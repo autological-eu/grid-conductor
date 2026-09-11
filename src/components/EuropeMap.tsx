@@ -219,7 +219,6 @@ export function EuropeMap({
   const onPointerDown = (e: React.PointerEvent<SVGSVGElement>) => {
     if (e.button !== 0) return;
     stopAnim();
-    (e.currentTarget as SVGSVGElement).setPointerCapture(e.pointerId);
     dragRef.current = { x: e.clientX, y: e.clientY, moved: false };
     setDragging(true);
   };
@@ -232,10 +231,14 @@ export function EuropeMap({
     const r = el.getBoundingClientRect();
     const dx = ((e.clientX - d.x) / r.width) * W;
     const dy = ((e.clientY - d.y) / r.height) * H;
-    if (Math.abs(e.clientX - d.x) + Math.abs(e.clientY - d.y) > 3) d.moved = true;
+    if (!d.moved && Math.abs(e.clientX - d.x) + Math.abs(e.clientY - d.y) > 3) {
+      // capture only once this is a real drag, so plain clicks still reach the borders
+      d.moved = true;
+      e.currentTarget.setPointerCapture(e.pointerId);
+    }
     d.x = e.clientX;
     d.y = e.clientY;
-    setView((v) => ({ ...v, x: v.x + dx, y: v.y + dy }));
+    if (d.moved) setView((v) => ({ ...v, x: v.x + dx, y: v.y + dy }));
   };
 
   const endDrag = (e: React.PointerEvent<SVGSVGElement>) => {
