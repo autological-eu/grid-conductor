@@ -318,7 +318,7 @@ export function EuropeMap({
                 <circle
                   cx={x}
                   cy={y}
-                  r={(z.hours > 0 ? 6 : 3.5) / k}
+                  r={(z.hours > 0 ? 9 : 6) / k}
                   fill={`oklch(${0.78 - 0.2 * c} ${0.09 + 0.13 * c} ${145 - 120 * c})`}
                   fillOpacity={dim ? 0.2 : z.hours > 0 ? 0.95 : 0.35}
                   stroke="var(--color-card)"
