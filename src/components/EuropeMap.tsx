@@ -425,10 +425,19 @@ export function EuropeMap({
 
       <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg border border-border bg-card/90 px-3 py-2 text-xs text-muted-foreground backdrop-blur">
         <div className="font-medium text-foreground">
-          {metric === "market" ? "Market opportunity loss" : "Climate opportunity loss"}
+          {metric === "market" ? "Market opportunity loss (MEUR/y)" : "Climate opportunity loss (ktCO2/y)"}
         </div>
-        <div>Thicker border = larger yearly loss. Click a border to zoom in on it.</div>
-        <div>Scroll to zoom, drag to pan.</div>
+        <div
+          className="mt-1.5 h-2 w-48 rounded-full"
+          style={{
+            background: `linear-gradient(to right, ${lossColor(0)}, ${lossColor(0.5)}, ${lossColor(1)})`,
+          }}
+        />
+        <div className="mt-0.5 flex w-48 justify-between text-[10px]">
+          <span>0</span>
+          <span>{maxLoss.toFixed(1)}</span>
+        </div>
+        <div className="mt-1">Click a border to zoom in on it. Scroll to zoom, drag to pan.</div>
       </div>
     </div>
   );
