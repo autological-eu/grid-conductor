@@ -354,7 +354,7 @@ export function EuropeMap({
             const [x1, y1] = project(t.a_lon, t.a_lat);
             const [x2, y2] = project(t.b_lon, t.b_lat);
             const v = metric === "market" ? t.market_loss_meur : t.climate_loss_ktco2;
-            const c = Math.min(1, Math.max(0, v / maxLoss));
+            const c = Math.min(1, Math.max(0, v / lossCap));
             const isSelected = selectedId === t.id;
             const active = isSelected || hover === t.id;
             const faded = selectedId != null && !isSelected;
@@ -445,7 +445,10 @@ export function EuropeMap({
         />
         <div className="mt-0.5 flex w-48 justify-between text-[10px]">
           <span>0</span>
-          <span>{maxLoss.toFixed(1)}</span>
+          <span>
+            {lossCap.toFixed(0)}
+            {maxLoss > lossCap ? "+" : ""}
+          </span>
         </div>
         <div className="mt-1">Click a border to zoom in on it. Scroll to zoom, drag to pan.</div>
       </div>
