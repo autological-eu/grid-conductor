@@ -17,4 +17,7 @@
 Open / next
 - [ ] Overlay official ENTSO-E NTC capacities on inferred capacities in target detection
 - [ ] Access control: workbench is currently open to anyone with the link
-- [ ] Map: larger zone nodes; border lines uniform width colored green→red by opportunity loss; add color bar legend at bottom
+- [x] Map: larger zone nodes; border lines uniform width colored green→red by opportunity loss; add color bar legend at bottom
+- [ ] Info hierarchy: numbered start flow in header with primary colour
+- [ ] Map: change connector colour scale to grey→red
+- [ ] Hide left target sidebar until a target border is clicked; pull-out arrow to reopen
