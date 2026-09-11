@@ -640,26 +640,34 @@ export function EuropeMap({
             );
           })}
 
-          {/* units placed in the selected scenario */}
-          {unitMarkers.map((m) => (
-            <g key={m.id} transform={`translate(${m.x + (m.off * 20) / k} ${m.y - 20 / k})`}>
-              <circle
-                r={11 / k}
-                fill="var(--color-card)"
-                stroke="var(--color-primary)"
-                strokeWidth={1.5 / k}
-              />
-              <text
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize={12 / k}
-                style={{ pointerEvents: "none" }}
+          {/* units placed in this target's scenarios */}
+          {unitMarkers.map((m) => {
+            const Icon = unitIcon(m.type);
+            const s = 1 / k;
+            return (
+              <g
+                key={m.id}
+                transform={`translate(${m.x + (m.off * 22) / k} ${m.y - 22 / k})`}
+                opacity={m.active ? 1 : 0.35}
               >
-                {m.icon}
-              </text>
-              <title>{m.label}</title>
-            </g>
-          ))}
+                <circle
+                  r={12 * s}
+                  fill="var(--color-card)"
+                  stroke={m.active ? "var(--color-primary)" : "var(--color-border)"}
+                  strokeWidth={1.5 * s}
+                />
+                <g transform={`translate(${-7 * s} ${-7 * s}) scale(${(14 * s) / 24})`}>
+                  <Icon
+                    width={24}
+                    height={24}
+                    color={m.active ? "var(--color-primary)" : "var(--color-muted-foreground)"}
+                    strokeWidth={2}
+                  />
+                </g>
+                <title>{m.label}</title>
+              </g>
+            );
+          })}
         </g>
 
       </svg>
