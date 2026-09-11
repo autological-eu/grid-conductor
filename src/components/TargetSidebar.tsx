@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { ChevronDown, ChevronRight, Copy, Loader2, Play, Plus, RefreshCw, Trash2 } from "lucide-react";
@@ -208,7 +208,11 @@ export function TargetSidebar({
         <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           Scenarios
         </h3>
-        <Button size="sm" variant="secondary" onClick={() => createMut.mutate()}>
+        <Button
+          size="sm"
+          className="bg-[#39FF14] text-black hover:bg-[#2fe00f]"
+          onClick={() => createMut.mutate()}
+        >
           <Plus className="mr-1 size-3.5" /> New
         </Button>
       </div>
