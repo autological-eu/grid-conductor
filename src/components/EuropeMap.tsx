@@ -86,6 +86,9 @@ const IDENTITY: View = { k: 1, x: 0, y: 0 };
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
+/** green (low) -> red (high) opportunity-loss scale */
+const lossColor = (t: number) => `oklch(0.68 0.19 ${145 - 120 * clamp(t, 0, 1)})`;
+
 export function EuropeMap({
   zones,
   targets,
@@ -268,7 +271,7 @@ export function EuropeMap({
   const k = view.k;
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-xl border border-border bg-card">
+    <div className="relative h-full w-full overflow-hidden rounded-xl border border-border bg-muted/40">
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
@@ -318,7 +321,7 @@ export function EuropeMap({
                 <circle
                   cx={x}
                   cy={y}
-                  r={(z.hours > 0 ? 6 : 3.5) / k}
+                  r={(z.hours > 0 ? 9 : 6) / k}
                   fill={`oklch(${0.78 - 0.2 * c} ${0.09 + 0.13 * c} ${145 - 120 * c})`}
                   fillOpacity={dim ? 0.2 : z.hours > 0 ? 0.95 : 0.35}
                   stroke="var(--color-card)"
@@ -336,12 +339,12 @@ export function EuropeMap({
             );
           })}
 
-          {/* target borders */}
+          {/* target borders, coloured green (low) to red (high) by yearly opportunity loss */}
           {targets.map((t) => {
             const [x1, y1] = project(t.a_lon, t.a_lat);
             const [x2, y2] = project(t.b_lon, t.b_lat);
             const v = metric === "market" ? t.market_loss_meur : t.climate_loss_ktco2;
-            const c = Math.min(1, Math.max(0.06, v / maxLoss));
+            const c = Math.min(1, Math.max(0, v / maxLoss));
             const isSelected = selectedId === t.id;
             const active = isSelected || hover === t.id;
             const faded = selectedId != null && !isSelected;
@@ -366,10 +369,10 @@ export function EuropeMap({
                       ? "var(--color-muted-foreground)"
                       : active
                         ? "var(--color-primary)"
-                        : "var(--color-destructive)"
+                        : lossColor(c)
                   }
-                  strokeOpacity={faded ? 0.25 : active ? 1 : 0.35 + 0.6 * c}
-                  strokeWidth={(2 + 9 * c) / k}
+                  strokeOpacity={faded ? 0.25 : active ? 1 : 0.9}
+                  strokeWidth={(active ? 5 : 3) / k}
                   strokeLinecap="round"
                 />
                 <title>
@@ -422,10 +425,19 @@ export function EuropeMap({
 
       <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg border border-border bg-card/90 px-3 py-2 text-xs text-muted-foreground backdrop-blur">
         <div className="font-medium text-foreground">
-          {metric === "market" ? "Market opportunity loss" : "Climate opportunity loss"}
+          {metric === "market" ? "Market opportunity loss (MEUR/y)" : "Climate opportunity loss (ktCO2/y)"}
         </div>
-        <div>Thicker border = larger yearly loss. Click a border to zoom in on it.</div>
-        <div>Scroll to zoom, drag to pan.</div>
+        <div
+          className="mt-1.5 h-2 w-48 rounded-full"
+          style={{
+            background: `linear-gradient(to right, ${lossColor(0)}, ${lossColor(0.5)}, ${lossColor(1)})`,
+          }}
+        />
+        <div className="mt-0.5 flex w-48 justify-between text-[10px]">
+          <span>0</span>
+          <span>{maxLoss.toFixed(1)}</span>
+        </div>
+        <div className="mt-1">Click a border to zoom in on it. Scroll to zoom, drag to pan.</div>
       </div>
     </div>
   );
