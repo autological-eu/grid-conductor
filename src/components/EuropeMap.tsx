@@ -336,12 +336,12 @@ export function EuropeMap({
             );
           })}
 
-          {/* target borders */}
+          {/* target borders, coloured green (low) to red (high) by yearly opportunity loss */}
           {targets.map((t) => {
             const [x1, y1] = project(t.a_lon, t.a_lat);
             const [x2, y2] = project(t.b_lon, t.b_lat);
             const v = metric === "market" ? t.market_loss_meur : t.climate_loss_ktco2;
-            const c = Math.min(1, Math.max(0.06, v / maxLoss));
+            const c = Math.min(1, Math.max(0, v / maxLoss));
             const isSelected = selectedId === t.id;
             const active = isSelected || hover === t.id;
             const faded = selectedId != null && !isSelected;
@@ -366,10 +366,10 @@ export function EuropeMap({
                       ? "var(--color-muted-foreground)"
                       : active
                         ? "var(--color-primary)"
-                        : "var(--color-destructive)"
+                        : lossColor(c)
                   }
-                  strokeOpacity={faded ? 0.25 : active ? 1 : 0.35 + 0.6 * c}
-                  strokeWidth={(2 + 9 * c) / k}
+                  strokeOpacity={faded ? 0.25 : active ? 1 : 0.9}
+                  strokeWidth={(active ? 5 : 3) / k}
                   strokeLinecap="round"
                 />
                 <title>
