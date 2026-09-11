@@ -358,8 +358,9 @@ export function EuropeMap({
         x: base[0],
         y: base[1],
         off: n,
-        icon: def.icon,
-        label: `${def.label} — ${where}`,
+        type: u.unit_type,
+        active: u.active !== false,
+        label: `${def.label} — ${where}${u.scenario_name ? ` · ${u.scenario_name}` : ""}`,
       });
     }
     return out;
