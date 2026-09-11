@@ -197,12 +197,7 @@ export function EuropeMap({
     setView({ k, x: px - (px - v.x) * ratio, y: py - (py - v.y) * ratio });
   }, []);
 
-  const wheelRef = useRef((e: WheelEvent) => {
-    const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 100 : 1);
-    const p = toViewBox(e.clientX, e.clientY);
-    stopAnim();
-    zoomAt(p.x, p.y, Math.exp(-dy * 0.0015));
-  });
+  const wheelRef = useRef<(e: WheelEvent) => void>(() => {});
   wheelRef.current = (e: WheelEvent) => {
     const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 100 : 1);
     const p = toViewBox(e.clientX, e.clientY);

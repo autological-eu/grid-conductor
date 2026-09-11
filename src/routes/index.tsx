@@ -62,6 +62,10 @@ function Workbench() {
               setTarget(t);
               setScenarioId(null);
             }}
+            onClear={() => {
+              setTarget(null);
+              setScenarioId(null);
+            }}
           />
         </div>
         <EvaluationPanel target={target} selectedScenarioId={scenarioId} />
