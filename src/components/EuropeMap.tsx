@@ -285,6 +285,21 @@ export function EuropeMap({
     return Math.hypot(px - (x1 + t * dx), py - (y1 + t * dy));
   };
 
+  /** only the endpoints / lines of eligible connections can receive a unit */
+  const eligibleBorders = useMemo(() => {
+    const sel = targets.find((t) => t.id === selectedId);
+    return sel ? [sel] : targets;
+  }, [targets, selectedId]);
+
+  const eligibleZones = useMemo(() => {
+    const s = new Set<string>();
+    for (const t of eligibleBorders) {
+      s.add(t.zone_a);
+      s.add(t.zone_b);
+    }
+    return s;
+  }, [eligibleBorders]);
+
   /** find the zone or border under a client point, depending on the dragged unit's placement */
   const locateDrop = useCallback(
     (clientX: number, clientY: number, placement: "zone" | "border") => {
@@ -296,7 +311,7 @@ export function EuropeMap({
         let best: ZoneSummary | null = null;
         let bd = 70;
         for (const z of zones) {
-          if (!z.hours) continue;
+          if (!eligibleZones.has(z.code)) continue;
           const [x, y] = project(z.lon, z.lat);
           const d = Math.hypot(x - wx, y - wy);
           if (d < bd) {
@@ -310,7 +325,7 @@ export function EuropeMap({
       }
       let best: TargetRow | null = null;
       let bd = 30;
-      for (const t of targets) {
+      for (const t of eligibleBorders) {
         const [x1, y1] = project(t.a_lon, t.a_lat);
         const [x2, y2] = project(t.b_lon, t.b_lat);
         const d = distToSeg(wx, wy, x1, y1, x2, y2);
@@ -327,7 +342,7 @@ export function EuropeMap({
           }
         : null;
     },
-    [zones, targets, toViewBox],
+    [zones, eligibleZones, eligibleBorders, toViewBox],
   );
 
   const onUnitDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -336,8 +351,10 @@ export function EuropeMap({
     e.preventDefault();
     e.dataTransfer.dropEffect = "copy";
     setDropActive(true);
+    setDropPlacement(unitDef(type).placement);
     setDropTarget(locateDrop(e.clientX, e.clientY, unitDef(type).placement));
   };
+
 
   const onUnitDrop = (e: React.DragEvent<HTMLDivElement>) => {
     const type = (e.dataTransfer.getData("text/unit") || unitDrag.current) as UnitType | "";
