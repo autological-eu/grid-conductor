@@ -43,7 +43,7 @@ export function EvaluationPanel({
   });
   const validation = useQuery({ queryKey: ["validation"], queryFn: () => validationFn() });
 
-  const rows = (scenarios.data ?? []).filter((s) => s.result);
+  const rows = (scenarios.data ?? []).filter((s) => s.result && !s.is_template);
   const reportScenario = rows.find((s) => s.id === reportId) ?? null;
 
   return (
