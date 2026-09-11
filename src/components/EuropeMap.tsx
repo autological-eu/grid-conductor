@@ -316,7 +316,7 @@ export function EuropeMap({
     return s;
   }, [eligibleBorders]);
 
-  /** icons for the units already placed in the selected scenario */
+  /** icons for the units already placed in the scenarios of this target */
   const unitMarkers = useMemo(() => {
     const byCode = new Map(zones.map((z) => [z.code, z]));
     const seen = new Map<string, number>();
@@ -325,7 +325,8 @@ export function EuropeMap({
       x: number;
       y: number;
       off: number;
-      icon: string;
+      type: string;
+      active: boolean;
       label: string;
     }> = [];
     for (const u of placedUnits) {
