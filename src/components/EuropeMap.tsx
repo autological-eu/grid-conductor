@@ -99,6 +99,14 @@ const lossColor = (t: number) => {
 /** market loss cap (MEUR/y) at which a border renders fully red */
 const MARKET_LOSS_CAP = 10;
 
+export type PlacedUnit = {
+  id: string;
+  unit_type: string;
+  zone_code: string | null;
+  border_zone_a: string | null;
+  border_zone_b: string | null;
+};
+
 export function EuropeMap({
   zones,
   targets,
@@ -108,6 +116,7 @@ export function EuropeMap({
   metric,
   onMetricChange,
   onDropUnit,
+  placedUnits = [],
 }: {
   zones: ZoneSummary[];
   targets: TargetRow[];
@@ -117,7 +126,9 @@ export function EuropeMap({
   metric: "market" | "climate";
   onMetricChange?: (m: "market" | "climate") => void;
   onDropUnit?: (unitType: UnitType, placement: UnitDropPlacement) => void;
+  placedUnits?: PlacedUnit[];
 }) {
+
   const [hover, setHover] = useState<string | null>(null);
   const [view, setView] = useState<View>(IDENTITY);
   const [dragging, setDragging] = useState(false);
