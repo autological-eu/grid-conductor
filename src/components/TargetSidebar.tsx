@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { ChevronDown, ChevronRight, Copy, Loader2, Play, Plus, RefreshCw, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronRight, Loader2, Play, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { UNIT_LIBRARY, unitDef, unitDrag, type UnitType } from "@/lib/units";
 import { unitIcon } from "@/lib/unitIcons";
-import { COST_ASSUMPTIONS, DEFAULT_TEMPLATE_BUDGET_MEUR } from "@/lib/costAssumptions";
 import {
   addUnit,
   createScenario,
@@ -15,10 +14,10 @@ import {
   runScenario,
   updateUnit,
 } from "@/lib/scenarios.functions";
-import { copyTemplateScenario, ensureTemplateScenarios } from "@/lib/templates.functions";
 import type { TargetRow } from "./EuropeMap";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+
 
 export function TargetSidebar({
   target,
