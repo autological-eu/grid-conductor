@@ -648,16 +648,16 @@ export function EuropeMap({
             return (
               <g
                 key={m.id}
-                transform={`translate(${m.x + (m.off * 22) / k} ${m.y - 22 / k})`}
+                transform={`translate(${m.x + (m.off * 30) / k} ${m.y - 30 / k})`}
                 opacity={m.active ? 1 : 0.35}
               >
                 <circle
-                  r={12 * s}
+                  r={18 * s}
                   fill="var(--color-card)"
                   stroke={m.active ? "var(--color-primary)" : "var(--color-border)"}
                   strokeWidth={1.5 * s}
                 />
-                <g transform={`translate(${-7 * s} ${-7 * s}) scale(${(14 * s) / 24})`}>
+                <g transform={`translate(${-10 * s} ${-10 * s}) scale(${(20 * s) / 24})`}>
                   <Icon
                     width={24}
                     height={24}
