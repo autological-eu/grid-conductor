@@ -57,15 +57,17 @@ function Workbench() {
     queryFn: () => listScenariosQFn({ data: { targetId: target!.id } }),
     enabled: !!target,
   });
-  const placedUnits: PlacedUnit[] = (
-    (scenarios.data ?? []).find((s) => s.id === scenarioId)?.units ?? []
-  ).map((u) => ({
-    id: u.id,
-    unit_type: u.unit_type,
-    zone_code: u.zone_code,
-    border_zone_a: u.border_zone_a,
-    border_zone_b: u.border_zone_b,
-  }));
+  const placedUnits: PlacedUnit[] = (scenarios.data ?? []).flatMap((s) =>
+    (s.units ?? []).map((u) => ({
+      id: u.id,
+      unit_type: u.unit_type,
+      zone_code: u.zone_code,
+      border_zone_a: u.border_zone_a,
+      border_zone_b: u.border_zone_b,
+      active: !scenarioId || s.id === scenarioId,
+      scenario_name: s.name as string,
+    })),
+  );
 
   const selectScenario = (id: string | null) => {
     setScenarioId(id);

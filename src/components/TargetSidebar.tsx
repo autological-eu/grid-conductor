@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { ChevronDown, ChevronRight, Play, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { UNIT_LIBRARY, unitDef, unitDrag, type UnitType } from "@/lib/units";
+import { unitIcon } from "@/lib/unitIcons";
 import {
   addUnit,
   createScenario,
@@ -153,8 +154,11 @@ export function TargetSidebar({
               className="cursor-grab rounded-md border border-border bg-background p-2 text-xs active:cursor-grabbing"
               title={u.description}
             >
-              <div className="font-medium">
-                <span className="mr-1">{u.icon}</span>
+              <div className="flex items-center gap-1.5 font-medium">
+                {(() => {
+                  const Icon = unitIcon(u.type);
+                  return <Icon className="h-4 w-4 text-primary" />;
+                })()}
                 {u.label}
               </div>
               <div className="text-[11px] text-muted-foreground">
