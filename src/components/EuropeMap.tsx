@@ -514,8 +514,11 @@ export function EuropeMap({
             const c = Math.min(1, Math.max(0, v / lossCap));
             const isSelected = selectedId === t.id;
             const dropB = dropTarget?.kind === "border" && dropTarget.key === t.id;
-            const active = isSelected || hover === t.id || dropB;
-            const faded = selectedId != null && !isSelected && !dropB;
+            const candidateB =
+              dropActive && dropPlacement === "border" && eligibleBorders.some((b) => b.id === t.id);
+            const active = isSelected || hover === t.id || dropB || candidateB;
+            const faded =
+              (dropActive && !candidateB) || (selectedId != null && !isSelected && !dropB);
             return (
               <g
                 key={t.id}
@@ -527,6 +530,25 @@ export function EuropeMap({
                 onMouseLeave={() => setHover(null)}
               >
                 <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="transparent" strokeWidth={16 / k} />
+                {candidateB && (
+                  <line
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y2}
+                    stroke="var(--color-primary)"
+                    strokeOpacity={0.3}
+                    strokeWidth={(dropB ? 14 : 10) / k}
+                    strokeLinecap="round"
+                  >
+                    <animate
+                      attributeName="stroke-opacity"
+                      values="0.45;0.15;0.45"
+                      dur="1s"
+                      repeatCount="indefinite"
+                    />
+                  </line>
+                )}
                 <line
                   x1={x1}
                   y1={y1}
@@ -543,6 +565,7 @@ export function EuropeMap({
                   strokeWidth={(active ? 5 : 3) / k}
                   strokeLinecap="round"
                 />
+
                 <title>
                   {t.zone_a} – {t.zone_b}: {t.market_loss_meur.toFixed(1)} MEUR/y,{" "}
                   {t.climate_loss_ktco2.toFixed(1)} ktCO2/y, {t.congested_hours} congested hours
