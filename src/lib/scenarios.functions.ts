@@ -213,13 +213,20 @@ export const runScenario = createServerFn({ method: "POST" })
         (scen.borderFlowMwh - base.borderFlowMwh) / years,
         1,
       ),
+      b8_congestion_rent_variation_meur_y: round(
+        ((scen.congestionRentEur - base.congestionRentEur) / 1e6) / years,
+        3,
+      ),
+      b9_price_convergence_hours_gained: Math.round(
+        (scen.convergedHours - base.convergedHours) / years,
+      ),
       c1_capex_meur: round(capex, 2),
       c2_delivery_months: delivery,
       npv_25y_meur: round(npvMeur, 2),
       benefit_cost_ratio: bcRatio == null ? null : round(bcRatio, 2),
       simple_payback_years: paybackYears == null ? null : round(paybackYears, 1),
       methodology:
-        "ENTSO-E CBA 4.0 style indicators derived from an hourly zonal transport model of the target sub-network.",
+        "ENTSO-E CBA 4.0 style indicators. Hourly market clearing follows the ENTSO-E single day-ahead coupling (Euphemia) ATC algorithm: welfare maximisation with balanced net positions, ATC limits, price convergence where borders are free and price splitting only across saturated borders.",
     };
 
     const payload = {
