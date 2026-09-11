@@ -78,9 +78,7 @@ export const addUnit = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const def = unitDef(data.unitType);
-    const params =
-      data.params ??
-      Object.fromEntries(def.params.map((p) => [p.key, p.default]));
+    const params = data.params ?? def.defaults;
     const { data: row, error } = await supabaseAdmin
       .from("scenario_units")
       .insert({
@@ -120,7 +118,7 @@ export const updateUnit = createServerFn({ method: "POST" })
     if (data.zoneCode !== undefined) patch["zone_code"] = data.zoneCode;
     const { error } = await supabaseAdmin
       .from("scenario_units")
-      .update(patch)
+      .update(patch as never)
       .eq("id", data.id);
     if (error) throw new Error(error.message);
     return { ok: true };
@@ -213,13 +211,20 @@ export const runScenario = createServerFn({ method: "POST" })
         (scen.borderFlowMwh - base.borderFlowMwh) / years,
         1,
       ),
+      b8_congestion_rent_variation_meur_y: round(
+        ((scen.congestionRentEur - base.congestionRentEur) / 1e6) / years,
+        3,
+      ),
+      b9_price_convergence_hours_gained: Math.round(
+        (scen.convergedHours - base.convergedHours) / years,
+      ),
       c1_capex_meur: round(capex, 2),
       c2_delivery_months: delivery,
       npv_25y_meur: round(npvMeur, 2),
       benefit_cost_ratio: bcRatio == null ? null : round(bcRatio, 2),
       simple_payback_years: paybackYears == null ? null : round(paybackYears, 1),
       methodology:
-        "ENTSO-E CBA 4.0 style indicators derived from an hourly zonal transport model of the target sub-network.",
+        "ENTSO-E CBA 4.0 style indicators. Hourly market clearing follows the ENTSO-E single day-ahead coupling (Euphemia) ATC algorithm: welfare maximisation with balanced net positions, ATC limits, price convergence where borders are free and price splitting only across saturated borders.",
     };
 
     const payload = {
@@ -256,10 +261,14 @@ export const runScenario = createServerFn({ method: "POST" })
         price_mae_eur_mwh: round(base.priceMae, 3),
         border_flow_mae_mw: round(base.flowMae, 1),
         flow_direction_accuracy: round(base.directionAccuracy, 4),
+        price_convergence_share: round(base.convergedHours / Math.max(base.hours, 1), 4),
+        adverse_flow_hours: base.adverseFlowHours,
+        congestion_rent_meur: round(base.congestionRentEur / 1e6, 3),
         hours: base.hours,
         zones: net.zones.length,
       },
-      passed: base.directionAccuracy > 0.8 && base.priceMae < 10,
+      passed:
+        base.directionAccuracy > 0.8 && base.priceMae < 10 && base.adverseFlowHours === 0,
     });
 
     return payload;

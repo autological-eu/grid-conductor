@@ -431,6 +431,19 @@ export type Database = {
         }
         Returns: number
       }
+      zone_summary: {
+        Args: never
+        Returns: {
+          avg_carbon_intensity: number
+          avg_price: number
+          code: string
+          country_code: string
+          hours: number
+          lat: number
+          lon: number
+          name: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

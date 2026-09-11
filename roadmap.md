@@ -10,3 +10,5 @@
 - [ ] Scenario folders, unit library, drag-and-drop builder, scenario runs
 - [ ] Evaluation panel with ENTSO-E CBA indicators
 - [ ] Scenario report view
+- [ ] Hourly clearing must follow the ENTSO-E single day-ahead coupling (Euphemia) welfare-maximising ATC algorithm, with congestion rent and price convergence reporting
+- [ ] Load the full year of hourly day-ahead prices and carbon intensity onto the server now (run the importer, not just build it)
