@@ -56,12 +56,14 @@ function pathFor(geom: Geom): string {
   let d = "";
   for (const poly of polys) {
     for (const ring of poly) {
-      ring.forEach((pt, i) => {
+      let started = false;
+      for (const pt of ring) {
         const [x, y] = project(pt[0]!, pt[1]!);
-        if (x < -400 || x > W + 400 || y < -400 || y > H + 400) return;
-        d += `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
-      });
-      d += "Z";
+        if (x < -400 || x > W + 400 || y < -400 || y > H + 400) continue;
+        d += `${started ? "L" : "M"}${x.toFixed(1)},${y.toFixed(1)}`;
+        started = true;
+      }
+      if (started) d += "Z";
     }
   }
   return d;
