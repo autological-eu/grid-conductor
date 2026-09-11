@@ -80,8 +80,6 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
     onError: (e: Error) => toast.error(e.message),
   });
 
-  const p = progress.data;
-
   const steps = [
     { n: 1, label: "Choose bottleneck", hint: "Click a highlighted border on the map" },
     { n: 2, label: "Simulate scenarios", hint: "Build scenarios in the left panel" },
@@ -109,7 +107,7 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
               )}
               <div
                 className={`flex items-center gap-2 rounded-lg px-3 py-1.5 ${
-                  active ? "bg-primary/10 ring-1 ring-primary" : ""
+                  active ? "bg-[#39FF14] ring-1 ring-[#39FF14] shadow-sm" : ""
                 }`}
                 title={s.hint}
                 aria-current={active ? "step" : undefined}
@@ -117,7 +115,7 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
                 <span
                   className={`flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-semibold ${
                     active
-                      ? "bg-primary text-primary-foreground"
+                      ? "bg-black/80 text-[#39FF14]"
                       : done
                         ? "bg-primary/20 text-primary"
                         : "bg-muted text-muted-foreground"
@@ -127,7 +125,7 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
                 </span>
                 <span
                   className={`text-xs font-medium ${
-                    active ? "text-primary" : done ? "text-foreground" : "text-muted-foreground"
+                    active ? "text-black" : done ? "text-foreground" : "text-muted-foreground"
                   }`}
                 >
                   {s.label}
@@ -138,13 +136,6 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
         })}
       </ol>
 
-      <p className="hidden text-xs text-muted-foreground xl:block">
-        {p?.rows
-          ? `${p.rows.toLocaleString()} hourly rows · updated daily`
-          : "No data yet — the daily backend import will populate it."}
-        {p?.paused ? " · provider limit reached, resumes tomorrow" : ""}
-        {running ? " · importing…" : ""}
-      </p>
 
       <div className="relative ml-auto" ref={menuRef}>
         <button
