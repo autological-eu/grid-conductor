@@ -105,6 +105,9 @@ export type PlacedUnit = {
   zone_code: string | null;
   border_zone_a: string | null;
   border_zone_b: string | null;
+  /** false when the unit belongs to a scenario that is not currently selected */
+  active?: boolean;
+  scenario_name?: string;
 };
 
 export function EuropeMap({
