@@ -6,7 +6,7 @@ import { PanelLeftClose, PanelLeftOpen, PanelRightClose, PanelRightOpen } from "
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { DataBar } from "@/components/DataBar";
-import { EuropeMap, type TargetRow, type UnitDropPlacement } from "@/components/EuropeMap";
+import { EuropeMap, type PlacedUnit, type TargetRow, type UnitDropPlacement } from "@/components/EuropeMap";
 import { TargetSidebar } from "@/components/TargetSidebar";
 import { EvaluationPanel } from "@/components/EvaluationPanel";
 import { listTargets, listZoneSummary } from "@/lib/analysis.functions";
@@ -50,6 +50,22 @@ function Workbench() {
   const targets = useQuery({ queryKey: ["targets"], queryFn: () => targetsFn() });
 
   const rows = (targets.data ?? []) as TargetRow[];
+
+  const listScenariosQFn = useServerFn(listScenarios);
+  const scenarios = useQuery({
+    queryKey: ["scenarios", target?.id],
+    queryFn: () => listScenariosQFn({ data: { targetId: target!.id } }),
+    enabled: !!target,
+  });
+  const placedUnits: PlacedUnit[] = (
+    (scenarios.data ?? []).find((s) => s.id === scenarioId)?.units ?? []
+  ).map((u) => ({
+    id: u.id,
+    unit_type: u.unit_type,
+    zone_code: u.zone_code,
+    border_zone_a: u.border_zone_a,
+    border_zone_b: u.border_zone_b,
+  }));
 
   const selectScenario = (id: string | null) => {
     setScenarioId(id);
@@ -156,6 +172,7 @@ function Workbench() {
               setEvalOpen(false);
             }}
             onDropUnit={handleDropUnit}
+            placedUnits={placedUnits}
           />
         </div>
         {evalOpen ? (

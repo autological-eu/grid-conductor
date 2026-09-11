@@ -313,6 +313,55 @@ export function EuropeMap({
     return s;
   }, [eligibleBorders]);
 
+  /** icons for the units already placed in the selected scenario */
+  const unitMarkers = useMemo(() => {
+    const byCode = new Map(zones.map((z) => [z.code, z]));
+    const seen = new Map<string, number>();
+    const out: Array<{
+      id: string;
+      x: number;
+      y: number;
+      off: number;
+      icon: string;
+      label: string;
+    }> = [];
+    for (const u of placedUnits) {
+      let base: [number, number] | null = null;
+      let where = "";
+      if (u.zone_code) {
+        const z = byCode.get(u.zone_code);
+        if (z) {
+          base = project(z.lon, z.lat);
+          where = u.zone_code;
+        }
+      } else if (u.border_zone_a && u.border_zone_b) {
+        const a = byCode.get(u.border_zone_a);
+        const b = byCode.get(u.border_zone_b);
+        if (a && b) {
+          const [ax, ay] = project(a.lon, a.lat);
+          const [bx, by] = project(b.lon, b.lat);
+          base = [(ax + bx) / 2, (ay + by) / 2];
+          where = `${u.border_zone_a}–${u.border_zone_b}`;
+        }
+      }
+      if (!base) continue;
+      const key = where;
+      const n = seen.get(key) ?? 0;
+      seen.set(key, n + 1);
+      const def = unitDef(u.unit_type);
+      out.push({
+        id: u.id,
+        x: base[0],
+        y: base[1],
+        off: n,
+        icon: def.icon,
+        label: `${def.label} — ${where}`,
+      });
+    }
+    return out;
+  }, [placedUnits, zones]);
+
+
   /** find the zone or border under a client point, depending on the dragged unit's placement */
   const locateDrop = useCallback(
     (clientX: number, clientY: number, placement: "zone" | "border") => {
@@ -573,7 +622,29 @@ export function EuropeMap({
               </g>
             );
           })}
+
+          {/* units placed in the selected scenario */}
+          {unitMarkers.map((m) => (
+            <g key={m.id} transform={`translate(${m.x + (m.off * 20) / k} ${m.y - 20 / k})`}>
+              <circle
+                r={11 / k}
+                fill="var(--color-card)"
+                stroke="var(--color-primary)"
+                strokeWidth={1.5 / k}
+              />
+              <text
+                textAnchor="middle"
+                dominantBaseline="central"
+                fontSize={12 / k}
+                style={{ pointerEvents: "none" }}
+              >
+                {m.icon}
+              </text>
+              <title>{m.label}</title>
+            </g>
+          ))}
         </g>
+
       </svg>
 
       <div className="pointer-events-none absolute left-3 top-3 max-w-[22rem] rounded-lg border border-border bg-card/90 px-3 py-2 backdrop-blur">

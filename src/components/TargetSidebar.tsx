@@ -153,7 +153,10 @@ export function TargetSidebar({
               className="cursor-grab rounded-md border border-border bg-background p-2 text-xs active:cursor-grabbing"
               title={u.description}
             >
-              <div className="font-medium">{u.label}</div>
+              <div className="font-medium">
+                <span className="mr-1">{u.icon}</span>
+                {u.label}
+              </div>
               <div className="text-[11px] text-muted-foreground">
                 {u.defaultCapexMeur} MEUR · {u.defaultDeliveryMonths} mo
               </div>
