@@ -428,8 +428,22 @@ export function EuropeMap({
           {zones.map((z) => {
             const [x, y] = project(z.lon, z.lat);
             const dim = focusIso ? !focusIso.has(countryOf(z.code)) : false;
+            const dropZ = dropTarget?.kind === "zone" && dropTarget.key === z.code;
             return (
               <g key={z.code}>
+                {dropZ && (
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r={16 / k}
+                    fill="none"
+                    stroke="var(--color-primary)"
+                    strokeWidth={2.5 / k}
+                    strokeDasharray={`${4 / k} ${3 / k}`}
+                  >
+                    <animate attributeName="opacity" values="1;0.4;1" dur="1s" repeatCount="indefinite" />
+                  </circle>
+                )}
                 <circle
                   cx={x}
                   cy={y}
@@ -458,8 +472,9 @@ export function EuropeMap({
             const v = metric === "market" ? t.market_loss_meur : t.climate_loss_ktco2;
             const c = Math.min(1, Math.max(0, v / lossCap));
             const isSelected = selectedId === t.id;
-            const active = isSelected || hover === t.id;
-            const faded = selectedId != null && !isSelected;
+            const dropB = dropTarget?.kind === "border" && dropTarget.key === t.id;
+            const active = isSelected || hover === t.id || dropB;
+            const faded = selectedId != null && !isSelected && !dropB;
             return (
               <g
                 key={t.id}
