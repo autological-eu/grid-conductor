@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import geo from "@/data/europe.geo.json";
 import { unitDef, unitDrag, type UnitType } from "@/lib/units";
+import { unitIcon } from "@/lib/unitIcons";
 
 export type UnitDropPlacement = { zoneCode?: string; zoneA?: string; zoneB?: string };
 
