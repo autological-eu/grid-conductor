@@ -317,7 +317,14 @@ export function EuropeMap({
   const unitMarkers = useMemo(() => {
     const byCode = new Map(zones.map((z) => [z.code, z]));
     const seen = new Map<string, number>();
-    const out: Array<{ id: string; x: number; y: number; icon: string; label: string }> = [];
+    const out: Array<{
+      id: string;
+      x: number;
+      y: number;
+      off: number;
+      icon: string;
+      label: string;
+    }> = [];
     for (const u of placedUnits) {
       let base: [number, number] | null = null;
       let where = "";
@@ -344,8 +351,9 @@ export function EuropeMap({
       const def = unitDef(u.unit_type);
       out.push({
         id: u.id,
-        x: base[0] + n * 20,
-        y: base[1] - 20,
+        x: base[0],
+        y: base[1],
+        off: n,
         icon: def.icon,
         label: `${def.label} — ${where}`,
       });
@@ -617,7 +625,7 @@ export function EuropeMap({
 
           {/* units placed in the selected scenario */}
           {unitMarkers.map((m) => (
-            <g key={m.id} transform={`translate(${m.x} ${m.y})`}>
+            <g key={m.id} transform={`translate(${m.x + (m.off * 20) / k} ${m.y - 20 / k})`}>
               <circle
                 r={11 / k}
                 fill="var(--color-card)"
