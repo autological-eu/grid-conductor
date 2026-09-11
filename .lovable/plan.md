@@ -1,22 +1,40 @@
-# Add a descriptive headline to the map
+# Map: headline, pan/zoom, and focus on a selected border
 
-## What
-Add a short, visible headline/label to the main map area so a first-time visitor immediately understands what the visualization represents.
+All changes are in `src/components/EuropeMap.tsx` (presentation only). No backend or data changes.
 
-## Where
-`src/components/EuropeMap.tsx` — rendered inside the existing map card, above the SVG.
+## 1. Headline
 
-## Proposed headline
-"European bidding zones and congested borders — yearly opportunity loss"
+Add a one-line headline overlay in the top-left of the map card so a first-time viewer understands the view:
 
-## Details
-- Place the headline in the top-left corner of the map card, overlaying the SVG on a semi-opaque card background so it remains readable.
-- Keep the existing bottom legend that explains the metric toggle and border thickness.
-- Use the current `metric` prop to optionally vary wording, e.g. "Market opportunity loss" / "Climate opportunity loss". A single neutral headline is also acceptable.
-- Style with the project's semantic tokens (`text-foreground`, `bg-card/90`, `border-border`, `backdrop-blur`) so it stays theme-consistent.
-- Keep it concise — one line.
+"European bidding zones and congested borders" with a smaller subline that follows the active metric ("Yearly market opportunity loss" / "Yearly climate opportunity loss").
+
+Styled with existing tokens (`bg-card/90`, `border-border`, `text-foreground`, `backdrop-blur`), matching the existing bottom-left legend.
+
+## 2. Pan and zoom
+
+- Wheel/trackpad zoom anchored at the cursor, using exponential scaling from the normalized wheel delta (not a fixed per-event factor), clamped between 1x and 12x.
+- Trackpad pinch (wheel with ctrlKey) handled by the same path.
+- Drag to pan with pointer events; cursor changes to grabbing while dragging. A drag must not be treated as a click on a border.
+- The wheel listener is attached natively with `{ passive: false }` in an effect so the page does not scroll behind the map; handler state read via a ref.
+- Transform applied to a single `<g>` wrapping all map content: `translate(x,y) scale(k)`.
+- Stroke widths and marker radii divided by the zoom factor so lines and dots stay visually constant while zoomed.
+- Small "+ / − / reset" buttons in the top-right corner, zooming about the viewport centre.
+
+## 3. Click a transmission line to focus it
+
+When a border is selected:
+- Animate the view to fit the two endpoint zones with padding (compute a target scale/offset from the two projected points, then ease the transform over ~500 ms).
+- Highlight the country outlines of the two zones: their country paths get an accent fill and a stronger accent stroke; all other countries stay in the base style.
+- All other border lines fade to grey at low opacity; the selected line keeps the accent colour and full opacity.
+- Zone markers not belonging to the two focused countries dim.
+- Clicking empty map background clears the focus and eases back to the full-Europe view.
+
+Country matching: zone codes carry a country prefix (e.g. `DK-DK1` -> `DK`, `IT-NO` -> `IT`), and the map file has an `iso` property per country. A few features carry `iso: "-99"` (Norway, France, Kosovo), so a small name-to-ISO fallback map is added inside the component.
 
 ## Acceptance
-- The map card shows a readable headline that explains the view.
-- No layout breakage on the 1409×960 viewport.
-- Build/typecheck passes.
+
+- Wheel/pinch zoom keeps the point under the cursor fixed; the page never scrolls behind the map.
+- Dragging pans; dragging over a line does not select it.
+- Clicking a border zooms to it, outlines both countries, greys the other borders; clicking the background resets.
+- Headline is readable at 1409x960 and does not block map interaction other than its own buttons.
+- Build and typecheck pass.
