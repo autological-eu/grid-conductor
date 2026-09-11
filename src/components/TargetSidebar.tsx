@@ -379,108 +379,11 @@ export function TargetSidebar({
         })}
       </div>
 
-      <div className="border-t border-border p-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Templates
-          </h3>
-          <div className="flex items-center gap-1">
-            <label className="flex items-center gap-1 text-[11px] text-muted-foreground">
-              €
-              <Input
-                className="h-6 w-14 px-1 text-xs"
-                type="number"
-                min={0.1}
-                step={1}
-                defaultValue={DEFAULT_TEMPLATE_BUDGET_MEUR}
-                onBlur={(e) => {
-                  const v = Number(e.target.value);
-                  if (v > 0 && v !== budget) setBudget(v);
-                }}
-              />
-              M
-            </label>
-            <Button
-              size="icon"
-              variant="ghost"
-              className="size-6"
-              disabled={ensureMut.isPending}
-              onClick={() => ensureMut.mutate(true)}
-              aria-label="Recompute templates"
-              title="Recompute templates"
-            >
-              <RefreshCw className={`size-3 ${ensureMut.isPending ? "animate-spin" : ""}`} />
-            </Button>
-          </div>
-        </div>
-        <p className="mt-1 text-[11px] text-muted-foreground">
-          Pre-computed scenarios, each sized to the same budget.
-        </p>
-        <div className="mt-2 space-y-1">
-          {(scenarios.data ?? [])
-            .filter((s) => s.is_template)
-            .map((s) => {
-              const unit = s.units[0];
-              const tech = (unit?.unit_type ?? "battery") as keyof typeof COST_ASSUMPTIONS;
-              const Icon = unitIcon(unit?.unit_type ?? "battery");
-              const cost = COST_ASSUMPTIONS[tech];
-              return (
-                <div
-                  key={s.id}
-                  onClick={() => onSelectScenario(s.id)}
-                  className={`flex cursor-pointer items-center gap-2 rounded-md border p-2 transition-colors ${
-                    selectedScenarioId === s.id
-                      ? "border-primary/60 bg-accent"
-                      : "border-border bg-background hover:bg-accent/50"
-                  }`}
-                >
-                  <Icon className="size-4 shrink-0 text-primary" />
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-xs font-medium">{s.name}</p>
-                    <p className="truncate text-[11px] text-muted-foreground" title={cost?.basis}>
-                      {capacityLabel(unit)}
-                      {s.result
-                        ? ` · ${s.result.market_opportunity_meur.toFixed(3)} MEUR/y · ${s.result.climate_opportunity_ktco2.toFixed(3)} ktCO2/y`
-                        : s.status === "running" || ensureMut.isPending
-                          ? " · computing…"
-                          : ""}
-                    </p>
-                  </div>
-                  <Button
-                    size="icon"
-                    variant="ghost"
-                    className="size-6 shrink-0"
-                    disabled={copyMut.isPending}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      copyMut.mutate(s.id);
-                    }}
-                    aria-label="Copy template to my scenarios"
-                    title="Copy to my scenarios"
-                  >
-                    <Copy className="size-3" />
-                  </Button>
-                </div>
-              );
-            })}
-          {(scenarios.data ?? []).filter((s) => s.is_template).length === 0 && (
-            <p className="text-[11px] text-muted-foreground">
-              {ensureMut.isPending ? "Computing template scenarios…" : "No templates yet."}
-            </p>
-          )}
-        </div>
-      </div>
     </aside>
   );
 }
 
-function capacityLabel(unit: { params: unknown } | undefined): string {
-  const p = (unit?.params ?? {}) as Record<string, number>;
-  if (p["energy_mwh"] != null) return `${p["power_mw"]} MW / ${p["energy_mwh"]} MWh`;
-  if (p["capacity_mw"] != null) return `${p["capacity_mw"]} MW`;
-  if (p["added_mw"] != null) return `+${p["added_mw"]} MW`;
-  return "";
-}
+
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
