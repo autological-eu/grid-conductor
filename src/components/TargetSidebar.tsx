@@ -38,12 +38,8 @@ export function TargetSidebar({
   const dropUnit = useServerFn(deleteUnit);
   const run = useServerFn(runScenario);
 
-  const ensureTemplates = useServerFn(ensureTemplateScenarios);
-  const copyTemplate = useServerFn(copyTemplateScenario);
-
   const [dragOver, setDragOver] = useState<string | null>(null);
   const [open, setOpen] = useState<Record<string, boolean>>({});
-  const [budget, setBudget] = useState<number>(DEFAULT_TEMPLATE_BUDGET_MEUR);
 
   const scenarios = useQuery({
     queryKey: ["scenarios", target?.id],
@@ -51,39 +47,6 @@ export function TargetSidebar({
     enabled: !!target,
   });
 
-  // pre-compute the seven templates in the background when a target opens
-  const ensureMut = useMutation({
-    mutationFn: (force: boolean) =>
-      ensureTemplates({ data: { targetId: target!.id, budgetMeur: budget, force } }),
-    onSuccess: (r) => {
-      if (r.created > 0) {
-        qc.invalidateQueries({ queryKey: ["scenarios", target?.id] });
-        toast.success(`${r.created} template scenarios ready`);
-      }
-    },
-    onError: (e: Error) => toast.error(e.message),
-  });
-
-  const targetId = target?.id;
-  const ensuredRef = useRef<string | null>(null);
-  useEffect(() => {
-    if (!targetId) return;
-    const sig = `${targetId}:${budget}`;
-    if (ensuredRef.current === sig) return;
-    ensuredRef.current = sig;
-    ensureMut.mutate(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [targetId, budget]);
-
-  const copyMut = useMutation({
-    mutationFn: (id: string) => copyTemplate({ data: { id } }),
-    onSuccess: (s) => {
-      qc.invalidateQueries({ queryKey: ["scenarios", target?.id] });
-      onSelectScenario(s.id);
-      toast.success("Template copied to your scenarios");
-    },
-    onError: (e: Error) => toast.error(e.message),
-  });
 
   const invalidate = () => {
     qc.invalidateQueries({ queryKey: ["scenarios", target?.id] });
