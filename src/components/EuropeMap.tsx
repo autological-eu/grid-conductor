@@ -272,6 +272,7 @@ export function EuropeMap({
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
+        preserveAspectRatio="xMidYMid slice"
         className={`h-full w-full touch-none select-none ${dragging ? "cursor-grabbing" : "cursor-grab"}`}
         role="img"
         aria-label="Map of European bidding zones and congested borders"
