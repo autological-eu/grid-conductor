@@ -168,7 +168,7 @@ export const runImportBatch = createServerFn({ method: "POST" })
             iso(chunkEnd),
           );
           const written = await writePoints(
-            supabaseAdmin,
+            supabaseAdmin as unknown as Parameters<typeof writePoints>[0],
             job.signal as Signal,
             job.zone_code,
             points,
@@ -220,7 +220,7 @@ export const runImportBatch = createServerFn({ method: "POST" })
 async function writePoints(
   db: {
     from: (t: string) => {
-      upsert: (rows: Row[], opts: { onConflict: string }) => Promise<{ error: { message: string } | null }>;
+      upsert: (rows: Row[], opts: { onConflict: string }) => PromiseLike<{ error: { message: string } | null }>;
     };
   },
   signal: Signal,
@@ -278,7 +278,7 @@ async function writePoints(
 async function upsertChunks(
   db: {
     from: (t: string) => {
-      upsert: (rows: Row[], opts: { onConflict: string }) => Promise<{ error: { message: string } | null }>;
+      upsert: (rows: Row[], opts: { onConflict: string }) => PromiseLike<{ error: { message: string } | null }>;
     };
   },
   table: string,

@@ -118,7 +118,7 @@ export const updateUnit = createServerFn({ method: "POST" })
     if (data.zoneCode !== undefined) patch["zone_code"] = data.zoneCode;
     const { error } = await supabaseAdmin
       .from("scenario_units")
-      .update(patch)
+      .update(patch as never)
       .eq("id", data.id);
     if (error) throw new Error(error.message);
     return { ok: true };

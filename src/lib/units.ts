@@ -72,5 +72,5 @@ export const UNIT_LIBRARY: UnitDefinition[] = [
   },
 ];
 
-export const unitDef = (type: string) =>
-  UNIT_LIBRARY.find((u) => u.type === type) ?? UNIT_LIBRARY[0];
+export const unitDef = (type: string): UnitDefinition =>
+  UNIT_LIBRARY.find((u) => u.type === type) ?? UNIT_LIBRARY[0]!;

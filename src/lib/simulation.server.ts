@@ -137,9 +137,11 @@ export async function loadNetwork(
   const netExport: Record<string, Float64Array> = {};
   for (const z of zones) netExport[z] = new Float64Array(H);
   for (const e of edges) {
+    const na = netExport[e.a]!;
+    const nb = netExport[e.b]!;
     for (let i = 0; i < H; i++) {
-      netExport[e.a]![i] += e.flow[i]!;
-      netExport[e.b]![i] -= e.flow[i]!;
+      na[i] = na[i]! + e.flow[i]!;
+      nb[i] = nb[i]! - e.flow[i]!;
     }
   }
 
@@ -210,7 +212,8 @@ function unitInjections(net: NetworkData, units: Unit[]): Record<string, Float64
           u.unit_type === "solar"
             ? Math.max(0, Math.sin(((hour - 6) / 12) * Math.PI)) * 0.55
             : 0.32;
-        inj[z]![i] += cap * cf;
+        const iz = inj[z]!;
+        iz[i] = iz[i]! + cap * cf;
       }
     }
 
@@ -248,8 +251,8 @@ function applyStorage(
       const cheap = idx[k]!;
       const dear = idx[idx.length - 1 - k]!;
       if (price[dear]! - price[cheap]! < 2) break;
-      inj[cheap] -= powerMw; // charging = extra demand
-      inj[dear] += powerMw * efficiency;
+      inj[cheap] = inj[cheap]! - powerMw; // charging = extra demand
+      inj[dear] = inj[dear]! + powerMw * efficiency;
     }
   }
 }
@@ -415,9 +418,9 @@ export function runDispatch(
       // Welfare gained by this transfer = area between the two curves.
       welfare += step * (bestGain - 0.5 * step * (slope[from]! + slope[to]!));
       co2 += step * (ci[to]! - ci[from]!); // kg CO2 (g/kWh x MWh)
-      price[from] += slope[from]! * step;
-      price[to] -= slope[to]! * step;
-      f[best] += bestDir * step;
+      price[from] = price[from]! + slope[from]! * step;
+      price[to] = price[to]! - slope[to]! * step;
+      f[best] = f[best]! + bestDir * step;
       extraTransfer += step;
     }
     if (hourCongested) congested++;

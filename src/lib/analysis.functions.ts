@@ -78,7 +78,10 @@ export const refreshOfficialCapacity = createServerFn({ method: "POST" }).handle
       if (ab != null) metrics["ntc_ab_mw"] = ab;
       if (ba != null) metrics["ntc_ba_mw"] = ba;
       metrics["ntc_source"] = "ENTSO-E day-ahead NTC";
-      await supabaseAdmin.from("targets").update({ metrics }).eq("id", t.id);
+      await supabaseAdmin
+        .from("targets")
+        .update({ metrics: metrics as never })
+        .eq("id", t.id);
       updated++;
     }
     return { updated, checked: targets?.length ?? 0 };
