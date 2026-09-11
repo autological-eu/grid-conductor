@@ -278,11 +278,12 @@ export function EuropeMap({
     1,
     ...targets.map((t) => (metric === "market" ? t.market_loss_meur : t.climate_loss_ktco2)),
   );
-  const maxCi = Math.max(1, ...zones.map((z) => z.avg_carbon_intensity ?? 0));
+  /** value mapped to the black end of the scale */
+  const lossCap = metric === "market" ? Math.min(maxLoss, MARKET_LOSS_CAP) : maxLoss;
   const k = view.k;
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-xl border border-border bg-muted/40">
+    <div className="relative h-full w-full overflow-hidden rounded-xl border border-border bg-card">
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
