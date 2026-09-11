@@ -551,6 +551,18 @@ export function EuropeMap({
                       : ""}
                   </title>
                 </circle>
+                <text
+                  x={x}
+                  y={y + 16 / k}
+                  textAnchor="middle"
+                  dominantBaseline="hanging"
+                  fontSize={9 / k}
+                  fontWeight={600}
+                  fill="var(--color-muted-foreground)"
+                  style={{ pointerEvents: "none" }}
+                >
+                  {(z.country_code || countryOf(z.code)).toUpperCase()}
+                </text>
               </g>
             );
           })}
