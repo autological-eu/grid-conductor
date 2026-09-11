@@ -474,13 +474,6 @@ export function TargetSidebar({
   );
 }
 
-function capacityLabel(unit: { params: unknown } | undefined): string {
-  const p = (unit?.params ?? {}) as Record<string, number>;
-  if (p["energy_mwh"] != null) return `${p["power_mw"]} MW / ${p["energy_mwh"]} MWh`;
-  if (p["capacity_mw"] != null) return `${p["capacity_mw"]} MW`;
-  if (p["added_mw"] != null) return `+${p["added_mw"]} MW`;
-  return "";
-}
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
