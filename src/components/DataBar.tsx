@@ -77,29 +77,67 @@ export function DataBar({
 
   const p = progress.data;
 
+  const hasData = (p?.rows ?? 0) > 0;
+
   return (
-    <header className="flex items-center gap-4 border-b border-border bg-card px-4 py-3">
-      <div>
-        <h1 className="text-sm font-semibold">Grid Conductor</h1>
+    <header className="flex items-center gap-6 border-b border-border bg-card px-5 py-3">
+      <div className="shrink-0">
+        <h1 className="text-lg font-bold leading-tight tracking-tight">Grid Conductor</h1>
         <p className="text-xs text-muted-foreground">
           Your real time intelligent engine&nbsp;
         </p>
       </div>
 
-      <div className="ml-auto flex items-center gap-3">
-        <div className="w-44">
-          <Progress value={Math.round((p?.fraction ?? 0) * 100)} />
-          <p className="mt-1 text-[11px] text-muted-foreground">
-            {p?.rows ? `${p.rows.toLocaleString()} rows · ${p.done}/${p.total} jobs` : "No data yet"}
-            {p?.paused ? " · paused" : ""}
+      <ol className="flex items-center gap-2">
+        <li className="flex items-center gap-2">
+          <StepBadge n={1} active={!hasData} done={hasData} />
+          <div className="flex flex-col gap-1">
+            <Button
+              size="sm"
+              variant={hasData ? "secondary" : "default"}
+              onClick={startImport}
+              disabled={running}
+              className={hasData ? "" : "shadow-md"}
+            >
+              {running ? "Importing…" : hasData ? "Re-import year" : "Import year"}
+            </Button>
+            <div className="w-36">
+              <Progress value={Math.round((p?.fraction ?? 0) * 100)} />
+              <p className="mt-0.5 text-[10px] text-muted-foreground">
+                {p?.rows
+                  ? `${p.rows.toLocaleString()} rows · ${p.done}/${p.total} jobs`
+                  : "No data yet"}
+                {p?.paused ? " · paused" : ""}
+              </p>
+            </div>
+          </div>
+        </li>
+        <StepArrow />
+        <li className="flex items-center gap-2">
+          <StepBadge n={2} active={hasData} done={false} />
+          <Button
+            size="sm"
+            variant={hasData ? "default" : "secondary"}
+            onClick={() => detect.mutate()}
+            disabled={detect.isPending}
+            className={hasData ? "shadow-md" : ""}
+          >
+            {detect.isPending ? "Analysing…" : "Find targets"}
+          </Button>
+        </li>
+        <StepArrow />
+        <li className="flex items-center gap-2">
+          <StepBadge n={3} active={false} done={false} />
+          <p className="max-w-36 text-xs font-medium text-primary">
+            Click a highlighted border on the map
           </p>
-        </div>
-        <Button size="sm" variant="secondary" onClick={startImport} disabled={running}>
-          {running ? "Importing…" : "Import year"}
-        </Button>
-        <Button size="sm" onClick={() => detect.mutate()} disabled={detect.isPending}>
-          {detect.isPending ? "Analysing…" : "Find targets"}
-        </Button>
+        </li>
+      </ol>
+
+      <div className="ml-auto flex items-center gap-2">
+        <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+          Colour by
+        </span>
         <div className="flex rounded-md border border-border p-0.5 text-xs">
           {(["market", "climate"] as const).map((m) => (
             <button
@@ -116,4 +154,24 @@ export function DataBar({
       </div>
     </header>
   );
+}
+
+function StepBadge({ n, active, done }: { n: number; active: boolean; done: boolean }) {
+  return (
+    <span
+      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+        done
+          ? "bg-primary/15 text-primary"
+          : active
+            ? "bg-primary text-primary-foreground"
+            : "bg-muted text-muted-foreground"
+      }`}
+    >
+      {n}
+    </span>
+  );
+}
+
+function StepArrow() {
+  return <span className="mx-1 text-muted-foreground/50">→</span>;
 }
