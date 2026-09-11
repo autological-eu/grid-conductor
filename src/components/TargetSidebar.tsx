@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { ChevronDown, ChevronRight, Play, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { UNIT_LIBRARY, unitDef, unitDrag, type UnitType } from "@/lib/units";
+import { unitIcon } from "@/lib/unitIcons";
 import {
   addUnit,
   createScenario,
