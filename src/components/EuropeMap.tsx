@@ -448,27 +448,38 @@ export function EuropeMap({
             const [x, y] = project(z.lon, z.lat);
             const dim = focusIso ? !focusIso.has(countryOf(z.code)) : false;
             const dropZ = dropTarget?.kind === "zone" && dropTarget.key === z.code;
+            const candidate = dropActive && dropPlacement === "zone" && eligibleZones.has(z.code);
+            const inactiveDrop = dropActive && !candidate;
             return (
               <g key={z.code}>
-                {dropZ && (
+                {candidate && (
                   <circle
                     cx={x}
                     cy={y}
-                    r={16 / k}
-                    fill="none"
+                    r={(dropZ ? 16 : 13) / k}
+                    fill="var(--color-primary)"
+                    fillOpacity={dropZ ? 0.18 : 0.08}
                     stroke="var(--color-primary)"
-                    strokeWidth={2.5 / k}
+                    strokeWidth={(dropZ ? 2.5 : 1.5) / k}
                     strokeDasharray={`${4 / k} ${3 / k}`}
                   >
-                    <animate attributeName="opacity" values="1;0.4;1" dur="1s" repeatCount="indefinite" />
+                    <animate
+                      attributeName="opacity"
+                      values={dropZ ? "1;0.4;1" : "0.9;0.55;0.9"}
+                      dur="1s"
+                      repeatCount="indefinite"
+                    />
                   </circle>
                 )}
                 <circle
                   cx={x}
                   cy={y}
                   r={(z.hours > 0 ? 9 : 6) / k}
-                  fill="var(--color-muted-foreground)"
-                  fillOpacity={dim ? 0.2 : z.hours > 0 ? 0.9 : 0.35}
+                  fill={candidate ? "var(--color-primary)" : "var(--color-muted-foreground)"}
+                  fillOpacity={
+                    inactiveDrop ? 0.15 : dim ? 0.2 : candidate ? 1 : z.hours > 0 ? 0.9 : 0.35
+                  }
+
                   stroke="var(--color-card)"
                   strokeWidth={1.5 / k}
                 >
