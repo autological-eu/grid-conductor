@@ -125,6 +125,8 @@ export function EuropeMap({
     null,
   );
   const [dropActive, setDropActive] = useState(false);
+  const [dropPlacement, setDropPlacement] = useState<"zone" | "border">("zone");
+
 
   const svgRef = useRef<SVGSVGElement | null>(null);
   const viewRef = useRef(view);
