@@ -255,16 +255,48 @@ function applyStorage(
 }
 
 // ------------------------------------------------------------------
-// Hourly redispatch
+// Hourly market clearing — ENTSO-E single day-ahead coupling (Euphemia)
 // ------------------------------------------------------------------
+//
+// Objective, constraints and pricing rules follow the SDAC/Euphemia
+// specification for the ATC (available transfer capacity) network model:
+//
+//   maximise  total social welfare = sum over zones of the area between the
+//             aggregated demand and supply curves at the cleared volume
+//   subject to  balance:      sum of all zonal net positions = 0
+//               ATC limits:   -ATC(b->a) <= flow(a->b) <= ATC(a->b)
+//               pricing:      one clearing price per zone; prices are equal
+//                             between zones whenever the connecting border is
+//                             not saturated (price convergence), and may only
+//                             diverge across a saturated border, with energy
+//                             flowing from the low- to the high-price zone
+//                             (no adverse flows)
+//
+// Each zone's aggregated curve is calibrated from its own hourly history: the
+// observed price/net-position relationship gives the local slope of the
+// residual supply curve, anchored at the observed clearing point. Solving is
+// a welfare-gradient auction: while any border can carry energy from a lower-
+// to a higher-price zone, transfer the volume that equalises the two prices or
+// saturates the border, whichever is smaller. This is the convex dual of the
+// coupling problem, so it converges to the same prices and net positions as
+// the LP; iteration stops at a 0.01 EUR/MWh price-convergence tolerance.
+//
+// Not modelled (deliberately, since the inputs are not public): block orders,
+// complex/PUN orders, flow-based domains, intraday and balancing timeframes.
+const PRICE_TOLERANCE = 0.01; // EUR/MWh, Euphemia price-convergence criterion
+const MAX_ITERATIONS = 400;
+
 export type RunResult = {
   hours: number;
   welfareEur: number;
   co2Kg: number;
   congestedHours: number;
+  convergedHours: number;
   extraTransferMwh: number;
   borderFlowMwh: number;
   avgSpreadEurMwh: number;
+  congestionRentEur: number;
+  adverseFlowHours: number;
   priceMae: number;
   flowMae: number;
   directionAccuracy: number;
@@ -296,8 +328,8 @@ export function runDispatch(
     return {
       ai: zIdx.get(e.a)!,
       bi: zIdx.get(e.b)!,
-      capAb: e.capAb + add,
-      capBa: e.capBa + add,
+      capAb: e.capAb + add, // ATC a -> b
+      capBa: e.capBa + add, // ATC b -> a
       flow: e.flow,
       isTarget:
         (e.a === target.a && e.b === target.b) || (e.a === target.b && e.b === target.a),
@@ -312,6 +344,9 @@ export function runDispatch(
   let welfare = 0;
   let co2 = 0;
   let congested = 0;
+  let converged = 0;
+  let adverse = 0;
+  let rent = 0;
   let extraTransfer = 0;
   let borderFlow = 0;
   let spreadSum = 0;
@@ -331,7 +366,7 @@ export function runDispatch(
         ok = false;
         break;
       }
-      // Injections shift the zone along its own price-response curve.
+      // Scenario units shift the zone along its own aggregated curve before clearing.
       price[z] = s.price[t]! - slope[z]! * (inj[zones[z]!]![t] ?? 0);
       ci[z] = s.ci[t]!;
     }
@@ -340,36 +375,44 @@ export function runDispatch(
     for (let e = 0; e < edges.length; e++) f[e] = edges[e]!.flow[t]!;
 
     let hourCongested = false;
-    for (let iter = 0; iter < 60; iter++) {
+    let iter = 0;
+    let residual = 0;
+    for (; iter < MAX_ITERATIONS; iter++) {
+      // Pick the border with the largest remaining welfare gradient that still
+      // has ATC headroom in the profitable direction.
       let best = -1;
-      let bestGain = 0.05;
+      let bestGain = PRICE_TOLERANCE;
       let bestDir = 1;
+      let blocked = 0;
       for (let e = 0; e < edges.length; e++) {
         const { ai, bi, capAb, capBa } = edges[e]!;
-        const dAB = price[bi]! - price[ai]!; // gain of moving a -> b
-        if (dAB > bestGain && f[e]! < capAb) {
+        const dAB = price[bi]! - price[ai]!;
+        const gain = Math.abs(dAB);
+        if (gain <= PRICE_TOLERANCE) continue;
+        const headroom = dAB > 0 ? capAb - f[e]! : capBa + f[e]!;
+        if (headroom <= 0.5) {
+          blocked = Math.max(blocked, gain);
+          continue;
+        }
+        if (gain > bestGain) {
           best = e;
-          bestGain = dAB;
-          bestDir = 1;
-        } else if (-dAB > bestGain && -f[e]! < capBa) {
-          best = e;
-          bestGain = -dAB;
-          bestDir = -1;
+          bestGain = gain;
+          bestDir = dAB > 0 ? 1 : -1;
         }
       }
-      if (best < 0) break;
+      if (best < 0) {
+        residual = blocked;
+        break;
+      }
       const e = edges[best]!;
       const from = bestDir === 1 ? e.ai : e.bi;
       const to = bestDir === 1 ? e.bi : e.ai;
       const headroom = bestDir === 1 ? e.capAb - f[best]! : e.capBa + f[best]!;
       const equalising = bestGain / (slope[from]! + slope[to]!);
       const step = Math.min(headroom, equalising);
-      if (step <= 0.5) {
-        hourCongested = true;
-        break;
-      }
       if (step >= headroom - 1e-6) hourCongested = true;
 
+      // Welfare gained by this transfer = area between the two curves.
       welfare += step * (bestGain - 0.5 * step * (slope[from]! + slope[to]!));
       co2 += step * (ci[to]! - ci[from]!); // kg CO2 (g/kWh x MWh)
       price[from] += slope[from]! * step;
@@ -378,6 +421,19 @@ export function runDispatch(
       extraTransfer += step;
     }
     if (hourCongested) congested++;
+    if (residual <= PRICE_TOLERANCE) converged++;
+
+    // Congestion rent and adverse-flow check on saturated borders.
+    let hourAdverse = false;
+    for (let e = 0; e < edges.length; e++) {
+      const ed = edges[e]!;
+      const spread = price[ed.bi]! - price[ed.ai]!;
+      if (Math.abs(spread) > PRICE_TOLERANCE) {
+        rent += Math.abs(f[e]!) * Math.abs(spread);
+        if (f[e]! * spread < -1) hourAdverse = true; // flow towards the cheaper zone
+      }
+    }
+    if (hourAdverse) adverse++;
 
     for (let e = 0; e < edges.length; e++) {
       const ed = edges[e]!;
@@ -402,9 +458,12 @@ export function runDispatch(
     welfareEur: welfare,
     co2Kg: co2,
     congestedHours: congested,
+    convergedHours: converged,
     extraTransferMwh: extraTransfer,
     borderFlowMwh: borderFlow,
     avgSpreadEurMwh: spreadN ? spreadSum / spreadN : 0,
+    congestionRentEur: rent,
+    adverseFlowHours: adverse,
     priceMae: priceN ? priceErr / priceN : 0,
     flowMae: flowN ? flowErr / flowN : 0,
     directionAccuracy: flowN ? dirOk / flowN : 0,
