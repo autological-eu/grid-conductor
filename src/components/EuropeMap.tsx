@@ -86,6 +86,9 @@ const IDENTITY: View = { k: 1, x: 0, y: 0 };
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
+/** green (low) -> red (high) opportunity-loss scale */
+const lossColor = (t: number) => `oklch(0.68 0.19 ${145 - 120 * clamp(t, 0, 1)})`;
+
 export function EuropeMap({
   zones,
   targets,
