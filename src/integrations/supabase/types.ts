@@ -423,7 +423,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      compute_targets: {
+        Args: {
+          congestion_ratio?: number
+          min_spread?: number
+          relief_share?: number
+        }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never
