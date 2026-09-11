@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import geo from "@/data/europe.geo.json";
+import { unitDef, unitDrag, type UnitType } from "@/lib/units";
+
+export type UnitDropPlacement = { zoneCode?: string; zoneA?: string; zoneB?: string };
 
 export type ZoneSummary = {
   code: string;
@@ -103,6 +106,8 @@ export function EuropeMap({
   onSelect,
   onClear,
   metric,
+  onMetricChange,
+  onDropUnit,
 }: {
   zones: ZoneSummary[];
   targets: TargetRow[];
@@ -110,10 +115,16 @@ export function EuropeMap({
   onSelect: (t: TargetRow) => void;
   onClear?: () => void;
   metric: "market" | "climate";
+  onMetricChange?: (m: "market" | "climate") => void;
+  onDropUnit?: (unitType: UnitType, placement: UnitDropPlacement) => void;
 }) {
   const [hover, setHover] = useState<string | null>(null);
   const [view, setView] = useState<View>(IDENTITY);
   const [dragging, setDragging] = useState(false);
+  const [dropTarget, setDropTarget] = useState<{ kind: "zone" | "border"; key: string } | null>(
+    null,
+  );
+  const [dropActive, setDropActive] = useState(false);
 
   const svgRef = useRef<SVGSVGElement | null>(null);
   const viewRef = useRef(view);
@@ -265,6 +276,94 @@ export function EuropeMap({
 
   const wasDrag = () => dragRef.current?.moved === true;
 
+  /** distance from point to segment, in world (untransformed) coordinates */
+  const distToSeg = (px: number, py: number, x1: number, y1: number, x2: number, y2: number) => {
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const len2 = dx * dx + dy * dy || 1;
+    const t = clamp(((px - x1) * dx + (py - y1) * dy) / len2, 0, 1);
+    return Math.hypot(px - (x1 + t * dx), py - (y1 + t * dy));
+  };
+
+  /** find the zone or border under a client point, depending on the dragged unit's placement */
+  const locateDrop = useCallback(
+    (clientX: number, clientY: number, placement: "zone" | "border") => {
+      const p = toViewBox(clientX, clientY);
+      const v = viewRef.current;
+      const wx = (p.x - v.x) / v.k;
+      const wy = (p.y - v.y) / v.k;
+      if (placement === "zone") {
+        let best: ZoneSummary | null = null;
+        let bd = 70;
+        for (const z of zones) {
+          if (!z.hours) continue;
+          const [x, y] = project(z.lon, z.lat);
+          const d = Math.hypot(x - wx, y - wy);
+          if (d < bd) {
+            bd = d;
+            best = z;
+          }
+        }
+        return best
+          ? { kind: "zone" as const, key: best.code, placement: { zoneCode: best.code } }
+          : null;
+      }
+      let best: TargetRow | null = null;
+      let bd = 30;
+      for (const t of targets) {
+        const [x1, y1] = project(t.a_lon, t.a_lat);
+        const [x2, y2] = project(t.b_lon, t.b_lat);
+        const d = distToSeg(wx, wy, x1, y1, x2, y2);
+        if (d < bd) {
+          bd = d;
+          best = t;
+        }
+      }
+      return best
+        ? {
+            kind: "border" as const,
+            key: best.id,
+            placement: { zoneA: best.zone_a, zoneB: best.zone_b },
+          }
+        : null;
+    },
+    [zones, targets, toViewBox],
+  );
+
+  const onUnitDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    const type = unitDrag.current;
+    if (!type || !onDropUnit) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "copy";
+    setDropActive(true);
+    setDropTarget(locateDrop(e.clientX, e.clientY, unitDef(type).placement));
+  };
+
+  const onUnitDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    const type = (e.dataTransfer.getData("text/unit") || unitDrag.current) as UnitType | "";
+    setDropActive(false);
+    setDropTarget(null);
+    if (!type || !onDropUnit) return;
+    e.preventDefault();
+    const hit = locateDrop(e.clientX, e.clientY, unitDef(type).placement);
+    if (hit) onDropUnit(type, hit.placement);
+  };
+
+  const endUnitDrag = () => {
+    setDropActive(false);
+    setDropTarget(null);
+  };
+
+  // reset drop visuals if the drag ends anywhere outside the map
+  useEffect(() => {
+    window.addEventListener("dragend", endUnitDrag);
+    window.addEventListener("drop", endUnitDrag);
+    return () => {
+      window.removeEventListener("dragend", endUnitDrag);
+      window.removeEventListener("drop", endUnitDrag);
+    };
+  }, []);
+
   const zoomButton = (factor: number) => {
     stopAnim();
     zoomAt(W / 2, H / 2, factor);
@@ -279,7 +378,14 @@ export function EuropeMap({
   const k = view.k;
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-xl border border-border bg-card">
+    <div
+      className={`relative h-full w-full overflow-hidden rounded-xl border bg-card transition-colors ${
+        dropActive ? "border-primary/60" : "border-border"
+      }`}
+      onDragOver={onUnitDragOver}
+      onDragLeave={endUnitDrag}
+      onDrop={onUnitDrop}
+    >
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
@@ -322,8 +428,22 @@ export function EuropeMap({
           {zones.map((z) => {
             const [x, y] = project(z.lon, z.lat);
             const dim = focusIso ? !focusIso.has(countryOf(z.code)) : false;
+            const dropZ = dropTarget?.kind === "zone" && dropTarget.key === z.code;
             return (
               <g key={z.code}>
+                {dropZ && (
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r={16 / k}
+                    fill="none"
+                    stroke="var(--color-primary)"
+                    strokeWidth={2.5 / k}
+                    strokeDasharray={`${4 / k} ${3 / k}`}
+                  >
+                    <animate attributeName="opacity" values="1;0.4;1" dur="1s" repeatCount="indefinite" />
+                  </circle>
+                )}
                 <circle
                   cx={x}
                   cy={y}
@@ -352,8 +472,9 @@ export function EuropeMap({
             const v = metric === "market" ? t.market_loss_meur : t.climate_loss_ktco2;
             const c = Math.min(1, Math.max(0, v / lossCap));
             const isSelected = selectedId === t.id;
-            const active = isSelected || hover === t.id;
-            const faded = selectedId != null && !isSelected;
+            const dropB = dropTarget?.kind === "border" && dropTarget.key === t.id;
+            const active = isSelected || hover === t.id || dropB;
+            const faded = selectedId != null && !isSelected && !dropB;
             return (
               <g
                 key={t.id}
@@ -430,8 +551,26 @@ export function EuropeMap({
       </div>
 
       <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg border border-border bg-card/90 px-3 py-2 text-xs text-muted-foreground backdrop-blur">
-        <div className="font-medium text-foreground">
-          {metric === "market" ? "Market opportunity loss (MEUR/y)" : "Climate opportunity loss (ktCO2/y)"}
+        <div className="flex items-center justify-between gap-3">
+          <span className="font-medium text-foreground">
+            {metric === "market"
+              ? "Market opportunity loss (MEUR/y)"
+              : "Climate opportunity loss (ktCO2/y)"}
+          </span>
+          <div className="pointer-events-auto flex rounded-md border border-border p-0.5 text-[10px]">
+            {(["market", "climate"] as const).map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => onMetricChange?.(m)}
+                className={`rounded px-1.5 py-0.5 ${
+                  metric === m ? "bg-primary text-primary-foreground" : "text-muted-foreground"
+                }`}
+              >
+                {m === "market" ? "Market" : "Climate"}
+              </button>
+            ))}
+          </div>
         </div>
         <div
           className="mt-1.5 h-2 w-48 rounded-full"
@@ -448,6 +587,15 @@ export function EuropeMap({
         </div>
         <div className="mt-1">Click a border to zoom in on it. Scroll to zoom, drag to pan.</div>
       </div>
+
+      {dropActive && (
+        <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-primary/50 bg-card/95 px-4 py-1.5 text-xs font-medium text-foreground shadow backdrop-blur">
+          {unitDrag.current && unitDef(unitDrag.current).placement === "border"
+            ? "Drop the line on a highlighted border"
+            : "Drop the unit on a country"}
+          {dropTarget ? " — release to place" : ""}
+        </div>
+      )}
     </div>
   );
 }

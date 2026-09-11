@@ -74,3 +74,6 @@ export const UNIT_LIBRARY: UnitDefinition[] = [
 
 export const unitDef = (type: string): UnitDefinition =>
   UNIT_LIBRARY.find((u) => u.type === type) ?? UNIT_LIBRARY[0]!;
+
+/** currently dragged library unit (shared so the map can react during dragover) */
+export const unitDrag: { current: UnitType | null } = { current: null };

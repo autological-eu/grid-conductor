@@ -15,9 +15,17 @@
 - [x] Product pitch/summary for the user
 
 Open / next
+- [x] Move Market/Climate metric toggle from header into the map colour bar
+- [x] Header simplified: title + 3-step progress bar + settings menu (Re-import / Recompute targets)
+- [x] Daily backend refresh at 05:00 UTC via scheduled job calling /api/public/daily-refresh (updates rolling year + recomputes targets)
+- [ ] After publishing: point app_config.daily_refresh_url at the production URL
 - [ ] Overlay official ENTSO-E NTC capacities on inferred capacities in target detection
 - [ ] Access control: workbench is currently open to anyone with the link
 - [x] Map: larger zone nodes; border lines uniform width colored green→red by opportunity loss; add color bar legend at bottom
 - [x] Info hierarchy: numbered start flow in header with primary colour
 - [x] Map: connector colour scale grey→red
 - [x] Left target sidebar hidden until a target border is clicked; pull-out arrow to reopen
+- [x] Right evaluation panel hidden until a scenario is clicked; pull-out arrow to reopen
+- [x] Both sidebars resizable via drag handles
+- [x] Gamify: drag units from library straight onto the map (drop on country / border)
+- [ ] Template scenarios: 7 default €1M-normalised scenarios per target, listed at bottom of left sidebar

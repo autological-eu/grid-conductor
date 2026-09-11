@@ -1,19 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useRef, useState } from "react";
+import { Settings } from "lucide-react";
 import { toast } from "sonner";
 import { getImportProgress, planImport, runImportBatch } from "@/lib/import.functions";
 import { refreshOfficialCapacity, refreshTargets } from "@/lib/analysis.functions";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 
-export function DataBar({
-  metric,
-  onMetricChange,
-}: {
-  metric: "market" | "climate";
-  onMetricChange: (m: "market" | "climate") => void;
-}) {
+export function DataBar({ step }: { step: 1 | 2 | 3 }) {
   const qc = useQueryClient();
   const progressFn = useServerFn(getImportProgress);
   const plan = useServerFn(planImport);
@@ -21,7 +14,9 @@ export function DataBar({
   const targetsFn = useServerFn(refreshTargets);
   const ntcFn = useServerFn(refreshOfficialCapacity);
   const [running, setRunning] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const stop = useRef(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   const progress = useQuery({
     queryKey: ["import-progress"],
@@ -31,7 +26,17 @@ export function DataBar({
 
   useEffect(() => () => void (stop.current = true), []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const close = (e: MouseEvent) => {
+      if (!menuRef.current?.contains(e.target as Node)) setMenuOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [menuOpen]);
+
   async function startImport() {
+    setMenuOpen(false);
     stop.current = false;
     setRunning(true);
     try {
@@ -77,101 +82,109 @@ export function DataBar({
 
   const p = progress.data;
 
-  const hasData = (p?.rows ?? 0) > 0;
+  const steps = [
+    { n: 1, label: "Choose bottleneck", hint: "Click a highlighted border on the map" },
+    { n: 2, label: "Simulate scenarios", hint: "Build scenarios in the left panel" },
+    { n: 3, label: "Evaluate opportunity", hint: "Review results in the right panel" },
+  ] as const;
 
   return (
     <header className="flex items-center gap-6 border-b border-border bg-card px-5 py-3">
       <div className="shrink-0">
         <h1 className="text-lg font-bold leading-tight tracking-tight">Grid Conductor</h1>
-        <p className="text-xs text-muted-foreground">
-          Your real time intelligent engine&nbsp;
-        </p>
+        <p className="text-xs text-muted-foreground">Your real time intelligent engine&nbsp;</p>
       </div>
 
-      <ol className="flex items-center gap-2">
-        <li className="flex items-center gap-2">
-          <StepBadge n={1} active={!hasData} done={hasData} />
-          <div className="flex flex-col gap-1">
-            <Button
-              size="sm"
-              variant={hasData ? "secondary" : "default"}
-              onClick={startImport}
-              disabled={running}
-              className={hasData ? "" : "shadow-md"}
-            >
-              {running ? "Importing…" : hasData ? "Re-import year" : "Import year"}
-            </Button>
-            <div className="w-36">
-              <Progress value={Math.round((p?.fraction ?? 0) * 100)} />
-              <p className="mt-0.5 text-[10px] text-muted-foreground">
-                {p?.rows
-                  ? `${p.rows.toLocaleString()} rows · ${p.done}/${p.total} jobs`
-                  : "No data yet"}
-                {p?.paused ? " · paused" : ""}
-              </p>
-            </div>
-          </div>
-        </li>
-        <StepArrow />
-        <li className="flex items-center gap-2">
-          <StepBadge n={2} active={hasData} done={false} />
-          <Button
-            size="sm"
-            variant={hasData ? "default" : "secondary"}
-            onClick={() => detect.mutate()}
-            disabled={detect.isPending}
-            className={hasData ? "shadow-md" : ""}
-          >
-            {detect.isPending ? "Analysing…" : "Find targets"}
-          </Button>
-        </li>
-        <StepArrow />
-        <li className="flex items-center gap-2">
-          <StepBadge n={3} active={false} done={false} />
-          <p className="max-w-36 text-xs font-medium text-primary">
-            Click a highlighted border on the map
-          </p>
-        </li>
+      <ol className="flex flex-1 items-center justify-center gap-0">
+        {steps.map((s, i) => {
+          const active = step === s.n;
+          const done = step > s.n;
+          return (
+            <li key={s.n} className="flex items-center">
+              {i > 0 && (
+                <div
+                  className={`h-px w-8 ${done || active ? "bg-primary" : "bg-border"}`}
+                  aria-hidden
+                />
+              )}
+              <div
+                className={`flex items-center gap-2 rounded-lg px-3 py-1.5 ${
+                  active ? "bg-primary/10 ring-1 ring-primary" : ""
+                }`}
+                title={s.hint}
+                aria-current={active ? "step" : undefined}
+              >
+                <span
+                  className={`flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-semibold ${
+                    active
+                      ? "bg-primary text-primary-foreground"
+                      : done
+                        ? "bg-primary/20 text-primary"
+                        : "bg-muted text-muted-foreground"
+                  }`}
+                >
+                  {s.n}
+                </span>
+                <span
+                  className={`text-xs font-medium ${
+                    active ? "text-primary" : done ? "text-foreground" : "text-muted-foreground"
+                  }`}
+                >
+                  {s.label}
+                </span>
+              </div>
+            </li>
+          );
+        })}
       </ol>
 
-      <div className="ml-auto flex items-center gap-2">
-        <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-          Colour by
-        </span>
-        <div className="flex rounded-md border border-border p-0.5 text-xs">
-          {(["market", "climate"] as const).map((m) => (
+      <p className="hidden text-xs text-muted-foreground xl:block">
+        {p?.rows
+          ? `${p.rows.toLocaleString()} hourly rows · updated daily`
+          : "No data yet — the daily backend import will populate it."}
+        {p?.paused ? " · provider limit reached, resumes tomorrow" : ""}
+        {running ? " · importing…" : ""}
+      </p>
+
+      <div className="relative ml-auto" ref={menuRef}>
+        <button
+          type="button"
+          aria-label="Settings"
+          onClick={() => setMenuOpen((o) => !o)}
+          className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-muted-foreground hover:bg-accent hover:text-foreground"
+        >
+          <Settings className="h-4 w-4" />
+        </button>
+        {menuOpen && (
+          <div className="absolute right-0 top-9 z-20 w-52 rounded-md border border-border bg-popover p-1 text-sm shadow-md">
             <button
-              key={m}
-              onClick={() => onMetricChange(m)}
-              className={`rounded px-2 py-1 ${
-                metric === m ? "bg-primary text-primary-foreground" : "text-muted-foreground"
-              }`}
+              type="button"
+              onClick={startImport}
+              disabled={running}
+              className="w-full rounded-sm px-2 py-1.5 text-left hover:bg-accent disabled:opacity-50"
             >
-              {m === "market" ? "Market" : "Climate"}
+              {running ? "Importing…" : "Re-import year"}
+              <span className="block text-[11px] text-muted-foreground">
+                Troubleshooting only — runs daily automatically
+              </span>
             </button>
-          ))}
-        </div>
+            <button
+              type="button"
+              onClick={() => {
+                setMenuOpen(false);
+                detect.mutate();
+              }}
+              disabled={detect.isPending}
+              className="w-full rounded-sm px-2 py-1.5 text-left hover:bg-accent disabled:opacity-50"
+            >
+              {detect.isPending ? "Recomputing…" : "Recompute targets"}
+              <span className="block text-[11px] text-muted-foreground">
+                Re-run congestion and loss detection
+              </span>
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );
-}
-
-function StepBadge({ n, active, done }: { n: number; active: boolean; done: boolean }) {
-  return (
-    <span
-      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-        done
-          ? "bg-primary/15 text-primary"
-          : active
-            ? "bg-primary text-primary-foreground"
-            : "bg-muted text-muted-foreground"
-      }`}
-    >
-      {n}
-    </span>
-  );
-}
-
-function StepArrow() {
-  return <span className="mx-1 text-muted-foreground/50">→</span>;
 }
