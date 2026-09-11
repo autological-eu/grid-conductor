@@ -54,15 +54,19 @@ export const ensureTemplateScenarios = createServerFn({ method: "POST" })
 
     const { data: existing } = await supabaseAdmin
       .from("scenarios")
-      .select("id")
+      .select("id, template_key")
       .eq("target_id", data.targetId)
       .eq("is_template", true)
       .eq("budget_meur", data.budgetMeur);
 
     if (existing?.length && !data.force) {
-      return { created: 0, reused: existing.length };
+      // race-safe: two concurrent calls both pass the length check above, so
+      // only insert the keys that are still missing at insert time
+      if (existing.length >= TEMPLATE_SPECS.length) {
+        return { created: 0, reused: existing.length };
+      }
     }
-    if (existing?.length) {
+    if (existing?.length && data.force) {
       const ids = existing.map((s) => s.id);
       await supabaseAdmin.from("scenario_results").delete().in("scenario_id", ids);
       await supabaseAdmin.from("scenario_units").delete().in("scenario_id", ids);

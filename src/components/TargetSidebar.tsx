@@ -65,8 +65,13 @@ export function TargetSidebar({
   });
 
   const targetId = target?.id;
+  const ensuredRef = useRef<string | null>(null);
   useEffect(() => {
-    if (targetId) ensureMut.mutate(false);
+    if (!targetId) return;
+    const sig = `${targetId}:${budget}`;
+    if (ensuredRef.current === sig) return;
+    ensuredRef.current = sig;
+    ensureMut.mutate(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetId, budget]);
 
