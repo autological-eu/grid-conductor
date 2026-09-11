@@ -80,9 +80,9 @@ export function DataBar({
   return (
     <header className="flex items-center gap-4 border-b border-border bg-card px-4 py-3">
       <div>
-        <h1 className="text-sm font-semibold">EU cross-border opportunity workbench</h1>
+        <h1 className="text-sm font-semibold">Grid Conductor</h1>
         <p className="text-xs text-muted-foreground">
-          One year of hourly European market data, congested borders, and investment scenarios.
+          Your real time intelligent engine&nbsp;
         </p>
       </div>
 
