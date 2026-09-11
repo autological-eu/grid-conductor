@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { ChevronDown, ChevronRight, Play, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { UNIT_LIBRARY, unitDef, type UnitType } from "@/lib/units";
+import { UNIT_LIBRARY, unitDef, unitDrag, type UnitType } from "@/lib/units";
 import {
   addUnit,
   createScenario,
@@ -94,7 +94,7 @@ export function TargetSidebar({
 
   if (!target) {
     return (
-      <aside className="flex h-full w-[340px] shrink-0 flex-col border-r border-border bg-card p-4">
+      <aside className="flex h-full w-full flex-col border-r border-border bg-card p-4">
         <h2 className="text-sm font-semibold">Targets</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Pick a highlighted border on the map to open its scenarios.
@@ -104,7 +104,7 @@ export function TargetSidebar({
   }
 
   return (
-    <aside className="flex h-full w-[340px] shrink-0 flex-col border-r border-border bg-card">
+    <aside className="flex h-full w-full flex-col border-r border-border bg-card">
       <div className="border-b border-border p-4">
         <h2 className="text-sm font-semibold">
           {target.zone_a} – {target.zone_b}
@@ -134,13 +134,22 @@ export function TargetSidebar({
         <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           Unit library
         </h3>
-        <p className="mb-2 text-xs text-muted-foreground">Drag a unit onto a scenario.</p>
+        <p className="mb-2 text-xs text-muted-foreground">
+          Drag a unit onto a scenario — or straight onto the map.
+        </p>
         <div className="grid grid-cols-2 gap-2">
           {UNIT_LIBRARY.map((u) => (
             <div
               key={u.type}
               draggable
-              onDragStart={(e) => e.dataTransfer.setData("text/unit", u.type)}
+              onDragStart={(e) => {
+                e.dataTransfer.setData("text/unit", u.type);
+                e.dataTransfer.effectAllowed = "copy";
+                unitDrag.current = u.type;
+              }}
+              onDragEnd={() => {
+                unitDrag.current = null;
+              }}
               className="cursor-grab rounded-md border border-border bg-background p-2 text-xs active:cursor-grabbing"
               title={u.description}
             >

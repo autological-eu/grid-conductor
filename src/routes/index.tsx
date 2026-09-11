@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { useRef, useState } from "react";
+import { PanelLeftClose, PanelLeftOpen, PanelRightClose, PanelRightOpen } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { DataBar } from "@/components/DataBar";
 import { EuropeMap, type TargetRow } from "@/components/EuropeMap";
@@ -39,23 +39,39 @@ function Workbench() {
   const [target, setTarget] = useState<TargetRow | null>(null);
   const [scenarioId, setScenarioId] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [evalOpen, setEvalOpen] = useState(false);
+  const [leftWidth, setLeftWidth] = useState(340);
+  const [rightWidth, setRightWidth] = useState(380);
 
   const zones = useQuery({ queryKey: ["zones"], queryFn: () => zonesFn() });
   const targets = useQuery({ queryKey: ["targets"], queryFn: () => targetsFn() });
 
   const rows = (targets.data ?? []) as TargetRow[];
 
+  const selectScenario = (id: string | null) => {
+    setScenarioId(id);
+    if (id) setEvalOpen(true);
+  };
+
+  const step: 1 | 2 | 3 = scenarioId ? 3 : target ? 2 : 1;
+
   return (
     <main className="flex h-screen flex-col bg-background">
-      <DataBar metric={metric} onMetricChange={setMetric} />
+      <DataBar step={step} />
       <div className="flex min-h-0 flex-1">
         {sidebarOpen ? (
-          <div className="relative h-full shrink-0">
+          <div
+            className={`relative h-full shrink-0 rounded-l-md ${
+              step === 2 ? "bg-primary/5 ring-1 ring-primary/40" : ""
+            }`}
+            style={{ width: leftWidth }}
+          >
             <TargetSidebar
               target={target}
               selectedScenarioId={scenarioId}
-              onSelectScenario={setScenarioId}
+              onSelectScenario={selectScenario}
             />
+            <ResizeHandle side="left" onResize={setLeftWidth} />
             <button
               type="button"
               aria-label="Hide target panel"
@@ -70,7 +86,7 @@ function Workbench() {
             type="button"
             aria-label="Show target panel"
             onClick={() => setSidebarOpen(true)}
-            className="z-10 my-auto -ml-0 flex h-16 w-5 shrink-0 items-center justify-center rounded-r-md border border-l-0 border-border bg-card text-muted-foreground shadow-sm hover:w-6 hover:bg-accent hover:text-primary"
+            className="z-10 my-auto flex h-16 w-5 shrink-0 items-center justify-center rounded-r-md border border-l-0 border-border bg-card text-muted-foreground shadow-sm hover:w-6 hover:bg-accent hover:text-primary"
           >
             <PanelLeftOpen className="h-3.5 w-3.5" />
           </button>
@@ -81,6 +97,7 @@ function Workbench() {
             targets={rows}
             selectedId={target?.id ?? null}
             metric={metric}
+            onMetricChange={setMetric}
             onSelect={(t) => {
               setTarget(t);
               setScenarioId(null);
@@ -90,12 +107,78 @@ function Workbench() {
               setTarget(null);
               setScenarioId(null);
               setSidebarOpen(false);
+              setEvalOpen(false);
             }}
           />
         </div>
-        <EvaluationPanel target={target} selectedScenarioId={scenarioId} />
+        {evalOpen ? (
+          <div
+            className={`relative h-full shrink-0 rounded-r-md ${
+              step === 3 ? "bg-primary/5 ring-1 ring-primary/40" : ""
+            }`}
+            style={{ width: rightWidth }}
+          >
+            <EvaluationPanel target={target} selectedScenarioId={scenarioId} />
+            <ResizeHandle side="right" onResize={setRightWidth} />
+            <button
+              type="button"
+              aria-label="Hide evaluation panel"
+              onClick={() => setEvalOpen(false)}
+              className="absolute -left-3 top-4 z-10 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-card text-muted-foreground shadow-sm hover:bg-accent hover:text-foreground"
+            >
+              <PanelRightClose className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            aria-label="Show evaluation panel"
+            onClick={() => setEvalOpen(true)}
+            className="z-10 my-auto flex h-16 w-5 shrink-0 items-center justify-center rounded-l-md border border-r-0 border-border bg-card text-muted-foreground shadow-sm hover:w-6 hover:bg-accent hover:text-primary"
+          >
+            <PanelRightOpen className="h-3.5 w-3.5" />
+          </button>
+        )}
       </div>
       <Toaster />
     </main>
+  );
+}
+
+function ResizeHandle({
+  side,
+  onResize,
+}: {
+  side: "left" | "right";
+  onResize: (width: number) => void;
+}) {
+  const start = useRef<{ x: number; width: number } | null>(null);
+
+  return (
+    <div
+      role="separator"
+      aria-orientation="vertical"
+      aria-label={side === "left" ? "Resize target panel" : "Resize evaluation panel"}
+      onPointerDown={(e) => {
+        const parent = e.currentTarget.parentElement;
+        if (!parent) return;
+        start.current = { x: e.clientX, width: parent.getBoundingClientRect().width };
+        e.currentTarget.setPointerCapture(e.pointerId);
+      }}
+      onPointerMove={(e) => {
+        const s = start.current;
+        if (!s) return;
+        const dx = e.clientX - s.x;
+        const next = side === "left" ? s.width + dx : s.width - dx;
+        onResize(Math.min(620, Math.max(260, Math.round(next))));
+      }}
+      onPointerUp={(e) => {
+        start.current = null;
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      }}
+      className={`absolute inset-y-0 z-10 w-1.5 cursor-col-resize hover:bg-primary/30 ${
+        side === "left" ? "-right-0.5" : "-left-0.5"
+      }`}
+    />
   );
 }

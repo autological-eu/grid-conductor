@@ -47,7 +47,7 @@ export function EvaluationPanel({
   const reportScenario = rows.find((s) => s.id === reportId) ?? null;
 
   return (
-    <section className="flex h-full w-[380px] shrink-0 flex-col border-l border-border bg-card">
+    <section className="flex h-full w-full flex-col border-l border-border bg-card">
       <div className="border-b border-border p-4">
         <h2 className="text-sm font-semibold">Evaluation</h2>
         <p className="text-xs text-muted-foreground">
