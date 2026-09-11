@@ -6,6 +6,7 @@ export type UnitDefinition = {
   label: string;
   description: string;
   placement: "zone" | "border";
+  icon: string;
   defaults: Record<string, number>;
   fields: Array<{ key: string; label: string; unit: string; step?: number }>;
   defaultCapexMeur: number;
@@ -15,6 +16,7 @@ export type UnitDefinition = {
 export const UNIT_LIBRARY: UnitDefinition[] = [
   {
     type: "battery",
+    icon: "🔋",
     label: "Battery storage",
     description: "Shifts energy between hours inside one zone.",
     placement: "zone",
@@ -29,6 +31,7 @@ export const UNIT_LIBRARY: UnitDefinition[] = [
   },
   {
     type: "solar",
+    icon: "☀️",
     label: "Solar farm",
     description: "Adds capacity following the zone's historical solar profile.",
     placement: "zone",
@@ -39,6 +42,7 @@ export const UNIT_LIBRARY: UnitDefinition[] = [
   },
   {
     type: "wind",
+    icon: "🌬️",
     label: "Wind farm",
     description: "Adds capacity following the zone's historical wind profile.",
     placement: "zone",
@@ -49,6 +53,7 @@ export const UNIT_LIBRARY: UnitDefinition[] = [
   },
   {
     type: "line",
+    icon: "🔌",
     label: "Transmission line",
     description: "Raises the transfer limit on the target border.",
     placement: "border",
@@ -59,6 +64,7 @@ export const UNIT_LIBRARY: UnitDefinition[] = [
   },
   {
     type: "demand_response",
+    icon: "🎛️",
     label: "Demand response",
     description: "Flexible load that can shift within the day.",
     placement: "zone",
