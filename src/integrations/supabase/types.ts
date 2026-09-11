@@ -290,30 +290,39 @@ export type Database = {
       }
       scenarios: {
         Row: {
+          budget_meur: number | null
           created_at: string
           description: string | null
           id: string
+          is_template: boolean
           name: string
           status: string
           target_id: string
+          template_key: string | null
           updated_at: string
         }
         Insert: {
+          budget_meur?: number | null
           created_at?: string
           description?: string | null
           id?: string
+          is_template?: boolean
           name: string
           status?: string
           target_id: string
+          template_key?: string | null
           updated_at?: string
         }
         Update: {
+          budget_meur?: number | null
           created_at?: string
           description?: string | null
           id?: string
+          is_template?: boolean
           name?: string
           status?: string
           target_id?: string
+          template_key?: string | null
           updated_at?: string
         }
         Relationships: [
