@@ -136,36 +136,31 @@ export function TargetSidebar({
           Unit library
         </h3>
         <p className="mb-2 text-xs text-muted-foreground">
-          Drag a unit onto a scenario — or straight onto the map.
+          Drag an icon onto the map.
         </p>
-        <div className="grid grid-cols-2 gap-2">
-          {UNIT_LIBRARY.map((u) => (
-            <div
-              key={u.type}
-              draggable
-              onDragStart={(e) => {
-                e.dataTransfer.setData("text/unit", u.type);
-                e.dataTransfer.effectAllowed = "copy";
-                unitDrag.current = u.type;
-              }}
-              onDragEnd={() => {
-                unitDrag.current = null;
-              }}
-              className="cursor-grab rounded-md border border-border bg-background p-2 text-xs active:cursor-grabbing"
-              title={u.description}
-            >
-              <div className="flex items-center gap-1.5 font-medium">
-                {(() => {
-                  const Icon = unitIcon(u.type);
-                  return <Icon className="h-4 w-4 text-primary" />;
-                })()}
-                {u.label}
+        <div className="flex flex-wrap gap-2">
+          {UNIT_LIBRARY.map((u) => {
+            const Icon = unitIcon(u.type);
+            return (
+              <div
+                key={u.type}
+                draggable
+                onDragStart={(e) => {
+                  e.dataTransfer.setData("text/unit", u.type);
+                  e.dataTransfer.effectAllowed = "copy";
+                  unitDrag.current = u.type;
+                }}
+                onDragEnd={() => {
+                  unitDrag.current = null;
+                }}
+                className="flex size-10 cursor-grab items-center justify-center rounded-md border border-border bg-background text-primary transition-colors hover:border-primary hover:bg-accent active:cursor-grabbing"
+                title={`${u.label} — ${u.description}`}
+                aria-label={u.label}
+              >
+                <Icon className="size-5" />
               </div>
-              <div className="text-[11px] text-muted-foreground">
-                {u.defaultCapexMeur} MEUR · {u.defaultDeliveryMonths} mo
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
