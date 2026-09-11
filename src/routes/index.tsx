@@ -57,7 +57,9 @@ function Workbench() {
     queryFn: () => listScenariosQFn({ data: { targetId: target!.id } }),
     enabled: !!target,
   });
-  const placedUnits: PlacedUnit[] = (scenarios.data ?? []).flatMap((s) =>
+  const placedUnits: PlacedUnit[] = (scenarios.data ?? [])
+    .filter((s) => !s.is_template)
+    .flatMap((s) =>
     (s.units ?? []).map((u) => ({
       id: u.id,
       unit_type: u.unit_type,
