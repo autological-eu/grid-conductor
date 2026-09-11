@@ -86,18 +86,14 @@ const IDENTITY: View = { k: 1, x: 0, y: 0 };
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
-/** green (low) -> red (high) -> black (extremum) opportunity-loss scale */
+/** grey (low) -> red (high) opportunity-loss scale */
 const lossColor = (t: number) => {
   const x = clamp(t, 0, 1);
-  if (x < 0.5) {
-    const u = x / 0.5; // green -> red
-    return `oklch(${0.68 - 0.08 * u} ${0.19 + 0.04 * u} ${145 - 120 * u})`;
-  }
-  const u = (x - 0.5) / 0.5; // red -> black
-  return `oklch(${0.6 * (1 - u)} ${0.23 * (1 - u)} 25)`;
+  // interpolate light neutral grey -> vivid red
+  return `oklch(${0.82 - 0.24 * x} ${0.01 + 0.22 * x} 25)`;
 };
 
-/** market loss cap (MEUR/y) at which a border renders black */
+/** market loss cap (MEUR/y) at which a border renders fully red */
 const MARKET_LOSS_CAP = 10;
 
 export function EuropeMap({
@@ -349,7 +345,7 @@ export function EuropeMap({
             );
           })}
 
-          {/* target borders, coloured green (low) to red (high) by yearly opportunity loss */}
+          {/* target borders, coloured grey (low) to red (high) by yearly opportunity loss */}
           {targets.map((t) => {
             const [x1, y1] = project(t.a_lon, t.a_lat);
             const [x2, y2] = project(t.b_lon, t.b_lat);
