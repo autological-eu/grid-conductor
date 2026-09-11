@@ -58,6 +58,49 @@ function Workbench() {
 
   const step: 1 | 2 | 3 = scenarioId ? 3 : target ? 2 : 1;
 
+  const qc = useQueryClient();
+  const listScenariosFn = useServerFn(listScenarios);
+  const createScenarioFn = useServerFn(createScenario);
+  const addUnitFn = useServerFn(addUnit);
+
+  /** a unit from the library was dropped onto the map */
+  const handleDropUnit = async (unitType: UnitType, placement: UnitDropPlacement) => {
+    if (!target) {
+      toast.error("Pick a bottleneck on the map first, then drop units onto it.");
+      return;
+    }
+    try {
+      let sid = scenarioId;
+      if (!sid) {
+        const existing = await listScenariosFn({ data: { targetId: target.id } });
+        sid = existing[0]?.id ?? null;
+        if (!sid) {
+          const s = await createScenarioFn({
+            data: { targetId: target.id, name: `Scenario ${existing.length + 1}` },
+          });
+          sid = s.id;
+        }
+      }
+      const def = unitDef(unitType);
+      await addUnitFn({
+        data: {
+          scenarioId: sid,
+          unitType,
+          zoneCode: def.placement === "zone" ? (placement.zoneCode ?? null) : null,
+          borderZoneA: def.placement === "border" ? (placement.zoneA ?? null) : null,
+          borderZoneB: def.placement === "border" ? (placement.zoneB ?? null) : null,
+        },
+      });
+      qc.invalidateQueries({ queryKey: ["scenarios", target.id] });
+      selectScenario(sid);
+      setSidebarOpen(true);
+      const where = placement.zoneCode ?? (placement.zoneA ? `${placement.zoneA}–${placement.zoneB}` : "");
+      toast.success(`${def.label} added${where ? ` in ${where}` : ""}`);
+    } catch (e) {
+      toast.error((e as Error).message);
+    }
+  };
+
   return (
     <main className="flex h-screen flex-col bg-background">
       <DataBar step={step} />
@@ -112,6 +155,7 @@ function Workbench() {
               setSidebarOpen(false);
               setEvalOpen(false);
             }}
+            onDropUnit={handleDropUnit}
           />
         </div>
         {evalOpen ? (
