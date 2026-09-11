@@ -1,14 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useRef, useState } from "react";
 import { PanelLeftClose, PanelLeftOpen, PanelRightClose, PanelRightOpen } from "lucide-react";
+import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { DataBar } from "@/components/DataBar";
-import { EuropeMap, type TargetRow } from "@/components/EuropeMap";
+import { EuropeMap, type TargetRow, type UnitDropPlacement } from "@/components/EuropeMap";
 import { TargetSidebar } from "@/components/TargetSidebar";
 import { EvaluationPanel } from "@/components/EvaluationPanel";
 import { listTargets, listZoneSummary } from "@/lib/analysis.functions";
+import { addUnit, createScenario, listScenarios } from "@/lib/scenarios.functions";
+import { unitDef, type UnitType } from "@/lib/units";
 
 export const Route = createFileRoute("/")({
   head: () => ({

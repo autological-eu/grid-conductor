@@ -587,6 +587,15 @@ export function EuropeMap({
         </div>
         <div className="mt-1">Click a border to zoom in on it. Scroll to zoom, drag to pan.</div>
       </div>
+
+      {dropActive && (
+        <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-primary/50 bg-card/95 px-4 py-1.5 text-xs font-medium text-foreground shadow backdrop-blur">
+          {unitDrag.current && unitDef(unitDrag.current).placement === "border"
+            ? "Drop the line on a highlighted border"
+            : "Drop the unit on a country"}
+          {dropTarget ? " — release to place" : ""}
+        </div>
+      )}
     </div>
   );
 }
