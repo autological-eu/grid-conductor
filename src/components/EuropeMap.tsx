@@ -313,6 +313,47 @@ export function EuropeMap({
     return s;
   }, [eligibleBorders]);
 
+  /** icons for the units already placed in the selected scenario */
+  const unitMarkers = useMemo(() => {
+    const byCode = new Map(zones.map((z) => [z.code, z]));
+    const seen = new Map<string, number>();
+    const out: Array<{ id: string; x: number; y: number; icon: string; label: string }> = [];
+    for (const u of placedUnits) {
+      let base: [number, number] | null = null;
+      let where = "";
+      if (u.zone_code) {
+        const z = byCode.get(u.zone_code);
+        if (z) {
+          base = project(z.lon, z.lat);
+          where = u.zone_code;
+        }
+      } else if (u.border_zone_a && u.border_zone_b) {
+        const a = byCode.get(u.border_zone_a);
+        const b = byCode.get(u.border_zone_b);
+        if (a && b) {
+          const [ax, ay] = project(a.lon, a.lat);
+          const [bx, by] = project(b.lon, b.lat);
+          base = [(ax + bx) / 2, (ay + by) / 2];
+          where = `${u.border_zone_a}–${u.border_zone_b}`;
+        }
+      }
+      if (!base) continue;
+      const key = where;
+      const n = seen.get(key) ?? 0;
+      seen.set(key, n + 1);
+      const def = unitDef(u.unit_type);
+      out.push({
+        id: u.id,
+        x: base[0] + n * 20,
+        y: base[1] - 20,
+        icon: def.icon,
+        label: `${def.label} — ${where}`,
+      });
+    }
+    return out;
+  }, [placedUnits, zones]);
+
+
   /** find the zone or border under a client point, depending on the dragged unit's placement */
   const locateDrop = useCallback(
     (clientX: number, clientY: number, placement: "zone" | "border") => {
