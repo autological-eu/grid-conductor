@@ -573,7 +573,29 @@ export function EuropeMap({
               </g>
             );
           })}
+
+          {/* units placed in the selected scenario */}
+          {unitMarkers.map((m) => (
+            <g key={m.id} transform={`translate(${m.x} ${m.y})`}>
+              <circle
+                r={11 / k}
+                fill="var(--color-card)"
+                stroke="var(--color-primary)"
+                strokeWidth={1.5 / k}
+              />
+              <text
+                textAnchor="middle"
+                dominantBaseline="central"
+                fontSize={12 / k}
+                style={{ pointerEvents: "none" }}
+              >
+                {m.icon}
+              </text>
+              <title>{m.label}</title>
+            </g>
+          ))}
         </g>
+
       </svg>
 
       <div className="pointer-events-none absolute left-3 top-3 max-w-[22rem] rounded-lg border border-border bg-card/90 px-3 py-2 backdrop-blur">
