@@ -29,4 +29,6 @@ Open / next
 - [x] Both sidebars resizable via drag handles
 - [x] Gamify: drag units from library straight onto the map (drop on country / border)
 - [ ] Template scenarios: 7 default €1M-normalised scenarios per target, listed at bottom of left sidebar
-- [ ] Show scenario units as emoji/icons pinned on the map (zones and borders)
+- [x] Show scenario units as emoji/icons pinned on the map (zones and borders)
+- [ ] Replace unit emojis with distinct Lucide icons (battery, sun, wind, utility pole, gauge) and simplify library to single-icon cards
+- [ ] Restructure scenario unit cards so the icon is primary and editable details sit below it
