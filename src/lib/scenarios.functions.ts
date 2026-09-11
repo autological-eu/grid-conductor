@@ -263,10 +263,14 @@ export const runScenario = createServerFn({ method: "POST" })
         price_mae_eur_mwh: round(base.priceMae, 3),
         border_flow_mae_mw: round(base.flowMae, 1),
         flow_direction_accuracy: round(base.directionAccuracy, 4),
+        price_convergence_share: round(base.convergedHours / Math.max(base.hours, 1), 4),
+        adverse_flow_hours: base.adverseFlowHours,
+        congestion_rent_meur: round(base.congestionRentEur / 1e6, 3),
         hours: base.hours,
         zones: net.zones.length,
       },
-      passed: base.directionAccuracy > 0.8 && base.priceMae < 10,
+      passed:
+        base.directionAccuracy > 0.8 && base.priceMae < 10 && base.adverseFlowHours === 0,
     });
 
     return payload;
