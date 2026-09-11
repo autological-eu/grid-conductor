@@ -27,3 +27,5 @@ Open / next
 - [x] Left target sidebar hidden until a target border is clicked; pull-out arrow to reopen
 - [x] Right evaluation panel hidden until a scenario is clicked; pull-out arrow to reopen
 - [x] Both sidebars resizable via drag handles
+- [x] Gamify: drag units from library straight onto the map (drop on country / border)
+- [ ] Template scenarios: 7 default €1M-normalised scenarios per target, listed at bottom of left sidebar
