@@ -1,4 +1,4 @@
-# Collaborative Space
+# Grid Conductor
 
 I want to build something together with others. Can you help me add them to a workspace?
 
