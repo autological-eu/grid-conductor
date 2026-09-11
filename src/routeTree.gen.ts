@@ -10,65 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as BenchmarkRouteImport } from './routes/benchmark'
-import { Route as CatalogueRouteImport } from './routes/catalogue'
-import { Route as ConceptsRouteImport } from './routes/concepts'
-import { Route as FootprintRouteImport } from './routes/footprint'
-import { Route as ForecastRouteImport } from './routes/forecast'
-import { Route as LiveRouteImport } from './routes/live'
-import { Route as MethodologyRouteImport } from './routes/methodology'
-import { Route as ApiWaterSignalsRouteImport } from './routes/api/water-signals'
-import { Route as DevPingRouteImport } from './routes/dev.ping'
 import { Route as ApiPublicDailyRefreshRouteImport } from './routes/api/public/daily-refresh'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BenchmarkRoute = BenchmarkRouteImport.update({
-  id: '/benchmark',
-  path: '/benchmark',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CatalogueRoute = CatalogueRouteImport.update({
-  id: '/catalogue',
-  path: '/catalogue',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConceptsRoute = ConceptsRouteImport.update({
-  id: '/concepts',
-  path: '/concepts',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FootprintRoute = FootprintRouteImport.update({
-  id: '/footprint',
-  path: '/footprint',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForecastRoute = ForecastRouteImport.update({
-  id: '/forecast',
-  path: '/forecast',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LiveRoute = LiveRouteImport.update({
-  id: '/live',
-  path: '/live',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MethodologyRoute = MethodologyRouteImport.update({
-  id: '/methodology',
-  path: '/methodology',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiWaterSignalsRoute = ApiWaterSignalsRouteImport.update({
-  id: '/api/water-signals',
-  path: '/api/water-signals',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DevPingRoute = DevPingRouteImport.update({
-  id: '/dev/ping',
-  path: '/dev/ping',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicDailyRefreshRoute = ApiPublicDailyRefreshRouteImport.update({
@@ -79,97 +25,27 @@ const ApiPublicDailyRefreshRoute = ApiPublicDailyRefreshRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/benchmark': typeof BenchmarkRoute
-  '/catalogue': typeof CatalogueRoute
-  '/concepts': typeof ConceptsRoute
-  '/footprint': typeof FootprintRoute
-  '/forecast': typeof ForecastRoute
-  '/live': typeof LiveRoute
-  '/methodology': typeof MethodologyRoute
-  '/api/water-signals': typeof ApiWaterSignalsRoute
-  '/dev/ping': typeof DevPingRoute
   '/api/public/daily-refresh': typeof ApiPublicDailyRefreshRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/benchmark': typeof BenchmarkRoute
-  '/catalogue': typeof CatalogueRoute
-  '/concepts': typeof ConceptsRoute
-  '/footprint': typeof FootprintRoute
-  '/forecast': typeof ForecastRoute
-  '/live': typeof LiveRoute
-  '/methodology': typeof MethodologyRoute
-  '/api/water-signals': typeof ApiWaterSignalsRoute
-  '/dev/ping': typeof DevPingRoute
   '/api/public/daily-refresh': typeof ApiPublicDailyRefreshRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/benchmark': typeof BenchmarkRoute
-  '/catalogue': typeof CatalogueRoute
-  '/concepts': typeof ConceptsRoute
-  '/footprint': typeof FootprintRoute
-  '/forecast': typeof ForecastRoute
-  '/live': typeof LiveRoute
-  '/methodology': typeof MethodologyRoute
-  '/api/water-signals': typeof ApiWaterSignalsRoute
-  '/dev/ping': typeof DevPingRoute
   '/api/public/daily-refresh': typeof ApiPublicDailyRefreshRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/benchmark'
-    | '/catalogue'
-    | '/concepts'
-    | '/footprint'
-    | '/forecast'
-    | '/live'
-    | '/methodology'
-    | '/api/water-signals'
-    | '/dev/ping'
-    | '/api/public/daily-refresh'
+  fullPaths: '/' | '/api/public/daily-refresh'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/benchmark'
-    | '/catalogue'
-    | '/concepts'
-    | '/footprint'
-    | '/forecast'
-    | '/live'
-    | '/methodology'
-    | '/api/water-signals'
-    | '/dev/ping'
-    | '/api/public/daily-refresh'
-  id:
-    | '__root__'
-    | '/'
-    | '/benchmark'
-    | '/catalogue'
-    | '/concepts'
-    | '/footprint'
-    | '/forecast'
-    | '/live'
-    | '/methodology'
-    | '/api/water-signals'
-    | '/dev/ping'
-    | '/api/public/daily-refresh'
+  to: '/' | '/api/public/daily-refresh'
+  id: '__root__' | '/' | '/api/public/daily-refresh'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BenchmarkRoute: typeof BenchmarkRoute
-  CatalogueRoute: typeof CatalogueRoute
-  ConceptsRoute: typeof ConceptsRoute
-  FootprintRoute: typeof FootprintRoute
-  ForecastRoute: typeof ForecastRoute
-  LiveRoute: typeof LiveRoute
-  MethodologyRoute: typeof MethodologyRoute
-  ApiWaterSignalsRoute: typeof ApiWaterSignalsRoute
-  DevPingRoute: typeof DevPingRoute
   ApiPublicDailyRefreshRoute: typeof ApiPublicDailyRefreshRoute
 }
 
@@ -180,69 +56,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/benchmark': {
-      id: '/benchmark'
-      path: '/benchmark'
-      fullPath: '/benchmark'
-      preLoaderRoute: typeof BenchmarkRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/catalogue': {
-      id: '/catalogue'
-      path: '/catalogue'
-      fullPath: '/catalogue'
-      preLoaderRoute: typeof CatalogueRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/concepts': {
-      id: '/concepts'
-      path: '/concepts'
-      fullPath: '/concepts'
-      preLoaderRoute: typeof ConceptsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/footprint': {
-      id: '/footprint'
-      path: '/footprint'
-      fullPath: '/footprint'
-      preLoaderRoute: typeof FootprintRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forecast': {
-      id: '/forecast'
-      path: '/forecast'
-      fullPath: '/forecast'
-      preLoaderRoute: typeof ForecastRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/live': {
-      id: '/live'
-      path: '/live'
-      fullPath: '/live'
-      preLoaderRoute: typeof LiveRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/methodology': {
-      id: '/methodology'
-      path: '/methodology'
-      fullPath: '/methodology'
-      preLoaderRoute: typeof MethodologyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/water-signals': {
-      id: '/api/water-signals'
-      path: '/api/water-signals'
-      fullPath: '/api/water-signals'
-      preLoaderRoute: typeof ApiWaterSignalsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dev/ping': {
-      id: '/dev/ping'
-      path: '/dev/ping'
-      fullPath: '/dev/ping'
-      preLoaderRoute: typeof DevPingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/daily-refresh': {
@@ -257,15 +70,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BenchmarkRoute: BenchmarkRoute,
-  CatalogueRoute: CatalogueRoute,
-  ConceptsRoute: ConceptsRoute,
-  FootprintRoute: FootprintRoute,
-  ForecastRoute: ForecastRoute,
-  LiveRoute: LiveRoute,
-  MethodologyRoute: MethodologyRoute,
-  ApiWaterSignalsRoute: ApiWaterSignalsRoute,
-  DevPingRoute: DevPingRoute,
   ApiPublicDailyRefreshRoute: ApiPublicDailyRefreshRoute,
 }
 export const routeTree = rootRouteImport

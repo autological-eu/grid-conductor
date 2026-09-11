@@ -101,24 +101,6 @@ export type Database = {
           },
         ]
       }
-      em_cache: {
-        Row: {
-          cache_key: string
-          fetched_at: string
-          payload: Json
-        }
-        Insert: {
-          cache_key: string
-          fetched_at?: string
-          payload: Json
-        }
-        Update: {
-          cache_key?: string
-          fetched_at?: string
-          payload?: Json
-        }
-        Relationships: []
-      }
       import_jobs: {
         Row: {
           created_at: string

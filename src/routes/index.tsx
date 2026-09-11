@@ -1,187 +1,252 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  BarChart3,
-  CloudSun,
-  Droplets,
-  Factory,
-  Gauge,
-  Handshake,
-  Map as MapIcon,
-  Rocket,
-  Search,
-  Users,
-} from "lucide-react";
-import { PageHeader } from "@/components/AppShell";
-import { SignalCard } from "@/components/SignalCard";
-import { DataBadge, ProfilesChip } from "@/components/DataBadge";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useZone } from "@/hooks/useZone";
-import { useLatest } from "@/hooks/useWaterSignals";
-import { zoneLabel } from "@/lib/zones";
-import { fmtL, fmtPct } from "@/lib/format";
-
-const OverviewSignalMap = lazy(() => import("@/components/OverviewSignalMap"));
+import { createFileRoute } from "@tanstack/react-router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { useRef, useState } from "react";
+import { PanelLeftClose, PanelLeftOpen, PanelRightClose, PanelRightOpen } from "lucide-react";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
+import { DataBar } from "@/components/DataBar";
+import { EuropeMap, type PlacedUnit, type TargetRow, type UnitDropPlacement } from "@/components/EuropeMap";
+import { TargetSidebar } from "@/components/TargetSidebar";
+import { EvaluationPanel } from "@/components/EvaluationPanel";
+import { listTargets, listZoneSummary } from "@/lib/analysis.functions";
+import { addUnit, createScenario, listScenarios } from "@/lib/scenarios.functions";
+import { unitDef, type UnitType } from "@/lib/units";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "WaterTrace — Water signals for every kilowatt-hour" },
+      { title: "EU Cross-Border Opportunity Workbench" },
       {
         name: "description",
         content:
-          "A concept water layer on Electricity Maps data: hourly water intensity, low-water windows, facility footprints and siting benchmarks.",
+          "Find congested European electricity borders, simulate batteries, renewables and new lines hour by hour, and evaluate them against ENTSO-E cost-benefit guidelines.",
       },
-      { property: "og:title", content: "WaterTrace — Water signals for every kilowatt-hour" },
+      { property: "og:title", content: "EU Cross-Border Opportunity Workbench" },
       {
         property: "og:description",
         content:
-          "Water consumption and withdrawal intensity, forecasts and facility footprints for electricity zones.",
+          "Congested borders, hourly market-coupling simulation and ENTSO-E cost-benefit evaluation for European grid investments.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: Overview,
+  component: Workbench,
 });
 
-const STRIP_ZONES = ["DK-DK1", "DE", "FR", "ES", "US-SW-AZPS"];
+function Workbench() {
+  const zonesFn = useServerFn(listZoneSummary);
+  const targetsFn = useServerFn(listTargets);
+  const [metric, setMetric] = useState<"market" | "climate">("market");
+  const [target, setTarget] = useState<TargetRow | null>(null);
+  const [scenarioId, setScenarioId] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [evalOpen, setEvalOpen] = useState(false);
+  const [leftWidth, setLeftWidth] = useState(340);
+  const [rightWidth, setRightWidth] = useState(380);
 
-const STEPS = [
-  { icon: Search, title: "The gap", text: "Every grid has a carbon signal. None has a water signal." },
-  { icon: Droplets, title: "Which water", text: "What power plants consume per kWh — not tap water at the office." },
-  { icon: Factory, title: "Why it matters", text: "US data centres use roughly 12× more water off-site through electricity than on-site cooling (LBNL via ITIF)." },
-  { icon: MapIcon, title: "Not every litre is equal", text: "A litre in Arizona is not a litre in Norway. Local water stress matters (concept X1)." },
-  { icon: Gauge, title: "The signal", text: "W1 water consumption intensity in L/kWh, hourly, with a 72 h forecast." },
-  { icon: CloudSun, title: "How", text: "Generation mix and cross-border flows × water factors by fuel and cooling type." },
-  { icon: Users, title: "Who it is for", text: "Data centres, CSRD/GRI reporters, ESG software, utilities and traders." },
-  { icon: Handshake, title: "Partnerships", text: "X1–X6 add water stress, satellite cooling, weather, hydrology and site telemetry." },
-  { icon: Rocket, title: "Next", text: "Pilot across EU and US zones; validate against Wattnet and the LBNL Water IMPACT Tool." },
-];
+  const zones = useQuery({ queryKey: ["zones"], queryFn: () => zonesFn() });
+  const targets = useQuery({ queryKey: ["targets"], queryFn: () => targetsFn() });
 
-function StripCard({ zone }: { zone: string }) {
-  const q = useLatest(zone);
-  const p = q.data?.points?.[q.data.points.length - 1];
-  if (q.isLoading) return <Skeleton className="h-40 rounded-xl" />;
+  const rows = (targets.data ?? []) as TargetRow[];
+
+  const listScenariosQFn = useServerFn(listScenarios);
+  const scenarios = useQuery({
+    queryKey: ["scenarios", target?.id],
+    queryFn: () => listScenariosQFn({ data: { targetId: target!.id } }),
+    enabled: !!target,
+  });
+  const placedUnits: PlacedUnit[] = (scenarios.data ?? [])
+    .filter((s) => !s.is_template)
+    .flatMap((s) =>
+    (s.units ?? []).map((u) => ({
+      id: u.id,
+      unit_type: u.unit_type,
+      zone_code: u.zone_code,
+      border_zone_a: u.border_zone_a,
+      border_zone_b: u.border_zone_b,
+      active: !scenarioId || s.id === scenarioId,
+      scenario_name: s.name as string,
+    })),
+  );
+
+  const selectScenario = (id: string | null) => {
+    setScenarioId(id);
+    if (id) setEvalOpen(true);
+  };
+
+  const step: 1 | 2 | 3 = scenarioId ? 3 : target ? 2 : 1;
+
+  const qc = useQueryClient();
+  const listScenariosFn = useServerFn(listScenarios);
+  const createScenarioFn = useServerFn(createScenario);
+  const addUnitFn = useServerFn(addUnit);
+
+  /** a unit from the library was dropped onto the map */
+  const handleDropUnit = async (unitType: UnitType, placement: UnitDropPlacement) => {
+    if (!target) {
+      toast.error("Pick a bottleneck on the map first, then drop units onto it.");
+      return;
+    }
+    try {
+      let sid = scenarioId;
+      if (!sid) {
+        const existing = await listScenariosFn({ data: { targetId: target.id } });
+        sid = existing[0]?.id ?? null;
+        if (!sid) {
+          const s = await createScenarioFn({
+            data: { targetId: target.id, name: `Scenario ${existing.length + 1}` },
+          });
+          sid = s.id;
+        }
+      }
+      const def = unitDef(unitType);
+      await addUnitFn({
+        data: {
+          scenarioId: sid,
+          unitType,
+          zoneCode: def.placement === "zone" ? (placement.zoneCode ?? null) : null,
+          borderZoneA: def.placement === "border" ? (placement.zoneA ?? null) : null,
+          borderZoneB: def.placement === "border" ? (placement.zoneB ?? null) : null,
+        },
+      });
+      qc.invalidateQueries({ queryKey: ["scenarios", target.id] });
+      selectScenario(sid);
+      setSidebarOpen(true);
+      const where = placement.zoneCode ?? (placement.zoneA ? `${placement.zoneA}–${placement.zoneB}` : "");
+      toast.success(`${def.label} added${where ? ` in ${where}` : ""}`);
+    } catch (e) {
+      toast.error((e as Error).message);
+    }
+  };
+
   return (
-    <SignalCard
-      id="W1"
-      title={zoneLabel(zone)}
-      value={q.error ? "—" : fmtL(p?.w1_consumption_L_per_kWh)}
-      unit="L/kWh"
-      subtitle={q.error ? "data unavailable right now" : `${zone} · water consumed now`}
-      badge="live"
-      chip={<ProfilesChip />}
-    />
+    <main className="flex h-screen flex-col bg-background">
+      <DataBar step={step} />
+      <div className="flex min-h-0 flex-1">
+        {sidebarOpen ? (
+          <div
+            className={`relative h-full shrink-0 rounded-l-md ${
+              step === 2 ? "bg-primary/5 ring-1 ring-primary/40" : ""
+            }`}
+            style={{ width: leftWidth }}
+          >
+            <TargetSidebar
+              target={target}
+              selectedScenarioId={scenarioId}
+              onSelectScenario={selectScenario}
+            />
+            <ResizeHandle side="left" onResize={setLeftWidth} />
+            <button
+              type="button"
+              aria-label="Hide target panel"
+              onClick={() => setSidebarOpen(false)}
+              className="absolute -right-3 top-4 z-10 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-card text-muted-foreground shadow-sm hover:bg-accent hover:text-foreground"
+            >
+              <PanelLeftClose className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            aria-label="Show target panel"
+            onClick={() => setSidebarOpen(true)}
+            className="z-10 my-auto flex h-16 w-5 shrink-0 items-center justify-center rounded-r-md border border-l-0 border-border bg-card text-muted-foreground shadow-sm hover:w-6 hover:bg-accent hover:text-primary"
+          >
+            <PanelLeftOpen className="h-3.5 w-3.5" />
+          </button>
+        )}
+        <div className="min-w-0 flex-1 p-4">
+          <EuropeMap
+            zones={zones.data ?? []}
+            targets={rows}
+            selectedId={target?.id ?? null}
+            metric={metric}
+            onMetricChange={setMetric}
+            onSelect={(t) => {
+              setTarget(t);
+              setScenarioId(null);
+              setSidebarOpen(true);
+            }}
+            onClear={() => {
+              setTarget(null);
+              setScenarioId(null);
+              setSidebarOpen(false);
+              setEvalOpen(false);
+            }}
+            onDropUnit={handleDropUnit}
+            placedUnits={placedUnits}
+          />
+        </div>
+        {evalOpen ? (
+          <div
+            className={`relative h-full shrink-0 rounded-r-md ${
+              step === 3 ? "bg-primary/5 ring-1 ring-primary/40" : ""
+            }`}
+            style={{ width: rightWidth }}
+          >
+            <EvaluationPanel target={target} selectedScenarioId={scenarioId} />
+            <ResizeHandle side="right" onResize={setRightWidth} />
+            <button
+              type="button"
+              aria-label="Hide evaluation panel"
+              onClick={() => setEvalOpen(false)}
+              className="absolute -left-3 top-4 z-10 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-card text-muted-foreground shadow-sm hover:bg-accent hover:text-foreground"
+            >
+              <PanelRightClose className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            aria-label="Show evaluation panel"
+            onClick={() => setEvalOpen(true)}
+            className="z-10 my-auto flex h-16 w-5 shrink-0 items-center justify-center rounded-l-md border border-r-0 border-border bg-card text-muted-foreground shadow-sm hover:w-6 hover:bg-accent hover:text-primary"
+          >
+            <PanelRightOpen className="h-3.5 w-3.5" />
+          </button>
+        )}
+      </div>
+      <Toaster />
+    </main>
   );
 }
 
-function Overview() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  const { zone } = useZone();
-  const dk = useLatest("DK-DK1");
-  const dkPoint = dk.data?.points?.[dk.data.points.length - 1];
-  const topOrigin = dkPoint
-    ? Object.entries(dkPoint.w3_by_origin).sort((a, b) => b[1].water_m3_per_h - a[1].water_m3_per_h)[0]?.[0]
-    : undefined;
+function ResizeHandle({
+  side,
+  onResize,
+}: {
+  side: "left" | "right";
+  onResize: (width: number) => void;
+}) {
+  const start = useRef<{ x: number; width: number } | null>(null);
 
   return (
-    <div className="space-y-10">
-      <section className="rounded-2xl border border-border bg-gradient-to-br from-water/10 to-transparent p-8">
-        <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-          Electricity Maps shows the carbon behind every kWh. WaterTrace adds the water.
-        </h1>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          Hourly, flow-traced water signals for any grid zone, built on the Electricity Maps API.
-        </p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Button asChild>
-            <Link to="/live" search={{ zone }}>
-              Explore live signals
-            </Link>
-          </Button>
-          <Button asChild variant="secondary">
-            <Link to="/concepts" search={{ zone }}>
-              See partner concepts
-            </Link>
-          </Button>
-        </div>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-sm font-medium text-muted-foreground">Water intensity right now</h2>
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-          {STRIP_ZONES.map((z) => (
-            <StripCard key={z} zone={z} />
-          ))}
-        </div>
-      </section>
-
-      <section aria-label="Global live water signals">
-        {mounted ? (
-          <Suspense fallback={<Skeleton className="h-[620px] rounded-xl" />}>
-            <OverviewSignalMap />
-          </Suspense>
-        ) : (
-          <Skeleton className="h-[620px] rounded-xl" />
-        )}
-      </section>
-
-      <section className="space-y-4">
-        <PageHeader title="Why a water layer" />
-        <ol className="space-y-4">
-          {STEPS.map((s, i) => (
-            <li key={s.title} className="flex gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-water/10 text-water">
-                <s.icon className="h-5 w-5" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-foreground">
-                  {i + 1}. {s.title}
-                </p>
-                <p className="text-sm text-muted-foreground">{s.text}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section>
-        <Card>
-          <CardContent className="space-y-3 p-6">
-            <div className="flex items-center justify-between gap-3">
-              <h2 className="text-sm font-medium">Live example — West Denmark</h2>
-              <DataBadge kind="live" />
-            </div>
-            {dk.isLoading ? (
-              <Skeleton className="h-20 rounded-lg" />
-            ) : dkPoint ? (
-              <p className="text-lg text-foreground">
-                {fmtPct(dkPoint.w3_imported_water_share, 0)}% of the water behind electricity consumed
-                in West Denmark right now is embedded in imports
-                {topOrigin ? `, mostly from ${topOrigin}` : ""}. Static annual factors would miss this.
-              </p>
-            ) : (
-              <p className="text-sm text-muted-foreground">Live data unavailable right now.</p>
-            )}
-            <div className="flex flex-wrap gap-3 pt-2">
-              <Button asChild size="sm">
-                <Link to="/live" search={{ zone }}>
-                  Explore live signals
-                </Link>
-              </Button>
-              <Button asChild size="sm" variant="secondary">
-                <Link to="/benchmark" search={{ zone }}>
-                  Compare zones
-                </Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-    </div>
+    <div
+      role="separator"
+      aria-orientation="vertical"
+      aria-label={side === "left" ? "Resize target panel" : "Resize evaluation panel"}
+      onPointerDown={(e) => {
+        const parent = e.currentTarget.parentElement;
+        if (!parent) return;
+        start.current = { x: e.clientX, width: parent.getBoundingClientRect().width };
+        e.currentTarget.setPointerCapture(e.pointerId);
+      }}
+      onPointerMove={(e) => {
+        const s = start.current;
+        if (!s) return;
+        const dx = e.clientX - s.x;
+        const next = side === "left" ? s.width + dx : s.width - dx;
+        onResize(Math.min(620, Math.max(260, Math.round(next))));
+      }}
+      onPointerUp={(e) => {
+        start.current = null;
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      }}
+      className={`absolute inset-y-0 z-10 w-1.5 cursor-col-resize hover:bg-primary/30 ${
+        side === "left" ? "-right-0.5" : "-left-0.5"
+      }`}
+    />
   );
 }
