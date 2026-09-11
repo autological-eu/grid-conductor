@@ -298,7 +298,7 @@ export function EuropeMap({
         <rect
           width={W}
           height={H}
-          className="fill-muted/40"
+          className="fill-transparent"
           onClick={() => {
             if (!wasDrag()) onClear?.();
           }}
@@ -322,11 +322,9 @@ export function EuropeMap({
             );
           })}
 
-          {/* zone markers, shaded by average carbon intensity */}
+          {/* zone markers */}
           {zones.map((z) => {
             const [x, y] = project(z.lon, z.lat);
-            const ci = z.avg_carbon_intensity ?? 0;
-            const c = Math.min(1, ci / maxCi);
             const dim = focusIso ? !focusIso.has(countryOf(z.code)) : false;
             return (
               <g key={z.code}>
@@ -334,10 +332,10 @@ export function EuropeMap({
                   cx={x}
                   cy={y}
                   r={(z.hours > 0 ? 9 : 6) / k}
-                  fill={`oklch(${0.78 - 0.2 * c} ${0.09 + 0.13 * c} ${145 - 120 * c})`}
-                  fillOpacity={dim ? 0.2 : z.hours > 0 ? 0.95 : 0.35}
+                  fill="var(--color-muted-foreground)"
+                  fillOpacity={dim ? 0.2 : z.hours > 0 ? 0.9 : 0.35}
                   stroke="var(--color-card)"
-                  strokeWidth={1 / k}
+                  strokeWidth={1.5 / k}
                 >
                   <title>
                     {z.name} ({z.code})
