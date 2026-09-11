@@ -29,3 +29,4 @@ Open / next
 - [x] Both sidebars resizable via drag handles
 - [x] Gamify: drag units from library straight onto the map (drop on country / border)
 - [ ] Template scenarios: 7 default €1M-normalised scenarios per target, listed at bottom of left sidebar
+- [ ] Show scenario units as emoji/icons pinned on the map (zones and borders)

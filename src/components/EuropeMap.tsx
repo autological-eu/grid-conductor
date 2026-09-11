@@ -99,6 +99,14 @@ const lossColor = (t: number) => {
 /** market loss cap (MEUR/y) at which a border renders fully red */
 const MARKET_LOSS_CAP = 10;
 
+export type PlacedUnit = {
+  id: string;
+  unit_type: string;
+  zone_code: string | null;
+  border_zone_a: string | null;
+  border_zone_b: string | null;
+};
+
 export function EuropeMap({
   zones,
   targets,
@@ -108,6 +116,7 @@ export function EuropeMap({
   metric,
   onMetricChange,
   onDropUnit,
+  placedUnits = [],
 }: {
   zones: ZoneSummary[];
   targets: TargetRow[];
@@ -117,7 +126,9 @@ export function EuropeMap({
   metric: "market" | "climate";
   onMetricChange?: (m: "market" | "climate") => void;
   onDropUnit?: (unitType: UnitType, placement: UnitDropPlacement) => void;
+  placedUnits?: PlacedUnit[];
 }) {
+
   const [hover, setHover] = useState<string | null>(null);
   const [view, setView] = useState<View>(IDENTITY);
   const [dragging, setDragging] = useState(false);
@@ -125,6 +136,8 @@ export function EuropeMap({
     null,
   );
   const [dropActive, setDropActive] = useState(false);
+  const [dropPlacement, setDropPlacement] = useState<"zone" | "border">("zone");
+
 
   const svgRef = useRef<SVGSVGElement | null>(null);
   const viewRef = useRef(view);
@@ -285,6 +298,21 @@ export function EuropeMap({
     return Math.hypot(px - (x1 + t * dx), py - (y1 + t * dy));
   };
 
+  /** only the endpoints / lines of eligible connections can receive a unit */
+  const eligibleBorders = useMemo(() => {
+    const sel = targets.find((t) => t.id === selectedId);
+    return sel ? [sel] : targets;
+  }, [targets, selectedId]);
+
+  const eligibleZones = useMemo(() => {
+    const s = new Set<string>();
+    for (const t of eligibleBorders) {
+      s.add(t.zone_a);
+      s.add(t.zone_b);
+    }
+    return s;
+  }, [eligibleBorders]);
+
   /** find the zone or border under a client point, depending on the dragged unit's placement */
   const locateDrop = useCallback(
     (clientX: number, clientY: number, placement: "zone" | "border") => {
@@ -296,7 +324,7 @@ export function EuropeMap({
         let best: ZoneSummary | null = null;
         let bd = 70;
         for (const z of zones) {
-          if (!z.hours) continue;
+          if (!eligibleZones.has(z.code)) continue;
           const [x, y] = project(z.lon, z.lat);
           const d = Math.hypot(x - wx, y - wy);
           if (d < bd) {
@@ -310,7 +338,7 @@ export function EuropeMap({
       }
       let best: TargetRow | null = null;
       let bd = 30;
-      for (const t of targets) {
+      for (const t of eligibleBorders) {
         const [x1, y1] = project(t.a_lon, t.a_lat);
         const [x2, y2] = project(t.b_lon, t.b_lat);
         const d = distToSeg(wx, wy, x1, y1, x2, y2);
@@ -327,7 +355,7 @@ export function EuropeMap({
           }
         : null;
     },
-    [zones, targets, toViewBox],
+    [zones, eligibleZones, eligibleBorders, toViewBox],
   );
 
   const onUnitDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -336,8 +364,10 @@ export function EuropeMap({
     e.preventDefault();
     e.dataTransfer.dropEffect = "copy";
     setDropActive(true);
+    setDropPlacement(unitDef(type).placement);
     setDropTarget(locateDrop(e.clientX, e.clientY, unitDef(type).placement));
   };
+
 
   const onUnitDrop = (e: React.DragEvent<HTMLDivElement>) => {
     const type = (e.dataTransfer.getData("text/unit") || unitDrag.current) as UnitType | "";
@@ -429,27 +459,38 @@ export function EuropeMap({
             const [x, y] = project(z.lon, z.lat);
             const dim = focusIso ? !focusIso.has(countryOf(z.code)) : false;
             const dropZ = dropTarget?.kind === "zone" && dropTarget.key === z.code;
+            const candidate = dropActive && dropPlacement === "zone" && eligibleZones.has(z.code);
+            const inactiveDrop = dropActive && !candidate;
             return (
               <g key={z.code}>
-                {dropZ && (
+                {candidate && (
                   <circle
                     cx={x}
                     cy={y}
-                    r={16 / k}
-                    fill="none"
+                    r={(dropZ ? 16 : 13) / k}
+                    fill="var(--color-primary)"
+                    fillOpacity={dropZ ? 0.18 : 0.08}
                     stroke="var(--color-primary)"
-                    strokeWidth={2.5 / k}
+                    strokeWidth={(dropZ ? 2.5 : 1.5) / k}
                     strokeDasharray={`${4 / k} ${3 / k}`}
                   >
-                    <animate attributeName="opacity" values="1;0.4;1" dur="1s" repeatCount="indefinite" />
+                    <animate
+                      attributeName="opacity"
+                      values={dropZ ? "1;0.4;1" : "0.9;0.55;0.9"}
+                      dur="1s"
+                      repeatCount="indefinite"
+                    />
                   </circle>
                 )}
                 <circle
                   cx={x}
                   cy={y}
                   r={(z.hours > 0 ? 9 : 6) / k}
-                  fill="var(--color-muted-foreground)"
-                  fillOpacity={dim ? 0.2 : z.hours > 0 ? 0.9 : 0.35}
+                  fill={candidate ? "var(--color-primary)" : "var(--color-muted-foreground)"}
+                  fillOpacity={
+                    inactiveDrop ? 0.15 : dim ? 0.2 : candidate ? 1 : z.hours > 0 ? 0.9 : 0.35
+                  }
+
                   stroke="var(--color-card)"
                   strokeWidth={1.5 / k}
                 >
@@ -473,8 +514,11 @@ export function EuropeMap({
             const c = Math.min(1, Math.max(0, v / lossCap));
             const isSelected = selectedId === t.id;
             const dropB = dropTarget?.kind === "border" && dropTarget.key === t.id;
-            const active = isSelected || hover === t.id || dropB;
-            const faded = selectedId != null && !isSelected && !dropB;
+            const candidateB =
+              dropActive && dropPlacement === "border" && eligibleBorders.some((b) => b.id === t.id);
+            const active = isSelected || hover === t.id || dropB || candidateB;
+            const faded =
+              (dropActive && !candidateB) || (selectedId != null && !isSelected && !dropB);
             return (
               <g
                 key={t.id}
@@ -486,6 +530,25 @@ export function EuropeMap({
                 onMouseLeave={() => setHover(null)}
               >
                 <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="transparent" strokeWidth={16 / k} />
+                {candidateB && (
+                  <line
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y2}
+                    stroke="var(--color-primary)"
+                    strokeOpacity={0.3}
+                    strokeWidth={(dropB ? 14 : 10) / k}
+                    strokeLinecap="round"
+                  >
+                    <animate
+                      attributeName="stroke-opacity"
+                      values="0.45;0.15;0.45"
+                      dur="1s"
+                      repeatCount="indefinite"
+                    />
+                  </line>
+                )}
                 <line
                   x1={x1}
                   y1={y1}
@@ -502,6 +565,7 @@ export function EuropeMap({
                   strokeWidth={(active ? 5 : 3) / k}
                   strokeLinecap="round"
                 />
+
                 <title>
                   {t.zone_a} – {t.zone_b}: {t.market_loss_meur.toFixed(1)} MEUR/y,{" "}
                   {t.climate_loss_ktco2.toFixed(1)} ktCO2/y, {t.congested_hours} congested hours
