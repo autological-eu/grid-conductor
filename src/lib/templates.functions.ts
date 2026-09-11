@@ -82,8 +82,15 @@ export const ensureTemplateScenarios = createServerFn({ method: "POST" })
     const zb = zoneRows?.find((z) => z.code === target.zone_b);
     const distKm = za && zb ? haversineKm(za.lat, za.lon, zb.lat, zb.lon) : 150;
 
-    // build the seven scenarios with their single sized unit
-    const built = TEMPLATE_SPECS.map((spec) => {
+    // build the seven scenarios with their single sized unit; when reusing,
+    // skip keys that already exist so concurrent calls never conflict
+    const existingKeys = new Set(
+      (data.force ? [] : (existing ?? [])).map((s) => s.template_key),
+    );
+    const specs = TEMPLATE_SPECS.filter((spec) => !existingKeys.has(spec.key));
+    if (specs.length === 0) return { created: 0, reused: existing?.length ?? 0 };
+
+    const built = specs.map((spec) => {
       const sized = sizeUnit(
         spec.unitType,
         data.budgetMeur,
