@@ -37,17 +37,18 @@ export function DataBar({
     try {
       await plan();
       for (let i = 0; i < 2000 && !stop.current; i++) {
-        const res = (await runBatch({ data: { maxChunks: 6 } })) as {
-          done?: boolean;
-          paused?: boolean;
-          message?: string;
+        const res = (await runBatch({ data: { chunks: 8 } })) as {
+          complete?: boolean;
+          throttled?: boolean;
+          skipped?: string;
+          reason?: string | null;
         };
         qc.invalidateQueries({ queryKey: ["import-progress"] });
-        if (res?.paused) {
-          toast.warning(res.message ?? "Import paused");
+        if (res?.skipped === "paused" || res?.throttled) {
+          toast.warning(res?.reason ?? "Import paused by the data provider's limits");
           break;
         }
-        if (res?.done) {
+        if (res?.complete) {
           toast.success("Historical data imported");
           break;
         }
@@ -74,9 +75,7 @@ export function DataBar({
     onError: (e: Error) => toast.error(e.message),
   });
 
-  const p = progress.data as
-    | { percent?: number; rows?: number; jobs?: number; done?: number; paused?: boolean }
-    | undefined;
+  const p = progress.data;
 
   return (
     <header className="flex items-center gap-4 border-b border-border bg-card px-4 py-3">
@@ -89,9 +88,9 @@ export function DataBar({
 
       <div className="ml-auto flex items-center gap-3">
         <div className="w-44">
-          <Progress value={Math.round(p?.percent ?? 0)} />
+          <Progress value={Math.round((p?.fraction ?? 0) * 100)} />
           <p className="mt-1 text-[11px] text-muted-foreground">
-            {p?.rows ? `${p.rows.toLocaleString()} hours stored` : "No data yet"}
+            {p?.rows ? `${p.rows.toLocaleString()} rows · ${p.done}/${p.total} jobs` : "No data yet"}
             {p?.paused ? " · paused" : ""}
           </p>
         </div>
