@@ -86,8 +86,19 @@ const IDENTITY: View = { k: 1, x: 0, y: 0 };
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
-/** green (low) -> red (high) opportunity-loss scale */
-const lossColor = (t: number) => `oklch(0.68 0.19 ${145 - 120 * clamp(t, 0, 1)})`;
+/** green (low) -> red (high) -> black (extremum) opportunity-loss scale */
+const lossColor = (t: number) => {
+  const x = clamp(t, 0, 1);
+  if (x < 0.5) {
+    const u = x / 0.5; // green -> red
+    return `oklch(${0.68 - 0.08 * u} ${0.19 + 0.04 * u} ${145 - 120 * u})`;
+  }
+  const u = (x - 0.5) / 0.5; // red -> black
+  return `oklch(${0.6 * (1 - u)} ${0.23 * (1 - u)} 25)`;
+};
+
+/** market loss cap (MEUR/y) at which a border renders black */
+const MARKET_LOSS_CAP = 10;
 
 export function EuropeMap({
   zones,
@@ -267,11 +278,12 @@ export function EuropeMap({
     1,
     ...targets.map((t) => (metric === "market" ? t.market_loss_meur : t.climate_loss_ktco2)),
   );
-  const maxCi = Math.max(1, ...zones.map((z) => z.avg_carbon_intensity ?? 0));
+  /** value mapped to the black end of the scale */
+  const lossCap = metric === "market" ? Math.min(maxLoss, MARKET_LOSS_CAP) : maxLoss;
   const k = view.k;
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-xl border border-border bg-muted/40">
+    <div className="relative h-full w-full overflow-hidden rounded-xl border border-border bg-card">
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
@@ -286,7 +298,7 @@ export function EuropeMap({
         <rect
           width={W}
           height={H}
-          className="fill-muted/40"
+          className="fill-transparent"
           onClick={() => {
             if (!wasDrag()) onClear?.();
           }}
@@ -310,11 +322,9 @@ export function EuropeMap({
             );
           })}
 
-          {/* zone markers, shaded by average carbon intensity */}
+          {/* zone markers */}
           {zones.map((z) => {
             const [x, y] = project(z.lon, z.lat);
-            const ci = z.avg_carbon_intensity ?? 0;
-            const c = Math.min(1, ci / maxCi);
             const dim = focusIso ? !focusIso.has(countryOf(z.code)) : false;
             return (
               <g key={z.code}>
@@ -322,10 +332,10 @@ export function EuropeMap({
                   cx={x}
                   cy={y}
                   r={(z.hours > 0 ? 9 : 6) / k}
-                  fill={`oklch(${0.78 - 0.2 * c} ${0.09 + 0.13 * c} ${145 - 120 * c})`}
-                  fillOpacity={dim ? 0.2 : z.hours > 0 ? 0.95 : 0.35}
+                  fill="var(--color-muted-foreground)"
+                  fillOpacity={dim ? 0.2 : z.hours > 0 ? 0.9 : 0.35}
                   stroke="var(--color-card)"
-                  strokeWidth={1 / k}
+                  strokeWidth={1.5 / k}
                 >
                   <title>
                     {z.name} ({z.code})
@@ -344,7 +354,7 @@ export function EuropeMap({
             const [x1, y1] = project(t.a_lon, t.a_lat);
             const [x2, y2] = project(t.b_lon, t.b_lat);
             const v = metric === "market" ? t.market_loss_meur : t.climate_loss_ktco2;
-            const c = Math.min(1, Math.max(0, v / maxLoss));
+            const c = Math.min(1, Math.max(0, v / lossCap));
             const isSelected = selectedId === t.id;
             const active = isSelected || hover === t.id;
             const faded = selectedId != null && !isSelected;
@@ -435,7 +445,10 @@ export function EuropeMap({
         />
         <div className="mt-0.5 flex w-48 justify-between text-[10px]">
           <span>0</span>
-          <span>{maxLoss.toFixed(1)}</span>
+          <span>
+            {lossCap.toFixed(0)}
+            {maxLoss > lossCap ? "+" : ""}
+          </span>
         </div>
         <div className="mt-1">Click a border to zoom in on it. Scroll to zoom, drag to pan.</div>
       </div>
