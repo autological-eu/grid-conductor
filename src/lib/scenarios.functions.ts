@@ -78,9 +78,7 @@ export const addUnit = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const def = unitDef(data.unitType);
-    const params =
-      data.params ??
-      Object.fromEntries(def.params.map((p) => [p.key, p.default]));
+    const params = data.params ?? def.defaults;
     const { data: row, error } = await supabaseAdmin
       .from("scenario_units")
       .insert({
