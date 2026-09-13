@@ -1,0 +1,100 @@
+{
+  "validation_doc": "docs/market-model-validation.md",
+  "window": {
+    "start": "2026-08-10T00:00:00Z",
+    "hours": 504,
+    "calibration_hours": 240,
+    "held_out_hours": 264
+  },
+  "unserved_mwh": 4189.658106000003,
+  "metrics": {
+    "calibration": {
+      "price_mae_eur_mwh": {
+        "FR": 48.90995833333333,
+        "CH": 51.53845833333333
+      },
+      "price_bias_eur_mwh": {
+        "FR": -36.890125,
+        "CH": -45.28720833333333
+      },
+      "flow_mae_mw": {
+        "FR-CH": 672.4196600916667
+      },
+      "price_excluded_unserved": 0,
+      "free_mad": {
+        "FR": {
+          "B11": 0.0,
+          "B12": 0.6174872694406605,
+          "B14": 0.0,
+          "B16": 0.0,
+          "B19": 0.0
+        },
+        "CH": {
+          "B11": 0.0,
+          "B12": 0.6629536647878831,
+          "B14": 0.0,
+          "B16": 0.0,
+          "B19": 0.0
+        }
+      }
+    },
+    "held_out": {
+      "price_mae_eur_mwh": {
+        "FR": 56.12462151394423,
+        "CH": 53.27832669322709
+      },
+      "price_bias_eur_mwh": {
+        "FR": -22.471474103585656,
+        "CH": -34.53760956175299
+      },
+      "flow_mae_mw": {
+        "FR-CH": 799.8670571723487
+      },
+      "price_excluded_unserved": 13,
+      "free_mad": {
+        "FR": {
+          "B11": 0.1392721658608004,
+          "B12": 0.7391380940010358,
+          "B14": 0.09576852702477237,
+          "B16": 0.25006814797186366,
+          "B19": 0.7813172736702977
+        },
+        "CH": {
+          "B11": 0.2183271092234334,
+          "B12": 0.641671456543222,
+          "B14": 0.19587993502552414,
+          "B16": 0.21772928320275098,
+          "B19": 0.5196028593140735
+        }
+      }
+    }
+  },
+  "benchmarks": {
+    "FR": {
+      "observed_count": 251,
+      "mean_eur_mwh": 118.39557768924303,
+      "mean_mae_eur_mwh": 50.87850192854082,
+      "persistence_mae_eur_mwh": 15.663440000000001
+    },
+    "CH": {
+      "observed_count": 251,
+      "mean_eur_mwh": 135.1641434262948,
+      "mean_mae_eur_mwh": 33.3312137902573,
+      "persistence_mae_eur_mwh": 12.075199999999999
+    }
+  },
+  "thermal_relmad": {
+    "FR": 0.1617029469524788,
+    "CH": 0.21064544248390282
+  },
+  "hydro_relmad": {},
+  "gates": {
+    "P1": false,
+    "P2": false,
+    "P3": true,
+    "P4": false
+  },
+  "decision": "experimental_not_validated",
+  "note": "annual rank attribution blocked unless decision==pilot_validated",
+  "generated_at": "2026-09-13T12:32:57.718117+00:00"
+}

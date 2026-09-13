@@ -1,0 +1,3 @@
+# Install in a dedicated research environment; Python 3.12 tested.
+scipy==1.18.1
+numpy==2.5.3

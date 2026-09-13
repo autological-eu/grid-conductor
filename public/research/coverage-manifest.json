@@ -1,0 +1,532 @@
+{
+  "model": "linked-dispatch-v1 FR\u2013CH pilot",
+  "period": {
+    "start": "2026-08-10T00:00:00Z",
+    "end": "2026-08-12T23:00:00Z",
+    "interval_hours": 1,
+    "interval_count": 72
+  },
+  "source": "ENTSO-E Transparency Platform",
+  "license_note": "ENTSO-E open data terms; no redistribution guarantee beyond research use. Electricity Maps prices used only as a diagnostic benchmark, not ingested.",
+  "mapping": {
+    "FR": {
+      "eic": "10YFR-RTE------C",
+      "neighbors": [
+        "BE",
+        "DE",
+        "GB",
+        "CH",
+        "ES",
+        "IT-NO"
+      ]
+    },
+    "CH": {
+      "eic": "10YCH-SWISSGRIDZ",
+      "neighbors": [
+        "FR",
+        "DE",
+        "AT",
+        "IT-NO"
+      ]
+    }
+  },
+  "records": [
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A75",
+        "processType": "A16",
+        "in_Domain": "10YFR-RTE------C"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\490354068eede9e3a8d3569c.xml",
+      "retrieved_at": "2026-09-12T18:14:11Z",
+      "sha256": {
+        "computed": "0759fb6c2e4d71acb7bf2100076fe520ea360e004d82870dc76579e74d8e3f6e",
+        "recorded": "0759fb6c2e4d71acb7bf2100076fe520ea360e004d82870dc76579e74d8e3f6e"
+      },
+      "resolution": "PT15M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:14:10Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A65",
+        "processType": "A16",
+        "outBiddingZone_Domain": "10YFR-RTE------C"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\47432908e0613f2020cb4b52.xml",
+      "retrieved_at": "2026-09-12T18:10:44Z",
+      "sha256": {
+        "computed": "82cdd699005d9c7942ea8afb32f72ac21665ad830f4ab8ae41cf1b4a1c84b687",
+        "recorded": "82cdd699005d9c7942ea8afb32f72ac21665ad830f4ab8ae41cf1b4a1c84b687"
+      },
+      "resolution": "PT15M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:10:44Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A75",
+        "processType": "A16",
+        "in_Domain": "10YCH-SWISSGRIDZ"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\68f911abcc5cea49419b2ffb.xml",
+      "retrieved_at": "2026-09-13T11:09:41Z",
+      "sha256": {
+        "computed": "def5cb866e3e3916e9dcada689707609041e432b6f850fe3fe93605c60b116c3",
+        "recorded": "def5cb866e3e3916e9dcada689707609041e432b6f850fe3fe93605c60b116c3"
+      },
+      "resolution": "PT60M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-13T11:09:35Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A65",
+        "processType": "A16",
+        "outBiddingZone_Domain": "10YCH-SWISSGRIDZ"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\4b5b3023c32e3ac5aab80bdf.xml",
+      "retrieved_at": "2026-09-13T11:09:42Z",
+      "sha256": {
+        "computed": "cda54f6a599ccbf46d2f0037db417e97d7eecc61cbb24ad80f93ce22ed1c1e39",
+        "recorded": "cda54f6a599ccbf46d2f0037db417e97d7eecc61cbb24ad80f93ce22ed1c1e39"
+      },
+      "resolution": "PT60M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-13T11:09:42Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A61",
+        "out_Domain": "10YFR-RTE------C",
+        "in_Domain": "10YCH-SWISSGRIDZ",
+        "contract_MarketAgreement.Type": "A01"
+      },
+      "file": "data\\carbon-pilot\\market\\raw\\ccc9f6c47af63c985beecca2.xml",
+      "retrieved_at": "2026-09-13T11:05:46Z",
+      "sha256": {
+        "computed": "535f71331eea2e8ef921363505a2fce7eeca33ca8bd30f621e0312418c604439",
+        "recorded": "535f71331eea2e8ef921363505a2fce7eeca33ca8bd30f621e0312418c604439"
+      },
+      "resolution": "PT60M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-13T11:05:46Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A61",
+        "out_Domain": "10YCH-SWISSGRIDZ",
+        "in_Domain": "10YFR-RTE------C",
+        "contract_MarketAgreement.Type": "A01"
+      },
+      "file": "data\\carbon-pilot\\market\\raw\\ca4f6718e3887d04f92f2c92.xml",
+      "retrieved_at": "2026-09-13T11:05:49Z",
+      "sha256": {
+        "computed": "5b3d73ba4083774d66042590f51387176fb80e03953d18bdb94d4bf083d9b4d6",
+        "recorded": "5b3d73ba4083774d66042590f51387176fb80e03953d18bdb94d4bf083d9b4d6"
+      },
+      "resolution": "PT60M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-13T11:05:49Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YFR-RTE------C",
+        "in_Domain": "10YBE----------2"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\8407801002777696c22ac637.xml",
+      "retrieved_at": "2026-09-12T18:11:22Z",
+      "sha256": {
+        "computed": "e093942bcbe875e0d1dd65d4bc2fa4ffed0ca6da5c432ee82b5e1ccfa0f24d76",
+        "recorded": "e093942bcbe875e0d1dd65d4bc2fa4ffed0ca6da5c432ee82b5e1ccfa0f24d76"
+      },
+      "resolution": "PT15M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:11:23Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YBE----------2",
+        "in_Domain": "10YFR-RTE------C"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\5d990b964e14cd9bd2a13073.xml",
+      "retrieved_at": "2026-09-12T18:11:18Z",
+      "sha256": {
+        "computed": "8dab6c77a1dc34e5418410923521a2dc592403be3b73d095eecb4a8b87ddc978",
+        "recorded": "8dab6c77a1dc34e5418410923521a2dc592403be3b73d095eecb4a8b87ddc978"
+      },
+      "resolution": "PT15M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:11:19Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YFR-RTE------C",
+        "in_Domain": "10Y1001A1001A83F"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\182ce1b845840300832adfbd.xml",
+      "retrieved_at": "2026-09-12T18:11:46Z",
+      "sha256": {
+        "computed": "3a635197e84a6b5b95167296cbb796f4113e575e10fed515493065f82778f789",
+        "recorded": "3a635197e84a6b5b95167296cbb796f4113e575e10fed515493065f82778f789"
+      },
+      "resolution": "PT15M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:11:47Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10Y1001A1001A83F",
+        "in_Domain": "10YFR-RTE------C"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\9f6d8b309cbca823d514d5fe.xml",
+      "retrieved_at": "2026-09-12T18:11:45Z",
+      "sha256": {
+        "computed": "28b514f9d7dbc086afcced0ffb9830758bf83b1defec974e606e3e8de73824ee",
+        "recorded": "28b514f9d7dbc086afcced0ffb9830758bf83b1defec974e606e3e8de73824ee"
+      },
+      "resolution": "PT15M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:11:46Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YFR-RTE------C",
+        "in_Domain": "10YGB----------A"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\11332c4a5a22c0e677f169d3.xml",
+      "retrieved_at": "2026-09-12T18:12:30Z",
+      "sha256": {
+        "computed": "d99ff69d1fce867ca00febac55895230cb28c2d4576263709de00ddf1addb2bc",
+        "recorded": "d99ff69d1fce867ca00febac55895230cb28c2d4576263709de00ddf1addb2bc"
+      },
+      "resolution": "PT60M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:12:30Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YGB----------A",
+        "in_Domain": "10YFR-RTE------C"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\25daeab8a07e4bc65b51828e.xml",
+      "retrieved_at": "2026-09-12T18:12:30Z",
+      "sha256": {
+        "computed": "7f6f8e3b111a323a577665817b6ba934cb6246b0632555f1e15e4bda5147c131",
+        "recorded": "7f6f8e3b111a323a577665817b6ba934cb6246b0632555f1e15e4bda5147c131"
+      },
+      "resolution": "PT60M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:12:31Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YFR-RTE------C",
+        "in_Domain": "10YCH-SWISSGRIDZ"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\16207482bcb4502ccc3b799d.xml",
+      "retrieved_at": "2026-09-12T18:11:35Z",
+      "sha256": {
+        "computed": "6dc8684920b1624c324ff9688950ee502de1f0645c2d5a16d655a25e4d6d05d5",
+        "recorded": "6dc8684920b1624c324ff9688950ee502de1f0645c2d5a16d655a25e4d6d05d5"
+      },
+      "resolution": "PT60M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:11:36Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YCH-SWISSGRIDZ",
+        "in_Domain": "10YFR-RTE------C"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\b0cd30bf3660fdddb52451b5.xml",
+      "retrieved_at": "2026-09-12T18:11:33Z",
+      "sha256": {
+        "computed": "efdba9a1ec1441fb362bb6ae4def4827e89112bae13af0e3d75a70bcf8cb3a21",
+        "recorded": "efdba9a1ec1441fb362bb6ae4def4827e89112bae13af0e3d75a70bcf8cb3a21"
+      },
+      "resolution": "PT60M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:11:34Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YFR-RTE------C",
+        "in_Domain": "10YES-REE------0"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\c1f18b223eb3c40387f92adf.xml",
+      "retrieved_at": "2026-09-12T18:12:29Z",
+      "sha256": {
+        "computed": "09b2f6a0b31b34cafafa3bbd2520be055eed032eaddd3f341c421c3702d027a9",
+        "recorded": "09b2f6a0b31b34cafafa3bbd2520be055eed032eaddd3f341c421c3702d027a9"
+      },
+      "resolution": "PT15M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:12:29Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YES-REE------0",
+        "in_Domain": "10YFR-RTE------C"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\41a47ac3b086a7f2f4627754.xml",
+      "retrieved_at": "2026-09-12T18:12:27Z",
+      "sha256": {
+        "computed": "6f894dcd8dfcde1415126c1b115017d7241070367e35f254044d603b94dc9302",
+        "recorded": "6f894dcd8dfcde1415126c1b115017d7241070367e35f254044d603b94dc9302"
+      },
+      "resolution": "PT15M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:12:28Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YFR-RTE------C",
+        "in_Domain": "10Y1001A1001A73I"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\e2f88811af4496fb1e526696.xml",
+      "retrieved_at": "2026-09-12T18:12:33Z",
+      "sha256": {
+        "computed": "212f82ff04abfb6373012952fdc1dbd33c5a839b6e6ef9be65377648dddbd9db",
+        "recorded": "212f82ff04abfb6373012952fdc1dbd33c5a839b6e6ef9be65377648dddbd9db"
+      },
+      "resolution": "PT15M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:12:32Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10Y1001A1001A73I",
+        "in_Domain": "10YFR-RTE------C"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\5f3a872b3d9b3dab899fc2c6.xml",
+      "retrieved_at": "2026-09-12T18:12:34Z",
+      "sha256": {
+        "computed": "b39b85225d80fb28ca7fd93a08e3f3e698143799382991eed9d2fa46d3c604e6",
+        "recorded": "b39b85225d80fb28ca7fd93a08e3f3e698143799382991eed9d2fa46d3c604e6"
+      },
+      "resolution": "PT15M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:12:35Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YCH-SWISSGRIDZ",
+        "in_Domain": "10Y1001A1001A83F"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\2ec362129f828598223a7bd2.xml",
+      "retrieved_at": "2026-09-12T18:11:28Z",
+      "sha256": {
+        "computed": "cc38429c29735167430c95d3f1c7bbbe96530fa9fe6c226283e4242da8db1d17",
+        "recorded": "cc38429c29735167430c95d3f1c7bbbe96530fa9fe6c226283e4242da8db1d17"
+      },
+      "resolution": "PT15M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:11:28Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10Y1001A1001A83F",
+        "in_Domain": "10YCH-SWISSGRIDZ"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\b1ff88d24c3114a090c0e420.xml",
+      "retrieved_at": "2026-09-12T18:11:31Z",
+      "sha256": {
+        "computed": "9e26e1bbc6bd8fe6069a753b7fe594f0a4196f366c81b0719eba175654126b3d",
+        "recorded": "9e26e1bbc6bd8fe6069a753b7fe594f0a4196f366c81b0719eba175654126b3d"
+      },
+      "resolution": "PT15M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-12T18:11:32Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YCH-SWISSGRIDZ",
+        "in_Domain": "10YAT-APG------L"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\9741142a62e376567c116d90.xml",
+      "retrieved_at": "2026-09-13T11:09:44Z",
+      "sha256": {
+        "computed": "7b68c51896e47756ece760ead0e9c36d38f1fb304c0b8021fdc61c8987d74e76",
+        "recorded": "7b68c51896e47756ece760ead0e9c36d38f1fb304c0b8021fdc61c8987d74e76"
+      },
+      "resolution": "PT60M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-13T11:09:43Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YAT-APG------L",
+        "in_Domain": "10YCH-SWISSGRIDZ"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\39201cfe5366b88f2c7e734a.xml",
+      "retrieved_at": "2026-09-13T11:09:45Z",
+      "sha256": {
+        "computed": "c29a08146bb23696b048069eb0db1416d9a463f159fe1dc2ddfcf7f0c4856f35",
+        "recorded": "c29a08146bb23696b048069eb0db1416d9a463f159fe1dc2ddfcf7f0c4856f35"
+      },
+      "resolution": "PT60M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-13T11:09:44Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10YCH-SWISSGRIDZ",
+        "in_Domain": "10Y1001A1001A73I"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\85866a0857096f763a1a71e5.xml",
+      "retrieved_at": "2026-09-13T11:09:46Z",
+      "sha256": {
+        "computed": "fe5a94b553da0782f32af06146a45d002571bd1366427c3012fb23689d5c9d40",
+        "recorded": "fe5a94b553da0782f32af06146a45d002571bd1366427c3012fb23689d5c9d40"
+      },
+      "resolution": "PT60M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-13T11:09:46Z"
+    },
+    {
+      "request": {
+        "periodStart": "202608010000",
+        "periodEnd": "202609010000",
+        "documentType": "A11",
+        "out_Domain": "10Y1001A1001A73I",
+        "in_Domain": "10YCH-SWISSGRIDZ"
+      },
+      "file": "data\\carbon-pilot\\flow-tracing\\raw\\0a3ff7cab7da0885714b3207.xml",
+      "retrieved_at": "2026-09-13T11:09:47Z",
+      "sha256": {
+        "computed": "1efabc2a9e86f1ce74454d16a48d77a8513aa4dea5323ec6faabe3079bf8de60",
+        "recorded": "1efabc2a9e86f1ce74454d16a48d77a8513aa4dea5323ec6faabe3079bf8de60"
+      },
+      "resolution": "PT60M",
+      "curve": "A03",
+      "unit": "MAW",
+      "publication_time": "2026-09-13T11:09:47Z"
+    }
+  ],
+  "zone_coverage": {
+    "FR": {
+      "generation_types": [
+        "B01",
+        "B04",
+        "B06",
+        "B11",
+        "B12",
+        "B14",
+        "B16",
+        "B17",
+        "B18",
+        "B19"
+      ],
+      "balance_residual_mae_mw": 340.01912104166644,
+      "price_benchmark": {
+        "matched_hours": 72,
+        "price_mae_eur_mwh": 40.37430555555555
+      },
+      "installed_capacity_available": false
+    },
+    "CH": {
+      "generation_types": [
+        "B11",
+        "B12",
+        "B14",
+        "B16",
+        "B19"
+      ],
+      "balance_residual_mae_mw": 914.4084761180555,
+      "price_benchmark": {
+        "matched_hours": 72,
+        "price_mae_eur_mwh": 47.67208333333333
+      },
+      "installed_capacity_available": false
+    }
+  },
+  "missing_status_note": "Missing quarters stay missing (never zero-filled); capacity, load and flow gaps raise during assembly.",
+  "generated_at": "2026-09-13T12:23:15.165503+00:00"
+}
