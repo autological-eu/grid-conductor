@@ -385,7 +385,140 @@ function Methodology() {
                 ],
               ]}
             />
+            <Note title="European ENTSO-E input pipeline">
+              <p>
+                The August dataset uses the ENTSO-E API: A44 prices, A75 realised generation, A65
+                demand, A11 physical exchanges and A61 day-ahead estimated transfer capacity. Raw
+                responses are cached with request hashes. Electricity Maps is not an input.
+              </p>
+              <p className="mt-2">
+                Border directions and Sweden’s four bidding zones remain separate. Only complete UTC
+                hours are observations. Published A03 blocks are decoded through their validity
+                intervals; actual gaps are not interpolated or zero-filled. Missing capacity is
+                never copied from the opposite direction or inferred from flow. Different generation
+                and demand domains block acceptance until reconciled.
+              </p>
+              <p className="mt-2">
+                The historical balance includes reported storage charging and discharge. Dispatch
+                requires complete required quantities and an absolute balance residual at most 5% of
+                demand in every zone. Missing prices remain unknown validation observations. This
+                initial data gate is not market validation: A61 is estimated NTC, not the complete
+                flow-based constraint set, and generator availability remains assumed.
+              </p>
+              <p className="mt-2">
+                <a href="/research/eu-input-quality.json" className="underline">
+                  Input coverage and balance report
+                </a>
+                {" · "}
+                <a href="/research/eu-model-validation.json" className="underline">
+                  European baseline status
+                </a>
+              </p>
+            </Note>
+            <Note title="PyPSA-Eur: European border opportunity model">
+              <p className="mb-3">
+                Weather preparation now processes one month at a time under a disk-space monitor.
+                Verified wind and solar conversion profiles are retained; only their reproducible
+                raw weather is removed. Annual regional weighting and the linked full-year dispatch
+                remain unchanged. The completed annual hydro runoff file is kept separately. The
+                monitor stops near the 10 GiB weather budget or when free disk space becomes low;
+                this is not a guarantee of total model disk usage.
+              </p>
+              <p className="mb-3">
+                Production now targets the full 2025 calendar year (8,760 hours), with March as a
+                pipeline test. The annual baseline has not been solved or validated yet. Full-year
+                weather uses a separate file from the March sample; existing weather files do not
+                automatically expand to cover new dates. Current configurations enable upstream
+                demand estimates and gap filling, which must be disclosed and audited before any
+                result is labelled validated. The January work below remains an earlier source-data
+                and method experiment.
+              </p>
+              <p>
+                The new physical-system workflow uses pinned PyPSA-Eur v2026.08.0 and its European
+                network. Each country border is tested independently with 100 MW of additional
+                transfer allowance distributed across its existing AC/DC connections. January
+                opportunity is the decrease in total system operating cost, in €million for the
+                month. Impedances remain fixed: this is capacity relief, not the design of a new AC
+                line. Independent border benefits cannot be summed or annualised.
+              </p>
+              <p className="mt-2">
+                The network inventory is a February 2026 source snapshot and still needs January
+                asset reconciliation. ENTSO-E quantities, flows and prices and JAO congestion
+                evidence must validate the baseline. Publication coverage alone is insufficient. On
+                the targets network, grey means unavailable. Experimental computed values require an
+                explicit toggle; validated opportunity remains empty until checks pass.
+              </p>
+              <p className="mt-2">
+                The first source inventory contains 34 countries and 74 international connections.
+                The pinned ENTSO-E-derived demand archive has complete January hours for 18 of those
+                countries. Demand gap filling is disabled; January weather, asset availability and
+                remaining quantities must be prepared before the operational baseline can run.
+              </p>
+              <a href="/research/pypsa-input-audit.json" className="underline">
+                Input audit
+              </a>
+              {" · "}
+              <a href="/research/pypsa-targets.json" className="underline">
+                European border dataset
+              </a>
+            </Note>
+            <Note title="JAO network restrictions">
+              <p>
+                The research pipeline now collects JAO Core flow-based domains: available margins
+                and the coefficients relating zonal net exports to network loading. It retains
+                virtual HVDC hubs and keeps these constraints separate from bilateral NTC limits.
+                ENTSO-E quantities constrain estimated supply and demand; ENTSO-E observed prices
+                remain validation data.
+              </p>
+              <p className="mt-2">
+                For 1 January 2026, 00:00–01:00 UTC, all 14,052 published Core constraints were
+                checked against JAO’s four quarter-hour net positions. The largest residual was
+                0.014 MW, below the declared 0.1 MW rounding tolerance. This checks the network
+                data, not the estimated offers or investment benefits. January downloads use the
+                published presolved filter to retain nonredundant constraints.
+              </p>
+              <p className="mt-2">
+                January coverage is complete for Core’s 744 hourly domains and Nordic’s 2,976
+                quarter-hour domains. Alongside ENTSO-E NTC, regional publication evidence now
+                covers 82 of the graph’s 102 directional entries. This is evidence availability, not
+                82 independent transfer limits or a validated market simulation.
+              </p>
+              <p className="mt-2">
+                The solver supports shared flow-based restrictions, but the real-data market adapter
+                still needs virtual-hub coupling, long-term-rights inclusion and allocation limits.
+                Quantity and geography gates remain in force. The Nordic adapter uses its own filter
+                schema and preserves quarter-hour domains; Core and Nordic data are not
+                interchangeable.
+              </p>
+              <p className="mt-2">
+                <a href="/research/jao-network-validation.json" className="underline">
+                  Network validation
+                </a>
+                {" · "}
+                <a href="/research/jao-january-coverage.json" className="underline">
+                  January Core coverage
+                </a>
+                {" · "}
+                <a href="/research/jao-nordic-january-coverage.json" className="underline">
+                  January Nordic coverage
+                </a>
+                {" · "}
+                <a href="/research/network-evidence-coverage.json" className="underline">
+                  Combined network evidence
+                </a>
+              </p>
+            </Note>
             <Note title="Planned annual market-opportunity model">
+              <p>
+                January and August 2026 are checked with identical input rules. Older observations
+                may have more complete reporting, but moving the baseline does not fix missing
+                constraint definitions or zone mismatches. Published A03 price blocks are decoded
+                before measuring coverage, and intraday prices are excluded.{" "}
+                <a href="/research/eu-month-comparison.json" className="underline">
+                  Compare monthly data coverage
+                </a>
+                . A single winter month cannot establish annual benefits.
+              </p>
               <a href="/research/market-model-plan.md" className="underline">
                 Read or download the implementation plan →
               </a>

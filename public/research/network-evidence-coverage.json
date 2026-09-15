@@ -1,0 +1,826 @@
+{
+  "month": "2026-01",
+  "expected_directions": 102,
+  "directions_with_published_network_evidence": 82,
+  "market_baseline_validated": false,
+  "annual_opportunity_meur": null,
+  "directions": [
+    {
+      "direction": "AT>CZ",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "CZ>AT",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "AT>HU",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "HU>AT",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "AT>IT-North",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-North>AT",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "AT>SI",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SI>AT",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "BE>DE-LU",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "DE-LU>BE",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "BE>NL",
+      "region": "core",
+      "ntc_hour_coverage": 1.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "NL>BE",
+      "region": "core",
+      "ntc_hour_coverage": 1.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "BG>RO",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "RO>BG",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "CZ>PL",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "PL>CZ",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "CZ>SK",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SK>CZ",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "AT>DE-LU",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "DE-LU>AT",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "CZ>DE-LU",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "DE-LU>CZ",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "DE-LU>DK1",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "DK1>DE-LU",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "DE-LU>DK2",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "DK2>DE-LU",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "DE-LU>PL",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "PL>DE-LU",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "DE-LU>SE4",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "SE4>DE-LU",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "DK1>DK2",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "DK2>DK1",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "DK1>SE3",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SE3>DK1",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "DK2>SE4",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SE4>DK2",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "EE>LV",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "LV>EE",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "ES>PT",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "PT>ES",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "EE>FI",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "FI>EE",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "BE>FR",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "FR>BE",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "DE-LU>FR",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "FR>DE-LU",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "ES>FR",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "FR>ES",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "FR>IT-North",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-North>FR",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "BG>GR",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "GR>BG",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "GR>IT-SUD",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-SUD>GR",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "HR>HU",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "HU>HR",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "HU>RO",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "RO>HU",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "HU>SI",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SI>HU",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "IT-CNOR>IT-CSUD",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-CSUD>IT-CNOR",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-CSUD>IT-SARD",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-SARD>IT-CSUD",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-CSUD>IT-SUD",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-SUD>IT-CSUD",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-CNOR>IT-North",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-North>IT-CNOR",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-SARD>IT-SICI",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-SICI>IT-SARD",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-SICI>IT-SUD",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "IT-SUD>IT-SICI",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "LT>SE4",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "SE4>LT",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "LT>LV",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "LV>LT",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "DE-LU>NL",
+      "region": "core",
+      "ntc_hour_coverage": 1.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "NL>DE-LU",
+      "region": "core",
+      "ntc_hour_coverage": 1.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "DK1>NL",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "NL>DK1",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "LT>PL",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "PL>LT",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "PL>SE4",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "SE4>PL",
+      "region": null,
+      "ntc_hour_coverage": 0.0,
+      "evidence": "unresolved",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "PL>SK",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SK>PL",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "FI>SE1",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SE1>FI",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SE1>SE2",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SE2>SE1",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SE2>SE3",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SE3>SE2",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "FI>SE3",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SE3>FI",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SE3>SE4",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SE4>SE3",
+      "region": "nordic",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "HR>SI",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SI>HR",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "IT-North>SI",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "SI>IT-North",
+      "region": null,
+      "ntc_hour_coverage": 1.0,
+      "evidence": "ENTSO-E estimated NTC",
+      "dispatch_ready": false,
+      "note": "Requires market-horizon and topology reconciliation"
+    },
+    {
+      "direction": "HU>SK",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    },
+    {
+      "direction": "SK>HU",
+      "region": "core",
+      "ntc_hour_coverage": 0.0,
+      "evidence": "JAO regional domain",
+      "dispatch_ready": false,
+      "note": "Region-wide constraints cannot be replaced by independent border limits"
+    }
+  ],
+  "interpretation": "Publication availability only: region membership plus complete monthly timestamps does not validate hybrid hub mappings, LTA inclusion or supply and demand."
+}

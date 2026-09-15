@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useRef, useState } from "react";
 import { Settings } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { getImportProgress, planImport, runImportBatch } from "@/lib/import.functions";
 import { refreshOfficialCapacity, refreshTargets } from "@/lib/analysis.functions";
@@ -136,7 +137,18 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
         })}
       </ol>
 
-
+      <Link
+        to="/targets"
+        className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
+      >
+        European targets
+      </Link>
+      <Link
+        to="/docs"
+        className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
+      >
+        Methodology
+      </Link>
       <div className="relative ml-auto" ref={menuRef}>
         <button
           type="button"

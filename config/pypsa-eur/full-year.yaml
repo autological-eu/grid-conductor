@@ -1,0 +1,80 @@
+# Full-year operational baseline for Grid Conductor.
+# Applied on top of upstream v2026.08.0 defaults. No country subset.
+# Build base topology first; generation/weather preparation is separately audited.
+run:
+  name: gridfix-2025
+  disable_progressbar: true
+snapshots:
+  start: '2025-01-01'
+  end: '2026-01-01'
+  inclusive: left
+scenario:
+  clusters: [128]
+  opts: ['']
+  planning_horizons: [2025]
+electricity:
+  base_network: osm
+  co2limit_enable: false
+  transmission_limit: v1.0
+  extendable_carriers:
+    Generator: []
+    StorageUnit: []
+    Store: []
+    Link: []
+load:
+  fill_gaps:
+    enable: true
+    interpolate_limit: 6
+    time_shift_for_large_gaps: 1w
+  supplement_synthetic: false
+  fixed_year: false
+  manual_adjustments: true
+atlite:
+  nprocesses: 1
+  default_cutout: europe-2025-compact
+  cutouts:
+    europe-2025-compact:
+      module: era5
+      x: [-12, 35]
+      y: [33, 72]
+      dx: 0.3
+      dy: 0.3
+      time: ['2025-01-01', '2025-12-31 23:00']
+      chunks:
+        time: 100
+      prepare_kwargs:
+        monthly_requests: true
+    europe-2025-hydro:
+      module: era5
+      x: [-12, 35]
+      y: [33, 72]
+      dx: 0.3
+      dy: 0.3
+      time: ['2025-01-01', '2025-12-31 23:00']
+      prepare_kwargs:
+        features: [height, runoff]
+        monthly_requests: true
+renewable:
+  hydro:
+    cutout: europe-2025-hydro
+data:
+  osm:
+    source: archive
+    version: '0.7'
+  powerplants:
+    source: archive
+    version: '0.8.1'
+  entsoe_electricity_demand:
+    source: archive
+    version: '2026-02-02'
+  cutout:
+    source: build
+clustering:
+  temporal:
+    resolution_elec: 1h
+costs:
+  year: 2025
+solving:
+  solver:
+    name: highs
+    options: highs-default

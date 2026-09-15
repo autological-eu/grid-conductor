@@ -68,6 +68,24 @@ def validate(data):
         if e['a'] not in zones or e['b'] not in zones or e['a']==e['b']:raise ValueError('Invalid edge')
         vector(e['ab_mw']);vector(e['ba_mw'])
     if len(ids)!=len(set(ids)):raise ValueError('Duplicate edge IDs')
+    regional_zones=set();region_ids=set()
+    for region in data.get('flow_based_regions',[]):
+        members=set(region['zones'])
+        if region['id'] in region_ids or len(members)!=len(region['zones']) or len(members)<2 or not members<=set(zones) or members&regional_zones:
+            raise ValueError('Invalid or overlapping flow-based region')
+        region_ids.add(region['id']);regional_zones.update(members)
+        if any(e['a'] in members and e['b'] in members for e in data['edges']):
+            raise ValueError('Internal bilateral edges would double-count the flow-based network')
+        covered=set();constraint_ids=set()
+        for restriction in region['constraints']:
+            t=restriction['interval']
+            if not isinstance(t,int) or not 0<=t<h or restriction['id'] in constraint_ids:
+                raise ValueError('Invalid flow-based constraint interval or ID')
+            constraint_ids.add(restriction['id']);covered.add(t)
+            if set(restriction['ptdf'])!=members or any(not isinstance(v,(int,float)) or not math.isfinite(v) for v in restriction['ptdf'].values()):
+                raise ValueError('Incomplete or unmapped PTDF hubs')
+            if not isinstance(restriction['ram_mw'],(int,float)) or not math.isfinite(restriction['ram_mw']):raise ValueError('Invalid RAM')
+        if covered!=set(range(h)):raise ValueError('Missing flow-based intervals')
     ids=[]
     for s in data.get('storage',[]):
         ids.append(s['id'])
@@ -91,6 +109,9 @@ def dispatch(data):
         for t in range(H):var(('g',g['id'],t),g['cost_eur_mwh']*dt,g.get('min_mw',[0]*H)[t],g['max_mw'][t],t)
     for e in data['edges']:
         for t in range(H):var(('f',e['id'],t),0,-e['ba_mw'][t],e['ab_mw'][t],t)
+    for region in data.get('flow_based_regions',[]):
+        for z in region['zones']:
+            for t in range(H):var(('np',z,t),0,None,None,t)
     for z in zones:
         for t in range(H):
             var(('u',z,t),data['unserved_cost_eur_mwh']*dt,0,None,t)
@@ -109,10 +130,20 @@ def dispatch(data):
                 if g['zone']==z:row[ix['g',g['id'],t]]=1
             for e in data['edges']:
                 if z in (e['a'],e['b']):row[ix['f',e['id'],t]]=-1 if z==e['a'] else 1
+            if ('np',z,t) in ix:row[ix['np',z,t]]=-1
             for s in data.get('storage',[]):
                 if s['zone']==z:
                     row[ix['charge',s['id'],t]]=-1;row[ix['discharge',s['id'],t]]=1
             equations.append(row);rhs.append(data['load_mw'][z][t]-data['external_net_import_mw'][z][t])
+    network_rows=[]
+    for region in data.get('flow_based_regions',[]):
+        for t in range(H):
+            equations.append({ix['np',z,t]:1 for z in region['zones']});rhs.append(0)
+        for restriction in region['constraints']:
+            t=restriction['interval']
+            network_rows.append((len(inequalities),region['id'],restriction['id'],t))
+            inequalities.append({ix['np',z,t]:v for z,v in restriction['ptdf'].items()})
+            limits.append(restriction['ram_mw'])
     for s in data.get('storage',[]):
         for t in range(H):
             equations.append({ix['soc',s['id'],t+1]:1,ix['soc',s['id'],t]:-1,
@@ -139,7 +170,7 @@ def dispatch(data):
         weights=[result.x[i]*c[i] for i,h in enumerate(hour_of) if h is not None],minlength=H)
     rows=[]
     co2_gens=[g for g in data['generators'] if g.get('co2_t_per_mwh') is not None]
-    co2_available=bool(co2_gens)
+    co2_available=bool(co2_gens) and len(co2_gens)==len(data['generators'])
     for t,stamp in enumerate(data['timestamps']):
         costs=hourly_cost[t]
         generation={g['id']:float(result.x[ix['g',g['id'],t]]) for g in data['generators']}
@@ -155,6 +186,10 @@ def dispatch(data):
     if abs(sum(r['cost_eur'] for r in rows)-result.fun)>max(1e-4,abs(result.fun)*1e-9):raise ValueError('Hourly cost reconciliation failed')
     simultaneous=sum(v['charge_mw']>1e-6 and v['discharge_mw']>1e-6 for r in rows for v in r['storage'].values())
     return dict(total_cost_eur=float(result.fun),total_co2_t=sum(r['co2_t'] for r in rows) if co2_available else None,
+        flow_based_net_positions_mw={z:[float(result.x[ix['np',z,t]]) for t in range(H)] for region in data.get('flow_based_regions',[]) for z in region['zones']},
+        flow_based_constraints=[dict(region=region,id=identity,interval=t,
+            slack_mw=float(result.ineqlin.residual[index]),
+            marginal_cost_reduction_eur_per_mw=-float(result.ineqlin.marginals[index])) for index,region,identity,t in network_rows],
         max_balance_residual=residual,simultaneous_storage_intervals=simultaneous,
         unserved_mwh=sum(r['unserved_mwh'] for r in rows),hourly=rows)
 

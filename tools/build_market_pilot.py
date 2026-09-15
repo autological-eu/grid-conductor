@@ -1,13 +1,11 @@
 """Assemble a clearly labeled ex-post FR–CH experiment from ENTSO-E snapshots."""
 import argparse
-from contextlib import closing
 import datetime as dt
 import hashlib
 import json
-import sqlite3
 from pathlib import Path
 from carbon_pilot import ROOT, timestamp, iso, parse_generation, STORAGE, FACTORS
-from flow_tracing import fetch, parse_quantity, hourly, charging
+from flow_tracing import fetch, parse_quantity, hourly, charging, parse_day_ahead_prices
 
 DOMAINS={'FR':'10YFR-RTE------C','CH':'10YCH-SWISSGRIDZ','DE':'10Y1001A1001A83F',
          'BE':'10YBE----------2','ES':'10YES-REE------0','GB':'10YGB----------A',
@@ -81,7 +79,7 @@ def assemble(start, hours, generation, charge, loads, caps, flows, observed_eur,
         observed_generation_mw=observed,observed_flow_mw={'FR-CH':hourly_flows['FR','CH']},
         observed_price_eur_mwh={z:[observed_eur.get((z,iso(t))) for t in stamps] for z in ['FR','CH']},
         emission_basis='ipcc_ar5_lifecycle_median_pilot_proxy',
-        assumptions=assumptions,provenance=dict(source='ENTSO-E + Electricity Maps prices for diagnostics only',audit=audit))
+        assumptions=assumptions,provenance=dict(source='ENTSO-E quantities and A44 prices; prices for diagnostics only',audit=audit))
 
 
 def collect(start, hours, headroom_multiplier=1.25):
@@ -109,8 +107,15 @@ def collect(start, hours, headroom_multiplier=1.25):
                 if (a,b) in flows:continue
                 raw=get(dict(documentType='A11',out_Domain=DOMAINS[a],in_Domain=DOMAINS[b]))
                 flows[a,b]=parse_quantity(raw,{'out_Domain.mRID':DOMAINS[a],'in_Domain.mRID':DOMAINS[b]})
-    with closing(sqlite3.connect((ROOT.parent/'data/annual/indicators.sqlite').resolve().as_uri()+'?mode=ro',uri=True)) as db:
-        obs={(z,t):v for z,t,v in db.execute("SELECT zone,start,value FROM observations WHERE metric='price' AND unit='EUR/MWh' AND start>=? AND start<?",(iso(start),iso(end)))}
+    obs={}
+    for z in ['FR','CH']:
+        request=dict(params,documentType='A44',processType='A01',in_Domain=DOMAINS[z],out_Domain=DOMAINS[z])
+        raw=fetch(request,ROOT/'data/eu-market/raw')
+        provenance.append(dict(request=request,sha256=hashlib.sha256(raw).hexdigest()))
+        samples=parse_day_ahead_prices(raw)
+        for h in range(hours):
+            instant=start+dt.timedelta(hours=h)
+            obs[z,iso(instant)]=hourly(samples,instant)
     data=assemble(start,hours,generation,charge,loads,caps,flows,obs,headroom_multiplier)
     data['provenance']['requests']=provenance
     return data

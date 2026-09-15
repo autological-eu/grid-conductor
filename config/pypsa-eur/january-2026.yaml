@@ -1,0 +1,56 @@
+# Applied on top of upstream v2026.08.0 defaults. No country subset.
+# Build base topology first; generation/weather preparation is separately audited.
+run:
+  name: gridfix-january-2026
+  disable_progressbar: true
+snapshots:
+  start: '2026-01-01'
+  end: '2026-02-01'
+  inclusive: left
+scenario:
+  clusters: [128]
+  opts: ['']
+electricity:
+  base_network: osm
+  co2limit_enable: false
+  transmission_limit: v1.0
+  extendable_carriers:
+    Generator: []
+    StorageUnit: []
+    Store: []
+    Link: []
+load:
+  fill_gaps:
+    enable: false
+  supplement_synthetic: false
+  fixed_year: false
+  manual_adjustments: false
+atlite:
+  default_cutout: europe-january-2026-era5
+  cutouts:
+    europe-january-2026-era5:
+      module: era5
+      x: [-12, 35]
+      y: [33, 72]
+      dx: 0.3
+      dy: 0.3
+      time: ['2026-01-01', '2026-01-31']
+data:
+  osm:
+    source: archive
+    version: '0.7'
+  powerplants:
+    source: archive
+    version: '0.8.1'
+  entsoe_electricity_demand:
+    source: archive
+    version: '2026-02-02'
+  cutout:
+    source: build
+clustering:
+  temporal:
+    resolution_elec: 1h
+solving:
+  solver:
+    name: highs
+    options: highs-default

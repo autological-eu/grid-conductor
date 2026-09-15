@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { BorderOpportunityNetwork } from "@/components/BorderOpportunityNetwork";
 
 export const Route = createFileRoute("/targets")({
   head: () => ({ meta: [{ title: "European target evidence | Grid Conductor" }] }),
@@ -87,6 +88,7 @@ function Targets() {
           Methodology
         </Link>
       </nav>
+      <BorderOpportunityNetwork />
       <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
         European screening · research snapshot
       </p>

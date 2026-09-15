@@ -1,0 +1,84 @@
+# Single-month test run for Grid Conductor — validates the full pipeline within ~8 GB RAM.
+# The compact wind/solar/temperature cutout covers all of 2025 (published by the monthly
+# weather pipeline). A second smaller cutout covers all of 2025 for the RUNOFF feature only,
+# because atlite's hydro profile normalization (build_hydro_profile) requires a full
+# calendar year (>8700 h) of runoff. The full-year production run reuses both cutouts.
+run:
+  name: gridfix-2025-march
+  disable_progressbar: true
+snapshots:
+  start: '2025-03-01'
+  end: '2025-04-01'
+  inclusive: left
+scenario:
+  clusters: [128]
+  opts: ['']
+  planning_horizons: [2025]
+electricity:
+  base_network: osm
+  co2limit_enable: false
+  transmission_limit: v1.0
+  extendable_carriers:
+    Generator: []
+    StorageUnit: []
+    Store: []
+    Link: []
+load:
+  fill_gaps:
+    enable: true
+    interpolate_limit: 6
+    time_shift_for_large_gaps: 1w
+  supplement_synthetic: false
+  fixed_year: false
+  manual_adjustments: true
+atlite:
+  nprocesses: 1
+  default_cutout: europe-2025-compact
+  cutouts:
+    europe-2025-compact:
+      module: era5
+      x: [-12, 35]
+      y: [33, 72]
+      dx: 0.3
+      dy: 0.3
+      time: ['2025-01-01', '2025-12-31 23:00']
+      chunks:
+        time: 100
+      prepare_kwargs:
+        monthly_requests: true
+    europe-2025-hydro:
+      module: era5
+      x: [-12, 35]
+      y: [33, 72]
+      dx: 0.3
+      dy: 0.3
+      time: ['2025-01-01', '2026-01-01']
+      chunks:
+        time: 500
+      prepare_kwargs:
+        features: [height, runoff]
+        monthly_requests: true
+data:
+  osm:
+    source: archive
+    version: '0.7'
+  powerplants:
+    source: archive
+    version: '0.8.1'
+  entsoe_electricity_demand:
+    source: archive
+    version: '2026-02-02'
+  cutout:
+    source: build
+renewable:
+  hydro:
+    cutout: europe-2025-hydro
+clustering:
+  temporal:
+    resolution_elec: 1h
+costs:
+  year: 2025
+solving:
+  solver:
+    name: highs
+    options: highs-default

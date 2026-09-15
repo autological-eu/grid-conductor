@@ -1,6 +1,33 @@
 import unittest
-from flow_tracing import trace, solve, parse_quantity, charging
+import datetime as dt
+from flow_tracing import trace, solve, parse_quantity, charging, parse_day_ahead_prices, hourly
 from test_carbon_pilot import document, point
+
+
+def price_doc(points, resolution='PT60M', zone='10YZZ', curve='A01', intervals=None):
+    import xml.etree.ElementTree as ET
+    ns = 'http://iec.ch/TC57/2013/schema/message'
+    doc = ET.Element(f'{{{ns}}}Publication_MarketDocument')
+    for tag in ['mRID', 'type', 'process.processType']:
+        ET.SubElement(doc, f'{{{ns}}}{tag}').text = tag.title()
+    ts = ET.SubElement(doc, f'{{{ns}}}TimeSeries')
+    for tag, value in [('businessType', 'B07'), ('in_Domain.mRID', zone), ('out_Domain.mRID', zone),
+                       ('currency_Unit.name', 'EUR'), ('price_Measure_Unit.name', 'MWH'), ('curveType',curve)]:
+        ET.SubElement(ts, f'{{{ns}}}{tag}').text = value
+    period = ET.SubElement(ts, f'{{{ns}}}Period')
+    ET.SubElement(period, f'{{{ns}}}resolution').text = resolution
+    start = '2026-08-10T00:00Z'
+    minutes = {'PT15M': 15, 'PT60M': 60}[resolution]
+    total = (intervals or len(points)) * minutes
+    end = f'2026-08-10T{total//60:02d}:{total%60:02d}Z'
+    ti = ET.SubElement(period, f'{{{ns}}}timeInterval')
+    ET.SubElement(ti, f'{{{ns}}}start').text = start
+    ET.SubElement(ti, f'{{{ns}}}end').text = end
+    for position, amount in points:
+        p = ET.SubElement(period, f'{{{ns}}}Point')
+        ET.SubElement(p, f'{{{ns}}}position').text = str(position)
+        ET.SubElement(p, f'{{{ns}}}price.amount').text = str(amount)
+    return ET.tostring(doc, encoding='unicode')
 
 
 def node(generation, intensity, load, unknown=0, charging=0):
@@ -62,6 +89,60 @@ class FlowTests(unittest.TestCase):
     def test_invalid_uncertainty_rejected(self):
         with self.assertRaises(ValueError):
             trace({'A':node(10,0,10,unknown=11)}, {})
+
+
+class PriceDocTests(unittest.TestCase):
+    def test_intraday_price_is_not_a_day_ahead_price(self):
+        import xml.etree.ElementTree as ET
+        root=ET.fromstring(price_doc([(1,'10')]))
+        series=next(e for e in root.iter() if e.tag.endswith('TimeSeries'))
+        ET.SubElement(series,'contract_MarketAgreement.type').text='A07'
+        with self.assertRaises(ValueError):parse_day_ahead_prices(ET.tostring(root))
+
+    def test_a03_price_blocks_are_observations(self):
+        xml=price_doc([(1,'10'),(4,'-2')],resolution='PT15M',curve='A03',intervals=8)
+        values=parse_day_ahead_prices(xml)
+        start=dt.datetime(2026,8,10,tzinfo=dt.timezone.utc)
+        self.assertEqual(hourly(values,start),7)
+        self.assertEqual(hourly(values,start+dt.timedelta(hours=1)),-2)
+
+    def test_a01_price_gap_stays_unknown(self):
+        values=parse_day_ahead_prices(price_doc([(1,'10'),(4,'-2')],resolution='PT15M',intervals=8))
+        self.assertIsNone(hourly(values,dt.datetime(2026,8,10,tzinfo=dt.timezone.utc)))
+
+    def test_hourly_prices_parsed_with_negatives(self):
+        prices = parse_day_ahead_prices(price_doc([(1, '50.0'), (2, '-5.5')]))
+        hour = dt.datetime(2026, 8, 10, 0, 0, tzinfo=dt.timezone.utc)
+        self.assertEqual(prices[hour], 50.0)
+        self.assertEqual(prices[hour + dt.timedelta(minutes=15)], 50.0)
+        self.assertEqual(prices[hour + dt.timedelta(hours=1)], -5.5)
+        self.assertAlmostEqual(hourly(prices, hour), 50.0)
+        self.assertAlmostEqual(hourly(prices, hour + dt.timedelta(hours=1)), -5.5)
+
+    def test_quarterly_prices_aggregate_via_hourly(self):
+        prices = parse_day_ahead_prices(price_doc([(1, '60'), (2, '40'), (3, '40'), (4, '20')], resolution='PT15M'))
+        hour = dt.datetime(2026, 8, 10, 0, 0, tzinfo=dt.timezone.utc)
+        self.assertEqual(len(prices), 4)
+        self.assertAlmostEqual(hourly(prices, hour), 40.0)
+
+    def test_hourly_missing_quarter(self):
+        self.assertIsNone(hourly({}, dt.datetime(2026, 8, 10, 0, 0, tzinfo=dt.timezone.utc)))
+
+    def test_rejects_non_price_document(self):
+        with self.assertRaises(ValueError):
+            parse_day_ahead_prices(document(point(1, 10)))
+
+    def test_rejects_non_eur_and_cross_zone(self):
+        bad = price_doc([(1, '1')], zone='10YZ')
+        bad = bad.replace('EUR', 'USD')
+        with self.assertRaises(ValueError):
+            parse_day_ahead_prices(bad)
+        with self.assertRaises(ValueError):
+            parse_day_ahead_prices('<Publication_MarketDocument/>')
+
+    def test_price_survives_entsoe_shaping(self):
+        xml = price_doc([(1, '40.00')])
+        self.assertEqual(parse_day_ahead_prices(xml)[dt.datetime(2026, 8, 10, 0, 0, tzinfo=dt.timezone.utc)], 40.0)
 
 
 if __name__ == '__main__':

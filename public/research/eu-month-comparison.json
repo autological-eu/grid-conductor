@@ -1,0 +1,84 @@
+{
+  "source": "ENTSO-E API",
+  "months": [
+    {
+      "month": "2026-01",
+      "bank_sha256": "e4f6180bc20f5ff128a2587145e1c740d4dec77ea23d369f88cad2265d287160",
+      "groups": {
+        "price": {
+          "series": 33,
+          "complete_series": 32,
+          "observed_hour_share": 0.9696969696969697
+        },
+        "load": {
+          "series": 33,
+          "complete_series": 32,
+          "observed_hour_share": 0.9995519713261649
+        },
+        "gen": {
+          "series": 352,
+          "complete_series": 303,
+          "observed_hour_share": 0.9814653592375366
+        },
+        "charge": {
+          "series": 26,
+          "complete_series": 11,
+          "observed_hour_share": 0.6654776674937966
+        },
+        "flow": {
+          "series": 154,
+          "complete_series": 144,
+          "observed_hour_share": 0.9478599357631615
+        },
+        "capacity": {
+          "series": 102,
+          "complete_series": 32,
+          "observed_hour_share": 0.3137254901960784
+        }
+      },
+      "issues": 167,
+      "input_gate_passed": false,
+      "balanced_zones": 12
+    },
+    {
+      "month": "2026-08",
+      "bank_sha256": "6aa5a7436fd14c3888697be35ea6db88dfaa42ccc7d87e2d299253a6188d3993",
+      "groups": {
+        "price": {
+          "series": 33,
+          "complete_series": 32,
+          "observed_hour_share": 0.9696969696969697
+        },
+        "load": {
+          "series": 33,
+          "complete_series": 30,
+          "observed_hour_share": 0.9974747474747475
+        },
+        "gen": {
+          "series": 352,
+          "complete_series": 294,
+          "observed_hour_share": 0.9785939027370479
+        },
+        "charge": {
+          "series": 28,
+          "complete_series": 14,
+          "observed_hour_share": 0.7252784178187404
+        },
+        "flow": {
+          "series": 154,
+          "complete_series": 142,
+          "observed_hour_share": 0.9470220639575478
+        },
+        "capacity": {
+          "series": 102,
+          "complete_series": 32,
+          "observed_hour_share": 0.3137254901960784
+        }
+      },
+      "issues": 180,
+      "input_gate_passed": false,
+      "balanced_zones": 11
+    }
+  ],
+  "interpretation": "Coverage comparison only. Differences do not isolate reporting delay from geography, seasonal operation, publication practices or API coverage."
+}

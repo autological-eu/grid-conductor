@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DocsRouteImport } from './routes/docs'
+import { Route as TargetsRouteImport } from './routes/targets'
 import { Route as ApiPublicDailyRefreshRouteImport } from './routes/api/public/daily-refresh'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsRoute = DocsRouteImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TargetsRoute = TargetsRouteImport.update({
+  id: '/targets',
+  path: '/targets',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicDailyRefreshRoute = ApiPublicDailyRefreshRouteImport.update({
@@ -25,27 +37,35 @@ const ApiPublicDailyRefreshRoute = ApiPublicDailyRefreshRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/docs': typeof DocsRoute
+  '/targets': typeof TargetsRoute
   '/api/public/daily-refresh': typeof ApiPublicDailyRefreshRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/docs': typeof DocsRoute
+  '/targets': typeof TargetsRoute
   '/api/public/daily-refresh': typeof ApiPublicDailyRefreshRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/docs': typeof DocsRoute
+  '/targets': typeof TargetsRoute
   '/api/public/daily-refresh': typeof ApiPublicDailyRefreshRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/daily-refresh'
+  fullPaths: '/' | '/docs' | '/targets' | '/api/public/daily-refresh'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/daily-refresh'
-  id: '__root__' | '/' | '/api/public/daily-refresh'
+  to: '/' | '/docs' | '/targets' | '/api/public/daily-refresh'
+  id: '__root__' | '/' | '/docs' | '/targets' | '/api/public/daily-refresh'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DocsRoute: typeof DocsRoute
+  TargetsRoute: typeof TargetsRoute
   ApiPublicDailyRefreshRoute: typeof ApiPublicDailyRefreshRoute
 }
 
@@ -56,6 +76,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs': {
+      id: '/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/targets': {
+      id: '/targets'
+      path: '/targets'
+      fullPath: '/targets'
+      preLoaderRoute: typeof TargetsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/daily-refresh': {
@@ -70,6 +104,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DocsRoute: DocsRoute,
+  TargetsRoute: TargetsRoute,
   ApiPublicDailyRefreshRoute: ApiPublicDailyRefreshRoute,
 }
 export const routeTree = rootRouteImport

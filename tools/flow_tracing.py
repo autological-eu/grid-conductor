@@ -17,7 +17,7 @@ import urllib.error
 import xml.etree.ElementTree as ET
 
 from carbon_pilot import (AREAS as GENERATION_AREAS, FACTORS, FACTOR_VERSION, IPCC, ROOT, UTC, iso, STORAGE,
-                          parse_generation, calculate)
+                          parse_generation, calculate, timestamp)
 
 # Explicit pilot geography, not a claim to cover the whole European grid.
 AREAS = dict(GENERATION_AREAS, GB="10YGB----------A")
@@ -194,6 +194,84 @@ def parse_quantity(raw, expected):
         for period in ts.findall('Period'):
             clean.append(period)
     return parse_generation(ET.tostring(out), 'quantity')['quantity']
+
+
+def parse_day_ahead_prices(raw):
+    """Day-ahead A44 prices to quarter-hour samples.
+
+    EUPHEMIA clearing price per bidding zone (Publication_MarketDocument).
+    Negative values are valid; missing points stay missing.
+    Some zones (DE-LU, AT, DK1, DK2, ES, IE) publish TWO per-day series
+    distinguished by auction classificationSequence position; the highest
+    reported day-ahead sequence wins per instant, same-position conflicts fail.
+    A03 is decoded as published blocks, not imputed missing observations.
+    """
+    root = ET.fromstring(raw)
+    for element in root.iter():
+        element.tag = element.tag.split("}")[-1]
+    if root.tag != "Publication_MarketDocument":
+        raise ValueError("ENTSO-E did not return a price document")
+    series = {}
+    for ts in root.findall("TimeSeries"):
+        # API responses can include intraday auctions even with processType=A01.
+        if ts.findtext('contract_MarketAgreement.type') not in (None, 'A01'):
+            continue
+        if ts.findtext("currency_Unit.name") != "EUR":
+            raise ValueError("Expected EUR prices")
+        if ts.findtext("price_Measure_Unit.name") != "MWH":
+            raise ValueError("Expected EUR/MWh")
+        origin = ts.findtext("in_Domain.mRID")
+        target = ts.findtext("out_Domain.mRID")
+        if origin is not None and target is not None and origin != target:
+            raise ValueError("Cross-zone price document (expected in==out)")
+        seq = int(ts.findtext("classificationSequence_AttributeInstanceComponent.position") or "0")
+        curve = ts.findtext("curveType") or "A01"
+        if curve not in {"A01", "A03"}:
+            raise ValueError("Unsupported price curve")
+        for period in ts.findall("Period"):
+            start = timestamp(period.findtext("timeInterval/start"))
+            end = timestamp(period.findtext("timeInterval/end"))
+            resolution = period.findtext("resolution")
+            minutes = {"PT15M": 15, "PT60M": 60}.get(resolution)
+            if minutes is None or end <= start:
+                raise ValueError("Unsupported price interval")
+            count_float = (end - start).total_seconds() / (minutes * 60)
+            if not count_float.is_integer():
+                raise ValueError("Misaligned price period end")
+            count = int(count_float)
+            points = {}
+            for point in period.findall("Point"):
+                pos = int(point.findtext("position"))
+                raw_amount = point.findtext("price.amount")
+                value = None if raw_amount is None else float(raw_amount)
+                if pos < 1 or pos > count or pos in points:
+                    raise ValueError("Invalid or repeated price point position")
+                if value is not None and not math.isfinite(value):
+                    raise ValueError("Non-finite price")
+                points[pos] = value
+            previous = None
+            for pos in (range(1, count + 1) if curve == "A03" else points):
+                if pos in points:
+                    previous = points[pos]
+                value = previous if curve == "A03" else points.get(pos)
+                for quarter in range(minutes // 15):
+                    instant = start + dt.timedelta(minutes=(pos - 1) * minutes + quarter * 15)
+                    series.setdefault(instant, {}).setdefault(seq, []).append(value)
+    if not series:
+        raise ValueError("No price series returned")
+    final = {}
+    for instant, buckets in series.items():
+        selected = None
+        for seq in sorted(buckets, reverse=True):
+            values = [v for v in buckets[seq] if v is not None]
+            if not values:
+                continue
+            if len(set(values)) > 1:
+                raise ValueError("Conflicting overlapping price")
+            selected = values[0]
+            break
+        final[instant] = selected
+    return final
 
 
 def hourly(samples, hour):

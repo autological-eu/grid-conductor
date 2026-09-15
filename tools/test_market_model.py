@@ -20,6 +20,11 @@ class DispatchTests(unittest.TestCase):
         self.assertIsNone(r['annual_opportunity_meur'])
         self.assertAlmostEqual(sum(h['benefit_eur'] for h in r['hourly_difference']),8000)
 
+    def test_partial_emissions_are_not_total(self):
+        data=fixture();data['generators'][0]['co2_t_per_mwh']=.1
+        self.assertIsNone(dispatch(data)['total_co2_t'])
+        self.assertIsNone(experiment(data,'AB',50)['co2_change_t'])
+
     def test_zero_relaxation(self):
         self.assertAlmostEqual(experiment(fixture(),'AB',0)['period_opportunity_meur'],0)
 
