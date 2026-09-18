@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as TargetsRouteImport } from './routes/targets'
 import { Route as ApiPublicDailyRefreshRouteImport } from './routes/api/public/daily-refresh'
+import { Route as ApiPublicFastEntsoeLpRouteImport } from './routes/api/public/fast-entsoe-lp'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const ApiPublicDailyRefreshRoute = ApiPublicDailyRefreshRouteImport.update({
   path: '/api/public/daily-refresh',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicFastEntsoeLpRoute = ApiPublicFastEntsoeLpRouteImport.update({
+  id: '/api/public/fast-entsoe-lp',
+  path: '/api/public/fast-entsoe-lp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/targets': typeof TargetsRoute
   '/api/public/daily-refresh': typeof ApiPublicDailyRefreshRoute
+  '/api/public/fast-entsoe-lp': typeof ApiPublicFastEntsoeLpRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/targets': typeof TargetsRoute
   '/api/public/daily-refresh': typeof ApiPublicDailyRefreshRoute
+  '/api/public/fast-entsoe-lp': typeof ApiPublicFastEntsoeLpRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,30 @@ export interface FileRoutesById {
   '/docs': typeof DocsRoute
   '/targets': typeof TargetsRoute
   '/api/public/daily-refresh': typeof ApiPublicDailyRefreshRoute
+  '/api/public/fast-entsoe-lp': typeof ApiPublicFastEntsoeLpRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/docs' | '/targets' | '/api/public/daily-refresh'
+  fullPaths:
+    | '/'
+    | '/docs'
+    | '/targets'
+    | '/api/public/daily-refresh'
+    | '/api/public/fast-entsoe-lp'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/docs' | '/targets' | '/api/public/daily-refresh'
-  id: '__root__' | '/' | '/docs' | '/targets' | '/api/public/daily-refresh'
+  to:
+    | '/'
+    | '/docs'
+    | '/targets'
+    | '/api/public/daily-refresh'
+    | '/api/public/fast-entsoe-lp'
+  id:
+    | '__root__'
+    | '/'
+    | '/docs'
+    | '/targets'
+    | '/api/public/daily-refresh'
+    | '/api/public/fast-entsoe-lp'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +92,7 @@ export interface RootRouteChildren {
   DocsRoute: typeof DocsRoute
   TargetsRoute: typeof TargetsRoute
   ApiPublicDailyRefreshRoute: typeof ApiPublicDailyRefreshRoute
+  ApiPublicFastEntsoeLpRoute: typeof ApiPublicFastEntsoeLpRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicDailyRefreshRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/fast-entsoe-lp': {
+      id: '/api/public/fast-entsoe-lp'
+      path: '/api/public/fast-entsoe-lp'
+      fullPath: '/api/public/fast-entsoe-lp'
+      preLoaderRoute: typeof ApiPublicFastEntsoeLpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocsRoute: DocsRoute,
   TargetsRoute: TargetsRoute,
   ApiPublicDailyRefreshRoute: ApiPublicDailyRefreshRoute,
+  ApiPublicFastEntsoeLpRoute: ApiPublicFastEntsoeLpRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -105,6 +105,24 @@ bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
 - Data and large runs live under gitignored dirs — never commit them: `data/carbon-pilot/`, `data/eu-market/`, `data/jao/`, `data/pypsa-eur/`.
 - Research context lives in `docs/*.md` and `public/research/`; `src/routes/targets.tsx` renders the target-evidence report page.
 
+## Fast ENTSO-E screening ladder (`tools/fast_entsoe_screening.py` + live Step-2 LP)
+
+- Docs: `docs/fast-entsoe-screening.md`. Two steps: (1) cached border screening
+  (`fast_entsoe_screening.py`, numpy, reads `data/eu-market/bank-*-v2.json`
+  schema_v2) → publishes `public/research/entsoe-fast-targets.json` (realized
+  rent, opportunity ladder ΔC∈{500,1000} MW, congested hours, avg positive
+  spread, price-response `slope_a`); (2) **live** 2-node LP per candidate
+  border in `src/lib/fast-entsoe-lp.server.ts` + route
+  `src/routes/api/public/fast-entsoe-lp.ts` (GET, public).
+- Step-2 solver is **`javascript-lp-solver`** (pure-JS simplex; solved under
+  bun). Do **not** swap in the `highs` npm package — its HiGHS-wasm glue fails
+  to import under bun 1.4 (`Export named 'Highs' not found`). Monthly bank
+  coverage: only months present in `data/eu-market/bank-*.json` are screened
+  (currently 2026-01 + 2026-08); rerunning Step 1 extends the ladder.
+- Shadow price (dual) is recovered by finite-difference **re-solve** (jsLPSolver
+  exposes no tableau duals); the model is a block-linearized mean-spread reduced
+  form — treat results as screening rankings, not dispatch-grade valuation.
+
 ## Gotchas
 
 - Keep the LOVABLE block above intact and keep pushed branches in a working state.
