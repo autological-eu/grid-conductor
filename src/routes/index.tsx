@@ -6,7 +6,14 @@ import { PanelLeftClose, PanelLeftOpen, PanelRightClose, PanelRightOpen } from "
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { DataBar } from "@/components/DataBar";
-import { EuropeMap, type PlacedUnit, type TargetRow, type UnitDropPlacement } from "@/components/EuropeMap";
+import {
+  EuropeMap,
+  type MapMetric,
+  type PlacedUnit,
+  type TargetRow,
+  type UnitDropPlacement,
+} from "@/components/EuropeMap";
+import { EuropeanTargets } from "@/components/EuropeanTargets";
 import { TargetSidebar } from "@/components/TargetSidebar";
 import { EvaluationPanel } from "@/components/EvaluationPanel";
 import { listTargets, listZoneSummary } from "@/lib/analysis.functions";
@@ -38,11 +45,12 @@ export const Route = createFileRoute("/")({
 function Workbench() {
   const zonesFn = useServerFn(listZoneSummary);
   const targetsFn = useServerFn(listTargets);
-  const [metric, setMetric] = useState<"market" | "climate">("market");
+  const [metric, setMetric] = useState<MapMetric>("market");
   const [target, setTarget] = useState<TargetRow | null>(null);
   const [scenarioId, setScenarioId] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [evalOpen, setEvalOpen] = useState(false);
+  const [showTargets, setShowTargets] = useState(false);
   const [leftWidth, setLeftWidth] = useState(340);
   const [rightWidth, setRightWidth] = useState(380);
 
@@ -60,16 +68,16 @@ function Workbench() {
   const placedUnits: PlacedUnit[] = (scenarios.data ?? [])
     .filter((s) => !s.is_template)
     .flatMap((s) =>
-    (s.units ?? []).map((u) => ({
-      id: u.id,
-      unit_type: u.unit_type,
-      zone_code: u.zone_code,
-      border_zone_a: u.border_zone_a,
-      border_zone_b: u.border_zone_b,
-      active: !scenarioId || s.id === scenarioId,
-      scenario_name: s.name as string,
-    })),
-  );
+      (s.units ?? []).map((u) => ({
+        id: u.id,
+        unit_type: u.unit_type,
+        zone_code: u.zone_code,
+        border_zone_a: u.border_zone_a,
+        border_zone_b: u.border_zone_b,
+        active: !scenarioId || s.id === scenarioId,
+        scenario_name: s.name as string,
+      })),
+    );
 
   const selectScenario = (id: string | null) => {
     setScenarioId(id);
@@ -114,7 +122,8 @@ function Workbench() {
       qc.invalidateQueries({ queryKey: ["scenarios", target.id] });
       selectScenario(sid);
       setSidebarOpen(true);
-      const where = placement.zoneCode ?? (placement.zoneA ? `${placement.zoneA}–${placement.zoneB}` : "");
+      const where =
+        placement.zoneCode ?? (placement.zoneA ? `${placement.zoneA}–${placement.zoneB}` : "");
       toast.success(`${def.label} added${where ? ` in ${where}` : ""}`);
     } catch (e) {
       toast.error((e as Error).message);
@@ -123,7 +132,7 @@ function Workbench() {
 
   return (
     <main className="flex h-screen flex-col bg-background">
-      <DataBar step={step} />
+      <DataBar step={step} onEuropeanTargets={() => setShowTargets(true)} />
       <div className="flex min-h-0 flex-1">
         {sidebarOpen ? (
           <div
@@ -208,6 +217,11 @@ function Workbench() {
           </button>
         )}
       </div>
+      {showTargets && (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-background">
+          <EuropeanTargets embedded onClose={() => setShowTargets(false)} />
+        </div>
+      )}
       <Toaster />
     </main>
   );

@@ -36,6 +36,15 @@ class BorderTests(unittest.TestCase):
         self.assertEqual(scenario.lines.at['border', 'x'], original.lines.at['border', 'x'])
         self.assertEqual(original.lines.at['border', 's_max_pu'], 1)
 
+    def test_zero_capacity_assets_skipped_only_in_lenient_mode(self):
+        original = self.network()
+        original.add('Link', 'placeholder', bus0='A', bus1='B', p_nom=0, carrier='DC')
+        with self.assertRaises(ValueError):
+            border_catalog(original)
+        borders = border_catalog(original, allow_zero_capacity=True)
+        self.assertEqual([b['id'] for b in borders], ['DE-FR'])
+        self.assertEqual(len(borders[0]['assets']), 1)
+
     def test_parallel_assets_share_increment_and_domestic_unchanged(self):
         n = self.network()
         n.add('Line', 'parallel', bus0='A', bus1='B', x=.1, r=.01, s_nom=150)

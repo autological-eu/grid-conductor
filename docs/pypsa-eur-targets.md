@@ -70,6 +70,41 @@ errors must not pass validation. Baseline/scenario differences are system benefi
 not revenues accruing to the two countries. Independent border benefits cannot be
 summed: projects interact. No multiplication by twelve; annual estimates remain null.
 
+## Baseline diagnostics without per-border runs
+
+`tools/baseline_opportunity.py` adds two per-border measures from **one** baseline
+solve (no per-border planning experiments), emitted as schema-v2
+`public/research/pypsa-targets.json` while `modelled_opportunity_meur` stays null:
+
+- **Congestion rent (MEUR/window)** = sum over hours and border assets of
+  `|locational price gap| x |actual flow| x hour weight / 1e6`. This is the
+  market wedge carried by current dispatch — "spread x actual flow". It is *not*
+  the marginal value of new capacity: adding transfer rights changes prices and
+  dispatch, which the rent alone does not capture.
+- **Marginal capacity value (EUR/MW/window)** from the flow-constraint duals of
+  the baseline re-solve (`assign_all_duals=True`). Per asset the relieving value
+  per MW is `max(-mu_upper, 0) + max(mu_lower, 0)` (PyPSA stores cost-sensitivity
+  duals); the border aggregates assets capacity-proportionally
+  (`share_i = nominal_i / sum nominal`), which is the exact Delta->0 linearization
+  of the proportional +MW experiments above. Duals are the solver's certified LP
+  shadow prices, so the gate is on **presence**: a solver that returned no
+  flow-limit duals fails closed. Re-solving the same LP can shift the simplex
+  basis, so `lmp_recheck_max_eur_mwh` (re-solve vs recorded build-solve LMP
+  deviation) and `kkt_max_residual` (saved price gap vs dual) are reported as
+  diagnostics and never gate the output.
+- Both measures are per-window: `window_years` is 1.0 only for a full calendar
+  year, so MEUR/window equals MEUR/year exactly when the window is a year. Never
+  multiply a partial window up.
+- Rent and spread use the **recorded build solve's** price/flow surface (the
+  canonical values published in `public/research/baseline/`); the marginal value
+  uses the re-solve's duals, since the build solve does not store them.
+- `baseline_co2_tonnes` is the efficiency-corrected operational CO2 of this
+  pipeline's re-solve. Solver degeneracy can shift cost-equivalent dispatch, so
+  it can differ from the build manifest's figure by ~1.6% on the March run.
+- The exact finite-+MW counterfactuals (`modelled_opportunity_meur`) remain the
+  reference for investment value and are deferred: a serial 77-border run is ~2
+  days, parallelized ~14-18 h on this machine.
+
 ## Pipeline
 
 1. Install the pinned upstream pixi.lock environment; build the base network with
@@ -93,7 +128,10 @@ Current runner deliberately reports diagnostic_not_validated: price diagnostics
 are implemented, but quantity and JAO acceptance gates are not yet complete.
 It cannot promote its own results to validated. modelled_opportunity_meur may hold
 an experimental solve; opportunity_meur stays null until the acceptance workflow
-is implemented and passes. A topology-only dataset contains neither value.
+is implemented and passes. `baseline_opportunity.py` produces schema-v2
+baseline rent/spread/marginal-value fields with the same
+experimental-not-validated status; a topology-only dataset contains neither
+value.
 
 ## First input audit
 
@@ -114,10 +152,24 @@ reasons to publish zero border opportunity.
 ## Display
 
 /targets loads public/research/pypsa-targets.json. Country nodes show schematic
-positions. Edge hue maps validated January opportunity from blue (zero) to orange
+positions. Edge hue maps validated opportunity from blue (zero) to orange
 (maximum), with an exact-value table and selection detail. Unknown values are
 grey dashed lines. An explicit experimental toggle exposes unvalidated computed
-values, if available. The legacy observed-spread report remains a separate section.
+values, if available; schema-v2 output also carries baseline spread/congestion-
+rent/marginal-value diagnostics per border for the same toggle. The legacy
+observed-spread report remains a separate section.
+
+The workbench map (`/`) now serves the same dataset through the bundled mirror
+at `src/data/baseline-targets.json`: `listTargets` maps schema-v2 borders onto
+workbench rows (`market_loss_meur` = per-window congestion rent, labels read
+`MEUR/window`), and `ensureTargetIds` upserts minimal identity rows into the
+legacy `targets` table for borders the DB does not know so the
+`scenarios.target_id` FK resolves. Neither the map numbers nor labels read the
+DB rows — Decoupling Points 4c + 5. The raw dataset is also exposed as
+`GET /api/public/baseline-opportunity`.
+
+`tools/baseline_opportunity.py` writes both `public/research/pypsa-targets.json`
+and the bundled mirror; a drift-guard test asserts they stay byte-identical.
 
 ## Commands
 

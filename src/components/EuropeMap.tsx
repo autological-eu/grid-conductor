@@ -29,8 +29,12 @@ export type TargetRow = {
   congested_hours: number;
   total_hours: number;
   market_loss_meur: number;
-  climate_loss_ktco2: number;
+  climate_loss_ktco2: number | null;
   observed_capacity_mw: number | null;
+  /** Additive diagnostics from the offline baseline solve. */
+  baseline_rent_meur: number | null;
+  mean_abs_spread_eur_mwh: number;
+  marginal_value_eur_mw: number;
 };
 
 const W = 900;
@@ -55,8 +59,7 @@ function project(lon: number, lat: number): [number, number] {
 
 type Ring = number[][];
 type Geom =
-  | { type: "Polygon"; coordinates: Ring[] }
-  | { type: "MultiPolygon"; coordinates: Ring[][] };
+  { type: "Polygon"; coordinates: Ring[] } | { type: "MultiPolygon"; coordinates: Ring[][] };
 
 function pathFor(geom: Geom): string {
   const polys = geom.type === "Polygon" ? [geom.coordinates] : geom.coordinates;
@@ -97,7 +100,7 @@ const lossColor = (t: number) => {
   return `oklch(${0.82 - 0.24 * x} ${0.01 + 0.22 * x} 25)`;
 };
 
-/** market loss cap (MEUR/y) at which a border renders fully red */
+/** market loss cap (MEUR/window) at which a border renders fully red */
 const MARKET_LOSS_CAP = 10;
 
 export type PlacedUnit = {
@@ -110,6 +113,8 @@ export type PlacedUnit = {
   active?: boolean;
   scenario_name?: string;
 };
+
+export type MapMetric = "market" | "spread" | "marginal" | "climate";
 
 export function EuropeMap({
   zones,
@@ -127,12 +132,11 @@ export function EuropeMap({
   selectedId: string | null;
   onSelect: (t: TargetRow) => void;
   onClear?: () => void;
-  metric: "market" | "climate";
-  onMetricChange?: (m: "market" | "climate") => void;
+  metric: MapMetric;
+  onMetricChange?: (m: MapMetric) => void;
   onDropUnit?: (unitType: UnitType, placement: UnitDropPlacement) => void;
   placedUnits?: PlacedUnit[];
 }) {
-
   const [hover, setHover] = useState<string | null>(null);
   const [view, setView] = useState<View>(IDENTITY);
   const [dragging, setDragging] = useState(false);
@@ -141,7 +145,6 @@ export function EuropeMap({
   );
   const [dropActive, setDropActive] = useState(false);
   const [dropPlacement, setDropPlacement] = useState<"zone" | "border">("zone");
-
 
   const svgRef = useRef<SVGSVGElement | null>(null);
   const viewRef = useRef(view);
@@ -367,7 +370,6 @@ export function EuropeMap({
     return out;
   }, [placedUnits, zones]);
 
-
   /** find the zone or border under a client point, depending on the dragged unit's placement */
   const locateDrop = useCallback(
     (clientX: number, clientY: number, placement: "zone" | "border") => {
@@ -423,7 +425,6 @@ export function EuropeMap({
     setDropTarget(locateDrop(e.clientX, e.clientY, unitDef(type).placement));
   };
 
-
   const onUnitDrop = (e: React.DragEvent<HTMLDivElement>) => {
     const type = (e.dataTransfer.getData("text/unit") || unitDrag.current) as UnitType | "";
     setDropActive(false);
@@ -454,10 +455,20 @@ export function EuropeMap({
     zoomAt(W / 2, H / 2, factor);
   };
 
-  const maxLoss = Math.max(
-    1,
-    ...targets.map((t) => (metric === "market" ? t.market_loss_meur : t.climate_loss_ktco2)),
-  );
+  const metricOf = (t: TargetRow, m: MapMetric): number => {
+    switch (m) {
+      case "market":
+        return t.market_loss_meur;
+      case "spread":
+        return t.mean_abs_spread_eur_mwh;
+      case "marginal":
+        return t.marginal_value_eur_mw;
+      case "climate":
+        return t.climate_loss_ktco2 ?? 0;
+    }
+  };
+
+  const maxLoss = Math.max(1, ...targets.map((t) => metricOf(t, metric)));
   /** value mapped to the black end of the scale */
   const lossCap = metric === "market" ? Math.min(maxLoss, MARKET_LOSS_CAP) : maxLoss;
   const k = view.k;
@@ -545,7 +556,6 @@ export function EuropeMap({
                   fillOpacity={
                     inactiveDrop ? 0.15 : dim ? 0.2 : candidate ? 1 : z.hours > 0 ? 0.9 : 0.35
                   }
-
                   stroke="var(--color-card)"
                   strokeWidth={1.5 / k}
                 >
@@ -577,12 +587,14 @@ export function EuropeMap({
           {targets.map((t) => {
             const [x1, y1] = project(t.a_lon, t.a_lat);
             const [x2, y2] = project(t.b_lon, t.b_lat);
-            const v = metric === "market" ? t.market_loss_meur : t.climate_loss_ktco2;
+            const v = metricOf(t, metric);
             const c = Math.min(1, Math.max(0, v / lossCap));
             const isSelected = selectedId === t.id;
             const dropB = dropTarget?.kind === "border" && dropTarget.key === t.id;
             const candidateB =
-              dropActive && dropPlacement === "border" && eligibleBorders.some((b) => b.id === t.id);
+              dropActive &&
+              dropPlacement === "border" &&
+              eligibleBorders.some((b) => b.id === t.id);
             const active = isSelected || hover === t.id || dropB || candidateB;
             const faded =
               (dropActive && !candidateB) || (selectedId != null && !isSelected && !dropB);
@@ -634,8 +646,13 @@ export function EuropeMap({
                 />
 
                 <title>
-                  {t.zone_a} – {t.zone_b}: {t.market_loss_meur.toFixed(1)} MEUR/y,{" "}
-                  {t.climate_loss_ktco2.toFixed(1)} ktCO2/y, {t.congested_hours} congested hours
+                  {t.zone_a} – {t.zone_b}: {t.market_loss_meur.toFixed(1)} MEUR/window rent ·{" "}
+                  {t.mean_abs_spread_eur_mwh.toFixed(1)} EUR/MWh mean spread ·{" "}
+                  {t.marginal_value_eur_mw.toFixed(1)} EUR/MW marginal value · {t.congested_hours}{" "}
+                  congested hours
+                  {t.climate_loss_ktco2 == null
+                    ? ""
+                    : ` · ${t.climate_loss_ktco2.toFixed(1)} ktCO2`}
                 </title>
               </g>
             );
@@ -670,7 +687,6 @@ export function EuropeMap({
             );
           })}
         </g>
-
       </svg>
 
       <div className="pointer-events-none absolute left-3 top-3 max-w-[22rem] rounded-lg border border-border bg-card/90 px-3 py-2 backdrop-blur">
@@ -678,9 +694,10 @@ export function EuropeMap({
           European bidding zones and congested borders
         </h2>
         <p className="text-xs text-muted-foreground">
-          {metric === "market"
-            ? "Yearly market opportunity loss"
-            : "Yearly climate opportunity loss"}
+          {metric === "market" && "Modelled-window market loss (congestion rent)"}
+          {metric === "spread" && "Mean absolute price spread over the modelled window"}
+          {metric === "marginal" && "Marginal capacity value from the baseline solve"}
+          {metric === "climate" && "Climate opportunity loss (modelled window)"}
         </p>
       </div>
 
@@ -714,12 +731,20 @@ export function EuropeMap({
       <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg border border-border bg-card/90 px-3 py-2 text-xs text-muted-foreground backdrop-blur">
         <div className="flex items-center justify-between gap-3">
           <span className="font-medium text-foreground">
-            {metric === "market"
-              ? "Market opportunity loss (MEUR/y)"
-              : "Climate opportunity loss (ktCO2/y)"}
+            {metric === "market" && "Market loss (MEUR/window)"}
+            {metric === "spread" && "Mean spread (EUR/MWh)"}
+            {metric === "marginal" && "Marginal value (EUR/MW)"}
+            {metric === "climate" && "Climate loss (ktCO2/window)"}
           </span>
           <div className="pointer-events-auto flex rounded-md border border-border p-0.5 text-[10px]">
-            {(["market", "climate"] as const).map((m) => (
+            {(
+              [
+                ["market", "Market"],
+                ["spread", "Spread"],
+                ["marginal", "Margin"],
+                ["climate", "Climate"],
+              ] as const
+            ).map(([m, label]) => (
               <button
                 key={m}
                 type="button"
@@ -728,7 +753,7 @@ export function EuropeMap({
                   metric === m ? "bg-primary text-primary-foreground" : "text-muted-foreground"
                 }`}
               >
-                {m === "market" ? "Market" : "Climate"}
+                {label}
               </button>
             ))}
           </div>

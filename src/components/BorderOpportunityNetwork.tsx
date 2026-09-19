@@ -8,12 +8,15 @@ type Border = {
   opportunity_meur: number | null;
   modelled_opportunity_meur: number | null;
   modelled_climate_opportunity_tonnes?: number | null;
+  baseline_rent_meur?: number | null;
+  mean_abs_spread_eur_mwh?: number | null;
+  marginal_value_eur_mw?: number | null;
 };
 type Dataset = {
   status: string;
   start: string;
   end_exclusive: string;
-  additional_mw: number;
+  additional_mw: number | null;
   nodes: { id: string; x: number; y: number }[];
   targets: Border[];
 };
@@ -37,14 +40,14 @@ export function BorderOpportunityNetwork() {
     return () => controller.abort();
   }, []);
   const value = (row: Border) =>
-    experimental ? row.modelled_opportunity_meur : row.opportunity_meur;
+    experimental ? (row.modelled_opportunity_meur ?? row.baseline_rent_meur) : row.opportunity_meur;
   const maximum = Math.max(0, ...(data?.targets.map((t) => value(t) ?? 0) ?? []));
   const nodes = new Map(data?.nodes.map((n) => [n.id, n]));
   const project = (id: string) => {
     const n = nodes.get(id);
     return n ? { x: 45 + ((n.x + 12) / 48) * 750, y: 540 - ((n.y - 34) / 38) * 510 } : null;
   };
-  const color = (v: number | null) =>
+  const color = (v: number | null | undefined) =>
     v == null ? "#94a3b8" : `hsl(${220 - (maximum ? v / maximum : 0) * 190} 80% 46%)`;
   return (
     <section className="my-8 rounded-xl border p-5" aria-label="Border market opportunity">
@@ -53,8 +56,10 @@ export function BorderOpportunityNetwork() {
         {data
           ? `${data.start.slice(0, 10)} to ${data.end_exclusive.slice(0, 10)} (end exclusive)`
           : "Period pending"}{" "}
-        · System operating-cost savings from {data?.additional_mw ?? 100} MW of additional border
-        allowance. Each border is tested independently; benefits cannot be added together.
+        ·{" "}
+        {data?.additional_mw
+          ? `System operating-cost savings from ${data.additional_mw} MW of added border allowance. Each border is tested independently; benefits cannot be added together.`
+          : "Baseline congestion rent (|price gap| × actual flow) per border. Diagnostics only, not validated system benefits."}
       </p>
       {error ? (
         <p role="status" className="mt-4">
@@ -107,7 +112,8 @@ export function BorderOpportunityNetwork() {
                     className="cursor-pointer"
                   >
                     <title>
-                      {t.id}: {v == null ? "Unavailable" : `€${v.toFixed(3)}m in January`}
+                      {t.id}:{" "}
+                      {v == null ? "Unavailable" : `€${v.toFixed(3)}m over the modelled window`}
                     </title>
                     <line
                       x1={a.x}
@@ -148,7 +154,7 @@ export function BorderOpportunityNetwork() {
           )}
           <p className="text-sm" aria-live="polite">
             {selected
-              ? `${selected.id}: ${value(selected) == null ? "Estimate unavailable" : `€${value(selected)!.toFixed(3)} million over the modelled period`} · ${selected.status.replaceAll("_", " ")}`
+              ? `${selected.id}: ${value(selected) == null ? "Estimate unavailable" : `€${value(selected)!.toFixed(3)} million over the modelled window`} · ${selected.status.replaceAll("_", " ")}`
               : "Select a connection to inspect its result."}
           </p>
           <details className="mt-4 text-sm">
@@ -160,6 +166,8 @@ export function BorderOpportunityNetwork() {
                     <th>Border</th>
                     <th>€m / period</th>
                     <th>CO₂ avoided (tonnes)</th>
+                    {experimental && <th>Spread €/MWh</th>}
+                    {experimental && <th>Marginal value €/MW</th>}
                     <th>Status</th>
                   </tr>
                 </thead>
@@ -173,6 +181,12 @@ export function BorderOpportunityNetwork() {
                           ? (t.modelled_climate_opportunity_tonnes?.toFixed(0) ?? "Unavailable")
                           : "Not validated"}
                       </td>
+                      {experimental && (
+                        <td>{t.mean_abs_spread_eur_mwh?.toFixed(2) ?? "Unavailable"}</td>
+                      )}
+                      {experimental && (
+                        <td>{t.marginal_value_eur_mw?.toFixed(0) ?? "Unavailable"}</td>
+                      )}
                       <td>{t.status.replaceAll("_", " ")}</td>
                     </tr>
                   ))}
@@ -181,8 +195,11 @@ export function BorderOpportunityNetwork() {
             </div>
           </details>
           <p className="mt-3 text-xs text-muted-foreground">
-            Colour range: €0m–€{maximum.toFixed(3)}m per modelled period. Country positions are
-            schematic. This is capacity relief, not the engineering design or profit of a new line.
+            {data?.additional_mw
+              ? `Colour range: €0m–€${maximum.toFixed(3)}m per modelled period.`
+              : `Colour range: €0m–€${maximum.toFixed(3)}m baseline rent per window.`}{" "}
+            Country positions are schematic. This is diagnostic evidence, not the engineering design
+            or profit of a new line.
           </p>
         </>
       )}

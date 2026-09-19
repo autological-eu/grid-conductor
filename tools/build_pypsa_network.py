@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Build a PyPSA-Eur operational network for Grid Conductor.
 
-Runs the Snakemake pipeline (through pixi inside WSL) from raw data through to a
-solved electricity network, validates the output, and writes a manifest consumed
-by extract_baseline.py and pypsa_border_targets.py.
+Runs the Snakemake pipeline (through pixi; directly on native Linux or WSL, or
+via the WSL distro on Windows) from raw data through to a solved electricity
+network, validates the output, and writes a manifest consumed by
+extract_baseline.py and pypsa_border_targets.py.
 
 Everything (window, clusters, run name, resolution) comes from the selected
 config file. Default is the full-year production config; pass --config to use a
@@ -16,7 +17,9 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
+import importlib.util
 import json
 import os
 import shlex
@@ -35,8 +38,13 @@ DEFAULT_CONFIG = CONFIG_DIR / "full-year.yaml"
 MANIFEST_PATH = ROOT / "data" / "pypsa-eur" / "baseline-manifest.json"
 UPSTREAM_COMMIT = "a5408e9db5402c53345d7339fffb52afe96d6e43"
 
-# pixi runs inside WSL; roots are mounted at /mnt/<drive>/<path>.
+# pixi runs directly on native Linux/WSL; on a Windows host it runs inside the
+# WSL distro where roots are mounted at /mnt/<drive>/<path>.
 WSL_DISTRO = os.environ.get("GRID_CONDUCTOR_WSL", "Ubuntu")
+
+
+def _on_posix() -> bool:
+    return sys.platform.startswith("linux") or os.name == "posix"
 
 
 def _inside_wsl() -> bool:
@@ -48,7 +56,7 @@ def _inside_wsl() -> bool:
 
 
 def _wsl_path(path: Path) -> str:
-    if _inside_wsl():
+    if _on_posix():
         return str(path.resolve())
     rel = str(path.resolve())
     parts = rel.replace("\\", "/").split(":")
@@ -57,10 +65,14 @@ def _wsl_path(path: Path) -> str:
 
 
 def _run_wsl(cmd: list[str], cwd: Path | None = None) -> subprocess.CompletedProcess:
-    """Run a command in the Linux environment (directly if inside WSL, via `wsl` otherwise)."""
+    """Run a command in the Linux environment.
+
+    Directly on native Linux or inside WSL; through the `wsl` distro on a Windows
+    host (override the distro with GRID_CONDUCTOR_WSL).
+    """
     cwd = cwd or UPSTREAM
     quoted = shlex.join([c for c in cmd if c])
-    if _inside_wsl():
+    if _on_posix():
         result = subprocess.run(
             ["bash", "-lc", f"cd '{_wsl_path(cwd)}' && {quoted}"],
             capture_output=True,
@@ -108,16 +120,19 @@ def check_prerequisites() -> None:
     print("[prereq] CDS API key present.")
 
     if not PIXI.exists():
-        sys.exit(f"ERROR: pixi not found at {PIXI}. Run the pixi Linux installer inside WSL.")
+        sys.exit(
+            f"ERROR: pixi not found at {PIXI}. Run the pixi Linux installer and copy the binary there."
+        )
     try:
         _run_wsl(["true"])
     except SystemExit as exc:
         if isinstance(exc.code, int) and exc.code == 1:
-            sys.exit(f"ERROR: WSL/Linux environment not reachable. Set GRID_CONDUCTOR_WSL.")
+            sys.exit(f"ERROR: Linux environment not reachable. Set GRID_CONDUCTOR_WSL.")
         raise
     except FileNotFoundError:
-        sys.exit("ERROR: `wsl` command not found on PATH.")
-    print(f"[prereq] WSL distro '{WSL_DISTRO}' reachable; pixi present.")
+        sys.exit("ERROR: `wsl` command not found on PATH (required on this Windows host).")
+    host = "Linux" if _on_posix() else f"WSL distro '{WSL_DISTRO}'"
+    print(f"[prereq] {host} reachable; pixi present.")
 
     if not (UPSTREAM / "Snakefile").exists():
         sys.exit(f"ERROR: Snakefile not found at {UPSTREAM / 'Snakefile'}")
@@ -126,9 +141,21 @@ def check_prerequisites() -> None:
     print("[prereq] Upstream checkout and config OK.")
 
 
+def _deep_update(base: dict, overlay: dict) -> None:
+    for key, value in overlay.items():
+        if isinstance(value, dict) and isinstance(base.get(key), dict):
+            _deep_update(base[key], value)
+        else:
+            base[key] = copy.deepcopy(value)
+
+
 def _load_config(config_path: Path) -> dict:
-    with config_path.open("r", encoding="utf-8") as f:
-        return yaml.safe_load(f)
+    """Load a config over config.default.yaml the way Snakemake merges them."""
+    default_path = UPSTREAM / "config" / "config.default.yaml"
+    merged = copy.deepcopy(yaml.safe_load(default_path.read_text(encoding="utf-8")) or {})
+    specific = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
+    _deep_update(merged, specific)
+    return merged
 
 
 def _run_context(config: dict) -> tuple[str, str, str, int]:
@@ -224,6 +251,10 @@ def run_snakemake(
 # Validation
 # ---------------------------------------------------------------------------
 
+def _host_pypsa() -> bool:
+    return importlib.util.find_spec("pypsa") is not None
+
+
 def validate_network(network_path: Path) -> dict:
     """Load the solved network via pypsa and perform sanity checks."""
     import pypsa
@@ -301,10 +332,14 @@ def validate_network(network_path: Path) -> dict:
     carrier_of = gen.set_index(gen.index)["carrier"]
     by_carrier = n.generators_t.p.T.groupby(carrier_of).sum().T.sum(axis=0) * 1e-6  # GWh
     co2_kt = 0.0
-    for carrier, gwh in by_carrier.items():
-        factor = co2_by_carrier.get(carrier)
-        if factor:
-            co2_kt += gwh * factor * 1e6 / 1e3  # t/MWh * MWh -> t, /1e3 -> kt
+    if len(n.generators_t.p):
+        efficiency = n.get_switchable_as_dense("Generator", "efficiency")
+        factors = gen.carrier.map(co2_by_carrier).fillna(0.0)
+        weights = n.snapshot_weightings["generators"].to_numpy(dtype=float)
+        co2_t = float(
+            ((n.generators_t.p / efficiency) * factors).mul(weights, axis=0).sum().sum()
+        )
+        co2_kt = co2_t / 1e3  # tonnes -> kt
 
     stats = {
         "n_snapshots": len(snapshots),
@@ -398,14 +433,28 @@ def main() -> None:
         action="store_true",
         help="Only build/download the ERA5 cutout and stop",
     )
+    parser.add_argument(
+        "--postprocess",
+        type=Path,
+        help="Internal: validate a solved network and write the manifest under pixi",
+    )
     args = parser.parse_args()
+
+    if args.postprocess:
+        config = _load_config(args.config)
+        stats = validate_network(args.postprocess)
+        print()
+        write_manifest(args.postprocess, args.config, stats)
+        return
 
     config = _load_config(args.config)
     run_name, start, end_exclusive, clusters = _run_context(config)
     print("=== PyPSA-Eur Baseline Build ===")
+    resolved = args.config.resolve()
+    config_label = resolved.relative_to(ROOT) if resolved.is_relative_to(ROOT) else args.config
     print(
         f"Run: {run_name}  Window: {start} -> {end_exclusive}  Clusters: {clusters}  "
-        f"Config: {args.config.relative_to(ROOT)}"
+        f"Config: {config_label}"
     )
     print()
 
@@ -417,6 +466,20 @@ def main() -> None:
 
     if not args.dry_run and not args.cutout_only:
         solved_abs = UPSTREAM / target
+        if not _host_pypsa():
+            print("[validate] host Python has no pypsa; re-invoking post-process under pixi")
+            cmd = [
+                str(PIXI),
+                "run",
+                "python",
+                str(ROOT / "tools" / "build_pypsa_network.py"),
+                "--postprocess",
+                str(solved_abs),
+                "--config",
+                str(args.config.resolve()),
+            ]
+            _run_wsl(cmd)
+            return
         stats = validate_network(solved_abs)
         print()
         write_manifest(solved_abs, args.config, stats)

@@ -61,10 +61,12 @@ bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
   build/extract/targets chain. Toolchain (all WSL-pixi aware):
   - `tools/build_pypsa_network.py` — Snakemake orchestrator. `--config
     config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,
-    `--cutout-only`. Runs pixi inside WSL distro `Ubuntu` (override with
-    `GRID_CONDUCTOR_WSL`); auto-detects when already inside WSL. Validates the
-    solved network (no extendable assets, hourly weights, nonzero load) and
-    writes `data/pypsa-eur/baseline-manifest.json` (format consumed by
+    `--cutout-only`. Runs pixi directly on native Linux or inside WSL, or via the
+    WSL distro `Ubuntu` on Windows (override with `GRID_CONDUCTOR_WSL`). Deep-merges
+    the config over `config.default.yaml`; when host Python lacks `pypsa` it
+    re-invokes validation/manifest itself under the pixi env (`--postprocess`).
+    Validates the solved network (no extendable assets, hourly weights, nonzero
+    load) and writes `data/pypsa-eur/baseline-manifest.json` (format consumed by
     `extract_baseline.py` and `pypsa_border_targets.py`).
   - `tools/extract_baseline.py` — solved network → `public/research/baseline/`
     (`countries.json`, `generators.json`, `cross_borders.json`,
@@ -72,6 +74,21 @@ bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
   - `tools/pypsa_border_targets.py` (exists) — border-relief experiments; expects
     manifest fields `start`/`end_exclusive`/`network_sha256`/`upstream_commit`/
     `assumptions`/`sources`, which the build tool now produces.
+  - `tools/baseline_opportunity.py` — single baseline re-solve (all duals
+    assigned, no per-border runs); emits schema-v2 `pypsa-targets.json` with
+    per-border congestion rent (|Δλ|×|actual flow|) + spread stats plus
+    capacity-proportional marginal capacity value (EUR/MW/window) from the
+    flow-constraint duals. `modelled_opportunity_meur` stays null. Writes the
+    public copy **and** the bundled server mirror `src/data/baseline-targets.json`
+    (byte-identical; drift-guard tested).
+  - **App feeding (checkpoint):** the workbench map reads `listTargets`, which
+    serves the bundled mirror via `src/lib/baseline.server.ts` (dynamic
+    import, `.server.ts` so the JSON never reaches the client bundle). Labels are
+    per-window (`MEUR/window`). `ensureTargetIds` upserts FK-only identity rows
+    into the legacy `targets` table for borders the DB lacks (scenario FK);
+    numbers never read from those rows. Raw dataset also at
+    `GET /api/public/baseline-opportunity`. Scenario dispatch still uses legacy
+    Supabase `borders`/`zone_hourly` (later Phase 4c).
   - Pinned upstream v2026.08.0 sits in `data/pypsa-eur/upstream` (commit
     `a5408e9`); pixi env via `data/pypsa-eur/bin/pixi`, run through WSL. ERA5
     cutout uses the CDS key in the WSL `~/.cdsapirc`, window limited to periods
@@ -87,6 +104,10 @@ bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
   - `tools/patch_pypsa_demand.py` records a narrow upstream fix: demand completeness
     is checked after selecting/reindexing the requested window, not across unused
     archive years. Remaining gaps still fail with per-country missing-hour counts.
+  - `tools/patch_pypsa_conventional.py` records another narrow fix: conventional
+    inputs like `data/nuclear_p_max_pu.csv` end at 2024, so a 2025 planning horizon
+    makes `add_electricity` raise `KeyError`; the year-selection loop now falls
+    back to the latest available column (idempotent, fails closed on drift).
   - Low-disk weather: `tools/monthly_weather.py` supervises one month at a time,
     verifies conversion outputs before deleting owned raw batches, and guards
     against 10 GiB growth. See `docs/monthly-weather.md`. The compact atlite

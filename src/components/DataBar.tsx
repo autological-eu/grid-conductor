@@ -7,7 +7,13 @@ import { toast } from "sonner";
 import { getImportProgress, planImport, runImportBatch } from "@/lib/import.functions";
 import { refreshOfficialCapacity, refreshTargets } from "@/lib/analysis.functions";
 
-export function DataBar({ step }: { step: 1 | 2 | 3 }) {
+export function DataBar({
+  step,
+  onEuropeanTargets,
+}: {
+  step: 1 | 2 | 3;
+  onEuropeanTargets?: () => void;
+}) {
   const qc = useQueryClient();
   const progressFn = useServerFn(getImportProgress);
   const plan = useServerFn(planImport);
@@ -76,7 +82,8 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
     onSuccess: (t) => {
       qc.invalidateQueries({ queryKey: ["targets"] });
       qc.invalidateQueries({ queryKey: ["zones"] });
-      toast.success(`${t.targets} borders analysed`);
+      if (t.note) toast.info(t.note);
+      else toast.success(`${t.targets} borders analysed`);
     },
     onError: (e: Error) => toast.error(e.message),
   });
@@ -137,12 +144,13 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
         })}
       </ol>
 
-      <Link
-        to="/targets"
+      <button
+        type="button"
+        onClick={onEuropeanTargets}
         className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
       >
         European targets
-      </Link>
+      </button>
       <Link
         to="/docs"
         className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -182,7 +190,7 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
             >
               {detect.isPending ? "Recomputing…" : "Recompute targets"}
               <span className="block text-[11px] text-muted-foreground">
-                Re-run congestion and loss detection
+                Targets come from the offline PyPSA-Eur baseline solve
               </span>
             </button>
           </div>

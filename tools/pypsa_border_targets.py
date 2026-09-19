@@ -29,8 +29,13 @@ def write_json(path, value):
     temporary.replace(path)
 
 
-def border_catalog(network):
-    """Country borders, including subsea DC; exclude domestic zone boundaries."""
+def border_catalog(network, allow_zero_capacity=False):
+    """Country borders, including subsea DC; exclude domestic zone boundaries.
+
+    When allow_zero_capacity is set, placeholder assets with nonpositive or
+    nonfinite nominal capacity are skipped instead of raising; such assets
+    carry no power and contribute nothing to border diagnostics.
+    """
     buses = network.buses
     grouped = {}
     for component, table, nominal in [('Line', network.lines, 's_nom'),
@@ -45,6 +50,8 @@ def border_catalog(network):
                 continue
             capacity = float(row[nominal])
             if not math.isfinite(capacity) or capacity <= 0:
+                if allow_zero_capacity:
+                    continue
                 raise ValueError(f'Invalid existing capacity for {component}/{name}')
             a, b = sorted([a, b])
             entry = grouped.setdefault(f'{a}-{b}', dict(id=f'{a}-{b}', a=a, b=b, assets=[]))
