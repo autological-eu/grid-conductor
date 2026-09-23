@@ -101,6 +101,10 @@ bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
   - `publish_pilot.py` (100/500/1000 MW + loose variants; `--validated` only after M2 gates) → `public/research/market-experiment.json`
   - `validate_market_model.py` (calibration vs held-out splits, predeclared gates P1–P4) → `public/research/model-validation.json`
   - FR–CH prices now come from ENTSO-E A44 (cached under `data/eu-market/raw`); the Electricity Maps archive is optional comparison data. `annual_opportunity_meur` stays `None`.
+- `python`/`python3` are not on PATH on this Windows box. Run the numpy/stdlib-only
+  tools and the test suite with conda base:
+  `& "C:\Users\owner\miniconda3\python.exe" tools\fast_entsoe_screening.py`
+  (`C:\Users\owner\miniconda3\python.exe -m unittest discover -s tools -p "test_*.py" -v`).
 - Run tests: `python -m unittest discover -s tools -p "test_*.py" -v`.
 - Data and large runs live under gitignored dirs — never commit them: `data/carbon-pilot/`, `data/eu-market/`, `data/jao/`, `data/pypsa-eur/`.
 - Research context lives in `docs/*.md` and `public/research/`; `src/routes/targets.tsx` renders the target-evidence report page.
@@ -110,10 +114,17 @@ bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
 - Docs: `docs/fast-entsoe-screening.md`. Two steps: (1) cached border screening
   (`fast_entsoe_screening.py`, numpy, reads `data/eu-market/bank-*-v2.json`
   schema_v2) → publishes `public/research/entsoe-fast-targets.json` (realized
-  rent, opportunity ladder ΔC∈{500,1000} MW, congested hours, avg positive
-  spread, price-response `slope_a`); (2) **live** 2-node LP per candidate
+  rent, opportunity ladder ΔC∈{500,1000} MW, congested quarters, avg positive
+  spread, price-response `slope_a`/`slope_b`, directed rows `a>b` and `b>a`);
+  (2) **live** 2-node LP per candidate
   border in `src/lib/fast-entsoe-lp.server.ts` + route
   `src/routes/api/public/fast-entsoe-lp.ts` (GET, public).
+- Step-1 publishes **monthly** M€ figures (quarter-hour sums already carry the
+  0.25 h factor; the field suffix is `_meur_month`). Step 2 annualizes by ×12
+  under the "the screened month is representative" assumption, then compares
+  annual welfare against capex; rows whose OLS price-response slope was ≤ 0 are
+  published with `slope=0` (raw fit in `slope_raw_*`), making cable welfare an
+  upper bound there.
 - Step-2 solver is **`javascript-lp-solver`** (pure-JS simplex; solved under
   bun). Do **not** swap in the `highs` npm package — its HiGHS-wasm glue fails
   to import under bun 1.4 (`Export named 'Highs' not found`). Monthly bank

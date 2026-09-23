@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "source": "ENTSO-E cached bank v2 (data/eu-market)",
   "months": [
     "2026-01",
@@ -9,1541 +9,3684 @@
     500,
     1000
   ],
-  "formula": "opportunity = 1e-6*sum_t max(0,P_B-P_A,t)*DeltaC; realized = 1e-6*sum_t F_AB*(P_B-P_A)",
+  "formula": "opportunity = 1e-6*0.25*sum_t max(0,P_B-P_A,t)*DeltaC M\u20ac/month; realized = 1e-6*0.25*sum_t F_AB*(P_B-P_A); directed rows a>b and b>a",
   "targets": [
     {
       "month": "2026-08",
+      "border": "SE3>DK1",
+      "slope_a": 0.0,
+      "slope_b": 0.021605273378334563,
+      "slope_raw_a": -0.02592966648271554,
+      "slope_raw_b": 0.021605273378334563,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 31.978294876694328,
+      "positive_rent_meur_month": 32.02232408524176,
+      "congested_quarters": 2392,
+      "average_positive_spread_eur_mwh": 82.24879597198998,
+      "opportunity_meur_month": {
+        "500": 24.63177874625,
+        "1000": 49.2635574925
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SE4>PL",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.106571436050384,
+      "slope_raw_b": -0.02502568205464784,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 9.0309241915,
+      "positive_rent_meur_month": 9.1505806315,
+      "congested_quarters": 2107,
+      "average_positive_spread_eur_mwh": 91.56120075937352,
+      "opportunity_meur_month": {
+        "500": 24.18382625,
+        "1000": 48.3676525
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
       "border": "LT>PL",
-      "realized_rent_meur_yr": 30.797185770000002,
-      "positive_rent_meur_yr": 31.246295645999997,
-      "congested_hours": 1970,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.0673812431743603,
+      "slope_raw_b": -0.02502568205464784,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 7.699296442500001,
+      "positive_rent_meur_month": 7.811573911499999,
+      "congested_quarters": 1970,
       "average_positive_spread_eur_mwh": 88.21545177664974,
-      "opportunity_meur_yr": {
-        "500": 87.13441999999999,
-        "1000": 174.26883999999998
+      "opportunity_meur_month": {
+        "500": 21.783604999999998,
+        "1000": 43.567209999999996
       },
-      "observed_quarters": 2976,
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SE4>DE-LU",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.106571436050384,
+      "slope_raw_b": -0.007441251342579732,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 2142,
+      "average_positive_spread_eur_mwh": 77.09740429505136,
+      "opportunity_meur_month": {
+        "500": 20.7037925,
+        "1000": 41.407585
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "FR>IT-North",
-      "realized_rent_meur_yr": 408.4901249857,
-      "positive_rent_meur_yr": 408.74160992189996,
-      "congested_hours": 2493,
-      "average_positive_spread_eur_mwh": 65.04987164059366,
-      "opportunity_meur_yr": {
-        "500": 81.20823,
-        "1000": 162.41646
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.004256141836743637,
+      "slope_b": 0.012024678983070752,
+      "slope_raw_a": 0.004256141836743637,
+      "slope_raw_b": 0.012024678983070752,
       "cap_ab_mw": 3530.0,
-      "slope_a": 0.004256141836743637
+      "realized_rent_meur_month": 102.122531246425,
+      "positive_rent_meur_month": 102.18540248047499,
+      "congested_quarters": 2493,
+      "average_positive_spread_eur_mwh": 65.04987164059366,
+      "opportunity_meur_month": {
+        "500": 20.3020575,
+        "1000": 40.604115
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SE4>DK2",
+      "slope_a": 0.0,
+      "slope_b": 3.602617002413752e-05,
+      "slope_raw_a": -0.106571436050384,
+      "slope_raw_b": 3.602617002413752e-05,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 16.80787020097456,
+      "positive_rent_meur_month": 16.822971089557942,
+      "congested_quarters": 1967,
+      "average_positive_spread_eur_mwh": 82.22179965480427,
+      "opportunity_meur_month": {
+        "500": 20.290289997124997,
+        "1000": 40.580579994249995
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "GR>IT-SUD",
-      "realized_rent_meur_yr": 68.2376858425,
-      "positive_rent_meur_yr": 69.13986507249999,
-      "congested_hours": 2235,
-      "average_positive_spread_eur_mwh": 63.744639821029075,
-      "opportunity_meur_yr": {
-        "500": 71.49839,
-        "1000": 142.99678
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.004607935210102337,
+      "slope_raw_a": -0.0739888255199247,
+      "slope_raw_b": 0.004607935210102337,
       "cap_ab_mw": 500.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 17.059421460625,
+      "positive_rent_meur_month": 17.284966268124997,
+      "congested_quarters": 2235,
+      "average_positive_spread_eur_mwh": 63.744639821029075,
+      "opportunity_meur_month": {
+        "500": 17.8745975,
+        "1000": 35.749195
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SE4>LT",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.03817965319254406,
+      "slope_raw_b": -0.06743062087469447,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 24.701188858753245,
+      "positive_rent_meur_month": 24.75204497390669,
+      "congested_quarters": 1910,
+      "average_positive_spread_eur_mwh": 72.58903664921466,
+      "opportunity_meur_month": {
+        "500": 17.415477499999998,
+        "1000": 34.830954999999996
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "GR>BG",
+      "slope_a": 0.0,
+      "slope_b": 0.043467197832953115,
+      "slope_raw_a": -0.05731359634613086,
+      "slope_raw_b": 0.043467197832953115,
+      "cap_ab_mw": 1249.0,
+      "realized_rent_meur_month": 18.902628930600002,
+      "positive_rent_meur_month": 18.902628930600002,
+      "congested_quarters": 1910,
+      "average_positive_spread_eur_mwh": 62.16782722513089,
+      "opportunity_meur_month": {
+        "500": 14.894908749999999,
+        "1000": 29.789817499999998
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SE4>PL",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.03817965319254406,
+      "slope_raw_b": -0.033269293717256204,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 16.00074464625,
+      "positive_rent_meur_month": 16.0944375415,
+      "congested_quarters": 2239,
+      "average_positive_spread_eur_mwh": 50.90109870477892,
+      "opportunity_meur_month": {
+        "500": 14.385975,
+        "1000": 28.77195
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "FI>EE",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.02491417504426227,
+      "slope_raw_b": -0.022592814156718283,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 27.779210423464246,
+      "positive_rent_meur_month": 27.801346824376747,
+      "congested_quarters": 1253,
+      "average_positive_spread_eur_mwh": 87.92404628890661,
+      "opportunity_meur_month": {
+        "500": 13.860026249999999,
+        "1000": 27.720052499999998
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "DE-LU>PL",
-      "realized_rent_meur_yr": 181.86367858537,
-      "positive_rent_meur_yr": 190.19457463547,
-      "congested_hours": 2067,
-      "average_positive_spread_eur_mwh": 50.347532656023226,
-      "opportunity_meur_yr": {
-        "500": 52.4602,
-        "1000": 104.9204
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.005625068067836686,
+      "slope_raw_b": -0.033269293717256204,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 45.4659196463425,
+      "positive_rent_meur_month": 47.5486436588675,
+      "congested_quarters": 2067,
+      "average_positive_spread_eur_mwh": 50.347532656023226,
+      "opportunity_meur_month": {
+        "500": 13.11505,
+        "1000": 26.2301
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "FR>IT-North",
-      "realized_rent_meur_yr": 284.1790622134,
-      "positive_rent_meur_yr": 284.1872782509,
-      "congested_hours": 2659,
-      "average_positive_spread_eur_mwh": 37.838427980443775,
-      "opportunity_meur_yr": {
-        "500": 50.39877,
-        "1000": 100.79754
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0011241940702688428,
+      "slope_b": 0.00044296533757834,
+      "slope_raw_a": 0.0011241940702688428,
+      "slope_raw_b": 0.00044296533757834,
       "cap_ab_mw": 4138.0,
-      "slope_a": 0.0011241940702688428
+      "realized_rent_meur_month": 71.04476555335,
+      "positive_rent_meur_month": 71.046819562725,
+      "congested_quarters": 2659,
+      "average_positive_spread_eur_mwh": 37.838427980443775,
+      "opportunity_meur_month": {
+        "500": 12.5996925,
+        "1000": 25.199385
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "DE-LU>AT",
+      "slope_a": 0.0,
+      "slope_b": 0.011791911681686052,
+      "slope_raw_a": -0.005625068067836686,
+      "slope_raw_b": 0.011791911681686052,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 55.257573968162,
+      "positive_rent_meur_month": 56.6456278583795,
+      "congested_quarters": 2319,
+      "average_positive_spread_eur_mwh": 41.608326865028026,
+      "opportunity_meur_month": {
+        "500": 12.144638749999999,
+        "1000": 24.289277499999997
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "ES>FR",
-      "realized_rent_meur_yr": 181.76124911519997,
-      "positive_rent_meur_yr": 181.76124911519997,
-      "congested_hours": 1451,
-      "average_positive_spread_eur_mwh": 66.24546519641626,
-      "opportunity_meur_yr": {
-        "500": 48.14593,
-        "1000": 96.29186
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0011241940702688428,
+      "slope_raw_a": -0.005139477403441886,
+      "slope_raw_b": 0.0011241940702688428,
       "cap_ab_mw": 3561.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 45.44031227879999,
+      "positive_rent_meur_month": 45.44031227879999,
+      "congested_quarters": 1451,
+      "average_positive_spread_eur_mwh": 66.24546519641626,
+      "opportunity_meur_month": {
+        "500": 12.0364825,
+        "1000": 24.072965
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "AT>IT-North",
-      "realized_rent_meur_yr": 25.985281389999997,
-      "positive_rent_meur_yr": 27.315653529999995,
-      "congested_hours": 2353,
-      "average_positive_spread_eur_mwh": 40.5059243518912,
-      "opportunity_meur_yr": {
-        "500": 47.916765,
-        "1000": 95.83353
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.01603519244409307,
+      "slope_b": 0.012024678983070752,
+      "slope_raw_a": 0.01603519244409307,
+      "slope_raw_b": 0.012024678983070752,
       "cap_ab_mw": 465.0,
-      "slope_a": 0.01603519244409307
+      "realized_rent_meur_month": 6.496320347499999,
+      "positive_rent_meur_month": 6.828913382499999,
+      "congested_quarters": 2353,
+      "average_positive_spread_eur_mwh": 40.5059243518912,
+      "opportunity_meur_month": {
+        "500": 11.97919125,
+        "1000": 23.9583825
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SE1>FI",
+      "slope_a": 0.03635247313693293,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.03635247313693293,
+      "slope_raw_b": -0.02491417504426227,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 38.0664899302525,
+      "positive_rent_meur_month": 38.067816216092496,
+      "congested_quarters": 1864,
+      "average_positive_spread_eur_mwh": 46.03369098712447,
+      "opportunity_meur_month": {
+        "500": 10.88275375,
+        "1000": 21.7655075
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SI>IT-North",
+      "slope_a": 0.0251767834625702,
+      "slope_b": 0.012024678983070752,
+      "slope_raw_a": 0.0251767834625702,
+      "slope_raw_b": 0.012024678983070752,
+      "cap_ab_mw": 482.0,
+      "realized_rent_meur_month": 9.3428410197,
+      "positive_rent_meur_month": 9.3753460384,
+      "congested_quarters": 1810,
+      "average_positive_spread_eur_mwh": 46.406093922651934,
+      "opportunity_meur_month": {
+        "500": 10.55501,
+        "1000": 21.11002
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "GR>IT-SUD",
-      "realized_rent_meur_yr": 32.426524625,
-      "positive_rent_meur_yr": 33.363236975,
-      "congested_hours": 2164,
-      "average_positive_spread_eur_mwh": 32.46751386321627,
-      "opportunity_meur_yr": {
-        "500": 35.419664999999995,
-        "1000": 70.83932999999999
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.001801975662642084,
+      "slope_raw_a": -0.05731359634613086,
+      "slope_raw_b": 0.001801975662642084,
       "cap_ab_mw": 500.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 8.10663115625,
+      "positive_rent_meur_month": 8.34080924375,
+      "congested_quarters": 2164,
+      "average_positive_spread_eur_mwh": 32.46751386321627,
+      "opportunity_meur_month": {
+        "500": 8.854916249999999,
+        "1000": 17.709832499999997
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "DE-LU>CZ",
+      "slope_a": 0.0,
+      "slope_b": 0.013102697053330661,
+      "slope_raw_a": -0.005625068067836686,
+      "slope_raw_b": 0.013102697053330661,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 28.043766424877496,
+      "positive_rent_meur_month": 30.084643035289993,
+      "congested_quarters": 1917,
+      "average_positive_spread_eur_mwh": 34.98920709441836,
+      "opportunity_meur_month": {
+        "500": 8.51652625,
+        "1000": 17.0330525
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "DE-LU>AT",
+      "slope_a": 0.0,
+      "slope_b": 0.01603519244409307,
+      "slope_raw_a": -0.007441251342579732,
+      "slope_raw_b": 0.01603519244409307,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 29.9219616871151,
+      "positive_rent_meur_month": 30.78639481982495,
+      "congested_quarters": 1970,
+      "average_positive_spread_eur_mwh": 32.48934517766497,
+      "opportunity_meur_month": {
+        "500": 8.13051875,
+        "1000": 16.2610375
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "EE>LV",
-      "realized_rent_meur_yr": 36.031220994,
-      "positive_rent_meur_yr": 36.031220994,
-      "congested_hours": 871,
-      "average_positive_spread_eur_mwh": 71.49965556831229,
-      "opportunity_meur_yr": {
-        "500": 31.440469999999998,
-        "1000": 62.880939999999995
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.025089603878831253,
+      "slope_raw_b": -0.009927970548911272,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 9.0078052485,
+      "positive_rent_meur_month": 9.0078052485,
+      "congested_quarters": 871,
+      "average_positive_spread_eur_mwh": 71.49965556831229,
+      "opportunity_meur_month": {
+        "500": 7.860117499999999,
+        "1000": 15.720234999999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SE3>FI",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.010721167836171193,
+      "slope_raw_b": -0.02491417504426227,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 15.00097154937415,
+      "positive_rent_meur_month": 17.1248582629325,
+      "congested_quarters": 1093,
+      "average_positive_spread_eur_mwh": 56.21904849039341,
+      "opportunity_meur_month": {
+        "500": 7.712927499999999,
+        "1000": 15.425854999999999
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "SE2>SE3",
-      "realized_rent_meur_yr": 313.6751779798159,
-      "positive_rent_meur_yr": 313.98968227278823,
-      "congested_hours": 1295,
-      "average_positive_spread_eur_mwh": 46.4648108108108,
-      "opportunity_meur_yr": {
-        "500": 30.65299,
-        "1000": 61.30598
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.014465618867654927,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.014465618867654927,
+      "slope_raw_b": -0.02592966648271554,
       "cap_ab_mw": null,
-      "slope_a": 0.014465618867654927
+      "realized_rent_meur_month": 78.41879449495397,
+      "positive_rent_meur_month": 78.49742056819706,
+      "congested_quarters": 1295,
+      "average_positive_spread_eur_mwh": 46.4648108108108,
+      "opportunity_meur_month": {
+        "500": 7.6632475,
+        "1000": 15.326495
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "IT-SARD>IT-SICI",
-      "realized_rent_meur_yr": null,
-      "positive_rent_meur_yr": null,
-      "congested_hours": 831,
-      "average_positive_spread_eur_mwh": 70.89149217809867,
-      "observed_quarters": 2976,
-      "opportunity_meur_yr": {
-        "500": 29.500619999999998,
-        "1000": 59.001239999999996
-      },
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.02279740218302866,
+      "slope_raw_b": null,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": null,
+      "positive_rent_meur_month": null,
+      "congested_quarters": 831,
+      "average_positive_spread_eur_mwh": 70.89149217809867,
+      "opportunity_meur_month": {
+        "500": 7.3751549999999995,
+        "1000": 14.750309999999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "PL>LT",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.033269293717256204,
+      "slope_raw_b": -0.06743062087469447,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 1.302267992,
+      "positive_rent_meur_month": 1.40225939475,
+      "congested_quarters": 816,
+      "average_positive_spread_eur_mwh": 71.43253676470587,
+      "opportunity_meur_month": {
+        "500": 7.30551,
+        "1000": 14.61102
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "FI>SE3",
-      "realized_rent_meur_yr": 12.001236089334299,
-      "positive_rent_meur_yr": 12.00595773563477,
-      "congested_hours": 1298,
-      "average_positive_spread_eur_mwh": 43.27862095531587,
-      "opportunity_meur_yr": {
-        "500": 28.678665,
-        "1000": 57.35733
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.021425801152209753,
+      "slope_raw_b": -0.02592966648271554,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 3.0003090223335747,
+      "positive_rent_meur_month": 3.0014894339086924,
+      "congested_quarters": 1298,
+      "average_positive_spread_eur_mwh": 43.27862095531587,
+      "opportunity_meur_month": {
+        "500": 7.16966625,
+        "1000": 14.3393325
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "PL>SK",
-      "realized_rent_meur_yr": 33.176463846,
-      "positive_rent_meur_yr": 35.736705439999994,
-      "congested_hours": 1466,
-      "average_positive_spread_eur_mwh": 38.28291268758527,
-      "opportunity_meur_yr": {
-        "500": 28.420975,
-        "1000": 56.84195
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.07849157668046539,
+      "slope_raw_a": -0.02502568205464784,
+      "slope_raw_b": 0.07849157668046539,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 8.2941159615,
+      "positive_rent_meur_month": 8.934176359999999,
+      "congested_quarters": 1466,
+      "average_positive_spread_eur_mwh": 38.28291268758527,
+      "opportunity_meur_month": {
+        "500": 7.10524375,
+        "1000": 14.2104875
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "IT-SUD>IT-SICI",
+      "slope_a": 0.004607935210102337,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.004607935210102337,
+      "slope_raw_b": null,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": null,
+      "positive_rent_meur_month": null,
+      "congested_quarters": 704,
+      "average_positive_spread_eur_mwh": 77.24234375,
+      "opportunity_meur_month": {
+        "500": 6.803893749999999,
+        "1000": 13.607787499999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "FI>EE",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.021425801152209753,
+      "slope_raw_b": -0.025089603878831253,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 12.1979745206715,
+      "positive_rent_meur_month": 12.201742917764,
+      "congested_quarters": 819,
+      "average_positive_spread_eur_mwh": 63.88173382173382,
+      "opportunity_meur_month": {
+        "500": 6.58959375,
+        "1000": 13.1791875
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "CZ>PL",
-      "realized_rent_meur_yr": 1.0525723824969997,
-      "positive_rent_meur_yr": 1.053304046418,
-      "congested_hours": 1205,
-      "average_positive_spread_eur_mwh": 42.58715352697095,
-      "opportunity_meur_yr": {
-        "500": 26.11093,
-        "1000": 52.22186
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.013102697053330661,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.013102697053330661,
+      "slope_raw_b": -0.033269293717256204,
       "cap_ab_mw": null,
-      "slope_a": 0.013102697053330661
+      "realized_rent_meur_month": 0.2631430956242499,
+      "positive_rent_meur_month": 0.2633260116045,
+      "congested_quarters": 1205,
+      "average_positive_spread_eur_mwh": 42.58715352697095,
+      "opportunity_meur_month": {
+        "500": 6.5277325,
+        "1000": 13.055465
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "ES>FR",
-      "realized_rent_meur_yr": 34.837253004000004,
-      "positive_rent_meur_yr": 34.871175485600006,
-      "congested_hours": 709,
-      "average_positive_spread_eur_mwh": 70.45527503526093,
-      "opportunity_meur_yr": {
-        "500": 25.03485,
-        "1000": 50.0697
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.004256141836743637,
+      "slope_raw_a": -0.02501539330001628,
+      "slope_raw_b": 0.004256141836743637,
       "cap_ab_mw": 3330.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 8.709313251000001,
+      "positive_rent_meur_month": 8.717793871400001,
+      "congested_quarters": 709,
+      "average_positive_spread_eur_mwh": 70.45527503526093,
+      "opportunity_meur_month": {
+        "500": 6.2587125,
+        "1000": 12.517425
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "DE-LU>PL",
-      "realized_rent_meur_yr": 60.60646578988,
-      "positive_rent_meur_yr": 76.32472803213,
-      "congested_hours": 1223,
-      "average_positive_spread_eur_mwh": 40.13690106295993,
-      "opportunity_meur_yr": {
-        "500": 25.0051,
-        "1000": 50.0102
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.007441251342579732,
+      "slope_raw_b": -0.02502568205464784,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 15.15161644747,
+      "positive_rent_meur_month": 19.0811820080325,
+      "congested_quarters": 1223,
+      "average_positive_spread_eur_mwh": 40.13690106295993,
+      "opportunity_meur_month": {
+        "500": 6.251275,
+        "1000": 12.50255
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "CZ>AT",
+      "slope_a": 0.013102697053330661,
+      "slope_b": 0.011791911681686052,
+      "slope_raw_a": 0.013102697053330661,
+      "slope_raw_b": 0.011791911681686052,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 14.457066261999998,
+      "positive_rent_meur_month": 19.979461247,
+      "congested_quarters": 1783,
+      "average_positive_spread_eur_mwh": 26.679029725182275,
+      "opportunity_meur_month": {
+        "500": 6.0349175,
+        "1000": 12.069835
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "AT>HU",
-      "realized_rent_meur_yr": 31.040111811259997,
-      "positive_rent_meur_yr": 39.471888478640004,
-      "congested_hours": 1139,
-      "average_positive_spread_eur_mwh": 41.20666374012291,
-      "opportunity_meur_yr": {
-        "500": 23.906965,
-        "1000": 47.81393
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.011791911681686052,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.011791911681686052,
+      "slope_raw_b": -0.05044410703325456,
       "cap_ab_mw": null,
-      "slope_a": 0.011791911681686052
+      "realized_rent_meur_month": 7.760027952814999,
+      "positive_rent_meur_month": 9.867972119660001,
+      "congested_quarters": 1139,
+      "average_positive_spread_eur_mwh": 41.20666374012291,
+      "opportunity_meur_month": {
+        "500": 5.97674125,
+        "1000": 11.9534825
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "DE-LU>CZ",
+      "slope_a": 0.0,
+      "slope_b": 0.03647015830190886,
+      "slope_raw_a": -0.007441251342579732,
+      "slope_raw_b": 0.03647015830190886,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 11.728875660985,
+      "positive_rent_meur_month": 12.8631419327925,
+      "congested_quarters": 1619,
+      "average_positive_spread_eur_mwh": 26.75323656578135,
+      "opportunity_meur_month": {
+        "500": 5.546106249999999,
+        "1000": 11.092212499999999
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "IT-North>SI",
-      "realized_rent_meur_yr": 3.183082332,
-      "positive_rent_meur_yr": 3.2503281024,
-      "congested_hours": 894,
-      "average_positive_spread_eur_mwh": 46.25107382550336,
-      "opportunity_meur_yr": {
-        "500": 20.79676,
-        "1000": 41.59352
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.00044296533757834,
+      "slope_b": 0.04395982693857018,
+      "slope_raw_a": 0.00044296533757834,
+      "slope_raw_b": 0.04395982693857018,
       "cap_ab_mw": 680.0,
-      "slope_a": 0.00044296533757834
+      "realized_rent_meur_month": 0.795770583,
+      "positive_rent_meur_month": 0.8125820256,
+      "congested_quarters": 894,
+      "average_positive_spread_eur_mwh": 46.25107382550336,
+      "opportunity_meur_month": {
+        "500": 5.19919,
+        "1000": 10.39838
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "FR>DE-LU",
+      "slope_a": 0.0011241940702688428,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.0011241940702688428,
+      "slope_raw_b": -0.005625068067836686,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 28.3465305649785,
+      "positive_rent_meur_month": 31.6600871761405,
+      "congested_quarters": 1359,
+      "average_positive_spread_eur_mwh": 29.46309050772627,
+      "opportunity_meur_month": {
+        "500": 5.14380125,
+        "1000": 10.2876025
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "SE2>SE3",
-      "realized_rent_meur_yr": 284.88285056087364,
-      "positive_rent_meur_yr": 285.80044191922207,
-      "congested_hours": 1061,
-      "average_positive_spread_eur_mwh": 36.534241281809614,
-      "opportunity_meur_yr": {
-        "500": 19.92746,
-        "1000": 39.85492
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.025024348279580597,
+      "slope_raw_b": -0.010721167836171193,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 71.22071264021841,
+      "positive_rent_meur_month": 71.45011047980552,
+      "congested_quarters": 1061,
+      "average_positive_spread_eur_mwh": 36.534241281809614,
+      "opportunity_meur_month": {
+        "500": 4.981865,
+        "1000": 9.96373
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "IT-North>AT",
+      "slope_a": 0.00044296533757834,
+      "slope_b": 0.011791911681686052,
+      "slope_raw_a": 0.00044296533757834,
+      "slope_raw_b": 0.011791911681686052,
+      "cap_ab_mw": 165.0,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 1342,
+      "average_positive_spread_eur_mwh": 29.112168405365125,
+      "opportunity_meur_month": {
+        "500": 4.97729875,
+        "1000": 9.9545975
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "CZ>SK",
-      "realized_rent_meur_yr": 68.528625267,
-      "positive_rent_meur_yr": 76.64240819800001,
-      "congested_hours": 1313,
-      "average_positive_spread_eur_mwh": 28.759619192688493,
-      "opportunity_meur_yr": {
-        "500": 19.569955,
-        "1000": 39.13991
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.013102697053330661,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.013102697053330661,
+      "slope_raw_b": -0.048166681033156244,
       "cap_ab_mw": null,
-      "slope_a": 0.013102697053330661
+      "realized_rent_meur_month": 17.13215631675,
+      "positive_rent_meur_month": 19.160602049500003,
+      "congested_quarters": 1313,
+      "average_positive_spread_eur_mwh": 28.759619192688493,
+      "opportunity_meur_month": {
+        "500": 4.89248875,
+        "1000": 9.7849775
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "SE3>SE4",
-      "realized_rent_meur_yr": 81.98407680717021,
-      "positive_rent_meur_yr": 82.03175659824375,
-      "congested_hours": 1126,
-      "average_positive_spread_eur_mwh": 32.43072824156305,
-      "opportunity_meur_yr": {
-        "500": 18.802899999999998,
-        "1000": 37.605799999999995
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.02592966648271554,
+      "slope_raw_b": -0.106571436050384,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 20.496019201792553,
+      "positive_rent_meur_month": 20.507939149560936,
+      "congested_quarters": 1126,
+      "average_positive_spread_eur_mwh": 32.43072824156305,
+      "opportunity_meur_month": {
+        "500": 4.700724999999999,
+        "1000": 9.401449999999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "FR>ES",
+      "slope_a": 0.004256141836743637,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.004256141836743637,
+      "slope_raw_b": -0.02501539330001628,
+      "cap_ab_mw": 1800.0,
+      "realized_rent_meur_month": 16.914277374399997,
+      "positive_rent_meur_month": 17.247821158,
+      "congested_quarters": 1178,
+      "average_positive_spread_eur_mwh": 30.74402376910017,
+      "opportunity_meur_month": {
+        "500": 4.563045,
+        "1000": 9.12609
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "CZ>SK",
-      "realized_rent_meur_yr": 62.060708951,
-      "positive_rent_meur_yr": 63.511457570999994,
-      "congested_hours": 1156,
-      "average_positive_spread_eur_mwh": 30.217846020761247,
-      "opportunity_meur_yr": {
-        "500": 17.95214,
-        "1000": 35.90428
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.03647015830190886,
+      "slope_b": 0.07849157668046539,
+      "slope_raw_a": 0.03647015830190886,
+      "slope_raw_b": 0.07849157668046539,
       "cap_ab_mw": null,
-      "slope_a": 0.03647015830190886
+      "realized_rent_meur_month": 15.51517723775,
+      "positive_rent_meur_month": 15.877864392749999,
+      "congested_quarters": 1156,
+      "average_positive_spread_eur_mwh": 30.217846020761247,
+      "opportunity_meur_month": {
+        "500": 4.488035,
+        "1000": 8.97607
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "CZ>AT",
+      "slope_a": 0.03647015830190886,
+      "slope_b": 0.01603519244409307,
+      "slope_raw_a": 0.03647015830190886,
+      "slope_raw_b": 0.01603519244409307,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 8.878565616,
+      "positive_rent_meur_month": 12.362355415999998,
+      "congested_quarters": 1646,
+      "average_positive_spread_eur_mwh": 20.3738517618469,
+      "opportunity_meur_month": {
+        "500": 4.3368975,
+        "1000": 8.673795
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "AT>HU",
-      "realized_rent_meur_yr": 17.447349630719994,
-      "positive_rent_meur_yr": 23.68270578377,
-      "congested_hours": 1271,
-      "average_positive_spread_eur_mwh": 26.01384736428009,
-      "opportunity_meur_yr": {
-        "500": 16.97169,
-        "1000": 33.94338
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.01603519244409307,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.01603519244409307,
+      "slope_raw_b": -0.030376261131381952,
       "cap_ab_mw": null,
-      "slope_a": 0.01603519244409307
+      "realized_rent_meur_month": 4.361837407679999,
+      "positive_rent_meur_month": 5.9206764459425,
+      "congested_quarters": 1271,
+      "average_positive_spread_eur_mwh": 26.01384736428009,
+      "opportunity_meur_month": {
+        "500": 4.2429225,
+        "1000": 8.485845
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "AT>SI",
-      "realized_rent_meur_yr": 19.510129575999997,
-      "positive_rent_meur_yr": 27.980247952,
-      "congested_hours": 1258,
-      "average_positive_spread_eur_mwh": 25.124340222575515,
-      "opportunity_meur_yr": {
-        "500": 16.292785,
-        "1000": 32.58557
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.01603519244409307,
+      "slope_b": 0.0251767834625702,
+      "slope_raw_a": 0.01603519244409307,
+      "slope_raw_b": 0.0251767834625702,
       "cap_ab_mw": null,
-      "slope_a": 0.01603519244409307
+      "realized_rent_meur_month": 4.877532393999999,
+      "positive_rent_meur_month": 6.995061988,
+      "congested_quarters": 1258,
+      "average_positive_spread_eur_mwh": 25.124340222575515,
+      "opportunity_meur_month": {
+        "500": 4.07319625,
+        "1000": 8.1463925
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "PL>CZ",
+      "slope_a": 0.0,
+      "slope_b": 0.03647015830190886,
+      "slope_raw_a": -0.02502568205464784,
+      "slope_raw_b": 0.03647015830190886,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 7.1045510505500005,
+      "positive_rent_meur_month": 9.534660362824999,
+      "congested_quarters": 1027,
+      "average_positive_spread_eur_mwh": 29.64377799415774,
+      "opportunity_meur_month": {
+        "500": 3.92936125,
+        "1000": 7.8587225
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "LT>PL",
-      "realized_rent_meur_yr": 3.082231467,
-      "positive_rent_meur_yr": 4.612222121,
-      "congested_hours": 910,
-      "average_positive_spread_eur_mwh": 33.53610989010989,
-      "opportunity_meur_yr": {
-        "500": 15.592329999999999,
-        "1000": 31.184659999999997
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.06743062087469447,
+      "slope_raw_b": -0.033269293717256204,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.77055786675,
+      "positive_rent_meur_month": 1.15305553025,
+      "congested_quarters": 910,
+      "average_positive_spread_eur_mwh": 33.53610989010989,
+      "opportunity_meur_month": {
+        "500": 3.8980824999999997,
+        "1000": 7.796164999999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SK>PL",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.048166681033156244,
+      "slope_raw_b": -0.033269293717256204,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 860,
+      "average_positive_spread_eur_mwh": 33.78222093023256,
+      "opportunity_meur_month": {
+        "500": 3.6988987499999997,
+        "1000": 7.397797499999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SI>HU",
+      "slope_a": 0.04395982693857018,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.04395982693857018,
+      "slope_raw_b": -0.05044410703325456,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 1.20211108868,
+      "positive_rent_meur_month": 1.2090751067699999,
+      "congested_quarters": 950,
+      "average_positive_spread_eur_mwh": 29.604368421052634,
+      "opportunity_meur_month": {
+        "500": 3.68945875,
+        "1000": 7.3789175
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "GR>BG",
+      "slope_a": 0.0,
+      "slope_b": 0.04016596782064277,
+      "slope_raw_a": -0.0739888255199247,
+      "slope_raw_b": 0.04016596782064277,
+      "cap_ab_mw": 1424.0,
+      "realized_rent_meur_month": 1.61765408,
+      "positive_rent_meur_month": 1.6178356175000002,
+      "congested_quarters": 576,
+      "average_positive_spread_eur_mwh": 50.760625000000005,
+      "opportunity_meur_month": {
+        "500": 3.6721524999999997,
+        "1000": 7.344304999999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "FR>DE-LU",
+      "slope_a": 0.004256141836743637,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.004256141836743637,
+      "slope_raw_b": -0.007441251342579732,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 11.199001400803423,
+      "positive_rent_meur_month": 14.395892909114348,
+      "congested_quarters": 1085,
+      "average_positive_spread_eur_mwh": 25.06984331797235,
+      "opportunity_meur_month": {
+        "500": 3.54908125,
+        "1000": 7.0981625
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "PL>SK",
-      "realized_rent_meur_yr": 11.75303555607,
-      "positive_rent_meur_yr": 29.60438085422,
-      "congested_hours": 868,
-      "average_positive_spread_eur_mwh": 30.193698156682025,
-      "opportunity_meur_yr": {
-        "500": 13.685004999999999,
-        "1000": 27.370009999999997
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.033269293717256204,
+      "slope_raw_b": -0.048166681033156244,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 2.9382588890175,
+      "positive_rent_meur_month": 7.401095213555,
+      "congested_quarters": 868,
+      "average_positive_spread_eur_mwh": 30.193698156682025,
+      "opportunity_meur_month": {
+        "500": 3.4212512499999996,
+        "1000": 6.842502499999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SE4>DE-LU",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.03817965319254406,
+      "slope_raw_b": -0.005625068067836686,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.90080134284977,
+      "positive_rent_meur_month": 1.0333105475035451,
+      "congested_quarters": 1360,
+      "average_positive_spread_eur_mwh": 18.25741911764706,
+      "opportunity_meur_month": {
+        "500": 3.28370125,
+        "1000": 6.5674025
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SK>HU",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.048166681033156244,
+      "slope_raw_b": -0.05044410703325456,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 14.15456208324,
+      "positive_rent_meur_month": 15.350817871967502,
+      "congested_quarters": 574,
+      "average_positive_spread_eur_mwh": 43.52418118466898,
+      "opportunity_meur_month": {
+        "500": 3.28036,
+        "1000": 6.56072
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SI>AT",
+      "slope_a": 0.04395982693857018,
+      "slope_b": 0.011791911681686052,
+      "slope_raw_a": 0.04395982693857018,
+      "slope_raw_b": 0.011791911681686052,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.3852074979999999,
+      "positive_rent_meur_month": 0.511088121,
+      "congested_quarters": 1275,
+      "average_positive_spread_eur_mwh": 19.362399999999997,
+      "opportunity_meur_month": {
+        "500": 3.2155275,
+        "1000": 6.431055
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SE3>DK1",
+      "slope_a": 0.0,
+      "slope_b": 0.019573298642559037,
+      "slope_raw_a": -0.010721167836171193,
+      "slope_raw_b": 0.019573298642559037,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 3.0872821611598895,
+      "positive_rent_meur_month": 3.127892582827485,
+      "congested_quarters": 863,
+      "average_positive_spread_eur_mwh": 27.186187712630357,
+      "opportunity_meur_month": {
+        "500": 3.2067787497499998,
+        "1000": 6.4135574994999995
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "DK1>DE-LU",
+      "slope_a": 0.019573298642559037,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.019573298642559037,
+      "slope_raw_b": -0.005625068067836686,
+      "cap_ab_mw": 2500.0,
+      "realized_rent_meur_month": 1.9219774924283994,
+      "positive_rent_meur_month": 3.997011900098399,
+      "congested_quarters": 1288,
+      "average_positive_spread_eur_mwh": 18.676801263975154,
+      "opportunity_meur_month": {
+        "500": 3.1787587561249997,
+        "1000": 6.357517512249999
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "BG>RO",
-      "realized_rent_meur_yr": 43.7622097728,
-      "positive_rent_meur_yr": 44.59297492879999,
-      "congested_hours": 376,
-      "average_positive_spread_eur_mwh": 64.27813829787233,
-      "opportunity_meur_yr": {
-        "500": 12.48547,
-        "1000": 24.97094
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.04016596782064277,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.04016596782064277,
+      "slope_raw_b": -0.058778271876798606,
       "cap_ab_mw": 2402.0,
-      "slope_a": 0.04016596782064277
+      "realized_rent_meur_month": 10.9405524432,
+      "positive_rent_meur_month": 11.148243732199997,
+      "congested_quarters": 376,
+      "average_positive_spread_eur_mwh": 64.27813829787233,
+      "opportunity_meur_month": {
+        "500": 3.1213675,
+        "1000": 6.242735
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "FR>BE",
+      "slope_a": 0.0011241940702688428,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.0011241940702688428,
+      "slope_raw_b": -0.002476377270632668,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 7.585552111396789,
+      "positive_rent_meur_month": 7.742750890759969,
+      "congested_quarters": 1144,
+      "average_positive_spread_eur_mwh": 20.51243881118881,
+      "opportunity_meur_month": {
+        "500": 3.0924449999999997,
+        "1000": 6.184889999999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "PL>DE-LU",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.02502568205464784,
+      "slope_raw_b": -0.007441251342579732,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 2.7239475567875,
+      "positive_rent_meur_month": 3.3668167275624996,
+      "congested_quarters": 1027,
+      "average_positive_spread_eur_mwh": 22.70576436222006,
+      "opportunity_meur_month": {
+        "500": 3.0336775,
+        "1000": 6.067355
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "DE-LU>BE",
+      "slope_a": 0.0,
+      "slope_b": 0.005443842399478523,
+      "slope_raw_a": -0.007441251342579732,
+      "slope_raw_b": 0.005443842399478523,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 2.095704696125,
+      "positive_rent_meur_month": 2.77147721423,
+      "congested_quarters": 1084,
+      "average_positive_spread_eur_mwh": 20.831697416974173,
+      "opportunity_meur_month": {
+        "500": 2.97933,
+        "1000": 5.95866
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "AT>SI",
-      "realized_rent_meur_yr": 7.543514764,
-      "positive_rent_meur_yr": 15.802743951999998,
-      "congested_hours": 875,
-      "average_positive_spread_eur_mwh": 26.16972571428572,
-      "opportunity_meur_yr": {
-        "500": 11.900395,
-        "1000": 23.80079
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.011791911681686052,
+      "slope_b": 0.04395982693857018,
+      "slope_raw_a": 0.011791911681686052,
+      "slope_raw_b": 0.04395982693857018,
       "cap_ab_mw": null,
-      "slope_a": 0.011791911681686052
+      "realized_rent_meur_month": 1.885878691,
+      "positive_rent_meur_month": 3.9506859879999996,
+      "congested_quarters": 875,
+      "average_positive_spread_eur_mwh": 26.16972571428572,
+      "opportunity_meur_month": {
+        "500": 2.97509875,
+        "1000": 5.9501975
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SE4>LT",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.106571436050384,
+      "slope_raw_b": -0.0673812431743603,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 3.8333866763291553,
+      "positive_rent_meur_month": 3.8681727855822743,
+      "congested_quarters": 429,
+      "average_positive_spread_eur_mwh": 49.93188811188811,
+      "opportunity_meur_month": {
+        "500": 2.812535,
+        "1000": 5.62507
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "HR>HU",
-      "realized_rent_meur_yr": 2.46309099,
-      "positive_rent_meur_yr": 2.49102204,
-      "congested_hours": 875,
-      "average_positive_spread_eur_mwh": 23.71316571428571,
-      "opportunity_meur_yr": {
-        "500": 11.17471,
-        "1000": 22.34942
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.012390408811321205,
+      "slope_raw_b": -0.05044410703325456,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.6157727475,
+      "positive_rent_meur_month": 0.62275551,
+      "congested_quarters": 875,
+      "average_positive_spread_eur_mwh": 23.71316571428571,
+      "opportunity_meur_month": {
+        "500": 2.7936775,
+        "1000": 5.587355
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "NL>DE-LU",
+      "slope_a": 0.001797769560019324,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.001797769560019324,
+      "slope_raw_b": -0.005625068067836686,
+      "cap_ab_mw": 1081.0,
+      "realized_rent_meur_month": 10.0658178092,
+      "positive_rent_meur_month": 12.409970767699997,
+      "congested_quarters": 1128,
+      "average_positive_spread_eur_mwh": 18.25929078014184,
+      "opportunity_meur_month": {
+        "500": 2.7426125,
+        "1000": 5.485225
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "HU>AT",
+      "slope_a": 0.0,
+      "slope_b": 0.011791911681686052,
+      "slope_raw_a": -0.05044410703325456,
+      "slope_raw_b": 0.011791911681686052,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.168055334695,
+      "positive_rent_meur_month": 0.208253222865,
+      "congested_quarters": 1086,
+      "average_positive_spread_eur_mwh": 18.71146408839779,
+      "opportunity_meur_month": {
+        "500": 2.65685125,
+        "1000": 5.3137025
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "FR>BE",
+      "slope_a": 0.004256141836743637,
+      "slope_b": 0.005443842399478523,
+      "slope_raw_a": 0.004256141836743637,
+      "slope_raw_b": 0.005443842399478523,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 11.797148528265,
+      "positive_rent_meur_month": 12.249615272577499,
+      "congested_quarters": 729,
+      "average_positive_spread_eur_mwh": 27.411796982167353,
+      "opportunity_meur_month": {
+        "500": 2.5996699999999997,
+        "1000": 5.199339999999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SI>IT-North",
+      "slope_a": 0.04395982693857018,
+      "slope_b": 0.00044296533757834,
+      "slope_raw_a": 0.04395982693857018,
+      "slope_raw_b": 0.00044296533757834,
+      "cap_ab_mw": 641.0,
+      "realized_rent_meur_month": 2.0082542642,
+      "positive_rent_meur_month": 3.0747610425,
+      "congested_quarters": 1080,
+      "average_positive_spread_eur_mwh": 18.47139814814815,
+      "opportunity_meur_month": {
+        "500": 2.5936387499999998,
+        "1000": 5.1872774999999995
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "BE>DE-LU",
-      "realized_rent_meur_yr": 9.646189715610461,
-      "positive_rent_meur_yr": 14.40198492792338,
-      "congested_hours": 997,
-      "average_positive_spread_eur_mwh": 19.42517552657974,
-      "opportunity_meur_yr": {
-        "500": 10.34876,
-        "1000": 20.69752
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.002476377270632668,
+      "slope_raw_b": -0.005625068067836686,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 2.4115474289026153,
+      "positive_rent_meur_month": 3.600496231980845,
+      "congested_quarters": 997,
+      "average_positive_spread_eur_mwh": 19.42517552657974,
+      "opportunity_meur_month": {
+        "500": 2.58719,
+        "1000": 5.17438
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "CZ>PL",
-      "realized_rent_meur_yr": 1.7998568659,
-      "positive_rent_meur_yr": 1.8010557979999997,
-      "congested_hours": 420,
-      "average_positive_spread_eur_mwh": 46.719071428571425,
-      "opportunity_meur_yr": {
-        "500": 9.98207,
-        "1000": 19.96414
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.03647015830190886,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.03647015830190886,
+      "slope_raw_b": -0.02502568205464784,
       "cap_ab_mw": null,
-      "slope_a": 0.03647015830190886
+      "realized_rent_meur_month": 0.449964216475,
+      "positive_rent_meur_month": 0.4502639494999999,
+      "congested_quarters": 420,
+      "average_positive_spread_eur_mwh": 46.719071428571425,
+      "opportunity_meur_month": {
+        "500": 2.4955175,
+        "1000": 4.991035
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "DE-LU>FR",
-      "realized_rent_meur_yr": 15.600177689852002,
-      "positive_rent_meur_yr": 16.2635194479741,
-      "congested_hours": 952,
-      "average_positive_spread_eur_mwh": 19.695157563025212,
-      "opportunity_meur_yr": {
-        "500": 9.927629999999999,
-        "1000": 19.855259999999998
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.004256141836743637,
+      "slope_raw_a": -0.007441251342579732,
+      "slope_raw_b": 0.004256141836743637,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 3.9000444224630004,
+      "positive_rent_meur_month": 4.065879861993525,
+      "congested_quarters": 952,
+      "average_positive_spread_eur_mwh": 19.695157563025212,
+      "opportunity_meur_month": {
+        "500": 2.4819074999999997,
+        "1000": 4.963814999999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SE1>FI",
+      "slope_a": 0.028817523843658557,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.028817523843658557,
+      "slope_raw_b": -0.021425801152209753,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 7.652121107897799,
+      "positive_rent_meur_month": 7.657143454569799,
+      "congested_quarters": 824,
+      "average_positive_spread_eur_mwh": 20.599174757281556,
+      "opportunity_meur_month": {
+        "500": 2.30810375,
+        "1000": 4.6162075
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "DE-LU>DK2",
-      "realized_rent_meur_yr": 3.043046092223328,
-      "positive_rent_meur_yr": 5.796204804612796,
-      "congested_hours": 983,
-      "average_positive_spread_eur_mwh": 16.443336848423193,
-      "opportunity_meur_yr": {
-        "500": 8.775850103500002,
-        "1000": 17.551700207000003
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 3.602617002413752e-05,
+      "slope_raw_a": -0.007441251342579732,
+      "slope_raw_b": 3.602617002413752e-05,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.760761523055832,
+      "positive_rent_meur_month": 1.449051201153199,
+      "congested_quarters": 983,
+      "average_positive_spread_eur_mwh": 16.443336848423193,
+      "opportunity_meur_month": {
+        "500": 2.1939625258750004,
+        "1000": 4.387925051750001
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "AT>IT-North",
-      "realized_rent_meur_yr": -6.09550641,
-      "positive_rent_meur_yr": 3.8974468399999997,
-      "congested_hours": 999,
-      "average_positive_spread_eur_mwh": 16.235345345345348,
-      "opportunity_meur_yr": {
-        "500": 8.525274999999999,
-        "1000": 17.050549999999998
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.011791911681686052,
+      "slope_b": 0.00044296533757834,
+      "slope_raw_a": 0.011791911681686052,
+      "slope_raw_b": 0.00044296533757834,
       "cap_ab_mw": 365.0,
-      "slope_a": 0.011791911681686052
+      "realized_rent_meur_month": -1.5238766025,
+      "positive_rent_meur_month": 0.9743617099999999,
+      "congested_quarters": 999,
+      "average_positive_spread_eur_mwh": 16.235345345345348,
+      "opportunity_meur_month": {
+        "500": 2.1313187499999997,
+        "1000": 4.262637499999999
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "AT>CZ",
-      "realized_rent_meur_yr": 0.0,
-      "positive_rent_meur_yr": 0.0,
-      "congested_hours": 628,
-      "average_positive_spread_eur_mwh": 25.686162420382164,
-      "opportunity_meur_yr": {
-        "500": 8.39452,
-        "1000": 16.78904
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.011791911681686052,
+      "slope_b": 0.013102697053330661,
+      "slope_raw_a": 0.011791911681686052,
+      "slope_raw_b": 0.013102697053330661,
       "cap_ab_mw": null,
-      "slope_a": 0.011791911681686052
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 628,
+      "average_positive_spread_eur_mwh": 25.686162420382164,
+      "opportunity_meur_month": {
+        "500": 2.09863,
+        "1000": 4.19726
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "HU>AT",
+      "slope_a": 0.0,
+      "slope_b": 0.01603519244409307,
+      "slope_raw_a": -0.030376261131381952,
+      "slope_raw_b": 0.01603519244409307,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.26693739075749995,
+      "positive_rent_meur_month": 0.7648308440925,
+      "congested_quarters": 922,
+      "average_positive_spread_eur_mwh": 16.81594360086768,
+      "opportunity_meur_month": {
+        "500": 2.0742125,
+        "1000": 4.148425
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "DK1>DE-LU",
+      "slope_a": 0.021605273378334563,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.021605273378334563,
+      "slope_raw_b": -0.007441251342579732,
+      "cap_ab_mw": 3500.0,
+      "realized_rent_meur_month": 0.1774664585344002,
+      "positive_rent_meur_month": 3.61119173871112,
+      "congested_quarters": 963,
+      "average_positive_spread_eur_mwh": 15.618099731048805,
+      "opportunity_meur_month": {
+        "500": 2.064398764375,
+        "1000": 4.12879752875
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "DK2>DE-LU",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.04692377767904271,
+      "slope_raw_b": -0.005625068067836686,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.7617910047606334,
+      "positive_rent_meur_month": 1.5652116235386757,
+      "congested_quarters": 992,
+      "average_positive_spread_eur_mwh": 14.808477701612903,
+      "opportunity_meur_month": {
+        "500": 2.0256587355,
+        "1000": 4.051317471
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "SE1>SE2",
-      "realized_rent_meur_yr": 10.926047191015448,
-      "positive_rent_meur_yr": 12.000063574293298,
-      "congested_hours": 837,
-      "average_positive_spread_eur_mwh": 16.54878136200717,
-      "opportunity_meur_yr": {
-        "500": 7.828015,
-        "1000": 15.65603
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.028817523843658557,
+      "slope_b": 0.014465618867654927,
+      "slope_raw_a": 0.028817523843658557,
+      "slope_raw_b": 0.014465618867654927,
       "cap_ab_mw": null,
-      "slope_a": 0.028817523843658557
+      "realized_rent_meur_month": 2.731511797753862,
+      "positive_rent_meur_month": 3.0000158935733245,
+      "congested_quarters": 837,
+      "average_positive_spread_eur_mwh": 16.54878136200717,
+      "opportunity_meur_month": {
+        "500": 1.95700375,
+        "1000": 3.9140075
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "DE-LU>BE",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.005625068067836686,
+      "slope_raw_b": -0.002476377270632668,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 1.0705270202580626,
+      "positive_rent_meur_month": 1.4906070125090274,
+      "congested_quarters": 873,
+      "average_positive_spread_eur_mwh": 16.32601374570447,
+      "opportunity_meur_month": {
+        "500": 1.9550999999999998,
+        "1000": 3.9101999999999997
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SI>AT",
+      "slope_a": 0.0251767834625702,
+      "slope_b": 0.01603519244409307,
+      "slope_raw_a": 0.0251767834625702,
+      "slope_raw_b": 0.01603519244409307,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.151609093,
+      "positive_rent_meur_month": 0.41593540399999995,
+      "congested_quarters": 876,
+      "average_positive_spread_eur_mwh": 16.514223744292238,
+      "opportunity_meur_month": {
+        "500": 1.943765,
+        "1000": 3.88753
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "PL>CZ",
+      "slope_a": 0.0,
+      "slope_b": 0.013102697053330661,
+      "slope_raw_a": -0.033269293717256204,
+      "slope_raw_b": 0.013102697053330661,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": -1.6427040403535003,
+      "positive_rent_meur_month": 6.16023990415175,
+      "congested_quarters": 411,
+      "average_positive_spread_eur_mwh": 36.508710462287105,
+      "opportunity_meur_month": {
+        "500": 1.9310874999999998,
+        "1000": 3.8621749999999997
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "DK1>DK2",
-      "realized_rent_meur_yr": 3.8405581803987694,
-      "positive_rent_meur_yr": 3.8500230876435997,
-      "congested_hours": 737,
-      "average_positive_spread_eur_mwh": 19.7287111329715,
-      "opportunity_meur_yr": {
-        "500": 7.7091151909999995,
-        "1000": 15.418230381999999
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.019573298642559037,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.019573298642559037,
+      "slope_raw_b": -0.04692377767904271,
       "cap_ab_mw": null,
-      "slope_a": 0.019573298642559037
+      "realized_rent_meur_month": 0.9601395450996923,
+      "positive_rent_meur_month": 0.9625057719108999,
+      "congested_quarters": 737,
+      "average_positive_spread_eur_mwh": 19.7287111329715,
+      "opportunity_meur_month": {
+        "500": 1.9272787977499999,
+        "1000": 3.8545575954999998
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "DE-LU>DK2",
-      "realized_rent_meur_yr": 3.3801919860133367,
-      "positive_rent_meur_yr": 4.9440989239294195,
-      "congested_hours": 794,
-      "average_positive_spread_eur_mwh": 17.426272147355164,
-      "opportunity_meur_yr": {
-        "500": 7.605435008999999,
-        "1000": 15.210870017999998
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.005625068067836686,
+      "slope_raw_b": -0.04692377767904271,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.8450479965033342,
+      "positive_rent_meur_month": 1.2360247309823549,
+      "congested_quarters": 794,
+      "average_positive_spread_eur_mwh": 17.426272147355164,
+      "opportunity_meur_month": {
+        "500": 1.9013587522499997,
+        "1000": 3.8027175044999995
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "NL>DE-LU",
+      "slope_a": 0.0023625620788124625,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.0023625620788124625,
+      "slope_raw_b": -0.007441251342579732,
+      "cap_ab_mw": 4607.0,
+      "realized_rent_meur_month": 2.7455296869351495,
+      "positive_rent_meur_month": 6.684965113223474,
+      "congested_quarters": 942,
+      "average_positive_spread_eur_mwh": 14.31160297239915,
+      "opportunity_meur_month": {
+        "500": 1.891945,
+        "1000": 3.78389
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "DE-LU>DK1",
-      "realized_rent_meur_yr": 2.2542484559011196,
-      "positive_rent_meur_yr": 9.84099350463648,
-      "congested_hours": 887,
-      "average_positive_spread_eur_mwh": 15.480744145434047,
-      "opportunity_meur_yr": {
-        "500": 7.5183550409999995,
-        "1000": 15.036710081999999
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.021605273378334563,
+      "slope_raw_a": -0.007441251342579732,
+      "slope_raw_b": 0.021605273378334563,
       "cap_ab_mw": 3500.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.5635621139752799,
+      "positive_rent_meur_month": 2.46024837615912,
+      "congested_quarters": 887,
+      "average_positive_spread_eur_mwh": 15.480744145434047,
+      "opportunity_meur_month": {
+        "500": 1.8795887602499999,
+        "1000": 3.7591775204999998
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "FI>SE3",
-      "realized_rent_meur_yr": 1.01141917879807,
-      "positive_rent_meur_yr": 1.1790685805522199,
-      "congested_hours": 509,
-      "average_positive_spread_eur_mwh": 27.105677799607072,
-      "opportunity_meur_yr": {
-        "500": 7.504605,
-        "1000": 15.00921
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.02491417504426227,
+      "slope_raw_b": -0.010721167836171193,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.2528547946995175,
+      "positive_rent_meur_month": 0.29476714513805496,
+      "congested_quarters": 509,
+      "average_positive_spread_eur_mwh": 27.105677799607072,
+      "opportunity_meur_month": {
+        "500": 1.87615125,
+        "1000": 3.7523025
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "DK1>NL",
-      "realized_rent_meur_yr": 3.42336446812375,
-      "positive_rent_meur_yr": 3.5442228623150895,
-      "congested_hours": 729,
-      "average_positive_spread_eur_mwh": 19.449437626886144,
-      "opportunity_meur_yr": {
-        "500": 7.408360066999999,
-        "1000": 14.816720133999999
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.019573298642559037,
+      "slope_b": 0.001797769560019324,
+      "slope_raw_a": 0.019573298642559037,
+      "slope_raw_b": 0.001797769560019324,
       "cap_ab_mw": 700.0,
-      "slope_a": 0.019573298642559037
+      "realized_rent_meur_month": 0.8558411170309375,
+      "positive_rent_meur_month": 0.8860557155787724,
+      "congested_quarters": 729,
+      "average_positive_spread_eur_mwh": 19.449437626886144,
+      "opportunity_meur_month": {
+        "500": 1.8520900167499998,
+        "1000": 3.7041800334999997
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SE4>DK2",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.03817965319254406,
+      "slope_raw_b": -0.04692377767904271,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 4.176487762775357,
+      "positive_rent_meur_month": 4.19264843837749,
+      "congested_quarters": 618,
+      "average_positive_spread_eur_mwh": 19.684029110032363,
+      "opportunity_meur_month": {
+        "500": 1.841432521875,
+        "1000": 3.68286504375
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "IT-SUD>GR",
+      "slope_a": 0.001801975662642084,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.001801975662642084,
+      "slope_raw_b": -0.05731359634613086,
+      "cap_ab_mw": 500.0,
+      "realized_rent_meur_month": 0.9899117275,
+      "positive_rent_meur_month": 1.1363255225,
+      "congested_quarters": 341,
+      "average_positive_spread_eur_mwh": 41.396803519061585,
+      "opportunity_meur_month": {
+        "500": 1.82225,
+        "1000": 3.6445
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "NL>BE",
+      "slope_a": 0.0023625620788124625,
+      "slope_b": 0.005443842399478523,
+      "slope_raw_a": 0.0023625620788124625,
+      "slope_raw_b": 0.005443842399478523,
+      "cap_ab_mw": 1856.0,
+      "realized_rent_meur_month": 9.08383553431241,
+      "positive_rent_meur_month": 9.950966191514908,
+      "congested_quarters": 369,
+      "average_positive_spread_eur_mwh": 36.34620596205962,
+      "opportunity_meur_month": {
+        "500": 1.7957349999999999,
+        "1000": 3.5914699999999997
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "DE-LU>NL",
-      "realized_rent_meur_yr": 5.3401536849181985,
-      "positive_rent_meur_yr": 14.2591712691404,
-      "congested_hours": 868,
-      "average_positive_spread_eur_mwh": 15.039907834101381,
-      "opportunity_meur_yr": {
-        "500": 7.141109999999999,
-        "1000": 14.282219999999999
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0023625620788124625,
+      "slope_raw_a": -0.007441251342579732,
+      "slope_raw_b": 0.0023625620788124625,
       "cap_ab_mw": 0.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 1.3350384212295496,
+      "positive_rent_meur_month": 3.5647928172851,
+      "congested_quarters": 868,
+      "average_positive_spread_eur_mwh": 15.039907834101381,
+      "opportunity_meur_month": {
+        "500": 1.7852774999999999,
+        "1000": 3.5705549999999997
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "DE-LU>NL",
-      "realized_rent_meur_yr": 8.620943871999998,
-      "positive_rent_meur_yr": 19.4186877808,
-      "congested_hours": 770,
-      "average_positive_spread_eur_mwh": 16.793584415584416,
-      "opportunity_meur_yr": {
-        "500": 7.092149999999999,
-        "1000": 14.184299999999999
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.001797769560019324,
+      "slope_raw_a": -0.005625068067836686,
+      "slope_raw_b": 0.001797769560019324,
       "cap_ab_mw": 1080.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 2.1552359679999995,
+      "positive_rent_meur_month": 4.8546719452,
+      "congested_quarters": 770,
+      "average_positive_spread_eur_mwh": 16.793584415584416,
+      "opportunity_meur_month": {
+        "500": 1.7730374999999998,
+        "1000": 3.5460749999999996
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "DK2>DE-LU",
+      "slope_a": 3.602617002413752e-05,
+      "slope_b": 0.0,
+      "slope_raw_a": 3.602617002413752e-05,
+      "slope_raw_b": -0.007441251342579732,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.5269316103593177,
+      "positive_rent_meur_month": 0.7186658795342529,
+      "congested_quarters": 865,
+      "average_positive_spread_eur_mwh": 14.63627772947977,
+      "opportunity_meur_month": {
+        "500": 1.7592587807499998,
+        "1000": 3.5185175614999995
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SK>HU",
+      "slope_a": 0.07849157668046539,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.07849157668046539,
+      "slope_raw_b": -0.030376261131381952,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 4.0086093885875,
+      "positive_rent_meur_month": 7.391909653552499,
+      "congested_quarters": 594,
+      "average_positive_spread_eur_mwh": 21.471666666666668,
+      "opportunity_meur_month": {
+        "500": 1.7449375,
+        "1000": 3.489875
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "IT-SICI>IT-SARD",
+      "slope_a": 0.0,
+      "slope_b": 0.013302790158365552,
+      "slope_raw_a": null,
+      "slope_raw_b": 0.013302790158365552,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": null,
+      "positive_rent_meur_month": null,
+      "congested_quarters": 457,
+      "average_positive_spread_eur_mwh": 29.403610503282277,
+      "opportunity_meur_month": {
+        "500": 1.70701625,
+        "1000": 3.4140325
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "IT-SUD>IT-CSUD",
+      "slope_a": 0.001801975662642084,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.001801975662642084,
+      "slope_raw_b": -0.01104154729853391,
+      "cap_ab_mw": 5519.0,
+      "realized_rent_meur_month": 11.215986571524999,
+      "positive_rent_meur_month": 11.215986571524999,
+      "congested_quarters": 452,
+      "average_positive_spread_eur_mwh": 29.516460176991156,
+      "opportunity_meur_month": {
+        "500": 1.6922674999999998,
+        "1000": 3.3845349999999996
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "DK1>SE3",
-      "realized_rent_meur_yr": 6.4650411218844015,
-      "positive_rent_meur_yr": 6.736842918302671,
-      "congested_hours": 653,
-      "average_positive_spread_eur_mwh": 19.276248127105664,
-      "opportunity_meur_yr": {
-        "500": 6.6876650159999995,
-        "1000": 13.375330031999999
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.019573298642559037,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.019573298642559037,
+      "slope_raw_b": -0.010721167836171193,
       "cap_ab_mw": null,
-      "slope_a": 0.019573298642559037
+      "realized_rent_meur_month": 1.6162602804711004,
+      "positive_rent_meur_month": 1.6842107295756676,
+      "congested_quarters": 653,
+      "average_positive_spread_eur_mwh": 19.276248127105664,
+      "opportunity_meur_month": {
+        "500": 1.6719162539999999,
+        "1000": 3.3438325079999998
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "PL>LT",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.02502568205464784,
+      "slope_raw_b": -0.0673812431743603,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.159792831,
+      "positive_rent_meur_month": 0.306517739,
+      "congested_quarters": 406,
+      "average_positive_spread_eur_mwh": 31.596945812807885,
+      "opportunity_meur_month": {
+        "500": 1.6572125,
+        "1000": 3.314425
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "BE>DE-LU",
-      "realized_rent_meur_yr": 2.6250425726635895,
-      "positive_rent_meur_yr": 6.48867052529368,
-      "congested_hours": 837,
-      "average_positive_spread_eur_mwh": 13.927502986857824,
-      "opportunity_meur_yr": {
-        "500": 6.50578,
-        "1000": 13.01156
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.005443842399478523,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.005443842399478523,
+      "slope_raw_b": -0.007441251342579732,
       "cap_ab_mw": null,
-      "slope_a": 0.005443842399478523
+      "realized_rent_meur_month": 0.6562606431658974,
+      "positive_rent_meur_month": 1.62216763132342,
+      "congested_quarters": 837,
+      "average_positive_spread_eur_mwh": 13.927502986857824,
+      "opportunity_meur_month": {
+        "500": 1.626445,
+        "1000": 3.25289
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "SE3>SE4",
-      "realized_rent_meur_yr": 55.2912301311772,
-      "positive_rent_meur_yr": 56.25127998534993,
-      "congested_hours": 495,
-      "average_positive_spread_eur_mwh": 23.33343434343434,
-      "opportunity_meur_yr": {
-        "500": 6.459899999999999,
-        "1000": 12.919799999999999
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.010721167836171193,
+      "slope_raw_b": -0.03817965319254406,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 13.8228075327943,
+      "positive_rent_meur_month": 14.062819996337483,
+      "congested_quarters": 495,
+      "average_positive_spread_eur_mwh": 23.33343434343434,
+      "opportunity_meur_month": {
+        "500": 1.6149749999999998,
+        "1000": 3.2299499999999997
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "DE-LU>SE4",
-      "realized_rent_meur_yr": 1.19787885170573,
-      "positive_rent_meur_yr": 1.30603992917055,
-      "congested_hours": 585,
-      "average_positive_spread_eur_mwh": 20.01237606837607,
-      "opportunity_meur_yr": {
-        "500": 6.39497,
-        "1000": 12.78994
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.005625068067836686,
+      "slope_raw_b": -0.03817965319254406,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.2994697129264325,
+      "positive_rent_meur_month": 0.3265099822926375,
+      "congested_quarters": 585,
+      "average_positive_spread_eur_mwh": 20.01237606837607,
+      "opportunity_meur_month": {
+        "500": 1.5987425,
+        "1000": 3.197485
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "DE-LU>FR",
-      "realized_rent_meur_yr": 7.258474130753998,
-      "positive_rent_meur_yr": 7.404349010698999,
-      "congested_hours": 726,
-      "average_positive_spread_eur_mwh": 16.011143250688704,
-      "opportunity_meur_yr": {
-        "500": 6.330175,
-        "1000": 12.66035
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0011241940702688428,
+      "slope_raw_a": -0.005625068067836686,
+      "slope_raw_b": 0.0011241940702688428,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 1.8146185326884996,
+      "positive_rent_meur_month": 1.8510872526747497,
+      "congested_quarters": 726,
+      "average_positive_spread_eur_mwh": 16.011143250688704,
+      "opportunity_meur_month": {
+        "500": 1.58254375,
+        "1000": 3.1650875
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "DE-LU>DK1",
-      "realized_rent_meur_yr": -0.0039972123452802185,
-      "positive_rent_meur_yr": 3.1803963109670397,
-      "congested_hours": 671,
-      "average_positive_spread_eur_mwh": 15.60497766766021,
-      "opportunity_meur_yr": {
-        "500": 5.8076150075,
-        "1000": 11.615230015
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.019573298642559037,
+      "slope_raw_a": -0.005625068067836686,
+      "slope_raw_b": 0.019573298642559037,
       "cap_ab_mw": 2500.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": -0.0009993030863200546,
+      "positive_rent_meur_month": 0.7950990777417599,
+      "congested_quarters": 671,
+      "average_positive_spread_eur_mwh": 15.60497766766021,
+      "opportunity_meur_month": {
+        "500": 1.451903751875,
+        "1000": 2.90380750375
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "PL>SE4",
-      "realized_rent_meur_yr": 2.145134326,
-      "positive_rent_meur_yr": 2.95141154,
-      "congested_hours": 384,
-      "average_positive_spread_eur_mwh": 29.21302083333333,
-      "opportunity_meur_yr": {
-        "500": 5.78121,
-        "1000": 11.56242
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.02502568205464784,
+      "slope_raw_b": -0.106571436050384,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.5362835815,
+      "positive_rent_meur_month": 0.737852885,
+      "congested_quarters": 384,
+      "average_positive_spread_eur_mwh": 29.21302083333333,
+      "opportunity_meur_month": {
+        "500": 1.4453025,
+        "1000": 2.890605
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SK>PL",
+      "slope_a": 0.07849157668046539,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.07849157668046539,
+      "slope_raw_b": -0.02502568205464784,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.16935761575,
+      "positive_rent_meur_month": 0.2114742695,
+      "congested_quarters": 271,
+      "average_positive_spread_eur_mwh": 41.15007380073801,
+      "opportunity_meur_month": {
+        "500": 1.4233212499999999,
+        "1000": 2.8466424999999997
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "AT>CZ",
-      "realized_rent_meur_yr": 0.0005374200000000002,
-      "positive_rent_meur_yr": 0.0005374200000000002,
-      "congested_hours": 536,
-      "average_positive_spread_eur_mwh": 17.759179104477614,
-      "opportunity_meur_yr": {
-        "500": 5.1651,
-        "1000": 10.3302
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.01603519244409307,
+      "slope_b": 0.03647015830190886,
+      "slope_raw_a": 0.01603519244409307,
+      "slope_raw_b": 0.03647015830190886,
       "cap_ab_mw": null,
-      "slope_a": 0.01603519244409307
+      "realized_rent_meur_month": 0.00013435500000000004,
+      "positive_rent_meur_month": 0.00013435500000000004,
+      "congested_quarters": 536,
+      "average_positive_spread_eur_mwh": 17.759179104477614,
+      "opportunity_meur_month": {
+        "500": 1.291275,
+        "1000": 2.58255
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "IT-North>SI",
-      "realized_rent_meur_yr": -0.6438742224,
-      "positive_rent_meur_yr": 0.23405809360000004,
-      "congested_hours": 189,
-      "average_positive_spread_eur_mwh": 52.15941798941798,
-      "opportunity_meur_yr": {
-        "500": 5.01419,
-        "1000": 10.02838
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.012024678983070752,
+      "slope_b": 0.0251767834625702,
+      "slope_raw_a": 0.012024678983070752,
+      "slope_raw_b": 0.0251767834625702,
       "cap_ab_mw": 645.0,
-      "slope_a": 0.012024678983070752
+      "realized_rent_meur_month": -0.1609685556,
+      "positive_rent_meur_month": 0.05851452340000001,
+      "congested_quarters": 189,
+      "average_positive_spread_eur_mwh": 52.15941798941798,
+      "opportunity_meur_month": {
+        "500": 1.2535475,
+        "1000": 2.507095
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "FR>ES",
+      "slope_a": 0.0011241940702688428,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.0011241940702688428,
+      "slope_raw_b": -0.005139477403441886,
+      "cap_ab_mw": 1900.0,
+      "realized_rent_meur_month": 5.764020753899999,
+      "positive_rent_meur_month": 5.764020753899999,
+      "congested_quarters": 364,
+      "average_positive_spread_eur_mwh": 25.765934065934065,
+      "opportunity_meur_month": {
+        "500": 1.1868174999999999,
+        "1000": 2.3736349999999997
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "DK1>NL",
-      "realized_rent_meur_yr": 4.710345051320081,
-      "positive_rent_meur_yr": 4.95763965420044,
-      "congested_hours": 351,
-      "average_positive_spread_eur_mwh": 25.118803313390313,
-      "opportunity_meur_yr": {
-        "500": 4.740520075,
-        "1000": 9.48104015
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.021605273378334563,
+      "slope_b": 0.0023625620788124625,
+      "slope_raw_a": 0.021605273378334563,
+      "slope_raw_b": 0.0023625620788124625,
       "cap_ab_mw": 700.0,
-      "slope_a": 0.021605273378334563
+      "realized_rent_meur_month": 1.1775862628300202,
+      "positive_rent_meur_month": 1.23940991355011,
+      "congested_quarters": 351,
+      "average_positive_spread_eur_mwh": 25.118803313390313,
+      "opportunity_meur_month": {
+        "500": 1.18513001875,
+        "1000": 2.3702600375
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "DE-LU>SE4",
-      "realized_rent_meur_yr": 0.0,
-      "positive_rent_meur_yr": 0.0,
-      "congested_hours": 432,
-      "average_positive_spread_eur_mwh": 20.609074074074073,
-      "opportunity_meur_yr": {
-        "500": 4.731465,
-        "1000": 9.46293
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.007441251342579732,
+      "slope_raw_b": -0.106571436050384,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 432,
+      "average_positive_spread_eur_mwh": 20.609074074074073,
+      "opportunity_meur_month": {
+        "500": 1.18286625,
+        "1000": 2.3657325
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "ES>PT",
-      "realized_rent_meur_yr": 31.953094052399997,
-      "positive_rent_meur_yr": 31.953094052399997,
-      "congested_hours": 200,
-      "average_positive_spread_eur_mwh": 46.04915000000001,
-      "opportunity_meur_yr": {
-        "500": 4.6425,
-        "1000": 9.285
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.04265556950999838,
+      "slope_raw_a": -0.02501539330001628,
+      "slope_raw_b": 0.04265556950999838,
       "cap_ab_mw": 5715.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 7.988273513099999,
+      "positive_rent_meur_month": 7.988273513099999,
+      "congested_quarters": 200,
+      "average_positive_spread_eur_mwh": 46.04915000000001,
+      "opportunity_meur_month": {
+        "500": 1.160625,
+        "1000": 2.32125
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "IT-North>IT-CNOR",
+      "slope_a": 0.012024678983070752,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.012024678983070752,
+      "slope_raw_b": -0.06645548626142898,
+      "cap_ab_mw": 3739.0,
+      "realized_rent_meur_month": 6.79107681835,
+      "positive_rent_meur_month": 6.79107681835,
+      "congested_quarters": 308,
+      "average_positive_spread_eur_mwh": 29.138993506493506,
+      "opportunity_meur_month": {
+        "500": 1.1395775,
+        "1000": 2.279155
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "NL>DK1",
+      "slope_a": 0.0023625620788124625,
+      "slope_b": 0.021605273378334563,
+      "slope_raw_a": 0.0023625620788124625,
+      "slope_raw_b": 0.021605273378334563,
+      "cap_ab_mw": 700.0,
+      "realized_rent_meur_month": 1.175032650979415,
+      "positive_rent_meur_month": 1.2257693379081176,
+      "congested_quarters": 428,
+      "average_positive_spread_eur_mwh": 17.547313077102807,
+      "opportunity_meur_month": {
+        "500": 1.106987514625,
+        "1000": 2.21397502925
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SI>HU",
+      "slope_a": 0.0251767834625702,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.0251767834625702,
+      "slope_raw_b": -0.030376261131381952,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": -0.06635907679749999,
+      "positive_rent_meur_month": 0.07627987846,
+      "congested_quarters": 518,
+      "average_positive_spread_eur_mwh": 15.472548262548264,
+      "opportunity_meur_month": {
+        "500": 1.09937125,
+        "1000": 2.1987425
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "NL>DK1",
+      "slope_a": 0.001797769560019324,
+      "slope_b": 0.019573298642559037,
+      "slope_raw_a": 0.001797769560019324,
+      "slope_raw_b": 0.019573298642559037,
+      "cap_ab_mw": 700.0,
+      "realized_rent_meur_month": 0.14014135255941254,
+      "positive_rent_meur_month": 1.1891766853127725,
+      "congested_quarters": 447,
+      "average_positive_spread_eur_mwh": 17.06624163758389,
+      "opportunity_meur_month": {
+        "500": 1.0948100125000002,
+        "1000": 2.1896200250000004
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "NL>BE",
+      "slope_a": 0.001797769560019324,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.001797769560019324,
+      "slope_raw_b": -0.002476377270632668,
+      "cap_ab_mw": 618.0,
+      "realized_rent_meur_month": 2.536793076725,
+      "positive_rent_meur_month": 4.53759858487875,
+      "congested_quarters": 497,
+      "average_positive_spread_eur_mwh": 14.949738430583501,
+      "opportunity_meur_month": {
+        "500": 1.0910825,
+        "1000": 2.182165
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "HU>SI",
-      "realized_rent_meur_yr": 0.29499682186999965,
-      "positive_rent_meur_yr": 1.4428061028799997,
-      "congested_hours": 390,
-      "average_positive_spread_eur_mwh": 18.217589743589745,
-      "opportunity_meur_yr": {
-        "500": 4.2403699999999995,
-        "1000": 8.480739999999999
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0251767834625702,
+      "slope_raw_a": -0.030376261131381952,
+      "slope_raw_b": 0.0251767834625702,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.07374920546749991,
+      "positive_rent_meur_month": 0.3607015257199999,
+      "congested_quarters": 390,
+      "average_positive_spread_eur_mwh": 18.217589743589745,
+      "opportunity_meur_month": {
+        "500": 1.0600924999999999,
+        "1000": 2.1201849999999998
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SI>HR",
+      "slope_a": 0.04395982693857018,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.04395982693857018,
+      "slope_raw_b": -0.012390408811321205,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.8045461574999999,
+      "positive_rent_meur_month": 0.8230163024999999,
+      "congested_quarters": 445,
+      "average_positive_spread_eur_mwh": 14.58802247191011,
+      "opportunity_meur_month": {
+        "500": 0.9734775,
+        "1000": 1.946955
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "SE1>SE2",
-      "realized_rent_meur_yr": 2.78003268851309,
-      "positive_rent_meur_yr": 8.39290231953542,
-      "congested_hours": 583,
-      "average_positive_spread_eur_mwh": 9.309639794168097,
-      "opportunity_meur_yr": {
-        "500": 3.7084949999999997,
-        "1000": 7.416989999999999
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.03635247313693293,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.03635247313693293,
+      "slope_raw_b": -0.025024348279580597,
       "cap_ab_mw": null,
-      "slope_a": 0.03635247313693293
+      "realized_rent_meur_month": 0.6950081721282725,
+      "positive_rent_meur_month": 2.098225579883855,
+      "congested_quarters": 583,
+      "average_positive_spread_eur_mwh": 9.309639794168097,
+      "opportunity_meur_month": {
+        "500": 0.9271237499999999,
+        "1000": 1.8542474999999998
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "CZ>DE-LU",
-      "realized_rent_meur_yr": -3.1158647203399994,
-      "positive_rent_meur_yr": 5.11857608378,
-      "congested_hours": 498,
-      "average_positive_spread_eur_mwh": 12.26652610441767,
-      "opportunity_meur_yr": {
-        "500": 3.5786599999999997,
-        "1000": 7.1573199999999995
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.03647015830190886,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.03647015830190886,
+      "slope_raw_b": -0.007441251342579732,
       "cap_ab_mw": null,
-      "slope_a": 0.03647015830190886
+      "realized_rent_meur_month": -0.7789661800849998,
+      "positive_rent_meur_month": 1.279644020945,
+      "congested_quarters": 498,
+      "average_positive_spread_eur_mwh": 12.26652610441767,
+      "opportunity_meur_month": {
+        "500": 0.8946649999999999,
+        "1000": 1.7893299999999999
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "HR>HU",
-      "realized_rent_meur_yr": 0.04115093999999994,
-      "positive_rent_meur_yr": 0.14798920999999995,
-      "congested_hours": 438,
-      "average_positive_spread_eur_mwh": 13.797283105022832,
-      "opportunity_meur_yr": {
-        "500": 3.55298,
-        "1000": 7.10596
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.01099970784442001,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.01099970784442001,
+      "slope_raw_b": -0.030376261131381952,
       "cap_ab_mw": null,
-      "slope_a": 0.01099970784442001
+      "realized_rent_meur_month": 0.010287734999999985,
+      "positive_rent_meur_month": 0.03699730249999999,
+      "congested_quarters": 438,
+      "average_positive_spread_eur_mwh": 13.797283105022832,
+      "opportunity_meur_month": {
+        "500": 0.888245,
+        "1000": 1.77649
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "LV>EE",
+      "slope_a": 0.19319735396391494,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.19319735396391494,
+      "slope_raw_b": -0.022592814156718283,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 1.0359716275,
+      "positive_rent_meur_month": 1.0359716275,
+      "congested_quarters": 119,
+      "average_positive_spread_eur_mwh": 59.426806722689065,
+      "opportunity_meur_month": {
+        "500": 0.885145,
+        "1000": 1.77029
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "BG>RO",
-      "realized_rent_meur_yr": 12.068413052,
-      "positive_rent_meur_yr": 12.068413052,
-      "congested_hours": 100,
-      "average_positive_spread_eur_mwh": 70.303,
-      "opportunity_meur_yr": {
-        "500": 3.517085,
-        "1000": 7.03417
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.043467197832953115,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.043467197832953115,
+      "slope_raw_b": -0.06277794097668488,
       "cap_ab_mw": 2338.0,
-      "slope_a": 0.043467197832953115
+      "realized_rent_meur_month": 3.017103263,
+      "positive_rent_meur_month": 3.017103263,
+      "congested_quarters": 100,
+      "average_positive_spread_eur_mwh": 70.303,
+      "opportunity_meur_month": {
+        "500": 0.87927125,
+        "1000": 1.7585425
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SE2>SE1",
+      "slope_a": 0.0,
+      "slope_b": 0.03635247313693293,
+      "slope_raw_a": -0.025024348279580597,
+      "slope_raw_b": 0.03635247313693293,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.002607760269654999,
+      "positive_rent_meur_month": 0.0103277233924375,
+      "congested_quarters": 386,
+      "average_positive_spread_eur_mwh": 16.008523316062174,
+      "opportunity_meur_month": {
+        "500": 0.84241625,
+        "1000": 1.6848325
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "PL>DE-LU",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.033269293717256204,
+      "slope_raw_b": -0.005625068067836686,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": -0.04534401334999999,
+      "positive_rent_meur_month": 0.03448476573999999,
+      "congested_quarters": 366,
+      "average_positive_spread_eur_mwh": 17.10931693989071,
+      "opportunity_meur_month": {
+        "500": 0.8414912499999999,
+        "1000": 1.6829824999999998
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "CZ>DE-LU",
-      "realized_rent_meur_yr": -7.221136573319999,
-      "positive_rent_meur_yr": 4.85220541551,
-      "congested_hours": 360,
-      "average_positive_spread_eur_mwh": 16.855999999999998,
-      "opportunity_meur_yr": {
-        "500": 3.35845,
-        "1000": 6.7169
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.013102697053330661,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.013102697053330661,
+      "slope_raw_b": -0.005625068067836686,
       "cap_ab_mw": null,
-      "slope_a": 0.013102697053330661
+      "realized_rent_meur_month": -1.8052841433299998,
+      "positive_rent_meur_month": 1.2130513538775,
+      "congested_quarters": 360,
+      "average_positive_spread_eur_mwh": 16.855999999999998,
+      "opportunity_meur_month": {
+        "500": 0.8396125,
+        "1000": 1.679225
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "HU>RO",
-      "realized_rent_meur_yr": 2.27922238877,
-      "positive_rent_meur_yr": 3.91294157947,
-      "congested_hours": 117,
-      "average_positive_spread_eur_mwh": 50.49649572649573,
-      "opportunity_meur_yr": {
-        "500": 3.123685,
-        "1000": 6.24737
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.05044410703325456,
+      "slope_raw_b": -0.06277794097668488,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.5698055971925,
+      "positive_rent_meur_month": 0.9782353948675,
+      "congested_quarters": 117,
+      "average_positive_spread_eur_mwh": 50.49649572649573,
+      "opportunity_meur_month": {
+        "500": 0.78092125,
+        "1000": 1.5618425
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "HU>SK",
-      "realized_rent_meur_yr": -0.03682465344999997,
-      "positive_rent_meur_yr": 0.01431749529000001,
-      "congested_hours": 345,
-      "average_positive_spread_eur_mwh": 16.01744927536232,
-      "opportunity_meur_yr": {
-        "500": 3.114735,
-        "1000": 6.22947
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.07849157668046539,
+      "slope_raw_a": -0.030376261131381952,
+      "slope_raw_b": 0.07849157668046539,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": -0.009206163362499992,
+      "positive_rent_meur_month": 0.0035793738225000024,
+      "congested_quarters": 345,
+      "average_positive_spread_eur_mwh": 16.01744927536232,
+      "opportunity_meur_month": {
+        "500": 0.77868375,
+        "1000": 1.5573675
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "BE>NL",
-      "realized_rent_meur_yr": 0.013045106250000002,
-      "positive_rent_meur_yr": 0.015848414125,
-      "congested_hours": 267,
-      "average_positive_spread_eur_mwh": 18.0885393258427,
-      "opportunity_meur_yr": {
-        "500": 3.0143899999999997,
-        "1000": 6.028779999999999
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.001797769560019324,
+      "slope_raw_a": -0.002476377270632668,
+      "slope_raw_b": 0.001797769560019324,
       "cap_ab_mw": 618.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.0032612765625000006,
+      "positive_rent_meur_month": 0.00396210353125,
+      "congested_quarters": 267,
+      "average_positive_spread_eur_mwh": 18.0885393258427,
+      "opportunity_meur_month": {
+        "500": 0.7535974999999999,
+        "1000": 1.5071949999999998
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "IT-CSUD>IT-CNOR",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.01104154729853391,
+      "slope_raw_b": -0.03270375112366419,
+      "cap_ab_mw": 3781.0,
+      "realized_rent_meur_month": 2.93258700775,
+      "positive_rent_meur_month": 2.93258700775,
+      "congested_quarters": 244,
+      "average_positive_spread_eur_mwh": 24.030778688524588,
+      "opportunity_meur_month": {
+        "500": 0.750065,
+        "1000": 1.50013
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "DK1>DK2",
-      "realized_rent_meur_yr": 1.8561999890915801,
-      "positive_rent_meur_yr": 1.9187202513099,
-      "congested_hours": 253,
-      "average_positive_spread_eur_mwh": 14.929209059288537,
-      "opportunity_meur_yr": {
-        "500": 2.9816802835,
-        "1000": 5.963360567
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.021605273378334563,
+      "slope_b": 3.602617002413752e-05,
+      "slope_raw_a": 0.021605273378334563,
+      "slope_raw_b": 3.602617002413752e-05,
       "cap_ab_mw": null,
-      "slope_a": 0.021605273378334563
+      "realized_rent_meur_month": 0.46404999727289503,
+      "positive_rent_meur_month": 0.479680062827475,
+      "congested_quarters": 253,
+      "average_positive_spread_eur_mwh": 14.929209059288537,
+      "opportunity_meur_month": {
+        "500": 0.745420070875,
+        "1000": 1.49084014175
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "RO>HU",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.06277794097668488,
+      "slope_raw_b": -0.05044410703325456,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.0165921703125,
+      "positive_rent_meur_month": 0.016629195215000003,
+      "congested_quarters": 191,
+      "average_positive_spread_eur_mwh": 22.723246073298426,
+      "opportunity_meur_month": {
+        "500": 0.7424662499999999,
+        "1000": 1.4849324999999998
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "HU>HR",
+      "slope_a": 0.0,
+      "slope_b": 0.01099970784442001,
+      "slope_raw_a": -0.030376261131381952,
+      "slope_raw_b": 0.01099970784442001,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": -0.16995299249999993,
+      "positive_rent_meur_month": 0.76405787,
+      "congested_quarters": 260,
+      "average_positive_spread_eur_mwh": 16.192076923076925,
+      "opportunity_meur_month": {
+        "500": 0.6808737499999999,
+        "1000": 1.3617474999999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "RO>HU",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.058778271876798606,
+      "slope_raw_b": -0.030376261131381952,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.6366750189699999,
+      "positive_rent_meur_month": 0.6457804590549999,
+      "congested_quarters": 142,
+      "average_positive_spread_eur_mwh": 28.22795774647887,
+      "opportunity_meur_month": {
+        "500": 0.64647625,
+        "1000": 1.2929525
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "DK1>SE3",
-      "realized_rent_meur_yr": 2.287827505026318,
-      "positive_rent_meur_yr": 2.3551058437227317,
-      "congested_hours": 177,
-      "average_positive_spread_eur_mwh": 25.230169536723164,
-      "opportunity_meur_yr": {
-        "500": 2.3926100015,
-        "1000": 4.785220003
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.021605273378334563,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.021605273378334563,
+      "slope_raw_b": -0.02592966648271554,
       "cap_ab_mw": null,
-      "slope_a": 0.021605273378334563
+      "realized_rent_meur_month": 0.5719568762565795,
+      "positive_rent_meur_month": 0.5887764609306829,
+      "congested_quarters": 177,
+      "average_positive_spread_eur_mwh": 25.230169536723164,
+      "opportunity_meur_month": {
+        "500": 0.598152500375,
+        "1000": 1.19630500075
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SK>CZ",
+      "slope_a": 0.0,
+      "slope_b": 0.013102697053330661,
+      "slope_raw_a": -0.048166681033156244,
+      "slope_raw_b": 0.013102697053330661,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 216,
+      "average_positive_spread_eur_mwh": 20.099768518518516,
+      "opportunity_meur_month": {
+        "500": 0.57349125,
+        "1000": 1.1469825
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "IT-SARD>IT-CSUD",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.02279740218302866,
+      "slope_raw_b": -0.01372992847427554,
+      "cap_ab_mw": 870.0,
+      "realized_rent_meur_month": 0.824027513675,
+      "positive_rent_meur_month": 0.824027513675,
+      "congested_quarters": 127,
+      "average_positive_spread_eur_mwh": 35.68677165354331,
+      "opportunity_meur_month": {
+        "500": 0.5712612499999999,
+        "1000": 1.1425224999999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "IT-North>AT",
+      "slope_a": 0.012024678983070752,
+      "slope_b": 0.01603519244409307,
+      "slope_raw_a": 0.012024678983070752,
+      "slope_raw_b": 0.01603519244409307,
+      "cap_ab_mw": 170.0,
+      "realized_rent_meur_month": -0.0036319775,
+      "positive_rent_meur_month": 5.231249999999996e-05,
+      "congested_quarters": 263,
+      "average_positive_spread_eur_mwh": 15.337110266159696,
+      "opportunity_meur_month": {
+        "500": 0.5482975,
+        "1000": 1.096595
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "AT>DE-LU",
-      "realized_rent_meur_yr": -45.144299945726,
-      "positive_rent_meur_yr": 3.6440767851609994,
-      "congested_hours": 197,
-      "average_positive_spread_eur_mwh": 19.268730964467004,
-      "opportunity_meur_yr": {
-        "500": 2.12575,
-        "1000": 4.2515
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.011791911681686052,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.011791911681686052,
+      "slope_raw_b": -0.005625068067836686,
       "cap_ab_mw": null,
-      "slope_a": 0.011791911681686052
+      "realized_rent_meur_month": -11.2860749864315,
+      "positive_rent_meur_month": 0.9110191962902499,
+      "congested_quarters": 197,
+      "average_positive_spread_eur_mwh": 19.268730964467004,
+      "opportunity_meur_month": {
+        "500": 0.5314375,
+        "1000": 1.062875
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "EE>LV",
-      "realized_rent_meur_yr": 2.39919994,
-      "positive_rent_meur_yr": 2.4000378799999997,
-      "congested_hours": 126,
-      "average_positive_spread_eur_mwh": 31.903095238095236,
-      "opportunity_meur_yr": {
-        "500": 2.0532,
-        "1000": 4.1064
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.19319735396391494,
+      "slope_raw_a": -0.022592814156718283,
+      "slope_raw_b": 0.19319735396391494,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.599799985,
+      "positive_rent_meur_month": 0.6000094699999999,
+      "congested_quarters": 126,
+      "average_positive_spread_eur_mwh": 31.903095238095236,
+      "opportunity_meur_month": {
+        "500": 0.5133,
+        "1000": 1.0266
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "IT-SUD>GR",
+      "slope_a": 0.004607935210102337,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.004607935210102337,
+      "slope_raw_b": -0.0739888255199247,
+      "cap_ab_mw": 500.0,
+      "realized_rent_meur_month": 0.09159120625,
+      "positive_rent_meur_month": 0.13995074312500003,
+      "congested_quarters": 215,
+      "average_positive_spread_eur_mwh": 17.704139534883723,
+      "opportunity_meur_month": {
+        "500": 0.51076375,
+        "1000": 1.0215275
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "HR>SI",
-      "realized_rent_meur_yr": 0.4645070199999999,
-      "positive_rent_meur_yr": 0.53513822,
-      "congested_hours": 168,
-      "average_positive_spread_eur_mwh": 12.725833333333334,
-      "opportunity_meur_yr": {
-        "500": 1.7899749999999996,
-        "1000": 3.5799499999999993
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.01099970784442001,
+      "slope_b": 0.0251767834625702,
+      "slope_raw_a": 0.01099970784442001,
+      "slope_raw_b": 0.0251767834625702,
       "cap_ab_mw": null,
-      "slope_a": 0.01099970784442001
+      "realized_rent_meur_month": 0.11612675499999997,
+      "positive_rent_meur_month": 0.133784555,
+      "congested_quarters": 168,
+      "average_positive_spread_eur_mwh": 12.725833333333334,
+      "opportunity_meur_month": {
+        "500": 0.4474937499999999,
+        "1000": 0.8949874999999998
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "AT>DE-LU",
-      "realized_rent_meur_yr": -23.767466660072,
-      "positive_rent_meur_yr": 2.7544448889429995,
-      "congested_hours": 263,
-      "average_positive_spread_eur_mwh": 10.48562737642586,
-      "opportunity_meur_yr": {
-        "500": 1.73382,
-        "1000": 3.46764
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.01603519244409307,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.01603519244409307,
+      "slope_raw_b": -0.007441251342579732,
       "cap_ab_mw": null,
-      "slope_a": 0.01603519244409307
+      "realized_rent_meur_month": -5.941866665018,
+      "positive_rent_meur_month": 0.6886112222357499,
+      "congested_quarters": 263,
+      "average_positive_spread_eur_mwh": 10.48562737642586,
+      "opportunity_meur_month": {
+        "500": 0.433455,
+        "1000": 0.86691
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "PL>SE4",
-      "realized_rent_meur_yr": 0.9994404719999999,
-      "positive_rent_meur_yr": 1.0171976269999998,
-      "congested_hours": 120,
-      "average_positive_spread_eur_mwh": 27.04533333333333,
-      "opportunity_meur_yr": {
-        "500": 1.70983,
-        "1000": 3.41966
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.033269293717256204,
+      "slope_raw_b": -0.03817965319254406,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.24986011799999996,
+      "positive_rent_meur_month": 0.25429940674999996,
+      "congested_quarters": 120,
+      "average_positive_spread_eur_mwh": 27.04533333333333,
+      "opportunity_meur_month": {
+        "500": 0.4274575,
+        "1000": 0.854915
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "LT>LV",
-      "realized_rent_meur_yr": 2.30991858,
-      "positive_rent_meur_yr": 2.30991858,
-      "congested_hours": 73,
-      "average_positive_spread_eur_mwh": 39.41561643835616,
-      "opportunity_meur_yr": {
-        "500": 1.44034,
-        "1000": 2.88068
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.19319735396391494,
+      "slope_raw_a": -0.06743062087469447,
+      "slope_raw_b": 0.19319735396391494,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.577479645,
+      "positive_rent_meur_month": 0.577479645,
+      "congested_quarters": 73,
+      "average_positive_spread_eur_mwh": 39.41561643835616,
+      "opportunity_meur_month": {
+        "500": 0.360085,
+        "1000": 0.72017
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "HU>SK",
-      "realized_rent_meur_yr": 0.0,
-      "positive_rent_meur_yr": 0.0,
-      "congested_hours": 192,
-      "average_positive_spread_eur_mwh": 10.904791666666668,
-      "opportunity_meur_yr": {
-        "500": 1.37272,
-        "1000": 2.74544
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.05044410703325456,
+      "slope_raw_b": -0.048166681033156244,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 192,
+      "average_positive_spread_eur_mwh": 10.904791666666668,
+      "opportunity_meur_month": {
+        "500": 0.34318,
+        "1000": 0.68636
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "BE>NL",
-      "realized_rent_meur_yr": 0.007361755599999994,
-      "positive_rent_meur_yr": 0.019365355600000005,
-      "congested_hours": 169,
-      "average_positive_spread_eur_mwh": 10.417100591715977,
-      "opportunity_meur_yr": {
-        "500": 1.34473,
-        "1000": 2.68946
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.005443842399478523,
+      "slope_b": 0.0023625620788124625,
+      "slope_raw_a": 0.005443842399478523,
+      "slope_raw_b": 0.0023625620788124625,
       "cap_ab_mw": 2711.0,
-      "slope_a": 0.005443842399478523
+      "realized_rent_meur_month": 0.0018404388999999986,
+      "positive_rent_meur_month": 0.004841338900000001,
+      "congested_quarters": 169,
+      "average_positive_spread_eur_mwh": 10.417100591715977,
+      "opportunity_meur_month": {
+        "500": 0.3361825,
+        "1000": 0.672365
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "DK2>SE4",
-      "realized_rent_meur_yr": 0.9760741536470041,
-      "positive_rent_meur_yr": 1.0601964320579471,
-      "congested_hours": 87,
-      "average_positive_spread_eur_mwh": 28.14827582758621,
-      "opportunity_meur_yr": {
-        "500": 1.3386400079999998,
-        "1000": 2.6772800159999997
-      },
-      "observed_quarters": 2976,
+      "slope_a": 3.602617002413752e-05,
+      "slope_b": 0.0,
+      "slope_raw_a": 3.602617002413752e-05,
+      "slope_raw_b": -0.106571436050384,
       "cap_ab_mw": null,
-      "slope_a": 3.602617002413752e-05
+      "realized_rent_meur_month": 0.24401853841175103,
+      "positive_rent_meur_month": 0.2650491080144868,
+      "congested_quarters": 87,
+      "average_positive_spread_eur_mwh": 28.14827582758621,
+      "opportunity_meur_month": {
+        "500": 0.33466000199999996,
+        "1000": 0.6693200039999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "DK2>DK1",
+      "slope_a": 0.0,
+      "slope_b": 0.019573298642559037,
+      "slope_raw_a": -0.04692377767904271,
+      "slope_raw_b": 0.019573298642559037,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": -0.33719244716183494,
+      "positive_rent_meur_month": 0.249522522322745,
+      "congested_quarters": 143,
+      "average_positive_spread_eur_mwh": 16.085384615384612,
+      "opportunity_meur_month": {
+        "500": 0.32472377674999997,
+        "1000": 0.6494475534999999
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "DK2>SE4",
-      "realized_rent_meur_yr": 0.6592906147770239,
-      "positive_rent_meur_yr": 0.6665549142541981,
-      "congested_hours": 29,
-      "average_positive_spread_eur_mwh": 69.89793103448275,
-      "opportunity_meur_yr": {
-        "500": 1.1230950205,
-        "1000": 2.246190041
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.04692377767904271,
+      "slope_raw_b": -0.03817965319254406,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.16482265369425597,
+      "positive_rent_meur_month": 0.16663872856354953,
+      "congested_quarters": 29,
+      "average_positive_spread_eur_mwh": 69.89793103448275,
+      "opportunity_meur_month": {
+        "500": 0.280773755125,
+        "1000": 0.56154751025
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SI>HR",
+      "slope_a": 0.0251767834625702,
+      "slope_b": 0.01099970784442001,
+      "slope_raw_a": 0.0251767834625702,
+      "slope_raw_b": 0.01099970784442001,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": -0.20035560999999985,
+      "positive_rent_meur_month": 0.32369197250000015,
+      "congested_quarters": 131,
+      "average_positive_spread_eur_mwh": 8.198091603053436,
+      "opportunity_meur_month": {
+        "500": 0.27940125000000005,
+        "1000": 0.5588025000000001
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "IT-North>FR",
+      "slope_a": 0.00044296533757834,
+      "slope_b": 0.0011241940702688428,
+      "slope_raw_a": 0.00044296533757834,
+      "slope_raw_b": 0.0011241940702688428,
+      "cap_ab_mw": 2160.0,
+      "realized_rent_meur_month": 0.7271416739999998,
+      "positive_rent_meur_month": 0.7271416739999998,
+      "congested_quarters": 71,
+      "average_positive_spread_eur_mwh": 30.329436619718308,
+      "opportunity_meur_month": {
+        "500": 0.27121375,
+        "1000": 0.5424275
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "HU>RO",
-      "realized_rent_meur_yr": 0.15393551944000006,
-      "positive_rent_meur_yr": 0.5745760956300001,
-      "congested_hours": 143,
-      "average_positive_spread_eur_mwh": 9.863076923076923,
-      "opportunity_meur_yr": {
-        "500": 1.055415,
-        "1000": 2.11083
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.030376261131381952,
+      "slope_raw_b": -0.058778271876798606,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.038483879860000014,
+      "positive_rent_meur_month": 0.14364402390750003,
+      "congested_quarters": 143,
+      "average_positive_spread_eur_mwh": 9.863076923076923,
+      "opportunity_meur_month": {
+        "500": 0.26385375,
+        "1000": 0.5277075
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SK>CZ",
+      "slope_a": 0.07849157668046539,
+      "slope_b": 0.03647015830190886,
+      "slope_raw_a": 0.07849157668046539,
+      "slope_raw_b": 0.03647015830190886,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.14721006374999998,
+      "positive_rent_meur_month": 0.16314009224999998,
+      "congested_quarters": 136,
+      "average_positive_spread_eur_mwh": 11.809117647058825,
+      "opportunity_meur_month": {
+        "500": 0.23995624999999993,
+        "1000": 0.47991249999999985
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "PT>ES",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.0033294063991421885,
+      "slope_raw_b": -0.005139477403441886,
+      "cap_ab_mw": 3465.0,
+      "realized_rent_meur_month": 0.6347580831999999,
+      "positive_rent_meur_month": 0.6347690453,
+      "congested_quarters": 87,
+      "average_positive_spread_eur_mwh": 19.277701149425287,
+      "opportunity_meur_month": {
+        "500": 0.21569875,
+        "1000": 0.4313975
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "LT>SE4",
-      "realized_rent_meur_yr": 0.5111478559927201,
-      "positive_rent_meur_yr": 0.5875238526228501,
-      "congested_hours": 46,
-      "average_positive_spread_eur_mwh": 18.00304347826087,
-      "opportunity_meur_yr": {
-        "500": 0.8016150000000001,
-        "1000": 1.6032300000000002
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.0673812431743603,
+      "slope_raw_b": -0.106571436050384,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.12778696399818001,
+      "positive_rent_meur_month": 0.14688096315571253,
+      "congested_quarters": 46,
+      "average_positive_spread_eur_mwh": 18.00304347826087,
+      "opportunity_meur_month": {
+        "500": 0.20040375000000002,
+        "1000": 0.40080750000000004
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "BE>FR",
-      "realized_rent_meur_yr": 0.04900627181508001,
-      "positive_rent_meur_yr": 0.10953309287999999,
-      "congested_hours": 42,
-      "average_positive_spread_eur_mwh": 10.166428571428572,
-      "opportunity_meur_yr": {
-        "500": 0.718445,
-        "1000": 1.43689
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.005443842399478523,
+      "slope_b": 0.004256141836743637,
+      "slope_raw_a": 0.005443842399478523,
+      "slope_raw_b": 0.004256141836743637,
       "cap_ab_mw": null,
-      "slope_a": 0.005443842399478523
+      "realized_rent_meur_month": 0.012251567953770002,
+      "positive_rent_meur_month": 0.027383273219999997,
+      "congested_quarters": 42,
+      "average_positive_spread_eur_mwh": 10.166428571428572,
+      "opportunity_meur_month": {
+        "500": 0.17961125,
+        "1000": 0.3592225
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "BE>FR",
-      "realized_rent_meur_yr": -2.4893627026567002,
-      "positive_rent_meur_yr": 0.7479423957741698,
-      "congested_hours": 68,
-      "average_positive_spread_eur_mwh": 7.075,
-      "opportunity_meur_yr": {
-        "500": 0.65311,
-        "1000": 1.30622
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0011241940702688428,
+      "slope_raw_a": -0.002476377270632668,
+      "slope_raw_b": 0.0011241940702688428,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": -0.6223406756641751,
+      "positive_rent_meur_month": 0.18698559894354244,
+      "congested_quarters": 68,
+      "average_positive_spread_eur_mwh": 7.075,
+      "opportunity_meur_month": {
+        "500": 0.1632775,
+        "1000": 0.326555
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SE2>SE1",
+      "slope_a": 0.014465618867654927,
+      "slope_b": 0.028817523843658557,
+      "slope_raw_a": 0.014465618867654927,
+      "slope_raw_b": 0.028817523843658557,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": -0.17153795634646246,
+      "positive_rent_meur_month": 0.005907472764864998,
+      "congested_quarters": 81,
+      "average_positive_spread_eur_mwh": 8.990123456790123,
+      "opportunity_meur_month": {
+        "500": 0.14882499999999999,
+        "1000": 0.29764999999999997
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "RO>BG",
+      "slope_a": 0.0,
+      "slope_b": 0.043467197832953115,
+      "slope_raw_a": -0.06277794097668488,
+      "slope_raw_b": 0.043467197832953115,
+      "cap_ab_mw": 2400.0,
+      "realized_rent_meur_month": 0.4917273823999999,
+      "positive_rent_meur_month": 0.4948215383999999,
+      "congested_quarters": 29,
+      "average_positive_spread_eur_mwh": 40.732413793103454,
+      "opportunity_meur_month": {
+        "500": 0.14834875,
+        "1000": 0.2966975
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "RO>BG",
+      "slope_a": 0.0,
+      "slope_b": 0.04016596782064277,
+      "slope_raw_a": -0.058778271876798606,
+      "slope_raw_b": 0.04016596782064277,
+      "cap_ab_mw": 1964.0,
+      "realized_rent_meur_month": 0.018357378200000045,
+      "positive_rent_meur_month": 0.06060601520000002,
+      "congested_quarters": 49,
+      "average_positive_spread_eur_mwh": 17.886938775510203,
+      "opportunity_meur_month": {
+        "500": 0.14185625000000002,
+        "1000": 0.28371250000000003
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "HU>SI",
-      "realized_rent_meur_yr": -0.10677745560999988,
-      "positive_rent_meur_yr": 0.1493160654100001,
-      "congested_hours": 25,
-      "average_positive_spread_eur_mwh": 10.628399999999997,
-      "opportunity_meur_yr": {
-        "500": 0.5165600000000001,
-        "1000": 1.0331200000000003
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.04395982693857018,
+      "slope_raw_a": -0.05044410703325456,
+      "slope_raw_b": 0.04395982693857018,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": -0.02669436390249997,
+      "positive_rent_meur_month": 0.03732901635250002,
+      "congested_quarters": 25,
+      "average_positive_spread_eur_mwh": 10.628399999999997,
+      "opportunity_meur_month": {
+        "500": 0.12914000000000003,
+        "1000": 0.25828000000000007
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "DK2>DK1",
+      "slope_a": 3.602617002413752e-05,
+      "slope_b": 0.021605273378334563,
+      "slope_raw_a": 3.602617002413752e-05,
+      "slope_raw_b": 0.021605273378334563,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.033747441269147485,
+      "positive_rent_meur_month": 0.048499316673352486,
+      "congested_quarters": 22,
+      "average_positive_spread_eur_mwh": 16.95727218181818,
+      "opportunity_meur_month": {
+        "500": 0.12590632162499993,
+        "1000": 0.25181264324999986
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "IT-North>FR",
+      "slope_a": 0.012024678983070752,
+      "slope_b": 0.004256141836743637,
+      "slope_raw_a": 0.012024678983070752,
+      "slope_raw_b": 0.004256141836743637,
+      "cap_ab_mw": 2055.0,
+      "realized_rent_meur_month": -0.00179656345,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 10,
+      "average_positive_spread_eur_mwh": 85.25200000000001,
+      "opportunity_meur_month": {
+        "500": 0.10692625,
+        "1000": 0.2138525
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "HR>SI",
-      "realized_rent_meur_yr": 0.19375226000000015,
-      "positive_rent_meur_yr": 0.3538370000000001,
-      "congested_hours": 26,
-      "average_positive_spread_eur_mwh": 7.726923076923075,
-      "opportunity_meur_yr": {
-        "500": 0.427095,
-        "1000": 0.85419
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.04395982693857018,
+      "slope_raw_a": -0.012390408811321205,
+      "slope_raw_b": 0.04395982693857018,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.04843806500000004,
+      "positive_rent_meur_month": 0.08845925000000003,
+      "congested_quarters": 26,
+      "average_positive_spread_eur_mwh": 7.726923076923075,
+      "opportunity_meur_month": {
+        "500": 0.10677375,
+        "1000": 0.2135475
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "HU>HR",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.05044410703325456,
+      "slope_raw_b": -0.012390408811321205,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": -0.3530798125,
+      "positive_rent_meur_month": 0.042521315,
+      "congested_quarters": 28,
+      "average_positive_spread_eur_mwh": 14.24535714285714,
+      "opportunity_meur_month": {
+        "500": 0.10006250000000004,
+        "1000": 0.20012500000000008
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "IT-CNOR>IT-CSUD",
-      "realized_rent_meur_yr": 0.8850036881999999,
-      "positive_rent_meur_yr": 0.8850036881999999,
-      "congested_hours": 23,
-      "average_positive_spread_eur_mwh": 31.49304347826087,
-      "opportunity_meur_yr": {
-        "500": 0.37032499999999996,
-        "1000": 0.7406499999999999
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.03270375112366419,
+      "slope_raw_b": -0.01104154729853391,
       "cap_ab_mw": 4067.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.22125092204999997,
+      "positive_rent_meur_month": 0.22125092204999997,
+      "congested_quarters": 23,
+      "average_positive_spread_eur_mwh": 31.49304347826087,
+      "opportunity_meur_month": {
+        "500": 0.09258124999999999,
+        "1000": 0.18516249999999998
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "BG>GR",
-      "realized_rent_meur_yr": 0.17528918000000002,
-      "positive_rent_meur_yr": 0.17528918000000002,
-      "congested_hours": 21,
-      "average_positive_spread_eur_mwh": 23.32761904761905,
-      "opportunity_meur_yr": {
-        "500": 0.24977,
-        "1000": 0.49954
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.043467197832953115,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.043467197832953115,
+      "slope_raw_b": -0.05731359634613086,
       "cap_ab_mw": 1400.0,
-      "slope_a": 0.043467197832953115
+      "realized_rent_meur_month": 0.043822295000000004,
+      "positive_rent_meur_month": 0.043822295000000004,
+      "congested_quarters": 21,
+      "average_positive_spread_eur_mwh": 23.32761904761905,
+      "opportunity_meur_month": {
+        "500": 0.0624425,
+        "1000": 0.124885
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "BG>GR",
-      "realized_rent_meur_yr": 0.13219020000000004,
-      "positive_rent_meur_yr": 0.21636865000000002,
-      "congested_hours": 22,
-      "average_positive_spread_eur_mwh": 21.290454545454544,
-      "opportunity_meur_yr": {
-        "500": 0.241915,
-        "1000": 0.48383
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.04016596782064277,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.04016596782064277,
+      "slope_raw_b": -0.0739888255199247,
       "cap_ab_mw": 1354.0,
-      "slope_a": 0.04016596782064277
+      "realized_rent_meur_month": 0.03304755000000001,
+      "positive_rent_meur_month": 0.054092162500000006,
+      "congested_quarters": 22,
+      "average_positive_spread_eur_mwh": 21.290454545454544,
+      "opportunity_meur_month": {
+        "500": 0.06047875,
+        "1000": 0.1209575
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "LT>SE4",
-      "realized_rent_meur_yr": 0.019643629197829974,
-      "positive_rent_meur_yr": 0.020594562542769985,
-      "congested_hours": 10,
-      "average_positive_spread_eur_mwh": 16.709999999999997,
-      "opportunity_meur_yr": {
-        "500": 0.19813000000000006,
-        "1000": 0.3962600000000001
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.06743062087469447,
+      "slope_raw_b": -0.03817965319254406,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.0049109072994574935,
+      "positive_rent_meur_month": 0.005148640635692496,
+      "congested_quarters": 10,
+      "average_positive_spread_eur_mwh": 16.709999999999997,
+      "opportunity_meur_month": {
+        "500": 0.049532500000000014,
+        "1000": 0.09906500000000003
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SE4>SE3",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.03817965319254406,
+      "slope_raw_b": -0.010721167836171193,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.03821625,
+        "1000": 0.0764325
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "ES>PT",
-      "realized_rent_meur_yr": 0.32929730840000004,
-      "positive_rent_meur_yr": 0.32929730840000004,
-      "congested_hours": 11,
-      "average_positive_spread_eur_mwh": 22.566363636363636,
-      "opportunity_meur_yr": {
-        "500": 0.138535,
-        "1000": 0.27707
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.005139477403441886,
+      "slope_raw_b": -0.0033294063991421885,
       "cap_ab_mw": 4365.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.08232432710000001,
+      "positive_rent_meur_month": 0.08232432710000001,
+      "congested_quarters": 11,
+      "average_positive_spread_eur_mwh": 22.566363636363636,
+      "opportunity_meur_month": {
+        "500": 0.03463375,
+        "1000": 0.0692675
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "LV>LT",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.009927970548911272,
+      "slope_raw_b": -0.0673812431743603,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.021991572499999997,
+      "positive_rent_meur_month": 0.021991572499999997,
+      "congested_quarters": 5,
+      "average_positive_spread_eur_mwh": 39.558,
+      "opportunity_meur_month": {
+        "500": 0.024835,
+        "1000": 0.04967
+      },
+      "observed_quarters": 2935
+    },
+    {
+      "month": "2026-01",
+      "border": "IT-SARD>IT-CSUD",
+      "slope_a": 0.013302790158365552,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.013302790158365552,
+      "slope_raw_b": -0.01104154729853391,
+      "cap_ab_mw": 870.0,
+      "realized_rent_meur_month": 0.012316345650000001,
+      "positive_rent_meur_month": 0.012316345650000001,
+      "congested_quarters": 20,
+      "average_positive_spread_eur_mwh": 9.305000000000003,
+      "opportunity_meur_month": {
+        "500": 0.023718750000000004,
+        "1000": 0.04743750000000001
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "IT-North>IT-CNOR",
+      "slope_a": 0.00044296533757834,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.00044296533757834,
+      "slope_raw_b": -0.03270375112366419,
+      "cap_ab_mw": 4382.0,
+      "realized_rent_meur_month": 0.17056431952499998,
+      "positive_rent_meur_month": 0.17056431952499998,
+      "congested_quarters": 7,
+      "average_positive_spread_eur_mwh": 26.514285714285716,
+      "opportunity_meur_month": {
+        "500": 0.02335375,
+        "1000": 0.0467075
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "IT-SICI>IT-SUD",
-      "realized_rent_meur_yr": null,
-      "positive_rent_meur_yr": null,
-      "congested_hours": 6,
-      "average_positive_spread_eur_mwh": 26.648333333333337,
-      "observed_quarters": 2976,
-      "opportunity_meur_yr": {
-        "500": 0.09146500000000002,
-        "1000": 0.18293000000000004
-      },
+      "slope_a": 0.0,
+      "slope_b": 0.001801975662642084,
+      "slope_raw_a": null,
+      "slope_raw_b": 0.001801975662642084,
       "cap_ab_mw": null,
-      "slope_a": null
+      "realized_rent_meur_month": null,
+      "positive_rent_meur_month": null,
+      "congested_quarters": 6,
+      "average_positive_spread_eur_mwh": 26.648333333333337,
+      "opportunity_meur_month": {
+        "500": 0.022866250000000005,
+        "1000": 0.04573250000000001
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "EE>FI",
-      "realized_rent_meur_yr": -0.00236348792799995,
-      "positive_rent_meur_yr": 0.0,
-      "congested_hours": 8,
-      "average_positive_spread_eur_mwh": 21.0175,
-      "opportunity_meur_yr": {
-        "500": 0.08867499999999998,
-        "1000": 0.17734999999999995
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.022592814156718283,
+      "slope_raw_b": -0.02491417504426227,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": -0.0005908719819999875,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 8,
+      "average_positive_spread_eur_mwh": 21.0175,
+      "opportunity_meur_month": {
+        "500": 0.022168749999999994,
+        "1000": 0.04433749999999999
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "SE3>SE2",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.010721167836171193,
+      "slope_raw_b": -0.025024348279580597,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.0213275,
+        "1000": 0.042655
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "IT-SARD>IT-SICI",
-      "realized_rent_meur_yr": null,
-      "positive_rent_meur_yr": null,
-      "congested_hours": 13,
-      "average_positive_spread_eur_mwh": 8.76923076923077,
-      "observed_quarters": 2976,
-      "opportunity_meur_yr": {
-        "500": 0.059045,
-        "1000": 0.11809
-      },
+      "slope_a": 0.013302790158365552,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.013302790158365552,
+      "slope_raw_b": null,
       "cap_ab_mw": null,
-      "slope_a": 0.013302790158365552
+      "realized_rent_meur_month": null,
+      "positive_rent_meur_month": null,
+      "congested_quarters": 13,
+      "average_positive_spread_eur_mwh": 8.76923076923077,
+      "opportunity_meur_month": {
+        "500": 0.01476125,
+        "1000": 0.0295225
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "IT-CSUD>IT-CNOR",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.01372992847427554,
+      "slope_raw_b": -0.06645548626142898,
+      "cap_ab_mw": 3789.0,
+      "realized_rent_meur_month": 0.054169724674999996,
+      "positive_rent_meur_month": 0.054169724674999996,
+      "congested_quarters": 7,
+      "average_positive_spread_eur_mwh": 12.541428571428574,
+      "opportunity_meur_month": {
+        "500": 0.011735000000000002,
+        "1000": 0.023470000000000005
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SE3>FI",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.02592966648271554,
+      "slope_raw_b": -0.021425801152209753,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": -6.689531266395657,
+      "positive_rent_meur_month": 0.016952111637500017,
+      "congested_quarters": 1,
+      "average_positive_spread_eur_mwh": 15.120000000000005,
+      "opportunity_meur_month": {
+        "500": 0.011001250000000011,
+        "1000": 0.022002500000000022
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SE3>SE2",
+      "slope_a": 0.0,
+      "slope_b": 0.014465618867654927,
+      "slope_raw_a": -0.02592966648271554,
+      "slope_raw_b": 0.014465618867654927,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": -1.2979539599999854e-06,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.008232500000000005,
+        "1000": 0.01646500000000001
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "FI>SE1",
-      "realized_rent_meur_yr": -0.02553478364123999,
-      "positive_rent_meur_yr": 0.01406485153552,
-      "congested_hours": 0,
-      "average_positive_spread_eur_mwh": null,
-      "opportunity_meur_yr": {
-        "500": 0.014299999999999985,
-        "1000": 0.02859999999999997
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.028817523843658557,
+      "slope_raw_a": -0.021425801152209753,
+      "slope_raw_b": 0.028817523843658557,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": -0.0063836959103099975,
+      "positive_rent_meur_month": 0.00351621288388,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.003574999999999996,
+        "1000": 0.007149999999999992
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "SE4>SE3",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.106571436050384,
+      "slope_raw_b": -0.02592966648271554,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": -0.001791686974232501,
+      "positive_rent_meur_month": 1.0730870850000008e-06,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.0032149999999999974,
+        "1000": 0.006429999999999995
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "EE>FI",
-      "realized_rent_meur_yr": 0.00034988518400000076,
-      "positive_rent_meur_yr": 0.00044964920000000044,
-      "congested_hours": 2,
-      "average_positive_spread_eur_mwh": 9.344999999999999,
-      "opportunity_meur_yr": {
-        "500": 0.01274,
-        "1000": 0.02548
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.025089603878831253,
+      "slope_raw_b": -0.021425801152209753,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 8.747129600000019e-05,
+      "positive_rent_meur_month": 0.00011241230000000011,
+      "congested_quarters": 2,
+      "average_positive_spread_eur_mwh": 9.344999999999999,
+      "opportunity_meur_month": {
+        "500": 0.003185,
+        "1000": 0.00637
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "LT>LV",
-      "realized_rent_meur_yr": 0.014893905000000006,
-      "positive_rent_meur_yr": 0.014893905000000006,
-      "congested_hours": 0,
-      "average_positive_spread_eur_mwh": null,
-      "opportunity_meur_yr": {
-        "500": 0.012220000000000003,
-        "1000": 0.024440000000000007
-      },
-      "observed_quarters": 2935,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.0673812431743603,
+      "slope_raw_b": -0.009927970548911272,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 0.0037234762500000015,
+      "positive_rent_meur_month": 0.0037234762500000015,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.003055000000000001,
+        "1000": 0.006110000000000002
+      },
+      "observed_quarters": 2935
     },
     {
       "month": "2026-01",
       "border": "IT-CSUD>IT-SARD",
-      "realized_rent_meur_yr": -0.009801835200000001,
-      "positive_rent_meur_yr": 0.0035741310000000012,
-      "congested_hours": 1,
-      "average_positive_spread_eur_mwh": 8.310000000000002,
-      "opportunity_meur_yr": {
-        "500": 0.004155000000000001,
-        "1000": 0.008310000000000001
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.013302790158365552,
+      "slope_raw_a": -0.01104154729853391,
+      "slope_raw_b": 0.013302790158365552,
       "cap_ab_mw": 720.0,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": -0.0024504588000000002,
+      "positive_rent_meur_month": 0.0008935327500000003,
+      "congested_quarters": 1,
+      "average_positive_spread_eur_mwh": 8.310000000000002,
+      "opportunity_meur_month": {
+        "500": 0.0010387500000000002,
+        "1000": 0.0020775000000000004
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "FI>SE1",
-      "realized_rent_meur_yr": 0.0002848523293399955,
-      "positive_rent_meur_yr": 0.0003499362139300003,
-      "congested_hours": 0,
-      "average_positive_spread_eur_mwh": null,
-      "opportunity_meur_yr": {
-        "500": 0.0029300000000000055,
-        "1000": 0.005860000000000011
-      },
-      "observed_quarters": 2976,
+      "slope_a": 0.0,
+      "slope_b": 0.03635247313693293,
+      "slope_raw_a": -0.02491417504426227,
+      "slope_raw_b": 0.03635247313693293,
       "cap_ab_mw": null,
-      "slope_a": 1e-06
+      "realized_rent_meur_month": 7.121308233499887e-05,
+      "positive_rent_meur_month": 8.748405348250008e-05,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.0007325000000000014,
+        "1000": 0.0014650000000000028
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "IT-SUD>IT-SICI",
+      "slope_a": 0.001801975662642084,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.001801975662642084,
+      "slope_raw_b": null,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": null,
+      "positive_rent_meur_month": null,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.0001987500000000004,
+        "1000": 0.0003975000000000008
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "IT-CSUD>IT-SUD",
-      "realized_rent_meur_yr": 0.0,
-      "positive_rent_meur_yr": 0.0,
-      "congested_hours": 0,
+      "slope_a": 0.0,
+      "slope_b": 0.001801975662642084,
+      "slope_raw_a": -0.01104154729853391,
+      "slope_raw_b": 0.001801975662642084,
+      "cap_ab_mw": 3563.0,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
       "average_positive_spread_eur_mwh": null,
-      "opportunity_meur_yr": {
+      "opportunity_meur_month": {
         "500": 0.0,
         "1000": 0.0
       },
-      "observed_quarters": 2976,
-      "cap_ab_mw": 3563.0,
-      "slope_a": 1e-06
+      "observed_quarters": 2976
     },
     {
       "month": "2026-01",
       "border": "IT-CNOR>IT-North",
-      "realized_rent_meur_yr": 0.0,
-      "positive_rent_meur_yr": 0.0,
-      "congested_hours": 0,
+      "slope_a": 0.0,
+      "slope_b": 0.00044296533757834,
+      "slope_raw_a": -0.03270375112366419,
+      "slope_raw_b": 0.00044296533757834,
+      "cap_ab_mw": 4090.0,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
       "average_positive_spread_eur_mwh": null,
-      "opportunity_meur_yr": {
+      "opportunity_meur_month": {
         "500": 0.0,
         "1000": 0.0
       },
-      "observed_quarters": 2976,
-      "cap_ab_mw": 4090.0,
-      "slope_a": 1e-06
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-01",
+      "border": "LV>LT",
+      "slope_a": 0.19319735396391494,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.19319735396391494,
+      "slope_raw_b": -0.06743062087469447,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.0,
+        "1000": 0.0
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "LV>EE",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.009927970548911272,
+      "slope_raw_b": -0.025089603878831253,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.0,
+        "1000": 0.0
+      },
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "PT>ES",
+      "slope_a": 0.04265556950999838,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.04265556950999838,
+      "slope_raw_b": -0.02501539330001628,
+      "cap_ab_mw": 4714.0,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.0,
+        "1000": 0.0
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "IT-CNOR>IT-CSUD",
-      "realized_rent_meur_yr": 0.0,
-      "positive_rent_meur_yr": 0.0,
-      "congested_hours": 0,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.06645548626142898,
+      "slope_raw_b": -0.01372992847427554,
+      "cap_ab_mw": 3786.0,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
       "average_positive_spread_eur_mwh": null,
-      "opportunity_meur_yr": {
+      "opportunity_meur_month": {
         "500": 0.0,
         "1000": 0.0
       },
-      "observed_quarters": 2976,
-      "cap_ab_mw": 3786.0,
-      "slope_a": 1e-06
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "IT-CSUD>IT-SARD",
-      "realized_rent_meur_yr": 0.0,
-      "positive_rent_meur_yr": 0.0,
-      "congested_hours": 0,
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": -0.01372992847427554,
+      "slope_raw_b": -0.02279740218302866,
+      "cap_ab_mw": 720.0,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
       "average_positive_spread_eur_mwh": null,
-      "opportunity_meur_yr": {
+      "opportunity_meur_month": {
         "500": 0.0,
         "1000": 0.0
       },
-      "observed_quarters": 2976,
-      "cap_ab_mw": 720.0,
-      "slope_a": 1e-06
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "IT-CSUD>IT-SUD",
-      "realized_rent_meur_yr": 0.0,
-      "positive_rent_meur_yr": 0.0,
-      "congested_hours": 0,
+      "slope_a": 0.0,
+      "slope_b": 0.004607935210102337,
+      "slope_raw_a": -0.01372992847427554,
+      "slope_raw_b": 0.004607935210102337,
+      "cap_ab_mw": 3947.0,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
       "average_positive_spread_eur_mwh": null,
-      "opportunity_meur_yr": {
+      "opportunity_meur_month": {
         "500": 0.0,
         "1000": 0.0
       },
-      "observed_quarters": 2976,
-      "cap_ab_mw": 3947.0,
-      "slope_a": 1e-06
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "IT-SUD>IT-CSUD",
+      "slope_a": 0.004607935210102337,
+      "slope_b": 0.0,
+      "slope_raw_a": 0.004607935210102337,
+      "slope_raw_b": -0.01372992847427554,
+      "cap_ab_mw": 5320.0,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.0,
+        "1000": 0.0
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "IT-CNOR>IT-North",
-      "realized_rent_meur_yr": 0.0,
-      "positive_rent_meur_yr": 0.0,
-      "congested_hours": 0,
+      "slope_a": 0.0,
+      "slope_b": 0.012024678983070752,
+      "slope_raw_a": -0.06645548626142898,
+      "slope_raw_b": 0.012024678983070752,
+      "cap_ab_mw": 3721.0,
+      "realized_rent_meur_month": 0.0,
+      "positive_rent_meur_month": 0.0,
+      "congested_quarters": 0,
       "average_positive_spread_eur_mwh": null,
-      "opportunity_meur_yr": {
+      "opportunity_meur_month": {
         "500": 0.0,
         "1000": 0.0
       },
-      "observed_quarters": 2976,
-      "cap_ab_mw": 3721.0,
-      "slope_a": 1e-06
+      "observed_quarters": 2976
+    },
+    {
+      "month": "2026-08",
+      "border": "IT-SICI>IT-SARD",
+      "slope_a": 0.0,
+      "slope_b": 0.0,
+      "slope_raw_a": null,
+      "slope_raw_b": -0.02279740218302866,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": null,
+      "positive_rent_meur_month": null,
+      "congested_quarters": 0,
+      "average_positive_spread_eur_mwh": null,
+      "opportunity_meur_month": {
+        "500": 0.0,
+        "1000": 0.0
+      },
+      "observed_quarters": 2976
     },
     {
       "month": "2026-08",
       "border": "IT-SICI>IT-SUD",
-      "realized_rent_meur_yr": null,
-      "positive_rent_meur_yr": null,
-      "congested_hours": 0,
+      "slope_a": 0.0,
+      "slope_b": 0.004607935210102337,
+      "slope_raw_a": null,
+      "slope_raw_b": 0.004607935210102337,
+      "cap_ab_mw": null,
+      "realized_rent_meur_month": null,
+      "positive_rent_meur_month": null,
+      "congested_quarters": 0,
       "average_positive_spread_eur_mwh": null,
-      "observed_quarters": 2976,
-      "opportunity_meur_yr": {
+      "opportunity_meur_month": {
         "500": 0.0,
         "1000": 0.0
       },
-      "cap_ab_mw": null,
-      "slope_a": null
+      "observed_quarters": 2976
     }
   ],
   "coverage": {
-    "borders": 102,
+    "borders": 51,
+    "directed_rows": 204,
     "months": [
       "2026-01",
       "2026-08"

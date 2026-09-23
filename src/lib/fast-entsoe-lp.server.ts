@@ -10,8 +10,10 @@
 //   * Cable scenarios: marginal spread on the A>B corridor drops linearly with
 //     added flow at rate slope_a (EUR/MWh per MW). We linearize capacity into
 //     10 equal blocks; block k has marginal welfare v_k = avg_spread - slope*C/10*k.
-//     Annual welfare = congested_hours * max{0, sum_k v_k*block} (LP: pick all
-//     blocks with positive marginal value).
+//     Annual welfare = congested_quarters * 0.25 h * max{0, sum_k v_k*block} * 12
+//     (LP: pick all blocks with positive marginal value). The 0.25 h factor is
+//     the per-quarter energy of the Step-1 screening samples, and x12 annualizes
+//     the single screened month.
 //   * Battery scenarios: one cycle/day, charging at the low-price node (spread 0)
 //     and discharging at avg spread via a 4-variable LP per cycle, x number of
 //     cycles bounded by energy/MW ratio; annualized with round-trip efficiency.
@@ -40,14 +42,16 @@ const CABLE_CAPEX_MEUR_PER_MW = 0.016; // ~80 EUR/MW-km over 200 km
 const BATTERY_CAPEX_MEUR_PER_MWH = 0.25;
 const ANNUAL_CAPEX_FACTOR = 0.08; // annuity factor used to annualize capex
 const ROUND_TRIP_EFFICIENCY = 0.9;
+const HOURS_PER_SAMPLE = 0.25; // Step-1 samples are quarter-hours (energy = MW * 0.25 h)
 
 export type ScreeningRow = {
   month: string;
   border: string;
   average_positive_spread_eur_mwh: number | null;
-  congested_hours: number;
+  congested_quarters: number;
   cap_ab_mw: number | null;
   slope_a: number | null;
+  slope_b: number | null;
 };
 
 /** Build the jsLPSolver model for the block-discretized cable LP. */
@@ -117,8 +121,9 @@ function scenarioRow(
 
 export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
   const spread = row.average_positive_spread_eur_mwh ?? 0;
-  const congestedSamples = row.congested_hours ?? 0; // quarter-hour samples in the month
-  const slope = row.slope_a ?? 1e-6;
+  const congestedSamples = row.congested_quarters ?? 0; // quarter-hour samples in the month
+  const congestionHours = congestedSamples / 4;
+  const slope = row.slope_a ?? 0;
   const baseCap = row.cap_ab_mw ?? 0;
   const monthsPerYear = 12;
   const results: ScenarioResult[] = [];
@@ -135,10 +140,10 @@ export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
     );
     const model = blockLp(marginals, blockMw, deltaC + baseCap);
     const res = solver.Solve(model);
-    // per-sample congestion value (EUR), sum of marginal blocks dispatched
+    // per-sample congestion value (EUR/h), sum of marginal blocks dispatched
     const welfarePerSample = welfare(res);
-    // M€/yr = sum over the month's congested samples, annualized x12, /1e6
-    const annual = (welfarePerSample * congestedSamples * monthsPerYear) / 1e6;
+    // M€/yr = per-sample value x 0.25 h x the month's congested quarters, annualized x12, /1e6
+    const annual = (welfarePerSample * HOURS_PER_SAMPLE * congestedSamples * monthsPerYear) / 1e6;
     // shadow price = marginal value of 1 more MW on the last (most expensive)
     // block: dual of the dispatched intertie
     const resPert = solver.Solve(blockLp(marginals, blockMw, deltaC + baseCap, 1));
@@ -152,7 +157,7 @@ export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
         capex,
         shadow,
         spread,
-        congestedSamples,
+        congestionHours,
       ),
     );
   }
@@ -166,7 +171,10 @@ export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
     const res = solver.Solve(model);
     const welfarePerCycle = welfare(res); // EUR per daily cycle
     const annual = (welfarePerCycle * 365) / 1e6; // M€/yr
-    const resPert = solver.Solve(batteryCycleLp(mw + 1, mwh + 4, spread));
+    // shadow = finite-difference re-solve perturbing only power (+1 MW, energy
+    // unchanged) so the marginal reads as the value of one extra MWh of
+    // throughput (the discharge leg is one hour: 1 MW extra spills 1 MWh).
+    const resPert = solver.Solve(batteryCycleLp(mw + 1, mwh, spread));
     const shadow = welfare(resPert) - welfarePerCycle;
     const capex = mwh * BATTERY_CAPEX_MEUR_PER_MWH;
     results.push(
@@ -177,7 +185,7 @@ export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
         capex,
         shadow,
         spread,
-        congestedSamples,
+        congestionHours,
       ),
     );
   }
@@ -195,7 +203,7 @@ export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
         capexSum,
         cable1000.shadow_price_ateur_mwh ?? 0,
         spread,
-        congestedSamples,
+        congestionHours,
       ),
     );
   }
