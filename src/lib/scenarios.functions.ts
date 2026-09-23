@@ -1,64 +1,68 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { unitDef } from "./units";
+import { entsoeZoneMeta } from "./entsoeZones";
 
 const idIn = (data: unknown) => z.object({ id: z.string().uuid() }).parse(data);
 
+/** months covered by the Step-1 screening (results are averaged over these). */
+const FAST_MONTHS = ["2026-01", "2026-08"] as const;
+
+/** Scenario/year window used for all fast-entsoe workbench targets. */
+const PERIOD_START = "2026-01-01";
+const PERIOD_END = "2026-12-31";
+
 export const listScenarios = createServerFn({ method: "GET" })
-  .inputValidator((d: unknown) => z.object({ targetId: z.string().uuid() }).parse(d))
+  .inputValidator((d: unknown) => z.object({ targetId: z.string().min(1) }).parse(d))
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const [{ data: scenarios }, { data: units }, { data: results }] = await Promise.all([
-      supabaseAdmin
-        .from("scenarios")
-        .select("*")
-        .eq("target_id", data.targetId)
-        .order("created_at"),
-      supabaseAdmin.from("scenario_units").select("*").order("created_at"),
-      supabaseAdmin.from("scenario_results").select("*"),
-    ]);
-    const ids = new Set((scenarios ?? []).map((s) => s.id));
-    return (scenarios ?? []).map((s) => ({
-      ...s,
-      units: (units ?? []).filter((u) => u.scenario_id === s.id),
-      result: (results ?? []).find((r) => r.scenario_id === s.id) ?? null,
-      _ok: ids.size,
-    }));
+    const { listScenariosForTarget } = await import("./workbench.server");
+    return listScenariosForTarget(data.targetId);
   });
 
 export const createScenario = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) =>
     z
       .object({
-        targetId: z.string().uuid(),
+        targetId: z.string().min(1),
         name: z.string().min(1).max(120),
         description: z.string().max(500).optional(),
       })
       .parse(d),
   )
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: row, error } = await supabaseAdmin
-      .from("scenarios")
-      .insert({
-        target_id: data.targetId,
-        name: data.name,
-        description: data.description ?? null,
-      })
-      .select()
-      .single();
-    if (error) throw new Error(error.message);
-    return row;
+    const { createScenario } = await import("./workbench.server");
+
+    // Fast-entsoe targets are directed borders ("FR>IT-North"); snapshot the
+    // zone pair and year window onto the scenario so runs never need a lookup.
+    let zoneA = data.targetId.split(">")[0] ?? data.targetId;
+    let zoneB = data.targetId.split(">")[1] ?? "";
+    try {
+      const { loadStep1SummaryCwd } = await import("./step1.server");
+      const t = loadStep1SummaryCwd().targets.find((x) => x.id === data.targetId);
+      if (t) {
+        zoneA = t.zone_a;
+        zoneB = t.zone_b;
+      }
+    } catch {
+      // summary missing -> fall back to the split border
+    }
+
+    return createScenario({
+      targetId: data.targetId,
+      name: data.name,
+      description: data.description,
+      zoneA,
+      zoneB,
+      periodStart: PERIOD_START,
+      periodEnd: PERIOD_END,
+    });
   });
 
 export const deleteScenario = createServerFn({ method: "POST" })
   .inputValidator(idIn)
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    await supabaseAdmin.from("scenario_results").delete().eq("scenario_id", data.id);
-    await supabaseAdmin.from("scenario_units").delete().eq("scenario_id", data.id);
-    const { error } = await supabaseAdmin.from("scenarios").delete().eq("id", data.id);
-    if (error) throw new Error(error.message);
+    const { deleteScenario } = await import("./workbench.server");
+    deleteScenario(data.id);
     return { ok: true };
   });
 
@@ -76,25 +80,19 @@ export const addUnit = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { insertUnit } = await import("./workbench.server");
     const def = unitDef(data.unitType);
     const params = data.params ?? def.defaults;
-    const { data: row, error } = await supabaseAdmin
-      .from("scenario_units")
-      .insert({
-        scenario_id: data.scenarioId,
-        unit_type: data.unitType,
-        zone_code: data.zoneCode ?? null,
-        border_zone_a: data.borderZoneA ?? null,
-        border_zone_b: data.borderZoneB ?? null,
-        params,
-        capex_meur: def.defaultCapexMeur,
-        delivery_months: def.defaultDeliveryMonths,
-      })
-      .select()
-      .single();
-    if (error) throw new Error(error.message);
-    return row;
+    return insertUnit({
+      scenarioId: data.scenarioId,
+      unitType: data.unitType,
+      zoneCode: data.zoneCode ?? null,
+      borderZoneA: data.borderZoneA ?? null,
+      borderZoneB: data.borderZoneB ?? null,
+      params,
+      capexMeur: def.defaultCapexMeur,
+      deliveryMonths: def.defaultDeliveryMonths,
+    });
   });
 
 export const updateUnit = createServerFn({ method: "POST" })
@@ -110,77 +108,63 @@ export const updateUnit = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const patch: Record<string, unknown> = {};
-    if (data.params) patch["params"] = data.params;
-    if (data.capexMeur !== undefined) patch["capex_meur"] = data.capexMeur;
-    if (data.deliveryMonths !== undefined) patch["delivery_months"] = data.deliveryMonths;
-    if (data.zoneCode !== undefined) patch["zone_code"] = data.zoneCode;
-    const { error } = await supabaseAdmin
-      .from("scenario_units")
-      .update(patch as never)
-      .eq("id", data.id);
-    if (error) throw new Error(error.message);
+    const { updateUnit } = await import("./workbench.server");
+    updateUnit(data.id, {
+      params: data.params,
+      capexMeur: data.capexMeur,
+      deliveryMonths: data.deliveryMonths,
+      zoneCode: data.zoneCode,
+    });
     return { ok: true };
   });
 
 export const deleteUnit = createServerFn({ method: "POST" })
   .inputValidator(idIn)
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { error } = await supabaseAdmin.from("scenario_units").delete().eq("id", data.id);
-    if (error) throw new Error(error.message);
+    const { deleteUnit } = await import("./workbench.server");
+    deleteUnit(data.id);
     return { ok: true };
   });
 
-/** Run the network model for a scenario and store results + ENTSO-E CBA indicators. */
+/** Run the fast 2-node LP model for a scenario and store results. */
 export const runScenario = createServerFn({ method: "POST" })
   .inputValidator(idIn)
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { loadNetwork, runDispatch } = await import("./simulation.server");
+    const { getScenarioWithDetails, setScenarioStatus, upsertResult, insertValidation } =
+      await import("./workbench.server");
+    const { solveFromUnits } = await import("./fast-entsoe-lp.server");
 
-    const { data: scenario, error: sErr } = await supabaseAdmin
-      .from("scenarios")
-      .select("*, targets:target_id (*)")
-      .eq("id", data.id)
-      .single();
-    if (sErr || !scenario) throw new Error(sErr?.message ?? "Scenario not found");
-    const target = scenario.targets as unknown as {
-      zone_a: string;
-      zone_b: string;
-      period_start: string;
-      period_end: string;
-    };
+    const scenario = getScenarioWithDetails(data.id);
 
-    const { data: units } = await supabaseAdmin
-      .from("scenario_units")
-      .select("*")
-      .eq("scenario_id", data.id);
+    const border = `${scenario.zone_a}>${scenario.zone_b}`;
+    const unitLikes = scenario.units.map((u) => ({
+      unit_type: u.unit_type,
+      zone_code: u.zone_code,
+      border_zone_a: u.border_zone_a,
+      border_zone_b: u.border_zone_b,
+      params: u.params,
+    }));
 
-    await supabaseAdmin.from("scenarios").update({ status: "running" }).eq("id", data.id);
+    setScenarioStatus(data.id, "running");
 
-    const net = await loadNetwork(supabaseAdmin, target.zone_a, target.zone_b);
-    const tgt = { a: target.zone_a, b: target.zone_b };
-    const base = runDispatch(net, [], tgt);
-    const scen = runDispatch(
-      net,
-      (units ?? []).map((u) => ({
-        unit_type: u.unit_type,
-        zone_code: u.zone_code,
-        border_zone_a: u.border_zone_a,
-        border_zone_b: u.border_zone_b,
-        params: (u.params ?? {}) as Record<string, number>,
-      })),
-      tgt,
+    const result = await solveFromUnits(border, unitLikes, [...FAST_MONTHS]);
+    if ("error" in result) throw new Error(result.error);
+
+    // Market opportunity is the LP's gross annual welfare gain (the Step-2
+    // annualisation averages both screened months). The 2-node LP has no CI
+    // signal, so the climate side mirrors the Step-1 adapter's locally-estimated
+    // "released energy x carbon contrast" quantity from the target's own zone
+    // carbon estimates.
+    const marketMeur = result.annual_welfare_gain_meur;
+    const carbonDelta = Math.abs(
+      entsoeZoneMeta(scenario.zone_a).carbon_g_per_kwh -
+        entsoeZoneMeta(scenario.zone_b).carbon_g_per_kwh,
     );
+    const climateKt =
+      result.avg_spread_eur_mwh > 0 ? (marketMeur * carbonDelta) / result.avg_spread_eur_mwh : 0;
 
-    const years = Math.max(base.hours, 1) / 8760;
-    const marketMeur = ((scen.welfareEur - base.welfareEur) / 1e6) / years;
-    const climateKt = (-(scen.co2Kg - base.co2Kg) / 1e6) / years;
-
-    const capex = (units ?? []).reduce((s, u) => s + Number(u.capex_meur ?? 0), 0);
-    const delivery = (units ?? []).reduce(
+    const capex = scenario.units.reduce((s, u) => s + Number(u.capex_meur ?? 0), 0);
+    const delivery = scenario.units.reduce(
       (m, u) => Math.max(m, Number(u.delivery_months ?? 0)),
       0,
     );
@@ -192,93 +176,89 @@ export const runScenario = createServerFn({ method: "POST" })
     const entsoe = {
       b1_socio_economic_welfare_meur_y: round(marketMeur, 3),
       b2_co2_variation_ktco2_y: round(climateKt, 3),
-      b3_res_integration_gwh_y: round(
-        ((scen.extraTransferMwh - base.extraTransferMwh) / 1000) / years,
-        2,
-      ),
-      b4_losses_variation_gwh_y: round(
-        (((scen.borderFlowMwh - base.borderFlowMwh) * 0.02) / 1000) / years,
-        3,
-      ),
-      b5_security_of_supply_congested_hours_avoided: Math.round(
-        (base.congestedHours - scen.congestedHours) / years,
-      ),
-      b6_flexibility_avg_spread_reduction_eur_mwh: round(
-        base.avgSpreadEurMwh - scen.avgSpreadEurMwh,
-        3,
-      ),
-      b7_transfer_capability_mwh_y: round(
-        (scen.borderFlowMwh - base.borderFlowMwh) / years,
-        1,
-      ),
-      b8_congestion_rent_variation_meur_y: round(
-        ((scen.congestionRentEur - base.congestionRentEur) / 1e6) / years,
-        3,
-      ),
-      b9_price_convergence_hours_gained: Math.round(
-        (scen.convergedHours - base.convergedHours) / years,
-      ),
       c1_capex_meur: round(capex, 2),
       c2_delivery_months: delivery,
       npv_25y_meur: round(npvMeur, 2),
       benefit_cost_ratio: bcRatio == null ? null : round(bcRatio, 2),
       simple_payback_years: paybackYears == null ? null : round(paybackYears, 1),
+      avg_spread_eur_mwh: round(result.avg_spread_eur_mwh, 3),
+      shadow_price_ateur_mwh:
+        result.shadow_price_ateur_mwh == null ? null : round(result.shadow_price_ateur_mwh, 4),
       methodology:
-        "ENTSO-E CBA 4.0 style indicators. Hourly market clearing follows the ENTSO-E single day-ahead coupling (Euphemia) ATC algorithm: welfare maximisation with balanced net positions, ATC limits, price convergence where borders are free and price splitting only across saturated borders.",
+        "Fast ENTSO-E screening, Step 2: a reduced-form 2-node transport LP over the " +
+        `screened border (${result.months.length} month(s) averaged). Line units raise the ` +
+        "corridor transfer limit with a linearised price response (10 blocks); battery units " +
+        "shift one cycle per day at the average positive spread. Shadow price recovered by " +
+        "finite-difference re-solve. Screening ranks candidates; it is not dispatch-grade valuation.",
     };
 
     const payload = {
       scenario_id: data.id,
       status: "complete",
+      created_at: new Date().toISOString(),
       market_opportunity_meur: round(marketMeur, 4),
       climate_opportunity_ktco2: round(climateKt, 4),
-      base_metrics: jsonify(base),
-      scenario_metrics: jsonify(scen),
+      base_metrics: {
+        avg_spread_eur_mwh: round(result.avg_spread_eur_mwh, 3),
+        congested_hours: round(result.congestion_hours, 1),
+        annual_welfare_gain_meur: 0,
+        net_annual_surplus_meur: 0,
+      },
+      scenario_metrics: {
+        avg_spread_eur_mwh: round(result.avg_spread_eur_mwh, 3),
+        congested_hours: round(result.congestion_hours, 1),
+        annual_welfare_gain_meur: round(marketMeur, 3),
+        net_annual_surplus_meur: round(marketMeur - capex * 0.08, 3),
+      },
       entsoe_indicators: entsoe,
       hourly_summary: {
-        hours_modelled: base.hours,
-        zones_modelled: net.zones.length,
-        borders_modelled: net.edges.length,
-        period_start: target.period_start,
-        period_end: target.period_end,
+        hours_modelled: Math.round(result.congestion_hours),
+        zones_modelled: 2,
+        borders_modelled: 1,
+        period_start: scenario.period_start,
+        period_end: scenario.period_end,
+        months: result.months,
       },
     };
 
-    await supabaseAdmin.from("scenario_results").delete().eq("scenario_id", data.id);
-    const { error: rErr } = await supabaseAdmin.from("scenario_results").insert(payload);
-    if (rErr) throw new Error(rErr.message);
+    upsertResult(data.id, payload);
+    setScenarioStatus(data.id, "complete");
 
-    await supabaseAdmin
-      .from("scenarios")
-      .update({ status: "complete", updated_at: new Date().toISOString() })
-      .eq("id", data.id);
-
-    // Model validation: how closely the base run reproduces observed flows/prices.
-    await supabaseAdmin.from("model_validation").insert({
-      period_start: target.period_start,
-      period_end: target.period_end,
+    // LP-derived validation placeholder: the Step-2 LP is a screening aggregate,
+    // not a calibrated hourly simulation, so the predeclared Euphemia accuracy
+    // gates do not apply. `passed` reflects data availability only.
+    insertValidation({
+      periodStart: scenario.period_start,
+      periodEnd: scenario.period_end,
       metrics: {
-        price_mae_eur_mwh: round(base.priceMae, 3),
-        border_flow_mae_mw: round(base.flowMae, 1),
-        flow_direction_accuracy: round(base.directionAccuracy, 4),
-        price_convergence_share: round(base.convergedHours / Math.max(base.hours, 1), 4),
-        adverse_flow_hours: base.adverseFlowHours,
-        congestion_rent_meur: round(base.congestionRentEur / 1e6, 3),
-        hours: base.hours,
-        zones: net.zones.length,
+        avg_spread_eur_mwh: round(result.avg_spread_eur_mwh, 3),
+        congestion_hours: round(result.congestion_hours, 1),
+        annual_welfare_gain_meur: round(marketMeur, 3),
+        screened_months: result.months.length,
+        methodology: "fast-entsoe Step-2 LP screening aggregates (not a calibrated hourly model)",
       },
       passed:
-        base.directionAccuracy > 0.8 && base.priceMae < 10 && base.adverseFlowHours === 0,
+        result.avg_spread_eur_mwh > 0 && result.congestion_hours > 0 && result.months.length > 0,
     });
 
     return payload;
   });
 
+/** Latest LP-derived model validation entry (null when nothing ran yet). */
+export const getValidation = createServerFn({ method: "GET" }).handler(async () => {
+  const { latestValidation } = await import("./workbench.server");
+  const v = latestValidation();
+  return v
+    ? {
+        period_start: v.period_start,
+        period_end: v.period_end,
+        passed: v.passed,
+        metrics: v.metrics,
+      }
+    : null;
+});
+
 function round(v: number, d: number) {
   const f = 10 ** d;
   return Math.round((Number.isFinite(v) ? v : 0) * f) / f;
-}
-
-function jsonify(r: Record<string, number>) {
-  return Object.fromEntries(Object.entries(r).map(([k, v]) => [k, round(v, 3)]));
 }

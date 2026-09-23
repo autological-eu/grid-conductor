@@ -6,10 +6,15 @@ import { PanelLeftClose, PanelLeftOpen, PanelRightClose, PanelRightOpen } from "
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { DataBar } from "@/components/DataBar";
-import { EuropeMap, type PlacedUnit, type TargetRow, type UnitDropPlacement } from "@/components/EuropeMap";
+import {
+  EuropeMap,
+  type PlacedUnit,
+  type TargetRow,
+  type UnitDropPlacement,
+} from "@/components/EuropeMap";
 import { TargetSidebar } from "@/components/TargetSidebar";
 import { EvaluationPanel } from "@/components/EvaluationPanel";
-import { listTargets, listZoneSummary } from "@/lib/analysis.functions";
+import { listFastSummary } from "@/lib/fast-entsoe.functions";
 import { addUnit, createScenario, listScenarios } from "@/lib/scenarios.functions";
 import { unitDef, type UnitType } from "@/lib/units";
 
@@ -20,13 +25,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Find congested European electricity borders, simulate batteries, renewables and new lines hour by hour, and evaluate them against ENTSO-E cost-benefit guidelines.",
+          "Find congested ENTSO-E European electricity borders, simulate batteries and new lines, and evaluate them with a fast 2-node screening LP against ENTSO-E cost-benefit thinking.",
       },
       { property: "og:title", content: "EU Cross-Border Opportunity Workbench" },
       {
         property: "og:description",
         content:
-          "Congested borders, hourly market-coupling simulation and ENTSO-E cost-benefit evaluation for European grid investments.",
+          "Congested ENTSO-E borders, 2-node LP scenario simulation and cost-benefit evaluation for European grid investments.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -36,8 +41,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Workbench() {
-  const zonesFn = useServerFn(listZoneSummary);
-  const targetsFn = useServerFn(listTargets);
+  const summaryFn = useServerFn(listFastSummary);
   const [metric, setMetric] = useState<"market" | "climate">("market");
   const [target, setTarget] = useState<TargetRow | null>(null);
   const [scenarioId, setScenarioId] = useState<string | null>(null);
@@ -46,10 +50,10 @@ function Workbench() {
   const [leftWidth, setLeftWidth] = useState(340);
   const [rightWidth, setRightWidth] = useState(380);
 
-  const zones = useQuery({ queryKey: ["zones"], queryFn: () => zonesFn() });
-  const targets = useQuery({ queryKey: ["targets"], queryFn: () => targetsFn() });
+  const summary = useQuery({ queryKey: ["fast-summary"], queryFn: () => summaryFn() });
 
-  const rows = (targets.data ?? []) as TargetRow[];
+  const zones = summary.data?.zones ?? [];
+  const rows = (summary.data?.targets ?? []) as TargetRow[];
 
   const listScenariosQFn = useServerFn(listScenarios);
   const scenarios = useQuery({
@@ -60,16 +64,16 @@ function Workbench() {
   const placedUnits: PlacedUnit[] = (scenarios.data ?? [])
     .filter((s) => !s.is_template)
     .flatMap((s) =>
-    (s.units ?? []).map((u) => ({
-      id: u.id,
-      unit_type: u.unit_type,
-      zone_code: u.zone_code,
-      border_zone_a: u.border_zone_a,
-      border_zone_b: u.border_zone_b,
-      active: !scenarioId || s.id === scenarioId,
-      scenario_name: s.name as string,
-    })),
-  );
+      (s.units ?? []).map((u) => ({
+        id: u.id,
+        unit_type: u.unit_type,
+        zone_code: u.zone_code,
+        border_zone_a: u.border_zone_a,
+        border_zone_b: u.border_zone_b,
+        active: !scenarioId || s.id === scenarioId,
+        scenario_name: s.name as string,
+      })),
+    );
 
   const selectScenario = (id: string | null) => {
     setScenarioId(id);
@@ -114,7 +118,8 @@ function Workbench() {
       qc.invalidateQueries({ queryKey: ["scenarios", target.id] });
       selectScenario(sid);
       setSidebarOpen(true);
-      const where = placement.zoneCode ?? (placement.zoneA ? `${placement.zoneA}–${placement.zoneB}` : "");
+      const where =
+        placement.zoneCode ?? (placement.zoneA ? `${placement.zoneA}–${placement.zoneB}` : "");
       toast.success(`${def.label} added${where ? ` in ${where}` : ""}`);
     } catch (e) {
       toast.error((e as Error).message);
@@ -159,7 +164,7 @@ function Workbench() {
         )}
         <div className="min-w-0 flex-1 p-4">
           <EuropeMap
-            zones={zones.data ?? []}
+            zones={zones}
             targets={rows}
             selectedId={target?.id ?? null}
             metric={metric}

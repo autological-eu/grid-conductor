@@ -15,8 +15,9 @@ python tools/carbon_pilot.py --month 2026-08 --archive ../data/annual/indicators
 python -m unittest discover -s tools -p "test_carbon_pilot.py" -v
 ```
 
-The archive path above assumes this repository is inside the earlier
-electricity-maps workspace. `--archive` is optional. Downloads are cached under
+The `../data/annual` path above assumes the generator runs from the repository
+root (this project lives standalone under `Coding\grid-conductor`). `--archive`
+is optional. Downloads are cached under
 `data/carbon-pilot/entsoe/raw`; generated `hourly.jsonl` and `summary.json` are
 under `data/carbon-pilot/entsoe/YYYY-MM`. All are ignored by Git. Cached runs
 need no API key. Raw XML has a checksum and secret-free request metadata.

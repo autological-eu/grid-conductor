@@ -91,6 +91,25 @@ export function batteryCycleLp(batteryMw: number, batteryMwh: number, spread: nu
   };
 }
 
+/** Battery LP honouring a per-unit round-trip efficiency (scenario battery override). */
+export function batteryCycleLpEff(mw: number, mwh: number, spread: number, eff: number): Model {
+  const h = 1; // one hour per leg
+  return {
+    optimize: "welfare",
+    opType: "max",
+    constraints: {
+      energy: { max: 0 }, // d - rte*c <= 0
+      chargeCap: { max: mw * h },
+      dischargeCap: { max: mw * h },
+      depth: { max: mwh },
+    },
+    variables: {
+      c: { energy: -eff, chargeCap: 1, depth: 1, welfare: 0 },
+      d: { energy: 1, dischargeCap: 1, welfare: spread },
+    },
+  };
+}
+
 function welfare(result: SolveResult | unknown): number {
   const r = result as SolveResult;
   return Number(r["result"] ?? 0);
@@ -229,4 +248,154 @@ export async function fastEntsoeLp(
     month,
     scenarios: solveScenarios(row as unknown as ScreeningRow),
   };
+}
+
+/**
+ * Custom scenario solving for the workbench's step-two flow. Takes the real
+ * scenario units (line added MW, battery power/energy/efficiency) placed on a
+ * directed border, solves the 2-node LP for each screened month and averages
+ * the annualised aggregates.
+ *
+ * Supported today: `line` and `battery`. `solar` / `wind` / `demand_response`
+ * are not representable in the 2-node reduced form yet and throw with a clear
+ * message (wind/solar extension is planned).
+ */
+export type ScenarioUnitLike = {
+  unit_type: string;
+  zone_code: string | null;
+  border_zone_a: string | null;
+  border_zone_b: string | null;
+  params: Record<string, number> | null;
+};
+
+export type FromUnitsResult = {
+  border: string;
+  months: string[];
+  annual_welfare_gain_meur: number;
+  shadow_price_ateur_mwh: number | null;
+  avg_spread_eur_mwh: number;
+  congestion_hours: number;
+};
+
+export async function solveFromUnits(
+  border: string,
+  units: ScenarioUnitLike[],
+  months: string[],
+): Promise<FromUnitsResult | { error: string }> {
+  const data = await loadTargetsJson();
+  const rows = (data["targets"] as Array<Record<string, unknown>>) ?? [];
+
+  // Aggregate the placed units into LP sizes.
+  let cableMw = 0;
+  let batteryMw = 0;
+  let batteryMwh = 0;
+  let batteryEffSum = 0;
+  let batteryCount = 0;
+  const unsupported = new Set<string>();
+  for (const u of units ?? []) {
+    const p = u.params ?? {};
+    switch (u.unit_type) {
+      case "line":
+        cableMw += p["added_mw"] ?? 0;
+        break;
+      case "battery":
+        batteryMw += p["power_mw"] ?? 0;
+        batteryMwh += p["energy_mwh"] ?? 0;
+        batteryEffSum += p["efficiency"] ?? ROUND_TRIP_EFFICIENCY;
+        batteryCount++;
+        break;
+      default:
+        unsupported.add(u.unit_type);
+        break;
+    }
+  }
+  if (unsupported.size > 0) {
+    throw new Error(
+      `unsupported unit type(s) for the fast 2-node LP: ${[...unsupported].join(", ")}. ` +
+        "Only line and battery are modelled for now.",
+    );
+  }
+
+  const batteryEff = batteryCount > 0 ? batteryEffSum / batteryCount : ROUND_TRIP_EFFICIENCY;
+
+  const monthly: Array<{
+    welfare: number;
+    shadow: number | null;
+    spread: number;
+    hours: number;
+  }> = [];
+  for (const month of months) {
+    const row = rows.find((r) => r["border"] === border && r["month"] === month);
+    if (!row) continue;
+    monthly.push(
+      solveFromUnitsMonth(
+        row as unknown as ScreeningRow,
+        cableMw,
+        batteryMw,
+        batteryMwh,
+        batteryEff,
+      ),
+    );
+  }
+  if (monthly.length === 0) {
+    return { error: `no screening row for border=${border} months=${months.join(",")}` };
+  }
+  const solvedMonths = months.filter((m) =>
+    rows.some((r) => r["border"] === border && r["month"] === m),
+  );
+
+  const avg = (xs: number[]) => (xs.length ? xs.reduce((s, v) => s + v, 0) / xs.length : 0);
+  const shadows = monthly.map((m) => m.shadow).filter((v): v is number => v != null);
+  return {
+    border,
+    months: solvedMonths,
+    annual_welfare_gain_meur: avg(monthly.map((m) => m.welfare)),
+    shadow_price_ateur_mwh: shadows.length ? avg(shadows) : null,
+    avg_spread_eur_mwh: avg(monthly.map((m) => m.spread)),
+    congestion_hours: avg(monthly.map((m) => m.hours)),
+  };
+}
+
+function solveFromUnitsMonth(
+  row: ScreeningRow,
+  cableMw: number,
+  batteryMw: number,
+  batteryMwh: number,
+  batteryEff: number,
+): { welfare: number; shadow: number | null; spread: number; hours: number } {
+  const spread = row.average_positive_spread_eur_mwh ?? 0;
+  const congestedSamples = row.congested_quarters ?? 0;
+  const congestionHours = congestedSamples / 4;
+  const monthsPerYear = 12;
+  let annual = 0;
+  let shadow: number | null = null;
+
+  if (cableMw > 0) {
+    const blocks = 10;
+    const blockMw = cableMw / blocks;
+    const slope = row.slope_a ?? 0;
+    const baseCap = row.cap_ab_mw ?? 0;
+    const marginals = Array.from({ length: blocks }, (_, k) =>
+      Math.max(0, spread - slope * ((k + 1) * blockMw)),
+    );
+    const welfarePerSample = welfare(solver.Solve(blockLp(marginals, blockMw, cableMw + baseCap)));
+    annual += (welfarePerSample * HOURS_PER_SAMPLE * congestedSamples * monthsPerYear) / 1e6;
+    const resPert = solver.Solve(blockLp(marginals, blockMw, cableMw + baseCap, 1));
+    shadow = welfare(resPert) - welfarePerSample;
+  }
+
+  if (batteryMw > 0 && batteryMwh > 0) {
+    const welfarePerCycle = welfare(
+      solver.Solve(batteryCycleLpEff(batteryMw, batteryMwh, spread, batteryEff)),
+    );
+    annual += (welfarePerCycle * 365) / 1e6;
+    if (shadow == null) {
+      const resPert = solver.Solve(
+        batteryCycleLpEff(batteryMw + 1, batteryMwh, spread, batteryEff),
+      );
+      shadow = welfare(resPert) - welfarePerCycle;
+    }
+  }
+
+  return { welfare: annual, shadow, spread, hours: congestionHours };
 }

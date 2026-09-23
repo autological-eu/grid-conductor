@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { entsoeZoneMeta } from "./entsoeZones";
@@ -51,6 +52,7 @@ export type Step1Summary = {
     total_hours: number;
     market_loss_meur: number;
     climate_loss_ktco2: number;
+    observed_capacity_mw: number | null;
   }>;
 };
 
@@ -165,6 +167,7 @@ export function loadStep1Summary(filePath: string): Step1Summary {
       total_hours: round(totalHours),
       market_loss_meur: round2(marketLossMeurYr),
       climate_loss_ktco2: round2(climate),
+      observed_capacity_mw: null,
     });
 
     for (const code of [a, b]) {
@@ -186,4 +189,29 @@ function round(x: number): number {
 }
 function round2(x: number): number {
   return Math.round(x * 100) / 100;
+}
+
+/** The Step-1 screening artifact the workbench renders. */
+const SUMMARY_PATH = path.join(process.cwd(), "public", "research", "entsoe-fast-targets.json");
+
+/** Read the Step-1 summary from its well-known path (server-side). */
+export function loadStep1SummaryCwd(): Step1Summary {
+  return loadStep1Summary(SUMMARY_PATH);
+}
+
+/**
+ * Deterministic target row id for a fast-entsoe directed border. The
+ * `scenarios.target_id` column is a FK to `targets.id` (a Postgres uuid), but
+ * fast-entsoe targets are identified by their border string ("FR>IT-North"),
+ * so we map each border to a stable uuid4-style hash that survives edits,
+ * re-runs and deploys. Existing Electricity-Maps target rows are untouched.
+ */
+export function borderUuid(border: string): string {
+  const bytes = [
+    ...createHash("sha256").update(`grid-conductor:${border}`).digest().subarray(0, 16),
+  ];
+  bytes[6] = (bytes[6]! & 0x0f) | 0x40;
+  bytes[8] = (bytes[8]! & 0x3f) | 0x80;
+  const hex = bytes.map((b) => b.toString(16).padStart(2, "0")).join("");
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
 }

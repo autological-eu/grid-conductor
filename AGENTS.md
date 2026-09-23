@@ -12,8 +12,9 @@
 # Grid Conductor — agent notes
 
 EU cross-border arbitrage / investment simulator. TanStack Start (React 19) app
-backed by Supabase (Postgres), with a PyPSA-Eur power-system model as the data
-backend. See **`refactor.md`** for the full plan to remove the Electricity Maps
+with a local SQLite scenario store (Supabase was removed), driven by the fast
+ENTSO-E screening pipeline, with a PyPSA-Eur power-system model as the data
+backend. See **`refactor.md`** for the plan to remove the Electricity Maps
 API dependency and complete the PyPSA-Eur integration.
 
 ## Stack & architecture
@@ -22,7 +23,7 @@ API dependency and complete the PyPSA-Eur integration.
 - File-based routing under `src/routes/` (TanStack file routes — no `pages/`). `src/routes/routeTree.gen.ts` is **auto-generated and changes on dev/build**; don't hand-edit it.
 - `vite.config.ts` must **not** re-add TanStackStart/viteReact/tailwind plugins — `@lovable.dev/vite-tanstack-config` already wires them and duplicates break the build. Only pass extra config through `defineConfig`.
 - Bundled server entry is redirected to `src/server.ts` (SSR error wrapper; h3 swallows in-handler throws into JSON 500s that never reach try/catch, and the wrapper re-renders the error page). `src/start.ts` re-adds CSRF for server fns manually — defining `start.ts` opts out of auto-install.
-- Build target is Nitro → Cloudflare/Wrangler. `.output/`, `.wrangler/`, `.vinxi/`, `.tanstack/` are gitignored artifacts; deploy concerns the Nitro output only.
+- Build target is Nitro → Cloudflare/Wrangler. `.output/`, `.wrangler/`, `.vinxi/`, `.tanstack/` are gitignored artifacts; deploy concerns the Nitro output only. **The local SQLite scenario store does not exist in a Workers build** (no bun built-ins / filesystem) — see the Workbench scenario store section.
 - UI is shadcn/ui (new-york style, lucide icons) from `components.json`; Tailwind v4 via `src/styles.css`.
 - `tsconfig.json` turns on extra-strict flags beyond `strict: true`: `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, `noPropertyAccessFromIndexSignature`. Don't pass explicit `undefined` for optional props, and treat index access as `| undefined` (narrow before use).
 
@@ -41,19 +42,43 @@ bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
 - The app has **no test suite**. Verification = `lint` + `bunx tsc --noEmit` + manual dev run.
 - Python research tools have their own tests (see below).
 
-## Supabase & secrets
+## Workbench scenario store (local SQLite)
 
-- Modes: browser client `src/integrations/supabase/client.ts` (`VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`); admin client `src/integrations/supabase/client.server.ts` (`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, bypasses RLS); `auth-middleware.ts`/`auth-attacher.ts` attach the user (RLS) client.
-- `client.server.ts` is marked auto-generated — the lazy `Proxy` allows importing it at top level only in other `.server.ts` modules. **Never top-level-import it from route files or `*.functions.ts`** (they ship to the client bundle and would leak the service-role key). Dynamic-import inside handlers instead.
-- Schema is auto-generated into `src/integrations/supabase/types.ts` (there are **no SQL migration files** in the repo). Current tables: `zones`, `borders`, `targets`, `scenarios`, `scenario_units`, `scenario_results`, `model_validation`, `app_config` (keep) and `import_jobs`, `job_locks`, `em_cache`, `zone_hourly`, `border_flow_hourly` (being removed). RPCs: `compute_targets`, `zone_summary` (being removed). **If you change DB schema, regenerate types via Lovable — do not hand-edit `types.ts`.**
-- External data keys: `ELECTRICITY_MAPS_API_KEY` (`src/lib/emaps.server.ts`, **being removed** — see refactor.md), `ENTSOE_API_KEY` (`src/lib/entsoe.server.ts`, `entsoe-flows.server.ts`). Cron auth uses `LOVABLE_CRON_SECRET`/`LOVABLE_CRON_SECRET_PREVIOUS`. All live in `.env` (untracked); never commit real keys.
-- Server-only modules use the `.server.ts` suffix convention. eslint `no-restricted-imports` errors on the Next.js `server-only` package — use `.server.ts` or `@tanstack/react-start/server-only` instead.
-- Server functions live in `*.functions.ts` and call `.server.ts` modules via **dynamic `import()` inside each handler** (e.g. `import.functions.ts`). Keep that indirection — importing `.server.ts` at the top of a `.functions.ts`/route file leaks server-side code into the client bundle.
+- **Supabase is gone.** Scenario CRUD, results and model validation persist in a
+  local SQLite database via `src/lib/workbench.server.ts` (bun built-in
+  `bun:sqlite`; tables mirror the old Supabase schema 1:1: `scenarios` /
+  `scenario_units` / `scenario_results` / `model_validation`).
+- Default path `data/workbench/scenarios.db` (gitignored), override with
+  `WORKBENCH_DB_PATH`. `created_at` columns are stored for stable ordering;
+  JSON columns (`params`, `metrics`, indicators, ...) are TEXT, parsed on read.
+- Server fns (`src/lib/scenarios.functions.ts`) dynamic-import `workbench.server`
+  inside each handler — keep that indirection (same rule as any `.server.ts`
+  module). `runScenario` snapshots `zone_a`/`zone_b`/`period_start`/`period_end`
+  onto the scenario at creation so runs never need external lookups.
+- `bun:sqlite` exists only in the bun runtime, so the store works under
+  `bun run dev` only. A Cloudflare/Wrangler build has no filesystem or bun
+  built-ins; if that deploy target is ever needed, slot a KV/D1 adapter behind
+  this same module boundary.
+- `@types/bun` is a devDependency so `bun:sqlite` typechecks under
+  `bunx tsc --noEmit`. Don't add `"bun"` to `tsconfig.json` `types` (that leaks
+  bun globals into client code — module resolution works without listing it).
+- Server-only modules use the `.server.ts` suffix convention. eslint
+  `no-restricted-imports` errors on the Next.js `server-only` package — use
+  `.server.ts` or `@tanstack/react-start/server-only` instead.
+- Remaining env: `ENTSOE_API_KEY` (`src/lib/entsoe.server.ts`,
+  `entsoe-flows.server.ts`), `ELECTRICITY_MAPS_API_KEY` (`emaps.server.ts`,
+  legacy, being removed). `.env` is tracked by git (Lovable boilerplate) but
+  holds no secrets; never commit real keys.
 
 ## Data pipeline & scheduled refresh
 
-- **Being replaced** — see `refactor.md` Phase 4. The Electricity Maps import pipeline (`import.server.ts`, `emaps.server.ts`, `daily-refresh.ts`) is being removed. Hourly data will come from PyPSA-Eur baseline static JSON in `public/research/baseline/`.
-- Until the refactor completes, the old pipeline still exists: chunked historical import in `src/lib/import.server.ts`, scheduled daily refresh in `src/routes/api/public/daily-refresh.ts` (POST, protected by `x-refresh-secret`), target detection via `compute_targets` Postgres RPC.
+- **Removed.** The Electricity Maps import pipeline (`import.server.ts`,
+  `daily-refresh.ts`, `import.functions.ts`) and the Supabase schema it wrote to
+  are deleted. The workbench now reads the Step-1 screening artifact
+  `public/research/entsoe-fast-targets.json` directly (see the screening ladder
+  section below).
+- Next step (refactor.md Phase 4): swap the Step-1 source to PyPSA-Eur baseline
+  static JSON in `public/research/baseline/` once the Python chain builds it.
 
 ## Python research tools (`tools/`, standalone)
 
@@ -106,7 +131,7 @@ bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
   `& "C:\Users\owner\miniconda3\python.exe" tools\fast_entsoe_screening.py`
   (`C:\Users\owner\miniconda3\python.exe -m unittest discover -s tools -p "test_*.py" -v`).
 - Run tests: `python -m unittest discover -s tools -p "test_*.py" -v`.
-- Data and large runs live under gitignored dirs — never commit them: `data/carbon-pilot/`, `data/eu-market/`, `data/jao/`, `data/pypsa-eur/`.
+- Data and large runs live under gitignored dirs — never commit them: `data/carbon-pilot/`, `data/eu-market/`, `data/jao/`, `data/pypsa-eur/`, `data/workbench/`.
 - Research context lives in `docs/*.md` and `public/research/`; `src/routes/targets.tsx` renders the target-evidence report page.
 
 ## Fast ENTSO-E screening ladder (`tools/fast_entsoe_screening.py` + live Step-2 LP)

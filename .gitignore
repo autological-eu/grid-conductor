@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 # Local research downloads and generated results
 data/carbon-pilot/
+data/workbench/
 __pycache__/
 dist
 dist-ssr

@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { listScenarios } from "@/lib/scenarios.functions";
-import { getValidation } from "@/lib/analysis.functions";
+import { listScenarios, getValidation } from "@/lib/scenarios.functions";
 import type { TargetRow } from "./EuropeMap";
 import { Button } from "@/components/ui/button";
 import { ScenarioReport } from "./ScenarioReport";
@@ -108,7 +107,9 @@ export function EvaluationPanel({
                     ind[key] === undefined ? null : (
                       <div key={key} className="flex justify-between gap-2 text-xs">
                         <dt className="text-muted-foreground">{label}</dt>
-                        <dd className="font-medium">{ind[key] === null ? "—" : String(ind[key])}</dd>
+                        <dd className="font-medium">
+                          {ind[key] === null ? "—" : String(ind[key])}
+                        </dd>
                       </div>
                     ),
                   )}
@@ -124,11 +125,7 @@ export function EvaluationPanel({
         <div className="border-t border-border p-4 text-xs">
           <div className="flex items-center justify-between">
             <span className="font-semibold">Model validation</span>
-            <span
-              className={
-                validation.data.passed ? "text-emerald-600" : "text-destructive"
-              }
-            >
+            <span className={validation.data.passed ? "text-emerald-600" : "text-destructive"}>
               {validation.data.passed ? "Passed" : "Check"}
             </span>
           </div>
@@ -168,9 +165,7 @@ function Kpi({
   return (
     <div className="rounded-md bg-muted p-2">
       <div className="text-[11px] text-muted-foreground">{label}</div>
-      <div
-        className={`text-lg font-semibold ${positive ? "text-emerald-600" : "text-foreground"}`}
-      >
+      <div className={`text-lg font-semibold ${positive ? "text-emerald-600" : "text-foreground"}`}>
         {value}
       </div>
       <div className="text-[11px] text-muted-foreground">{unit}</div>

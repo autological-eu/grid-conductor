@@ -96,23 +96,17 @@ export function ScenarioReport({
         <Section title="2. Problem addressed">
           <p className="text-sm">
             Over the assessment period the border was at its observed transfer limit for{" "}
-            {target.congested_hours} of {target.total_hours} hours while prices diverged
-            between the two zones. The unexploited exchange is valued at{" "}
-            {target.market_loss_meur.toFixed(1)} MEUR per year of foregone welfare and{" "}
-            {target.climate_loss_ktco2.toFixed(1)} ktCO2 per year of avoidable emissions.
+            {target.congested_hours} of {target.total_hours} hours while prices diverged between the
+            two zones. The unexploited exchange is valued at {target.market_loss_meur.toFixed(1)}{" "}
+            MEUR per year of foregone welfare and {target.climate_loss_ktco2.toFixed(1)} ktCO2 per
+            year of avoidable emissions.
           </p>
         </Section>
 
         <Section title="3. Methodology">
           <p className="text-sm">
-            Hourly market clearing follows the ENTSO-E single day-ahead coupling (Euphemia)
-            algorithm on an ATC network representation: total social welfare is maximised
-            subject to balanced net positions and transfer limits, prices converge across
-            unsaturated borders and split only where a border is saturated, and no energy
-            flows towards the cheaper zone. Each zone's aggregated curve is calibrated from
-            its own hourly price and net-position history. The counterfactual is the same
-            year cleared without the project. Block, complex and PUN orders, flow-based
-            domains and the intraday/balancing timeframes are outside the model.
+            {ind["methodology"] ??
+              "Hourly market clearing follows the ENTSO-E single day-ahead coupling (Euphemia) algorithm on an ATC network representation."}
           </p>
         </Section>
 
@@ -154,10 +148,10 @@ export function ScenarioReport({
 
         <Section title="6. Conclusion">
           <p className="text-sm">
-            The project delivers {r.market_opportunity_meur.toFixed(1)} MEUR per year of
-            additional welfare and {r.climate_opportunity_ktco2.toFixed(1)} ktCO2 per year of
-            avoided emissions, at a capital cost of {String(ind["c1_capex_meur"] ?? "—")} MEUR
-            and a delivery time of {String(ind["c2_delivery_months"] ?? "—")} months
+            The project delivers {r.market_opportunity_meur.toFixed(1)} MEUR per year of additional
+            welfare and {r.climate_opportunity_ktco2.toFixed(1)} ktCO2 per year of avoided
+            emissions, at a capital cost of {String(ind["c1_capex_meur"] ?? "—")} MEUR and a
+            delivery time of {String(ind["c2_delivery_months"] ?? "—")} months
             {ind["simple_payback_years"] != null
               ? `, implying a simple payback of ${String(ind["simple_payback_years"])} years`
               : ""}
