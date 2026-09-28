@@ -79,9 +79,7 @@ export async function fetchNtcMw(
     const res = await fetch(url, { headers: { Accept: "application/xml" } });
     if (!res.ok) return null;
     const xml = await res.text();
-    const values = [...xml.matchAll(/<quantity>([\d.]+)<\/quantity>/g)].map((m) =>
-      Number(m[1]),
-    );
+    const values = [...xml.matchAll(/<quantity>([\d.]+)<\/quantity>/g)].map((m) => Number(m[1]));
     if (!values.length) return null;
     return Math.max(...values);
   } catch {

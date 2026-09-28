@@ -112,8 +112,8 @@ function db(): Db {
       updated_at TEXT NOT NULL,
       zone_a TEXT NOT NULL,
       zone_b TEXT NOT NULL,
-      period_start TEXT NOT NULL DEFAULT '2026-01-01',
-      period_end TEXT NOT NULL DEFAULT '2026-12-31'
+      period_start TEXT NOT NULL DEFAULT '2025-01-01',
+      period_end TEXT NOT NULL DEFAULT '2025-12-31'
     );
     CREATE INDEX IF NOT EXISTS idx_scenarios_target ON scenarios(target_id);
 
@@ -145,8 +145,8 @@ function db(): Db {
 
     CREATE TABLE IF NOT EXISTS model_validation (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      period_start TEXT NOT NULL DEFAULT '2026-01-01',
-      period_end TEXT NOT NULL DEFAULT '2026-12-31',
+      period_start TEXT NOT NULL DEFAULT '2025-01-01',
+      period_end TEXT NOT NULL DEFAULT '2025-12-31',
       metrics TEXT,
       passed INTEGER NOT NULL DEFAULT 0,
       created_at TEXT NOT NULL

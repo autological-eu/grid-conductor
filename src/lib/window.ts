@@ -1,9 +1,7 @@
 // Shared (client-safe) definition of the analysis window: the last full year,
 // ending at midnight UTC of yesterday.
 export function analysisWindow(now: Date = new Date()): { start: Date; end: Date } {
-  const end = new Date(
-    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()),
-  );
+  const end = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
   end.setUTCDate(end.getUTCDate() - 1);
   const start = new Date(end);
   start.setUTCFullYear(start.getUTCFullYear() - 1);

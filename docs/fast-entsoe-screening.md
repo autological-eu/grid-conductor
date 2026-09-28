@@ -6,12 +6,16 @@ decision-focused pipeline. It runs entirely on **locally cached ENTSO-E data**
 (`data/eu-market/bank-*.json`), so no API key, network, or live ticker is
 needed — and the whole thing is reproducible and resumable.
 
+The screening baseline is the **full calendar year 2025** (12 monthly banks,
+Jan–Dec): Step-1 sums are true annual sums, **not** an ×12 extrapolation of one
+representative month.
+
 ## Split
 
-| step | what | where | when |
-| --- | --- | --- | --- |
-| **Step 1** | border screening: realized congestion rent + theoretical opportunity ladder | `tools/fast_entsoe_screening.py` (Python, numpy) | offline, cached; publishes `public/research/entsoe-fast-targets.json` |
-| **Step 2** | 2-node LP decision matrix per candidate border | `src/lib/fast-entsoe-lp.server.ts` + route `/api/public/fast-entsoe-lp` (bun, `javascript-lp-solver`) | live, on request, server-side |
+| step       | what                                                                        | where                                                                                                 | when                                                                              |
+| ---------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **Step 1** | border screening: realized congestion rent + theoretical opportunity ladder | `tools/fast_entsoe_screening.py` (Python, numpy)                                                      | offline, cached; publishes `public/research/entsoe-fast-targets.json` (schema_v3) |
+| **Step 2** | 2-node LP decision matrix per candidate border                              | `src/lib/fast-entsoe-lp.server.ts` + route `/api/public/fast-entsoe-lp` (bun, `javascript-lp-solver`) | live, on request, server-side                                                     |
 
 Step 1 produces the ranked candidate list; Step 2 lets the user (or the app)
 ask "what happens if I add a cable / battery / both on border X?" and get an
@@ -19,30 +23,34 @@ annualized decision matrix back — computed live, not pre-baked.
 
 ## Step 1 — screening (cached, numpy-only)
 
-For every *interior* border, in **both directions** (`A>B` and `B>A`), the
-screened month's quarter-hour bank is summed up:
+For every _interior_ border, in **both directions** (`A>B` and `B>A`), the
+calendar year's quarter-hour series (all 12 banks concat onto one NaN-padded
+quarter grid, see `concat_banks`) is summed up:
 
 ```
-realized_rent           = (0.25/1e6) * Σ_t  F_AB,t * (P_B,t - P_A,t)        [signed M€/month]
-positive_rent           = (0.25/1e6) * Σ_t  F_AB,t * max(0, P_B,t - P_A,t)  [M€/month]
+realized_rent           = (0.25/1e6) * Σ_t  F_AB,t * (P_B,t - P_A,t)        [signed M€/year]
+positive_rent           = (0.25/1e6) * Σ_t  F_AB,t * max(0, P_B,t - P_A,t)  [M€/year]
 congested_quarters      = #(spread > 5 EUR/MWh), quarter-hour samples
 avg_positive_spread     = mean(positive spread)                             [EUR/MWh]
-opportunity_ΔC          = (0.25/1e6) * Σ_t  ΔC * max(0, P_B,t - P_A,t)      [M€/month], ΔC ∈ {500, 1000}
+opportunity_ΔC          = (0.25/1e6) * Σ_t  ΔC * max(0, P_B,t - P_A,t)      [M€/year], ΔC ∈ {500, 1000}
 slope_{a,b}             = effective dP/d(inflow) for the zone                [EUR/MWh per MW]
 slope_raw_{a,b}         = the raw OLS slope (may be negative / null)
 ```
 
 - Energy sums carry the **0.25 h factor** because the bank series are
-  quarter-hour samples (energy = MW × 0.25 h). Since only the screened month is
-  summed, all M€ figures are **monthly**, not annualised — the published field
-  suffixes are `_meur_month`.
+  quarter-hour samples (energy = MW × 0.25 h). Rows built from a **single bank**
+  carry the `_meur_month` suffix; rows from a **calendar-year concat** carry
+  `_meur_year` and are the full-year sum (no ×12). The published `targets` are
+  the annual rows; `monthly` holds the 12 per-bank diagnostics.
 - `P` = ENTSO-E A44 day-ahead price per bidding zone (quarter-hour).
 - `F` = ENTSO-E A11 scheduled cross-border flow, directed (MW). Both directions
-  are read from the bank and emitted as separate *directed* rows (`A>B`, `B>A`),
+  are read from the bank and emitted as separate _directed_ rows (`A>B`, `B>A`),
   so a border that congests "the wrong way" still ranks.
-- data is NaN-aware (the `GB>IE`/`LT>LV` series have `null` gaps), and borders
-  with **no** flow data at all (e.g. `IT-SARD>IT-SICI`, `IT-SICI>IT-SUD`) get
-  `realized_rent = null` rather than a fabricated zero.
+- Data is NaN-aware (the `GB>IE`/`LT>LV` series have `null` gaps): as in the
+  monthly pipeline, the annual row's realized **and** opportunity figures only
+  count samples whose price AND flow are known (`observed_quarters`), so a
+  missing interval cannot inflate a year's rent or ladder. Borders with **no**
+  flow data at all get `realized_rent = null` rather than a fabricated zero.
 - `slope_{a,b}` is an OLS of the zone's price against its net scheduled inflow;
   it feeds the Step-2 LP's price-response term (how much the spread collapses
   once you inject more capacity on the border). The raw OLS is clamped to `0`
@@ -50,19 +58,20 @@ slope_raw_{a,b}         = the raw OLS slope (may be negative / null)
   `slope_raw_{a,b}`, and Step-2 cable welfare is an **upper bound** on rows with
   a clamped slope.
 
-Output: `public/research/entsoe-fast-targets.json` (schema_v2) ranked by
-theoretical opportunity at ΔC=1000. The equivalent SQL formulation over the
-quarter-hour series is:
+Output: `public/research/entsoe-fast-targets.json` (schema_v3) ranked by
+theoretical opportunity at ΔC=1000, with the monthly diagnostics and a coverage
+summary (`year`, `months[]`, window, quarter-hour count). The equivalent SQL
+formulation over the concatenated quarter-hour series is:
 
 ```sql
 SELECT border,
        COUNT(*) FILTER (WHERE spread > 5)                        AS congested_quarters,
        AVG(spread) FILTER (WHERE spread > 5)                     AS avg_positive_spread,
-       SUM(0.25 * F_AB * spread)/1e6                              AS realized_rent_meur_month,
-       SUM(0.25 * 500 * max(0, spread))/1e6 AS opp_500mw_meur_month,
-       SUM(0.25 * 1000 * max(0, spread))/1e6 AS opp_1000mw_meur_month
+       SUM(0.25 * F_AB * spread)/1e6                              AS realized_rent_meur_year,
+       SUM(0.25 * 500 * max(0, spread))/1e6 AS opp_500mw_meur_year,
+       SUM(0.25 * 1000 * max(0, spread))/1e6 AS opp_1000mw_meur_year
 FROM quarterly
-GROUP BY border ORDER BY opp_1000mw_meur_month DESC;
+GROUP BY border ORDER BY opp_1000mw_meur_year DESC;
 ```
 
 The numpy implementation produces numerically identical results; it was chosen
@@ -71,27 +80,29 @@ because no duckdb engine is installed in this environment.
 Run:
 
 ```sh
-python tools/fast_entsoe_screening.py                 # defaults to both cached bank months
+python tools/fast_entsoe_screening.py                  # defaults to --year 2025 (all bank-2025-*-v2.json)
+python tools/fast_entsoe_screening.py --banks data/eu-market/bank-2025-01-v2.json   # single bank
+python tools/fast_entsoe_screening.py --year 2026      # any year with cached banks
 python -m unittest discover -s tools -p "test_fast_entsoe_screening.py" -v
 ```
 
 ## Step 2 — live 2-node LP (`javascript-lp-solver`)
 
-`src/lib/fast-entsoe-lp.server.ts` reads the published Step-1 JSON and solves a
-small LP per scenario on the bun server:
+`src/lib/fast-entsoe-lp.server.ts` reads the published Step-1 annual rows and
+solves a small LP per scenario on the bun server:
 
 - **`cable_500` / `cable_1000`** — add ΔC MW of intertie on `A>B`. Capacity is
-  linearized into 10 blocks; block *k* has marginal welfare
+  linearized into 10 blocks; block _k_ has marginal welfare
   `v_k = max(0, avg_spread - slope * (k+1) * block)` so price response eats the
   spread as you push more flow. The LP picks all blocks with positive value.
 
   ```
-  annual_gain_M€ = (Σ_k v_k * x_k) * 0.25 h * congested_quarters * 12 / 1e6
+  annual_gain_M€ = (Σ_k v_k * x_k) * 0.25 h * congested_quarters / 1e6
   ```
 
-  The `0.25 h` converts the quarter-hour screening samples to energy; the `x12`
-  annualises under the "the screened month is representative" assumption (the
-  month is a route parameter, so you can compare January vs August).
+  The `0.25 h` converts the quarter-hour screening samples to energy;
+  `congested_quarters` spans the **full year** (the annual row), so the result
+  is the true annual welfare gain — there is **no ×12** factor.
 
 - **`battery_200` / `battery_100`** — 200 MW/800 MWh or 100 MW/400 MWh
   round-trip storage on the low-price side, one charge/discharge cycle per day
@@ -111,15 +122,15 @@ spread at the margin after price response; for batteries the perturbation moves
 power only (energy is left fixed), so the marginal reads as the value of one
 extra MWh of throughput (the discharge leg is one hour).
 
-### Example (Aug 2026, `FR>IT-North`, live)
+### Example (2025 annual, `FR>IT-North`, live)
 
-| scenario | gain M€/yr | capex M€ | net M€/yr | payback | shadow €/MWh |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| cable_500 | 239 | 8 | 238 | 0.03 yr | 62.92 |
-| cable_1000 | 469 | 16 | 468 | 0.03 yr | 60.79 |
-| battery_200 | 4 | 200 | -12 | — | 58.54 |
-| battery_100 | 2 | 100 | -6 | — | 58.54 |
-| co_opt | 473 | 216 | 456 | 0.47 yr | 60.79 |
+| scenario    | gain M€/yr | capex M€ | net M€/yr | payback | shadow €/MWh |
+| ----------- | ---------: | -------: | --------: | ------: | -----------: |
+| cable_500   |        240 |        8 |       239 | 0.03 yr |        58.18 |
+| cable_1000  |        480 |       16 |       478 | 0.03 yr |        58.18 |
+| battery_200 |          4 |      200 |       -12 |       — |        52.36 |
+| battery_100 |          2 |      100 |        -6 |       — |        52.36 |
+| co_opt      |        483 |      216 |       466 | 0.46 yr |        58.18 |
 
 Numbers are order-of-magnitude screening inputs (mean-spread reduced form),
 not dispatch-grade valuation; treat paybacks under a year as "definitely
@@ -138,29 +149,31 @@ wasm-import story improves.
 ## Routes
 
 ```
-GET /api/public/fast-entsoe-lp?border=FR>IT-North&month=2026-08
+GET /api/public/fast-entsoe-lp?border=FR>IT-North
 GET /api/public/entsoe-fast-summary
 ```
 
-Both are public and stateless. The LP endpoint returns the scenario rows above
-(404 with `{error}` if the border/month has no screening row); the summary
-endpoint returns the Step-1 → EuropeMap contract (zones + directed congested
-targets, with `market_loss_meur`/`climate_loss_ktco2` annualised x12 to
-"MEUR/y" / "ktCO2/y" under the screened-month-is-representative assumption).
-No auth needed.
+Both are public and stateless. The LP endpoint returns the scenario rows plus
+the screened `year`/`months` (404 with `{error}` if the border has no annual
+row); the summary endpoint returns the Step-1 → EuropeMap contract (zones +
+directed congested targets, with `market_loss_meur`/`climate_loss_ktco2` in
+"MEUR/y" / "ktCO2/y" mapped straight from the annual rows). No auth needed.
 
 ## Coverage & caveats
 
-- Coverage: 51 interior borders × 2 directed orientations × 2 cached months =
-  204 directed rows. The ladder is direction-flagged, so `X>Y` and `Y>X` are
-  separate rows with their own opportunity/rent.
-- Only months `2026-01` and `2026-08` exist in the cache today; adding a month
-  to `data/eu-market/bank-*.json` and rerunning Step 1 extends the ladder.
-- Step-1 figures are **monthly**; Step-2 annualises by ×12 on the assumption the
-  screened month is representative. Rows whose OLS slope was clamped to `0`
+- Coverage: all 12 months of 2025 (`bank-2025-01-v2.json` … `bank-2025-12-v2.json`),
+  102 directed monthly rows × 12 months of diagnostics, and 140 annual directed
+  rows (union of every border that carried a directed flow in any month). The
+  ladder is direction-flagged, so `X>Y` and `Y>X` are separate rows with their
+  own opportunity/rent.
+- Rerunning Step 1 over the same cache is a no-op; adding a month to
+  `data/eu-market/bank-*.json` and rerunning with its `--year` extends the
+  ladder.
+- Step-1 figures are **annual** (or per-bank monthly in `monthly`); Step-2 uses
+  the annual row directly, with no ×12. Rows whose OLS slope was clamped to `0`
   (`slope_a`/`slope_b` at the floor) have Step-2 cable welfare as an upper
   bound.
-- The reduced-form LP uses the *mean* positive spread per border; hourly
+- The reduced-form LP uses the _mean_ positive spread per border; hourly
   volatility (which drives real storage revenue) is not modeled yet — battery
   figures are conservative.
 

@@ -1,4 +1,5 @@
 <!-- LOVABLE:BEGIN -->
+
 > [!IMPORTANT]
 > This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
 > published git history — force pushing, or rebasing/amending/squashing commits
@@ -7,6 +8,7 @@
 >
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
+
 <!-- LOVABLE:END -->
 
 # Grid Conductor — agent notes
@@ -85,7 +87,7 @@ bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
 - **PyPSA-Eur groundwork is in progress.** See `refactor.md` (phases 0–3) for the
   build/extract/targets chain. Toolchain (all WSL-pixi aware):
   - `tools/build_pypsa_network.py` — Snakemake orchestrator. `--config
-    config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,
+config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,
     `--cutout-only`. Runs pixi inside WSL distro `Ubuntu` (override with
     `GRID_CONDUCTOR_WSL`); auto-detects when already inside WSL. Validates the
     solved network (no extendable assets, hourly weights, nonzero load) and
@@ -144,17 +146,18 @@ bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
   (2) **live** 2-node LP per candidate
   border in `src/lib/fast-entsoe-lp.server.ts` + route
   `src/routes/api/public/fast-entsoe-lp.ts` (GET, public).
-- Step-1 publishes **monthly** M€ figures (quarter-hour sums already carry the
-  0.25 h factor; the field suffix is `_meur_month`). Step 2 annualizes by ×12
-  under the "the screened month is representative" assumption, then compares
-  annual welfare against capex; rows whose OLS price-response slope was ≤ 0 are
-  published with `slope=0` (raw fit in `slope_raw_*`), making cable welfare an
-  upper bound there.
+- Step-1 publishes **annual** M€ figures for the calendar-year concat (quarter-
+  hour sums already carry the 0.25 h factor; single-bank fields keep the
+  `_meur_month` suffix, annual rows use `_meur_year` and are full-year sums, no
+  ×12). Default run is `--year 2025` (all `bank-2025-*-v2.json`); Step-2 reads
+  the annual row directly and compares annual welfare against capex. Rows whose
+  OLS price-response slope was ≤ 0 are published with `slope=0` (raw fit in
+  `slope_raw_*`), making cable welfare an upper bound there.
 - Step-2 solver is **`javascript-lp-solver`** (pure-JS simplex; solved under
   bun). Do **not** swap in the `highs` npm package — its HiGHS-wasm glue fails
-  to import under bun 1.4 (`Export named 'Highs' not found`). Monthly bank
-  coverage: only months present in `data/eu-market/bank-*.json` are screened
-  (currently 2026-01 + 2026-08); rerunning Step 1 extends the ladder.
+  to import under bun 1.4 (`Export named 'Highs' not found`). Bank coverage:
+  all 12 months of 2025 are cached and screened; rerunning Step 1 with `--year`
+  extends the ladder to any year with `data/eu-market/bank-*-v2.json`.
 - Shadow price (dual) is recovered by finite-difference **re-solve** (jsLPSolver
   exposes no tableau duals); the model is a block-linearized mean-spread reduced
   form — treat results as screening rankings, not dispatch-grade valuation.

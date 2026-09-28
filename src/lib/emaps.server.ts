@@ -22,10 +22,7 @@ function qs(input: Record<string, unknown>): string {
   return s ? `?${s}` : "";
 }
 
-export async function emapsFetch<T>(
-  path: string,
-  query: Record<string, unknown> = {},
-): Promise<T> {
+export async function emapsFetch<T>(path: string, query: Record<string, unknown> = {}): Promise<T> {
   const apiKey = process.env["ELECTRICITY_MAPS_API_KEY"];
   if (!apiKey) throw new EmapsError("ELECTRICITY_MAPS_API_KEY is not configured", 0);
   const url = `${BASE}${path}${qs(query)}`;
@@ -38,10 +35,7 @@ export async function emapsFetch<T>(
   });
   if (!res.ok) {
     const body = await res.text().catch(() => "");
-    throw new EmapsError(
-      `Electricity Maps ${res.status}: ${body.slice(0, 300)}`,
-      res.status,
-    );
+    throw new EmapsError(`Electricity Maps ${res.status}: ${body.slice(0, 300)}`, res.status);
   }
   return (await res.json()) as T;
 }
@@ -73,8 +67,7 @@ export async function fetchSignalRange(
   start: string,
   end: string,
 ): Promise<RawPoint[]> {
-  const extra: Record<string, unknown> =
-    signal === "mix" ? { breakdownType: "normal" } : {};
+  const extra: Record<string, unknown> = signal === "mix" ? { breakdownType: "normal" } : {};
   const resp = await emapsFetch(SIGNAL_PATHS[signal], {
     zone,
     start,

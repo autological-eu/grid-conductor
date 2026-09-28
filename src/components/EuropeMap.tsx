@@ -55,8 +55,7 @@ function project(lon: number, lat: number): [number, number] {
 
 type Ring = number[][];
 type Geom =
-  | { type: "Polygon"; coordinates: Ring[] }
-  | { type: "MultiPolygon"; coordinates: Ring[][] };
+  { type: "Polygon"; coordinates: Ring[] } | { type: "MultiPolygon"; coordinates: Ring[][] };
 
 function pathFor(geom: Geom): string {
   const polys = geom.type === "Polygon" ? [geom.coordinates] : geom.coordinates;
@@ -132,7 +131,6 @@ export function EuropeMap({
   onDropUnit?: (unitType: UnitType, placement: UnitDropPlacement) => void;
   placedUnits?: PlacedUnit[];
 }) {
-
   const [hover, setHover] = useState<string | null>(null);
   const [view, setView] = useState<View>(IDENTITY);
   const [dragging, setDragging] = useState(false);
@@ -141,7 +139,6 @@ export function EuropeMap({
   );
   const [dropActive, setDropActive] = useState(false);
   const [dropPlacement, setDropPlacement] = useState<"zone" | "border">("zone");
-
 
   const svgRef = useRef<SVGSVGElement | null>(null);
   const viewRef = useRef(view);
@@ -367,7 +364,6 @@ export function EuropeMap({
     return out;
   }, [placedUnits, zones]);
 
-
   /** find the zone or border under a client point, depending on the dragged unit's placement */
   const locateDrop = useCallback(
     (clientX: number, clientY: number, placement: "zone" | "border") => {
@@ -422,7 +418,6 @@ export function EuropeMap({
     setDropPlacement(unitDef(type).placement);
     setDropTarget(locateDrop(e.clientX, e.clientY, unitDef(type).placement));
   };
-
 
   const onUnitDrop = (e: React.DragEvent<HTMLDivElement>) => {
     const type = (e.dataTransfer.getData("text/unit") || unitDrag.current) as UnitType | "";
@@ -582,7 +577,9 @@ export function EuropeMap({
             const isSelected = selectedId === t.id;
             const dropB = dropTarget?.kind === "border" && dropTarget.key === t.id;
             const candidateB =
-              dropActive && dropPlacement === "border" && eligibleBorders.some((b) => b.id === t.id);
+              dropActive &&
+              dropPlacement === "border" &&
+              eligibleBorders.some((b) => b.id === t.id);
             const active = isSelected || hover === t.id || dropB || candidateB;
             const faded =
               (dropActive && !candidateB) || (selectedId != null && !isSelected && !dropB);
@@ -670,7 +667,6 @@ export function EuropeMap({
             );
           })}
         </g>
-
       </svg>
 
       <div className="pointer-events-none absolute left-3 top-3 max-w-[22rem] rounded-lg border border-border bg-card/90 px-3 py-2 backdrop-blur">

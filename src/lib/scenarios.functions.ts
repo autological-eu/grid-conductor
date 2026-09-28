@@ -5,12 +5,9 @@ import { entsoeZoneMeta } from "./entsoeZones";
 
 const idIn = (data: unknown) => z.object({ id: z.string().uuid() }).parse(data);
 
-/** months covered by the Step-1 screening (results are averaged over these). */
-const FAST_MONTHS = ["2026-01", "2026-08"] as const;
-
 /** Scenario/year window used for all fast-entsoe workbench targets. */
-const PERIOD_START = "2026-01-01";
-const PERIOD_END = "2026-12-31";
+const PERIOD_START = "2025-01-01";
+const PERIOD_END = "2025-12-31";
 
 export const listScenarios = createServerFn({ method: "GET" })
   .inputValidator((d: unknown) => z.object({ targetId: z.string().min(1) }).parse(d))
@@ -147,12 +144,12 @@ export const runScenario = createServerFn({ method: "POST" })
 
     setScenarioStatus(data.id, "running");
 
-    const result = await solveFromUnits(border, unitLikes, [...FAST_MONTHS]);
+    const result = await solveFromUnits(border, unitLikes);
     if ("error" in result) throw new Error(result.error);
 
-    // Market opportunity is the LP's gross annual welfare gain (the Step-2
-    // annualisation averages both screened months). The 2-node LP has no CI
-    // signal, so the climate side mirrors the Step-1 adapter's locally-estimated
+    // Market opportunity is the LP's gross annual welfare gain over the full
+    // 2025 year row (no x12 representative-month factor). The 2-node LP has no
+    // CI signal, so the climate side mirrors the Step-1 adapter's locally-estimated
     // "released energy x carbon contrast" quantity from the target's own zone
     // carbon estimates.
     const marketMeur = result.annual_welfare_gain_meur;
@@ -186,10 +183,12 @@ export const runScenario = createServerFn({ method: "POST" })
         result.shadow_price_ateur_mwh == null ? null : round(result.shadow_price_ateur_mwh, 4),
       methodology:
         "Fast ENTSO-E screening, Step 2: a reduced-form 2-node transport LP over the " +
-        `screened border (${result.months.length} month(s) averaged). Line units raise the ` +
-        "corridor transfer limit with a linearised price response (10 blocks); battery units " +
-        "shift one cycle per day at the average positive spread. Shadow price recovered by " +
-        "finite-difference re-solve. Screening ranks candidates; it is not dispatch-grade valuation.",
+        `screened border (12-month ENTSO-E 2025 year, annual sum, no x12 ` +
+        "representative-month factor). Line units raise the corridor transfer " +
+        "limit with a linearised price response (10 blocks); battery units shift " +
+        "one cycle per day at the average positive spread. Shadow price recovered " +
+        "by finite-difference re-solve. Screening ranks candidates; it is not " +
+        "dispatch-grade valuation.",
     };
 
     const payload = {

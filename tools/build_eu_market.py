@@ -198,10 +198,14 @@ def collect(month='2026-08',output=DUMP/'bank-2026-08.json'):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--month',default='2026-08')
+    p.add_argument('--months',nargs='+',help='collect several YYYY-MM months (overrides --month)')
     p.add_argument('--output',type=Path)
     args=p.parse_args()
-    if not args.output:
-        args.output=DUMP/f'bank-{args.month}.json'
-    collect(args.month,args.output)
+    months=args.months if args.months else [args.month]
+    for m in months:
+        out=args.output
+        if not out:
+            out=DUMP/f'bank-{m}.json'
+        collect(m,out)
 
 if __name__=='__main__':main()

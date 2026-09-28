@@ -10,10 +10,10 @@
 //   * Cable scenarios: marginal spread on the A>B corridor drops linearly with
 //     added flow at rate slope_a (EUR/MWh per MW). We linearize capacity into
 //     10 equal blocks; block k has marginal welfare v_k = avg_spread - slope*C/10*k.
-//     Annual welfare = congested_quarters * 0.25 h * max{0, sum_k v_k*block} * 12
+//     Annual welfare = congested_quarters * 0.25 h * max{0, sum_k v_k*block}
 //     (LP: pick all blocks with positive marginal value). The 0.25 h factor is
-//     the per-quarter energy of the Step-1 screening samples, and x12 annualizes
-//     the single screened month.
+//     the per-quarter energy of the Step-1 screening samples, and congested
+//     quarters now span the full YEAR, not one representative month.
 //   * Battery scenarios: one cycle/day, charging at the low-price node (spread 0)
 //     and discharging at avg spread via a 4-variable LP per cycle, x number of
 //     cycles bounded by energy/MW ratio; annualized with round-trip efficiency.
@@ -44,6 +44,9 @@ const ANNUAL_CAPEX_FACTOR = 0.08; // annuity factor used to annualize capex
 const ROUND_TRIP_EFFICIENCY = 0.9;
 const HOURS_PER_SAMPLE = 0.25; // Step-1 samples are quarter-hours (energy = MW * 0.25 h)
 
+// Each row is one directed border over the FULL screened year (Step-1 schema
+// v3): `congested_quarters` spans the 12 concatenated months, so annual figures
+// are true annual sums, NOT an x12 of a representative month.
 export type ScreeningRow = {
   month: string;
   border: string;
@@ -140,11 +143,10 @@ function scenarioRow(
 
 export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
   const spread = row.average_positive_spread_eur_mwh ?? 0;
-  const congestedSamples = row.congested_quarters ?? 0; // quarter-hour samples in the month
+  const congestedSamples = row.congested_quarters ?? 0; // full-year quarter-hour samples
   const congestionHours = congestedSamples / 4;
   const slope = row.slope_a ?? 0;
   const baseCap = row.cap_ab_mw ?? 0;
-  const monthsPerYear = 12;
   const results: ScenarioResult[] = [];
 
   const cableScenarios: Array<{ name: LpScenario; deltaC: number }> = [
@@ -161,8 +163,8 @@ export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
     const res = solver.Solve(model);
     // per-sample congestion value (EUR/h), sum of marginal blocks dispatched
     const welfarePerSample = welfare(res);
-    // M€/yr = per-sample value x 0.25 h x the month's congested quarters, annualized x12, /1e6
-    const annual = (welfarePerSample * HOURS_PER_SAMPLE * congestedSamples * monthsPerYear) / 1e6;
+    // M€/yr = per-sample value x 0.25 h x the full year's congested quarters, /1e6
+    const annual = (welfarePerSample * HOURS_PER_SAMPLE * congestedSamples) / 1e6;
     // shadow price = marginal value of 1 more MW on the last (most expensive)
     // block: dual of the dispatched intertie
     const resPert = solver.Solve(blockLp(marginals, blockMw, deltaC + baseCap, 1));
@@ -237,15 +239,20 @@ export async function loadTargetsJson(): Promise<Record<string, unknown>> {
 
 export async function fastEntsoeLp(
   border: string,
-  month: "2026-01" | "2026-08" = "2026-08",
-): Promise<{ border: string; month: string; scenarios: ScenarioResult[] } | { error: string }> {
+): Promise<
+  | { border: string; year: string; months: string[]; scenarios: ScenarioResult[] }
+  | { error: string }
+> {
   const data = await loadTargetsJson();
   const rows = (data["targets"] as Array<Record<string, unknown>>) ?? [];
-  const row = rows.find((r) => r["border"] === border && r["month"] === month);
-  if (!row) return { error: `no screening row for border=${border} month=${month}` };
+  const year = String(data["year"] ?? "");
+  const row = rows.find((r) => r["border"] === border && r["month"] === year);
+  if (!row)
+    return { error: `no screening row for border=${border} in ${year || "the published year"}` };
   return {
     border,
-    month,
+    year,
+    months: (data["months"] as string[]) ?? [],
     scenarios: solveScenarios(row as unknown as ScreeningRow),
   };
 }
@@ -253,8 +260,8 @@ export async function fastEntsoeLp(
 /**
  * Custom scenario solving for the workbench's step-two flow. Takes the real
  * scenario units (line added MW, battery power/energy/efficiency) placed on a
- * directed border, solves the 2-node LP for each screened month and averages
- * the annualised aggregates.
+ * directed border and solves the 2-node LP over the FULL-year screening row (
+ * Step-1 schema v3), returning the annual aggregates directly.
  *
  * Supported today: `line` and `battery`. `solar` / `wind` / `demand_response`
  * are not representable in the 2-node reduced form yet and throw with a clear
@@ -280,10 +287,10 @@ export type FromUnitsResult = {
 export async function solveFromUnits(
   border: string,
   units: ScenarioUnitLike[],
-  months: string[],
 ): Promise<FromUnitsResult | { error: string }> {
   const data = await loadTargetsJson();
   const rows = (data["targets"] as Array<Record<string, unknown>>) ?? [];
+  const year = String(data["year"] ?? "");
 
   // Aggregate the placed units into LP sizes.
   let cableMw = 0;
@@ -318,45 +325,28 @@ export async function solveFromUnits(
 
   const batteryEff = batteryCount > 0 ? batteryEffSum / batteryCount : ROUND_TRIP_EFFICIENCY;
 
-  const monthly: Array<{
-    welfare: number;
-    shadow: number | null;
-    spread: number;
-    hours: number;
-  }> = [];
-  for (const month of months) {
-    const row = rows.find((r) => r["border"] === border && r["month"] === month);
-    if (!row) continue;
-    monthly.push(
-      solveFromUnitsMonth(
-        row as unknown as ScreeningRow,
-        cableMw,
-        batteryMw,
-        batteryMwh,
-        batteryEff,
-      ),
-    );
-  }
-  if (monthly.length === 0) {
-    return { error: `no screening row for border=${border} months=${months.join(",")}` };
-  }
-  const solvedMonths = months.filter((m) =>
-    rows.some((r) => r["border"] === border && r["month"] === m),
-  );
+  const row = rows.find((r) => r["border"] === border && r["month"] === year);
+  if (!row)
+    return { error: `no screening row for border=${border} in ${year || "the published year"}` };
 
-  const avg = (xs: number[]) => (xs.length ? xs.reduce((s, v) => s + v, 0) / xs.length : 0);
-  const shadows = monthly.map((m) => m.shadow).filter((v): v is number => v != null);
+  const solved = solveAnnual(
+    row as unknown as ScreeningRow,
+    cableMw,
+    batteryMw,
+    batteryMwh,
+    batteryEff,
+  );
   return {
     border,
-    months: solvedMonths,
-    annual_welfare_gain_meur: avg(monthly.map((m) => m.welfare)),
-    shadow_price_ateur_mwh: shadows.length ? avg(shadows) : null,
-    avg_spread_eur_mwh: avg(monthly.map((m) => m.spread)),
-    congestion_hours: avg(monthly.map((m) => m.hours)),
+    months: (data["months"] as string[]) ?? [],
+    annual_welfare_gain_meur: solved.welfare,
+    shadow_price_ateur_mwh: solved.shadow,
+    avg_spread_eur_mwh: solved.spread,
+    congestion_hours: solved.hours,
   };
 }
 
-function solveFromUnitsMonth(
+function solveAnnual(
   row: ScreeningRow,
   cableMw: number,
   batteryMw: number,
@@ -366,7 +356,6 @@ function solveFromUnitsMonth(
   const spread = row.average_positive_spread_eur_mwh ?? 0;
   const congestedSamples = row.congested_quarters ?? 0;
   const congestionHours = congestedSamples / 4;
-  const monthsPerYear = 12;
   let annual = 0;
   let shadow: number | null = null;
 
@@ -379,7 +368,7 @@ function solveFromUnitsMonth(
       Math.max(0, spread - slope * ((k + 1) * blockMw)),
     );
     const welfarePerSample = welfare(solver.Solve(blockLp(marginals, blockMw, cableMw + baseCap)));
-    annual += (welfarePerSample * HOURS_PER_SAMPLE * congestedSamples * monthsPerYear) / 1e6;
+    annual += (welfarePerSample * HOURS_PER_SAMPLE * congestedSamples) / 1e6;
     const resPert = solver.Solve(blockLp(marginals, blockMw, cableMw + baseCap, 1));
     shadow = welfare(resPert) - welfarePerSample;
   }
