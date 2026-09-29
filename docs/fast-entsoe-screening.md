@@ -35,6 +35,9 @@ avg_positive_spread     = mean(positive spread)                             [EUR
 opportunity_ΔC          = (0.25/1e6) * Σ_t  ΔC * max(0, P_B,t - P_A,t)      [M€/year], ΔC ∈ {500, 1000}
 slope_{a,b}             = effective dP/d(inflow) for the zone                [EUR/MWh per MW]
 slope_raw_{a,b}         = the raw OLS slope (may be negative / null)
+slope_mode_{a,b}        = "fit" | "floor" | "none"
+base_qty_mw             = observed exchange used to size the slope floor     [MW]
+deadweight_loss_meur_*  = 0.25 h * cq * spread² / (2*slope_a) / 1e6        [M€/year]
 ```
 
 - Energy sums carry the **0.25 h factor** because the bank series are
@@ -53,10 +56,20 @@ slope_raw_{a,b}         = the raw OLS slope (may be negative / null)
   flow data at all get `realized_rent = null` rather than a fabricated zero.
 - `slope_{a,b}` is an OLS of the zone's price against its net scheduled inflow;
   it feeds the Step-2 LP's price-response term (how much the spread collapses
-  once you inject more capacity on the border). The raw OLS is clamped to `0`
-  when it is `<= 0` (short-window noise); the raw fit is published in
-  `slope_raw_{a,b}`, and Step-2 cable welfare is an **upper bound** on rows with
-  a clamped slope.
+  once you inject more capacity on the border). A **positive** raw fit is used
+  as-is (`slope_mode = "fit"`); when the fit is `<= 0` or null (short-window
+  noise — 92/140 annual rows), the slope falls back to a **data-grounded floor**
+  (`slope_mode = "floor"`): `floor = avg_positive_spread / (2 * base_qty_mw)`,
+  i.e. adding `2×` the border's observed exchange fully erodes the spread.
+  `base_qty_mw` is the first finite day-ahead cap sample, else the median
+  absolute flow (only ~55/140 rows carry caps). Every congested row therefore has
+  `slope > 0`, so Step-2 gains are **bounded** instead of linear in ΔC.
+- **Market opportunity = deadweight loss.** With the marginal spread falling
+  linearly, the total welfare a project can ever capture is the triangle
+  `deadweight_loss = 0.25 h * congested_quarters * spread² / (2*slope_a) / 1e6`.
+  This is the map's headline figure and the cap every Step-2 scenario result is
+  clamped to — a scenario can never claim more than the border's market
+  opportunity.
 
 Output: `public/research/entsoe-fast-targets.json` (schema_v3) ranked by
 theoretical opportunity at ΔC=1000, with the monthly diagnostics and a coverage
@@ -89,20 +102,25 @@ python -m unittest discover -s tools -p "test_fast_entsoe_screening.py" -v
 ## Step 2 — live 2-node LP (`javascript-lp-solver`)
 
 `src/lib/fast-entsoe-lp.server.ts` reads the published Step-1 annual rows and
-solves a small LP per scenario on the bun server:
+solves a small model per scenario on the bun server:
 
-- **`cable_500` / `cable_1000`** — add ΔC MW of intertie on `A>B`. Capacity is
-  linearized into 10 blocks; block _k_ has marginal welfare
-  `v_k = max(0, avg_spread - slope * (k+1) * block)` so price response eats the
-  spread as you push more flow. The LP picks all blocks with positive value.
+- **`cable_500` / `cable_1000`** — add ΔC MW of intertie on `A>B`. With the
+  marginal spread falling linearly at `slope_a`, welfare is the exact integral
+  of that trapezoid — no block discretization:
 
   ```
-  annual_gain_M€ = (Σ_k v_k * x_k) * 0.25 h * congested_quarters / 1e6
+  q*              = min(ΔC, spread/slope)            [MW saturated]
+  welfare/sample  = spread*q* − ½·slope·q*²          [EUR/h]
+  annual_gain_M€  = welfare/sample × 0.25 h × congested_quarters / 1e6
+  shadow_price    = spread − slope·q* (marginal €/MWh at the added MW)
   ```
 
-  The `0.25 h` converts the quarter-hour screening samples to energy;
-  `congested_quarters` spans the **full year** (the annual row), so the result
-  is the true annual welfare gain — there is **no ×12** factor.
+  A huge ΔC simply saturates at `q* = spread/slope`, where the trapezoid equals
+  the border's deadweight loss — adding 200,000 MW returns the market
+  opportunity, not 200× the 1,000-MW value. The `0.25 h` converts the
+  quarter-hour screening samples to energy; `congested_quarters` spans the
+  **full year** (the annual row), so the result is the true annual welfare gain
+  — there is **no ×12** factor.
 
 - **`battery_200` / `battery_100`** — 200 MW/800 MWh or 100 MW/400 MWh
   round-trip storage on the low-price side, one charge/discharge cycle per day
@@ -115,25 +133,32 @@ solves a small LP per scenario on the bun server:
 
 - **`co_opt`** — cable_1000 + battery_200 stacked.
 
+Every scenario result is clamped to the border's **market opportunity**
+(deadweight loss), so the economic invariant `gain ≤ market opportunity` holds
+for any placed capacity — including the battery and stacked rows.
+
 Dual/shadow price is recovered by **finite-difference re-solve** (perturb one
 more MW of capacity, `Δobjective` = marginal value) because jsLPSolver does not
-expose tableau duals. For cables this gives `shadow_price_ateur_mwh` ≈ the
-spread at the margin after price response; for batteries the perturbation moves
+expose tableau duals. For cables the closed form gives the marginal directly
+(`spread − slope·q*`, ≈0 once saturated); for batteries the perturbation moves
 power only (energy is left fixed), so the marginal reads as the value of one
 extra MWh of throughput (the discharge leg is one hour).
 
 ### Example (2025 annual, `FR>IT-North`, live)
 
-| scenario    | gain M€/yr | capex M€ | net M€/yr | payback | shadow €/MWh |
-| ----------- | ---------: | -------: | --------: | ------: | -----------: |
-| cable_500   |        240 |        8 |       239 | 0.03 yr |        58.18 |
-| cable_1000  |        480 |       16 |       478 | 0.03 yr |        58.18 |
-| battery_200 |          4 |      200 |       -12 |       — |        52.36 |
-| battery_100 |          2 |      100 |        -6 |       — |        52.36 |
-| co_opt      |        483 |      216 |       466 | 0.46 yr |        58.18 |
+| scenario    | gain M€/yr | capex M€ | net M€/yr | payback | shadow €/MWh | market opp. M€/yr |
+| ----------- | ---------: | -------: | --------: | ------: | -----------: | ----------------: |
+| cable_500   |        230 |        8 |       229 | 0.03 yr |        53.61 |             1,530 |
+| cable_1000  |        442 |       16 |       440 | 0.04 yr |        49.05 |             1,530 |
+| battery_200 |          4 |      200 |       -12 |       — |        52.36 |             1,530 |
+| battery_100 |          2 |      100 |        -6 |       — |        52.36 |             1,530 |
+| co_opt      |        446 |      216 |       428 | 0.50 yr |        49.05 |             1,530 |
 
-Numbers are order-of-magnitude screening inputs (mean-spread reduced form),
-not dispatch-grade valuation; treat paybacks under a year as "definitely
+The market opportunity is the border's deadweight-loss bound (~1,530 M€/yr):
+`cable_1000` earns 442 of it, and **any** capacity beyond saturation (e.g. a
+200,000 MW line) still converges to exactly 1,530 M€/yr, never beyond. Numbers
+are order-of-magnitude screening inputs (mean-spread reduced form), not
+dispatch-grade valuation; treat paybacks under a year as "definitely
 investigate", not "confirmed".
 
 ### Solver choice (why not HiGHS)
@@ -142,8 +167,8 @@ The `highs` npm package (HiGHS compiled to WASM) **does not load under bun
 1.4.0**: `Export named 'Highs' not found in highs/build/highs.mjs` (the
 emscripten glue's ESM/CommonJS interop breaks under bun). `javascript-lp-solver`
 is a pure-JS simplex — no WASM, no native deps — and solves correctly under
-bun (verified: block-discretized cable LP dispatches the expected 500 MW across
-10 blocks). It is therefore the Step-2 engine. Revisit `highs` if/when bun's
+bun. It remains the Step-2 battery engine; cables now use the exact trapezoid
+closed form (no LP needed, no block artifacts). Revisit `highs` if/when bun's
 wasm-import story improves.
 
 ## Routes
@@ -156,8 +181,10 @@ GET /api/public/entsoe-fast-summary
 Both are public and stateless. The LP endpoint returns the scenario rows plus
 the screened `year`/`months` (404 with `{error}` if the border has no annual
 row); the summary endpoint returns the Step-1 → EuropeMap contract (zones +
-directed congested targets, with `market_loss_meur`/`climate_loss_ktco2` in
-"MEUR/y" / "ktCO2/y" mapped straight from the annual rows). No auth needed.
+directed congested targets, with `market_opportunity_meur`/`climate_loss_ktco2`
+in "MEUR/y" / "ktCO2/y" mapped straight from the annual rows — the headline
+`market_opportunity_meur` is the bounded deadweight loss, the cap the LP
+enforces). No auth needed.
 
 ## Coverage & caveats
 
@@ -170,9 +197,10 @@ directed congested targets, with `market_loss_meur`/`climate_loss_ktco2` in
   `data/eu-market/bank-*.json` and rerunning with its `--year` extends the
   ladder.
 - Step-1 figures are **annual** (or per-bank monthly in `monthly`); Step-2 uses
-  the annual row directly, with no ×12. Rows whose OLS slope was clamped to `0`
-  (`slope_a`/`slope_b` at the floor) have Step-2 cable welfare as an upper
-  bound.
+  the annual row directly, with no ×12. Every congested row has `slope > 0`
+  (`slope_mode = "fit"` or `"floor"`), so scenario gains saturate at the
+  deadweight loss instead of scaling linearly without bound — the map's market
+  opportunity is that bound.
 - The reduced-form LP uses the _mean_ positive spread per border; hourly
   volatility (which drives real storage revenue) is not modeled yet — battery
   figures are conservative.

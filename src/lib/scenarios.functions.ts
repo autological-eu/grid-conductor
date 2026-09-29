@@ -148,10 +148,12 @@ export const runScenario = createServerFn({ method: "POST" })
     if ("error" in result) throw new Error(result.error);
 
     // Market opportunity is the LP's gross annual welfare gain over the full
-    // 2025 year row (no x12 representative-month factor). The 2-node LP has no
-    // CI signal, so the climate side mirrors the Step-1 adapter's locally-estimated
-    // "released energy x carbon contrast" quantity from the target's own zone
-    // carbon estimates.
+    // 2025 year row (no x12 representative-month factor), capped at the
+    // border's deadweight-loss estimate — a scenario can never claim more than
+    // the map's market opportunity. The 2-node LP has no CI signal, so the
+    // climate side mirrors the Step-1 adapter's locally-estimated "released
+    // energy x carbon contrast" quantity from the target's own zone carbon
+    // estimates.
     const marketMeur = result.annual_welfare_gain_meur;
     const carbonDelta = Math.abs(
       entsoeZoneMeta(scenario.zone_a).carbon_g_per_kwh -
@@ -185,9 +187,11 @@ export const runScenario = createServerFn({ method: "POST" })
         "Fast ENTSO-E screening, Step 2: a reduced-form 2-node transport LP over the " +
         `screened border (12-month ENTSO-E 2025 year, annual sum, no x12 ` +
         "representative-month factor). Line units raise the corridor transfer " +
-        "limit with a linearised price response (10 blocks); battery units shift " +
-        "one cycle per day at the average positive spread. Shadow price recovered " +
-        "by finite-difference re-solve. Screening ranks candidates; it is not " +
+        "limit with an exact trapezoid price response (welfare = spread*q - " +
+        "slope*q^2/2, saturating at the border's deadweight loss); battery units " +
+        "shift one cycle per day at the average positive spread. Gains are " +
+        "capped at the market opportunity. Shadow price recovered by " +
+        "finite-difference re-solve. Screening ranks candidates; it is not " +
         "dispatch-grade valuation.",
     };
 

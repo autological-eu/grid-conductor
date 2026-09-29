@@ -28,7 +28,9 @@ export type TargetRow = {
   b_lon: number;
   congested_hours: number;
   total_hours: number;
-  market_loss_meur: number;
+  /** Bounded deadweight-loss estimate of the directed border (MEUR/y) — the
+   * cap every scenario outcome is clamped to. */
+  market_opportunity_meur: number;
   climate_loss_ktco2: number;
   observed_capacity_mw: number | null;
 };
@@ -89,15 +91,12 @@ const IDENTITY: View = { k: 1, x: 0, y: 0 };
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
-/** grey (low) -> red (high) opportunity-loss scale */
+/** grey (low) -> red (high) opportunity scale */
 const lossColor = (t: number) => {
   const x = clamp(t, 0, 1);
   // interpolate light neutral grey -> vivid red
   return `oklch(${0.82 - 0.24 * x} ${0.01 + 0.22 * x} 25)`;
 };
-
-/** market loss cap (MEUR/y) at which a border renders fully red */
-const MARKET_LOSS_CAP = 10;
 
 export type PlacedUnit = {
   id: string;
@@ -449,12 +448,22 @@ export function EuropeMap({
     zoomAt(W / 2, H / 2, factor);
   };
 
+  /** market opportunity full-red point: the 90th percentile of the positive
+   * values (a fixed cap burned most borders fully red; a quantile keeps the
+   * scale sensitive to the bulk of candidates while the legend shows the max). */
   const maxLoss = Math.max(
     1,
-    ...targets.map((t) => (metric === "market" ? t.market_loss_meur : t.climate_loss_ktco2)),
+    ...targets.map((t) => (metric === "market" ? t.market_opportunity_meur : t.climate_loss_ktco2)),
   );
-  /** value mapped to the black end of the scale */
-  const lossCap = metric === "market" ? Math.min(maxLoss, MARKET_LOSS_CAP) : maxLoss;
+  const positive = targets
+    .map((t) => (metric === "market" ? t.market_opportunity_meur : t.climate_loss_ktco2))
+    .filter((v) => v > 0)
+    .sort((a, b) => a - b);
+  const p90 =
+    positive.length > 0
+      ? positive[Math.min(positive.length - 1, Math.floor(0.9 * positive.length))]!
+      : maxLoss;
+  const lossCap = metric === "market" ? Math.max(1, Math.min(maxLoss, p90)) : maxLoss;
   const k = view.k;
 
   return (
@@ -568,11 +577,11 @@ export function EuropeMap({
             );
           })}
 
-          {/* target borders, coloured grey (low) to red (high) by yearly opportunity loss */}
+          {/* target borders, coloured grey (low) to red (high) by yearly market opportunity */}
           {targets.map((t) => {
             const [x1, y1] = project(t.a_lon, t.a_lat);
             const [x2, y2] = project(t.b_lon, t.b_lat);
-            const v = metric === "market" ? t.market_loss_meur : t.climate_loss_ktco2;
+            const v = metric === "market" ? t.market_opportunity_meur : t.climate_loss_ktco2;
             const c = Math.min(1, Math.max(0, v / lossCap));
             const isSelected = selectedId === t.id;
             const dropB = dropTarget?.kind === "border" && dropTarget.key === t.id;
@@ -631,7 +640,7 @@ export function EuropeMap({
                 />
 
                 <title>
-                  {t.zone_a} – {t.zone_b}: {t.market_loss_meur.toFixed(1)} MEUR/y,{" "}
+                  {t.zone_a} – {t.zone_b}: {t.market_opportunity_meur.toFixed(1)} MEUR/y,{" "}
                   {t.climate_loss_ktco2.toFixed(1)} ktCO2/y, {t.congested_hours} congested hours
                 </title>
               </g>
@@ -675,8 +684,8 @@ export function EuropeMap({
         </h2>
         <p className="text-xs text-muted-foreground">
           {metric === "market"
-            ? "Yearly market opportunity loss"
-            : "Yearly climate opportunity loss"}
+            ? "Yearly market opportunity (bounded DWL)"
+            : "Yearly climate opportunity"}
         </p>
       </div>
 
@@ -710,9 +719,7 @@ export function EuropeMap({
       <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg border border-border bg-card/90 px-3 py-2 text-xs text-muted-foreground backdrop-blur">
         <div className="flex items-center justify-between gap-3">
           <span className="font-medium text-foreground">
-            {metric === "market"
-              ? "Market opportunity loss (MEUR/y)"
-              : "Climate opportunity loss (ktCO2/y)"}
+            {metric === "market" ? "Market opportunity (MEUR/y)" : "Climate opportunity (ktCO2/y)"}
           </span>
           <div className="pointer-events-auto flex rounded-md border border-border p-0.5 text-[10px]">
             {(["market", "climate"] as const).map((m) => (

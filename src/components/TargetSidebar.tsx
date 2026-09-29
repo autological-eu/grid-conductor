@@ -115,7 +115,10 @@ export function TargetSidebar({
           {target.zone_a_name} to {target.zone_b_name}
         </p>
         <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
-          <Stat label="Market loss" value={`${target.market_loss_meur.toFixed(1)} MEUR/y`} />
+          <Stat
+            label="Market opportunity"
+            value={`${target.market_opportunity_meur.toFixed(1)} MEUR/y`}
+          />
           <Stat label="Climate loss" value={`${target.climate_loss_ktco2.toFixed(1)} ktCO2/y`} />
           <Stat
             label="Congested hours"

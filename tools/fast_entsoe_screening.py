@@ -14,8 +14,28 @@ border, in BOTH directions (`a>b` and `b>a`), it computes:
   * average_positive_spread = mean of the profitable-spread samples
   * slope_{a,b}             = effective dP/d(f) slope per zone (Step-2 LP
                               input), OLS of zone price on net scheduled
-                              inflow, clamped to 0 when the raw fit is <= 0.
+                              inflow. When the raw OLS fit is positive it is
+                              kept; when the fit is <= 0 / null the slope falls
+                              back to a data-grounded FLOOR so that the spread
+                              fully erodes once ~SLOPE_EROSION_MULT times the
+                              border's observed exchange capacity is added
+                              (floor_slope = spread / (MULT * base_qty_mw)).
+                              slope is therefore strictly positive on every
+                              congested directed row.
   * slope_raw_{a,b}         = the raw OLS slope (may be negative / null).
+  * slope_mode_{a,b}        = "fit" when the raw OLS was positive, "floor"
+                              when the data-grounded floor was applied, else
+                              "none".
+  * base_qty_mw             = the border's observed exchange capacity used to
+                              size the slope floor: first finite day-ahead cap
+                              sample, else median absolute flow on the
+                              direction (only 55/140 rows carry caps).
+  * deadweight_loss_meur_*  = bounded recoverable-welfare estimate for the
+                              window: 0.25h * congested_quarters *
+                              (spread^2 / (2*slope_a)) / 1e6. This is the cap
+                              that the Step-2 LP enforces: no cable scenario
+                              may claim more than the border's market
+                              opportunity (DWL).
 
 Energy sums carry the 0.25 h factor because the bank series are quarter-hour
 samples (energy = MW * 0.25 h). Field suffixes are `_month` for a single bank
@@ -41,6 +61,9 @@ OUT = PUBLIC / "entsoe-fast-targets.json"
 LADDERS = (500, 1000)  # candidate cable capacity increments in MW
 HOURS_PER_SAMPLE = 0.25  # bank series are quarter-hour (energy = MW * 0.25 h)
 SAMPLE_MIN = dt.timedelta(minutes=15)
+# Added flow equal to SLOPE_EROSION_MULT * base_qty_mw fully erodes the
+# observed positive spread (sizes the data-grounded slope floor).
+SLOPE_EROSION_MULT = 2.0
 
 
 def read_bank(path):
@@ -224,9 +247,43 @@ def price_response_slope(price, net_inflow):
     return float(num / den) if den > 1e-9 else 0.0
 
 
-def effective_slope(raw):
-    """Step-2 price-response slope: raw OLS slope, or 0 when raw is None / <= 0."""
-    return max(raw, 0.0) if raw is not None else 0.0
+def effective_slope(raw, floor=0.0):
+    """Step-2 price-response slope: the raw OLS slope when positive, else the
+    data-grounded floor (spread / (SLOPE_EROSION_MULT * base_qty)). Returns
+    floor when raw is None / <= 0 so every congested row stays strictly
+    positive (the Step-2 LP saturates at the deadweight loss instead of
+    scaling value linearly without bound)."""
+    if raw is not None and raw > 0:
+        return float(raw)
+    return float(floor)
+
+
+def row_base_qty(cap_val, flows_ab):
+    """Observed exchange capacity of a directed border: the first finite
+    day-ahead cap sample, else the median absolute scheduled flow (NaN-aware).
+    Used to size the slope floor; None when neither is available."""
+    if cap_val is not None and cap_val > 0:
+        return float(cap_val)
+    mag = np.abs(np.asarray(flows_ab, dtype=float))
+    finite = mag[np.isfinite(mag)]
+    return float(np.median(finite)) if finite.size else None
+
+
+def row_slope_floor(spread, base_qty):
+    """Data-grounded floor slope: added flow of SLOPE_EROSION_MULT * base_qty
+    fully erodes the positive spread. None when spread/base_qty are missing."""
+    if not (spread and base_qty and SLOPE_EROSION_MULT > 0):
+        return 0.0
+    return spread / (SLOPE_EROSION_MULT * base_qty)
+
+
+def deadweight_loss_meur(spread, slope, congested_quarters, suffix="_month"):
+    """Bounded recoverable-welfare estimate (deadweight loss) for a window:
+    0.25h * cq * spread^2 / (2 * slope) / 1e6. The Step-2 LP caps cable
+    welfare at exactly this quantity. None when the inputs are unusable."""
+    if not (spread and slope and slope > 0 and congested_quarters):
+        return None
+    return 0.25 * congested_quarters * (spread ** 2 / (2 * slope)) / 1e6
 
 
 def zone_slopes(bank):
@@ -290,10 +347,25 @@ def screening(banks, suffix="_month"):
                 )
                 # slope_a/slope_raw_a belong to the directed row's START zone,
                 # slope_b/slope_raw_b to its END zone (they swap when reversed).
-                rows.append(dict(month=bank.get("month"), period=period, border=f"{fwd}>{rev}",
-                                 slope_a=effective_slope(slopes.get(fwd)), slope_b=effective_slope(slopes.get(rev)),
-                                 slope_raw_a=slopes.get(fwd), slope_raw_b=slopes.get(rev),
-                                 cap_ab_mw=cap_val, **metrics))
+                # The effective slope keeps a positive OLS fit and otherwise
+                # applies the row's data-grounded floor (spread erodes over
+                # ~2x the observed exchange), so every congested row has
+                # slope > 0 and the Step-2 LP saturates at the deadweight loss.
+                spread = metrics.get("average_positive_spread_eur_mwh")
+                base_qty = row_base_qty(cap_val, flows_ab)
+                floor = row_slope_floor(spread, base_qty)
+                sl_a = effective_slope(slopes.get(fwd), floor)
+                sl_b = effective_slope(slopes.get(rev), floor)
+                rows.append({
+                    "month": bank.get("month"), "period": period, "border": f"{fwd}>{rev}",
+                    "slope_a": sl_a, "slope_b": sl_b,
+                    "slope_raw_a": slopes.get(fwd), "slope_raw_b": slopes.get(rev),
+                    "slope_mode_a": "fit" if (slopes.get(fwd) or 0) > 0 else ("floor" if floor > 0 else "none"),
+                    "slope_mode_b": "fit" if (slopes.get(rev) or 0) > 0 else ("floor" if floor > 0 else "none"),
+                    "base_qty_mw": base_qty, "cap_ab_mw": cap_val,
+                    f"deadweight_loss_meur{suffix}": deadweight_loss_meur(
+                        spread, sl_a, metrics.get("congested_quarters"), suffix=suffix),
+                    **metrics})
     return rows
 
 
@@ -336,7 +408,9 @@ def main():
         ladder_mw=list(LADDERS),
         formula="opportunity = 1e-6*0.25*sum_t max(0,P_B-P_A,t)*DeltaC M€ per window; "
                 "realized = 1e-6*0.25*sum_t F_AB*(P_B-P_A); directed rows a>b and b>a; "
-                "year rows are the full-year sum, NOT an x12 extrapolation",
+                "year rows are the full-year sum, NOT an x12 extrapolation; "
+                "slope = positive OLS fit, else floor spread/(2*base_qty_mw); "
+                "deadweight_loss = 1e-6*0.25*cq*spread^2/(2*slope) caps Step-2 cable welfare",
         targets=annual,
         monthly=dict(labels=labels, rows=monthly),
         coverage=dict(

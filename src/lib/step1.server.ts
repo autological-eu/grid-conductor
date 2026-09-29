@@ -7,22 +7,28 @@ import { entsoeZoneMeta } from "./entsoeZones";
  * Step-1 -> EuropeMap adapter (server-side).
  *
  * Turns `public/research/entsoe-fast-targets.json` (the Step-1 ENTSO-E
- * screening: directed borders x the full calendar year, per-direction "lost
- * congestion rent" under a capacity ladder) into the exact
+ * screening: directed borders x the full calendar year) into the exact
  * `ZoneSummary[]`/`TargetRow[]` contract the EuropeMap workbench renders.
+ *
+ * The headline map figure is the border's **market opportunity**: the bounded
+ * deadweight-loss estimate the screening tool publishes as
+ * `deadweight_loss_meur_year` (0.25 h * congested_quarters * spread^2 /
+ * (2*slope) / 1e6). Unlike the old linear "opportunity = ΔC x spread" rent,
+ * this is the cap the Step-2 LP enforces, so no simulated line/battery can
+ * claim more than the map shows.
  *
  * The Step-1 JSON **does not** ship coordinates, zone names or carbon data, so
  * we supply them from `ENTSOE_ZONES` (static, client-safe). It **does not**
  * ship a climate number either — the `climate_loss_ktco2` column is a
  * locally-estimated approximation "(est.)" derived from the released energy
- * implied by each border's annual opportunity rent:
+ * implied by each border's annual market opportunity:
  *
- *   released_energy (MWh/yr) = opportunity_meur_year * 1e6 / average_positive_spread_eur_mwh
+ *   released_energy (MWh/yr) = market_opportunity_meur * 1e6 / average_positive_spread_eur_mwh
  *   climate_ktco2 (est.)/yr  = released_energy * |carbon_b - carbon_a| (g/kWh) / 1e6
  *
- * Only directed exposure areas with positive annual opportunity are kept (the
- * map draws congested borders as heat lines; a zero-opportunity direction is
- * invisible). The Step-1 rows are ANNUAL (schema_version 3: full calendar
+ * Only directed exposure areas with positive annual market opportunity are kept
+ * (the map draws congested borders as heat lines; a zero-opportunity direction
+ * is invisible). The Step-1 rows are ANNUAL (schema_version 3: full calendar
  * year, no x12 representative-month factor); this adapter maps the annual row
  * straight onto the "MEUR/y" / "ktCO2/y" UI contract and converts congested
  * sample counts to real hours for display.
@@ -50,7 +56,8 @@ export type Step1Summary = {
     b_lon: number;
     congested_hours: number;
     total_hours: number;
-    market_loss_meur: number;
+    /** Bounded deadweight-loss estimate (the cap the Step-2 LP enforces). */
+    market_opportunity_meur: number;
     climate_loss_ktco2: number;
     observed_capacity_mw: number | null;
   }>;
@@ -60,6 +67,7 @@ type Step1BorderAnnual = {
   month: string;
   border: string;
   opportunity_meur_year?: Record<string, number | null> | null;
+  deadweight_loss_meur_year?: number | null;
   congested_quarters?: number | null;
   observed_quarters?: number | null;
   average_positive_spread_eur_mwh?: number | null;
@@ -114,18 +122,25 @@ export function loadStep1Summary(filePath: string): Step1Summary {
   for (const [border, months] of byBorder) {
     const [a, b] = (border ?? "").split(">");
     if (!a || !b) continue;
-    // Opportunity is never negative; a direction with no positive opportunity in
-    // the year is dropped (the map draws only congested directions). The annual
-    // row is the full-year sum, so the "MEUR/y" / "ktCO2/y" UI contract is exact.
+    // Market opportunity is never negative; a direction with no positive
+    // opportunity in the year is dropped (the map draws only congested
+    // directions). The annual row is the full-year sum, so the "MEUR/y" /
+    // "ktCO2/y" UI contract is exact. We read the bounded DWL field
+    // (deadweight_loss_meur_year) and fall back to the linear 1000-MW
+    // opportunity when the DWL is absent (pre-v4 artifact).
     const opps = months
       .map((m) => m.opportunity_meur_year?.["1000"])
       .filter((v): v is number => typeof v === "number");
+    // Keep the direction only when it has an observable, positive opportunity.
     if (!opps.some((v) => v > 0)) continue;
 
     const metaA = entsoeZoneMeta(a);
     const metaB = entsoeZoneMeta(b);
 
-    const marketLossMeurYr = mean(opps);
+    const dwls = months
+      .map((m) => m.deadweight_loss_meur_year)
+      .filter((v): v is number => typeof v === "number" && v > 0);
+    const marketOpportunityMeurYr = dwls.length > 0 ? mean(dwls) : mean(opps);
     const avgSpread = mean(
       months
         .map((m) => m.average_positive_spread_eur_mwh)
@@ -142,7 +157,7 @@ export function loadStep1Summary(filePath: string): Step1Summary {
       ) / 4;
 
     const carbonDelta = Math.abs(metaB.carbon_g_per_kwh - metaA.carbon_g_per_kwh);
-    const climate = avgSpread > 0 ? (marketLossMeurYr * carbonDelta) / avgSpread : 0;
+    const climate = avgSpread > 0 ? (marketOpportunityMeurYr * carbonDelta) / avgSpread : 0;
 
     targets.push({
       id: border,
@@ -156,7 +171,7 @@ export function loadStep1Summary(filePath: string): Step1Summary {
       b_lon: metaB.lon,
       congested_hours: round(congestedHours),
       total_hours: round(totalHours),
-      market_loss_meur: round2(marketLossMeurYr),
+      market_opportunity_meur: round2(marketOpportunityMeurYr),
       climate_loss_ktco2: round2(climate),
       observed_capacity_mw: null,
     });

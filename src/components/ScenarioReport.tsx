@@ -97,8 +97,9 @@ export function ScenarioReport({
           <p className="text-sm">
             Over the assessment period the border was at its observed transfer limit for{" "}
             {target.congested_hours} of {target.total_hours} hours while prices diverged between the
-            two zones. The unexploited exchange is valued at {target.market_loss_meur.toFixed(1)}{" "}
-            MEUR per year of foregone welfare and {target.climate_loss_ktco2.toFixed(1)} ktCO2 per
+            two zones. The screen estimates a market opportunity of{" "}
+            {target.market_opportunity_meur.toFixed(1)} MEUR per year (the bounded deadweight loss a
+            capacity project could recover) and {target.climate_loss_ktco2.toFixed(1)} ktCO2 per
             year of avoidable emissions.
           </p>
         </Section>

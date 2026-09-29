@@ -8,17 +8,21 @@
 // Model (reduced form over the published aggregates — see
 // docs/fast-entsoe-screening.md for the full derivation):
 //   * Cable scenarios: marginal spread on the A>B corridor drops linearly with
-//     added flow at rate slope_a (EUR/MWh per MW). We linearize capacity into
-//     10 equal blocks; block k has marginal welfare v_k = avg_spread - slope*C/10*k.
-//     Annual welfare = congested_quarters * 0.25 h * max{0, sum_k v_k*block}
-//     (LP: pick all blocks with positive marginal value). The 0.25 h factor is
-//     the per-quarter energy of the Step-1 screening samples, and congested
-//     quarters now span the full YEAR, not one representative month.
+//     added flow at rate slope_a (EUR/MWh per MW). Welfare is the exact
+//     integral of that trapezoid in closed form:
+//         welfare/sample = spread*q - slab(q^2)/2,  q = min(deltaC, spread/slope)
+//     which equals the full deadweight-loss triangle at q = spread/slope. No
+//     block discretization is needed (10 blocks artefact on huge deltaC). The
+//     0.25 h factor is the per-quarter energy of the Step-1 screening samples,
+//     and congested quarters now span the full YEAR, not one representative
+//     month. Slope is strictly positive on every congested row (the screening
+//     tool applies a data-grounded floor), and every scenario gain is capped at
+//     the border's market opportunity (deadweight loss), so a 200,000 MW line
+//     never claims more than the DWL.
 //   * Battery scenarios: one cycle/day, charging at the low-price node (spread 0)
 //     and discharging at avg spread via a 4-variable LP per cycle, x number of
 //     cycles bounded by energy/MW ratio; annualized with round-trip efficiency.
-//   * co_opt = cable_1000 blocks + battery_200 cycle (additive LP terms, same
-//     slope penalty shared by the cable's added flow).
+//   * co_opt = cable_1000 + battery_200 (additive terms), capped at the DWL.
 import fs from "node:fs";
 import path from "node:path";
 import solver, { type Model, type SolveResult } from "javascript-lp-solver";
@@ -57,7 +61,9 @@ export type ScreeningRow = {
   slope_b: number | null;
 };
 
-/** Build the jsLPSolver model for the block-discretized cable LP. */
+/** Build the jsLPSolver model for the block-discretized cable LP.
+ * LEGACY: solveScenarios/solveAnnual now use the exact trapezoid closed form
+ * (see cableAnnualMeur) — kept exported for reference/tests. */
 export function blockLp(
   marginals: number[],
   blockMw: number,
@@ -118,12 +124,49 @@ function welfare(result: SolveResult | unknown): number {
   return Number(r["result"] ?? 0);
 }
 
+/** Market-opportunity cap (deadweight loss) of the directed border: total
+ * recoverable welfare before the spread fully erodes,
+ * M€/yr = 0.25 h * congested_quarters * spread^2/(2*slope) / 1e6 — the same
+ * formula the screening tool publishes as deadweight_loss_meur_year. Every
+ * scenario gain (cable, battery, co_opt) is clamped to this value. */
+function dwlMeur(row: ScreeningRow): number {
+  const spread = row.average_positive_spread_eur_mwh ?? 0;
+  const slope = row.slope_a ?? 0;
+  const congestedSamples = row.congested_quarters ?? 0;
+  if (!(spread > 0 && slope > 0 && congestedSamples > 0)) return 0;
+  return (congestedSamples * HOURS_PER_SAMPLE * (spread ** 2 / (2 * slope))) / 1e6;
+}
+
+/** Exact trapezoid cable value: with marginal spread dropping linearly at
+ * slope from `spread`, added flow q earns spread*q - slope*q^2/2 per quarter
+ * sample until q saturates at spread/slope. `shadow` is the finite-difference
+ * marginal of one extra MW. The trapezoid maximum at q = spread/slope equals
+ * the border's DWL, so the result is structurally capped already. */
+function cableAnnualMeur(
+  deltaC: number,
+  spread: number,
+  slope: number,
+  congestedSamples: number,
+): { annual: number; shadow: number | null } {
+  if (!(spread > 0 && slope > 0 && deltaC > 0 && congestedSamples > 0)) {
+    return { annual: 0, shadow: null };
+  }
+  const qStar = Math.min(deltaC, spread / slope);
+  const welfarePerSample = spread * qStar - 0.5 * slope * qStar * qStar;
+  const qEnd = Math.min(deltaC + 1, spread / slope); // +1 MW marginal
+  const welfareEnd = spread * qEnd - 0.5 * slope * qEnd * qEnd;
+  return {
+    annual: (welfarePerSample * HOURS_PER_SAMPLE * congestedSamples) / 1e6,
+    shadow: welfareEnd - welfarePerSample,
+  };
+}
+
 function scenarioRow(
   scenario: LpScenario,
   welfare: number,
   annualCapCost: number,
   capex: number,
-  shadow: number,
+  shadow: number | null,
   spread: number,
   hours: number,
 ): ScenarioResult {
@@ -146,7 +189,7 @@ export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
   const congestedSamples = row.congested_quarters ?? 0; // full-year quarter-hour samples
   const congestionHours = congestedSamples / 4;
   const slope = row.slope_a ?? 0;
-  const baseCap = row.cap_ab_mw ?? 0;
+  const marketOpportunityMeur = dwlMeur(row); // deadweight-loss cap (M€/yr)
   const results: ScenarioResult[] = [];
 
   const cableScenarios: Array<{ name: LpScenario; deltaC: number }> = [
@@ -154,26 +197,12 @@ export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
     { name: "cable_1000", deltaC: 1000 },
   ];
   for (const { name, deltaC } of cableScenarios) {
-    const blocks = 10;
-    const blockMw = deltaC / blocks;
-    const marginals = Array.from({ length: blocks }, (_, k) =>
-      Math.max(0, spread - slope * ((k + 1) * blockMw)),
-    );
-    const model = blockLp(marginals, blockMw, deltaC + baseCap);
-    const res = solver.Solve(model);
-    // per-sample congestion value (EUR/h), sum of marginal blocks dispatched
-    const welfarePerSample = welfare(res);
-    // M€/yr = per-sample value x 0.25 h x the full year's congested quarters, /1e6
-    const annual = (welfarePerSample * HOURS_PER_SAMPLE * congestedSamples) / 1e6;
-    // shadow price = marginal value of 1 more MW on the last (most expensive)
-    // block: dual of the dispatched intertie
-    const resPert = solver.Solve(blockLp(marginals, blockMw, deltaC + baseCap, 1));
-    const shadow = welfare(resPert) - welfarePerSample;
+    const { annual, shadow } = cableAnnualMeur(deltaC, spread, slope, congestedSamples);
     const capex = deltaC * CABLE_CAPEX_MEUR_PER_MW;
     results.push(
       scenarioRow(
         name,
-        annual,
+        annual, // structurally <= marketOpportunityMeur (trapezoid saturates at DWL)
         capex * ANNUAL_CAPEX_FACTOR,
         capex,
         shadow,
@@ -191,7 +220,7 @@ export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
     const model = batteryCycleLp(mw, mwh, spread);
     const res = solver.Solve(model);
     const welfarePerCycle = welfare(res); // EUR per daily cycle
-    const annual = (welfarePerCycle * 365) / 1e6; // M€/yr
+    const annual = Math.min((welfarePerCycle * 365) / 1e6, marketOpportunityMeur); // M€/yr, capped
     // shadow = finite-difference re-solve perturbing only power (+1 MW, energy
     // unchanged) so the marginal reads as the value of one extra MWh of
     // throughput (the discharge leg is one hour: 1 MW extra spills 1 MWh).
@@ -214,7 +243,10 @@ export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
   const cable1000 = results.find((r) => r.scenario === "cable_1000");
   const battery200 = results.find((r) => r.scenario === "battery_200");
   if (cable1000 && battery200) {
-    const welfareSum = cable1000.annual_welfare_gain_meur + battery200.annual_welfare_gain_meur;
+    const welfareSum = Math.min(
+      cable1000.annual_welfare_gain_meur + battery200.annual_welfare_gain_meur,
+      marketOpportunityMeur,
+    );
     const capexSum = cable1000.capex_meur + battery200.capex_meur;
     results.push(
       scenarioRow(
@@ -356,28 +388,27 @@ function solveAnnual(
   const spread = row.average_positive_spread_eur_mwh ?? 0;
   const congestedSamples = row.congested_quarters ?? 0;
   const congestionHours = congestedSamples / 4;
+  const slope = row.slope_a ?? 0;
+  const marketOpportunityMeur = dwlMeur(row); // deadweight-loss cap (M€/yr)
   let annual = 0;
   let shadow: number | null = null;
 
   if (cableMw > 0) {
-    const blocks = 10;
-    const blockMw = cableMw / blocks;
-    const slope = row.slope_a ?? 0;
-    const baseCap = row.cap_ab_mw ?? 0;
-    const marginals = Array.from({ length: blocks }, (_, k) =>
-      Math.max(0, spread - slope * ((k + 1) * blockMw)),
+    const { annual: cableAnnual, shadow: cableShadow } = cableAnnualMeur(
+      cableMw,
+      spread,
+      slope,
+      congestedSamples,
     );
-    const welfarePerSample = welfare(solver.Solve(blockLp(marginals, blockMw, cableMw + baseCap)));
-    annual += (welfarePerSample * HOURS_PER_SAMPLE * congestedSamples) / 1e6;
-    const resPert = solver.Solve(blockLp(marginals, blockMw, cableMw + baseCap, 1));
-    shadow = welfare(resPert) - welfarePerSample;
+    annual += cableAnnual; // structurally <= marketOpportunityMeur
+    shadow = cableShadow;
   }
 
   if (batteryMw > 0 && batteryMwh > 0) {
     const welfarePerCycle = welfare(
       solver.Solve(batteryCycleLpEff(batteryMw, batteryMwh, spread, batteryEff)),
     );
-    annual += (welfarePerCycle * 365) / 1e6;
+    annual = Math.min(annual + (welfarePerCycle * 365) / 1e6, marketOpportunityMeur);
     if (shadow == null) {
       const resPert = solver.Solve(
         batteryCycleLpEff(batteryMw + 1, batteryMwh, spread, batteryEff),

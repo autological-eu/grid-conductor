@@ -108,7 +108,7 @@ class FastEntsoeScreeningTests(unittest.TestCase):
         self.assertEqual(row["opportunity_meur_month"]["1000"], 0.0)
         self.assertEqual(row["observed_quarters"], 0)
 
-    def test_negative_slope_clamps_to_zero(self):
+    def test_negative_slope_falls_back_to_floor(self):
         bank = make_bank("2026-08", 24)
         # Inflow into A moves with flow A>B; make price fall as flow rises -> raw slope < 0.
         bank["prices"]["A"] = [50 - 1.5 * i for i in range(24)]
@@ -118,14 +118,41 @@ class FastEntsoeScreeningTests(unittest.TestCase):
         row = rows[0]
         self.assertIsNotNone(row["slope_raw_a"])
         self.assertLess(row["slope_raw_a"], 0)
-        self.assertEqual(row["slope_a"], 0)
+        # The raw fit is negative, so the effective slope is the data-grounded
+        # floor (spread / (SLOPE_EROSION_MULT * base_qty)) - strictly positive.
+        self.assertEqual(row["slope_mode_a"], "floor")
+        self.assertGreater(row["slope_a"], 0)
+        self.assertAlmostEqual(
+            row["slope_a"],
+            tool.row_slope_floor(row["average_positive_spread_eur_mwh"], row["base_qty_mw"]),
+            places=10)
+        self.assertEqual(row["base_qty_mw"], 1000.0)
+        # DWL estimate is finite and positive on this congested row.
+        self.assertIsNotNone(row["deadweight_loss_meur_month"])
+        self.assertGreater(row["deadweight_loss_meur_month"], 0)
 
-    def test_raw_positive_slope_kept(self):
+    def test_positive_fit_slope_kept(self):
         raw = tool.price_response_slope(
             [20 + 2 * i for i in range(30)], [100 + 3 * i for i in range(30)])
         self.assertIsNotNone(raw)
         self.assertGreater(raw, 0)
+        # A positive raw fit is kept, not replaced by the floor.
+        self.assertEqual(tool.effective_slope(raw, floor=1e6), raw)
         self.assertEqual(tool.effective_slope(raw), raw)
+
+    def test_dwl_field_matches_formula(self):
+        bank = make_bank("2026-08", 24)
+        rows = [r for r in tool.screening([bank]) if r["border"] == "A>B"]
+        row = rows[0]
+        h = tool.HOURS_PER_SAMPLE
+        cq = row["congested_quarters"]
+        slope = row["slope_a"]
+        self.assertIsNotNone(slope)
+        self.assertIsNotNone(row["deadweight_loss_meur_month"])
+        self.assertAlmostEqual(
+            row["deadweight_loss_meur_month"],
+            h * cq * (row["average_positive_spread_eur_mwh"] ** 2 / (2 * slope)) / 1e6,
+            places=6)
 
     def test_directed_row_slopes_follow_the_row_orientation(self):
         bank = make_bank("2026-08", 24)
@@ -139,13 +166,19 @@ class FastEntsoeScreeningTests(unittest.TestCase):
         slopes = tool.zone_slopes(bank)
         self.assertGreater(slopes["A"], 0)
         self.assertLess(slopes["B"], 0)
-        # A>B carries A's slope as slope_a, B's as slope_b; B>A swaps them.
+        # A>B carries A's slope as slope_a, B's as slope_b; B>A swaps them;
+        # each zone keeps a positive fit or falls back to that row's floor.
         for border, fwd, rev in (("A>B", "A", "B"), ("B>A", "B", "A")):
             row = rows[border]
-            self.assertEqual(row["slope_a"], tool.effective_slope(slopes[fwd]))
-            self.assertEqual(row["slope_b"], tool.effective_slope(slopes[rev]))
+            floor = tool.row_slope_floor(
+                row["average_positive_spread_eur_mwh"], row["base_qty_mw"])
+            self.assertEqual(row["slope_a"], tool.effective_slope(slopes[fwd], floor))
+            self.assertEqual(row["slope_b"], tool.effective_slope(slopes[rev], floor))
             self.assertEqual(row["slope_raw_a"], slopes[fwd])
             self.assertEqual(row["slope_raw_b"], slopes[rev])
+            self.assertEqual(
+                row["slope_mode_a"],
+                "fit" if (slopes[fwd] or 0) > 0 else ("floor" if floor > 0 else "none"))
 
     def test_bank_window_from_period_and_fallback(self):
         bank = make_bank("2026-08", 24)

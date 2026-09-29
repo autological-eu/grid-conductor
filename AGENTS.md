@@ -142,17 +142,29 @@ config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,
   (`fast_entsoe_screening.py`, numpy, reads `data/eu-market/bank-*-v2.json`
   schema_v2) → publishes `public/research/entsoe-fast-targets.json` (realized
   rent, opportunity ladder ΔC∈{500,1000} MW, congested quarters, avg positive
-  spread, price-response `slope_a`/`slope_b`, directed rows `a>b` and `b>a`);
+  spread, price-response `slope_a`/`slope_b` + `slope_mode`/`slope_raw_*` +
+  `base_qty_mw` + `deadweight_loss_meur_*`, directed rows `a>b` and `b>a`);
   (2) **live** 2-node LP per candidate
   border in `src/lib/fast-entsoe-lp.server.ts` + route
   `src/routes/api/public/fast-entsoe-lp.ts` (GET, public).
+- Slope is **strictly positive** on every congested directed row: a positive OLS
+  fit is kept (`slope_mode="fit"`); a ≤0/null fit falls back to a data-grounded
+  floor (`slope_mode="floor"` = `spread/(2*base_qty_mw)`, where `base_qty_mw` =
+  first finite cap sample else median |flow|). The published
+  `deadweight_loss_meur_*` (0.25 h·congested_quarters·spread²/(2·slope)/1e6) is
+  the border's **market opportunity** — the map's headline figure and the cap
+  the Step-2 LP enforces, so no scenario (line, battery, co_opt) can claim more
+  than the DWL even at absurd ΔC.
 - Step-1 publishes **annual** M€ figures for the calendar-year concat (quarter-
   hour sums already carry the 0.25 h factor; single-bank fields keep the
   `_meur_month` suffix, annual rows use `_meur_year` and are full-year sums, no
   ×12). Default run is `--year 2025` (all `bank-2025-*-v2.json`); Step-2 reads
-  the annual row directly and compares annual welfare against capex. Rows whose
-  OLS price-response slope was ≤ 0 are published with `slope=0` (raw fit in
-  `slope_raw_*`), making cable welfare an upper bound there.
+  the annual row directly and compares annual welfare against capex.
+- Step-2 cables use the **exact trapezoid closed form** (`spread·q − ½·slope·q²`
+  with `q=min(ΔC, spread/slope)`, M€/yr = ·0.25h·congested_quarters), not the
+  block LP — the 10-block discretization produced artifacts for huge ΔC
+  (200,000 MW returned ~200× the 1,000-MW value before the cap). jsLPSolver is
+  still the battery engine.
 - Step-2 solver is **`javascript-lp-solver`** (pure-JS simplex; solved under
   bun). Do **not** swap in the `highs` npm package — its HiGHS-wasm glue fails
   to import under bun 1.4 (`Export named 'Highs' not found`). Bank coverage:
