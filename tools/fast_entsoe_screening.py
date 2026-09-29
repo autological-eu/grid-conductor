@@ -27,9 +27,13 @@ border, in BOTH directions (`a>b` and `b>a`), it computes:
                               when the data-grounded floor was applied, else
                               "none".
   * base_qty_mw             = the border's observed exchange capacity used to
-                              size the slope floor: first finite day-ahead cap
-                              sample, else median absolute flow on the
-                              direction (only 55/140 rows carry caps).
+                              size the slope floor. Direction-independent: the
+                              maximum over the two directed capacities (first
+                              finite day-ahead cap sample, else median absolute
+                              flow, else median NONZERO absolute flow for a
+                              one-way border's rarely-used reverse direction),
+                              so every border with opportunity gets slope > 0
+                              (only 55/140 rows carry caps).
   * deadweight_loss_meur_*  = bounded recoverable-welfare estimate for the
                               window: 0.25h * congested_quarters *
                               (spread^2 / (2*slope_a)) / 1e6. This is the cap
@@ -259,14 +263,34 @@ def effective_slope(raw, floor=0.0):
 
 
 def row_base_qty(cap_val, flows_ab):
-    """Observed exchange capacity of a directed border: the first finite
-    day-ahead cap sample, else the median absolute scheduled flow (NaN-aware).
-    Used to size the slope floor; None when neither is available."""
+    """Observed exchange capacity for a directed border: the first finite
+    day-ahead cap sample, else the median absolute scheduled flow. When that
+    median is zero (a one-way border's rarely-used reverse direction) the
+    median of the NONZERO absolute flows is used, so the slope floor is never
+    sized to zero on a border that demonstrably moves energy. None when there
+    is no finite flow at all."""
     if cap_val is not None and cap_val > 0:
         return float(cap_val)
     mag = np.abs(np.asarray(flows_ab, dtype=float))
     finite = mag[np.isfinite(mag)]
-    return float(np.median(finite)) if finite.size else None
+    if not finite.size:
+        return None
+    median = float(np.median(finite))
+    if median > 0:
+        return median
+    nonzero = finite[finite > 0]
+    if nonzero.size:
+        return float(np.median(nonzero))
+    return None
+
+
+def _first_cap(cap_series):
+    """First finite day-ahead cap sample of a direction, else None."""
+    if cap_series is None:
+        return None
+    cap_arr = np.asarray(cap_series, dtype=float)
+    finite = cap_arr[np.isfinite(cap_arr)]
+    return float(finite[0]) if finite.size else None
 
 
 def row_slope_floor(spread, base_qty):
@@ -331,16 +355,27 @@ def screening(banks, suffix="_month"):
             pb = price_series(bank, b)
             if pa is None or pb is None:
                 continue
+            # Interconnector capacity is direction-independent: a one-way
+            # border's reverse direction (median |flow| ~ 0) inherits the
+            # observed capacity of the forward direction, so its slope floor is
+            # sized and every border with opportunity gets slope > 0 (the
+            # Step-2 LP can claim it instead of returning exactly 0).
+            fwd_flows = tbl_flows.get(f"{a}>{b}")
+            rev_flows = tbl_flows.get(f"{b}>{a}")
+            if fwd_flows is None:
+                fwd_flows = [np.nan] * len(pa)
+            if rev_flows is None:
+                rev_flows = [np.nan] * len(pa)
+            fwd_cap = _first_cap(tbl_caps.get(f"{a}>{b}"))
+            rev_cap = _first_cap(tbl_caps.get(f"{b}>{a}"))
+            fwd_qty = row_base_qty(fwd_cap, fwd_flows)
+            rev_qty = row_base_qty(rev_cap, rev_flows)
+            pair_base = max(
+                q for q in (fwd_qty, rev_qty) if q is not None
+            ) if fwd_qty is not None or rev_qty is not None else None
             for fwd, rev in ((a, b), (b, a)):
-                flows_ab = tbl_flows.get(f"{fwd}>{rev}")
-                if flows_ab is None:
-                    flows_ab = [np.nan] * len(pa)
-                cap_ab = tbl_caps.get(f"{fwd}>{rev}")
-                cap_val = None
-                if cap_ab is not None:
-                    cap_arr = np.asarray(cap_ab, dtype=float)
-                    finite = cap_arr[np.isfinite(cap_arr)]
-                    cap_val = float(finite[0]) if finite.size else None
+                flows_ab = fwd_flows if fwd == a else rev_flows
+                cap_val = _first_cap(tbl_caps.get(f"{fwd}>{rev}"))
                 metrics = (
                     realized_metrics(pa, pb, flows_ab, suffix=suffix)
                     if fwd == a else realized_metrics(pb, pa, flows_ab, suffix=suffix)
@@ -352,8 +387,7 @@ def screening(banks, suffix="_month"):
                 # ~2x the observed exchange), so every congested row has
                 # slope > 0 and the Step-2 LP saturates at the deadweight loss.
                 spread = metrics.get("average_positive_spread_eur_mwh")
-                base_qty = row_base_qty(cap_val, flows_ab)
-                floor = row_slope_floor(spread, base_qty)
+                floor = row_slope_floor(spread, pair_base)
                 sl_a = effective_slope(slopes.get(fwd), floor)
                 sl_b = effective_slope(slopes.get(rev), floor)
                 rows.append({
@@ -362,7 +396,7 @@ def screening(banks, suffix="_month"):
                     "slope_raw_a": slopes.get(fwd), "slope_raw_b": slopes.get(rev),
                     "slope_mode_a": "fit" if (slopes.get(fwd) or 0) > 0 else ("floor" if floor > 0 else "none"),
                     "slope_mode_b": "fit" if (slopes.get(rev) or 0) > 0 else ("floor" if floor > 0 else "none"),
-                    "base_qty_mw": base_qty, "cap_ab_mw": cap_val,
+                    "base_qty_mw": pair_base, "cap_ab_mw": cap_val,
                     f"deadweight_loss_meur{suffix}": deadweight_loss_meur(
                         spread, sl_a, metrics.get("congested_quarters"), suffix=suffix),
                     **metrics})

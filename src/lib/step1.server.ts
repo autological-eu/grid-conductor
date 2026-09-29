@@ -27,8 +27,13 @@ import { entsoeZoneMeta } from "./entsoeZones";
  *   climate_ktco2 (est.)/yr  = released_energy * |carbon_b - carbon_a| (g/kWh) / 1e6
  *
  * Only directed exposure areas with positive annual market opportunity are kept
- * (the map draws congested borders as heat lines; a zero-opportunity direction
- * is invisible). The Step-1 rows are ANNUAL (schema_version 3: full calendar
+ * (the map draws congested borders as heat lines; a direction with no claimable
+ * opportunity is invisible). The step-1 screening now sizes every border that
+ * moves energy with a positive price-response slope (interconnector capacity is
+ * direction-independent, so a one-way border's reverse direction inherits the
+ * pair's observed capacity) and the adapter drops directions whose bounded
+ * deadweight loss is absent — those the Step-2 LP cannot claim at all. The
+ * Step-1 rows are ANNUAL (schema_version 3: full calendar
  * year, no x12 representative-month factor); this adapter maps the annual row
  * straight onto the "MEUR/y" / "ktCO2/y" UI contract and converts congested
  * sample counts to real hours for display.
@@ -122,25 +127,22 @@ export function loadStep1Summary(filePath: string): Step1Summary {
   for (const [border, months] of byBorder) {
     const [a, b] = (border ?? "").split(">");
     if (!a || !b) continue;
-    // Market opportunity is never negative; a direction with no positive
-    // opportunity in the year is dropped (the map draws only congested
-    // directions). The annual row is the full-year sum, so the "MEUR/y" /
-    // "ktCO2/y" UI contract is exact. We read the bounded DWL field
-    // (deadweight_loss_meur_year) and fall back to the linear 1000-MW
-    // opportunity when the DWL is absent (pre-v4 artifact).
-    const opps = months
-      .map((m) => m.opportunity_meur_year?.["1000"])
-      .filter((v): v is number => typeof v === "number");
-    // Keep the direction only when it has an observable, positive opportunity.
-    if (!opps.some((v) => v > 0)) continue;
+    // Market opportunity is never negative; we keep only directions the model
+    // can actually claim — those with a positive bounded DWL (the cap the
+    // Step-2 LP enforces). A direction whose opportunity lives entirely under
+    // the 5 EUR/MWh congestion threshold has no DWL and would render on the map
+    // but return 0 from every scenario, so it is dropped instead. The annual
+    // row is the full-year sum, so the "MEUR/y" / "ktCO2/y" UI contract is
+    // exact.
+    const dwls = months
+      .map((m) => m.deadweight_loss_meur_year)
+      .filter((v): v is number => typeof v === "number" && v > 0);
+    if (!dwls.some((v) => v > 0)) continue;
+    const marketOpportunityMeurYr = mean(dwls);
 
     const metaA = entsoeZoneMeta(a);
     const metaB = entsoeZoneMeta(b);
 
-    const dwls = months
-      .map((m) => m.deadweight_loss_meur_year)
-      .filter((v): v is number => typeof v === "number" && v > 0);
-    const marketOpportunityMeurYr = dwls.length > 0 ? mean(dwls) : mean(opps);
     const avgSpread = mean(
       months
         .map((m) => m.average_positive_spread_eur_mwh)

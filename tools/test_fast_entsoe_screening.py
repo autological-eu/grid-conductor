@@ -190,6 +190,30 @@ class FastEntsoeScreeningTests(unittest.TestCase):
         self.assertEqual(start2, start)
         self.assertEqual(end2, end)
 
+    def test_one_way_border_reverse_inherits_pair_capacity(self):
+        # A one-way border: A>B carries the flow (median |flow| ~ 523), while
+        # B>A is a rarely-used reverse direction with median |flow| = 0 but a
+        # handful of real nonzero samples. The reverse row still has positive
+        # opportunity (prices cross so A is sometimes above B), so it renders;
+        # its slope floor must reuse the pair's observed capacity instead of
+        # sizing to zero (which made every scenario return exactly 0).
+        bank = make_bank("2026-08", 24)
+        bank["prices"]["A"] = [50 - i for i in range(24)]
+        bank["prices"]["B"] = [40] * 24
+        bank["flows_mw"]["A>B"] = [500 + 2 * i for i in range(24)]
+        bank["flows_mw"]["B>A"] = [0] * 20 + [40, 60, 80, 100]
+        bank["caps_mw"] = {}
+        rows = {r["border"]: r for r in tool.screening([bank])}
+        b2a, a2b = rows["B>A"], rows["A>B"]
+        self.assertGreater(b2a["opportunity_meur_month"]["1000"], 0)
+        self.assertGreater(b2a["base_qty_mw"], 0)
+        self.assertEqual(b2a["base_qty_mw"], a2b["base_qty_mw"])
+        self.assertAlmostEqual(b2a["base_qty_mw"], 523.0, places=6)
+        self.assertEqual(b2a["slope_mode_a"], "floor")
+        self.assertGreater(b2a["slope_a"], 0)
+        self.assertIsNotNone(b2a["deadweight_loss_meur_month"])
+        self.assertGreater(b2a["deadweight_loss_meur_month"], 0)
+
 
 class FastEntsoeConcatTests(unittest.TestCase):
     """Annual concat: NaN-padded quarter-grid alignment across monthly banks."""

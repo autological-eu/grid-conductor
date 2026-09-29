@@ -58,12 +58,19 @@ deadweight_loss_meur_*  = 0.25 h * cq * spread² / (2*slope_a) / 1e6        [M�
   it feeds the Step-2 LP's price-response term (how much the spread collapses
   once you inject more capacity on the border). A **positive** raw fit is used
   as-is (`slope_mode = "fit"`); when the fit is `<= 0` or null (short-window
-  noise — 92/140 annual rows), the slope falls back to a **data-grounded floor**
+  noise), the slope falls back to a **data-grounded floor**
   (`slope_mode = "floor"`): `floor = avg_positive_spread / (2 * base_qty_mw)`,
   i.e. adding `2×` the border's observed exchange fully erodes the spread.
-  `base_qty_mw` is the first finite day-ahead cap sample, else the median
-  absolute flow (only ~55/140 rows carry caps). Every congested row therefore has
-  `slope > 0`, so Step-2 gains are **bounded** instead of linear in ΔC.
+  `base_qty_mw` is the border's **direction-independent** observed capacity: the
+  maximum over the two directed capacities (first finite day-ahead cap sample,
+  else median absolute flow, else the median **nonzero** absolute flow for a
+  one-way border's rarely-used reverse direction — only ~55/140 rows carry
+  caps). A one-way border's reverse direction therefore inherits the pair's
+  capacity instead of being sized to zero, so **every** border that moves energy
+  has `slope > 0` and the Step-2 LP can claim its opportunity — a reverse
+  direction with `base_qty = 0` previously made every scenario return exactly
+  0.0 while the map still rendered it. Step-2 gains are **bounded** instead of
+  linear in ΔC.
 - **Market opportunity = deadweight loss.** With the marginal spread falling
   linearly, the total welfare a project can ever capture is the triangle
   `deadweight_loss = 0.25 h * congested_quarters * spread² / (2*slope_a) / 1e6`.

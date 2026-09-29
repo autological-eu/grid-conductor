@@ -149,12 +149,17 @@ config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,
   `src/routes/api/public/fast-entsoe-lp.ts` (GET, public).
 - Slope is **strictly positive** on every congested directed row: a positive OLS
   fit is kept (`slope_mode="fit"`); a ≤0/null fit falls back to a data-grounded
-  floor (`slope_mode="floor"` = `spread/(2*base_qty_mw)`, where `base_qty_mw` =
-  first finite cap sample else median |flow|). The published
+  floor (`slope_mode="floor"` = `spread/(2*base_qty_mw)`). `base_qty_mw` is
+  direction-independent: the max over the two directed capacities (first finite
+  cap sample else median |flow| else median nonzero |flow|), so a one-way
+  border's reverse direction inherits the pair's capacity instead of being sized
+  to zero (which made every scenario on it return exactly 0.0). The published
   `deadweight_loss_meur_*` (0.25 h·congested_quarters·spread²/(2·slope)/1e6) is
   the border's **market opportunity** — the map's headline figure and the cap
   the Step-2 LP enforces, so no scenario (line, battery, co_opt) can claim more
-  than the DWL even at absurd ΔC.
+  than the DWL even at absurd ΔC. Step-1 drops directions with no DWL (their
+  opportunity lives entirely under the 5 EUR/MWh congestion threshold), so the
+  map only renders borders the model can actually claim.
 - Step-1 publishes **annual** M€ figures for the calendar-year concat (quarter-
   hour sums already carry the 0.25 h factor; single-bank fields keep the
   `_meur_month` suffix, annual rows use `_meur_year` and are full-year sums, no
