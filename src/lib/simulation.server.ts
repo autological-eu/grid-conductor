@@ -5,7 +5,11 @@
 // price-coupling algorithm (a gradient method on the transport LP): energy is
 // moved from the cheapest to the dearest connected zone until either prices
 // equalise or a border hits its transfer limit.
-import type { SupabaseClient } from "@supabase/supabase-js";
+//
+// Inputs come from the static PyPSA-Eur baseline in public/research/baseline/,
+// loaded by baseline-static.server.ts. Transfer limits are declared in
+// cross_borders.json; they are never inferred from observed flow.
+import { loadStaticNetwork } from "./baseline-static.server";
 
 export type ZoneSeries = {
   price: Float64Array;
@@ -22,161 +26,8 @@ export type NetworkData = {
   slope: Record<string, number>;
 };
 
-const PAGE = 1000;
-
-async function pagedSelect<T>(
-  build: (from: number, to: number) => PromiseLike<{ data: T[] | null; error: { message: string } | null }>,
-  max = 200_000,
-): Promise<T[]> {
-  const out: T[] = [];
-  for (let from = 0; from < max; from += PAGE) {
-    const { data, error } = await build(from, from + PAGE - 1);
-    if (error) throw new Error(error.message);
-    if (!data?.length) break;
-    out.push(...data);
-    if (data.length < PAGE) break;
-  }
-  return out;
-}
-
-export async function loadNetwork(
-  db: SupabaseClient,
-  zoneA: string,
-  zoneB: string,
-): Promise<NetworkData> {
-  const { data: borderRows, error: bErr } = await db
-    .from("borders")
-    .select("zone_a, zone_b");
-  if (bErr) throw new Error(bErr.message);
-
-  const zoneSet = new Set<string>([zoneA, zoneB]);
-  for (const b of borderRows ?? []) {
-    if (b.zone_a === zoneA || b.zone_a === zoneB) zoneSet.add(b.zone_b);
-    if (b.zone_b === zoneA || b.zone_b === zoneB) zoneSet.add(b.zone_a);
-  }
-  const zones = [...zoneSet].sort();
-
-  const edgeKeys = (borderRows ?? []).filter(
-    (b) => zoneSet.has(b.zone_a) && zoneSet.has(b.zone_b),
-  );
-
-  // ---- hourly zone data
-  type ZRow = { zone_code: string; ts: string; price_eur_mwh: number | null; carbon_intensity: number | null; load_mw: number | null };
-  const zoneRows: ZRow[] = [];
-  for (const z of zones) {
-    const rows = await pagedSelect<ZRow>((from, to) =>
-      db
-        .from("zone_hourly")
-        .select("zone_code, ts, price_eur_mwh, carbon_intensity, load_mw")
-        .eq("zone_code", z)
-        .order("ts")
-        .range(from, to),
-      20_000,
-    );
-    zoneRows.push(...rows);
-  }
-  if (!zoneRows.length) throw new Error("No historical data imported yet for this border.");
-
-  const hourSet = new Set<string>();
-  for (const r of zoneRows) hourSet.add(r.ts);
-  const hours = [...hourSet].sort();
-  const index = new Map(hours.map((h, i) => [h, i]));
-  const H = hours.length;
-
-  const series: Record<string, ZoneSeries> = {};
-  for (const z of zones) {
-    series[z] = {
-      price: new Float64Array(H),
-      ci: new Float64Array(H),
-      load: new Float64Array(H),
-      has: new Uint8Array(H),
-    };
-  }
-  for (const r of zoneRows) {
-    const i = index.get(r.ts);
-    if (i === undefined) continue;
-    const s = series[r.zone_code];
-    if (!s) continue;
-    if (r.price_eur_mwh != null) {
-      s.price[i] = r.price_eur_mwh;
-      s.has[i] = 1;
-    }
-    if (r.carbon_intensity != null) s.ci[i] = r.carbon_intensity;
-    if (r.load_mw != null) s.load[i] = r.load_mw;
-  }
-
-  // ---- hourly flows
-  type FRow = { zone_a: string; zone_b: string; ts: string; flow_mw: number };
-  const edges: NetworkData["edges"] = [];
-  for (const e of edgeKeys) {
-    const rows = await pagedSelect<FRow>((from, to) =>
-      db
-        .from("border_flow_hourly")
-        .select("zone_a, zone_b, ts, flow_mw")
-        .eq("zone_a", e.zone_a)
-        .eq("zone_b", e.zone_b)
-        .order("ts")
-        .range(from, to),
-      20_000,
-    );
-    if (!rows.length) continue;
-    const flow = new Float64Array(H);
-    let capAb = 0;
-    let capBa = 0;
-    for (const r of rows) {
-      const i = index.get(r.ts);
-      if (i === undefined) continue;
-      flow[i] = r.flow_mw;
-      if (r.flow_mw > capAb) capAb = r.flow_mw;
-      if (-r.flow_mw > capBa) capBa = -r.flow_mw;
-    }
-    edges.push({ a: e.zone_a, b: e.zone_b, capAb, capBa, flow });
-  }
-
-  // ---- price-response slope per zone: regress price on net export
-  const netExport: Record<string, Float64Array> = {};
-  for (const z of zones) netExport[z] = new Float64Array(H);
-  for (const e of edges) {
-    const na = netExport[e.a]!;
-    const nb = netExport[e.b]!;
-    for (let i = 0; i < H; i++) {
-      na[i] = na[i]! + e.flow[i]!;
-      nb[i] = nb[i]! - e.flow[i]!;
-    }
-  }
-
-  const slope: Record<string, number> = {};
-  for (const z of zones) {
-    const s = series[z]!;
-    const x = netExport[z]!;
-    let n = 0;
-    let mx = 0;
-    let my = 0;
-    for (let i = 0; i < H; i++) {
-      if (!s.has[i]) continue;
-      n++;
-      mx += x[i]!;
-      my += s.price[i]!;
-    }
-    if (n < 100) {
-      slope[z] = 0.02;
-      continue;
-    }
-    mx /= n;
-    my /= n;
-    let cov = 0;
-    let varx = 0;
-    for (let i = 0; i < H; i++) {
-      if (!s.has[i]) continue;
-      const dx = x[i]! - mx;
-      cov += dx * (s.price[i]! - my);
-      varx += dx * dx;
-    }
-    const raw = varx > 0 ? cov / varx : 0.02;
-    slope[z] = Math.min(0.5, Math.max(0.002, Math.abs(raw)));
-  }
-
-  return { hours, zones, series, edges, slope };
+export async function loadNetwork(zoneA: string, zoneB: string): Promise<NetworkData> {
+  return loadStaticNetwork(zoneA, zoneB);
 }
 
 // ------------------------------------------------------------------
@@ -275,19 +126,42 @@ function applyStorage(
 //                             flowing from the low- to the high-price zone
 //                             (no adverse flows)
 //
-// Each zone's aggregated curve is calibrated from its own hourly history: the
-// observed price/net-position relationship gives the local slope of the
-// residual supply curve, anchored at the observed clearing point. Solving is
-// a welfare-gradient auction: while any border can carry energy from a lower-
-// to a higher-price zone, transfer the volume that equalises the two prices or
-// saturates the border, whichever is smaller. This is the convex dual of the
-// coupling problem, so it converges to the same prices and net positions as
-// the LP; iteration stops at a 0.01 EUR/MWh price-convergence tolerance.
+// Each zone's aggregated curve is calibrated from its own hourly history (see
+// baseline-static.server.ts): the observed marginal price is the clearing point,
+// and the slope is the local inverse-elasticity of the residual supply curve.
+//
+// Solving is a damped Newton ascent on the dual of the coupling problem, run per
+// hour. Candidate transfers are batched one per border, each pushed towards the
+// direction that would equalise that border's two prices. For a batch scaled by
+// a, the welfare gain is exactly quadratic in the transfer volumes under the
+// linearised zonal curves:
+//
+//   dW(a) = a * sum_e x_e g_e  -  a^2 / 2 * sum_z s_z nu_z(a)^2
+//
+// where g_e is the price difference across border e, s_z is zone z's curve slope
+// and nu_z is zone z's net export implied by the batch. The step length is the
+// exact maximiser of that quadratic, a = G / Q, capped by the remaining ATC
+// headroom, so every accepted iteration strictly increases welfare and the
+// ascent is monotone.
+//
+// Batching is what keeps this from oscillating. Transferring on a single border
+// at a time with the full step that equalises it overshoots that pair; the prices
+// at both endpoints move, which makes a neighbouring border the new maximum, and
+// its full step re-creates the spread just closed. Batching lets the line search
+// see the cross terms and pick a step that is good for the whole sub-network.
+//
+// It stops on a KKT certificate, not on an iteration count: any interior border
+// (one still with ATC headroom in the profitable direction) must have a price
+// difference within PRICE_TOLERANCE. A saturated border is *allowed* to diverge —
+// that divergence is the congestion rent, and treating it as a convergence error
+// would mean the more congested an hour is, the less it counts as solved.
 //
 // Not modelled (deliberately, since the inputs are not public): block orders,
 // complex/PUN orders, flow-based domains, intraday and balancing timeframes.
 const PRICE_TOLERANCE = 0.01; // EUR/MWh, Euphemia price-convergence criterion
-const MAX_ITERATIONS = 400;
+const MAX_ITERATIONS = 2000;
+const CAP_EPSILON = 1e-6; // MW of ATC headroom still counted as interior
+const MIN_STEP_MW = 1e-7; // below this a step cannot change anything meaningful
 
 export type RunResult = {
   hours: number;
@@ -299,10 +173,26 @@ export type RunResult = {
   borderFlowMwh: number;
   avgSpreadEurMwh: number;
   congestionRentEur: number;
+  /**
+   * Congestion rent on the target border alone. The sub-network total can rise
+   * while the target border is being relieved, because freeing energy at one
+   * border shifts dispatch and can load up the others; this isolates the border
+   * the scenario actually invests in.
+   */
+  targetRentEur: number;
   adverseFlowHours: number;
   priceMae: number;
   flowMae: number;
   directionAccuracy: number;
+  /**
+   * Largest price difference left on an *unsaturated* border, in EUR/MWh, over
+   * every hour. This is the true KKT residual: at a solution it sits at or below
+   * PRICE_TOLERANCE. Distinct from the spread on a saturated border, which is a
+   * shadow price and legitimately non-zero.
+   */
+  maxDualResidualEurMwh: number;
+  /** Total inner iterations across all hours, for the convergence/speed budget. */
+  iterations: number;
 };
 
 export function runDispatch(
@@ -326,7 +216,9 @@ export function runDispatch(
   const zones = net.zones;
   const zIdx = new Map(zones.map((z, i) => [z, i]));
   const edges = net.edges.map((e) => {
-    const key = `${e.a}|${e.b}`;
+    // Normalised like the extraCap keys above, so a unit's added_mw reaches this
+    // border regardless of which way round the two zones are ordered.
+    const key = e.a < e.b ? `${e.a}|${e.b}` : `${e.b}|${e.a}`;
     const add = extraCap[key] ?? 0;
     return {
       ai: zIdx.get(e.a)!,
@@ -334,8 +226,7 @@ export function runDispatch(
       capAb: e.capAb + add, // ATC a -> b
       capBa: e.capBa + add, // ATC b -> a
       flow: e.flow,
-      isTarget:
-        (e.a === target.a && e.b === target.b) || (e.a === target.b && e.b === target.a),
+      isTarget: (e.a === target.a && e.b === target.b) || (e.a === target.b && e.b === target.a),
     };
   });
 
@@ -343,6 +234,9 @@ export function runDispatch(
   const ci = new Float64Array(zones.length);
   const slope = new Float64Array(zones.map((z) => net.slope[z] ?? 0.02));
   const f = new Float64Array(edges.length);
+  /** Per-border transfer in the current batch (MW, +ve = a -> b), and its zone imbalance. */
+  const dirStep = new Float64Array(edges.length);
+  const netExport = new Float64Array(zones.length);
 
   let welfare = 0;
   let co2 = 0;
@@ -350,6 +244,7 @@ export function runDispatch(
   let converged = 0;
   let adverse = 0;
   let rent = 0;
+  let targetRent = 0;
   let extraTransfer = 0;
   let borderFlow = 0;
   let spreadSum = 0;
@@ -360,6 +255,8 @@ export function runDispatch(
   let flowN = 0;
   let dirOk = 0;
   let usableHours = 0;
+  let maxDualResidual = 0;
+  let totalIterations = 0;
 
   for (let t = 0; t < H; t++) {
     let ok = true;
@@ -380,51 +277,103 @@ export function runDispatch(
     let hourCongested = false;
     let iter = 0;
     let residual = 0;
+    let hourSolved = false;
+
     for (; iter < MAX_ITERATIONS; iter++) {
-      // Pick the border with the largest remaining welfare gradient that still
-      // has ATC headroom in the profitable direction.
-      let best = -1;
-      let bestGain = PRICE_TOLERANCE;
-      let bestDir = 1;
-      let blocked = 0;
+      // 1. Direction per border: push towards equalising prices, but only as far
+      //    as the ATC headroom allows. Borders already saturated in the
+      //    profitable direction are binding, not unresolved, and are skipped.
+      let anyInterior = false;
+      let gradient = 0;
+      residual = 0; // current KKT violation, not the worst ever seen
       for (let e = 0; e < edges.length; e++) {
-        const { ai, bi, capAb, capBa } = edges[e]!;
-        const dAB = price[bi]! - price[ai]!;
-        const gain = Math.abs(dAB);
-        if (gain <= PRICE_TOLERANCE) continue;
-        const headroom = dAB > 0 ? capAb - f[e]! : capBa + f[e]!;
-        if (headroom <= 0.5) {
-          blocked = Math.max(blocked, gain);
-          continue;
-        }
-        if (gain > bestGain) {
-          best = e;
-          bestGain = gain;
-          bestDir = dAB > 0 ? 1 : -1;
+        dirStep[e] = 0;
+        const ed = edges[e]!;
+        const g = price[ed.bi]! - price[ed.ai]!;
+        const curvature = slope[ed.ai]! + slope[ed.bi]!;
+        if (g > PRICE_TOLERANCE) {
+          const head = ed.capAb - f[e]!;
+          if (head <= CAP_EPSILON) continue;
+          anyInterior = true;
+          if (g > residual) residual = g;
+          const x = Math.min(head, g / curvature);
+          dirStep[e] = x;
+          gradient += x * g;
+        } else if (g < -PRICE_TOLERANCE) {
+          const head = ed.capBa + f[e]!;
+          if (head <= CAP_EPSILON) continue;
+          anyInterior = true;
+          if (-g > residual) residual = -g;
+          const x = -Math.min(head, -g / curvature);
+          dirStep[e] = x;
+          gradient += x * g;
         }
       }
-      if (best < 0) {
-        residual = blocked;
+      if (!anyInterior || gradient <= 0) {
+        hourSolved = true;
         break;
       }
-      const e = edges[best]!;
-      const from = bestDir === 1 ? e.ai : e.bi;
-      const to = bestDir === 1 ? e.bi : e.ai;
-      const headroom = bestDir === 1 ? e.capAb - f[best]! : e.capBa + f[best]!;
-      const equalising = bestGain / (slope[from]! + slope[to]!);
-      const step = Math.min(headroom, equalising);
-      if (step >= headroom - 1e-6) hourCongested = true;
 
-      // Welfare gained by this transfer = area between the two curves.
-      welfare += step * (bestGain - 0.5 * step * (slope[from]! + slope[to]!));
-      co2 += step * (ci[to]! - ci[from]!); // kg CO2 (g/kWh x MWh)
-      price[from] = price[from]! + slope[from]! * step;
-      price[to] = price[to]! - slope[to]! * step;
-      f[best] = f[best]! + bestDir * step;
-      extraTransfer += step;
+      // 2. Imbalance the batch induces per zone, and the ATC limit on the step.
+      netExport.fill(0);
+      let stepLimit = Infinity;
+      let batchSize = 0;
+      for (let e = 0; e < edges.length; e++) {
+        const x = dirStep[e]!;
+        if (x === 0) continue;
+        const ed = edges[e]!;
+        netExport[ed.ai]! += x;
+        netExport[ed.bi]! -= x;
+        const head = x > 0 ? ed.capAb - f[e]! : ed.capBa + f[e]!;
+        stepLimit = Math.min(stepLimit, head / Math.abs(x));
+        batchSize += Math.abs(x);
+      }
+
+      // 3. Exact maximiser of the quadratic along this direction, capped so no
+      //    border is pushed past its ATC. Because the cap is at a least 1 (the
+      //    direction was already clipped to the headroom), the accepted step
+      //    stays inside the increasing region and welfare strictly increases.
+      let curvature2 = 0;
+      for (let z = 0; z < zones.length; z++) {
+        curvature2 += slope[z]! * netExport[z]! * netExport[z]!;
+      }
+      if (!(curvature2 > 0)) {
+        hourSolved = true;
+        break;
+      }
+      let a = gradient / curvature2;
+      if (a > stepLimit) a = stepLimit;
+      if (a * batchSize < MIN_STEP_MW) {
+        hourSolved = true;
+        break;
+      }
+
+      // 4. Apply the batch: welfare and CO2 from the same quadratic, prices from
+      //    the curve slopes, flows from the batch direction.
+      welfare += a * gradient - 0.5 * a * a * curvature2;
+      for (let z = 0; z < zones.length; z++) {
+        price[z] = price[z]! + a * slope[z]! * netExport[z]!;
+      }
+      for (let e = 0; e < edges.length; e++) {
+        const x = dirStep[e]!;
+        if (x === 0) continue;
+        const ed = edges[e]!;
+        const moved = a * x;
+        const from = x > 0 ? ed.ai : ed.bi;
+        const to = x > 0 ? ed.bi : ed.ai;
+        co2 += moved * (ci[to]! - ci[from]!);
+        f[e] = f[e]! + moved;
+        // This border is now pinned against its ATC, so it can legitimately hold a
+        // price difference: that divergence is the congestion rent.
+        const limit = x > 0 ? ed.capAb : -ed.capBa;
+        if (Math.abs(f[e]!) >= Math.abs(limit) - CAP_EPSILON) hourCongested = true;
+      }
+      extraTransfer += a * batchSize;
     }
     if (hourCongested) congested++;
-    if (residual <= PRICE_TOLERANCE) converged++;
+    if (hourSolved) converged++;
+    totalIterations += iter;
+    if (residual > maxDualResidual) maxDualResidual = residual;
 
     // Congestion rent and adverse-flow check on saturated borders.
     let hourAdverse = false;
@@ -433,6 +382,7 @@ export function runDispatch(
       const spread = price[ed.bi]! - price[ed.ai]!;
       if (Math.abs(spread) > PRICE_TOLERANCE) {
         rent += Math.abs(f[e]!) * Math.abs(spread);
+        if (ed.isTarget) targetRent += Math.abs(f[e]!) * Math.abs(spread);
         if (f[e]! * spread < -1) hourAdverse = true; // flow towards the cheaper zone
       }
     }
@@ -466,9 +416,12 @@ export function runDispatch(
     borderFlowMwh: borderFlow,
     avgSpreadEurMwh: spreadN ? spreadSum / spreadN : 0,
     congestionRentEur: rent,
+    targetRentEur: targetRent,
     adverseFlowHours: adverse,
     priceMae: priceN ? priceErr / priceN : 0,
     flowMae: flowN ? flowErr / flowN : 0,
     directionAccuracy: flowN ? dirOk / flowN : 0,
+    maxDualResidualEurMwh: maxDualResidual,
+    iterations: totalIterations,
   };
 }

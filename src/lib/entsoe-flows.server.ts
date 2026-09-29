@@ -24,7 +24,7 @@ export function parseTimeSeries(xml: string): Point[] {
     const minutes =
       resolution === "PT15M" ? 15 : resolution === "PT30M" ? 30 : resolution === "PT60M" ? 60 : 60;
     for (const [, pos, qty] of body!.matchAll(
-      /<position>(\d+)<\/position>\s*<quantity>([\d.\-]+)<\/quantity>/g,
+      /<position>(\d+)<\/position>\s*<quantity>([\d.-]+)<\/quantity>/g,
     )) {
       const t = t0 + (Number(pos) - 1) * minutes * 60_000;
       const hour = new Date(Math.floor(t / 3_600_000) * 3_600_000).toISOString();
@@ -74,11 +74,7 @@ export async function fetchPhysicalFlow(
 }
 
 /** Hourly actual total load for a zone, in MW. */
-export async function fetchActualLoad(
-  zone: string,
-  start: Date,
-  end: Date,
-): Promise<Point[]> {
+export async function fetchActualLoad(zone: string, start: Date, end: Date): Promise<Point[]> {
   const domain = EIC_BY_ZONE[zone];
   if (!domain) return [];
   const xml = await entsoe({

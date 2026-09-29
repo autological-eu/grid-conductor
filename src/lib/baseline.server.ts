@@ -92,6 +92,11 @@ export type BaselineTargetRow = {
   congested_hours: number;
   total_hours: number;
   market_loss_meur: number;
+  /** Window the rent and spread figures cover, so the UI can label the unit rather
+   *  than leaving the reader to guess what "per window" spans. */
+  period_start: string;
+  period_end_exclusive: string;
+  window_years: number;
   climate_loss_ktco2: number | null;
   observed_capacity_mw: number;
   /** Additive diagnostics for the sidebar; not part of the legacy row shape. */
@@ -124,6 +129,9 @@ export function mapToTargetRows(
       congested_hours: t.congested_hours,
       total_hours: hours,
       market_loss_meur: t.baseline_rent_meur ?? 0,
+      period_start: report.start,
+      period_end_exclusive: report.end_exclusive,
+      window_years: report.window_years,
       climate_loss_ktco2: null,
       observed_capacity_mw: capacity,
       baseline_rent_meur: t.baseline_rent_meur,

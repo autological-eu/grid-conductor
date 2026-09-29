@@ -6,3 +6,17 @@ pnpm-lock.yaml
 package-lock.json
 bun.lock
 routeTree.gen.ts
+# Lovable regenerates these from the live Supabase schema (see eslint.config.js).
+# Formatting them here would be undone on the next schema push and would make
+# `prettier --check` fight the exemption in the eslint config.
+src/integrations/supabase
+# Machine-written data, not hand-maintained source. The research artefacts under
+# public/research are written by the Python tools in tools/, and
+# src/data/baseline-targets.json is a byte-identical mirror of
+# public/research/pypsa-targets.json which the drift guard test compares byte for
+# byte. Reformatting either side risks desynchronising the pair or churning
+# pipeline output. Hand-written files such as public/research/*.md stay checked.
+public/research/**/*.json
+public/research/**/*.csv
+src/data/baseline-targets.json
+src/data/europe.geo.json

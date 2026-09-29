@@ -112,10 +112,16 @@ export function TargetSidebar({
           {target.zone_a} – {target.zone_b}
         </h2>
         <p className="text-xs text-muted-foreground">
-          {target.zone_a_name} to {target.zone_b_name}
+          {target.zone_a_name} to {target.zone_b_name} · {target.period_start.slice(0, 10)} to{" "}
+          {target.period_end_exclusive.slice(0, 10)} (end exclusive)
         </p>
         <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
-          <Stat label="Market loss" value={`${target.market_loss_meur.toFixed(1)} MEUR/window`} />
+          <Stat
+            label="Market loss"
+            value={`${target.market_loss_meur.toFixed(1)} ${
+              target.window_years >= 0.9 && target.window_years <= 1.1 ? "MEUR/yr" : "MEUR/window"
+            }`}
+          />
           <Stat
             label="Climate loss"
             value={

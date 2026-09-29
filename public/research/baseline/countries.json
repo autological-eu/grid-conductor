@@ -1,0 +1,240 @@
+[
+  {
+    "code": "AL",
+    "name": "Albania",
+    "lat": 41.5079,
+    "lon": 19.8344,
+    "n_buses": 1
+  },
+  {
+    "code": "AT",
+    "name": "Austria",
+    "lat": 47.6312,
+    "lon": 14.2577,
+    "n_buses": 1
+  },
+  {
+    "code": "BA",
+    "name": "Bosnia and Herzegovina",
+    "lat": 43.8797,
+    "lon": 18.0467,
+    "n_buses": 1
+  },
+  {
+    "code": "BE",
+    "name": "Belgium",
+    "lat": 50.7297,
+    "lon": 4.8887,
+    "n_buses": 1
+  },
+  {
+    "code": "BG",
+    "name": "Bulgaria",
+    "lat": 42.7693,
+    "lon": 24.5128,
+    "n_buses": 1
+  },
+  {
+    "code": "CH",
+    "name": "Switzerland",
+    "lat": 46.8299,
+    "lon": 8.2654,
+    "n_buses": 1
+  },
+  {
+    "code": "CZ",
+    "name": "Czechia",
+    "lat": 49.8669,
+    "lon": 15.3179,
+    "n_buses": 1
+  },
+  {
+    "code": "DE",
+    "name": "Germany",
+    "lat": 51.0897,
+    "lon": 9.2467,
+    "n_buses": 1
+  },
+  {
+    "code": "DK",
+    "name": "Denmark",
+    "lat": 55.8292,
+    "lon": 11.0156,
+    "n_buses": 2
+  },
+  {
+    "code": "EE",
+    "name": "Estonia",
+    "lat": 58.9097,
+    "lon": 25.8729,
+    "n_buses": 1
+  },
+  {
+    "code": "ES",
+    "name": "Spain",
+    "lat": 40.1415,
+    "lon": -0.3702,
+    "n_buses": 2
+  },
+  {
+    "code": "FI",
+    "name": "Finland",
+    "lat": 62.7705,
+    "lon": 24.7667,
+    "n_buses": 1
+  },
+  {
+    "code": "FR",
+    "name": "France",
+    "lat": 44.8143,
+    "lon": 6.2834,
+    "n_buses": 2
+  },
+  {
+    "code": "GB",
+    "name": "United Kingdom",
+    "lat": 55.4786,
+    "lon": -3.734,
+    "n_buses": 3
+  },
+  {
+    "code": "GR",
+    "name": "Greece",
+    "lat": 39.2235,
+    "lon": 23.0352,
+    "n_buses": 1
+  },
+  {
+    "code": "HR",
+    "name": "Croatia",
+    "lat": 44.8081,
+    "lon": 16.2842,
+    "n_buses": 1
+  },
+  {
+    "code": "HU",
+    "name": "Hungary",
+    "lat": 47.3903,
+    "lon": 19.2484,
+    "n_buses": 1
+  },
+  {
+    "code": "IE",
+    "name": "Ireland",
+    "lat": 52.8712,
+    "lon": -7.5919,
+    "n_buses": 1
+  },
+  {
+    "code": "IT",
+    "name": "Italy",
+    "lat": 41.8266,
+    "lon": 10.1835,
+    "n_buses": 2
+  },
+  {
+    "code": "LT",
+    "name": "Lithuania",
+    "lat": 55.3793,
+    "lon": 23.3431,
+    "n_buses": 1
+  },
+  {
+    "code": "LU",
+    "name": "Luxembourg",
+    "lat": 49.6846,
+    "lon": 6.0563,
+    "n_buses": 1
+  },
+  {
+    "code": "LV",
+    "name": "Latvia",
+    "lat": 56.8289,
+    "lon": 24.0748,
+    "n_buses": 1
+  },
+  {
+    "code": "ME",
+    "name": "Montenegro",
+    "lat": 42.7872,
+    "lon": 19.0852,
+    "n_buses": 1
+  },
+  {
+    "code": "MK",
+    "name": "North Macedonia",
+    "lat": 41.6751,
+    "lon": 21.5966,
+    "n_buses": 1
+  },
+  {
+    "code": "NL",
+    "name": "Netherlands",
+    "lat": 52.3115,
+    "lon": 5.3327,
+    "n_buses": 1
+  },
+  {
+    "code": "NO",
+    "name": "Norway",
+    "lat": 61.7275,
+    "lon": 9.2091,
+    "n_buses": 1
+  },
+  {
+    "code": "PL",
+    "name": "Poland",
+    "lat": 51.6394,
+    "lon": 19.0538,
+    "n_buses": 1
+  },
+  {
+    "code": "PT",
+    "name": "Portugal",
+    "lat": 40.179,
+    "lon": -8.2404,
+    "n_buses": 1
+  },
+  {
+    "code": "RO",
+    "name": "Romania",
+    "lat": 45.5509,
+    "lon": 25.0403,
+    "n_buses": 1
+  },
+  {
+    "code": "RS",
+    "name": "Serbia",
+    "lat": 44.5074,
+    "lon": 20.6295,
+    "n_buses": 1
+  },
+  {
+    "code": "SE",
+    "name": "Sweden",
+    "lat": 60.7828,
+    "lon": 16.236,
+    "n_buses": 1
+  },
+  {
+    "code": "SI",
+    "name": "Slovenia",
+    "lat": 46.1705,
+    "lon": 15.0431,
+    "n_buses": 1
+  },
+  {
+    "code": "SK",
+    "name": "Slovakia",
+    "lat": 48.5912,
+    "lon": 19.2363,
+    "n_buses": 1
+  },
+  {
+    "code": "XK",
+    "name": "Kosovo",
+    "lat": 42.5627,
+    "lon": 21.0361,
+    "n_buses": 1
+  }
+]

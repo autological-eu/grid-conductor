@@ -1,26 +1,26 @@
 {
   "schema_version": 2,
   "status": "experimental_not_validated",
-  "start": "2025-03-01",
-  "end_exclusive": "2025-04-01",
+  "start": "2025-01-01",
+  "end_exclusive": "2026-01-01",
   "metric": "system_operating_cost_reduction",
   "baseline_metric": "congestion_rent_and_marginal_capacity_value",
   "unit": "MEUR/period",
-  "window_years": 0.0849,
+  "window_years": 1.0,
   "additional_mw": null,
   "annual_opportunity_meur": null,
-  "network_sha256": "3189f33529b6234978f44b8fe5c7ec033250a82a320a3d55969ece818a4bda0f",
+  "network_sha256": "4b6f45e1d7f803aada037d965db925acc3c5a992ac3430e21e1887393382e738",
   "upstream_commit": "a5408e9db5402c53345d7339fffb52afe96d6e43",
-  "manifest_sha256": "fa3fb5dcc3b3a5b8c858614e1e83261ea6d8cbe51bc10fb5fb27fcbba5158ab9",
+  "manifest_sha256": "294768c94f28e88d4ebfc601bb40823d5a6bc1752d384a43f5741c43ee254375",
   "observations_sha256": null,
   "pypsa_version": "1.2.4",
-  "baseline_cost_eur": 4194583050.1748753,
-  "baseline_rent_meur_total": 682.807,
-  "baseline_co2_tonnes": 68255779.56280902,
+  "baseline_cost_eur": 49812533018.26167,
+  "baseline_rent_meur_total": 10303.038,
+  "baseline_co2_tonnes": 761513340.6820381,
   "climate_error": null,
   "climate_basis": "direct_operational_generator_co2_not_lifecycle",
-  "lmp_recheck_max_eur_mwh": 40.91509694793679,
-  "kkt_max_residual": 716.192302,
+  "lmp_recheck_max_eur_mwh": 91.05103702855652,
+  "kkt_max_residual": 957.862065,
   "validation": {
     "status": "observations_unavailable",
     "price_basis": null,
@@ -35,8 +35,8 @@
     },
     {
       "id": "AT",
-      "x": 13.69154254955005,
-      "y": 47.581192242290186
+      "x": 14.257698540454545,
+      "y": 47.631170556818184
     },
     {
       "id": "BA",
@@ -45,8 +45,8 @@
     },
     {
       "id": "BE",
-      "x": 4.453691823771368,
-      "y": 50.86722579683761
+      "x": 4.888693661162791,
+      "y": 50.72972178581395
     },
     {
       "id": "BG",
@@ -55,18 +55,18 @@
     },
     {
       "id": "CH",
-      "x": 7.762847989461855,
-      "y": 46.68591282837526
+      "x": 8.265393220409836,
+      "y": 46.82985554114754
     },
     {
       "id": "CZ",
-      "x": 15.869039723789172,
-      "y": 49.78404990645299
+      "x": 15.3179132525,
+      "y": 49.86685497775
     },
     {
       "id": "DE",
-      "x": 9.99463287379657,
-      "y": 50.83546696248857
+      "x": 9.246650889284254,
+      "y": 51.08974812116565
     },
     {
       "id": "DK",
@@ -80,23 +80,23 @@
     },
     {
       "id": "ES",
-      "x": -2.7798978852377303,
-      "y": 40.47873565499479
+      "x": -0.37018080773226925,
+      "y": 40.14151941740781
     },
     {
       "id": "FI",
-      "x": 24.79966758989832,
-      "y": 62.70179698240054
+      "x": 24.76673476238095,
+      "y": 62.770459053928576
     },
     {
       "id": "FR",
-      "x": 3.0593403922563027,
-      "y": 46.5829269575642
+      "x": 6.283372945240433,
+      "y": 44.8143497311315
     },
     {
       "id": "GB",
-      "x": -2.2863451691118883,
-      "y": 53.629806635997845
+      "x": -3.7340397458504095,
+      "y": 55.47862434894737
     },
     {
       "id": "GR",
@@ -120,8 +120,8 @@
     },
     {
       "id": "IT",
-      "x": 11.9895253451611,
-      "y": 42.883983722576225
+      "x": 10.183499658868833,
+      "y": 41.826554150206945
     },
     {
       "id": "LT",
@@ -150,28 +150,28 @@
     },
     {
       "id": "NL",
-      "x": 5.3851714476136365,
-      "y": 52.23602200331061
+      "x": 5.3327438702941174,
+      "y": 52.311549318529416
     },
     {
       "id": "NO",
-      "x": 13.675740592114026,
-      "y": 64.15327800121844
+      "x": 9.209122494716981,
+      "y": 61.727451176650945
     },
     {
       "id": "PL",
-      "x": 18.813059376443462,
-      "y": 51.94946129351135
+      "x": 19.053754416190475,
+      "y": 51.639362767414966
     },
     {
       "id": "PT",
-      "x": -8.346369757168459,
-      "y": 39.879130671805555
+      "x": -8.240434353265305,
+      "y": 40.17897568459183
     },
     {
       "id": "RO",
-      "x": 24.966984304013042,
-      "y": 45.557605439734786
+      "x": 25.040321879270834,
+      "y": 45.550931287187495
     },
     {
       "id": "RS",
@@ -180,8 +180,8 @@
     },
     {
       "id": "SE",
-      "x": 15.939252150590931,
-      "y": 60.39422040743789
+      "x": 16.235995640601505,
+      "y": 60.78284723503759
     },
     {
       "id": "SI",
@@ -212,10 +212,10 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.53,
-      "mean_abs_spread_eur_mwh": 1.54,
-      "max_abs_spread_eur_mwh": 2.9,
-      "spread_hours": 494,
+      "baseline_rent_meur": 5.009,
+      "mean_abs_spread_eur_mwh": 1.45,
+      "max_abs_spread_eur_mwh": 3.0,
+      "spread_hours": 6615,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -234,12 +234,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.021,
-      "mean_abs_spread_eur_mwh": 0.09,
-      "max_abs_spread_eur_mwh": 1.2,
-      "spread_hours": 443,
-      "congested_hours": 0,
-      "marginal_value_eur_mw": 0.0,
+      "baseline_rent_meur": 0.383,
+      "mean_abs_spread_eur_mwh": 0.12,
+      "max_abs_spread_eur_mwh": 2.0,
+      "spread_hours": 5437,
+      "congested_hours": 16,
+      "marginal_value_eur_mw": 1.54,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -256,10 +256,10 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.02,
+      "baseline_rent_meur": 0.242,
       "mean_abs_spread_eur_mwh": 0.09,
       "max_abs_spread_eur_mwh": 0.9,
-      "spread_hours": 474,
+      "spread_hours": 4870,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -278,10 +278,10 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.01,
-      "mean_abs_spread_eur_mwh": 0.08,
-      "max_abs_spread_eur_mwh": 0.5,
-      "spread_hours": 403,
+      "baseline_rent_meur": 0.617,
+      "mean_abs_spread_eur_mwh": 0.18,
+      "max_abs_spread_eur_mwh": 1.0,
+      "spread_hours": 5192,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -295,15 +295,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "9",
+          "id": "4",
           "nominal_mw": 4379.31726185715
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 11.24,
-      "mean_abs_spread_eur_mwh": 20.78,
-      "max_abs_spread_eur_mwh": 27.5,
-      "spread_hours": 744,
+      "baseline_rent_meur": 10.86,
+      "mean_abs_spread_eur_mwh": 3.27,
+      "max_abs_spread_eur_mwh": 26.3,
+      "spread_hours": 8737,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -327,12 +327,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.81,
-      "mean_abs_spread_eur_mwh": 0.85,
-      "max_abs_spread_eur_mwh": 2.2,
-      "spread_hours": 718,
-      "congested_hours": 0,
-      "marginal_value_eur_mw": 0.0,
+      "baseline_rent_meur": 17.256,
+      "mean_abs_spread_eur_mwh": 1.93,
+      "max_abs_spread_eur_mwh": 3.2,
+      "spread_hours": 8740,
+      "congested_hours": 26,
+      "marginal_value_eur_mw": 3.42,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -344,32 +344,22 @@
       "assets": [
         {
           "component": "Line",
-          "id": "10",
-          "nominal_mw": 2949.3361151282843
+          "id": "7",
+          "nominal_mw": 10009.868027102057
         },
         {
           "component": "Line",
-          "id": "11",
+          "id": "8",
           "nominal_mw": 3396.21
-        },
-        {
-          "component": "Line",
-          "id": "12",
-          "nominal_mw": 983.1120383760948
-        },
-        {
-          "component": "Line",
-          "id": "13",
-          "nominal_mw": 6077.419873597677
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 10.663,
-      "mean_abs_spread_eur_mwh": 17.71,
-      "max_abs_spread_eur_mwh": 21.6,
-      "spread_hours": 744,
-      "congested_hours": 127,
-      "marginal_value_eur_mw": 235.28,
+      "baseline_rent_meur": 90.68,
+      "mean_abs_spread_eur_mwh": 6.1,
+      "max_abs_spread_eur_mwh": 17.2,
+      "spread_hours": 8709,
+      "congested_hours": 8,
+      "marginal_value_eur_mw": 0.58,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -381,15 +371,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "7",
+          "id": "9",
           "nominal_mw": 4558.064905198257
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.21,
-      "mean_abs_spread_eur_mwh": 0.56,
-      "max_abs_spread_eur_mwh": 1.4,
-      "spread_hours": 717,
+      "baseline_rent_meur": 1.788,
+      "mean_abs_spread_eur_mwh": 0.95,
+      "max_abs_spread_eur_mwh": 9.3,
+      "spread_hours": 8689,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -403,22 +393,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "14",
-          "nominal_mw": 491.5560191880474
-        },
-        {
-          "component": "Line",
-          "id": "15",
-          "nominal_mw": 491.5560191880474
+          "id": "10",
+          "nominal_mw": 983.1120383760948
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 26.812,
-      "mean_abs_spread_eur_mwh": 107.44,
-      "max_abs_spread_eur_mwh": 59.9,
-      "spread_hours": 744,
-      "congested_hours": 744,
-      "marginal_value_eur_mw": 230839.14,
+      "baseline_rent_meur": 291.27,
+      "mean_abs_spread_eur_mwh": 53.43,
+      "max_abs_spread_eur_mwh": 56.3,
+      "spread_hours": 8760,
+      "congested_hours": 2931,
+      "marginal_value_eur_mw": 176951.8,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -430,15 +415,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "8",
+          "id": "11",
           "nominal_mw": 3887.761242669102
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.29,
-      "mean_abs_spread_eur_mwh": 1.54,
-      "max_abs_spread_eur_mwh": 3.4,
-      "spread_hours": 741,
+      "baseline_rent_meur": 15.539,
+      "mean_abs_spread_eur_mwh": 1.78,
+      "max_abs_spread_eur_mwh": 17.2,
+      "spread_hours": 8759,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -452,15 +437,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "16",
+          "id": "12",
           "nominal_mw": 7015.845001138495
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.133,
-      "mean_abs_spread_eur_mwh": 0.16,
-      "max_abs_spread_eur_mwh": 1.3,
-      "spread_hours": 477,
+      "baseline_rent_meur": 1.301,
+      "mean_abs_spread_eur_mwh": 0.11,
+      "max_abs_spread_eur_mwh": 3.0,
+      "spread_hours": 2933,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -474,15 +459,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "17",
+          "id": "13",
           "nominal_mw": 4066.50888601021
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.017,
-      "mean_abs_spread_eur_mwh": 0.06,
-      "max_abs_spread_eur_mwh": 0.4,
-      "spread_hours": 400,
+      "baseline_rent_meur": 1.356,
+      "mean_abs_spread_eur_mwh": 0.22,
+      "max_abs_spread_eur_mwh": 2.0,
+      "spread_hours": 5252,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -496,20 +481,20 @@
       "assets": [
         {
           "component": "Line",
-          "id": "18",
+          "id": "14",
           "nominal_mw": 2279.0324525991286
         },
         {
           "component": "Line",
-          "id": "19",
+          "id": "15",
           "nominal_mw": 3396.21
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.017,
-      "mean_abs_spread_eur_mwh": 0.09,
-      "max_abs_spread_eur_mwh": 0.3,
-      "spread_hours": 252,
+      "baseline_rent_meur": 0.207,
+      "mean_abs_spread_eur_mwh": 0.14,
+      "max_abs_spread_eur_mwh": 2.7,
+      "spread_hours": 2735,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -528,12 +513,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 4.561,
-      "mean_abs_spread_eur_mwh": 6.13,
-      "max_abs_spread_eur_mwh": 47.6,
-      "spread_hours": 731,
-      "congested_hours": 722,
-      "marginal_value_eur_mw": 2824.84,
+      "baseline_rent_meur": 53.904,
+      "mean_abs_spread_eur_mwh": 6.15,
+      "max_abs_spread_eur_mwh": 55.6,
+      "spread_hours": 8584,
+      "congested_hours": 8755,
+      "marginal_value_eur_mw": 44518.4,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -545,32 +530,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "22",
-          "nominal_mw": 1787.4764334110814
-        },
-        {
-          "component": "Line",
-          "id": "23",
-          "nominal_mw": 1005.4554937937334
-        },
-        {
-          "component": "Line",
-          "id": "27",
-          "nominal_mw": 3574.952866822163
-        },
-        {
-          "component": "Line",
-          "id": "28",
-          "nominal_mw": 502.7277468968667
+          "id": "16",
+          "nominal_mw": 6870.612540923845
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 2.073,
-      "mean_abs_spread_eur_mwh": 10.08,
-      "max_abs_spread_eur_mwh": 28.0,
-      "spread_hours": 744,
-      "congested_hours": 5,
-      "marginal_value_eur_mw": 11.29,
+      "baseline_rent_meur": 28.344,
+      "mean_abs_spread_eur_mwh": 2.33,
+      "max_abs_spread_eur_mwh": 35.9,
+      "spread_hours": 6279,
+      "congested_hours": 216,
+      "marginal_value_eur_mw": 424.49,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -587,12 +557,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 5.548,
-      "mean_abs_spread_eur_mwh": 7.46,
-      "max_abs_spread_eur_mwh": 48.1,
-      "spread_hours": 557,
-      "congested_hours": 654,
-      "marginal_value_eur_mw": 6549.48,
+      "baseline_rent_meur": 61.338,
+      "mean_abs_spread_eur_mwh": 7.0,
+      "max_abs_spread_eur_mwh": 53.7,
+      "spread_hours": 6392,
+      "congested_hours": 7757,
+      "marginal_value_eur_mw": 66694.04,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -604,17 +574,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "24",
+          "id": "17",
           "nominal_mw": 983.1120383760948
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 1.496,
-      "mean_abs_spread_eur_mwh": 3.76,
-      "max_abs_spread_eur_mwh": 47.9,
-      "spread_hours": 712,
-      "congested_hours": 43,
-      "marginal_value_eur_mw": 1085.55,
+      "baseline_rent_meur": 47.394,
+      "mean_abs_spread_eur_mwh": 8.96,
+      "max_abs_spread_eur_mwh": 144.4,
+      "spread_hours": 8719,
+      "congested_hours": 2426,
+      "marginal_value_eur_mw": 209081.24,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -626,22 +596,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "25",
-          "nominal_mw": 3396.205223481055
-        },
-        {
-          "component": "Line",
-          "id": "29",
-          "nominal_mw": 3396.205223481055
+          "id": "18",
+          "nominal_mw": 6792.41044696211
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 5.912,
-      "mean_abs_spread_eur_mwh": 5.25,
-      "max_abs_spread_eur_mwh": 52.9,
-      "spread_hours": 743,
-      "congested_hours": 150,
-      "marginal_value_eur_mw": 929.07,
+      "baseline_rent_meur": 52.95,
+      "mean_abs_spread_eur_mwh": 2.77,
+      "max_abs_spread_eur_mwh": 54.7,
+      "spread_hours": 8470,
+      "congested_hours": 122,
+      "marginal_value_eur_mw": 1660.11,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -653,21 +618,21 @@
       "assets": [
         {
           "component": "Line",
-          "id": "30",
+          "id": "19",
           "nominal_mw": 3574.952866822163
         },
         {
           "component": "Line",
-          "id": "31",
+          "id": "20",
           "nominal_mw": 3396.21
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 1.498,
-      "mean_abs_spread_eur_mwh": 3.03,
-      "max_abs_spread_eur_mwh": 2.8,
-      "spread_hours": 497,
-      "congested_hours": 0,
+      "baseline_rent_meur": 27.284,
+      "mean_abs_spread_eur_mwh": 3.39,
+      "max_abs_spread_eur_mwh": 5.3,
+      "spread_hours": 6347,
+      "congested_hours": 1,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
@@ -680,17 +645,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "32",
+          "id": "21",
           "nominal_mw": 1787.4764334110814
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.017,
-      "mean_abs_spread_eur_mwh": 0.19,
-      "max_abs_spread_eur_mwh": 1.0,
-      "spread_hours": 447,
-      "congested_hours": 7,
-      "marginal_value_eur_mw": 0.09,
+      "baseline_rent_meur": 0.951,
+      "mean_abs_spread_eur_mwh": 0.36,
+      "max_abs_spread_eur_mwh": 4.9,
+      "spread_hours": 5974,
+      "congested_hours": 543,
+      "marginal_value_eur_mw": 157.66,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -702,20 +667,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "33",
-          "nominal_mw": 3574.952866822163
-        },
-        {
-          "component": "Line",
-          "id": "34",
-          "nominal_mw": 3574.952866822163
+          "id": "22",
+          "nominal_mw": 7149.905733644326
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.051,
-      "mean_abs_spread_eur_mwh": 0.16,
-      "max_abs_spread_eur_mwh": 2.0,
-      "spread_hours": 167,
+      "baseline_rent_meur": 0.5,
+      "mean_abs_spread_eur_mwh": 0.08,
+      "max_abs_spread_eur_mwh": 4.3,
+      "spread_hours": 3849,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -729,17 +689,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "35",
+          "id": "23",
           "nominal_mw": 1787.4764334110814
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.033,
-      "mean_abs_spread_eur_mwh": 0.14,
-      "max_abs_spread_eur_mwh": 1.6,
-      "spread_hours": 269,
-      "congested_hours": 0,
-      "marginal_value_eur_mw": 0.0,
+      "baseline_rent_meur": 0.405,
+      "mean_abs_spread_eur_mwh": 0.16,
+      "max_abs_spread_eur_mwh": 5.5,
+      "spread_hours": 3118,
+      "congested_hours": 173,
+      "marginal_value_eur_mw": 69.46,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -751,17 +711,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "42",
+          "id": "24",
           "nominal_mw": 19930.36223253356
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 20.376,
-      "mean_abs_spread_eur_mwh": 5.46,
-      "max_abs_spread_eur_mwh": 9.0,
-      "spread_hours": 744,
-      "congested_hours": 0,
-      "marginal_value_eur_mw": 0.0,
+      "baseline_rent_meur": 131.637,
+      "mean_abs_spread_eur_mwh": 2.53,
+      "max_abs_spread_eur_mwh": 23.7,
+      "spread_hours": 7968,
+      "congested_hours": 244,
+      "marginal_value_eur_mw": 553.84,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -773,27 +733,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "39",
-          "nominal_mw": 3485.5790451516086
-        },
-        {
-          "component": "Line",
-          "id": "40",
-          "nominal_mw": 6077.419873597677
-        },
-        {
-          "component": "Line",
-          "id": "43",
-          "nominal_mw": 1787.4764334110814
+          "id": "25",
+          "nominal_mw": 11350.475352160369
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 11.812,
-      "mean_abs_spread_eur_mwh": 17.42,
-      "max_abs_spread_eur_mwh": 14.4,
-      "spread_hours": 744,
-      "congested_hours": 0,
-      "marginal_value_eur_mw": 0.0,
+      "baseline_rent_meur": 91.25,
+      "mean_abs_spread_eur_mwh": 2.83,
+      "max_abs_spread_eur_mwh": 28.7,
+      "spread_hours": 6363,
+      "congested_hours": 80,
+      "marginal_value_eur_mw": 1597.05,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -805,32 +755,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "41",
-          "nominal_mw": 983.1120383760948
-        },
-        {
-          "component": "Line",
-          "id": "44",
-          "nominal_mw": 5585.86385440963
-        },
-        {
-          "component": "Line",
-          "id": "45",
-          "nominal_mw": 3396.205223481055
-        },
-        {
-          "component": "Line",
-          "id": "46",
-          "nominal_mw": 491.5560191880474
+          "id": "26",
+          "nominal_mw": 10456.737135454827
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 122.579,
-      "mean_abs_spread_eur_mwh": 121.69,
-      "max_abs_spread_eur_mwh": 41.2,
-      "spread_hours": 744,
-      "congested_hours": 383,
-      "marginal_value_eur_mw": 3707.09,
+      "baseline_rent_meur": 3198.075,
+      "mean_abs_spread_eur_mwh": 52.57,
+      "max_abs_spread_eur_mwh": 62.4,
+      "spread_hours": 8760,
+      "congested_hours": 8407,
+      "marginal_value_eur_mw": 612066.72,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -842,22 +777,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "51",
-          "nominal_mw": 3396.205223481055
-        },
-        {
-          "component": "Line",
-          "id": "52",
-          "nominal_mw": 3396.205223481055
+          "id": "27",
+          "nominal_mw": 6792.41044696211
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 8.289,
-      "mean_abs_spread_eur_mwh": 6.99,
-      "max_abs_spread_eur_mwh": 26.0,
-      "spread_hours": 744,
-      "congested_hours": 569,
-      "marginal_value_eur_mw": 2155.72,
+      "baseline_rent_meur": 40.018,
+      "mean_abs_spread_eur_mwh": 2.72,
+      "max_abs_spread_eur_mwh": 18.9,
+      "spread_hours": 8733,
+      "congested_hours": 520,
+      "marginal_value_eur_mw": 940.75,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -869,22 +799,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "48",
-          "nominal_mw": 1787.4764334110814
-        },
-        {
-          "component": "Line",
-          "id": "49",
-          "nominal_mw": 2770.588471787176
+          "id": "28",
+          "nominal_mw": 4558.064905198257
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 1.131,
-      "mean_abs_spread_eur_mwh": 2.19,
-      "max_abs_spread_eur_mwh": 4.0,
-      "spread_hours": 744,
-      "congested_hours": 280,
-      "marginal_value_eur_mw": 467.9,
+      "baseline_rent_meur": 4.628,
+      "mean_abs_spread_eur_mwh": 0.78,
+      "max_abs_spread_eur_mwh": 4.9,
+      "spread_hours": 6584,
+      "congested_hours": 35,
+      "marginal_value_eur_mw": 21.04,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -896,15 +821,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "50",
+          "id": "29",
           "nominal_mw": 5853.985319421292
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.211,
-      "mean_abs_spread_eur_mwh": 0.31,
-      "max_abs_spread_eur_mwh": 1.4,
-      "spread_hours": 664,
+      "baseline_rent_meur": 3.536,
+      "mean_abs_spread_eur_mwh": 0.41,
+      "max_abs_spread_eur_mwh": 6.4,
+      "spread_hours": 6848,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -918,17 +843,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "85",
+          "id": "30",
           "nominal_mw": 7149.905733644326
         },
         {
           "component": "Line",
-          "id": "86",
+          "id": "31",
           "nominal_mw": 3396.21
         },
         {
           "component": "Line",
-          "id": "87",
+          "id": "32",
           "nominal_mw": 3396.21
         },
         {
@@ -938,12 +863,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 1.749,
-      "mean_abs_spread_eur_mwh": 3.19,
-      "max_abs_spread_eur_mwh": 26.3,
-      "spread_hours": 578,
-      "congested_hours": 712,
-      "marginal_value_eur_mw": 92.04,
+      "baseline_rent_meur": 16.757,
+      "mean_abs_spread_eur_mwh": 2.54,
+      "max_abs_spread_eur_mwh": 27.9,
+      "spread_hours": 4269,
+      "congested_hours": 8497,
+      "marginal_value_eur_mw": 834.46,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -955,22 +880,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "67",
-          "nominal_mw": 3977.1350643396563
-        },
-        {
-          "component": "Line",
-          "id": "76",
-          "nominal_mw": 2279.0324525991286
+          "id": "33",
+          "nominal_mw": 6256.167516938785
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 2.736,
-      "mean_abs_spread_eur_mwh": 4.34,
-      "max_abs_spread_eur_mwh": 13.4,
-      "spread_hours": 744,
-      "congested_hours": 14,
-      "marginal_value_eur_mw": 65.97,
+      "baseline_rent_meur": 61.936,
+      "mean_abs_spread_eur_mwh": 4.93,
+      "max_abs_spread_eur_mwh": 50.3,
+      "spread_hours": 8370,
+      "congested_hours": 7,
+      "marginal_value_eur_mw": 242.14,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -982,17 +902,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "68",
+          "id": "34",
           "nominal_mw": 3932.448153504379
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.573,
-      "mean_abs_spread_eur_mwh": 0.79,
-      "max_abs_spread_eur_mwh": 7.6,
-      "spread_hours": 651,
-      "congested_hours": 0,
-      "marginal_value_eur_mw": 0.0,
+      "baseline_rent_meur": 71.795,
+      "mean_abs_spread_eur_mwh": 4.99,
+      "max_abs_spread_eur_mwh": 90.7,
+      "spread_hours": 8722,
+      "congested_hours": 40,
+      "marginal_value_eur_mw": 331.85,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1004,27 +924,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "80",
-          "nominal_mw": 3396.205223481055
-        },
-        {
-          "component": "Line",
-          "id": "93",
-          "nominal_mw": 3396.205223481055
-        },
-        {
-          "component": "Line",
-          "id": "98",
-          "nominal_mw": 6792.41044696211
+          "id": "35",
+          "nominal_mw": 13584.82089392422
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 34.112,
-      "mean_abs_spread_eur_mwh": 18.69,
-      "max_abs_spread_eur_mwh": 102.2,
-      "spread_hours": 744,
-      "congested_hours": 257,
-      "marginal_value_eur_mw": 3038.76,
+      "baseline_rent_meur": 182.305,
+      "mean_abs_spread_eur_mwh": 3.39,
+      "max_abs_spread_eur_mwh": 55.6,
+      "spread_hours": 8532,
+      "congested_hours": 119,
+      "marginal_value_eur_mw": 1331.78,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1041,12 +951,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 10.274,
-      "mean_abs_spread_eur_mwh": 9.86,
-      "max_abs_spread_eur_mwh": 40.6,
-      "spread_hours": 683,
-      "congested_hours": 720,
-      "marginal_value_eur_mw": 4698.71,
+      "baseline_rent_meur": 37.088,
+      "mean_abs_spread_eur_mwh": 3.02,
+      "max_abs_spread_eur_mwh": 47.3,
+      "spread_hours": 7635,
+      "congested_hours": 7994,
+      "marginal_value_eur_mw": 22003.91,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1058,22 +968,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "101",
-          "nominal_mw": 3574.952866822163
-        },
-        {
-          "component": "Line",
-          "id": "103",
-          "nominal_mw": 3396.205223481055
+          "id": "36",
+          "nominal_mw": 6971.158090303217
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 3.123,
-      "mean_abs_spread_eur_mwh": 3.38,
-      "max_abs_spread_eur_mwh": 27.1,
-      "spread_hours": 741,
-      "congested_hours": 221,
-      "marginal_value_eur_mw": 609.46,
+      "baseline_rent_meur": 21.403,
+      "mean_abs_spread_eur_mwh": 2.11,
+      "max_abs_spread_eur_mwh": 17.7,
+      "spread_hours": 8498,
+      "congested_hours": 26,
+      "marginal_value_eur_mw": 5.96,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1090,12 +995,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 1.633,
-      "mean_abs_spread_eur_mwh": 3.66,
-      "max_abs_spread_eur_mwh": 28.0,
-      "spread_hours": 642,
-      "congested_hours": 704,
-      "marginal_value_eur_mw": 3112.06,
+      "baseline_rent_meur": 15.285,
+      "mean_abs_spread_eur_mwh": 2.91,
+      "max_abs_spread_eur_mwh": 47.3,
+      "spread_hours": 7531,
+      "congested_hours": 8224,
+      "marginal_value_eur_mw": 21927.97,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1112,12 +1017,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 12.176,
-      "mean_abs_spread_eur_mwh": 11.69,
-      "max_abs_spread_eur_mwh": 59.9,
-      "spread_hours": 589,
-      "congested_hours": 632,
-      "marginal_value_eur_mw": 8828.87,
+      "baseline_rent_meur": 124.433,
+      "mean_abs_spread_eur_mwh": 10.15,
+      "max_abs_spread_eur_mwh": 55.2,
+      "spread_hours": 6549,
+      "congested_hours": 8153,
+      "marginal_value_eur_mw": 93913.19,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1134,12 +1039,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 3.084,
-      "mean_abs_spread_eur_mwh": 5.92,
-      "max_abs_spread_eur_mwh": 82.0,
-      "spread_hours": 591,
-      "congested_hours": 710,
-      "marginal_value_eur_mw": 3678.47,
+      "baseline_rent_meur": 19.09,
+      "mean_abs_spread_eur_mwh": 3.11,
+      "max_abs_spread_eur_mwh": 55.6,
+      "spread_hours": 6630,
+      "congested_hours": 8744,
+      "marginal_value_eur_mw": 20250.46,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1161,12 +1066,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 11.643,
-      "mean_abs_spread_eur_mwh": 19.08,
-      "max_abs_spread_eur_mwh": 40.6,
-      "spread_hours": 670,
-      "congested_hours": 731,
-      "marginal_value_eur_mw": 4698.11,
+      "baseline_rent_meur": 35.55,
+      "mean_abs_spread_eur_mwh": 4.95,
+      "max_abs_spread_eur_mwh": 47.3,
+      "spread_hours": 5605,
+      "congested_hours": 8290,
+      "marginal_value_eur_mw": 22001.7,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1178,7 +1083,7 @@
       "assets": [
         {
           "component": "Line",
-          "id": "104",
+          "id": "37",
           "nominal_mw": 3574.952866822163
         },
         {
@@ -1188,12 +1093,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 2.676,
-      "mean_abs_spread_eur_mwh": 4.97,
-      "max_abs_spread_eur_mwh": 30.4,
-      "spread_hours": 709,
-      "congested_hours": 718,
-      "marginal_value_eur_mw": 489.55,
+      "baseline_rent_meur": 38.266,
+      "mean_abs_spread_eur_mwh": 4.38,
+      "max_abs_spread_eur_mwh": 47.3,
+      "spread_hours": 5429,
+      "congested_hours": 8224,
+      "marginal_value_eur_mw": 4985.97,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1215,12 +1120,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 1.449,
-      "mean_abs_spread_eur_mwh": 3.9,
-      "max_abs_spread_eur_mwh": 9.3,
-      "spread_hours": 500,
-      "congested_hours": 515,
-      "marginal_value_eur_mw": 438.11,
+      "baseline_rent_meur": 15.168,
+      "mean_abs_spread_eur_mwh": 3.47,
+      "max_abs_spread_eur_mwh": 48.2,
+      "spread_hours": 3972,
+      "congested_hours": 5918,
+      "marginal_value_eur_mw": 11173.72,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1232,15 +1137,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "105",
+          "id": "38",
           "nominal_mw": 3318.00312951932
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.183,
-      "mean_abs_spread_eur_mwh": 0.33,
-      "max_abs_spread_eur_mwh": 2.1,
-      "spread_hours": 192,
+      "baseline_rent_meur": 0.366,
+      "mean_abs_spread_eur_mwh": 0.07,
+      "max_abs_spread_eur_mwh": 2.4,
+      "spread_hours": 827,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -1254,18 +1159,8 @@
       "assets": [
         {
           "component": "Line",
-          "id": "115",
-          "nominal_mw": 1787.4764334110814
-        },
-        {
-          "component": "Line",
-          "id": "121",
-          "nominal_mw": 2290.2041803079483
-        },
-        {
-          "component": "Line",
-          "id": "124",
-          "nominal_mw": 502.7277468968667
+          "id": "39",
+          "nominal_mw": 4580.4083606158965
         },
         {
           "component": "Link",
@@ -1279,12 +1174,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 11.637,
-      "mean_abs_spread_eur_mwh": 18.94,
-      "max_abs_spread_eur_mwh": 51.7,
-      "spread_hours": 744,
-      "congested_hours": 744,
-      "marginal_value_eur_mw": 1733.86,
+      "baseline_rent_meur": 1667.62,
+      "mean_abs_spread_eur_mwh": 128.13,
+      "max_abs_spread_eur_mwh": 57.4,
+      "spread_hours": 8334,
+      "congested_hours": 8760,
+      "marginal_value_eur_mw": 365413.41,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1296,32 +1191,22 @@
       "assets": [
         {
           "component": "Line",
-          "id": "113",
-          "nominal_mw": 3262.144490975223
+          "id": "40",
+          "nominal_mw": 12199.52665803063
         },
         {
           "component": "Line",
-          "id": "122",
-          "nominal_mw": 3574.952866822163
-        },
-        {
-          "component": "Line",
-          "id": "123",
+          "id": "41",
           "nominal_mw": 3396.21
-        },
-        {
-          "component": "Line",
-          "id": "125",
-          "nominal_mw": 5362.429300233244
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 3.487,
-      "mean_abs_spread_eur_mwh": 3.59,
-      "max_abs_spread_eur_mwh": 45.0,
-      "spread_hours": 674,
-      "congested_hours": 33,
-      "marginal_value_eur_mw": 66.54,
+      "baseline_rent_meur": 46.228,
+      "mean_abs_spread_eur_mwh": 2.33,
+      "max_abs_spread_eur_mwh": 11.7,
+      "spread_hours": 1885,
+      "congested_hours": 0,
+      "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1333,17 +1218,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "130",
+          "id": "42",
           "nominal_mw": 491.5560191880474
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 1.365,
-      "mean_abs_spread_eur_mwh": 6.59,
-      "max_abs_spread_eur_mwh": 11.8,
-      "spread_hours": 744,
-      "congested_hours": 1,
-      "marginal_value_eur_mw": 1.01,
+      "baseline_rent_meur": 0.077,
+      "mean_abs_spread_eur_mwh": 0.12,
+      "max_abs_spread_eur_mwh": 5.8,
+      "spread_hours": 613,
+      "congested_hours": 5,
+      "marginal_value_eur_mw": 0.06,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1355,12 +1240,12 @@
       "assets": [
         {
           "component": "Line",
-          "id": "131",
+          "id": "43",
           "nominal_mw": 7149.905733644326
         },
         {
           "component": "Line",
-          "id": "132",
+          "id": "44",
           "nominal_mw": 3396.21
         },
         {
@@ -1375,12 +1260,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.369,
-      "mean_abs_spread_eur_mwh": 0.64,
-      "max_abs_spread_eur_mwh": 4.2,
-      "spread_hours": 224,
-      "congested_hours": 744,
-      "marginal_value_eur_mw": 4.98,
+      "baseline_rent_meur": 0.131,
+      "mean_abs_spread_eur_mwh": 0.02,
+      "max_abs_spread_eur_mwh": 2.9,
+      "spread_hours": 83,
+      "congested_hours": 8760,
+      "marginal_value_eur_mw": 9.85,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1407,12 +1292,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 25.651,
-      "mean_abs_spread_eur_mwh": 26.37,
-      "max_abs_spread_eur_mwh": 50.2,
-      "spread_hours": 740,
-      "congested_hours": 731,
-      "marginal_value_eur_mw": 6926.65,
+      "baseline_rent_meur": 279.935,
+      "mean_abs_spread_eur_mwh": 23.97,
+      "max_abs_spread_eur_mwh": 54.3,
+      "spread_hours": 4825,
+      "congested_hours": 8760,
+      "marginal_value_eur_mw": 74415.82,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1424,13 +1309,8 @@
       "assets": [
         {
           "component": "Line",
-          "id": "147",
-          "nominal_mw": 502.7277468968667
-        },
-        {
-          "component": "Line",
-          "id": "166",
-          "nominal_mw": 5362.429300233244
+          "id": "45",
+          "nominal_mw": 5865.157047130111
         },
         {
           "component": "Link",
@@ -1444,12 +1324,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 114.239,
-      "mean_abs_spread_eur_mwh": 106.06,
-      "max_abs_spread_eur_mwh": 84.1,
-      "spread_hours": 744,
-      "congested_hours": 743,
-      "marginal_value_eur_mw": 37431.3,
+      "baseline_rent_meur": 1534.63,
+      "mean_abs_spread_eur_mwh": 57.07,
+      "max_abs_spread_eur_mwh": 56.7,
+      "spread_hours": 8760,
+      "congested_hours": 8589,
+      "marginal_value_eur_mw": 92903.61,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1461,17 +1341,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "171",
+          "id": "46",
           "nominal_mw": 502.7277468968667
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.128,
-      "mean_abs_spread_eur_mwh": 1.93,
-      "max_abs_spread_eur_mwh": 20.8,
-      "spread_hours": 741,
-      "congested_hours": 0,
-      "marginal_value_eur_mw": 0.0,
+      "baseline_rent_meur": 9.46,
+      "mean_abs_spread_eur_mwh": 7.8,
+      "max_abs_spread_eur_mwh": 119.3,
+      "spread_hours": 8657,
+      "congested_hours": 264,
+      "marginal_value_eur_mw": 31509.5,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1483,12 +1363,12 @@
       "assets": [
         {
           "component": "Line",
-          "id": "186",
+          "id": "47",
           "nominal_mw": 1843.3350719551775
         },
         {
           "component": "Line",
-          "id": "187",
+          "id": "48",
           "nominal_mw": 3396.21
         },
         {
@@ -1498,12 +1378,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 11.429,
-      "mean_abs_spread_eur_mwh": 30.72,
+      "baseline_rent_meur": 142.678,
+      "mean_abs_spread_eur_mwh": 32.58,
       "max_abs_spread_eur_mwh": 80.8,
-      "spread_hours": 657,
-      "congested_hours": 665,
-      "marginal_value_eur_mw": 2070.45,
+      "spread_hours": 6560,
+      "congested_hours": 7552,
+      "marginal_value_eur_mw": 24754.9,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1520,12 +1400,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 5.776,
-      "mean_abs_spread_eur_mwh": 7.76,
-      "max_abs_spread_eur_mwh": 53.2,
-      "spread_hours": 537,
-      "congested_hours": 616,
-      "marginal_value_eur_mw": 6437.41,
+      "baseline_rent_meur": 69.398,
+      "mean_abs_spread_eur_mwh": 7.92,
+      "max_abs_spread_eur_mwh": 54.9,
+      "spread_hours": 7030,
+      "congested_hours": 8190,
+      "marginal_value_eur_mw": 77711.46,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1542,12 +1422,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 16.053,
-      "mean_abs_spread_eur_mwh": 15.41,
-      "max_abs_spread_eur_mwh": 40.6,
-      "spread_hours": 667,
-      "congested_hours": 644,
-      "marginal_value_eur_mw": 9858.93,
+      "baseline_rent_meur": 146.71,
+      "mean_abs_spread_eur_mwh": 11.96,
+      "max_abs_spread_eur_mwh": 53.6,
+      "spread_hours": 5828,
+      "congested_hours": 8001,
+      "marginal_value_eur_mw": 105969.53,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1564,12 +1444,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 19.06,
-      "mean_abs_spread_eur_mwh": 51.24,
-      "max_abs_spread_eur_mwh": 56.7,
-      "spread_hours": 744,
-      "congested_hours": 744,
-      "marginal_value_eur_mw": 38191.92,
+      "baseline_rent_meur": 234.003,
+      "mean_abs_spread_eur_mwh": 53.43,
+      "max_abs_spread_eur_mwh": 60.3,
+      "spread_hours": 8760,
+      "congested_hours": 8760,
+      "marginal_value_eur_mw": 471998.69,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1581,17 +1461,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "188",
+          "id": "49",
           "nominal_mw": 3574.952866822163
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 1.121,
-      "mean_abs_spread_eur_mwh": 1.46,
+      "baseline_rent_meur": 12.403,
+      "mean_abs_spread_eur_mwh": 1.44,
       "max_abs_spread_eur_mwh": 2.6,
-      "spread_hours": 491,
-      "congested_hours": 0,
-      "marginal_value_eur_mw": 0.0,
+      "spread_hours": 6404,
+      "congested_hours": 2,
+      "marginal_value_eur_mw": 0.05,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1603,15 +1483,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "189",
+          "id": "50",
           "nominal_mw": 7149.905733644326
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.149,
-      "mean_abs_spread_eur_mwh": 0.67,
-      "max_abs_spread_eur_mwh": 2.2,
-      "spread_hours": 604,
+      "baseline_rent_meur": 2.478,
+      "mean_abs_spread_eur_mwh": 0.51,
+      "max_abs_spread_eur_mwh": 8.3,
+      "spread_hours": 6007,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -1625,15 +1505,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "190",
+          "id": "51",
           "nominal_mw": 1787.4764334110814
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.028,
-      "mean_abs_spread_eur_mwh": 0.17,
-      "max_abs_spread_eur_mwh": 1.3,
-      "spread_hours": 504,
+      "baseline_rent_meur": 0.289,
+      "mean_abs_spread_eur_mwh": 0.13,
+      "max_abs_spread_eur_mwh": 5.3,
+      "spread_hours": 4233,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -1647,15 +1527,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "191",
+          "id": "52",
           "nominal_mw": 6345.54133860934
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.233,
-      "mean_abs_spread_eur_mwh": 0.38,
-      "max_abs_spread_eur_mwh": 1.0,
-      "spread_hours": 572,
+      "baseline_rent_meur": 2.001,
+      "mean_abs_spread_eur_mwh": 0.36,
+      "max_abs_spread_eur_mwh": 3.0,
+      "spread_hours": 5817,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -1669,17 +1549,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "192",
+          "id": "53",
           "nominal_mw": 3574.952866822163
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.326,
-      "mean_abs_spread_eur_mwh": 0.7,
-      "max_abs_spread_eur_mwh": 2.8,
-      "spread_hours": 567,
-      "congested_hours": 26,
-      "marginal_value_eur_mw": 6.99,
+      "baseline_rent_meur": 3.844,
+      "mean_abs_spread_eur_mwh": 0.56,
+      "max_abs_spread_eur_mwh": 18.9,
+      "spread_hours": 5726,
+      "congested_hours": 134,
+      "marginal_value_eur_mw": 695.64,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1691,17 +1571,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "193",
+          "id": "54",
           "nominal_mw": 1787.4764334110814
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.133,
-      "mean_abs_spread_eur_mwh": 0.68,
-      "max_abs_spread_eur_mwh": 2.7,
-      "spread_hours": 575,
-      "congested_hours": 1,
-      "marginal_value_eur_mw": 1.64,
+      "baseline_rent_meur": 1.541,
+      "mean_abs_spread_eur_mwh": 0.51,
+      "max_abs_spread_eur_mwh": 13.6,
+      "spread_hours": 5640,
+      "congested_hours": 95,
+      "marginal_value_eur_mw": 675.67,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1713,20 +1593,20 @@
       "assets": [
         {
           "component": "Line",
-          "id": "194",
+          "id": "55",
           "nominal_mw": 3574.952866822163
         },
         {
           "component": "Line",
-          "id": "195",
+          "id": "56",
           "nominal_mw": 3396.21
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.461,
-      "mean_abs_spread_eur_mwh": 2.07,
-      "max_abs_spread_eur_mwh": 2.6,
-      "spread_hours": 616,
+      "baseline_rent_meur": 4.697,
+      "mean_abs_spread_eur_mwh": 1.69,
+      "max_abs_spread_eur_mwh": 7.9,
+      "spread_hours": 6841,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -1740,20 +1620,20 @@
       "assets": [
         {
           "component": "Line",
-          "id": "196",
+          "id": "57",
           "nominal_mw": 8937.382167055406
         },
         {
           "component": "Line",
-          "id": "197",
+          "id": "58",
           "nominal_mw": 3396.21
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.524,
-      "mean_abs_spread_eur_mwh": 0.7,
-      "max_abs_spread_eur_mwh": 0.9,
-      "spread_hours": 677,
+      "baseline_rent_meur": 4.0,
+      "mean_abs_spread_eur_mwh": 0.47,
+      "max_abs_spread_eur_mwh": 2.0,
+      "spread_hours": 5503,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -1772,12 +1652,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 46.731,
-      "mean_abs_spread_eur_mwh": 52.34,
-      "max_abs_spread_eur_mwh": 53.1,
-      "spread_hours": 744,
-      "congested_hours": 744,
-      "marginal_value_eur_mw": 38157.39,
+      "baseline_rent_meur": 574.696,
+      "mean_abs_spread_eur_mwh": 54.67,
+      "max_abs_spread_eur_mwh": 56.8,
+      "spread_hours": 8760,
+      "congested_hours": 8760,
+      "marginal_value_eur_mw": 472042.36,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1789,17 +1669,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "212",
+          "id": "59",
           "nominal_mw": 2279.0324525991286
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 58.96,
-      "mean_abs_spread_eur_mwh": 52.88,
-      "max_abs_spread_eur_mwh": 54.4,
-      "spread_hours": 744,
-      "congested_hours": 744,
-      "marginal_value_eur_mw": 33422.91,
+      "baseline_rent_meur": 677.925,
+      "mean_abs_spread_eur_mwh": 55.21,
+      "max_abs_spread_eur_mwh": 59.5,
+      "spread_hours": 8760,
+      "congested_hours": 8758,
+      "marginal_value_eur_mw": 507031.76,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1811,15 +1691,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "213",
+          "id": "60",
           "nominal_mw": 4424.004172692426
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.014,
-      "mean_abs_spread_eur_mwh": 0.02,
-      "max_abs_spread_eur_mwh": 1.3,
-      "spread_hours": 25,
+      "baseline_rent_meur": 0.317,
+      "mean_abs_spread_eur_mwh": 0.04,
+      "max_abs_spread_eur_mwh": 3.1,
+      "spread_hours": 212,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -1833,17 +1713,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "214",
+          "id": "61",
           "nominal_mw": 3574.952866822163
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 1.41,
-      "mean_abs_spread_eur_mwh": 1.94,
-      "max_abs_spread_eur_mwh": 6.5,
-      "spread_hours": 703,
-      "congested_hours": 192,
-      "marginal_value_eur_mw": 186.32,
+      "baseline_rent_meur": 8.163,
+      "mean_abs_spread_eur_mwh": 1.0,
+      "max_abs_spread_eur_mwh": 14.3,
+      "spread_hours": 3893,
+      "congested_hours": 2445,
+      "marginal_value_eur_mw": 1063.95,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1860,12 +1740,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.231,
-      "mean_abs_spread_eur_mwh": 0.45,
-      "max_abs_spread_eur_mwh": 4.4,
-      "spread_hours": 265,
-      "congested_hours": 669,
-      "marginal_value_eur_mw": 719.95,
+      "baseline_rent_meur": 10.804,
+      "mean_abs_spread_eur_mwh": 1.76,
+      "max_abs_spread_eur_mwh": 45.2,
+      "spread_hours": 4740,
+      "congested_hours": 5893,
+      "marginal_value_eur_mw": 11172.45,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1877,20 +1757,20 @@
       "assets": [
         {
           "component": "Line",
-          "id": "215",
+          "id": "62",
           "nominal_mw": 983.1120383760948
         },
         {
           "component": "Line",
-          "id": "216",
+          "id": "63",
           "nominal_mw": 3396.21
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.011,
-      "mean_abs_spread_eur_mwh": 0.08,
-      "max_abs_spread_eur_mwh": 0.3,
-      "spread_hours": 189,
+      "baseline_rent_meur": 1.06,
+      "mean_abs_spread_eur_mwh": 0.34,
+      "max_abs_spread_eur_mwh": 1.2,
+      "spread_hours": 4239,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -1904,15 +1784,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "217",
+          "id": "64",
           "nominal_mw": 1787.4764334110814
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.007,
-      "mean_abs_spread_eur_mwh": 0.05,
-      "max_abs_spread_eur_mwh": 0.9,
-      "spread_hours": 213,
+      "baseline_rent_meur": 0.172,
+      "mean_abs_spread_eur_mwh": 0.14,
+      "max_abs_spread_eur_mwh": 1.6,
+      "spread_hours": 4394,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -1926,15 +1806,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "218",
+          "id": "65",
           "nominal_mw": 1787.4764334110814
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.027,
-      "mean_abs_spread_eur_mwh": 0.15,
-      "max_abs_spread_eur_mwh": 1.8,
-      "spread_hours": 434,
+      "baseline_rent_meur": 0.589,
+      "mean_abs_spread_eur_mwh": 0.26,
+      "max_abs_spread_eur_mwh": 2.2,
+      "spread_hours": 5565,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -1948,15 +1828,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "219",
+          "id": "66",
           "nominal_mw": 2770.588471787176
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.06,
-      "mean_abs_spread_eur_mwh": 0.14,
-      "max_abs_spread_eur_mwh": 1.1,
-      "spread_hours": 393,
+      "baseline_rent_meur": 0.811,
+      "mean_abs_spread_eur_mwh": 0.18,
+      "max_abs_spread_eur_mwh": 1.0,
+      "spread_hours": 4864,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -1975,12 +1855,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 4.86,
-      "mean_abs_spread_eur_mwh": 9.33,
-      "max_abs_spread_eur_mwh": 61.8,
-      "spread_hours": 688,
-      "congested_hours": 697,
-      "marginal_value_eur_mw": 4586.08,
+      "baseline_rent_meur": 31.415,
+      "mean_abs_spread_eur_mwh": 5.12,
+      "max_abs_spread_eur_mwh": 59.1,
+      "spread_hours": 7402,
+      "congested_hours": 8622,
+      "marginal_value_eur_mw": 37156.06,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -1992,32 +1872,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "227",
-          "nominal_mw": 3753.7005101632712
-        },
-        {
-          "component": "Line",
-          "id": "230",
-          "nominal_mw": 1876.8502550816356
-        },
-        {
-          "component": "Line",
-          "id": "231",
-          "nominal_mw": 491.5560191880474
-        },
-        {
-          "component": "Line",
-          "id": "233",
-          "nominal_mw": 1787.4764334110814
+          "id": "67",
+          "nominal_mw": 7909.583217844035
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 34.953,
-      "mean_abs_spread_eur_mwh": 72.73,
-      "max_abs_spread_eur_mwh": 34.2,
-      "spread_hours": 744,
-      "congested_hours": 744,
-      "marginal_value_eur_mw": 6315.97,
+      "baseline_rent_meur": 2.023,
+      "mean_abs_spread_eur_mwh": 0.12,
+      "max_abs_spread_eur_mwh": 5.8,
+      "spread_hours": 609,
+      "congested_hours": 152,
+      "marginal_value_eur_mw": 79.07,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -2034,12 +1899,12 @@
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 1.212,
-      "mean_abs_spread_eur_mwh": 2.72,
-      "max_abs_spread_eur_mwh": 7.0,
-      "spread_hours": 729,
-      "congested_hours": 700,
-      "marginal_value_eur_mw": 968.25,
+      "baseline_rent_meur": 6.536,
+      "mean_abs_spread_eur_mwh": 1.25,
+      "max_abs_spread_eur_mwh": 36.7,
+      "spread_hours": 6739,
+      "congested_hours": 8514,
+      "marginal_value_eur_mw": 12238.92,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -2051,17 +1916,17 @@
       "assets": [
         {
           "component": "Line",
-          "id": "242",
+          "id": "68",
           "nominal_mw": 3574.952866822163
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.345,
-      "mean_abs_spread_eur_mwh": 0.72,
-      "max_abs_spread_eur_mwh": 2.7,
-      "spread_hours": 687,
-      "congested_hours": 0,
-      "marginal_value_eur_mw": 0.0,
+      "baseline_rent_meur": 6.949,
+      "mean_abs_spread_eur_mwh": 1.03,
+      "max_abs_spread_eur_mwh": 8.6,
+      "spread_hours": 8325,
+      "congested_hours": 598,
+      "marginal_value_eur_mw": 1671.56,
       "opportunity_meur": null,
       "modelled_opportunity_meur": null,
       "modelled_climate_opportunity_tonnes": null
@@ -2073,15 +1938,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "246",
+          "id": "69",
           "nominal_mw": 7149.905733644326
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.042,
-      "mean_abs_spread_eur_mwh": 0.07,
-      "max_abs_spread_eur_mwh": 1.6,
-      "spread_hours": 257,
+      "baseline_rent_meur": 1.012,
+      "mean_abs_spread_eur_mwh": 0.1,
+      "max_abs_spread_eur_mwh": 5.4,
+      "spread_hours": 3180,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,
@@ -2095,15 +1960,15 @@
       "assets": [
         {
           "component": "Line",
-          "id": "247",
+          "id": "70",
           "nominal_mw": 2279.0324525991286
         }
       ],
       "status": "baseline_diagnostic",
-      "baseline_rent_meur": 0.004,
-      "mean_abs_spread_eur_mwh": 0.03,
-      "max_abs_spread_eur_mwh": 0.9,
-      "spread_hours": 105,
+      "baseline_rent_meur": 0.28,
+      "mean_abs_spread_eur_mwh": 0.1,
+      "max_abs_spread_eur_mwh": 1.5,
+      "spread_hours": 3008,
       "congested_hours": 0,
       "marginal_value_eur_mw": 0.0,
       "opportunity_meur": null,

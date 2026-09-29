@@ -29,6 +29,11 @@ export type TargetRow = {
   congested_hours: number;
   total_hours: number;
   market_loss_meur: number;
+  /** Window the rent figures cover. The unit is "per window", so the UI states the
+   *  period explicitly rather than leaving the magnitude unanchored. */
+  period_start: string;
+  period_end_exclusive: string;
+  window_years: number;
   climate_loss_ktco2: number | null;
   observed_capacity_mw: number | null;
   /** Additive diagnostics from the offline baseline solve. */
@@ -100,8 +105,43 @@ const lossColor = (t: number) => {
   return `oklch(${0.82 - 0.24 * x} ${0.01 + 0.22 * x} 25)`;
 };
 
-/** market loss cap (MEUR/window) at which a border renders fully red */
-const MARKET_LOSS_CAP = 10;
+/**
+ * Normalise a metric onto the 0..1 colour ramp.
+ *
+ * Rent, spread and marginal value are all heavy-tailed, so a linear ramp is not usable.
+ * On the full-year baseline, rent spans 0.08 to 3,198 MEUR (258x the median) and marginal
+ * value 0 to 612,067 EUR/MW (2,528x). Scaling linearly to a fixed cap clipped 40 of 75
+ * borders to a single saturated colour; scaling linearly to the max left almost every border
+ * at the grey end. The ramp is therefore logarithmic, which keeps the small borders
+ * separable while still reserving the deep end for the large ones.
+ */
+const lossNorm = (v: number, max: number) => {
+  if (!(max > 0) || !(v > 0)) return 0;
+  return clamp(Math.log10(1 + v) / Math.log10(1 + max), 0, 1);
+};
+
+/** Legend ticks. The four metrics span ~8 orders of magnitude between them, so compact
+ *  notation is used rather than a fixed number of decimals. */
+/** Rent is a total over the dataset window, so the unit is stated as a period rather
+ *  than a bare "MEUR/window": on the full-year baseline the totals are annual. */
+const periodLabel = (t: TargetRow) => {
+  const years = t.window_years;
+  if (Number.isFinite(years) && years >= 0.9 && years <= 1.1) return "MEUR/yr";
+  return "MEUR/window";
+};
+
+const formatLegendValue = (v: number, m: MapMetric) => {
+  if (!Number.isFinite(v) || v === 0) return "0";
+  if (m === "marginal") {
+    if (v >= 1000) return `${(v / 1000).toFixed(v >= 10_000 ? 0 : 1)}k`;
+    if (v >= 1) return v.toFixed(0);
+    return v.toFixed(2);
+  }
+  if (v >= 1000) return `${(v / 1000).toFixed(1)}k`;
+  if (v >= 10) return v.toFixed(0);
+  if (v >= 1) return v.toFixed(1);
+  return v.toFixed(2);
+};
 
 export type PlacedUnit = {
   id: string;
@@ -468,9 +508,13 @@ export function EuropeMap({
     }
   };
 
-  const maxLoss = Math.max(1, ...targets.map((t) => metricOf(t, metric)));
-  /** value mapped to the black end of the scale */
-  const lossCap = metric === "market" ? Math.min(maxLoss, MARKET_LOSS_CAP) : maxLoss;
+  const values = targets.map((t) => metricOf(t, metric));
+  const maxLoss = Math.max(1, ...values);
+  const minLoss = values.length ? Math.min(...values) : 0;
+  /** value mapped to the deep end of the scale */
+  const lossCap = maxLoss;
+  /** every row carries the same window, so the first one labels the legend */
+  const sampleRow = targets[0];
   const k = view.k;
 
   return (
@@ -588,7 +632,7 @@ export function EuropeMap({
             const [x1, y1] = project(t.a_lon, t.a_lat);
             const [x2, y2] = project(t.b_lon, t.b_lat);
             const v = metricOf(t, metric);
-            const c = Math.min(1, Math.max(0, v / lossCap));
+            const c = lossNorm(v, lossCap);
             const isSelected = selectedId === t.id;
             const dropB = dropTarget?.kind === "border" && dropTarget.key === t.id;
             const candidateB =
@@ -646,7 +690,7 @@ export function EuropeMap({
                 />
 
                 <title>
-                  {t.zone_a} – {t.zone_b}: {t.market_loss_meur.toFixed(1)} MEUR/window rent ·{" "}
+                  {t.zone_a} – {t.zone_b}: {t.market_loss_meur.toFixed(1)} {periodLabel(t)} rent ·{" "}
                   {t.mean_abs_spread_eur_mwh.toFixed(1)} EUR/MWh mean spread ·{" "}
                   {t.marginal_value_eur_mw.toFixed(1)} EUR/MW marginal value · {t.congested_hours}{" "}
                   congested hours
@@ -731,10 +775,11 @@ export function EuropeMap({
       <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg border border-border bg-card/90 px-3 py-2 text-xs text-muted-foreground backdrop-blur">
         <div className="flex items-center justify-between gap-3">
           <span className="font-medium text-foreground">
-            {metric === "market" && "Market loss (MEUR/window)"}
+            {metric === "market" &&
+              `Market loss (${sampleRow ? periodLabel(sampleRow) : "MEUR/window"})`}
             {metric === "spread" && "Mean spread (EUR/MWh)"}
             {metric === "marginal" && "Marginal value (EUR/MW)"}
-            {metric === "climate" && "Climate loss (ktCO2/window)"}
+            {metric === "climate" && "Climate loss (ktCO2)"}
           </span>
           <div className="pointer-events-auto flex rounded-md border border-border p-0.5 text-[10px]">
             {(
@@ -765,12 +810,10 @@ export function EuropeMap({
           }}
         />
         <div className="mt-0.5 flex w-48 justify-between text-[10px]">
-          <span>0</span>
-          <span>
-            {lossCap.toFixed(0)}
-            {maxLoss > lossCap ? "+" : ""}
-          </span>
+          <span>{formatLegendValue(minLoss, metric)}</span>
+          <span>{formatLegendValue(maxLoss, metric)}</span>
         </div>
+        <div className="mt-0.5 text-[10px] opacity-70">logarithmic scale</div>
         <div className="mt-1">Click a border to zoom in on it. Scroll to zoom, drag to pan.</div>
       </div>
 

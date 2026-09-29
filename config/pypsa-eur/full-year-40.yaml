@@ -1,0 +1,105 @@
+# Full-year operational baseline for Grid Conductor, at (near) one bus per country.
+#
+# Applied on top of upstream v2026.08.0 defaults. No country subset, no
+# investment decisions, hourly snapshots across the whole 2025 calendar year.
+#
+# Why 40 clusters rather than 128: every downstream consumer aggregates to the
+# country level (extract_baseline groups by buses.country, the border-relief
+# diagnostics aggregate by country pair), so sub-country clustering buys little
+# resolution for this product while costing roughly 3.5x the LP. Measured on the
+# March window, 128 clusters produced an LP of 3.21M rows / 5.49M nonzeros and
+# 6.1 GB peak; scaling that to 8760h would need ~65M nonzeros and roughly 70 GB,
+# which does not fit this host.
+#
+# 40 is a hard floor, not a preference: cluster_network asserts
+# `n_clusters >= len(buses per country)`, and this selection resolves 40
+# countries. Requesting 37 fails before the solve. At 40 the 34 countries that
+# survive simplification hold one bus each except for six that hold two, so
+# country prices and carbon are the mean over that country's buses.
+#
+# Note: upstream's own `solve_network` resource declaration is
+# `3 * (10000 + 195 * clusters)` MB, which is linear in cluster count and ignores
+# the snapshot count entirely (it also declares 51.6 GB for 37 clusters against a
+# measured ~20 GB). Snakemake does not enforce it; treat it as a hint, not a
+# requirement.
+run:
+  name: gridfix-2025-40
+  disable_progressbar: true
+snapshots:
+  start: '2025-01-01'
+  end: '2026-01-01'
+  inclusive: left
+scenario:
+  clusters: [40]
+  opts: ['']
+  planning_horizons: [2025]
+electricity:
+  base_network: osm
+  co2limit_enable: false
+  transmission_limit: v1.0
+  extendable_carriers:
+    Generator: []
+    StorageUnit: []
+    Store: []
+    Link: []
+load:
+  fill_gaps:
+    enable: true
+    interpolate_limit: 6
+    time_shift_for_large_gaps: 1w
+  supplement_synthetic: false
+  fixed_year: false
+  manual_adjustments: true
+atlite:
+  nprocesses: 1
+  default_cutout: europe-2025-compact
+  cutouts:
+    europe-2025-compact:
+      module: era5
+      x: [-12, 35]
+      y: [33, 72]
+      dx: 0.3
+      dy: 0.3
+      time: ['2025-01-01', '2025-12-31 23:00']
+      chunks:
+        time: 100
+      prepare_kwargs:
+        monthly_requests: true
+    europe-2025-hydro:
+      module: era5
+      x: [-12, 35]
+      y: [33, 72]
+      dx: 0.3
+      dy: 0.3
+      # The hydro profile normalisation needs a full calendar year (>8700h) of
+      # runoff, so this cutout is annual regardless of the solve window.
+      time: ['2025-01-01', '2026-01-01']
+      chunks:
+        time: 500
+      prepare_kwargs:
+        features: [height, runoff]
+        monthly_requests: true
+data:
+  osm:
+    source: archive
+    version: '0.7'
+  powerplants:
+    source: archive
+    version: '0.8.1'
+  entsoe_electricity_demand:
+    source: archive
+    version: '2026-02-02'
+  cutout:
+    source: build
+renewable:
+  hydro:
+    cutout: europe-2025-hydro
+clustering:
+  temporal:
+    resolution_elec: 1h
+costs:
+  year: 2025
+solving:
+  solver:
+    name: highs
+    options: highs-default

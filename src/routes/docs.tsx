@@ -178,8 +178,8 @@ function Methodology() {
               rows={[
                 [
                   "Day-ahead prices",
-                  "ENTSO-E or Electricity Maps · EUR/MWh",
-                  "Matched prices define spread events. The current app imports Electricity Maps prices; direct ENTSO-E price ingestion remains to be connected.",
+                  "PyPSA-Eur nodal LMP · EUR/MWh",
+                  "Matched prices define spread events. Prices are the marginal cost of energy at each country bus from the offline PyPSA-Eur solve, not a day-ahead market quotation.",
                 ],
                 [
                   "Generation by technology",
@@ -188,18 +188,18 @@ function Methodology() {
                 ],
                 [
                   "Actual load and physical flows",
-                  "ENTSO-E · MW, integrated to MWh",
-                  "Available in the research pilot and app ingestion paths. Measure demand, transfers and energy-balance consistency.",
+                  "ENTSO-E demand in, PyPSA-Eur solved flows out · MW, integrated to MWh",
+                  "Demand time series come from the ENTSO-E archive; flows are the solved network state. Measure demand, transfers and energy-balance consistency.",
                 ],
                 [
                   "Transfer capacity",
-                  "ENTSO-E / regional capacity platforms · directional MW or flow-based constraints",
-                  "Must match the event time and market horizon. A physical flow maximum is not a capacity rating.",
+                  "PyPSA-Eur network topology · directional MW; ENTSO-E NTC as an overlay",
+                  "Taken from the declared p_nom of each modelled line and link, per direction. A physical flow maximum is not a capacity rating, and capacity is never inferred from observed flow.",
                 ],
                 [
                   "Carbon intensity",
-                  "Independent calculation; Electricity Maps benchmark · gCO₂e/kWh",
-                  "Consumption-based lifecycle intensity is the proposed map indicator. Keep production intensity separately.",
+                  "Independent calculation from PyPSA-Eur generation and demand · gCO₂e/kWh",
+                  "Domestic operational intensity: generator emissions (lifecycle factors, efficiency-corrected) divided by domestic load. Imports are not netted out; keep consumption-based accounting separate.",
                 ],
                 [
                   "Outages, curtailment and availability",
@@ -252,18 +252,31 @@ function Methodology() {
                 Open European target evidence →
               </Link>
               <p className="mt-2">
-                The first run screens 107 configured borders across 54 zones for 12 August–10
-                September 2026. Eighty borders meet the price-coverage gate, of which 79 have
-                qualifying events. Twenty-three have no comparable prices and four have low
-                coverage. This uses archived Electricity Maps prices and consumption-based lifecycle
-                carbon, not the independent ENTSO-E carbon pilot.
+                This page is served from the offline PyPSA-Eur solve, not from a market data feed.
+                The published window is the full 2025 calendar year (8,760 hourly snapshots) across
+                34 country buses and 75 modelled cross-borders, each rated from the declared
+                capacity of its lines and links. Congestion rent is |Δλ| × |actual flow| summed over
+                the window; the 75 borders total €10,303M for the year. The largest single exposures
+                are CH–IT (€3,198M), ES–FR (€1,668M) and FR–IT (€1,535M).
               </p>
               <p className="mt-2">
-                Only EUR/MWh observations are compared. GBP, MDL and TRY are excluded until explicit
-                exchange rates are available. Rank requires at least 80% matched price coverage and
-                one event; the 80% gate is an exploratory setting, not a quality certification.
-                Unranked borders remain inspectable. Configured connections are not yet
-                independently verified as operational.
+                The dataset is marked experimental, not validated. Prices are the marginal cost of
+                energy at each bus rather than day-ahead market quotations, so the absolute rent is
+                a model quantity, not a realised cash flow. The price basis is unverified: the LMP
+                recheck against nodal averages leaves a residual up to €91.1/MWh, and the KKT
+                residual between the price gap and the flow duals reaches 958. Both are recorded and
+                neither currently gates publication, and both are worse at full-year scale than in
+                the March sample. Independent ENTSO-E quantity reconciliation, a JAO market-domain
+                check, and any climate validation remain pending, and no annualised or climate
+                figure is published.
+              </p>
+              <p className="mt-2">
+                The two capacity measures cross-check each other. Rent ÷ (mean |flow| × hours) and
+                marginal value ÷ hours are two estimates of the same shadow price from the same
+                solve. They agree within 1.0–1.3× on the strongly binding borders — GR–IT 53.4 vs
+                53.9, IT–SI 55.2 vs 57.9, ES–FR 44.7 vs 41.7 — and diverge only where the network is
+                meshed, where the price gap across a border is not the dual of any single asset, and
+                on slack borders. That is what the KKT residual reports.
               </p>
             </Note>
             <Table
@@ -316,14 +329,16 @@ function Methodology() {
               topology provenance. Capacity and supply sufficiency are not assessed by this
               snapshot. Carbon contrast is not used to invent avoided tonnes or market losses.
             </Paragraph>
-            <Note title="The existing workbench still uses a separate calculation">
-              The workbench map retrieves precomputed targets ordered by a market-loss field and
-              calls a database calculation with a EUR 1/MWh spread threshold, a 0.98 congestion
-              ratio and a 0.1 relief share. The database calculation is not defined in this
-              checkout, so its full formula is not verified here. The capacity overlay uses a
-              maximum from a seven-day window. The new /targets evidence page uses the event-level
-              calculation above; its research identifiers are not passed into existing scenario
-              records.
+            <Note title="How the workbench map is served">
+              The workbench map reads the same offline baseline dataset as the evidence page. It is
+              a static artefact of the PyPSA-Eur solve, bundled on the server and served directly;
+              there is no longer a paid hourly feed or a database-side opportunity calculation in
+              the request path. Borders are ordered by the market-loss field of that dataset. The
+              legacy targets table is kept only to satisfy the scenario foreign key, so identity
+              rows are created for borders the database does not yet know; the numbers displayed
+              always come from the baseline dataset and are never read back from those rows. The
+              capacity overlay still uses the maximum published ENTSO-E transfer capacity over a
+              seven-day window where that is available.
             </Note>
             <h3 className="mt-8 text-lg font-semibold">Bridge from the pilot to the target map</h3>
             <ol className="mt-4 list-decimal space-y-3 pl-5 leading-7 text-muted-foreground">
@@ -415,44 +430,74 @@ function Methodology() {
                 </a>
               </p>
             </Note>
+            <Note title="How the baseline is actually computed">
+              <p className="mb-3">
+                The baseline is a genuine linear program, solved once offline and then frozen. It
+                uses pinned PyPSA-Eur v2026.08.0 (commit a5408e9) and its built European network.
+                The full 2025 calendar year, 8,760 hours, is clustered to 40 countries — the minimum
+                the clustering supports for the selected set — of which 34 carry a bus. The dispatch
+                is solved by HiGHS through pypsa.optimization.solve_model, as an operational problem
+                only: no unit commitment, no investment planning, no extension carriers, no CO₂
+                limit.
+              </p>
+              <p className="mb-3">
+                Prices are the solve&apos;s own locational marginal prices, the LP duals of the bus
+                balance constraints, read from buses_t.marginal_price and averaged over each
+                country&apos;s buses. Border prices are therefore not a separately assumed series;
+                they are an output of the optimisation. Carbon intensity is computed from the
+                dispatched generation, efficiency-corrected, and is an average rather than a
+                marginal quantity. Transfer limits are the declared nominal ratings of the existing
+                AC lines and DC links in both directions and are never inferred from observed flow;
+                reported flow is the net of the physical AC and DC exchange.
+              </p>
+              <p className="mb-3">
+                The solve is validated before publication: the network must have no extendable
+                assets, hourly snapshot weights and non-zero load, and the run is recorded in a
+                manifest with the network hash, window, cluster count, upstream commit and
+                assumptions. The 2025 run produced 8,760 snapshots, 40 buses, 391 generators, 71 AC
+                lines and 43 DC links, 3,008 TWh of load, a mean marginal price of 38.26 EUR/MWh and
+                754 Mt of operational CO₂.
+              </p>
+              <p>
+                The published border dataset does not re-solve the network per border. It reports
+                two measures from the baseline solve and one dual-assigned re-solve: congestion rent
+                as the price-gap × actual-flow wedge over the window, and the marginal capacity
+                value per MW from the flow-constraint duals, aggregated capacity-proportionally
+                across each border&apos;s assets. Exact per-border relief experiments are a
+                separate, much more expensive tool and are not published. Ranked annual or per-MW
+                opportunity is deliberately not published, and no modelled opportunity figure is
+                asserted.
+              </p>
+            </Note>
             <Note title="PyPSA-Eur: European border opportunity model">
               <p className="mb-3">
-                Weather preparation now processes one month at a time under a disk-space monitor.
+                Weather preparation processes one month at a time under a disk-space monitor.
                 Verified wind and solar conversion profiles are retained; only their reproducible
                 raw weather is removed. Annual regional weighting and the linked full-year dispatch
-                remain unchanged. The completed annual hydro runoff file is kept separately. The
+                are unchanged. The completed annual hydro runoff file is kept separately. The
                 monitor stops near the 10 GiB weather budget or when free disk space becomes low;
                 this is not a guarantee of total model disk usage.
               </p>
               <p className="mb-3">
-                Production now targets the full 2025 calendar year (8,760 hours), with March as a
-                pipeline test. The annual baseline has not been solved or validated yet. Full-year
-                weather uses a separate file from the March sample; existing weather files do not
-                automatically expand to cover new dates. Current configurations enable upstream
-                demand estimates and gap filling, which must be disclosed and audited before any
-                result is labelled validated. The January work below remains an earlier source-data
-                and method experiment.
+                The full 2025 calendar year has been solved and validated, and is the published
+                window. March 2025 remains available as a cheaper pipeline test. Full-year weather
+                uses a separate file from the March sample; existing weather files do not
+                automatically expand to cover new dates. The configuration enables upstream demand
+                estimates and gap filling, which must be disclosed and audited before any result is
+                labelled validated.
+              </p>
+              <p className="mb-3">
+                Impedances remain fixed throughout. Any capacity experiment is relief on existing AC
+                and DC connections, not the design of a new AC line, and does not re-optimise the
+                network. Independent border benefits cannot be summed or annualised.
               </p>
               <p>
-                The new physical-system workflow uses pinned PyPSA-Eur v2026.08.0 and its European
-                network. Each country border is tested independently with 100 MW of additional
-                transfer allowance distributed across its existing AC/DC connections. January
-                opportunity is the decrease in total system operating cost, in €million for the
-                month. Impedances remain fixed: this is capacity relief, not the design of a new AC
-                line. Independent border benefits cannot be summed or annualised.
-              </p>
-              <p className="mt-2">
-                The network inventory is a February 2026 source snapshot and still needs January
-                asset reconciliation. ENTSO-E quantities, flows and prices and JAO congestion
-                evidence must validate the baseline. Publication coverage alone is insufficient. On
-                the targets network, grey means unavailable. Experimental computed values require an
-                explicit toggle; validated opportunity remains empty until checks pass.
-              </p>
-              <p className="mt-2">
-                The first source inventory contains 34 countries and 74 international connections.
-                The pinned ENTSO-E-derived demand archive has complete January hours for 18 of those
-                countries. Demand gap filling is disabled; January weather, asset availability and
-                remaining quantities must be prepared before the operational baseline can run.
+                ENTSO-E quantities, flows and prices and JAO congestion evidence must validate the
+                baseline before it is labelled validated; publication coverage alone is
+                insufficient. The price basis is separately unverified: the LMP recheck against
+                nodal averages and the KKT residual between the price gap and the flow duals are
+                both recorded and neither currently gating. On the targets network, grey means
+                unavailable.
               </p>
               <a href="/research/pypsa-input-audit.json" className="underline">
                 Input audit
@@ -541,12 +586,109 @@ function Methodology() {
                 are required before publishing annual opportunity rankings.
               </p>
             </Note>
-            <Note title="Current simulator limitations">
-              The prototype uses a local zonal price-response model and observed maximum flows as
-              transfer limits. It is not a verified reproduction of Euphemia. Historical average
-              carbon intensities do not establish marginal emissions. Missing carbon/load
-              observations are currently held in zero-initialized arrays in parts of the model;
-              quality gating must be fixed before those results support investment claims.
+            <Note title="How a scenario is actually computed">
+              <p className="mb-3">
+                A scenario is not a re-solve of the European LP. It is a separate and deliberately
+                lightweight zonal model around the target border: the two zones plus their direct
+                neighbours, 7 to 15 countries. Each hour is cleared independently from the baseline
+                nodal prices, flows and declared ATC limits.
+              </p>
+              <p className="mb-3">
+                Each hour maximises social welfare subject to zonal balance and directional ATC
+                limits. Candidate transfers are batched one per border, each pushed towards the
+                direction that would equalise that border&apos;s two prices. Under the linearised
+                zonal supply curves the welfare gain of a batch scaled by a is exactly quadratic,
+                with g_e the price difference across border e, s_z zone z&apos;s supply-curve slope,
+                and ν_z the net export zone z implies:
+              </p>
+              <p className="mb-3 rounded-md bg-muted px-3 py-2 font-mono text-xs">
+                dW(a) = a · Σ_e x_e g_e − (a² / 2) · Σ_z s_z ν_z(a)²
+              </p>
+              <p className="mb-3">
+                The step length is the exact maximiser of that quadratic, a = G / Q, capped by the
+                remaining ATC headroom. Because the direction is already clipped to the headroom,
+                the cap is at least 1, so every accepted iteration lands in the increasing region
+                and welfare strictly increases: the ascent is monotone by construction. Batching is
+                what makes it converge. Transferring on one border at a time with the full step that
+                equalises it overshoots that pair, which moves both endpoint prices, makes a
+                neighbouring border the new maximum, and re-creates the spread just closed.
+              </p>
+              <p className="mb-3">
+                The supply-curve slope s_z is the one modelling assumption, since the price response
+                of a zonal aggregate is not observed directly. It is estimated as each border&apos;s
+                mean absolute nodal price difference over the hours that border is binding, divided
+                by its binding capacity, and split between the two zones in proportion to load.
+                Regressing price on net export was tried first and rejected: with one bus per
+                country the marginal price is set by the same system-wide unit, so price is nearly
+                common-mode and the fit returns noise (March values −0.0038 to +0.0059, median
+                0.00002). Measuring the slope from the same nodal differences the model then
+                reproduces also keeps calibration and simulation consistent with one another. It
+                remains a proxy, not an identification of the supply curve.
+              </p>
+              <p>
+                Termination is a KKT certificate, not an iteration count: any border still with ATC
+                headroom in the profitable direction must have a price difference within 0.01
+                EUR/MWh, while a saturated border is allowed to diverge because that divergence is
+                the congestion rent. On the full 2025 baseline all 8,760 hours satisfy it with a
+                dual residual of 0.00 and no adverse flows, in 22–290 ms per case.
+              </p>
+            </Note>
+            <Note title="What the scenario model does not do">
+              The zonal scenario solver is not a verified reproduction of Euphemia, is not an LP
+              solve, and is not the production market-coupling algorithm. Because it works from
+              country-averaged nodal prices, re-clearing moves prices by roughly 2–10 EUR/MWh
+              against the PyPSA LMPs; that zonal approximation error is the dominant uncertainty in
+              scenario outputs and is larger than the differences between most candidate projects.
+              It models no unit commitment, no block or complex orders, no flow-based domains, no
+              network reconfiguration, no losses and no intraday or balancing timeframes. Carbon
+              intensities are historical averages, which do not establish marginal emissions.
+              Relieving a border can raise congestion rent elsewhere in the sub-network, so the
+              sub-network rent total is reported alongside rent on the target border itself.
+            </Note>
+            <Note title="The scenario solver undervalues heavily congested borders">
+              <p className="mb-3">
+                The two models measure the value of capacity very differently, and the gap is not
+                random. Compared against the full-year LP duals, the value of adding 1,000 MW comes
+                out at roughly €365M in both methods on ES–FR, but roughly €472M versus €44M on
+                IT–ME, €507M versus €41M on IT–SI, and €587M versus €0.2M on CH–IT. The disagreement
+                grows with how congested the border is.
+              </p>
+              <p>
+                The cause is structural. The LP prices scarcity, so a persistent 55–70 EUR/MWh gap
+                carries a shadow price all year and extra capacity is worth a lot. The zonal solver
+                has no merit order and no scarcity pricing; it represents price response with one
+                fitted linear slope, so a wide gap is closed by a modest transfer and the marginal
+                value of further capacity collapses to nearly zero. It therefore behaves like a
+                local perturbation model around the baseline and should be read that way.
+              </p>
+              <p>
+                Practical consequence: the published marginal capacity values come from the LP
+                duals, which price scarcity and are the better measure for investment decisions. The
+                scenario solver remains useful for its intended purpose — running fast, interactive
+                what-if comparisons and checking that welfare is monotone and concave — but it
+                should not be used to rank borders by absolute capacity value, and its ranking
+                disagrees with the LP on the most congested borders.
+              </p>
+            </Note>
+            <Note title="How the scenario results were checked">
+              <p className="mb-3">
+                The value of a scenario is the welfare optimum of an LP in which capacity only
+                appears on the right-hand side of flow constraints, so it must be concave and
+                non-decreasing in added capacity. Sweeping added capacity from 0 to 8,000 MW and
+                differencing the welfare gives a check on the economics that is independent of how
+                the solver works, rather than a restatement of it. All tested borders return a
+                monotonically declining marginal value of capacity, with welfare non-decreasing
+                throughout, and lightly constrained borders correctly decay to zero (CH–IT, EUR 225
+                per MW at the margin, falling to 0 by +4,000 MW as its rent goes to zero). This
+                confirms the solver is internally consistent. It does not confirm the absolute
+                level: the next note explains why the zonal model prices CH–IT near zero when the LP
+                prices it as the most valuable border in the network.
+              </p>
+              <p>
+                Congestion rent is the product of flow and shadow price, so it is genuinely
+                non-monotone in capacity: relieving a border can raise the rent recorded on it. Only
+                welfare is constrained to increase, and it is.
+              </p>
             </Note>
           </Section>
 
@@ -632,8 +774,8 @@ function Methodology() {
                   "https://arxiv.org/abs/1812.06679",
                 ],
                 [
-                  "Electricity Maps: historical carbon intensity and accounting options",
-                  "https://app.electricitymaps.com/docs/reference/carbon-intensity/past-range",
+                  "PyPSA-Eur: an open optimisation-based electricity grid model of Europe",
+                  "https://pypsa-eur.readthedocs.io/en/latest/",
                 ],
                 [
                   "ENTSO-E: final fourth cost-benefit guideline, approved in 2024",

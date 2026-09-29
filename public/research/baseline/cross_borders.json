@@ -1,0 +1,1452 @@
+[
+  {
+    "id": "AL-GR",
+    "country_a": "AL",
+    "country_b": "GR",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "0",
+        "nominal_mw": 1787.5,
+        "bus0_country": "AL",
+        "bus1_country": "GR"
+      }
+    ],
+    "capacity_mw": 1787.5,
+    "cap_ab_mw": 1787.5,
+    "cap_ba_mw": 1787.5
+  },
+  {
+    "id": "AL-ME",
+    "country_a": "AL",
+    "country_b": "ME",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "1",
+        "nominal_mw": 2279.0,
+        "bus0_country": "AL",
+        "bus1_country": "ME"
+      }
+    ],
+    "capacity_mw": 2279.0,
+    "cap_ab_mw": 2279.0,
+    "cap_ba_mw": 2279.0
+  },
+  {
+    "id": "AL-MK",
+    "country_a": "AL",
+    "country_b": "MK",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "2",
+        "nominal_mw": 3396.2,
+        "bus0_country": "AL",
+        "bus1_country": "MK"
+      }
+    ],
+    "capacity_mw": 3396.2,
+    "cap_ab_mw": 3396.2,
+    "cap_ba_mw": 3396.2
+  },
+  {
+    "id": "AL-XK",
+    "country_a": "AL",
+    "country_b": "XK",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "3",
+        "nominal_mw": 2279.0,
+        "bus0_country": "AL",
+        "bus1_country": "XK"
+      }
+    ],
+    "capacity_mw": 2279.0,
+    "cap_ab_mw": 2279.0,
+    "cap_ba_mw": 2279.0
+  },
+  {
+    "id": "AT-CH",
+    "country_a": "AT",
+    "country_b": "CH",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "4",
+        "nominal_mw": 4379.3,
+        "bus0_country": "AT",
+        "bus1_country": "CH"
+      }
+    ],
+    "capacity_mw": 4379.3,
+    "cap_ab_mw": 4379.3,
+    "cap_ba_mw": 4379.3
+  },
+  {
+    "id": "AT-CZ",
+    "country_a": "AT",
+    "country_b": "CZ",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "5",
+        "nominal_mw": 4558.1,
+        "bus0_country": "AT",
+        "bus1_country": "CZ"
+      },
+      {
+        "component": "Line",
+        "id": "6",
+        "nominal_mw": 3396.2,
+        "bus0_country": "AT",
+        "bus1_country": "CZ"
+      }
+    ],
+    "capacity_mw": 7954.3,
+    "cap_ab_mw": 7954.3,
+    "cap_ba_mw": 7954.3
+  },
+  {
+    "id": "AT-DE",
+    "country_a": "AT",
+    "country_b": "DE",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "7",
+        "nominal_mw": 10009.9,
+        "bus0_country": "AT",
+        "bus1_country": "DE"
+      },
+      {
+        "component": "Line",
+        "id": "8",
+        "nominal_mw": 3396.2,
+        "bus0_country": "AT",
+        "bus1_country": "DE"
+      }
+    ],
+    "capacity_mw": 13406.1,
+    "cap_ab_mw": 13406.1,
+    "cap_ba_mw": 13406.1
+  },
+  {
+    "id": "AT-HU",
+    "country_a": "AT",
+    "country_b": "HU",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "9",
+        "nominal_mw": 4558.1,
+        "bus0_country": "AT",
+        "bus1_country": "HU"
+      }
+    ],
+    "capacity_mw": 4558.1,
+    "cap_ab_mw": 4558.1,
+    "cap_ba_mw": 4558.1
+  },
+  {
+    "id": "AT-IT",
+    "country_a": "AT",
+    "country_b": "IT",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "10",
+        "nominal_mw": 983.1,
+        "bus0_country": "AT",
+        "bus1_country": "IT"
+      }
+    ],
+    "capacity_mw": 983.1,
+    "cap_ab_mw": 983.1,
+    "cap_ba_mw": 983.1
+  },
+  {
+    "id": "AT-SI",
+    "country_a": "AT",
+    "country_b": "SI",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "11",
+        "nominal_mw": 3887.8,
+        "bus0_country": "AT",
+        "bus1_country": "SI"
+      }
+    ],
+    "capacity_mw": 3887.8,
+    "cap_ab_mw": 3887.8,
+    "cap_ba_mw": 3887.8
+  },
+  {
+    "id": "BA-HR",
+    "country_a": "BA",
+    "country_b": "HR",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "12",
+        "nominal_mw": 7015.8,
+        "bus0_country": "BA",
+        "bus1_country": "HR"
+      }
+    ],
+    "capacity_mw": 7015.8,
+    "cap_ab_mw": 7015.8,
+    "cap_ba_mw": 7015.8
+  },
+  {
+    "id": "BA-ME",
+    "country_a": "BA",
+    "country_b": "ME",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "13",
+        "nominal_mw": 4066.5,
+        "bus0_country": "BA",
+        "bus1_country": "ME"
+      }
+    ],
+    "capacity_mw": 4066.5,
+    "cap_ab_mw": 4066.5,
+    "cap_ba_mw": 4066.5
+  },
+  {
+    "id": "BA-RS",
+    "country_a": "BA",
+    "country_b": "RS",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "14",
+        "nominal_mw": 2279.0,
+        "bus0_country": "BA",
+        "bus1_country": "RS"
+      },
+      {
+        "component": "Line",
+        "id": "15",
+        "nominal_mw": 3396.2,
+        "bus0_country": "BA",
+        "bus1_country": "RS"
+      }
+    ],
+    "capacity_mw": 5675.2,
+    "cap_ab_mw": 5675.2,
+    "cap_ba_mw": 5675.2
+  },
+  {
+    "id": "BE-DE",
+    "country_a": "BE",
+    "country_b": "DE",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/8193755-320-DC",
+        "nominal_mw": 1000.0,
+        "bus0_country": "BE",
+        "bus1_country": "DE"
+      }
+    ],
+    "capacity_mw": 1000.0,
+    "cap_ab_mw": 1000.0,
+    "cap_ba_mw": 1000.0
+  },
+  {
+    "id": "BE-FR",
+    "country_a": "BE",
+    "country_b": "FR",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "16",
+        "nominal_mw": 6870.6,
+        "bus0_country": "BE",
+        "bus1_country": "FR"
+      }
+    ],
+    "capacity_mw": 6870.6,
+    "cap_ab_mw": 6870.6,
+    "cap_ba_mw": 6870.6
+  },
+  {
+    "id": "BE-GB",
+    "country_a": "BE",
+    "country_b": "GB",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/8185487-400-DC",
+        "nominal_mw": 1000.0,
+        "bus0_country": "GB",
+        "bus1_country": "BE"
+      }
+    ],
+    "capacity_mw": 1000.0,
+    "cap_ab_mw": 1000.0,
+    "cap_ba_mw": 1000.0
+  },
+  {
+    "id": "BE-LU",
+    "country_a": "BE",
+    "country_b": "LU",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "17",
+        "nominal_mw": 983.1,
+        "bus0_country": "BE",
+        "bus1_country": "LU"
+      }
+    ],
+    "capacity_mw": 983.1,
+    "cap_ab_mw": 983.1,
+    "cap_ba_mw": 983.1
+  },
+  {
+    "id": "BE-NL",
+    "country_a": "BE",
+    "country_b": "NL",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "18",
+        "nominal_mw": 6792.4,
+        "bus0_country": "BE",
+        "bus1_country": "NL"
+      }
+    ],
+    "capacity_mw": 6792.4,
+    "cap_ab_mw": 6792.4,
+    "cap_ba_mw": 6792.4
+  },
+  {
+    "id": "BG-GR",
+    "country_a": "BG",
+    "country_b": "GR",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "19",
+        "nominal_mw": 3575.0,
+        "bus0_country": "BG",
+        "bus1_country": "GR"
+      },
+      {
+        "component": "Line",
+        "id": "20",
+        "nominal_mw": 3396.2,
+        "bus0_country": "BG",
+        "bus1_country": "GR"
+      }
+    ],
+    "capacity_mw": 6971.2,
+    "cap_ab_mw": 6971.2,
+    "cap_ba_mw": 6971.2
+  },
+  {
+    "id": "BG-MK",
+    "country_a": "BG",
+    "country_b": "MK",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "21",
+        "nominal_mw": 1787.5,
+        "bus0_country": "BG",
+        "bus1_country": "MK"
+      }
+    ],
+    "capacity_mw": 1787.5,
+    "cap_ab_mw": 1787.5,
+    "cap_ba_mw": 1787.5
+  },
+  {
+    "id": "BG-RO",
+    "country_a": "BG",
+    "country_b": "RO",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "22",
+        "nominal_mw": 7149.9,
+        "bus0_country": "BG",
+        "bus1_country": "RO"
+      }
+    ],
+    "capacity_mw": 7149.9,
+    "cap_ab_mw": 7149.9,
+    "cap_ba_mw": 7149.9
+  },
+  {
+    "id": "BG-RS",
+    "country_a": "BG",
+    "country_b": "RS",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "23",
+        "nominal_mw": 1787.5,
+        "bus0_country": "BG",
+        "bus1_country": "RS"
+      }
+    ],
+    "capacity_mw": 1787.5,
+    "cap_ab_mw": 1787.5,
+    "cap_ba_mw": 1787.5
+  },
+  {
+    "id": "CH-DE",
+    "country_a": "CH",
+    "country_b": "DE",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "24",
+        "nominal_mw": 19930.4,
+        "bus0_country": "CH",
+        "bus1_country": "DE"
+      }
+    ],
+    "capacity_mw": 19930.4,
+    "cap_ab_mw": 19930.4,
+    "cap_ba_mw": 19930.4
+  },
+  {
+    "id": "CH-FR",
+    "country_a": "CH",
+    "country_b": "FR",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "25",
+        "nominal_mw": 11350.5,
+        "bus0_country": "CH",
+        "bus1_country": "FR"
+      }
+    ],
+    "capacity_mw": 11350.5,
+    "cap_ab_mw": 11350.5,
+    "cap_ba_mw": 11350.5
+  },
+  {
+    "id": "CH-IT",
+    "country_a": "CH",
+    "country_b": "IT",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "26",
+        "nominal_mw": 10456.7,
+        "bus0_country": "CH",
+        "bus1_country": "IT"
+      }
+    ],
+    "capacity_mw": 10456.7,
+    "cap_ab_mw": 10456.7,
+    "cap_ba_mw": 10456.7
+  },
+  {
+    "id": "CZ-DE",
+    "country_a": "CZ",
+    "country_b": "DE",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "27",
+        "nominal_mw": 6792.4,
+        "bus0_country": "CZ",
+        "bus1_country": "DE"
+      }
+    ],
+    "capacity_mw": 6792.4,
+    "cap_ab_mw": 6792.4,
+    "cap_ba_mw": 6792.4
+  },
+  {
+    "id": "CZ-PL",
+    "country_a": "CZ",
+    "country_b": "PL",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "28",
+        "nominal_mw": 4558.1,
+        "bus0_country": "CZ",
+        "bus1_country": "PL"
+      }
+    ],
+    "capacity_mw": 4558.1,
+    "cap_ab_mw": 4558.1,
+    "cap_ba_mw": 4558.1
+  },
+  {
+    "id": "CZ-SK",
+    "country_a": "CZ",
+    "country_b": "SK",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "29",
+        "nominal_mw": 5854.0,
+        "bus0_country": "CZ",
+        "bus1_country": "SK"
+      }
+    ],
+    "capacity_mw": 5854.0,
+    "cap_ab_mw": 5854.0,
+    "cap_ba_mw": 5854.0
+  },
+  {
+    "id": "DE-DK",
+    "country_a": "DE",
+    "country_b": "DK",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "30",
+        "nominal_mw": 7149.9,
+        "bus0_country": "DE",
+        "bus1_country": "DK"
+      },
+      {
+        "component": "Line",
+        "id": "31",
+        "nominal_mw": 3396.2,
+        "bus0_country": "DE",
+        "bus1_country": "DK"
+      },
+      {
+        "component": "Line",
+        "id": "32",
+        "nominal_mw": 3396.2,
+        "bus0_country": "DE",
+        "bus1_country": "DK"
+      },
+      {
+        "component": "Link",
+        "id": "relation/2505320-400-DC",
+        "nominal_mw": 600.0,
+        "bus0_country": "DK",
+        "bus1_country": "DE"
+      }
+    ],
+    "capacity_mw": 14542.3,
+    "cap_ab_mw": 14542.3,
+    "cap_ba_mw": 14542.3
+  },
+  {
+    "id": "DE-FR",
+    "country_a": "DE",
+    "country_b": "FR",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "33",
+        "nominal_mw": 6256.2,
+        "bus0_country": "DE",
+        "bus1_country": "FR"
+      }
+    ],
+    "capacity_mw": 6256.2,
+    "cap_ab_mw": 6256.2,
+    "cap_ba_mw": 6256.2
+  },
+  {
+    "id": "DE-LU",
+    "country_a": "DE",
+    "country_b": "LU",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "34",
+        "nominal_mw": 3932.4,
+        "bus0_country": "DE",
+        "bus1_country": "LU"
+      }
+    ],
+    "capacity_mw": 3932.4,
+    "cap_ab_mw": 3932.4,
+    "cap_ba_mw": 3932.4
+  },
+  {
+    "id": "DE-NL",
+    "country_a": "DE",
+    "country_b": "NL",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "35",
+        "nominal_mw": 13584.8,
+        "bus0_country": "DE",
+        "bus1_country": "NL"
+      }
+    ],
+    "capacity_mw": 13584.8,
+    "cap_ab_mw": 13584.8,
+    "cap_ba_mw": 13584.8
+  },
+  {
+    "id": "DE-NO",
+    "country_a": "DE",
+    "country_b": "NO",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/16213216-525-DC",
+        "nominal_mw": 1400.0,
+        "bus0_country": "DE",
+        "bus1_country": "NO"
+      }
+    ],
+    "capacity_mw": 1400.0,
+    "cap_ab_mw": 1400.0,
+    "cap_ba_mw": 1400.0
+  },
+  {
+    "id": "DE-PL",
+    "country_a": "DE",
+    "country_b": "PL",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "36",
+        "nominal_mw": 6971.2,
+        "bus0_country": "DE",
+        "bus1_country": "PL"
+      }
+    ],
+    "capacity_mw": 6971.2,
+    "cap_ab_mw": 6971.2,
+    "cap_ba_mw": 6971.2
+  },
+  {
+    "id": "DE-SE",
+    "country_a": "DE",
+    "country_b": "SE",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/3918230-450-DC",
+        "nominal_mw": 600.0,
+        "bus0_country": "DE",
+        "bus1_country": "SE"
+      }
+    ],
+    "capacity_mw": 600.0,
+    "cap_ab_mw": 600.0,
+    "cap_ba_mw": 600.0
+  },
+  {
+    "id": "DK-GB",
+    "country_a": "DK",
+    "country_b": "GB",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/15781671-525-DC",
+        "nominal_mw": 1400.0,
+        "bus0_country": "GB",
+        "bus1_country": "DK"
+      }
+    ],
+    "capacity_mw": 1400.0,
+    "cap_ab_mw": 1400.0,
+    "cap_ba_mw": 1400.0
+  },
+  {
+    "id": "DK-NL",
+    "country_a": "DK",
+    "country_b": "NL",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/8185420-320-DC",
+        "nominal_mw": 700.0,
+        "bus0_country": "DK",
+        "bus1_country": "NL"
+      }
+    ],
+    "capacity_mw": 700.0,
+    "cap_ab_mw": 700.0,
+    "cap_ba_mw": 700.0
+  },
+  {
+    "id": "DK-NO",
+    "country_a": "DK",
+    "country_b": "NO",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/3391931-350-DC",
+        "nominal_mw": 940.0,
+        "bus0_country": "DK",
+        "bus1_country": "NO"
+      },
+      {
+        "component": "Link",
+        "id": "relation/8184632-500-DC",
+        "nominal_mw": 700.0,
+        "bus0_country": "DK",
+        "bus1_country": "NO"
+      }
+    ],
+    "capacity_mw": 1640.0,
+    "cap_ab_mw": 1640.0,
+    "cap_ba_mw": 1640.0
+  },
+  {
+    "id": "DK-SE",
+    "country_a": "DK",
+    "country_b": "SE",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "37",
+        "nominal_mw": 3575.0,
+        "bus0_country": "DK",
+        "bus1_country": "SE"
+      },
+      {
+        "component": "Link",
+        "id": "relation/8184629-300-DC",
+        "nominal_mw": 680.0,
+        "bus0_country": "DK",
+        "bus1_country": "SE"
+      }
+    ],
+    "capacity_mw": 4255.0,
+    "cap_ab_mw": 4255.0,
+    "cap_ba_mw": 4255.0
+  },
+  {
+    "id": "EE-FI",
+    "country_a": "EE",
+    "country_b": "FI",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/6886400-450-DC",
+        "nominal_mw": 650.0,
+        "bus0_country": "EE",
+        "bus1_country": "FI"
+      },
+      {
+        "component": "Link",
+        "id": "relation/8184630-150-DC",
+        "nominal_mw": 350.0,
+        "bus0_country": "EE",
+        "bus1_country": "FI"
+      }
+    ],
+    "capacity_mw": 1000.0,
+    "cap_ab_mw": 1000.0,
+    "cap_ba_mw": 1000.0
+  },
+  {
+    "id": "EE-LV",
+    "country_a": "EE",
+    "country_b": "LV",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "38",
+        "nominal_mw": 3318.0,
+        "bus0_country": "EE",
+        "bus1_country": "LV"
+      }
+    ],
+    "capacity_mw": 3318.0,
+    "cap_ab_mw": 3318.0,
+    "cap_ba_mw": 3318.0
+  },
+  {
+    "id": "ES-FR",
+    "country_a": "ES",
+    "country_b": "FR",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "39",
+        "nominal_mw": 4580.4,
+        "bus0_country": "ES",
+        "bus1_country": "FR"
+      },
+      {
+        "component": "Link",
+        "id": "relation/9934065-320-DC",
+        "nominal_mw": 1000.0,
+        "bus0_country": "FR",
+        "bus1_country": "ES"
+      },
+      {
+        "component": "Link",
+        "id": "relation/9934066-320-DC",
+        "nominal_mw": 1000.0,
+        "bus0_country": "FR",
+        "bus1_country": "ES"
+      }
+    ],
+    "capacity_mw": 6580.4,
+    "cap_ab_mw": 6580.4,
+    "cap_ba_mw": 6580.4
+  },
+  {
+    "id": "ES-PT",
+    "country_a": "ES",
+    "country_b": "PT",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "40",
+        "nominal_mw": 12199.5,
+        "bus0_country": "ES",
+        "bus1_country": "PT"
+      },
+      {
+        "component": "Line",
+        "id": "41",
+        "nominal_mw": 3396.2,
+        "bus0_country": "ES",
+        "bus1_country": "PT"
+      }
+    ],
+    "capacity_mw": 15595.7,
+    "cap_ab_mw": 15595.7,
+    "cap_ba_mw": 15595.7
+  },
+  {
+    "id": "FI-NO",
+    "country_a": "FI",
+    "country_b": "NO",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "42",
+        "nominal_mw": 491.6,
+        "bus0_country": "FI",
+        "bus1_country": "NO"
+      }
+    ],
+    "capacity_mw": 491.6,
+    "cap_ab_mw": 491.6,
+    "cap_ba_mw": 491.6
+  },
+  {
+    "id": "FI-SE",
+    "country_a": "FI",
+    "country_b": "SE",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "43",
+        "nominal_mw": 7149.9,
+        "bus0_country": "FI",
+        "bus1_country": "SE"
+      },
+      {
+        "component": "Line",
+        "id": "44",
+        "nominal_mw": 3396.2,
+        "bus0_country": "FI",
+        "bus1_country": "SE"
+      },
+      {
+        "component": "Link",
+        "id": "relation/3391954-500-DC",
+        "nominal_mw": 800.0,
+        "bus0_country": "FI",
+        "bus1_country": "SE"
+      },
+      {
+        "component": "Link",
+        "id": "relation/8184631-400-DC",
+        "nominal_mw": 500.0,
+        "bus0_country": "SE",
+        "bus1_country": "FI"
+      }
+    ],
+    "capacity_mw": 11846.1,
+    "cap_ab_mw": 11846.1,
+    "cap_ba_mw": 11846.1
+  },
+  {
+    "id": "FR-GB",
+    "country_a": "FR",
+    "country_b": "GB",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/10377412-320-DC",
+        "nominal_mw": 1000.0,
+        "bus0_country": "FR",
+        "bus1_country": "GB"
+      },
+      {
+        "component": "Link",
+        "id": "relation/15772117-320-DC",
+        "nominal_mw": 1000.0,
+        "bus0_country": "GB",
+        "bus1_country": "FR"
+      },
+      {
+        "component": "Link",
+        "id": "relation/2127794-270-DC",
+        "nominal_mw": 2000.0,
+        "bus0_country": "GB",
+        "bus1_country": "FR"
+      }
+    ],
+    "capacity_mw": 4000.0,
+    "cap_ab_mw": 4000.0,
+    "cap_ba_mw": 4000.0
+  },
+  {
+    "id": "FR-IT",
+    "country_a": "FR",
+    "country_b": "IT",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "45",
+        "nominal_mw": 5865.2,
+        "bus0_country": "FR",
+        "bus1_country": "IT"
+      },
+      {
+        "component": "Link",
+        "id": "relation/3391794-200-DC",
+        "nominal_mw": 300.0,
+        "bus0_country": "IT",
+        "bus1_country": "FR"
+      },
+      {
+        "component": "Link",
+        "id": "relation/9982798-200-DC",
+        "nominal_mw": 300.0,
+        "bus0_country": "FR",
+        "bus1_country": "IT"
+      }
+    ],
+    "capacity_mw": 6465.2,
+    "cap_ab_mw": 6465.2,
+    "cap_ba_mw": 6465.2
+  },
+  {
+    "id": "FR-LU",
+    "country_a": "FR",
+    "country_b": "LU",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "46",
+        "nominal_mw": 502.7,
+        "bus0_country": "FR",
+        "bus1_country": "LU"
+      }
+    ],
+    "capacity_mw": 502.7,
+    "cap_ab_mw": 502.7,
+    "cap_ba_mw": 502.7
+  },
+  {
+    "id": "GB-IE",
+    "country_a": "GB",
+    "country_b": "IE",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "47",
+        "nominal_mw": 1843.3,
+        "bus0_country": "GB",
+        "bus1_country": "IE"
+      },
+      {
+        "component": "Line",
+        "id": "48",
+        "nominal_mw": 3396.2,
+        "bus0_country": "GB",
+        "bus1_country": "IE"
+      },
+      {
+        "component": "Link",
+        "id": "relation/8184641-200-DC",
+        "nominal_mw": 500.0,
+        "bus0_country": "GB",
+        "bus1_country": "IE"
+      }
+    ],
+    "capacity_mw": 5739.5,
+    "cap_ab_mw": 5739.5,
+    "cap_ba_mw": 5739.5
+  },
+  {
+    "id": "GB-NL",
+    "country_a": "GB",
+    "country_b": "NL",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/14126301-450-DC",
+        "nominal_mw": 1000.0,
+        "bus0_country": "GB",
+        "bus1_country": "NL"
+      }
+    ],
+    "capacity_mw": 1000.0,
+    "cap_ab_mw": 1000.0,
+    "cap_ba_mw": 1000.0
+  },
+  {
+    "id": "GB-NO",
+    "country_a": "GB",
+    "country_b": "NO",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/13295785-515-DC",
+        "nominal_mw": 1400.0,
+        "bus0_country": "NO",
+        "bus1_country": "GB"
+      }
+    ],
+    "capacity_mw": 1400.0,
+    "cap_ab_mw": 1400.0,
+    "cap_ba_mw": 1400.0
+  },
+  {
+    "id": "GR-IT",
+    "country_a": "GR",
+    "country_b": "IT",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/8185664-400-DC",
+        "nominal_mw": 500.0,
+        "bus0_country": "IT",
+        "bus1_country": "GR"
+      }
+    ],
+    "capacity_mw": 500.0,
+    "cap_ab_mw": 500.0,
+    "cap_ba_mw": 500.0
+  },
+  {
+    "id": "GR-MK",
+    "country_a": "GR",
+    "country_b": "MK",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "49",
+        "nominal_mw": 3575.0,
+        "bus0_country": "GR",
+        "bus1_country": "MK"
+      }
+    ],
+    "capacity_mw": 3575.0,
+    "cap_ab_mw": 3575.0,
+    "cap_ba_mw": 3575.0
+  },
+  {
+    "id": "HR-HU",
+    "country_a": "HR",
+    "country_b": "HU",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "50",
+        "nominal_mw": 7149.9,
+        "bus0_country": "HR",
+        "bus1_country": "HU"
+      }
+    ],
+    "capacity_mw": 7149.9,
+    "cap_ab_mw": 7149.9,
+    "cap_ba_mw": 7149.9
+  },
+  {
+    "id": "HR-RS",
+    "country_a": "HR",
+    "country_b": "RS",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "51",
+        "nominal_mw": 1787.5,
+        "bus0_country": "HR",
+        "bus1_country": "RS"
+      }
+    ],
+    "capacity_mw": 1787.5,
+    "cap_ab_mw": 1787.5,
+    "cap_ba_mw": 1787.5
+  },
+  {
+    "id": "HR-SI",
+    "country_a": "HR",
+    "country_b": "SI",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "52",
+        "nominal_mw": 6345.5,
+        "bus0_country": "HR",
+        "bus1_country": "SI"
+      }
+    ],
+    "capacity_mw": 6345.5,
+    "cap_ab_mw": 6345.5,
+    "cap_ba_mw": 6345.5
+  },
+  {
+    "id": "HU-RO",
+    "country_a": "HU",
+    "country_b": "RO",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "53",
+        "nominal_mw": 3575.0,
+        "bus0_country": "HU",
+        "bus1_country": "RO"
+      }
+    ],
+    "capacity_mw": 3575.0,
+    "cap_ab_mw": 3575.0,
+    "cap_ba_mw": 3575.0
+  },
+  {
+    "id": "HU-RS",
+    "country_a": "HU",
+    "country_b": "RS",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "54",
+        "nominal_mw": 1787.5,
+        "bus0_country": "HU",
+        "bus1_country": "RS"
+      }
+    ],
+    "capacity_mw": 1787.5,
+    "cap_ab_mw": 1787.5,
+    "cap_ba_mw": 1787.5
+  },
+  {
+    "id": "HU-SI",
+    "country_a": "HU",
+    "country_b": "SI",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "55",
+        "nominal_mw": 3575.0,
+        "bus0_country": "HU",
+        "bus1_country": "SI"
+      },
+      {
+        "component": "Line",
+        "id": "56",
+        "nominal_mw": 3396.2,
+        "bus0_country": "HU",
+        "bus1_country": "SI"
+      }
+    ],
+    "capacity_mw": 6971.2,
+    "cap_ab_mw": 6971.2,
+    "cap_ba_mw": 6971.2
+  },
+  {
+    "id": "HU-SK",
+    "country_a": "HU",
+    "country_b": "SK",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "57",
+        "nominal_mw": 8937.4,
+        "bus0_country": "HU",
+        "bus1_country": "SK"
+      },
+      {
+        "component": "Line",
+        "id": "58",
+        "nominal_mw": 3396.2,
+        "bus0_country": "HU",
+        "bus1_country": "SK"
+      }
+    ],
+    "capacity_mw": 12333.6,
+    "cap_ab_mw": 12333.6,
+    "cap_ba_mw": 12333.6
+  },
+  {
+    "id": "IT-ME",
+    "country_a": "IT",
+    "country_b": "ME",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/8185767-500-DC",
+        "nominal_mw": 1200.0,
+        "bus0_country": "IT",
+        "bus1_country": "ME"
+      }
+    ],
+    "capacity_mw": 1200.0,
+    "cap_ab_mw": 1200.0,
+    "cap_ba_mw": 1200.0
+  },
+  {
+    "id": "IT-SI",
+    "country_a": "IT",
+    "country_b": "SI",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "59",
+        "nominal_mw": 2279.0,
+        "bus0_country": "IT",
+        "bus1_country": "SI"
+      }
+    ],
+    "capacity_mw": 2279.0,
+    "cap_ab_mw": 2279.0,
+    "cap_ba_mw": 2279.0
+  },
+  {
+    "id": "LT-LV",
+    "country_a": "LT",
+    "country_b": "LV",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "60",
+        "nominal_mw": 4424.0,
+        "bus0_country": "LT",
+        "bus1_country": "LV"
+      }
+    ],
+    "capacity_mw": 4424.0,
+    "cap_ab_mw": 4424.0,
+    "cap_ba_mw": 4424.0
+  },
+  {
+    "id": "LT-PL",
+    "country_a": "LT",
+    "country_b": "PL",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "61",
+        "nominal_mw": 3575.0,
+        "bus0_country": "LT",
+        "bus1_country": "PL"
+      }
+    ],
+    "capacity_mw": 3575.0,
+    "cap_ab_mw": 3575.0,
+    "cap_ba_mw": 3575.0
+  },
+  {
+    "id": "LT-SE",
+    "country_a": "LT",
+    "country_b": "SE",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/8185455-300-DC",
+        "nominal_mw": 700.0,
+        "bus0_country": "LT",
+        "bus1_country": "SE"
+      }
+    ],
+    "capacity_mw": 700.0,
+    "cap_ab_mw": 700.0,
+    "cap_ba_mw": 700.0
+  },
+  {
+    "id": "ME-RS",
+    "country_a": "ME",
+    "country_b": "RS",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "62",
+        "nominal_mw": 983.1,
+        "bus0_country": "ME",
+        "bus1_country": "RS"
+      },
+      {
+        "component": "Line",
+        "id": "63",
+        "nominal_mw": 3396.2,
+        "bus0_country": "ME",
+        "bus1_country": "RS"
+      }
+    ],
+    "capacity_mw": 4379.3,
+    "cap_ab_mw": 4379.3,
+    "cap_ba_mw": 4379.3
+  },
+  {
+    "id": "ME-XK",
+    "country_a": "ME",
+    "country_b": "XK",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "64",
+        "nominal_mw": 1787.5,
+        "bus0_country": "ME",
+        "bus1_country": "XK"
+      }
+    ],
+    "capacity_mw": 1787.5,
+    "cap_ab_mw": 1787.5,
+    "cap_ba_mw": 1787.5
+  },
+  {
+    "id": "MK-RS",
+    "country_a": "MK",
+    "country_b": "RS",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "65",
+        "nominal_mw": 1787.5,
+        "bus0_country": "MK",
+        "bus1_country": "RS"
+      }
+    ],
+    "capacity_mw": 1787.5,
+    "cap_ab_mw": 1787.5,
+    "cap_ba_mw": 1787.5
+  },
+  {
+    "id": "MK-XK",
+    "country_a": "MK",
+    "country_b": "XK",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "66",
+        "nominal_mw": 2770.6,
+        "bus0_country": "MK",
+        "bus1_country": "XK"
+      }
+    ],
+    "capacity_mw": 2770.6,
+    "cap_ab_mw": 2770.6,
+    "cap_ba_mw": 2770.6
+  },
+  {
+    "id": "NL-NO",
+    "country_a": "NL",
+    "country_b": "NO",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/9965201-450-DC",
+        "nominal_mw": 700.0,
+        "bus0_country": "NL",
+        "bus1_country": "NO"
+      }
+    ],
+    "capacity_mw": 700.0,
+    "cap_ab_mw": 700.0,
+    "cap_ba_mw": 700.0
+  },
+  {
+    "id": "NO-SE",
+    "country_a": "NO",
+    "country_b": "SE",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "67",
+        "nominal_mw": 7909.6,
+        "bus0_country": "NO",
+        "bus1_country": "SE"
+      }
+    ],
+    "capacity_mw": 7909.6,
+    "cap_ab_mw": 7909.6,
+    "cap_ba_mw": 7909.6
+  },
+  {
+    "id": "PL-SE",
+    "country_a": "PL",
+    "country_b": "SE",
+    "assets": [
+      {
+        "component": "Link",
+        "id": "relation/3392010-450-DC",
+        "nominal_mw": 600.0,
+        "bus0_country": "PL",
+        "bus1_country": "SE"
+      }
+    ],
+    "capacity_mw": 600.0,
+    "cap_ab_mw": 600.0,
+    "cap_ba_mw": 600.0
+  },
+  {
+    "id": "PL-SK",
+    "country_a": "PL",
+    "country_b": "SK",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "68",
+        "nominal_mw": 3575.0,
+        "bus0_country": "PL",
+        "bus1_country": "SK"
+      }
+    ],
+    "capacity_mw": 3575.0,
+    "cap_ab_mw": 3575.0,
+    "cap_ba_mw": 3575.0
+  },
+  {
+    "id": "RO-RS",
+    "country_a": "RO",
+    "country_b": "RS",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "69",
+        "nominal_mw": 7149.9,
+        "bus0_country": "RO",
+        "bus1_country": "RS"
+      }
+    ],
+    "capacity_mw": 7149.9,
+    "cap_ab_mw": 7149.9,
+    "cap_ba_mw": 7149.9
+  },
+  {
+    "id": "RS-XK",
+    "country_a": "RS",
+    "country_b": "XK",
+    "assets": [
+      {
+        "component": "Line",
+        "id": "70",
+        "nominal_mw": 2279.0,
+        "bus0_country": "RS",
+        "bus1_country": "XK"
+      }
+    ],
+    "capacity_mw": 2279.0,
+    "cap_ab_mw": 2279.0,
+    "cap_ba_mw": 2279.0
+  }
+]

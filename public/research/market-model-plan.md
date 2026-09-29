@@ -38,16 +38,16 @@ result with coverage, or explicitly modeled imputations with sensitivity.
 
 ## 2. Existing assets and missing inputs
 
-| Asset | Available now | Work required |
-|---|---|---|
-| Annual zone prices and carbon | Electricity Maps archive | Currency normalization, native-resolution history and geography checks |
-| European screening | 107 configured borders, 54 zones; versioned events | Operational topology audit and annual screening run |
-| Generation/load/physical flows | ENTSO-E research pilot for a subset and month | Full-year ingestion, resolution checks and neighboring-zone coverage |
-| Constraints | App capacity reader and physical flows | Historical market constraints for every modeled interval; flows are not capacity |
-| Generator capacity/availability | Not assembled for this model | Join assets, installed capacities and outage histories; assess reporting gaps |
-| Supply costs | No calibrated supply stacks | Fuel/carbon prices, efficiencies, costs and operational assumptions |
-| Storage/hydro | Partial pilot observations | Energy inventories, budgets, efficiency, operating limits and initial conditions |
-| Existing simulator | Zonal price-response prototype | Keep separately labeled; do not repurpose its results as validated market clearing |
+| Asset                           | Available now                                      | Work required                                                                      |
+| ------------------------------- | -------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Annual zone prices and carbon   | Electricity Maps archive                           | Currency normalization, native-resolution history and geography checks             |
+| European screening              | 107 configured borders, 54 zones; versioned events | Operational topology audit and annual screening run                                |
+| Generation/load/physical flows  | ENTSO-E research pilot for a subset and month      | Full-year ingestion, resolution checks and neighboring-zone coverage               |
+| Constraints                     | App capacity reader and physical flows             | Historical market constraints for every modeled interval; flows are not capacity   |
+| Generator capacity/availability | Not assembled for this model                       | Join assets, installed capacities and outage histories; assess reporting gaps      |
+| Supply costs                    | No calibrated supply stacks                        | Fuel/carbon prices, efficiencies, costs and operational assumptions                |
+| Storage/hydro                   | Partial pilot observations                         | Energy inventories, budgets, efficiency, operating limits and initial conditions   |
+| Existing simulator              | Zonal price-response prototype                     | Keep separately labeled; do not repurpose its results as validated market clearing |
 
 ## 3. Phase A — data audit and pilot selection
 

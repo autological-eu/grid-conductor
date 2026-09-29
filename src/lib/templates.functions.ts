@@ -84,18 +84,12 @@ export const ensureTemplateScenarios = createServerFn({ method: "POST" })
 
     // build the seven scenarios with their single sized unit; when reusing,
     // skip keys that already exist so concurrent calls never conflict
-    const existingKeys = new Set(
-      (data.force ? [] : (existing ?? [])).map((s) => s.template_key),
-    );
+    const existingKeys = new Set((data.force ? [] : (existing ?? [])).map((s) => s.template_key));
     const specs = TEMPLATE_SPECS.filter((spec) => !existingKeys.has(spec.key));
     if (specs.length === 0) return { created: 0, reused: existing?.length ?? 0 };
 
     const built = specs.map((spec) => {
-      const sized = sizeUnit(
-        spec.unitType,
-        data.budgetMeur,
-        spec.unitType === "line" ? distKm : 0,
-      );
+      const sized = sizeUnit(spec.unitType, data.budgetMeur, spec.unitType === "line" ? distKm : 0);
       return { spec, sized };
     });
 
@@ -107,7 +101,10 @@ export const ensureTemplateScenarios = createServerFn({ method: "POST" })
           name: spec.name.replace("{A}", target.zone_a).replace("{B}", target.zone_b),
           description: `Template: ${spec.name
             .replace("{A}", target.zone_a)
-            .replace("{B}", target.zone_b)} sized to €${data.budgetMeur}M (${sized.capacity_label}).`,
+            .replace(
+              "{B}",
+              target.zone_b,
+            )} sized to €${data.budgetMeur}M (${sized.capacity_label}).`,
           status: "running",
           is_template: true,
           template_key: spec.key,
@@ -122,8 +119,7 @@ export const ensureTemplateScenarios = createServerFn({ method: "POST" })
       return {
         scenario_id: created![i]!.id,
         unit_type: spec.unitType,
-        zone_code:
-          spec.side === "a" ? target.zone_a : spec.side === "b" ? target.zone_b : null,
+        zone_code: spec.side === "a" ? target.zone_a : spec.side === "b" ? target.zone_b : null,
         border_zone_a: spec.side === "border" ? target.zone_a : null,
         border_zone_b: spec.side === "border" ? target.zone_b : null,
         params: sized.params,
@@ -135,7 +131,7 @@ export const ensureTemplateScenarios = createServerFn({ method: "POST" })
     if (uErr) throw new Error(uErr.message);
 
     // simulate: one network load + one base run, then one run per template
-    const net = await loadNetwork(supabaseAdmin, target.zone_a, target.zone_b);
+    const net = await loadNetwork(target.zone_a, target.zone_b);
     const tgt = { a: target.zone_a, b: target.zone_b };
     const base = runDispatch(net, [], tgt);
     const years = Math.max(base.hours, 1) / 8760;

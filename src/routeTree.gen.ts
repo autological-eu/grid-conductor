@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as TargetsRouteImport } from './routes/targets'
 import { Route as ApiPublicBaselineOpportunityRouteImport } from './routes/api/public/baseline-opportunity'
-import { Route as ApiPublicDailyRefreshRouteImport } from './routes/api/public/daily-refresh'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -36,25 +35,18 @@ const ApiPublicBaselineOpportunityRoute =
     path: '/api/public/baseline-opportunity',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicDailyRefreshRoute = ApiPublicDailyRefreshRouteImport.update({
-  id: '/api/public/daily-refresh',
-  path: '/api/public/daily-refresh',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/targets': typeof TargetsRoute
   '/api/public/baseline-opportunity': typeof ApiPublicBaselineOpportunityRoute
-  '/api/public/daily-refresh': typeof ApiPublicDailyRefreshRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/targets': typeof TargetsRoute
   '/api/public/baseline-opportunity': typeof ApiPublicBaselineOpportunityRoute
-  '/api/public/daily-refresh': typeof ApiPublicDailyRefreshRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,30 +54,14 @@ export interface FileRoutesById {
   '/docs': typeof DocsRoute
   '/targets': typeof TargetsRoute
   '/api/public/baseline-opportunity': typeof ApiPublicBaselineOpportunityRoute
-  '/api/public/daily-refresh': typeof ApiPublicDailyRefreshRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/docs'
-    | '/targets'
-    | '/api/public/baseline-opportunity'
-    | '/api/public/daily-refresh'
+  fullPaths: '/' | '/docs' | '/targets' | '/api/public/baseline-opportunity'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/docs'
-    | '/targets'
-    | '/api/public/baseline-opportunity'
-    | '/api/public/daily-refresh'
+  to: '/' | '/docs' | '/targets' | '/api/public/baseline-opportunity'
   id:
-    | '__root__'
-    | '/'
-    | '/docs'
-    | '/targets'
-    | '/api/public/baseline-opportunity'
-    | '/api/public/daily-refresh'
+    '__root__' | '/' | '/docs' | '/targets' | '/api/public/baseline-opportunity'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -93,7 +69,6 @@ export interface RootRouteChildren {
   DocsRoute: typeof DocsRoute
   TargetsRoute: typeof TargetsRoute
   ApiPublicBaselineOpportunityRoute: typeof ApiPublicBaselineOpportunityRoute
-  ApiPublicDailyRefreshRoute: typeof ApiPublicDailyRefreshRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -126,13 +101,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicBaselineOpportunityRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/daily-refresh': {
-      id: '/api/public/daily-refresh'
-      path: '/api/public/daily-refresh'
-      fullPath: '/api/public/daily-refresh'
-      preLoaderRoute: typeof ApiPublicDailyRefreshRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -141,7 +109,6 @@ const rootRouteChildren: RootRouteChildren = {
   DocsRoute: DocsRoute,
   TargetsRoute: TargetsRoute,
   ApiPublicBaselineOpportunityRoute: ApiPublicBaselineOpportunityRoute,
-  ApiPublicDailyRefreshRoute: ApiPublicDailyRefreshRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

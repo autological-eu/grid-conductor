@@ -160,7 +160,7 @@ export const runScenario = createServerFn({ method: "POST" })
 
     await supabaseAdmin.from("scenarios").update({ status: "running" }).eq("id", data.id);
 
-    const net = await loadNetwork(supabaseAdmin, target.zone_a, target.zone_b);
+    const net = await loadNetwork(target.zone_a, target.zone_b);
     const tgt = { a: target.zone_a, b: target.zone_b };
     const base = runDispatch(net, [], tgt);
     const scen = runDispatch(
@@ -176,14 +176,11 @@ export const runScenario = createServerFn({ method: "POST" })
     );
 
     const years = Math.max(base.hours, 1) / 8760;
-    const marketMeur = ((scen.welfareEur - base.welfareEur) / 1e6) / years;
-    const climateKt = (-(scen.co2Kg - base.co2Kg) / 1e6) / years;
+    const marketMeur = (scen.welfareEur - base.welfareEur) / 1e6 / years;
+    const climateKt = -(scen.co2Kg - base.co2Kg) / 1e6 / years;
 
     const capex = (units ?? []).reduce((s, u) => s + Number(u.capex_meur ?? 0), 0);
-    const delivery = (units ?? []).reduce(
-      (m, u) => Math.max(m, Number(u.delivery_months ?? 0)),
-      0,
-    );
+    const delivery = (units ?? []).reduce((m, u) => Math.max(m, Number(u.delivery_months ?? 0)), 0);
     const lifetimeYears = 25;
     const npvMeur = marketMeur * lifetimeYears - capex;
     const bcRatio = capex > 0 ? (marketMeur * lifetimeYears) / capex : null;
@@ -193,11 +190,11 @@ export const runScenario = createServerFn({ method: "POST" })
       b1_socio_economic_welfare_meur_y: round(marketMeur, 3),
       b2_co2_variation_ktco2_y: round(climateKt, 3),
       b3_res_integration_gwh_y: round(
-        ((scen.extraTransferMwh - base.extraTransferMwh) / 1000) / years,
+        (scen.extraTransferMwh - base.extraTransferMwh) / 1000 / years,
         2,
       ),
       b4_losses_variation_gwh_y: round(
-        (((scen.borderFlowMwh - base.borderFlowMwh) * 0.02) / 1000) / years,
+        ((scen.borderFlowMwh - base.borderFlowMwh) * 0.02) / 1000 / years,
         3,
       ),
       b5_security_of_supply_congested_hours_avoided: Math.round(
@@ -207,12 +204,9 @@ export const runScenario = createServerFn({ method: "POST" })
         base.avgSpreadEurMwh - scen.avgSpreadEurMwh,
         3,
       ),
-      b7_transfer_capability_mwh_y: round(
-        (scen.borderFlowMwh - base.borderFlowMwh) / years,
-        1,
-      ),
+      b7_transfer_capability_mwh_y: round((scen.borderFlowMwh - base.borderFlowMwh) / years, 1),
       b8_congestion_rent_variation_meur_y: round(
-        ((scen.congestionRentEur - base.congestionRentEur) / 1e6) / years,
+        (scen.congestionRentEur - base.congestionRentEur) / 1e6 / years,
         3,
       ),
       b9_price_convergence_hours_gained: Math.round(
@@ -264,11 +258,18 @@ export const runScenario = createServerFn({ method: "POST" })
         price_convergence_share: round(base.convergedHours / Math.max(base.hours, 1), 4),
         adverse_flow_hours: base.adverseFlowHours,
         congestion_rent_meur: round(base.congestionRentEur / 1e6, 3),
+        target_rent_meur: round(base.targetRentEur / 1e6, 3),
+        kkt_dual_residual_eur_mwh: round(base.maxDualResidualEurMwh, 4),
+        solver_iterations: base.iterations,
         hours: base.hours,
         zones: net.zones.length,
       },
       passed:
-        base.directionAccuracy > 0.8 && base.priceMae < 10 && base.adverseFlowHours === 0,
+        base.directionAccuracy > 0.8 &&
+        base.priceMae < 10 &&
+        base.adverseFlowHours === 0 &&
+        base.convergedHours === base.hours &&
+        base.maxDualResidualEurMwh <= 0.01,
     });
 
     return payload;

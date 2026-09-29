@@ -13,7 +13,6 @@ import {
   type TargetRow,
   type UnitDropPlacement,
 } from "@/components/EuropeMap";
-import { EuropeanTargets } from "@/components/EuropeanTargets";
 import { TargetSidebar } from "@/components/TargetSidebar";
 import { EvaluationPanel } from "@/components/EvaluationPanel";
 import { listTargets, listZoneSummary } from "@/lib/analysis.functions";
@@ -50,7 +49,6 @@ function Workbench() {
   const [scenarioId, setScenarioId] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [evalOpen, setEvalOpen] = useState(false);
-  const [showTargets, setShowTargets] = useState(false);
   const [leftWidth, setLeftWidth] = useState(340);
   const [rightWidth, setRightWidth] = useState(380);
 
@@ -132,7 +130,7 @@ function Workbench() {
 
   return (
     <main className="flex h-screen flex-col bg-background">
-      <DataBar step={step} onEuropeanTargets={() => setShowTargets(true)} />
+      <DataBar step={step} />
       <div className="flex min-h-0 flex-1">
         {sidebarOpen ? (
           <div
@@ -217,11 +215,6 @@ function Workbench() {
           </button>
         )}
       </div>
-      {showTargets && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-background">
-          <EuropeanTargets embedded onClose={() => setShowTargets(false)} />
-        </div>
-      )}
       <Toaster />
     </main>
   );
