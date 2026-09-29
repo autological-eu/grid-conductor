@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as TargetsRouteImport } from './routes/targets'
+import { Route as ApiPublicBaselineOpportunityRouteImport } from './routes/api/public/baseline-opportunity'
 import { Route as ApiPublicEntsoeFastSummaryRouteImport } from './routes/api/public/entsoe-fast-summary'
 import { Route as ApiPublicFastEntsoeLpRouteImport } from './routes/api/public/fast-entsoe-lp'
 
@@ -30,6 +31,12 @@ const TargetsRoute = TargetsRouteImport.update({
   path: '/targets',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicBaselineOpportunityRoute =
+  ApiPublicBaselineOpportunityRouteImport.update({
+    id: '/api/public/baseline-opportunity',
+    path: '/api/public/baseline-opportunity',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicEntsoeFastSummaryRoute =
   ApiPublicEntsoeFastSummaryRouteImport.update({
     id: '/api/public/entsoe-fast-summary',
@@ -46,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/targets': typeof TargetsRoute
+  '/api/public/baseline-opportunity': typeof ApiPublicBaselineOpportunityRoute
   '/api/public/entsoe-fast-summary': typeof ApiPublicEntsoeFastSummaryRoute
   '/api/public/fast-entsoe-lp': typeof ApiPublicFastEntsoeLpRoute
 }
@@ -53,6 +61,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/targets': typeof TargetsRoute
+  '/api/public/baseline-opportunity': typeof ApiPublicBaselineOpportunityRoute
   '/api/public/entsoe-fast-summary': typeof ApiPublicEntsoeFastSummaryRoute
   '/api/public/fast-entsoe-lp': typeof ApiPublicFastEntsoeLpRoute
 }
@@ -61,6 +70,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/targets': typeof TargetsRoute
+  '/api/public/baseline-opportunity': typeof ApiPublicBaselineOpportunityRoute
   '/api/public/entsoe-fast-summary': typeof ApiPublicEntsoeFastSummaryRoute
   '/api/public/fast-entsoe-lp': typeof ApiPublicFastEntsoeLpRoute
 }
@@ -70,6 +80,7 @@ export interface FileRouteTypes {
     | '/'
     | '/docs'
     | '/targets'
+    | '/api/public/baseline-opportunity'
     | '/api/public/entsoe-fast-summary'
     | '/api/public/fast-entsoe-lp'
   fileRoutesByTo: FileRoutesByTo
@@ -77,6 +88,7 @@ export interface FileRouteTypes {
     | '/'
     | '/docs'
     | '/targets'
+    | '/api/public/baseline-opportunity'
     | '/api/public/entsoe-fast-summary'
     | '/api/public/fast-entsoe-lp'
   id:
@@ -84,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/docs'
     | '/targets'
+    | '/api/public/baseline-opportunity'
     | '/api/public/entsoe-fast-summary'
     | '/api/public/fast-entsoe-lp'
   fileRoutesById: FileRoutesById
@@ -92,6 +105,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DocsRoute: typeof DocsRoute
   TargetsRoute: typeof TargetsRoute
+  ApiPublicBaselineOpportunityRoute: typeof ApiPublicBaselineOpportunityRoute
   ApiPublicEntsoeFastSummaryRoute: typeof ApiPublicEntsoeFastSummaryRoute
   ApiPublicFastEntsoeLpRoute: typeof ApiPublicFastEntsoeLpRoute
 }
@@ -119,6 +133,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TargetsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/baseline-opportunity': {
+      id: '/api/public/baseline-opportunity'
+      path: '/api/public/baseline-opportunity'
+      fullPath: '/api/public/baseline-opportunity'
+      preLoaderRoute: typeof ApiPublicBaselineOpportunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/entsoe-fast-summary': {
       id: '/api/public/entsoe-fast-summary'
       path: '/api/public/entsoe-fast-summary'
@@ -140,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DocsRoute: DocsRoute,
   TargetsRoute: TargetsRoute,
+  ApiPublicBaselineOpportunityRoute: ApiPublicBaselineOpportunityRoute,
   ApiPublicEntsoeFastSummaryRoute: ApiPublicEntsoeFastSummaryRoute,
   ApiPublicFastEntsoeLpRoute: ApiPublicFastEntsoeLpRoute,
 }

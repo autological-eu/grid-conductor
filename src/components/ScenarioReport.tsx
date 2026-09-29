@@ -95,12 +95,16 @@ export function ScenarioReport({
 
         <Section title="2. Problem addressed">
           <p className="text-sm">
-            Over the assessment period the border was at its observed transfer limit for{" "}
+            Over the modelled window the border was at its transfer limit for{" "}
             {target.congested_hours} of {target.total_hours} hours while prices diverged between the
-            two zones. The screen estimates a market opportunity of{" "}
-            {target.market_opportunity_meur.toFixed(1)} MEUR per year (the bounded deadweight loss a
-            capacity project could recover) and {target.climate_loss_ktco2.toFixed(1)} ktCO2 per
-            year of avoidable emissions.
+            two zones. The baseline solve puts the resulting market loss at{" "}
+            {target.market_loss_meur.toFixed(1)} MEUR, with a mean absolute spread of{" "}
+            {target.mean_abs_spread_eur_mwh.toFixed(1)} EUR/MWh and a marginal capacity value of{" "}
+            {target.marginal_value_eur_mw.toFixed(1)} EUR/MW
+            {target.climate_loss_ktco2 == null
+              ? ""
+              : `, plus ${target.climate_loss_ktco2.toFixed(1)} ktCO2 of avoidable emissions`}
+            .
           </p>
         </Section>
 

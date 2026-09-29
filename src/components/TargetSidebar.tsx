@@ -112,14 +112,24 @@ export function TargetSidebar({
           {target.zone_a} – {target.zone_b}
         </h2>
         <p className="text-xs text-muted-foreground">
-          {target.zone_a_name} to {target.zone_b_name}
+          {target.zone_a_name} to {target.zone_b_name} · {target.period_start.slice(0, 10)} to{" "}
+          {target.period_end_exclusive.slice(0, 10)} (end exclusive)
         </p>
         <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
           <Stat
-            label="Market opportunity"
-            value={`${target.market_opportunity_meur.toFixed(1)} MEUR/y`}
+            label="Market loss"
+            value={`${target.market_loss_meur.toFixed(1)} ${
+              target.window_years >= 0.9 && target.window_years <= 1.1 ? "MEUR/yr" : "MEUR/window"
+            }`}
           />
-          <Stat label="Climate loss" value={`${target.climate_loss_ktco2.toFixed(1)} ktCO2/y`} />
+          <Stat
+            label="Climate loss"
+            value={
+              target.climate_loss_ktco2 == null
+                ? "n/a"
+                : `${target.climate_loss_ktco2.toFixed(1)} ktCO2/window`
+            }
+          />
           <Stat
             label="Congested hours"
             value={`${target.congested_hours} / ${target.total_hours}`}
@@ -129,6 +139,18 @@ export function TargetSidebar({
             value={
               target.observed_capacity_mw ? `${Math.round(target.observed_capacity_mw)} MW` : "—"
             }
+          />
+          <Stat
+            label="Baseline rent"
+            value={`${(target.baseline_rent_meur ?? 0).toFixed(1)} MEUR`}
+          />
+          <Stat
+            label="Mean abs spread"
+            value={`${target.mean_abs_spread_eur_mwh.toFixed(1)} EUR/MWh`}
+          />
+          <Stat
+            label="Marginal capacity value"
+            value={`${target.marginal_value_eur_mw.toFixed(1)} EUR/MW`}
           />
         </dl>
       </div>

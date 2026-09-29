@@ -1,0 +1,3521 @@
+[
+  {
+    "name": "AT2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "AT",
+    "p_nom_mw": 4596.0,
+    "efficiency": 0.577,
+    "build_year": null
+  },
+  {
+    "name": "AT2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "AT",
+    "p_nom_mw": 132.0,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "AT2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "AT",
+    "p_nom_mw": 170.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "AT2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "AT",
+    "p_nom_mw": 123.0,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "BA2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "BA",
+    "p_nom_mw": 2090.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "BE2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "BE",
+    "p_nom_mw": 6634.2,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "BE2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "BE",
+    "p_nom_mw": 113.0,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "BE2 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "BE",
+    "p_nom_mw": 4096.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "BE2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "BE",
+    "p_nom_mw": 130.2,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "BE2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "BE",
+    "p_nom_mw": 293.8,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "BG2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "BG",
+    "p_nom_mw": 761.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "BG2 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "BG",
+    "p_nom_mw": 1204.0,
+    "efficiency": 0.356,
+    "build_year": null
+  },
+  {
+    "name": "BG2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "BG",
+    "p_nom_mw": 6057.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "BG2 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "BG",
+    "p_nom_mw": 2080.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "CH2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "CH",
+    "p_nom_mw": 98.8,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "CH2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "CH",
+    "p_nom_mw": 59.0,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "CH2 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "CH",
+    "p_nom_mw": 3095.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "CH2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "CH",
+    "p_nom_mw": 212.5,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "CZ2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "CZ",
+    "p_nom_mw": 1719.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "CZ2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "CZ",
+    "p_nom_mw": 30.0,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "CZ2 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "CZ",
+    "p_nom_mw": 639.0,
+    "efficiency": 0.356,
+    "build_year": null
+  },
+  {
+    "name": "CZ2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "CZ",
+    "p_nom_mw": 8875.6,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "CZ2 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "CZ",
+    "p_nom_mw": 4164.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "CZ2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "CZ",
+    "p_nom_mw": 30.2,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "DE",
+    "p_nom_mw": 30783.1,
+    "efficiency": 0.529,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC OCGT",
+    "carrier": "OCGT",
+    "fuel": "OCGT",
+    "country": "DE",
+    "p_nom_mw": 6112.7,
+    "efficiency": 0.401,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "DE",
+    "p_nom_mw": 8020.0,
+    "efficiency": 0.465,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "DE",
+    "p_nom_mw": 20351.9,
+    "efficiency": 0.389,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC geothermal",
+    "carrier": "geothermal",
+    "fuel": "geothermal",
+    "country": "DE",
+    "p_nom_mw": 26.9,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "DE",
+    "p_nom_mw": 19457.0,
+    "efficiency": 0.371,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "DE",
+    "p_nom_mw": 5684.3,
+    "efficiency": 0.352,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "DE",
+    "p_nom_mw": 3127.7,
+    "efficiency": 0.274,
+    "build_year": null
+  },
+  {
+    "name": "DK0 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "DK",
+    "p_nom_mw": 38.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "DK0 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "DK",
+    "p_nom_mw": 1120.0,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "DK0 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "DK",
+    "p_nom_mw": 126.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "DK0 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "DK",
+    "p_nom_mw": 102.0,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "DK2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "DK",
+    "p_nom_mw": 1137.2,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "DK2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "DK",
+    "p_nom_mw": 661.0,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "DK2 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "DK",
+    "p_nom_mw": 716.0,
+    "efficiency": 0.356,
+    "build_year": null
+  },
+  {
+    "name": "DK2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "DK",
+    "p_nom_mw": 51.0,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "EE2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "EE",
+    "p_nom_mw": 207.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "EE2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "EE",
+    "p_nom_mw": 80.0,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "EE2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "EE",
+    "p_nom_mw": 251.1,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "ES2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "ES",
+    "p_nom_mw": 26913.4,
+    "efficiency": 0.555,
+    "build_year": null
+  },
+  {
+    "name": "ES2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "ES",
+    "p_nom_mw": 526.1,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "ES2 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "ES",
+    "p_nom_mw": 7408.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "ES2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "ES",
+    "p_nom_mw": 285.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "ES2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "ES",
+    "p_nom_mw": 192.2,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "ES7 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "ES",
+    "p_nom_mw": 782.6,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "ES7 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "ES",
+    "p_nom_mw": 510.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "ES7 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "ES",
+    "p_nom_mw": 349.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "ES7 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "ES",
+    "p_nom_mw": 38.0,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "FI",
+    "p_nom_mw": 1906.6,
+    "efficiency": 0.688,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "FI",
+    "p_nom_mw": 3800.7,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "FI",
+    "p_nom_mw": 903.2,
+    "efficiency": 0.356,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "FI",
+    "p_nom_mw": 150.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "FI",
+    "p_nom_mw": 4622.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "FI",
+    "p_nom_mw": 1100.2,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "FI",
+    "p_nom_mw": 88.0,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "FR",
+    "p_nom_mw": 10079.7,
+    "efficiency": 0.564,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "FR",
+    "p_nom_mw": 481.2,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "FR",
+    "p_nom_mw": 1385.0,
+    "efficiency": 0.356,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC geothermal",
+    "carrier": "geothermal",
+    "fuel": "geothermal",
+    "country": "FR",
+    "p_nom_mw": 1.7,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "FR",
+    "p_nom_mw": 977.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "FR",
+    "p_nom_mw": 65690.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "FR",
+    "p_nom_mw": 1077.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "FR",
+    "p_nom_mw": 208.5,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "FR6 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "FR",
+    "p_nom_mw": 133.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "FR6 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "FR",
+    "p_nom_mw": 231.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "GB",
+    "p_nom_mw": 33491.4,
+    "efficiency": 0.571,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "GB",
+    "p_nom_mw": 4185.9,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC geothermal",
+    "carrier": "geothermal",
+    "fuel": "geothermal",
+    "country": "GB",
+    "p_nom_mw": 2.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "GB",
+    "p_nom_mw": 6534.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "GB",
+    "p_nom_mw": 276.7,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "GB",
+    "p_nom_mw": 1766.2,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "GB3 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "GB",
+    "p_nom_mw": 1957.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "GB3 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "GB",
+    "p_nom_mw": 15.8,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "GB3 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "GB",
+    "p_nom_mw": 63.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "GB5 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "GB",
+    "p_nom_mw": 72.8,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "GB5 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "GB",
+    "p_nom_mw": 116.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "GR2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "GR",
+    "p_nom_mw": 8436.6,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "GR2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "GR",
+    "p_nom_mw": 1280.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "GR2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "GR",
+    "p_nom_mw": 1262.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "HR2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "HR",
+    "p_nom_mw": 1005.8,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "HR2 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "HR",
+    "p_nom_mw": 342.0,
+    "efficiency": 0.356,
+    "build_year": null
+  },
+  {
+    "name": "HR2 0AC geothermal",
+    "carrier": "geothermal",
+    "fuel": "geothermal",
+    "country": "HR",
+    "p_nom_mw": 36.1,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "HR2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "HR",
+    "p_nom_mw": 415.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "HU2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "HU",
+    "p_nom_mw": 2573.5,
+    "efficiency": 0.573,
+    "build_year": null
+  },
+  {
+    "name": "HU2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "HU",
+    "p_nom_mw": 303.6,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "HU2 0AC geothermal",
+    "carrier": "geothermal",
+    "fuel": "geothermal",
+    "country": "HU",
+    "p_nom_mw": 3.4,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "HU2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "HU",
+    "p_nom_mw": 1134.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "HU2 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "HU",
+    "p_nom_mw": 2027.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "HU2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "HU",
+    "p_nom_mw": 451.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "HU2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "HU",
+    "p_nom_mw": 24.0,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "IE3 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "IE",
+    "p_nom_mw": 4688.4,
+    "efficiency": 0.571,
+    "build_year": null
+  },
+  {
+    "name": "IE3 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "IE",
+    "p_nom_mw": 38.4,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "IE3 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "IE",
+    "p_nom_mw": 253.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "IE3 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "IE",
+    "p_nom_mw": 480.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "IE3 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "IE",
+    "p_nom_mw": 85.0,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "IT2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "IT",
+    "p_nom_mw": 46554.4,
+    "efficiency": 0.561,
+    "build_year": null
+  },
+  {
+    "name": "IT2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "IT",
+    "p_nom_mw": 256.1,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "IT2 0AC geothermal",
+    "carrier": "geothermal",
+    "fuel": "geothermal",
+    "country": "IT",
+    "p_nom_mw": 834.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IT2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "IT",
+    "p_nom_mw": 754.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "IT2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "IT",
+    "p_nom_mw": 376.1,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "IT4 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "IT",
+    "p_nom_mw": 736.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "IT4 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "IT",
+    "p_nom_mw": 22.8,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "IT4 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "IT",
+    "p_nom_mw": 1230.0,
+    "efficiency": 0.356,
+    "build_year": null
+  },
+  {
+    "name": "IT4 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "IT",
+    "p_nom_mw": 357.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "LT2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "LT",
+    "p_nom_mw": 1148.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "LT2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "LT",
+    "p_nom_mw": 80.0,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "LT2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "LT",
+    "p_nom_mw": 64.0,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "LU2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "LU",
+    "p_nom_mw": 2.8,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "LU2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "LU",
+    "p_nom_mw": 15.0,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "LV2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "LV",
+    "p_nom_mw": 1087.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "LV2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "LV",
+    "p_nom_mw": 23.0,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "ME2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "ME",
+    "p_nom_mw": 225.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "MK2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "MK",
+    "p_nom_mw": 220.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "MK2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "MK",
+    "p_nom_mw": 824.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "MK2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "MK",
+    "p_nom_mw": 198.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "NL2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "NL",
+    "p_nom_mw": 14198.5,
+    "efficiency": 0.481,
+    "build_year": null
+  },
+  {
+    "name": "NL2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "NL",
+    "p_nom_mw": 877.0,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "NL2 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "NL",
+    "p_nom_mw": 4706.0,
+    "efficiency": 0.356,
+    "build_year": null
+  },
+  {
+    "name": "NL2 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "NL",
+    "p_nom_mw": 515.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "NL2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "NL",
+    "p_nom_mw": 696.2,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "NO0 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "NO",
+    "p_nom_mw": 753.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "PL2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "PL",
+    "p_nom_mw": 6702.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "PL2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "PL",
+    "p_nom_mw": 678.0,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "PL2 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "PL",
+    "p_nom_mw": 13098.5,
+    "efficiency": 0.356,
+    "build_year": null
+  },
+  {
+    "name": "PL2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "PL",
+    "p_nom_mw": 8193.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "PL2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "PL",
+    "p_nom_mw": 16.0,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "PT2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "PT",
+    "p_nom_mw": 4186.0,
+    "efficiency": 0.573,
+    "build_year": null
+  },
+  {
+    "name": "PT2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "PT",
+    "p_nom_mw": 379.6,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "PT2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "PT",
+    "p_nom_mw": 91.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "PT2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "PT",
+    "p_nom_mw": 76.5,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "RO",
+    "p_nom_mw": 3679.8,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "RO",
+    "p_nom_mw": 30.0,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "RO",
+    "p_nom_mw": 260.0,
+    "efficiency": 0.356,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "RO",
+    "p_nom_mw": 4130.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "RO",
+    "p_nom_mw": 1411.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "RO",
+    "p_nom_mw": 100.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "RS2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "RS",
+    "p_nom_mw": 594.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "RS2 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "RS",
+    "p_nom_mw": 7.2,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "RS2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "RS",
+    "p_nom_mw": 4817.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "RS2 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "RS",
+    "p_nom_mw": 30.0,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "SE0 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "SE",
+    "p_nom_mw": 790.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "SE0 0AC biomass",
+    "carrier": "biomass",
+    "fuel": "biomass",
+    "country": "SE",
+    "p_nom_mw": 3185.6,
+    "efficiency": 0.468,
+    "build_year": null
+  },
+  {
+    "name": "SE0 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "SE",
+    "p_nom_mw": 7184.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "SE0 0AC oil",
+    "carrier": "oil",
+    "fuel": "oil",
+    "country": "SE",
+    "p_nom_mw": 3109.0,
+    "efficiency": 0.35,
+    "build_year": null
+  },
+  {
+    "name": "SE0 0AC waste",
+    "carrier": "waste",
+    "fuel": "waste",
+    "country": "SE",
+    "p_nom_mw": 452.1,
+    "efficiency": 0.205,
+    "build_year": null
+  },
+  {
+    "name": "SI2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "SI",
+    "p_nom_mw": 198.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "SI2 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "SI",
+    "p_nom_mw": 124.0,
+    "efficiency": 0.356,
+    "build_year": null
+  },
+  {
+    "name": "SI2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "SI",
+    "p_nom_mw": 1355.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "SI2 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "SI",
+    "p_nom_mw": 727.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "SK2 0AC CCGT",
+    "carrier": "CCGT",
+    "fuel": "CCGT",
+    "country": "SK",
+    "p_nom_mw": 1076.0,
+    "efficiency": 0.57,
+    "build_year": null
+  },
+  {
+    "name": "SK2 0AC coal",
+    "carrier": "coal",
+    "fuel": "coal",
+    "country": "SK",
+    "p_nom_mw": 208.0,
+    "efficiency": 0.356,
+    "build_year": null
+  },
+  {
+    "name": "SK2 0AC nuclear",
+    "carrier": "nuclear",
+    "fuel": "nuclear",
+    "country": "SK",
+    "p_nom_mw": 2942.0,
+    "efficiency": 0.326,
+    "build_year": null
+  },
+  {
+    "name": "XK2 0AC lignite",
+    "carrier": "lignite",
+    "fuel": "lignite",
+    "country": "XK",
+    "p_nom_mw": 1480.0,
+    "efficiency": 0.33,
+    "build_year": null
+  },
+  {
+    "name": "BE2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "BE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BG2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "BG",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "DE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DK0 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "DK",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DK2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "DK",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "EE2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "EE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "FI",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "FR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "GB",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB3 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "GB",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB5 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "GB",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GR2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "GR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "HR2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "HR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IE3 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "IE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IT2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "IT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LT2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "LT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LV2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "LV",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "NL2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "NL",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "NO0 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "NO",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "PL2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "PL",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "RO",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SE0 0AC 0 offwind-dc",
+    "carrier": "offwind-dc",
+    "fuel": "offwind-dc",
+    "country": "SE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "AL2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "AL",
+    "p_nom_mw": 354.2,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "AT2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "AT",
+    "p_nom_mw": 915.8,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BA2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "BA",
+    "p_nom_mw": 564.5,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BE2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "BE",
+    "p_nom_mw": 937.6,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BG2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "BG",
+    "p_nom_mw": 3604.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "CH2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "CH",
+    "p_nom_mw": 98.8,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "CZ2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "CZ",
+    "p_nom_mw": 2957.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "DE",
+    "p_nom_mw": 48773.3,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DK0 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "DK",
+    "p_nom_mw": 854.4,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DK2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "DK",
+    "p_nom_mw": 2529.5,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "EE2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "EE",
+    "p_nom_mw": 1158.7,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ES2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "ES",
+    "p_nom_mw": 40876.9,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ES7 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "ES",
+    "p_nom_mw": 391.6,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "FI",
+    "p_nom_mw": 253.4,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "FR",
+    "p_nom_mw": 13238.8,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FR6 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "FR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "GB",
+    "p_nom_mw": 13418.6,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB3 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "GB",
+    "p_nom_mw": 209.3,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB5 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "GB",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GR2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "GR",
+    "p_nom_mw": 11358.7,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "HR2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "HR",
+    "p_nom_mw": 366.8,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "HU2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "HU",
+    "p_nom_mw": 4064.9,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IE3 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "IE",
+    "p_nom_mw": 1394.7,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IT2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "IT",
+    "p_nom_mw": 5850.4,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IT4 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "IT",
+    "p_nom_mw": 587.6,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LT2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "LT",
+    "p_nom_mw": 870.2,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LU2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "LU",
+    "p_nom_mw": 101.4,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LV2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "LV",
+    "p_nom_mw": 810.3,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ME2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "ME",
+    "p_nom_mw": 26.1,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "MK2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "MK",
+    "p_nom_mw": 558.9,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "NL2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "NL",
+    "p_nom_mw": 7094.3,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "NO0 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "NO",
+    "p_nom_mw": 34.6,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "PL2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "PL",
+    "p_nom_mw": 9313.3,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "PT2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "PT",
+    "p_nom_mw": 3921.1,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "RO",
+    "p_nom_mw": 4237.9,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "RS2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "RS",
+    "p_nom_mw": 181.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SE0 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "SE",
+    "p_nom_mw": 681.1,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SI2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "SI",
+    "p_nom_mw": 90.6,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SK2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "SK",
+    "p_nom_mw": 894.3,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "XK2 0AC 0 solar",
+    "carrier": "solar",
+    "fuel": "solar",
+    "country": "XK",
+    "p_nom_mw": 20.4,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "AL2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "AL",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "AT2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "AT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BA2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "BA",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BE2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "BE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BG2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "BG",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "CH2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "CH",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "CZ2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "CZ",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "DE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DK0 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "DK",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DK2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "DK",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "EE2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "EE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ES2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "ES",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ES7 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "ES",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "FI",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "FR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FR6 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "FR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "GB",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB3 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "GB",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB5 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "GB",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GR2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "GR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "HR2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "HR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "HU2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "HU",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IE3 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "IE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IT2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "IT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IT4 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "IT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LT2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "LT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LU2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "LU",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LV2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "LV",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ME2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "ME",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "MK2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "MK",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "NL2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "NL",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "NO0 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "NO",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "PL2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "PL",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "PT2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "PT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "RO",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "RS2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "RS",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SE0 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "SE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SI2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "SI",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SK2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "SK",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "XK2 0AC 0 solar-hsat",
+    "carrier": "solar-hsat",
+    "fuel": "solar-hsat",
+    "country": "XK",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "AL2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "AL",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BA2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "BA",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BE2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "BE",
+    "p_nom_mw": 2752.2,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BG2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "BG",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "DE",
+    "p_nom_mw": 11163.7,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DK0 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "DK",
+    "p_nom_mw": 1050.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DK2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "DK",
+    "p_nom_mw": 1602.6,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "EE2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "EE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ES2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "ES",
+    "p_nom_mw": 20.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ES7 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "ES",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "FI",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "FR",
+    "p_nom_mw": 2025.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FR6 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "FR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "GB",
+    "p_nom_mw": 22620.6,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB3 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "GB",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB5 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "GB",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GR2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "GR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "HR2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "HR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IE3 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "IE",
+    "p_nom_mw": 25.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IT2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "IT",
+    "p_nom_mw": 30.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IT4 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "IT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LT2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "LT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LV2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "LV",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ME2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "ME",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "NL2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "NL",
+    "p_nom_mw": 7121.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "NO0 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "NO",
+    "p_nom_mw": 138.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "PL2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "PL",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "PT2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "PT",
+    "p_nom_mw": 25.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "RO",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SE0 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "SE",
+    "p_nom_mw": 158.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SI2 0AC 0 offwind-ac",
+    "carrier": "offwind-ac",
+    "fuel": "offwind-ac",
+    "country": "SI",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "AL2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "AL",
+    "p_nom_mw": 150.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "AT2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "AT",
+    "p_nom_mw": 2788.6,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BA2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "BA",
+    "p_nom_mw": 244.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BE2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "BE",
+    "p_nom_mw": 1753.6,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BG2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "BG",
+    "p_nom_mw": 608.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "CH2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "CH",
+    "p_nom_mw": 55.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "CZ2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "CZ",
+    "p_nom_mw": 155.3,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "DE",
+    "p_nom_mw": 73332.1,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DK0 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "DK",
+    "p_nom_mw": 209.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DK2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "DK",
+    "p_nom_mw": 1777.7,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "EE2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "EE",
+    "p_nom_mw": 688.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ES2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "ES",
+    "p_nom_mw": 31792.7,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ES7 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "ES",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "FI",
+    "p_nom_mw": 8658.3,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "FR",
+    "p_nom_mw": 24236.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FR6 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "FR",
+    "p_nom_mw": 17.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "GB",
+    "p_nom_mw": 14579.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB3 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "GB",
+    "p_nom_mw": 1231.6,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB5 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "GB",
+    "p_nom_mw": 627.3,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GR2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "GR",
+    "p_nom_mw": 6093.4,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "HR2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "HR",
+    "p_nom_mw": 1140.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "HU2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "HU",
+    "p_nom_mw": 319.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IE3 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "IE",
+    "p_nom_mw": 4562.7,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IT2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "IT",
+    "p_nom_mw": 9157.5,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IT4 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "IT",
+    "p_nom_mw": 1185.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LT2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "LT",
+    "p_nom_mw": 1493.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LU2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "LU",
+    "p_nom_mw": 133.6,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LV2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "LV",
+    "p_nom_mw": 100.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ME2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "ME",
+    "p_nom_mw": 118.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "MK2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "MK",
+    "p_nom_mw": 546.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "NL2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "NL",
+    "p_nom_mw": 4352.4,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "NO0 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "NO",
+    "p_nom_mw": 5016.4,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "PL2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "PL",
+    "p_nom_mw": 9259.5,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "PT2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "PT",
+    "p_nom_mw": 5619.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "RO",
+    "p_nom_mw": 5723.2,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "RS2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "RS",
+    "p_nom_mw": 670.1,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SE0 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "SE",
+    "p_nom_mw": 17284.8,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SI2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "SI",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SK2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "SK",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "XK2 0AC 0 onwind",
+    "carrier": "onwind",
+    "fuel": "onwind",
+    "country": "XK",
+    "p_nom_mw": 135.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "AL2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "AL",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BA2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "BA",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BE2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "BE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "BG2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "BG",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "DE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DK0 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "DK",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "DK2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "DK",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "EE2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "EE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ES2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "ES",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ES7 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "ES",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "FI",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "FR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "FR6 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "FR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "GB",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB3 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "GB",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GB5 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "GB",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "GR2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "GR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "HR2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "HR",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IE3 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "IE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IT2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "IT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "IT4 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "IT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LT2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "LT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "LV2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "LV",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "ME2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "ME",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "NL2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "NL",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "NO0 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "NO",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "PL2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "PL",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "PT2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "PT",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "RO",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SE0 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "SE",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "SI2 0AC 0 offwind-float",
+    "carrier": "offwind-float",
+    "fuel": "offwind-float",
+    "country": "SI",
+    "p_nom_mw": 0.0,
+    "efficiency": 1.0,
+    "build_year": null
+  },
+  {
+    "name": "AL2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "AL",
+    "p_nom_mw": 383.7,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "AT2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "AT",
+    "p_nom_mw": 2395.2,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "BA2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "BA",
+    "p_nom_mw": 14.0,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "BE2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "BE",
+    "p_nom_mw": 58.5,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "BG2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "BG",
+    "p_nom_mw": 241.4,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "CH2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "CH",
+    "p_nom_mw": 3892.2,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "CZ2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "CZ",
+    "p_nom_mw": 40.2,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "DE2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "DE",
+    "p_nom_mw": 4014.1,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "ES2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "ES",
+    "p_nom_mw": 496.8,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "FI0 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "FI",
+    "p_nom_mw": 1201.6,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "FR2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "FR",
+    "p_nom_mw": 7126.2,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "GB1 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "GB",
+    "p_nom_mw": 3349.0,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "GR2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "GR",
+    "p_nom_mw": 29.3,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "HR2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "HR",
+    "p_nom_mw": 375.8,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "HU2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "HU",
+    "p_nom_mw": 17.9,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "IE3 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "IE",
+    "p_nom_mw": 215.0,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "IT2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "IT",
+    "p_nom_mw": 8340.6,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "IT4 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "IT",
+    "p_nom_mw": 20.0,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "LV2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "LV",
+    "p_nom_mw": 1536.0,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "ME2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "ME",
+    "p_nom_mw": 5.4,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "MK2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "MK",
+    "p_nom_mw": 207.6,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "NO0 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "NO",
+    "p_nom_mw": 2083.0,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "PL2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "PL",
+    "p_nom_mw": 182.4,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "PT2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "PT",
+    "p_nom_mw": 2373.7,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "RO2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "RO",
+    "p_nom_mw": 3990.4,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "RS2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "RS",
+    "p_nom_mw": 341.0,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "SE0 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "SE",
+    "p_nom_mw": 2223.0,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "SI2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "SI",
+    "p_nom_mw": 808.4,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "SK2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "SK",
+    "p_nom_mw": 1326.1,
+    "efficiency": 0.9,
+    "build_year": null
+  },
+  {
+    "name": "XK2 0AC ror",
+    "carrier": "ror",
+    "fuel": "ror",
+    "country": "XK",
+    "p_nom_mw": 30.2,
+    "efficiency": 0.9,
+    "build_year": null
+  }
+]

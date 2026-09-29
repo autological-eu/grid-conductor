@@ -1,6 +1,42 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { useEffect, useRef, useState } from "react";
+import { Settings } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { toast } from "sonner";
+import { refreshOfficialCapacity, refreshTargets } from "@/lib/analysis.functions";
 
 export function DataBar({ step }: { step: 1 | 2 | 3 }) {
+  const qc = useQueryClient();
+  const targetsFn = useServerFn(refreshTargets);
+  const ntcFn = useServerFn(refreshOfficialCapacity);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const close = (e: MouseEvent) => {
+      if (!menuRef.current?.contains(e.target as Node)) setMenuOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [menuOpen]);
+
+  const detect = useMutation({
+    mutationFn: async () => {
+      const t = await targetsFn();
+      await ntcFn().catch(() => null);
+      return t;
+    },
+    onSuccess: (t) => {
+      qc.invalidateQueries({ queryKey: ["targets"] });
+      qc.invalidateQueries({ queryKey: ["zones"] });
+      if (t.note) toast.info(t.note);
+      else toast.success(`${t.targets} borders analysed`);
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
   const steps = [
     { n: 1, label: "Choose bottleneck", hint: "Click a highlighted border on the map" },
     { n: 2, label: "Simulate scenarios", hint: "Build scenarios in the left panel" },
@@ -11,7 +47,7 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
     <header className="flex items-center gap-6 border-b border-border bg-card px-5 py-3">
       <div className="shrink-0">
         <h1 className="text-lg font-bold leading-tight tracking-tight">Grid Conductor</h1>
-        <p className="text-xs text-muted-foreground">Fast ENTSO-E screening workbench&nbsp;</p>
+        <p className="text-xs text-muted-foreground">Your real time intelligent engine&nbsp;</p>
       </div>
 
       <ol className="flex flex-1 items-center justify-center gap-0">
@@ -69,6 +105,34 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
       >
         Methodology
       </Link>
+      <div className="relative ml-auto" ref={menuRef}>
+        <button
+          type="button"
+          aria-label="Settings"
+          onClick={() => setMenuOpen((o) => !o)}
+          className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-muted-foreground hover:bg-accent hover:text-foreground"
+        >
+          <Settings className="h-4 w-4" />
+        </button>
+        {menuOpen && (
+          <div className="absolute right-0 top-9 z-20 w-52 rounded-md border-border bg-popover p-1 text-sm shadow-md">
+            <button
+              type="button"
+              onClick={() => {
+                setMenuOpen(false);
+                detect.mutate();
+              }}
+              disabled={detect.isPending}
+              className="w-full rounded-sm px-2 py-1.5 text-left hover:bg-accent disabled:opacity-50"
+            >
+              {detect.isPending ? "Recomputing…" : "Refresh target evidence"}
+              <span className="block text-[11px] text-muted-foreground">
+                Targets come from the offline PyPSA-Eur baseline solve
+              </span>
+            </button>
+          </div>
+        )}
+      </div>
     </header>
   );
 }

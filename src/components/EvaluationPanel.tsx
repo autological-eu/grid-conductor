@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { listScenarios, getValidation } from "@/lib/scenarios.functions";
+import { listScenarios } from "@/lib/scenarios.functions";
+import { getValidation } from "@/lib/analysis.functions";
 import type { TargetRow } from "./EuropeMap";
 import { Button } from "@/components/ui/button";
 import { ScenarioReport } from "./ScenarioReport";

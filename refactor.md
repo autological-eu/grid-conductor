@@ -6,6 +6,7 @@ Replace the Electricity Maps API dependency with a PyPSA-Eur power-system model 
 the single source of truth for baseline data, targets, and scenario simulation.
 
 **Architecture:**
+
 - **Offline batch** (Python): PyPSA-Eur builds an operational network, solves
   baseline dispatch, extracts hourly country-level data and border-relief target
   experiments. Results written to `public/research/` as static JSON/CSV.
@@ -32,33 +33,33 @@ the single source of truth for baseline data, targets, and scenario simulation.
 
 ### Tables to keep (adapt rows)
 
-| Table | Columns (Row type) | Change |
-|---|---|---|
-| `zones` | code (PK), name, country_code, lat, lon, created_at | Replace 41 bidding zones → 34 countries |
-| `borders` | id (PK), zone_a, zone_b, created_at | Replace with country-pair borders from PyPSA-Eur |
-| `targets` | id (PK), zone_a, zone_b, period_start, period_end, market_loss_meur, climate_loss_ktco2, congested_hours, total_hours, observed_capacity_mw, metrics (JSON), computed_at | Repopulate from PyPSA-Eur border-relief experiments |
-| `scenarios` | id (PK), target_id (FK→targets), name, description, status, is_template, template_key, budget_meur, created_at, updated_at | Keep as-is |
-| `scenario_units` | id (PK), scenario_id (FK→scenarios), unit_type, zone_code, border_zone_a, border_zone_b, params (JSON), capex_meur, delivery_months, created_at | Keep as-is (unit types unchanged) |
-| `scenario_results` | id (PK), scenario_id (FK→scenarios), status, market_opportunity_meur, climate_opportunity_ktco2, base_metrics (JSON), scenario_metrics (JSON), entsoe_indicators (JSON), hourly_summary (JSON), created_at | Keep as-is |
-| `model_validation` | id (PK), period_start, period_end, metrics (JSON), passed, created_at | Keep as-is |
-| `app_config` | key (PK), value | Keep (daily_refresh_secret, daily_refresh_url) |
+| Table              | Columns (Row type)                                                                                                                                                                                         | Change                                              |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| `zones`            | code (PK), name, country_code, lat, lon, created_at                                                                                                                                                        | Replace 41 bidding zones → 34 countries             |
+| `borders`          | id (PK), zone_a, zone_b, created_at                                                                                                                                                                        | Replace with country-pair borders from PyPSA-Eur    |
+| `targets`          | id (PK), zone_a, zone_b, period_start, period_end, market_loss_meur, climate_loss_ktco2, congested_hours, total_hours, observed_capacity_mw, metrics (JSON), computed_at                                   | Repopulate from PyPSA-Eur border-relief experiments |
+| `scenarios`        | id (PK), target_id (FK→targets), name, description, status, is_template, template_key, budget_meur, created_at, updated_at                                                                                 | Keep as-is                                          |
+| `scenario_units`   | id (PK), scenario_id (FK→scenarios), unit_type, zone_code, border_zone_a, border_zone_b, params (JSON), capex_meur, delivery_months, created_at                                                            | Keep as-is (unit types unchanged)                   |
+| `scenario_results` | id (PK), scenario_id (FK→scenarios), status, market_opportunity_meur, climate_opportunity_ktco2, base_metrics (JSON), scenario_metrics (JSON), entsoe_indicators (JSON), hourly_summary (JSON), created_at | Keep as-is                                          |
+| `model_validation` | id (PK), period_start, period_end, metrics (JSON), passed, created_at                                                                                                                                      | Keep as-is                                          |
+| `app_config`       | key (PK), value                                                                                                                                                                                            | Keep (daily_refresh_secret, daily_refresh_url)      |
 
 ### Tables to remove
 
-| Table | Reason |
-|---|---|
-| `import_jobs` | EM import pipeline removed |
-| `job_locks` | EM import lock removed |
-| `em_cache` | EM API cache removed |
-| `zone_hourly` | Replaced by static JSON in `public/research/` |
+| Table                | Reason                                        |
+| -------------------- | --------------------------------------------- |
+| `import_jobs`        | EM import pipeline removed                    |
+| `job_locks`          | EM import lock removed                        |
+| `em_cache`           | EM API cache removed                          |
+| `zone_hourly`        | Replaced by static JSON in `public/research/` |
 | `border_flow_hourly` | Replaced by static JSON in `public/research/` |
 
 ### Functions to remove
 
-| Function | Reason |
-|---|---|
-| `compute_targets` | Replaced by PyPSA-Eur border-relief experiments |
-| `zone_summary` | Replaced by static JSON read from `public/research/baseline/nodes.json` |
+| Function          | Reason                                                                  |
+| ----------------- | ----------------------------------------------------------------------- |
+| `compute_targets` | Replaced by PyPSA-Eur border-relief experiments                         |
+| `zone_summary`    | Replaced by static JSON read from `public/research/baseline/nodes.json` |
 
 ## CDS / ERA5 setup
 
@@ -77,26 +78,26 @@ the single source of truth for baseline data, targets, and scenario simulation.
         y: [33, 72]
         dx: 0.3
         dy: 0.3
-        time: ['2026-01-01', '2026-01-31']
+        time: ["2026-01-01", "2026-01-31"]
   ```
 - For a full-year window, update `time` to the chosen year range and rename the
   cutout accordingly.
 
 ## Prerequisites (local, verified)
 
-| Resource | Path | Status |
-|---|---|---|
-| PyPSA-Eur upstream v2026.08.0 | `data/pypsa-eur/upstream` (commit `a5408e9`) | ✅ |
-| pixi environment | `data/pypsa-eur/bin/pixi` | ✅ |
-| January config | `config/pypsa-eur/january-2026.yaml` | ✅ |
-| OSM topology CSVs | `data/pypsa-eur/source-osm/` (buses, lines, links, converters, transformers) | ✅ |
-| ENTSO-E demand archive | `data/pypsa-eur/entsoe-demand-2026-02-02.csv` | ✅ |
-| Power plants | `data/pypsa-eur/powerplants-0.8.1.csv` | ✅ |
-| JAO Core batches | `data/jao/core-*.json.gz` (31 daily files, Jan 2026) | ✅ |
-| JAO Nordic batches | `data/jao/nordic-*.json.gz` | ✅ |
-| ENTSO-E bank (Jan + Aug) | `data/eu-market/bank-2026-01-v2.json`, `bank-2026-08-v2.json` | ✅ |
-| ERA5 cutout | `data/pypsa-eur/upstream/cutouts/` | ❌ needs download |
-| Built network | `data/pypsa-eur/upstream/resources/*/networks/base.nc` | ❌ not yet built |
+| Resource                      | Path                                                                         | Status            |
+| ----------------------------- | ---------------------------------------------------------------------------- | ----------------- |
+| PyPSA-Eur upstream v2026.08.0 | `data/pypsa-eur/upstream` (commit `a5408e9`)                                 | ✅                |
+| pixi environment              | `data/pypsa-eur/bin/pixi`                                                    | ✅                |
+| January config                | `config/pypsa-eur/january-2026.yaml`                                         | ✅                |
+| OSM topology CSVs             | `data/pypsa-eur/source-osm/` (buses, lines, links, converters, transformers) | ✅                |
+| ENTSO-E demand archive        | `data/pypsa-eur/entsoe-demand-2026-02-02.csv`                                | ✅                |
+| Power plants                  | `data/pypsa-eur/powerplants-0.8.1.csv`                                       | ✅                |
+| JAO Core batches              | `data/jao/core-*.json.gz` (31 daily files, Jan 2026)                         | ✅                |
+| JAO Nordic batches            | `data/jao/nordic-*.json.gz`                                                  | ✅                |
+| ENTSO-E bank (Jan + Aug)      | `data/eu-market/bank-2026-01-v2.json`, `bank-2026-08-v2.json`                | ✅                |
+| ERA5 cutout                   | `data/pypsa-eur/upstream/cutouts/`                                           | ❌ needs download |
+| Built network                 | `data/pypsa-eur/upstream/resources/*/networks/base.nc`                       | ❌ not yet built  |
 
 ---
 
@@ -127,6 +128,7 @@ Algorithm:
 ```
 
 **CLI:**
+
 ```sh
 python tools/build_pypsa_network.py \
   --start 2025-01-01 \
@@ -136,6 +138,7 @@ python tools/build_pypsa_network.py \
 ```
 
 **Manifest schema:**
+
 ```json
 {
   "start": "2025-01-01T00:00:00Z",
@@ -157,6 +160,7 @@ python tools/build_pypsa_network.py \
 ```
 
 **Validation gates:**
+
 - All `p_nom_extendable`, `s_nom_extendable`, `e_nom_extendable` are False
 - No shortage generators with nonzero output
 - Objective is finite
@@ -185,18 +189,19 @@ python tools/extract_baseline.py \
 
 ### Output files
 
-| File | Format | Contents |
-|---|---|---|
-| `nodes.json` | JSON | `[{id, name, lat, lon}]` — country nodes (bus mean coordinates) |
-| `borders.json` | JSON | `[{id, a, b, assets: [{component, id, nominal_mw}]}]` — reuse `border_catalog()` |
-| `zone_hourly.csv` | CSV/TSV | `zone_code, ts, price_eur_mwh, carbon_intensity, load_mw` — hourly per country |
-| `border_flow_hourly.csv` | CSV/TSV | `zone_a, zone_b, ts, flow_mw` — hourly per country-pair border |
-| `capacity_by_border.json` | JSON | `{border_id: {cap_ab_mw, cap_ba_mw}}` — peak ATC from baseline |
-| `metadata.json` | JSON | `{start, end_exclusive, network_sha256, upstream_commit, hours, countries, borders}` |
+| File                      | Format  | Contents                                                                             |
+| ------------------------- | ------- | ------------------------------------------------------------------------------------ |
+| `nodes.json`              | JSON    | `[{id, name, lat, lon}]` — country nodes (bus mean coordinates)                      |
+| `borders.json`            | JSON    | `[{id, a, b, assets: [{component, id, nominal_mw}]}]` — reuse `border_catalog()`     |
+| `zone_hourly.csv`         | CSV/TSV | `zone_code, ts, price_eur_mwh, carbon_intensity, load_mw` — hourly per country       |
+| `border_flow_hourly.csv`  | CSV/TSV | `zone_a, zone_b, ts, flow_mw` — hourly per country-pair border                       |
+| `capacity_by_border.json` | JSON    | `{border_id: {cap_ab_mw, cap_ba_mw}}` — peak ATC from baseline                       |
+| `metadata.json`           | JSON    | `{start, end_exclusive, network_sha256, upstream_commit, hours, countries, borders}` |
 
 ### Extraction logic per signal
 
 **Price** (`price_eur_mwh`):
+
 ```python
 # Average nodal dual price per country
 for country, buses in network.buses.groupby('country'):
@@ -204,6 +209,7 @@ for country, buses in network.buses.groupby('country'):
 ```
 
 **Carbon intensity** (`carbon_intensity`, gCO₂e/MWh):
+
 ```python
 # Generator dispatch × emission factors, summed per country, divided by load
 emissions_per_bus = (generators_t.p * generators.e_carrier_emissions).groupby(bus).sum()
@@ -213,11 +219,13 @@ carbon_intensity = emissions_per_country / load_per_country  # gCO₂e/MWh
 ```
 
 **Load** (`load_mw`):
+
 ```python
 load_per_country = network.loads_t.p_set.groupby(buses.country).sum()
 ```
 
 **Border flows** (`flow_mw`):
+
 ```python
 # AC lines: lines_t.p0 (flow from bus0 to bus1)
 # DC links: links_t.p0 (flow from bus0 to bus1)
@@ -248,6 +256,7 @@ experiments. Changes:
 6. Make runnable as a standalone batch command
 
 **CLI:**
+
 ```sh
 python tools/pypsa_border_targets.py \
   --network data/pypsa-eur/solved-baseline.nc \
@@ -258,6 +267,7 @@ python tools/pypsa_border_targets.py \
 ```
 
 **Output schema** (already matches what `/targets` page reads):
+
 ```json
 {
   "schema_version": 1,
@@ -286,15 +296,18 @@ python tools/pypsa_border_targets.py \
 ### 4a. Remove Electricity Maps
 
 **Delete:**
+
 - `src/lib/emaps.server.ts`
 - `src/lib/import.server.ts`
 - `src/lib/import.functions.ts`
 
 **Rewrite:**
+
 - `src/routes/api/public/daily-refresh.ts` → either remove entirely or rewrite to
   trigger a PyPSA-Eur refresh (would require a compute host — defer).
 
 **Remove from Supabase** (via Lovable schema editor or manual migration):
+
 - Drop table `import_jobs`
 - Drop table `job_locks`
 - Drop table `em_cache`
@@ -309,33 +322,40 @@ The core algorithm (`runDispatch`, `unitInjections`, `applyStorage`) is unchange
 Only `loadNetwork()` changes:
 
 **Before** (queries Supabase):
+
 ```ts
 const { data: zoneRows } = await db.from("zone_hourly").select("...");
 const { data: flowRows } = await db.from("border_flow_hourly").select("...");
 ```
 
 **After** (reads static files):
+
 ```ts
 // On first call, fetch and cache in module scope
 const baseline = await fetchBaseline();
 
 async function fetchBaseline(): Promise<BaselineData> {
   const [zones, flows, borders, nodes] = await Promise.all([
-    fetch("/research/baseline/zone_hourly.csv").then(r => r.text()).then(parseCSV),
-    fetch("/research/baseline/border_flow_hourly.csv").then(r => r.text()).then(parseCSV),
-    fetch("/research/baseline/borders.json").then(r => r.json()),
-    fetch("/research/baseline/nodes.json").then(r => r.json()),
+    fetch("/research/baseline/zone_hourly.csv")
+      .then((r) => r.text())
+      .then(parseCSV),
+    fetch("/research/baseline/border_flow_hourly.csv")
+      .then((r) => r.text())
+      .then(parseCSV),
+    fetch("/research/baseline/borders.json").then((r) => r.json()),
+    fetch("/research/baseline/nodes.json").then((r) => r.json()),
   ]);
   return { zones, flows, borders, nodes };
 }
 ```
 
 **CSV parser** (lightweight, no external dependency):
+
 ```ts
 function parseCSV(text: string): Record<string, string>[] {
   const [header, ...rows] = text.trim().split("\n");
   const keys = header!.split(",");
-  return rows.map(row => {
+  return rows.map((row) => {
     const vals = row.split(",");
     return Object.fromEntries(keys!.map((k, i) => [k, vals![i]]));
   });
@@ -343,6 +363,7 @@ function parseCSV(text: string): Record<string, string>[] {
 ```
 
 **loadNetwork() signature change:**
+
 ```ts
 // Before: loadNetwork(db: SupabaseClient, zoneA: string, zoneB: string)
 // After:  loadNetwork(zoneA: string, zoneB: string)
@@ -350,19 +371,22 @@ function parseCSV(text: string): Record<string, string>[] {
 ```
 
 All callers of `loadNetwork()` must be updated:
+
 - `src/lib/scenarios.functions.ts:runScenario()` — remove `supabaseAdmin` arg
 - `src/lib/templates.functions.ts:ensureTemplateScenarios()` — remove `supabaseAdmin` arg
 
 ### 4c. Adapt `analysis.functions.ts` → targets from static JSON
 
 **Before** (queries Supabase):
+
 ```ts
 const { data } = await supabaseAdmin.from("targets").select("*");
 ```
 
 **After** (reads static file):
+
 ```ts
-const targets = await fetch("/research/pypsa-targets.json").then(r => r.json());
+const targets = await fetch("/research/pypsa-targets.json").then((r) => r.json());
 ```
 
 **`listTargets()`**: Read from `/research/pypsa-targets.json`, map to `TargetRow`
@@ -393,6 +417,7 @@ populated by scenario runs).
 ### 4f. Adapt `daily-refresh.ts`
 
 Options (in order of preference):
+
 1. **Remove the endpoint.** The daily refresh was EM-specific. PyPSA-Eur refresh is
    an offline batch operation.
 2. **Rewrite as a webhook** that triggers a remote compute job (deferred — requires
@@ -407,18 +432,18 @@ After Phase 2 produces `nodes.json` and `borders.json`, populate the Supabase
 
 ```ts
 // In a one-time migration script or server function
-const nodes = await fetch("/research/baseline/nodes.json").then(r => r.json());
+const nodes = await fetch("/research/baseline/nodes.json").then((r) => r.json());
 for (const node of nodes) {
   await supabaseAdmin.from("zones").upsert({
     code: node.id,
-    name: node.id,  // PyPSA-Eur uses country codes; add names later
+    name: node.id, // PyPSA-Eur uses country codes; add names later
     country_code: node.id,
     lat: node.y,
     lon: node.x,
   });
 }
 
-const bordersData = await fetch("/research/baseline/borders.json").then(r => r.json());
+const bordersData = await fetch("/research/baseline/borders.json").then((r) => r.json());
 for (const border of bordersData) {
   await supabaseAdmin.from("borders").upsert({
     id: border.id,
@@ -475,28 +500,28 @@ edges via `BorderOpportunityNetwork`. Changes:
 
 ### Delete or archive
 
-| File | Reason |
-|---|---|
-| `tools/carbon_pilot.py` | EM-based carbon intensity pilot |
+| File                       | Reason                          |
+| -------------------------- | ------------------------------- |
+| `tools/carbon_pilot.py`    | EM-based carbon intensity pilot |
 | `tools/compute_targets.py` | EM-based price-spread screening |
 
 ### Keep and adapt
 
-| File | Changes |
-|---|---|
-| `tools/pypsa_border_targets.py` | Accept new manifest format, minor output tweaks |
-| `tools/prepare_pypsa_targets.py` | Keep (OSM inventory, no change) |
-| `tools/audit_pypsa_inputs.py` | Keep (demand/plant audit) |
-| `tools/build_pypsa_network.py` | **New** — Snakemake orchestrator |
-| `tools/extract_baseline.py` | **New** — baseline data extraction |
-| `tools/market_model.py` | Keep (generic flow-based solver, validation) |
-| `tools/flow_tracing.py` | Keep (validation) |
-| `tools/eu_zones.py` | Adapt: update zone list from 41→34 countries |
-| `tools/build_eu_market.py` | Keep (ENTSO-E validation data) |
-| `tools/validate_eu_market.py` | Keep (input gate validation) |
-| `tools/jao_constraints.py` | Keep (JAO validation data) |
-| `tools/audit_jao_sample.py` | Keep (JAO validation) |
-| `tools/network_coverage.py` | Keep (coverage evidence) |
+| File                             | Changes                                         |
+| -------------------------------- | ----------------------------------------------- |
+| `tools/pypsa_border_targets.py`  | Accept new manifest format, minor output tweaks |
+| `tools/prepare_pypsa_targets.py` | Keep (OSM inventory, no change)                 |
+| `tools/audit_pypsa_inputs.py`    | Keep (demand/plant audit)                       |
+| `tools/build_pypsa_network.py`   | **New** — Snakemake orchestrator                |
+| `tools/extract_baseline.py`      | **New** — baseline data extraction              |
+| `tools/market_model.py`          | Keep (generic flow-based solver, validation)    |
+| `tools/flow_tracing.py`          | Keep (validation)                               |
+| `tools/eu_zones.py`              | Adapt: update zone list from 41→34 countries    |
+| `tools/build_eu_market.py`       | Keep (ENTSO-E validation data)                  |
+| `tools/validate_eu_market.py`    | Keep (input gate validation)                    |
+| `tools/jao_constraints.py`       | Keep (JAO validation data)                      |
+| `tools/audit_jao_sample.py`      | Keep (JAO validation)                           |
+| `tools/network_coverage.py`      | Keep (coverage evidence)                        |
 
 ---
 
@@ -563,20 +588,60 @@ DELETE FROM targets;
 
 ## Execution order
 
-| Step | Phase | Depends on | Estimated effort |
-|---|---|---|---|
-| 1 | ERA5 cutout download | CDS account (done) | 1-2 hours |
-| 2 | `build_pypsa_network.py` | Step 1 | 1-2 days |
-| 3 | `extract_baseline.py` | Step 2 | 1 day |
-| 4 | `pypsa_border_targets.py` adaptation | Step 2 | 0.5 day |
-| 5 | App pipeline rewrite (Phase 4) | Steps 3, 4 | 2-3 days |
-| 6 | UI updates (Phase 5) | Step 5 | 1-2 days |
-| 7 | Database migration (Phase 7) | Steps 5, 6 | 0.5 day |
-| 8 | Cleanup (Phase 6) | Step 7 | 0.5 day |
-| 9 | Lint + typecheck | All | 0.5 day |
-| 10 | Python tests | Steps 2-4 | 0.5 day |
+| Step | Phase                                    | Depends on  | Status                                   |
+| ---- | ---------------------------------------- | ----------- | ---------------------------------------- |
+| 1    | ERA5 cutout download                     | CDS account | done                                     |
+| 2    | `build_pypsa_network.py` full-year solve | Step 1      | done (40 clusters, 29/29 jobs)           |
+| 3    | `extract_baseline.py`                    | Step 2      | done (8,760 h, 34 countries, 75 borders) |
+| 4    | `pypsa_border_targets.py` adaptation     | Step 2      | superseded by `baseline_opportunity.py`  |
+| 5    | App pipeline rewrite (Phase 4)           | Steps 3, 4  | done                                     |
+| 6    | UI updates (Phase 5)                     | Step 5      | done                                     |
+| 7    | Database migration (Phase 7)             | Steps 5, 6  | done (Supabase -> local SQLite)          |
+| 8    | Cleanup (Phase 6)                        | Step 7      | done                                     |
+| 9    | Lint + typecheck                         | All         | passing                                  |
+| 10   | Python tests                             | Steps 2-4   | passing (131 tests)                      |
 
-**Total estimate:** 8-12 days of focused work.
+### Where the target figures come from
+
+`tools/baseline_opportunity.py` supersedes the `pypsa_border_targets.py` design in
+Phase 3. The per-border relief experiment was replaced by a **single full-year
+re-solve with border transfer limits tightened by a solved multiplier**, taking
+the optimal duals as each border's marginal value. That is one LP rather than 75,
+and the duals are consistent with each other. Both output copies
+(`public/research/pypsa-targets.json` and `src/data/baseline-targets.json`) are
+schema v2 and byte-identical; a drift guard test enforces it.
+
+### Known gap: the zonal scenario engine understates heavy congestion
+
+The map ranks borders by the LP's congestion rent and marginal value. The
+scenario engine (`src/lib/simulation.server.ts`) prices added capacity with an
+hourly zonal dual ascent that has **no merit-order scarcity pricing**, so on
+borders where the LP's rent is driven by scarcity rather than by ATC headroom it
+recovers very little. Measured against the full-year solve:
+
+| border | LP rent (MEUR) | zonal rent (MEUR) | zonal/LP |
+| ------ | -------------- | ----------------- | -------- |
+| ES-FR  | 1668           | 2405              | 1.44     |
+| FR-GB  | 280            | 556               | 1.99     |
+| IT-SI  | 678            | 98                | 0.14     |
+| FR-IT  | 1535           | 9                 | 0.01     |
+| CH-IT  | 3198           | 2                 | 0.00     |
+
+This is a real inconsistency, not a rounding artefact: the top-ranked border is
+the one the engine values least. The LP duals are the correct measure of
+investment value; the zonal solver is a structural (network-flow) model of
+dispatch, and the two answer different questions on scarcity-driven borders.
+Closing it needs a merit-order formulation or a dual-based welfare accounting
+for the relief run, not a tuning constant.
+
+### Lint and test configuration
+
+- `eslint.config.js` ignores `data/**` (the PyPSA-Eur checkout and pixi env
+  contain tens of thousands of files, which made `eslint .` take tens of minutes)
+  and exempts `src/components/ui/**` from `react-refresh/only-export-components`
+  (shadcn primitives export variants next to the component).
+- `.prettierignore` excludes machine-written artefacts under `public/research`
+  and the bundled dataset mirror. Hand-written research notes stay checked.
 
 ---
 
@@ -600,11 +665,11 @@ After each phase, verify:
 
 ## Risks and mitigations
 
-| Risk | Mitigation |
-|---|---|
-| Full-year PyPSA-Eur solve is slow (~10-30 min for 34 countries × 8760h) | Start with offline batch; profile and optimise later (parallel solve, reduced clusters, representative days) |
-| ERA5 cutout download fails or is incomplete | Check CDS account status; fall back to a shorter window if needed |
-| PyPSA-Eur nodal prices don't match observed day-ahead prices | This is expected (nodal duals ≠ zonal auction prices). Label as "modelled" not "observed". Validation is diagnostic. |
-| 34-country geography loses bidding-zone detail (DK1/DK2, SE1-SE4, IT regions) | Accept for now. Can add sub-country split zones later if PyPSA-Eur config supports it. |
-| Static JSON files are large for 8760h × 34 countries | ~8760 × 34 = ~300k rows in zone_hourly.csv (~10-15 MB). Acceptable for Cloudflare static serving. |
-| App cache staleness after Python batch re-run | Baseline JSON is immutable between runs. App fetches on page load. No cache invalidation needed. |
+| Risk                                                                          | Mitigation                                                                                                           |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Full-year PyPSA-Eur solve is slow (~10-30 min for 34 countries × 8760h)       | Start with offline batch; profile and optimise later (parallel solve, reduced clusters, representative days)         |
+| ERA5 cutout download fails or is incomplete                                   | Check CDS account status; fall back to a shorter window if needed                                                    |
+| PyPSA-Eur nodal prices don't match observed day-ahead prices                  | This is expected (nodal duals ≠ zonal auction prices). Label as "modelled" not "observed". Validation is diagnostic. |
+| 34-country geography loses bidding-zone detail (DK1/DK2, SE1-SE4, IT regions) | Accept for now. Can add sub-country split zones later if PyPSA-Eur config supports it.                               |
+| Static JSON files are large for 8760h × 34 countries                          | ~8760 × 34 = ~300k rows in zone_hourly.csv (~10-15 MB). Acceptable for Cloudflare static serving.                    |
+| App cache staleness after Python batch re-run                                 | Baseline JSON is immutable between runs. App fetches on page load. No cache invalidation needed.                     |

@@ -14,10 +14,12 @@
 # Grid Conductor — agent notes
 
 EU cross-border arbitrage / investment simulator. TanStack Start (React 19) app
-with a local SQLite scenario store (Supabase was removed), driven by the fast
-ENTSO-E screening pipeline, with a PyPSA-Eur power-system model as the data
-backend. See **`refactor.md`** for the plan to remove the Electricity Maps
-API dependency and complete the PyPSA-Eur integration.
+with a local SQLite scenario store (Supabase was removed), driven by a PyPSA-Eur
+full-year baseline solve and an hourly zonal re-dispatch solver. The
+fast-entsoe screening ladder survives as a **second, independent** evidence
+source (its own targets endpoint and Step-2 LP); it does not drive the
+workbench map or the scenario engine. See **`refactor.md`** for the remaining
+Electricity Maps removal work.
 
 ## Stack & architecture
 
@@ -54,9 +56,16 @@ bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
   `WORKBENCH_DB_PATH`. `created_at` columns are stored for stable ordering;
   JSON columns (`params`, `metrics`, indicators, ...) are TEXT, parsed on read.
 - Server fns (`src/lib/scenarios.functions.ts`) dynamic-import `workbench.server`
-  inside each handler — keep that indirection (same rule as any `.server.ts`
-  module). `runScenario` snapshots `zone_a`/`zone_b`/`period_start`/`period_end`
-  onto the scenario at creation so runs never need external lookups.
+  and `simulation.server` inside each handler — keep that indirection (same rule
+  as any `.server.ts` module). `createScenario` snapshots `zone_a`/`zone_b`/
+  `period_start`/`period_end` onto the scenario from the baseline dataset, so
+  runs never need a target lookup and stay stable if targets are regenerated.
+- There is **no `targets` table** and no `template_key`/`budget_meur` column.
+  Border identity comes from `baselineTargetId(zoneA, zoneB)` in
+  `baseline.server.ts`. `refreshOfficialCapacity` is read-only and returns the
+  NTCs it fetched rather than persisting them. `templates.functions.ts` and
+  `costAssumptions.ts` were deleted with the Supabase schema; nothing imports
+  them.
 - `bun:sqlite` exists only in the bun runtime, so the store works under
   `bun run dev` only. A Cloudflare/Wrangler build has no filesystem or bun
   built-ins; if that deploy target is ever needed, slot a KV/D1 adapter behind
@@ -79,8 +88,12 @@ bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
   are deleted. The workbench now reads the Step-1 screening artifact
   `public/research/entsoe-fast-targets.json` directly (see the screening ladder
   section below).
-- Next step (refactor.md Phase 4): swap the Step-1 source to PyPSA-Eur baseline
-  static JSON in `public/research/baseline/` once the Python chain builds it.
+- **Done (Phase 4).** The workbench map and scenario engine no longer use the
+  Step-1 artifact at all: they read the PyPSA-Eur baseline static JSON in
+  `public/research/baseline/` (`baseline-static.server.ts` -> HTTP, for
+  Workers) plus the schema-v2 targets in `public/research/pypsa-targets.json`.
+  Step-1 remains reachable at `/targets` and
+  `/api/public/entsoe-fast-summary` as the independent ENTSO-E cross-check.
 
 ## Python research tools (`tools/`, standalone)
 

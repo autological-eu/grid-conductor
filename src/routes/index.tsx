@@ -8,13 +8,14 @@ import { Toaster } from "@/components/ui/sonner";
 import { DataBar } from "@/components/DataBar";
 import {
   EuropeMap,
+  type MapMetric,
   type PlacedUnit,
   type TargetRow,
   type UnitDropPlacement,
 } from "@/components/EuropeMap";
 import { TargetSidebar } from "@/components/TargetSidebar";
 import { EvaluationPanel } from "@/components/EvaluationPanel";
-import { listFastSummary } from "@/lib/fast-entsoe.functions";
+import { listTargets, listZoneSummary } from "@/lib/analysis.functions";
 import { addUnit, createScenario, listScenarios } from "@/lib/scenarios.functions";
 import { unitDef, type UnitType } from "@/lib/units";
 
@@ -25,13 +26,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Find congested ENTSO-E European electricity borders, simulate batteries and new lines, and evaluate them with a fast 2-node screening LP against ENTSO-E cost-benefit thinking.",
+          "Find congested European electricity borders, simulate batteries, renewables and new lines hour by hour, and evaluate them against ENTSO-E cost-benefit guidelines.",
       },
       { property: "og:title", content: "EU Cross-Border Opportunity Workbench" },
       {
         property: "og:description",
         content:
-          "Congested ENTSO-E borders, 2-node LP scenario simulation and cost-benefit evaluation for European grid investments.",
+          "Congested borders, hourly market-coupling simulation and ENTSO-E cost-benefit evaluation for European grid investments.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -41,8 +42,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Workbench() {
-  const summaryFn = useServerFn(listFastSummary);
-  const [metric, setMetric] = useState<"market" | "climate">("market");
+  const zonesFn = useServerFn(listZoneSummary);
+  const targetsFn = useServerFn(listTargets);
+  const [metric, setMetric] = useState<MapMetric>("market");
   const [target, setTarget] = useState<TargetRow | null>(null);
   const [scenarioId, setScenarioId] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -50,10 +52,10 @@ function Workbench() {
   const [leftWidth, setLeftWidth] = useState(340);
   const [rightWidth, setRightWidth] = useState(380);
 
-  const summary = useQuery({ queryKey: ["fast-summary"], queryFn: () => summaryFn() });
+  const zones = useQuery({ queryKey: ["zones"], queryFn: () => zonesFn() });
+  const targets = useQuery({ queryKey: ["targets"], queryFn: () => targetsFn() });
 
-  const zones = summary.data?.zones ?? [];
-  const rows = (summary.data?.targets ?? []) as TargetRow[];
+  const rows = (targets.data ?? []) as TargetRow[];
 
   const listScenariosQFn = useServerFn(listScenarios);
   const scenarios = useQuery({
@@ -164,7 +166,7 @@ function Workbench() {
         )}
         <div className="min-w-0 flex-1 p-4">
           <EuropeMap
-            zones={zones}
+            zones={zones.data ?? []}
             targets={rows}
             selectedId={target?.id ?? null}
             metric={metric}

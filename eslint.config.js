@@ -6,7 +6,12 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist", ".output", ".vinxi"] },
+  // `data/` holds gitignored research downloads, the PyPSA-Eur checkout and its
+  // pixi environment (tens of thousands of files). Without this, `eslint .`
+  // walks all of it and takes tens of minutes. `**` is required so nested
+  // .pixi/.git contents are skipped too; a bare "data" only ignores the
+  // directory entry itself.
+  { ignores: ["dist", ".output", ".vinxi", ".wrangler", ".tanstack", "data/**"] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ["**/*.{ts,tsx}"],
@@ -35,6 +40,13 @@ export default tseslint.config(
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
       "@typescript-eslint/no-unused-vars": "off",
     },
+  },
+  {
+    // shadcn primitives legitimately export variants/variants helpers next to
+    // the component, which react-refresh flags. These are vendored files: edit
+    // them upstream, not here.
+    files: ["src/components/ui/**"],
+    rules: { "react-refresh/only-export-components": "off" },
   },
   eslintPluginPrettier,
 );
