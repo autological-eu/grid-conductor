@@ -41,6 +41,7 @@ jobs:
             sleep 1
           done
           bun run test:browser
+          bun tools/network-browser-smoke.ts
       - uses: actions/upload-pages-artifact@v5
         if: github.event_name != 'pull_request'
         with:
@@ -72,4 +73,6 @@ jobs:
       - name: Verify the deployed public workbench and research
         env:
           SMOKE_URL: ${{ steps.deployment.outputs.page_url }}
-        run: bun run test:browser
+        run: |
+          bun run test:browser
+          bun tools/network-browser-smoke.ts

@@ -52,6 +52,9 @@ function Research() {
           Target evidence
         </Link>
       </nav>
+      <Link to="/network" className="mb-5 inline-block underline">
+        Coupled network experiment
+      </Link>
       <p className="text-xs uppercase tracking-widest text-muted-foreground">
         Experimental electricity-grid research
       </p>

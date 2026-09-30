@@ -28,7 +28,8 @@ publications live at `/docs`, evidence at `/targets`.
   `src/lib/fast-entsoe-lp.ts`, imported on evaluation. Keep exact cable trapezoid
   welfare, battery javascript-lp-solver, finite-difference shadow-price re-solves,
   annual quarter-hour sums and DWL caps. Do not silently change methodology.
-  Do not substitute HiGHS without separately resolving the documented Bun issues.
+  HiGHS 1.15.3 now works in Bun and the browser worker for the separate network
+  lab; do not replace this existing screening solver or change its methodology.
 - Only line/battery interventions are exposed in v1. Geographic placement must
   belong to the selected zones/corridor; it is not detailed spatial dispatch.
 - Screening data availability is NOT model validation. Preserve failed/blocked
@@ -127,3 +128,20 @@ research retains its separate integration gates.
 - `audit_jao_sample.py` validates one Core hour against four published net positions and retains LTA, nominations, bilateral and allocation restrictions separately.
 - `market_model.py` supports generic flow_based_regions (PTDF times zonal net export <= RAM). Do not supply internal bilateral edges for the same region. This solver extension does not yet reconstruct JAO virtual-hub or LTA coupling.
 - A successful network sample must not bypass ENTSO-E quantity/geography gates or mark the full market baseline validated.
+
+## Experimental fast network lab
+
+- `/network`, `src/lib/network-model/`: strict input schema, sparse HiGHS/WASM
+  lossless dispatch, cancellable worker, cached baseline and reusable native basis.
+- Match `tools/market_model.py` semantics; exact hourly decomposition only when
+  there is no storage, energy budget or ramp coupling. Never reset linked inventories
+  daily or extrapolate a partial year. Reject unsupported physics/oversized models.
+- Separate IndexedDB workspace; source hashes are declarations, not validation.
+  Emissions need complete factors. Flag shortages and simultaneous storage cycling.
+- Annual research input remains unexported: solved NetCDF/manifest are absent.
+  Existing dispatch CSVs must never become generation availability. Preserve gates.
+- Methods: `docs/fast-network-model.md`; remaining phases in the implementation
+  plan. `bun tools/network-browser-smoke.ts` checks the production worker and WASM;
+  `bun tools/benchmark_fast_network.ts` uses synthetic structural cases only.
+- Python reference regeneration: `python3 tools/check_fast_network_reference.py`.
+  Inspect changes to committed analytical fixtures rather than blindly accepting them.

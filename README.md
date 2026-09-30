@@ -18,6 +18,8 @@ running Bun/Node server, authentication, cloud database or paid service is neede
 - `/`: European map, bottleneck selection, local scenarios and evaluation.
 - `/docs`: research publications sourced from `docs/*.md`, plus published artifacts.
 - `/docs/<document-slug>`: individual Markdown publication.
+- `/network`: experimental HiGHS/WASM coupled dispatch lab; complete local input
+  required, separate IndexedDB workspace, no validated European annual dataset yet.
 - `/targets`: separate observed-spread and PyPSA-Eur evidence views.
 - `src/lib/workbench.ts`: versioned IndexedDB persistence; stable IDs, ordered
   interventions, scenario snapshots and results. Edits invalidate old evaluations.
@@ -129,3 +131,23 @@ public URL without authentication; build success is insufficient.
 
 See [public-v1 audit and verification](docs/public-v1-architecture.md) for the
 server-boundary audit and deployment limitations.
+
+## Fast coupled network prototype
+
+The experimental worker solves paired network dispatch with chronological storage,
+energy budgets, ramps and optional PTDF/RAM regions. Independent hours can be
+solved in exact small blocks; linked cases retain chronology and resource guards.
+The existing map screening model is unchanged. HiGHS 1.15.3 works under Bun and
+in the production browser worker; the old Step-2 solver has not been replaced.
+
+See [methods and input contract](docs/fast-network-model.md) and
+[phased implementation plan](docs/fast-network-model-plan.md). Offline tools:
+`export_fast_network.py`, `audit_fast_network.py`,
+`check_fast_network_reference.py`; benchmark: `bun tools/benchmark_fast_network.ts`.
+Python parity fixtures are generated offline with SciPy, then checked by Bun tests
+without a Python dependency in frontend CI. Browser checks additionally run
+`bun tools/network-browser-smoke.ts` against preview or the public URL.
+
+Real annual network comparisons remain blocked by the missing solved PyPSA NetCDF
+and baseline manifest/availability/cost inputs. Do not infer them from dispatch
+outputs or substitute analytical test fixtures for published research.

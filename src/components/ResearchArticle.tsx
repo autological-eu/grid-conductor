@@ -13,7 +13,8 @@ function publicationLink(href: string): string {
     return documentHref(slug!) + (hash ? `#${hash}` : "");
   }
   if (file?.includes("research/")) return publicAsset(file.slice(file.indexOf("research/")));
-  if (href === "/" || href === "/docs" || href === "/targets") return publicAsset(href);
+  if (href === "/" || href === "/docs" || href === "/targets" || href === "/network")
+    return publicAsset(href);
   if (href.startsWith("/research/")) return publicAsset(href);
   return `https://github.com/autological-eu/grid-conductor/blob/public-v1/${href.replace(/^(\.\.\/)+/, "")}`;
 }
