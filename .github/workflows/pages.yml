@@ -51,6 +51,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
@@ -60,3 +61,15 @@ jobs:
       - name: Deploy static application
         id: deployment
         uses: actions/deploy-pages@v5
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - name: Prepare live-site browser verification
+        run: |
+          bun install --frozen-lockfile
+          bunx playwright install --with-deps chromium
+      - name: Verify the deployed public workbench and research
+        env:
+          SMOKE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: bun run test:browser
