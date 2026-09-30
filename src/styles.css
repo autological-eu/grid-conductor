@@ -212,3 +212,14 @@
 .research-prose th {
   background: var(--muted);
 }
+
+.research-prose h2,
+.research-prose h3,
+#research-library {
+  scroll-margin-top: 1.5rem;
+}
+.research-prose pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}

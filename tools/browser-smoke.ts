@@ -64,11 +64,47 @@ try {
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
     if (process.env["SMOKE_SCREENSHOTS"])
       await page.screenshot({ path: `/tmp/grid-conductor-${viewport.width}.png`, fullPage: true });
-    for (const route of ["docs/", "docs/fast-entsoe-screening/", "targets/"]) {
+    for (const route of [
+      "docs/",
+      "docs/worked-example-se4-pl/",
+      "docs/fast-entsoe-screening/",
+      "targets/",
+    ]) {
       const response = await page.goto(`${base}${route}`);
       assert.equal(response?.status(), 200, `Direct navigation to ${route}`);
       await page.getByRole("heading", { level: 1 }).first().waitFor();
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
+      if (route === "docs/") {
+        await page.getByRole("heading", { name: "2. What market opportunity means" }).waitFor();
+        const anchorsResolve = await page
+          .locator('nav[aria-label="Methods chapters"] a')
+          .evaluateAll((links) =>
+            links.every((link) => document.getElementById(link.getAttribute("href")!.slice(1))),
+          );
+        assert(anchorsResolve, "Every methods chapter links to a rendered section");
+        assert(
+          await page.getByRole("link", { name: "SE4 → PL: reproduce €229.9 million/year →" }).count(),
+        );
+      }
+      if (route === "docs/worked-example-se4-pl/") {
+        await page.getByRole("heading", { name: "3. Reproduce €229.9 million/year" }).waitFor();
+        // Execute the exact published console example against the served artifact.
+        const source = await page.locator("pre code.language-javascript").innerText();
+        const values: number[] = await page.evaluate(async (code) => {
+          const reproduce = new Function(
+            `return (async () => {\n${code}\nreturn [bound, line(500), line(700)]; })()`,
+          );
+          return reproduce();
+        }, source);
+        assert(Math.abs(values[0]! - 229.8925178625) < 1e-9);
+        assert(Math.abs(values[1]! - 154.86579666666665) < 1e-9);
+        assert(Math.abs(values[2]! - 193.14912866666666) < 1e-9);
+        const artifactLink = page.getByRole("link", { name: "Annual input JSON", exact: true });
+        assert.equal(
+          await artifactLink.getAttribute("href"),
+          "/grid-conductor/research/entsoe-fast-targets.json",
+        );
+      }
     }
     assert(
       await page.getByText("Inspect recurring price differences", { exact: false }).isVisible(),

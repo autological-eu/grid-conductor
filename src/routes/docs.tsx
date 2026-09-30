@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ResearchArticle } from "@/components/ResearchArticle";
 import { researchDocuments } from "@/lib/research-documents";
 import { publicAsset } from "@/lib/research";
 
 export const Route = createFileRoute("/docs")({
-  head: () => ({ meta: [{ title: "Grid Conductor Research" }] }),
+  head: () => ({ meta: [{ title: "Methods, maths & evidence | Grid Conductor" }] }),
   component: Research,
 });
 
@@ -22,9 +23,22 @@ const artifacts = [
   ["targets.json", "Observed-spread target evidence"],
 ] as const;
 
+const chapters = [
+  ["1-from-source-data-to-the-map", "1. Source data"],
+  ["2-what-market-opportunity-means", "2. Market opportunity"],
+  ["3-rent-and-the-fixed-spread-ladder", "3. Rent and opportunity"],
+  ["4-transmission-interventions", "4. Transmission"],
+  ["5-storage-interventions", "5. Storage"],
+  ["6-costs-and-financial-indicators", "6. Costs and finance"],
+  ["7-climate-indicators-and-validation", "7. Climate and validation"],
+  ["8-audit-a-number-yourself", "8. Audit a number"],
+  ["research-library", "Research library & artifacts"],
+] as const;
+
 function Research() {
+  const overview = researchDocuments.find((doc) => doc.slug === "methods-and-maths");
   return (
-    <main className="mx-auto max-w-6xl px-5 py-8">
+    <main className="mx-auto max-w-7xl px-5 py-8">
       <nav className="mb-8 flex gap-5 text-sm">
         <Link to="/" className="underline">
           Workbench
@@ -36,69 +50,96 @@ function Research() {
       <p className="text-xs uppercase tracking-widest text-muted-foreground">
         Experimental electricity-grid research
       </p>
-      <h1 className="mt-3 text-4xl font-bold">Grid Conductor Research</h1>
+      <h1 className="mt-3 text-4xl font-bold">Methods, maths &amp; evidence</h1>
       <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
-        From source data to published evidence to interactive scenarios. Read the assumptions,
-        coverage and validation before interpreting an estimated investment opportunity.
+        What the map measures, where its numbers come from, and how interventions are evaluated.
+        Follow the equations from published observations to estimated system welfare.
       </p>
-      <aside className="my-6 rounded-xl border bg-muted/40 p-5 text-sm leading-7">
-        <strong>Current workbench: 2025 reduced-form screening.</strong> Cable welfare uses an exact
-        trapezoid response; batteries use a daily-cycle LP. These are screening estimates, not
-        dispatch-grade valuations. Climate figures are unsigned average-mix proxies, not
-        demonstrated avoided emissions. The separate FR–CH pilot has failed validation gates; the
-        European dispatch baseline remains blocked by input quality. PyPSA-Eur and JAO publication
-        coverage do not establish validated investment benefits.
-      </aside>
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
-        <section>
-          <h2 className="mb-4 text-xl font-semibold">Research publications</h2>
-          <Link
-            to="/docs/$slug"
-            params={{ slug: "fast-entsoe-screening" }}
-            className="mb-4 block rounded-xl border border-primary bg-muted p-4 font-semibold"
-          >
-            Start here: Fast ENTSO-E screening ladder →
-          </Link>
-          <ul className="space-y-2">
-            {researchDocuments.map((doc) => (
-              <li key={doc.slug}>
-                <Link
-                  to="/docs/$slug"
-                  params={{ slug: doc.slug }}
-                  className="block rounded-lg border p-4 hover:bg-muted"
-                >
-                  {doc.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-        <section>
-          <h2 className="mb-4 text-xl font-semibold">Published artifacts</h2>
-          <p className="mb-4 text-sm text-muted-foreground">
-            Machine-readable research snapshots ship with the app. Each artifact retains its
-            provenance, assumptions and validation status.
+      <Link
+        to="/docs/$slug"
+        params={{ slug: "worked-example-se4-pl" }}
+        className="my-6 block max-w-3xl rounded-xl border border-primary bg-muted p-5"
+      >
+        <span className="block font-semibold">SE4 → PL: reproduce €229.9 million/year →</span>
+        <span className="mt-1 block text-sm text-muted-foreground">
+          Exact source fields, arithmetic, line and battery examples, and the fallback-slope
+          assumption.
+        </span>
+      </Link>
+      <div className="grid gap-10 lg:grid-cols-[14rem_minmax(0,1fr)]">
+        <nav aria-label="Methods chapters" className="self-start lg:sticky lg:top-5">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            On this page
           </p>
-          <ul className="space-y-2">
-            {artifacts.map(([file, label]) => (
-              <li key={file}>
-                <a
-                  href={publicAsset(`research/${file}`)}
-                  className="block rounded-lg border p-4 hover:bg-muted"
-                >
-                  <span className="block text-sm font-medium">{label}</span>
-                  <span className="text-xs text-muted-foreground">{file} ↗</span>
+          <ul className="grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-1">
+            {chapters.map(([anchor, label]) => (
+              <li key={anchor}>
+                <a href={`#${anchor}`} className="block rounded-lg p-2 hover:bg-muted">
+                  {label}
                 </a>
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-sm leading-6 text-muted-foreground">
-            Offline Python / PyPSA-Eur tools → Markdown publication and JSON/CSV artifacts →
-            research library → browser workbench. No research credentials or heavy Python models run
-            in this public application.
-          </p>
-        </section>
+        </nav>
+        <ResearchArticle content={overview?.content.replace(/^# .+\n/, "") ?? ""} />
       </div>
+      <section id="research-library" className="mt-14 border-t pt-8">
+        <h2 className="mb-2 text-2xl font-semibold">Research library &amp; published artifacts</h2>
+        <p className="mb-8 max-w-3xl text-sm leading-7 text-muted-foreground">
+          The overview is maintained in Markdown alongside these original publications. Read the
+          detailed reports and their validation/provenance before interpreting screening results.
+        </p>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+          <section>
+            <h2 className="mb-4 text-xl font-semibold">Research publications</h2>
+            <Link
+              to="/docs/$slug"
+              params={{ slug: "fast-entsoe-screening" }}
+              className="mb-4 block rounded-xl border border-primary bg-muted p-4 font-semibold"
+            >
+              Technical detail: Fast ENTSO-E screening ladder →
+            </Link>
+            <ul className="space-y-2">
+              {researchDocuments.map((doc) => (
+                <li key={doc.slug}>
+                  <Link
+                    to="/docs/$slug"
+                    params={{ slug: doc.slug }}
+                    className="block rounded-lg border p-4 hover:bg-muted"
+                  >
+                    {doc.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section>
+            <h2 className="mb-4 text-xl font-semibold">Published artifacts</h2>
+            <p className="mb-4 text-sm text-muted-foreground">
+              Machine-readable research snapshots ship with the app. Each artifact retains its
+              provenance, assumptions and validation status.
+            </p>
+            <ul className="space-y-2">
+              {artifacts.map(([file, label]) => (
+                <li key={file}>
+                  <a
+                    href={publicAsset(`research/${file}`)}
+                    className="block rounded-lg border p-4 hover:bg-muted"
+                  >
+                    <span className="block text-sm font-medium">{label}</span>
+                    <span className="text-xs text-muted-foreground">{file} ↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-sm leading-6 text-muted-foreground">
+              Offline Python / PyPSA-Eur tools → Markdown publication and JSON/CSV artifacts →
+              research library → browser workbench. No research credentials or heavy Python models run
+              in this public application.
+            </p>
+          </section>
+        </div>
+      </section>
     </main>
   );
 }

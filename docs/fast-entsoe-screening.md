@@ -10,6 +10,12 @@ The screening baseline is the **full calendar year 2025** (12 monthly banks,
 Jan–Dec): Step-1 sums are true annual sums, **not** an ×12 extrapolation of one
 representative month.
 
+For a reader-facing overview with exact implementation conventions and a
+reproducible example, see [Methods and maths](methods-and-maths.md) and
+[SE4 → PL: €229.9 million/year](worked-example-se4-pl.md). These distinguish
+above-€5 event screening, fixed-spread ladders, fallback slopes and the
+interactive workbench defaults from the legacy predefined matrix.
+
 ## Split
 
 | step       | what                                                                        | where                                                         | when                                                                              |
@@ -29,9 +35,9 @@ quarter grid, see `concat_banks`) is summed up:
 
 ```
 realized_rent           = (0.25/1e6) * Σ_t  F_AB,t * (P_B,t - P_A,t)        [signed M€/year]
-positive_rent           = (0.25/1e6) * Σ_t  F_AB,t * max(0, P_B,t - P_A,t)  [M€/year]
+positive_rent           = (0.25/1e6) * Σ_{t: spread > 5} F_AB,t * spread  [M€/year]
 congested_quarters      = #(spread > 5 EUR/MWh), quarter-hour samples
-avg_positive_spread     = mean(positive spread)                             [EUR/MWh]
+avg_positive_spread     = mean(spread where spread > 5)                             [EUR/MWh]
 opportunity_ΔC          = (0.25/1e6) * Σ_t  ΔC * max(0, P_B,t - P_A,t)      [M€/year], ΔC ∈ {500, 1000}
 slope_{a,b}             = effective dP/d(inflow) for the zone                [EUR/MWh per MW]
 slope_raw_{a,b}         = the raw OLS slope (may be negative / null)
@@ -119,7 +125,7 @@ solves a small model per scenario in the browser:
   q*              = min(ΔC, spread/slope)            [MW saturated]
   welfare/sample  = spread*q* − ½·slope·q*²          [EUR/h]
   annual_gain_M€  = welfare/sample × 0.25 h × congested_quarters / 1e6
-  shadow_price    = spread − slope·q* (marginal €/MWh at the added MW)
+  shadow_price    = objective(ΔC + 1 MW) − objective(ΔC), before annual scaling
   ```
 
   A huge ΔC simply saturates at `q* = spread/slope`, where the trapezoid equals
@@ -131,7 +137,8 @@ solves a small model per scenario in the browser:
 
 - **`battery_200` / `battery_100`** — 200 MW/800 MWh or 100 MW/400 MWh
   round-trip storage on the low-price side, one charge/discharge cycle per day
-  at the mean positive spread:
+  at the mean event spread. Each charge/discharge leg is **one hour**, so the
+  power bound may prevent the full four-hour nameplate energy being used:
 
   ```
   max  d * spread    s.t.   d ≤ rte*c, c ≤ MW*h, d ≤ MW*h, c ≤ MWh
@@ -146,8 +153,8 @@ for any placed capacity — including the battery and stacked rows.
 
 Dual/shadow price is recovered by **finite-difference re-solve** (perturb one
 more MW of capacity, `Δobjective` = marginal value) because jsLPSolver does not
-expose tableau duals. For cables the closed form gives the marginal directly
-(`spread − slope·q*`, ≈0 once saturated); for batteries the perturbation moves
+expose tableau duals. For cables the closed form is evaluated at ΔC and ΔC + 1 MW (zero once
+saturated); for batteries the perturbation moves
 power only (energy is left fixed), so the marginal reads as the value of one
 extra MWh of throughput (the discharge leg is one hour).
 
@@ -210,7 +217,7 @@ their separate integration gates.
   opportunity is that bound.
 - The reduced-form LP uses the _mean_ positive spread per border; hourly
   volatility (which drives real storage revenue) is not modeled yet — battery
-  figures are conservative.
+  figures are simplified screening estimates, not proven conservative bounds.
 
 ## Next steps
 
