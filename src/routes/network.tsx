@@ -28,6 +28,7 @@ function NetworkLab() {
   const [result, setResult] = useState<Result>();
   const [message, setMessage] = useState("Import a complete model input to start.");
   const [busy, setBusy] = useState(false);
+  const [loadingInput, setLoadingInput] = useState(false);
   const [ready, setReady] = useState(false);
   const [edge, setEdge] = useState("");
   const [mw, setMw] = useState(100);
@@ -88,7 +89,7 @@ function NetworkLab() {
     }
   };
   const run = () => {
-    if (!input || busy) return;
+    if (!input || busy || loadingInput) return;
     setBusy(true);
     setResult(undefined);
     worker.current ??= new Worker(new URL("../lib/network-model/worker.ts", import.meta.url), {
@@ -143,15 +144,20 @@ function NetworkLab() {
           bidding-zone labels.
         </p>
         <button
-          disabled={busy || !ready}
+          disabled={busy || loadingInput || !ready}
           className="rounded border px-3 py-2"
           onClick={async () => {
+            setLoadingInput(true);
+            setResult(undefined);
+            setMessage("Loading benchmark input…");
             try {
               const response = await fetch(publicAsset("research/network-benchmark/input.json"));
               if (!response.ok) throw new Error(`Dataset unavailable (${response.status})`);
               importModel(await response.json());
             } catch (error) {
               setMessage(String(error));
+            } finally {
+              setLoadingInput(false);
             }
           }}
         >
@@ -180,16 +186,20 @@ function NetworkLab() {
           className="mt-2 block w-full rounded border p-3"
           type="file"
           accept=".json,application/json"
-          disabled={busy || !ready}
+          disabled={busy || loadingInput || !ready}
           onChange={async (event) => {
             const file = event.target.files?.[0];
             if (!file) return;
+            setLoadingInput(true);
+            setResult(undefined);
             try {
               if (file.size > 25 * 1024 * 1024)
                 throw new Error("Input exceeds 25 MiB browser import budget");
               importModel(JSON.parse(await file.text()));
             } catch (error) {
               setMessage(String(error));
+            } finally {
+              setLoadingInput(false);
             }
           }}
         />
@@ -211,7 +221,7 @@ function NetworkLab() {
               <li key={i}>{a}</li>
             ))}
           </ul>
-          <fieldset disabled={busy} className="space-y-3">
+          <fieldset disabled={busy || loadingInput} className="space-y-3">
             <legend className="font-semibold">Transmission additions</legend>
             <div className="flex flex-wrap gap-3">
               <select
@@ -319,7 +329,7 @@ function NetworkLab() {
           </fieldset>
           <button
             data-testid="network-run"
-            disabled={busy}
+            disabled={busy || loadingInput}
             className="rounded bg-primary px-4 py-2 text-primary-foreground disabled:opacity-50"
             onClick={run}
           >

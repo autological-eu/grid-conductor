@@ -39,7 +39,20 @@ try {
     await page.getByTestId("network-run").click();
     await page.getByTestId("network-result").waitFor();
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
+    // Exercise a slow fetch: an old dataset must not remain evaluable while loading.
+    let releaseDownload!: () => void;
+    const downloadGate = new Promise<void>((resolve) => {
+      releaseDownload = resolve;
+    });
+    await page.route("**/research/network-benchmark/input.json", async (route) => {
+      await downloadGate;
+      await route.continue();
+    });
     await page.getByRole("button", { name: "Load real-data benchmark", exact: true }).click();
+    assert(await page.getByTestId("network-run").isDisabled());
+    releaseDownload();
+    await page.getByRole("heading", { name: "pypsa-eur-37-2013-168h", exact: true }).waitFor();
+    await page.unroute("**/research/network-benchmark/input.json");
     await page.getByLabel("Additional MW", { exact: true }).fill("500");
     await page.getByRole("button", { name: "Set capacity addition" }).click();
     await page.getByTestId("network-run").click();
