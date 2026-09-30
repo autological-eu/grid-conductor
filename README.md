@@ -1,24 +1,131 @@
 # Grid Conductor
 
-I want to build something together with others. Can you help me add them to a workspace?
+An experimental European electricity-grid investment and market-opportunity
+workbench. The interactive map is the landing page: select a directed border,
+inspect published evidence, create a scenario, add transmission or battery
+interventions, and evaluate estimated economic and climate indicators.
 
-This project was built with [Lovable](https://lovable.dev).
+Public-v1 target URL: **https://autological-eu.github.io/grid-conductor/**.
+Deployment requires GitHub Pages to be enabled for this repository; a successful
+build alone does not establish a live deployment.
 
-## Build with Lovable
+## Browser application
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/7e94c247-d214-4db4-8db5-ab838b1488d8).
+**Bun → Vite → React 19 → TanStack Router → static GitHub Pages.** Tailwind v4,
+shadcn/ui and TanStack Query support the existing workbench. No continuously
+running Bun/Node server, authentication, cloud database or paid service is needed.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+- `/`: European map, bottleneck selection, local scenarios and evaluation.
+- `/docs`: research publications sourced from `docs/*.md`, plus published artifacts.
+- `/docs/<document-slug>`: individual Markdown publication.
+- `/targets`: separate observed-spread and PyPSA-Eur evidence views.
+- `src/lib/workbench.ts`: versioned IndexedDB persistence; stable IDs, ordered
+  interventions, scenario snapshots and results. Edits invalidate old evaluations.
+- `src/lib/fast-entsoe-lp.ts`: pure-JavaScript Step-2 screening calculations,
+  fetched from `public/research/entsoe-fast-targets.json` through the base-aware
+  research loader. The LP module is loaded when a scenario is evaluated.
 
-## Development
+Scenarios belong to this browser and origin. Refreshing or reopening retains
+state; clearing site data removes it. There is no synchronization, account or
+SQLite migration. Browser storage must be available. Lines and batteries are the
+supported public-v1 interventions; renewables and demand response remain research
+extensions. Unit placement selects the target's zones/corridor; the reduced-form
+model does not simulate detailed geographic placement or an hourly network.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Local development
+
+Install [Bun](https://bun.sh/) **1.4.2**, then:
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+bun install --frozen-lockfile
+bun run dev
 ```
+
+Open the URL printed by Vite **with `/grid-conductor/` appended** (normally
+`http://localhost:5173/grid-conductor/`). No `.env` or API credentials are needed.
+The dependency policy retains a 24-hour minimum package release age.
+
+```sh
+bun run lint
+bun run typecheck
+bun run test
+bun run build
+bun run preview
+```
+
+`dist/` is the complete deployable static site. Vite owns React, Tailwind and
+TanStack Router configuration explicitly; no Lovable or TanStack Start/SSR
+runtime remains. Router generation updates `src/routeTree.gen.ts`; do not edit it
+manually. The small Bun test suite covers screening caps/annual units and the
+IndexedDB lifecycle using fake-indexeddb. For the real Chromium smoke check:
+
+```sh
+bunx playwright install chromium
+bun run preview                  # keep running in another terminal
+bun run test:browser
+```
+
+`SMOKE_URL` can target another static server or the deployed project-site URL.
+The smoke check uses fresh browser contexts, creates local test scenarios and
+checks desktop/mobile interaction, reload persistence and direct routes.
+
+## Research and methodology
+
+Offline Python, ENTSO-E, JAO and PyPSA-Eur tooling in `tools/` and `config/`
+produces reviewed publications in `docs/*.md` and artifacts in
+`public/research/*`. Vite publishes Markdown without bundling Python or heavy
+models. Add a Markdown file to `docs/` to publish another research article;
+relative links between publications are resolved by the renderer. Retain
+provenance, period, assumptions and validation status in each artifact.
+
+The workbench uses full-year **2025 screening**, not validated hourly dispatch:
+
+- Cable welfare retains the exact trapezoid price-response calculation.
+- Batteries retain the javascript-lp-solver daily-cycle model and finite-difference
+  shadow-price re-solves. Combined gains remain capped at Step-1 deadweight loss.
+- Annual values are annual sums, never a representative month multiplied by 12.
+- Climate figures are unsigned average-mix proxies, **not demonstrated avoided
+  emissions**. The 25-year benefit-minus-capex figure is undiscounted.
+- Separate FR–CH and EU research gates retain their published failed/blocked
+  status; PyPSA-Eur topology and JAO coverage are not validated investment benefits.
+
+Start with [screening methodology](docs/fast-entsoe-screening.md),
+[validation](docs/market-model-validation.md),
+[European input quality](docs/market-model-eu-validation.md),
+[carbon integration gates](docs/carbon-pilot.md),
+[flow tracing](docs/flow-tracing.md) and
+[PyPSA-Eur targets](docs/pypsa-eur-targets.md).
+The previous hard-coded methodology page is preserved as
+[historical Markdown](docs/methodology-overview.md).
+
+Research setup depends on the selected toolchain; see `requirements-market.txt`
+in `tools/` and the PyPSA-Eur runbook rather than installing it for frontend work.
+Where available, run `python -m unittest discover -s tools -p 'test_*.py' -v`.
+API keys are needed only for offline uncached research collection. Never commit
+keys, `.env`, caches, solved networks or ignored generated research directories.
+
+## GitHub Pages deployment
+
+`.github/workflows/pages.yml` installs pinned Bun, uses the frozen lockfile, runs
+lint/typecheck/tests/build plus Chromium desktop/mobile checks, uploads `dist/`, and deploys with the Pages Actions.
+Pull requests verify without deploying. Pushes to `public-v1` deploy the previewed
+public-v1 implementation; `main` deploys only after a reviewed merge. The workflow
+can also be run manually. No automatic merge or history rewrite is performed.
+
+Repository administrators must select **Settings → Pages → Source → GitHub
+Actions** and permit `public-v1` (and later `main`) in the `github-pages`
+environment's deployment branch rules. Pages Actions require `pages: write` and
+`id-token: write`, and the organization must allow these Actions. Public Pages
+from a private repository requires an eligible GitHub plan; confirm the site is
+public rather than an access-controlled enterprise Pages site. Source visibility
+is a separate choice and must not be changed automatically.
+
+Vite and Router use `/grid-conductor/`. `tools/prepare-pages.ts` generates real
+`index.html` entries for `/docs`, `/targets` and every research article, so direct
+links work on Pages without server rewrites. `404.html` boots the router for
+unknown URLs and displays a not-found page. All public artifact links/fetches use
+the same base path. After deployment inspect the Actions result and open the
+public URL without authentication; build success is insufficient.
+
+See [public-v1 audit and verification](docs/public-v1-architecture.md) for the
+server-boundary audit and deployment limitations.

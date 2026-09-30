@@ -142,3 +142,73 @@
     color: var(--color-foreground);
   }
 }
+
+.research-prose {
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.research-prose h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 1.5rem 0;
+}
+.research-prose h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+}
+.research-prose h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem;
+}
+.research-prose p,
+.research-prose ul,
+.research-prose ol {
+  margin: 1rem 0;
+}
+.research-prose ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+.research-prose ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+}
+.research-prose a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.research-prose pre {
+  overflow-x: auto;
+  background: var(--muted);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+}
+.research-prose code {
+  background: var(--muted);
+  padding: 0.1rem 0.25rem;
+  border-radius: 0.2rem;
+  font-size: 0.9em;
+}
+.research-prose blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: 1rem;
+  color: var(--muted-foreground);
+}
+.research-prose table {
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  width: 100%;
+}
+.research-prose th,
+.research-prose td {
+  border: 1px solid var(--border);
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+}
+.research-prose th {
+  background: var(--muted);
+}

@@ -12,10 +12,10 @@ representative month.
 
 ## Split
 
-| step       | what                                                                        | where                                                                                                 | when                                                                              |
-| ---------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **Step 1** | border screening: realized congestion rent + theoretical opportunity ladder | `tools/fast_entsoe_screening.py` (Python, numpy)                                                      | offline, cached; publishes `public/research/entsoe-fast-targets.json` (schema_v3) |
-| **Step 2** | 2-node LP decision matrix per candidate border                              | `src/lib/fast-entsoe-lp.server.ts` + route `/api/public/fast-entsoe-lp` (bun, `javascript-lp-solver`) | live, on request, server-side                                                     |
+| step       | what                                                                        | where                                                         | when                                                                              |
+| ---------- | --------------------------------------------------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **Step 1** | border screening: realized congestion rent + theoretical opportunity ladder | `tools/fast_entsoe_screening.py` (Python, numpy)              | offline, cached; publishes `public/research/entsoe-fast-targets.json` (schema_v3) |
+| **Step 2** | 2-node LP decision matrix per candidate border                              | `src/lib/fast-entsoe-lp.ts` (browser, `javascript-lp-solver`) | locally in the browser                                                            |
 
 Step 1 produces the ranked candidate list; Step 2 lets the user (or the app)
 ask "what happens if I add a cable / battery / both on border X?" and get an
@@ -108,8 +108,8 @@ python -m unittest discover -s tools -p "test_fast_entsoe_screening.py" -v
 
 ## Step 2 — live 2-node LP (`javascript-lp-solver`)
 
-`src/lib/fast-entsoe-lp.server.ts` reads the published Step-1 annual rows and
-solves a small model per scenario on the bun server:
+`src/lib/fast-entsoe-lp.ts` reads the published Step-1 annual rows and
+solves a small model per scenario in the browser:
 
 - **`cable_500` / `cable_1000`** — add ΔC MW of intertie on `A>B`. With the
   marginal spread falling linearly at `slope_a`, welfare is the exact integral
@@ -178,20 +178,20 @@ bun. It remains the Step-2 battery engine; cables now use the exact trapezoid
 closed form (no LP needed, no block artifacts). Revisit `highs` if/when bun's
 wasm-import story improves.
 
-## Routes
+## Public-v1 browser integration
 
-```
-GET /api/public/fast-entsoe-lp?border=FR>IT-North
-GET /api/public/entsoe-fast-summary
-```
+`src/lib/research.ts` fetches the published annual schema-v3 JSON using Vite's
+project-site base path. `src/lib/step1.ts` adapts it to the map's zones and directed
+borders. `src/lib/fast-entsoe-lp.ts` exports `fastEntsoeLp` (decision matrix) and
+`solveFromUnits` (interactive scenario), both evaluated locally. The former
+`/api/public/*` server endpoints have been removed. No authentication or API key
+is needed. Scenario interventions and results persist in IndexedDB through
+`src/lib/workbench.ts`; edits invalidate old evaluations.
 
-Both are public and stateless. The LP endpoint returns the scenario rows plus
-the screened `year`/`months` (404 with `{error}` if the border has no annual
-row); the summary endpoint returns the Step-1 → EuropeMap contract (zones +
-directed congested targets, with `market_opportunity_meur`/`climate_loss_ktco2`
-in "MEUR/y" / "ktCO2/y" mapped straight from the annual rows — the headline
-`market_opportunity_meur` is the bounded deadweight loss, the cap the LP
-enforces). No auth needed.
+The Step-1 summary's climate field remains an unsigned average-mix proxy derived
+from welfare/spread and static carbon contrasts. It is not a dispatch-based
+estimate of avoided emissions. Research carbon and flow-tracing pilots retain
+their separate integration gates.
 
 ## Coverage & caveats
 
@@ -216,8 +216,8 @@ enforces). No auth needed.
 
 1. Hourly/block granularity for Step 2 (use `observed_quarters` + spread
    distribution instead of the mean) — this was scoped out of the first cut.
-2. Wire the decision matrix into a UI (targets page) — Step 2 currently returns
-   JSON only.
+2. Wire the decision matrix into a UI (targets page) — the browser service already exports
+   the matrix, while the workbench evaluates user-created scenarios.
 3. Research-grade PYPSA capacities will eventually supersede the `capex`
    constants (`CABLE_CAPEX_MEUR_PER_MW=0.016`, `BATTERY_CAPEX_MEUR_PER_MWH=0.25`,
    annuity 8%).
