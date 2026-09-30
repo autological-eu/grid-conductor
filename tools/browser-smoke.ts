@@ -31,7 +31,16 @@ try {
     }
     await page.getByRole("button", { name: "New", exact: true }).click();
     await page.getByRole("button", { name: "Run scenario" }).waitFor();
-    await page.getByRole("button", { name: "Transmission line", exact: true }).click();
+    if (viewport.width > 1000) {
+      await page
+        .getByRole("button", { name: "Transmission line", exact: true })
+        .dragTo(page.locator('g[aria-label="Select FR to IT-North bottleneck"]'));
+      await page.waitForFunction(
+        () => document.querySelectorAll('[aria-label="Remove unit"]').length === 1,
+      );
+    } else {
+      await page.getByRole("button", { name: "Transmission line", exact: true }).click();
+    }
     await page.getByRole("button", { name: "Battery storage", exact: true }).click();
     await page.waitForFunction(
       () => document.querySelectorAll('[aria-label="Remove unit"]').length === 2,

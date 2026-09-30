@@ -176,8 +176,14 @@ export function EuropeMap({
   const toViewBox = useCallback((clientX: number, clientY: number) => {
     const el = svgRef.current;
     if (!el) return { x: 0, y: 0 };
-    const r = el.getBoundingClientRect();
-    return { x: ((clientX - r.left) / r.width) * W, y: ((clientY - r.top) / r.height) * H };
+    const matrix = el.getScreenCTM();
+    if (!matrix) return { x: 0, y: 0 };
+    // Invert the SVG viewport transform, including aspect-ratio letterboxing.
+    // Bounding-box ratios misplace drops on narrow or tall maps.
+    const point = el.createSVGPoint();
+    point.x = clientX;
+    point.y = clientY;
+    return point.matrixTransform(matrix.inverse());
   }, []);
 
   const stopAnim = () => {
@@ -262,9 +268,10 @@ export function EuropeMap({
     if (!d) return;
     const el = svgRef.current;
     if (!el) return;
-    const r = el.getBoundingClientRect();
-    const dx = ((e.clientX - d.x) / r.width) * W;
-    const dy = ((e.clientY - d.y) / r.height) * H;
+    const previous = toViewBox(d.x, d.y);
+    const current = toViewBox(e.clientX, e.clientY);
+    const dx = current.x - previous.x;
+    const dy = current.y - previous.y;
     if (!d.moved && Math.abs(e.clientX - d.x) + Math.abs(e.clientY - d.y) > 3) {
       // capture only once this is a real drag, so plain clicks still reach the borders
       d.moved = true;
