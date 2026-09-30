@@ -83,7 +83,9 @@ try {
           );
         assert(anchorsResolve, "Every methods chapter links to a rendered section");
         assert(
-          await page.getByRole("link", { name: "SE4 → PL: reproduce €229.9 million/year →" }).count(),
+          await page
+            .getByRole("link", { name: "SE4 → PL: reproduce €229.9 million/year →" })
+            .count(),
         );
       }
       if (route === "docs/worked-example-se4-pl/") {

@@ -134,8 +134,8 @@ function Research() {
             </ul>
             <p className="mt-6 text-sm leading-6 text-muted-foreground">
               Offline Python / PyPSA-Eur tools → Markdown publication and JSON/CSV artifacts →
-              research library → browser workbench. No research credentials or heavy Python models run
-              in this public application.
+              research library → browser workbench. No research credentials or heavy Python models
+              run in this public application.
             </p>
           </section>
         </div>
