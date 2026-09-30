@@ -1,11 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useMatch } from "@tanstack/react-router";
 import { ResearchArticle } from "@/components/ResearchArticle";
 import { researchDocuments } from "@/lib/research-documents";
 import { publicAsset } from "@/lib/research";
 
 export const Route = createFileRoute("/docs")({
   head: () => ({ meta: [{ title: "Methods, maths & evidence | Grid Conductor" }] }),
-  component: Research,
+  component: ResearchRoute,
 });
 
 const artifacts = [
@@ -34,6 +34,11 @@ const chapters = [
   ["8-audit-a-number-yourself", "8. Audit a number"],
   ["research-library", "Research library & artifacts"],
 ] as const;
+
+function ResearchRoute() {
+  const article = useMatch({ from: "/docs/$slug", shouldThrow: false });
+  return article ? <Outlet /> : <Research />;
+}
 
 function Research() {
   const overview = researchDocuments.find((doc) => doc.slug === "methods-and-maths");
