@@ -8,13 +8,13 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
   ] as const;
 
   return (
-    <header className="flex items-center gap-6 border-b border-border bg-card px-5 py-3">
+    <header className="flex flex-wrap items-center gap-3 lg:gap-6 border-b border-border bg-card px-5 py-3">
       <div className="shrink-0">
         <h1 className="text-lg font-bold leading-tight tracking-tight">Grid Conductor</h1>
         <p className="text-xs text-muted-foreground">Fast ENTSO-E screening workbench&nbsp;</p>
       </div>
 
-      <ol className="flex flex-1 items-center justify-center gap-0">
+      <ol className="hidden flex-1 items-center justify-center gap-0 md:flex">
         {steps.map((s, i) => {
           const active = step === s.n;
           const done = step > s.n;
@@ -67,7 +67,7 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
         to="/docs"
         className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
       >
-        Methodology
+        Research
       </Link>
     </header>
   );

@@ -40,3 +40,10 @@ data/eu-market/
 
 data/jao/
 data/pypsa-eur/
+
+# Credentials and browser verification artifacts
+.env
+.env.*
+!.env.example
+playwright-report/
+test-results/

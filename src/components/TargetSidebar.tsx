@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { ChevronDown, ChevronRight, Loader2, Play, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { UNIT_LIBRARY, unitDef, unitDrag, type UnitType } from "@/lib/units";
@@ -29,13 +28,13 @@ export function TargetSidebar({
   onSelectScenario: (id: string | null) => void;
 }) {
   const qc = useQueryClient();
-  const list = useServerFn(listScenarios);
-  const create = useServerFn(createScenario);
-  const remove = useServerFn(deleteScenario);
-  const add = useServerFn(addUnit);
-  const patch = useServerFn(updateUnit);
-  const dropUnit = useServerFn(deleteUnit);
-  const run = useServerFn(runScenario);
+  const list = listScenarios;
+  const create = createScenario;
+  const remove = safely(deleteScenario);
+  const add = addUnit;
+  const patch = safely(updateUnit);
+  const dropUnit = safely(deleteUnit);
+  const run = runScenario;
 
   const [dragOver, setDragOver] = useState<string | null>(null);
   const [open, setOpen] = useState<Record<string, boolean>>({});
@@ -77,6 +76,10 @@ export function TargetSidebar({
   });
 
   async function handleDrop(scenarioId: string, unitType: UnitType) {
+    if (unitType !== "line" && unitType !== "battery") {
+      toast.error("Only lines and batteries are modelled in v1.");
+      return;
+    }
     const def = unitDef(unitType);
     try {
       await add({
@@ -119,7 +122,10 @@ export function TargetSidebar({
             label="Market opportunity"
             value={`${target.market_opportunity_meur.toFixed(1)} MEUR/y`}
           />
-          <Stat label="Climate loss" value={`${target.climate_loss_ktco2.toFixed(1)} ktCO2/y`} />
+          <Stat
+            label="Climate proxy (est.)"
+            value={`${target.climate_loss_ktco2.toFixed(1)} ktCO2/y`}
+          />
           <Stat
             label="Congested hours"
             value={`${target.congested_hours} / ${target.total_hours}`}
@@ -137,13 +143,28 @@ export function TargetSidebar({
         <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           Unit library
         </h3>
-        <p className="mb-2 text-xs text-muted-foreground">Drag an icon onto the map.</p>
+        <p className="mb-2 text-xs text-muted-foreground">
+          Drag onto the map, or click to add to the selected scenario.
+        </p>
         <div className="flex flex-wrap gap-2">
-          {UNIT_LIBRARY.map((u) => {
+          {UNIT_LIBRARY.filter((u) => u.type === "line" || u.type === "battery").map((u) => {
             const Icon = unitIcon(u.type);
             return (
               <div
                 key={u.type}
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                  if (selectedScenarioId) void handleDrop(selectedScenarioId, u.type);
+                  else toast.info("Create or select a scenario first.");
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    if (selectedScenarioId) void handleDrop(selectedScenarioId, u.type);
+                    else toast.info("Create or select a scenario first.");
+                  }
+                }}
                 draggable
                 onDragStart={(e) => {
                   e.dataTransfer.setData("text/unit", u.type);
@@ -178,6 +199,15 @@ export function TargetSidebar({
       </div>
 
       <div className="flex-1 space-y-2 overflow-y-auto p-4">
+        {scenarios.isError && (
+          <p role="alert" className="text-xs text-destructive">
+            {scenarios.error.message}
+          </p>
+        )}
+        <p className="text-xs text-muted-foreground">
+          Saved locally in this browser. Editing interventions clears previous results. Only lines
+          and batteries are modelled in v1.
+        </p>
         {(scenarios.data ?? [])
           .filter((s) => !s.is_template)
           .map((s) => {
@@ -355,4 +385,15 @@ function Stat({ label, value }: { label: string; value: string }) {
       <dd className="text-xs font-semibold">{value}</dd>
     </div>
   );
+}
+
+function safely<T, R>(action: (input: T) => Promise<R>) {
+  return async (input: T) => {
+    try {
+      return await action(input);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Could not update browser storage");
+      return undefined;
+    }
+  };
 }

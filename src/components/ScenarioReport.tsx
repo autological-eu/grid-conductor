@@ -95,19 +95,19 @@ export function ScenarioReport({
 
         <Section title="2. Problem addressed">
           <p className="text-sm">
-            Over the assessment period the border was at its observed transfer limit for{" "}
+            The screening identifies price spreads above its congestion threshold for{" "}
             {target.congested_hours} of {target.total_hours} hours while prices diverged between the
             two zones. The screen estimates a market opportunity of{" "}
             {target.market_opportunity_meur.toFixed(1)} MEUR per year (the bounded deadweight loss a
             capacity project could recover) and {target.climate_loss_ktco2.toFixed(1)} ktCO2 per
-            year of avoidable emissions.
+            year as an unsigned average-mix climate proxy, not demonstrated avoided emissions.
           </p>
         </Section>
 
         <Section title="3. Methodology">
           <p className="text-sm">
             {ind["methodology"] ??
-              "Hourly market clearing follows the ENTSO-E single day-ahead coupling (Euphemia) algorithm on an ATC network representation."}
+              "Experimental reduced-form screening. No dispatch-grade methodology is available for this result."}
           </p>
         </Section>
 
@@ -147,16 +147,21 @@ export function ScenarioReport({
           </table>
         </Section>
 
-        <Section title="6. Conclusion">
+        <Section title="6. Interpretation">
           <p className="text-sm">
-            The project delivers {r.market_opportunity_meur.toFixed(1)} MEUR per year of additional
-            welfare and {r.climate_opportunity_ktco2.toFixed(1)} ktCO2 per year of avoided
-            emissions, at a capital cost of {String(ind["c1_capex_meur"] ?? "—")} MEUR and a
-            delivery time of {String(ind["c2_delivery_months"] ?? "—")} months
+            The screening estimates {r.market_opportunity_meur.toFixed(1)} MEUR per year of
+            additional welfare and {r.climate_opportunity_ktco2.toFixed(1)} ktCO2 per year as a
+            climate proxy (not avoided emissions), at a capital cost of{" "}
+            {String(ind["c1_capex_meur"] ?? "—")} MEUR and a delivery time of{" "}
+            {String(ind["c2_delivery_months"] ?? "—")} months
             {ind["simple_payback_years"] != null
               ? `, implying a simple payback of ${String(ind["simple_payback_years"])} years`
               : ""}
             .
+          </p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Payback is a screening indicator. The 25-year figure is undiscounted; it does not
+            account for changing prices, degradation, financing or project feasibility.
           </p>
         </Section>
       </div>

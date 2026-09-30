@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { listScenarios, getValidation } from "@/lib/scenarios.functions";
 import type { TargetRow } from "./EuropeMap";
@@ -8,7 +7,7 @@ import { ScenarioReport } from "./ScenarioReport";
 
 const LABELS: Record<string, string> = {
   b1_socio_economic_welfare_meur_y: "B1 Socio-economic welfare (MEUR/y)",
-  b2_co2_variation_ktco2_y: "B2 CO2 variation (ktCO2/y)",
+  b2_co2_variation_ktco2_y: "B2 Climate proxy (est., ktCO2/y)",
   b3_res_integration_gwh_y: "B3 RES integration (GWh/y)",
   b4_losses_variation_gwh_y: "B4 Grid losses variation (GWh/y)",
   b5_security_of_supply_congested_hours_avoided: "B5 Security of supply (congested hours avoided)",
@@ -18,7 +17,7 @@ const LABELS: Record<string, string> = {
   b9_price_convergence_hours_gained: "B9 Price convergence hours gained",
   c1_capex_meur: "C1 Capital cost (MEUR)",
   c2_delivery_months: "C2 Delivery time (months)",
-  npv_25y_meur: "NPV over 25 years (MEUR)",
+  npv_25y_meur: "25-year undiscounted benefit minus capex (MEUR)",
   benefit_cost_ratio: "Benefit / cost ratio",
   simple_payback_years: "Simple payback (years)",
 };
@@ -30,8 +29,8 @@ export function EvaluationPanel({
   target: TargetRow | null;
   selectedScenarioId: string | null;
 }) {
-  const list = useServerFn(listScenarios);
-  const validationFn = useServerFn(getValidation);
+  const list = listScenarios;
+  const validationFn = getValidation;
   const [expanded, setExpanded] = useState<string | null>(null);
   const [reportId, setReportId] = useState<string | null>(null);
 
@@ -50,7 +49,8 @@ export function EvaluationPanel({
       <div className="border-b border-border p-4">
         <h2 className="text-sm font-semibold">Evaluation</h2>
         <p className="text-xs text-muted-foreground">
-          Key indicators per scenario, expandable to the full ENTSO-E CBA set.
+          Screening estimates with CBA-inspired indicators. Climate is an unsigned average-mix
+          proxy, not avoided emissions.
         </p>
       </div>
 
@@ -89,7 +89,7 @@ export function EvaluationPanel({
                   positive={r.market_opportunity_meur > 0}
                 />
                 <Kpi
-                  label="Climate opportunity"
+                  label="Climate proxy (est.)"
                   value={`${r.climate_opportunity_ktco2.toFixed(1)}`}
                   unit="ktCO2 / year"
                   positive={r.climate_opportunity_ktco2 > 0}
@@ -124,16 +124,21 @@ export function EvaluationPanel({
       {validation.data && (
         <div className="border-t border-border p-4 text-xs">
           <div className="flex items-center justify-between">
-            <span className="font-semibold">Model validation</span>
+            <span className="font-semibold">Screening data availability</span>
             <span className={validation.data.passed ? "text-emerald-600" : "text-destructive"}>
-              {validation.data.passed ? "Passed" : "Check"}
+              {validation.data.passed ? "Available" : "Check"}
             </span>
           </div>
+          <p className="mt-1 text-muted-foreground">
+            This check is not model validation. See Research for the separate pilot gates.
+          </p>
           <ul className="mt-1 space-y-0.5 text-muted-foreground">
             {Object.entries(validation.data.metrics as Record<string, number>).map(([k, v]) => (
-              <li key={k} className="flex justify-between">
+              <li key={k} className="flex justify-between gap-3">
                 <span>{k.replace(/_/g, " ")}</span>
-                <span className="font-medium text-foreground">{String(v)}</span>
+                <span className="max-w-[65%] break-words text-right font-medium text-foreground">
+                  {String(v)}
+                </span>
               </li>
             ))}
           </ul>

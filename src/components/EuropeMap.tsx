@@ -579,8 +579,19 @@ export function EuropeMap({
 
           {/* target borders, coloured grey (low) to red (high) by yearly market opportunity */}
           {targets.map((t) => {
-            const [x1, y1] = project(t.a_lon, t.a_lat);
-            const [x2, y2] = project(t.b_lon, t.b_lat);
+            let [x1, y1] = project(t.a_lon, t.a_lat);
+            let [x2, y2] = project(t.b_lon, t.b_lat);
+            // Opposite directed rows carry distinct evidence. Offset their
+            // schematic lines so each direction can actually be selected.
+            if (targets.some((other) => other.zone_a === t.zone_b && other.zone_b === t.zone_a)) {
+              const length = Math.hypot(x2 - x1, y2 - y1) || 1;
+              const offsetX = (-(y2 - y1) / length) * (7 / k);
+              const offsetY = ((x2 - x1) / length) * (7 / k);
+              x1 += offsetX;
+              x2 += offsetX;
+              y1 += offsetY;
+              y2 += offsetY;
+            }
             const v = metric === "market" ? t.market_opportunity_meur : t.climate_loss_ktco2;
             const c = Math.min(1, Math.max(0, v / lossCap));
             const isSelected = selectedId === t.id;
@@ -595,6 +606,15 @@ export function EuropeMap({
             return (
               <g
                 key={t.id}
+                role="button"
+                tabIndex={0}
+                aria-label={`Select ${t.zone_a} to ${t.zone_b} bottleneck`}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    onSelect(t);
+                  }
+                }}
                 className="cursor-pointer"
                 onClick={() => {
                   if (!wasDrag()) onSelect(t);
@@ -602,7 +622,7 @@ export function EuropeMap({
                 onMouseEnter={() => setHover(t.id)}
                 onMouseLeave={() => setHover(null)}
               >
-                <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="transparent" strokeWidth={16 / k} />
+                <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="transparent" strokeWidth={12 / k} />
                 {candidateB && (
                   <line
                     x1={x1}
@@ -685,7 +705,7 @@ export function EuropeMap({
         <p className="text-xs text-muted-foreground">
           {metric === "market"
             ? "Yearly market opportunity (bounded DWL)"
-            : "Yearly climate opportunity"}
+            : "Yearly climate proxy (est.)"}
         </p>
       </div>
 
@@ -716,10 +736,10 @@ export function EuropeMap({
         </button>
       </div>
 
-      <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg border border-border bg-card/90 px-3 py-2 text-xs text-muted-foreground backdrop-blur">
-        <div className="flex items-center justify-between gap-3">
+      <div className="pointer-events-none absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] rounded-lg border border-border bg-card/90 px-3 py-2 text-xs text-muted-foreground backdrop-blur">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="font-medium text-foreground">
-            {metric === "market" ? "Market opportunity (MEUR/y)" : "Climate opportunity (ktCO2/y)"}
+            {metric === "market" ? "Market opportunity (MEUR/y)" : "Climate proxy (est., ktCO2/y)"}
           </span>
           <div className="pointer-events-auto flex rounded-md border border-border p-0.5 text-[10px]">
             {(["market", "climate"] as const).map((m) => (

@@ -1,10 +1,8 @@
-import { createHash } from "node:crypto";
-import fs from "node:fs";
-import path from "node:path";
+import { loadScreeningData } from "./research";
 import { entsoeZoneMeta } from "./entsoeZones";
 
 /**
- * Step-1 -> EuropeMap adapter (server-side).
+ * Step-1 -> EuropeMap adapter (browser-side).
  *
  * Turns `public/research/entsoe-fast-targets.json` (the Step-1 ENTSO-E
  * screening: directed borders x the full calendar year) into the exact
@@ -82,8 +80,7 @@ type Step1File = {
   targets?: Step1BorderAnnual[];
 };
 
-export function loadStep1Summary(filePath: string): Step1Summary {
-  const raw = JSON.parse(fs.readFileSync(filePath, "utf-8")) as Step1File;
+export function summarizeStep1(raw: Step1File): Step1Summary {
   const rows = raw.targets ?? [];
 
   const byBorder = new Map<string, Step1BorderAnnual[]>();
@@ -196,27 +193,7 @@ function round2(x: number): number {
   return Math.round(x * 100) / 100;
 }
 
-/** The Step-1 screening artifact the workbench renders. */
-const SUMMARY_PATH = path.join(process.cwd(), "public", "research", "entsoe-fast-targets.json");
-
-/** Read the Step-1 summary from its well-known path (server-side). */
-export function loadStep1SummaryCwd(): Step1Summary {
-  return loadStep1Summary(SUMMARY_PATH);
-}
-
-/**
- * Deterministic target row id for a fast-entsoe directed border. The
- * `scenarios.target_id` column is a FK to `targets.id` (a Postgres uuid), but
- * fast-entsoe targets are identified by their border string ("FR>IT-North"),
- * so we map each border to a stable uuid4-style hash that survives edits,
- * re-runs and deploys. Existing Electricity-Maps target rows are untouched.
- */
-export function borderUuid(border: string): string {
-  const bytes = [
-    ...createHash("sha256").update(`grid-conductor:${border}`).digest().subarray(0, 16),
-  ];
-  bytes[6] = (bytes[6]! & 0x0f) | 0x40;
-  bytes[8] = (bytes[8]! & 0x3f) | 0x80;
-  const hex = bytes.map((b) => b.toString(16).padStart(2, "0")).join("");
-  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+/** Load the published screening artifact; no server or API credential required. */
+export async function loadStep1Summary(): Promise<Step1Summary> {
+  return summarizeStep1(await loadScreeningData());
 }

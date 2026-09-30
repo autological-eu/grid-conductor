@@ -1,5 +1,5 @@
-// Server-only 2-node LP for the fast ENTSO-E target ladder (Step 2).
-// Live on the bun server: reads the screening output published by
+// Browser-side 2-node LP for the fast ENTSO-E target ladder (Step 2).
+// Reads the screening output published by
 // tools/fast_entsoe_screening.py (public/research/entsoe-fast-targets.json)
 // and solves a genuine 2-node transport LP per scenario with
 // javascript-lp-solver. duals are recovered via finite-difference re-solve
@@ -23,8 +23,7 @@
 //     and discharging at avg spread via a 4-variable LP per cycle, x number of
 //     cycles bounded by energy/MW ratio; annualized with round-trip efficiency.
 //   * co_opt = cable_1000 + battery_200 (additive terms), capped at the DWL.
-import fs from "node:fs";
-import path from "node:path";
+import { loadScreeningData } from "./research";
 import solver, { type Model, type SolveResult } from "javascript-lp-solver";
 
 export type LpScenario = "cable_500" | "cable_1000" | "battery_200" | "battery_100" | "co_opt";
@@ -265,8 +264,7 @@ export function solveScenarios(row: ScreeningRow): ScenarioResult[] {
 }
 
 export async function loadTargetsJson(): Promise<Record<string, unknown>> {
-  const p = path.join(process.cwd(), "public", "research", "entsoe-fast-targets.json");
-  return JSON.parse(fs.readFileSync(p, "utf-8")) as Record<string, unknown>;
+  return loadScreeningData();
 }
 
 export async function fastEntsoeLp(
