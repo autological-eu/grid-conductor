@@ -39,6 +39,18 @@ try {
     await page.getByTestId("network-run").click();
     await page.getByTestId("network-result").waitFor();
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
+    await page.getByRole("button", { name: "Load real-data benchmark", exact: true }).click();
+    await page.getByLabel("Additional MW", { exact: true }).fill("500");
+    await page.getByRole("button", { name: "Set capacity addition" }).click();
+    await page.getByTestId("network-run").click();
+    await page.getByTestId("network-result").waitFor({ timeout: 30000 });
+    assert.match(await page.getByTestId("network-result").innerText(), /1,392,863/);
+    await page.reload();
+    await page.getByText("dc:14823: +500 MW in both directions").waitFor();
+    await page.getByTestId("network-run").click();
+    await page.getByTestId("network-result").waitFor({ timeout: 30000 });
+    assert.match(await page.getByTestId("network-result").innerText(), /1,392,863/);
+    assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
     if (viewport.width > 1000) {
       // Make cancellation observable using a full-period TEST input, never public research.
       const testInput = JSON.parse(await readFile("tests/fixtures/network.json", "utf8"));

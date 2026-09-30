@@ -200,3 +200,40 @@ test("added storage cannot introduce a free initial inventory subsidy", () => {
     }),
   ).toThrow("inventory subsidy");
 });
+
+test("schema-v2 reservoir conserves inflow, standing loss and cyclic inventory", () => {
+  const d = data();
+  d.schema_version = 2;
+  d.zones = ["A"];
+  d.load_mw = { A: [0, 10] };
+  d.external_net_import_mw = { A: [0, 0] };
+  d.generators = [{ id: "gas", zone: "A", max_mw: [20, 20], cost_eur_mwh: 100, co2_t_per_mwh: 1 }];
+  d.edges = [];
+  d.storage = [
+    {
+      id: "hydro",
+      zone: "A",
+      power_mw: 10,
+      charge_power_mw: 0,
+      energy_mwh: 10,
+      initial_mwh: 0,
+      terminal_mwh: 0,
+      charge_efficiency: 1,
+      discharge_efficiency: 0.9,
+      throughput_cost_eur_mwh: 0,
+      inflow_mw: [10, 0],
+      standing_loss: 0.1,
+      cyclic: true,
+    },
+  ];
+  const r = dispatchNetwork(highs, d);
+  expect(r.total_cost_eur).toBeCloseTo(190, 6);
+  expect(r.storage["hydro"]!.discharge_mw[1]).toBeCloseTo(8.1, 6);
+  expect(r.storage["hydro"]!.soc_mwh[0]).toBeCloseTo(r.storage["hydro"]!.soc_mwh[2]!, 6);
+  d.storage[0]!.inflow_mw = [100, 0];
+  expect(dispatchNetwork(highs, d).storage["hydro"]!.spill_mw[0]).toBeGreaterThan(0);
+  d.storage[0]!.inflow_mw = [0, 0];
+  expect(dispatchNetwork(highs, d).total_cost_eur).toBeCloseTo(1000, 6);
+  d.schema_version = 1;
+  expect(() => parseNetworkInput(d)).toThrow("schema v2");
+});

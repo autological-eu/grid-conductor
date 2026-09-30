@@ -11,7 +11,7 @@ from market_model import validate
 
 FIELDS = {'timestamps', 'interval_hours', 'zones', 'load_mw', 'external_net_import_mw',
           'generators', 'edges', 'storage', 'flow_based_regions', 'unserved_cost_eur_mwh'}
-DOCUMENTATION = {'provenance', 'assumptions', 'observed_price_eur_mwh', 'emission_basis'}
+DOCUMENTATION = {'schema_version', 'provenance', 'assumptions', 'observed_price_eur_mwh', 'emission_basis'}
 
 def export(source, dataset_id, assumptions):
     raw = source.read_bytes()
@@ -22,7 +22,7 @@ def export(source, dataset_id, assumptions):
     allowed = {
         'generators': {'id', 'zone', 'max_mw', 'min_mw', 'cost_eur_mwh', 'co2_t_per_mwh', 'energy_budget_mwh', 'ramp_mw_per_hour'},
         'edges': {'id', 'a', 'b', 'ab_mw', 'ba_mw'},
-        'storage': {'id', 'zone', 'power_mw', 'energy_mwh', 'initial_mwh', 'terminal_mwh', 'charge_efficiency', 'discharge_efficiency', 'throughput_cost_eur_mwh'},
+        'storage': {'id', 'zone', 'power_mw', 'energy_mwh', 'initial_mwh', 'terminal_mwh', 'charge_efficiency', 'discharge_efficiency', 'throughput_cost_eur_mwh', 'charge_power_mw', 'inflow_mw', 'standing_loss', 'cyclic'},
         'flow_based_regions': {'id', 'zones', 'constraints'},
     }
     for key, fields in allowed.items():
@@ -40,7 +40,7 @@ def export(source, dataset_id, assumptions):
     output = {key: value for key, value in data.items() if key in FIELDS}
     output.setdefault('storage', [])
     output.setdefault('flow_based_regions', [])
-    output.update(schema_version=1, dataset_id=dataset_id, provenance=dict(
+    output.update(schema_version=data.get('schema_version',1), dataset_id=dataset_id, provenance=dict(
         source=f'Offline linked-dispatch input: {source.name}',
         source_sha256=hashlib.sha256(raw).hexdigest(), assumptions=assumptions))
     return output

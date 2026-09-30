@@ -27,11 +27,15 @@ export const storageSchema = z
     charge_efficiency: finite.positive().max(1),
     discharge_efficiency: finite.positive().max(1),
     throughput_cost_eur_mwh: nonnegative,
+    charge_power_mw: nonnegative.optional(),
+    inflow_mw: series.optional(),
+    standing_loss: finite.nonnegative().lt(1).optional(),
+    cyclic: z.boolean().optional(),
   })
   .strict();
 const inputSchema = z
   .object({
-    schema_version: z.literal(1),
+    schema_version: z.union([z.literal(1), z.literal(2)]),
     dataset_id: id,
     provenance: z
       .object({
@@ -132,11 +136,20 @@ export function parseNetworkInput(value: unknown): NetworkInput {
     check(e.ab_mw);
     check(e.ba_mw);
   }
-  for (const s of d.storage)
+  for (const s of d.storage) {
+    if (s.inflow_mw) check(s.inflow_mw);
+    if (
+      d.schema_version === 1 &&
+      [s.charge_power_mw, s.inflow_mw, s.standing_loss, s.cyclic].some((v) => v !== undefined)
+    )
+      throw new Error("Reservoir features require input schema v2");
+    if (s.cyclic && (s.initial_mwh !== 0 || s.terminal_mwh !== 0))
+      throw new Error("Cyclic inventory is endogenous; fixed boundary fields must be zero");
     assert(
       d.zones.includes(s.zone) && Math.max(s.initial_mwh, s.terminal_mwh) <= s.energy_mwh,
       "Invalid storage zone or inventory",
     );
+  }
   unique(
     d.flow_based_regions.map((r) => r.id),
     "regions",
@@ -173,7 +186,7 @@ export function parseNetworkInput(value: unknown): NetworkInput {
       (d.generators.length +
         d.edges.length +
         2 * d.zones.length +
-        3 * d.storage.length +
+        4 * d.storage.length +
         assigned.size) <=
       (d.storage.length ||
       d.generators.some(

@@ -27,6 +27,9 @@ export function ResearchArticle({ content }: { content: string }) {
         rehypePlugins={[rehypeSlug]}
         components={{
           a: ({ href, children }) => <a href={publicationLink(href ?? "")}>{children}</a>,
+          img: ({ src, alt }) => (
+            <img src={publicationLink(src ?? "")} alt={alt ?? ""} loading="lazy" />
+          ),
           table: ({ children }) => (
             <div className="overflow-x-auto" tabIndex={0}>
               <table>{children}</table>

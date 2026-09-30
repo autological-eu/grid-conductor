@@ -7,6 +7,7 @@ import {
   type DispatchResult,
   type compareDispatch,
 } from "@/lib/network-model/solver";
+import { publicAsset } from "@/lib/research";
 import { loadNetworkWorkspace, saveNetworkWorkspace } from "@/lib/network-model/persistence";
 
 export const Route = createFileRoute("/network")({ component: NetworkLab });
@@ -65,6 +66,17 @@ function NetworkLab() {
       setMessage(`Persistence failed: ${String(error)}`),
     );
   }, [input, patch, ready]);
+  const importModel = (value: unknown) => {
+    const data = parseNetworkInput(value);
+    setInput(data);
+    setPatch(emptyPatch);
+    setResult(undefined);
+    setEdge(data.edges.find((e) => e.id === "dc:14823")?.id ?? data.edges[0]?.id ?? "");
+    setZone(data.zones.find((z) => z === "PL1 0") ?? data.zones[0] ?? "");
+    setMessage("Input parsed. Source declaration is not independent validation.");
+    worker.current?.terminate();
+    worker.current = null;
+  };
   const edit = (next: Intervention) => {
     if (!input) return;
     try {
@@ -123,15 +135,39 @@ function NetworkLab() {
         / optional PTDF model uses chronological availability, operating costs and demand—not
         observed price spreads.
       </p>
-      <aside className="rounded border p-4 text-sm">
-        <strong>European dataset not yet ready.</strong> Published PyPSA dispatch outputs cannot
-        substitute for generation availability. Its solved source network and baseline manifest are
-        required for a genuine annual comparison. The existing map continues to use the screening
-        model.
+      <aside className="rounded border p-4 text-sm space-y-3">
+        <p>
+          <strong>Real-data technical benchmark available.</strong> The public 37-bus PyPSA archive
+          contains 2013 weather/load, older existing fleet assumptions and hydro inflows. This is a
+          one-week benchmark, not a validated 2025 investment estimate. Swedish cluster IDs are not
+          bidding-zone labels.
+        </p>
+        <button
+          disabled={busy || !ready}
+          className="rounded border px-3 py-2"
+          onClick={async () => {
+            try {
+              const response = await fetch(publicAsset("research/network-benchmark/input.json"));
+              if (!response.ok) throw new Error(`Dataset unavailable (${response.status})`);
+              importModel(await response.json());
+            } catch (error) {
+              setMessage(String(error));
+            }
+          }}
+        >
+          Load real-data benchmark
+        </button>
+        <Link
+          to="/docs/$slug"
+          params={{ slug: "network-benchmark-comparison" }}
+          className="ml-3 underline"
+        >
+          Results, speed and AC comparison
+        </Link>
       </aside>
       <p className="text-sm">
-        Import a schema-v1 JSON input from your offline research pipeline. It stays in this browser.
-        No weather processing, uploads or server are involved.{" "}
+        Import a schema-v1/v2 JSON input from your offline research pipeline. It stays in this
+        browser. No weather processing, uploads or server are involved.{" "}
         <Link to="/docs/$slug" params={{ slug: "fast-network-model" }} className="underline">
           Input format, equations and limitations
         </Link>
@@ -151,15 +187,7 @@ function NetworkLab() {
             try {
               if (file.size > 25 * 1024 * 1024)
                 throw new Error("Input exceeds 25 MiB browser import budget");
-              const data = parseNetworkInput(JSON.parse(await file.text()));
-              setInput(data);
-              setPatch(emptyPatch);
-              setResult(undefined);
-              setEdge(data.edges[0]?.id ?? "");
-              setZone(data.zones[0] ?? "");
-              setMessage("Input parsed. Source declaration is not independent validation.");
-              worker.current?.terminate();
-              worker.current = null;
+              importModel(JSON.parse(await file.text()));
             } catch (error) {
               setMessage(String(error));
             }

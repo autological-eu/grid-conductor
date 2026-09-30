@@ -5,7 +5,8 @@ The experimental network lab is available at [/network](/network). It solves a
 The existing map and screening calculations are unchanged.
 
 **Current gate:** the browser engine is implemented and tested, but a reproducible
-European annual input has not yet been exported. Do not interpret the lab as a
+European annual input has not yet been exported. A matched real-data **168-hour**
+benchmark is now available: [comparison](network-benchmark-comparison.md). Do not interpret the lab as a
 validated European investment model. The input audit is published in
 [network-model-input-audit.json](../public/research/network-model-input-audit.json).
 
@@ -209,3 +210,14 @@ in force. The engine does not bypass them.
 
 The full phased implementation and acceptance criteria remain in
 [the implementation plan](fast-network-model-plan.md).
+
+## Reservoir input extension (schema v2)
+
+Schema v1 remains unchanged and rejects reservoir-specific fields. V2 adds declared
+`inflow_mw`, `charge_power_mw`, hourly `standing_loss` and `cyclic` storage. The
+linked balance includes inflow minus water spill, with spill bounded by inflow.
+Cyclic storage has endogenous bounded initial inventory equal to terminal
+inventory; supplied initial/terminal fields must be zero placeholders. Added
+battery interventions cannot receive inflow or free initial/final inventory.
+These semantics are independently matched against native PyPSA in the
+[real-data benchmark](network-benchmark-comparison.md).

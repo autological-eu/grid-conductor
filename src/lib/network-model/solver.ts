@@ -15,7 +15,10 @@ export interface DispatchResult {
   price_eur_mwh: Record<string, number[]>;
   generation_mw: Record<string, number[]>;
   flow_mw: Record<string, number[]>;
-  storage: Record<string, { charge_mw: number[]; discharge_mw: number[]; soc_mwh: number[] }>;
+  storage: Record<
+    string,
+    { charge_mw: number[]; discharge_mw: number[]; soc_mwh: number[]; spill_mw: number[] }
+  >;
 }
 export function applyIntervention(input: NetworkInput, patch: Intervention): NetworkInput {
   const data = structuredClone(input);
@@ -28,7 +31,12 @@ export function applyIntervention(input: NetworkInput, patch: Intervention): Net
     edge.ba_mw = edge.ba_mw.map((v) => v + mw);
   }
   for (const storage of patch.storage) {
-    if (storage.initial_mwh !== 0 || storage.terminal_mwh !== 0)
+    if (
+      storage.initial_mwh !== 0 ||
+      storage.terminal_mwh !== 0 ||
+      storage.inflow_mw?.some((v) => v !== 0) ||
+      storage.cyclic
+    )
       throw new Error(
         "New storage interventions must start and end empty; no added inventory subsidy",
       );
@@ -72,11 +80,18 @@ export function compileNetwork(d: NetworkInput) {
     }
   for (const s of d.storage) {
     for (let t = 0; t < H; t++) {
-      add("charge", s.id, t, s.throughput_cost_eur_mwh * dt, 0, s.power_mw);
+      add("charge", s.id, t, s.throughput_cost_eur_mwh * dt, 0, s.charge_power_mw ?? s.power_mw);
       add("discharge", s.id, t, s.throughput_cost_eur_mwh * dt, 0, s.power_mw);
+      if (s.inflow_mw) add("water_spill", s.id, t, 0, 0, s.inflow_mw[t]!);
     }
     for (let t = 0; t <= H; t++) {
-      const fixed = t === 0 ? s.initial_mwh : t === H ? s.terminal_mwh : undefined;
+      const fixed = s.cyclic
+        ? undefined
+        : t === 0
+          ? s.initial_mwh
+          : t === H
+            ? s.terminal_mwh
+            : undefined;
       add("soc", s.id, t, 0, fixed ?? 0, fixed ?? s.energy_mwh);
     }
   }
@@ -129,9 +144,20 @@ export function compileNetwork(d: NetworkInput) {
       row(
         [
           [ix("soc", s.id, t + 1), 1],
-          [ix("soc", s.id, t), -1],
+          [ix("soc", s.id, t), -Math.pow(1 - (s.standing_loss ?? 0), dt)],
           [ix("charge", s.id, t), -dt * s.charge_efficiency],
           [ix("discharge", s.id, t), dt / s.discharge_efficiency],
+          ...(s.inflow_mw ? [[ix("water_spill", s.id, t), dt] as [number, number]] : []),
+        ],
+        dt * (s.inflow_mw?.[t] ?? 0),
+        dt * (s.inflow_mw?.[t] ?? 0),
+      );
+  for (const s of d.storage)
+    if (s.cyclic)
+      row(
+        [
+          [ix("soc", s.id, 0), 1],
+          [ix("soc", s.id, H), -1],
         ],
         0,
         0,
@@ -272,6 +298,7 @@ function dispatchLinkedNetwork(
           charge_mw: series("charge", s.id),
           discharge_mw: series("discharge", s.id),
           soc_mwh: series("soc", s.id, H + 1),
+          spill_mw: s.inflow_mw ? series("water_spill", s.id) : Array(H).fill(0),
         },
       ]),
     );

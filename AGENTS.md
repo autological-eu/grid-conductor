@@ -145,3 +145,12 @@ research retains its separate integration gates.
   `bun tools/benchmark_fast_network.ts` uses synthetic structural cases only.
 - Python reference regeneration: `python3 tools/check_fast_network_reference.py`.
   Inspect changes to committed analytical fixtures rather than blindly accepting them.
+
+- Public weekly real-data benchmark: `public/research/network-benchmark/`, prepared
+  Zenodo 7646728 37-bus network. 2013 weather/load, 2020 renewable estimates, 2030
+  source costs, zero carbon price; never relabel as the missing 2025 run or SE4.
+  See `docs/network-benchmark-comparison.md` for matched inputs and reproduction.
+- Schema v2 explicitly supports reservoir inflow, spill bounded by inflow,
+  asymmetric charging, standing loss and cyclic initial/final inventory. Schema v1
+  rejects those fields. New battery interventions remain empty at both boundaries.
+  Preserve paired chronology and signed emissions, including increases.

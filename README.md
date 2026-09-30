@@ -19,7 +19,9 @@ running Bun/Node server, authentication, cloud database or paid service is neede
 - `/docs`: research publications sourced from `docs/*.md`, plus published artifacts.
 - `/docs/<document-slug>`: individual Markdown publication.
 - `/network`: experimental HiGHS/WASM coupled dispatch lab; complete local input
-  required, separate IndexedDB workspace, no validated European annual dataset yet.
+  or load the prepared real-data weekly benchmark; separate IndexedDB workspace.
+  See [matched PyPSA comparison](docs/network-benchmark-comparison.md). No validated
+  European annual dataset yet.
 - `/targets`: separate observed-spread and PyPSA-Eur evidence views.
 - `src/lib/workbench.ts`: versioned IndexedDB persistence; stable IDs, ordered
   interventions, scenario snapshots and results. Edits invalidate old evaluations.

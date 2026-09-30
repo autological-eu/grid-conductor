@@ -9,6 +9,7 @@ export const Route = createFileRoute("/docs")({
 });
 
 const artifacts = [
+  ["network-benchmark/results.json", "Matched real-data weekly dispatch benchmark · experimental"],
   ["entsoe-fast-targets.json", "2025 annual screening · workbench input"],
   ["model-validation.json", "FR–CH validation · experimental, failed gates"],
   ["eu-input-quality.json", "European input coverage · blocked baseline"],
@@ -72,6 +73,19 @@ function Research() {
         <span className="mt-1 block text-sm text-muted-foreground">
           Exact source fields, arithmetic, line and battery examples, and the fallback-slope
           assumption.
+        </span>
+      </Link>
+      <Link
+        to="/docs/$slug"
+        params={{ slug: "network-benchmark-comparison" }}
+        className="mb-6 block max-w-3xl rounded-xl border p-5"
+      >
+        <span className="block font-semibold">
+          Real-data benchmark: browser dispatch versus PyPSA →
+        </span>
+        <span className="mt-1 block text-sm text-muted-foreground">
+          Matched weekly inputs, investment benefits, network-physics differences and measured
+          timings.
         </span>
       </Link>
       <div className="grid gap-10 lg:grid-cols-[14rem_minmax(0,1fr)]">
