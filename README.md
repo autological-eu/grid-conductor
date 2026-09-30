@@ -5,7 +5,7 @@ workbench. The interactive map is the landing page: select a directed border,
 inspect published evidence, create a scenario, add transmission or battery
 interventions, and evaluate estimated economic and climate indicators.
 
-Public-v1 target URL: **https://autological-eu.github.io/grid-conductor/**.
+Public site: **https://autological-eu.github.io/grid-conductor/**.
 Deployment requires GitHub Pages to be enabled for this repository; a successful
 build alone does not establish a live deployment.
 

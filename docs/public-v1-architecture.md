@@ -62,12 +62,26 @@ The test suite checks published annual DWL caps, exact cable integration, batter
 cycle efficiency/shadow prices, annual units, persistent IDs/order, atomic edits,
 concurrent writes, cascade deletion and stale evaluation rejection.
 
-Deployment is not established until an Actions deployment succeeds and the URL
-is opened without authentication. The repository remains private; public Pages
-requires an eligible plan and public Pages settings. The connected integration
-initially denied Pages settings access (403), so repository administration may
-require manual action. See the pull request and completion report for observed
-Actions/browser verification and outstanding deployment settings.
+## Verified public deployment (30 September 2026)
+
+The repository owner made the source public and selected GitHub Actions as the
+Pages source. The agent did not change visibility or merge into `main`.
+
+Public application: https://autological-eu.github.io/grid-conductor/.
+Successful build and deployment:
+https://github.com/autological-eu/grid-conductor/actions/runs/36737646156.
+Review pull request: https://github.com/autological-eu/grid-conductor/pull/1.
+
+GitHub reports a public Pages site. Unauthenticated HTTP requests returned 200
+for the homepage, direct `/docs`, a research article, `/targets` and the screening
+JSON. Real Chromium smoke checks also passed against the deployed site at
+1440 px and 390 px, including desktop drag-and-drop, local evaluation, refresh
+persistence and direct routes. A follow-up map fix uses the SVG viewport matrix
+for placement/panning, preserving coordinates under aspect-ratio letterboxing.
+
+No Pages setting remains outstanding at this verification point. Future changes
+still require the configured deployment branch policy, public site setting and
+successful Actions deployment; a build alone is insufficient.
 
 ## Follow-up research and product work
 
