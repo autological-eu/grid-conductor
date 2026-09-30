@@ -154,3 +154,10 @@ research retains its separate integration gates.
   asymmetric charging, standing loss and cyclic initial/final inventory. Schema v1
   rejects those fields. New battery interventions remain empty at both boundaries.
   Preserve paired chronology and signed emissions, including increases.
+
+- Climate robustness study: `docs/network-carbon-sensitivity.md`, four assumed
+  carbon prices with a separate paired baseline at each price. Effective cost is
+  archived cost + assumed price × direct generation intensity. Never add carbon
+  benefit twice or treat allowance price as an automatic social damage value.
+  Reproduce with `tools/carbon_network_sensitivity.py`, then
+  `bun tools/check_carbon_sensitivity.ts`, then the Python publication tool.

@@ -20,7 +20,9 @@ running Bun/Node server, authentication, cloud database or paid service is neede
 - `/docs/<document-slug>`: individual Markdown publication.
 - `/network`: experimental HiGHS/WASM coupled dispatch lab; complete local input
   or load the prepared real-data weekly benchmark; separate IndexedDB workspace.
-  See [matched PyPSA comparison](docs/network-benchmark-comparison.md). No validated
+  Choose explicit carbon-price assumptions for paired local re-solves.
+  See [matched PyPSA comparison](docs/network-benchmark-comparison.md) and
+  [climate sensitivity](docs/network-carbon-sensitivity.md). No validated
   European annual dataset yet.
 - `/targets`: separate observed-spread and PyPSA-Eur evidence views.
 - `src/lib/workbench.ts`: versioned IndexedDB persistence; stable IDs, ordered

@@ -338,3 +338,20 @@ Work can proceed through schema, reference formulation and analytical tests whil
 source recovery is pending. The data gate determines whether real full-year
 experiments can run. Do not spend time rebuilding all European weather or an
 elaborate new frontend before establishing that boundary.
+
+## Measured progress: 30 September 2026
+
+The experimental browser prototype now has a real prepared **weekly** European
+input and a [matched PyPSA comparison](network-benchmark-comparison.md). The
+37-physical-cluster archive preserves weather availability and reservoir inflow;
+schema v2 adds explicit reservoir/cyclic chronology while v1 stays compatible.
+Transport numerical parity passes, and source-network Kirchhoff comparisons
+measure a nontrivial benefit approximation error. This closes the compact
+technical-input and solver-benchmark milestones, not annual historical validation.
+
+A separate [carbon-price study](network-carbon-sensitivity.md) shows why economic
+and climate benefit require explicit policy assumptions and paired baselines.
+The public lab loads the archived benchmark and persists interventions locally.
+Full-year 2025 input recovery, modern calibration, seasonal robustness, named
+network scenarios, security constraints and investment appraisal remain open.
+The original map retains its existing screening model.

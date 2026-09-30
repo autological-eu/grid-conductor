@@ -9,6 +9,7 @@ export const Route = createFileRoute("/docs")({
 });
 
 const artifacts = [
+  ["network-benchmark/carbon-sensitivity.json", "Paired carbon-price sensitivity · experimental"],
   ["network-benchmark/results.json", "Matched real-data weekly dispatch benchmark · experimental"],
   ["entsoe-fast-targets.json", "2025 annual screening · workbench input"],
   ["model-validation.json", "FR–CH validation · experimental, failed gates"],

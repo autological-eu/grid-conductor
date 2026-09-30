@@ -95,6 +95,9 @@ Maximum cross-implementation cost difference: **€0.000016**. Maximum browser/B
 
 In this zero-carbon-price archived week, **every tested intervention increases modelled generation emissions**. The +500 MW link case increases emissions by about **3,593 t** in transport and **28,408 t** in AC. Those are signed dispatch differences, not average-mix proxies. Their disagreement is another reason not to infer emissions from a border's average generation mix.
 
+The follow-up [carbon-price sensitivity](network-carbon-sensitivity.md) tests €0,
+€40, €80 and €120/t with a paired baseline at every price.
+
 A grid project enables trade; which generators expand or contract depends on costs and constraints. Cheap fossil generation can gain access to new demand. Climate-aware planning must declare carbon costs or emissions constraints, then re-clear and report both economic and emissions effects. This benchmark's cost year and absent carbon price are not a representation of today's EU ETS market.
 
 ## What this establishes, and what remains open

@@ -68,12 +68,23 @@ try {
       "docs/",
       "docs/worked-example-se4-pl/",
       "docs/fast-entsoe-screening/",
+      "docs/network-benchmark-comparison/",
+      "docs/network-carbon-sensitivity/",
       "targets/",
     ]) {
       const response = await page.goto(`${base}${route}`);
       assert.equal(response?.status(), 200, `Direct navigation to ${route}`);
       await page.getByRole("heading", { level: 1 }).first().waitFor();
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
+      if (route.startsWith("docs/network-")) {
+        await page.locator("article img").scrollIntoViewIfNeeded();
+        await page.waitForFunction(() =>
+          Array.from(document.images).every((img) => img.complete && img.naturalWidth > 0),
+        );
+        assert(
+          await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
+        );
+      }
       if (route === "docs/") {
         await page.getByRole("heading", { name: "2. What market opportunity means" }).waitFor();
         const anchorsResolve = await page

@@ -7,6 +7,7 @@ import {
   type DispatchResult,
   type compareDispatch,
 } from "@/lib/network-model/solver";
+import { benchmarkWithCarbonPrice } from "@/lib/network-model/benchmark";
 import { publicAsset } from "@/lib/research";
 import { loadNetworkWorkspace, saveNetworkWorkspace } from "@/lib/network-model/persistence";
 
@@ -29,6 +30,7 @@ function NetworkLab() {
   const [message, setMessage] = useState("Import a complete model input to start.");
   const [busy, setBusy] = useState(false);
   const [loadingInput, setLoadingInput] = useState(false);
+  const [benchmarkCarbon, setBenchmarkCarbon] = useState(0);
   const [ready, setReady] = useState(false);
   const [edge, setEdge] = useState("");
   const [mw, setMw] = useState(100);
@@ -42,6 +44,7 @@ function NetworkLab() {
           const data = parseNetworkInput(saved.input);
           applyIntervention(data, saved.patch);
           setInput(data);
+          setBenchmarkCarbon(Number(data.dataset_id.match(/-carbon-(40|80|120)$/)?.[1] ?? 0));
           setPatch(saved.patch);
           setEdge(data.edges[0]?.id ?? "");
           setZone(data.zones[0] ?? "");
@@ -70,6 +73,7 @@ function NetworkLab() {
   const importModel = (value: unknown) => {
     const data = parseNetworkInput(value);
     setInput(data);
+    setBenchmarkCarbon(Number(data.dataset_id.match(/-carbon-(40|80|120)$/)?.[1] ?? 0));
     setPatch(emptyPatch);
     setResult(undefined);
     setEdge(data.edges.find((e) => e.id === "dc:14823")?.id ?? data.edges[0]?.id ?? "");
@@ -143,6 +147,26 @@ function NetworkLab() {
           one-week benchmark, not a validated 2025 investment estimate. Swedish cluster IDs are not
           bidding-zone labels.
         </p>
+        <label className="block">
+          Assumed carbon price (€/t CO₂)
+          <select
+            aria-label="Assumed carbon price (€/t CO₂)"
+            className="ml-3 rounded border p-2"
+            value={benchmarkCarbon}
+            disabled={busy || loadingInput}
+            onChange={(event) => setBenchmarkCarbon(Number(event.target.value))}
+          >
+            {[0, 40, 80, 120].map((price) => (
+              <option key={price} value={price}>
+                €{price}/t
+              </option>
+            ))}
+          </select>
+        </label>
+        <p>
+          Illustrative addition to the archive’s zero-carbon costs. Load to apply; loading resets
+          interventions. Each price uses its own baseline.
+        </p>
         <button
           disabled={busy || loadingInput || !ready}
           className="rounded border px-3 py-2"
@@ -153,7 +177,7 @@ function NetworkLab() {
             try {
               const response = await fetch(publicAsset("research/network-benchmark/input.json"));
               if (!response.ok) throw new Error(`Dataset unavailable (${response.status})`);
-              importModel(await response.json());
+              importModel(benchmarkWithCarbonPrice(await response.json(), benchmarkCarbon));
             } catch (error) {
               setMessage(String(error));
             } finally {
@@ -169,6 +193,13 @@ function NetworkLab() {
           className="ml-3 underline"
         >
           Results, speed and AC comparison
+        </Link>
+        <Link
+          to="/docs/$slug"
+          params={{ slug: "network-carbon-sensitivity" }}
+          className="ml-3 underline"
+        >
+          Carbon sensitivity and interpretation
         </Link>
       </aside>
       <p className="text-sm">
