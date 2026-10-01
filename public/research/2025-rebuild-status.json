@@ -103,6 +103,18 @@
     "Measure solve memory/time on the 128-node March case before committing to a full linked annual solve on 8 GiB."
   ],
   "historical_market_validation": "not_performed",
+  "verified_spatial_weather_batches": [
+    {
+      "start": "2025-03-01T00:00:00",
+      "end_exclusive": "2025-04-01T00:00:00",
+      "hours": 744,
+      "sha256": "5deb3dd5b8e0527083790b12dc5d34e77e3aef49619815ad8ffc6442fad8c7db",
+      "raw_sha256": "655d6607f1d2e9e192315d070214b3b818a2bdfc899163952b00d5fb776d5560",
+      "atlite_version": "0.6.1",
+      "bytes": 160426445
+    }
+  ],
+  "annual_spatial_weather_complete": false,
   "prepared_upstream_demand": {
     "march": {
       "status": "prepared_demand_not_dispatch_validation",

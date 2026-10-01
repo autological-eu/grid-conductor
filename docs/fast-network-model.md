@@ -78,7 +78,7 @@ are decomposed into 24-interval blocks only when none of these restrictions exis
 this is mathematically exact for the supported model, not time sampling. There is
 no representative-day weighting or rolling-horizon approximation.
 
-The schema does not yet support reservoir inflows, standing losses, unit commitment,
+Schema v2 adds reservoir inflows and standing losses; v3 adds linearised Kirchhoff physics. The model does not yet support unit commitment,
 lossy links, reserve/security rules, or detailed within-zone physics. Those features
 must not be silently dropped in a PyPSA reduction. An annual energy-budget generator
 is not a substitute for reservoir chronology unless explicitly justified and audited.

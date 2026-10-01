@@ -32,6 +32,12 @@ def main():
         filename = f'2025-{label}-demand-audit.json'
         (ROOT/'public/research'/filename).write_text(json.dumps(audit, indent=2)+'\n')
         prepared[label] = dict(status=audit['status'], hours=len(data), countries=len(data.columns), audit=filename)
+    verified_weather = []
+    for receipt in sorted((ROOT/'data/pypsa-eur/monthly-weather').glob('2025-*/verified.json')):
+        item = json.loads(receipt.read_text())
+        verified_weather.append({k: item[k] for k in ['start', 'end_exclusive', 'hours', 'sha256', 'raw_sha256', 'atlite_version', 'bytes']})
+    report['verified_spatial_weather_batches'] = verified_weather
+    report['annual_spatial_weather_complete'] = len(verified_weather) == 12
     report['prepared_upstream_demand'] = prepared
     (ROOT/'public/research/2025-rebuild-status.json').write_text(json.dumps(report,indent=2)+'\n');print('2025 weather and GB load ready; complete ENTSO-E country load:',len(report['entsoe_hourly_load']['complete_countries']))
 if __name__=='__main__':main()
