@@ -10,7 +10,7 @@ from pathlib import Path
 from market_model import validate
 
 FIELDS = {'timestamps', 'interval_hours', 'zones', 'load_mw', 'external_net_import_mw',
-          'generators', 'edges', 'storage', 'flow_based_regions', 'unserved_cost_eur_mwh'}
+          'generators', 'edges', 'storage', 'ac_branches', 'flow_based_regions', 'unserved_cost_eur_mwh'}
 DOCUMENTATION = {'schema_version', 'provenance', 'assumptions', 'observed_price_eur_mwh', 'emission_basis'}
 
 def export(source, dataset_id, assumptions):
@@ -23,6 +23,7 @@ def export(source, dataset_id, assumptions):
         'generators': {'id', 'zone', 'max_mw', 'min_mw', 'cost_eur_mwh', 'co2_t_per_mwh', 'energy_budget_mwh', 'ramp_mw_per_hour'},
         'edges': {'id', 'a', 'b', 'ab_mw', 'ba_mw'},
         'storage': {'id', 'zone', 'power_mw', 'energy_mwh', 'initial_mwh', 'terminal_mwh', 'charge_efficiency', 'discharge_efficiency', 'throughput_cost_eur_mwh', 'charge_power_mw', 'inflow_mw', 'standing_loss', 'cyclic'},
+        'ac_branches': {'edge_id', 'reactance'},
         'flow_based_regions': {'id', 'zones', 'constraints'},
     }
     for key, fields in allowed.items():

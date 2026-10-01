@@ -1,6 +1,10 @@
 import { chromium } from "playwright";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 const base = process.env["SMOKE_URL"] ?? "http://127.0.0.1:4173/grid-conductor/";
+const asset = process.env["NETWORK_BENCHMARK_INPUT"] ?? "research/network-benchmark/input.json";
+const output =
+  process.env["NETWORK_BENCHMARK_OUTPUT"] ??
+  "data/pypsa-eur/network-benchmark/browser-results.json";
 const manifest = JSON.parse(
   await readFile("public/research/network-benchmark/manifest.json", "utf8"),
 );
@@ -17,9 +21,9 @@ try {
     page.on("pageerror", (error) => failures.push(error.message));
     await page.goto(`${base}network/`);
     const results = await page.evaluate(
-      async ({ base, filename, cases }) => {
+      async ({ base, filename, cases, asset }) => {
         const beforeFetch = performance.now();
-        const response = await fetch(`${base}research/network-benchmark/input.json`);
+        const response = await fetch(`${base}${asset}`);
         if (!response.ok) throw new Error("Input fetch failed");
         const input = await response.json();
         const input_fetch_parse_ms = performance.now() - beforeFetch;
@@ -66,7 +70,7 @@ try {
         }
         return { input_fetch_parse_ms, cases: results };
       },
-      { base, filename, cases: manifest.cases },
+      { base, filename, cases: manifest.cases, asset },
     );
     if (failures.length) throw new Error(failures.join("\n"));
     trials.push(results);
@@ -86,7 +90,7 @@ try {
     );
   }
   await writeFile(
-    "data/pypsa-eur/network-benchmark/browser-results.json",
+    output,
     JSON.stringify(
       {
         runtime: `Chromium ${browser.version()}`,

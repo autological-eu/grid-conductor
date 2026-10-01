@@ -55,6 +55,7 @@ def add_storage(n,storage):
             n.storage_units_t.state_of_charge_set[s['id']]=values
 
 def transport_network(d):
+    if d.get("ac_branches"):raise ValueError("AC physics cannot be silently discarded by transport adapter")
     n=pypsa.Network();n.set_snapshots(pd.to_datetime(d['timestamps']).tz_localize(None));n.snapshot_weightings.loc[:,:]=d['interval_hours']
     n.add('Bus',d['zones'])
     n.add('Load',['load::'+z for z in d['zones']],bus=d['zones'],

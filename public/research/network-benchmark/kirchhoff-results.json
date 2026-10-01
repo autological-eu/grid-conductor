@@ -1,0 +1,215 @@
+{
+  "status": "experimental_not_historically_validated",
+  "physics": "Linearised lossless Kirchhoff AC network with controllable HVDC; fixed line impedance",
+  "input": {
+    "parent_input_file_sha256": "7f2ba384a65a58bd26e7241cf46128b47cf52c6cddbdf842be380e032b261cdf",
+    "input_file_sha256": "d29cc60600283187942a85cbe7adbc016dd352ee5f3e439748892bfd248a184e",
+    "ac_branches": 51,
+    "omitted_zero_capacity_edges": [
+      "ac:3"
+    ],
+    "physics": "linearised lossless AC (DC power flow) with controllable HVDC",
+    "status": "experimental_not_historically_validated"
+  },
+  "period": "2013-01-01 to 2013-01-08 exclusive; not 2025",
+  "runtime": "Chromium 153.0.8010.12",
+  "timing_scope": "request includes structured clone, input validation/hash, cold worker/WASM startup on first request, solving and returning full results; dataset fetch/parse reported separately. Later requests cache baseline.",
+  "trials": 3,
+  "cases": [
+    {
+      "id": "baseline",
+      "native_ac_cost_eur": 922865591.1680124,
+      "native_ac_benefit_eur": 0.0,
+      "browser_cost_eur": 922865591.1680125,
+      "browser_median_request_ms": 3708.4000000059605,
+      "bun_median_ms": 3126.6750900000006,
+      "maximum_cost_difference_eur": 1.1920928955078125e-07
+    },
+    {
+      "id": "swepol-plus-100",
+      "native_ac_cost_eur": 922532254.7311428,
+      "native_ac_benefit_eur": 333336.4368696213,
+      "browser_cost_eur": 922532254.7311422,
+      "browser_median_request_ms": 555.7999999970198,
+      "bun_median_ms": 642.2983539999996,
+      "maximum_cost_difference_eur": 5.960464477539062e-07
+    },
+    {
+      "id": "swepol-plus-500",
+      "native_ac_cost_eur": 921219411.7962291,
+      "native_ac_benefit_eur": 1646179.3717832565,
+      "browser_cost_eur": 921219411.7962297,
+      "browser_median_request_ms": 444.3999999910593,
+      "bun_median_ms": 472.44797599999947,
+      "maximum_cost_difference_eur": 5.960464477539062e-07
+    },
+    {
+      "id": "swepol-plus-1000",
+      "native_ac_cost_eur": 920272217.8209062,
+      "native_ac_benefit_eur": 2593373.3471062183,
+      "browser_cost_eur": 920272217.8209068,
+      "browser_median_request_ms": 675.5,
+      "bun_median_ms": 712.8794249999992,
+      "maximum_cost_difference_eur": 1.0728836059570312e-06
+    },
+    {
+      "id": "battery-PL-100-400",
+      "native_ac_cost_eur": 922846786.5354031,
+      "native_ac_benefit_eur": 18804.63260924816,
+      "browser_cost_eur": 922846786.535403,
+      "browser_median_request_ms": 3091.199999988079,
+      "bun_median_ms": 3315.7792260000024,
+      "maximum_cost_difference_eur": 1.1920928955078125e-07
+    },
+    {
+      "id": "mixed-500-battery",
+      "native_ac_cost_eur": 921200489.2484213,
+      "native_ac_benefit_eur": 1665101.9195910692,
+      "browser_cost_eur": 921200489.2484208,
+      "browser_median_request_ms": 617.1999999880791,
+      "bun_median_ms": 641.4907650000023,
+      "maximum_cost_difference_eur": 4.76837158203125e-07
+    },
+    {
+      "id": "meshed-DE-FR-plus-500",
+      "native_ac_cost_eur": 922678764.3884687,
+      "native_ac_benefit_eur": 186826.77954363823,
+      "browser_cost_eur": 922678764.3884689,
+      "browser_median_request_ms": 2954,
+      "bun_median_ms": 3116.7829789999996,
+      "maximum_cost_difference_eur": 1.1920928955078125e-07
+    }
+  ],
+  "carbon_policy_parity": {
+    "cases": [
+      {
+        "price": 0,
+        "id": "baseline",
+        "total_cost_eur": 922865591.1680125,
+        "native_ac_difference_eur": 1.1920928955078125e-07,
+        "co2_difference_t": 2.2351741790771484e-08,
+        "max_constraint_violation": 2.091837814077735e-10
+      },
+      {
+        "price": 0,
+        "id": "swepol-plus-500",
+        "total_cost_eur": 921219411.7962294,
+        "native_ac_difference_eur": 2.384185791015625e-07,
+        "co2_difference_t": 1.4901161193847656e-08,
+        "max_constraint_violation": 3.6288838600739837e-10
+      },
+      {
+        "price": 0,
+        "id": "battery-PL-100-400",
+        "total_cost_eur": 922846786.535403,
+        "native_ac_difference_eur": -1.1920928955078125e-07,
+        "co2_difference_t": 2.2351741790771484e-08,
+        "max_constraint_violation": 3.583409124985337e-10
+      },
+      {
+        "price": 0,
+        "id": "meshed-DE-FR-plus-500",
+        "total_cost_eur": 922678764.3884689,
+        "native_ac_difference_eur": 1.1920928955078125e-07,
+        "co2_difference_t": 1.862645149230957e-08,
+        "max_constraint_violation": 1.5279510989785194e-10
+      },
+      {
+        "price": 40,
+        "id": "baseline",
+        "total_cost_eur": 1655779046.9445226,
+        "native_ac_difference_eur": -7.152557373046875e-07,
+        "co2_difference_t": 0,
+        "max_constraint_violation": 1.6370904631912708e-10
+      },
+      {
+        "price": 40,
+        "id": "swepol-plus-500",
+        "total_cost_eur": 1654973263.6466997,
+        "native_ac_difference_eur": 0,
+        "co2_difference_t": 0,
+        "max_constraint_violation": 2.4010660126805305e-10
+      },
+      {
+        "price": 40,
+        "id": "battery-PL-100-400",
+        "total_cost_eur": 1655771876.677627,
+        "native_ac_difference_eur": -1.430511474609375e-06,
+        "co2_difference_t": 0,
+        "max_constraint_violation": 1.673470251262188e-10
+      },
+      {
+        "price": 40,
+        "id": "meshed-DE-FR-plus-500",
+        "total_cost_eur": 1655779046.9445226,
+        "native_ac_difference_eur": -7.152557373046875e-07,
+        "co2_difference_t": 0,
+        "max_constraint_violation": 1.6370904631912708e-10
+      },
+      {
+        "price": 80,
+        "id": "baseline",
+        "total_cost_eur": 2131292688.4390786,
+        "native_ac_difference_eur": 1.430511474609375e-06,
+        "co2_difference_t": 3.725290298461914e-09,
+        "max_constraint_violation": 1.0518306226003915e-09
+      },
+      {
+        "price": 80,
+        "id": "swepol-plus-500",
+        "total_cost_eur": 2130965268.891675,
+        "native_ac_difference_eur": -4.76837158203125e-07,
+        "co2_difference_t": 1.862645149230957e-09,
+        "max_constraint_violation": 5.311449058353901e-10
+      },
+      {
+        "price": 80,
+        "id": "battery-PL-100-400",
+        "total_cost_eur": 2131268545.4183717,
+        "native_ac_difference_eur": 2.384185791015625e-07,
+        "co2_difference_t": 7.450580596923828e-09,
+        "max_constraint_violation": 4.019966581836343e-10
+      },
+      {
+        "price": 80,
+        "id": "meshed-DE-FR-plus-500",
+        "total_cost_eur": 2131292688.4390788,
+        "native_ac_difference_eur": 1.6689300537109375e-06,
+        "co2_difference_t": 5.587935447692871e-09,
+        "max_constraint_violation": 5.711626727133989e-10
+      },
+      {
+        "price": 120,
+        "id": "baseline",
+        "total_cost_eur": 2574704409.1009126,
+        "native_ac_difference_eur": 9.5367431640625e-07,
+        "co2_difference_t": 5.587935447692871e-09,
+        "max_constraint_violation": 4.929461283609271e-10
+      },
+      {
+        "price": 120,
+        "id": "swepol-plus-500",
+        "total_cost_eur": 2573866850.3433256,
+        "native_ac_difference_eur": -9.5367431640625e-07,
+        "co2_difference_t": 1.862645149230957e-09,
+        "max_constraint_violation": 7.166818249970675e-10
+      },
+      {
+        "price": 120,
+        "id": "battery-PL-100-400",
+        "total_cost_eur": 2574665235.6111836,
+        "native_ac_difference_eur": 9.5367431640625e-07,
+        "co2_difference_t": 7.450580596923828e-09,
+        "max_constraint_violation": 2.9103830456733704e-10
+      },
+      {
+        "price": 120,
+        "id": "meshed-DE-FR-plus-500",
+        "total_cost_eur": 2574704409.1009126,
+        "native_ac_difference_eur": 9.5367431640625e-07,
+        "co2_difference_t": 5.587935447692871e-09,
+        "max_constraint_violation": 4.929461283609271e-10
+      }
+    ]
+  }
+}

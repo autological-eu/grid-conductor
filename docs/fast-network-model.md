@@ -24,8 +24,7 @@ column bounds change. Changing storage structure rebuilds the native model.
 Cancellation terminates the worker, including its current solve. Everything runs
 locally; there is no service, API key or server bill.
 
-This is a lossless transport model with optional non-overlapping PTDF/RAM regions.
-It is not AC power flow, EUPHEMIA, or an automatic equivalent of PyPSA-Eur.
+The lossless model supports transport dispatch, optional non-overlapping PTDF/RAM regions, and schema-v3 linearised Kirchhoff AC branches with controllable HVDC. The real-data preset defaults to Kirchhoff physics. It does not perform nonlinear AC power flow, security analysis or EUPHEMIA market coupling.
 
 ## 2. Objective and balance
 
@@ -221,3 +220,11 @@ inventory; supplied initial/terminal fields must be zero placeholders. Added
 battery interventions cannot receive inflow or free initial/final inventory.
 These semantics are independently matched against native PyPSA in the
 [real-data benchmark](network-benchmark-comparison.md).
+
+## Kirchhoff input extension (schema v3)
+
+Declare `ac_branches` as unique edge IDs with finite positive `reactance`, using consistent units. The browser constructs a fundamental cycle basis and enforces `Σcycle sign × reactance × flow = 0` in every hour. Tree components have no additional cycle rows; parallel branches form cycles. Controllable HVDC edges must remain outside this inventory. Python independently uses node angles and `reactance × flow = angle_from − angle_to`, with a reference angle in each connected AC component.
+
+Versions 1 and 2 reject these fields. V3 rejects simultaneous regional PTDF declarations because a coupling rule has not been defined. Capacity relief changes an existing branch bound at fixed impedance; constructing a parallel circuit requires a new electrical topology.
+
+See the [matched benchmark](network-benchmark-comparison.md) for native PyPSA agreement and [2025 rebuild](fast-network-2025-rebuild.md) for the remaining source and chronology gates.

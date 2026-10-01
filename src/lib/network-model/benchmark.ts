@@ -6,7 +6,7 @@ import { parseNetworkInput, type NetworkInput } from "./schema";
 export function benchmarkWithCarbonPrice(value: unknown, price: number): NetworkInput {
   if (![0, 40, 80, 120].includes(price)) throw new Error("Unsupported benchmark carbon price");
   const input = parseNetworkInput(value);
-  if (input.dataset_id !== "pypsa-eur-37-2013-168h")
+  if (!["pypsa-eur-37-2013-168h", "pypsa-eur-37-2013-168h-kirchhoff"].includes(input.dataset_id))
     throw new Error("Carbon sensitivity requires the original unpriced benchmark input");
   if (price === 0) return input;
   for (const generator of input.generators) {

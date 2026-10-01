@@ -1,0 +1,115 @@
+{
+  "status": "2025_sources_partly_ready_dispatch_input_not_assembled",
+  "year": 2025,
+  "entsoe_hourly_load": {
+    "hours": 8760,
+    "complete_countries": [
+      "AT",
+      "BE",
+      "BG",
+      "CZ",
+      "DE",
+      "ES",
+      "FI",
+      "GR",
+      "HR",
+      "HU",
+      "IT",
+      "LT",
+      "LU",
+      "LV",
+      "ME",
+      "NL",
+      "NO",
+      "PL",
+      "PT",
+      "SE",
+      "XK"
+    ],
+    "missing_hours": {
+      "AL": 722,
+      "AT": 0,
+      "BE": 0,
+      "BA": 26,
+      "BG": 0,
+      "CH": 1,
+      "CY": 1040,
+      "CZ": 0,
+      "DE": 0,
+      "DK": 11,
+      "EE": 7,
+      "ES": 0,
+      "FI": 0,
+      "FR": 4,
+      "GB": 8760,
+      "GR": 0,
+      "HR": 0,
+      "HU": 0,
+      "IE": 314,
+      "IT": 0,
+      "LT": 0,
+      "LU": 0,
+      "LV": 0,
+      "MD": 136,
+      "ME": 0,
+      "MK": 1728,
+      "NL": 0,
+      "NO": 0,
+      "PL": 0,
+      "PT": 0,
+      "RO": 4,
+      "RS": 1,
+      "SE": 0,
+      "SI": 24,
+      "SK": 2,
+      "UA": 8760,
+      "XK": 0
+    }
+  },
+  "neso": {
+    "source_url": "https://api.neso.energy/dataset/8f2fe0af-871c-488d-8bad-960426f24601/resource/b2bde559-3455-4021-b179-dfe60c0337b0/download/demanddata_2025.csv",
+    "source_sha256": "8b8be946bbb084bc28fbf95a71fad0fceb5543b98e02755235130a42beaee4e0",
+    "intervals": 17520,
+    "settlement_timezone": "Europe/London",
+    "utc_alignment": "complete_after_explicit_DST_conversion",
+    "fields": [
+      "ND",
+      "TSD"
+    ],
+    "units": "MW",
+    "model_mapping": "Unresolved: ND/TSD, embedded generation and Great Britain versus Northern Ireland accounting must match model geography."
+  },
+  "weather": {
+    "source_sha256": "ad3325cb8ac2ecf27eede79adc2fed37ab2f0f92efbb0bafc95290786bc61474",
+    "hours_per_node": 8760,
+    "nodes": 37,
+    "generation_availability_ready": false
+  },
+  "rebuild": {
+    "upstream_commit": "a5408e9db5402c53345d7339fffb52afe96d6e43",
+    "config": "config/pypsa-eur/full-year.yaml",
+    "clusters": 128,
+    "hours": 8760,
+    "memory_limit_gib": 8,
+    "cpu_quota_cores": 2,
+    "disk_capacity_gib": 32,
+    "cloud_native_launcher_supported": true
+  },
+  "remaining_gates": [
+    "Reconcile demand gaps using the explicitly configured research methodology; never silently invent or fill data.",
+    "Rebuild full spatial renewable availability and annual hydro inflow from 2025 data; point-centroid weather is insufficient for the original PyPSA-Eur method.",
+    "Audit the archived power-plant snapshot, fuel/carbon costs and network version against the 2025 rebuild specification.",
+    "Match original local patches and record hashes/environment versions; call a new build a rebuild rather than an exact reproduction until these match.",
+    "Measure solve memory/time on the 128-node March case before committing to a full linked annual solve on 8 GiB."
+  ],
+  "historical_market_validation": "not_performed",
+  "cloud_execution": {
+    "cds_authentication": "verified; ERA5 request accepted",
+    "march_weather": "in progress; first 161 MB ERA5 component downloaded",
+    "march_demand": {
+      "status": "prepared_744_hours_34_countries_zero_missing_after_configured_gap_filling",
+      "audit": "2025-march-demand-audit.json"
+    },
+    "annual_dispatch": "not assembled or solved"
+  }
+}

@@ -38,8 +38,7 @@ self.onmessage = async (event: MessageEvent<{ input: unknown; patch: Interventio
     self.postMessage({
       kind: "result",
       input_sha256,
-      model_version:
-        data.schema_version === 2 ? "linked-dispatch-browser-v2" : "linked-dispatch-browser-v1",
+      model_version: `linked-dispatch-browser-v${data.schema_version}${data.ac_branches ? "-kirchhoff" : ""}`,
       baseline: base,
       scenario,
       comparison: compareDispatch(base, scenario),

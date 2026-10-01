@@ -55,7 +55,7 @@ publications live at `/docs`, evidence at `/targets`.
   build/extract/targets chain. Toolchain (all WSL-pixi aware):
   - `tools/build_pypsa_network.py` — Snakemake orchestrator. `--config
 config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,
-    `--cutout-only`. Runs pixi inside WSL distro `Ubuntu` (override with
+    `--cutout-only`. Runs pixi directly on Linux, or inside WSL distro `Ubuntu` (override with
     `GRID_CONDUCTOR_WSL`); auto-detects when already inside WSL. Validates the
     solved network (no extendable assets, hourly weights, nonzero load) and
     writes `data/pypsa-eur/baseline-manifest.json` (format consumed by
@@ -67,15 +67,14 @@ config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,
     manifest fields `start`/`end_exclusive`/`network_sha256`/`upstream_commit`/
     `assumptions`/`sources`, which the build tool now produces.
   - Pinned upstream v2026.08.0 sits in `data/pypsa-eur/upstream` (commit
-    `a5408e9`); pixi env via `data/pypsa-eur/bin/pixi`, run through WSL. ERA5
-    cutout uses the CDS key in the WSL `~/.cdsapirc`, window limited to periods
+    `a5408e9`); pixi env via `data/pypsa-eur/bin/pixi`. ERA5
+    cutout uses ignored `data/pypsa-eur/.cdsapirc` on cloud Linux, or `~/.cdsapirc`, window limited to periods
     with available weather.
   - **Local upstream patch:** `rules/build_electricity.smk` `build_cutout`
     output uses `Path(CUTOUT_DATASET["folder"]) / ...` — upstream only tests the
     `archive` cutout source and its `build` path broke on str/Path division.
   - Production config is full year (2025, 128 clusters); `test-month.yaml` solves
-    March 2025 only for RAM-limited machines and uses a March-only cutout
-    download (~1/12 disk size). Full-year weather now has a separate filename
+    March 2025 only for RAM-limited machines but annual resource weighting still requires all twelve months of weather. Full-year weather now has a separate filename
     `europe-2025-compact`: atlite loads an existing file without extending its
     time range. Check actual timestamps before every solve.
   - `tools/patch_pypsa_demand.py` records a narrow upstream fix: demand completeness
@@ -150,6 +149,7 @@ research retains its separate integration gates.
   Zenodo 7646728 37-bus network. 2013 weather/load, 2020 renewable estimates, 2030
   source costs, zero carbon price; never relabel as the missing 2025 run or SE4.
   See `docs/network-benchmark-comparison.md` for matched inputs and reproduction.
+- Schema v3 adds explicit finite positive AC reactances and Kirchhoff cycle constraints; the browser uses a cycle basis and Python uses independent node-angle equations. HVDC stays controllable. Keep thermal relief at fixed impedance separate from new parallel-circuit construction. Do not combine AC branches with regional PTDF constraints without a defined coupling model.
 - Schema v2 explicitly supports reservoir inflow, spill bounded by inflow,
   asymmetric charging, standing loss and cyclic initial/final inventory. Schema v1
   rejects those fields. New battery interventions remain empty at both boundaries.

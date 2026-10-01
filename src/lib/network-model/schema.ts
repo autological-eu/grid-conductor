@@ -35,7 +35,7 @@ export const storageSchema = z
   .strict();
 const inputSchema = z
   .object({
-    schema_version: z.union([z.literal(1), z.literal(2)]),
+    schema_version: z.union([z.literal(1), z.literal(2), z.literal(3)]),
     dataset_id: id,
     provenance: z
       .object({
@@ -55,6 +55,10 @@ const inputSchema = z
     generators: z.array(generator).max(2000),
     edges: z.array(z.object({ id, a: id, b: id, ab_mw: series, ba_mw: series }).strict()).max(1000),
     storage: z.array(storageSchema).max(200),
+    ac_branches: z
+      .array(z.object({ edge_id: id, reactance: finite.positive() }).strict())
+      .max(1000)
+      .optional(),
     flow_based_regions: z
       .array(
         z
@@ -136,6 +140,22 @@ export function parseNetworkInput(value: unknown): NetworkInput {
     check(e.ab_mw);
     check(e.ba_mw);
   }
+  if (d.ac_branches !== undefined) {
+    assert(d.schema_version === 3, "Kirchhoff branches require input schema v3");
+    assert(d.ac_branches.length > 0, "Declare at least one AC branch");
+    assert(
+      d.flow_based_regions.length === 0,
+      "Combined AC-cycle and regional PTDF physics is unsupported",
+    );
+    unique(
+      d.ac_branches.map((b) => b.edge_id),
+      "AC branches",
+    );
+    assert(
+      d.ac_branches.every((b) => d.edges.some((e) => e.id === b.edge_id)),
+      "Unknown AC branch edge",
+    );
+  } else assert(d.schema_version !== 3, "Schema v3 requires explicit AC branches");
   for (const s of d.storage) {
     if (s.inflow_mw) check(s.inflow_mw);
     if (

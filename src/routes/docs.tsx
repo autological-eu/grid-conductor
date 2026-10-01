@@ -9,6 +9,11 @@ export const Route = createFileRoute("/docs")({
 });
 
 const artifacts = [
+  [
+    "network-benchmark/kirchhoff-results.json",
+    "Fast Kirchhoff / native PyPSA parity · experimental",
+  ],
+  ["2025-rebuild-status.json", "2025 rebuild source coverage · in progress"],
   ["network-benchmark/carbon-sensitivity.json", "Paired carbon-price sensitivity · experimental"],
   ["network-benchmark/results.json", "Matched real-data weekly dispatch benchmark · experimental"],
   ["entsoe-fast-targets.json", "2025 annual screening · workbench input"],

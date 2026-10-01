@@ -68,6 +68,13 @@ def validate(data):
         if e['a'] not in zones or e['b'] not in zones or e['a']==e['b']:raise ValueError('Invalid edge')
         vector(e['ab_mw']);vector(e['ba_mw'])
     if len(ids)!=len(set(ids)):raise ValueError('Duplicate edge IDs')
+    ac=data.get('ac_branches')
+    if ac is not None:
+        if data.get('schema_version')!=3 or not ac or data.get('flow_based_regions'):raise ValueError('AC branches require schema v3 without regional PTDF')
+        if len({b['edge_id'] for b in ac})!=len(ac):raise ValueError('Duplicate AC branches')
+        edge_ids={e['id'] for e in data['edges']}
+        if any(b['edge_id'] not in edge_ids or not math.isfinite(b['reactance']) or b['reactance']<=0 for b in ac):raise ValueError('Invalid AC branch')
+    elif data.get('schema_version')==3:raise ValueError('Schema v3 requires AC branches')
     regional_zones=set();region_ids=set()
     for region in data.get('flow_based_regions',[]):
         members=set(region['zones'])
@@ -128,6 +135,17 @@ def dispatch(data):
         for t in range(H+1):
             fixed=None if s.get('cyclic') else s['initial_mwh'] if t==0 else s['terminal_mwh'] if t==H else None
             var(('soc',s['id'],t),0,fixed if fixed is not None else 0,fixed if fixed is not None else s['energy_mwh'])
+    # Independent angle formulation: equivalent physics to browser cycle rows.
+    ac_edges={e['id']:e for e in data['edges'] if e['id'] in {b['edge_id'] for b in data.get('ac_branches',[])}}
+    ac_nodes={z for e in ac_edges.values() for z in [e['a'],e['b']]}
+    parents={z:z for z in ac_nodes}
+    def root(z):
+        while parents[z]!=z:z=parents[z]
+        return z
+    for e in ac_edges.values():parents[root(e['a'])]=root(e['b'])
+    anchors={root(z) for z in ac_nodes}
+    for z in sorted(ac_nodes):
+        for t in range(H):var(('angle',z,t),0,0 if z in anchors else None,0 if z in anchors else None,t)
     equations=[];rhs=[];inequalities=[];limits=[]
     for z in zones:
         for t in range(H):
@@ -150,6 +168,10 @@ def dispatch(data):
             network_rows.append((len(inequalities),region['id'],restriction['id'],t))
             inequalities.append({ix['np',z,t]:v for z,v in restriction['ptdf'].items()})
             limits.append(restriction['ram_mw'])
+    for branch in data.get('ac_branches',[]):
+        e=ac_edges[branch['edge_id']]
+        for t in range(H):
+            equations.append({ix['f',e['id'],t]:branch['reactance'],ix['angle',e['a'],t]:-1,ix['angle',e['b'],t]:1});rhs.append(0)
     for s in data.get('storage',[]):
         for t in range(H):
             row={ix['soc',s['id'],t+1]:1,ix['soc',s['id'],t]:-(1-s.get('standing_loss',0))**dt,
@@ -219,7 +241,7 @@ def experiment(data,edge_id,additional_mw):
         pairs=[(r['price_eur_mwh'][z],v) for r,v in zip(baseline['hourly'],prices) if v is not None]
         validation[z]=dict(matched_hours=len(pairs),price_mae_eur_mwh=sum(abs(a-b) for a,b in pairs)/len(pairs) if pairs else None)
     co2_change_t=baseline['total_co2_t']-scenario['total_co2_t'] if baseline['total_co2_t'] is not None and scenario['total_co2_t'] is not None else None
-    return dict(version='linked-dispatch-v2' if data.get('schema_version')==2 else VERSION,input_sha256=hashlib.sha256(json.dumps(data,sort_keys=True).encode()).hexdigest(),
+    return dict(version=f"linked-dispatch-v{data.get('schema_version',1)}",input_sha256=hashlib.sha256(json.dumps(data,sort_keys=True).encode()).hexdigest(),
         status='experimental_not_validated',annual_opportunity_meur=None,period_opportunity_meur=gain/1e6,
         interval_count=len(data['timestamps']),interval_hours=data['interval_hours'],
         constraint_patch=dict(edge=edge_id,both_directions_added_mw=additional_mw),

@@ -39,6 +39,7 @@ try {
     await page.getByTestId("network-run").click();
     await page.getByTestId("network-result").waitFor();
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
+    await page.getByLabel("Network physics", { exact: true }).selectOption("transport");
     // Exercise a slow fetch: an old dataset must not remain evaluable while loading.
     let releaseDownload!: () => void;
     const downloadGate = new Promise<void>((resolve) => {
@@ -86,6 +87,17 @@ try {
       await page.getByLabel("Assumed carbon price (€/t CO₂)", { exact: true }).inputValue(),
       "80",
     );
+    await page.getByLabel("Network physics", { exact: true }).selectOption("kirchhoff");
+    await page.getByLabel("Assumed carbon price (€/t CO₂)", { exact: true }).selectOption("0");
+    await page.getByRole("button", { name: "Load real-data benchmark", exact: true }).click();
+    await page
+      .getByRole("heading", { name: "pypsa-eur-37-2013-168h-kirchhoff", exact: true })
+      .waitFor();
+    await page.getByLabel("Additional MW", { exact: true }).fill("500");
+    await page.getByRole("button", { name: "Set capacity addition" }).click();
+    await page.getByTestId("network-run").click();
+    await page.getByTestId("network-result").waitFor({ timeout: 30000 });
+    assert.match(await page.getByTestId("network-result").innerText(), /€1,646,179\.37/);
     if (viewport.width > 1000) {
       // Make cancellation observable using a full-period TEST input, never public research.
       const testInput = JSON.parse(await readFile("tests/fixtures/network.json", "utf8"));

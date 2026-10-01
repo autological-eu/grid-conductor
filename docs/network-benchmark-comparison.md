@@ -6,6 +6,14 @@ Try **Load real-data benchmark** in the [/network](/network) lab. Download the [
 
 ![Matched investment benefits and scenario timings](../public/research/network-benchmark/comparison.png)
 
+## Fast dispatch with the physics retained
+
+The lab now offers **Linearised AC / Kirchhoff** as its default benchmark physics, alongside the transport relaxation. The new browser solver retains Kirchhoff cycle equations on 51 finite-impedance AC branches; HVDC remains controllable. The zero-capacity AC branch `ac:3` has infinite impedance and is explicitly omitted from those equations.
+
+Seven investment cases, each repeated three times in Bun and production Chromium, reproduce native PyPSA AC costs within one cent. All sixteen carbon-policy cases also pass matched native AC objective checks. See the [Kirchhoff results](../public/research/network-benchmark/kirchhoff-results.json) and [declared physics](../public/research/network-benchmark/kirchhoff-manifest.json). Warm browser capacity interventions take roughly 0.4–0.7 seconds on this host; the baseline and storage cases take several seconds. These are weekly benchmark timings, not an annual scalability claim.
+
+The previous **€0.000016** figure measures agreement between implementations of the **same transport model**. The roughly **€495,000** difference is the effect of imposing additional physical constraints. Those numbers answer different questions; the new solver addresses the second by retaining the constraints rather than fitting a correction factor.
+
 ## What data are these?
 
 A real prepared network, `networks/elec_s_37.nc`, from the [PyPSA-Eur archive on Zenodo](https://zenodo.org/records/7646728), release v0.7.0, licensed CC BY 4.0. Credit the PyPSA-Eur authors. The downloader extracts this one member using HTTP ranges and verifies its SHA-256, without downloading the entire 2.22 GB archive.
@@ -14,7 +22,7 @@ The source contains hourly **2013 weather and load**, renewable capacities estim
 
 We select **1–7 January 2013: 168 consecutive hours**, with 37 physical clusters, 258 nonzero-capacity generators, 94 connections, and 51 reservoir/pumped-storage units. Prepared wind/solar availability and reservoir inflows are retained; dispatch is never substituted for availability. All source cyclic storage closes over the test week, explicitly changing the source's annual water boundary. Winter results must not be multiplied by 52.
 
-The Swedish labels `SE1 0` and `SE2 0` are physical cluster IDs, **not Swedish bidding zones**. The Poland–Sweden HVDC link `dc:14823` connects `PL1 0` and `SE2 0`, initially 600 MW. AC bounds use archived thermal ratings × 0.7; DC bounds use nominal capacity. Neither is an hourly commercial ATC reconstruction.
+The archive contains **one Swedish aggregate node, `SE2 0`**, a physical cluster ID, **not a Swedish bidding zone**. Earlier metadata mentioning two Swedish nodes was incorrect; the numerical benchmark inputs are unchanged. The Poland–Sweden HVDC link `dc:14823` connects `PL1 0` and `SE2 0`, initially 600 MW. AC bounds use archived thermal ratings × 0.7; DC bounds use nominal capacity. Neither is an hourly commercial ATC reconstruction.
 
 ## The comparison isolates two questions
 
@@ -59,6 +67,16 @@ The test battery is 100 MW / 400 MWh in Poland, 95% efficiency per leg, empty in
 | Existing DE–FR AC bound +500 MW | €139,660 | €186,827 | −25.2% |
 
 Transport baseline cost is €915.923 million; AC baseline cost is €922.866 million. Relaxing constraints makes transport operating cost no higher than AC cost. **That does not bound investment benefit:** benefit subtracts two optimal costs, each with its own relaxation error. Here transport understates benefit; another network could reverse this.
+
+### Why transport underestimated this investment
+
+Let the relaxation gap be `R(K) = C_AC(K) − C_transport(K) ≥ 0`. Then:
+
+```text
+Benefit_transport − Benefit_AC = R(after investment) − R(baseline)
+```
+
+For Poland–Sweden +1,000 MW, the gap falls from **€6,942,858.54** to **€6,447,956.28**, so transport understates benefit by **€494,902.26**. Its freer routing has already removed some of the bottleneck's value in the baseline. A constant baseline adjustment cancels in the benefit subtraction and cannot repair this. Nor is the sign universal: the separate €80/t carbon-policy benchmark reverses it. The appropriate correction is to retain network physics and re-clear both cases, not apply a universal percentage uplift.
 
 ### Why a price spread helps, but does not finish the calculation
 

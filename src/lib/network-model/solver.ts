@@ -1,3 +1,4 @@
+import { kirchhoffCycles } from "./kirchhoff";
 import type { Highs, ModelData, Model } from "highs";
 import { parseNetworkInput, type NetworkInput, type StorageInput } from "./schema";
 
@@ -139,6 +140,13 @@ export function compileNetwork(d: NetworkInput) {
         c.ram_mw,
       );
   }
+  for (const cycle of kirchhoffCycles(d.edges, d.ac_branches ?? []))
+    for (let t = 0; t < H; t++)
+      row(
+        cycle.map(([edge, coefficient]) => [ix("f", edge, t), coefficient]),
+        0,
+        0,
+      );
   for (const s of d.storage)
     for (let t = 0; t < H; t++)
       row(

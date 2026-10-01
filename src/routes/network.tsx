@@ -31,6 +31,7 @@ function NetworkLab() {
   const [busy, setBusy] = useState(false);
   const [loadingInput, setLoadingInput] = useState(false);
   const [benchmarkCarbon, setBenchmarkCarbon] = useState(0);
+  const [benchmarkPhysics, setBenchmarkPhysics] = useState("kirchhoff");
   const [ready, setReady] = useState(false);
   const [edge, setEdge] = useState("");
   const [mw, setMw] = useState(100);
@@ -44,6 +45,7 @@ function NetworkLab() {
           const data = parseNetworkInput(saved.input);
           applyIntervention(data, saved.patch);
           setInput(data);
+          setBenchmarkPhysics(data.ac_branches ? "kirchhoff" : "transport");
           setBenchmarkCarbon(Number(data.dataset_id.match(/-carbon-(40|80|120)$/)?.[1] ?? 0));
           setPatch(saved.patch);
           setEdge(data.edges[0]?.id ?? "");
@@ -73,6 +75,7 @@ function NetworkLab() {
   const importModel = (value: unknown) => {
     const data = parseNetworkInput(value);
     setInput(data);
+    setBenchmarkPhysics(data.ac_branches ? "kirchhoff" : "transport");
     setBenchmarkCarbon(Number(data.dataset_id.match(/-carbon-(40|80|120)$/)?.[1] ?? 0));
     setPatch(emptyPatch);
     setResult(undefined);
@@ -137,8 +140,9 @@ function NetworkLab() {
       </header>
       <p>
         Re-dispatch all zones together after adding transmission or storage. This lossless transport
-        / optional PTDF model uses chronological availability, operating costs and demand—not
-        observed price spreads.
+        model can retain linearised AC Kirchhoff constraints, or use a transport / optional PTDF
+        relaxation. It uses chronological availability, operating costs and demand—not observed
+        price spreads.
       </p>
       <aside className="rounded border p-4 text-sm space-y-3">
         <p>
@@ -147,6 +151,19 @@ function NetworkLab() {
           one-week benchmark, not a validated 2025 investment estimate. Swedish cluster IDs are not
           bidding-zone labels.
         </p>
+        <label className="block">
+          Network physics
+          <select
+            aria-label="Network physics"
+            className="ml-3 rounded border p-2"
+            value={benchmarkPhysics}
+            disabled={busy || loadingInput}
+            onChange={(event) => setBenchmarkPhysics(event.target.value)}
+          >
+            <option value="kirchhoff">Linearised AC / Kirchhoff</option>
+            <option value="transport">Transport relaxation</option>
+          </select>
+        </label>
         <label className="block">
           Assumed carbon price (€/t CO₂)
           <select
@@ -175,7 +192,11 @@ function NetworkLab() {
             setResult(undefined);
             setMessage("Loading benchmark input…");
             try {
-              const response = await fetch(publicAsset("research/network-benchmark/input.json"));
+              const response = await fetch(
+                publicAsset(
+                  `research/network-benchmark/${benchmarkPhysics === "kirchhoff" ? "kirchhoff-input.json" : "input.json"}`,
+                ),
+              );
               if (!response.ok) throw new Error(`Dataset unavailable (${response.status})`);
               importModel(benchmarkWithCarbonPrice(await response.json(), benchmarkCarbon));
             } catch (error) {
@@ -203,7 +224,7 @@ function NetworkLab() {
         </Link>
       </aside>
       <p className="text-sm">
-        Import a schema-v1/v2 JSON input from your offline research pipeline. It stays in this
+        Import a schema-v1/v2/v3 JSON input from your offline research pipeline. It stays in this
         browser. No weather processing, uploads or server are involved.{" "}
         <Link to="/docs/$slug" params={{ slug: "fast-network-model" }} className="underline">
           Input format, equations and limitations
@@ -239,7 +260,7 @@ function NetworkLab() {
         <section className="space-y-4 rounded border p-4">
           <h2 className="text-xl font-semibold">{input.dataset_id}</h2>
           <p>
-            {input.zones.length} zones · {input.timestamps.length} consecutive intervals ·{" "}
+            {input.zones.length} model nodes · {input.timestamps.length} consecutive intervals ·{" "}
             {input.interval_hours} h each
           </p>
           <p className="break-all text-sm">

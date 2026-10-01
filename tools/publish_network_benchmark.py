@@ -61,7 +61,7 @@ def publish():
         cases.append(row)
     report=dict(schema_version=1,status='experimental_technical_benchmark_not_validated',checked_date='2026-09-30',dataset_id=manifest['dataset_id'],input_file_sha256=digest,source_sha256=manifest['source_sha256'],
         source_url=manifest['source_url'],source_member=manifest['source_member'],license=manifest['license'],hours=manifest['hours'],start=manifest['start'],end_exclusive=manifest['end_exclusive'],
-        geography='37 physical model clusters, including two Swedish clusters; not SE4 bidding-zone geography',weather_year=2013,renewable_capacity_estimation_year=2020,cost_year=2030,
+        geography='37 physical model clusters, including one Swedish aggregate node (SE2 0); not SE4 bidding-zone geography',weather_year=2013,renewable_capacity_estimation_year=2020,cost_year=2030,
         versions=dict(**native[0]['versions'],browser=browser['runtime'],bun=bun['runtime']),
         gates=dict(input_hash_match=True,all_transport_objectives_within_one_cent=True,max_transport_objective_difference_eur=maximum_error,max_constraint_violation=max_residual,
             unserved_energy_absent=True,simultaneous_storage_cycling_absent=True,historical_market_validation='not_performed',annual_2025_reproduction='not_performed'),

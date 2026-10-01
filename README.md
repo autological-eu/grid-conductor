@@ -20,10 +20,10 @@ running Bun/Node server, authentication, cloud database or paid service is neede
 - `/docs/<document-slug>`: individual Markdown publication.
 - `/network`: experimental HiGHS/WASM coupled dispatch lab; complete local input
   or load the prepared real-data weekly benchmark; separate IndexedDB workspace.
-  Choose explicit carbon-price assumptions for paired local re-solves.
+  Choose Kirchhoff or transport physics and explicit carbon-price assumptions for paired local re-solves.
   See [matched PyPSA comparison](docs/network-benchmark-comparison.md) and
   [climate sensitivity](docs/network-carbon-sensitivity.md). No validated
-  European annual dataset yet.
+  European annual dataset yet. See the [2025 rebuild](docs/fast-network-2025-rebuild.md).
 - `/targets`: separate observed-spread and PyPSA-Eur evidence views.
 - `src/lib/workbench.ts`: versioned IndexedDB persistence; stable IDs, ordered
   interventions, scenario snapshots and results. Edits invalidate old evaluations.

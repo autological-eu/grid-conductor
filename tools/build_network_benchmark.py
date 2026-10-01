@@ -62,7 +62,7 @@ def build(hours=168, start='2013-01-01'):
     assumptions=[
         'Technical benchmark: 2013 hourly weather/load, existing archived capacities; renewable capacity estimation year 2020 and source cost year 2030. Not a 2025 historical reconstruction.',
         'All generation and network capacity expansion disabled; only explicit intervention patches change fixed nominal capacities.',
-        '37 clustered buses are physical model nodes, not bidding zones. Swedish SE1 0 / SE2 0 labels are cluster IDs, not SE1/SE2 market zones or SE4.',
+        '37 clustered buses are physical model nodes, not bidding zones. The sole Swedish aggregate node SE2 0 is a cluster ID, not a Swedish bidding zone or SE4.',
         'Lossless transport relaxation uses archived AC thermal bounds (s_nom × 0.7) and DC nominal ratings, not commercial NTC/ATC. The native AC benchmark separately retains Kirchhoff constraints.',
         'Prepared renewable p_max_pu availability is retained, not reconstructed from solved dispatch. Source reservoir inflows, efficiencies and pumped storage are retained.',
         f'Exactly {hours} consecutive hourly intervals; source cyclic storage is closed over this benchmark period. No annual extrapolation; weekly cycle changes the source annual water boundary.',

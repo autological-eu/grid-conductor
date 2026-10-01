@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build a PyPSA-Eur operational network for Grid Conductor.
 
-Runs the Snakemake pipeline (through pixi inside WSL) from raw data through to a
+Runs the Snakemake pipeline (through pixi inside native Linux or WSL) from raw data through to a
 solved electricity network, validates the output, and writes a manifest consumed
 by extract_baseline.py and pypsa_border_targets.py.
 
@@ -48,7 +48,7 @@ def _inside_wsl() -> bool:
 
 
 def _wsl_path(path: Path) -> str:
-    if _inside_wsl():
+    if sys.platform == "linux":
         return str(path.resolve())
     rel = str(path.resolve())
     parts = rel.replace("\\", "/").split(":")
@@ -60,9 +60,15 @@ def _run_wsl(cmd: list[str], cwd: Path | None = None) -> subprocess.CompletedPro
     """Run a command in the Linux environment (directly if inside WSL, via `wsl` otherwise)."""
     cwd = cwd or UPSTREAM
     quoted = shlex.join([c for c in cmd if c])
-    if _inside_wsl():
+    if sys.platform == "linux":
+        environment = os.environ.copy()
+        local_cds = ROOT / "data" / "pypsa-eur" / ".cdsapirc"
+        if local_cds.exists():
+            environment.setdefault("CDSAPI_RC", str(local_cds))
+        if environment.get("CDSAPI_KEY"):
+            environment.setdefault("CDSAPI_URL", "https://cds.climate.copernicus.eu/api")
         result = subprocess.run(
-            ["bash", "-lc", f"cd '{_wsl_path(cwd)}' && {quoted}"],
+            cmd, cwd=cwd, env=environment,
             capture_output=True,
             text=True,
         )
@@ -95,17 +101,17 @@ def _digest(path: Path) -> str:
 # Prerequisite checks
 # ---------------------------------------------------------------------------
 
-def check_prerequisites() -> None:
+def check_prerequisites(require_weather_credentials: bool = True) -> None:
     """Verify CDS key, pixi/WSL, and upstream checkout exist before Snakemake runs."""
     cds_rc = ROOT / "data" / "pypsa-eur" / ".cdsapirc"
     home_rc = Path.home() / ".cdsapirc"
-    if not cds_rc.exists() and not home_rc.exists():
+    if require_weather_credentials and not cds_rc.exists() and not home_rc.exists() and not os.environ.get("CDSAPI_KEY"):
         sys.exit(
             "ERROR: CDS API key not found. Create data/pypsa-eur/.cdsapirc with:\n"
             "  url: https://cds.climate.copernicus.eu/api\n"
             "  key: <your-key>"
         )
-    print("[prereq] CDS API key present.")
+    print("[prereq] Weather credentials checked." if require_weather_credentials else "[prereq] Dry run: weather credentials not required.")
 
     if not PIXI.exists():
         sys.exit(f"ERROR: pixi not found at {PIXI}. Run the pixi Linux installer inside WSL.")
@@ -117,7 +123,7 @@ def check_prerequisites() -> None:
         raise
     except FileNotFoundError:
         sys.exit("ERROR: `wsl` command not found on PATH.")
-    print(f"[prereq] WSL distro '{WSL_DISTRO}' reachable; pixi present.")
+    print(f"[prereq] Linux/WSL execution available; pixi present.")
 
     if not (UPSTREAM / "Snakefile").exists():
         sys.exit(f"ERROR: Snakefile not found at {UPSTREAM / 'Snakefile'}")
@@ -399,6 +405,7 @@ def main() -> None:
         help="Only build/download the ERA5 cutout and stop",
     )
     args = parser.parse_args()
+    args.config = args.config.resolve()
 
     config = _load_config(args.config)
     run_name, start, end_exclusive, clusters = _run_context(config)
@@ -409,7 +416,7 @@ def main() -> None:
     )
     print()
 
-    check_prerequisites()
+    check_prerequisites(require_weather_credentials=not args.dry_run)
     print()
 
     target = run_snakemake(args.config, args.dry_run, args.cutout_only)
