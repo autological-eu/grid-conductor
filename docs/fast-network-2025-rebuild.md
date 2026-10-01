@@ -41,3 +41,7 @@ The pinned upstream country-level nuclear availability table ends in 2024. Its i
 ## Measured dispatch resource blocker
 
 All twelve spatial weather batches and the annual compact cutout are verified. The 128-node, 8,760-hour input network is prepared. A 744-hour March dispatch pilot using HiGHS dual simplex was stopped by a 6 GiB process-memory guard after approximately 22.7 minutes, during postsolve. Its measured peak was 6.04 GiB. No completed optimal network was exported, so this is not a dispatch result or investment valuation. A guarded retry uses HiGHS interior-point optimisation without crossover on exactly the same March inputs. The full annual solve remains pending; the monthly pilot has a monthly cyclic water boundary and must not be annualised.
+
+The March interior-point retry subsequently completed with HiGHS status `optimal`, exported its solved network and exited successfully. It took 436.7 seconds overall and peaked at 4.95 GiB process memory. This is a March resource pilot, not an annual valuation or matched investment comparison. A full 8,760-hour attempt now uses the same 6 GiB memory guard and retains the original annual cyclic inventory boundary.
+
+The guarded full-year attempt stopped after 13.2 seconds, before solver iterations started, with sampled process memory reaching 6.71 GiB and exceeding the 6 GiB guard. The 128-node hourly annual run is therefore blocked by memory on this 8 GiB machine. No annual optimal solution or baseline manifest exists. The completed March solve must remain a separate limited-period experiment.
