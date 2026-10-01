@@ -1,6 +1,6 @@
 # Rebuilding the network benchmark for 2025
 
-**Status: genuine 2025 source collection is under way; a complete 2025 dispatch comparison is not yet available.** The published 168-hour network benchmark remains a mixed-vintage technical experiment. It must not be relabelled as a 2025 result.
+**Status: 2025 inputs and a twelve-month sequential dispatch run are complete. Coordinated annual optimisation and a matched browser comparison remain pending.** The published 168-hour network benchmark remains a mixed-vintage technical experiment. It must not be relabelled as a 2025 result.
 
 ## What we are reconstructing
 
@@ -51,3 +51,7 @@ The guarded full-year attempt stopped after 13.2 seconds, before solver iteratio
 `tools/monthly_dispatch.py` now solves separate months, saves each StorageUnit ending inventory, and passes that exact inventory to the next month. Checkpoints include source and result hashes, objectives and boundary states; interrupted runs resume verified completed months. Unsupported ramp limits, Stores, unit commitment, energy budgets and capacity expansion fail closed. Each monthly worker runs in a separate process under a memory guard.
 
 This first implementation is **sequential monthly dispatch, not coordinated annual optimisation**. It fixes starting inventories to the source initial values and constrains originally cyclic units to return to those values in December. Unlike the original free cyclic annual formulation, it does not optimise the initial inventory, and it does not price the value of water in later months. These are explicit approximations; results must not be described as the full-year optimum or directly replace the existing benchmark. Tests verify inventory transfer, rejection of invalid states and resuming without re-solving completed months. A January run is underway; boundary-state coordination remains to be implemented and validated against a monolithic case.
+
+## Completed sequential-year audit
+
+All twelve monthly solves completed, covering exactly 8,760 consecutive 2025 hours. The [sequential dispatch audit](../public/research/2025-sequential-dispatch-audit.json) verifies every result hash, exact month-to-month inventory transfer, nodal energy balance and the prescribed December closure. This is an integrity and feasibility check, not historical calibration or proof of annual optimality. No cross-implementation investment comparison has yet been published for these inputs.

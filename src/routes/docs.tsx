@@ -9,6 +9,7 @@ export const Route = createFileRoute("/docs")({
 });
 
 const artifacts = [
+  ["2025-sequential-dispatch-audit.json", "2025 sequential dispatch audit · approximate"],
   [
     "network-benchmark/kirchhoff-results.json",
     "Fast Kirchhoff / native PyPSA parity · experimental",
