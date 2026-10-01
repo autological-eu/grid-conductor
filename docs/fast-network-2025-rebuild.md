@@ -37,3 +37,7 @@ The fast Kirchhoff solver already reproduces the published weekly native PyPSA o
 ## Nuclear availability source limitation
 
 The pinned upstream country-level nuclear availability table ends in 2024. Its intended last-column fallback failed for 2025 because a missing year raises `KeyError`, which upstream did not catch. The narrow patch in `tools/patch_pypsa_availability.py` repairs that exception handling and logs the selected proxy. The rebuild therefore uses **2024 country-level nuclear availability as a declared proxy**, not observed 2025 hourly outage availability. This assumption must accompany the resulting dispatch benchmark and be revisited when suitable 2025 data are available.
+
+## Measured dispatch resource blocker
+
+All twelve spatial weather batches and the annual compact cutout are verified. The 128-node, 8,760-hour input network is prepared. A 744-hour March dispatch pilot using HiGHS dual simplex was stopped by a 6 GiB process-memory guard after approximately 22.7 minutes, during postsolve. Its measured peak was 6.04 GiB. No completed optimal network was exported, so this is not a dispatch result or investment valuation. A guarded retry uses HiGHS interior-point optimisation without crossover on exactly the same March inputs. The full annual solve remains pending; the monthly pilot has a monthly cyclic water boundary and must not be annualised.
