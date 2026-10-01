@@ -33,3 +33,7 @@ The pinned March build resolves a 55-job workflow. Its upstream scheduler declar
 5. Extend to annual chronology only with valid water/storage boundaries; never multiply a winter week by 52 or reset reservoir inventory each day.
 
 The fast Kirchhoff solver already reproduces the published weekly native PyPSA objectives across seven investment cases and sixteen carbon-policy cases. That establishes implementation parity for those inputs. It does not validate historical prices or establish annual 2025 scalability.
+
+## Nuclear availability source limitation
+
+The pinned upstream country-level nuclear availability table ends in 2024. Its intended last-column fallback failed for 2025 because a missing year raises `KeyError`, which upstream did not catch. The narrow patch in `tools/patch_pypsa_availability.py` repairs that exception handling and logs the selected proxy. The rebuild therefore uses **2024 country-level nuclear availability as a declared proxy**, not observed 2025 hourly outage availability. This assumption must accompany the resulting dispatch benchmark and be revisited when suitable 2025 data are available.

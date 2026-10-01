@@ -80,6 +80,7 @@ config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,
   - `tools/patch_pypsa_demand.py` records a narrow upstream fix: demand completeness
     is checked after selecting/reindexing the requested window, not across unused
     archive years. Remaining gaps still fail with per-country missing-hour counts.
+  - `tools/patch_pypsa_availability.py` repairs the upstream intended last-column fallback for missing availability years. The nuclear table ends in 2024: explicitly record 2024 country-level nuclear availability as a proxy in the 2025 rebuild, never as observed 2025 hourly outages.
   - Low-disk weather: `tools/monthly_weather.py` supervises one month at a time,
     verifies conversion outputs before deleting owned raw batches, and guards
     against 10 GiB growth. See `docs/monthly-weather.md`. The compact atlite
