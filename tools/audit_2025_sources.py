@@ -19,5 +19,19 @@ def main():
       weather=dict(source_sha256=weather['source_sha256'],hours_per_node=8760,nodes=len(weather['nodes']),generation_availability_ready=False),
       rebuild=dict(upstream_commit='a5408e9db5402c53345d7339fffb52afe96d6e43',config='config/pypsa-eur/full-year.yaml',clusters=128,hours=8760,memory_limit_gib=8,cpu_quota_cores=2,disk_capacity_gib=32,cloud_native_launcher_supported=True),
       remaining_gates=['Reconcile demand gaps using the explicitly configured research methodology; never silently invent or fill data.','Rebuild full spatial renewable availability and annual hydro inflow from 2025 data; point-centroid weather is insufficient for the original PyPSA-Eur method.','Audit the archived power-plant snapshot, fuel/carbon costs and network version against the 2025 rebuild specification.','Match original local patches and record hashes/environment versions; call a new build a rebuild rather than an exact reproduction until these match.','Measure solve memory/time on the 128-node March case before committing to a full linked annual solve on 8 GiB.'],historical_market_validation='not_performed')
+    prepared = {}
+    for label, run in [('march', 'gridfix-2025-march'), ('annual', 'gridfix-2025')]:
+        path = ROOT/'data/pypsa-eur/upstream/resources'/run/'electricity_demand.csv'
+        if not path.exists():
+            continue
+        data = pd.read_csv(path, index_col=0, parse_dates=True)
+        expected = pd.date_range('2025-03-01' if label == 'march' else '2025-01-01', periods=744 if label == 'march' else 8760, freq='h')
+        if not data.index.equals(expected) or data.isna().any().any():
+            raise ValueError('Prepared demand output fails chronology/completeness')
+        audit = dict(status='prepared_demand_not_dispatch_validation', hours=len(data), countries=data.columns.tolist(), missing_values=0, start=str(data.index.min()), last=str(data.index.max()), sha256=hashlib.sha256(path.read_bytes()).hexdigest(), assumptions=['Pinned upstream 2025 demand assembly with manual adjustments.', 'Six-hour interpolation and one-week shifts fill configured gaps; output completeness is not observational coverage or model validation.'])
+        filename = f'2025-{label}-demand-audit.json'
+        (ROOT/'public/research'/filename).write_text(json.dumps(audit, indent=2)+'\n')
+        prepared[label] = dict(status=audit['status'], hours=len(data), countries=len(data.columns), audit=filename)
+    report['prepared_upstream_demand'] = prepared
     (ROOT/'public/research/2025-rebuild-status.json').write_text(json.dumps(report,indent=2)+'\n');print('2025 weather and GB load ready; complete ENTSO-E country load:',len(report['entsoe_hourly_load']['complete_countries']))
 if __name__=='__main__':main()

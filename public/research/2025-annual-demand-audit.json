@@ -1,6 +1,6 @@
 {
   "status": "prepared_demand_not_dispatch_validation",
-  "hours": 744,
+  "hours": 8760,
   "countries": [
     "AL",
     "AT",
@@ -38,9 +38,9 @@
     "XK"
   ],
   "missing_values": 0,
-  "start": "2025-03-01 00:00:00",
-  "last": "2025-03-31 23:00:00",
-  "sha256": "dadbf9097412caf4c6bfcfa74817e74719e19923f8c0672713b7bb1accfad33d",
+  "start": "2025-01-01 00:00:00",
+  "last": "2025-12-31 23:00:00",
+  "sha256": "60b3463eef98db302223776a2b92b2a82a237a40d112cffc0534a8d745f939a8",
   "assumptions": [
     "Pinned upstream 2025 demand assembly with manual adjustments.",
     "Six-hour interpolation and one-week shifts fill configured gaps; output completeness is not observational coverage or model validation."

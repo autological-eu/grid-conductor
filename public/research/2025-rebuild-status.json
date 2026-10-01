@@ -103,13 +103,18 @@
     "Measure solve memory/time on the 128-node March case before committing to a full linked annual solve on 8 GiB."
   ],
   "historical_market_validation": "not_performed",
-  "cloud_execution": {
-    "cds_authentication": "verified; ERA5 request accepted",
-    "march_weather": "in progress; first 161 MB ERA5 component downloaded",
-    "march_demand": {
-      "status": "prepared_744_hours_34_countries_zero_missing_after_configured_gap_filling",
+  "prepared_upstream_demand": {
+    "march": {
+      "status": "prepared_demand_not_dispatch_validation",
+      "hours": 744,
+      "countries": 34,
       "audit": "2025-march-demand-audit.json"
     },
-    "annual_dispatch": "not assembled or solved"
+    "annual": {
+      "status": "prepared_demand_not_dispatch_validation",
+      "hours": 8760,
+      "countries": 34,
+      "audit": "2025-annual-demand-audit.json"
+    }
   }
 }
