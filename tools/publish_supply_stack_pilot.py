@@ -49,7 +49,7 @@ def publish():
   for j,scenario in enumerate(c['scenarios']):
    ax=axes[i,j];x=[0.];cost=[]
    for b in scenario['blocks']:x.append(x[-1]+b['available_mw']/1000);cost.append(b['scenario_cost_eur_mwh'])
-   ax.stairs(cost,x,color='#0f766e',lw=2,label='Prepared available generators');ax.axvline(c['observed_load_mw']/1000,color='#b45309',lw=2,label='Observed load');ax.axvline(c['prepared_load_mw']/1000,color='#64748b',ls=':',label='Prepared model load')
+   ax.stairs(cost,x,baseline=None,color='#0f766e',lw=2,label='Prepared available generators');ax.axvline(c['observed_load_mw']/1000,color='#b45309',lw=2,label='Observed load');ax.axvline(c['prepared_load_mw']/1000,color='#64748b',ls=':',label='Prepared model load')
    if c['country']=='PL':ax.axhline(observed_price,color='#2563eb',ls='--',label=f'Observed PL price €{observed_price:.2f}')
    ax.set(title=f'{c["country"]} · additional carbon €{scenario["additional_carbon_eur_t"]}/t',xlabel='Cumulative available generator power (GW)',ylabel='Assumed marginal cost (€/MWh)',ylim=(0,max(cost)*1.1));ax.legend(fontsize=8,loc='upper left')
  fig.suptitle('2025-01-01 18:00–19:00 UTC · partial domestic stacks, not market clearing',fontsize=14);fig.tight_layout();fig.savefig(out/'supply-demand-stacks.svg',metadata={'Date':None});plt.close(fig)

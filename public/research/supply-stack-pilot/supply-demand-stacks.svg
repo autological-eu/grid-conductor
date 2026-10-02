@@ -98,7 +98,7 @@ L 454.679003 73.570696
 L 474.102636 73.570696 
 L 474.102636 73.570696 
 L 478.280107 73.570696 
-L 478.280107 299.677656 
+L 478.280107 73.570696 
 " clip-path="url(#p8ab38117dd)" style="fill: none; stroke: #0f766e; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_1">
@@ -441,7 +441,7 @@ L 919.0152 89.179454
 L 976.709161 89.179454 
 L 976.709161 73.570696 
 L 976.880107 73.570696 
-L 976.880107 299.677656 
+L 976.880107 73.570696 
 " clip-path="url(#p79e9aaa938)" style="fill: none; stroke: #0f766e; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_3">
@@ -760,7 +760,7 @@ L 442.218478 379.770696
 L 464.555759 379.770696 
 L 464.555759 379.770696 
 L 478.280107 379.770696 
-L 478.280107 605.877656 
+L 478.280107 379.770696 
 " clip-path="url(#pb39e7480f7)" style="fill: none; stroke: #0f766e; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_5">
@@ -1075,7 +1075,7 @@ L 940.818478 379.770696
 L 963.155759 379.770696 
 L 963.155759 379.770696 
 L 976.880107 379.770696 
-L 976.880107 605.877656 
+L 976.880107 379.770696 
 " clip-path="url(#p1f76803b67)" style="fill: none; stroke: #0f766e; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_7">
