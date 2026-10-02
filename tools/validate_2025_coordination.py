@@ -18,7 +18,9 @@ def run(folder,iterations):
  output=folder/'coordination-reference.json'
  def report(row):
   clean={k:(None if isinstance(v,float) and not np.isfinite(v) else v) for k,v in row.items()};output.write_text(json.dumps(dict(status='running',source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),hours=48,blocks=2,elapsed_seconds=time.monotonic()-started,**clean),indent=2)+'\n')
- result=coordinate(parts,bounds,max_iterations=iterations,absolute_gap=.01,relative_gap=1e-10,on_iteration=report)
+ reference=pypsa.Network(folder.parent/'monthly-dispatch-sequential/01.nc')
+ warm=np.r_[initial,reference.storage_units_t.state_of_charge.iloc[23].reindex(ids).to_numpy(),terminal];del reference;gc.collect()
+ result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.01,relative_gap=1e-10,on_iteration=report)
  native=json.loads((folder/'native-cases.json').read_text())[0]['cost_eur'];state=result.pop('state');result['state_mwh']=None if state is None else state.tolist();result['native_monolithic_cost_eur']=native;result['difference_eur']=None if not np.isfinite(result['objective']) else result['objective']-native;result['scope']='48h conditional reference, not annual optimum';result['elapsed_seconds']=time.monotonic()-started
  for k in ['objective','gap']:result[k]=None if not np.isfinite(result[k]) else result[k]
  for row in result['history']:
