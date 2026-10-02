@@ -75,6 +75,23 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
         master=linprog(np.r_[np.zeros(nx),np.ones(nb)],A_ub=sparse.csr_matrix(cuts) if cuts else None,b_ub=limits if cuts else None,A_eq=E,b_eq=rhs,bounds=bounds+theta_bounds,method='highs')
         if not master.success:raise RuntimeError(f'Master LP failed: {master.status}: {master.message}')
         state=master.x[:nx];lower=max(lower,float(master.fun));cost=0.;feasible=True
+        if np.isfinite(upper) and lower>upper+absolute_gap:raise RuntimeError('Invalid lower bound exceeds feasible upper bound')
+        threshold=absolute_gap+relative_gap*max(1,abs(upper))
+        if np.isfinite(upper) and upper-lower<=threshold:
+            return dict(status='converged',state=best,objective=upper,lower_bound=lower,gap=max(0.,upper-lower),iterations=iteration,history=history)
+        if best is not None and np.isfinite(upper) and iteration%5!=0:
+            # Level stabilization chooses a nearby proposal without restricting
+            # the unrestricted master used for the global lower bound.
+            level=lower+.5*(upper-lower)
+            width=np.array([max(1.,hi-lo) if lo is not None and hi is not None and np.isfinite(hi-lo) else 1. for lo,hi in bounds])
+            original=sparse.hstack([sparse.csr_matrix(cuts),sparse.csr_matrix((len(cuts),nx))],format='csr') if cuts else sparse.csr_matrix((0,2*nx+nb))
+            distance=sparse.vstack([sparse.hstack([sparse.eye(nx),sparse.csr_matrix((nx,nb)),-sparse.eye(nx)]),sparse.hstack([-sparse.eye(nx),sparse.csr_matrix((nx,nb)),-sparse.eye(nx)])],format='csr')
+            target=sparse.csr_matrix(np.r_[np.zeros(nx),np.ones(nb),np.zeros(nx)][None,:])
+            eq=None if E is None else sparse.hstack([E,sparse.csr_matrix((E.shape[0],nx))],format='csr')
+            stabilized=linprog(np.r_[np.zeros(nx+nb),1/width],A_ub=sparse.vstack([original,distance,target],format='csr'),b_ub=np.r_[limits,best,-best,level],A_eq=eq,b_eq=rhs,bounds=bounds+theta_bounds+[(0,None)]*nx,method='highs')
+            if not stabilized.success:raise RuntimeError(f'Level master failed: {stabilized.message}')
+            state=stabilized.x[:nx]
+
         for i,block in enumerate(blocks):
             local=solve_block(block,state)
             if local is None:

@@ -50,3 +50,12 @@ The driver now records failures explicitly, retries HiGHS numerical-status
 failures with dual simplex and presolve disabled, and saves atomic cut/bound
 checkpoints for resumption. These changes are recovery mechanisms, not evidence
 that the network reference or annual model has converged.
+
+The unrestricted proposal rule stalled on the real reference: after 57
+iterations the best feasible objective remained unchanged and the gap was
+approximately €866,005. A level-stabilized proposal now minimizes scaled
+inventory distance from the best feasible state, subject to an objective
+level halfway between the current bounds. Every fifth iteration uses the
+unrestricted proposal. The unrestricted master still supplies the lower bound;
+stabilization never restricts that certificate. This change is being tested on
+the real reference and does not constitute a convergence claim.
