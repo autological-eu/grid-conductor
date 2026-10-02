@@ -81,3 +81,16 @@ now use matching feasibility/duality tolerances, and an infeasible local status
 is retried with presolve disabled before it is treated as a genuine feasibility
 failure. This changes numerical handling, not the physical constraints. The
 restart passed the previously failing point; convergence remains a separate gate.
+
+## Reference validation tolerance and resumption
+
+The 48-hour driver now uses an absolute gap of €0.01 plus a relative gap of
+10⁻¹² times the objective magnitude, keeping its stopping threshold below the
+€0.02 monolithic objective-parity gate for this reference. A parity failure is
+written as `failed_not_certified` before the driver raises an error.
+
+The 400-iteration run reached a feasible objective €117.11 above the native
+monolith, with a €289.02 lower-to-upper-bound gap. It did not converge. A resumed
+process stopped after iteration 402 without a recorded solver exception; its
+`running` receipt therefore does not demonstrate an active job. Saved cuts allow
+resumption, but neither result supports an annual-optimum claim.
