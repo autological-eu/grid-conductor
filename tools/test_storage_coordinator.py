@@ -31,6 +31,13 @@ class CoordinationTests(unittest.TestCase):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],initial_state=[0])
   self.assertEqual(r['status'],'converged');self.assertAlmostEqual(r['objective'],5)
+ def test_resume_preserves_bounds_and_cuts(self):
+  b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]]);saved=[]
+  first=coordinate([b],[(0,5)],max_iterations=1,on_checkpoint=saved.append)
+  self.assertEqual(first['status'],'iteration_limit_not_certified')
+  result=coordinate([b],[(0,5)],resume=saved[-1])
+  self.assertEqual(result['status'],'converged');self.assertAlmostEqual(result['objective'],5)
+  self.assertGreater(result['iterations'],1)
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)

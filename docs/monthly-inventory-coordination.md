@@ -43,3 +43,10 @@ An iteration limit means **not certified**. A lower bound materially above a fea
 ## Remaining annual gate
 
 The twelve-month production coordinator has not been validated or certified. Retaining all yearly LP matrices in memory would undermine the memory-saving purpose; the production driver needs streamed block workers, guarded resources and resumable cuts/checkpoints. A real annual run must retain the original free cyclic initial inventories, unsupported-feature gates and published availability inputs. No annual investment results should be derived from a nonconverged bound or extrapolated from the 48-hour benchmark.
+
+The real-network reference run encountered a numerical Phase-I failure after
+29 iterations and had not converged (last gap approximately €885,049).
+The driver now records failures explicitly, retries HiGHS numerical-status
+failures with dual simplex and presolve disabled, and saves atomic cut/bound
+checkpoints for resumption. These changes are recovery mechanisms, not evidence
+that the network reference or annual model has converged.

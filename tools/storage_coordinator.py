@@ -33,13 +33,15 @@ def solve_block(block, state, phase=False):
         bounds=block.bounds+[(0,None)]*(2*ne+nu)
     else:eq,ub,c,bounds=A,U,block.cost,block.bounds
     result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method='highs',options={'primal_feasibility_tolerance':1e-9,'dual_feasibility_tolerance':1e-9})
+    if result.status==4:
+        result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method='highs-ds',options={'presolve':False,'primal_feasibility_tolerance':1e-9,'dual_feasibility_tolerance':1e-9})
     if result.status==2 and not phase:return None
     if not result.success:raise RuntimeError(f'Local LP failed: {result.status}: {result.message}')
     gradient=-np.asarray(B.T@result.eqlin.marginals).ravel()
     if len(r):gradient-=np.asarray(V.T@result.ineqlin.marginals).ravel()
     return result,gradient
 
-def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None):
+def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None):
     """Return best feasible state and rigorous LP-cut bounds, or fail to converge."""
     nx=len(bounds);nb=len(blocks);cuts=[];limits=[];history=[];upper=np.inf;lower=-np.inf;best=None
     theta_bounds=[]
@@ -54,7 +56,11 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
         floor=float(floor_lp.fun)
         theta_bounds.append((floor,None))
     E=None if equality is None else sparse.hstack([sparse.csr_matrix(equality),sparse.csr_matrix((len(rhs),nb))],format='csr')
-    if initial_state is not None:
+    start_iteration=1
+    if resume is not None:
+        if resume['shared_variables']!=nx or resume['blocks']!=nb:raise ValueError('Checkpoint dimensions mismatch')
+        cuts=[np.asarray(v,dtype=float) for v in resume['cuts']];limits=resume['limits'];history=resume['history'];upper=np.inf if resume['upper_bound'] is None else resume['upper_bound'];lower=-np.inf if resume['lower_bound'] is None else resume['lower_bound'];best=None if resume['best_state'] is None else np.asarray(resume['best_state']);start_iteration=resume['iteration']+1
+    if initial_state is not None and resume is None:
         state=np.asarray(initial_state,dtype=float)
         if len(state)!=nx or any((lo is not None and v<lo-1e-7) or (hi is not None and v>hi+1e-7) for v,(lo,hi) in zip(state,bounds)):raise ValueError('Invalid warm boundary state')
         if equality is not None and np.max(abs(sparse.csr_matrix(equality)@state-rhs))>1e-7:raise ValueError('Warm state violates master equalities')
@@ -65,7 +71,7 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
             result,gradient=local;cost+=result.fun
             row=np.r_[gradient,np.zeros(nb)];row[nx+i]=-1;cuts.append(row);limits.append(float(gradient@state-result.fun))
         upper=float(cost);best=state.copy()
-    for iteration in range(1,max_iterations+1):
+    for iteration in range(start_iteration,max_iterations+1):
         master=linprog(np.r_[np.zeros(nx),np.ones(nb)],A_ub=sparse.csr_matrix(cuts) if cuts else None,b_ub=limits if cuts else None,A_eq=E,b_eq=rhs,bounds=bounds+theta_bounds,method='highs')
         if not master.success:raise RuntimeError(f'Master LP failed: {master.status}: {master.message}')
         state=master.x[:nx];lower=max(lower,float(master.fun));cost=0.;feasible=True
@@ -81,6 +87,8 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
         if feasible and cost<upper:upper=float(cost);best=state.copy()
         if np.isfinite(upper) and lower>upper+absolute_gap:raise RuntimeError('Invalid lower bound exceeds feasible upper bound')
         gap=upper-lower;history.append(dict(iteration=iteration,lower_bound=float(lower),upper_bound=float(upper),gap=float(gap),candidate_feasible=feasible))
+        if on_checkpoint is not None:
+            on_checkpoint(dict(schema_version=1,shared_variables=nx,blocks=nb,iteration=iteration,cuts=[v.tolist() for v in cuts],limits=limits,history=history,upper_bound=None if not np.isfinite(upper) else upper,lower_bound=None if not np.isfinite(lower) else lower,best_state=None if best is None else best.tolist()))
         if on_iteration is not None:on_iteration(history[-1])
         if np.isfinite(upper) and gap<=absolute_gap+relative_gap*max(1,abs(upper)):
             return dict(status='converged',state=best,objective=upper,lower_bound=lower,gap=max(0.,gap),iterations=iteration,history=history)
