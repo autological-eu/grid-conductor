@@ -7,6 +7,7 @@ import argparse,gc,json,hashlib,time
 from pathlib import Path
 import numpy as np,pandas as pd,pypsa
 from storage_coordinator import coordinate
+from inventory_reachability import envelope
 from pypsa_storage_blocks import block
 from run_network_benchmark import add_diagnostics
 
@@ -15,6 +16,20 @@ def run(folder,iterations):
  ids=n.storage_units.index;ns=len(ids);initial=n.storage_units.state_of_charge_initial.to_numpy();terminal=n.storage_units_t.state_of_charge_set.iloc[-1].reindex(ids).to_numpy();maximum=(n.storage_units.p_nom*n.storage_units.max_hours).to_numpy()
  n.storage_units_t.state_of_charge_set=pd.DataFrame(index=n.snapshots);add_diagnostics(n,data)
  started=time.monotonic();parts=[block(n,n.snapshots[:24],0,2),block(n,n.snapshots[24:],1,2)];bounds=[(v,v) for v in initial]+[(0,v) for v in maximum]+[(v,v) for v in terminal]
+ if not np.all(n.snapshot_weightings.to_numpy()==1):raise ValueError('Reference reachability requires hourly weights')
+ for key in ['p_min_pu','p_max_pu','efficiency_store','efficiency_dispatch','standing_loss']:
+  if len(n.storage_units_t[key].columns):raise ValueError('Dynamic storage parameters need hourly envelope inputs')
+ constraints=[];limits=[]
+ for period,times in enumerate([n.snapshots[:24],n.snapshots[24:]]):
+  for j,key in enumerate(ids):
+   unit=n.storage_units.loc[key]
+   inflow=n.storage_units_t.inflow.loc[times,key].to_numpy() if key in n.storage_units_t.inflow else np.zeros(len(times))
+   retention=np.full(len(times),1-unit.standing_loss)
+   if period==0 and not unit.cyclic_state_of_charge:retention[0]=1.
+   a,gain,drain,cap=envelope(maximum[j],retention,np.full(len(times),-unit.p_min_pu*unit.p_nom*unit.efficiency_store),np.full(len(times),unit.p_max_pu*unit.p_nom/unit.efficiency_dispatch),inflow)
+   row=np.zeros(3*ns);row[period*ns+j]=-a;row[(period+1)*ns+j]=1.;constraints.append(row);limits.append(gain)
+   constraints.append(-row);limits.append(drain)
+   row=np.zeros(3*ns);row[(period+1)*ns+j]=1.;constraints.append(row);limits.append(cap)
  output=folder/'coordination-reference.json'
  checkpoint=folder/'coordination-cuts.json';source_hash=hashlib.sha256(source.read_bytes()).hexdigest();resume=None
  if checkpoint.exists():
@@ -32,7 +47,7 @@ def run(folder,iterations):
  reference=pypsa.Network(folder.parent/'monthly-dispatch-sequential/01.nc')
  warm=np.r_[initial,reference.storage_units_t.state_of_charge.iloc[23].reindex(ids).to_numpy(),terminal];del reference;gc.collect()
  try:
-  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.01,relative_gap=1e-10,on_iteration=report,resume=resume,on_checkpoint=save_cuts)
+  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.01,relative_gap=1e-10,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits)
  except Exception as error:
   progress=json.loads(output.read_text()) if output.exists() else {}
   progress.update(status='failed_not_certified',error=str(error));output.write_text(json.dumps(progress,indent=2)+'\n');raise

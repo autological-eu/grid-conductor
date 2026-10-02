@@ -59,3 +59,18 @@ level halfway between the current bounds. Every fifth iteration uses the
 unrestricted proposal. The unrestricted master still supplies the lower bound;
 stabilization never restricts that certificate. This change is being tested on
 the real reference and does not constitute a convergence claim.
+
+Single-asset inventory reachability is also projected directly into the
+master. For a block, let $a$ be the product of retention factors, $R$ the
+retention-weighted charging capability plus inflow, and $D$ the weighted
+discharging capability. Boundaries satisfy
+
+$$x_{end}\le a x_{start}+R,\qquad x_{end}\ge a x_{start}-D.$$
+
+An additional constant upper envelope accounts for intermediate capacity
+limits. `tools/inventory_reachability.py` derives these bounds for controllable
+spill limited to available inflow. Forty randomized cases match full hourly
+storage LP minima and maxima. These are storage-feasibility projections, not
+an economic dispatch substitute; Phase-I checks remain active. They apply
+only to the stated continuous storage assumptions. The current network
+reference uses hourly weights and constant power/efficiency bounds.

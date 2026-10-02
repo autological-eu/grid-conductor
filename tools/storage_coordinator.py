@@ -41,7 +41,7 @@ def solve_block(block, state, phase=False):
     if len(r):gradient-=np.asarray(V.T@result.ineqlin.marginals).ravel()
     return result,gradient
 
-def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None):
+def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None):
     """Return best feasible state and rigorous LP-cut bounds, or fail to converge."""
     nx=len(bounds);nb=len(blocks);cuts=[];limits=[];history=[];upper=np.inf;lower=-np.inf;best=None
     theta_bounds=[]
@@ -60,6 +60,10 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
     if resume is not None:
         if resume['shared_variables']!=nx or resume['blocks']!=nb:raise ValueError('Checkpoint dimensions mismatch')
         cuts=[np.asarray(v,dtype=float) for v in resume['cuts']];limits=resume['limits'];history=resume['history'];upper=np.inf if resume['upper_bound'] is None else resume['upper_bound'];lower=-np.inf if resume['lower_bound'] is None else resume['lower_bound'];best=None if resume['best_state'] is None else np.asarray(resume['best_state']);start_iteration=resume['iteration']+1
+    if inequality is not None:
+        rows=np.asarray(inequality,dtype=float);values=np.asarray(limit,dtype=float)
+        if rows.ndim!=2 or rows.shape!=(len(values),nx) or not np.isfinite(rows).all() or not np.isfinite(values).all():raise ValueError('Invalid master inequality dimensions/values')
+        for row,value in zip(rows,values):cuts.append(np.r_[row,np.zeros(nb)]);limits.append(float(value))
     if initial_state is not None and resume is None:
         state=np.asarray(initial_state,dtype=float)
         if len(state)!=nx or any((lo is not None and v<lo-1e-7) or (hi is not None and v>hi+1e-7) for v,(lo,hi) in zip(state,bounds)):raise ValueError('Invalid warm boundary state')
