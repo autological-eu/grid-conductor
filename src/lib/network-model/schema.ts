@@ -49,7 +49,7 @@ const inputSchema = z
       .min(1)
       .max(8784),
     interval_hours: finite.positive(),
-    zones: z.array(id).min(1).max(100),
+    zones: z.array(id).min(1).max(128),
     load_mw: z.record(series),
     external_net_import_mw: z.record(z.array(finite)),
     generators: z.array(generator).max(2000),

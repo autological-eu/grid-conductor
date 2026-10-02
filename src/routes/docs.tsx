@@ -9,6 +9,7 @@ export const Route = createFileRoute("/docs")({
 });
 
 const artifacts = [
+  ["network-benchmark-2025/comparison.json", "2025 conditional window parity · experimental"],
   ["2025-sequential-dispatch-audit.json", "2025 sequential dispatch audit · approximate"],
   [
     "network-benchmark/kirchhoff-results.json",
