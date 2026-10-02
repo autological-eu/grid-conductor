@@ -30,6 +30,13 @@ def publish():
  names=['Signed flow × spread','Above-€5 flow × spread','Fixed-spread +500 MW ladder','Fixed-spread +1,000 MW ladder','Mean-spread triangle bound','Price-response +500 MW benefit'];fig,ax=plt.subplots(figsize=(10,5));bars=ax.barh(names,values,color=['#64748b','#64748b','#d97706','#d97706','#0f766e','#76c8b7']);ax.invert_yaxis();ax.set(xlabel='M€ over calendar year 2025 / screening estimate',title='Different quantities: do not treat these as interchangeable benefits',xlim=(0,460))
  for bar,v in zip(bars,values):ax.text(v+4,bar.get_y()+bar.get_height()/2,f'{v:.2f}',va='center')
  save(fig,'metric-comparison.svg')
+ fig,ax=plt.subplots(figsize=(9,7));ax.set(xlim=(0,1),ylim=(0,1));ax.axis('off')
+ boxes=[('1 · ENTSO-E observations','A44 prices + A11 scheduled flows; capacity when available'),('2 · Align and filter','Known prices AND flow; 0.25 h samples; spread > €5 events'),('3 · Aggregate across 2025','35,040 observed; 27,442 events; weighted event spread €57.47/MWh'),('4 · Declare the response assumption','Negative OLS fits → flow-derived fallback k = 0.04927'),('5 · Integrate the modelled area','Triangle €229.89m/year; +500 MW trapezoid €154.87m/year'),('6 · Evaluate the scenario separately','Gross welfare → capital assumptions, battery model and DWL cap')]
+ for i,(title,description) in enumerate(boxes):
+  y=.92-i*.16
+  ax.text(.5,y,title+'\n'+description,ha='center',va='center',fontsize=10,bbox={'boxstyle':'round,pad=.7','facecolor':'#f0fdfa' if i<3 else '#fffbeb','edgecolor':'#0f766e' if i<3 else '#b45309'})
+  if i<5:ax.annotate('',xy=(.5,y-.115),xytext=(.5,y-.055),arrowprops={'arrowstyle':'->','color':'#475569','lw':1.5})
+ ax.set_title('Observed inputs → summaries → assumed model → scenario',pad=15);save(fig,'pipeline.svg')
  result=dict(source='entsoe-fast-targets.json',source_sha256=hashlib.sha256(raw).hexdigest(),border='SE4>PL',year=2025,annual=row,monthly=monthly,derived=dict(event_hours=hours,event_weighted_mean_spread=weighted,saturation_mw=sat,line_500_gross_meur_year=benefit,sum_monthly_dwl_meur=sum(r['deadweight_loss_meur_month'] for r in monthly)),limitations=['Source contains published aggregates, not auction supply/demand bids or interval series.','Curve pair is illustrative; only gap and welfare curve use the screening assumption.','Raw OLS slopes are negative; effective slopes use a heuristic flow-derived fallback.'])
  (out/'walkthrough.json').write_text(json.dumps(result,indent=2)+'\n');print('Published five figures and aggregate provenance JSON')
 if __name__=='__main__':publish()
