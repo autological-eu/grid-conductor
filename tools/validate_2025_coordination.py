@@ -47,7 +47,7 @@ def run(folder,iterations):
  reference=pypsa.Network(folder.parent/'monthly-dispatch-sequential/01.nc')
  warm=np.r_[initial,reference.storage_units_t.state_of_charge.iloc[23].reindex(ids).to_numpy(),terminal];del reference;gc.collect()
  try:
-  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.01,relative_gap=1e-12,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits)
+  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.001,relative_gap=0.,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits)
  except Exception as error:
   progress=json.loads(output.read_text()) if output.exists() else {}
   progress.update(status='failed_not_certified',error=str(error));output.write_text(json.dumps(progress,indent=2)+'\n');raise
@@ -56,9 +56,9 @@ def run(folder,iterations):
  for row in result['history']:
   for k,v in row.items():
    if isinstance(v,float) and not np.isfinite(v):row[k]=None
- if result['status']=='converged' and abs(result['difference_eur'])>.02:
+ if result['status']=='converged' and (abs(result['difference_eur'])>.02 or result['lower_bound']>native+.02):
   result['status']='failed_not_certified'
-  result['error']='Monolithic parity failed'
+  result['error']='Monolithic objective/bound parity failed'
   output.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
   raise RuntimeError(result['error'])
  output.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n');print(result['status'],result['difference_eur'])

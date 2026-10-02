@@ -100,3 +100,17 @@ stopped on an unknown HiGHS master-LP status. It remains uncertified. Master
 and level LPs now retry statuses 2 and 4 using dual simplex without presolve,
 with identical constraints, cuts and feasibility tolerances. A targeted test
 checks this retry; persistent failure still stops the run.
+
+## Numerical certificate audit
+
+At iteration 791, the two-block run closed its configured gap but failed
+monolithic parity: its feasible objective exceeded the reference by €0.03496,
+and its lower bound exceeded the reference by €0.02476. This is a numerical
+certificate discrepancy, not evidence of a different economic optimum. The
+attempt is retained for diagnosis and is explicitly uncertified.
+
+The next reference attempt uses primal/dual tolerances of 10⁻¹⁰ and a €0.001
+absolute stopping gap with no relative contribution. It starts with fresh cuts
+to avoid retaining the earlier numerical lower-bound error. Reference validation
+now also rejects a lower bound more than €0.02 above the monolith. This stricter
+attempt has not yet passed; an annual optimum remains unverified.
