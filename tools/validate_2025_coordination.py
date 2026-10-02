@@ -8,14 +8,23 @@ from pathlib import Path
 import numpy as np,pandas as pd,pypsa
 from storage_coordinator import coordinate
 from inventory_reachability import envelope
+from disk_storage_blocks import save_block,DiskBlocks
 from pypsa_storage_blocks import block
 from run_network_benchmark import add_diagnostics
 
-def run(folder,iterations):
+def run(folder,iterations,disk_blocks=False):
  source=folder/'native-input.nc';data=json.loads((folder/'input.json').read_text());n=pypsa.Network(source)
  ids=n.storage_units.index;ns=len(ids);initial=n.storage_units.state_of_charge_initial.to_numpy();terminal=n.storage_units_t.state_of_charge_set.iloc[-1].reindex(ids).to_numpy();maximum=(n.storage_units.p_nom*n.storage_units.max_hours).to_numpy()
  n.storage_units_t.state_of_charge_set=pd.DataFrame(index=n.snapshots);add_diagnostics(n,data)
- started=time.monotonic();parts=[block(n,n.snapshots[:24],0,2),block(n,n.snapshots[24:],1,2)];bounds=[(v,v) for v in initial]+[(0,v) for v in maximum]+[(v,v) for v in terminal]
+ started=time.monotonic()
+ if disk_blocks:
+  paths=[]
+  for period,times in enumerate([n.snapshots[:24],n.snapshots[24:]]):
+   prepared=block(n,times,period,2);path=folder/f'coordination-block-{period}.npz'
+   save_block(path,prepared);paths.append(path);del prepared;gc.collect()
+  parts=DiskBlocks(paths)
+ else:parts=[block(n,n.snapshots[:24],0,2),block(n,n.snapshots[24:],1,2)]
+ bounds=[(v,v) for v in initial]+[(0,v) for v in maximum]+[(v,v) for v in terminal]
  if not np.all(n.snapshot_weightings.to_numpy()==1):raise ValueError('Reference reachability requires hourly weights')
  for key in ['p_min_pu','p_max_pu','efficiency_store','efficiency_dispatch','standing_loss']:
   if len(n.storage_units_t[key].columns):raise ValueError('Dynamic storage parameters need hourly envelope inputs')
@@ -63,4 +72,4 @@ def run(folder,iterations):
   raise RuntimeError(result['error'])
  output.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n');print(result['status'],result['difference_eur'])
 if __name__=='__main__':
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--folder',type=Path,required=True);p.add_argument('--iterations',type=int,default=100);a=p.parse_args();run(a.folder,a.iterations)
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--folder',type=Path,required=True);p.add_argument('--iterations',type=int,default=100);p.add_argument('--disk-blocks',action='store_true',help='Load one prepared LP block at a time');a=p.parse_args();run(a.folder,a.iterations,a.disk_blocks)

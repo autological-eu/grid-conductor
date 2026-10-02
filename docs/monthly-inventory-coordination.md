@@ -114,3 +114,16 @@ absolute stopping gap with no relative contribution. It starts with fresh cuts
 to avoid retaining the earlier numerical lower-bound error. Reference validation
 now also rejects a lower bound more than €0.02 above the monolith. This stricter
 attempt has not yet passed; an annual optimum remains unverified.
+
+## Disk-backed block preparation
+
+`tools/disk_storage_blocks.py` stores sparse LP coefficients in atomic numeric
+NPZ archives and loads one block at a time without retaining a matrix cache.
+The reference driver accepts `--disk-blocks` to exercise this path. Round-trip
+and coordinator-parity tests cover coefficients, optional constraints, bounds
+and objective certificates. Archives do not use pickle.
+
+This reduces retained block-matrix memory; it does not yet constitute an annual
+runner. Preparing a full monthly native LP must still fit available memory, and
+the master cuts remain in memory. Annual source fingerprints, boundary closure,
+paired intervention validation and a convergence certificate remain required.
