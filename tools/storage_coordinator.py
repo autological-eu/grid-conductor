@@ -33,7 +33,7 @@ def solve_block(block, state, phase=False):
         bounds=block.bounds+[(0,None)]*(2*ne+nu)
     else:eq,ub,c,bounds=A,U,block.cost,block.bounds
     result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method='highs',options={'primal_feasibility_tolerance':1e-9,'dual_feasibility_tolerance':1e-9})
-    if result.status==4:
+    if result.status in (2,4):
         result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method='highs-ds',options={'presolve':False,'primal_feasibility_tolerance':1e-9,'dual_feasibility_tolerance':1e-9})
     if result.status==2 and not phase:return None
     if not result.success:raise RuntimeError(f'Local LP failed: {result.status}: {result.message}')
@@ -76,7 +76,7 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
             row=np.r_[gradient,np.zeros(nb)];row[nx+i]=-1;cuts.append(row);limits.append(float(gradient@state-result.fun))
         upper=float(cost);best=state.copy()
     for iteration in range(start_iteration,max_iterations+1):
-        master=linprog(np.r_[np.zeros(nx),np.ones(nb)],A_ub=sparse.csr_matrix(cuts) if cuts else None,b_ub=limits if cuts else None,A_eq=E,b_eq=rhs,bounds=bounds+theta_bounds,method='highs')
+        master=linprog(np.r_[np.zeros(nx),np.ones(nb)],A_ub=sparse.csr_matrix(cuts) if cuts else None,b_ub=limits if cuts else None,A_eq=E,b_eq=rhs,bounds=bounds+theta_bounds,method='highs',options={'primal_feasibility_tolerance':1e-9,'dual_feasibility_tolerance':1e-9})
         if not master.success:raise RuntimeError(f'Master LP failed: {master.status}: {master.message}')
         state=master.x[:nx];lower=max(lower,float(master.fun));cost=0.;feasible=True
         if np.isfinite(upper) and lower>upper+absolute_gap:raise RuntimeError('Invalid lower bound exceeds feasible upper bound')
@@ -92,7 +92,7 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
             distance=sparse.vstack([sparse.hstack([sparse.eye(nx),sparse.csr_matrix((nx,nb)),-sparse.eye(nx)]),sparse.hstack([-sparse.eye(nx),sparse.csr_matrix((nx,nb)),-sparse.eye(nx)])],format='csr')
             target=sparse.csr_matrix(np.r_[np.zeros(nx),np.ones(nb),np.zeros(nx)][None,:])
             eq=None if E is None else sparse.hstack([E,sparse.csr_matrix((E.shape[0],nx))],format='csr')
-            stabilized=linprog(np.r_[np.zeros(nx+nb),1/width],A_ub=sparse.vstack([original,distance,target],format='csr'),b_ub=np.r_[limits,best,-best,level],A_eq=eq,b_eq=rhs,bounds=bounds+theta_bounds+[(0,None)]*nx,method='highs')
+            stabilized=linprog(np.r_[np.zeros(nx+nb),1/width],A_ub=sparse.vstack([original,distance,target],format='csr'),b_ub=np.r_[limits,best,-best,level],A_eq=eq,b_eq=rhs,bounds=bounds+theta_bounds+[(0,None)]*nx,method='highs',options={'primal_feasibility_tolerance':1e-9,'dual_feasibility_tolerance':1e-9})
             if not stabilized.success:raise RuntimeError(f'Level master failed: {stabilized.message}')
             state=stabilized.x[:nx]
 
@@ -100,7 +100,7 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
             local=solve_block(block,state)
             if local is None:
                 feasible=False;phase,gradient=solve_block(block,state,phase=True)
-                if phase.fun<=feasibility_tolerance:raise RuntimeError('Inconsistent local infeasibility and Phase-I result')
+                if phase.fun<=feasibility_tolerance:raise RuntimeError(f'Inconsistent local infeasibility and Phase-I result: violation={phase.fun:.12g}, block={i}')
                 row=np.r_[gradient,np.zeros(nb)];cuts.append(row);limits.append(float(gradient@state-phase.fun))
             else:
                 result,gradient=local;cost+=result.fun

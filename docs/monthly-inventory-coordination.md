@@ -74,3 +74,10 @@ storage LP minima and maxima. These are storage-feasibility projections, not
 an economic dispatch substitute; Phase-I checks remain active. They apply
 only to the stated continuous storage assumptions. The current network
 reference uses hourly weights and constant power/efficiency bounds.
+
+A subsequent run stopped after iteration 110 because the local infeasibility
+status disagreed with a near-zero Phase-I violation. Master and local solves
+now use matching feasibility/duality tolerances, and an infeasible local status
+is retried with presolve disabled before it is treated as a genuine feasibility
+failure. This changes numerical handling, not the physical constraints. The
+restart passed the previously failing point; convergence remains a separate gate.

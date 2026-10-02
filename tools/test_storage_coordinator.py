@@ -38,6 +38,18 @@ class CoordinationTests(unittest.TestCase):
   result=coordinate([b],[(0,5)],resume=saved[-1])
   self.assertEqual(result['status'],'converged');self.assertAlmostEqual(result['objective'],5)
   self.assertGreater(result['iterations'],1)
+ def test_infeasible_status_is_retried_without_presolve(self):
+  from unittest.mock import patch
+  from types import SimpleNamespace
+  import storage_coordinator as module
+  original=module.linprog;calls=[]
+  def simulated(*args,**kwargs):
+   calls.append(kwargs)
+   if len(calls)==1:return SimpleNamespace(status=2)
+   return original(*args,**kwargs)
+  b=Block(np.array([1.]),[(0,2)],[[1]],np.array([1.]),[[1]])
+  with patch.object(module,'linprog',side_effect=simulated):result,_=module.solve_block(b,np.array([0.]))
+  self.assertAlmostEqual(result.fun,1);self.assertFalse(calls[1]['options']['presolve'])
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)
