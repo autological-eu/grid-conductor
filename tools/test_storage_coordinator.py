@@ -50,6 +50,21 @@ class CoordinationTests(unittest.TestCase):
   b=Block(np.array([1.]),[(0,2)],[[1]],np.array([1.]),[[1]])
   with patch.object(module,'linprog',side_effect=simulated):result,_=module.solve_block(b,np.array([0.]))
   self.assertAlmostEqual(result.fun,1);self.assertFalse(calls[1]['options']['presolve'])
+ def test_unknown_master_status_retries_identical_problem(self):
+  from unittest.mock import patch
+  from types import SimpleNamespace
+  import storage_coordinator as module
+  original=module.linprog;calls=[]
+  def simulated(*args,**kwargs):
+   calls.append(kwargs)
+   if len(calls)==1:return SimpleNamespace(status=4,success=False)
+   return original(*args,**kwargs)
+  with patch.object(module,'linprog',side_effect=simulated):
+   result=module.solve_master([1.],bounds=[(2,5)])
+  self.assertTrue(result.success);self.assertAlmostEqual(result.fun,2)
+  self.assertEqual(calls[0]['bounds'],calls[1]['bounds'])
+  self.assertEqual(calls[0]['options']['primal_feasibility_tolerance'],calls[1]['options']['primal_feasibility_tolerance'])
+  self.assertFalse(calls[1]['options']['presolve'])
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)

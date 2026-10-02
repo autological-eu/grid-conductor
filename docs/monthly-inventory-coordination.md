@@ -94,3 +94,9 @@ monolith, with a €289.02 lower-to-upper-bound gap. It did not converge. A resu
 process stopped after iteration 402 without a recorded solver exception; its
 `running` receipt therefore does not demonstrate an active job. Saved cuts allow
 resumption, but neither result supports an annual-optimum claim.
+
+The resumed reference reached iteration 766 with a €0.074635 bound gap, but
+stopped on an unknown HiGHS master-LP status. It remains uncertified. Master
+and level LPs now retry statuses 2 and 4 using dual simplex without presolve,
+with identical constraints, cuts and feasibility tolerances. A targeted test
+checks this retry; persistent failure still stops the run.

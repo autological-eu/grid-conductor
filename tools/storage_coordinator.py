@@ -9,6 +9,14 @@ import numpy as np
 from scipy import sparse
 from scipy.optimize import linprog
 
+def solve_master(cost, **kwargs):
+    """Retry numerical/infeasible presolve statuses without changing the LP."""
+    tolerances={'primal_feasibility_tolerance':1e-9,'dual_feasibility_tolerance':1e-9}
+    result=linprog(cost,**kwargs,method='highs',options=tolerances)
+    if result.status in (2,4):
+        result=linprog(cost,**kwargs,method='highs-ds',options={**tolerances,'presolve':False})
+    return result
+
 @dataclass
 class Block:
     cost: np.ndarray
@@ -76,7 +84,7 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
             row=np.r_[gradient,np.zeros(nb)];row[nx+i]=-1;cuts.append(row);limits.append(float(gradient@state-result.fun))
         upper=float(cost);best=state.copy()
     for iteration in range(start_iteration,max_iterations+1):
-        master=linprog(np.r_[np.zeros(nx),np.ones(nb)],A_ub=sparse.csr_matrix(cuts) if cuts else None,b_ub=limits if cuts else None,A_eq=E,b_eq=rhs,bounds=bounds+theta_bounds,method='highs',options={'primal_feasibility_tolerance':1e-9,'dual_feasibility_tolerance':1e-9})
+        master=solve_master(np.r_[np.zeros(nx),np.ones(nb)],A_ub=sparse.csr_matrix(cuts) if cuts else None,b_ub=limits if cuts else None,A_eq=E,b_eq=rhs,bounds=bounds+theta_bounds)
         if not master.success:raise RuntimeError(f'Master LP failed: {master.status}: {master.message}')
         state=master.x[:nx];lower=max(lower,float(master.fun));cost=0.;feasible=True
         if np.isfinite(upper) and lower>upper+absolute_gap:raise RuntimeError('Invalid lower bound exceeds feasible upper bound')
@@ -92,7 +100,7 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
             distance=sparse.vstack([sparse.hstack([sparse.eye(nx),sparse.csr_matrix((nx,nb)),-sparse.eye(nx)]),sparse.hstack([-sparse.eye(nx),sparse.csr_matrix((nx,nb)),-sparse.eye(nx)])],format='csr')
             target=sparse.csr_matrix(np.r_[np.zeros(nx),np.ones(nb),np.zeros(nx)][None,:])
             eq=None if E is None else sparse.hstack([E,sparse.csr_matrix((E.shape[0],nx))],format='csr')
-            stabilized=linprog(np.r_[np.zeros(nx+nb),1/width],A_ub=sparse.vstack([original,distance,target],format='csr'),b_ub=np.r_[limits,best,-best,level],A_eq=eq,b_eq=rhs,bounds=bounds+theta_bounds+[(0,None)]*nx,method='highs',options={'primal_feasibility_tolerance':1e-9,'dual_feasibility_tolerance':1e-9})
+            stabilized=solve_master(np.r_[np.zeros(nx+nb),1/width],A_ub=sparse.vstack([original,distance,target],format='csr'),b_ub=np.r_[limits,best,-best,level],A_eq=eq,b_eq=rhs,bounds=bounds+theta_bounds+[(0,None)]*nx)
             if not stabilized.success:raise RuntimeError(f'Level master failed: {stabilized.message}')
             state=stabilized.x[:nx]
 
