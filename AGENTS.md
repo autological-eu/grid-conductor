@@ -162,3 +162,20 @@ research retains its separate integration gates.
   benefit twice or treat allowance price as an automatic social damage value.
   Reproduce with `tools/carbon_network_sensitivity.py`, then
   `bun tools/check_carbon_sensitivity.ts`, then the Python publication tool.
+
+## Inventory coordination validation
+
+- `tools/storage_coordinator.py` coordinates continuous LP blocks using Benders
+  objective cuts and separate Phase-I feasibility cuts. Bounds are explicit;
+  iteration limits are not convergence certificates. A warm feasible boundary
+  state provides an upper bound, never bypasses optimisation.
+- `tools/pypsa_storage_blocks.py` preserves native Linopy coefficients and maps
+  chronological StorageUnit boundaries. Stores, ramps, commitment, expansion and
+  annual energy/global budgets are unsupported and must not disappear silently.
+- `tools/validate_2025_coordination.py` runs the two-block 48h conditional reference;
+  progress is `data/pypsa-eur/benchmark-2025-window/coordination-reference.json`.
+  Check the live process before interpreting `running`. The warm start uses the
+  saved January sequential state, not the monolithic optimal boundary.
+- Tests: pinned Pixi Python, `-m unittest discover -s tools -p 'test_*storage*.py'`.
+  See `docs/monthly-inventory-coordination.md`. The yearly streamed/resumable
+  coordinator remains unfinished; do not claim a certified annual optimum.

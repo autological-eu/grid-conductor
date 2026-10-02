@@ -1,0 +1,87 @@
+"""Bounded Benders coordination of continuous LP blocks.
+
+Local variables retain hourly chronology. Shared variables represent inventories
+at block boundaries. Phase-I LPs generate feasibility cuts; objective duals
+produce lower bounds. No annual-optimum claim without a certified gap.
+"""
+from dataclasses import dataclass
+import numpy as np
+from scipy import sparse
+from scipy.optimize import linprog
+
+@dataclass
+class Block:
+    cost: np.ndarray
+    bounds: list
+    equality: object
+    rhs: np.ndarray
+    coupling: object
+    inequality: object = None
+    limit: object = None
+    inequality_coupling: object = None
+
+def solve_block(block, state, phase=False):
+    A=sparse.csr_matrix(block.equality);B=sparse.csr_matrix(block.coupling)
+    U=sparse.csr_matrix((0,len(block.cost))) if block.inequality is None else sparse.csr_matrix(block.inequality)
+    V=sparse.csr_matrix((U.shape[0],len(state))) if block.inequality_coupling is None else sparse.csr_matrix(block.inequality_coupling)
+    b=np.asarray(block.rhs)-B@state;r=np.zeros(0) if block.limit is None else np.asarray(block.limit)-V@state
+    if phase:
+        ne,nu=A.shape[0],U.shape[0]
+        eq=sparse.hstack([A,sparse.eye(ne),-sparse.eye(ne),sparse.csr_matrix((ne,nu))],format='csr')
+        ub=sparse.hstack([U,sparse.csr_matrix((nu,2*ne)),-sparse.eye(nu)],format='csr')
+        c=np.r_[np.zeros(len(block.cost)),np.ones(2*ne+nu)]
+        bounds=block.bounds+[(0,None)]*(2*ne+nu)
+    else:eq,ub,c,bounds=A,U,block.cost,block.bounds
+    result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method='highs',options={'primal_feasibility_tolerance':1e-9,'dual_feasibility_tolerance':1e-9})
+    if result.status==2 and not phase:return None
+    if not result.success:raise RuntimeError(f'Local LP failed: {result.status}: {result.message}')
+    gradient=-np.asarray(B.T@result.eqlin.marginals).ravel()
+    if len(r):gradient-=np.asarray(V.T@result.ineqlin.marginals).ravel()
+    return result,gradient
+
+def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None):
+    """Return best feasible state and rigorous LP-cut bounds, or fail to converge."""
+    nx=len(bounds);nb=len(blocks);cuts=[];limits=[];history=[];upper=np.inf;lower=-np.inf;best=None
+    theta_bounds=[]
+    for block in blocks:
+        A=sparse.csr_matrix(block.equality);B=sparse.csr_matrix(block.coupling)
+        eq=np.asarray(B.getnnz(axis=1))==0
+        U=sparse.csr_matrix((0,len(block.cost))) if block.inequality is None else sparse.csr_matrix(block.inequality)
+        V=sparse.csr_matrix((U.shape[0],nx)) if block.inequality_coupling is None else sparse.csr_matrix(block.inequality_coupling)
+        keep=np.asarray(V.getnnz(axis=1))==0
+        floor_lp=linprog(block.cost,A_eq=A[eq] if eq.any() else None,b_eq=np.asarray(block.rhs)[eq] if eq.any() else None,A_ub=U[keep] if keep.any() else None,b_ub=np.asarray(block.limit)[keep] if keep.any() else None,bounds=block.bounds,method='highs')
+        if not floor_lp.success:raise ValueError('A bounded independent block relaxation is required')
+        floor=float(floor_lp.fun)
+        theta_bounds.append((floor,None))
+    E=None if equality is None else sparse.hstack([sparse.csr_matrix(equality),sparse.csr_matrix((len(rhs),nb))],format='csr')
+    if initial_state is not None:
+        state=np.asarray(initial_state,dtype=float)
+        if len(state)!=nx or any((lo is not None and v<lo-1e-7) or (hi is not None and v>hi+1e-7) for v,(lo,hi) in zip(state,bounds)):raise ValueError('Invalid warm boundary state')
+        if equality is not None and np.max(abs(sparse.csr_matrix(equality)@state-rhs))>1e-7:raise ValueError('Warm state violates master equalities')
+        cost=0.
+        for i,block in enumerate(blocks):
+            local=solve_block(block,state)
+            if local is None:raise ValueError('Warm boundary state is infeasible')
+            result,gradient=local;cost+=result.fun
+            row=np.r_[gradient,np.zeros(nb)];row[nx+i]=-1;cuts.append(row);limits.append(float(gradient@state-result.fun))
+        upper=float(cost);best=state.copy()
+    for iteration in range(1,max_iterations+1):
+        master=linprog(np.r_[np.zeros(nx),np.ones(nb)],A_ub=sparse.csr_matrix(cuts) if cuts else None,b_ub=limits if cuts else None,A_eq=E,b_eq=rhs,bounds=bounds+theta_bounds,method='highs')
+        if not master.success:raise RuntimeError(f'Master LP failed: {master.status}: {master.message}')
+        state=master.x[:nx];lower=max(lower,float(master.fun));cost=0.;feasible=True
+        for i,block in enumerate(blocks):
+            local=solve_block(block,state)
+            if local is None:
+                feasible=False;phase,gradient=solve_block(block,state,phase=True)
+                if phase.fun<=feasibility_tolerance:raise RuntimeError('Inconsistent local infeasibility and Phase-I result')
+                row=np.r_[gradient,np.zeros(nb)];cuts.append(row);limits.append(float(gradient@state-phase.fun))
+            else:
+                result,gradient=local;cost+=result.fun
+                row=np.r_[gradient,np.zeros(nb)];row[nx+i]=-1;cuts.append(row);limits.append(float(gradient@state-result.fun))
+        if feasible and cost<upper:upper=float(cost);best=state.copy()
+        if np.isfinite(upper) and lower>upper+absolute_gap:raise RuntimeError('Invalid lower bound exceeds feasible upper bound')
+        gap=upper-lower;history.append(dict(iteration=iteration,lower_bound=float(lower),upper_bound=float(upper),gap=float(gap),candidate_feasible=feasible))
+        if on_iteration is not None:on_iteration(history[-1])
+        if np.isfinite(upper) and gap<=absolute_gap+relative_gap*max(1,abs(upper)):
+            return dict(status='converged',state=best,objective=upper,lower_bound=lower,gap=max(0.,gap),iterations=iteration,history=history)
+    return dict(status='iteration_limit_not_certified',state=best,objective=upper,lower_bound=lower,gap=upper-lower,iterations=max_iterations,history=history)
