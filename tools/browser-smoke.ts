@@ -35,6 +35,12 @@ try {
       await page.getByRole("combobox", { name: "Choose a bottleneck" }).selectOption("FR>IT-North");
     }
     await page.getByRole("combobox", { name: "Choose a bottleneck" }).selectOption("FR>IT-North");
+    await page.getByRole("button", { name: "Hourly price difference" }).click();
+    await page.getByText(/Coverage: 8,759/).waitFor();
+    assert.equal(await page.getByRole("dialog").locator("svg[role=img] path").count(), 3);
+    await page.getByRole("combobox", { name: "Price chart period" }).selectOption("0");
+    await page.getByText(/Coverage: 744/).waitFor();
+    await page.getByRole("button", { name: "Close", exact: true }).click();
     await page.getByRole("button", { name: "New", exact: true }).click();
     await page.getByRole("button", { name: "Run scenario" }).waitFor();
     if (viewport.width > 1000) {

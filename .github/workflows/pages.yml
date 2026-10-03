@@ -26,6 +26,8 @@ jobs:
       - run: bun run lint
       - run: bun run typecheck
       - run: bun run test
+      - name: Verify static hourly coverage for every map corridor
+        run: python3 tools/check_zone_price_traces.py
       - run: bun run build
       - name: Install Chromium for interaction checks
         run: bunx playwright install --with-deps chromium

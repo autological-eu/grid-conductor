@@ -167,9 +167,8 @@ function Workbench() {
               <option value="">Select on the map or here…</option>
               {rows.map((row) => (
                 <option key={row.id} value={row.id}>
-                  {row.zone_a} → {row.zone_b} ·{" "}
-                  {row.mean_absolute_spread_eur_mwh?.toFixed(2) ?? "—"} €/MWh mean spread ·{" "}
-                  {row.congestion_rent_meur_year?.toFixed(1) ?? "—"} M€ rent
+                  {row.zone_a} → {row.zone_b} · {row.congestion_rent_meur_year?.toFixed(1) ?? "—"}{" "}
+                  M€ rent · {row.mean_absolute_spread_eur_mwh?.toFixed(2) ?? "—"} €/MWh mean spread
                 </option>
               ))}
             </select>

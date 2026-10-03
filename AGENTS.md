@@ -179,3 +179,18 @@ research retains its separate integration gates.
 - Tests: pinned Pixi Python, `-m unittest discover -s tools -p 'test_*storage*.py'`.
   See `docs/monthly-inventory-coordination.md`. The yearly streamed/resumable
   coordinator remains unfinished; do not claim a certified annual optimum.
+
+## Observed Stage-1 map and price charts
+
+- The map's primary baseline metric is signed annual congestion rent (M€/year),
+  summing both directed scheduled exchanges × signed price difference × hours.
+  Mean absolute price spread (€/MWh) is secondary. Neither is investment welfare.
+  Source exchanges are scheduled, not metered physical flows; preserve negative rent.
+- Static hourly price arrays and source/coverage manifest live under
+  `public/research/zone-prices-2025/`. The sidebar shows two price lines, shaded
+  separation, UTC month/year selection and missing-hour coverage. Gaps are not filled.
+- `tools/publish_zone_price_traces.py` permits only openly licensed Energy-Charts
+  zones. Other provider zones explicitly prohibit public republication; do not
+  publish their cached raw or derived values. Use `publish_entsoe_zone_prices.py`
+  with offline `ENTSOE_API_KEY` for remaining zones. Raw caches/credentials stay
+  ignored under `data/price-trace/`; public provenance excludes security tokens.

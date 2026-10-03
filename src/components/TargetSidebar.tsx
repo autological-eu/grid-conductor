@@ -120,14 +120,6 @@ export function TargetSidebar({
         </p>
         <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
           <Stat
-            label="Mean absolute price spread"
-            value={
-              target.mean_absolute_spread_eur_mwh == null
-                ? "Unavailable"
-                : `${target.mean_absolute_spread_eur_mwh.toFixed(2)} €/MWh`
-            }
-          />
-          <Stat
             label="Annual congestion rent (signed)"
             value={
               target.congestion_rent_meur_year == null
@@ -136,7 +128,15 @@ export function TargetSidebar({
             }
           />
           <Stat
-            label="Congested hours"
+            label="Mean absolute price spread"
+            value={
+              target.mean_absolute_spread_eur_mwh == null
+                ? "Unavailable"
+                : `${target.mean_absolute_spread_eur_mwh.toFixed(2)} €/MWh`
+            }
+          />
+          <Stat
+            label="Hours with spread > €5/MWh"
             value={`${target.congested_hours} / ${target.total_hours}`}
           />
           <Stat

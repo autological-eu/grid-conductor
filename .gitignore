@@ -47,3 +47,6 @@ data/pypsa-eur/
 !.env.example
 playwright-report/
 test-results/
+
+# Offline historical price responses and credentials
+data/price-trace/

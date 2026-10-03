@@ -4,76 +4,78 @@ import { useQuery } from "@tanstack/react-query";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
 
-async function prices(zone: string) {
-  const response = await fetch(
-    `https://api.energy-charts.info/price?bzn=${encodeURIComponent(zone)}&start=2025-01-01&end=2025-12-31`,
-  );
-  if (!response.ok)
-    throw new Error(`Price source unavailable (${response.status}). Try again later.`);
-  const data = (await response.json()) as {
-    unix_seconds: number[];
-    price: (number | null)[];
-    unit: string;
-  };
-  if (data.unit !== "EUR / MWh" || data.unix_seconds.length !== data.price.length)
-    throw new Error("Unexpected price source format");
-  const quarters = new Map<number, number>();
-  data.unix_seconds.forEach((time, i) => {
-    const value = data.price[i];
-    const duration = (data.unix_seconds[i + 1] ?? time + 900) - time;
-    if (duration !== 900 && duration !== 3600) throw new Error("Unsupported price interval");
-    if (value == null || !Number.isFinite(value)) return;
-    for (let t = time; t < time + duration; t += 900) quarters.set(t, value);
-  });
-  return quarters;
+type Prices = (number | null)[];
+async function prices(zone: string): Promise<Prices> {
+  const manifestResponse = await fetch(publicAsset("research/zone-prices-2025/manifest.json"));
+  if (!manifestResponse.ok) throw new Error("Price coverage manifest unavailable");
+  const manifest = (await manifestResponse.json()) as Record<
+    string,
+    { status: string; error?: string }
+  >;
+  if (manifest[zone]?.status !== "published")
+    throw new Error(
+      `Hourly prices for ${zone} are not yet published. Direct ENTSO-E collection is required.`,
+    );
+  const response = await fetch(publicAsset(`research/zone-prices-2025/${zone}.json`));
+  if (!response.ok) throw new Error(`No verified published hourly prices for ${zone}.`);
+  const data: unknown = await response.json();
+  if (
+    !Array.isArray(data) ||
+    data.length !== 8760 ||
+    data.some((v) => v !== null && (typeof v !== "number" || !Number.isFinite(v)))
+  )
+    throw new Error(`Invalid published prices for ${zone}`);
+  return data as Prices;
 }
 
 export function PriceSpreadDetails({ a, b }: { a: string; b: string }) {
   const [open, setOpen] = useState(false);
+  const [month, setMonth] = useState("year");
   const query = useQuery({
-    queryKey: ["hourly-prices", a, b, 2025],
+    queryKey: ["published-zone-prices", a, b, 2025],
     enabled: open,
     staleTime: Infinity,
     retry: false,
-    queryFn: async () => {
-      if ([a, b].sort().join("|") === "FR|IT-North") {
-        const response = await fetch(publicAsset("research/fr-it-screening/hourly-spreads.json"));
-        if (!response.ok) throw new Error("Published hourly trace unavailable");
-        const data = (await response.json()) as (number | null)[];
-        return data.map((value) => (value == null ? null : a === "FR" ? value : -value));
-      }
-      const [left, right] = await Promise.all([prices(a), prices(b)]);
-      const start = Date.UTC(2025, 0, 1) / 1000;
-      return Array.from({ length: 8760 }, (_, i) => {
-        const differences: number[] = [];
-        for (let q = 0; q < 4; q++) {
-          const t = start + i * 3600 + q * 900;
-          const x = left.get(t),
-            y = right.get(t);
-          if (x == null || y == null) return null;
-          differences.push(y - x);
-        }
-        return differences.reduce((sum, v) => sum + v, 0) / 4;
-      });
-    },
+    queryFn: async () => Promise.all([prices(a), prices(b)]),
   });
-  const data = query.data ?? [];
-  const values = data.filter((v): v is number => v != null);
+  const begin =
+    month === "year" ? 0 : (Date.UTC(2025, Number(month), 1) - Date.UTC(2025, 0, 1)) / 3600000;
+  const end =
+    month === "year"
+      ? 8760
+      : (Date.UTC(2025, Number(month) + 1, 1) - Date.UTC(2025, 0, 1)) / 3600000;
+  const left = query.data?.[0].slice(begin, end) ?? [],
+    right = query.data?.[1].slice(begin, end) ?? [];
+  const values = [...left, ...right].filter((v): v is number => v != null);
   const low = Math.min(0, ...values),
     high = Math.max(1, ...values);
   const y = (v: number) => 230 - ((v - low) / (high - low)) * 210;
-  let pen = false;
-  const path = data
+  const x = (i: number) => 55 + (i / Math.max(1, end - begin - 1)) * 900;
+  const line = (data: Prices) => {
+    let pen = false;
+    return data
+      .map((v, i) => {
+        if (v == null) {
+          pen = false;
+          return "";
+        }
+        const command = `${pen ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`;
+        pen = true;
+        return command;
+      })
+      .join(" ");
+  };
+  const shade = left
     .map((v, i) => {
-      if (v == null) {
-        pen = false;
-        return "";
-      }
-      const command = `${pen ? "L" : "M"}${((i / 8759) * 900 + 55).toFixed(1)},${y(v).toFixed(1)}`;
-      pen = true;
-      return command;
+      const w = right[i],
+        v2 = left[i + 1],
+        w2 = right[i + 1];
+      return v == null || w == null || v2 == null || w2 == null
+        ? ""
+        : `M${x(i)},${y(v)}L${x(i + 1)},${y(v2)}L${x(i + 1)},${y(w2)}L${x(i)},${y(w)}Z`;
     })
     .join(" ");
+  const known = left.filter((v, i) => v != null && right[i] != null).length;
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -84,29 +86,51 @@ export function PriceSpreadDetails({ a, b }: { a: string; b: string }) {
       <DialogContent className="max-w-4xl">
         <DialogHeader>
           <DialogTitle>
-            {b} − {a}: hourly day-ahead price difference, 2025
+            {a} and {b}: hourly day-ahead prices, 2025
           </DialogTitle>
         </DialogHeader>
         <p className="text-sm text-muted-foreground">
-          Signed difference in €/MWh. Hourly means require four known quarter-hours. Gaps remain
-          blank.
+          Two observed price series in €/MWh. The shaded area shows their difference, not congestion
+          rent or recoverable welfare.
         </p>
-        {query.isPending && <p>Loading public historical prices…</p>}
-        {query.error && (
-          <p role="alert">
-            {query.error.message} This zone may not be supported by the public provider.
-          </p>
-        )}
+        <label className="text-sm">
+          Period{" "}
+          <select
+            aria-label="Price chart period"
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
+            className="rounded border bg-background p-1"
+          >
+            <option value="year">Full year</option>
+            {Array.from({ length: 12 }, (_, i) => (
+              <option key={i} value={i}>
+                {new Date(Date.UTC(2025, i, 1)).toLocaleString("en", {
+                  month: "long",
+                  timeZone: "UTC",
+                })}
+              </option>
+            ))}
+          </select>
+        </label>
+        {query.isPending && <p>Loading published historical prices…</p>}
+        {query.error && <p role="alert">{query.error.message}</p>}
         {query.data && (
           <>
+            <div className="flex gap-4 text-sm">
+              <span style={{ color: "#2563eb" }}>━ {a}</span>
+              <span style={{ color: "#d97706" }}>━ {b}</span>
+              <span>Shading: price difference</span>
+            </div>
             <svg
               viewBox="0 0 1000 270"
               role="img"
-              aria-label={`Hourly price difference ${b} minus ${a}`}
+              aria-label={`Hourly prices for ${a} and ${b}, shaded price difference`}
               className="w-full"
             >
+              <path d={shade} fill="#64748b" opacity=".22" />
               <line x1="55" x2="955" y1={y(0)} y2={y(0)} stroke="currentColor" opacity=".3" />
-              <path d={path} fill="none" stroke="currentColor" strokeWidth=".8" />
+              <path d={line(left)} fill="none" stroke="#2563eb" strokeWidth=".9" />
+              <path d={line(right)} fill="none" stroke="#d97706" strokeWidth=".9" />
               <text x="0" y="20" fontSize="14">
                 {high.toFixed(0)}
               </text>
@@ -114,29 +138,32 @@ export function PriceSpreadDetails({ a, b }: { a: string; b: string }) {
                 {low.toFixed(0)}
               </text>
               <text x="55" y="260" fontSize="14">
-                Jan
+                {new Date(Date.UTC(2025, 0, 1) + begin * 3600000).toISOString().slice(0, 10)}
               </text>
-              <text x="470" y="260" fontSize="14">
-                Jul · UTC
-              </text>
-              <text x="925" y="260" fontSize="14">
-                Dec
+              <text x="800" y="260" fontSize="14">
+                {new Date(Date.UTC(2025, 0, 1) + (end - 1) * 3600000).toISOString().slice(0, 10)}{" "}
+                UTC
               </text>
             </svg>
             <p className="text-sm">
-              Coverage: {values.length.toLocaleString()} / 8,760 hours. Absolute hourly-mean spread
-              sum:{" "}
-              {values
-                .reduce((sum, v) => sum + Math.abs(v), 0)
-                .toLocaleString(undefined, { maximumFractionDigits: 0 })}{" "}
-              €/MW-year.
+              Coverage: {known.toLocaleString()} / {(end - begin).toLocaleString()} hours in this
+              view. Missing hours break both shading and lines.
             </p>
           </>
         )}
         <p className="text-xs text-muted-foreground">
-          Public Energy-Charts / SMARD price source (CC BY 4.0). Fetched on demand; requires
-          internet. This price-only trace has no scheduled-flow coverage mask and can differ from
-          the map’s archived screening input. No cable benefit or welfare is inferred.
+          Published hourly means from ENTSO-E A44 or openly licensed Energy-Charts / SMARD (CC BY
+          4.0). No live third-party request. Quarter-hour prices are averaged only for complete
+          hours. This price-only trace may differ from the archived screening’s price-and-flow
+          coverage mask.{" "}
+          <a
+            href={publicAsset("research/zone-prices-2025/manifest.json")}
+            target="_blank"
+            rel="noreferrer"
+            className="underline"
+          >
+            Source and coverage manifest
+          </a>
         </p>
       </DialogContent>
     </Dialog>

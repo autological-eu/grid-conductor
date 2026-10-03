@@ -1,6 +1,6 @@
 # Observed annual price-spread targets
 
-The current Stage-1 sidebar shows **mean absolute price spread (€/MWh)** and **annual signed congestion rent (M€)**. The map colours use the mean spread. The accumulated spread described below remains an intermediate used to calculate the mean by dividing by covered hours.
+The current Stage-1 sidebar shows **mean absolute price spread (€/MWh)** and **annual signed congestion rent (M€)**. The map colours now use annual signed congestion rent; mean absolute spread is secondary. The accumulated spread described below remains an intermediate used to calculate the mean by dividing by covered hours.
 
 Congestion rent sums both directed scheduled exchange × signed destination-minus-origin price spread × interval duration, including negative contributions. These are ENTSO-E scheduled exchanges, not metered physical flows. Missing rent inputs are unavailable, not zero. Mean spread requires matching directional coverage counts; interval-mask identity cannot be audited from these aggregate-only artifacts. Scenario welfare remains separate.
 
@@ -18,6 +18,10 @@ Scenario evaluations retain their separate experimental welfare methodology. The
 
 Select a corridor and open **Hourly price difference** in the sidebar. The plot shows signed hourly mean prices, destination minus origin, and observed-hour coverage. Missing observations break the line.
 
-France–Italy North uses a bundled historical trace, covering 8,759 of 8,760 UTC hours. Other zones request public Energy-Charts historical prices on demand. Unsupported zones, rate limits or browser restrictions produce an explicit error; they do not produce a synthetic trace. Broader bundled trace coverage is still needed for consistent offline access.
+France–Italy North uses a bundled historical trace, covering 8,759 of 8,760 UTC hours. Other zones use bundled published prices when available; there are no live third-party browser requests. Unsupported zones, rate limits or browser restrictions produce an explicit error; they do not produce a synthetic trace. All 68 displayed corridors now have static two-zone traces (39 zones), with at least 8,758 jointly observed hours out of 8,760. A published manifest identifies missing intervals and their source. The Energy-Charts provider permits republication for only a subset. The offline ENTSO-E collector fills remaining zones directly from A44; the coverage manifest records every source, monthly receipt and failed collection month.
 
 The plot is a price-only cross-source check. It does not apply the archived scheduled-flow mask. Its sum of absolute **hourly mean** spreads can differ from the map's **quarter-hour absolute** sum, especially where direction changes within an hour. Source attribution is Energy-Charts / SMARD, CC BY 4.0 as declared by the API; the price trace is not fetched directly from the original ENTSO-E cache.
+
+The hourly pop-out draws both zones’ prices and shades between them. Its month selector allows close inspection without replacing the full-year view. Shading is price separation, not flow-weighted rent. Null hours break the shaded area as well as the price lines.
+
+Reproduce static traces with `tools/publish_zone_price_traces.py` for openly licensed public-provider zones, then `tools/publish_entsoe_zone_prices.py` for the remainder using `ENTSOE_API_KEY` offline. Credentials and raw response caches stay in ignored `data/price-trace/`; only hourly values and non-secret provenance ship. No modelling dispatch is used to substitute for observed prices.

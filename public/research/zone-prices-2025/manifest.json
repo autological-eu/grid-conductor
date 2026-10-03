@@ -1,0 +1,3755 @@
+{
+  "AL": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YAL-KESH-----5",
+          "out_Domain": "10YAL-KESH-----5",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "93f3ce6a2223d369e59944df2fd4750f1c1504c23a1ef3f77a286f22369b0008"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YAL-KESH-----5",
+          "out_Domain": "10YAL-KESH-----5",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "8f30f5a8949b5287e3ba47fde72e13c36f4ca9773662ef7f73b3f02d796483c2"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YAL-KESH-----5",
+          "out_Domain": "10YAL-KESH-----5",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "03aeb9a5fd6d03903440fbac69a53a95dc35d87dba897347fab6bcee20c31523"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YAL-KESH-----5",
+          "out_Domain": "10YAL-KESH-----5",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "675d95676efe2a4e9fcd724864dc5c8c2606b09cdfe78a734193479b4b6ab2fd"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YAL-KESH-----5",
+          "out_Domain": "10YAL-KESH-----5",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "0e6d2ff94bf7e98ea6677b4955adcf4220716d586d56093617f2021d1587b7d6"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YAL-KESH-----5",
+          "out_Domain": "10YAL-KESH-----5",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "4ee9c1a3369f9436cb014a5f399dab131aed37453dd6e64968336512d881c9e9"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YAL-KESH-----5",
+          "out_Domain": "10YAL-KESH-----5",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "c8e3296561eda6852857cf09ec3d1a051dc96c848543d404b1305d3584b856d5"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YAL-KESH-----5",
+          "out_Domain": "10YAL-KESH-----5",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "3c9e04e56a7fecc49425a83df2b65491fcb25079e25301e6e62ddef2af3e9507"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YAL-KESH-----5",
+          "out_Domain": "10YAL-KESH-----5",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "6cfdef3ab6905c9f0d627c6f7f2f49dcc46ad44d0db9e699eb87becc638e5236"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YAL-KESH-----5",
+          "out_Domain": "10YAL-KESH-----5",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "c5553f1524e87d80c8dfedc306e33f6099945d98c4f413471dc7c2f1b4ffabc9"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YAL-KESH-----5",
+          "out_Domain": "10YAL-KESH-----5",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "88af7d61b5e8519e7e883fb465b592d4dba909dadb38a488aba8af49650076af"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YAL-KESH-----5",
+          "out_Domain": "10YAL-KESH-----5",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "cf53b0efbadacbe75b01eaa7843c43fd23abf730394fa370c50fe8e5bb5908ad"
+      }
+    ],
+    "failed_months": []
+  },
+  "AT": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=AT&start=2025-01-01&end=2025-12-31",
+    "sha256": "70f59a432bb721005b9697a386cc36a26135592b2d114b718461d3471556443d",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "BE": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=BE&start=2025-01-01&end=2025-12-31",
+    "sha256": "66c92478f614ecc6b3e4df0d07c8c54a789a6d88e2eab8eee8a81b59bd768c97",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "BG": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCA-BULGARIA-R",
+          "out_Domain": "10YCA-BULGARIA-R",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "c49dbe7e3aeac1159d5ca418b81d2c52b6898756a7a4aff3439e2bfa8901a064"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCA-BULGARIA-R",
+          "out_Domain": "10YCA-BULGARIA-R",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "d8b51bd6cefef3d12134d361e02cdeeed07162246ea03ff2d10b8a9952d511cc"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCA-BULGARIA-R",
+          "out_Domain": "10YCA-BULGARIA-R",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "3114cd31491277cd05f0bbdc70f71e589c9a218f030e4edfa4d12bd2f0d13d83"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCA-BULGARIA-R",
+          "out_Domain": "10YCA-BULGARIA-R",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "4b01a62944c3ca3e041785c6c9e40511c6f010fdc6d456d4fddd5028493de842"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCA-BULGARIA-R",
+          "out_Domain": "10YCA-BULGARIA-R",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "151e74fe46fab2a2ee18bdd3c4326123f124c946bfaa30297cca3abf528c0094"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCA-BULGARIA-R",
+          "out_Domain": "10YCA-BULGARIA-R",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "14ef6bc894cdcb334d62f68797c843bd4e05218220484ee68c5850ec32436e2d"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCA-BULGARIA-R",
+          "out_Domain": "10YCA-BULGARIA-R",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "40bb408eeb077fe5abe7926a6aacfe15c4814632b8d490cf8d6573c21c943398"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCA-BULGARIA-R",
+          "out_Domain": "10YCA-BULGARIA-R",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "11c37da75e648aadcf9c971fe4f9a58090e49fb2cc4dbad228757bbe912f296b"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCA-BULGARIA-R",
+          "out_Domain": "10YCA-BULGARIA-R",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "ec605f621f9228195d9e7bcac45df372f0187895a4b6a0bb61f101497d403479"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCA-BULGARIA-R",
+          "out_Domain": "10YCA-BULGARIA-R",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "e80dc54916b845acb04fb1e72d9c1ceb20b86a391346546472b6ceb26904990f"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCA-BULGARIA-R",
+          "out_Domain": "10YCA-BULGARIA-R",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "54403b83c4d39ae1a91e6e292d95fb2fd4fc4a0cc5e8bf5bf189ea0dc1bf6301"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCA-BULGARIA-R",
+          "out_Domain": "10YCA-BULGARIA-R",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "ba448e6b8eed80c89181e8198c95f341c93dda6df85c38cb68abd2a14ee800e5"
+      }
+    ],
+    "failed_months": []
+  },
+  "CH": {
+    "status": "published",
+    "known_hours": 8758,
+    "url": "https://api.energy-charts.info/price?bzn=CH&start=2025-01-01&end=2025-12-31",
+    "sha256": "bcca228f89b679dbbc9acdfd1ba2fcd9d482d033406a2bd22e429dec2e582355",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "CZ": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=CZ&start=2025-01-01&end=2025-12-31",
+    "sha256": "7bbd4c08703fb3d76554b3fee346feb37159f8355e55c42dc6df3a00e6f47c26",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "DE-LU": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=DE-LU&start=2025-01-01&end=2025-12-31",
+    "sha256": "6027e994c2e73fc1aec3b9a226a027676349e0d5c47957995b63a1ff35a7404a",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "DK1": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=DK1&start=2025-01-01&end=2025-12-31",
+    "sha256": "1f4cf3359fc9370381bfd21f1d98a8cb11ae09b65bc780c33ca131055e94dd39",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "DK2": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=DK2&start=2025-01-01&end=2025-12-31",
+    "sha256": "4179a48e15965d87dee892231612d6542b87cf0b73ccab8aa8e9febd1f6846db",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "EE": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A39I",
+          "out_Domain": "10Y1001A1001A39I",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "faea4bb1c4488a5c2da58cd1b79c3c35aed26819848d1ae76bb89e11355541ce"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A39I",
+          "out_Domain": "10Y1001A1001A39I",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "08a39bbbb8dbe3f11f6746f2559c7b7d3244217d14d4197b3933aa2c3f8a1516"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A39I",
+          "out_Domain": "10Y1001A1001A39I",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "62bc69623b26bbefd1d8cb817bea55467cc2c671c20ffa0bf8a3bd9fe01a611e"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A39I",
+          "out_Domain": "10Y1001A1001A39I",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "0f7edf5e897ef3b7ba04c3489b04b7179eab975bc29e1d6028be364ea0d42ec6"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A39I",
+          "out_Domain": "10Y1001A1001A39I",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "e5b889da23c5b59e5a375efc8f945b75b784699b0f5d04d9efd43debce3af086"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A39I",
+          "out_Domain": "10Y1001A1001A39I",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "236fecda803d12c1be912be8c95ca7a57a2bf2d1b4c0bf53506832b5062aa5a4"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A39I",
+          "out_Domain": "10Y1001A1001A39I",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "2484d4b81ff36d3d515443ed61f913df19d21e99bca4e1d0ab7151bd26f484f3"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A39I",
+          "out_Domain": "10Y1001A1001A39I",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "a6e71db82f7dafddd7f12f4226cc652444efa33b14d1dcc3955058bd7db9f66d"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A39I",
+          "out_Domain": "10Y1001A1001A39I",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "b6d2adc0fe4125d560c58823a2b6ffea8d538c8ba6570df98ea8568703ae3506"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A39I",
+          "out_Domain": "10Y1001A1001A39I",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "a07bd5402de1953d4146a4d35e48bcf156801e88a298d838db4c817bc1e176e5"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A39I",
+          "out_Domain": "10Y1001A1001A39I",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "0d42eb0b1f543ea70c68bb60b049306050b13a63e3b465ab4ae4dd2d5860063a"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A39I",
+          "out_Domain": "10Y1001A1001A39I",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "175e659245437eb3aea93caff3734265c36d40e4ff62bb9129cc621d0e5fc462"
+      }
+    ],
+    "failed_months": []
+  },
+  "ES": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YES-REE------0",
+          "out_Domain": "10YES-REE------0",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "b0b70a1b10f018a1bda67c87c57c6c8b8b513685ca33c91e038f62a327399f96"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YES-REE------0",
+          "out_Domain": "10YES-REE------0",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "360d305f676d86f3ff5620d5e2bce864d25f56c7b41a5e2d132c412ca2482196"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YES-REE------0",
+          "out_Domain": "10YES-REE------0",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "e0962f41f99b7c730b75e661ab5ee15905082af09932a9f8ae10919d43376c1b"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YES-REE------0",
+          "out_Domain": "10YES-REE------0",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "cd298b4cdcb810ecc4deb0fb84d8924d497c15d5f91b3169574fd6ee6f4ffbab"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YES-REE------0",
+          "out_Domain": "10YES-REE------0",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "3ce1eb6715ed3148a5d402759e5605cc956bf966a041a504fb04e6c724b64709"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YES-REE------0",
+          "out_Domain": "10YES-REE------0",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "bedf8c1c6d363871b8bd588a3e06386c27cc2b0832ee736e55992b61ec2472fa"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YES-REE------0",
+          "out_Domain": "10YES-REE------0",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "8f9c75927083f33011a0f1c2674ab2953407457fa85eee857341c1a14fa62f54"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YES-REE------0",
+          "out_Domain": "10YES-REE------0",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "7489e7fa338b7b27bd7f5b587b26ead580c288ef508ca30e998b6d4e0625806a"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YES-REE------0",
+          "out_Domain": "10YES-REE------0",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "8a52492fe51d56c449f6138c4b8c29a33031c062885cfa7ebb8e2feea0f5e639"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YES-REE------0",
+          "out_Domain": "10YES-REE------0",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "747d89dcc2e5a3fb818b2ebe3479c8baddbb594834fb5c7ef5d9923619fd18f8"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YES-REE------0",
+          "out_Domain": "10YES-REE------0",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "a695b9a2437e7d293b1233a72a75d0c91d0ea7b5e71e9543f5006e149b858255"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YES-REE------0",
+          "out_Domain": "10YES-REE------0",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "0aa130f90fc7dab1e9bd25e66b06f30a3609848e3ead1da8005227f8f0967bd9"
+      }
+    ],
+    "failed_months": []
+  },
+  "FI": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YFI-1--------U",
+          "out_Domain": "10YFI-1--------U",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "d02e17009ec30bd3d6d161dbe19a2a0f0aa7415d247eb84bcf29a9dc512bf011"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YFI-1--------U",
+          "out_Domain": "10YFI-1--------U",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "e6f81087d0bec6bd69b24545a7e6d33118f7028d18e06a10dd7ce9f5ce2a20b6"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YFI-1--------U",
+          "out_Domain": "10YFI-1--------U",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "7647a729939fd1f730bb8caceb6649fd1462eb488d9fea7f38ac4f8527724c28"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YFI-1--------U",
+          "out_Domain": "10YFI-1--------U",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "e722c2df4e88700784091009017ef57bdd043bb7929bd0f0652f7346a182cf0e"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YFI-1--------U",
+          "out_Domain": "10YFI-1--------U",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "add5fb5f01ac385e4994169d2daa43e7e2e7bc6bf16b855025a73454a38ca90f"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YFI-1--------U",
+          "out_Domain": "10YFI-1--------U",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "a2db03f2aca9064216ad2742a90b13253c60f1f0110b1532b08dd0fb613b8450"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YFI-1--------U",
+          "out_Domain": "10YFI-1--------U",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "ab540a8ad3dfc4e2ccd27994418f93435fbf007390e4c08f9605069328c8420c"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YFI-1--------U",
+          "out_Domain": "10YFI-1--------U",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "f6a7b919cbb7689c708c20763b4427a4bd2a2da817d325995d8a88e714839d29"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YFI-1--------U",
+          "out_Domain": "10YFI-1--------U",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "0937bc037b3451db3265c420816e5a22e413ad08103259ce4017ba26fc16d6e1"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YFI-1--------U",
+          "out_Domain": "10YFI-1--------U",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "347ac9a7f3261ed3bf3e9760bad506e669097b80a471e2c7a5a827d087caec61"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YFI-1--------U",
+          "out_Domain": "10YFI-1--------U",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "730a1aafb8ef36ec01a99c54a975fab39c517ae161b1cbc4f072429b4e389018"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YFI-1--------U",
+          "out_Domain": "10YFI-1--------U",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "180cf6c1377f0cb8f6ff86267f74771b059e4635730cbb5af3150609c2c422c3"
+      }
+    ],
+    "failed_months": []
+  },
+  "FR": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=FR&start=2025-01-01&end=2025-12-31",
+    "sha256": "7433475e219dcc495b66d3a4d00826694661e265c70dc956c122879c21bd6018",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "GR": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YGR-HTSO-----Y",
+          "out_Domain": "10YGR-HTSO-----Y",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "c4a0bf883c8ae7a1d2822d896e171cbc350757d48ef9ddec91202a6466beef90"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YGR-HTSO-----Y",
+          "out_Domain": "10YGR-HTSO-----Y",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "3d326c5658183f0c721443d727e3dce9fc02bd378c0d9528f955fc18267c935c"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YGR-HTSO-----Y",
+          "out_Domain": "10YGR-HTSO-----Y",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "b83a392581295afb0fd8d331c727a512b17e8d627620744d286a6d3d0602df33"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YGR-HTSO-----Y",
+          "out_Domain": "10YGR-HTSO-----Y",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "5b414675e2815211a6ac39ca456b7603583df3620961a105f91dd95382ebfc36"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YGR-HTSO-----Y",
+          "out_Domain": "10YGR-HTSO-----Y",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "2864c95e34a461d2586b637b9c21f945b10d958a05c1650a1108e89d9c99e50e"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YGR-HTSO-----Y",
+          "out_Domain": "10YGR-HTSO-----Y",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "49fbde12f30dfaba3faf1e54d1cc763afdc7da30b14971589efb678cf6335b84"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YGR-HTSO-----Y",
+          "out_Domain": "10YGR-HTSO-----Y",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "b20e9cd9d4fd05100afd5b3b597b50a47e266b8e0f3c66e43e7b6b628a135514"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YGR-HTSO-----Y",
+          "out_Domain": "10YGR-HTSO-----Y",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "ee23bca32eee56e27b968e281d910323772aa0be41c7323c20514fcd89f5003c"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YGR-HTSO-----Y",
+          "out_Domain": "10YGR-HTSO-----Y",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "81aa12f1296f4b9abfd64f63b065519a4ba021fdfbf78e6afa6de58f368db2d3"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YGR-HTSO-----Y",
+          "out_Domain": "10YGR-HTSO-----Y",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "d347147ed0827d9144f7aecdabdd421161266ad84adbb20aaa58eefeec21bead"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YGR-HTSO-----Y",
+          "out_Domain": "10YGR-HTSO-----Y",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "fe3654fdc48bd15366381cde755fa12c642d9c222d258ef3e77a56c74a7d927b"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YGR-HTSO-----Y",
+          "out_Domain": "10YGR-HTSO-----Y",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "ac9c17a0edd9b87e9ce8c9df0a86b7f612dfaf8575fc39ed47337cc8453868f4"
+      }
+    ],
+    "failed_months": []
+  },
+  "HR": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YHR-HEP------M",
+          "out_Domain": "10YHR-HEP------M",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "52aa5f558de18086df696225edbfc4ab6a01a787e5618af19f5f6c900b9973ea"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YHR-HEP------M",
+          "out_Domain": "10YHR-HEP------M",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "0b6a2cf2414322ae3a24eef75cf4ddbec0e851d5170bec6353e2c6f7e0fbbc3c"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YHR-HEP------M",
+          "out_Domain": "10YHR-HEP------M",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "77f53d98fe57cc8bd4b9c0cd0d4f1a3318b71dd43f8919680738736932b13e7f"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YHR-HEP------M",
+          "out_Domain": "10YHR-HEP------M",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "2064645f86179c63a49b29b10054c2d4b35fb70f03d068b2293441dafa3bd971"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YHR-HEP------M",
+          "out_Domain": "10YHR-HEP------M",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "5fd45747b55b351f15ff30f32a7e18d5c427c7807ad5f8eca91ff6f992c00316"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YHR-HEP------M",
+          "out_Domain": "10YHR-HEP------M",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "2fb253daeb28fd69ed2ba1be0d7a066cb183b94812bc3ed17bd2ac947c43cff4"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YHR-HEP------M",
+          "out_Domain": "10YHR-HEP------M",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "b21c904266fb98f0d3d292afec440cd89ddff1b5648f2965ae579b4cfb0c489e"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YHR-HEP------M",
+          "out_Domain": "10YHR-HEP------M",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "7486dedbd9a699d254aa5712c0cdd642f2d7cac706b0585ca83ea8ed9359efa5"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YHR-HEP------M",
+          "out_Domain": "10YHR-HEP------M",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "74c242a875e2ed934496ec480fb3ae3e8e61f4bb534c4bd00b390d691f04fd53"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YHR-HEP------M",
+          "out_Domain": "10YHR-HEP------M",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "2d44f689a2873fbaf5615711adec451d067c66c9934bfed58ffd6d3b180ad7ec"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YHR-HEP------M",
+          "out_Domain": "10YHR-HEP------M",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "d6099b3dc37dea50a1ea752fc14f447623c7abe2ee781dff9f94335ddd852095"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YHR-HEP------M",
+          "out_Domain": "10YHR-HEP------M",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "02d86a8621913305ad46071f45ebc1eff4db2df0883ca67792fe33b9b41148c4"
+      }
+    ],
+    "failed_months": []
+  },
+  "HU": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=HU&start=2025-01-01&end=2025-12-31",
+    "sha256": "2557bfb5a319cf81ef9cce4714fb14a19d52fd7e05161b24d56fd11c150259b3",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "IT-CNOR": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A70O",
+          "out_Domain": "10Y1001A1001A70O",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "8933f41ce942e645d3522f01ee68985c0dd13bfda63571528718270b1a53eac4"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A70O",
+          "out_Domain": "10Y1001A1001A70O",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "0d13c95f42150b6e032e04901cce2d5f20de0718c396a83c05b9bb3c50874e22"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A70O",
+          "out_Domain": "10Y1001A1001A70O",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "576a3eb9f59d5b2427f60738b62bf035ba9ac764f6df67c1618bb8fee6df75bf"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A70O",
+          "out_Domain": "10Y1001A1001A70O",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "e5b0e68dd2096f66717fdc57d6030c16b85d0fa485277cd7deac51c712bfecd2"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A70O",
+          "out_Domain": "10Y1001A1001A70O",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "06407571f7e7b5c52510e0a2c9132717d7929119e2defc086e8783371898a9f2"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A70O",
+          "out_Domain": "10Y1001A1001A70O",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "da88d05a9798684ccc0600c12372eebd1d195f36272a86881a52caf2595b48c9"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A70O",
+          "out_Domain": "10Y1001A1001A70O",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "73fe193ef535881aef8b876765a0cffa63dda6123729d5cac470316351c0a36e"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A70O",
+          "out_Domain": "10Y1001A1001A70O",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "3cf6c358bcd976712a0f2d2ebf1981e1e69d9646191168230177a298f0259e61"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A70O",
+          "out_Domain": "10Y1001A1001A70O",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "b196ae297c40dfc18d99ccb325aac9a44b074cafb87ddc97248d2c3b18bf4690"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A70O",
+          "out_Domain": "10Y1001A1001A70O",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "ea5dff7af38cffc9f5f041cefb7e058225d598db047c10988d99dba65663da95"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A70O",
+          "out_Domain": "10Y1001A1001A70O",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "8c6872bd69412897a58132e0f22d44188b39dcb33f69425f4fc87ec4eb35d8f6"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A70O",
+          "out_Domain": "10Y1001A1001A70O",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "10d1e7b617ba22ae2fdc2e3459ffe13619ac40d3772cdae6abe1538c19f4ed27"
+      }
+    ],
+    "failed_months": []
+  },
+  "IT-CSUD": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A71M",
+          "out_Domain": "10Y1001A1001A71M",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "e30872c4557366e24dd0a08336fe794102384ea5f1381a75d4a6f7679843fe49"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A71M",
+          "out_Domain": "10Y1001A1001A71M",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "a2a9a36a73be7b6e7debad411c70b0ea9d56ba5798ff6be543b725c90e1649c8"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A71M",
+          "out_Domain": "10Y1001A1001A71M",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "2a2bbc70c43dd177cf1562adce00c9d17e7da767990de7939a17bc3629ad8c48"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A71M",
+          "out_Domain": "10Y1001A1001A71M",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "eb6a80042408b340a6fa9ef052cbab506b4810d5705263f74bd0248e3e544f1d"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A71M",
+          "out_Domain": "10Y1001A1001A71M",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "7740c4e5f38669b57e62cc61beed51abfb6dbdb0b6a6fbb30a6c6a8afada319e"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A71M",
+          "out_Domain": "10Y1001A1001A71M",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "cf6ff7009ea7017d0d733842e70716bf1fe3e35c5757fe9d3f3501c6ce7b59a0"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A71M",
+          "out_Domain": "10Y1001A1001A71M",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "e71855589de71b9d87febb7b8faa7666171fce3bf139eeff5ec8d64e3eda99f4"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A71M",
+          "out_Domain": "10Y1001A1001A71M",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "fd4e11676c0bbd7d3149cb5c48b5836771a6e2afc8d76e161d93718eda9d28a5"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A71M",
+          "out_Domain": "10Y1001A1001A71M",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "3d4dfdb26d2bb62eca8f04c576a2931f7adfa14a67fcd192812904c75e84cb24"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A71M",
+          "out_Domain": "10Y1001A1001A71M",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "f3f09bed1d7d6dc1907d77022f6db8c612ff7415b88aed38db378ed391216da6"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A71M",
+          "out_Domain": "10Y1001A1001A71M",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "aebf586856a4fdbe708aaed2ab042ed78cbba7923d98c0a113c8962e46846aa6"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A71M",
+          "out_Domain": "10Y1001A1001A71M",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "cdf48edfdb9a3db4ee7477354a99d45ee6219a0ceab2b94e5f771d7a6c5c8893"
+      }
+    ],
+    "failed_months": []
+  },
+  "IT-North": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=IT-North&start=2025-01-01&end=2025-12-31",
+    "sha256": "511a11a1b6a60ef588ed44c0c389e8d66947ac6d7ae6278fc36cfd08dbfbf768",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "IT-SARD": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A74G",
+          "out_Domain": "10Y1001A1001A74G",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "59df9beecd5f1e3402b337226d3cae778d4f0dc08566520cd9cb890e66420c93"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A74G",
+          "out_Domain": "10Y1001A1001A74G",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "6e012de9258a3f8a2cca4eba8298e2b65471bfdcfb71d0624367c6169e93a8a3"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A74G",
+          "out_Domain": "10Y1001A1001A74G",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "edafd9bf8502e89a4ca7c2a12c34b13985fe70b462c575c88a1adb4ec4f02a0c"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A74G",
+          "out_Domain": "10Y1001A1001A74G",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "7f828c505d5cd1ed62a1d84750f9ffb53b53a58473d29700100cd9b5d97f9f73"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A74G",
+          "out_Domain": "10Y1001A1001A74G",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "a059fea59e2e77ccdccf827ca94934a8dda119c5fcdffeb7040e876eca99b712"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A74G",
+          "out_Domain": "10Y1001A1001A74G",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "b21b1e9fb5e837a7dd5201b42952f2cef9c488c32b6ef15ae73624b099d3e76a"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A74G",
+          "out_Domain": "10Y1001A1001A74G",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "2d8f0713dcddff666ddec5221c3d06345d9728c341f40d0af8c80faafe5e8c55"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A74G",
+          "out_Domain": "10Y1001A1001A74G",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "31aa06367b6d9d891df4c6f1ac652ed998ffd36d83cc3a84dd28c1bd6424cf4d"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A74G",
+          "out_Domain": "10Y1001A1001A74G",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "12160123931d25b4814ae1b149569d9ca0b2f67d86317a8aad6274c5c40d5879"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A74G",
+          "out_Domain": "10Y1001A1001A74G",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "22ff8a5be6c27002361be1c6752bbbd188998d1ebc96f5860f026692621d9f37"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A74G",
+          "out_Domain": "10Y1001A1001A74G",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "ca5e6707c6fb1f891611eb6f94561b602d38706663686eed6c47762e770de6b4"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A74G",
+          "out_Domain": "10Y1001A1001A74G",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "854baa82f8a21318e557d021436f5d93f6c51a3990d440d6b19f4d0c4685aa30"
+      }
+    ],
+    "failed_months": []
+  },
+  "IT-SUD": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A788",
+          "out_Domain": "10Y1001A1001A788",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "029ca6ff99601be2a58197b45bce80906255ef8cce57bfc68a68a78c0b11df6c"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A788",
+          "out_Domain": "10Y1001A1001A788",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "52606969c02dea990c627eb646907ebac0dacc38f4eceb66464a14aeea70f7de"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A788",
+          "out_Domain": "10Y1001A1001A788",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "dc3fe0e551242619179ef9d37abbfd62eb8187a4c6116de815d2a72517104c3f"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A788",
+          "out_Domain": "10Y1001A1001A788",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "acdbc81dbf91ad2735963fdda3d63580037ee0fa8cfeb59f4340445cf8c00e4c"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A788",
+          "out_Domain": "10Y1001A1001A788",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "d9fc15f7298807ed7d85fdcf3778a5bbf9518923e5d93bf1ee0287af37ad5a58"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A788",
+          "out_Domain": "10Y1001A1001A788",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "efe36c88820b5219dcc4dc0ea9c7b3269141cdf8dfe4fe114a0a612969f506e7"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A788",
+          "out_Domain": "10Y1001A1001A788",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "24491c6ffe47bdf3499f59b8fb7c33f967266ba4ab4b7433541c26a8f64708fb"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A788",
+          "out_Domain": "10Y1001A1001A788",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "5154d83d5ca07cda2c3b1d0ee9d67516b27af40d4b9f05afa228438d8ce4455b"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A788",
+          "out_Domain": "10Y1001A1001A788",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "d3416b30a138e68adea2b5461770177067642cb3b7f4f838d03c909371d7ed16"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A788",
+          "out_Domain": "10Y1001A1001A788",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "99f7116536741ab70a9c8984e0a9094f49eeefdf551630087ac96e41ad148e74"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A788",
+          "out_Domain": "10Y1001A1001A788",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "15b83e02797a66f6e4459846ff3704c2f7caa90b1767abb245fb4c93c810b5d3"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A788",
+          "out_Domain": "10Y1001A1001A788",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "88bf8364a9cc3125307049f174ae1cb16f26b277841f25a9c2b9d65f648790ed"
+      }
+    ],
+    "failed_months": []
+  },
+  "LT": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLT-1001A0008Q",
+          "out_Domain": "10YLT-1001A0008Q",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "efcc4a917060139c536090356f01f5c0449af1e46d93222a266fc3cf18393683"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLT-1001A0008Q",
+          "out_Domain": "10YLT-1001A0008Q",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "8bf36fc31c768bb566b3a3e882b5af4cc97d980e4224632459305f47076377e6"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLT-1001A0008Q",
+          "out_Domain": "10YLT-1001A0008Q",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "69fbf4a1268acdfc1af66a6521d49ee33a05ce39b9ab51a60321552a2d3dbbc8"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLT-1001A0008Q",
+          "out_Domain": "10YLT-1001A0008Q",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "a00c67cc7dcaab9ff28b59d957e60e64f389ef52e42878fd86e691e12c77d9c3"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLT-1001A0008Q",
+          "out_Domain": "10YLT-1001A0008Q",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "8cf909eb7e3520ac7983a0ca47f8da550f5b94635e9c440154a309b5237fb040"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLT-1001A0008Q",
+          "out_Domain": "10YLT-1001A0008Q",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "5cbc2894f18443e39e8a8537ccd3c951925e8671d11fda4767cceb2bf5e8fe2e"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLT-1001A0008Q",
+          "out_Domain": "10YLT-1001A0008Q",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "82cc022403692c080030206040f0748b446be289f2bcf42098e985bceb0790b0"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLT-1001A0008Q",
+          "out_Domain": "10YLT-1001A0008Q",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "f6f9257939438cbd6c254532b6f9a80e937f76cb18964008e193ec91f53e3e51"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLT-1001A0008Q",
+          "out_Domain": "10YLT-1001A0008Q",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "29db4fb3a51f50854a7f4e640369c4c1476e18738e413bb6e30cf3467d216a17"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLT-1001A0008Q",
+          "out_Domain": "10YLT-1001A0008Q",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "2489d933d75071486cfe75c8872d0d73352228c5358338e0698e935e9faa256c"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLT-1001A0008Q",
+          "out_Domain": "10YLT-1001A0008Q",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "504fe1602a679d528935ff16e3138254cfe8179e256b9664f64733661c47bd59"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLT-1001A0008Q",
+          "out_Domain": "10YLT-1001A0008Q",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "31cfdcc857943f29c8c76feadc10ee934e0b691edd573fa24206f6b9bebac769"
+      }
+    ],
+    "failed_months": []
+  },
+  "LV": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLV-1001A00074",
+          "out_Domain": "10YLV-1001A00074",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "217adcb4ef3e1d0a8d72714ad6275e010586c37a1a96322ee1540b45eb3c704e"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLV-1001A00074",
+          "out_Domain": "10YLV-1001A00074",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "6aeddb4d89d014ec1970b3414a2285f1734d63c9b02612669876fcdd07e2feca"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLV-1001A00074",
+          "out_Domain": "10YLV-1001A00074",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "64e70e5007d4b243a94514f2e64a699ceba50bc704c597233472dfa279bbbc1e"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLV-1001A00074",
+          "out_Domain": "10YLV-1001A00074",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "53e5791589847814bcddad30712b376cfc34a2cdc10a4f4fcaf47187ca1cc1fb"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLV-1001A00074",
+          "out_Domain": "10YLV-1001A00074",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "10ecc049cb7bd94c86defb1d81b55be079b50253a82fb013d87e5857d77286c0"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLV-1001A00074",
+          "out_Domain": "10YLV-1001A00074",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "251b1df1ce5c00763f4fcf3ca0a7346e75b2dd5af54cfb464e5a9a2492bd3a2f"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLV-1001A00074",
+          "out_Domain": "10YLV-1001A00074",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "213bb7a6f4cf533bda61b4d621709d76ca5898b1b7271a3fd72b767d9f048511"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLV-1001A00074",
+          "out_Domain": "10YLV-1001A00074",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "9881b803567eef74a13e1c439937a792e778a51c1390f035009ba6b497d7ecb2"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLV-1001A00074",
+          "out_Domain": "10YLV-1001A00074",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "8920b2fabf14dc98592cea9e402b6eaf1b89ccf9ab2292cce8693208d6114bee"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLV-1001A00074",
+          "out_Domain": "10YLV-1001A00074",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "96086fe0161aa463fe357d16765613580c7d86a5104dc8904ac8e964178718ca"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLV-1001A00074",
+          "out_Domain": "10YLV-1001A00074",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "8e3c5fd9ab1490124a246219558591ce5d39aae6070935d266ecb21a1b78897f"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YLV-1001A00074",
+          "out_Domain": "10YLV-1001A00074",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "3e04c827bb140baf979d7d02051798b4e147f242253b2fedb975fa3c918d2399"
+      }
+    ],
+    "failed_months": []
+  },
+  "MK": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YMK-MEPSO----8",
+          "out_Domain": "10YMK-MEPSO----8",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "3ebc6faf2a3bea968e36a2c2435f61537c51ba6811ee9bfef0a26445e903c4e2"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YMK-MEPSO----8",
+          "out_Domain": "10YMK-MEPSO----8",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "efeff6262ef76fc7aa4fa8e973c6c9add98bee2cf05e4cf1091055e7c8bd6f27"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YMK-MEPSO----8",
+          "out_Domain": "10YMK-MEPSO----8",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "d6947edc94edea98331961723b75ca40c508de2ce9297063520214e9a87e910a"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YMK-MEPSO----8",
+          "out_Domain": "10YMK-MEPSO----8",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "7a72db0889b52ae05a022d706b4671ce922ac381f84566e2644adc800d53db8f"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YMK-MEPSO----8",
+          "out_Domain": "10YMK-MEPSO----8",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "0d980dda24c57d93b3b8abdf2eabacf270c11ee26be203c310151df22297ff8a"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YMK-MEPSO----8",
+          "out_Domain": "10YMK-MEPSO----8",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "33dce747da92371cd9a7e30d0476956bba40ab12b364d0bed12a97a0f0cbe934"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YMK-MEPSO----8",
+          "out_Domain": "10YMK-MEPSO----8",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "c6a81cb6b9779168dcfd971c0eea0c3ad62a0a4a22cd6ae9f753c5346e6de449"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YMK-MEPSO----8",
+          "out_Domain": "10YMK-MEPSO----8",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "ce950eaa4abb3d427406c0622dbb00e3e7cba47591407821e3478104314084b8"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YMK-MEPSO----8",
+          "out_Domain": "10YMK-MEPSO----8",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "0cbc1430201c7ee5ced5287014bc19ab30b6725cacca3580c97d4c5454b83b17"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YMK-MEPSO----8",
+          "out_Domain": "10YMK-MEPSO----8",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "5ec1e7accadc39560278b81977a86833fd60af933f3ec30decac20d52c8756d2"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YMK-MEPSO----8",
+          "out_Domain": "10YMK-MEPSO----8",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "6e3bd083ccd8f4b7ca0e16db94987c6bbc2461386fc7a3a04c9727a8f149c2c3"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YMK-MEPSO----8",
+          "out_Domain": "10YMK-MEPSO----8",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "9034975a4ade8e24c1f38c58829d6e000ca777884e2a44e997ca1c24faf0b636"
+      }
+    ],
+    "failed_months": []
+  },
+  "NL": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=NL&start=2025-01-01&end=2025-12-31",
+    "sha256": "7a344f48a7efa3989ab5943b3bb73940100fc27f1d410051fdaf664d625c303a",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "NO1": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-1--------2",
+          "out_Domain": "10YNO-1--------2",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "6c0a59d75a5f6a449a0fa0e8c0cee6e30791b5346f2ca863e7f0df0b2af70f1a"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-1--------2",
+          "out_Domain": "10YNO-1--------2",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "9b934ceda2480a2ee1e7880acda23d6c39bdcffeebf5812e4fb667b180d79e5b"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-1--------2",
+          "out_Domain": "10YNO-1--------2",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "12e6a050864c8f46430994f350ec023b72d29b4cf273ff278a39ef6b9522ca67"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-1--------2",
+          "out_Domain": "10YNO-1--------2",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "c9cbea3f12d2a66e97f4c894ca7cf4104b01670802777463cd6d88d708b07572"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-1--------2",
+          "out_Domain": "10YNO-1--------2",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "2431613dcc53b84d60ea71d56ea60d4d7ba325c18e4d64b4331ef044292f456c"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-1--------2",
+          "out_Domain": "10YNO-1--------2",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "998d6990e6e3dcb69d1e822ddae3c46b00a6308afe6e71971d8ac8e80870c454"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-1--------2",
+          "out_Domain": "10YNO-1--------2",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "2fc797dd43b582e28e43a3445ee399d0f1044533ea069067aa426b5c984b925e"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-1--------2",
+          "out_Domain": "10YNO-1--------2",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "7510da2d0c6914b0261cbe130c6863d4254da080730119fe89a8f106505112e5"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-1--------2",
+          "out_Domain": "10YNO-1--------2",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "e5d83598cf01d40fe571e055482491692d0d186210922dcd38967d4fa2ab2bd5"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-1--------2",
+          "out_Domain": "10YNO-1--------2",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "322e52926c4f081a7624d2ad78b5d08a9c674e86357678cefe613c0e92e71513"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-1--------2",
+          "out_Domain": "10YNO-1--------2",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "649971d1c75c860264d5925359b807911a67b7f57a1c2c2d85f113d0053429f3"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-1--------2",
+          "out_Domain": "10YNO-1--------2",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "7526f189e91771504f15940287e11785ace817a755000c7c95c49d07676548d1"
+      }
+    ],
+    "failed_months": []
+  },
+  "NO2": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=NO2&start=2025-01-01&end=2025-12-31",
+    "sha256": "fcb3811470656bd4bccae89b0e1ba714fb21db7ed1209f21510855c19daebe0f",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "NO3": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-3--------J",
+          "out_Domain": "10YNO-3--------J",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "ac33ef5a7752cbecd46b34424b788072d14dafa10c5b69b028d4d6394dd50271"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-3--------J",
+          "out_Domain": "10YNO-3--------J",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "dd3000fab7aa9bd952deef26384b2132e04ff94c81f1e433d597816edf532797"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-3--------J",
+          "out_Domain": "10YNO-3--------J",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "c26704730351887c12c3a0a846b95a1e6f276b021f31933dfa963762da579398"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-3--------J",
+          "out_Domain": "10YNO-3--------J",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "6c85e5fda7662b2aba1f2dd61da8ecded7ad41b7c699768c7afe8b02255518f7"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-3--------J",
+          "out_Domain": "10YNO-3--------J",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "f3b88f816501f72bd9b16cd0c21cf6232cf6e2b0751d5592076a5c7483fa9ace"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-3--------J",
+          "out_Domain": "10YNO-3--------J",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "0cd78c43e57458fdfba97faddbad64445310b765b78e4258e1f0827ebe0a184b"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-3--------J",
+          "out_Domain": "10YNO-3--------J",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "80c8c427bd4f468beb12e9f508a3e8a86fc5513feefa66a10afcb9fdf879e925"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-3--------J",
+          "out_Domain": "10YNO-3--------J",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "e92b1850f11928a5dab6065f95c5ced3dfac84ae392c75e23902e918973ff690"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-3--------J",
+          "out_Domain": "10YNO-3--------J",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "70b02ff419a94aa6f0b98a83c05482cc235dc1bdfc4ecb99fc22512ba6dc1d09"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-3--------J",
+          "out_Domain": "10YNO-3--------J",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "f180f442ef6c72c72489a677ae95bf4e0f520ff65fd9bd41eaf5d559b04703e1"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-3--------J",
+          "out_Domain": "10YNO-3--------J",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "143ce25bfd91f4b0fe7d49006911622497b5833d28159b55cea0f3c556767468"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-3--------J",
+          "out_Domain": "10YNO-3--------J",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "7b9d01424c1b0830e85fe916fa25a9a55d5a2121fbded13177ebed99b6c94782"
+      }
+    ],
+    "failed_months": []
+  },
+  "NO4": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-4--------9",
+          "out_Domain": "10YNO-4--------9",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "b4505ab4ab618b565e1f369a7cfe7179c1b099c2b5f42b088f02a891aba7b706"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-4--------9",
+          "out_Domain": "10YNO-4--------9",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "51deb1503178119097d61f5970dbc8bd6ef1dce963df3a986f33d146f5c8c1de"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-4--------9",
+          "out_Domain": "10YNO-4--------9",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "c62a67ab01f05c1b7d7b1878f605fd706b890f00a0ce698147a03541a155fbae"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-4--------9",
+          "out_Domain": "10YNO-4--------9",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "2c94055b3e47d986966547154dd78757149fdfdeeaa8a30aebc3cce3dfbb1206"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-4--------9",
+          "out_Domain": "10YNO-4--------9",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "66d56d0d8d93f0e79e8834ce58d1f3d71fae579a6e21ebeda080df90f7138c89"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-4--------9",
+          "out_Domain": "10YNO-4--------9",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "db0ed142618e7e84b148a47817b85e0eb3c029a8eaf293a5b79eca188501837f"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-4--------9",
+          "out_Domain": "10YNO-4--------9",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "d123b98fdc35ad4edd960b10ad4a17006d99166e8b47375a930c2da927fe8541"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-4--------9",
+          "out_Domain": "10YNO-4--------9",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "aa2c1f24ba96fe050e9a9037c55dc485250af21423036cc4cc3aa7c499fb061d"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-4--------9",
+          "out_Domain": "10YNO-4--------9",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "33bff16838452971e35efca0783fb094726ec163515acf40b7a22f9c77d2aa0b"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-4--------9",
+          "out_Domain": "10YNO-4--------9",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "0db13eb8c4024994feb2ccb799ff238ad6f00cbbcef2ad25b786febe709d4644"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-4--------9",
+          "out_Domain": "10YNO-4--------9",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "73454a473049fb80f79bc5db467d1b4e522a5472b21c46faf40a63a27c32815e"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YNO-4--------9",
+          "out_Domain": "10YNO-4--------9",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "29e53371dc16215803bbe0366d329d521ae1e1d9dc314c9e012a409af4ab89b3"
+      }
+    ],
+    "failed_months": []
+  },
+  "PL": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=PL&start=2025-01-01&end=2025-12-31",
+    "sha256": "dfb17f884a70e5fc779146117dd962936e5d57c0bfaf959132a71668248e66b0",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "PT": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YPT-REN------W",
+          "out_Domain": "10YPT-REN------W",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "1e19bd6dd8957912510b19589a7eda6a7d1b1249bae0d6d6dd8d53bf3e1cd4f9"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YPT-REN------W",
+          "out_Domain": "10YPT-REN------W",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "1fedb4a334c298e87639ac9a5a5b23cc0253ce5d30ec055e7fd3af60920c1c86"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YPT-REN------W",
+          "out_Domain": "10YPT-REN------W",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "bf68ee83fc7c8e22df5002116d7a4c49c86fc7599f3bfa324fc42b864e4c3ccf"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YPT-REN------W",
+          "out_Domain": "10YPT-REN------W",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "6dbe0e90386c9e93a1bcda2c22a375c97aecc8960c549ebadce22fbd0bf147f7"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YPT-REN------W",
+          "out_Domain": "10YPT-REN------W",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "9aacccb7012577a354fcca4f389e9cc1adfb9280139ca3efb437cfeea30732d8"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YPT-REN------W",
+          "out_Domain": "10YPT-REN------W",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "2e5614615dfb0f1f03ceb99f427275a00a38837ac7ce1d927f2060065c00557c"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YPT-REN------W",
+          "out_Domain": "10YPT-REN------W",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "46d1e049964f7e115268ec02cbc2f566028c58c91732e76a1dabf8eb34804387"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YPT-REN------W",
+          "out_Domain": "10YPT-REN------W",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "7538fde22a022d84d0aa889d0ea34e952d3fa55263034a68b3fcaac8453ccfab"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YPT-REN------W",
+          "out_Domain": "10YPT-REN------W",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "29abaa528c24b966c1c3831425da2976c541ff9c94bf478ef32fad4c95a616b8"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YPT-REN------W",
+          "out_Domain": "10YPT-REN------W",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "2894ef782c4d0760098e3cfbf8546b9eec4cd498282acc6d7e5ea68d7a864d52"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YPT-REN------W",
+          "out_Domain": "10YPT-REN------W",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "b864a40978106544dfb20f71eeca6339db8bf796a731bb053d80950d3f2bad79"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YPT-REN------W",
+          "out_Domain": "10YPT-REN------W",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "e700edf4ade30452786519b23bc6ff30ea4478d396d596d67c630225a091a1ad"
+      }
+    ],
+    "failed_months": []
+  },
+  "RO": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YRO-TEL------P",
+          "out_Domain": "10YRO-TEL------P",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "b6cf8193dcf54be62d35f1eba26a2019e8b18aed4b420d9cbd0cac51650d61fe"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YRO-TEL------P",
+          "out_Domain": "10YRO-TEL------P",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "7b99da9e249db73b02bc55d9d62f95fbf98ef5f93a9e0fc1d967feae439bc99d"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YRO-TEL------P",
+          "out_Domain": "10YRO-TEL------P",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "60aec641d335965f83dd7f4b29ac345211072f871b9ab60c8f95543267cdb9dd"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YRO-TEL------P",
+          "out_Domain": "10YRO-TEL------P",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "15c44da7c212b2c3d74bbc90d9cebbbf7a8f190aeba2d54a84e2603560999bbe"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YRO-TEL------P",
+          "out_Domain": "10YRO-TEL------P",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "ab386dd70d4168a36f6e1f24cd2dcb1e835797d971398cf99e2c683c080d5cea"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YRO-TEL------P",
+          "out_Domain": "10YRO-TEL------P",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "fd03ef0d387b7e61a98106f628ae63bf9c4fdc8ede9d7909e40c4db1f89a6de3"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YRO-TEL------P",
+          "out_Domain": "10YRO-TEL------P",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "fc13a564ec35e3d406cbf62c0b59c3dc5d8bd1dbfc6e3b0fce9dc240bbff7506"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YRO-TEL------P",
+          "out_Domain": "10YRO-TEL------P",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "dba24f87f311619ceaed464571fec6a3ac993297fba4dc608d5c27d458757f54"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YRO-TEL------P",
+          "out_Domain": "10YRO-TEL------P",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "f54d193e54a972a908022bd625a87a652ed9d8bd3586f022ca9b4fd6abf6cf37"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YRO-TEL------P",
+          "out_Domain": "10YRO-TEL------P",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "f3448fd061bb13577e98f3db0a9d610061a216e9d1b9d4f8acc76e48abba9b2c"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YRO-TEL------P",
+          "out_Domain": "10YRO-TEL------P",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "877d3b9253b687f802f83bbf6a39e0b9b5c70fb21b35c57ffe573c956b33ca62"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YRO-TEL------P",
+          "out_Domain": "10YRO-TEL------P",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "20aa524cae5e092cc5d3f93710353ec62190bfc38af81fe55bfdfd0747098678"
+      }
+    ],
+    "failed_months": []
+  },
+  "RS": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCS-SERBIATSOV",
+          "out_Domain": "10YCS-SERBIATSOV",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "3a70fc0db0975272eadda0c3f86afe4625a67eec32b7391bb7d7ee90e55233bd"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCS-SERBIATSOV",
+          "out_Domain": "10YCS-SERBIATSOV",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "6c28c3343729b48b5ebc3c74366238a1387a8f0f2d7c5522d09badecd7a67b2e"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCS-SERBIATSOV",
+          "out_Domain": "10YCS-SERBIATSOV",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "8211f309ec9269e7a1bce044f33641c688553f6bbe22763a96d4cf53f806a9de"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCS-SERBIATSOV",
+          "out_Domain": "10YCS-SERBIATSOV",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "bd45e81ea07495964f983e84a2a1329bc39f6fc81eca014bdc180f1fc25c4a74"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCS-SERBIATSOV",
+          "out_Domain": "10YCS-SERBIATSOV",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "07db9fb0f55d8c09d34a0ba8c76fc807cc363eaeb616756e0622536f0dba8200"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCS-SERBIATSOV",
+          "out_Domain": "10YCS-SERBIATSOV",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "f137e4c7014f93987b2678e5ffd8cdd6b2df76b283117047a033aed852ce05b7"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCS-SERBIATSOV",
+          "out_Domain": "10YCS-SERBIATSOV",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "53a92a67b48ac06f0096f41f803ff8c7519669d3b8eafc9e5421b16e7510cef2"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCS-SERBIATSOV",
+          "out_Domain": "10YCS-SERBIATSOV",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "5e2bba9e5cd058ab2396d3553260daf7d4a10c786331581c2b6e699d534e4a66"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCS-SERBIATSOV",
+          "out_Domain": "10YCS-SERBIATSOV",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "7eda10a13f73a936a982d68e368a5643ba9a98d2f4931da5257b2d16c1e1d797"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCS-SERBIATSOV",
+          "out_Domain": "10YCS-SERBIATSOV",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "9439d3990780c8fc37505e7e2a98195c44d0ded56d5b79e7dd8eec7d1c92648f"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCS-SERBIATSOV",
+          "out_Domain": "10YCS-SERBIATSOV",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "64c637364db94d45aa0472ab2e9110f38fb9e863ad4fe2010d3481221a8ec0f1"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YCS-SERBIATSOV",
+          "out_Domain": "10YCS-SERBIATSOV",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "25371cef85d55d0ac98699af280e45f4f6a6adb016066853ec6130a8db2dd25d"
+      }
+    ],
+    "failed_months": []
+  },
+  "SE1": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A44P",
+          "out_Domain": "10Y1001A1001A44P",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "3449b3bab4c1f60de53967524f8edf33f8bc1db5a9d759266aa1a2525b0baf82"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A44P",
+          "out_Domain": "10Y1001A1001A44P",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "2373b79739e1baa0663bc93d4c90bdb46097b05ef6a3bf2b34f56b7b6559bd30"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A44P",
+          "out_Domain": "10Y1001A1001A44P",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "b1726a568d4d2509e659cf75c8721cebacc227203a38dec453fc7817458514e6"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A44P",
+          "out_Domain": "10Y1001A1001A44P",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "dd458bf00d03fe7838564250f50367cee84b0db8e79ed2d60b1d701d9b8444e5"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A44P",
+          "out_Domain": "10Y1001A1001A44P",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "bd245166b3ba6c031d13a28ec1c735341462181432bd2108b2e77fd87503e865"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A44P",
+          "out_Domain": "10Y1001A1001A44P",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "0c88c40887cd6358b6aa913e05cf9212c5f84fc77eec38edbb174f4fc6eb5eba"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A44P",
+          "out_Domain": "10Y1001A1001A44P",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "866d77e82674a82970a6ec1b0758c7df7f7a87cb82ef2579273f5199bf1cb8c7"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A44P",
+          "out_Domain": "10Y1001A1001A44P",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "8c814f5682ed5da87230608477c389fdc8b3cd78ce03d8ca1d609fc0e47969b9"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A44P",
+          "out_Domain": "10Y1001A1001A44P",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "c42ab73dec11812965c17e9b40d92c4395bd2795db83fa88c7645b744f92e0b0"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A44P",
+          "out_Domain": "10Y1001A1001A44P",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "cac9932c725e159096617af73c6b1f1260efeaec36a0112cf597b93857d6fef5"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A44P",
+          "out_Domain": "10Y1001A1001A44P",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "91e8f4fa4a907759f9f646e3a8f419b47b19d63b52d5f55e9422cd1afcfe55cd"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A44P",
+          "out_Domain": "10Y1001A1001A44P",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "9979d4341f4bc5a8ee908464c483028e4d3642c348ea2c91f5f9e0f5c7ef9e33"
+      }
+    ],
+    "failed_months": []
+  },
+  "SE2": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A45N",
+          "out_Domain": "10Y1001A1001A45N",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "2f7cd88e599f900796ff0e31b7417ef5bc2982444bfa21ed3505fe00cacc679f"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A45N",
+          "out_Domain": "10Y1001A1001A45N",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "12cfbde84e6942f532247d465e84dd303e972dc00f8db05de0f41275090bb50d"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A45N",
+          "out_Domain": "10Y1001A1001A45N",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "b2e20cc300233e6e8c82d74febd88e26ccd025dd5864c075e8883a8f4f3a7291"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A45N",
+          "out_Domain": "10Y1001A1001A45N",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "4fa7c6574c5f4bbd420719a562cc352db79e0ef06512896e6f7c755e76fc3f7f"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A45N",
+          "out_Domain": "10Y1001A1001A45N",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "1a7c77b4b8c5105e85815d9ab6fb14721771b1f9d9ea36ec8920d5ab7d7351a0"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A45N",
+          "out_Domain": "10Y1001A1001A45N",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "fb558590dfe8b8a213b33041e254d3818ca5ab292ed4902bb59d04ea80ea7c07"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A45N",
+          "out_Domain": "10Y1001A1001A45N",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "0f7f4d635dcac1151695b1032bec07b2f6be341fc9c868170fdf246baa3a229e"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A45N",
+          "out_Domain": "10Y1001A1001A45N",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "49552d237bd3c6a59813f5d19a2f8af74490d76b184c4c7b0d22741b916c1f23"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A45N",
+          "out_Domain": "10Y1001A1001A45N",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "f8855ea2512595758a60c20ac455d73e489b0a1bb2c3a978dee1db6ed74c0150"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A45N",
+          "out_Domain": "10Y1001A1001A45N",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "cf832b18c3d62999346e985b18fa2250365c5b71c1977f1ca6268233d2609302"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A45N",
+          "out_Domain": "10Y1001A1001A45N",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "0377d9a0eb907d747a606b4867d2070dc5367698cae5b53117a470e7ca5c0a68"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A45N",
+          "out_Domain": "10Y1001A1001A45N",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "94db270377f1e7757dfdf2a127bd30e17543a981c3964920e839156bcc451743"
+      }
+    ],
+    "failed_months": []
+  },
+  "SE3": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A46L",
+          "out_Domain": "10Y1001A1001A46L",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "54fa433ec2fedcfdbd78c767ad24741aee8125cb308ae33f96f9820ae1f89e93"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A46L",
+          "out_Domain": "10Y1001A1001A46L",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "237755e09ae2d6e6cb6f5cd997c8147760eca4a59b3f60ae06d886c8f1c7f8af"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A46L",
+          "out_Domain": "10Y1001A1001A46L",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "1540042398b0e435fa923c55ac5538c66e49bc5357ca4ce1dcecec3f39593f83"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A46L",
+          "out_Domain": "10Y1001A1001A46L",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "4661722a0303e25818efe6451bdb04a21cc95d496acabeed97627b495e8976aa"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A46L",
+          "out_Domain": "10Y1001A1001A46L",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "688f4adcea7b03a78a10e92dc73dfa3975933790396f7ff3a2e85aa26a6d7850"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A46L",
+          "out_Domain": "10Y1001A1001A46L",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "f3fbe4c82bd825bee93e3db5cd458ef56d42e8551f5f17fc342c560b854d4890"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A46L",
+          "out_Domain": "10Y1001A1001A46L",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "71257514fdf30be401d4db9e206e8b61b85e1a84a35b1465622540c92a5dc405"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A46L",
+          "out_Domain": "10Y1001A1001A46L",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "c5908c29f29549caf77fc1335b542be46a7fabad4250d2964958e29f144a6e2c"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A46L",
+          "out_Domain": "10Y1001A1001A46L",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "84c0048510fa49348dc1f73298750e515285ada5f7332dce63488bfe35fd99b6"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A46L",
+          "out_Domain": "10Y1001A1001A46L",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "1c6ba3285a0d4bead1e9b7ab481020225328b2570e01a3c4b79196690ca5858a"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A46L",
+          "out_Domain": "10Y1001A1001A46L",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "46cf0b91c4881e1d87b960fa46dce593f124752f635d1252aae78a8223b45909"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10Y1001A1001A46L",
+          "out_Domain": "10Y1001A1001A46L",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "be9986f1297e3bbbc089997ac56e84d3de769f1cb6a2b15bc15019f156faf6a1"
+      }
+    ],
+    "failed_months": []
+  },
+  "SE4": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=SE4&start=2025-01-01&end=2025-12-31",
+    "sha256": "09c31aa4b136230cb9233d776b1147c8eee23af9b5fb60721c84459ba3eeac5a",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "SI": {
+    "status": "published",
+    "known_hours": 8759,
+    "url": "https://api.energy-charts.info/price?bzn=SI&start=2025-01-01&end=2025-12-31",
+    "sha256": "79c1d783a6bc2842251ee57e11dddea58241cadd6c051f7d09dceaa41a537fc8",
+    "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de"
+  },
+  "SK": {
+    "status": "published",
+    "source": "ENTSO-E A44 day-ahead prices",
+    "known_hours": 8760,
+    "receipts": [
+      {
+        "month": 1,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YSK-SEPS-----K",
+          "out_Domain": "10YSK-SEPS-----K",
+          "periodStart": "202501010000",
+          "periodEnd": "202502010000"
+        },
+        "sha256": "2d9aa96e6a48113779db005480ef7c73e77ea75027d44af25a9f315356dac56a"
+      },
+      {
+        "month": 2,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YSK-SEPS-----K",
+          "out_Domain": "10YSK-SEPS-----K",
+          "periodStart": "202502010000",
+          "periodEnd": "202503010000"
+        },
+        "sha256": "3cdc35833baf2c7fcd80703ab6432cdee9347a5f224133f0b9d60927f350a551"
+      },
+      {
+        "month": 3,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YSK-SEPS-----K",
+          "out_Domain": "10YSK-SEPS-----K",
+          "periodStart": "202503010000",
+          "periodEnd": "202504010000"
+        },
+        "sha256": "74e284107bad0aa0d3ba3550de236467d471afcc9aab8cbe447f7531a777f1df"
+      },
+      {
+        "month": 4,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YSK-SEPS-----K",
+          "out_Domain": "10YSK-SEPS-----K",
+          "periodStart": "202504010000",
+          "periodEnd": "202505010000"
+        },
+        "sha256": "9b389b97fa6fcd9dbcf1d7a03bf4464379240f9037a906619e719737fa016024"
+      },
+      {
+        "month": 5,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YSK-SEPS-----K",
+          "out_Domain": "10YSK-SEPS-----K",
+          "periodStart": "202505010000",
+          "periodEnd": "202506010000"
+        },
+        "sha256": "d3685f192a6d412af66f8348c91ea92f464eaff2bbc7e8a1632f71a75e0992d5"
+      },
+      {
+        "month": 6,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YSK-SEPS-----K",
+          "out_Domain": "10YSK-SEPS-----K",
+          "periodStart": "202506010000",
+          "periodEnd": "202507010000"
+        },
+        "sha256": "1cab544a3b908bc8da4267fd614cb7c7e8087a9187027239c78c53d1fec24372"
+      },
+      {
+        "month": 7,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YSK-SEPS-----K",
+          "out_Domain": "10YSK-SEPS-----K",
+          "periodStart": "202507010000",
+          "periodEnd": "202508010000"
+        },
+        "sha256": "225bdc2d67fbb5db6b230ebcd91a05e7b8292ae7ef66e01c6dbe28422383e33d"
+      },
+      {
+        "month": 8,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YSK-SEPS-----K",
+          "out_Domain": "10YSK-SEPS-----K",
+          "periodStart": "202508010000",
+          "periodEnd": "202509010000"
+        },
+        "sha256": "24722f9ef461851122f4e1eef3304d4afbc3c3e6b544182bda604c8942514751"
+      },
+      {
+        "month": 9,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YSK-SEPS-----K",
+          "out_Domain": "10YSK-SEPS-----K",
+          "periodStart": "202509010000",
+          "periodEnd": "202510010000"
+        },
+        "sha256": "7e922999a5ec72314b6ef7708f2d9be662f2259051177d36e36298eaae04adc0"
+      },
+      {
+        "month": 10,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YSK-SEPS-----K",
+          "out_Domain": "10YSK-SEPS-----K",
+          "periodStart": "202510010000",
+          "periodEnd": "202511010000"
+        },
+        "sha256": "ed4ee1ddd2dcf7ddbc7cc9845a6d5d1f3b5d5b20508b84c0e0cf8593acbbbfb3"
+      },
+      {
+        "month": 11,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YSK-SEPS-----K",
+          "out_Domain": "10YSK-SEPS-----K",
+          "periodStart": "202511010000",
+          "periodEnd": "202512010000"
+        },
+        "sha256": "6710c5536a8aaf6769777d09183f19339339319166e354070bbaadb5bbad58c4"
+      },
+      {
+        "month": 12,
+        "request": {
+          "documentType": "A44",
+          "processType": "A01",
+          "in_Domain": "10YSK-SEPS-----K",
+          "out_Domain": "10YSK-SEPS-----K",
+          "periodStart": "202512010000",
+          "periodEnd": "202601010000"
+        },
+        "sha256": "9eac2d7c3080e2608e0cd4ab562b8fb2e2ff0f48888af02a6b37242393f1d995"
+      }
+    ],
+    "failed_months": []
+  }
+}
