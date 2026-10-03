@@ -120,7 +120,7 @@ export function TargetSidebar({
         </p>
         <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
           <Stat
-            label="Annual exchange value (floor: 0)"
+            label="Annual congestion rent (floor: 0)"
             value={
               target.congestion_rent_meur_year == null
                 ? "Unavailable"

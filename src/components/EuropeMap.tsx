@@ -627,7 +627,7 @@ export function EuropeMap({
                 data-corridor={[t.zone_a, t.zone_b].sort().join("|")}
                 role="button"
                 tabIndex={0}
-                aria-label={`Select ${t.zone_a} – ${t.zone_b} corridor, ${(t.congestion_rent_meur_year == null ? undefined : Math.max(0, t.congestion_rent_meur_year).toFixed(1)) ?? "unavailable"} M€ annual exchange value (floor: 0)`}
+                aria-label={`Select ${t.zone_a} – ${t.zone_b} corridor, ${(t.congestion_rent_meur_year == null ? undefined : Math.max(0, t.congestion_rent_meur_year).toFixed(1)) ?? "unavailable"} M€ annual congestion rent (floor: 0)`}
                 onKeyDown={(event) => {
                   if (event.key === "Enter" || event.key === " ") {
                     event.preventDefault();
@@ -685,7 +685,7 @@ export function EuropeMap({
                   {(t.congestion_rent_meur_year == null
                     ? undefined
                     : Math.max(0, t.congestion_rent_meur_year).toFixed(1)) ?? "unavailable"}{" "}
-                  M€ annual exchange value (floor: 0);{" "}
+                  M€ annual congestion rent (floor: 0);{" "}
                   {t.mean_absolute_spread_eur_mwh?.toFixed(2) ?? "unavailable"} €/MWh mean absolute
                   price spread.
                 </title>
@@ -730,7 +730,7 @@ export function EuropeMap({
         </h2>
         <p className="text-xs text-muted-foreground">
           {metric === "market"
-            ? "Annual exchange value · 2025 · floor: 0"
+            ? "Annual congestion rent · 2025 · floor: 0"
             : "Yearly climate proxy (est.)"}
         </p>
       </div>
@@ -766,7 +766,7 @@ export function EuropeMap({
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="font-medium text-foreground">
             {metric === "market"
-              ? "Exchange value (M€/year) · floor: 0"
+              ? "Congestion rent (M€/year) · floor: 0"
               : "Climate proxy (est., ktCO2/y)"}
           </span>
           <div className="pointer-events-auto flex rounded-md border border-border p-0.5 text-[10px]">

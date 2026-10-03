@@ -1,4 +1,4 @@
-The map and sidebar display **annual scheduled-exchange value, floored at zero**: max(0, annual signed total). Negative hours still reduce the annual total; we do not clip individual hours. Signed research artifacts remain unchanged. This display convention does not establish actual TSO congestion income or investment welfare.
+The map and sidebar display **annual congestion rent, floored at zero**: max(0, annual signed total). Negative hours still reduce the annual total; we do not clip individual hours. Signed research artifacts remain unchanged. This display convention does not establish actual TSO congestion income or investment welfare.
 
 # Observed annual price-spread targets
 
