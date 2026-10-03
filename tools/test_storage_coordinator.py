@@ -106,6 +106,13 @@ class CoordinationTests(unittest.TestCase):
    result=module.solve_master([0.,1.],bounds=[(0,10),(2,None)])
   self.assertTrue(result.success);self.assertAlmostEqual(result.fun,2)
   self.assertFalse(calls[1]['options']['presolve'])
+ def test_scaled_master_restores_large_cost_and_inventory_units(self):
+  from storage_coordinator import solve_master
+  r=solve_master([0.,1.],A_ub=[[100.,-1.]],b_ub=[-300000000.],bounds=[(0,100000.),(200000000.,None)])
+  self.assertTrue(r.success)
+  self.assertAlmostEqual(r.fun,300000000.,places=2)
+  self.assertAlmostEqual(r.x[0],0.,places=5)
+  self.assertAlmostEqual(r.x[1],300000000.,places=2)
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)

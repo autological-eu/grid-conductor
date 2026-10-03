@@ -10,11 +10,27 @@ from scipy import sparse
 from scipy.optimize import linprog
 
 def solve_master(cost, **kwargs):
-    """Retry numerical/infeasible presolve statuses without changing the LP."""
+    """Solve an equivalent centered/scaled LP and restore original units."""
+    cost=np.asarray(cost,dtype=float)
+    bounds=kwargs.pop('bounds')
+    shift=np.array([lo if lo is not None and np.isfinite(lo) else 0. for lo,hi in bounds])
+    scale=np.array([max(1.,hi-lo) if lo is not None and hi is not None and np.isfinite(hi-lo) else 1e6 for lo,hi in bounds])
+    transformed=[(None if lo is None else (lo-v)/w,None if hi is None else (hi-v)/w) for (lo,hi),v,w in zip(bounds,shift,scale)]
+    for matrix_key,rhs_key in [('A_ub','b_ub'),('A_eq','b_eq')]:
+        if kwargs.get(matrix_key) is None:continue
+        matrix=sparse.csr_matrix(kwargs[matrix_key]);rhs=np.asarray(kwargs[rhs_key])-matrix@shift
+        matrix=matrix.multiply(scale).tocsr()
+        row_scale=np.maximum(1.,np.asarray(abs(matrix).max(axis=1).toarray()).ravel())
+        kwargs[matrix_key]=matrix.multiply((1/row_scale)[:,None]).tocsr()
+        kwargs[rhs_key]=rhs/row_scale
+    scaled_cost=cost*scale;objective_scale=max(1.,np.max(abs(scaled_cost)))
     tolerances={'primal_feasibility_tolerance':1e-10,'dual_feasibility_tolerance':1e-10}
-    result=linprog(cost,**kwargs,method='highs',options=tolerances)
+    result=linprog(scaled_cost/objective_scale,**kwargs,bounds=transformed,method='highs',options=tolerances)
     if result.status in (2,3,4):
-        result=linprog(cost,**kwargs,method='highs-ds',options={**tolerances,'presolve':False})
+        result=linprog(scaled_cost/objective_scale,**kwargs,bounds=transformed,method='highs-ds',options={**tolerances,'presolve':False})
+    if result.success:
+        result.x=shift+scale*result.x
+        result.fun=float(cost@result.x)
     return result
 
 @dataclass

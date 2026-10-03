@@ -179,3 +179,15 @@ variable floors, this master has a finite objective lower bound. The master
 retry now includes status 3 (unbounded), using the identical LP without presolve.
 A targeted bounded-master test covers this contradictory status. Persistent
 failure remains fatal; the last recorded gap was €1.43915, not convergence.
+
+## Master numerical scaling
+
+The saved real-data master reached 3,092 rows, coefficient magnitudes up to
+11,547 and right-hand sides up to €602 million. `solve_master` now translates
+variables by finite lower bounds, scales finite ranges (or uses 10⁶ for an
+unbounded range), normalizes constraint rows and normalizes the objective.
+It restores the returned primal variables and objective to original MWh/euro
+units. These invertible transformations preserve the LP; numerical tolerances
+operate in scaled units, so the existing native-reference objective and bound
+parity gates remain essential. Analytical tests include a €300 million case.
+The real-data scaled retry remains uncertified.
