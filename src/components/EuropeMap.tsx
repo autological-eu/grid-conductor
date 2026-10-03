@@ -455,15 +455,33 @@ export function EuropeMap({
     zoomAt(W / 2, H / 2, factor);
   };
 
+  const corridors = useMemo(() => {
+    const grouped = new Map<string, TargetRow[]>();
+    for (const target of targets) {
+      const key = [target.zone_a, target.zone_b].sort().join("|");
+      const members = grouped.get(key) ?? [];
+      members.push(target);
+      grouped.set(key, members);
+    }
+    return [...grouped.values()].map((members) => ({
+      members,
+      target:
+        members.find((target) => target.id === selectedId) ??
+        [...members].sort((a, b) => b.market_opportunity_meur - a.market_opportunity_meur)[0]!,
+      market: members.reduce((sum, target) => sum + target.market_opportunity_meur, 0),
+      climate: members.reduce((sum, target) => sum + target.climate_loss_ktco2, 0),
+    }));
+  }, [targets, selectedId]);
+
   /** market opportunity full-red point: the 90th percentile of the positive
    * values (a fixed cap burned most borders fully red; a quantile keeps the
    * scale sensitive to the bulk of candidates while the legend shows the max). */
   const maxLoss = Math.max(
     1,
-    ...targets.map((t) => (metric === "market" ? t.market_opportunity_meur : t.climate_loss_ktco2)),
+    ...corridors.map((corridor) => (metric === "market" ? corridor.market : corridor.climate)),
   );
-  const positive = targets
-    .map((t) => (metric === "market" ? t.market_opportunity_meur : t.climate_loss_ktco2))
+  const positive = corridors
+    .map((corridor) => (metric === "market" ? corridor.market : corridor.climate))
     .filter((v) => v > 0)
     .sort((a, b) => a - b);
   const p90 =
@@ -585,21 +603,11 @@ export function EuropeMap({
           })}
 
           {/* target borders, coloured grey (low) to red (high) by yearly market opportunity */}
-          {targets.map((t) => {
-            let [x1, y1] = project(t.a_lon, t.a_lat);
-            let [x2, y2] = project(t.b_lon, t.b_lat);
-            // Opposite directed rows carry distinct evidence. Offset their
-            // schematic lines so each direction can actually be selected.
-            if (targets.some((other) => other.zone_a === t.zone_b && other.zone_b === t.zone_a)) {
-              const length = Math.hypot(x2 - x1, y2 - y1) || 1;
-              const offsetX = (-(y2 - y1) / length) * (7 / k);
-              const offsetY = ((x2 - x1) / length) * (7 / k);
-              x1 += offsetX;
-              x2 += offsetX;
-              y1 += offsetY;
-              y2 += offsetY;
-            }
-            const v = metric === "market" ? t.market_opportunity_meur : t.climate_loss_ktco2;
+          {corridors.map((corridor) => {
+            const t = corridor.target;
+            const [x1, y1] = project(t.a_lon, t.a_lat);
+            const [x2, y2] = project(t.b_lon, t.b_lat);
+            const v = metric === "market" ? corridor.market : corridor.climate;
             const c = Math.min(1, Math.max(0, v / lossCap));
             const isSelected = selectedId === t.id;
             const dropB = dropTarget?.kind === "border" && dropTarget.key === t.id;
@@ -615,7 +623,7 @@ export function EuropeMap({
                 key={t.id}
                 role="button"
                 tabIndex={0}
-                aria-label={`Select ${t.zone_a} to ${t.zone_b} bottleneck`}
+                aria-label={`Select ${t.zone_a} – ${t.zone_b} corridor, ${corridor.market.toFixed(1)} MEUR/y combined opportunity`}
                 onKeyDown={(event) => {
                   if (event.key === "Enter" || event.key === " ") {
                     event.preventDefault();
@@ -667,8 +675,8 @@ export function EuropeMap({
                 />
 
                 <title>
-                  {t.zone_a} – {t.zone_b}: {t.market_opportunity_meur.toFixed(1)} MEUR/y,{" "}
-                  {t.climate_loss_ktco2.toFixed(1)} ktCO2/y, {t.congested_hours} congested hours
+                  {t.zone_a} – {t.zone_b}: {corridor.market.toFixed(1)} MEUR/y combined opportunity,{" "}
+                  {corridor.climate.toFixed(1)} ktCO2/y climate proxy. Sum of both directions.
                 </title>
               </g>
             );
