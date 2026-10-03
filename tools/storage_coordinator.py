@@ -13,7 +13,7 @@ def solve_master(cost, **kwargs):
     """Retry numerical/infeasible presolve statuses without changing the LP."""
     tolerances={'primal_feasibility_tolerance':1e-10,'dual_feasibility_tolerance':1e-10}
     result=linprog(cost,**kwargs,method='highs',options=tolerances)
-    if result.status in (2,4):
+    if result.status in (2,3,4):
         result=linprog(cost,**kwargs,method='highs-ds',options={**tolerances,'presolve':False})
     return result
 

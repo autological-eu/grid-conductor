@@ -93,6 +93,19 @@ class CoordinationTests(unittest.TestCase):
   r=coordinate([b],[(0,5)],resume=saved[-1],stabilize=False)
   self.assertEqual(r['status'],'converged');self.assertAlmostEqual(r['objective'],5)
   self.assertLessEqual(r['lower_bound'],5+1e-5)
+ def test_false_unbounded_master_is_retried(self):
+  from unittest.mock import patch
+  from types import SimpleNamespace
+  import storage_coordinator as module
+  original=module.linprog;calls=[]
+  def simulated(*args,**kwargs):
+   calls.append(kwargs)
+   if len(calls)==1:return SimpleNamespace(status=3,success=False)
+   return original(*args,**kwargs)
+  with patch.object(module,'linprog',side_effect=simulated):
+   result=module.solve_master([0.,1.],bounds=[(0,10),(2,None)])
+  self.assertTrue(result.success);self.assertAlmostEqual(result.fun,2)
+  self.assertFalse(calls[1]['options']['presolve'])
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)

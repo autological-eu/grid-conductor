@@ -172,3 +172,10 @@ unrestricted master proposals while retaining all saved cuts, physical
 constraints and convergence gates. Stabilization is a proposal heuristic, not
 part of the lower-bound certificate. A test covers unstabilized resumption.
 The new real-data attempt remains unverified.
+
+The unrestricted-proposal run advanced through iteration 586 before the master
+solver reported unboundedness. With finite inventory bounds and finite cost
+variable floors, this master has a finite objective lower bound. The master
+retry now includes status 3 (unbounded), using the identical LP without presolve.
+A targeted bounded-master test covers this contradictory status. Persistent
+failure remains fatal; the last recorded gap was €1.43915, not convergence.
