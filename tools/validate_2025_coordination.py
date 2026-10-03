@@ -3,7 +3,8 @@
 This validates a conditional reference, not an annual optimum. Bounds and cuts
 are reported on every iteration; an iteration limit is never a certificate.
 """
-import argparse,gc,json,hashlib,time
+import argparse,gc,json,hashlib,time,os
+from datetime import datetime,timezone
 from pathlib import Path
 import numpy as np,pandas as pd,pypsa
 from storage_coordinator import coordinate
@@ -13,7 +14,11 @@ from pypsa_storage_blocks import block
 from run_network_benchmark import add_diagnostics
 
 def run(folder,iterations,disk_blocks=False):
- source=folder/'native-input.nc';data=json.loads((folder/'input.json').read_text());n=pypsa.Network(source)
+ output=folder/'coordination-reference.json'
+ previous=json.loads(output.read_text()) if output.exists() else {}
+ source=folder/'native-input.nc'
+ output.write_text(json.dumps(dict(status='preparing',pid=os.getpid(),started_utc=datetime.now(timezone.utc).isoformat(),previous_status=previous.get('status'),previous_iteration=previous.get('iteration',previous.get('iterations')),scope='48h conditional reference, not annual optimum'),indent=2)+'\n')
+ data=json.loads((folder/'input.json').read_text());n=pypsa.Network(source)
  ids=n.storage_units.index;ns=len(ids);initial=n.storage_units.state_of_charge_initial.to_numpy();terminal=n.storage_units_t.state_of_charge_set.iloc[-1].reindex(ids).to_numpy();maximum=(n.storage_units.p_nom*n.storage_units.max_hours).to_numpy()
  n.storage_units_t.state_of_charge_set=pd.DataFrame(index=n.snapshots);add_diagnostics(n,data)
  started=time.monotonic()
@@ -52,7 +57,7 @@ def run(folder,iterations,disk_blocks=False):
     if isinstance(v,float) and not np.isfinite(v):item[k]=None
   temp=checkpoint.with_suffix('.tmp');temp.write_text(json.dumps(value,allow_nan=False)+'\n');temp.replace(checkpoint)
  def report(row):
-  clean={k:(None if isinstance(v,float) and not np.isfinite(v) else v) for k,v in row.items()};output.write_text(json.dumps(dict(status='running',source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),hours=48,blocks=2,elapsed_seconds=time.monotonic()-started,**clean),indent=2)+'\n')
+  clean={k:(None if isinstance(v,float) and not np.isfinite(v) else v) for k,v in row.items()};output.write_text(json.dumps(dict(status='running',pid=os.getpid(),source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),hours=48,blocks=2,elapsed_seconds=time.monotonic()-started,**clean),indent=2)+'\n')
  reference=pypsa.Network(folder.parent/'monthly-dispatch-sequential/01.nc')
  warm=np.r_[initial,reference.storage_units_t.state_of_charge.iloc[23].reindex(ids).to_numpy(),terminal];del reference;gc.collect()
  try:

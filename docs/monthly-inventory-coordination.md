@@ -139,3 +139,9 @@ iteration 558: Phase I measured only 1.78×10⁻¹⁰ violation. Local solves no
 try interior point with crossover after persistent simplex status 2 or 4,
 keeping the same LP and primal/dual tolerances; IPM optimality tolerance is
 10⁻¹². Persistent inconsistency still aborts. No feasibility gate is waived.
+
+The driver records `preparing`, process ID and UTC start time before loading
+the network or constructing blocks. Iteration receipts also include the process
+ID. An absent process still overrides these receipts: preparation and running
+labels are not proof of a live job. The prior receipt status/iteration is retained
+in the preparation record to distinguish a fresh attempt from stale progress.
