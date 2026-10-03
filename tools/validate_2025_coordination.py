@@ -13,7 +13,7 @@ from disk_storage_blocks import save_block,DiskBlocks
 from pypsa_storage_blocks import block
 from run_network_benchmark import add_diagnostics
 
-def run(folder,iterations,disk_blocks=False,stabilize=True):
+def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.):
  output=folder/'coordination-reference.json'
  previous=json.loads(output.read_text()) if output.exists() else {}
  source=folder/'native-input.nc'
@@ -77,7 +77,7 @@ def run(folder,iterations,disk_blocks=False,stabilize=True):
  reference=pypsa.Network(folder.parent/'monthly-dispatch-sequential/01.nc')
  warm=np.r_[initial,reference.storage_units_t.state_of_charge.iloc[23].reindex(ids).to_numpy(),terminal];del reference;gc.collect()
  try:
-  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.001,relative_gap=0.,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits,on_stage=stage,stabilize=stabilize)
+  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.001,relative_gap=0.,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits,on_stage=stage,stabilize=stabilize,proposal_fraction=proposal_fraction)
  except Exception as error:
   progress=json.loads(output.read_text()) if output.exists() else {}
   progress.update(status='failed_not_certified',error=str(error));output.write_text(json.dumps(progress,indent=2)+'\n');raise
@@ -93,4 +93,4 @@ def run(folder,iterations,disk_blocks=False,stabilize=True):
   raise RuntimeError(result['error'])
  output.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n');print(result['status'],result['difference_eur'])
 if __name__=='__main__':
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--folder',type=Path,required=True);p.add_argument('--iterations',type=int,default=100);p.add_argument('--disk-blocks',action='store_true',help='Load one prepared LP block at a time');p.add_argument('--no-stabilization',action='store_true',help='Use unrestricted master proposals with unchanged cut bounds');a=p.parse_args();run(a.folder,a.iterations,a.disk_blocks,not a.no_stabilization)
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--folder',type=Path,required=True);p.add_argument('--iterations',type=int,default=100);p.add_argument('--disk-blocks',action='store_true',help='Load one prepared LP block at a time');p.add_argument('--no-stabilization',action='store_true',help='Use unrestricted master proposals with unchanged cut bounds');p.add_argument('--proposal-fraction',type=float,default=1.,help='Fraction toward master proposal from best feasible state');a=p.parse_args();run(a.folder,a.iterations,a.disk_blocks,not a.no_stabilization,a.proposal_fraction)

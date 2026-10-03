@@ -67,8 +67,9 @@ def solve_block(block, state, phase=False):
     if len(r):gradient-=np.asarray(V.T@result.ineqlin.marginals).ravel()
     return result,gradient
 
-def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True):
+def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True,proposal_fraction=1.):
     """Return best feasible state and rigorous LP-cut bounds, or fail to converge."""
+    if not 0<proposal_fraction<=1:raise ValueError('Proposal fraction must be in (0, 1]')
     nx=len(bounds);nb=len(blocks);cuts=[];limits=[];history=[];upper=np.inf;lower=-np.inf;best=None
     theta_bounds=[]
     for block_index,block in enumerate(blocks):
@@ -124,6 +125,9 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
             stabilized=solve_master(np.r_[np.zeros(nx+nb),1/width],A_ub=sparse.vstack([original,distance,target],format='csr'),b_ub=np.r_[limits,best,-best,level],A_eq=eq,b_eq=rhs,bounds=bounds+theta_bounds+[(0,None)]*nx)
             if not stabilized.success:raise RuntimeError(f'Level master failed: {stabilized.message}')
             state=stabilized.x[:nx]
+
+        if best is not None and proposal_fraction<1:
+            state=best+proposal_fraction*(state-best)
 
         for i,block in enumerate(blocks):
             if on_stage is not None:on_stage(dict(stage='local',block=i))

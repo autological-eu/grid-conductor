@@ -113,6 +113,12 @@ class CoordinationTests(unittest.TestCase):
   self.assertAlmostEqual(r.fun,300000000.,places=2)
   self.assertAlmostEqual(r.x[0],0.,places=5)
   self.assertAlmostEqual(r.x[1],300000000.,places=2)
+ def test_damped_proposals_keep_original_bounds_and_optimum(self):
+  b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
+  r=coordinate([b],[(0,5)],initial_state=[0],stabilize=False,proposal_fraction=.5)
+  self.assertEqual(r['status'],'converged');self.assertAlmostEqual(r['objective'],5,places=4)
+  self.assertLessEqual(r['lower_bound'],5+1e-5)
+  with self.assertRaises(ValueError):coordinate([b],[(0,5)],proposal_fraction=0)
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)

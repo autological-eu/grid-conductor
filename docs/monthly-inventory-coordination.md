@@ -191,3 +191,11 @@ units. These invertible transformations preserve the LP; numerical tolerances
 operate in scaled units, so the existing native-reference objective and bound
 parity gates remain essential. Analytical tests include a €300 million case.
 The real-data scaled retry remains uncertified.
+
+The scaled run reached iteration 598 and a €1.29946 gap before a local timeout.
+An optional `--proposal-fraction` now interpolates the next candidate between
+the best known feasible inventory and the master proposal. This is a search
+heuristic: local LPs still verify feasibility, the unrestricted master still
+provides the lower bound, and convergence/parity gates are unchanged. A damped
+analytical test verifies the original optimum and lower bound. The real-data
+attempt uses fraction 0.5 and remains uncertified.
