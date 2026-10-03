@@ -4,6 +4,7 @@ NPZ contains numeric arrays only; no pickle or executable object serialization.
 These are internal prepared LP coefficients, not published model results.
 """
 import json
+import hashlib
 from pathlib import Path
 from collections.abc import Sequence
 import numpy as np
@@ -45,8 +46,13 @@ def load_block(path):
 
 class DiskBlocks(Sequence):
     """Reload blocks on demand; retain no in-memory matrix cache."""
-    def __init__(self,paths):self.paths=tuple(Path(p) for p in paths)
+    def __init__(self,paths,hashes=None):
+        self.paths=tuple(Path(p) for p in paths)
+        self.hashes=tuple(hashes) if hashes is not None else tuple(hashlib.sha256(p.read_bytes()).hexdigest() for p in self.paths)
+        if len(self.hashes)!=len(self.paths):raise ValueError('Block fingerprint count mismatch')
     def __len__(self):return len(self.paths)
     def __getitem__(self,index):
-        if isinstance(index,slice):return DiskBlocks(self.paths[index])
-        return load_block(self.paths[index])
+        if isinstance(index,slice):return DiskBlocks(self.paths[index],self.hashes[index])
+        path=self.paths[index]
+        if hashlib.sha256(path.read_bytes()).hexdigest()!=self.hashes[index]:raise ValueError('Prepared block fingerprint mismatch')
+        return load_block(path)

@@ -28,4 +28,10 @@ class DiskBlockTests(unittest.TestCase):
    self.assertEqual(blocks[0].cost[0],0)
    self.assertEqual(len(blocks[:]),1)
    with self.assertRaises(IndexError):blocks[1]
+ def test_changed_archive_is_rejected(self):
+  b=Block(np.array([0.]),[(0,0)],[[1]],np.array([0.]),[[0.]])
+  with tempfile.TemporaryDirectory() as root:
+   path=Path(root)/'block.npz';save_block(path,b);blocks=DiskBlocks([path])
+   b.cost[0]=1;save_block(path,b)
+   with self.assertRaisesRegex(ValueError,'fingerprint'):blocks[0]
 if __name__=='__main__':unittest.main()

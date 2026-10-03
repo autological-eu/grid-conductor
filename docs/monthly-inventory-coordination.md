@@ -127,3 +127,9 @@ This reduces retained block-matrix memory; it does not yet constitute an annual
 runner. Preparing a full monthly native LP must still fit available memory, and
 the master cuts remain in memory. Annual source fingerprints, boundary closure,
 paired intervention validation and a convergence certificate remain required.
+
+Disk-backed sequences fingerprint each prepared archive with SHA-256 and verify
+it before every load, including slices. Changed archives abort rather than
+silently alter the coordinated model. The tighter reference was interrupted
+without a solver traceback after iteration 558, with a €1.45 gap; the saved
+cuts remain resumable, but its stale running receipt is not a live process.
