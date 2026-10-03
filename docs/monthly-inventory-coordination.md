@@ -237,3 +237,11 @@ attempts with and without presolve. It reports equality residuals and inequality
 violations for successful solves. These are diagnostics, not objective cuts,
 accepted upper bounds or an annual-optimum certificate. A regression test
 checks that the conflict records its state and still fails closed.
+
+The captured retry at iteration 736 gave Phase-I violation 4.75e-8. Replaying
+that same fingerprinted local LP returned infeasibility for presolved dual
+simplex and both interior-point configurations; dual simplex without presolve
+timed out at its 30-second limit. No configuration returned an optimal primal
+or usable objective duals. This reproducer now isolates boundary feasibility
+and numerical conditioning from the preceding hundreds of master iterations.
+No annual-result gate has passed.
