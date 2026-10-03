@@ -56,7 +56,10 @@ class Block:
     limit: object = None
     inequality_coupling: object = None
 
-def solve_block(block, state, phase=False):
+def solve_block(block, state, phase=False, time_limit=60., first_method='highs'):
+    if not np.isfinite(time_limit) or time_limit<=0:raise ValueError('Invalid local solver time limit')
+    if first_method not in ('highs','highs-ipm'):raise ValueError('Unsupported first local solver')
+
     A=sparse.csr_matrix(block.equality);B=sparse.csr_matrix(block.coupling)
     U=sparse.csr_matrix((0,len(block.cost))) if block.inequality is None else sparse.csr_matrix(block.inequality)
     V=sparse.csr_matrix((U.shape[0],len(state))) if block.inequality_coupling is None else sparse.csr_matrix(block.inequality_coupling)
@@ -68,11 +71,12 @@ def solve_block(block, state, phase=False):
         c=np.r_[np.zeros(len(block.cost)),np.ones(2*ne+nu)]
         bounds=block.bounds+[(0,None)]*(2*ne+nu)
     else:eq,ub,c,bounds=A,U,block.cost,block.bounds
-    result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method='highs',options={'time_limit':60.,'primal_feasibility_tolerance':1e-10,'dual_feasibility_tolerance':1e-10})
-    if result.status in (1,2,4):
-        result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method='highs-ds',options={'time_limit':60.,'presolve':False,'primal_feasibility_tolerance':1e-10,'dual_feasibility_tolerance':1e-10})
-    if result.status in (1,2,4):
-        result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method='highs-ipm',options={'time_limit':60.,'presolve':True,'primal_feasibility_tolerance':1e-10,'dual_feasibility_tolerance':1e-10,'ipm_optimality_tolerance':1e-12})
+    attempts=[(first_method,True),('highs-ds',False),('highs-ipm',first_method!='highs-ipm')]
+    for method,presolve in attempts:
+        options={'time_limit':float(time_limit),'presolve':presolve,'primal_feasibility_tolerance':1e-10,'dual_feasibility_tolerance':1e-10}
+        if method=='highs-ipm':options['ipm_optimality_tolerance']=1e-12
+        result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method=method,options=options)
+        if result.status not in (1,2,4):break
     if result.status==2 and not phase:return None
     if not result.success:raise RuntimeError(f'Local LP failed: {result.status}: {result.message}')
     gradient=-np.asarray(B.T@result.eqlin.marginals).ravel()

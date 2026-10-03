@@ -192,6 +192,25 @@ class CoordinationTests(unittest.TestCase):
   self.assertAlmostEqual(r.x[0],-1e-8)
   self.assertLess(abs(r.x[0]),1e-7)
   self.assertEqual(r.fun,300000000.)
+ def test_explicit_monthly_time_budget_and_ipm_first(self):
+  from unittest.mock import patch
+  import storage_coordinator as module
+  original=module.linprog;calls=[]
+  def captured(*args,**kwargs):
+   calls.append(kwargs);return original(*args,**kwargs)
+  b=Block(np.array([1.]),[(0,2)],[[1]],np.array([1.]),[[1]])
+  with patch.object(module,'linprog',side_effect=captured):
+   result,_=module.solve_block(b,np.array([0.]),time_limit=300.,first_method='highs-ipm')
+  self.assertAlmostEqual(result.fun,1)
+  self.assertEqual(calls[0]['method'],'highs-ipm')
+  self.assertEqual(calls[0]['options']['time_limit'],300.)
+  self.assertEqual(calls[0]['options']['ipm_optimality_tolerance'],1e-12)
+ def test_invalid_budget_or_solver_fails_before_solving(self):
+  import storage_coordinator as module
+  b=Block(np.array([1.]),[(0,2)],[[1]],np.array([1.]),[[1]])
+  for value in [0.,-1.,float('nan'),float('inf')]:
+   with self.assertRaises(ValueError):module.solve_block(b,np.array([0.]),time_limit=value)
+  with self.assertRaises(ValueError):module.solve_block(b,np.array([0.]),first_method='unknown')
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)

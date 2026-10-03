@@ -367,3 +367,21 @@ The first January fixed-inventory re-solve exhausted the existing bounded
 guard. No optimal primal or monthly cost receipt was accepted. Full-month
 solver budgeting/configuration remains a blocker; the small-reference time
 limits are not evidence that the prepared monthly LP is infeasible.
+
+### Full-month execution budget
+
+The annual warm audit now accepts `--solver-seconds` (default 300, at most
+600 per attempt) and `--first-solver` (`highs-ipm` by default). It makes at
+most three solver attempts; with the default budget their solver time is
+bounded by 900 seconds, excluding input loading and preprocessing. The
+6 GiB process-memory guard remains active. Reference solves retain their
+60-second default.
+
+This changes execution configuration only: the original monthly LP,
+1e-10 primal/dual solver tolerances, 1e-12 IPM optimality tolerance and
+1e-7 original-unit residual acceptance gates are unchanged. Time-limit
+solutions are rejected. A successful fixed-boundary month establishes
+conditional feasibility and cost, not an optimised annual trajectory.
+The January retry has started; no successful monthly receipt has yet been
+accepted. All 25 storage coordinator tests pass, including budget validation
+and preservation of the requested IPM tolerances.

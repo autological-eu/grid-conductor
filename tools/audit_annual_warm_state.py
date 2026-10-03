@@ -18,7 +18,7 @@ def worker(args):
  signature=receipts(args,args.month)
  with np.load(args.folder/'master-state.npz',allow_pickle=False) as data:state=data['warm_state_mwh'].copy()
  block=load_block(args.folder/f'{args.month:02d}.npz')
- local=solve_block(block,state)
+ local=solve_block(block,state,time_limit=args.solver_seconds,first_method=args.first_solver)
  if local is None:raise ValueError('Fixed warm inventories infeasible')
  r,_=local
  eq=float(np.max(abs(block.equality@r.x+block.coupling@state-block.rhs)))
@@ -27,7 +27,7 @@ def worker(args):
  if max(eq,ub,bound)>1e-7:raise ValueError('Original-unit primal residual gate failed')
  save(args.folder/'warm-audit'/f'{args.month:02d}.json',dict(**signature,month=args.month,cost_eur=float(r.fun),
   max_equality_residual=eq,max_inequality_violation=ub,max_bound_violation=bound,
-  scope='verified fixed monthly inventories only; no annual optimum'))
+  solver_seconds=args.solver_seconds,first_solver=args.first_solver,scope='verified fixed monthly inventories only; no annual optimum'))
 def run(args):
  output=args.folder/'warm-audit';output.mkdir(exist_ok=True)
  for month in range(1,args.last_month+1):
@@ -37,7 +37,7 @@ def run(args):
    if any(item.get(k)!=v for k,v in signature.items()):raise ValueError('Warm audit/source mismatch')
    continue
   with (output/f'{month:02d}.log').open('w') as log:
-   child=subprocess.Popen([sys.executable,__file__,'--folder',str(args.folder),'--month',str(month)],stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
+   child=subprocess.Popen([sys.executable,__file__,'--folder',str(args.folder),'--month',str(month),'--solver-seconds',str(args.solver_seconds),'--first-solver',args.first_solver],stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
    save(output/'status.json',dict(status='solving_fixed_inventories',month=month,pid=child.pid))
    peak=0
    while child.poll() is None:
@@ -57,7 +57,7 @@ def run(args):
   scope='conditional monthly re-solves, not annual optimisation'))
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('--folder',type=Path,required=True)
- p.add_argument('--month',type=int);p.add_argument('--last-month',type=int,default=1);p.add_argument('--memory-gib',type=float,default=6.)
+ p.add_argument('--month',type=int);p.add_argument('--last-month',type=int,default=1);p.add_argument('--memory-gib',type=float,default=6.);p.add_argument('--solver-seconds',type=float,default=300.);p.add_argument('--first-solver',choices=['highs','highs-ipm'],default='highs-ipm')
  args=p.parse_args();args.folder=args.folder.resolve()
- if not 1<=args.last_month<=12 or (args.month is not None and not 1<=args.month<=12) or not 0<args.memory_gib<=6:p.error('Invalid month/resource limit')
+ if not 1<=args.last_month<=12 or (args.month is not None and not 1<=args.month<=12) or not 0<args.memory_gib<=6 or not 0<args.solver_seconds<=600:p.error('Invalid month/resource limit')
  worker(args) if args.month is not None else run(args)
