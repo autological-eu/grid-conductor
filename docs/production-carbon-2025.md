@@ -67,3 +67,72 @@ See [existing carbon gates](carbon-pilot.md), [flow tracing](flow-tracing.md) an
     python -m unittest discover -s tools -p 'test*carbon*.py'
 
 Uncached collection requires an offline ENTSO-E credential. Raw XML and credentials remain ignored; public provenance contains request parameters and hashes without security tokens. The publisher needs matplotlib and numpy in the research environment.
+
+## Full-year 2025 collection and aggregation
+
+The pilot now has a resumable annual collector. It fetches twelve UTC calendar
+months of ENTSO-E A75/A16 generation for France, DK1 and DK2 and checks the
+assembled timestamps against all 8,760 hours. Raw responses are hashed and
+cached offline; missing intervals are never filled or annualized.
+
+For complete generation and factor coverage, annual lifecycle intensity is
+
+$$I_{year}=\frac{\sum_h\sum_k G_{h,k} f_k}{\sum_h\sum_k G_{h,k}}.$$
+
+Here $G$ is primary electricity generated in MWh and $f$ is a consistent
+lifecycle factor in g CO2e/kWh. Numerically g/kWh equals kg/MWh. This is an
+energy-weighted ratio, not the arithmetic mean of hourly intensities. A full
+annual estimate remains unavailable if any hour lacks reported primary
+generation or has positive generation without a justified factor. Totals for
+complete hours alone are explicitly partial-period quantities.
+
+Potential cross-check sources are
+[Energy-Charts public generation](https://api.energy-charts.info/) for France
+and Denmark's [Energi Data Service](https://www.energidataservice.dk/)
+`ElectricityBalanceNonv` dataset for DK1/DK2. The French full-year endpoint
+responded with 8,760 timestamps; its calendar boundary and missing values must
+be matched by UTC timestamps, not array positions. The Danish bulk request
+encountered HTTP 429 rate limiting; its totals are not yet checked. These
+providers may share original observations with ENTSO-E, so agreement is
+a consistency check rather than an independent measurement validation.
+
+Reproduce offline collection and matched-hour FR comparison with:
+
+    python tools/collect_annual_production_carbon.py --year 2025
+    python tools/compare_annual_generation_sources.py
+
+Comparison requires the cached Energy-Charts response. Cross-provider results
+must retain missing hours, geographic scope and technology mapping. Collection
+and consistency checks do not resolve lifecycle factors, CHP allocation or
+unknown fuels, and do not establish consumption or avoided emissions.
+
+### Collected annual coverage results
+
+All twelve months are collected and the assembled chronology is checked.
+The public artifact was independently recomputed from hash-checked monthly
+inputs before publication.
+
+| Area | Complete generation hours / 8,760 | Hours with full pilot factor coverage | Full annual lifecycle intensity |
+| --- | --- | --- | --- |
+| France (national) | 5,376 | 0 | Unavailable |
+| DK1 | 8,750 | 0 | Unavailable |
+| DK2 | 8,750 | 5 | Unavailable |
+
+France still has positive oil and waste generation without justified lifecycle
+factors. DK1 also reports unsupported other-renewable generation; DK2 has oil
+and waste. Five supported hours in DK2 are insufficient for an annual estimate.
+Generation-mix totals in the artifact cover **complete-generation hours only**;
+they are not whole-year generation totals.
+
+![Monthly generation-data completeness](../public/research/production-carbon-2025/annual-coverage.svg)
+
+[Download annual coverage, partial generation totals and provenance](../public/research/production-carbon-2025/annual-coverage.json)
+
+The offline French cross-provider check compares matching hours separately for
+eleven technologies and twelve months. The maximum absolute relative
+difference among nonzero matched totals was about 1.47%; some technology-month
+pairs have no matched data. This is not a whole-year accuracy score. Danish
+independent totals remain unchecked because the bulk endpoint rate-limited
+the request. Next work is to explain and resolve missing generation, audit
+provider definitions and resolve the lifecycle-factor registry before exposing
+a full-zone annual estimate.
