@@ -56,9 +56,11 @@ class Block:
     limit: object = None
     inequality_coupling: object = None
 
-def solve_block(block, state, phase=False, time_limit=60., first_method='highs'):
+def solve_block(block, state, phase=False, time_limit=60., first_method='highs', residual_tolerance=None):
     if not np.isfinite(time_limit) or time_limit<=0:raise ValueError('Invalid local solver time limit')
     if first_method not in ('highs','highs-ipm'):raise ValueError('Unsupported first local solver')
+
+    if residual_tolerance is not None and (not np.isfinite(residual_tolerance) or residual_tolerance<=0):raise ValueError('Invalid local residual tolerance')
 
     A=sparse.csr_matrix(block.equality);B=sparse.csr_matrix(block.coupling)
     U=sparse.csr_matrix((0,len(block.cost))) if block.inequality is None else sparse.csr_matrix(block.inequality)
@@ -72,11 +74,22 @@ def solve_block(block, state, phase=False, time_limit=60., first_method='highs')
         bounds=block.bounds+[(0,None)]*(2*ne+nu)
     else:eq,ub,c,bounds=A,U,block.cost,block.bounds
     attempts=[(first_method,True),('highs-ds',False),('highs-ipm',first_method!='highs-ipm')]
+    rejected_residual=None
     for method,presolve in attempts:
         options={'time_limit':float(time_limit),'presolve':presolve,'primal_feasibility_tolerance':1e-10,'dual_feasibility_tolerance':1e-10}
         if method=='highs-ipm':options['ipm_optimality_tolerance']=1e-12
         result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method=method,options=options)
+        if residual_tolerance is not None and result.success:
+            equality_error=float(np.max(np.abs(eq@result.x-b),initial=0.))
+            inequality_error=float(np.max(ub@result.x-r,initial=0.))
+            bound_error=max([0.]+[max(0.,lo-x) if lo is not None else 0. for x,(lo,hi) in zip(result.x,bounds)]+[max(0.,x-hi) if hi is not None else 0. for x,(lo,hi) in zip(result.x,bounds)])
+            if max(equality_error,inequality_error,bound_error)>residual_tolerance:
+                rejected_residual=(method,presolve,equality_error,inequality_error,bound_error)
+                continue
+            rejected_residual=None
         if result.status not in (1,2,4):break
+    if result.success and rejected_residual is not None:
+        raise RuntimeError(f'Local LP residual gate failed after bounded retries: {rejected_residual}')
     if result.status==2 and not phase:return None
     if not result.success:raise RuntimeError(f'Local LP failed: {result.status}: {result.message}')
     gradient=-np.asarray(B.T@result.eqlin.marginals).ravel()

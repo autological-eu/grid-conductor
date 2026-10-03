@@ -392,3 +392,14 @@ No successful receipt was written. The audit now writes a separate rejected
 diagnostic containing equality, inequality and variable-bound violation
 magnitudes. These diagnostics cannot be used as accepted monthly results. All 25 storage coordinator tests pass, including budget validation
 and preservation of the requested IPM tolerances.
+
+### Acceptance-aware local retries
+
+The January diagnostic measured equality residual 2.854e-7, inequality
+violation 1.58e-12 and zero bound violation. The 1e-7 gate therefore rejected
+the result despite solver-reported success. Monthly warm audits now check
+original-unit residuals within the retry loop, allowing remaining bounded
+configurations to run after an inaccurate success. At most three attempts
+are still permitted; no tolerances or physical constraints are relaxed.
+All 27 storage tests pass, including retry after inaccurate success and
+failure after three inaccurate successes. Annual feasibility is still unverified.

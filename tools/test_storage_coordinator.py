@@ -205,6 +205,29 @@ class CoordinationTests(unittest.TestCase):
   self.assertEqual(calls[0]['method'],'highs-ipm')
   self.assertEqual(calls[0]['options']['time_limit'],300.)
   self.assertEqual(calls[0]['options']['ipm_optimality_tolerance'],1e-12)
+ def test_success_with_bad_residual_retries_without_weakening_gate(self):
+  from unittest.mock import patch
+  import storage_coordinator as module
+  original=module.linprog;calls=[]
+  def simulated(*args,**kwargs):
+   result=original(*args,**kwargs);calls.append(kwargs)
+   if len(calls)==1:result.x[0]+=3e-7
+   return result
+  b=Block(np.array([1.]),[(0,2)],[[1]],np.array([1.]),[[1]])
+  with patch.object(module,'linprog',side_effect=simulated):
+   result,_=module.solve_block(b,np.array([0.]),residual_tolerance=1e-7)
+  self.assertEqual(len(calls),2);self.assertAlmostEqual(result.x[0],1.)
+ def test_all_successful_but_inaccurate_attempts_fail_closed(self):
+  from unittest.mock import patch
+  import storage_coordinator as module
+  original=module.linprog
+  def simulated(*args,**kwargs):
+   result=original(*args,**kwargs);result.x[0]+=3e-7;return result
+  b=Block(np.array([1.]),[(0,2)],[[1]],np.array([1.]),[[1]])
+  with patch.object(module,'linprog',side_effect=simulated) as calls:
+   with self.assertRaisesRegex(RuntimeError,'residual gate failed'):
+    module.solve_block(b,np.array([0.]),residual_tolerance=1e-7)
+   self.assertEqual(calls.call_count,3)
  def test_invalid_budget_or_solver_fails_before_solving(self):
   import storage_coordinator as module
   b=Block(np.array([1.]),[(0,2)],[[1]],np.array([1.]),[[1]])
