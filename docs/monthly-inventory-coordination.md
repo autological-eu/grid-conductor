@@ -382,6 +382,9 @@ This changes execution configuration only: the original monthly LP,
 1e-7 original-unit residual acceptance gates are unchanged. Time-limit
 solutions are rejected. A successful fixed-boundary month establishes
 conditional feasibility and cost, not an optimised annual trajectory.
-The January retry has started; no successful monthly receipt has yet been
-accepted. All 25 storage coordinator tests pass, including budget validation
+The January retry exhausted all three 300-second attempts. Peak sampled
+memory was 5.91 GiB, below the 6 GiB guard, and no successful monthly receipt
+was accepted. The failure logs are preserved offline. A further January retry
+uses the configured maximum of 600 seconds per attempt (at most 1,800 seconds
+of solver time); its verification is pending. All 25 storage coordinator tests pass, including budget validation
 and preservation of the requested IPM tolerances.
