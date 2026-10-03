@@ -329,7 +329,10 @@ removed, with its identity recorded explicitly.
 Every block links to a shared 13-boundary inventory vector and keeps original
 hourly generation availability, demand and inflows. Source/code/block hashes
 guard resume; a 6 GiB worker memory limit and free-disk check bound preparation.
-Raw matrices and receipts remain ignored. January 2025 prepared successfully.
+Raw matrices and receipts remain ignored. All twelve 2025 months prepared successfully. The reproducible audit tool
+tools/audit_annual_coordination_preparation.py verified source/code/archive
+hashes, 8,760-hour chronology, 160 storage identities and 2,080 shared boundary
+variables. Compressed archives total 271 MB and remain offline.
 This step exports coefficients only: it is not a monthly dispatch result, an
 annual solve or a convergence certificate. Annual coordination, boundary
 conditions, warm-state validation and final independent audits remain unfinished.
