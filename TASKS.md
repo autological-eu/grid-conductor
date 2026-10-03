@@ -39,7 +39,7 @@ separate from the 2025 conditional and future annual comparisons.
   implement mapped operational/lifecycle calculations, missing-hour gaps,
   generation-mix charts and provenance. 14 carbon tests pass. Full intensities
   remain null: FR has 319/744 complete hours, DK1/DK2 744/744, and all have unmapped fuels.
-  See [pilot methods](docs/production-carbon-2025.md). Publication verification pending.
+  See [pilot methods](docs/production-carbon-2025.md). Published route, chart and JSON verified on the public site at desktop and mobile widths.
 - [ ] C2: Investigate generation gaps, audit independent monthly totals and
   resolve factors/biomass/CHP/efficiency assumptions with sensitivities.
 - [ ] C3: Add consumption accounting with physical flows, load and chronological
