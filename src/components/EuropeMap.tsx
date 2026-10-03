@@ -638,7 +638,7 @@ export function EuropeMap({
                     onSelect(t);
                   }
                 }}
-                className="cursor-pointer"
+                className="group cursor-pointer outline-none"
                 onClick={() => {
                   if (!wasDrag()) onSelect(t);
                 }}
@@ -666,6 +666,7 @@ export function EuropeMap({
                   </line>
                 )}
                 <line
+                  className="group-focus-visible:stroke-primary group-focus-visible:[stroke-dasharray:6_3]"
                   x1={x1}
                   y1={y1}
                   x2={x2}

@@ -35,6 +35,15 @@ try {
       .evaluateAll((elements) => elements.map((element) => element.getAttribute("data-corridor")));
     assert(corridors.length > 0);
     assert.equal(new Set(corridors).size, corridors.length);
+    const keyboardCorridor = page.locator('g[data-corridor="FR|IT-North"]');
+    await keyboardCorridor.focus();
+    assert.equal(
+      await keyboardCorridor.evaluate((element) => getComputedStyle(element).outlineStyle),
+      "none",
+      "SVG corridors never draw a native rectangular focus outline",
+    );
+    await keyboardCorridor.press("Enter");
+    await page.getByRole("button", { name: "Hourly price difference" }).waitFor();
     if (viewport.width > 1000) {
       await page.locator('g[data-corridor="FR|IT-North"]').click();
     } else {
