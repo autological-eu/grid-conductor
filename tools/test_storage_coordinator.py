@@ -179,6 +179,19 @@ class CoordinationTests(unittest.TestCase):
   self.assertEqual(r['state'][0],0.)
   self.assertEqual(r['objective'],10.)
   self.assertEqual(r['status'],'iteration_limit_not_certified')
+ def test_large_inventory_scaling_limits_original_bound_roundoff(self):
+  from unittest.mock import patch
+  from types import SimpleNamespace
+  import storage_coordinator as module
+  def near_boundary(cost,**kwargs):
+   # Finite inventory scaling is capped; unbounded objective scaling remains.
+   self.assertEqual(kwargs['bounds'][0],(0.,10000000.))
+   return SimpleNamespace(success=True,status=0,x=np.array([-1e-10,0.]))
+  with patch.object(module,'linprog',side_effect=near_boundary):
+   r=module.solve_master([0.,1.],bounds=[(0.,1e9),(300000000.,None)])
+  self.assertAlmostEqual(r.x[0],-1e-8)
+  self.assertLess(abs(r.x[0]),1e-7)
+  self.assertEqual(r.fun,300000000.)
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)

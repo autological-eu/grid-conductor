@@ -14,7 +14,7 @@ def solve_master(cost, **kwargs):
     cost=np.asarray(cost,dtype=float)
     bounds=kwargs.pop('bounds')
     shift=np.array([lo if lo is not None and np.isfinite(lo) else 0. for lo,hi in bounds])
-    scale=np.array([max(1.,hi-lo) if lo is not None and hi is not None and np.isfinite(hi-lo) else 1e6 for lo,hi in bounds])
+    scale=np.array([min(100.,max(1.,hi-lo)) if lo is not None and hi is not None and np.isfinite(hi-lo) else 1e6 for lo,hi in bounds])
     transformed=[(None if lo is None else (lo-v)/w,None if hi is None else (hi-v)/w) for (lo,hi),v,w in zip(bounds,shift,scale)]
     for matrix_key,rhs_key in [('A_ub','b_ub'),('A_eq','b_eq')]:
         if kwargs.get(matrix_key) is None:continue

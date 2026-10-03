@@ -273,3 +273,20 @@ iteration 738, then stopped on a proposal lower-bound overshoot larger than
 the existing tolerance. The last recorded gap remained €0.001223. The check
 therefore exposed a second master-precision issue rather than certifying
 convergence. No annual result or model integration follows from this retry.
+
+
+## Finite master scaling cap
+
+Finite master-variable scales now use min(100, max(1, upper - lower)).
+Previously a large reservoir range could amplify a 1e-10 solver bound
+tolerance into a material original-unit inventory overshoot. The capped
+transformation limits that nominal amplification to 1e-8 in original units.
+This is numerical scaling, not a guarantee of arbitrary solver residuals:
+proposal bound checks and independent local solves remain mandatory.
+Unbounded objective variables retain their existing scaling. Physical bounds,
+master cuts and the convergence/parity thresholds are unchanged.
+
+A regression test uses a billion-unit inventory range and a solver boundary
+roundoff value to verify the restored error remains below the existing
+proposal tolerance. The real-data checkpoint retry is still required before
+claiming reference convergence.
