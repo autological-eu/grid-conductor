@@ -60,7 +60,7 @@ These contributions sum exactly to €1,529.7838952 million. Their cumulative li
 
 A large observed price separation is useful evidence of differing marginal market conditions. It does not establish that this entire triangle can be captured by transmission. The fallback response is an assumption, rather than a calibrated causal response to a new cable. Scheduled-flow capacity conventions, internal congestion, alternative paths, hydro inventories and the interaction with the rest of Europe can substantially change benefits.
 
-The annual source also has a reverse Italy North → France estimate of €18.146 million, based on only **two event hours** and a different fitted slope. It should not be treated as equally robust evidence. The map combines only the directional targets admitted by the workbench's eligibility filter; this report explains the forward €1,529.8 million component.
+The annual source also has a reverse Italy North → France estimate of €18.146 million, based on only **two event hours** and a different fitted slope. It should not be treated as equally robust evidence. The combined map edge sums eligible directional targets: these two published components total €1,547.93 million/year. The directional selection panel can still show the forward €1,529.8 million component explained here.
 
 **Use this as a prioritisation indicator, not an investment valuation.** A matched chronological network baseline and intervention comparison is the next valuation step. The separately published 2025 conditional 48-hour benchmark is not an annual France–Italy valuation.
 
