@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { summarizeStep1 } from "./step1";
+import { summarizeStep1 } from "../src/lib/step1";
 
 test("corridor spread removes capacity multiplier and includes reverse price observations", () => {
   const result = summarizeStep1({
