@@ -100,7 +100,7 @@ claims.
 ## Map-wide carbon collection and price-separation hours
 
 User-authorized expansion: all 39 displayed map zones and 68 unique borders.
-`collect_map_carbon_2025.py` performs sequential, resumable monthly A75/A16
+`collect_map_carbon_2025.py` uses three bounded zone workers with sequential, resumable monthly A75/A16
 requests with per-month raw/input hashes, candidate EIC domain validation,
 exact chronology and credential-free failure diagnostics. The live collector
 records progress offline; inspect its PID before interpreting its status.
@@ -110,7 +110,5 @@ lifecycle estimates separately for each endpoint. Full estimates require all
 selected hours and no positive unsupported fuel. Mapped subsets retain their
 coverage label; national DE generation is explicitly a DE-LU proxy.
 
-Sidebar integration and methods are implemented; published snapshot preparation also produces 8,760-row per-zone hourly arrays with hashes and explicit full/subset/share columns. Local Chromium checks at 1,280px and 390px verify selection, labels, coverage and no horizontal overflow. Lint has zero errors (six existing warnings); typecheck, 28 frontend tests and production build pass. Initial CI caught map overlap with scenario controls on mobile after adding the detail section. The sidebar now scrolls as one bounded panel; the regression test opens carbon details before creating/evaluating scenarios. All four browser smoke viewports (1,440, 390, 320, 667px) pass with details expanded. Publication verification is pending. 23 carbon tests pass. Collection remains incomplete and some source
-requests are unavailable; these are not zero generation. Next: finish the pass,
-audit unavailable areas and source coverage, republish hash-checked summaries,
+Sidebar integration and methods are implemented; published snapshot preparation also produces 8,760-row per-zone hourly arrays with hashes and explicit full/subset/share columns. Local Chromium checks at 1,280px and 390px verify selection, labels, coverage and no horizontal overflow. Lint has zero errors (six existing warnings); typecheck, 28 frontend tests and production build pass. Initial CI caught map overlap with scenario controls on mobile after adding the detail section. The sidebar now scrolls as one bounded panel; the regression test opens carbon details before creating/evaluating scenarios. All four browser smoke viewports (1,440, 390, 320, 667px) pass with details expanded. Publication verification is pending. 26 carbon tests pass. The collection pass finished: 456/468 usable area-months, all twelve months for 38/39 displayed areas; AL has twelve unavailable requests. Complete-generation/factor gates still block most full estimates (CH has a full-year reported-generation pilot estimate, not independent validation). A map-wide monthly coverage chart and hash-checked final snapshot are prepared. Next: verify final snapshot publication, audit unavailable areas and source coverage,
 and resolve lifecycle factors under C5. No avoided-emissions claims.

@@ -187,3 +187,27 @@ The snapshot also contains per-zone hourly arrays linked from the summary's
 intensity and mapped generation share; unavailable values are null. These
 allow the selected price-separation hours to be inspected individually,
 instead of relying only on period averages. Arrays carry SHA-256 hashes.
+
+### Completed map-wide collection pass
+
+All 468 area-month requests have been attempted: 456 usable months cover
+all twelve months for 38 of the 39 displayed areas. Albania's twelve
+requests did not yield usable generation for this pipeline and remain
+unavailable, not zero. This is a collection result, not complete-data or
+carbon-factor validation. The monthly chart distinguishes an unavailable
+month from a retrieved month with incomplete reported-generation hours.
+
+![Generation coverage across displayed areas and months](../public/research/production-carbon-2025/map-coverage.svg)
+
+Only Switzerland currently passes every hourly-generation and mapped-fuel
+check for a full-year **reported-generation pilot estimate**, about
+21.9 g CO2e/kWh under the generic factors. That is not independently
+validated fleet-specific lifecycle intensity. Other areas retain partial
+mapped estimates and coverage diagnostics. A border's selected
+price-separation period has its own gates, so it may have different
+coverage from the entire year.
+
+Collection uses at most three simultaneous zone workers, with sequential
+monthly requests per zone and hash-checked checkpoint reuse. It remains
+offline; there are no browser API credentials. Factor registry, missing
+interval and independent-total investigations under C5 remain unfinished.
