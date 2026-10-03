@@ -92,7 +92,9 @@ and Denmark's [Energi Data Service](https://www.energidataservice.dk/)
 `ElectricityBalanceNonv` dataset for DK1/DK2. The French full-year endpoint
 responded with 8,760 timestamps; its calendar boundary and missing values must
 be matched by UTC timestamps, not array positions. The Danish bulk request
-encountered HTTP 429 rate limiting; its totals are not yet checked. These
+initially encountered HTTP 429 rate limiting. A later retry returned 20,000
+quarter-hour records covering only part of the year; pagination, UTC boundaries
+and annual totals are not yet checked. These
 providers may share original observations with ENTSO-E, so agreement is
 a consistency check rather than an independent measurement validation.
 
@@ -132,7 +134,7 @@ The offline French cross-provider check compares matching hours separately for
 eleven technologies and twelve months. The maximum absolute relative
 difference among nonzero matched totals was about 1.47%; some technology-month
 pairs have no matched data. This is not a whole-year accuracy score. Danish
-independent totals remain unchecked because the bulk endpoint rate-limited
-the request. Next work is to explain and resolve missing generation, audit
+comparison totals remain unchecked: after initial rate limiting, a partial
+20,000-record response was cached, but full-year pagination remains necessary. Next work is to explain and resolve missing generation, audit
 provider definitions and resolve the lifecycle-factor registry before exposing
 a full-zone annual estimate.
