@@ -315,3 +315,21 @@ A regression test uses a billion-unit inventory range and a solver boundary
 roundoff value to verify the restored error remains below the existing
 proposal tolerance. The real-data checkpoint retry is still required before
 claiming reference convergence.
+
+
+## Annual preparation pipeline
+
+tools/prepare_annual_coordination.py now prepares native monthly LP coefficients
+in separate worker processes, one month at a time. It requires a complete ordered
+hourly calendar with unit weights and rejects unsupported Stores, commitment,
+ramps, annual generation budgets, expansion and dynamic storage parameters.
+Only a transmission-volume expansion constraint on checked fixed capacities is
+removed, with its identity recorded explicitly.
+
+Every block links to a shared 13-boundary inventory vector and keeps original
+hourly generation availability, demand and inflows. Source/code/block hashes
+guard resume; a 6 GiB worker memory limit and free-disk check bound preparation.
+Raw matrices and receipts remain ignored. January 2025 prepared successfully.
+This step exports coefficients only: it is not a monthly dispatch result, an
+annual solve or a convergence certificate. Annual coordination, boundary
+conditions, warm-state validation and final independent audits remain unfinished.
