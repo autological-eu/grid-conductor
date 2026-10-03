@@ -199,3 +199,15 @@ heuristic: local LPs still verify feasibility, the unrestricted master still
 provides the lower bound, and convergence/parity gates are unchanged. A damped
 analytical test verifies the original optimum and lower bound. The real-data
 attempt uses fraction 0.5 and remains uncertified.
+
+## Bounded timeout recovery
+
+The damped 48-hour reference reached a €0.02705 bound gap before a local
+solver timed out at iteration 655. That result is **not certified**. Local
+timeout status now triggers the same bounded fallback sequence as numerical
+failure: dual simplex without presolve, then interior point without presolve.
+Each attempt retains its 60-second limit and the original LP and tolerances.
+A partial solution from a timed-out attempt never contributes an objective or
+dual cut; exhausted retries stop with failure rather than implying infeasibility.
+Two regression tests cover successful recovery and exhausted timeouts. The
+€0.001 convergence threshold and €0.02 native-reference parity gate are unchanged.

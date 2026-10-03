@@ -80,6 +80,28 @@ class CoordinationTests(unittest.TestCase):
   self.assertEqual(calls[-1]['method'],'highs-ipm')
   self.assertEqual(calls[-1]['options']['ipm_optimality_tolerance'],1e-12)
   self.assertTrue(all(c['options']['time_limit']==60. for c in calls))
+ def test_timeout_retries_without_accepting_partial_solution(self):
+  from unittest.mock import patch
+  from types import SimpleNamespace
+  import storage_coordinator as module
+  original=module.linprog;calls=[]
+  def simulated(*args,**kwargs):
+   calls.append(kwargs)
+   if len(calls)<=2:return SimpleNamespace(status=1,success=False,fun=-1e20)
+   return original(*args,**kwargs)
+  b=Block(np.array([1.]),[(0,2)],[[1]],np.array([1.]),[[1]])
+  with patch.object(module,'linprog',side_effect=simulated):result,gradient=module.solve_block(b,np.array([0.]))
+  self.assertAlmostEqual(result.fun,1)
+  self.assertAlmostEqual(gradient[0],-1)
+  self.assertEqual(calls[-1]['method'],'highs-ipm')
+ def test_exhausted_timeout_fails_without_feasibility_cut(self):
+  from unittest.mock import patch
+  from types import SimpleNamespace
+  import storage_coordinator as module
+  b=Block(np.array([1.]),[(0,2)],[[1]],np.array([1.]),[[1]])
+  with patch.object(module,'linprog',return_value=SimpleNamespace(status=1,success=False,message='Time limit')) as solver:
+   with self.assertRaisesRegex(RuntimeError,'Local LP failed: 1'):module.solve_block(b,np.array([0.]))
+  self.assertEqual(solver.call_count,3)
  def test_stage_receipts_identify_work(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]]);stages=[]
   result=coordinate([b],[(0,5)],on_stage=stages.append)
