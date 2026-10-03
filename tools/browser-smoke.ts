@@ -35,6 +35,23 @@ try {
       await page.getByRole("combobox", { name: "Choose a bottleneck" }).selectOption("FR>IT-North");
     }
     await page.getByRole("combobox", { name: "Choose a bottleneck" }).selectOption("FR>IT-North");
+    // Numeric bidding-zone suffixes must still select the country polygons.
+    for (const [border, countries] of [
+      ["SE4>PL", ["PL", "SE"]],
+      ["PL>SE4", ["PL", "SE"]],
+      ["DK1>NO2", ["DK", "NO"]],
+      ["FR>IT-North", ["FR", "IT"]],
+    ] as const) {
+      const picker = page.getByRole("combobox", { name: "Choose a bottleneck" });
+      assert.equal(await picker.locator(`option[value="${border}"]`).count(), 1);
+      await picker.selectOption(border);
+      const focused = await page
+        .locator('path[data-focused="true"]')
+        .evaluateAll((elements) =>
+          elements.map((element) => element.getAttribute("data-country")).sort(),
+        );
+      assert.deepEqual(focused, [...countries]);
+    }
     await page.getByRole("button", { name: "Hourly price difference" }).click();
     await page.getByText(/Coverage: 8,759/).waitFor();
     assert.equal(await page.getByRole("dialog").locator("svg[role=img] path").count(), 3);

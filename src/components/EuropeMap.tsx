@@ -87,7 +87,9 @@ const ISO_FALLBACK: Record<string, string> = {
   Kosovo: "XK",
 };
 
-const countryOf = (zoneCode: string) => zoneCode.split("-")[0]!;
+// Bidding zones include both numeric (SE4, NO2) and hyphenated (IT-North)
+// suffixes. Country polygons use two-letter ISO codes.
+const countryOf = (zoneCode: string) => zoneCode.slice(0, 2);
 
 type View = { k: number; x: number; y: number };
 const IDENTITY: View = { k: 1, x: 0, y: 0 };
@@ -528,6 +530,8 @@ export function EuropeMap({
             return (
               <path
                 key={c.name}
+                data-country={c.iso}
+                data-focused={focused}
                 d={c.d}
                 className={
                   focused
