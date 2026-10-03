@@ -1,3 +1,4 @@
+import { ProductionCarbonDetails } from "@/components/ProductionCarbonDetails";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ChevronDown, ChevronRight, Loader2, Play, Plus, Trash2 } from "lucide-react";
@@ -154,6 +155,7 @@ export function TargetSidebar({
           scheduled flows, not metered physical flows.
         </p>
         <PriceSpreadDetails key={target.id} a={target.zone_a} b={target.zone_b} />
+        <ProductionCarbonDetails a={target.zone_a} b={target.zone_b} />
         <p className="mt-2 text-xs text-muted-foreground">
           Experimental scenario welfare bound: {target.market_opportunity_meur.toFixed(1)} M€/year
           (directional model).

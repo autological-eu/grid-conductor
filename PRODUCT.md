@@ -41,6 +41,11 @@ A new visitor should understand this workflow within roughly 30 seconds.
 Estimate the carbon intensity of electricity **produced in each supported zone**
 from its observed generation mix and documented lifecycle emissions factors.
 Prioritize full-year 2025 where data coverage supports it; label partial periods.
+Cover the countries/bidding zones displayed on the map and allow inspection
+of production estimates during jointly observed hours with absolute cross-zone
+price spread above €5/MWh. This selection is price separation, not proof of
+physical congestion. Show generation/factor coverage and national proxies
+explicitly; unavailable areas remain unknown.
 This is separate from import-adjusted consumption intensity and avoided emissions
 from investments.
 

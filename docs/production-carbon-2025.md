@@ -138,3 +138,52 @@ comparison totals remain unchecked: after initial rate limiting, a partial
 20,000-record response was cached, but full-year pagination remains necessary. Next work is to explain and resolve missing generation, audit
 provider definitions and resolve the lifecycle-factor registry before exposing
 a full-zone annual estimate.
+
+## Map-wide estimates during price-separation hours
+
+The workbench now has a **Production carbon · price-separation hours** detail
+section for each displayed border. The selected hours are those where both
+2025 hourly prices are observed and their absolute difference exceeds
+€5/MWh. This does not establish physical congestion. For each endpoint,
+we report its own generation-weighted production lifecycle estimate during
+these hours; we do not attribute electricity exchanged across the border
+or compute avoided emissions.
+
+Collection is being extended to all 39 displayed areas, querying twelve
+months of ENTSO-E A75/A16 generation separately. Missing responses, missing
+intervals and unsupported fuels remain unavailable. The sidebar reports
+complete-generation hours out of selected hours, mapped generation share
+and whether the value is a mapped subset rather than full reported-area
+intensity. Generic IPCC pilot technology proxies retain their earlier
+limitations, including biomass accounting and fleet/CHP assumptions.
+
+Generation domains follow the repository's EIC registry, and parsed responses
+must match the requested area. Candidate domains do not themselves establish
+full coverage. Swedish, Norwegian, Danish and Italian bidding zones stay
+separate. German national generation is explicitly a proxy for DE-LU and
+excludes Luxembourg: it must not be read as DE-LU generation. Other areas
+retain their national scope.
+
+Collection checkpoints stay offline. The static app loads a published
+snapshot; it does not request ENTSO-E or require credentials. A completed
+month has hash-checked inputs and UTC chronology. A full period intensity
+requires complete reported generation in every selected hour and no positive
+unmapped fuel; absent reported categories still do not prove zero fleet output.
+
+[Map coverage, border summaries and provenance](../public/research/production-carbon-2025/map-summary.json)
+
+    python tools/collect_map_carbon_2025.py
+    python tools/publish_map_carbon_2025.py
+
+The publisher can snapshot a partial collection: collected-month and
+hour-coverage fields explicitly identify that limitation. Never infer zero
+intensity, whole-year completeness or consumption intensity from a partial
+mapped subset. Full lifecycle accounting remains subject to the C5 factor
+and independent-total verification gates.
+
+The snapshot also contains per-zone hourly arrays linked from the summary's
+`hourly_files` manifest. Each has exactly 8,760 UTC-indexed rows starting
+1 January 2025 00:00, with reported-generation intensity, mapped-subset
+intensity and mapped generation share; unavailable values are null. These
+allow the selected price-separation hours to be inspected individually,
+instead of relying only on period averages. Arrays carry SHA-256 hashes.
