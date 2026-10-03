@@ -4,6 +4,13 @@ Experimental European electricity-grid investment workbench. Public v1 is a
 static browser app on GitHub Pages. Keep the interactive map at `/`; research
 publications live at `/docs`, evidence at `/targets`.
 
+## Project requirements and priorities
+
+Read `PRODUCT.md` for requirements and `TASKS.md` for the current ordered backlog.
+`README.md` is the project entry point. Historical proposals in
+`planning/archive/` are not current architecture or verification evidence.
+Update task status with concrete verification, not job-start or build success.
+
 ## Architecture and commands
 
 - Use Bun 1.4.2 and `bun.lock`. Install reproducibly with `bun install --frozen-lockfile`.
@@ -51,7 +58,7 @@ publications live at `/docs`, evidence at `/targets`.
 
 ## Python research tools (`tools/`, standalone)
 
-- **PyPSA-Eur groundwork is in progress.** See `refactor.md` (phases 0–3) for the
+- **PyPSA-Eur groundwork is in progress.** See `TASKS.md` and `docs/fast-network-model-plan.md` for the
   build/extract/targets chain. Toolchain (all WSL-pixi aware):
   - `tools/build_pypsa_network.py` — Snakemake orchestrator. `--config
 config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,

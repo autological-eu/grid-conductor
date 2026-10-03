@@ -1,13 +1,25 @@
 # Grid Conductor
 
 An experimental European electricity-grid investment and market-opportunity
-workbench. The interactive map is the landing page: select a directed border,
+workbench. The interactive map is the landing page: select a border,
 inspect published evidence, create a scenario, add transmission or battery
 interventions, and evaluate estimated economic and climate indicators.
 
 Public site: **https://autological-eu.github.io/grid-conductor/**.
 Deployment requires GitHub Pages to be enabled for this repository; a successful
 build alone does not establish a live deployment.
+
+## Project documents and repository map
+
+- [Product requirements](PRODUCT.md): purpose, scope and acceptance criteria.
+- [Current tasks](TASKS.md): ordered milestones, blockers and verification gates.
+- [Agent instructions](AGENTS.md): implementation and research operating rules.
+- `src/`: static browser application; `tests/`: Bun tests.
+- `tools/` and `config/`: offline research, verification and publication tooling.
+- `docs/` and `public/research/`: published methods and reviewed artifacts.
+- `planning/archive/`: preserved historical plans, not current architecture.
+- `.github/workflows/`: verification and Pages deployment.
+- Ignored `data/`: private local inputs, credentials and large generated outputs.
 
 ## Browser application
 
@@ -152,6 +164,8 @@ Python parity fixtures are generated offline with SciPy, then checked by Bun tes
 without a Python dependency in frontend CI. Browser checks additionally run
 `bun tools/network-browser-smoke.ts` against preview or the public URL.
 
-Real annual network comparisons remain blocked by the missing solved PyPSA NetCDF
-and baseline manifest/availability/cost inputs. Do not infer them from dispatch
+Prepared 2025 inputs and sequential monthly solves exist offline. A certified
+annual network comparison remains blocked by inventory-coordination validation
+and the unfinished annual coordinator; the annual solved baseline and publication
+manifest are not ready. Do not infer them from dispatch
 outputs or substitute analytical test fixtures for published research.
