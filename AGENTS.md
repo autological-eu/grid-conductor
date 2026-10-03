@@ -185,7 +185,7 @@ research retains its separate integration gates.
 - The map's primary baseline metric is signed annual congestion rent (M€/year),
   summing both directed scheduled exchanges × signed price difference × hours.
   Mean absolute price spread (€/MWh) is secondary. Neither is investment welfare.
-  Source exchanges are scheduled, not metered physical flows; preserve negative rent.
+  Source exchanges are scheduled, not metered physical flows. Preserve signed research values; floor only the displayed annual total at zero and label it exchange value, not verified TSO income.
 - Static hourly price arrays and source/coverage manifest live under
   `public/research/zone-prices-2025/`. The sidebar shows two price lines, shaded
   separation, UTC month/year selection and missing-hour coverage. Gaps are not filled.

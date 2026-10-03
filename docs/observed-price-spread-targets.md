@@ -1,6 +1,8 @@
+The map and sidebar display **annual scheduled-exchange value, floored at zero**: max(0, annual signed total). Negative hours still reduce the annual total; we do not clip individual hours. Signed research artifacts remain unchanged. This display convention does not establish actual TSO congestion income or investment welfare.
+
 # Observed annual price-spread targets
 
-The current Stage-1 sidebar shows **mean absolute price spread (€/MWh)** and **annual signed congestion rent (M€)**. The map colours now use annual signed congestion rent; mean absolute spread is secondary. The accumulated spread described below remains an intermediate used to calculate the mean by dividing by covered hours.
+The current Stage-1 sidebar shows **mean absolute price spread (€/MWh)** and **annual signed congestion rent (M€)**. The map colours use the annual signed total floored at zero; mean absolute spread is secondary. The accumulated spread described below remains an intermediate used to calculate the mean by dividing by covered hours.
 
 Congestion rent sums both directed scheduled exchange × signed destination-minus-origin price spread × interval duration, including negative contributions. These are ENTSO-E scheduled exchanges, not metered physical flows. Missing rent inputs are unavailable, not zero. Mean spread requires matching directional coverage counts; interval-mask identity cannot be audited from these aggregate-only artifacts. Scenario welfare remains separate.
 

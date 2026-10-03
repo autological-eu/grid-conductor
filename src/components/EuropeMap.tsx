@@ -471,7 +471,7 @@ export function EuropeMap({
       target:
         members.find((target) => target.id === selectedId) ??
         [...members].sort((a, b) => b.market_opportunity_meur - a.market_opportunity_meur)[0]!,
-      market: Math.max(...members.map((target) => target.congestion_rent_meur_year ?? 0)),
+      market: Math.max(0, ...members.map((target) => target.congestion_rent_meur_year ?? 0)),
       climate: members.reduce((sum, target) => sum + target.climate_loss_ktco2, 0),
     }));
   }, [targets, selectedId]);
@@ -627,7 +627,7 @@ export function EuropeMap({
                 data-corridor={[t.zone_a, t.zone_b].sort().join("|")}
                 role="button"
                 tabIndex={0}
-                aria-label={`Select ${t.zone_a} – ${t.zone_b} corridor, ${t.congestion_rent_meur_year?.toFixed(1) ?? "unavailable"} M€ annual signed congestion rent`}
+                aria-label={`Select ${t.zone_a} – ${t.zone_b} corridor, ${(t.congestion_rent_meur_year == null ? undefined : Math.max(0, t.congestion_rent_meur_year).toFixed(1)) ?? "unavailable"} M€ annual exchange value (floor: 0)`}
                 onKeyDown={(event) => {
                   if (event.key === "Enter" || event.key === " ") {
                     event.preventDefault();
@@ -682,9 +682,12 @@ export function EuropeMap({
 
                 <title>
                   {t.zone_a} – {t.zone_b}:{" "}
-                  {t.congestion_rent_meur_year?.toFixed(1) ?? "unavailable"} M€ annual signed
-                  congestion rent; {t.mean_absolute_spread_eur_mwh?.toFixed(2) ?? "unavailable"}{" "}
-                  €/MWh mean absolute price spread.
+                  {(t.congestion_rent_meur_year == null
+                    ? undefined
+                    : Math.max(0, t.congestion_rent_meur_year).toFixed(1)) ?? "unavailable"}{" "}
+                  M€ annual exchange value (floor: 0);{" "}
+                  {t.mean_absolute_spread_eur_mwh?.toFixed(2) ?? "unavailable"} €/MWh mean absolute
+                  price spread.
                 </title>
               </g>
             );
@@ -727,7 +730,7 @@ export function EuropeMap({
         </h2>
         <p className="text-xs text-muted-foreground">
           {metric === "market"
-            ? "Annual signed congestion rent · 2025"
+            ? "Annual exchange value · 2025 · floor: 0"
             : "Yearly climate proxy (est.)"}
         </p>
       </div>
@@ -763,7 +766,7 @@ export function EuropeMap({
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="font-medium text-foreground">
             {metric === "market"
-              ? "Congestion rent (M€/year) · blue: negative"
+              ? "Exchange value (M€/year) · floor: 0"
               : "Climate proxy (est., ktCO2/y)"}
           </span>
           <div className="pointer-events-auto flex rounded-md border border-border p-0.5 text-[10px]">

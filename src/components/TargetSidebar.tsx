@@ -120,11 +120,11 @@ export function TargetSidebar({
         </p>
         <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
           <Stat
-            label="Annual congestion rent (signed)"
+            label="Annual exchange value (floor: 0)"
             value={
               target.congestion_rent_meur_year == null
                 ? "Unavailable"
-                : `${target.congestion_rent_meur_year.toFixed(1)} M€`
+                : `${Math.max(0, target.congestion_rent_meur_year).toFixed(1)} M€`
             }
           />
           <Stat
@@ -149,7 +149,9 @@ export function TargetSidebar({
         <p className="mt-2 text-xs text-muted-foreground">
           2025 observed baseline. Mean absolute spread over covered hours; rent sums scheduled
           cross-border flow × signed price difference × interval hours in both directions. Negative
-          contributions remain. Source uses ENTSO-E scheduled flows, not metered physical flows.
+          contributions remain in the calculation; only the displayed annual total is floored at
+          zero. This is a scheduled-exchange value, not verified TSO income. Source uses ENTSO-E
+          scheduled flows, not metered physical flows.
         </p>
         <PriceSpreadDetails key={target.id} a={target.zone_a} b={target.zone_b} />
         <p className="mt-2 text-xs text-muted-foreground">
