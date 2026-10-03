@@ -386,5 +386,9 @@ The January retry exhausted all three 300-second attempts. Peak sampled
 memory was 5.91 GiB, below the 6 GiB guard, and no successful monthly receipt
 was accepted. The failure logs are preserved offline. A further January retry
 uses the configured maximum of 600 seconds per attempt (at most 1,800 seconds
-of solver time); its verification is pending. All 25 storage coordinator tests pass, including budget validation
+of solver time). It reached a solver solution but failed the unchanged
+1e-7 original-unit residual gate, with peak sampled memory 5.18 GiB.
+No successful receipt was written. The audit now writes a separate rejected
+diagnostic containing equality, inequality and variable-bound violation
+magnitudes. These diagnostics cannot be used as accepted monthly results. All 25 storage coordinator tests pass, including budget validation
 and preservation of the requested IPM tolerances.

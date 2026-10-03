@@ -24,7 +24,13 @@ def worker(args):
  eq=float(np.max(abs(block.equality@r.x+block.coupling@state-block.rhs)))
  ub=float(max(0.,np.max(block.inequality@r.x+block.inequality_coupling@state-block.limit)))
  bound=max([0.]+[max(0.,lo-x) if lo is not None else 0. for x,(lo,hi) in zip(r.x,block.bounds)]+[max(0.,x-hi) if hi is not None else 0. for x,(lo,hi) in zip(r.x,block.bounds)])
- if max(eq,ub,bound)>1e-7:raise ValueError('Original-unit primal residual gate failed')
+ if max(eq,ub,bound)>1e-7:
+  save(args.folder/'warm-audit'/f'{args.month:02d}-rejected.json',dict(**signature,
+   month=args.month,status='rejected_original_unit_residuals',cost_eur=float(r.fun),
+   max_equality_residual=eq,max_inequality_violation=ub,max_bound_violation=bound,
+   solver_seconds=args.solver_seconds,first_solver=args.first_solver,
+   scope='diagnostic only; not accepted feasibility or an annual result'))
+  raise ValueError(f'Original-unit primal residual gate failed: equality={eq:.12g}, inequality={ub:.12g}, bounds={bound:.12g}')
  save(args.folder/'warm-audit'/f'{args.month:02d}.json',dict(**signature,month=args.month,cost_eur=float(r.fun),
   max_equality_residual=eq,max_inequality_violation=ub,max_bound_violation=bound,
   solver_seconds=args.solver_seconds,first_solver=args.first_solver,scope='verified fixed monthly inventories only; no annual optimum'))
