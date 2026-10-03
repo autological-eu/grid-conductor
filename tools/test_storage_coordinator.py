@@ -87,6 +87,12 @@ class CoordinationTests(unittest.TestCase):
   self.assertEqual(stages[0],dict(stage='independent_relaxation',block=0))
   self.assertTrue(any(row['stage']=='master' for row in stages))
   self.assertTrue(any(row['stage']=='local' for row in stages))
+ def test_unstabilized_resume_preserves_certificate(self):
+  b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]]);saved=[]
+  coordinate([b],[(0,5)],initial_state=[0],max_iterations=1,on_checkpoint=saved.append)
+  r=coordinate([b],[(0,5)],resume=saved[-1],stabilize=False)
+  self.assertEqual(r['status'],'converged');self.assertAlmostEqual(r['objective'],5)
+  self.assertLessEqual(r['lower_bound'],5+1e-5)
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)

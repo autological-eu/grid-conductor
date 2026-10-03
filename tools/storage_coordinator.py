@@ -51,7 +51,7 @@ def solve_block(block, state, phase=False):
     if len(r):gradient-=np.asarray(V.T@result.ineqlin.marginals).ravel()
     return result,gradient
 
-def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None):
+def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True):
     """Return best feasible state and rigorous LP-cut bounds, or fail to converge."""
     nx=len(bounds);nb=len(blocks);cuts=[];limits=[];history=[];upper=np.inf;lower=-np.inf;best=None
     theta_bounds=[]
@@ -96,7 +96,7 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
         threshold=absolute_gap+relative_gap*max(1,abs(upper))
         if np.isfinite(upper) and upper-lower<=threshold:
             return dict(status='converged',state=best,objective=upper,lower_bound=lower,gap=max(0.,upper-lower),iterations=iteration,history=history)
-        if best is not None and np.isfinite(upper) and iteration%5!=0:
+        if stabilize and best is not None and np.isfinite(upper) and iteration%5!=0:
             # Level stabilization chooses a nearby proposal without restricting
             # the unrestricted master used for the global lower bound.
             level=lower+.5*(upper-lower)

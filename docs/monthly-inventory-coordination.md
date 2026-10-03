@@ -165,3 +165,10 @@ never supplies a cut, feasible upper bound or convergence certificate. This
 bounds one numerical retry sequence to at most three solver attempts, excluding
 Python assembly and archive loading time. The real-data reference is still
 uncertified and annual coordination remains blocked.
+
+The bounded retry recorded a local solver timeout at the stabilized proposal
+for block 0, iteration 559. The driver now offers `--no-stabilization` to use
+unrestricted master proposals while retaining all saved cuts, physical
+constraints and convergence gates. Stabilization is a proposal heuristic, not
+part of the lower-bound certificate. A test covers unstabilized resumption.
+The new real-data attempt remains unverified.
