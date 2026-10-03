@@ -79,6 +79,7 @@ class CoordinationTests(unittest.TestCase):
   self.assertAlmostEqual(result.fun,1)
   self.assertEqual(calls[-1]['method'],'highs-ipm')
   self.assertEqual(calls[-1]['options']['ipm_optimality_tolerance'],1e-12)
+  self.assertTrue(all(c['options']['time_limit']==60. for c in calls))
  def test_stage_receipts_identify_work(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]]);stages=[]
   result=coordinate([b],[(0,5)],on_stage=stages.append)

@@ -157,3 +157,11 @@ Stage receipts now distinguish independent block relaxations, unrestricted maste
 solves and local block solves. Each stage records process identity and elapsed
 time atomically, so an interrupted resume can be located before its next
 iteration checkpoint. These diagnostics do not alter LP coefficients or gates.
+
+Each local solver attempt now has a 60-second solver time limit. The previous
+retry was last observed inside block 0 at iteration 559 and stopped without
+a traceback. A solver time-limit status now raises a diagnostic failure; it
+never supplies a cut, feasible upper bound or convergence certificate. This
+bounds one numerical retry sequence to at most three solver attempts, excluding
+Python assembly and archive loading time. The real-data reference is still
+uncertified and annual coordination remains blocked.
