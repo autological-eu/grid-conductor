@@ -152,3 +152,8 @@ archive implementation. Matching dependencies allow reuse only after every
 archive passes its stored hash. Changed dependencies trigger fresh preparation;
 changed archives fail rather than silently change coefficients. No manifest
 means preparation must be regenerated before the cache can be trusted.
+
+Stage receipts now distinguish independent block relaxations, unrestricted master
+solves and local block solves. Each stage records process identity and elapsed
+time atomically, so an interrupted resume can be located before its next
+iteration checkpoint. These diagnostics do not alter LP coefficients or gates.

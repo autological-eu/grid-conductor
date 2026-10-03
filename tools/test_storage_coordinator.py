@@ -79,6 +79,13 @@ class CoordinationTests(unittest.TestCase):
   self.assertAlmostEqual(result.fun,1)
   self.assertEqual(calls[-1]['method'],'highs-ipm')
   self.assertEqual(calls[-1]['options']['ipm_optimality_tolerance'],1e-12)
+ def test_stage_receipts_identify_work(self):
+  b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]]);stages=[]
+  result=coordinate([b],[(0,5)],on_stage=stages.append)
+  self.assertEqual(result['status'],'converged')
+  self.assertEqual(stages[0],dict(stage='independent_relaxation',block=0))
+  self.assertTrue(any(row['stage']=='master' for row in stages))
+  self.assertTrue(any(row['stage']=='local' for row in stages))
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)

@@ -51,11 +51,12 @@ def solve_block(block, state, phase=False):
     if len(r):gradient-=np.asarray(V.T@result.ineqlin.marginals).ravel()
     return result,gradient
 
-def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None):
+def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None):
     """Return best feasible state and rigorous LP-cut bounds, or fail to converge."""
     nx=len(bounds);nb=len(blocks);cuts=[];limits=[];history=[];upper=np.inf;lower=-np.inf;best=None
     theta_bounds=[]
-    for block in blocks:
+    for block_index,block in enumerate(blocks):
+        if on_stage is not None:on_stage(dict(stage='independent_relaxation',block=block_index))
         A=sparse.csr_matrix(block.equality);B=sparse.csr_matrix(block.coupling)
         eq=np.asarray(B.getnnz(axis=1))==0
         U=sparse.csr_matrix((0,len(block.cost))) if block.inequality is None else sparse.csr_matrix(block.inequality)
@@ -80,12 +81,14 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
         if equality is not None and np.max(abs(sparse.csr_matrix(equality)@state-rhs))>1e-7:raise ValueError('Warm state violates master equalities')
         cost=0.
         for i,block in enumerate(blocks):
+            if on_stage is not None:on_stage(dict(stage='local',block=i))
             local=solve_block(block,state)
             if local is None:raise ValueError('Warm boundary state is infeasible')
             result,gradient=local;cost+=result.fun
             row=np.r_[gradient,np.zeros(nb)];row[nx+i]=-1;cuts.append(row);limits.append(float(gradient@state-result.fun))
         upper=float(cost);best=state.copy()
     for iteration in range(start_iteration,max_iterations+1):
+        if on_stage is not None:on_stage(dict(stage='master',iteration=iteration))
         master=solve_master(np.r_[np.zeros(nx),np.ones(nb)],A_ub=sparse.csr_matrix(cuts) if cuts else None,b_ub=limits if cuts else None,A_eq=E,b_eq=rhs,bounds=bounds+theta_bounds)
         if not master.success:raise RuntimeError(f'Master LP failed: {master.status}: {master.message}')
         state=master.x[:nx];lower=max(lower,float(master.fun));cost=0.;feasible=True
@@ -107,6 +110,7 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
             state=stabilized.x[:nx]
 
         for i,block in enumerate(blocks):
+            if on_stage is not None:on_stage(dict(stage='local',block=i))
             local=solve_block(block,state)
             if local is None:
                 feasible=False;phase,gradient=solve_block(block,state,phase=True)

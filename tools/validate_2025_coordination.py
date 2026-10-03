@@ -70,10 +70,14 @@ def run(folder,iterations,disk_blocks=False):
   temp=checkpoint.with_suffix('.tmp');temp.write_text(json.dumps(value,allow_nan=False)+'\n');temp.replace(checkpoint)
  def report(row):
   clean={k:(None if isinstance(v,float) and not np.isfinite(v) else v) for k,v in row.items()};output.write_text(json.dumps(dict(status='running',pid=os.getpid(),source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),hours=48,blocks=2,elapsed_seconds=time.monotonic()-started,**clean),indent=2)+'\n')
+ def stage(row):
+  current=json.loads(output.read_text()) if output.exists() else {}
+  current.update(status='running',pid=os.getpid(),elapsed_seconds=time.monotonic()-started,**row)
+  temp=output.with_suffix('.tmp');temp.write_text(json.dumps(current,indent=2)+'\n');temp.replace(output)
  reference=pypsa.Network(folder.parent/'monthly-dispatch-sequential/01.nc')
  warm=np.r_[initial,reference.storage_units_t.state_of_charge.iloc[23].reindex(ids).to_numpy(),terminal];del reference;gc.collect()
  try:
-  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.001,relative_gap=0.,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits)
+  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.001,relative_gap=0.,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits,on_stage=stage)
  except Exception as error:
   progress=json.loads(output.read_text()) if output.exists() else {}
   progress.update(status='failed_not_certified',error=str(error));output.write_text(json.dumps(progress,indent=2)+'\n');raise
