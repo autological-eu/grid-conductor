@@ -32,6 +32,8 @@ export type TargetRow = {
    * cap every scenario outcome is clamped to. */
   market_opportunity_meur: number;
   price_spread_eur_mw_year?: number;
+  mean_absolute_spread_eur_mwh?: number | null;
+  congestion_rent_meur_year?: number | null;
   climate_loss_ktco2: number;
   observed_capacity_mw: number | null;
 };
@@ -469,7 +471,7 @@ export function EuropeMap({
       target:
         members.find((target) => target.id === selectedId) ??
         [...members].sort((a, b) => b.market_opportunity_meur - a.market_opportunity_meur)[0]!,
-      market: Math.max(...members.map((target) => target.price_spread_eur_mw_year ?? 0)),
+      market: Math.max(...members.map((target) => target.mean_absolute_spread_eur_mwh ?? 0)),
       climate: members.reduce((sum, target) => sum + target.climate_loss_ktco2, 0),
     }));
   }, [targets, selectedId]);
@@ -625,7 +627,7 @@ export function EuropeMap({
                 data-corridor={[t.zone_a, t.zone_b].sort().join("|")}
                 role="button"
                 tabIndex={0}
-                aria-label={`Select ${t.zone_a} – ${t.zone_b} corridor, ${corridor.market.toFixed(0)} €/MW-year accumulated price spread`}
+                aria-label={`Select ${t.zone_a} – ${t.zone_b} corridor, ${corridor.market.toFixed(0)} €/MWh mean absolute price spread`}
                 onKeyDown={(event) => {
                   if (event.key === "Enter" || event.key === " ") {
                     event.preventDefault();
@@ -677,9 +679,9 @@ export function EuropeMap({
                 />
 
                 <title>
-                  {t.zone_a} – {t.zone_b}: {corridor.market.toFixed(0)} €/MW-year accumulated
-                  absolute price spread, {corridor.climate.toFixed(1)} ktCO2/y climate proxy. Sum of
-                  both directions.
+                  {t.zone_a} – {t.zone_b}: {corridor.market.toFixed(0)} €/MWh mean absolute price
+                  spread, {t.congestion_rent_meur_year?.toFixed(1) ?? "unavailable"} M€ annual
+                  signed congestion rent.
                 </title>
               </g>
             );
@@ -722,7 +724,7 @@ export function EuropeMap({
         </h2>
         <p className="text-xs text-muted-foreground">
           {metric === "market"
-            ? "Accumulated absolute price spread · 2025"
+            ? "Mean absolute price spread · 2025"
             : "Yearly climate proxy (est.)"}
         </p>
       </div>
@@ -757,7 +759,7 @@ export function EuropeMap({
       <div className="pointer-events-none absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] rounded-lg border border-border bg-card/90 px-3 py-2 text-xs text-muted-foreground backdrop-blur">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="font-medium text-foreground">
-            {metric === "market" ? "Price spread (€/MW-year)" : "Climate proxy (est., ktCO2/y)"}
+            {metric === "market" ? "Mean price spread (€/MWh)" : "Climate proxy (est., ktCO2/y)"}
           </span>
           <div className="pointer-events-auto flex rounded-md border border-border p-0.5 text-[10px]">
             {(["market", "climate"] as const).map((m) => (

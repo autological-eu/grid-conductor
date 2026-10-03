@@ -60,6 +60,8 @@ export type Step1Summary = {
     /** Bounded deadweight-loss estimate (the cap the Step-2 LP enforces). */
     market_opportunity_meur: number;
     price_spread_eur_mw_year?: number;
+    mean_absolute_spread_eur_mwh?: number | null;
+    congestion_rent_meur_year?: number | null;
     climate_loss_ktco2: number;
     observed_capacity_mw: number | null;
   }>;
@@ -68,6 +70,7 @@ export type Step1Summary = {
 type Step1BorderAnnual = {
   month: string;
   border: string;
+  realized_rent_meur_year?: number | null;
   opportunity_meur_year?: Record<string, number | null> | null;
   deadweight_loss_meur_year?: number | null;
   congested_quarters?: number | null;
@@ -136,6 +139,26 @@ export function summarizeStep1(raw: Step1File): Step1Summary {
     if (!dwls.some((v) => v > 0)) continue;
     const marketOpportunityMeurYr = mean(dwls);
 
+    const reverse = byBorder.get(`${b}>${a}`) ?? [];
+    const pairRows = [...months, ...reverse];
+    const spreadArea = pairRows.reduce(
+      (sum, row) => sum + ((row.opportunity_meur_year?.["500"] ?? 0) * 1e6) / 500,
+      0,
+    );
+    const coveredHours = (months[0]?.observed_quarters ?? 0) / 4;
+    const compatible =
+      months.length === 1 &&
+      reverse.length === 1 &&
+      coveredHours > 0 &&
+      reverse[0]?.observed_quarters === months[0]?.observed_quarters &&
+      pairRows.every((row) => typeof row.opportunity_meur_year?.["500"] === "number");
+    const meanSpread = compatible ? spreadArea / coveredHours : null;
+    const rent =
+      pairRows.length === 2 &&
+      pairRows.every((row) => typeof row.realized_rent_meur_year === "number")
+        ? pairRows.reduce((sum, row) => sum + (row.realized_rent_meur_year ?? 0), 0)
+        : null;
+
     const metaA = entsoeZoneMeta(a);
     const metaB = entsoeZoneMeta(b);
 
@@ -170,6 +193,8 @@ export function summarizeStep1(raw: Step1File): Step1Summary {
       congested_hours: round(congestedHours),
       total_hours: round(totalHours),
       market_opportunity_meur: round2(marketOpportunityMeurYr),
+      mean_absolute_spread_eur_mwh: meanSpread,
+      congestion_rent_meur_year: rent,
       price_spread_eur_mw_year: [...months, ...(byBorder.get(`${b}>${a}`) ?? [])].reduce(
         (sum, row) => sum + ((row.opportunity_meur_year?.["500"] ?? 0) * 1e6) / 500,
         0,

@@ -120,12 +120,20 @@ export function TargetSidebar({
         </p>
         <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
           <Stat
-            label="Accumulated price spread"
-            value={`${(target.price_spread_eur_mw_year ?? 0).toFixed(0)} €/MW-year`}
+            label="Mean absolute price spread"
+            value={
+              target.mean_absolute_spread_eur_mwh == null
+                ? "Unavailable"
+                : `${target.mean_absolute_spread_eur_mwh.toFixed(2)} €/MWh`
+            }
           />
           <Stat
-            label="Climate proxy (est.)"
-            value={`${target.climate_loss_ktco2.toFixed(1)} ktCO2/y`}
+            label="Annual congestion rent (signed)"
+            value={
+              target.congestion_rent_meur_year == null
+                ? "Unavailable"
+                : `${target.congestion_rent_meur_year.toFixed(1)} M€`
+            }
           />
           <Stat
             label="Congested hours"
@@ -139,8 +147,9 @@ export function TargetSidebar({
           />
         </dl>
         <p className="mt-2 text-xs text-muted-foreground">
-          Sum of absolute price differences × interval hours, over known price-and-flow intervals in
-          2025. No assumed expansion or price response.
+          2025 observed baseline. Mean absolute spread over covered hours; rent sums scheduled
+          cross-border flow × signed price difference × interval hours in both directions. Negative
+          contributions remain. Source uses ENTSO-E scheduled flows, not metered physical flows.
         </p>
         <PriceSpreadDetails key={target.id} a={target.zone_a} b={target.zone_b} />
         <p className="mt-2 text-xs text-muted-foreground">

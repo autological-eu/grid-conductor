@@ -1,5 +1,9 @@
 # Observed annual price-spread targets
 
+The current Stage-1 sidebar shows **mean absolute price spread (€/MWh)** and **annual signed congestion rent (M€)**. The map colours use the mean spread. The accumulated spread described below remains an intermediate used to calculate the mean by dividing by covered hours.
+
+Congestion rent sums both directed scheduled exchange × signed destination-minus-origin price spread × interval duration, including negative contributions. These are ENTSO-E scheduled exchanges, not metered physical flows. Missing rent inputs are unavailable, not zero. Mean spread requires matching directional coverage counts; interval-mask identity cannot be audited from these aggregate-only artifacts. Scenario welfare remains separate.
+
 The workbench now uses accumulated absolute price spread as its map headline:
 
 $$A_{AB}=\sum_{t\in observed}|P_{B,t}-P_{A,t}|\Delta t.$$
