@@ -361,3 +361,9 @@ is not reused against changed inventories. Monthly results are conditional,
 not annual optima; a feasible annual upper bound requires all twelve
 successful re-solves and verified continuity. Annual coordination, objective
 cuts, convergence and final independent result audits remain unfinished.
+
+The first January fixed-inventory re-solve exhausted the existing bounded
+60-second solver attempts. Peak sampled memory was 5.71 GiB, below its 6 GiB
+guard. No optimal primal or monthly cost receipt was accepted. Full-month
+solver budgeting/configuration remains a blocker; the small-reference time
+limits are not evidence that the prepared monthly LP is infeasible.
