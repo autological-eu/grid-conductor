@@ -36,6 +36,46 @@ A new visitor should understand this workflow within roughly 30 seconds.
 | P10 | Carbon accounting | Separate hourly production, consumption and intervention emissions. Declare operational versus lifecycle factors, spatial scope, missing data, storage attribution and coverage. Full estimates remain unavailable when positive generation lacks factors; validate before replacing map climate proxies. |
 | P9 | Verified annual network planning | Chronological storage and original renewable availability; matched native/fast inputs, feasibility and convergence bounds; smaller monolithic reference before annual-optimum claims. Integrate only verified results. |
 
+## Milestone: production-based lifecycle carbon intensity
+
+Estimate the carbon intensity of electricity **produced in each supported zone**
+from its observed generation mix and documented lifecycle emissions factors.
+Prioritize full-year 2025 where data coverage supports it; label partial periods.
+This is separate from import-adjusted consumption intensity and avoided emissions
+from investments.
+
+Use **g CO2e/kWh of electricity generated** with a consistent lifecycle boundary:
+fuel extraction and processing, manufacturing/construction, operation, and
+decommissioning/end-of-life where included by the selected source. Record the
+boundary rather than claiming every published factor covers identical stages.
+Prefer authoritative harmonised assessments (such as IPCC) and regionally
+appropriate fleet estimates over undocumented constants.
+
+Completion requires:
+
+- Hourly generation by technology, with zone identity, provenance and audited
+  coverage; independent monthly-total checks. National data must not be presented
+  as individual bidding-zone data.
+- A versioned factor registry recording source, technology, units, lifecycle
+  boundary, geography, representative value/range and justified mapping.
+- Explicit treatment of biomass biogenic carbon, waste fossil share, CHP
+  allocation, hydro variation and technology/fleet differences. Unresolved
+  sources remain unknown rather than receiving zero emissions.
+- Energy-weighted hourly, monthly and annual estimates with missing-data and
+  factor-coverage diagnostics, plus sensitivity to plausible factor choices.
+  Full estimates stay unavailable for incomplete generation or positive
+  generation with unresolved factors.
+- Published generation-mix and intensity charts, methods, downloadable artifacts
+  and transparent limitations. Integrate verified production estimates into the
+  app under their own label; do not overwrite consumption or marginal metrics.
+- Separate storage discharge from primary generation until charging-origin
+  attribution prevents double counting.
+
+A lifecycle factor describes emissions attributed per unit of generated
+electricity across a technology's life; it is not a claim that those emissions
+occur during the displayed hour. Do not combine operational and lifecycle
+factors within one purportedly consistent estimate.
+
 ## Model boundaries
 
 Observed ENTSO-E price/flow evidence, reduced-form screening, the 2013 weekly

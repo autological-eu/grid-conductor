@@ -42,6 +42,28 @@ separate from the 2025 conditional and future annual comparisons.
   See [pilot methods](docs/production-carbon-2025.md). Published route, chart and JSON verified on the public site at desktop and mobile widths.
 - [ ] C2: Investigate generation gaps, audit independent monthly totals and
   resolve factors/biomass/CHP/efficiency assumptions with sensitivities.
+### Milestone C5 — verified production lifecycle intensity
+
+**Goal:** publish and integrate supported zones' generation-weighted lifecycle
+intensity, in g CO2e/kWh, prioritizing full-year 2025. Detailed acceptance criteria
+are in [PRODUCT.md](PRODUCT.md#milestone-production-based-lifecycle-carbon-intensity).
+The existing January pilot is groundwork, not completion.
+
+- [ ] C5.1: Inventory observed generation-mix coverage; obtain missing data where
+  available and check independent monthly totals. Preserve geographic scope.
+- [ ] C5.2: Build a documented, versioned lifecycle-factor registry from
+  authoritative harmonised sources, with units, boundaries, ranges and mappings.
+- [ ] C5.3: Resolve biomass/waste/CHP treatment and other unsupported categories;
+  quantify hydro and fleet-factor sensitivities. Retain nulls when unresolved.
+- [ ] C5.4: Calculate energy-weighted hourly/monthly/annual production intensity,
+  coverage diagnostics and factor sensitivities; distinguish partial periods.
+- [ ] C5.5: Publish methods, generation-mix/intensity visualisations and artifacts;
+  integrate only verified estimates with clear production/lifecycle labels.
+  Verify browser behaviour, CI/Pages and public URLs.
+
+C2 feeds this milestone. C3 and C4 remain separate accounting/model extensions.
+The annual dispatch milestones N3–N5 retain their existing verification gates.
+
 - [ ] C3: Add consumption accounting with physical flows, load and chronological
   storage-origin attribution, retaining existing flow-tracing gates.
 - [ ] C4: Validate intervention emissions against paired verified dispatch;
