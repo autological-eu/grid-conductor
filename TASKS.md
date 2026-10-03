@@ -110,7 +110,7 @@ lifecycle estimates separately for each endpoint. Full estimates require all
 selected hours and no positive unsupported fuel. Mapped subsets retain their
 coverage label; national DE generation is explicitly a DE-LU proxy.
 
-Sidebar integration and methods are implemented; published snapshot preparation also produces 8,760-row per-zone hourly arrays with hashes and explicit full/subset/share columns. Local Chromium checks at 1,280px and 390px verify selection, labels, coverage and no horizontal overflow. Lint has zero errors (six existing warnings); typecheck, 28 frontend tests and production build pass. Publication verification is pending. 23 carbon tests pass. Collection remains incomplete and some source
+Sidebar integration and methods are implemented; published snapshot preparation also produces 8,760-row per-zone hourly arrays with hashes and explicit full/subset/share columns. Local Chromium checks at 1,280px and 390px verify selection, labels, coverage and no horizontal overflow. Lint has zero errors (six existing warnings); typecheck, 28 frontend tests and production build pass. Initial CI caught map overlap with scenario controls on mobile after adding the detail section. The sidebar now scrolls as one bounded panel; the regression test opens carbon details before creating/evaluating scenarios. All four browser smoke viewports (1,440, 390, 320, 667px) pass with details expanded. Publication verification is pending. 23 carbon tests pass. Collection remains incomplete and some source
 requests are unavailable; these are not zero generation. Next: finish the pass,
 audit unavailable areas and source coverage, republish hash-checked summaries,
 and resolve lifecycle factors under C5. No avoided-emissions claims.

@@ -111,7 +111,7 @@ export function TargetSidebar({
   }
 
   return (
-    <aside className="flex h-full w-full flex-col border-r border-border bg-card">
+    <aside className="h-full w-full overflow-y-auto border-r border-border bg-card">
       <div className="border-b border-border p-4">
         <h2 className="text-sm font-semibold">
           {target.zone_a} – {target.zone_b}
@@ -221,7 +221,7 @@ export function TargetSidebar({
         </Button>
       </div>
 
-      <div className="flex-1 space-y-2 overflow-y-auto p-4">
+      <div className="space-y-2 p-4">
         {scenarios.isError && (
           <p role="alert" className="text-xs text-destructive">
             {scenarios.error.message}
