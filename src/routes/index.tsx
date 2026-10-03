@@ -167,8 +167,8 @@ function Workbench() {
               <option value="">Select on the map or here…</option>
               {rows.map((row) => (
                 <option key={row.id} value={row.id}>
-                  {row.zone_a} → {row.zone_b} · {row.market_opportunity_meur.toFixed(1)} M€/y
-                  estimated opportunity
+                  {row.zone_a} → {row.zone_b} · {(row.price_spread_eur_mw_year ?? 0).toFixed(0)}{" "}
+                  €/MW-year accumulated price spread
                 </option>
               ))}
             </select>

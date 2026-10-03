@@ -8,12 +8,10 @@ import { entsoeZoneMeta } from "./entsoeZones";
  * screening: directed borders x the full calendar year) into the exact
  * `ZoneSummary[]`/`TargetRow[]` contract the EuropeMap workbench renders.
  *
- * The headline map figure is the border's **market opportunity**: the bounded
- * deadweight-loss estimate the screening tool publishes as
- * `deadweight_loss_meur_year` (0.25 h * congested_quarters * spread^2 /
- * (2*slope) / 1e6). Unlike the old linear "opportunity = ΔC x spread" rent,
- * this is the cap the Step-2 LP enforces, so no simulated line/battery can
- * claim more than the map shows.
+ * The map headline is accumulated absolute observed price spread in €/MW-year,
+ * recovered from the two directed 500 MW fixed-price ladders by dividing out
+ * 500 MW. These retain the source's known-price AND known-flow coverage mask.
+ * The experimental welfare bound remains separate for scenario evaluation.
  *
  * The Step-1 JSON **does not** ship coordinates, zone names or carbon data, so
  * we supply them from `ENTSOE_ZONES` (static, client-safe). It **does not**
@@ -61,6 +59,7 @@ export type Step1Summary = {
     total_hours: number;
     /** Bounded deadweight-loss estimate (the cap the Step-2 LP enforces). */
     market_opportunity_meur: number;
+    price_spread_eur_mw_year?: number;
     climate_loss_ktco2: number;
     observed_capacity_mw: number | null;
   }>;
@@ -171,6 +170,10 @@ export function summarizeStep1(raw: Step1File): Step1Summary {
       congested_hours: round(congestedHours),
       total_hours: round(totalHours),
       market_opportunity_meur: round2(marketOpportunityMeurYr),
+      price_spread_eur_mw_year: [...months, ...(byBorder.get(`${b}>${a}`) ?? [])].reduce(
+        (sum, row) => sum + ((row.opportunity_meur_year?.["500"] ?? 0) * 1e6) / 500,
+        0,
+      ),
       climate_loss_ktco2: round2(climate),
       observed_capacity_mw: null,
     });

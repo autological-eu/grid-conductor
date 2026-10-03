@@ -16,6 +16,7 @@ import {
 
 import type { TargetRow } from "./EuropeMap";
 import { Button } from "@/components/ui/button";
+import { PriceSpreadDetails } from "./PriceSpreadDetails";
 import { Input } from "@/components/ui/input";
 
 export function TargetSidebar({
@@ -119,8 +120,8 @@ export function TargetSidebar({
         </p>
         <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
           <Stat
-            label="Market opportunity"
-            value={`${target.market_opportunity_meur.toFixed(1)} MEUR/y`}
+            label="Accumulated price spread"
+            value={`${(target.price_spread_eur_mw_year ?? 0).toFixed(0)} €/MW-year`}
           />
           <Stat
             label="Climate proxy (est.)"
@@ -137,6 +138,15 @@ export function TargetSidebar({
             }
           />
         </dl>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Sum of absolute price differences × interval hours, over known price-and-flow intervals in
+          2025. No assumed expansion or price response.
+        </p>
+        <PriceSpreadDetails key={target.id} a={target.zone_a} b={target.zone_b} />
+        <p className="mt-2 text-xs text-muted-foreground">
+          Experimental scenario welfare bound: {target.market_opportunity_meur.toFixed(1)} M€/year
+          (directional model).
+        </p>
       </div>
 
       <div className="border-b border-border p-4">
