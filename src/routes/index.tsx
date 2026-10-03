@@ -196,7 +196,7 @@ function Workbench() {
               type="button"
               aria-label="Hide target panel"
               onClick={() => setSidebarOpen(false)}
-              className="absolute right-3 top-4 lg:-right-3 z-10 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-card text-muted-foreground shadow-sm hover:bg-accent hover:text-foreground"
+              className="absolute right-3 top-4 lg:-right-3 z-10 flex h-11 w-11 items-center lg:h-6 lg:w-6 justify-center rounded-full border border-border bg-card text-muted-foreground shadow-sm hover:bg-accent hover:text-foreground"
             >
               <PanelLeftClose className="h-3.5 w-3.5" />
             </button>
@@ -206,7 +206,7 @@ function Workbench() {
             type="button"
             aria-label="Show target panel"
             onClick={() => setSidebarOpen(true)}
-            className="z-10 mx-auto flex h-8 w-16 shrink-0 lg:mx-0 lg:my-auto lg:h-16 lg:w-5 items-center justify-center rounded-r-md border border-l-0 border-border bg-card text-muted-foreground shadow-sm hover:w-6 hover:bg-accent hover:text-primary"
+            className="z-10 mx-auto flex h-11 w-16 shrink-0 lg:mx-0 lg:my-auto lg:h-16 lg:w-5 items-center justify-center rounded-r-md border border-l-0 border-border bg-card text-muted-foreground shadow-sm hover:w-6 hover:bg-accent hover:text-primary"
           >
             <PanelLeftOpen className="h-3.5 w-3.5" />
           </button>
@@ -247,7 +247,7 @@ function Workbench() {
               type="button"
               aria-label="Hide evaluation panel"
               onClick={() => setEvalOpen(false)}
-              className="absolute right-3 top-4 lg:right-auto lg:-left-3 z-10 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-card text-muted-foreground shadow-sm hover:bg-accent hover:text-foreground"
+              className="absolute right-3 top-4 lg:right-auto lg:-left-3 z-10 flex h-11 w-11 items-center lg:h-6 lg:w-6 justify-center rounded-full border border-border bg-card text-muted-foreground shadow-sm hover:bg-accent hover:text-foreground"
             >
               <PanelRightClose className="h-3.5 w-3.5" />
             </button>
@@ -257,7 +257,7 @@ function Workbench() {
             type="button"
             aria-label="Show evaluation panel"
             onClick={() => setEvalOpen(true)}
-            className="z-10 mx-auto flex h-8 w-16 shrink-0 lg:mx-0 lg:my-auto lg:h-16 lg:w-5 items-center justify-center rounded-l-md border border-r-0 border-border bg-card text-muted-foreground shadow-sm hover:w-6 hover:bg-accent hover:text-primary"
+            className="z-10 mx-auto flex h-11 w-16 shrink-0 lg:mx-0 lg:my-auto lg:h-16 lg:w-5 items-center justify-center rounded-l-md border border-r-0 border-border bg-card text-muted-foreground shadow-sm hover:w-6 hover:bg-accent hover:text-primary"
           >
             <PanelRightOpen className="h-3.5 w-3.5" />
           </button>

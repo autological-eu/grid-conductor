@@ -728,7 +728,7 @@ export function EuropeMap({
         </g>
       </svg>
 
-      <div className="pointer-events-none absolute left-3 top-3 max-w-[22rem] rounded-lg border border-border bg-card/90 px-3 py-2 backdrop-blur">
+      <div className="pointer-events-none absolute left-3 right-16 top-3 max-w-[22rem] rounded-lg border border-border bg-card/90 px-3 py-2 backdrop-blur">
         <h2 className="text-sm font-semibold text-foreground">
           European bidding zones and congested borders
         </h2>
@@ -744,7 +744,7 @@ export function EuropeMap({
           type="button"
           aria-label="Zoom in"
           onClick={() => zoomButton(1.4)}
-          className="h-8 w-8 rounded-md border border-border bg-card/90 text-sm text-foreground backdrop-blur hover:bg-accent"
+          className="h-11 w-11 rounded-md sm:h-8 sm:w-8 border border-border bg-card/90 text-sm text-foreground backdrop-blur hover:bg-accent"
         >
           +
         </button>
@@ -752,7 +752,7 @@ export function EuropeMap({
           type="button"
           aria-label="Zoom out"
           onClick={() => zoomButton(1 / 1.4)}
-          className="h-8 w-8 rounded-md border border-border bg-card/90 text-sm text-foreground backdrop-blur hover:bg-accent"
+          className="h-11 w-11 rounded-md sm:h-8 sm:w-8 border border-border bg-card/90 text-sm text-foreground backdrop-blur hover:bg-accent"
         >
           −
         </button>
@@ -760,7 +760,7 @@ export function EuropeMap({
           type="button"
           aria-label="Reset view"
           onClick={() => animateTo(IDENTITY, 350)}
-          className="h-8 w-8 rounded-md border border-border bg-card/90 text-[10px] text-foreground backdrop-blur hover:bg-accent"
+          className="h-11 w-11 rounded-md sm:h-8 sm:w-8 border border-border bg-card/90 text-[10px] text-foreground backdrop-blur hover:bg-accent"
         >
           Fit
         </button>
@@ -801,7 +801,7 @@ export function EuropeMap({
             {maxLoss > lossCap ? "+" : ""}
           </span>
         </div>
-        <div className="mt-1">Click a border to zoom in on it. Scroll to zoom, drag to pan.</div>
+        <div className="mt-1">Tap a border to select it. Use +/− to zoom; drag to pan.</div>
       </div>
 
       {dropActive && (

@@ -9,8 +9,14 @@ try {
   for (const viewport of [
     { width: 1440, height: 1000 },
     { width: 390, height: 844 },
+    { width: 320, height: 568 },
+    { width: 667, height: 375 },
   ]) {
-    const context = await browser.newContext({ viewport });
+    const context = await browser.newContext({
+      viewport,
+      isMobile: viewport.width < 1024,
+      hasTouch: viewport.width < 1024,
+    });
     const page = await context.newPage();
     const failures: string[] = [];
     page.on("pageerror", (error) => failures.push(error.message));
@@ -55,6 +61,15 @@ try {
     await page.getByRole("button", { name: "Hourly price difference" }).click();
     await page.getByText(/Coverage: 8,759/).waitFor();
     assert.equal(await page.getByRole("dialog").locator("svg[role=img] path").count(), 3);
+    const dialogBox = await page.getByRole("dialog").boundingBox();
+    assert(
+      dialogBox && dialogBox.y >= 0 && dialogBox.y + dialogBox.height <= viewport.height,
+      "Price dialog stays inside the viewport, including landscape",
+    );
+    if (viewport.width < 1024) {
+      const closeBox = await page.getByRole("button", { name: "Close", exact: true }).boundingBox();
+      assert(closeBox && closeBox.y >= 0 && closeBox.y + closeBox.height <= viewport.height);
+    }
     await page.getByRole("combobox", { name: "Price chart period" }).selectOption("0");
     await page.getByText(/Coverage: 744/).waitFor();
     await page.getByRole("button", { name: "Close", exact: true }).click();
