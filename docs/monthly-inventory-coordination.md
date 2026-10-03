@@ -1,5 +1,30 @@
 # Coordinating chronological storage inventories
 
+## Current reference result — 3 October 2026
+
+The two-block 48-hour conditional reference now passes its configured numerical
+gates: **€0.0002267 master/feasible gap** and **€0.007903 difference from native
+monolithic cost**, against pre-existing limits of €0.001 and €0.02 respectively.
+Independent final-inventory re-solves reproduced the total €294,446,869.947464
+objective; maximum original-unit equality residual was 8.09e-9, inequality
+violation 1.85e-12 and variable-bound violation zero.
+
+[Machine-readable reference and independent audit](../public/research/network-benchmark-2025/coordination-reference.json)
+
+The floating-point lower bound is €0.007676 above the native objective. It
+passes the declared parity tolerance, but does **not** exactly enclose that
+known reference: do not describe it as an exact mathematical certificate.
+All figures concern 1–2 January 2025 with fixed initial/final inventories,
+not an annual optimum or seasonal water-value validation. Iteration 738 includes
+checkpoint history; reported resumed-segment time is not total runtime or a
+speed comparison.
+
+The next task is the streamed/resumable annual coordinator and its independent
+audits. The following sections preserve the failed-attempt history and explain
+the numerical corrections. Reproduce the final audit with
+tools/publish_2025_coordination_reference.py after the reference validator.
+
+
 The sequential 2025 monthly run preserves inventory continuity, but each month chooses its ending inventory without optimising future water value. It is a feasible chronological reference, not an annual optimum. The new coordinator addresses that missing optimisation; it remains under validation.
 
 ## Shared boundary states

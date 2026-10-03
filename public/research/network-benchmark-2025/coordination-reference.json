@@ -1,0 +1,46 @@
+{
+  "status": "converged",
+  "objective": 294446869.9474642,
+  "lower_bound": 294446869.94723755,
+  "gap": 0.00022667646408081055,
+  "iterations": 738,
+  "native_monolithic_cost_eur": 294446869.93956167,
+  "difference_eur": 0.007902562618255615,
+  "scope": "48h conditional reference, not annual optimum",
+  "resumed_segment_elapsed_seconds": 12.810887995001394,
+  "schema_version": 1,
+  "reference_parity_status": "passed configured numerical tolerances",
+  "source_sha256": "4887ed184781877a48e7684104c7709aba071f209ea12cfdb3c8d1c101c5ee91",
+  "block_sha256": [
+    "42462af0abcfd2885a8a8297aa6fa82491b24857c5309fac291c5ad1126fdcbf",
+    "3ff6d268a28a8a85d4bdfcf78faaba39c4e2cd46b8dd4c0478c92197b8259902"
+  ],
+  "independent_audit": [
+    {
+      "block": 0,
+      "cost_eur": 117355132.6248015,
+      "max_equality_residual": 8.087226888164878e-09,
+      "max_inequality_violation": 1.8417267710901796e-12,
+      "max_bound_violation": 0.0
+    },
+    {
+      "block": 1,
+      "cost_eur": 177091737.32266274,
+      "max_equality_residual": 1.3292265066411346e-09,
+      "max_inequality_violation": 0.0,
+      "max_bound_violation": 0.0
+    }
+  ],
+  "independent_cost_eur": 294446869.9474642,
+  "lower_bound_minus_native_eur": 0.007675886154174805,
+  "gates": {
+    "absolute_gap_eur": 0.001,
+    "native_parity_eur": 0.02,
+    "original_unit_primal_residual": 1e-07
+  },
+  "limitations": [
+    "48-hour conditional reference only; not an annual optimum",
+    "Reported floating-point lower bound is above native objective within declared parity tolerance; not an exact enclosing certificate",
+    "Prepared fleet remains uncalibrated; nuclear availability uses declared 2024 proxy"
+  ]
+}
