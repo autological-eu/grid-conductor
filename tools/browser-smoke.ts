@@ -24,17 +24,23 @@ try {
         .locator('svg[aria-label="Map of European bidding zones and congested borders"] path')
         .count()) > 20,
     );
+    const corridors = await page
+      .locator("g[data-corridor]")
+      .evaluateAll((elements) => elements.map((element) => element.getAttribute("data-corridor")));
+    assert(corridors.length > 0);
+    assert.equal(new Set(corridors).size, corridors.length);
     if (viewport.width > 1000) {
-      await page.locator('g[aria-label="Select FR to IT-North bottleneck"]').click();
+      await page.locator('g[data-corridor="FR|IT-North"]').click();
     } else {
       await page.getByRole("combobox", { name: "Choose a bottleneck" }).selectOption("FR>IT-North");
     }
+    await page.getByRole("combobox", { name: "Choose a bottleneck" }).selectOption("FR>IT-North");
     await page.getByRole("button", { name: "New", exact: true }).click();
     await page.getByRole("button", { name: "Run scenario" }).waitFor();
     if (viewport.width > 1000) {
       await page
         .getByRole("button", { name: "Transmission line", exact: true })
-        .dragTo(page.locator('g[aria-label="Select FR to IT-North bottleneck"]'));
+        .dragTo(page.locator('g[data-corridor="FR|IT-North"]'));
       await page.waitForFunction(
         () => document.querySelectorAll('[aria-label="Remove unit"]').length === 1,
       );

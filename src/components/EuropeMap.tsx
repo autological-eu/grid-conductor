@@ -620,7 +620,8 @@ export function EuropeMap({
               (dropActive && !candidateB) || (selectedId != null && !isSelected && !dropB);
             return (
               <g
-                key={t.id}
+                key={[t.zone_a, t.zone_b].sort().join("|")}
+                data-corridor={[t.zone_a, t.zone_b].sort().join("|")}
                 role="button"
                 tabIndex={0}
                 aria-label={`Select ${t.zone_a} – ${t.zone_b} corridor, ${corridor.market.toFixed(1)} MEUR/y combined opportunity`}
