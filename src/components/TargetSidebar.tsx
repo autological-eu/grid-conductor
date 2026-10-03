@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { ChevronDown, ChevronRight, Loader2, Play, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { UNIT_LIBRARY, unitDef, unitDrag, type UnitType } from "@/lib/units";
@@ -17,6 +16,7 @@ import {
 
 import type { TargetRow } from "./EuropeMap";
 import { Button } from "@/components/ui/button";
+import { PriceSpreadDetails } from "./PriceSpreadDetails";
 import { Input } from "@/components/ui/input";
 
 export function TargetSidebar({
@@ -29,13 +29,13 @@ export function TargetSidebar({
   onSelectScenario: (id: string | null) => void;
 }) {
   const qc = useQueryClient();
-  const list = useServerFn(listScenarios);
-  const create = useServerFn(createScenario);
-  const remove = useServerFn(deleteScenario);
-  const add = useServerFn(addUnit);
-  const patch = useServerFn(updateUnit);
-  const dropUnit = useServerFn(deleteUnit);
-  const run = useServerFn(runScenario);
+  const list = listScenarios;
+  const create = createScenario;
+  const remove = safely(deleteScenario);
+  const add = addUnit;
+  const patch = safely(updateUnit);
+  const dropUnit = safely(deleteUnit);
+  const run = runScenario;
 
   const [dragOver, setDragOver] = useState<string | null>(null);
   const [open, setOpen] = useState<Record<string, boolean>>({});
@@ -77,6 +77,10 @@ export function TargetSidebar({
   });
 
   async function handleDrop(scenarioId: string, unitType: UnitType) {
+    if (unitType !== "line" && unitType !== "battery") {
+      toast.error("Only lines and batteries are modelled in v1.");
+      return;
+    }
     const def = unitDef(unitType);
     try {
       await add({
@@ -116,12 +120,23 @@ export function TargetSidebar({
         </p>
         <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
           <Stat
-            label="Market opportunity"
-            value={`${target.market_opportunity_meur.toFixed(1)} MEUR/y`}
+            label="Annual congestion rent (floor: 0)"
+            value={
+              target.congestion_rent_meur_year == null
+                ? "Unavailable"
+                : `${Math.max(0, target.congestion_rent_meur_year).toFixed(1)} M€`
+            }
           />
-          <Stat label="Climate loss" value={`${target.climate_loss_ktco2.toFixed(1)} ktCO2/y`} />
           <Stat
-            label="Congested hours"
+            label="Mean absolute price spread"
+            value={
+              target.mean_absolute_spread_eur_mwh == null
+                ? "Unavailable"
+                : `${target.mean_absolute_spread_eur_mwh.toFixed(2)} €/MWh`
+            }
+          />
+          <Stat
+            label="Hours with spread > €5/MWh"
             value={`${target.congested_hours} / ${target.total_hours}`}
           />
           <Stat
@@ -131,19 +146,46 @@ export function TargetSidebar({
             }
           />
         </dl>
+        <p className="mt-2 text-xs text-muted-foreground">
+          2025 observed baseline. Mean absolute spread over covered hours; rent sums scheduled
+          cross-border flow × signed price difference × interval hours in both directions. Negative
+          contributions remain in the calculation; only the displayed annual total is floored at
+          zero. This is a scheduled-exchange value, not verified TSO income. Source uses ENTSO-E
+          scheduled flows, not metered physical flows.
+        </p>
+        <PriceSpreadDetails key={target.id} a={target.zone_a} b={target.zone_b} />
+        <p className="mt-2 text-xs text-muted-foreground">
+          Experimental scenario welfare bound: {target.market_opportunity_meur.toFixed(1)} M€/year
+          (directional model).
+        </p>
       </div>
 
       <div className="border-b border-border p-4">
         <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           Unit library
         </h3>
-        <p className="mb-2 text-xs text-muted-foreground">Drag an icon onto the map.</p>
+        <p className="mb-2 text-xs text-muted-foreground">
+          Drag onto the map, or click to add to the selected scenario.
+        </p>
         <div className="flex flex-wrap gap-2">
-          {UNIT_LIBRARY.map((u) => {
+          {UNIT_LIBRARY.filter((u) => u.type === "line" || u.type === "battery").map((u) => {
             const Icon = unitIcon(u.type);
             return (
               <div
                 key={u.type}
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                  if (selectedScenarioId) void handleDrop(selectedScenarioId, u.type);
+                  else toast.info("Create or select a scenario first.");
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    if (selectedScenarioId) void handleDrop(selectedScenarioId, u.type);
+                    else toast.info("Create or select a scenario first.");
+                  }
+                }}
                 draggable
                 onDragStart={(e) => {
                   e.dataTransfer.setData("text/unit", u.type);
@@ -178,6 +220,15 @@ export function TargetSidebar({
       </div>
 
       <div className="flex-1 space-y-2 overflow-y-auto p-4">
+        {scenarios.isError && (
+          <p role="alert" className="text-xs text-destructive">
+            {scenarios.error.message}
+          </p>
+        )}
+        <p className="text-xs text-muted-foreground">
+          Saved locally in this browser. Editing interventions clears previous results. Only lines
+          and batteries are modelled in v1.
+        </p>
         {(scenarios.data ?? [])
           .filter((s) => !s.is_template)
           .map((s) => {
@@ -355,4 +406,15 @@ function Stat({ label, value }: { label: string; value: string }) {
       <dd className="text-xs font-semibold">{value}</dd>
     </div>
   );
+}
+
+function safely<T, R>(action: (input: T) => Promise<R>) {
+  return async (input: T) => {
+    try {
+      return await action(input);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Could not update browser storage");
+      return undefined;
+    }
+  };
 }

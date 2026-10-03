@@ -1,0 +1,1081 @@
+{
+  "status": "exploratory_partial_supply_stack_not_calibrated",
+  "timestamp_utc": "2025-01-01T18:00:00Z",
+  "duration_hours": 1,
+  "native_input_sha256": "4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec",
+  "countries": [
+    {
+      "country": "PL",
+      "observed_load_mw": 17537.425,
+      "prepared_load_mw": 17537.430740356445,
+      "observed_generation_by_group_mw": {
+        "Run-of-river": 140.05,
+        "Biomass": 181.20000000000002,
+        "Lignite": 1872.325,
+        "Hard coal": 4949.325000000001,
+        "Other": 1050.2250000000001,
+        "Gas": 1850.275,
+        "Reservoir hydro": 154.675,
+        "Pumped storage": 246.5,
+        "Wind": 8845.175000000001,
+        "Solar": 0.0
+      },
+      "prepared_available_by_group_mw": {
+        "Gas": 6702.0,
+        "Biomass": 678.0,
+        "Hard coal": 13098.5,
+        "Lignite": 8193.0,
+        "Other": 16.0,
+        "Wind": 9241.914991792373,
+        "Solar": 0.0,
+        "Run-of-river": 108.33550884391886
+      },
+      "excluded_storage_power_by_carrier_mw": {
+        "PHS": 1875.0,
+        "hydro": 163.50636942675158
+      },
+      "null_observed_series": [],
+      "observed_hourly_series_mw": {
+        "Hydro pumped storage consumption": -3.75,
+        "Cross border electricity trading": -1760.0,
+        "Hydro Run-of-River": 140.05,
+        "Biomass": 181.20000000000002,
+        "Fossil brown coal / lignite": 1872.325,
+        "Fossil hard coal": 4949.325000000001,
+        "Fossil oil": 200.52500000000003,
+        "Fossil coal-derived gas": 168.925,
+        "Fossil gas": 1850.275,
+        "Hydro water reservoir": 154.675,
+        "Hydro pumped storage": 246.5,
+        "Others": 625.2750000000001,
+        "Other renewables": 55.5,
+        "Wind onshore": 8845.175000000001,
+        "Solar": 0.0,
+        "Load": 17537.425,
+        "Residual load": 8692.275,
+        "Renewable share of load": 53.45,
+        "Renewable share of generation": 49.25
+      },
+      "observation_interval_seconds": 900,
+      "observation_url": "https://api.energy-charts.info/public_power?country=pl&start=2025-01-01&end=2025-01-02",
+      "observation_sha256": "45d8cf88b7ba93c42988e4c3b9bfd7dc0a2de998b60cba1cdd870e15761e8446",
+      "scenarios": [
+        {
+          "additional_carbon_eur_t": 0,
+          "partial_stack_threshold_eur_mwh": 26.067353932584272,
+          "available_generator_mw": 38037.75050063629,
+          "blocks": [
+            {
+              "id": "PL2 1AC ror",
+              "technology": "ror",
+              "available_mw": 3.935185432101699,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "PL2 3AC ror",
+              "technology": "ror",
+              "available_mw": 3.2123962711034273,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "PL2 4AC ror",
+              "technology": "ror",
+              "available_mw": 101.18792714071374,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "PL2 0AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 1028.8000457950068,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "PL2 1AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 1359.7798644179527,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "PL2 2AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 3565.0999999999985,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "PL2 3AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 432.0829129647527,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "PL2 4AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 2257.999999999999,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "PL2 5AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 598.1521686146639,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "PL2 0AC biomass",
+              "technology": "biomass",
+              "available_mw": 92.0,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "PL2 2AC biomass",
+              "technology": "biomass",
+              "available_mw": 68.0,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "PL2 3AC biomass",
+              "technology": "biomass",
+              "available_mw": 225.0,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "PL2 4AC biomass",
+              "technology": "biomass",
+              "available_mw": 188.0,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "PL2 5AC biomass",
+              "technology": "biomass",
+              "available_mw": 105.0,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "PL2 0AC coal",
+              "technology": "coal",
+              "available_mw": 4096.0,
+              "cost_eur_mwh": 26.06735393258427,
+              "co2_t_mwh": 0.9441011235955057,
+              "scenario_cost_eur_mwh": 26.06735393258427
+            },
+            {
+              "id": "PL2 3AC coal",
+              "technology": "coal",
+              "available_mw": 222.0,
+              "cost_eur_mwh": 26.06735393258427,
+              "co2_t_mwh": 0.9441011235955057,
+              "scenario_cost_eur_mwh": 26.06735393258427
+            },
+            {
+              "id": "PL2 4AC coal",
+              "technology": "coal",
+              "available_mw": 663.0,
+              "cost_eur_mwh": 26.06735393258427,
+              "co2_t_mwh": 0.9441011235955058,
+              "scenario_cost_eur_mwh": 26.06735393258427
+            },
+            {
+              "id": "PL2 1AC coal",
+              "technology": "coal",
+              "available_mw": 263.0,
+              "cost_eur_mwh": 26.067353932584272,
+              "co2_t_mwh": 0.9441011235955057,
+              "scenario_cost_eur_mwh": 26.067353932584272
+            },
+            {
+              "id": "PL2 2AC coal",
+              "technology": "coal",
+              "available_mw": 134.0,
+              "cost_eur_mwh": 26.067353932584272,
+              "co2_t_mwh": 0.9441011235955057,
+              "scenario_cost_eur_mwh": 26.067353932584272
+            },
+            {
+              "id": "PL2 5AC coal",
+              "technology": "coal",
+              "available_mw": 7720.5,
+              "cost_eur_mwh": 26.067353932584272,
+              "co2_t_mwh": 0.9441011235955057,
+              "scenario_cost_eur_mwh": 26.067353932584272
+            },
+            {
+              "id": "PL2 0AC lignite",
+              "technology": "lignite",
+              "available_mw": 1075.0,
+              "cost_eur_mwh": 28.168075757575757,
+              "co2_t_mwh": 1.233030303030303,
+              "scenario_cost_eur_mwh": 28.168075757575757
+            },
+            {
+              "id": "PL2 4AC lignite",
+              "technology": "lignite",
+              "available_mw": 1718.0,
+              "cost_eur_mwh": 28.168075757575757,
+              "co2_t_mwh": 1.233030303030303,
+              "scenario_cost_eur_mwh": 28.168075757575757
+            },
+            {
+              "id": "PL2 5AC lignite",
+              "technology": "lignite",
+              "available_mw": 5400.0,
+              "cost_eur_mwh": 28.168075757575757,
+              "co2_t_mwh": 1.233030303030303,
+              "scenario_cost_eur_mwh": 28.168075757575757
+            },
+            {
+              "id": "PL2 4AC waste",
+              "technology": "waste",
+              "available_mw": 16.0,
+              "cost_eur_mwh": 35.9309,
+              "co2_t_mwh": 1.2535348610433934,
+              "scenario_cost_eur_mwh": 35.9309
+            },
+            {
+              "id": "PL2 0AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 1284.5,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 81.00768421052632
+            },
+            {
+              "id": "PL2 1AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 468.5,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.34736842105263155,
+              "scenario_cost_eur_mwh": 81.00768421052632
+            },
+            {
+              "id": "PL2 2AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 1789.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 81.00768421052632
+            },
+            {
+              "id": "PL2 3AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 951.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 81.00768421052632
+            },
+            {
+              "id": "PL2 4AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 1818.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 81.00768421052632
+            },
+            {
+              "id": "PL2 5AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 391.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 81.00768421052632
+            }
+          ]
+        },
+        {
+          "additional_carbon_eur_t": 80,
+          "partial_stack_threshold_eur_mwh": 101.59544382022472,
+          "available_generator_mw": 38037.75050063629,
+          "blocks": [
+            {
+              "id": "PL2 1AC ror",
+              "technology": "ror",
+              "available_mw": 3.935185432101699,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "PL2 3AC ror",
+              "technology": "ror",
+              "available_mw": 3.2123962711034273,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "PL2 4AC ror",
+              "technology": "ror",
+              "available_mw": 101.18792714071374,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "PL2 0AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 1028.8000457950068,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "PL2 1AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 1359.7798644179527,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "PL2 2AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 3565.0999999999985,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "PL2 3AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 432.0829129647527,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "PL2 4AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 2257.999999999999,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "PL2 5AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 598.1521686146639,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "PL2 0AC biomass",
+              "technology": "biomass",
+              "available_mw": 92.0,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "PL2 2AC biomass",
+              "technology": "biomass",
+              "available_mw": 68.0,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "PL2 3AC biomass",
+              "technology": "biomass",
+              "available_mw": 225.0,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "PL2 4AC biomass",
+              "technology": "biomass",
+              "available_mw": 188.0,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "PL2 5AC biomass",
+              "technology": "biomass",
+              "available_mw": 105.0,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "PL2 0AC coal",
+              "technology": "coal",
+              "available_mw": 4096.0,
+              "cost_eur_mwh": 26.06735393258427,
+              "co2_t_mwh": 0.9441011235955057,
+              "scenario_cost_eur_mwh": 101.59544382022472
+            },
+            {
+              "id": "PL2 1AC coal",
+              "technology": "coal",
+              "available_mw": 263.0,
+              "cost_eur_mwh": 26.067353932584272,
+              "co2_t_mwh": 0.9441011235955057,
+              "scenario_cost_eur_mwh": 101.59544382022472
+            },
+            {
+              "id": "PL2 2AC coal",
+              "technology": "coal",
+              "available_mw": 134.0,
+              "cost_eur_mwh": 26.067353932584272,
+              "co2_t_mwh": 0.9441011235955057,
+              "scenario_cost_eur_mwh": 101.59544382022472
+            },
+            {
+              "id": "PL2 3AC coal",
+              "technology": "coal",
+              "available_mw": 222.0,
+              "cost_eur_mwh": 26.06735393258427,
+              "co2_t_mwh": 0.9441011235955057,
+              "scenario_cost_eur_mwh": 101.59544382022472
+            },
+            {
+              "id": "PL2 5AC coal",
+              "technology": "coal",
+              "available_mw": 7720.5,
+              "cost_eur_mwh": 26.067353932584272,
+              "co2_t_mwh": 0.9441011235955057,
+              "scenario_cost_eur_mwh": 101.59544382022472
+            },
+            {
+              "id": "PL2 4AC coal",
+              "technology": "coal",
+              "available_mw": 663.0,
+              "cost_eur_mwh": 26.06735393258427,
+              "co2_t_mwh": 0.9441011235955058,
+              "scenario_cost_eur_mwh": 101.59544382022473
+            },
+            {
+              "id": "PL2 0AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 1284.5,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 108.79715789473684
+            },
+            {
+              "id": "PL2 1AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 468.5,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.34736842105263155,
+              "scenario_cost_eur_mwh": 108.79715789473684
+            },
+            {
+              "id": "PL2 2AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 1789.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 108.79715789473684
+            },
+            {
+              "id": "PL2 3AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 951.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 108.79715789473684
+            },
+            {
+              "id": "PL2 4AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 1818.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 108.79715789473684
+            },
+            {
+              "id": "PL2 5AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 391.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 108.79715789473684
+            },
+            {
+              "id": "PL2 0AC lignite",
+              "technology": "lignite",
+              "available_mw": 1075.0,
+              "cost_eur_mwh": 28.168075757575757,
+              "co2_t_mwh": 1.233030303030303,
+              "scenario_cost_eur_mwh": 126.81049999999999
+            },
+            {
+              "id": "PL2 4AC lignite",
+              "technology": "lignite",
+              "available_mw": 1718.0,
+              "cost_eur_mwh": 28.168075757575757,
+              "co2_t_mwh": 1.233030303030303,
+              "scenario_cost_eur_mwh": 126.81049999999999
+            },
+            {
+              "id": "PL2 5AC lignite",
+              "technology": "lignite",
+              "available_mw": 5400.0,
+              "cost_eur_mwh": 28.168075757575757,
+              "co2_t_mwh": 1.233030303030303,
+              "scenario_cost_eur_mwh": 126.81049999999999
+            },
+            {
+              "id": "PL2 4AC waste",
+              "technology": "waste",
+              "available_mw": 16.0,
+              "cost_eur_mwh": 35.9309,
+              "co2_t_mwh": 1.2535348610433934,
+              "scenario_cost_eur_mwh": 136.21368888347146
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "country": "SE",
+      "observed_load_mw": 17797.0,
+      "prepared_load_mw": 17797.000045776367,
+      "observed_generation_by_group_mw": {
+        "Nuclear": 5822.0,
+        "Gas": 0.7,
+        "Reservoir hydro": 9659.9,
+        "Other": 603.0,
+        "Wind": 7716.5,
+        "Solar": 0.9
+      },
+      "prepared_available_by_group_mw": {
+        "Biomass": 3185.6,
+        "Nuclear": 5833.408,
+        "Other": 3561.1,
+        "Gas": 790.0,
+        "Wind": 5823.345959390169,
+        "Solar": 0.0,
+        "Run-of-river": 1001.557219972618
+      },
+      "excluded_storage_power_by_carrier_mw": {
+        "PHS": 91.0,
+        "hydro": 12304.362323032172
+      },
+      "null_observed_series": [],
+      "observed_hourly_series_mw": {
+        "Cross border electricity trading": -5973.5,
+        "Nuclear": 5822.0,
+        "Fossil gas": 0.7,
+        "Hydro water reservoir": 9659.9,
+        "Others": 603.0,
+        "Wind onshore": 7716.5,
+        "Solar": 0.9,
+        "Load": 17797.0,
+        "Residual load": 10079.5,
+        "Renewable share of load": 97.6,
+        "Renewable share of generation": 73.0
+      },
+      "observation_interval_seconds": 3600,
+      "observation_url": "https://api.energy-charts.info/public_power?country=se&start=2025-01-01&end=2025-01-02",
+      "observation_sha256": "744ce5dd448edf2604ccef174dcb953501e4a686fe3a779c97fde41ea5b26941",
+      "scenarios": [
+        {
+          "additional_carbon_eur_t": 0,
+          "partial_stack_threshold_eur_mwh": 130.87422857142857,
+          "available_generator_mw": 20195.011179362788,
+          "blocks": [
+            {
+              "id": "SE0 0AC ror",
+              "technology": "ror",
+              "available_mw": 27.032583535023424,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "SE0 1AC ror",
+              "technology": "ror",
+              "available_mw": 182.46993886140814,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "SE0 2AC ror",
+              "technology": "ror",
+              "available_mw": 120.29499673085424,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "SE0 3AC ror",
+              "technology": "ror",
+              "available_mw": 671.7597008453322,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "SE0 0AC 0 offwind-ac",
+              "technology": "offwind-ac",
+              "available_mw": 35.05358891076255,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 4AC 0 offwind-ac",
+              "technology": "offwind-ac",
+              "available_mw": 91.35202262523585,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 0AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 851.1071885247902,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 1AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 794.7391103971381,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 2AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 373.6433318292245,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 3AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 2078.9624165704595,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 4AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 1598.488300532558,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 4AC biomass",
+              "technology": "biomass",
+              "available_mw": 328.1,
+              "cost_eur_mwh": 19.979914529914524,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914524
+            },
+            {
+              "id": "SE0 0AC biomass",
+              "technology": "biomass",
+              "available_mw": 1792.5,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "SE0 1AC biomass",
+              "technology": "biomass",
+              "available_mw": 158.0,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "SE0 2AC biomass",
+              "technology": "biomass",
+              "available_mw": 438.2,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "SE0 3AC biomass",
+              "technology": "biomass",
+              "available_mw": 468.8,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "SE0 0AC nuclear",
+              "technology": "nuclear",
+              "available_mw": 3975.552,
+              "cost_eur_mwh": 27.322803680981593,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 27.322803680981593
+            },
+            {
+              "id": "SE0 2AC nuclear",
+              "technology": "nuclear",
+              "available_mw": 1857.8560000000002,
+              "cost_eur_mwh": 27.322803680981593,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 27.322803680981593
+            },
+            {
+              "id": "SE0 0AC waste",
+              "technology": "waste",
+              "available_mw": 277.5,
+              "cost_eur_mwh": 35.9309,
+              "co2_t_mwh": 1.2535348610433934,
+              "scenario_cost_eur_mwh": 35.9309
+            },
+            {
+              "id": "SE0 2AC waste",
+              "technology": "waste",
+              "available_mw": 42.0,
+              "cost_eur_mwh": 35.9309,
+              "co2_t_mwh": 1.2535348610433934,
+              "scenario_cost_eur_mwh": 35.9309
+            },
+            {
+              "id": "SE0 3AC waste",
+              "technology": "waste",
+              "available_mw": 77.0,
+              "cost_eur_mwh": 35.9309,
+              "co2_t_mwh": 1.2535348610433934,
+              "scenario_cost_eur_mwh": 35.9309
+            },
+            {
+              "id": "SE0 4AC waste",
+              "technology": "waste",
+              "available_mw": 55.6,
+              "cost_eur_mwh": 35.9309,
+              "co2_t_mwh": 1.2535348610433934,
+              "scenario_cost_eur_mwh": 35.9309
+            },
+            {
+              "id": "SE0 1AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 100.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 81.00768421052632
+            },
+            {
+              "id": "SE0 2AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 250.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 81.00768421052632
+            },
+            {
+              "id": "SE0 4AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 440.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 81.00768421052632
+            },
+            {
+              "id": "SE0 2AC oil",
+              "technology": "oil",
+              "available_mw": 1317.0,
+              "cost_eur_mwh": 130.87422857142857,
+              "co2_t_mwh": 0.7345714285714287,
+              "scenario_cost_eur_mwh": 130.87422857142857
+            },
+            {
+              "id": "SE0 4AC oil",
+              "technology": "oil",
+              "available_mw": 1110.0,
+              "cost_eur_mwh": 130.87422857142857,
+              "co2_t_mwh": 0.7345714285714287,
+              "scenario_cost_eur_mwh": 130.87422857142857
+            },
+            {
+              "id": "SE0 0AC oil",
+              "technology": "oil",
+              "available_mw": 682.0,
+              "cost_eur_mwh": 130.8742285714286,
+              "co2_t_mwh": 0.7345714285714287,
+              "scenario_cost_eur_mwh": 130.8742285714286
+            }
+          ]
+        },
+        {
+          "additional_carbon_eur_t": 80,
+          "partial_stack_threshold_eur_mwh": 189.63994285714287,
+          "available_generator_mw": 20195.011179362784,
+          "blocks": [
+            {
+              "id": "SE0 0AC ror",
+              "technology": "ror",
+              "available_mw": 27.032583535023424,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "SE0 1AC ror",
+              "technology": "ror",
+              "available_mw": 182.46993886140814,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "SE0 2AC ror",
+              "technology": "ror",
+              "available_mw": 120.29499673085424,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "SE0 3AC ror",
+              "technology": "ror",
+              "available_mw": 671.7597008453322,
+              "cost_eur_mwh": 0.0,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.0
+            },
+            {
+              "id": "SE0 0AC 0 offwind-ac",
+              "technology": "offwind-ac",
+              "available_mw": 35.05358891076255,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 4AC 0 offwind-ac",
+              "technology": "offwind-ac",
+              "available_mw": 91.35202262523585,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 0AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 851.1071885247902,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 1AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 794.7391103971381,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 2AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 373.6433318292245,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 3AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 2078.9624165704595,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 4AC 0 onwind",
+              "technology": "onwind",
+              "available_mw": 1598.488300532558,
+              "cost_eur_mwh": 0.015,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 0.015
+            },
+            {
+              "id": "SE0 4AC biomass",
+              "technology": "biomass",
+              "available_mw": 328.1,
+              "cost_eur_mwh": 19.979914529914524,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914524
+            },
+            {
+              "id": "SE0 0AC biomass",
+              "technology": "biomass",
+              "available_mw": 1792.5,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "SE0 1AC biomass",
+              "technology": "biomass",
+              "available_mw": 158.0,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "SE0 2AC biomass",
+              "technology": "biomass",
+              "available_mw": 438.2,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "SE0 3AC biomass",
+              "technology": "biomass",
+              "available_mw": 468.8,
+              "cost_eur_mwh": 19.979914529914527,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 19.979914529914527
+            },
+            {
+              "id": "SE0 0AC nuclear",
+              "technology": "nuclear",
+              "available_mw": 3975.552,
+              "cost_eur_mwh": 27.322803680981593,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 27.322803680981593
+            },
+            {
+              "id": "SE0 2AC nuclear",
+              "technology": "nuclear",
+              "available_mw": 1857.8560000000002,
+              "cost_eur_mwh": 27.322803680981593,
+              "co2_t_mwh": 0.0,
+              "scenario_cost_eur_mwh": 27.322803680981593
+            },
+            {
+              "id": "SE0 1AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 100.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 108.79715789473684
+            },
+            {
+              "id": "SE0 2AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 250.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 108.79715789473684
+            },
+            {
+              "id": "SE0 4AC CCGT",
+              "technology": "CCGT",
+              "available_mw": 440.0,
+              "cost_eur_mwh": 81.00768421052632,
+              "co2_t_mwh": 0.3473684210526316,
+              "scenario_cost_eur_mwh": 108.79715789473684
+            },
+            {
+              "id": "SE0 0AC waste",
+              "technology": "waste",
+              "available_mw": 277.5,
+              "cost_eur_mwh": 35.9309,
+              "co2_t_mwh": 1.2535348610433934,
+              "scenario_cost_eur_mwh": 136.21368888347146
+            },
+            {
+              "id": "SE0 2AC waste",
+              "technology": "waste",
+              "available_mw": 42.0,
+              "cost_eur_mwh": 35.9309,
+              "co2_t_mwh": 1.2535348610433934,
+              "scenario_cost_eur_mwh": 136.21368888347146
+            },
+            {
+              "id": "SE0 3AC waste",
+              "technology": "waste",
+              "available_mw": 77.0,
+              "cost_eur_mwh": 35.9309,
+              "co2_t_mwh": 1.2535348610433934,
+              "scenario_cost_eur_mwh": 136.21368888347146
+            },
+            {
+              "id": "SE0 4AC waste",
+              "technology": "waste",
+              "available_mw": 55.6,
+              "cost_eur_mwh": 35.9309,
+              "co2_t_mwh": 1.2535348610433934,
+              "scenario_cost_eur_mwh": 136.21368888347146
+            },
+            {
+              "id": "SE0 2AC oil",
+              "technology": "oil",
+              "available_mw": 1317.0,
+              "cost_eur_mwh": 130.87422857142857,
+              "co2_t_mwh": 0.7345714285714287,
+              "scenario_cost_eur_mwh": 189.63994285714287
+            },
+            {
+              "id": "SE0 4AC oil",
+              "technology": "oil",
+              "available_mw": 1110.0,
+              "cost_eur_mwh": 130.87422857142857,
+              "co2_t_mwh": 0.7345714285714287,
+              "scenario_cost_eur_mwh": 189.63994285714287
+            },
+            {
+              "id": "SE0 0AC oil",
+              "technology": "oil",
+              "available_mw": 682.0,
+              "cost_eur_mwh": 130.8742285714286,
+              "co2_t_mwh": 0.7345714285714287,
+              "scenario_cost_eur_mwh": 189.6399428571429
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "observed_pl_price_eur_mwh": 39.38,
+  "price_source_url": "https://api.energy-charts.info/price?bzn=PL&start=2025-01-01&end=2025-01-02",
+  "price_source_sha256": "20235ac13a4fda9052cadc46a0a7b1c5be0eac83e5327c48f285bb5cbf98d3f5",
+  "price_license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de",
+  "attribution": "Fraunhofer ISE Energy-Charts API; prepared PyPSA-Eur v2026.08.0 inputs",
+  "limitations": [
+    "A New Year holiday hour is not representative of a full year.",
+    "Public net generation, prepared generation availability and prepared load can have different scopes.",
+    "Reservoir hydro and pumped storage excluded from supply curve; need inventory and opportunity costs.",
+    "Sweden is a national aggregate, not SE4; there is no single Swedish bidding-zone price.",
+    "No exchanges, internal network, commitment/minimum output, CHP heat obligations or bid markups.",
+    "2024 nuclear availability proxy and uncalibrated fleet; no inferred causal demand elasticity.",
+    "Carbon increments are scenarios, not observed hourly allowance prices."
+  ]
+}

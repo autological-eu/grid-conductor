@@ -1,94 +1,68 @@
-<!-- LOVABLE:BEGIN -->
-
-> [!IMPORTANT]
-> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
-> published git history — force pushing, or rebasing/amending/squashing commits
-> that are already pushed — as it rewrites history on Lovable's side and the
-> user will likely lose their project history.
->
-> Commits you push to the connected branch sync back to Lovable and show up in
-> the editor, so keep the branch in a working state.
-
-<!-- LOVABLE:END -->
-
 # Grid Conductor — agent notes
 
-EU cross-border arbitrage / investment simulator. TanStack Start (React 19) app
-with a local SQLite scenario store (Supabase was removed), driven by the fast
-ENTSO-E screening pipeline, with a PyPSA-Eur power-system model as the data
-backend. See **`refactor.md`** for the plan to remove the Electricity Maps
-API dependency and complete the PyPSA-Eur integration.
+Experimental European electricity-grid investment workbench. Public v1 is a
+static browser app on GitHub Pages. Keep the interactive map at `/`; research
+publications live at `/docs`, evidence at `/targets`.
 
-## Stack & architecture
+## Project requirements and priorities
 
-- **Package manager is `bun`** (`bun.lock`, `bunfig.toml` exist; README's `npm`/`node` text is stale Lovable boilerplate). `bunfig.toml` enforces a 24h minimum-release-age supply-chain guard; don't add bypasses to `minimumReleaseAgeExcludes` without confirming with the user.
-- File-based routing under `src/routes/` (TanStack file routes — no `pages/`). `src/routes/routeTree.gen.ts` is **auto-generated and changes on dev/build**; don't hand-edit it.
-- `vite.config.ts` must **not** re-add TanStackStart/viteReact/tailwind plugins — `@lovable.dev/vite-tanstack-config` already wires them and duplicates break the build. Only pass extra config through `defineConfig`.
-- Bundled server entry is redirected to `src/server.ts` (SSR error wrapper; h3 swallows in-handler throws into JSON 500s that never reach try/catch, and the wrapper re-renders the error page). `src/start.ts` re-adds CSRF for server fns manually — defining `start.ts` opts out of auto-install.
-- Build target is Nitro → Cloudflare/Wrangler. `.output/`, `.wrangler/`, `.vinxi/`, `.tanstack/` are gitignored artifacts; deploy concerns the Nitro output only. **The local SQLite scenario store does not exist in a Workers build** (no bun built-ins / filesystem) — see the Workbench scenario store section.
-- UI is shadcn/ui (new-york style, lucide icons) from `components.json`; Tailwind v4 via `src/styles.css`.
-- `tsconfig.json` turns on extra-strict flags beyond `strict: true`: `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, `noPropertyAccessFromIndexSignature`. Don't pass explicit `undefined` for optional props, and treat index access as `| undefined` (narrow before use).
+Read `PRODUCT.md` for requirements and `TASKS.md` for the current ordered backlog.
+`README.md` is the project entry point. Historical proposals in
+`planning/archive/` are not current architecture or verification evidence.
+Update task status with concrete verification, not job-start or build success.
 
-## Commands
+## Architecture and commands
 
-```sh
-bun install           # use bun, not npm
-bun run dev           # vite dev
-bun run build         # vite build (build:dev for dev mode)
-bun run preview
-bun run lint          # eslint . (not type-aware)
-bun run format        # prettier --write  (printWidth 100, double quotes)
-bunx tsc --noEmit     # typecheck — there is NO typecheck script; run this
-```
-
-- The app has **no test suite**. Verification = `lint` + `bunx tsc --noEmit` + manual dev run.
-- Python research tools have their own tests (see below).
-
-## Workbench scenario store (local SQLite)
-
-- **Supabase is gone.** Scenario CRUD, results and model validation persist in a
-  local SQLite database via `src/lib/workbench.server.ts` (bun built-in
-  `bun:sqlite`; tables mirror the old Supabase schema 1:1: `scenarios` /
-  `scenario_units` / `scenario_results` / `model_validation`).
-- Default path `data/workbench/scenarios.db` (gitignored), override with
-  `WORKBENCH_DB_PATH`. `created_at` columns are stored for stable ordering;
-  JSON columns (`params`, `metrics`, indicators, ...) are TEXT, parsed on read.
-- Server fns (`src/lib/scenarios.functions.ts`) dynamic-import `workbench.server`
-  inside each handler — keep that indirection (same rule as any `.server.ts`
-  module). `runScenario` snapshots `zone_a`/`zone_b`/`period_start`/`period_end`
-  onto the scenario at creation so runs never need external lookups.
-- `bun:sqlite` exists only in the bun runtime, so the store works under
-  `bun run dev` only. A Cloudflare/Wrangler build has no filesystem or bun
-  built-ins; if that deploy target is ever needed, slot a KV/D1 adapter behind
-  this same module boundary.
-- `@types/bun` is a devDependency so `bun:sqlite` typechecks under
-  `bunx tsc --noEmit`. Don't add `"bun"` to `tsconfig.json` `types` (that leaks
-  bun globals into client code — module resolution works without listing it).
-- Server-only modules use the `.server.ts` suffix convention. eslint
-  `no-restricted-imports` errors on the Next.js `server-only` package — use
-  `.server.ts` or `@tanstack/react-start/server-only` instead.
-- Remaining env: `ENTSOE_API_KEY` (`src/lib/entsoe.server.ts`,
-  `entsoe-flows.server.ts`), `ELECTRICITY_MAPS_API_KEY` (`emaps.server.ts`,
-  legacy, being removed). `.env` is tracked by git (Lovable boilerplate) but
-  holds no secrets; never commit real keys.
-
-## Data pipeline & scheduled refresh
-
-- **Removed.** The Electricity Maps import pipeline (`import.server.ts`,
-  `daily-refresh.ts`, `import.functions.ts`) and the Supabase schema it wrote to
-  are deleted. The workbench now reads the Step-1 screening artifact
-  `public/research/entsoe-fast-targets.json` directly (see the screening ladder
-  section below).
-- Next step (refactor.md Phase 4): swap the Step-1 source to PyPSA-Eur baseline
-  static JSON in `public/research/baseline/` once the Python chain builds it.
+- Use Bun 1.4.2 and `bun.lock`. Install reproducibly with `bun install --frozen-lockfile`.
+  `bunfig.toml` retains the 24-hour minimum release age; do not add bypasses
+  without user approval.
+- Vite explicitly configures React 19, TanStack Router generation/code splitting,
+  Tailwind v4, native tsconfig paths and the `/grid-conductor/` base. No Lovable,
+  TanStack Start, SSR, Nitro, Cloudflare or persistent frontend server is needed.
+- Routes are file-based under `src/routes/`; `src/routeTree.gen.ts` is generated.
+  `src/routes/__root.tsx` provides QueryClientProvider, HeadContent and Outlet.
+- Use `publicAsset()` from `src/lib/research.ts` for every static fetch/link.
+  `tools/prepare-pages.ts` creates direct-route HTML entries for Pages; update it
+  if adding a new non-publication route. Publications are `docs/*.md` and use
+  `/docs/$slug`. Preserve original publications and machine-readable provenance.
+- Scenario services in `scenarios.functions.ts` are ordinary async browser
+  functions with Zod validation. Persistence is isolated in `workbench.ts`:
+  IndexedDB version 1, scenarios containing ordered units and results, separate
+  latest data-availability diagnostic. IDs are UUIDs; target IDs remain directed
+  border strings. Edits invalidate results; revision checks reject stale solves.
+  No local SQLite migration, login, API keys or cloud database is required.
+- Step-1 uses published schema-v3 annual screening JSON. Step-2 lives in
+  `src/lib/fast-entsoe-lp.ts`, imported on evaluation. Keep exact cable trapezoid
+  welfare, battery javascript-lp-solver, finite-difference shadow-price re-solves,
+  annual quarter-hour sums and DWL caps. Do not silently change methodology.
+  HiGHS 1.15.3 now works in Bun and the browser worker for the separate network
+  lab; do not replace this existing screening solver or change its methodology.
+- Only line/battery interventions are exposed in v1. Geographic placement must
+  belong to the selected zones/corridor; it is not detailed spatial dispatch.
+- Screening data availability is NOT model validation. Preserve failed/blocked
+  pilot gates. Climate numbers are unsigned average-mix proxies, not proven
+  avoided emissions. The 25-year benefit-minus-capex result is undiscounted,
+  despite the legacy `npv_25y_meur` storage key. Do not imply dispatch-grade results.
+- UI: shadcn/ui + Tailwind v4. Preserve strict TypeScript flags including
+  exactOptionalPropertyTypes/noUncheckedIndexedAccess. Narrow indexed values.
+- Commands: `bun run dev`, `bun run lint`, `bun run typecheck`, `bun run test`,
+  `bun run build`, `bun run preview`. Local URL includes `/grid-conductor/`.
+- Targeted Bun tests use fake-indexeddb. Verify browser interaction and production
+  asset paths as well as lint/typecheck/test/build. Never claim unperformed checks.
+- Work on `public-v1` until review; do not merge main automatically, force-push,
+  rewrite published history or change repository visibility. Pages deployment is
+  via `.github/workflows/pages.yml`; repository Pages source must be GitHub Actions
+  and the github-pages environment must allow the deployment branch.
+- Never commit `.env` secrets, API keys or ignored cache/large generated outputs.
+  Offline credential-backed collection stays in Python tools, outside `src/`.
 
 ## Python research tools (`tools/`, standalone)
 
-- **PyPSA-Eur groundwork is in progress.** See `refactor.md` (phases 0–3) for the
+- **PyPSA-Eur groundwork is in progress.** See `TASKS.md` and `docs/fast-network-model-plan.md` for the
   build/extract/targets chain. Toolchain (all WSL-pixi aware):
   - `tools/build_pypsa_network.py` — Snakemake orchestrator. `--config
 config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,
-    `--cutout-only`. Runs pixi inside WSL distro `Ubuntu` (override with
+    `--cutout-only`. Runs pixi directly on Linux, or inside WSL distro `Ubuntu` (override with
     `GRID_CONDUCTOR_WSL`); auto-detects when already inside WSL. Validates the
     solved network (no extendable assets, hourly weights, nonzero load) and
     writes `data/pypsa-eur/baseline-manifest.json` (format consumed by
@@ -100,20 +74,20 @@ config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,
     manifest fields `start`/`end_exclusive`/`network_sha256`/`upstream_commit`/
     `assumptions`/`sources`, which the build tool now produces.
   - Pinned upstream v2026.08.0 sits in `data/pypsa-eur/upstream` (commit
-    `a5408e9`); pixi env via `data/pypsa-eur/bin/pixi`, run through WSL. ERA5
-    cutout uses the CDS key in the WSL `~/.cdsapirc`, window limited to periods
+    `a5408e9`); pixi env via `data/pypsa-eur/bin/pixi`. ERA5
+    cutout uses ignored `data/pypsa-eur/.cdsapirc` on cloud Linux, or `~/.cdsapirc`, window limited to periods
     with available weather.
   - **Local upstream patch:** `rules/build_electricity.smk` `build_cutout`
     output uses `Path(CUTOUT_DATASET["folder"]) / ...` — upstream only tests the
     `archive` cutout source and its `build` path broke on str/Path division.
   - Production config is full year (2025, 128 clusters); `test-month.yaml` solves
-    March 2025 only for RAM-limited machines and uses a March-only cutout
-    download (~1/12 disk size). Full-year weather now has a separate filename
+    March 2025 only for RAM-limited machines but annual resource weighting still requires all twelve months of weather. Full-year weather now has a separate filename
     `europe-2025-compact`: atlite loads an existing file without extending its
     time range. Check actual timestamps before every solve.
   - `tools/patch_pypsa_demand.py` records a narrow upstream fix: demand completeness
     is checked after selecting/reindexing the requested window, not across unused
     archive years. Remaining gaps still fail with per-country missing-hour counts.
+  - `tools/patch_pypsa_availability.py` repairs the upstream intended last-column fallback for missing availability years. The nuclear table ends in 2024: explicitly record 2024 country-level nuclear availability as a proxy in the 2025 rebuild, never as observed 2025 hourly outages.
   - Low-disk weather: `tools/monthly_weather.py` supervises one month at a time,
     verifies conversion outputs before deleting owned raw batches, and guards
     against 10 GiB growth. See `docs/monthly-weather.md`. The compact atlite
@@ -136,53 +110,16 @@ config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,
 - Data and large runs live under gitignored dirs — never commit them: `data/carbon-pilot/`, `data/eu-market/`, `data/jao/`, `data/pypsa-eur/`, `data/workbench/`.
 - Research context lives in `docs/*.md` and `public/research/`; `src/routes/targets.tsx` renders the target-evidence report page.
 
-## Fast ENTSO-E screening ladder (`tools/fast_entsoe_screening.py` + live Step-2 LP)
+## Fast ENTSO-E screening research
 
-- Docs: `docs/fast-entsoe-screening.md`. Two steps: (1) cached border screening
-  (`fast_entsoe_screening.py`, numpy, reads `data/eu-market/bank-*-v2.json`
-  schema_v2) → publishes `public/research/entsoe-fast-targets.json` (realized
-  rent, opportunity ladder ΔC∈{500,1000} MW, congested quarters, avg positive
-  spread, price-response `slope_a`/`slope_b` + `slope_mode`/`slope_raw_*` +
-  `base_qty_mw` + `deadweight_loss_meur_*`, directed rows `a>b` and `b>a`);
-  (2) **live** 2-node LP per candidate
-  border in `src/lib/fast-entsoe-lp.server.ts` + route
-  `src/routes/api/public/fast-entsoe-lp.ts` (GET, public).
-- Slope is **strictly positive** on every congested directed row: a positive OLS
-  fit is kept (`slope_mode="fit"`); a ≤0/null fit falls back to a data-grounded
-  floor (`slope_mode="floor"` = `spread/(2*base_qty_mw)`). `base_qty_mw` is
-  direction-independent: the max over the two directed capacities (first finite
-  cap sample else median |flow| else median nonzero |flow|), so a one-way
-  border's reverse direction inherits the pair's capacity instead of being sized
-  to zero (which made every scenario on it return exactly 0.0). The published
-  `deadweight_loss_meur_*` (0.25 h·congested_quarters·spread²/(2·slope)/1e6) is
-  the border's **market opportunity** — the map's headline figure and the cap
-  the Step-2 LP enforces, so no scenario (line, battery, co_opt) can claim more
-  than the DWL even at absurd ΔC. Step-1 drops directions with no DWL (their
-  opportunity lives entirely under the 5 EUR/MWh congestion threshold), so the
-  map only renders borders the model can actually claim.
-- Step-1 publishes **annual** M€ figures for the calendar-year concat (quarter-
-  hour sums already carry the 0.25 h factor; single-bank fields keep the
-  `_meur_month` suffix, annual rows use `_meur_year` and are full-year sums, no
-  ×12). Default run is `--year 2025` (all `bank-2025-*-v2.json`); Step-2 reads
-  the annual row directly and compares annual welfare against capex.
-- Step-2 cables use the **exact trapezoid closed form** (`spread·q − ½·slope·q²`
-  with `q=min(ΔC, spread/slope)`, M€/yr = ·0.25h·congested_quarters), not the
-  block LP — the 10-block discretization produced artifacts for huge ΔC
-  (200,000 MW returned ~200× the 1,000-MW value before the cap). jsLPSolver is
-  still the battery engine.
-- Step-2 solver is **`javascript-lp-solver`** (pure-JS simplex; solved under
-  bun). Do **not** swap in the `highs` npm package — its HiGHS-wasm glue fails
-  to import under bun 1.4 (`Export named 'Highs' not found`). Bank coverage:
-  all 12 months of 2025 are cached and screened; rerunning Step 1 with `--year`
-  extends the ladder to any year with `data/eu-market/bank-*-v2.json`.
-- Shadow price (dual) is recovered by finite-difference **re-solve** (jsLPSolver
-  exposes no tableau duals); the model is a block-linearized mean-spread reduced
-  form — treat results as screening rankings, not dispatch-grade valuation.
-
-## Gotchas
-
-- Keep the LOVABLE block above intact and keep pushed branches in a working state.
-- Prettier config: `printWidth 100`, double quotes, trailing commas — matches the base `eslint-plugin-prettier` setup.
+Read `docs/fast-entsoe-screening.md` before changing calculations. Step 1
+(`tools/fast_entsoe_screening.py`) publishes full-calendar-year targets and
+monthly diagnostics. Slope floors, direction-independent base exchange and
+positive-DWL filtering are deliberate. Annual sums already include 0.25 h;
+never multiply by twelve. Cable gains saturate at DWL even for enormous capacity;
+batteries and co-optimized gains are also capped. Results are mean-spread
+reduced-form rankings, not calibrated hourly valuations. Carbon/flow-tracing
+research retains its separate integration gates.
 
 ## European research pipeline
 
@@ -198,3 +135,69 @@ config/pypsa-eur/<x>.yaml` (default `full-year.yaml`), `--dry-run`,
 - `audit_jao_sample.py` validates one Core hour against four published net positions and retains LTA, nominations, bilateral and allocation restrictions separately.
 - `market_model.py` supports generic flow_based_regions (PTDF times zonal net export <= RAM). Do not supply internal bilateral edges for the same region. This solver extension does not yet reconstruct JAO virtual-hub or LTA coupling.
 - A successful network sample must not bypass ENTSO-E quantity/geography gates or mark the full market baseline validated.
+
+## Experimental fast network lab
+
+- `/network`, `src/lib/network-model/`: strict input schema, sparse HiGHS/WASM
+  lossless dispatch, cancellable worker, cached baseline and reusable native basis.
+- Match `tools/market_model.py` semantics; exact hourly decomposition only when
+  there is no storage, energy budget or ramp coupling. Never reset linked inventories
+  daily or extrapolate a partial year. Reject unsupported physics/oversized models.
+- Separate IndexedDB workspace; source hashes are declarations, not validation.
+  Emissions need complete factors. Flag shortages and simultaneous storage cycling.
+- Annual research input remains unexported: solved NetCDF/manifest are absent.
+  Existing dispatch CSVs must never become generation availability. Preserve gates.
+- Methods: `docs/fast-network-model.md`; remaining phases in the implementation
+  plan. `bun tools/network-browser-smoke.ts` checks the production worker and WASM;
+  `bun tools/benchmark_fast_network.ts` uses synthetic structural cases only.
+- Python reference regeneration: `python3 tools/check_fast_network_reference.py`.
+  Inspect changes to committed analytical fixtures rather than blindly accepting them.
+
+- Public weekly real-data benchmark: `public/research/network-benchmark/`, prepared
+  Zenodo 7646728 37-bus network. 2013 weather/load, 2020 renewable estimates, 2030
+  source costs, zero carbon price; never relabel as the missing 2025 run or SE4.
+  See `docs/network-benchmark-comparison.md` for matched inputs and reproduction.
+- Schema v3 adds explicit finite positive AC reactances and Kirchhoff cycle constraints; the browser uses a cycle basis and Python uses independent node-angle equations. HVDC stays controllable. Keep thermal relief at fixed impedance separate from new parallel-circuit construction. Do not combine AC branches with regional PTDF constraints without a defined coupling model.
+- Schema v2 explicitly supports reservoir inflow, spill bounded by inflow,
+  asymmetric charging, standing loss and cyclic initial/final inventory. Schema v1
+  rejects those fields. New battery interventions remain empty at both boundaries.
+  Preserve paired chronology and signed emissions, including increases.
+
+- Climate robustness study: `docs/network-carbon-sensitivity.md`, four assumed
+  carbon prices with a separate paired baseline at each price. Effective cost is
+  archived cost + assumed price × direct generation intensity. Never add carbon
+  benefit twice or treat allowance price as an automatic social damage value.
+  Reproduce with `tools/carbon_network_sensitivity.py`, then
+  `bun tools/check_carbon_sensitivity.ts`, then the Python publication tool.
+
+## Inventory coordination validation
+
+- `tools/storage_coordinator.py` coordinates continuous LP blocks using Benders
+  objective cuts and separate Phase-I feasibility cuts. Bounds are explicit;
+  iteration limits are not convergence certificates. A warm feasible boundary
+  state provides an upper bound, never bypasses optimisation.
+- `tools/pypsa_storage_blocks.py` preserves native Linopy coefficients and maps
+  chronological StorageUnit boundaries. Stores, ramps, commitment, expansion and
+  annual energy/global budgets are unsupported and must not disappear silently.
+- `tools/validate_2025_coordination.py` runs the two-block 48h conditional reference;
+  progress is `data/pypsa-eur/benchmark-2025-window/coordination-reference.json`.
+  Check the live process before interpreting `running`. The warm start uses the
+  saved January sequential state, not the monolithic optimal boundary.
+- Tests: pinned Pixi Python, `-m unittest discover -s tools -p 'test_*storage*.py'`.
+  See `docs/monthly-inventory-coordination.md`. The yearly streamed/resumable
+  coordinator remains unfinished; do not claim a certified annual optimum.
+
+## Observed Stage-1 map and price charts
+
+- The map's primary baseline metric is signed annual congestion rent (M€/year),
+  summing both directed scheduled exchanges × signed price difference × hours.
+  Mean absolute price spread (€/MWh) is secondary. Neither is investment welfare.
+  Source exchanges are scheduled, not metered physical flows. Preserve signed research values; floor only the displayed annual total at zero and label it congestion rent, with an explanation that scheduled-flow × price-spread estimates are not verified TSO income.
+- Static hourly price arrays and source/coverage manifest live under
+  `public/research/zone-prices-2025/`. The sidebar shows two price lines, shaded
+  separation, UTC month/year selection and missing-hour coverage. Gaps are not filled.
+- `tools/publish_zone_price_traces.py` permits only openly licensed Energy-Charts
+  zones. Other provider zones explicitly prohibit public republication; do not
+  publish their cached raw or derived values. Use `publish_entsoe_zone_prices.py`
+  with offline `ENTSOE_API_KEY` for remaining zones. Raw caches/credentials stay
+  ignored under `data/price-trace/`; public provenance excludes security tokens.

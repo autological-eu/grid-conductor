@@ -68,6 +68,13 @@ def validate(data):
         if e['a'] not in zones or e['b'] not in zones or e['a']==e['b']:raise ValueError('Invalid edge')
         vector(e['ab_mw']);vector(e['ba_mw'])
     if len(ids)!=len(set(ids)):raise ValueError('Duplicate edge IDs')
+    ac=data.get('ac_branches')
+    if ac is not None:
+        if data.get('schema_version')!=3 or not ac or data.get('flow_based_regions'):raise ValueError('AC branches require schema v3 without regional PTDF')
+        if len({b['edge_id'] for b in ac})!=len(ac):raise ValueError('Duplicate AC branches')
+        edge_ids={e['id'] for e in data['edges']}
+        if any(b['edge_id'] not in edge_ids or not math.isfinite(b['reactance']) or b['reactance']<=0 for b in ac):raise ValueError('Invalid AC branch')
+    elif data.get('schema_version')==3:raise ValueError('Schema v3 requires AC branches')
     regional_zones=set();region_ids=set()
     for region in data.get('flow_based_regions',[]):
         members=set(region['zones'])
@@ -93,6 +100,11 @@ def validate(data):
         for k in ['power_mw','energy_mwh','initial_mwh','terminal_mwh','throughput_cost_eur_mwh']:
             if not math.isfinite(s[k]) or s[k]<0:raise ValueError('Invalid storage parameter')
         if max(s['initial_mwh'],s['terminal_mwh'])>s['energy_mwh']:raise ValueError('Invalid inventory')
+        if 'inflow_mw' in s:vector(s['inflow_mw'])
+        if 'charge_power_mw' in s and (not math.isfinite(s['charge_power_mw']) or s['charge_power_mw']<0):raise ValueError('Invalid charging power')
+        if not 0<=s.get('standing_loss',0)<1:raise ValueError('Invalid standing losses')
+        if s.get('cyclic') and (s['initial_mwh'] or s['terminal_mwh']):raise ValueError('Cyclic storage cannot fix boundary inventory')
+        if data.get('schema_version',1)==1 and any(k in s for k in ['charge_power_mw','inflow_mw','standing_loss','cyclic']):raise ValueError('Reservoir features require schema v2')
         if not 0<s['charge_efficiency']<=1 or not 0<s['discharge_efficiency']<=1:raise ValueError('Invalid efficiency')
     if len(ids)!=len(set(ids)):raise ValueError('Duplicate storage IDs')
     if not math.isfinite(data['unserved_cost_eur_mwh']) or data['unserved_cost_eur_mwh']<=0:raise ValueError('Invalid shortage penalty')
@@ -118,10 +130,22 @@ def dispatch(data):
             var(('spill',z,t),0,0,None,t)
     for s in data.get('storage',[]):
         for t in range(H):
-            for kind in ['charge','discharge']:var((kind,s['id'],t),s['throughput_cost_eur_mwh']*dt,0,s['power_mw'],t)
+            for kind in ['charge','discharge']:var((kind,s['id'],t),s['throughput_cost_eur_mwh']*dt,0,s.get('charge_power_mw',s['power_mw']) if kind=='charge' else s['power_mw'],t)
+            if 'inflow_mw' in s:var(('water_spill',s['id'],t),0,0,s['inflow_mw'][t],t)
         for t in range(H+1):
-            fixed=s['initial_mwh'] if t==0 else s['terminal_mwh'] if t==H else None
+            fixed=None if s.get('cyclic') else s['initial_mwh'] if t==0 else s['terminal_mwh'] if t==H else None
             var(('soc',s['id'],t),0,fixed if fixed is not None else 0,fixed if fixed is not None else s['energy_mwh'])
+    # Independent angle formulation: equivalent physics to browser cycle rows.
+    ac_edges={e['id']:e for e in data['edges'] if e['id'] in {b['edge_id'] for b in data.get('ac_branches',[])}}
+    ac_nodes={z for e in ac_edges.values() for z in [e['a'],e['b']]}
+    parents={z:z for z in ac_nodes}
+    def root(z):
+        while parents[z]!=z:z=parents[z]
+        return z
+    for e in ac_edges.values():parents[root(e['a'])]=root(e['b'])
+    anchors={root(z) for z in ac_nodes}
+    for z in sorted(ac_nodes):
+        for t in range(H):var(('angle',z,t),0,0 if z in anchors else None,0 if z in anchors else None,t)
     equations=[];rhs=[];inequalities=[];limits=[]
     for z in zones:
         for t in range(H):
@@ -144,10 +168,18 @@ def dispatch(data):
             network_rows.append((len(inequalities),region['id'],restriction['id'],t))
             inequalities.append({ix['np',z,t]:v for z,v in restriction['ptdf'].items()})
             limits.append(restriction['ram_mw'])
+    for branch in data.get('ac_branches',[]):
+        e=ac_edges[branch['edge_id']]
+        for t in range(H):
+            equations.append({ix['f',e['id'],t]:branch['reactance'],ix['angle',e['a'],t]:-1,ix['angle',e['b'],t]:1});rhs.append(0)
     for s in data.get('storage',[]):
         for t in range(H):
-            equations.append({ix['soc',s['id'],t+1]:1,ix['soc',s['id'],t]:-1,
-                ix['charge',s['id'],t]:-dt*s['charge_efficiency'],ix['discharge',s['id'],t]:dt/s['discharge_efficiency']});rhs.append(0)
+            row={ix['soc',s['id'],t+1]:1,ix['soc',s['id'],t]:-(1-s.get('standing_loss',0))**dt,
+                ix['charge',s['id'],t]:-dt*s['charge_efficiency'],ix['discharge',s['id'],t]:dt/s['discharge_efficiency']}
+            if 'inflow_mw' in s:row[ix['water_spill',s['id'],t]]=dt
+            equations.append(row);rhs.append(dt*s.get('inflow_mw',[0]*H)[t])
+        if s.get('cyclic'):
+            equations.append({ix['soc',s['id'],0]:1,ix['soc',s['id'],H]:-1});rhs.append(0)
     for g in data['generators']:
         if 'energy_budget_mwh' in g:
             inequalities.append({ix['g',g['id'],t]:dt for t in range(H)});limits.append(g['energy_budget_mwh'])
@@ -175,7 +207,7 @@ def dispatch(data):
         costs=hourly_cost[t]
         generation={g['id']:float(result.x[ix['g',g['id'],t]]) for g in data['generators']}
         storage={s['id']:dict(charge_mw=float(result.x[ix['charge',s['id'],t]]),discharge_mw=float(result.x[ix['discharge',s['id'],t]]),
-            start_mwh=float(result.x[ix['soc',s['id'],t]]),end_mwh=float(result.x[ix['soc',s['id'],t+1]])) for s in data.get('storage',[])}
+            start_mwh=float(result.x[ix['soc',s['id'],t]]),end_mwh=float(result.x[ix['soc',s['id'],t+1]]),spill_mw=float(result.x[ix['water_spill',s['id'],t]]) if 'inflow_mw' in s else 0) for s in data.get('storage',[])}
         co2_t=sum(float(result.x[ix['g',g['id'],t]])*g['co2_t_per_mwh']*dt for g in co2_gens)
         rows.append(dict(start=stamp,cost_eur=float(costs),generation_mw=generation,
             price_eur_mwh={z:float(result.eqlin.marginals[j*H+t]/dt) for j,z in enumerate(zones)},
@@ -209,7 +241,7 @@ def experiment(data,edge_id,additional_mw):
         pairs=[(r['price_eur_mwh'][z],v) for r,v in zip(baseline['hourly'],prices) if v is not None]
         validation[z]=dict(matched_hours=len(pairs),price_mae_eur_mwh=sum(abs(a-b) for a,b in pairs)/len(pairs) if pairs else None)
     co2_change_t=baseline['total_co2_t']-scenario['total_co2_t'] if baseline['total_co2_t'] is not None and scenario['total_co2_t'] is not None else None
-    return dict(version=VERSION,input_sha256=hashlib.sha256(json.dumps(data,sort_keys=True).encode()).hexdigest(),
+    return dict(version=f"linked-dispatch-v{data.get('schema_version',1)}",input_sha256=hashlib.sha256(json.dumps(data,sort_keys=True).encode()).hexdigest(),
         status='experimental_not_validated',annual_opportunity_meur=None,period_opportunity_meur=gain/1e6,
         interval_count=len(data['timestamps']),interval_hours=data['interval_hours'],
         constraint_patch=dict(edge=edge_id,both_directions_added_mw=additional_mw),

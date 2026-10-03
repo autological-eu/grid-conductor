@@ -1,0 +1,10 @@
+{
+  "parent_input_file_sha256": "7f2ba384a65a58bd26e7241cf46128b47cf52c6cddbdf842be380e032b261cdf",
+  "input_file_sha256": "d29cc60600283187942a85cbe7adbc016dd352ee5f3e439748892bfd248a184e",
+  "ac_branches": 51,
+  "omitted_zero_capacity_edges": [
+    "ac:3"
+  ],
+  "physics": "linearised lossless AC (DC power flow) with controllable HVDC",
+  "status": "experimental_not_historically_validated"
+}

@@ -1,0 +1,421 @@
+{
+  "year": 2025,
+  "manifest_sha256": "eb693b2e5c5a546e3aaeaf345dec9bb738f543150711f77165dd4223e000239f",
+  "zones": 39,
+  "corridors": 68,
+  "minimum_joint_hours": 8758,
+  "coverage": [
+    {
+      "zone_a": "AL",
+      "zone_b": "GR",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "AT",
+      "zone_b": "CH",
+      "known_hours": 8758,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "AT",
+      "zone_b": "CZ",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "AT",
+      "zone_b": "DE-LU",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "AT",
+      "zone_b": "HU",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "AT",
+      "zone_b": "IT-North",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "AT",
+      "zone_b": "SI",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "BE",
+      "zone_b": "DE-LU",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "BE",
+      "zone_b": "FR",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "BE",
+      "zone_b": "NL",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "BG",
+      "zone_b": "GR",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "BG",
+      "zone_b": "MK",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "BG",
+      "zone_b": "RO",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "BG",
+      "zone_b": "RS",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "CH",
+      "zone_b": "DE-LU",
+      "known_hours": 8758,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "CH",
+      "zone_b": "FR",
+      "known_hours": 8758,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "CH",
+      "zone_b": "IT-North",
+      "known_hours": 8758,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "CZ",
+      "zone_b": "DE-LU",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "CZ",
+      "zone_b": "PL",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "CZ",
+      "zone_b": "SK",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "DE-LU",
+      "zone_b": "DK1",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "DE-LU",
+      "zone_b": "DK2",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "DE-LU",
+      "zone_b": "FR",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "DE-LU",
+      "zone_b": "NL",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "DE-LU",
+      "zone_b": "NO2",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "DE-LU",
+      "zone_b": "PL",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "DE-LU",
+      "zone_b": "SE4",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "DK1",
+      "zone_b": "DK2",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "DK1",
+      "zone_b": "NL",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "DK1",
+      "zone_b": "NO2",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "DK1",
+      "zone_b": "SE3",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "DK2",
+      "zone_b": "SE4",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "EE",
+      "zone_b": "FI",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "EE",
+      "zone_b": "LV",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "ES",
+      "zone_b": "FR",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "ES",
+      "zone_b": "PT",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "FI",
+      "zone_b": "NO4",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "FI",
+      "zone_b": "SE1",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "FI",
+      "zone_b": "SE3",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "FR",
+      "zone_b": "IT-North",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "GR",
+      "zone_b": "IT-SUD",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "GR",
+      "zone_b": "MK",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "HR",
+      "zone_b": "HU",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "HR",
+      "zone_b": "RS",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "HR",
+      "zone_b": "SI",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "HU",
+      "zone_b": "RO",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "HU",
+      "zone_b": "RS",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "HU",
+      "zone_b": "SI",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "HU",
+      "zone_b": "SK",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "IT-CNOR",
+      "zone_b": "IT-CSUD",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "IT-CNOR",
+      "zone_b": "IT-North",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "IT-CSUD",
+      "zone_b": "IT-SARD",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "IT-CSUD",
+      "zone_b": "IT-SUD",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "IT-North",
+      "zone_b": "SI",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "LT",
+      "zone_b": "LV",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "LT",
+      "zone_b": "PL",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "LT",
+      "zone_b": "SE4",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "NL",
+      "zone_b": "NO2",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "NO1",
+      "zone_b": "SE3",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "NO3",
+      "zone_b": "SE2",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "NO4",
+      "zone_b": "SE1",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "NO4",
+      "zone_b": "SE2",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "PL",
+      "zone_b": "SE4",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "PL",
+      "zone_b": "SK",
+      "known_hours": 8759,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "RO",
+      "zone_b": "RS",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "SE1",
+      "zone_b": "SE2",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "SE2",
+      "zone_b": "SE3",
+      "known_hours": 8760,
+      "total_hours": 8760
+    },
+    {
+      "zone_a": "SE3",
+      "zone_b": "SE4",
+      "known_hours": 8759,
+      "total_hours": 8760
+    }
+  ],
+  "limitations": [
+    "Hourly means require all four quarter-hour prices.",
+    "Known-hour coverage is not validation of network congestion or investment benefit."
+  ]
+}

@@ -1,4 +1,4 @@
-# Single-month test run for Grid Conductor — validates the full pipeline within ~8 GB RAM.
+# Single-month test run for Grid Conductor — bounds chronology for a measured resource trial; RAM fit is not yet established.
 # The compact wind/solar/temperature cutout covers all of 2025 (published by the monthly
 # weather pipeline). A second smaller cutout covers all of 2025 for the RUNOFF feature only,
 # because atlite's hydro profile normalization (build_hydro_profile) requires a full

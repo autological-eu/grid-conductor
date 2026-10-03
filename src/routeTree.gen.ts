@@ -11,9 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocsRouteImport } from './routes/docs'
+import { Route as NetworkRouteImport } from './routes/network'
 import { Route as TargetsRouteImport } from './routes/targets'
-import { Route as ApiPublicEntsoeFastSummaryRouteImport } from './routes/api/public/entsoe-fast-summary'
-import { Route as ApiPublicFastEntsoeLpRouteImport } from './routes/api/public/fast-entsoe-lp'
+import { Route as DocsSlugRouteImport } from './routes/docs.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -25,75 +25,57 @@ const DocsRoute = DocsRouteImport.update({
   path: '/docs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NetworkRoute = NetworkRouteImport.update({
+  id: '/network',
+  path: '/network',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TargetsRoute = TargetsRouteImport.update({
   id: '/targets',
   path: '/targets',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicEntsoeFastSummaryRoute =
-  ApiPublicEntsoeFastSummaryRouteImport.update({
-    id: '/api/public/entsoe-fast-summary',
-    path: '/api/public/entsoe-fast-summary',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiPublicFastEntsoeLpRoute = ApiPublicFastEntsoeLpRouteImport.update({
-  id: '/api/public/fast-entsoe-lp',
-  path: '/api/public/fast-entsoe-lp',
-  getParentRoute: () => rootRouteImport,
+const DocsSlugRoute = DocsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => DocsRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/docs': typeof DocsRoute
+  '/docs': typeof DocsRouteWithChildren
+  '/network': typeof NetworkRoute
   '/targets': typeof TargetsRoute
-  '/api/public/entsoe-fast-summary': typeof ApiPublicEntsoeFastSummaryRoute
-  '/api/public/fast-entsoe-lp': typeof ApiPublicFastEntsoeLpRoute
+  '/docs/$slug': typeof DocsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/docs': typeof DocsRoute
+  '/docs': typeof DocsRouteWithChildren
+  '/network': typeof NetworkRoute
   '/targets': typeof TargetsRoute
-  '/api/public/entsoe-fast-summary': typeof ApiPublicEntsoeFastSummaryRoute
-  '/api/public/fast-entsoe-lp': typeof ApiPublicFastEntsoeLpRoute
+  '/docs/$slug': typeof DocsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/docs': typeof DocsRoute
+  '/docs': typeof DocsRouteWithChildren
+  '/network': typeof NetworkRoute
   '/targets': typeof TargetsRoute
-  '/api/public/entsoe-fast-summary': typeof ApiPublicEntsoeFastSummaryRoute
-  '/api/public/fast-entsoe-lp': typeof ApiPublicFastEntsoeLpRoute
+  '/docs/$slug': typeof DocsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/docs'
-    | '/targets'
-    | '/api/public/entsoe-fast-summary'
-    | '/api/public/fast-entsoe-lp'
+  fullPaths: '/' | '/docs' | '/network' | '/targets' | '/docs/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/docs'
-    | '/targets'
-    | '/api/public/entsoe-fast-summary'
-    | '/api/public/fast-entsoe-lp'
-  id:
-    | '__root__'
-    | '/'
-    | '/docs'
-    | '/targets'
-    | '/api/public/entsoe-fast-summary'
-    | '/api/public/fast-entsoe-lp'
+  to: '/' | '/docs' | '/network' | '/targets' | '/docs/$slug'
+  id: '__root__' | '/' | '/docs' | '/network' | '/targets' | '/docs/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DocsRoute: typeof DocsRoute
+  DocsRoute: typeof DocsRouteWithChildren
+  NetworkRoute: typeof NetworkRoute
   TargetsRoute: typeof TargetsRoute
-  ApiPublicEntsoeFastSummaryRoute: typeof ApiPublicEntsoeFastSummaryRoute
-  ApiPublicFastEntsoeLpRoute: typeof ApiPublicFastEntsoeLpRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -112,6 +94,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/network': {
+      id: '/network'
+      path: '/network'
+      fullPath: '/network'
+      preLoaderRoute: typeof NetworkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/targets': {
       id: '/targets'
       path: '/targets'
@@ -119,40 +108,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TargetsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/entsoe-fast-summary': {
-      id: '/api/public/entsoe-fast-summary'
-      path: '/api/public/entsoe-fast-summary'
-      fullPath: '/api/public/entsoe-fast-summary'
-      preLoaderRoute: typeof ApiPublicEntsoeFastSummaryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/fast-entsoe-lp': {
-      id: '/api/public/fast-entsoe-lp'
-      path: '/api/public/fast-entsoe-lp'
-      fullPath: '/api/public/fast-entsoe-lp'
-      preLoaderRoute: typeof ApiPublicFastEntsoeLpRouteImport
-      parentRoute: typeof rootRouteImport
+    '/docs/$slug': {
+      id: '/docs/$slug'
+      path: '/$slug'
+      fullPath: '/docs/$slug'
+      preLoaderRoute: typeof DocsSlugRouteImport
+      parentRoute: typeof DocsRoute
     }
   }
 }
 
+interface DocsRouteChildren {
+  DocsSlugRoute: typeof DocsSlugRoute
+}
+
+const DocsRouteChildren: DocsRouteChildren = {
+  DocsSlugRoute: DocsSlugRoute,
+}
+
+const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DocsRoute: DocsRoute,
+  DocsRoute: DocsRouteWithChildren,
+  NetworkRoute: NetworkRoute,
   TargetsRoute: TargetsRoute,
-  ApiPublicEntsoeFastSummaryRoute: ApiPublicEntsoeFastSummaryRoute,
-  ApiPublicFastEntsoeLpRoute: ApiPublicFastEntsoeLpRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

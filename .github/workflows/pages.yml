@@ -1,0 +1,80 @@
+name: Public v1 — verify and deploy Pages
+
+on:
+  push:
+    branches: [public-v1, main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.event_name == 'pull_request' && github.ref || 'production' }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - run: bun install --frozen-lockfile
+      - run: bun run lint
+      - run: bun run typecheck
+      - run: bun run test
+      - name: Verify static hourly coverage for every map corridor
+        run: python3 tools/check_zone_price_traces.py
+      - run: bun run build
+      - name: Install Chromium for interaction checks
+        run: bunx playwright install --with-deps chromium
+      - name: Verify the production static site in Chromium
+        env:
+          SMOKE_URL: http://127.0.0.1:4180/grid-conductor/
+        run: |
+          mkdir -p /tmp/grid-conductor-preview
+          ln -s "$GITHUB_WORKSPACE/dist" /tmp/grid-conductor-preview/grid-conductor
+          python3 -m http.server 4180 --bind 127.0.0.1 --directory /tmp/grid-conductor-preview > /tmp/grid-conductor-preview.log 2>&1 &
+          for attempt in {1..30}; do
+            if curl --silent --fail "$SMOKE_URL" > /dev/null; then break; fi
+            sleep 1
+          done
+          bun run test:browser
+          bun tools/network-browser-smoke.ts
+      - uses: actions/upload-pages-artifact@v5
+        if: github.event_name != 'pull_request'
+        with:
+          path: dist
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy static application
+        id: deployment
+        uses: actions/deploy-pages@v5
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - name: Prepare live-site browser verification
+        run: |
+          bun install --frozen-lockfile
+          bunx playwright install --with-deps chromium
+      - name: Verify the deployed public workbench and research
+        env:
+          SMOKE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          bun run test:browser
+          bun tools/network-browser-smoke.ts

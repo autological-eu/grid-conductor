@@ -31,6 +31,9 @@ export type TargetRow = {
   /** Bounded deadweight-loss estimate of the directed border (MEUR/y) — the
    * cap every scenario outcome is clamped to. */
   market_opportunity_meur: number;
+  price_spread_eur_mw_year?: number;
+  mean_absolute_spread_eur_mwh?: number | null;
+  congestion_rent_meur_year?: number | null;
   climate_loss_ktco2: number;
   observed_capacity_mw: number | null;
 };
@@ -84,7 +87,9 @@ const ISO_FALLBACK: Record<string, string> = {
   Kosovo: "XK",
 };
 
-const countryOf = (zoneCode: string) => zoneCode.split("-")[0]!;
+// Bidding zones include both numeric (SE4, NO2) and hyphenated (IT-North)
+// suffixes. Country polygons use two-letter ISO codes.
+const countryOf = (zoneCode: string) => zoneCode.slice(0, 2);
 
 type View = { k: number; x: number; y: number };
 const IDENTITY: View = { k: 1, x: 0, y: 0 };
@@ -176,8 +181,14 @@ export function EuropeMap({
   const toViewBox = useCallback((clientX: number, clientY: number) => {
     const el = svgRef.current;
     if (!el) return { x: 0, y: 0 };
-    const r = el.getBoundingClientRect();
-    return { x: ((clientX - r.left) / r.width) * W, y: ((clientY - r.top) / r.height) * H };
+    const matrix = el.getScreenCTM();
+    if (!matrix) return { x: 0, y: 0 };
+    // Invert the SVG viewport transform, including aspect-ratio letterboxing.
+    // Bounding-box ratios misplace drops on narrow or tall maps.
+    const point = el.createSVGPoint();
+    point.x = clientX;
+    point.y = clientY;
+    return point.matrixTransform(matrix.inverse());
   }, []);
 
   const stopAnim = () => {
@@ -262,9 +273,10 @@ export function EuropeMap({
     if (!d) return;
     const el = svgRef.current;
     if (!el) return;
-    const r = el.getBoundingClientRect();
-    const dx = ((e.clientX - d.x) / r.width) * W;
-    const dy = ((e.clientY - d.y) / r.height) * H;
+    const previous = toViewBox(d.x, d.y);
+    const current = toViewBox(e.clientX, e.clientY);
+    const dx = current.x - previous.x;
+    const dy = current.y - previous.y;
     if (!d.moved && Math.abs(e.clientX - d.x) + Math.abs(e.clientY - d.y) > 3) {
       // capture only once this is a real drag, so plain clicks still reach the borders
       d.moved = true;
@@ -448,15 +460,33 @@ export function EuropeMap({
     zoomAt(W / 2, H / 2, factor);
   };
 
+  const corridors = useMemo(() => {
+    const grouped = new Map<string, TargetRow[]>();
+    for (const target of targets) {
+      const key = [target.zone_a, target.zone_b].sort().join("|");
+      const members = grouped.get(key) ?? [];
+      members.push(target);
+      grouped.set(key, members);
+    }
+    return [...grouped.values()].map((members) => ({
+      members,
+      target:
+        members.find((target) => target.id === selectedId) ??
+        [...members].sort((a, b) => b.market_opportunity_meur - a.market_opportunity_meur)[0]!,
+      market: Math.max(0, ...members.map((target) => target.congestion_rent_meur_year ?? 0)),
+      climate: members.reduce((sum, target) => sum + target.climate_loss_ktco2, 0),
+    }));
+  }, [targets, selectedId]);
+
   /** market opportunity full-red point: the 90th percentile of the positive
    * values (a fixed cap burned most borders fully red; a quantile keeps the
    * scale sensitive to the bulk of candidates while the legend shows the max). */
   const maxLoss = Math.max(
     1,
-    ...targets.map((t) => (metric === "market" ? t.market_opportunity_meur : t.climate_loss_ktco2)),
+    ...corridors.map((corridor) => (metric === "market" ? corridor.market : corridor.climate)),
   );
-  const positive = targets
-    .map((t) => (metric === "market" ? t.market_opportunity_meur : t.climate_loss_ktco2))
+  const positive = corridors
+    .map((corridor) => (metric === "market" ? corridor.market : corridor.climate))
     .filter((v) => v > 0)
     .sort((a, b) => a - b);
   const p90 =
@@ -500,6 +530,8 @@ export function EuropeMap({
             return (
               <path
                 key={c.name}
+                data-country={c.iso}
+                data-focused={focused}
                 d={c.d}
                 className={
                   focused
@@ -578,10 +610,11 @@ export function EuropeMap({
           })}
 
           {/* target borders, coloured grey (low) to red (high) by yearly market opportunity */}
-          {targets.map((t) => {
+          {corridors.map((corridor) => {
+            const t = corridor.target;
             const [x1, y1] = project(t.a_lon, t.a_lat);
             const [x2, y2] = project(t.b_lon, t.b_lat);
-            const v = metric === "market" ? t.market_opportunity_meur : t.climate_loss_ktco2;
+            const v = metric === "market" ? corridor.market : corridor.climate;
             const c = Math.min(1, Math.max(0, v / lossCap));
             const isSelected = selectedId === t.id;
             const dropB = dropTarget?.kind === "border" && dropTarget.key === t.id;
@@ -594,15 +627,25 @@ export function EuropeMap({
               (dropActive && !candidateB) || (selectedId != null && !isSelected && !dropB);
             return (
               <g
-                key={t.id}
-                className="cursor-pointer"
+                key={[t.zone_a, t.zone_b].sort().join("|")}
+                data-corridor={[t.zone_a, t.zone_b].sort().join("|")}
+                role="button"
+                tabIndex={0}
+                aria-label={`Select ${t.zone_a} – ${t.zone_b} corridor, ${(t.congestion_rent_meur_year == null ? undefined : Math.max(0, t.congestion_rent_meur_year).toFixed(1)) ?? "unavailable"} M€ annual congestion rent (floor: 0)`}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    onSelect(t);
+                  }
+                }}
+                className="group cursor-pointer outline-none"
                 onClick={() => {
                   if (!wasDrag()) onSelect(t);
                 }}
                 onMouseEnter={() => setHover(t.id)}
                 onMouseLeave={() => setHover(null)}
               >
-                <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="transparent" strokeWidth={16 / k} />
+                <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="transparent" strokeWidth={12 / k} />
                 {candidateB && (
                   <line
                     x1={x1}
@@ -623,6 +666,7 @@ export function EuropeMap({
                   </line>
                 )}
                 <line
+                  className="group-focus-visible:stroke-primary group-focus-visible:[stroke-dasharray:6_3]"
                   x1={x1}
                   y1={y1}
                   x2={x2}
@@ -632,7 +676,9 @@ export function EuropeMap({
                       ? "var(--color-muted-foreground)"
                       : active
                         ? "var(--color-primary)"
-                        : lossColor(c)
+                        : metric === "market" && v < 0
+                          ? "#2563eb"
+                          : lossColor(c)
                   }
                   strokeOpacity={faded ? 0.25 : active ? 1 : 0.9}
                   strokeWidth={(active ? 5 : 3) / k}
@@ -640,8 +686,13 @@ export function EuropeMap({
                 />
 
                 <title>
-                  {t.zone_a} – {t.zone_b}: {t.market_opportunity_meur.toFixed(1)} MEUR/y,{" "}
-                  {t.climate_loss_ktco2.toFixed(1)} ktCO2/y, {t.congested_hours} congested hours
+                  {t.zone_a} – {t.zone_b}:{" "}
+                  {(t.congestion_rent_meur_year == null
+                    ? undefined
+                    : Math.max(0, t.congestion_rent_meur_year).toFixed(1)) ?? "unavailable"}{" "}
+                  M€ annual congestion rent (floor: 0);{" "}
+                  {t.mean_absolute_spread_eur_mwh?.toFixed(2) ?? "unavailable"} €/MWh mean absolute
+                  price spread.
                 </title>
               </g>
             );
@@ -678,14 +729,14 @@ export function EuropeMap({
         </g>
       </svg>
 
-      <div className="pointer-events-none absolute left-3 top-3 max-w-[22rem] rounded-lg border border-border bg-card/90 px-3 py-2 backdrop-blur">
+      <div className="pointer-events-none absolute left-3 right-16 top-3 max-w-[22rem] rounded-lg border border-border bg-card/90 px-3 py-2 backdrop-blur">
         <h2 className="text-sm font-semibold text-foreground">
           European bidding zones and congested borders
         </h2>
         <p className="text-xs text-muted-foreground">
           {metric === "market"
-            ? "Yearly market opportunity (bounded DWL)"
-            : "Yearly climate opportunity"}
+            ? "Annual congestion rent · 2025 · floor: 0"
+            : "Yearly climate proxy (est.)"}
         </p>
       </div>
 
@@ -694,7 +745,7 @@ export function EuropeMap({
           type="button"
           aria-label="Zoom in"
           onClick={() => zoomButton(1.4)}
-          className="h-8 w-8 rounded-md border border-border bg-card/90 text-sm text-foreground backdrop-blur hover:bg-accent"
+          className="h-11 w-11 rounded-md sm:h-8 sm:w-8 border border-border bg-card/90 text-sm text-foreground backdrop-blur hover:bg-accent"
         >
           +
         </button>
@@ -702,7 +753,7 @@ export function EuropeMap({
           type="button"
           aria-label="Zoom out"
           onClick={() => zoomButton(1 / 1.4)}
-          className="h-8 w-8 rounded-md border border-border bg-card/90 text-sm text-foreground backdrop-blur hover:bg-accent"
+          className="h-11 w-11 rounded-md sm:h-8 sm:w-8 border border-border bg-card/90 text-sm text-foreground backdrop-blur hover:bg-accent"
         >
           −
         </button>
@@ -710,16 +761,18 @@ export function EuropeMap({
           type="button"
           aria-label="Reset view"
           onClick={() => animateTo(IDENTITY, 350)}
-          className="h-8 w-8 rounded-md border border-border bg-card/90 text-[10px] text-foreground backdrop-blur hover:bg-accent"
+          className="h-11 w-11 rounded-md sm:h-8 sm:w-8 border border-border bg-card/90 text-[10px] text-foreground backdrop-blur hover:bg-accent"
         >
           Fit
         </button>
       </div>
 
-      <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg border border-border bg-card/90 px-3 py-2 text-xs text-muted-foreground backdrop-blur">
-        <div className="flex items-center justify-between gap-3">
+      <div className="pointer-events-none absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] rounded-lg border border-border bg-card/90 px-3 py-2 text-xs text-muted-foreground backdrop-blur">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="font-medium text-foreground">
-            {metric === "market" ? "Market opportunity (MEUR/y)" : "Climate opportunity (ktCO2/y)"}
+            {metric === "market"
+              ? "Congestion rent (M€/year) · floor: 0"
+              : "Climate proxy (est., ktCO2/y)"}
           </span>
           <div className="pointer-events-auto flex rounded-md border border-border p-0.5 text-[10px]">
             {(["market", "climate"] as const).map((m) => (
@@ -731,7 +784,7 @@ export function EuropeMap({
                   metric === m ? "bg-primary text-primary-foreground" : "text-muted-foreground"
                 }`}
               >
-                {m === "market" ? "Market" : "Climate"}
+                {m === "market" ? "Rent" : "Climate"}
               </button>
             ))}
           </div>
@@ -749,7 +802,7 @@ export function EuropeMap({
             {maxLoss > lossCap ? "+" : ""}
           </span>
         </div>
-        <div className="mt-1">Click a border to zoom in on it. Scroll to zoom, drag to pan.</div>
+        <div className="mt-1">Tap a border to select it. Use +/− to zoom; drag to pan.</div>
       </div>
 
       {dropActive && (

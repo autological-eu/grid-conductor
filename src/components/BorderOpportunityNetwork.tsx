@@ -1,3 +1,4 @@
+import { publicAsset } from "@/lib/research";
 import { useEffect, useState } from "react";
 
 type Border = {
@@ -25,7 +26,7 @@ export function BorderOpportunityNetwork() {
   const [selected, setSelected] = useState<Border | null>(null);
   useEffect(() => {
     const controller = new AbortController();
-    fetch("/research/pypsa-targets.json", { signal: controller.signal })
+    fetch(publicAsset("/research/pypsa-targets.json"), { signal: controller.signal })
       .then((r) => {
         if (!r.ok) throw new Error("Dataset unavailable");
         return r.json();

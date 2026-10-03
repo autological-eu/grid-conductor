@@ -1,3 +1,4 @@
+import { publicAsset } from "@/lib/research";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { BorderOpportunityNetwork } from "@/components/BorderOpportunityNetwork";
@@ -61,7 +62,7 @@ function Targets() {
   const [all, setAll] = useState(false);
   useEffect(() => {
     const controller = new AbortController();
-    fetch("/research/targets.json", { signal: controller.signal })
+    fetch(publicAsset("/research/targets.json"), { signal: controller.signal })
       .then((r) => {
         if (!r.ok) throw new Error("Snapshot unavailable");
         return r.json();
@@ -132,7 +133,7 @@ function Targets() {
               Capacity: not assessed. Connection operation: unverified. Carbon contrast is an
               average-mix indicator, not avoided emissions.
             </p>
-            <a className="underline" href="/research/targets.json" download>
+            <a className="underline" href={publicAsset("/research/targets.json")} download>
               Download full evidence, directions and events (JSON)
             </a>
           </section>

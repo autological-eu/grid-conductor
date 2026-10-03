@@ -1,0 +1,355 @@
+{
+  "status": "2025_weather_source_ready_model_not_assembled",
+  "year": 2025,
+  "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=41.587568%2C47.549498%2C43.811367%2C50.818887%2C42.765271%2C46.832432%2C49.835025%2C50.978098%2C55.954011%2C55.509903%2C58.979906%2C40.601332%2C39.672902%2C62.857680%2C46.801579%2C53.331721%2C54.668779%2C38.948594%2C45.206872%2C47.216547%2C52.799814%2C43.584110%2C39.968196%2C55.161559%2C49.677340%2C56.838802%2C42.806664%2C41.581362%2C52.374286%2C60.999101%2C51.588620%2C40.313466%2C45.551309%2C44.113710%2C61.274981%2C46.121279%2C48.653333&longitude=19.897914%2C13.604274%2C18.122704%2C4.617461%2C24.673671%2C8.213076%2C15.255766%2C9.482007%2C9.780572%2C12.283974%2C25.879152%2C-3.427610%2C2.738892%2C25.053686%2C3.141638%2C-1.983315%2C-6.097541%2C22.730044%2C16.157554%2C18.879135%2C-7.631338%2C11.706807%2C8.745976%2C23.007282%2C6.130511%2C23.724680%2C19.144501%2C21.587448%2C5.551448%2C8.623107%2C19.081274%2C-8.282125%2C25.091770%2C20.662692%2C16.233414%2C14.805218%2C19.027888&start_date=2025-01-01&end_date=2025-12-31&hourly=wind_speed_100m%2Cshortwave_radiation%2Ctemperature_2m&models=era5&timezone=UTC&wind_speed_unit=ms",
+  "source_sha256": "ad3325cb8ac2ecf27eede79adc2fed37ab2f0f92efbb0bafc95290786bc61474",
+  "source_bytes": 10880588,
+  "variables": {
+    "wind_speed_100m": "m/s",
+    "shortwave_radiation": "W/m\u00b2",
+    "temperature_2m": "\u00b0C"
+  },
+  "nodes": [
+    {
+      "node": "AL1 0",
+      "country": "AL",
+      "requested_latitude": 41.58756832883462,
+      "requested_longitude": 19.897913657380467,
+      "returned_latitude": 41.5,
+      "returned_longitude": 20.0,
+      "hours": 8760
+    },
+    {
+      "node": "AT1 0",
+      "country": "AT",
+      "requested_latitude": 47.54949821704954,
+      "requested_longitude": 13.60427444018489,
+      "returned_latitude": 47.5,
+      "returned_longitude": 13.5,
+      "hours": 8760
+    },
+    {
+      "node": "BA1 0",
+      "country": "BA",
+      "requested_latitude": 43.81136666515542,
+      "requested_longitude": 18.122703744298455,
+      "returned_latitude": 43.75,
+      "returned_longitude": 18.0,
+      "hours": 8760
+    },
+    {
+      "node": "BE1 0",
+      "country": "BE",
+      "requested_latitude": 50.81888696970449,
+      "requested_longitude": 4.6174607553224245,
+      "returned_latitude": 50.75,
+      "returned_longitude": 4.5,
+      "hours": 8760
+    },
+    {
+      "node": "BG1 0",
+      "country": "BG",
+      "requested_latitude": 42.76527120231763,
+      "requested_longitude": 24.673671018558693,
+      "returned_latitude": 42.75,
+      "returned_longitude": 24.75,
+      "hours": 8760
+    },
+    {
+      "node": "CH1 0",
+      "country": "CH",
+      "requested_latitude": 46.83243155790327,
+      "requested_longitude": 8.213076121971683,
+      "returned_latitude": 46.75,
+      "returned_longitude": 8.25,
+      "hours": 8760
+    },
+    {
+      "node": "CZ1 0",
+      "country": "CZ",
+      "requested_latitude": 49.835025231961914,
+      "requested_longitude": 15.255766133141059,
+      "returned_latitude": 49.75,
+      "returned_longitude": 15.25,
+      "hours": 8760
+    },
+    {
+      "node": "DE1 0",
+      "country": "DE",
+      "requested_latitude": 50.97809797287747,
+      "requested_longitude": 9.482007477191074,
+      "returned_latitude": 51.0,
+      "returned_longitude": 9.5,
+      "hours": 8760
+    },
+    {
+      "node": "DK1 0",
+      "country": "DK",
+      "requested_latitude": 55.95401091656313,
+      "requested_longitude": 9.780571804546701,
+      "returned_latitude": 56.0,
+      "returned_longitude": 9.75,
+      "hours": 8760
+    },
+    {
+      "node": "DK2 0",
+      "country": "DK",
+      "requested_latitude": 55.50990254373552,
+      "requested_longitude": 12.2839744286048,
+      "returned_latitude": 55.5,
+      "returned_longitude": 12.25,
+      "hours": 8760
+    },
+    {
+      "node": "EE6 0",
+      "country": "EE",
+      "requested_latitude": 58.97990628084797,
+      "requested_longitude": 25.879151796111493,
+      "returned_latitude": 59.0,
+      "returned_longitude": 26.0,
+      "hours": 8760
+    },
+    {
+      "node": "ES1 0",
+      "country": "ES",
+      "requested_latitude": 40.60133167815752,
+      "requested_longitude": -3.4276102147050658,
+      "returned_latitude": 40.5,
+      "returned_longitude": -3.5,
+      "hours": 8760
+    },
+    {
+      "node": "ES4 0",
+      "country": "ES",
+      "requested_latitude": 39.6729018,
+      "requested_longitude": 2.7388915999999996,
+      "returned_latitude": 39.75,
+      "returned_longitude": 2.75,
+      "hours": 8760
+    },
+    {
+      "node": "FI2 0",
+      "country": "FI",
+      "requested_latitude": 62.8576799074074,
+      "requested_longitude": 25.053685500000004,
+      "returned_latitude": 62.75,
+      "returned_longitude": 25.0,
+      "hours": 8760
+    },
+    {
+      "node": "FR1 0",
+      "country": "FR",
+      "requested_latitude": 46.80157876606808,
+      "requested_longitude": 3.1416376979667873,
+      "returned_latitude": 46.75,
+      "returned_longitude": 3.25,
+      "hours": 8760
+    },
+    {
+      "node": "GB0 0",
+      "country": "GB",
+      "requested_latitude": 53.33172116554991,
+      "requested_longitude": -1.9833148477788194,
+      "returned_latitude": 53.25,
+      "returned_longitude": -2.0,
+      "hours": 8760
+    },
+    {
+      "node": "GB5 0",
+      "country": "GB",
+      "requested_latitude": 54.668778749066895,
+      "requested_longitude": -6.097540942585512,
+      "returned_latitude": 54.75,
+      "returned_longitude": -6.0,
+      "hours": 8760
+    },
+    {
+      "node": "GR1 0",
+      "country": "GR",
+      "requested_latitude": 38.948594315594896,
+      "requested_longitude": 22.73004415738375,
+      "returned_latitude": 39.0,
+      "returned_longitude": 22.75,
+      "hours": 8760
+    },
+    {
+      "node": "HR1 0",
+      "country": "HR",
+      "requested_latitude": 45.20687242857143,
+      "requested_longitude": 16.157553500000002,
+      "returned_latitude": 45.25,
+      "returned_longitude": 16.25,
+      "hours": 8760
+    },
+    {
+      "node": "HU1 0",
+      "country": "HU",
+      "requested_latitude": 47.216547475067166,
+      "requested_longitude": 18.879135167852805,
+      "returned_latitude": 47.25,
+      "returned_longitude": 19.0,
+      "hours": 8760
+    },
+    {
+      "node": "IE5 0",
+      "country": "IE",
+      "requested_latitude": 52.799813936222904,
+      "requested_longitude": -7.631337824605365,
+      "returned_latitude": 52.75,
+      "returned_longitude": -7.75,
+      "hours": 8760
+    },
+    {
+      "node": "IT1 0",
+      "country": "IT",
+      "requested_latitude": 43.58410977578161,
+      "requested_longitude": 11.706806725438838,
+      "returned_latitude": 43.5,
+      "returned_longitude": 11.75,
+      "hours": 8760
+    },
+    {
+      "node": "IT3 0",
+      "country": "IT",
+      "requested_latitude": 39.9681955,
+      "requested_longitude": 8.7459755,
+      "returned_latitude": 40.0,
+      "returned_longitude": 8.75,
+      "hours": 8760
+    },
+    {
+      "node": "LT6 0",
+      "country": "LT",
+      "requested_latitude": 55.161558581596694,
+      "requested_longitude": 23.007282074232347,
+      "returned_latitude": 55.25,
+      "returned_longitude": 23.0,
+      "hours": 8760
+    },
+    {
+      "node": "LU1 0",
+      "country": "LU",
+      "requested_latitude": 49.6773404049915,
+      "requested_longitude": 6.130510690868268,
+      "returned_latitude": 49.75,
+      "returned_longitude": 6.25,
+      "hours": 8760
+    },
+    {
+      "node": "LV6 0",
+      "country": "LV",
+      "requested_latitude": 56.838802320354965,
+      "requested_longitude": 23.724680088385135,
+      "returned_latitude": 56.75,
+      "returned_longitude": 23.75,
+      "hours": 8760
+    },
+    {
+      "node": "ME1 0",
+      "country": "ME",
+      "requested_latitude": 42.8066642,
+      "requested_longitude": 19.1445008,
+      "returned_latitude": 42.75,
+      "returned_longitude": 19.25,
+      "hours": 8760
+    },
+    {
+      "node": "MK1 0",
+      "country": "MK",
+      "requested_latitude": 41.58136233333333,
+      "requested_longitude": 21.587448166666665,
+      "returned_latitude": 41.5,
+      "returned_longitude": 21.5,
+      "hours": 8760
+    },
+    {
+      "node": "NL1 0",
+      "country": "NL",
+      "requested_latitude": 52.374286058823536,
+      "requested_longitude": 5.55144817647059,
+      "returned_latitude": 52.25,
+      "returned_longitude": 5.5,
+      "hours": 8760
+    },
+    {
+      "node": "NO2 0",
+      "country": "NO",
+      "requested_latitude": 60.99910110334458,
+      "requested_longitude": 8.623107409406309,
+      "returned_latitude": 61.0,
+      "returned_longitude": 8.5,
+      "hours": 8760
+    },
+    {
+      "node": "PL1 0",
+      "country": "PL",
+      "requested_latitude": 51.58862009063283,
+      "requested_longitude": 19.08127436397448,
+      "returned_latitude": 51.5,
+      "returned_longitude": 19.0,
+      "hours": 8760
+    },
+    {
+      "node": "PT1 0",
+      "country": "PT",
+      "requested_latitude": 40.313465607938554,
+      "requested_longitude": -8.282124629507434,
+      "returned_latitude": 40.25,
+      "returned_longitude": -8.25,
+      "hours": 8760
+    },
+    {
+      "node": "RO1 0",
+      "country": "RO",
+      "requested_latitude": 45.55130893440349,
+      "requested_longitude": 25.091769508644916,
+      "returned_latitude": 45.5,
+      "returned_longitude": 25.0,
+      "hours": 8760
+    },
+    {
+      "node": "RS1 0",
+      "country": "RS",
+      "requested_latitude": 44.11371028940375,
+      "requested_longitude": 20.662691528520664,
+      "returned_latitude": 44.0,
+      "returned_longitude": 20.75,
+      "hours": 8760
+    },
+    {
+      "node": "SE2 0",
+      "country": "SE",
+      "requested_latitude": 61.274981309992185,
+      "requested_longitude": 16.233413841148572,
+      "returned_latitude": 61.25,
+      "returned_longitude": 16.25,
+      "hours": 8760
+    },
+    {
+      "node": "SI1 0",
+      "country": "SI",
+      "requested_latitude": 46.12127875725622,
+      "requested_longitude": 14.805218016971812,
+      "returned_latitude": 46.0,
+      "returned_longitude": 14.75,
+      "hours": 8760
+    },
+    {
+      "node": "SK1 0",
+      "country": "SK",
+      "requested_latitude": 48.6533333776392,
+      "requested_longitude": 19.02788801851852,
+      "returned_latitude": 48.75,
+      "returned_longitude": 19.0,
+      "hours": 8760
+    }
+  ],
+  "license": "Weather service: Open-Meteo CC BY 4.0; ERA5: Copernicus Climate Change Service / ECMWF",
+  "limitations": [
+    "Weather at coarse archive-node centroids is not capacity-weighted wind/solar generation availability.",
+    "Weather-to-power conversion, 2025 installed fleet/costs, hydro inflow/boundaries and complete demand/network data remain model gates.",
+    "Archive node coordinates are a declared sampling geography, not a 2025 physical topology or SE4 bidding-zone mapping."
+  ],
+  "generation_availability_published": false,
+  "historical_validation": "not_performed"
+}
