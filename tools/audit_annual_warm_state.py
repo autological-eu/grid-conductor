@@ -18,7 +18,15 @@ def worker(args):
  signature=receipts(args,args.month)
  with np.load(args.folder/'master-state.npz',allow_pickle=False) as data:state=data['warm_state_mwh'].copy()
  block=load_block(args.folder/f'{args.month:02d}.npz')
- local=solve_block(block,state,time_limit=args.solver_seconds,first_method=args.first_solver,residual_tolerance=1e-7)
+ def retain_rejected(result,diagnostic):
+  target=args.folder/'warm-audit'/f'{args.month:02d}-rejected-primal.npz'
+  temporary=target.with_suffix('.npz.tmp')
+  with temporary.open('wb') as stream:np.savez_compressed(stream,primal=result.x)
+  temporary.replace(target)
+  save(target.with_suffix('.json'),dict(**signature,**diagnostic,month=args.month,
+   primal_sha256=digest(target),cost_eur=float(result.fun),
+   scope='rejected candidate, diagnostic only; no accepted feasibility or annual result'))
+ local=solve_block(block,state,time_limit=args.solver_seconds,first_method=args.first_solver,residual_tolerance=1e-7,on_residual_rejection=retain_rejected)
  if local is None:raise ValueError('Fixed warm inventories infeasible')
  r,_=local
  eq=float(np.max(abs(block.equality@r.x+block.coupling@state-block.rhs)))

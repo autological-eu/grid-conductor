@@ -215,7 +215,10 @@ class CoordinationTests(unittest.TestCase):
    return result
   b=Block(np.array([1.]),[(0,2)],[[1]],np.array([1.]),[[1]])
   with patch.object(module,'linprog',side_effect=simulated):
-   result,_=module.solve_block(b,np.array([0.]),residual_tolerance=1e-7)
+   rejected=[]
+   result,_=module.solve_block(b,np.array([0.]),residual_tolerance=1e-7,on_residual_rejection=lambda result,diagnostic:rejected.append((result.x.copy(),diagnostic)))
+  self.assertEqual(len(rejected),1)
+  self.assertGreater(rejected[0][1]['equality_residual'],1e-7)
   self.assertEqual(len(calls),2);self.assertAlmostEqual(result.x[0],1.)
  def test_all_successful_but_inaccurate_attempts_fail_closed(self):
   from unittest.mock import patch

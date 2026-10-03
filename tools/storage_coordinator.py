@@ -56,7 +56,7 @@ class Block:
     limit: object = None
     inequality_coupling: object = None
 
-def solve_block(block, state, phase=False, time_limit=60., first_method='highs', residual_tolerance=None):
+def solve_block(block, state, phase=False, time_limit=60., first_method='highs', residual_tolerance=None, on_residual_rejection=None):
     if not np.isfinite(time_limit) or time_limit<=0:raise ValueError('Invalid local solver time limit')
     if first_method not in ('highs','highs-ipm'):raise ValueError('Unsupported first local solver')
 
@@ -85,6 +85,7 @@ def solve_block(block, state, phase=False, time_limit=60., first_method='highs',
             bound_error=max([0.]+[max(0.,lo-x) if lo is not None else 0. for x,(lo,hi) in zip(result.x,bounds)]+[max(0.,x-hi) if hi is not None else 0. for x,(lo,hi) in zip(result.x,bounds)])
             if max(equality_error,inequality_error,bound_error)>residual_tolerance:
                 rejected_residual=(method,presolve,equality_error,inequality_error,bound_error)
+                if on_residual_rejection is not None:on_residual_rejection(result,dict(method=method,presolve=presolve,equality_residual=equality_error,inequality_violation=inequality_error,bound_violation=bound_error))
                 continue
             rejected_residual=None
         if result.status not in (1,2,4):break

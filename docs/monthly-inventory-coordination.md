@@ -403,3 +403,19 @@ configurations to run after an inaccurate success. At most three attempts
 are still permitted; no tolerances or physical constraints are relaxed.
 All 27 storage tests pass, including retry after inaccurate success and
 failure after three inaccurate successes. Annual feasibility is still unverified.
+
+### Retaining rejected monthly candidates
+
+The acceptance-aware January retry failed: a solver-reported success exceeded
+the original-unit residual gate, while the remaining configurations timed
+out. Peak sampled memory was 5.92 GiB, below the 6 GiB guard. No monthly
+receipt was accepted.
+
+Monthly audits now retain a rejected primal vector as numeric-only NPZ
+(without pickle), together with its source/block/warm-state hashes, solver
+configuration, objective and residual diagnostics. This permits independent
+inspection of the offending rows without another full solve. These files
+are explicitly rejected diagnostics and cannot supply accepted feasibility
+or convergence evidence. A bounded diagnostic retry is launched to capture
+a candidate. The original physical LP and acceptance tolerances are unchanged;
+all 27 storage tests pass, including rejected-candidate callback coverage.
