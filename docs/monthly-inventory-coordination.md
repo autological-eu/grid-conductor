@@ -267,3 +267,9 @@ rejection of larger violations, and a corrected candidate being solved before
 any feasible upper bound is accepted. This is a numerical search correction,
 not relaxation of storage physics or of the €0.001 convergence gate. The
 real-data retry remains subject to native objective/bound parity.
+
+The corrected real-data retry passed the captured candidate and reached
+iteration 738, then stopped on a proposal lower-bound overshoot larger than
+the existing tolerance. The last recorded gap remained €0.001223. The check
+therefore exposed a second master-precision issue rather than certifying
+convergence. No annual result or model integration follows from this retry.
