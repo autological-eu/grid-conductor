@@ -33,6 +33,18 @@ def solve_master(cost, **kwargs):
         result.fun=float(cost@result.x)
     return result
 
+def bounded_proposal(state,bounds,tolerance):
+    """Correct candidate roundoff only; never alter master objective/bounds."""
+    state=np.asarray(state,dtype=float).copy()
+    for i,(lo,hi) in enumerate(bounds):
+        if lo is not None and state[i]<lo:
+            if lo-state[i]>tolerance:raise RuntimeError('Inventory proposal exceeds lower bound beyond tolerance')
+            state[i]=lo
+        if hi is not None and state[i]>hi:
+            if state[i]-hi>tolerance:raise RuntimeError('Inventory proposal exceeds upper bound beyond tolerance')
+            state[i]=hi
+    return state
+
 @dataclass
 class Block:
     cost: np.ndarray
@@ -129,6 +141,14 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
         if best is not None and proposal_fraction<1:
             state=best+proposal_fraction*(state-best)
 
+        # Scaled master tolerances can produce tiny negative inventories.
+        # Project only the search proposal; the unrestricted lower bound stays
+        # untouched, and local LPs verify the corrected candidate independently.
+        state=bounded_proposal(state,bounds,feasibility_tolerance)
+        if equality is not None and np.max(abs(sparse.csr_matrix(equality)@state-rhs))>feasibility_tolerance:
+            raise RuntimeError('Corrected inventory proposal violates master equality')
+        if inequality is not None and np.max(sparse.csr_matrix(inequality)@state-limit)>feasibility_tolerance:
+            raise RuntimeError('Corrected inventory proposal violates master inequality')
         for i,block in enumerate(blocks):
             if on_stage is not None:on_stage(dict(stage='local',block=i))
             local=solve_block(block,state)

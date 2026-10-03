@@ -160,6 +160,25 @@ class CoordinationTests(unittest.TestCase):
   self.assertEqual(failures[0]['state_mwh'],[0.])
   self.assertEqual(failures[0]['phase_violation'],8e-8)
   self.assertEqual(failures[0]['feasibility_tolerance'],1e-7)
+ def test_proposal_roundoff_is_snapped_without_changing_master(self):
+  from storage_coordinator import bounded_proposal
+  source=np.array([-4.75e-8,5.00000001,2.])
+  corrected=bounded_proposal(source,[(0,5),(0,5),(2,2)],1e-7)
+  np.testing.assert_array_equal(corrected,[0,5,2])
+  self.assertLess(source[0],0)
+  with self.assertRaisesRegex(RuntimeError,'beyond tolerance'):
+   bounded_proposal([-1e-4],[(0,5)],1e-7)
+ def test_corrected_candidate_is_resolved_before_upper_bound(self):
+  from unittest.mock import patch
+  from types import SimpleNamespace
+  import storage_coordinator as module
+  b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
+  with patch.object(module,'solve_master',return_value=SimpleNamespace(success=True,x=np.array([-4.75e-8,0.]),fun=0.)):
+   r=coordinate([b],[(0,5)],max_iterations=1,stabilize=False)
+  self.assertEqual(r['lower_bound'],0.)
+  self.assertEqual(r['state'][0],0.)
+  self.assertEqual(r['objective'],10.)
+  self.assertEqual(r['status'],'iteration_limit_not_certified')
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)

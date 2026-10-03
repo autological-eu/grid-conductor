@@ -245,3 +245,25 @@ timed out at its 30-second limit. No configuration returned an optimal primal
 or usable objective duals. This reproducer now isolates boundary feasibility
 and numerical conditioning from the preceding hundreds of master iterations.
 No annual-result gate has passed.
+
+
+## Inventory proposal roundoff
+
+The captured state contains a -4.74848e-8 MWh inventory despite its zero lower
+bound. Phase I placed exactly that amount in a single inequality slack. This
+isolates an actual proposal bound violation, rather than proving that an
+otherwise feasible state was rejected.
+
+The scaled master may return a proposal with tiny original-unit roundoff.
+Before local solves, candidate inventories now snap to their exact lower/upper
+bounds only when the overshoot is within the existing feasibility tolerance.
+Larger overshoots fail. Master equalities and supplied inequalities are checked
+again after correction. The unrestricted master objective and lower bound are
+never changed. Every corrected candidate is independently re-solved, and cuts
+are anchored at the corrected state, not the original proposal.
+
+Tests cover both bound directions, fixed states, unchanged source arrays,
+rejection of larger violations, and a corrected candidate being solved before
+any feasible upper bound is accepted. This is a numerical search correction,
+not relaxation of storage physics or of the €0.001 convergence gate. The
+real-data retry remains subject to native objective/bound parity.
