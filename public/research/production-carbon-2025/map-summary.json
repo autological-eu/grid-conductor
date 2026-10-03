@@ -4,6 +4,48 @@
   "unit": "gCO2e/kWh",
   "basis": "production lifecycle; not consumption or avoided emissions",
   "selection": "joint observed hourly prices, absolute spread strictly greater than 5 EUR/MWh; not proof of physical congestion",
+  "publisher_sha256": "0be2f97282a98b13954a20b198cf6e36b3869469298bc5510012720464f6ed5d",
+  "price_sha256": {
+    "AL": "470ce846bc8c1d00c4ecd5365ada9d09f9bc4b093c4c669e0d49111ac71edbca",
+    "AT": "57411dea7cc2aa969760fa46a0ca4eec232feacad946e8cc353faf9e484a05f1",
+    "BE": "3f762725690cccee4cc815b06f1115f83f51d304a78660a5dd50ef51228dc6e5",
+    "BG": "8217f63fdf8cb9b272305efa49175bb19b56e2063ee700a92911a9093ba425a9",
+    "CH": "adacaf6f7db6a9e4ba29feff260da060c23bae4cd9f33d32e8da252883ea839c",
+    "CZ": "b9da1329bae175980dc29c486b4d61c4a70a96bc2c2f715d61cee40d50f767aa",
+    "DE-LU": "bb2bf788973234b5c15e0ecc0020c1b7814319648e74c01af32d31f1b53b028a",
+    "DK1": "14c6b754ac43a009c587df87ee1568af8ba5d0a40485250de31bf0eb14fe3f11",
+    "DK2": "b4376f186aaf7d879bd220473232476fc0a3e24ffe6b8574bf610a1c0920a91a",
+    "EE": "d74d50ba8885affc76c83e42ac96758ad6b8ed8d81d521db6320d6f06b865b63",
+    "ES": "57f2d3fd32adcde7949aa661b3e78e01ce0a0c61e4a282c37ab34545f942a8b6",
+    "FI": "42784d49f2fa0d09337ea39d0d92171f3884ff111233fbb1e2387fbb9fce3b85",
+    "FR": "a0749d359d1a4bdd33d658419e2a7cb6d212e0ac59e869a163f699db27dbbc41",
+    "GR": "3d5bb4f35a35da722f271f82975bedea61f12a550db314aab5df551e3b3000fb",
+    "HR": "87f8d8fd2af970b9df4af674821c79e2504a28fc8af394f1b8ef13e6c80cbaea",
+    "HU": "413f49949296ae81b768cf3099d757bb5d44b18e4e9bdbc85e9968ccaa920e99",
+    "IT-CNOR": "d7930b2b0e99ef745211c7190188351c45d18a1a31dfc7bd8630fa5940903a20",
+    "IT-CSUD": "5a1dd2752b8e72473f4da3b37cbb23a96139d892ef8cd40ad5184cffd5493af5",
+    "IT-North": "840b7d14e68d3bff8cd2823637c1a66fcf384924db1c87f2b867c229c7eb47af",
+    "IT-SARD": "e4b2c97ddab6259871855a5be7cdfee3054e28870734e606ca23deeca8daaee6",
+    "IT-SUD": "2d764b7d0aaf7c3073a6e8f103db4dcb0d1cfe393039f37021e0116c69ec61f0",
+    "LT": "e1632f196d8dece21c3a7c0a7ee28603ff256fe2835478b7ac17bd71e00272fb",
+    "LV": "77c7a7893714300baddc897dc2a4e6963df66609935769bc5208af8405c2a50a",
+    "MK": "6cab5766d586b1f46985af5696d17958ad450841560d8b5590ded8b7c65cabbe",
+    "NL": "6289d0dec4b8e983a74b16513a2a19041aa11c1cef5481af6b10cab85dc4aa12",
+    "NO1": "c7e59439af5686e768cab153e495416f1f03a4f978a57faa606c71e1296e71db",
+    "NO2": "e3687c99de9e0e90db114126d4a38fe3615f656fdc35f986295b56169bd12524",
+    "NO3": "5efa22a51dc8ba5c100cf530c665567481ca45b6a9a99ac82c3a88b9e936dfb1",
+    "NO4": "04a270030ecabda3c37f53027b78bcf54ab415de2118dae5ab15167e61991eb2",
+    "PL": "f37faebe37fb91f3138ca2c4b85f7d4263bae06575cb87c60c5805317e9c811a",
+    "PT": "197f0ef08d3647e3fd595322841808da41672670c0f89e6de3afb66242395f49",
+    "RO": "1d2534a1fce17e013bd165d50f08744aae4512652d80eb3c21c68516692764c0",
+    "RS": "892a9e8ce7a78b15d73862b9aa5980b78cf6c1c989fa077db3042ed9ff09dcdb",
+    "SE1": "6ae32654583721f03caf9677571ae19658f5a723904fa57b022217dc4566155e",
+    "SE2": "425856ec167d24b80a61312962b4fdd535b850dab43da55e959072585150687b",
+    "SE3": "90795436b9b7b6d99bbff234560f559e1bcd59e90ffa1c0b549e1828ec7db5b0",
+    "SE4": "9dddbcb5d9655b49d19eb01d6e09781f50640d60a34f70784ac97b5965c80b64",
+    "SI": "d666a39a9406901e580917aad41833935ce923b94bbd6d02609110170f87c354",
+    "SK": "0305285ff4d13a50396314696d3ba568fd087657c97305ee6f4e0c7676d1bc70"
+  },
   "hourly_files": {
     "AL": {
       "path": "research/production-carbon-2025/hourly/AL.json",
@@ -32,12 +74,12 @@
     },
     "CZ": {
       "path": "research/production-carbon-2025/hourly/CZ.json",
-      "sha256": "2b7e3ccde2476ae5b97b6ebfb3f00a3259ab7391b0317140c93e7f44f0eef686",
+      "sha256": "de1c57450a754a62d089422a900dcbf6a7505f1480be0374fc2b753a1d589ce4",
       "hours": 8760
     },
     "DE-LU": {
       "path": "research/production-carbon-2025/hourly/DE-LU.json",
-      "sha256": "149b03bd565bf4a5cd11673b5b78ae295e4657dcd454c8f63684ac4ca8e836c3",
+      "sha256": "1ae377326aa7efc2f19ec704e9def1fdfbb8daf180acb46fed5ace60caa4583f",
       "hours": 8760
     },
     "DK1": {
@@ -326,12 +368,12 @@
     },
     "CZ": {
       "geographic_scope": "national area",
-      "collected_months": 2,
+      "collected_months": 12,
       "expected_hours": 8760,
-      "complete_generation_hours": 1416,
+      "complete_generation_hours": 8759,
       "full_lifecycle_gco2e_kwh": null,
-      "mapped_subset_gco2e_kwh": 423.8890511130298,
-      "mapped_generation_share": 0.9617615104367747,
+      "mapped_subset_gco2e_kwh": 334.0181607208214,
+      "mapped_generation_share": 0.9593979164523774,
       "positive_unmapped_types": [
         "B03",
         "B06",
@@ -339,18 +381,24 @@
         "B17",
         "B20"
       ],
-      "generation_complete_hours_mwh": 13619144.57
+      "generation_complete_hours_mwh": 70393845.285
     },
     "DE-LU": {
       "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
-      "collected_months": 0,
+      "collected_months": 3,
       "expected_hours": 8760,
-      "complete_generation_hours": 0,
+      "complete_generation_hours": 2160,
       "full_lifecycle_gco2e_kwh": null,
-      "mapped_subset_gco2e_kwh": null,
-      "mapped_generation_share": null,
-      "positive_unmapped_types": [],
-      "generation_complete_hours_mwh": 0
+      "mapped_subset_gco2e_kwh": 359.2942052823911,
+      "mapped_generation_share": 0.9668692494276228,
+      "positive_unmapped_types": [
+        "B03",
+        "B06",
+        "B15",
+        "B17",
+        "B20"
+      ],
+      "generation_complete_hours_mwh": 115263671.2751955
     },
     "DK1": {
       "geographic_scope": "bidding zone",
@@ -788,10 +836,10 @@
         "CZ": {
           "geographic_scope": "national area",
           "expected_hours": 3429,
-          "complete_generation_hours": 640,
+          "complete_generation_hours": 3428,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": 417.6641670863136,
-          "mapped_generation_share": 0.9609584719602379,
+          "mapped_subset_gco2e_kwh": 339.0902809664602,
+          "mapped_generation_share": 0.9593631439818735,
           "positive_unmapped_types": [
             "B03",
             "B06",
@@ -799,7 +847,7 @@
             "B17",
             "B20"
           ],
-          "generation_complete_hours_mwh": 5988844.68
+          "generation_complete_hours_mwh": 27580341.71
         }
       }
     },
@@ -822,12 +870,18 @@
         "DE-LU": {
           "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
           "expected_hours": 4206,
-          "complete_generation_hours": 0,
+          "complete_generation_hours": 1007,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": null,
-          "mapped_generation_share": null,
-          "positive_unmapped_types": [],
-          "generation_complete_hours_mwh": 0
+          "mapped_subset_gco2e_kwh": 307.4689426686749,
+          "mapped_generation_share": 0.9692596698400033,
+          "positive_unmapped_types": [
+            "B03",
+            "B06",
+            "B15",
+            "B17",
+            "B20"
+          ],
+          "generation_complete_hours_mwh": 57311394.3333845
         }
       }
     },
@@ -935,12 +989,18 @@
         "DE-LU": {
           "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
           "expected_hours": 4602,
-          "complete_generation_hours": 0,
+          "complete_generation_hours": 995,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": null,
-          "mapped_generation_share": null,
-          "positive_unmapped_types": [],
-          "generation_complete_hours_mwh": 0
+          "mapped_subset_gco2e_kwh": 344.8355992827985,
+          "mapped_generation_share": 0.967467388877616,
+          "positive_unmapped_types": [
+            "B03",
+            "B06",
+            "B15",
+            "B17",
+            "B20"
+          ],
+          "generation_complete_hours_mwh": 53710568.9414135
         }
       }
     },
@@ -1129,12 +1189,18 @@
         "DE-LU": {
           "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
           "expected_hours": 6000,
-          "complete_generation_hours": 0,
+          "complete_generation_hours": 1633,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": null,
-          "mapped_generation_share": null,
-          "positive_unmapped_types": [],
-          "generation_complete_hours_mwh": 0
+          "mapped_subset_gco2e_kwh": 333.00008661036543,
+          "mapped_generation_share": 0.9679200986468537,
+          "positive_unmapped_types": [
+            "B03",
+            "B06",
+            "B15",
+            "B17",
+            "B20"
+          ],
+          "generation_complete_hours_mwh": 89750144.03804
         }
       }
     },
@@ -1197,10 +1263,10 @@
         "CZ": {
           "geographic_scope": "national area",
           "expected_hours": 3130,
-          "complete_generation_hours": 599,
+          "complete_generation_hours": 3130,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": 415.3588993493157,
-          "mapped_generation_share": 0.9604798447206238,
+          "mapped_subset_gco2e_kwh": 336.5440798135553,
+          "mapped_generation_share": 0.9594951211939908,
           "positive_unmapped_types": [
             "B03",
             "B06",
@@ -1208,17 +1274,23 @@
             "B17",
             "B20"
           ],
-          "generation_complete_hours_mwh": 5576838.475
+          "generation_complete_hours_mwh": 25198503.1825
         },
         "DE-LU": {
           "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
           "expected_hours": 3130,
-          "complete_generation_hours": 0,
+          "complete_generation_hours": 774,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": null,
-          "mapped_generation_share": null,
-          "positive_unmapped_types": [],
-          "generation_complete_hours_mwh": 0
+          "mapped_subset_gco2e_kwh": 293.29577952868186,
+          "mapped_generation_share": 0.9696801473607054,
+          "positive_unmapped_types": [
+            "B03",
+            "B06",
+            "B15",
+            "B17",
+            "B20"
+          ],
+          "generation_complete_hours_mwh": 45348347.362812
         }
       }
     },
@@ -1228,10 +1300,10 @@
         "CZ": {
           "geographic_scope": "national area",
           "expected_hours": 4374,
-          "complete_generation_hours": 639,
+          "complete_generation_hours": 4374,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": 416.70706470702646,
-          "mapped_generation_share": 0.9603228733569226,
+          "mapped_subset_gco2e_kwh": 321.41716905778804,
+          "mapped_generation_share": 0.9583377347058541,
           "positive_unmapped_types": [
             "B03",
             "B06",
@@ -1239,7 +1311,7 @@
             "B17",
             "B20"
           ],
-          "generation_complete_hours_mwh": 6052488.8725
+          "generation_complete_hours_mwh": 34132463.6325
         },
         "PL": {
           "geographic_scope": "national area",
@@ -1259,10 +1331,10 @@
         "CZ": {
           "geographic_scope": "national area",
           "expected_hours": 2869,
-          "complete_generation_hours": 591,
+          "complete_generation_hours": 2869,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": 422.56755813140717,
-          "mapped_generation_share": 0.9608621771218169,
+          "mapped_subset_gco2e_kwh": 341.2536796063503,
+          "mapped_generation_share": 0.9593173795209251,
           "positive_unmapped_types": [
             "B03",
             "B06",
@@ -1270,7 +1342,7 @@
             "B17",
             "B20"
           ],
-          "generation_complete_hours_mwh": 5595167.255
+          "generation_complete_hours_mwh": 23262579.115
         },
         "SK": {
           "geographic_scope": "national area",
@@ -1290,12 +1362,18 @@
         "DE-LU": {
           "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
           "expected_hours": 2936,
-          "complete_generation_hours": 0,
+          "complete_generation_hours": 942,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": null,
-          "mapped_generation_share": null,
-          "positive_unmapped_types": [],
-          "generation_complete_hours_mwh": 0
+          "mapped_subset_gco2e_kwh": 351.43970733283334,
+          "mapped_generation_share": 0.9683199814389913,
+          "positive_unmapped_types": [
+            "B03",
+            "B06",
+            "B15",
+            "B17",
+            "B20"
+          ],
+          "generation_complete_hours_mwh": 52349687.063826
         },
         "DK1": {
           "geographic_scope": "bidding zone",
@@ -1319,12 +1397,18 @@
         "DE-LU": {
           "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
           "expected_hours": 2761,
-          "complete_generation_hours": 0,
+          "complete_generation_hours": 792,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": null,
-          "mapped_generation_share": null,
-          "positive_unmapped_types": [],
-          "generation_complete_hours_mwh": 0
+          "mapped_subset_gco2e_kwh": 322.2877533721689,
+          "mapped_generation_share": 0.968495508180656,
+          "positive_unmapped_types": [
+            "B03",
+            "B06",
+            "B15",
+            "B17",
+            "B20"
+          ],
+          "generation_complete_hours_mwh": 44775555.902186
         },
         "DK2": {
           "geographic_scope": "bidding zone",
@@ -1347,12 +1431,18 @@
         "DE-LU": {
           "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
           "expected_hours": 6201,
-          "complete_generation_hours": 0,
+          "complete_generation_hours": 1263,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": null,
-          "mapped_generation_share": null,
-          "positive_unmapped_types": [],
-          "generation_complete_hours_mwh": 0
+          "mapped_subset_gco2e_kwh": 349.2720890499216,
+          "mapped_generation_share": 0.9671831784695656,
+          "positive_unmapped_types": [
+            "B03",
+            "B06",
+            "B15",
+            "B17",
+            "B20"
+          ],
+          "generation_complete_hours_mwh": 67360050.4761235
         },
         "FR": {
           "geographic_scope": "national area",
@@ -1375,12 +1465,18 @@
         "DE-LU": {
           "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
           "expected_hours": 3422,
-          "complete_generation_hours": 0,
+          "complete_generation_hours": 817,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": null,
-          "mapped_generation_share": null,
-          "positive_unmapped_types": [],
-          "generation_complete_hours_mwh": 0
+          "mapped_subset_gco2e_kwh": 341.77021191402514,
+          "mapped_generation_share": 0.9675334300237104,
+          "positive_unmapped_types": [
+            "B03",
+            "B06",
+            "B15",
+            "B17",
+            "B20"
+          ],
+          "generation_complete_hours_mwh": 44009334.189367
         },
         "NL": {
           "geographic_scope": "national area",
@@ -1400,12 +1496,18 @@
         "DE-LU": {
           "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
           "expected_hours": 7504,
-          "complete_generation_hours": 0,
+          "complete_generation_hours": 1966,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": null,
-          "mapped_generation_share": null,
-          "positive_unmapped_types": [],
-          "generation_complete_hours_mwh": 0
+          "mapped_subset_gco2e_kwh": 366.92474795767936,
+          "mapped_generation_share": 0.9665226140355373,
+          "positive_unmapped_types": [
+            "B03",
+            "B06",
+            "B15",
+            "B17",
+            "B20"
+          ],
+          "generation_complete_hours_mwh": 103843695.4501265
         },
         "NO2": {
           "geographic_scope": "bidding zone",
@@ -1425,12 +1527,18 @@
         "DE-LU": {
           "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
           "expected_hours": 4790,
-          "complete_generation_hours": 0,
+          "complete_generation_hours": 934,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": null,
-          "mapped_generation_share": null,
-          "positive_unmapped_types": [],
-          "generation_complete_hours_mwh": 0
+          "mapped_subset_gco2e_kwh": 307.36778893705457,
+          "mapped_generation_share": 0.9689438758024623,
+          "positive_unmapped_types": [
+            "B03",
+            "B06",
+            "B15",
+            "B17",
+            "B20"
+          ],
+          "generation_complete_hours_mwh": 53257877.4094465
         },
         "PL": {
           "geographic_scope": "national area",
@@ -1450,12 +1558,18 @@
         "DE-LU": {
           "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
           "expected_hours": 5872,
-          "complete_generation_hours": 0,
+          "complete_generation_hours": 1580,
           "full_lifecycle_gco2e_kwh": null,
-          "mapped_subset_gco2e_kwh": null,
-          "mapped_generation_share": null,
-          "positive_unmapped_types": [],
-          "generation_complete_hours_mwh": 0
+          "mapped_subset_gco2e_kwh": 370.13352311768676,
+          "mapped_generation_share": 0.966158776362956,
+          "positive_unmapped_types": [
+            "B03",
+            "B06",
+            "B15",
+            "B17",
+            "B20"
+          ],
+          "generation_complete_hours_mwh": 82418488.706977
         },
         "SE4": {
           "geographic_scope": "bidding zone",
@@ -3533,9 +3647,270 @@
         },
         "sha256": "163bb0b36e4b01e1a20e58f910aafcb0378c83be5810aa3ea31e4fd25b3bd01f",
         "complete_hours": 672
+      },
+      {
+        "zone": "CZ",
+        "month": 3,
+        "eic": "10YCZ-CEPS-----N",
+        "geographic_scope": "national area",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10YCZ-CEPS-----N",
+            "periodStart": "202503010000",
+            "periodEnd": "202504010000"
+          },
+          "retrieved_at": "2026-10-03T22:33:37Z",
+          "sha256": "e3d772852eb28fa8aaf6c465ceeb84f76edb541cfaa985bc34906ea737ec21ab"
+        },
+        "sha256": "e3de3751ae8a0a27e12a51f9aadfe9f37b9aad27afceb81244c20084eaf1bd81",
+        "complete_hours": 744
+      },
+      {
+        "zone": "CZ",
+        "month": 4,
+        "eic": "10YCZ-CEPS-----N",
+        "geographic_scope": "national area",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10YCZ-CEPS-----N",
+            "periodStart": "202504010000",
+            "periodEnd": "202505010000"
+          },
+          "retrieved_at": "2026-10-03T22:33:45Z",
+          "sha256": "ba436b57a04c32f192bea35b7d28366ae71742265e558a389024ed710390671b"
+        },
+        "sha256": "441ed2d2a80a449a6502071b5f5446edf3384ade3ffb30da39f8b6a5e532e341",
+        "complete_hours": 720
+      },
+      {
+        "zone": "CZ",
+        "month": 5,
+        "eic": "10YCZ-CEPS-----N",
+        "geographic_scope": "national area",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10YCZ-CEPS-----N",
+            "periodStart": "202505010000",
+            "periodEnd": "202506010000"
+          },
+          "retrieved_at": "2026-10-03T22:33:52Z",
+          "sha256": "c286060a91050722e0e25037dd401f63120ad313c7720d1ee8a47b0939c1e696"
+        },
+        "sha256": "25e60b59d0ec623c809f2297020dda7617607141024a98c0a43ad0cbfa6dc455",
+        "complete_hours": 744
+      },
+      {
+        "zone": "CZ",
+        "month": 6,
+        "eic": "10YCZ-CEPS-----N",
+        "geographic_scope": "national area",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10YCZ-CEPS-----N",
+            "periodStart": "202506010000",
+            "periodEnd": "202507010000"
+          },
+          "retrieved_at": "2026-10-03T22:33:59Z",
+          "sha256": "8353b2c9debc28e68df31bd0d1401c0d9bd0dbb42af70f4589c5acf39fd0db57"
+        },
+        "sha256": "ec74b656b073b17849ff3d97909655a9364e27217b51cc4a6649bdaadaef30af",
+        "complete_hours": 720
+      },
+      {
+        "zone": "CZ",
+        "month": 7,
+        "eic": "10YCZ-CEPS-----N",
+        "geographic_scope": "national area",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10YCZ-CEPS-----N",
+            "periodStart": "202507010000",
+            "periodEnd": "202508010000"
+          },
+          "retrieved_at": "2026-10-03T22:34:05Z",
+          "sha256": "995a66efd897c399fb120cc0f1018ce8aa0491b040088d0e958d5204ddffdd14"
+        },
+        "sha256": "c3b35b9e38ec4b94121c2132ac3db2f2c17b03332b92e2846b680c88ea2f2b1a",
+        "complete_hours": 744
+      },
+      {
+        "zone": "CZ",
+        "month": 8,
+        "eic": "10YCZ-CEPS-----N",
+        "geographic_scope": "national area",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10YCZ-CEPS-----N",
+            "periodStart": "202508010000",
+            "periodEnd": "202509010000"
+          },
+          "retrieved_at": "2026-10-03T22:34:12Z",
+          "sha256": "3939ed9e861bf607a3b92b646f15fdffdeab17f7a6ecf8ac9e8e342c8498b3ef"
+        },
+        "sha256": "0d04f0fbb7eafabc105aebf4ce355bf4085a76ed080a7a252d9a2c7c8f109682",
+        "complete_hours": 744
+      },
+      {
+        "zone": "CZ",
+        "month": 9,
+        "eic": "10YCZ-CEPS-----N",
+        "geographic_scope": "national area",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10YCZ-CEPS-----N",
+            "periodStart": "202509010000",
+            "periodEnd": "202510010000"
+          },
+          "retrieved_at": "2026-10-03T22:34:20Z",
+          "sha256": "52589d8a097b18b078c8c20f795a46637707f523fa55c5b61be3c98fa3598769"
+        },
+        "sha256": "79434d97eb6a837043752aea16d620c54acd6637ca8219e2cedcce76405ced2a",
+        "complete_hours": 720
+      },
+      {
+        "zone": "CZ",
+        "month": 10,
+        "eic": "10YCZ-CEPS-----N",
+        "geographic_scope": "national area",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10YCZ-CEPS-----N",
+            "periodStart": "202510010000",
+            "periodEnd": "202511010000"
+          },
+          "retrieved_at": "2026-10-03T22:34:25Z",
+          "sha256": "162b7de0c85daa34e115265aaa3f22827f1510bc96a74f2bf40e20434fb864b7"
+        },
+        "sha256": "39e5ad2ef61ec0ede056cb0cea3a77e25bcfdacfbfa478cedcce0e7f70838307",
+        "complete_hours": 743
+      },
+      {
+        "zone": "CZ",
+        "month": 11,
+        "eic": "10YCZ-CEPS-----N",
+        "geographic_scope": "national area",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10YCZ-CEPS-----N",
+            "periodStart": "202511010000",
+            "periodEnd": "202512010000"
+          },
+          "retrieved_at": "2026-10-03T22:34:31Z",
+          "sha256": "f1e92902df70de2b0d9b3cc45240742706c38a74858aeb7d3adbf3584ff974d3"
+        },
+        "sha256": "93be5b69d50df50723cc248aa9fac61cac9546fdcfc8fd74337fefc530388315",
+        "complete_hours": 720
+      },
+      {
+        "zone": "CZ",
+        "month": 12,
+        "eic": "10YCZ-CEPS-----N",
+        "geographic_scope": "national area",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10YCZ-CEPS-----N",
+            "periodStart": "202512010000",
+            "periodEnd": "202601010000"
+          },
+          "retrieved_at": "2026-10-03T22:34:36Z",
+          "sha256": "057b7133746096928a3678d9c082b3052bfc99ee1e30a18821660ebb31128c7d"
+        },
+        "sha256": "33a5589ca113226e43836aa8e5857f2df266ba1694bd5d31ef7c28b1ab2fa368",
+        "complete_hours": 744
       }
     ],
-    "DE-LU": [],
+    "DE-LU": [
+      {
+        "zone": "DE-LU",
+        "month": 1,
+        "eic": "10Y1001A1001A83F",
+        "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10Y1001A1001A83F",
+            "periodStart": "202501010000",
+            "periodEnd": "202502010000"
+          },
+          "retrieved_at": "2026-10-03T22:34:44Z",
+          "sha256": "5a80e67c0a9c3b1d39f0c35728b2fa6a8add643b3b99b464fdddf667c3eb2e6f"
+        },
+        "sha256": "31d89852a3ab0f2fcd09d479adb6e9209fd1926e5736dfcbcd60a852a32444e6",
+        "complete_hours": 744
+      },
+      {
+        "zone": "DE-LU",
+        "month": 2,
+        "eic": "10Y1001A1001A83F",
+        "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10Y1001A1001A83F",
+            "periodStart": "202502010000",
+            "periodEnd": "202503010000"
+          },
+          "retrieved_at": "2026-10-03T22:35:00Z",
+          "sha256": "5ec1274035a5833ffe23ee6ff5236158588cbb0cc4ae6e670cd2af872bb6a299"
+        },
+        "sha256": "d27b59e615c54d16826416d021c4a9d673d0a2f3b653cb7a09df080694b705d3",
+        "complete_hours": 672
+      },
+      {
+        "zone": "DE-LU",
+        "month": 3,
+        "eic": "10Y1001A1001A83F",
+        "geographic_scope": "Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",
+        "source": {
+          "provider": "ENTSO-E Transparency Platform",
+          "request": {
+            "documentType": "A75",
+            "processType": "A16",
+            "in_Domain": "10Y1001A1001A83F",
+            "periodStart": "202503010000",
+            "periodEnd": "202504010000"
+          },
+          "retrieved_at": "2026-10-03T22:35:14Z",
+          "sha256": "cead7ee4e430c0b354cc42ab281c8f8e7c68d8fc774b3c2898e97ec174b11c39"
+        },
+        "sha256": "8506ac8a88e219e0d03908492248d3f76cc8109795b5a0a818b22c93d6547947",
+        "complete_hours": 744
+      }
+    ],
     "DK1": [
       {
         "zone": "DK1",

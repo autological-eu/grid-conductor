@@ -30,6 +30,7 @@ def publish():
    r=json.loads(receipt.read_text())
    if r['eic']!=area['eic'] or r['sha256']!=hashlib.sha256(path.read_bytes()).hexdigest():raise ValueError('Generation source mismatch')
    for row in json.loads(path.read_text()):
+    if row['factor_version']!=FACTOR_VERSION:raise ValueError('Factor version mismatch')
     i=int((dt.datetime.fromisoformat(row['start'].replace('Z','+00:00'))-start).total_seconds()/3600)
     if not 0<=i<8760 or row['start']!=iso(start+dt.timedelta(hours=i)) or i in rows:raise ValueError('Hourly identity mismatch')
     rows[i]=row
@@ -57,6 +58,7 @@ def publish():
 
  save(output/'map-summary.json',dict(schema_version=1,year=2025,unit='gCO2e/kWh',basis='production lifecycle; not consumption or avoided emissions',
   selection='joint observed hourly prices, absolute spread strictly greater than 5 EUR/MWh; not proof of physical congestion',
+  publisher_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),price_sha256={z:hashlib.sha256((ROOT/f'public/research/zone-prices-2025/{z}.json').read_bytes()).hexdigest() for z in areas},
   hourly_files=hourly_files,hourly_start='2025-01-01T00:00:00Z',hourly_columns=['reported_generation_intensity_gco2e_kwh','mapped_subset_intensity_gco2e_kwh','mapped_generation_share'],
   factor_version=FACTOR_VERSION,factor_source=IPCC,factors=FACTORS,zones=zones,borders=borders,provenance=receipts,
   limitations=['Uncollected/missing generation never filled','Mapped subset is not full-zone intensity','Reported categories alone do not prove whole-fleet completeness','Generic factor proxies; biomass/CHP treatment remains unresolved','DE-LU uses labelled German national proxy, not DE-LU generation']))
