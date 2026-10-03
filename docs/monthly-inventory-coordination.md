@@ -336,3 +336,28 @@ variables. Compressed archives total 271 MB and remain offline.
 This step exports coefficients only: it is not a monthly dispatch result, an
 annual solve or a convergence certificate. Annual coordination, boundary
 conditions, warm-state validation and final independent audits remain unfinished.
+
+
+## Annual inventory workspace and warm checks
+
+The annual workspace now encodes the source boundary semantics explicitly.
+Cyclic units have free bounded initial inventories with final=initial;
+noncyclic initial inventories stay fixed to the source, and their terminal
+inventories remain free within capacity. All 160 units in this prepared
+network are cyclic. This is different from fixing cyclic initial values at
+zero merely because the sequential warm run started there.
+
+tools/build_annual_inventory_workspace.py verifies all block and sequential
+result hashes and exact month-to-month warm continuity, then writes sparse
+closure/reachability constraints and candidate inventories. The prepared
+workspace has 2,080 variables, 160 closure equalities and 5,760 necessary
+single-asset reachability inequalities. The warm inventories passed with
+zero reachability violation. This does not establish network feasibility.
+
+tools/audit_annual_warm_state.py independently re-solves fixed monthly
+inventories in separate memory-guarded processes, verifies original-unit
+primal residuals and records source/workspace/block fingerprints. A result
+is not reused against changed inventories. Monthly results are conditional,
+not annual optima; a feasible annual upper bound requires all twelve
+successful re-solves and verified continuity. Annual coordination, objective
+cuts, convergence and final independent result audits remain unfinished.
