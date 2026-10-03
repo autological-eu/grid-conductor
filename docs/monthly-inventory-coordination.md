@@ -145,3 +145,10 @@ the network or constructing blocks. Iteration receipts also include the process
 ID. An absent process still overrides these receipts: preparation and running
 labels are not proof of a live job. The prior receipt status/iteration is retained
 in the preparation record to distinguish a fresh attempt from stale progress.
+
+Disk-backed preparation is reusable across restarts. A manifest fingerprints the
+native input, diagnostic input, driver, exporter, diagnostic implementation and
+archive implementation. Matching dependencies allow reuse only after every
+archive passes its stored hash. Changed dependencies trigger fresh preparation;
+changed archives fail rather than silently change coefficients. No manifest
+means preparation must be regenerated before the cache can be trusted.

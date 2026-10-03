@@ -23,11 +23,23 @@ def run(folder,iterations,disk_blocks=False):
  n.storage_units_t.state_of_charge_set=pd.DataFrame(index=n.snapshots);add_diagnostics(n,data)
  started=time.monotonic()
  if disk_blocks:
-  paths=[]
-  for period,times in enumerate([n.snapshots[:24],n.snapshots[24:]]):
-   prepared=block(n,times,period,2);path=folder/f'coordination-block-{period}.npz'
-   save_block(path,prepared);paths.append(path);del prepared;gc.collect()
-  parts=DiskBlocks(paths)
+  paths=[folder/f'coordination-block-{period}.npz' for period in range(2)]
+  manifest=folder/'coordination-blocks-manifest.json'
+  dependencies=[source,folder/'input.json',Path(__file__),Path(__file__).with_name('pypsa_storage_blocks.py'),Path(__file__).with_name('run_network_benchmark.py'),Path(__file__).with_name('disk_storage_blocks.py')]
+  fingerprint={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in dependencies}
+  saved=json.loads(manifest.read_text()) if manifest.exists() else None
+  if saved is not None and saved['dependencies']==fingerprint:
+   parts=DiskBlocks(paths,saved['blocks'])
+   # Verify all archives now, before expensive independent relaxations.
+   for prepared in parts:del prepared
+  else:
+   for period,times in enumerate([n.snapshots[:24],n.snapshots[24:]]):
+    prepared=block(n,times,period,2)
+    save_block(paths[period],prepared);del prepared;gc.collect()
+   parts=DiskBlocks(paths)
+   temp=manifest.with_suffix('.tmp')
+   temp.write_text(json.dumps(dict(dependencies=fingerprint,blocks=parts.hashes))+'\n');temp.replace(manifest)
+
  else:parts=[block(n,n.snapshots[:24],0,2),block(n,n.snapshots[24:],1,2)]
  bounds=[(v,v) for v in initial]+[(0,v) for v in maximum]+[(v,v) for v in terminal]
  if not np.all(n.snapshot_weightings.to_numpy()==1):raise ValueError('Reference reachability requires hourly weights')
