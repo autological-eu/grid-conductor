@@ -60,7 +60,7 @@ def solve_block(block, state, phase=False):
     if result.status in (1,2,4):
         result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method='highs-ds',options={'time_limit':60.,'presolve':False,'primal_feasibility_tolerance':1e-10,'dual_feasibility_tolerance':1e-10})
     if result.status in (1,2,4):
-        result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method='highs-ipm',options={'time_limit':60.,'presolve':False,'primal_feasibility_tolerance':1e-10,'dual_feasibility_tolerance':1e-10,'ipm_optimality_tolerance':1e-12})
+        result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method='highs-ipm',options={'time_limit':60.,'presolve':True,'primal_feasibility_tolerance':1e-10,'dual_feasibility_tolerance':1e-10,'ipm_optimality_tolerance':1e-12})
     if result.status==2 and not phase:return None
     if not result.success:raise RuntimeError(f'Local LP failed: {result.status}: {result.message}')
     gradient=-np.asarray(B.T@result.eqlin.marginals).ravel()

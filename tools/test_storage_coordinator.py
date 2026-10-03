@@ -78,6 +78,7 @@ class CoordinationTests(unittest.TestCase):
   with patch.object(module,'linprog',side_effect=simulated):result,_=module.solve_block(b,np.array([0.]))
   self.assertAlmostEqual(result.fun,1)
   self.assertEqual(calls[-1]['method'],'highs-ipm')
+  self.assertTrue(calls[-1]['options']['presolve'])
   self.assertEqual(calls[-1]['options']['ipm_optimality_tolerance'],1e-12)
   self.assertTrue(all(c['options']['time_limit']==60. for c in calls))
  def test_timeout_retries_without_accepting_partial_solution(self):
@@ -94,6 +95,7 @@ class CoordinationTests(unittest.TestCase):
   self.assertAlmostEqual(result.fun,1)
   self.assertAlmostEqual(gradient[0],-1)
   self.assertEqual(calls[-1]['method'],'highs-ipm')
+  self.assertTrue(calls[-1]['options']['presolve'])
  def test_exhausted_timeout_fails_without_feasibility_cut(self):
   from unittest.mock import patch
   from types import SimpleNamespace

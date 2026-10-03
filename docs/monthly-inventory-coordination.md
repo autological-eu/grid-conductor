@@ -205,9 +205,17 @@ attempt uses fraction 0.5 and remains uncertified.
 The damped 48-hour reference reached a €0.02705 bound gap before a local
 solver timed out at iteration 655. That result is **not certified**. Local
 timeout status now triggers the same bounded fallback sequence as numerical
-failure: dual simplex without presolve, then interior point without presolve.
+failure: dual simplex without presolve, then interior point with presolve.
 Each attempt retains its 60-second limit and the original LP and tolerances.
 A partial solution from a timed-out attempt never contributes an objective or
 dual cut; exhausted retries stop with failure rather than implying infeasibility.
 Two regression tests cover successful recovery and exhausted timeouts. The
 €0.001 convergence threshold and €0.02 native-reference parity gate are unchanged.
+
+
+The first timeout-recovery attempt also exhausted its three bounded solves at
+the same reference candidate. The final interior-point retry now enables
+presolve, allowing redundant rows and fixed variables to be removed before
+factorisation. This changes solver preparation, not the physical LP, state
+boundaries or certification thresholds. Regression tests assert that this
+fallback uses presolve. Real-data convergence remains unverified.
