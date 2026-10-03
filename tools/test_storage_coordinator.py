@@ -143,6 +143,23 @@ class CoordinationTests(unittest.TestCase):
   self.assertEqual(r['status'],'converged');self.assertAlmostEqual(r['objective'],5,places=4)
   self.assertLessEqual(r['lower_bound'],5+1e-5)
   with self.assertRaises(ValueError):coordinate([b],[(0,5)],proposal_fraction=0)
+ def test_numerical_conflict_preserves_candidate_and_fails_closed(self):
+  from unittest.mock import patch
+  from types import SimpleNamespace
+  import storage_coordinator as module
+  b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
+  failures=[]
+  def conflict(block,state,phase=False):
+   if not phase:return None
+   return SimpleNamespace(fun=8e-8),np.array([-1.])
+  with patch.object(module,'solve_block',side_effect=conflict):
+   with self.assertRaisesRegex(RuntimeError,'Inconsistent local infeasibility'):
+    coordinate([b],[(0,5)],on_failure=failures.append)
+  self.assertEqual(len(failures),1)
+  self.assertEqual(failures[0]['block'],0)
+  self.assertEqual(failures[0]['state_mwh'],[0.])
+  self.assertEqual(failures[0]['phase_violation'],8e-8)
+  self.assertEqual(failures[0]['feasibility_tolerance'],1e-7)
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)

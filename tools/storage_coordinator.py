@@ -67,7 +67,7 @@ def solve_block(block, state, phase=False):
     if len(r):gradient-=np.asarray(V.T@result.ineqlin.marginals).ravel()
     return result,gradient
 
-def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True,proposal_fraction=1.):
+def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True,proposal_fraction=1.,on_failure=None):
     """Return best feasible state and rigorous LP-cut bounds, or fail to converge."""
     if not 0<proposal_fraction<=1:raise ValueError('Proposal fraction must be in (0, 1]')
     nx=len(bounds);nb=len(blocks);cuts=[];limits=[];history=[];upper=np.inf;lower=-np.inf;best=None
@@ -134,7 +134,10 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
             local=solve_block(block,state)
             if local is None:
                 feasible=False;phase,gradient=solve_block(block,state,phase=True)
-                if phase.fun<=feasibility_tolerance:raise RuntimeError(f'Inconsistent local infeasibility and Phase-I result: violation={phase.fun:.12g}, block={i}')
+                if phase.fun<=feasibility_tolerance:
+                    if on_failure is not None:
+                        on_failure(dict(reason='inconsistent_local_infeasibility',iteration=iteration,block=i,state_mwh=state.tolist(),phase_violation=float(phase.fun),feasibility_tolerance=feasibility_tolerance))
+                    raise RuntimeError(f'Inconsistent local infeasibility and Phase-I result: violation={phase.fun:.12g}, block={i}')
                 row=np.r_[gradient,np.zeros(nb)];cuts.append(row);limits.append(float(gradient@state-phase.fun))
             else:
                 result,gradient=local;cost+=result.fun

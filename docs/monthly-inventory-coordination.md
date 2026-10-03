@@ -219,3 +219,21 @@ presolve, allowing redundant rows and fixed variables to be removed before
 factorisation. This changes solver preparation, not the physical LP, state
 boundaries or certification thresholds. Regression tests assert that this
 fallback uses presolve. Real-data convergence remains unverified.
+
+
+## Reproducible numerical conflicts
+
+The presolved fallback advanced the conditional reference to iteration 736 with
+a reported €0.001223 gap, still above the €0.001 gate. It then stopped because
+the cost LP reported infeasibility while Phase I found an 8.05e-8 violation.
+This is not a certified result. Numerical disagreement does not authorize
+accepting the candidate or weakening the convergence threshold.
+
+The validator now saves the proposed boundary inventories, block index, source
+hash, block hashes and Phase-I violation in ignored coordination-failure.json.
+The standalone tools/diagnose_2025_coordination.py validates those fingerprints
+and re-solves just that fixed-state block using bounded simplex/interior-point
+attempts with and without presolve. It reports equality residuals and inequality
+violations for successful solves. These are diagnostics, not objective cuts,
+accepted upper bounds or an annual-optimum certificate. A regression test
+checks that the conflict records its state and still fails closed.

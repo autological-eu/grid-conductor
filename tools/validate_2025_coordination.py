@@ -74,10 +74,15 @@ def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.)
   current=json.loads(output.read_text()) if output.exists() else {}
   current.update(status='running',pid=os.getpid(),elapsed_seconds=time.monotonic()-started,**row)
   temp=output.with_suffix('.tmp');temp.write_text(json.dumps(current,indent=2)+'\n');temp.replace(output)
+ def failure(value):
+  value.update(source_sha256=source_hash,scope='48h conditional reference, not annual optimum',
+               block_hashes=parts.hashes if disk_blocks else None)
+  destination=folder/'coordination-failure.json';temp=destination.with_suffix('.tmp')
+  temp.write_text(json.dumps(value,allow_nan=False,indent=2)+'\n');temp.replace(destination)
  reference=pypsa.Network(folder.parent/'monthly-dispatch-sequential/01.nc')
  warm=np.r_[initial,reference.storage_units_t.state_of_charge.iloc[23].reindex(ids).to_numpy(),terminal];del reference;gc.collect()
  try:
-  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.001,relative_gap=0.,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits,on_stage=stage,stabilize=stabilize,proposal_fraction=proposal_fraction)
+  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.001,relative_gap=0.,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits,on_stage=stage,stabilize=stabilize,proposal_fraction=proposal_fraction,on_failure=failure)
  except Exception as error:
   progress=json.loads(output.read_text()) if output.exists() else {}
   progress.update(status='failed_not_certified',error=str(error));output.write_text(json.dumps(progress,indent=2)+'\n');raise
