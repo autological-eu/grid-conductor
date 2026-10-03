@@ -33,6 +33,7 @@ A new visitor should understand this workflow within roughly 30 seconds.
 | P6 | Research publication | Maintain methods, maths, worked examples, validation gates and downloadable JSON/CSV through Markdown in `docs/` and artifacts in `public/research/`. |
 | P7 | Mobile and accessibility | Selection, panels, charts and scenarios work on narrow portrait and landscape screens. Dialogs fit and scroll; touch controls are usable; keyboard selection has visible focus. |
 | P8 | Static public hosting | Public GitHub Pages URL, correct project base/deep links, reproducible Bun build and CI. No persistent server, paid service or credentials in the browser. |
+| P10 | Carbon accounting | Separate hourly production, consumption and intervention emissions. Declare operational versus lifecycle factors, spatial scope, missing data, storage attribution and coverage. Full estimates remain unavailable when positive generation lacks factors; validate before replacing map climate proxies. |
 | P9 | Verified annual network planning | Chronological storage and original renewable availability; matched native/fast inputs, feasibility and convergence bounds; smaller monolithic reference before annual-optimum claims. Integrate only verified results. |
 
 ## Model boundaries

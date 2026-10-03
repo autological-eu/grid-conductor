@@ -33,6 +33,21 @@ separate from the 2025 conditional and future annual comparisons.
 | W5 | Pending | Audit scheduled-flow direction, timestamps and settlement interpretation on a negative-rent example; compare with actual TSO income where published. Keep metric caveats until verified. |
 | W6 | Pending | Research physical-congestion evidence from ENTSO-E/JAO. Define data/coverage gates before adding a physical-congestion label. Price differences alone are insufficient. |
 
+## Authorized carbon-accounting pilot
+
+- [x] C1: Collect January 2025 ENTSO-E generation for FR, DK1 and DK2;
+  implement mapped operational/lifecycle calculations, missing-hour gaps,
+  generation-mix charts and provenance. 14 carbon tests pass. Full intensities
+  remain null: FR has 319/744 complete hours, DK1/DK2 744/744, and all have unmapped fuels.
+  See [pilot methods](docs/production-carbon-2025.md). Publication verification pending.
+- [ ] C2: Investigate generation gaps, audit independent monthly totals and
+  resolve factors/biomass/CHP/efficiency assumptions with sensitivities.
+- [ ] C3: Add consumption accounting with physical flows, load and chronological
+  storage-origin attribution, retaining existing flow-tracing gates.
+- [ ] C4: Validate intervention emissions against paired verified dispatch;
+  48-hour first, annual only after N2–N4. Never substitute average intensities
+  for marginal intervention benefits.
+
 ## Priority 3 — maintainability and resilience
 
 - [ ] Define durable offline artifact backup/restore with hashes and retention.
