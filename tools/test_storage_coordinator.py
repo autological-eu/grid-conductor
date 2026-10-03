@@ -65,6 +65,20 @@ class CoordinationTests(unittest.TestCase):
   self.assertEqual(calls[0]['bounds'],calls[1]['bounds'])
   self.assertEqual(calls[0]['options']['primal_feasibility_tolerance'],calls[1]['options']['primal_feasibility_tolerance'])
   self.assertFalse(calls[1]['options']['presolve'])
+ def test_persistent_simplex_infeasibility_uses_interior_point(self):
+  from unittest.mock import patch
+  from types import SimpleNamespace
+  import storage_coordinator as module
+  original=module.linprog;calls=[]
+  def simulated(*args,**kwargs):
+   calls.append(kwargs)
+   if len(calls)<=2:return SimpleNamespace(status=2,success=False)
+   return original(*args,**kwargs)
+  b=Block(np.array([1.]),[(0,2)],[[1]],np.array([1.]),[[1]])
+  with patch.object(module,'linprog',side_effect=simulated):result,_=module.solve_block(b,np.array([0.]))
+  self.assertAlmostEqual(result.fun,1)
+  self.assertEqual(calls[-1]['method'],'highs-ipm')
+  self.assertEqual(calls[-1]['options']['ipm_optimality_tolerance'],1e-12)
  def test_iteration_limit_is_not_certificate(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   r=coordinate([b],[(0,5)],max_iterations=1)

@@ -133,3 +133,9 @@ it before every load, including slices. Changed archives abort rather than
 silently alter the coordinated model. The tighter reference was interrupted
 without a solver traceback after iteration 558, with a €1.45 gap; the saved
 cuts remain resumable, but its stale running receipt is not a live process.
+
+The disk-backed resumption stopped on contradictory local infeasibility at
+iteration 558: Phase I measured only 1.78×10⁻¹⁰ violation. Local solves now
+try interior point with crossover after persistent simplex status 2 or 4,
+keeping the same LP and primal/dual tolerances; IPM optimality tolerance is
+10⁻¹². Persistent inconsistency still aborts. No feasibility gate is waived.
