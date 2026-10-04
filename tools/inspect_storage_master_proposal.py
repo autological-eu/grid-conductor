@@ -32,6 +32,13 @@ def run():
  master=solve_master(np.r_[np.zeros(nx),np.ones(nb)],A_ub=sparse.csr_matrix(cuts),b_ub=limits,bounds=bounds+theta)
  if not master.success:raise RuntimeError('Master reconstruction failed')
  lower=max(r['lower_bound'],float(master.fun));iteration=r['iteration']+1;state=master.x[:nx]
+ from storage_master_dual import master_dual
+ dual=master_dual(np.r_[np.zeros(nx),np.ones(nb)],cuts,limits,bounds+theta,master,nx)
+ if lower>upper:
+  direct=linprog(np.r_[np.zeros(nx),np.ones(nb)],A_ub=sparse.csr_matrix(cuts),b_ub=limits,bounds=bounds+theta,method='highs-ds',options={'presolve':False,'time_limit':60.,'primal_feasibility_tolerance':1e-10,'dual_feasibility_tolerance':1e-10})
+  report=dict(checkpoint_sha256=digest(checkpoint),iteration=iteration,incumbent_upper_eur=upper,master_dual=dual,scaled_master_value_eur=float(master.fun),scaled_master_excess_eur=float(master.fun-upper),scaled_master_max_cut_violation=float(np.max(cuts@master.x-limits)),direct_master_success=bool(direct.success),direct_master_status=int(direct.status),scope='Read-only master numerical comparison; not a corrected certificate')
+  if direct.success:report.update(direct_master_value_eur=float(direct.fun),direct_master_excess_eur=float(direct.fun-upper),direct_master_max_cut_violation=float(np.max(cuts@direct.x-limits)))
+  save(folder/'master-bound-diagnostic.json',report);print(json.dumps(report,indent=2));return
  if iteration%5!=0:
   level=lower+.5*(upper-lower);width=np.array([max(1.,hi-lo) for lo,hi in bounds])
   original=sparse.hstack([sparse.csr_matrix(cuts),sparse.csr_matrix((len(cuts),nx))],format='csr')

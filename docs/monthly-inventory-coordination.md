@@ -763,3 +763,34 @@ modes. A detached opt-in smaller-reference run passed iteration 293; full
 convergence/native parity is still unverified. All 55 storage tests pass.
 This fallback is not enabled for annual coordination or published as an annual
 optimum.
+
+
+### Iteration-456 master bound inconsistency
+
+The opt-in reference reached iteration 456 and stopped on a lower-bound/upper-bound
+inconsistency. Last saved feasible cost was €294,446,869.9470595, about €0.007498
+above the native reference; the last saved gap was €0.007492, not convergence.
+No coordinator process remains live.
+
+Read-only master reconstruction finds primal objective €294,446,869.9738686,
+€0.026809 above the incumbent, and maximum original cut violation €0.564062.
+The unscaled dual-simplex comparison returns numerical status 4. A scaled master
+primal with original constraint violations must not be treated as a reliable
+lower bound merely because the solver reports success.
+
+`storage_master_dual.py` reconstructs inequality multipliers in original units,
+projects their signs, and uniformly shrinks them if needed to remove negative
+reduced costs on unbounded-above theta variables. It does not clamp reduced
+costs to zero. Finite inventory bounds supply explicit reduced-cost penalties;
+master equality multipliers are taken as zero, yielding a potentially weaker
+bound. The diagnostic never substitutes a master primal objective for its dual
+expression. Analytic tests cover original units, independence from a deliberately
+invalid primal objective, and multiplier adjustment.
+
+At this checkpoint the reconstructed lower diagnostic is €294,446,869.6609897,
+below the native and incumbent costs, leaving gap €0.286070. This is floating-point
+diagnostic evidence, not rigorous interval certification or the €0.001 convergence
+gate. All 57 storage tests pass. The helper is not yet enabled in the coordinator.
+Next validate that integration on the smaller reference; prior primal-derived
+lower values must not be carried forward as proven bounds. Native parity and all
+original feasibility gates remain unchanged.
