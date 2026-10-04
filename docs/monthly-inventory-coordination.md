@@ -994,3 +994,14 @@ partial-cut relaxation, not the annual cost. Five months remain without verified
 dispatch witnesses; an annual feasible upper bound and optimisation gap remain
 unavailable. This bound does not establish empirical agreement or investment
 value.
+
+
+The opt-in diagnostic can now repair an inventory search proposal by clipping
+only tolerated bound roundoff and retracting toward the checked warm inventory
+state. It rechecks capacity, cyclic closure and reachability at the original
+1e-7 tolerance. The unrestricted master objective and dual lower bound remain
+unchanged; raw and repaired residuals are reported separately. A repaired state
+is only a **master-feasible proposal**: all monthly dispatch feasibility checks
+are still required. Tests verify unchanged lower bounds and reject invalid
+repair anchors. The seven-cut proposal passes this repair, with the same
+€1.550bn lower bound; no additional annual dispatch or optimum is implied.

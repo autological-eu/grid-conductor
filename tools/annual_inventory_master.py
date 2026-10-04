@@ -4,12 +4,13 @@ import json
 from pathlib import Path
 import numpy as np
 from scipy import sparse
-from storage_coordinator import solve_master
+from storage_coordinator import solve_master, bounded_proposal, feasible_proposal
+from annual_inventory_workspace import validate_warm
 from storage_master_dual import master_dual
 from monthly_dispatch import digest, save
 
 
-def solve_cut_master(bounds, equality, rhs, inequality, limit, floors, cuts):
+def solve_cut_master(bounds, equality, rhs, inequality, limit, floors, cuts, warm=None):
     nx=len(bounds); nb=len(floors)
     if nb<1 or not np.isfinite(floors).all():raise ValueError('Invalid objective floors')
     rows=[sparse.hstack([sparse.csr_matrix(inequality),sparse.csr_matrix((len(limit),nb))],format='csr')]
@@ -33,8 +34,23 @@ def solve_cut_master(bounds, equality, rhs, inequality, limit, floors, cuts):
     accepted=max(eq,ub,bound)<=1e-7
     diagnostic=master_dual(cost,A,b,all_bounds,result,nx)
     if accepted and diagnostic['lower_bound_eur']>result.fun+1e-7:raise ValueError('Master dual exceeds master primal')
-    return dict(**diagnostic,master_objective_eur=float(result.fun),proposal_accepted=accepted,
-                proposal_mwh=result.x[:nx].tolist() if accepted else None,
+    proposal=result.x[:nx].copy() if accepted else None
+    repaired=False
+    if not accepted and warm is not None:
+        # Repair inventory only. Do not change the unrestricted objective or dual.
+        warm=validate_warm(warm,bounds,sparse.csr_matrix(equality),rhs)
+        if np.max(sparse.csr_matrix(inequality)@warm-limit,initial=0.)>1e-7:
+            raise ValueError('Warm proposal anchor violates reachability')
+        candidate=bounded_proposal(result.x[:nx],bounds,1e-7)
+        candidate=feasible_proposal(candidate,warm,inequality,limit,1e-7)
+        proposal=validate_warm(candidate,bounds,sparse.csr_matrix(equality),rhs)
+        if np.max(sparse.csr_matrix(inequality)@proposal-limit,initial=0.)>1e-7:
+            raise ValueError('Repaired inventory proposal violates reachability')
+        repaired=True
+    return dict(**diagnostic,master_objective_eur=float(result.fun),proposal_accepted=proposal is not None,
+                proposal_repaired=repaired,proposal_mwh=None if proposal is None else proposal.tolist(),
+                proposal_equality_residual=None if proposal is None else float(np.max(abs(sparse.csr_matrix(equality)@proposal-rhs),initial=0.)),
+                proposal_reachability_violation=None if proposal is None else float(max(0.,np.max(sparse.csr_matrix(inequality)@proposal-limit,initial=0.))),
                 max_equality_residual=eq,max_inequality_violation=ub,max_bound_violation=bound)
 
 
@@ -64,7 +80,7 @@ def audit(folder):
     with np.load(folder/'master-state.npz',allow_pickle=False) as state:
         result=solve_cut_master(state['bounds'],sparse.load_npz(folder/'master-equality.npz'),state['rhs'],
             sparse.load_npz(folder/'master-inequality.npz'),state['limit'],
-            [r['objective_floor_eur'] for r in floors['rows']],cuts)
+            [r['objective_floor_eur'] for r in floors['rows']],cuts,warm=state['warm_state_mwh'])
     upper=verified['annual_feasible_cost_eur']
     if upper is not None and result['lower_bound_eur']>upper+1e-7:raise ValueError('Annual bound inconsistency')
     result.update(input_sha256=master['input_sha256'],verified_cut_months=len(cuts),
