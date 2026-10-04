@@ -13,7 +13,8 @@ from disk_storage_blocks import save_block,DiskBlocks
 from pypsa_storage_blocks import block
 from run_network_benchmark import add_diagnostics
 
-def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.,dual_support=False):
+def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.,dual_support=False,primal_fallback=False):
+ if primal_fallback and not dual_support:raise ValueError('Primal fallback requires independent objective oracle gates')
  suffix='-dual-support' if dual_support else ''
  output=folder/f'coordination-reference{suffix}.json'
  previous=json.loads(output.read_text()) if output.exists() else {}
@@ -66,10 +67,13 @@ def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.,
  if checkpoint.exists():
   resume=json.loads(checkpoint.read_text())
   if resume['source_sha256']!=source_hash:raise ValueError('Coordinator checkpoint source mismatch')
-  if dual_support:verify(resume.get('dependency_fingerprints'),current_fingerprint)
+  if dual_support:
+   verify(resume.get('dependency_fingerprints'),current_fingerprint)
+   if bool(resume.get('primal_fallback',False))!=primal_fallback:raise ValueError('Checkpoint fallback mode mismatch; explicit audited adoption required')
  def save_cuts(value):
   value['source_sha256']=source_hash
   if dual_support:value['dependency_fingerprints']=current_fingerprint
+  value['primal_fallback']=primal_fallback
   # JSON history uses null for unbounded initial upper bounds.
   for item in value['history']:
    for k,v in item.items():
@@ -88,9 +92,9 @@ def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.,
   temp.write_text(json.dumps(value,allow_nan=False,indent=2)+'\n');temp.replace(destination)
  reference=pypsa.Network(folder.parent/'monthly-dispatch-sequential/01.nc')
  warm=np.r_[initial,reference.storage_units_t.state_of_charge.iloc[23].reindex(ids).to_numpy(),terminal];del reference;gc.collect()
- from storage_objective_oracle import objective_oracle
+ from storage_objective_oracle import objective_oracle,solve_with_primal_fallback
  try:
-  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.001,relative_gap=0.,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits,on_stage=stage,stabilize=stabilize,proposal_fraction=proposal_fraction,on_failure=failure,objective_oracle=objective_oracle if dual_support else None)
+  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.001,relative_gap=0.,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits,on_stage=stage,stabilize=stabilize,proposal_fraction=proposal_fraction,on_failure=failure,objective_oracle=objective_oracle if dual_support else None,local_solver=solve_with_primal_fallback if primal_fallback else None)
  except Exception as error:
   progress=json.loads(output.read_text()) if output.exists() else {}
   progress.update(status='failed_not_certified',error=str(error));output.write_text(json.dumps(progress,indent=2)+'\n');raise
@@ -106,4 +110,4 @@ def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.,
   raise RuntimeError(result['error'])
  output.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n');print(result['status'],result['difference_eur'])
 if __name__=='__main__':
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--folder',type=Path,required=True);p.add_argument('--iterations',type=int,default=100);p.add_argument('--disk-blocks',action='store_true',help='Load one prepared LP block at a time');p.add_argument('--no-stabilization',action='store_true',help='Use unrestricted master proposals with unchanged cut bounds');p.add_argument('--proposal-fraction',type=float,default=1.,help='Fraction toward master proposal from best feasible state');p.add_argument('--dual-support',action='store_true',help='Separate primal upper costs from state-independent dual supports; isolated checkpoints');a=p.parse_args();run(a.folder,a.iterations,a.disk_blocks,not a.no_stabilization,a.proposal_fraction,a.dual_support)
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--folder',type=Path,required=True);p.add_argument('--iterations',type=int,default=100);p.add_argument('--disk-blocks',action='store_true',help='Load one prepared LP block at a time');p.add_argument('--no-stabilization',action='store_true',help='Use unrestricted master proposals with unchanged cut bounds');p.add_argument('--proposal-fraction',type=float,default=1.,help='Fraction toward master proposal from best feasible state');p.add_argument('--dual-support',action='store_true',help='Separate primal upper costs from state-independent dual supports; isolated checkpoints');p.add_argument('--primal-fallback',action='store_true',help='After strict objective infeasibility, try solver primal tolerance 1e-7 with unchanged independent gates');a=p.parse_args();run(a.folder,a.iterations,a.disk_blocks,not a.no_stabilization,a.proposal_fraction,a.dual_support,a.primal_fallback)

@@ -76,7 +76,8 @@ class Block:
     limit: object = None
     inequality_coupling: object = None
 
-def solve_block(block, state, phase=False, time_limit=60., first_method='highs', residual_tolerance=None, on_residual_rejection=None):
+def solve_block(block, state, phase=False, time_limit=60., first_method='highs', residual_tolerance=None, on_residual_rejection=None,primal_tolerance=1e-10):
+    if not np.isfinite(primal_tolerance) or not 1e-10<=primal_tolerance<=1e-7:raise ValueError('Unsupported solver primal tolerance')
     if not np.isfinite(time_limit) or time_limit<=0:raise ValueError('Invalid local solver time limit')
     if first_method not in ('highs','highs-ipm'):raise ValueError('Unsupported first local solver')
 
@@ -96,7 +97,7 @@ def solve_block(block, state, phase=False, time_limit=60., first_method='highs',
     attempts=[(first_method,True),('highs-ds',False),('highs-ipm',first_method!='highs-ipm')]
     rejected_residual=None
     for method,presolve in attempts:
-        options={'time_limit':float(time_limit),'presolve':presolve,'primal_feasibility_tolerance':1e-10,'dual_feasibility_tolerance':1e-10}
+        options={'time_limit':float(time_limit),'presolve':presolve,'primal_feasibility_tolerance':primal_tolerance,'dual_feasibility_tolerance':1e-10}
         if method=='highs-ipm':options['ipm_optimality_tolerance']=1e-12
         result=linprog(c,A_eq=eq,b_eq=b,A_ub=ub if len(r) else None,b_ub=r if len(r) else None,bounds=bounds,method=method,options=options)
         if residual_tolerance is not None and result.success:
@@ -117,9 +118,10 @@ def solve_block(block, state, phase=False, time_limit=60., first_method='highs',
     if len(r):gradient-=np.asarray(V.T@result.ineqlin.marginals).ravel()
     return result,gradient
 
-def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True,proposal_fraction=1.,on_failure=None,objective_oracle=None):
+def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True,proposal_fraction=1.,on_failure=None,objective_oracle=None,local_solver=None):
     """Return best feasible state and configured numerical LP-cut bounds, or fail to converge."""
     if not 0<proposal_fraction<=1:raise ValueError('Proposal fraction must be in (0, 1]')
+    objective_solver=solve_block if local_solver is None else local_solver
     nx=len(bounds);nb=len(blocks);cuts=[];limits=[];history=[];upper=np.inf;lower=-np.inf;best=None
     theta_bounds=[]
     for block_index,block in enumerate(blocks):
@@ -149,7 +151,7 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
         cost=0.
         for i,block in enumerate(blocks):
             if on_stage is not None:on_stage(dict(stage='local',block=i))
-            local=solve_block(block,state)
+            local=objective_solver(block,state)
             if local is None:raise ValueError('Warm boundary state is infeasible')
             result,gradient=local
             upper_value,support_value=result.fun,result.fun
@@ -193,7 +195,7 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
             if equality is not None and np.max(abs(sparse.csr_matrix(equality)@state-rhs))>feasibility_tolerance:raise RuntimeError('Repaired inventory proposal violates master equality')
         for i,block in enumerate(blocks):
             if on_stage is not None:on_stage(dict(stage='local',block=i))
-            local=solve_block(block,state)
+            local=objective_solver(block,state)
             if local is None:
                 feasible=False;phase,gradient=solve_block(block,state,phase=True)
                 if phase.fun<=feasibility_tolerance:

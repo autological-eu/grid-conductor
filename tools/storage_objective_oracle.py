@@ -25,3 +25,11 @@ def objective_oracle(block,state,result):
   upper=math.fsum(float(c)*float(x) for c,x in zip(block.cost,candidate))
  if lower>upper+1e-7:raise RuntimeError(f'Dual support exceeds primal upper value: excess={lower-upper:.12g} EUR, lower={lower:.12g}, upper={upper:.12g}, equality={eq:.12g}, inequality={ub:.12g}, bounds={violation:.12g}')
  return upper,gradient,lower
+
+
+def solve_with_primal_fallback(block,state):
+ """Opt-in fallback; original-unit acceptance and dual tolerance unchanged."""
+ from storage_coordinator import solve_block
+ local=solve_block(block,state)
+ if local is not None:return local
+ return solve_block(block,state,primal_tolerance=1e-7,residual_tolerance=1e-7)

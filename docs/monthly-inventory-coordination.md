@@ -738,3 +738,28 @@ inspect the actual process before treating incomplete receipts as progress.
 All 53 storage tests pass, including budget, endpoint and non-extrapolation tests.
 This is local numerical investigation, not reference convergence or an annual
 result.
+
+
+### Solver tolerance study and opt-in fallback
+
+All three shared-inventory perturbations failed block 0; block 1 passed each.
+`check_storage_solver_tolerances.py` then tested the original block-0 objective
+at the same failed state. Solver primal tolerances 1e-9 and 1e-8 report infeasible;
+1e-7 reports success and passes the independent original-unit primal and dual
+consistency gates, with local primal–dual gap 7.600e-7 EUR. This is numerical
+feasibility within declared tolerances, not exact feasibility certification.
+
+The solver's internal primal tolerance is distinct from the acceptance gate.
+An explicit `--primal-fallback` reference option now retries a strictly reported
+infeasible objective solve at solver primal tolerance 1e-7, requiring independent
+original-unit checks at 1e-7. Objective dual tolerance remains 1e-10; the original
+reference €0.001 convergence and €0.02 native parity gates remain unchanged.
+Phase-I duals are never used as objective duals. The default solver is unchanged.
+No fallback occurs when the strict solve succeeds; non-infeasibility errors stop.
+
+The prior checkpoint is archived and its code fingerprints were explicitly
+adopted without modifying numerical cuts. Resume rejects mismatched fallback
+modes. A detached opt-in smaller-reference run passed iteration 293; full
+convergence/native parity is still unverified. All 55 storage tests pass.
+This fallback is not enabled for annual coordination or published as an annual
+optimum.
