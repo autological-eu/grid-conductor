@@ -960,3 +960,11 @@ witnesses and the annual preparation audit pass. Neither a partial prefix nor
 all twelve fixed-inventory solves establishes an annual optimum, an annual
 optimisation gap, or agreement with observed ENTSO-E prices. Large witnesses
 remain outside Git; the verification tool and methods are versioned.
+
+
+The coordinator also supports opt-in `nonnegative_floors=True`. It checks each
+block's state-independent nonnegative source bounds and objective coefficients
+before using a conservative zero lower floor, avoiding independent relaxation
+solves. Negative costs or unsupported bounds are rejected. This is a weaker
+initial lower bound, not a convergence shortcut or an annual certificate;
+subsequent feasibility and gap checks still apply. The default path is unchanged.

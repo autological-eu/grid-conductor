@@ -2,9 +2,24 @@
 import unittest
 import numpy as np
 from scipy.optimize import linprog
+from scipy import sparse
 from storage_coordinator import Block,coordinate
 
 class CoordinationTests(unittest.TestCase):
+ def test_source_floors_preserve_optimum_and_skip_relaxations(self):
+  b=Block(np.array([1.]),[(0,10)],sparse.csr_matrix([[1]]),np.array([10.]),sparse.csr_matrix([[1]]))
+  stages=[]
+  default=coordinate([b],[(0,5)],initial_state=[0])
+  result=coordinate([b],[(0,5)],initial_state=[0],nonnegative_floors=True,on_stage=stages.append)
+  self.assertEqual(result['status'],'converged')
+  self.assertAlmostEqual(result['objective'],default['objective'])
+  self.assertLessEqual(result['lower_bound'],default['objective']+1e-5)
+  self.assertTrue(any(s['stage']=='source_objective_floor' for s in stages))
+  self.assertFalse(any(s['stage']=='independent_relaxation' for s in stages))
+ def test_source_floors_reject_negative_costs(self):
+  b=Block(np.array([-1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
+  with self.assertRaises(ValueError):coordinate([b],[(0,5)],nonnegative_floors=True)
+
  def test_proposal_repair_retracts_only_toward_feasible_incumbent(self):
   from storage_coordinator import feasible_proposal
   p=feasible_proposal(np.array([1.+4e-7]),np.array([.5]),[[1.]],[1.],1e-7)

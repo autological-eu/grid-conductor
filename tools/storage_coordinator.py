@@ -118,13 +118,18 @@ def solve_block(block, state, phase=False, time_limit=60., first_method='highs',
     if len(r):gradient-=np.asarray(V.T@result.ineqlin.marginals).ravel()
     return result,gradient
 
-def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True,proposal_fraction=1.,on_failure=None,objective_oracle=None,local_solver=None,master_bound=None):
+def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True,proposal_fraction=1.,on_failure=None,objective_oracle=None,local_solver=None,master_bound=None,nonnegative_floors=False):
     """Return best feasible state and configured numerical LP-cut bounds, or fail to converge."""
     if not 0<proposal_fraction<=1:raise ValueError('Proposal fraction must be in (0, 1]')
     objective_solver=solve_block if local_solver is None else local_solver
     nx=len(bounds);nb=len(blocks);cuts=[];limits=[];history=[];upper=np.inf;lower=-np.inf;best=None
     theta_bounds=[]
     for block_index,block in enumerate(blocks):
+        if nonnegative_floors:
+            from storage_objective_floor import nonnegative_objective_floor
+            if on_stage is not None:on_stage(dict(stage='source_objective_floor',block=block_index))
+            theta_bounds.append((nonnegative_objective_floor(block),None))
+            continue
         if on_stage is not None:on_stage(dict(stage='independent_relaxation',block=block_index))
         A=sparse.csr_matrix(block.equality);B=sparse.csr_matrix(block.coupling)
         eq=np.asarray(B.getnnz(axis=1))==0
