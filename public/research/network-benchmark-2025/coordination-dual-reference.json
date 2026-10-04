@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "status": "configured_reference_gates_passed",
+  "hours": 48,
+  "blocks": [
+    {
+      "block": 0,
+      "block_sha256": "42462af0abcfd2885a8a8297aa6fa82491b24857c5309fac291c5ad1126fdcbf",
+      "re_solved_cost_eur": 117111436.63132346,
+      "dual_support_eur": 117111436.6311402,
+      "independent_corrected_cost_eur": 117111436.63131997,
+      "primal_checks": {
+        "lsmr_stop_code": 7,
+        "lsmr_iterations": 100,
+        "free_variables": 53208,
+        "max_equality_residual": 8.949427865445614e-10,
+        "max_inequality_violation": 9.013092494569719e-10,
+        "max_bound_violation": 0.0,
+        "maximum_correction": 2.8723113850411987e-10,
+        "cost_change_eur": -3.487301388444872e-06,
+        "original_unit_gate_passed": true
+      }
+    },
+    {
+      "block": 1,
+      "block_sha256": "3ff6d268a28a8a85d4bdfcf78faaba39c4e2cd46b8dd4c0478c92197b8259902",
+      "re_solved_cost_eur": 177335433.3089429,
+      "dual_support_eur": 177335433.3089394,
+      "independent_corrected_cost_eur": 177335433.30894193,
+      "primal_checks": {
+        "lsmr_stop_code": 7,
+        "lsmr_iterations": 100,
+        "free_variables": 53208,
+        "max_equality_residual": 1.4551915228366852e-10,
+        "max_inequality_violation": 5.476284265092887e-11,
+        "max_bound_violation": 0.0,
+        "maximum_correction": 8.571987564209849e-11,
+        "cost_change_eur": -9.891744008373963e-07,
+        "original_unit_gate_passed": true
+      }
+    }
+  ],
+  "iterations": 474,
+  "objective_eur": 294446869.9402664,
+  "native_cost_eur": 294446869.93956167,
+  "difference_eur": 0.0007047057151794434,
+  "lower_bound_eur": 294446869.9393161,
+  "gap_eur": 0.0009502768516540527,
+  "independent_cost_eur": 294446869.9402664,
+  "independent_native_difference_eur": 0.0007047057151794434,
+  "native_input_sha256": "4887ed184781877a48e7684104c7709aba071f209ea12cfdb3c8d1c101c5ee91",
+  "audit_tool_sha256": "5d8621f1cf79cb0376811426686f0481db7ac934b9a811961e54bf6a9133094d",
+  "reference_sha256": "c8ba3ebc519c1df331aaf8f3b65273a3b1867b732197e88e32cd6095ecfb428b",
+  "checkpoint_sha256": "4764e067443ce0dad26d6a73f9417bfd1b5dabd4a96abb13ff6e9138d2a147da",
+  "scope": "2025 conditional 48h reference; floating-point numerical validation, not interval certification or annual optimum"
+}

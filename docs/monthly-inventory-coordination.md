@@ -1,6 +1,39 @@
 # Coordinating chronological storage inventories
 
-## Current reference result — 3 October 2026
+## Verified dual-support reference — 4 October 2026
+
+The opt-in two-block 48-hour reference converged at iteration **474**, passing
+its unchanged €0.001 numerical gap and €0.02 native parity gates. Independent
+final-inventory objective re-solves reproduced the saved cost. Both corrected
+primals passed the original 1e-7 feasibility gates.
+
+| Check | Result |
+| --- | ---: |
+| Native 48-hour cost | €294,446,869.93956167 |
+| Coordinated feasible cost | €294,446,869.9402664 |
+| Numerical master dual lower bound | €294,446,869.9393161 |
+| Master/feasible gap | €0.0009503 |
+| Difference from native | €0.0007047 |
+| Maximum independent equality residual | 8.95e-10 |
+| Maximum independent inequality violation | 9.02e-10 |
+| Maximum independent variable-bound violation | 0 |
+
+[Dual-support reference and independent audit](../public/research/network-benchmark-2025/coordination-dual-reference.json)
+
+Unlike the earlier result below, this numerical lower bound lies below the native
+reference. This is still floating-point validation, not rigorous interval
+certification. It covers **1–2 January 2025**, fixed initial/final inventories and
+two chronological 24-hour blocks. It does not establish seasonal water values,
+annual optimality, or agreement with observed ENTSO-E prices. Original renewable
+availability and storage physics remain unchanged. The earlier reference and its
+artifact are preserved separately.
+
+Reproduce the final audit with `python tools/audit_storage_dual_reference.py`.
+The run used explicit `--dual-support --primal-fallback --master-dual` options;
+full convergence is now verified for this reference, while the annual streamed
+coordinator and annual empirical validation remain unfinished.
+
+## Earlier reference result — 3 October 2026
 
 The two-block 48-hour conditional reference now passes its configured numerical
 gates: **€0.0002267 master/feasible gap** and **€0.007903 difference from native
