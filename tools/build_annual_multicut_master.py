@@ -14,7 +14,7 @@ def matching_domain(reference,candidate):
             raise ValueError('Candidate inventory domain differs from reference')
 
 
-def build(folders):
+def build(folders,feasibility_paths=()):
     if not folders or len(set(p.resolve() for p in folders))!=len(folders):raise ValueError('Distinct verified workspaces required')
     domains=[];cuts=[];evidence=[];best=None;seen=set()
     for folder in folders:
@@ -45,12 +45,33 @@ def build(folders):
         if best is None or audit['annual_feasible_cost_eur']<evidence[best]['cost_eur']:best=len(evidence)-1
     parent=folders[best];domain=domains[best]
     floors=json.loads((parent/'objective-floors.json').read_text())
+    feasibility=[];feasibility_evidence=[]
+    for path in feasibility_paths:
+        cut=json.loads(path.read_text())
+        if cut['status']!='independently_replayed_numerical_feasibility_cut' or cut['input_sha256']!=evidence[0]['manifest']['input_sha256'] or cut['audit_tool_sha256']!=digest(Path(__file__).with_name('audit_annual_feasibility_cut.py')):
+            raise ValueError('Unverified feasibility cut/model mismatch')
+        month=cut['month']
+        if not 1<=month<=12:raise ValueError('Invalid feasibility-cut month')
+        if cut['block_sha256']!=json.loads((folders[0]/f'{month:02d}.json').read_text())['block_sha256']:
+            raise ValueError('Feasibility cut LP source differs')
+        receipt_path=path.parent/f'{month:02d}-witness.json'
+        receipt=json.loads(receipt_path.read_text())
+        if digest(receipt_path)!=cut['producer_receipt_sha256'] or digest(path.parent/f'{month:02d}-witness.npz')!=cut['witness_sha256']:
+            raise ValueError('Replayed feasibility witness changed')
+        if receipt['tool_sha256']!=digest(Path(__file__).with_name('annual_inventory_phase_one.py')):
+            raise ValueError('Feasibility producer changed')
+        for name,value in receipt['dependencies'].items():
+            if digest(Path(__file__).with_name(name))!=value:raise ValueError('Feasibility dependency changed')
+        if cut['anchor_audit_sha256'] not in {item['audit_sha256'] for item in evidence}:
+            raise ValueError('Verified feasibility anchor not among model-matched candidates')
+        feasibility.append((cut['gradient'],cut['feasibility_limit']))
+        feasibility_evidence.append(dict(path=str(path.resolve()),sha256=digest(path)))
     result=solve_cut_master(domain['bounds'],sparse.load_npz(parent/'master-equality.npz'),domain['rhs'],
-        sparse.load_npz(parent/'master-inequality.npz'),domain['limit'],[r['objective_floor_eur'] for r in floors['rows']],cuts,warm=domain['warm_state_mwh'])
+        sparse.load_npz(parent/'master-inequality.npz'),domain['limit'],[r['objective_floor_eur'] for r in floors['rows']],cuts,warm=domain['warm_state_mwh'],feasibility_cuts=feasibility)
     upper=evidence[best]['cost_eur']
     if result['lower_bound_eur']>upper+1e-7:raise ValueError('Combined annual bounds inconsistent')
     result.update(input_sha256=evidence[best]['manifest']['input_sha256'],annual_feasible_cost_eur=upper,
-        annual_gap_eur=upper-result['lower_bound_eur'],candidate_count=len(folders),cut_count=len(cuts),
+        annual_gap_eur=upper-result['lower_bound_eur'],candidate_count=len(folders),cut_count=len(cuts),feasibility_cuts=feasibility_evidence,
         witness_audit_sha256=evidence[best]['audit_sha256'],floor_audit_sha256=digest(parent/'objective-floors.json'),
         tool_sha256=digest(Path(__file__)),dependencies={name:digest(Path(__file__).with_name(name)) for name in ['annual_inventory_master.py','storage_coordinator.py','storage_master_dual.py']},
         candidates=[{k:v for k,v in item.items() if k!='manifest'} for item in evidence],
@@ -59,6 +80,6 @@ def build(folders):
     return parent,result
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--folders',type=Path,nargs='+',required=True)
-    parent,result=build(parser.parse_args().folders)
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--folders',type=Path,nargs='+',required=True);parser.add_argument('--feasibility-cuts',type=Path,nargs='*',default=[])
+    args=parser.parse_args();parent,result=build(args.folders,args.feasibility_cuts)
     print(f"Combined {result['candidate_count']} verified candidates; gap €{result['annual_gap_eur']:.6f}; selected incumbent {parent}")

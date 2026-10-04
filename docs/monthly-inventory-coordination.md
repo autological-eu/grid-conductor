@@ -1123,3 +1123,21 @@ source hashes and the explicit elastic mode are retained for independent replay;
 no production cut or convergence claim is accepted merely because a solve starts.
 The new run has its own `phase-one-boundary` directory, preserving the failed
 full-row attempt, and retains the 6 GiB/600-second/900-second resource guards.
+
+
+### Feasibility-cut replay and master integration
+
+`tools/audit_annual_feasibility_cut.py` reconstructs the declared elastic
+formulation from the original monthly block and replays saved numeric primal
+and dual arrays. It checks source, producer, dependency, witness and feasible
+anchor hashes, original-unit residuals, the elastic objective and the affine
+support/cut limit. It rejects nonpositive infeasibility claims or a cut that
+excludes the verified feasible anchor. A solver receipt alone is insufficient.
+
+The multi-candidate master accepts only these replayed cuts, with matching
+original LP coefficients and a verified anchor among its candidate workspaces.
+Feasibility cuts constrain inventories separately from economic objective cuts.
+They also apply during numerical proposal repair; tests verify that repair does
+not bypass the added constraint or change the unrestricted lower bound. The
+boundary-row production job remains unverified until it finishes and passes
+independent replay. No production cut or narrower annual gap is claimed here.

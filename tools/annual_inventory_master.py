@@ -10,11 +10,18 @@ from storage_master_dual import master_dual
 from monthly_dispatch import digest, save
 
 
-def solve_cut_master(bounds, equality, rhs, inequality, limit, floors, cuts, warm=None):
+def solve_cut_master(bounds, equality, rhs, inequality, limit, floors, cuts, warm=None, feasibility_cuts=()):
     nx=len(bounds); nb=len(floors)
     if nb<1 or not np.isfinite(floors).all():raise ValueError('Invalid objective floors')
-    rows=[sparse.hstack([sparse.csr_matrix(inequality),sparse.csr_matrix((len(limit),nb))],format='csr')]
-    values=list(limit)
+    inventory_rows=[sparse.csr_matrix(inequality)];inventory_limits=list(limit)
+    for gradient,value in feasibility_cuts:
+        gradient=np.asarray(gradient,dtype=float)
+        if gradient.shape!=(nx,) or not np.isfinite(gradient).all() or not np.isfinite(value):
+            raise ValueError('Invalid feasibility cut')
+        inventory_rows.append(sparse.csr_matrix(gradient.reshape(1,-1)));inventory_limits.append(float(value))
+    inventory_matrix=sparse.vstack(inventory_rows,format='csr');inventory_limit=np.asarray(inventory_limits)
+    rows=[sparse.hstack([inventory_matrix,sparse.csr_matrix((len(inventory_limit),nb))],format='csr')]
+    values=list(inventory_limit)
     for month,gradient,intercept in cuts:
         gradient=np.asarray(gradient,dtype=float)
         if not 0<=month<nb or gradient.shape!=(nx,) or not np.isfinite(gradient).all() or not np.isfinite(intercept):
@@ -39,18 +46,18 @@ def solve_cut_master(bounds, equality, rhs, inequality, limit, floors, cuts, war
     if not accepted and warm is not None:
         # Repair inventory only. Do not change the unrestricted objective or dual.
         warm=validate_warm(warm,bounds,sparse.csr_matrix(equality),rhs)
-        if np.max(sparse.csr_matrix(inequality)@warm-limit,initial=0.)>1e-7:
+        if np.max(inventory_matrix@warm-inventory_limit,initial=0.)>1e-7:
             raise ValueError('Warm proposal anchor violates reachability')
         candidate=bounded_proposal(result.x[:nx],bounds,1e-7)
-        candidate=feasible_proposal(candidate,warm,inequality,limit,1e-7)
+        candidate=feasible_proposal(candidate,warm,inventory_matrix,inventory_limit,1e-7)
         proposal=validate_warm(candidate,bounds,sparse.csr_matrix(equality),rhs)
-        if np.max(sparse.csr_matrix(inequality)@proposal-limit,initial=0.)>1e-7:
+        if np.max(inventory_matrix@proposal-inventory_limit,initial=0.)>1e-7:
             raise ValueError('Repaired inventory proposal violates reachability')
         repaired=True
     return dict(**diagnostic,master_objective_eur=float(result.fun),proposal_accepted=proposal is not None,
                 proposal_repaired=repaired,proposal_mwh=None if proposal is None else proposal.tolist(),
                 proposal_equality_residual=None if proposal is None else float(np.max(abs(sparse.csr_matrix(equality)@proposal-rhs),initial=0.)),
-                proposal_reachability_violation=None if proposal is None else float(max(0.,np.max(sparse.csr_matrix(inequality)@proposal-limit,initial=0.))),
+                proposal_reachability_violation=None if proposal is None else float(max(0.,np.max(inventory_matrix@proposal-inventory_limit,initial=0.))),
                 max_equality_residual=eq,max_inequality_violation=ub,max_bound_violation=bound)
 
 

@@ -51,3 +51,22 @@ class AnnualMasterTests(unittest.TestCase):
    return result
   with patch.object(module,'solve_master',side_effect=perturbed):
    with self.assertRaises(ValueError):solve_cut_master([(0.,5.)],[[1.]],np.array([3.]),[[1.]],np.array([3.]),[0.],[(0,[-1.],10.)],warm=np.array([1.]))
+
+ def test_feasibility_cut_changes_domain_not_welfare_cut(self):
+  r=solve_cut_master([(0.,5.)],sparse.csr_matrix((0,1)),np.array([]),sparse.csr_matrix((0,1)),np.array([]),[0.],[(0,[-1.],10.)],feasibility_cuts=[([1.],2.)])
+  self.assertAlmostEqual(r['master_objective_eur'],8.)
+  self.assertAlmostEqual(r['lower_bound_eur'],8.)
+  self.assertLessEqual(r['proposal_mwh'][0],2.+1e-7)
+
+ def test_repair_respects_added_feasibility_cut(self):
+  from unittest.mock import patch
+  import annual_inventory_master as module
+  original=module.solve_master
+  def perturbed(*args,**kwargs):
+   result=original(*args,**kwargs);result.x[0]+=4e-7
+   return result
+  with patch.object(module,'solve_master',side_effect=perturbed):
+   r=solve_cut_master([(0.,5.)],sparse.csr_matrix((0,1)),np.array([]),sparse.csr_matrix((0,1)),np.array([]),[0.],[(0,[-1.],10.)],warm=np.array([1.]),feasibility_cuts=[([1.],2.)])
+  self.assertTrue(r['proposal_repaired'])
+  self.assertLessEqual(r['proposal_mwh'][0],2.)
+  self.assertAlmostEqual(r['lower_bound_eur'],8.)
