@@ -419,3 +419,31 @@ are explicitly rejected diagnostics and cannot supply accepted feasibility
 or convergence evidence. A bounded diagnostic retry is launched to capture
 a candidate. The original physical LP and acceptance tolerances are unchanged;
 all 27 storage tests pass, including rejected-candidate callback coverage.
+
+### Rejected January row inspection (4 October 2026)
+
+The diagnostic retry failed, but retained its rejected primal vector.
+`inspect_rejected_monthly_primal.py` verifies the block, warm-state and
+primal hashes, then inspects the 100 largest CSR equality residuals.
+Worst row 117846 has 256 nonzero terms and zero right-hand side. Its
+coefficients range in absolute value from 2.654 to 185.186; the sum of
+absolute evaluated terms is about 419,349.
+
+| Arithmetic | Worst-row residual |
+| --- | --- |
+| Original CSR evaluation | 2.854330887e-7 |
+| Compensated sum of double-precision products | 2.854421837e-7 |
+| Extended-precision products and sum | 2.854404126e-7 |
+
+Agreement across these evaluations rules out ordinary summation error as
+the explanation for this row's failed 1e-7 gate. This diagnostic inspects
+selected rows only and is not a new acceptance check. The solution remains
+rejected; no annual feasibility or optimality claim follows. No identical
+full-month solve is restarted. Next work is a controlled conditioning or
+solver-refinement experiment validated on the smaller matched reference
+and audited in original units before returning to January.
+
+    python tools/inspect_rejected_monthly_primal.py --folder data/pypsa-eur/annual-coordination
+
+Raw diagnostic outputs stay ignored offline. All 27 existing storage tests
+pass; the inspector was run on the actual hash-verified retained candidate.
