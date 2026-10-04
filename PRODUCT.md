@@ -109,6 +109,14 @@ Static Bun/Vite/React/TanStack Router, IndexedDB and published research artifact
 Keep useful existing UI and research. Never commit credentials or ignored large
 caches/networks. Work on `public-v1`; reviewed merge only, no force-push.
 
+## Research cache and recovery
+
+Keep large reproducible provider inputs as local caches; do not upload
+multi-gigabyte backups to GitHub or establish third-party bulk backups merely
+to mirror those inputs. Preserve source requests, versions and hashes for
+reconstruction. Prioritise compact solver-state/result recovery with provenance;
+a changed reconstructed input must not silently resume saved optimisation cuts.
+
 ## Documentation ownership
 
 - [README.md](README.md): introduction, setup, repository map and deployment.

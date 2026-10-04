@@ -20,6 +20,7 @@ def call(args):
  return result.stdout
 
 def main():
+ raise RuntimeError("Bulk GitHub backup retired by user decision; see planning/research-backup.md")
  STAGE.mkdir(exist_ok=True)
  manifest={'schema_version':1,'repository':REPO,'source_commit':call(['git','-C',str(ROOT),'rev-parse','HEAD']).strip(),'status':'prepared_2025_inputs_and_March_pilot_not_annual_solution','restore':'Concatenate each file parts in listed order, verify file SHA-256, then restore to its relative path. Restore compact weather to its original path; recreate the upstream cutout symlink. Never treat the March pilot as an annual result.','assumptions':['2024 country-level nuclear availability proxy','March solution closes storage over March; annual solve stopped at memory guard'],'files':[]}
  for source in FILES:
