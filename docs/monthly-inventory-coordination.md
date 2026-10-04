@@ -447,3 +447,29 @@ and audited in original units before returning to January.
 
 Raw diagnostic outputs stay ignored offline. All 27 existing storage tests
 pass; the inspector was run on the actual hash-verified retained candidate.
+
+### Rejected row-normalization experiment
+
+`condition_storage_block.py` multiplies each equality/inequality and its
+boundary coupling/right-hand side by the same positive row factor. Costs
+and variable bounds stay unchanged. Analytical tests preserve objective
+values and boundary gradients, including inequalities.
+
+The experiment compared original and normalized blocks at the saved 48-hour
+reference boundary state. Its initial run imposed an unnecessary extra
+scaled-unit 1e-10 residual limit and failed; that limit was removed. The
+second run used the original-unit 1e-7 feasibility and €0.02 cost-parity gates.
+Block 1 still failed: equality residual 2.56179e-7, inequality violation
+7.28e-12, zero bound violation. Cost difference was -4.77e-7 EUR; maximum
+boundary-gradient difference was 2.46e-10.
+
+Near-identical objectives do not establish feasible dispatch. This simple
+normalization is rejected for annual use and no January solve is launched
+with it. The experiment and failing diagnostics are retained for further
+conditioning/refinement work. All 29 storage tests pass; this includes
+analytical tests, not a passing numerical-reference experiment.
+
+    python tools/check_conditioned_storage_reference.py
+
+The tool writes a failure receipt before raising if an original-unit gate
+fails. Offline diagnostics remain separate from accepted research artifacts.
