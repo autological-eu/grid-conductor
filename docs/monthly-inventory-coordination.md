@@ -1005,3 +1005,44 @@ is only a **master-feasible proposal**: all monthly dispatch feasibility checks
 are still required. Tests verify unchanged lower bounds and reject invalid
 repair anchors. The seven-cut proposal passes this repair, with the same
 €1.550bn lower bound; no additional annual dispatch or optimum is implied.
+
+
+### Verified annual feasible incumbent — 4 October 2026
+
+All twelve retained monthly primal/dual witnesses now pass independent replay
+against the original prepared network, source/code/content hashes and original-unit
+feasibility gates. The preparation audit confirms all 8,760 chronological hours;
+shared inventories preserve annual cyclic closure. These are fixed warm-inventory
+monthly re-solves, combined into a feasible annual dispatch, **not a converged
+annual optimum**.
+
+| Quantity | Euros |
+| --- | ---: |
+| Feasible annual dispatch cost (upper bound) | 50,745,703,158.61136 |
+| Initial twelve-cut lower bound | 13,704,093,509.130175 |
+| Absolute bound gap | 37,041,609,649.481186 |
+
+The relative bound gap is **72.99%**, computed as `(upper − lower) / upper`.
+Tiny local monthly primal/dual gaps do not imply a tiny annual coordination gap:
+those local problems hold inventories fixed, while annual optimisation may choose
+different linked inventories. The lower bound is a conservative floating-point
+cut relaxation, not an interval-certified bound. No annual convergence claim is
+made. Peak monthly RSS was 3,900,272,640 bytes; the longest whole-worker elapsed
+time was 625.32 seconds, including setup and witness retention.
+
+[Download the compact annual feasibility evidence](../../research/network-benchmark-2025/annual-inventory-feasibility.json).
+It includes monthly residuals, costs, local gaps, runtime, memory and provenance
+hashes. Large numeric witnesses stay offline. This evidence is separate from the
+2013 weekly benchmark and the matched 2025 conditional-window benchmark; it is
+not an annual native/fast investment comparison or empirical validation.
+
+`tools/prepare_annual_inventory_candidate.py` prepares candidate 001 in an
+isolated workspace only after complete incumbent replay and source/proposal
+fingerprint checks. Original monthly LP blocks are linked without copying or
+changing coefficients; capacity, reachability and cyclic closure are checked
+again. Its inventory proposal requires twelve new bounded monthly dispatch
+checks before it can provide another upper bound. Infeasible or timed-out solves
+must remain failures, never accepted annual results. Feasibility cuts and a
+resumable converged annual coordination loop remain unfinished. No changes to
+renewable availability or research methodology were made; the declared 2024
+nuclear-availability proxy remains.
