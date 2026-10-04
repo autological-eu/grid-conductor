@@ -26,7 +26,7 @@ def worker(args):
   save(target.with_suffix('.json'),dict(**signature,**diagnostic,month=args.month,
    primal_sha256=digest(target),cost_eur=float(result.fun),
    scope='rejected candidate, diagnostic only; no accepted feasibility or annual result'))
- local=solve_block(block,state,time_limit=args.solver_seconds,first_method=args.first_solver,residual_tolerance=1e-7,on_residual_rejection=retain_rejected)
+ local=solve_block(block,state,time_limit=args.solver_seconds,first_method=args.first_solver,residual_tolerance=1e-7,on_residual_rejection=retain_rejected,primal_tolerance=getattr(args,'primal_tolerance',1e-10))
  if local is None:raise ValueError('Fixed warm inventories infeasible')
  r,_=local
  eq=float(np.max(abs(block.equality@r.x+block.coupling@state-block.rhs)))
@@ -36,12 +36,12 @@ def worker(args):
   save(args.folder/'warm-audit'/f'{args.month:02d}-rejected.json',dict(**signature,
    month=args.month,status='rejected_original_unit_residuals',cost_eur=float(r.fun),
    max_equality_residual=eq,max_inequality_violation=ub,max_bound_violation=bound,
-   solver_seconds=args.solver_seconds,first_solver=args.first_solver,
+   solver_seconds=args.solver_seconds,first_solver=args.first_solver,solver_primal_tolerance=getattr(args,'primal_tolerance',1e-10),
    scope='diagnostic only; not accepted feasibility or an annual result'))
   raise ValueError(f'Original-unit primal residual gate failed: equality={eq:.12g}, inequality={ub:.12g}, bounds={bound:.12g}')
  save(args.folder/'warm-audit'/f'{args.month:02d}.json',dict(**signature,month=args.month,cost_eur=float(r.fun),
   max_equality_residual=eq,max_inequality_violation=ub,max_bound_violation=bound,
-  solver_seconds=args.solver_seconds,first_solver=args.first_solver,scope='verified fixed monthly inventories only; no annual optimum'))
+  solver_seconds=args.solver_seconds,first_solver=args.first_solver,solver_primal_tolerance=getattr(args,'primal_tolerance',1e-10),scope='verified fixed monthly inventories only; no annual optimum'))
 def run(args):
  output=args.folder/'warm-audit';output.mkdir(exist_ok=True)
  for month in range(1,args.last_month+1):
@@ -51,7 +51,7 @@ def run(args):
    if any(item.get(k)!=v for k,v in signature.items()):raise ValueError('Warm audit/source mismatch')
    continue
   with (output/f'{month:02d}.log').open('w') as log:
-   child=subprocess.Popen([sys.executable,__file__,'--folder',str(args.folder),'--month',str(month),'--solver-seconds',str(args.solver_seconds),'--first-solver',args.first_solver],stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
+   child=subprocess.Popen([sys.executable,__file__,'--folder',str(args.folder),'--month',str(month),'--solver-seconds',str(args.solver_seconds),'--first-solver',args.first_solver,'--primal-tolerance',str(args.primal_tolerance)],stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
    save(output/'status.json',dict(status='solving_fixed_inventories',month=month,pid=child.pid))
    peak=0
    while child.poll() is None:
@@ -72,6 +72,7 @@ def run(args):
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('--folder',type=Path,required=True)
  p.add_argument('--month',type=int);p.add_argument('--last-month',type=int,default=1);p.add_argument('--memory-gib',type=float,default=6.);p.add_argument('--solver-seconds',type=float,default=300.);p.add_argument('--first-solver',choices=['highs','highs-ipm'],default='highs-ipm')
+ p.add_argument('--primal-tolerance',type=float,choices=[1e-10,1e-7],default=1e-10,help='Explicit solver tolerance; original-unit acceptance remains 1e-7')
  args=p.parse_args();args.folder=args.folder.resolve()
  if not 1<=args.last_month<=12 or (args.month is not None and not 1<=args.month<=12) or not 0<args.memory_gib<=6 or not 0<args.solver_seconds<=600:p.error('Invalid month/resource limit')
  worker(args) if args.month is not None else run(args)

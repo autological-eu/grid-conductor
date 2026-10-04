@@ -844,3 +844,19 @@ bound €294,446,869.93744755 and feasible upper €294,446,869.9466152 leave ga
 including integrated dual-bound solving and rejected legacy resume. Full
 convergence, native parity and independent final-state feasibility remain
 unverified. This is not an interval-certified or annual result.
+
+
+### Guarded monthly prerequisite
+
+Following the independently audited converged reference, the fixed-inventory
+monthly audit accepts an explicit `--primal-tolerance 1e-7` option; its default
+remains 1e-10. Original-unit acceptance remains 1e-7 and the monthly memory guard
+remains 6 GiB. The option is forwarded to worker processes and recorded in
+accepted result receipts. Tests confirm that bad original residuals
+are rejected even with this option.
+
+A bounded January re-solve is started with interior point first and 300 seconds
+per solver attempt. Prior rejected and sparse-corrected candidates are archived
+locally. No result is accepted yet. This prerequisite checks a fixed set of
+monthly boundary inventories; it does not coordinate the full year or establish
+annual optimality. All 60 storage tests pass.
