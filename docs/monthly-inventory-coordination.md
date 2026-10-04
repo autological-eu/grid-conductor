@@ -700,3 +700,23 @@ Next investigate equivalent numerical representations or solver accuracy using
 this isolated state, with independent original-unit checks and original-objective
 dual validation. Do not accept Phase-I duals, relax research gates, or restart
 the same coordinator proposal without a demonstrated remedy.
+
+
+### Equivalent scaling at the isolated failure
+
+`tools/check_storage_scaled_failure.py` applies positive scaling to each equality
+and inequality and its inventory coupling/right-hand side at the saved
+iteration-293 block-0 state. It removes no source constraints and uses the
+existing solver tolerances. If a solve succeeds, multipliers are converted back
+to original units before the original primal and dual-consistency checks.
+Analytic tests verify original objective and inventory-gradient preservation.
+
+The real scaled objective LP still reports infeasible. Its hash-labelled
+`scaled-failure-293-0.json` receipt records rejection; this representation is not
+enabled in the coordinator. All 50 storage tests pass. The annual run remains
+blocked, and no new coordinator job is started.
+
+Next isolate whether a small shared-inventory perturbation can produce successful
+objective solves for both chronological blocks while preserving fixed endpoints,
+source constraints and original gates. A Phase-I primal within tolerance alone
+cannot establish exact feasibility or original-objective optimality.
