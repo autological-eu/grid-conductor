@@ -13,8 +13,9 @@ from disk_storage_blocks import save_block,DiskBlocks
 from pypsa_storage_blocks import block
 from run_network_benchmark import add_diagnostics
 
-def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.):
- output=folder/'coordination-reference.json'
+def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.,dual_support=False):
+ suffix='-dual-support' if dual_support else ''
+ output=folder/f'coordination-reference{suffix}.json'
  previous=json.loads(output.read_text()) if output.exists() else {}
  source=folder/'native-input.nc'
  output.write_text(json.dumps(dict(status='preparing',pid=os.getpid(),started_utc=datetime.now(timezone.utc).isoformat(),previous_status=previous.get('status'),previous_iteration=previous.get('iteration',previous.get('iterations')),scope='48h conditional reference, not annual optimum'),indent=2)+'\n')
@@ -56,8 +57,8 @@ def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.)
    row=np.zeros(3*ns);row[period*ns+j]=-a;row[(period+1)*ns+j]=1.;constraints.append(row);limits.append(gain)
    constraints.append(-row);limits.append(drain)
    row=np.zeros(3*ns);row[(period+1)*ns+j]=1.;constraints.append(row);limits.append(cap)
- output=folder/'coordination-reference.json'
- checkpoint=folder/'coordination-cuts.json';source_hash=hashlib.sha256(source.read_bytes()).hexdigest();resume=None
+ output=folder/f'coordination-reference{suffix}.json'
+ checkpoint=folder/f'coordination-cuts{suffix}.json';source_hash=hashlib.sha256(source.read_bytes()).hexdigest();resume=None
  if checkpoint.exists():
   resume=json.loads(checkpoint.read_text())
   if resume['source_sha256']!=source_hash:raise ValueError('Coordinator checkpoint source mismatch')
@@ -77,12 +78,13 @@ def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.)
  def failure(value):
   value.update(source_sha256=source_hash,scope='48h conditional reference, not annual optimum',
                block_hashes=parts.hashes if disk_blocks else None)
-  destination=folder/'coordination-failure.json';temp=destination.with_suffix('.tmp')
+  destination=folder/f'coordination-failure{suffix}.json';temp=destination.with_suffix('.tmp')
   temp.write_text(json.dumps(value,allow_nan=False,indent=2)+'\n');temp.replace(destination)
  reference=pypsa.Network(folder.parent/'monthly-dispatch-sequential/01.nc')
  warm=np.r_[initial,reference.storage_units_t.state_of_charge.iloc[23].reindex(ids).to_numpy(),terminal];del reference;gc.collect()
+ from storage_objective_oracle import objective_oracle
  try:
-  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.001,relative_gap=0.,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits,on_stage=stage,stabilize=stabilize,proposal_fraction=proposal_fraction,on_failure=failure)
+  result=coordinate(parts,bounds,initial_state=warm,max_iterations=iterations,absolute_gap=.001,relative_gap=0.,on_iteration=report,resume=resume,on_checkpoint=save_cuts,inequality=constraints,limit=limits,on_stage=stage,stabilize=stabilize,proposal_fraction=proposal_fraction,on_failure=failure,objective_oracle=objective_oracle if dual_support else None)
  except Exception as error:
   progress=json.loads(output.read_text()) if output.exists() else {}
   progress.update(status='failed_not_certified',error=str(error));output.write_text(json.dumps(progress,indent=2)+'\n');raise
@@ -98,4 +100,4 @@ def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.)
   raise RuntimeError(result['error'])
  output.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n');print(result['status'],result['difference_eur'])
 if __name__=='__main__':
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--folder',type=Path,required=True);p.add_argument('--iterations',type=int,default=100);p.add_argument('--disk-blocks',action='store_true',help='Load one prepared LP block at a time');p.add_argument('--no-stabilization',action='store_true',help='Use unrestricted master proposals with unchanged cut bounds');p.add_argument('--proposal-fraction',type=float,default=1.,help='Fraction toward master proposal from best feasible state');a=p.parse_args();run(a.folder,a.iterations,a.disk_blocks,not a.no_stabilization,a.proposal_fraction)
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--folder',type=Path,required=True);p.add_argument('--iterations',type=int,default=100);p.add_argument('--disk-blocks',action='store_true',help='Load one prepared LP block at a time');p.add_argument('--no-stabilization',action='store_true',help='Use unrestricted master proposals with unchanged cut bounds');p.add_argument('--proposal-fraction',type=float,default=1.,help='Fraction toward master proposal from best feasible state');p.add_argument('--dual-support',action='store_true',help='Separate primal upper costs from state-independent dual supports; isolated checkpoints');a=p.parse_args();run(a.folder,a.iterations,a.disk_blocks,not a.no_stabilization,a.proposal_fraction,a.dual_support)

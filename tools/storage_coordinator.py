@@ -97,8 +97,8 @@ def solve_block(block, state, phase=False, time_limit=60., first_method='highs',
     if len(r):gradient-=np.asarray(V.T@result.ineqlin.marginals).ravel()
     return result,gradient
 
-def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True,proposal_fraction=1.,on_failure=None):
-    """Return best feasible state and rigorous LP-cut bounds, or fail to converge."""
+def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True,proposal_fraction=1.,on_failure=None,objective_oracle=None):
+    """Return best feasible state and configured numerical LP-cut bounds, or fail to converge."""
     if not 0<proposal_fraction<=1:raise ValueError('Proposal fraction must be in (0, 1]')
     nx=len(bounds);nb=len(blocks);cuts=[];limits=[];history=[];upper=np.inf;lower=-np.inf;best=None
     theta_bounds=[]
@@ -131,8 +131,11 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
             if on_stage is not None:on_stage(dict(stage='local',block=i))
             local=solve_block(block,state)
             if local is None:raise ValueError('Warm boundary state is infeasible')
-            result,gradient=local;cost+=result.fun
-            row=np.r_[gradient,np.zeros(nb)];row[nx+i]=-1;cuts.append(row);limits.append(float(gradient@state-result.fun))
+            result,gradient=local
+            upper_value,support_value=result.fun,result.fun
+            if objective_oracle is not None:upper_value,gradient,support_value=objective_oracle(block,state,result)
+            cost+=upper_value
+            row=np.r_[gradient,np.zeros(nb)];row[nx+i]=-1;cuts.append(row);limits.append(float(gradient@state-support_value))
         upper=float(cost);best=state.copy()
     for iteration in range(start_iteration,max_iterations+1):
         if on_stage is not None:on_stage(dict(stage='master',iteration=iteration))
@@ -178,8 +181,11 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
                     raise RuntimeError(f'Inconsistent local infeasibility and Phase-I result: violation={phase.fun:.12g}, block={i}')
                 row=np.r_[gradient,np.zeros(nb)];cuts.append(row);limits.append(float(gradient@state-phase.fun))
             else:
-                result,gradient=local;cost+=result.fun
-                row=np.r_[gradient,np.zeros(nb)];row[nx+i]=-1;cuts.append(row);limits.append(float(gradient@state-result.fun))
+                result,gradient=local
+                upper_value,support_value=result.fun,result.fun
+                if objective_oracle is not None:upper_value,gradient,support_value=objective_oracle(block,state,result)
+                cost+=upper_value
+                row=np.r_[gradient,np.zeros(nb)];row[nx+i]=-1;cuts.append(row);limits.append(float(gradient@state-support_value))
         if feasible and cost<upper:upper=float(cost);best=state.copy()
         if np.isfinite(upper) and lower>upper+absolute_gap:raise RuntimeError('Invalid lower bound exceeds feasible upper bound')
         gap=upper-lower;history.append(dict(iteration=iteration,lower_bound=float(lower),upper_bound=float(upper),gap=float(gap),candidate_feasible=feasible))

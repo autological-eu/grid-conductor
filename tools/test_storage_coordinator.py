@@ -5,6 +5,13 @@ from scipy.optimize import linprog
 from storage_coordinator import Block,coordinate
 
 class CoordinationTests(unittest.TestCase):
+ def test_oracle_support_not_anchored_at_primal_upper_cost(self):
+  b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
+  def oracle(block,state,result):return result.fun,np.array([-1.]),result.fun-.001
+  r=coordinate([b],[(0,5)],initial_state=[0],max_iterations=3,absolute_gap=1e-5,objective_oracle=oracle,stabilize=False)
+  self.assertEqual(r['status'],'iteration_limit_not_certified')
+  self.assertAlmostEqual(r['objective'],5.)
+  self.assertAlmostEqual(r['lower_bound'],4.999)
  def test_seasonal_inventory_and_free_cyclic_initial(self):
   # Each block: generation g, charge c, discharge d. Inventory change=c-d.
   # Renewable capacity in first block is free; second generation costs 100.

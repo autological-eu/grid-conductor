@@ -584,3 +584,30 @@ This remains floating-point evidence rather than interval certification. The
 helper is not yet integrated into the coordinator: full smaller-reference
 convergence and cut compatibility remain the next acceptance gate. Existing
 annual receipts are unchanged; no annual optimum is claimed.
+
+
+### Opt-in coordinator integration
+
+`storage_objective_oracle.py` now supplies separate feasible upper costs and
+inventory-independent dual support values to the coordinator. Original-unit
+primal checks remain at 1e-7; sparse correction is attempted only when needed,
+and a failed correction is rejected. Nonfinite values or dual support exceeding
+the primal cost are rejected. This path is opt-in and has not replaced the
+previous published reference or been applied to annual coordination.
+
+Run `python tools/validate_2025_coordination.py --folder
+ data/pypsa-eur/benchmark-2025-window --disk-blocks --dual-support --iterations 50`
+(on one line). Outputs and checkpoints use the `-dual-support` suffix, preventing
+reuse of the old objective cuts. A running or iteration-limit receipt is not
+validation. Require configured gap convergence and native monolithic parity
+before accepting this integration. Independent-relaxation floors and Phase-I
+cuts retain their existing numerical solver treatment; this does not introduce
+rigorous interval certification.
+
+
+The initial integration test stopped at iteration 1: block 0's computed dual
+support exceeded its primal upper cost by 6.855e-7 EUR, above the 1e-7 consistency
+gate. Equality residual was 4.20e-8, inequality violation 2.27e-12 and bound
+violation zero. A diagnostic repeat reproduced the failure. No integration
+result is accepted. This isolates a numerical consistency issue to investigate;
+the tolerance is not relaxed and the cut is not shifted by an arbitrary amount.
