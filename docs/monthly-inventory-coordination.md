@@ -1169,3 +1169,12 @@ cut, capacity, cyclic closure and reachability. Its monthly evaluations must
 still establish full dispatch feasibility before any new annual upper bound is
 accepted. No ENTSO-E empirical-validation, annual optimum or investment claim
 follows from this first feasibility cut.
+
+
+Candidate 002's January economic solve stopped after 323.19 seconds at
+3,649,376,256 bytes peak RSS with native HiGHS status **Unknown**. This is an
+indeterminate solver result, not proof of infeasibility or an accepted dispatch.
+The verified upper/lower bounds above remain unchanged. A separately guarded
+boundary-row Phase-I diagnostic follows; only a positive independently replayed
+dual support can justify another feasibility cut. No failure receipt is treated
+as an annual result.
