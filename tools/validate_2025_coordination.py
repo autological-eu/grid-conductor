@@ -59,11 +59,17 @@ def run(folder,iterations,disk_blocks=False,stabilize=True,proposal_fraction=1.,
    row=np.zeros(3*ns);row[(period+1)*ns+j]=1.;constraints.append(row);limits.append(cap)
  output=folder/f'coordination-reference{suffix}.json'
  checkpoint=folder/f'coordination-cuts{suffix}.json';source_hash=hashlib.sha256(source.read_bytes()).hexdigest();resume=None
+ from storage_checkpoint_provenance import fingerprints,verify
+ dependencies=[source,folder/'input.json',folder/'native-cases.json']+[Path(__file__).with_name(name) for name in ['storage_coordinator.py','storage_objective_oracle.py','check_storage_dual_bounds.py','sparse_primal_correction.py','disk_storage_blocks.py']]
+ if disk_blocks:dependencies += paths
+ current_fingerprint=fingerprints(dependencies) if dual_support else None
  if checkpoint.exists():
   resume=json.loads(checkpoint.read_text())
   if resume['source_sha256']!=source_hash:raise ValueError('Coordinator checkpoint source mismatch')
+  if dual_support:verify(resume.get('dependency_fingerprints'),current_fingerprint)
  def save_cuts(value):
   value['source_sha256']=source_hash
+  if dual_support:value['dependency_fingerprints']=current_fingerprint
   # JSON history uses null for unbounded initial upper bounds.
   for item in value['history']:
    for k,v in item.items():

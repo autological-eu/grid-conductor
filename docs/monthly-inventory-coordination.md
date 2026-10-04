@@ -626,3 +626,16 @@ Its process subsequently exited by signal 9 without a solver exception;
 the observed cgroup OOM-kill count was zero, so the cause is unconfirmed.
 Checkpoint resume is supported. These intermediate values are not convergence
 or annual results; verify the live process independently of status receipts.
+
+
+The detached dual-support run completed its 50-iteration budget without a
+numerical consistency exception, but did not converge: gap €32,664.899863,
+feasible objective €6,508.347065 above the native monolith. A larger bounded
+resume remains a reference experiment, not an accepted annual result.
+
+Dual-support checkpoints now record hashes of matched native inputs, prepared
+blocks and the coordinator/objective dependency code. Missing or changed hashes
+stop resume rather than mixing cuts from different implementations. The original
+iteration-50 checkpoint is retained offline; adding its metadata was an explicit
+audited adoption after oracle dependencies matched commit `686475d` byte-for-byte.
+Numerical cuts were unchanged. Subsequent checkpoints persist these fingerprints.
