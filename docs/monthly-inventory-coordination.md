@@ -1092,3 +1092,34 @@ The offline diagnostic has a 6 GiB memory guard, a 600-second native solver
 limit and a 900-second whole-worker deadline. Resource or numerical failures
 remain failures, and no automatic convergence claim follows. The production
 feasibility cut and subsequent annual coordination are still unverified.
+
+
+### Memory-efficient boundary-row Phase-I
+
+The full-row elastic diagnostic stopped at its 6 GiB memory guard, with sampled
+peak RSS 6,675,456,000 bytes. No feasibility cut was accepted. January's full-row
+formulation introduces 3,549,200 slack variables.
+
+The explicit `--mode boundary` alternative adds slacks only to rows whose
+right-hand sides depend on shared boundary inventories: 640 slack variables
+for January. State-independent dispatch/network constraints and original
+variable bounds stay hard. Setting all added slacks to zero recovers exactly
+the original monthly LP, so its zero-cost feasible set is unchanged. The elastic
+penalty and resulting cut path differ from full-row Phase-I; the original annual
+economic objective and dispatch physics do not change.
+
+The retained feasible primal proves that the smaller elastic problem has a
+feasible point for any proposed inventories: retain its original local variables
+and put the changes in inventory-dependent rows into positive/negative equality
+slacks and positive inequality-violation slacks. The diagnostic constructs and
+checks this point before solving. It also checks the elastic optimum against
+that point's cost. This uses saved dispatch solely as a feasibility witness,
+never as renewable availability.
+
+Five focused tests verify cut orientation, zero-slack feasibility, retention of
+hard state-independent rows and construction of the elastic point. Original-unit
+primal, dual-support and feasible-anchor checks still apply. Numeric witnesses,
+source hashes and the explicit elastic mode are retained for independent replay;
+no production cut or convergence claim is accepted merely because a solve starts.
+The new run has its own `phase-one-boundary` directory, preserving the failed
+full-row attempt, and retains the 6 GiB/600-second/900-second resource guards.
