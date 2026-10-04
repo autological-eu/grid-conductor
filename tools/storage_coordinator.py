@@ -45,6 +45,26 @@ def bounded_proposal(state,bounds,tolerance):
             state[i]=hi
     return state
 
+def feasible_proposal(state,best,matrix,limit,tolerance):
+    """Retract only a search proposal toward a checked feasible incumbent.
+
+    The unrestricted master objective/lower bound is never changed.
+    """
+    A=sparse.csr_matrix(matrix);limit=np.asarray(limit)
+    errors=np.asarray(A@state-limit)
+    if np.max(errors,initial=0)<=tolerance:return state
+    if best is None:raise RuntimeError('No feasible incumbent for proposal repair')
+    incumbent=np.asarray(A@best-limit)
+    if np.max(incumbent,initial=0)>tolerance:raise RuntimeError('Incumbent violates master inequalities')
+    alpha=1.
+    for proposed,old in zip(errors,incumbent):
+        if proposed>tolerance:
+            if old>=tolerance*.5:alpha=0.;break
+            alpha=min(alpha,(tolerance*.5-old)/(proposed-old))
+    candidate=np.asarray(best)+alpha*(np.asarray(state)-best)
+    if np.max(A@candidate-limit,initial=0)>tolerance:raise RuntimeError('Repaired proposal violates master inequality')
+    return candidate
+
 @dataclass
 class Block:
     cost: np.ndarray
@@ -168,8 +188,9 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
         state=bounded_proposal(state,bounds,feasibility_tolerance)
         if equality is not None and np.max(abs(sparse.csr_matrix(equality)@state-rhs))>feasibility_tolerance:
             raise RuntimeError('Corrected inventory proposal violates master equality')
-        if inequality is not None and np.max(sparse.csr_matrix(inequality)@state-limit)>feasibility_tolerance:
-            raise RuntimeError('Corrected inventory proposal violates master inequality')
+        if inequality is not None:
+            state=feasible_proposal(state,best,inequality,limit,feasibility_tolerance)
+            if equality is not None and np.max(abs(sparse.csr_matrix(equality)@state-rhs))>feasibility_tolerance:raise RuntimeError('Repaired inventory proposal violates master equality')
         for i,block in enumerate(blocks):
             if on_stage is not None:on_stage(dict(stage='local',block=i))
             local=solve_block(block,state)

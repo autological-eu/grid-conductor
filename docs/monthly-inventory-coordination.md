@@ -639,3 +639,25 @@ stop resume rather than mixing cuts from different implementations. The original
 iteration-50 checkpoint is retained offline; adding its metadata was an explicit
 audited adoption after oracle dependencies matched commit `686475d` byte-for-byte.
 Numerical cuts were unchanged. Subsequent checkpoints persist these fingerprints.
+
+
+### Master reachability roundoff
+
+The resumed reference stopped at iteration 133 with a €7,795.119423 gap, when
+its proposed inventory exceeded a necessary reachability envelope. A read-only
+reconstruction (`tools/inspect_storage_master_proposal.py`) measured
+3.73938e-7 MWh against the unchanged 1e-7 gate. The incumbent's maximum envelope
+violation was 3.64e-12 MWh.
+
+The coordinator now retracts only a violating search proposal toward that checked
+feasible incumbent. Convexity preserves linear constraints and variable bounds;
+it rechecks original master inequalities and equalities before local solves.
+The unrestricted master objective and its lower bound remain untouched. If no
+feasible incumbent exists, or repair fails its gate, execution still stops.
+Testing the real rejected proposal gives a maximum violation of 5.00004e-8 MWh.
+This is proposal handling, not a relaxed acceptance gate or convergence claim.
+
+The original iteration-132 checkpoint is archived. Its proposal-code fingerprint
+was explicitly updated after checking that all objective dependencies and numeric
+cuts remained unchanged; future mismatches still fail closed. A bounded resume
+remains subject to the existing reference gap and native-parity gates.

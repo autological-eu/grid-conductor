@@ -5,6 +5,12 @@ from scipy.optimize import linprog
 from storage_coordinator import Block,coordinate
 
 class CoordinationTests(unittest.TestCase):
+ def test_proposal_repair_retracts_only_toward_feasible_incumbent(self):
+  from storage_coordinator import feasible_proposal
+  p=feasible_proposal(np.array([1.+4e-7]),np.array([.5]),[[1.]],[1.],1e-7)
+  self.assertLessEqual(p[0]-1.,1e-7);self.assertGreater(p[0],.5)
+  with self.assertRaises(RuntimeError):feasible_proposal(np.array([2.]),None,[[1.]],[1.],1e-7)
+  with self.assertRaises(RuntimeError):feasible_proposal(np.array([2.]),np.array([1.1]),[[1.]],[1.],1e-7)
  def test_oracle_support_not_anchored_at_primal_upper_cost(self):
   b=Block(np.array([1.]),[(0,10)],[[1]],np.array([10.]),[[1]])
   def oracle(block,state,result):return result.fun,np.array([-1.]),result.fun-.001
