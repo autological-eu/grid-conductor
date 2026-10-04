@@ -794,3 +794,20 @@ gate. All 57 storage tests pass. The helper is not yet enabled in the coordinato
 Next validate that integration on the smaller reference; prior primal-derived
 lower values must not be carried forward as proven bounds. Native parity and all
 original feasibility gates remain unchanged.
+
+
+### Opt-in master dual integration
+
+`--master-dual` now uses the original-unit master dual expression for lower bounds
+in the isolated reference. The default coordinator path remains unchanged. Resume
+checks master-bound mode and dependencies and rejects primal-derived bounds.
+The previous checkpoint and its history are archived; its lower bound is reset,
+while numerical cuts and the feasible incumbent are preserved. No rejected
+primal-derived lower value is carried forward.
+
+The detached reference passed iteration 456. At iteration 457, numerical lower
+bound €294,446,869.93744755 and feasible upper €294,446,869.9466152 leave gap
+€0.009168, still above the €0.001 convergence gate. All 58 storage tests pass,
+including integrated dual-bound solving and rejected legacy resume. Full
+convergence, native parity and independent final-state feasibility remain
+unverified. This is not an interval-certified or annual result.

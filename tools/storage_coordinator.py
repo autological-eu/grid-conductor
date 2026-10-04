@@ -118,7 +118,7 @@ def solve_block(block, state, phase=False, time_limit=60., first_method='highs',
     if len(r):gradient-=np.asarray(V.T@result.ineqlin.marginals).ravel()
     return result,gradient
 
-def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True,proposal_fraction=1.,on_failure=None,objective_oracle=None,local_solver=None):
+def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_gap=1e-5,relative_gap=1e-9,feasibility_tolerance=1e-7,on_iteration=None,initial_state=None,resume=None,on_checkpoint=None,inequality=None,limit=None,on_stage=None,stabilize=True,proposal_fraction=1.,on_failure=None,objective_oracle=None,local_solver=None,master_bound=None):
     """Return best feasible state and configured numerical LP-cut bounds, or fail to converge."""
     if not 0<proposal_fraction<=1:raise ValueError('Proposal fraction must be in (0, 1]')
     objective_solver=solve_block if local_solver is None else local_solver
@@ -138,6 +138,7 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
     E=None if equality is None else sparse.hstack([sparse.csr_matrix(equality),sparse.csr_matrix((len(rhs),nb))],format='csr')
     start_iteration=1
     if resume is not None:
+        if master_bound is not None and resume.get('lower_bound_source')!='master_dual':raise ValueError('Cannot reuse primal-derived master bounds')
         if resume['shared_variables']!=nx or resume['blocks']!=nb:raise ValueError('Checkpoint dimensions mismatch')
         cuts=[np.asarray(v,dtype=float) for v in resume['cuts']];limits=resume['limits'];history=resume['history'];upper=np.inf if resume['upper_bound'] is None else resume['upper_bound'];lower=-np.inf if resume['lower_bound'] is None else resume['lower_bound'];best=None if resume['best_state'] is None else np.asarray(resume['best_state']);start_iteration=resume['iteration']+1
     if inequality is not None:
@@ -163,7 +164,10 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
         if on_stage is not None:on_stage(dict(stage='master',iteration=iteration))
         master=solve_master(np.r_[np.zeros(nx),np.ones(nb)],A_ub=sparse.csr_matrix(cuts) if cuts else None,b_ub=limits if cuts else None,A_eq=E,b_eq=rhs,bounds=bounds+theta_bounds)
         if not master.success:raise RuntimeError(f'Master LP failed: {master.status}: {master.message}')
-        state=master.x[:nx];lower=max(lower,float(master.fun));cost=0.;feasible=True
+        state=master.x[:nx]
+        bound_value=float(master.fun) if master_bound is None else float(master_bound(np.r_[np.zeros(nx),np.ones(nb)],sparse.csr_matrix(cuts) if cuts else sparse.csr_matrix((0,nx+nb)),np.asarray(limits),bounds+theta_bounds,master,nx))
+        if not np.isfinite(bound_value):raise RuntimeError('Nonfinite master bound')
+        lower=max(lower,bound_value);cost=0.;feasible=True
         if np.isfinite(upper) and lower>upper+absolute_gap:raise RuntimeError('Invalid lower bound exceeds feasible upper bound')
         threshold=absolute_gap+relative_gap*max(1,abs(upper))
         if np.isfinite(upper) and upper-lower<=threshold:
@@ -213,7 +217,7 @@ def coordinate(blocks,bounds,equality=None,rhs=None,max_iterations=200,absolute_
         if np.isfinite(upper) and lower>upper+absolute_gap:raise RuntimeError('Invalid lower bound exceeds feasible upper bound')
         gap=upper-lower;history.append(dict(iteration=iteration,lower_bound=float(lower),upper_bound=float(upper),gap=float(gap),candidate_feasible=feasible))
         if on_checkpoint is not None:
-            on_checkpoint(dict(schema_version=1,shared_variables=nx,blocks=nb,iteration=iteration,cuts=[v.tolist() for v in cuts],limits=limits,history=history,upper_bound=None if not np.isfinite(upper) else upper,lower_bound=None if not np.isfinite(lower) else lower,best_state=None if best is None else best.tolist()))
+            on_checkpoint(dict(schema_version=1,lower_bound_source='master_dual' if master_bound is not None else 'master_primal',shared_variables=nx,blocks=nb,iteration=iteration,cuts=[v.tolist() for v in cuts],limits=limits,history=history,upper_bound=None if not np.isfinite(upper) else upper,lower_bound=None if not np.isfinite(lower) else lower,best_state=None if best is None else best.tolist()))
         if on_iteration is not None:on_iteration(history[-1])
         if np.isfinite(upper) and gap<=absolute_gap+relative_gap*max(1,abs(upper)):
             return dict(status='converged',state=best,objective=upper,lower_bound=lower,gap=max(0.,gap),iterations=iteration,history=history)
