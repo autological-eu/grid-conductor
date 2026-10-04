@@ -968,3 +968,29 @@ before using a conservative zero lower floor, avoiding independent relaxation
 solves. Negative costs or unsupported bounds are rejected. This is a weaker
 initial lower bound, not a convergence shortcut or an annual certificate;
 subsequent feasibility and gap checks still apply. The default path is unchanged.
+
+
+### Initial annual cut-master diagnostic
+
+`tools/annual_inventory_master.py` combines independently replayed monthly
+objective cuts with the twelve audited conservative floors, inventory bounds,
+cyclic closure and reachability constraints in a sparse master LP. It reports
+an original-unit floating-point dual lower bound separately from the master
+primal objective. Unverified months contribute only their conservative floors.
+An annual feasible upper bound and gap remain unavailable until all twelve
+chronological dispatch witnesses pass independent replay.
+
+The initial two-cut diagnostic returned a zero lower bound. Its inventory
+proposal had a reachability violation of 9.54e-6 MWh, above the unchanged 1e-7
+original-unit tolerance, so the proposal was withheld. No monthly dispatch was
+started from it. Tests cover cut signs, chronology constraints, invalid cuts
+and rejection of numerically infeasible proposals. This is initial master
+infrastructure, not a converged annual coordinator or an annual optimum.
+
+
+After January–July witnesses passed independent replay, the seven-cut master
+returned a conservative annual lower bound of €1,549,914,046.016851. This is a
+partial-cut relaxation, not the annual cost. Five months remain without verified
+dispatch witnesses; an annual feasible upper bound and optimisation gap remain
+unavailable. This bound does not establish empirical agreement or investment
+value.
