@@ -535,3 +535,28 @@ and 120-second guards.
     python tools/check_sparse_correction_reference.py
     python tools/sparse_primal_correction.py --folder data/pypsa-eur/annual-coordination
     python tools/inspect_rejected_monthly_primal.py --folder data/pypsa-eur/annual-coordination --kind sparse-corrected
+
+
+### Fixed-boundary dual diagnostics (4 October 2026)
+
+`tools/check_storage_dual_bounds.py` checks the two real 24-hour blocks at the
+saved reference inventory state. With equality multipliers $y$, nonpositive
+inequality multipliers $z$, and reduced costs $r=c-A^Ty-U^Tz$, it evaluates
+$y^Tb'+z^Tu'+\sum_j\min_{l_j\le x_j\le h_j} r_jx_j$.
+Bounds are taken from the exported variable bounds and explicit single-variable
+source constraints, including the fixed-state right-hand sides. This adds no
+physical assumptions. Tiny reduced costs on unbounded variables are never
+rounded to zero: without the source-implied bounds, the diagnostic is unavailable.
+
+Both source-implied diagnostics are finite. Corrected feasible costs exceed the
+computed lower values by €0.00000599 and €0.00000197, respectively. Maximum
+stationarity residuals are 1.62e-10 and 6.63e-10. Both corrected candidates pass
+the original 1e-7 primal gates. These are floating-point diagnostics, not rigorous
+interval certificates. They validate neither annual optimality nor a globally
+valid inventory cut: the implied bounds depend on the fixed inventory state.
+The next gate is correction and cut compatibility in the smaller coordinator
+reference; the annual coordinator remains unfinished.
+
+Reproduce with `python tools/check_storage_dual_bounds.py`. Numeric diagnostics
+remain under the ignored research-data directory; source block hashes are saved
+in the report.
