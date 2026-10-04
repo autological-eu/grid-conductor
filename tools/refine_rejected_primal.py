@@ -33,11 +33,11 @@ def run(folder,month):
  if report['original_unit_gate_passed']:
   with (root/f'{month:02d}-corrected-diagnostic.npz').open('wb') as f:np.savez_compressed(f,primal=candidate)
  print(json.dumps(report,indent=2))
-def guarded(folder,month):
+def guarded(folder,month,worker_file=None,label="correction"):
  root=folder/'warm-audit';started=time.monotonic();peak=0;reason=None
- with (root/'correction.log').open('w') as log:
-  child=subprocess.Popen([sys.executable,__file__,'--folder',str(folder),'--month',str(month),'--worker'],stdout=log,stderr=log,start_new_session=True)
-  save(root/'correction-status.json',dict(status='running_diagnostic',pid=child.pid))
+ with (root/f'{label}.log').open('w') as log:
+  child=subprocess.Popen([sys.executable,worker_file or __file__,'--folder',str(folder),'--month',str(month),'--worker'],stdout=log,stderr=log,start_new_session=True)
+  save(root/f'{label}-status.json',dict(status='running_diagnostic',pid=child.pid))
   while child.poll() is None:
    try:rss=sum(int(line.split()[1])*1024 for line in Path(f'/proc/{child.pid}/status').read_text().splitlines() if line.startswith('VmRSS:'))
    except FileNotFoundError:rss=0
@@ -46,7 +46,7 @@ def guarded(folder,month):
     reason='memory_guard' if rss>6*2**30 else 'wall_time_guard'
     os.killpg(child.pid,signal.SIGTERM);child.wait(timeout=30);break
    time.sleep(.5)
- save(root/'correction-status.json',dict(status='diagnostic_finished' if child.returncode==0 else 'diagnostic_failed',returncode=child.returncode,peak_rss_bytes=peak,stop_reason=reason))
+ save(root/f'{label}-status.json',dict(status='diagnostic_finished' if child.returncode==0 else 'diagnostic_failed',returncode=child.returncode,peak_rss_bytes=peak,stop_reason=reason))
  if child.returncode:raise RuntimeError('Correction diagnostic failed; no accepted result')
 
 if __name__=='__main__':

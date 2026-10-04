@@ -495,3 +495,43 @@ correction boxes and invalid limits.
 
 Next work should reduce refinement memory and validate on the smaller reference
 before annual use. The failed full-month correction is not retried unchanged.
+
+### Sparse correction: reference and January feasibility checks
+
+`correct_sparse` freezes variables within 1e-6 of an original bound, then
+applies up to 100 LSMR iterations to the equality residual using only interior
+variables. It does not clip the result: all original equalities, inequalities
+and bounds are audited afterwards against the unchanged 1e-7 gate. Costs,
+chronology, inventory boundary states and renewable availability are unchanged.
+This is a numerical primal correction, not a new dispatch objective.
+
+A deliberate 3e-7 perturbation of an interior variable in the real 24-hour
+fixed-boundary reference passed: equality residual 1.89e-8, inequality
+violation 1.68e-8, zero bound violation; cost difference from the original
+solve was -0.000203 EUR, within the existing €0.02 parity gate. This validates
+one local perturbation case, not full coordinator convergence.
+
+The retained January candidate also passed the original-unit primal checks:
+
+| Check | Result |
+| --- | --- |
+| Maximum equality residual | 4.97704e-9 |
+| Maximum inequality violation | 3.35108e-9 |
+| Variable-bound violation | 0 |
+| Maximum variable correction | 9.66384e-9 |
+| Cost change from the correction | -7.03e-7 EUR |
+| Peak sampled memory | 1.32 GiB |
+
+The corrected numeric candidate is retained offline with a SHA-256 hash.
+Independent inspection of its worst equality rows reproduces the residual
+with compensated and extended-precision arithmetic. The LSMR stop code is
+7 (100-iteration limit): **the candidate passed explicit feasibility checks;
+this does not establish iterative convergence or optimality**. No Benders
+objective cuts or annual certificate are accepted from this correction.
+Dual/cut compatibility and integration must first pass the smaller monolithic
+reference. All 35 storage tests pass. The diagnostic CLI retains the 6 GiB
+and 120-second guards.
+
+    python tools/check_sparse_correction_reference.py
+    python tools/sparse_primal_correction.py --folder data/pypsa-eur/annual-coordination
+    python tools/inspect_rejected_monthly_primal.py --folder data/pypsa-eur/annual-coordination --kind sparse-corrected
