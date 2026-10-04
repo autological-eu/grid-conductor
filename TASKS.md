@@ -72,9 +72,14 @@ The annual dispatch milestones N3–N5 retain their existing verification gates.
 
 ## Priority 3 — maintainability and resilience
 
-- [ ] Define durable offline artifact backup/restore with hashes and retention.
-  Keep large weather/network caches out of ordinary Git; assess release assets or
-  Actions artifacts and quotas before choosing a mechanism.
+- [ ] Durable offline artifact backup/restore: investigation and design in
+  [research-backup.md](planning/research-backup.md). GitHub Release assets are the
+  proposed zero-cost immutable store (under 2 GiB per asset; 1,000 assets/release).
+  Existing 2.1 GiB staged snapshot is local only: draft release has zero assets.
+  Small 476-byte uploads fail HTTP 400 Bad Content-Length, including an explicit
+  length retry. Resolve upload transport, verify downloaded hashes, implement a
+  clean-directory restore drill and snapshot current checkpoints before claiming
+  durable protection. Keep secrets/restricted data and large caches out of Git.
 - [ ] Add reproducible research environment/setup guidance for the current cloud
   and local platforms; separate old Windows notes from general agent instructions.
 - [ ] Check documentation links and source/provenance descriptions when changing
