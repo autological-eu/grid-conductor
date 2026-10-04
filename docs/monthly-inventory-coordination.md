@@ -872,3 +872,73 @@ per solver attempt. Prior rejected and sparse-corrected candidates are archived
 locally. No result is accepted yet. This prerequisite checks a fixed set of
 monthly boundary inventories; it does not coordinate the full year or establish
 annual optimality. All 60 storage tests pass.
+
+### Monthly scalability diagnostics — 4 October 2026
+
+The January fixed-inventory re-solve described above has now failed with a
+HiGHS time-limit status. Peak worker RSS was 6,211,522,560 bytes (about 5.78 GiB).
+No monthly objective/cut was accepted. An isolated 168-hour first-January solve
+also timed out: 294.17 seconds elapsed and peak RSS 1,983,500,288 bytes (about
+1.85 GiB). Reducing block length reduced memory, but did not by itself produce an
+accepted local solve. Neither failure proves physical infeasibility.
+
+The supervisor now enforces a whole-worker wall-clock deadline as well as the
+6 GiB memory guard. The default deadline allows three solver attempts plus
+120 seconds of setup/cleanup. Overruns terminate the owned process group,
+escalating from TERM to KILL if needed, and produce explicit failure receipts.
+The original-unit feasibility gate remains 1e-7. Five monthly guard/tolerance
+tests pass; all 63 storage tests pass.
+
+A separate `native_storage_solver.py` diagnostic uses native HiGHS 1.15.1 IPM
+with simplex crossover disabled, matching that setting in the successful
+sequential PyPSA runs. It preserves the LP coefficients and objective; it is
+**not enabled in the coordinator**. Synthetic tests check objective/dual-sign
+parity, coupling and infeasibility handling against the existing solver.
+At the already converged 48-hour boundary state, two fixed-block re-solves pass
+original-unit corrected primal checks and the existing €0.02 monolithic cost
+parity gate: combined cost €294,446,869.940559, difference €0.0009973.
+However, their local dual-support gaps sum to €0.01653, exceeding the €0.001
+reference convergence threshold. This verifies fixed-state cost parity, not a
+new converged coordinator or tighter certificate. The previously published
+iteration-474 result remains separate and unchanged.
+
+The native 168-hour first-January diagnostic passes original-unit primal and
+state-independent dual-support checks: cost €1,090,974,405.877837, local support
+€1,090,974,405.876792, gap €0.0010452. Runtime is 60.05 seconds; peak RSS is
+1,270,861,824 bytes (about 1.18 GiB). Initial/final inventories come from the
+sequential run. This is a **conditional seven-day scalability result**, separate
+from both the 2013 weekly benchmark and the 2025 conditional 48-hour benchmark.
+It is not an annual result or investment benefit.
+
+A subsequent native monthly trial timed out after 307.13 seconds, with peak RSS
+3,651,637,248 bytes (about 3.40 GiB). Memory fits the guard, but full-month runtime
+still needs verification. The 600-second/two-CPU January trial subsequently passes: 573.28 seconds,
+peak RSS 3,933,073,408 bytes (about 3.66 GiB), corrected equality residual
+1.16e-10, inequality violation 2.98e-12 and bound violation 1.06e-13.
+Cost is €5,807,858,074.253742; fixed-state dual support is
+€5,807,858,074.244161, a local gap of €0.0095816.
+This clears the monthly local numerical gate for **one conditional month**.
+It is not annual convergence. The preflight retained diagnostic/cut receipts but
+not full primal/dual arrays; its archived receipt is not a reusable independent
+annual solution witness.
+
+The native monthly audit now atomically stores the corrected primal, equality
+and inequality multipliers, bound marginals and source/code hashes in ignored
+local NPZ witnesses. Resume checks verify these hashes and reject missing or
+changed witnesses. The durable twelve-month audit must repeat January once to
+retain that witness, then check the remaining eleven months. Only after all
+verified chronological witnesses exist may their total be adopted as a feasible
+annual upper bound. No large witnesses are committed to Git.
+
+All twelve monthly blocks also pass the source-bounded nonnegative-objective
+floor audit. A conservative €0 floor can replace expensive independent initial
+relaxations in a future coordinator. It is not an annual lower/upper gap. Four
+floor tests pass, rejecting negative costs, negative lower bounds and
+boundary-dependent nonnegativity. The full storage suite now passes 70 tests.
+
+Download the [compact diagnostic receipts](../public/research/network-benchmark-2025/monthly-scalability-diagnostics.json)
+and the [exact archived native-week solver](../public/research/network-benchmark-2025/native-storage-solver-4695437.py).
+
+Next: complete and independently verify durable monthly witnesses, then implement
+streamed annual coordination with bounds and explicit feasibility handling. Annual coordination, empirical
+ENTSO-E validation and paired annual investment results remain unverified.

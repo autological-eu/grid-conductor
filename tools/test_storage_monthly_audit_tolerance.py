@@ -20,4 +20,20 @@ class MonthlyAuditToleranceTests(unittest.TestCase):
  def test_explicit_solver_option_keeps_original_unit_gate(self):self.invoke(1.)
  def test_bad_original_residual_still_rejected(self):
   with self.assertRaisesRegex(ValueError,'Original-unit primal residual gate'):self.invoke(1.+1e-5)
+
+class MonthlyResourceGuardTests(unittest.TestCase):
+ def test_deadline_includes_all_solver_attempts(self):
+  self.assertIsNone(audit.guard_reason(1019.,1024,6.,1020.))
+  self.assertEqual(audit.guard_reason(1021.,1024,6.,1020.),'stopped_wall_time_guard')
+ def test_memory_remains_independent_of_deadline(self):
+  self.assertEqual(audit.guard_reason(1.,6*2**30+1,6.,1020.),'stopped_memory_guard')
+ def test_owned_worker_gets_kill_if_term_does_not_finish(self):
+  import subprocess
+  from unittest.mock import Mock
+  child=Mock(pid=123);child.poll.return_value=None
+  child.wait.side_effect=[subprocess.TimeoutExpired('worker',10),0]
+  with patch.object(audit.os,'killpg') as kill:
+   audit.terminate_worker(child)
+  self.assertEqual([call.args for call in kill.call_args_list],[(123,audit.signal.SIGTERM),(123,audit.signal.SIGKILL)])
+
 if __name__=='__main__':unittest.main()
