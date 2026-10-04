@@ -15,17 +15,19 @@ def checked_candidate(candidate,bounds,equality,rhs,inequality,limit):
     return state
 
 
-def prepare(parent,output):
+def prepare(parent,output,proposal_name="initial-cut-master.json"):
+    if proposal_name not in ("initial-cut-master.json","multi-cut-master.json"):raise ValueError("Unsupported proposal artifact")
     if output.exists():raise ValueError('Candidate workspace already exists; never overwrite evidence')
     master=json.loads((parent/'master-workspace.json').read_text())
     audit_path=parent/'warm-audit'/'independent-witness-audit.json'
     audit=json.loads(audit_path.read_text())
-    proposal_path=parent/'initial-cut-master.json';proposal=json.loads(proposal_path.read_text())
+    proposal_path=parent/proposal_name;proposal=json.loads(proposal_path.read_text())
     if audit['status']!='annual_fixed_inventory_feasible' or audit['verified_months']!=12 or audit['annual_feasible_cost_eur'] is None:
         raise ValueError('A fully verified annual feasible incumbent is required')
     if proposal['witness_audit_sha256']!=digest(audit_path) or proposal['input_sha256']!=master['input_sha256'] or audit['input_sha256']!=master['input_sha256']:
         raise ValueError('Proposal/incumbent source mismatch; rebuild cut master')
-    if proposal['tool_sha256']!=digest(Path(__file__).with_name('annual_inventory_master.py')):
+    producer='annual_inventory_master.py' if proposal_name=='initial-cut-master.json' else 'build_annual_multicut_master.py'
+    if proposal['tool_sha256']!=digest(Path(__file__).with_name(producer)):
         raise ValueError('Proposal implementation changed; rebuild cut master')
     for name,value in proposal['dependencies'].items():
         if digest(Path(__file__).with_name(name))!=value:raise ValueError('Master dependency changed')
@@ -56,7 +58,7 @@ def prepare(parent,output):
     child=dict(master);child['workspace_sha256']=dict(master['workspace_sha256'])
     child['workspace_sha256']['master-state.npz']=digest(output/'master-state.npz')
     child.update(candidate_parent_workspace_sha256=digest(parent/'master-workspace.json'),
-        candidate_proposal_sha256=digest(proposal_path),candidate_incumbent_audit_sha256=digest(audit_path),
+        candidate_proposal_sha256=digest(proposal_path),candidate_proposal_name=proposal_name,candidate_incumbent_audit_sha256=digest(audit_path),
         candidate_preparation_sha256=digest(Path(__file__)),
         scope='Master-feasible inventory candidate only; requires all twelve monthly dispatch witnesses. Not an annual optimum.')
     save(output/'master-workspace.json',child)
@@ -65,5 +67,6 @@ def prepare(parent,output):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--parent',type=Path,required=True);parser.add_argument('--output',type=Path,required=True)
-    args=parser.parse_args();prepare(args.parent.resolve(),args.output.resolve())
+    parser.add_argument('--proposal',choices=['initial-cut-master.json','multi-cut-master.json'],default='initial-cut-master.json')
+    args=parser.parse_args();prepare(args.parent.resolve(),args.output.resolve(),args.proposal)
     print('Isolated annual inventory candidate prepared; no dispatch result accepted.')

@@ -1046,3 +1046,49 @@ must remain failures, never accepted annual results. Feasibility cuts and a
 resumable converged annual coordination loop remain unfinished. No changes to
 renewable availability or research methodology were made; the declared 2024
 nuclear-availability proxy remains.
+
+
+### Retaining cuts across inventory evaluations
+
+`tools/build_annual_multicut_master.py` combines objective cuts from completed,
+independently replayed annual candidate workspaces. It checks that original
+monthly LP coefficients and the shared inventory domain match exactly, rejects
+duplicate inventory evaluations, and retains previous candidates' cuts rather
+than resetting the relaxation. The lowest verified annual feasible cost supplies
+the incumbent and proposal-repair anchor. The tool reports a numerical lower
+bound and remaining gap; it does not infer convergence or empirical validity.
+
+A one-candidate replay reproduces the fixed warm-inventory gap above. Targeted
+tests show an added valid cut tightening a simple reference lower bound and
+reject changed capacity, closure right-hand-side or reachability domains.
+Candidate 001 must finish its monthly solves and independent witness replay
+before contributing cuts or an upper bound. A subsequent workspace can use
+`--proposal multi-cut-master.json`; its producer, dependency, source and witness
+fingerprints remain checked. The annual feasibility-cut/restart loop and matched
+investment comparisons remain unfinished.
+
+
+### First candidate infeasibility and Phase-I diagnostic
+
+Candidate 001's January fixed-inventory dispatch was classified infeasible by
+native HiGHS. The worker stopped after 259.11 seconds with peak RSS
+3,650,891,776 bytes, below its resource guards. No annual result was accepted.
+Passing inventory capacity, cyclic closure and relaxed reachability constraints
+does not guarantee feasibility of all hourly network and dispatch constraints.
+The verified warm annual incumbent remains intact.
+
+`tools/annual_inventory_phase_one.py` prepares the same elastic formulation as
+the existing generic Phase-I method: positive/negative slacks on equalities and
+nonnegative violation slacks on inequalities, preserving original variable
+bounds. Its zero-slack feasible set matches the source LP. A positive, checked
+affine dual lower support provides a necessary feasibility cut; it is never
+used as a welfare/objective cut. The diagnostic checks original-unit elastic
+primal residuals, primal/dual consistency and retention of the verified feasible
+anchor. Numeric witnesses and dependency hashes are retained for independent
+replay before a cut is adopted. Tests reject zero-infeasibility cut claims and
+verify cut orientation against a simple feasible/infeasible reference.
+
+The offline diagnostic has a 6 GiB memory guard, a 600-second native solver
+limit and a 900-second whole-worker deadline. Resource or numerical failures
+remain failures, and no automatic convergence claim follows. The production
+feasibility cut and subsequent annual coordination are still unverified.
