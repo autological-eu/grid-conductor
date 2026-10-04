@@ -59,8 +59,8 @@ def feasible_proposal(state,best,matrix,limit,tolerance):
     alpha=1.
     for proposed,old in zip(errors,incumbent):
         if proposed>tolerance:
-            if old>=tolerance*.5:alpha=0.;break
-            alpha=min(alpha,(tolerance*.5-old)/(proposed-old))
+            if old>=-tolerance:alpha=0.;break
+            alpha=min(alpha,(-tolerance-old)/(proposed-old))
     candidate=np.asarray(best)+alpha*(np.asarray(state)-best)
     if np.max(A@candidate-limit,initial=0)>tolerance:raise RuntimeError('Repaired proposal violates master inequality')
     return candidate

@@ -661,3 +661,15 @@ The original iteration-132 checkpoint is archived. Its proposal-code fingerprint
 was explicitly updated after checking that all objective dependencies and numeric
 cuts remained unchanged; future mismatches still fail closed. A bounded resume
 remains subject to the existing reference gap and native-parity gates.
+
+
+The first proposal repair left a positive 5.0e-8 MWh violation. At that state,
+the local solver reported infeasible while Phase-I found only 4.50e-8 MWh;
+the existing inconsistency gate correctly stopped the run. Retraction now targets
+negative 1e-7 MWh slack on an offending envelope when the feasible incumbent
+provides room, instead of accepting a small positive violation. The rejected
+row reconstructs at -9.99999e-8 MWh. This changes only search proposal handling:
+objective cuts, lower bounds and acceptance tolerances remain unchanged.
+If the incumbent lacks interior room, the existing fallback is that incumbent;
+all proposal checks and independent local solves still apply. A bounded real
+reference resume is in progress; no convergence is claimed.
