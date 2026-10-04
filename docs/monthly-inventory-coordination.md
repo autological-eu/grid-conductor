@@ -1141,3 +1141,31 @@ They also apply during numerical proposal repair; tests verify that repair does
 not bypass the added constraint or change the unrestricted lower bound. The
 boundary-row production job remains unverified until it finishes and passes
 independent replay. No production cut or narrower annual gap is claimed here.
+
+
+### First independently replayed feasibility cut
+
+The boundary-row January Phase-I diagnostic finished in 339.19 seconds at
+3,661,643,776 bytes peak RSS. Its saved primal/dual arrays pass independent
+replay: maximum equality residual 1.38e-8, inequality violation 7.11e-14,
+variable-bound violation 1.05e-13. The positive affine support excludes candidate
+001 and retains the verified warm feasible anchor. Its elastic penalty is an
+inventory-feasibility diagnostic, **not euros or investment benefit**.
+
+[Download the replayed cut and provenance](../../research/network-benchmark-2025/first-feasibility-cut.json).
+The numeric primal/dual witness remains offline; the compact cut includes source
+and witness hashes, gradient, intercept, cut limit and replay checks.
+
+Adding this necessary numerical feasibility cut to the master raises the
+conservative lower bound from €13,704,093,509.130175 to
+€13,751,128,000.556618, an increase of €47,034,491.426443. The verified annual
+feasible upper bound remains €50,745,703,158.61136. The absolute gap is now
+€36,994,575,158.054741, or **72.90%** of the upper bound. This is not convergence.
+The initial no-feasibility-cut snapshot above remains separate.
+
+[Download the first-cut annual bound evidence](../../research/network-benchmark-2025/annual-inventory-feasibility-first-cut.json).
+Candidate 002 has a separately hash-pinned inventory workspace respecting this
+cut, capacity, cyclic closure and reachability. Its monthly evaluations must
+still establish full dispatch feasibility before any new annual upper bound is
+accepted. No ENTSO-E empirical-validation, annual optimum or investment claim
+follows from this first feasibility cut.
