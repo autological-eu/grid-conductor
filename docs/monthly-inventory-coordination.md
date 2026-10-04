@@ -942,3 +942,21 @@ and the [exact archived native-week solver](../public/research/network-benchmark
 Next: complete and independently verify durable monthly witnesses, then implement
 streamed annual coordination with bounds and explicit feasibility handling. Annual coordination, empirical
 ENTSO-E validation and paired annual investment results remain unverified.
+
+
+### Independent saved-witness replay
+
+`tools/audit_monthly_dispatch_witnesses.py` verifies saved numeric primal and
+dual arrays without running another dispatch solve. It checks source, block,
+workspace, producer and witness fingerprints; replays original-unit equality,
+inequality and variable-bound feasibility; and reproduces the objective and
+affine dual support from the saved arrays. Four targeted tests reject altered
+costs, gradients, infeasible values and incorrect array shapes.
+
+The retained January witness passed this independent replay on 4 October 2026.
+This establishes only a **verified monthly prefix**, at fixed warm inventories.
+The verifier exposes an annual feasible cost only after all twelve chronological
+witnesses and the annual preparation audit pass. Neither a partial prefix nor
+all twelve fixed-inventory solves establishes an annual optimum, an annual
+optimisation gap, or agreement with observed ENTSO-E prices. Large witnesses
+remain outside Git; the verification tool and methods are versioned.
