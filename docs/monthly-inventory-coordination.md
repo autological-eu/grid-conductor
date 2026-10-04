@@ -611,3 +611,18 @@ gate. Equality residual was 4.20e-8, inequality violation 2.27e-12 and bound
 violation zero. A diagnostic repeat reproduced the failure. No integration
 result is accepted. This isolates a numerical consistency issue to investigate;
 the tolerance is not relaxed and the cut is not shifted by an arbitrary amount.
+
+
+The subsequent numerical experiment uses compensated primal-cost summation.
+If dual support still exceeds that cost, sparse primal correction is attempted
+even when the original candidate passes its residual gate. The dual support
+is unchanged: a remaining excess is still rejected at 1e-7 EUR. Tests cover
+both successful correction and rejection when an apparent correction leaves
+the discrepancy. This is not a tolerance increase or arbitrary cut shift.
+
+The real reference passed the previous iteration-1 failure and saved two
+iterations: feasible upper cost €294,453,378.286627 and gap €816,918.765344.
+Its process subsequently exited by signal 9 without a solver exception;
+the observed cgroup OOM-kill count was zero, so the cause is unconfirmed.
+Checkpoint resume is supported. These intermediate values are not convergence
+or annual results; verify the live process independently of status receipts.

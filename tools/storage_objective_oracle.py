@@ -2,6 +2,7 @@
 
 Not rigorous interval certification. Original-unit feasibility remains mandatory.
 """
+import math
 import numpy as np
 from check_storage_dual_bounds import objective_support
 from sparse_primal_correction import correct_sparse
@@ -14,9 +15,13 @@ def objective_oracle(block,state,result):
  if max(eq,ub,violation)>1e-7:
   candidate,checks=correct_sparse(block,state,result.x)
   if not checks['original_unit_gate_passed']:raise RuntimeError('Corrected objective candidate fails original-unit primal gates')
- upper=float(block.cost@candidate)
+ upper=math.fsum(float(c)*float(x) for c,x in zip(block.cost,candidate))
  gradient,intercept=objective_support(block,state,result)
  lower=float(intercept+gradient@state)
  if not np.isfinite(upper) or not np.isfinite(lower) or not np.isfinite(gradient).all():raise RuntimeError('Nonfinite objective oracle')
+ if lower>upper+1e-7 and candidate is result.x:
+  candidate,checks=correct_sparse(block,state,result.x)
+  if not checks['original_unit_gate_passed']:raise RuntimeError('Consistency correction fails original-unit primal gates')
+  upper=math.fsum(float(c)*float(x) for c,x in zip(block.cost,candidate))
  if lower>upper+1e-7:raise RuntimeError(f'Dual support exceeds primal upper value: excess={lower-upper:.12g} EUR, lower={lower:.12g}, upper={upper:.12g}, equality={eq:.12g}, inequality={ub:.12g}, bounds={violation:.12g}')
  return upper,gradient,lower
