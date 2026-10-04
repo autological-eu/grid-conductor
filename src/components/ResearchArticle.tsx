@@ -1,4 +1,7 @@
 import ReactMarkdown from "react-markdown";
+import "katex/dist/katex.min.css";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { documentHref, researchDocuments } from "@/lib/research-documents";
@@ -23,8 +26,8 @@ export function ResearchArticle({ content }: { content: string }) {
   return (
     <article className="research-prose min-w-0">
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeSlug]}
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeSlug, rehypeKatex]}
         components={{
           a: ({ href, children }) => <a href={publicationLink(href ?? "")}>{children}</a>,
           img: ({ src, alt }) => (
