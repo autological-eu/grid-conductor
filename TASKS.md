@@ -18,6 +18,29 @@ against live processes; this file is not a job monitor.
 | N4 | Pending N3 | Produce and audit full-year native/reference and fast dispatch comparisons plus paired interventions. Preserve original hourly renewable availability and declare proxies. Distinguish sequential feasible dispatch from a certified annual optimum. |
 | N5 | Pending N4 | Publish annual benchmark tables, charts, JSON and methods; integrate supported verified 2025 functionality into the static app. Inspect CI/Pages and public URLs. Disable recurring implementation checks only after the annual benchmark and supported app integration are complete. |
 
+
+## Goal — memory-efficient PyPSA dispatch validated against ENTSO-E 2025
+
+User-approved goal; see [PRODUCT.md](PRODUCT.md#goal-memory-efficient-2025-dispatch-with-observed-data-validation).
+This adds empirical validation alongside N1–N5; it does not replace their gates.
+
+- [ ] V1: Predeclare validation protocol: supported zones, node-to-bidding-zone
+  mapping and price aggregation, UTC/interval alignment, coverage gates,
+  calibration versus held-out observations and quantitative acceptance thresholds.
+  Document nodal-versus-zonal pricing differences before judging agreement.
+- [ ] V2: Audit reference observations and provenance: existing 2025 hourly price
+  artifacts, generation mix and cross-border exchanges with correct scheduled/
+  physical scope. Keep missing observations and proxies explicit.
+- [ ] V3 (requires verified annual dispatch): Report per-zone price bias/MAE,
+  correlation and seasonal patterns; border-spread magnitude/direction/duration;
+  generation and exchange errors. Record memory/runtime/restart and solver bounds.
+  Publish failures as well as successes; no annual-optimum or empirical-validation
+  claim based only on numerical implementation parity.
+- [ ] V4: Diagnose mismatches, calibrate only on the declared training period,
+  then evaluate untouched held-out observations. Publish methods, metrics and
+  limitations; integrate only supported verified results. Do not silently alter
+  research methodology or infer investment/emissions validity from price fit.
+
 Prepared 2025 weather, hydro and chronological monthly dispatch exist offline.
 They are not a published annual optimum. The 2013 weekly benchmark remains
 separate from the 2025 conditional and future annual comparisons.

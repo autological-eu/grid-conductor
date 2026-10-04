@@ -1,6 +1,6 @@
 # Grid Conductor — product requirements
 
-Current product direction, 3 October 2026. Requirements express intended behaviour;
+Current product direction, 4 October 2026. Requirements express intended behaviour;
 implementation and verification status belong in [TASKS.md](TASKS.md).
 
 ## Purpose and audience
@@ -80,6 +80,39 @@ A lifecycle factor describes emissions attributed per unit of generated
 electricity across a technology's life; it is not a claim that those emissions
 occur during the displayed hour. Do not combine operational and lifecycle
 factors within one purportedly consistent estimate.
+
+## Goal: memory-efficient 2025 dispatch with observed-data validation
+
+Run a full-calendar-year PyPSA-based dispatch within the managed environment's
+memory budget, preserving hourly chronology, network constraints, storage physics
+and original renewable availability. Aim for defensible agreement with observed
+2025 ENTSO-E evidence, rather than numerical solver agreement alone.
+
+Acceptance requires:
+
+- Record peak memory, runtime, checkpoint/restart behaviour, exact input/code
+  hashes, feasibility checks and convergence bounds. A feasible annual trial
+  may be reported as experimental; it is not an annual optimum certificate.
+- Define and audit the mapping from model nodes to actual bidding zones. Declare
+  price aggregation, UTC alignment, interval weighting and jointly observed
+  coverage; preserve gaps and spatial proxies. Nodal marginal prices and zonal
+  day-ahead prices are different quantities and need explicit interpretation.
+- Compare hourly price bias, absolute error, correlation and seasonal patterns;
+  prioritise border-spread magnitude, direction and duration. Cross-check
+  generation by technology and scheduled/physical exchanges under their correct
+  labels, so apparent price agreement is supported by plausible dispatch.
+- Predeclare quantitative acceptance thresholds, minimum coverage and the
+  calibration/held-out split before fitting or assessing the model. Numerical
+  thresholds are not yet selected. Do not tune and claim validation on the same
+  observations or select only favourable zones/hours after seeing errors.
+- Publish supported zones/periods, error metrics, validation failures, assumptions
+  and limitations. Explain fuel-cost, outage, fleet, weather and market-design
+  mismatches; do not force exact price matching through undocumented changes.
+
+Keep computational consistency (matched native/fast solves) separate from
+empirical validation (agreement with observations). Preserve existing research
+and annual acceptance gates. Investment benefits and carbon effects require their
+own paired-dispatch checks; price agreement alone does not validate them.
 
 ## Model boundaries
 
