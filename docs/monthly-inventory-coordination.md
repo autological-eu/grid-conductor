@@ -560,3 +560,27 @@ reference; the annual coordinator remains unfinished.
 Reproduce with `python tools/check_storage_dual_bounds.py`. Numeric diagnostics
 remain under the ignored research-data directory; source block hashes are saved
 in the report.
+
+
+### Inventory-independent supporting planes
+
+The follow-up excludes every single-variable row whose right-hand side depends
+on shared inventory. The remaining source-implied bounds still make both dual
+diagnostics finite, with the same fixed-state values. These bounds hold across
+inventory states. With fixed multipliers and reduced-cost bound penalties,
+the supporting expression is affine in inventory: its gradient is
+$-B^Ty-V^Tz$. Its intercept uses the diagnostic lower value, **not** the corrected
+primal cost, which is an upper value and could lift a cut above the value function.
+
+`tools/check_storage_inventory_support.py` checks these planes at the existing
+January sequential warm inventory as a different feasible state. For blocks 0
+and 1, the feasible costs exceed the support by €5,697.54 and €340.01.
+Both corrected alternate-state candidates pass the original-unit primal gates.
+The receipt records block, reference and warm-source hashes and both inventory
+states. Analytic tests also exercise the plane across an inventory interval
+and ensure inventory-dependent bound rows are excluded.
+
+This remains floating-point evidence rather than interval certification. The
+helper is not yet integrated into the coordinator: full smaller-reference
+convergence and cut compatibility remain the next acceptance gate. Existing
+annual receipts are unchanged; no annual optimum is claimed.

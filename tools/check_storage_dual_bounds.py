@@ -12,13 +12,15 @@ from storage_coordinator import solve_block
 from sparse_primal_correction import correct_sparse
 from monthly_dispatch import save,digest
 
-def implied_bounds(block,state):
+def implied_bounds(block,state,state_independent=False):
  bounds=[list(pair) for pair in block.bounds]
- matrices=[(block.equality,block.rhs-block.coupling@state,True)]
- if block.inequality is not None:matrices.append((block.inequality,block.limit-(0 if block.inequality_coupling is None else block.inequality_coupling@state),False))
- for matrix,rhs,equality in matrices:
+ matrices=[(block.equality,block.rhs-block.coupling@state,True,block.coupling)]
+ if block.inequality is not None:matrices.append((block.inequality,block.limit-(0 if block.inequality_coupling is None else block.inequality_coupling@state),False,block.inequality_coupling))
+ for matrix,rhs,equality,coupling in matrices:
   matrix=matrix.tocsr()
+  coupling=None if coupling is None else coupling.tocsr()
   for row in range(matrix.shape[0]):
+   if state_independent and coupling is not None and np.any(coupling.data[coupling.indptr[row]:coupling.indptr[row+1]]):continue
    start,end=matrix.indptr[row:row+2];indices=matrix.indices[start:end];data=matrix.data[start:end];nonzero=np.flatnonzero(data)
    if len(nonzero)!=1:continue
    k=nonzero[0];j=indices[k];value=float(rhs[row]/data[k]);lo,hi=bounds[j]
@@ -28,7 +30,7 @@ def implied_bounds(block,state):
    bounds[j]=[lo,hi]
  return bounds
 
-def diagnostic(block,state,result,use_implied=False):
+def diagnostic(block,state,result,use_implied=False,state_independent=False):
  y=np.asarray(result.eqlin.marginals);z=np.minimum(np.asarray(result.ineqlin.marginals),0.)
  rhs=block.rhs-block.coupling@state
  reduced=block.cost-block.equality.T@y
@@ -37,7 +39,7 @@ def diagnostic(block,state,result,use_implied=False):
   limit=block.limit-(0 if block.inequality_coupling is None else block.inequality_coupling@state)
   reduced-=block.inequality.T@z;constant+=math.fsum(float(a)*float(b) for a,b in zip(z,limit))
  terms=[];unbounded=[]
- bounds=implied_bounds(block,state) if use_implied else block.bounds
+ bounds=implied_bounds(block,state,state_independent) if use_implied else block.bounds
  for j,(value,(lo,hi)) in enumerate(zip(reduced,bounds)):
   endpoint=lo if value>=0 else hi
   if value!=0 and (endpoint is None or not np.isfinite(endpoint)):unbounded.append(dict(variable=j,reduced_cost=float(value)))
@@ -46,14 +48,27 @@ def diagnostic(block,state,result,use_implied=False):
  stationarity=reduced-np.asarray(result.lower.marginals)-np.asarray(result.upper.marginals)
  return dict(lower_bound_eur=lower,unbounded_reduced_cost_count=len(unbounded),unbounded_examples=unbounded[:10],max_stationarity_residual=float(np.max(abs(stationarity),initial=0)),scope='Floating-point diagnostic, not rigorous interval certification')
 
+def objective_support(block,state,result):
+ """Floating-point affine dual support using only state-independent bounds.
+
+Not an interval certificate. Never anchor this plane at corrected primal cost:
+that cost is an upper bound and can lift the plane above the LP value function.
+ """
+ bound=diagnostic(block,state,result,use_implied=True,state_independent=True)
+ if bound['lower_bound_eur'] is None:raise ValueError('No finite state-independent dual support')
+ y=np.asarray(result.eqlin.marginals);z=np.minimum(np.asarray(result.ineqlin.marginals),0.)
+ gradient=-np.asarray(block.coupling.T@y).ravel()
+ if block.inequality_coupling is not None:gradient-=np.asarray(block.inequality_coupling.T@z).ravel()
+ return gradient,float(bound['lower_bound_eur']-gradient@state)
+
 def run():
  root=Path(__file__).resolve().parents[1];folder=root/'data/pypsa-eur/benchmark-2025-window'
  ref=json.loads((folder/'coordination-reference.json').read_text());state=np.array(ref['state_mwh']);rows=[]
  for i in range(2):
   path=folder/f'coordination-block-{i}.npz';block=load_block(path);result,_=solve_block(block,state,residual_tolerance=1e-7)
   candidate,primal=correct_sparse(block,state,result.x)
-  dual=diagnostic(block,state,result);implied=diagnostic(block,state,result,use_implied=True);upper=float(block.cost@candidate)
-  rows.append(dict(block=i,block_sha256=digest(path),primal=primal,dual=dual,source_implied_bound=implied,source_implied_gap_eur=None if implied['lower_bound_eur'] is None else upper-implied['lower_bound_eur'],primal_cost_eur=upper,duality_gap_eur=None if dual['lower_bound_eur'] is None else upper-dual['lower_bound_eur']))
+  dual=diagnostic(block,state,result);implied=diagnostic(block,state,result,use_implied=True);global_bound=diagnostic(block,state,result,use_implied=True,state_independent=True);upper=float(block.cost@candidate)
+  rows.append(dict(block=i,block_sha256=digest(path),primal=primal,dual=dual,state_independent_bound=global_bound,source_implied_bound=implied,source_implied_gap_eur=None if implied['lower_bound_eur'] is None else upper-implied['lower_bound_eur'],primal_cost_eur=upper,duality_gap_eur=None if dual['lower_bound_eur'] is None else upper-dual['lower_bound_eur']))
  report=dict(reference_sha256=digest(folder/'coordination-reference.json'),state_mwh=state.tolist(),rows=rows,scope='Two fixed-boundary 24h dual diagnostics; not coordinator or annual validation')
  save(folder/'dual-bound-diagnostics.json',report);print(json.dumps(report,indent=2))
 if __name__=='__main__':run()
