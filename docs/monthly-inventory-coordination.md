@@ -720,3 +720,21 @@ Next isolate whether a small shared-inventory perturbation can produce successfu
 objective solves for both chronological blocks while preserving fixed endpoints,
 source constraints and original gates. A Phase-I primal within tolerance alone
 cannot establish exact feasibility or original-objective optimality.
+
+
+### Bounded shared-inventory perturbations
+
+`tools/check_storage_inventory_perturbation.py` moves the rejected state toward
+the saved feasible incumbent with maximum inventory changes of 1e-5, 1e-3 and
+0.1 MWh, stopping at the first trial where both blocks pass. Both fixed endpoints
+remain unchanged. It verifies source/checkpoint hashes, solves both original
+objective LPs, and applies the existing primal/dual consistency gates. No
+coordinator checkpoint, cut or model input is changed.
+
+The 1e-5 MWh trial still reports infeasible for block 0. Block 1 passes with a
+2.414e-6 EUR local diagnostic primal–dual gap. The 1e-3 MWh trial also reports infeasible for block 0; block 1 passes with a
+2.354e-6 EUR gap. The 0.1 MWh trial is not yet verified. Atomic per-trial receipts live in the ignored research directory;
+inspect the actual process before treating incomplete receipts as progress.
+All 53 storage tests pass, including budget, endpoint and non-extrapolation tests.
+This is local numerical investigation, not reference convergence or an annual
+result.
