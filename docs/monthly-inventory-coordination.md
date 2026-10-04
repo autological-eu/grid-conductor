@@ -673,3 +673,30 @@ objective cuts, lower bounds and acceptance tolerances remain unchanged.
 If the incumbent lacks interior room, the existing fallback is that incumbent;
 all proposal checks and independent local solves still apply. A bounded real
 reference resume is in progress; no convergence is claimed.
+
+
+### Iteration-293 local numerical contradiction
+
+The half-step proposal experiment stopped at iteration 293: block 0 again
+reported infeasible, while Phase-I returned 4.94902e-8 MWh. Last saved reference
+gap was €250.891803; this is not convergence. No coordinator job is live.
+
+`inspect_storage_phase_candidate.py` reconstructs Phase-I at the hash-verified
+failure state, extracts only original primal variables, and applies the existing
+sparse equality correction. Original-unit checks measure equality 8.87e-11,
+inequality violation 4.94902e-8 and variable-bound violation 4.26e-13. They pass
+the configured 1e-7 gates. The largest inequality violation is a variable at
+-4.94902e-8 under an explicit nonnegativity constraint. This candidate is feasible
+only within the stated numerical gates, not an exact feasibility certificate.
+Phase-I duals remain unusable as original-objective duals.
+
+`check_storage_explicit_bounds.py` tests adding the redundant bounds implied by
+single-variable source constraints at this fixed inventory. All original rows
+remain. The objective solver still reports infeasible; this experiment is not
+integrated into the coordinator. Both diagnostics retain input/failure hashes
+and numeric candidates offline. No accepted cuts or optimum were produced.
+
+Next investigate equivalent numerical representations or solver accuracy using
+this isolated state, with independent original-unit checks and original-objective
+dual validation. Do not accept Phase-I duals, relax research gates, or restart
+the same coordinator proposal without a demonstrated remedy.
