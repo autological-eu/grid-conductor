@@ -473,3 +473,25 @@ analytical tests, not a passing numerical-reference experiment.
 
 The tool writes a failure receipt before raising if an original-unit gate
 fails. Offline diagnostics remain separate from accepted research artifacts.
+
+### Bounded primal-correction diagnostic
+
+`refine_rejected_primal.py` tests feasibility correction around a retained
+rejected solution. It leaves the physical LP unchanged, solves for a correction
+within ±1e-6 of each original variable, and audits the corrected vector against
+all original equations, inequalities and variable bounds. The diagnostic
+objective is zero; its duals cannot supply original-model objective cuts, and
+a feasible result would not establish optimality.
+
+The January test exceeded the 6 GiB memory guard (peak sampled 6.0036 GiB)
+and was terminated before producing a result. No corrected candidate was
+accepted. The original retained candidate remains unchanged. The CLI now
+includes a 6 GiB memory guard and 120-second overall wall-time guard; the LP
+solver budget is 60 seconds. These execution limits do not relax feasibility
+checks. All 32 storage tests pass, including small-error correction, infeasible
+correction boxes and invalid limits.
+
+    python tools/refine_rejected_primal.py --folder data/pypsa-eur/annual-coordination
+
+Next work should reduce refinement memory and validate on the smaller reference
+before annual use. The failed full-month correction is not retried unchanged.
