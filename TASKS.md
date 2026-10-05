@@ -223,3 +223,13 @@ The parent pass is no longer live. A separate versioned pass will use a reviewed
 this changes only the resource guard, not native coefficients or acceptance.
 All six exchange tests still pass. Recreate label receipts under the new producer
 hash rather than relabelling the previous pilot's provenance.
+
+
+Official exchange definitions now cached from ENTSO-E's Detailed Data Descriptions
+v3r4 (printed pages 56–58), preserving PDF URL/hash under the ignored reference
+cache. Scheduled exchanges exclude remedial/balancing/emergency/unintended flows;
+physical DC flows generally use sending-end measurements. This confirms the
+scope distinction, not the missing archived request provenance. Methods are in
+`docs/2025-exchange-validation.md`. The reviewed full-002 mapper is live at PID
+35116 and has passed the previously guarded block; all numerical gates remain
+unchanged. Publication requires the new CI/Pages and live route checks.
