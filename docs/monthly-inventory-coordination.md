@@ -1280,3 +1280,28 @@ adapter changes require reviewing the diagnostic and preserving original produce
 fingerprints. An isolated analytical native test verifies the unchanged optimum
 and restored original-unit duals; all 108 storage tests pass. This tests a
 conditioning hypothesis, not a demonstrated speed improvement on the annual data.
+
+
+### Shorter chronological sub-block preparation
+
+The equivalent-objective diagnostic also reached its 600-second solver limit
+(608.33 seconds whole-worker, 3,664,105,472 bytes peak RSS). No witness or new
+bound was accepted. Repeating the same monthly solve is paused.
+
+The next preparation pilot partitions 2025 into **59** windows of at most
+168 hours, retaining all month boundaries. It uses the existing native-coefficient
+exporter and additional shared inventories at internal boundaries. Storage must
+remain linked across every window and cyclic at the annual boundary; no weekly
+or monthly reset is permitted. Hourly renewable availability and physical
+constraints are retained. Two calendar tests check complete 8,760-hour coverage,
+contiguity, month alignment and invalid-input rejection; all 110 storage tests pass.
+
+`tools/prepare_submonthly_blocks.py` exports one guarded pilot block to a separate
+ignored workspace (6 GiB memory, 300-second preparation deadline). Prepared
+coefficients are **not** dispatch, decomposition equivalence or an annual result.
+Before adopting this layout, verify it against a smaller monolithic reference,
+construct its full shared-inventory domain and audit how prior monthly objective
+and feasibility cuts map to the additional boundaries. Existing monthly evidence
+and bounds remain preserved; no cut is reused with a different state layout
+without that explicit correspondence. Annual, empirical and investment gates
+remain unchanged.
