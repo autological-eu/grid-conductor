@@ -1,5 +1,5 @@
 import unittest
-from compare_2025_generation_reference import reference,compare
+from compare_2025_generation_reference import reference,compare,hydro_diagnostic
 
 
 class GenerationReference(unittest.TestCase):
@@ -39,6 +39,33 @@ class GenerationReference(unittest.TestCase):
 
     def test_missing_reference_stays_unknown(self):
         self.assertEqual(compare([self.zone()],{})[0]['status'],'national_reference_unavailable')
+
+    def hydro_zone(self,**changes):
+        months=[dict(status='raw_interval_energy_replayed',by_reported_type={
+            'B11':dict(reported_energy_mwh=1e6,observed_hours=730),
+            'B12':dict(reported_energy_mwh=1e6,observed_hours=730),
+            'B10':dict(reported_energy_mwh=.5e6,observed_hours=730)}) for _ in range(12)]
+        return self.zone(monthly=months,**changes)
+
+    def test_hydro_alternatives_do_not_change_primary_generation(self):
+        zone=self.hydro_zone();ref=dict(by_reported_fuel_twh={'Hydro':33.})
+        d=hydro_diagnostic(zone,ref)
+        self.assertEqual(d['reported_primary_hydro_twh'],24.)
+        self.assertEqual(d['reported_hydro_including_pumped_discharge_twh'],30.)
+        self.assertEqual(zone['full_reported_primary_energy_mwh'],48040000.)
+
+    def test_partial_hydro_not_annualised(self):
+        zone=self.hydro_zone();zone['monthly'][0]['by_reported_type']['B11']['observed_hours']=729
+        self.assertEqual(hydro_diagnostic(zone,dict(by_reported_fuel_twh={}))['status'],
+            'incomplete_reported_primary_hydro_not_annualised')
+
+    def test_missing_discharge_and_reference_not_zero(self):
+        zone=self.hydro_zone()
+        for m in zone['monthly']:del m['by_reported_type']['B10']
+        d=hydro_diagnostic(zone,dict(by_reported_fuel_twh={}))
+        self.assertIsNone(d['reported_pumped_storage_discharge_twh'])
+        self.assertIsNone(d['reference_hydro_twh'])
+        self.assertIsNone(d['including_discharge_difference_twh'])
 
 
 if __name__=='__main__':unittest.main()

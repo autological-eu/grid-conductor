@@ -29,6 +29,31 @@ def reference(rows):
     return result
 
 
+
+def hydro_diagnostic(zone,ref):
+    """Keep alternative hydro/storage boundaries visible; never correct totals."""
+    months=zone.get('monthly',[])
+    if len(months)!=12:return dict(status='monthly_type_inventory_unavailable')
+    energy={};hours={}
+    for month in months:
+        if month['status']!='raw_interval_energy_replayed':return dict(status='incomplete_monthly_type_inventory')
+        for kind,values in month['by_reported_type'].items():
+            energy[kind]=energy.get(kind,0.)+values['reported_energy_mwh']/1e6
+            hours[kind]=hours.get(kind,0)+values['observed_hours']
+    present=[kind for kind in ('B11','B12') if kind in energy]
+    if not present or any(hours[kind]!=8760 for kind in present):
+        return dict(status='incomplete_reported_primary_hydro_not_annualised')
+    primary=math.fsum(energy[kind] for kind in present)
+    discharge=energy.get('B10') if hours.get('B10')==8760 else None
+    reference_hydro=ref['by_reported_fuel_twh'].get('Hydro')
+    return dict(status='unreconciled_hydro_storage_boundary_diagnostic',
+        reported_primary_hydro_twh=primary,reported_pumped_storage_discharge_twh=discharge,
+        reported_hydro_including_pumped_discharge_twh=None if discharge is None else primary+discharge,
+        reference_hydro_twh=reference_hydro,
+        primary_difference_twh=None if reference_hydro is None else primary-reference_hydro,
+        including_discharge_difference_twh=None if reference_hydro is None or discharge is None else primary+discharge-reference_hydro,
+        limitation='Pumped discharge is not new primary generation. Reference hydro/storage accounting is unreconciled; neither alternative corrects generation, carbon intensity or missing coverage.')
+
 def compare(zones,bank):
     result=[]
     for zone in zones:
@@ -50,7 +75,7 @@ def compare(zones,bank):
             reference_generation_twh=total,reported_primary_generation_twh=twh,
             difference_twh=None if twh is None else twh-total,
             reported_to_reference_ratio=None if twh is None or total==0 else twh/total,
-            reference_reported_fuels_twh=ref['by_reported_fuel_twh'],
+            reference_reported_fuels_twh=ref['by_reported_fuel_twh'],hydro_storage_diagnostic=hydro_diagnostic(zone,ref),
             accounting_scope='ENTSO-E reported primary generation excludes storage discharge; reference national generation boundary remains to be reconciled. Ratio is not a verified coverage fraction.'))
     return result
 
