@@ -1241,8 +1241,10 @@ candidate is feasible. The finite driver stopped explicitly for review.
 
 A separate trial uses the convex inventory step
 
-$$s_{\mathrm{trial}} = s_{\mathrm{incumbent}} + 0.05
-(s_{\mathrm{master}}-s_{\mathrm{incumbent}}).$$
+$$
+s_{\mathrm{trial}} = s_{\mathrm{incumbent}} + 0.05
+(s_{\mathrm{master}}-s_{\mathrm{incumbent}}).
+$$
 
 This is a conservative evaluation heuristic. It preserves the linear inventory
 domain but does **not** establish full network dispatch feasibility. The original
