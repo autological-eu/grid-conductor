@@ -318,3 +318,17 @@ supervisor PID 38841 is live, waiting under its own lock for the original finite
 pass; continuation-001 is configured for a 10% step, five candidates and six-hour
 wait limit. No continuation dispatch has started. Inspect both real processes
 and locks before taking over; numerical, empirical and investment gates stay open.
+
+V3 inventory sensitivity groundwork: candidate 006 native generation/storage/
+price mapping completed all 59 blocks/8,760 hours in a separate ignored folder
+(`annual-witness-mapping/candidate-006/`), preserving coefficient identity and
+original availability. `compare_native_price_witnesses.py` replays both annual
+chains and price mappings, requiring identical observations/geography/coverage.
+Candidate 006 lowers annual feasible cost by €28,605,721.25538 relative to 001,
+but the maximum absolute change in bias across 88 compared nodes is only
+€0.14052/MWh. German and Polish underprediction persists; this particular nearby
+inventory change does not fix the mismatch, and does not rule out wider-state
+effects. Three new sensitivity tests and six existing price/publication tests
+pass. The compact JSON, individual-node scatter plot and methods are prepared;
+neither cost changes nor paired price errors become investment benefits or
+empirical acceptance. Original candidate 001 publications are preserved.

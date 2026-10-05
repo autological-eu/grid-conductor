@@ -1,0 +1,2797 @@
+{
+  "status": "fixed_inventory_price_sensitivity_not_validation",
+  "year": 2025,
+  "hours": 8760,
+  "input_sha256": "4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec",
+  "inventory_domain_sha256": "c23377e44e6870d074640441fb42099bf06e8e1407e518e07f5a9c01a143bcca",
+  "price_manifest_sha256": "eb693b2e5c5a546e3aaeaf345dec9bb738f543150711f77165dd4223e000239f",
+  "observed_price_sha256": {
+    "AL": "470ce846bc8c1d00c4ecd5365ada9d09f9bc4b093c4c669e0d49111ac71edbca",
+    "AT": "57411dea7cc2aa969760fa46a0ca4eec232feacad946e8cc353faf9e484a05f1",
+    "BE": "3f762725690cccee4cc815b06f1115f83f51d304a78660a5dd50ef51228dc6e5",
+    "BG": "8217f63fdf8cb9b272305efa49175bb19b56e2063ee700a92911a9093ba425a9",
+    "CH": "adacaf6f7db6a9e4ba29feff260da060c23bae4cd9f33d32e8da252883ea839c",
+    "CZ": "b9da1329bae175980dc29c486b4d61c4a70a96bc2c2f715d61cee40d50f767aa",
+    "DE-LU": "bb2bf788973234b5c15e0ecc0020c1b7814319648e74c01af32d31f1b53b028a",
+    "DK1": "14c6b754ac43a009c587df87ee1568af8ba5d0a40485250de31bf0eb14fe3f11",
+    "DK2": "b4376f186aaf7d879bd220473232476fc0a3e24ffe6b8574bf610a1c0920a91a",
+    "EE": "d74d50ba8885affc76c83e42ac96758ad6b8ed8d81d521db6320d6f06b865b63",
+    "ES": "57f2d3fd32adcde7949aa661b3e78e01ce0a0c61e4a282c37ab34545f942a8b6",
+    "FI": "42784d49f2fa0d09337ea39d0d92171f3884ff111233fbb1e2387fbb9fce3b85",
+    "FR": "a0749d359d1a4bdd33d658419e2a7cb6d212e0ac59e869a163f699db27dbbc41",
+    "GR": "3d5bb4f35a35da722f271f82975bedea61f12a550db314aab5df551e3b3000fb",
+    "HR": "87f8d8fd2af970b9df4af674821c79e2504a28fc8af394f1b8ef13e6c80cbaea",
+    "HU": "413f49949296ae81b768cf3099d757bb5d44b18e4e9bdbc85e9968ccaa920e99",
+    "IT-CNOR": "d7930b2b0e99ef745211c7190188351c45d18a1a31dfc7bd8630fa5940903a20",
+    "IT-CSUD": "5a1dd2752b8e72473f4da3b37cbb23a96139d892ef8cd40ad5184cffd5493af5",
+    "IT-North": "840b7d14e68d3bff8cd2823637c1a66fcf384924db1c87f2b867c229c7eb47af",
+    "IT-SARD": "e4b2c97ddab6259871855a5be7cdfee3054e28870734e606ca23deeca8daaee6",
+    "IT-SUD": "2d764b7d0aaf7c3073a6e8f103db4dcb0d1cfe393039f37021e0116c69ec61f0",
+    "LT": "e1632f196d8dece21c3a7c0a7ee28603ff256fe2835478b7ac17bd71e00272fb",
+    "LV": "77c7a7893714300baddc897dc2a4e6963df66609935769bc5208af8405c2a50a",
+    "MK": "6cab5766d586b1f46985af5696d17958ad450841560d8b5590ded8b7c65cabbe",
+    "NL": "6289d0dec4b8e983a74b16513a2a19041aa11c1cef5481af6b10cab85dc4aa12",
+    "NO1": "c7e59439af5686e768cab153e495416f1f03a4f978a57faa606c71e1296e71db",
+    "NO2": "e3687c99de9e0e90db114126d4a38fe3615f656fdc35f986295b56169bd12524",
+    "NO3": "5efa22a51dc8ba5c100cf530c665567481ca45b6a9a99ac82c3a88b9e936dfb1",
+    "NO4": "04a270030ecabda3c37f53027b78bcf54ab415de2118dae5ab15167e61991eb2",
+    "PL": "f37faebe37fb91f3138ca2c4b85f7d4263bae06575cb87c60c5805317e9c811a",
+    "PT": "197f0ef08d3647e3fd595322841808da41672670c0f89e6de3afb66242395f49",
+    "RO": "1d2534a1fce17e013bd165d50f08744aae4512652d80eb3c21c68516692764c0",
+    "RS": "892a9e8ce7a78b15d73862b9aa5980b78cf6c1c989fa077db3042ed9ff09dcdb",
+    "SE1": "6ae32654583721f03caf9677571ae19658f5a723904fa57b022217dc4566155e",
+    "SE2": "425856ec167d24b80a61312962b4fdd535b850dab43da55e959072585150687b",
+    "SE3": "90795436b9b7b6d99bbff234560f559e1bcd59e90ffa1c0b549e1828ec7db5b0",
+    "SE4": "9dddbcb5d9655b49d19eb01d6e09781f50640d60a34f70784ac97b5965c80b64",
+    "SI": "d666a39a9406901e580917aad41833935ce923b94bbd6d02609110170f87c354",
+    "SK": "0305285ff4d13a50396314696d3ba568fd087657c97305ee6f4e0c7676d1bc70"
+  },
+  "reference": {
+    "id": "candidate-001",
+    "annual_replay_sha256": "99c17a7378d823695440f5a5c4ce903253d4ce5ee0d0a6e7c92460c184e9544b",
+    "mapping_calendar_sha256": "70553de8d1e10ce95706ea28995289b1e80645068f895f21fca852e14aadf16b",
+    "annual_feasible_cost_eur": 50662078462.99544
+  },
+  "candidate": {
+    "id": "candidate-006",
+    "annual_replay_sha256": "74f7566e8f58e3249fcb42edaa99e75d28c2c027f9395dfd5f8de58980e2328c",
+    "mapping_calendar_sha256": "f6592f576121d715138cd96c25017f5b45f708091c92db1016bbc989b6ab3528",
+    "annual_feasible_cost_eur": 50633472741.74006
+  },
+  "nodes": [
+    {
+      "node": "AL2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "AL",
+      "provisional_observed_zone": "AL",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -85.94110660845111,
+          "candidate": -85.99393988241351,
+          "difference": -0.052833273962406224
+        },
+        "mae_eur_mwh": {
+          "reference": 87.47802528645404,
+          "candidate": 87.53150075952784,
+          "difference": 0.05347547307380296
+        },
+        "rmse_eur_mwh": {
+          "reference": 100.69232690227145,
+          "candidate": 100.76344931544999,
+          "difference": 0.07112241317854284
+        },
+        "correlation": {
+          "reference": 0.33937317328464645,
+          "candidate": 0.3356076507113423,
+          "difference": -0.0037655225733041475
+        }
+      }
+    },
+    {
+      "node": "AT2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "AT",
+      "provisional_observed_zone": "AT",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -67.00416563933182,
+          "candidate": -67.07148495416686,
+          "difference": -0.06731931483504638
+        },
+        "mae_eur_mwh": {
+          "reference": 72.86877842089339,
+          "candidate": 72.93576028887482,
+          "difference": 0.06698186798142558
+        },
+        "rmse_eur_mwh": {
+          "reference": 81.0177289186368,
+          "candidate": 81.10040777563802,
+          "difference": 0.08267885700121269
+        },
+        "correlation": {
+          "reference": 0.43912402249998667,
+          "candidate": 0.4368163531032011,
+          "difference": -0.002307669396785561
+        }
+      }
+    },
+    {
+      "node": "AT2 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "AT",
+      "provisional_observed_zone": "AT",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -68.14503302902672,
+          "candidate": -68.19416790977122,
+          "difference": -0.04913488074450356
+        },
+        "mae_eur_mwh": {
+          "reference": 73.12776826998734,
+          "candidate": 73.17362734504285,
+          "difference": 0.04585907505550324
+        },
+        "rmse_eur_mwh": {
+          "reference": 81.58177566838253,
+          "candidate": 81.62667335361239,
+          "difference": 0.04489768522985571
+        },
+        "correlation": {
+          "reference": 0.442446147942849,
+          "candidate": 0.44281598578920456,
+          "difference": 0.0003698378463555807
+        }
+      }
+    },
+    {
+      "node": "BA2 0AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "BE2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "BE",
+      "provisional_observed_zone": "BE",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -44.71002739306061,
+          "candidate": -44.78708479712754,
+          "difference": -0.07705740406693451
+        },
+        "mae_eur_mwh": {
+          "reference": 52.44400075813588,
+          "candidate": 52.512358287568055,
+          "difference": 0.06835752943217699
+        },
+        "rmse_eur_mwh": {
+          "reference": 60.47702641162099,
+          "candidate": 60.54372863752536,
+          "difference": 0.06670222590437191
+        },
+        "correlation": {
+          "reference": 0.5450132399689472,
+          "candidate": 0.5450339803436619,
+          "difference": 2.0740374714667276e-05
+        }
+      }
+    },
+    {
+      "node": "BE2 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "BE",
+      "provisional_observed_zone": "BE",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -44.186448723753834,
+          "candidate": -44.25428952336851,
+          "difference": -0.06784079961467882
+        },
+        "mae_eur_mwh": {
+          "reference": 52.091354456468146,
+          "candidate": 52.146895034168615,
+          "difference": 0.055540577700469385
+        },
+        "rmse_eur_mwh": {
+          "reference": 60.22032131188924,
+          "candidate": 60.27507680742707,
+          "difference": 0.05475549553782599
+        },
+        "correlation": {
+          "reference": 0.5344275897811444,
+          "candidate": 0.5346047754497876,
+          "difference": 0.0001771856686432205
+        }
+      }
+    },
+    {
+      "node": "BE2 2AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "BE",
+      "provisional_observed_zone": "BE",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -44.052642054550155,
+          "candidate": -44.13092041180201,
+          "difference": -0.07827835725185395
+        },
+        "mae_eur_mwh": {
+          "reference": 51.89387452859543,
+          "candidate": 51.96021548993148,
+          "difference": 0.06634096133604572
+        },
+        "rmse_eur_mwh": {
+          "reference": 60.08930353304353,
+          "candidate": 60.15606434817883,
+          "difference": 0.06676081513530363
+        },
+        "correlation": {
+          "reference": 0.5314011480902886,
+          "candidate": 0.5313382529120906,
+          "difference": -6.289517819801915e-05
+        }
+      }
+    },
+    {
+      "node": "BG2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "BG",
+      "provisional_observed_zone": "BG",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -74.67520829551133,
+          "candidate": -74.72233212001939,
+          "difference": -0.04712382450806274
+        },
+        "mae_eur_mwh": {
+          "reference": 79.65501137746458,
+          "candidate": 79.70282945631239,
+          "difference": 0.04781807884781131
+        },
+        "rmse_eur_mwh": {
+          "reference": 93.3870092389739,
+          "candidate": 93.45124904888333,
+          "difference": 0.06423980990942368
+        },
+        "correlation": {
+          "reference": 0.360633977160287,
+          "candidate": 0.3573688564565706,
+          "difference": -0.003265120703716373
+        }
+      }
+    },
+    {
+      "node": "CH2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "CH",
+      "provisional_observed_zone": "CH",
+      "matched_hours": 8758,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -61.906483389954836,
+          "candidate": -61.99325398890285,
+          "difference": -0.08677059894801431
+        },
+        "mae_eur_mwh": {
+          "reference": 66.70353984406509,
+          "candidate": 66.79001614841292,
+          "difference": 0.08647630434782627
+        },
+        "rmse_eur_mwh": {
+          "reference": 71.13710554038454,
+          "candidate": 71.22993801465547,
+          "difference": 0.092832474270935
+        },
+        "correlation": {
+          "reference": 0.5382689189943541,
+          "candidate": 0.5371988706944135,
+          "difference": -0.001070048299940618
+        }
+      }
+    },
+    {
+      "node": "CH2 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "CH",
+      "provisional_observed_zone": "CH",
+      "matched_hours": 8758,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -64.93722960523253,
+          "candidate": -65.038254859868,
+          "difference": -0.10102525463547352
+        },
+        "mae_eur_mwh": {
+          "reference": 69.27818734284863,
+          "candidate": 69.38151652654051,
+          "difference": 0.10332918369188349
+        },
+        "rmse_eur_mwh": {
+          "reference": 73.75514737657595,
+          "candidate": 73.86882829553393,
+          "difference": 0.11368091895798216
+        },
+        "correlation": {
+          "reference": 0.531362137964026,
+          "candidate": 0.5294507759212264,
+          "difference": -0.0019113620427996247
+        }
+      }
+    },
+    {
+      "node": "CZ2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "CZ",
+      "provisional_observed_zone": "CZ",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -64.82169522638816,
+          "candidate": -64.89020869785114,
+          "difference": -0.06851347146297826
+        },
+        "mae_eur_mwh": {
+          "reference": 70.2986801677763,
+          "candidate": 70.36822005345194,
+          "difference": 0.0695398856756384
+        },
+        "rmse_eur_mwh": {
+          "reference": 79.63442956722108,
+          "candidate": 79.71606831731565,
+          "difference": 0.08163875009456945
+        },
+        "correlation": {
+          "reference": 0.4126530784258965,
+          "candidate": 0.41054271311836765,
+          "difference": -0.0021103653075288387
+        }
+      }
+    },
+    {
+      "node": "CZ2 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "CZ",
+      "provisional_observed_zone": "CZ",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -65.43467641804979,
+          "candidate": -65.48210565110755,
+          "difference": -0.04742923305775548
+        },
+        "mae_eur_mwh": {
+          "reference": 71.08162048421177,
+          "candidate": 71.13251365834944,
+          "difference": 0.050893174137669916
+        },
+        "rmse_eur_mwh": {
+          "reference": 80.35208976822783,
+          "candidate": 80.41895811593949,
+          "difference": 0.06686834771166161
+        },
+        "correlation": {
+          "reference": 0.395475707579471,
+          "candidate": 0.39273763653592386,
+          "difference": -0.002738071043547119
+        }
+      }
+    },
+    {
+      "node": "DE2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -55.73552225697338,
+          "candidate": -55.80573833445917,
+          "difference": -0.07021607748578873
+        },
+        "mae_eur_mwh": {
+          "reference": 63.06078886377578,
+          "candidate": 63.12869247061515,
+          "difference": 0.0679036068393728
+        },
+        "rmse_eur_mwh": {
+          "reference": 72.57586719249906,
+          "candidate": 72.64554949641663,
+          "difference": 0.06968230391757402
+        },
+        "correlation": {
+          "reference": 0.5014850103093401,
+          "candidate": 0.5013347430076053,
+          "difference": -0.00015026730173484104
+        }
+      }
+    },
+    {
+      "node": "DE2 10AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -56.47129024487635,
+          "candidate": -56.53502611882344,
+          "difference": -0.06373587394708835
+        },
+        "mae_eur_mwh": {
+          "reference": 63.517693035262866,
+          "candidate": 63.57890206608528,
+          "difference": 0.06120903082241114
+        },
+        "rmse_eur_mwh": {
+          "reference": 73.14215810278802,
+          "candidate": 73.20804105983332,
+          "difference": 0.06588295704530367
+        },
+        "correlation": {
+          "reference": 0.5047323591570109,
+          "candidate": 0.5044151904932798,
+          "difference": -0.0003171686637311044
+        }
+      }
+    },
+    {
+      "node": "DE2 11AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -56.17537195207794,
+          "candidate": -56.23456880344498,
+          "difference": -0.05919685136704089
+        },
+        "mae_eur_mwh": {
+          "reference": 63.59242367858588,
+          "candidate": 63.65384727746552,
+          "difference": 0.06142359887964233
+        },
+        "rmse_eur_mwh": {
+          "reference": 73.46907451897192,
+          "candidate": 73.52371870588425,
+          "difference": 0.054644186912327086
+        },
+        "correlation": {
+          "reference": 0.42669993681348034,
+          "candidate": 0.42652182384751164,
+          "difference": -0.00017811296596870196
+        }
+      }
+    },
+    {
+      "node": "DE2 12AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -55.341518990345364,
+          "candidate": -55.41473385669637,
+          "difference": -0.07321486635100882
+        },
+        "mae_eur_mwh": {
+          "reference": 62.806380462224624,
+          "candidate": 62.87531670739998,
+          "difference": 0.06893624517535812
+        },
+        "rmse_eur_mwh": {
+          "reference": 72.27332091402768,
+          "candidate": 72.34327540619654,
+          "difference": 0.0699544921688613
+        },
+        "correlation": {
+          "reference": 0.5042353607712047,
+          "candidate": 0.5043563496528357,
+          "difference": 0.0001209888816310345
+        }
+      }
+    },
+    {
+      "node": "DE2 13AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -57.960735863661164,
+          "candidate": -58.01672847487208,
+          "difference": -0.05599261121091814
+        },
+        "mae_eur_mwh": {
+          "reference": 64.44360503533935,
+          "candidate": 64.49767960751767,
+          "difference": 0.054074572178322455
+        },
+        "rmse_eur_mwh": {
+          "reference": 74.06988313570726,
+          "candidate": 74.13026423108035,
+          "difference": 0.060381095373088556
+        },
+        "correlation": {
+          "reference": 0.5284397137163062,
+          "candidate": 0.52816886875172,
+          "difference": -0.000270844964586181
+        }
+      }
+    },
+    {
+      "node": "DE2 14AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -53.330800031660935,
+          "candidate": -53.4241097619728,
+          "difference": -0.09330973031186574
+        },
+        "mae_eur_mwh": {
+          "reference": 61.43148621152716,
+          "candidate": 61.515354345942846,
+          "difference": 0.08386813441568819
+        },
+        "rmse_eur_mwh": {
+          "reference": 71.18709164341172,
+          "candidate": 71.26700760424039,
+          "difference": 0.07991596082867147
+        },
+        "correlation": {
+          "reference": 0.4479006305138342,
+          "candidate": 0.4479352513433161,
+          "difference": 3.4620829481857296e-05
+        }
+      }
+    },
+    {
+      "node": "DE2 15AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -56.40626649783691,
+          "candidate": -56.47876673128603,
+          "difference": -0.07250023344911938
+        },
+        "mae_eur_mwh": {
+          "reference": 63.69244984140517,
+          "candidate": 63.76127899515183,
+          "difference": 0.06882915374665544
+        },
+        "rmse_eur_mwh": {
+          "reference": 73.18225948244304,
+          "candidate": 73.25734772757444,
+          "difference": 0.075088245131397
+        },
+        "correlation": {
+          "reference": 0.49986298044692934,
+          "candidate": 0.4993348564005722,
+          "difference": -0.000528124046357159
+        }
+      }
+    },
+    {
+      "node": "DE2 16AC",
+      "status": "native_nodal_price_row_absent"
+    },
+    {
+      "node": "DE2 17AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -57.007577694752776,
+          "candidate": -57.06729568879991,
+          "difference": -0.059717994047133516
+        },
+        "mae_eur_mwh": {
+          "reference": 63.82288369249604,
+          "candidate": 63.88218132557602,
+          "difference": 0.059297633079978596
+        },
+        "rmse_eur_mwh": {
+          "reference": 73.41234523255756,
+          "candidate": 73.47517955809326,
+          "difference": 0.06283432553570378
+        },
+        "correlation": {
+          "reference": 0.513920514649038,
+          "candidate": 0.5136931512783744,
+          "difference": -0.00022736337066353585
+        }
+      }
+    },
+    {
+      "node": "DE2 18AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -63.009674530797625,
+          "candidate": -63.03930388341993,
+          "difference": -0.029629352622308147
+        },
+        "mae_eur_mwh": {
+          "reference": 68.11753593462123,
+          "candidate": 68.14734258476135,
+          "difference": 0.02980665014011663
+        },
+        "rmse_eur_mwh": {
+          "reference": 78.01886441013872,
+          "candidate": 78.0525151090488,
+          "difference": 0.03365069891007977
+        },
+        "correlation": {
+          "reference": 0.4859097590562304,
+          "candidate": 0.48561496680580846,
+          "difference": -0.0002947922504219491
+        }
+      }
+    },
+    {
+      "node": "DE2 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -57.52294612444191,
+          "candidate": -57.58006970551395,
+          "difference": -0.05712358107204096
+        },
+        "mae_eur_mwh": {
+          "reference": 64.17764210764575,
+          "candidate": 64.23265247867262,
+          "difference": 0.05501037102686723
+        },
+        "rmse_eur_mwh": {
+          "reference": 73.81306840507301,
+          "candidate": 73.87448620693557,
+          "difference": 0.06141780186256085
+        },
+        "correlation": {
+          "reference": 0.5220470309247933,
+          "candidate": 0.5217278836250057,
+          "difference": -0.00031914729978765877
+        }
+      }
+    },
+    {
+      "node": "DE2 2AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -57.174173888365814,
+          "candidate": -57.225525893993584,
+          "difference": -0.05135200562776987
+        },
+        "mae_eur_mwh": {
+          "reference": 63.94377329272012,
+          "candidate": 64.00022580449412,
+          "difference": 0.05645251177400468
+        },
+        "rmse_eur_mwh": {
+          "reference": 73.51344928654872,
+          "candidate": 73.56871202978674,
+          "difference": 0.05526274323801772
+        },
+        "correlation": {
+          "reference": 0.49582256029260136,
+          "candidate": 0.4956194681432584,
+          "difference": -0.00020309214934294273
+        }
+      }
+    },
+    {
+      "node": "DE2 3AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -56.52843967379338,
+          "candidate": -56.603451448976045,
+          "difference": -0.07501177518266644
+        },
+        "mae_eur_mwh": {
+          "reference": 63.77567149927114,
+          "candidate": 63.84642726158482,
+          "difference": 0.07075576231368075
+        },
+        "rmse_eur_mwh": {
+          "reference": 73.29349307160246,
+          "candidate": 73.37129835608413,
+          "difference": 0.0778052844816699
+        },
+        "correlation": {
+          "reference": 0.49819948748852383,
+          "candidate": 0.4976073446286316,
+          "difference": -0.0005921428598922307
+        }
+      }
+    },
+    {
+      "node": "DE2 4AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -58.5829303450847,
+          "candidate": -58.63089754284045,
+          "difference": -0.04796719775575298
+        },
+        "mae_eur_mwh": {
+          "reference": 64.95069507423919,
+          "candidate": 64.99748781365112,
+          "difference": 0.04679273941192719
+        },
+        "rmse_eur_mwh": {
+          "reference": 74.60445332542257,
+          "candidate": 74.65924253310202,
+          "difference": 0.05478920767944828
+        },
+        "correlation": {
+          "reference": 0.5370299788833286,
+          "candidate": 0.5366942863238456,
+          "difference": -0.0003356925594829585
+        }
+      }
+    },
+    {
+      "node": "DE2 5AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -55.926009087909264,
+          "candidate": -55.9916890363403,
+          "difference": -0.06567994843103264
+        },
+        "mae_eur_mwh": {
+          "reference": 63.23086775286822,
+          "candidate": 63.29223462414996,
+          "difference": 0.06136687128174145
+        },
+        "rmse_eur_mwh": {
+          "reference": 72.92999623413353,
+          "candidate": 72.99737386719296,
+          "difference": 0.06737763305943645
+        },
+        "correlation": {
+          "reference": 0.48408536245270806,
+          "candidate": 0.4836244711543121,
+          "difference": -0.0004608912983959379
+        }
+      }
+    },
+    {
+      "node": "DE2 6AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -56.15189707930854,
+          "candidate": -56.214048518449744,
+          "difference": -0.06215143914120347
+        },
+        "mae_eur_mwh": {
+          "reference": 63.33215083216877,
+          "candidate": 63.39486292430186,
+          "difference": 0.06271209213308993
+        },
+        "rmse_eur_mwh": {
+          "reference": 72.83473243353646,
+          "candidate": 72.89866804924742,
+          "difference": 0.06393561571096029
+        },
+        "correlation": {
+          "reference": 0.5023592729803937,
+          "candidate": 0.5022013582571716,
+          "difference": -0.00015791472322213007
+        }
+      }
+    },
+    {
+      "node": "DE2 7AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -58.339113173690656,
+          "candidate": -58.3894407107579,
+          "difference": -0.05032753706724691
+        },
+        "mae_eur_mwh": {
+          "reference": 64.73368110548432,
+          "candidate": 64.78260137737847,
+          "difference": 0.04892027189414705
+        },
+        "rmse_eur_mwh": {
+          "reference": 74.3598419955408,
+          "candidate": 74.415226362097,
+          "difference": 0.05538436655619705
+        },
+        "correlation": {
+          "reference": 0.5355735158334546,
+          "candidate": 0.5353728067573881,
+          "difference": -0.00020070907606650756
+        }
+      }
+    },
+    {
+      "node": "DE2 8AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -58.64279375206761,
+          "candidate": -58.69331261858031,
+          "difference": -0.05051886651269655
+        },
+        "mae_eur_mwh": {
+          "reference": 65.00824331320214,
+          "candidate": 65.05673423329924,
+          "difference": 0.04849092009709466
+        },
+        "rmse_eur_mwh": {
+          "reference": 74.64927680533242,
+          "candidate": 74.70626312135418,
+          "difference": 0.05698631602176363
+        },
+        "correlation": {
+          "reference": 0.5379945546209303,
+          "candidate": 0.5376565264246603,
+          "difference": -0.00033802819626993497
+        }
+      }
+    },
+    {
+      "node": "DE2 9AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "DE",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -56.74684296280411,
+          "candidate": -56.805989367704015,
+          "difference": -0.05914640489990575
+        },
+        "mae_eur_mwh": {
+          "reference": 63.73555577377138,
+          "candidate": 63.79516209832852,
+          "difference": 0.059606324557137214
+        },
+        "rmse_eur_mwh": {
+          "reference": 73.35376114364264,
+          "candidate": 73.41415345663376,
+          "difference": 0.06039231299111236
+        },
+        "correlation": {
+          "reference": 0.49239466184324066,
+          "candidate": 0.4922811911019911,
+          "difference": -0.00011347074124956613
+        }
+      }
+    },
+    {
+      "node": "DK0 0AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "DK2 0AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "EE2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "EE",
+      "provisional_observed_zone": "EE",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -46.55655801448733,
+          "candidate": -46.585926674291485,
+          "difference": -0.02936865980415604
+        },
+        "mae_eur_mwh": {
+          "reference": 58.5257760668604,
+          "candidate": 58.50685676815319,
+          "difference": -0.01891929870721043
+        },
+        "rmse_eur_mwh": {
+          "reference": 83.74893646226225,
+          "candidate": 83.76875455035444,
+          "difference": 0.019818088092193875
+        },
+        "correlation": {
+          "reference": 0.34587552601418237,
+          "candidate": 0.3440174588957749,
+          "difference": -0.0018580671184074693
+        }
+      }
+    },
+    {
+      "node": "ES2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "ES",
+      "provisional_observed_zone": "ES",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -1.7006951842847957,
+          "candidate": -1.7122988532660663,
+          "difference": -0.011603668981270632
+        },
+        "mae_eur_mwh": {
+          "reference": 30.544532728609468,
+          "candidate": 30.507790518382418,
+          "difference": -0.036742210227050265
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.339837377004685,
+          "candidate": 37.29132163900519,
+          "difference": -0.04851573799949449
+        },
+        "correlation": {
+          "reference": 0.6598846648322021,
+          "candidate": 0.6618826418999139,
+          "difference": 0.0019979770677117648
+        }
+      }
+    },
+    {
+      "node": "ES2 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "ES",
+      "provisional_observed_zone": "ES",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -0.9765241685103473,
+          "candidate": -0.9848607016141094,
+          "difference": -0.008336533103762145
+        },
+        "mae_eur_mwh": {
+          "reference": 30.547836152018665,
+          "candidate": 30.50853646080075,
+          "difference": -0.03929969121791288
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.407810055387394,
+          "candidate": 37.35633960539637,
+          "difference": -0.05147044999102235
+        },
+        "correlation": {
+          "reference": 0.6524333789873628,
+          "candidate": 0.6544539442098452,
+          "difference": 0.0020205652224823956
+        }
+      }
+    },
+    {
+      "node": "ES2 2AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "ES",
+      "provisional_observed_zone": "ES",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -5.96354200618661,
+          "candidate": -5.996736903981085,
+          "difference": -0.03319489779447515
+        },
+        "mae_eur_mwh": {
+          "reference": 30.985571700497303,
+          "candidate": 30.960718128471314,
+          "difference": -0.02485357202598948
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.515216864559186,
+          "candidate": 37.484996284397695,
+          "difference": -0.030220580161490318
+        },
+        "correlation": {
+          "reference": 0.6972511297830942,
+          "candidate": 0.6991181349470162,
+          "difference": 0.0018670051639220198
+        }
+      }
+    },
+    {
+      "node": "ES2 3AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "ES",
+      "provisional_observed_zone": "ES",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -0.7459384042953102,
+          "candidate": -0.7537603701070867,
+          "difference": -0.007821965811776521
+        },
+        "mae_eur_mwh": {
+          "reference": 30.656042580327654,
+          "candidate": 30.616214763665777,
+          "difference": -0.039827816661876625
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.507894825746014,
+          "candidate": 37.45593269973924,
+          "difference": -0.05196212600677086
+        },
+        "correlation": {
+          "reference": 0.6495701056619347,
+          "candidate": 0.6516169946370476,
+          "difference": 0.0020468889751128483
+        }
+      }
+    },
+    {
+      "node": "ES2 4AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "ES",
+      "provisional_observed_zone": "ES",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": 0.12287498820131983,
+          "candidate": 0.1180696811100195,
+          "difference": -0.004805307091300323
+        },
+        "mae_eur_mwh": {
+          "reference": 30.895214251201754,
+          "candidate": 30.853456321847414,
+          "difference": -0.04175792935433975
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.804236938962624,
+          "candidate": 37.7497557071917,
+          "difference": -0.05448123177092157
+        },
+        "correlation": {
+          "reference": 0.6373765267918813,
+          "candidate": 0.6394868153641391,
+          "difference": 0.0021102885722578124
+        }
+      }
+    },
+    {
+      "node": "ES2 5AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "ES",
+      "provisional_observed_zone": "ES",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": 0.9492445903319501,
+          "candidate": 0.9499380395230356,
+          "difference": 0.0006934491910854934
+        },
+        "mae_eur_mwh": {
+          "reference": 30.827200407843105,
+          "candidate": 30.78316819362581,
+          "difference": -0.04403221421729597
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.83212792219288,
+          "candidate": 37.77376793136132,
+          "difference": -0.05835999083156196
+        },
+        "correlation": {
+          "reference": 0.6302415304169013,
+          "candidate": 0.6323872697454382,
+          "difference": 0.0021457393285368997
+        }
+      }
+    },
+    {
+      "node": "ES2 6AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "ES",
+      "provisional_observed_zone": "ES",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -0.6643142148231787,
+          "candidate": -0.6709658985222312,
+          "difference": -0.006651683699052557
+        },
+        "mae_eur_mwh": {
+          "reference": 30.554252728959572,
+          "candidate": 30.513979206377066,
+          "difference": -0.04027352258250616
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.4481849979495,
+          "candidate": 37.39533855650982,
+          "difference": -0.05284644143967654
+        },
+        "correlation": {
+          "reference": 0.6488176393881949,
+          "candidate": 0.6508544397369516,
+          "difference": 0.00203680034875664
+        }
+      }
+    },
+    {
+      "node": "ES2 7AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "ES",
+      "provisional_observed_zone": "ES",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -3.3337153156041164,
+          "candidate": -3.3548828945953373,
+          "difference": -0.021167578991220903
+        },
+        "mae_eur_mwh": {
+          "reference": 30.429364143645422,
+          "candidate": 30.39882049300907,
+          "difference": -0.030543650636353448
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.105268310519854,
+          "candidate": 37.06564773830245,
+          "difference": -0.03962057221740167
+        },
+        "correlation": {
+          "reference": 0.6806824458204556,
+          "candidate": 0.6824968535024547,
+          "difference": 0.0018144076819991417
+        }
+      }
+    },
+    {
+      "node": "ES2 8AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "ES",
+      "provisional_observed_zone": "ES",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": 0.09491249769588105,
+          "candidate": 0.09100929460690492,
+          "difference": -0.003903203088976126
+        },
+        "mae_eur_mwh": {
+          "reference": 30.759736138349865,
+          "candidate": 30.717931945347875,
+          "difference": -0.04180419300199034
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.67650169086638,
+          "candidate": 37.621404697915764,
+          "difference": -0.05509699295061665
+        },
+        "correlation": {
+          "reference": 0.6398345857667235,
+          "candidate": 0.6419332164345773,
+          "difference": 0.0020986306678538735
+        }
+      }
+    },
+    {
+      "node": "ES2 9AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "ES",
+      "provisional_observed_zone": "ES",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -0.9669878238766406,
+          "candidate": -0.9755392093086717,
+          "difference": -0.008551385432031045
+        },
+        "mae_eur_mwh": {
+          "reference": 30.600988918660853,
+          "candidate": 30.561747523116992,
+          "difference": -0.0392413955438613
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.44543212830113,
+          "candidate": 37.39412693189836,
+          "difference": -0.05130519640276532
+        },
+        "correlation": {
+          "reference": 0.6521697834433278,
+          "candidate": 0.654200956373824,
+          "difference": 0.002031172930496261
+        }
+      }
+    },
+    {
+      "node": "ES7 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "ES",
+      "provisional_observed_zone": "ES",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -1.8180808699645366,
+          "candidate": -1.8309132400288484,
+          "difference": -0.012832370064311815
+        },
+        "mae_eur_mwh": {
+          "reference": 30.433038774240654,
+          "candidate": 30.39902210425748,
+          "difference": -0.0340166699831741
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.224696738682745,
+          "candidate": 37.179075338722164,
+          "difference": -0.04562139996058079
+        },
+        "correlation": {
+          "reference": 0.6635243443122524,
+          "candidate": 0.665359793662483,
+          "difference": 0.0018354493502306113
+        }
+      }
+    },
+    {
+      "node": "FI0 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FI",
+      "provisional_observed_zone": "FI",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -8.085935368789814,
+          "candidate": -7.986069276868254,
+          "difference": 0.09986609192155971
+        },
+        "mae_eur_mwh": {
+          "reference": 36.5300956893655,
+          "candidate": 36.61300349948492,
+          "difference": 0.08290781011941561
+        },
+        "rmse_eur_mwh": {
+          "reference": 52.69922729059889,
+          "candidate": 52.82385452978807,
+          "difference": 0.12462723918918073
+        },
+        "correlation": {
+          "reference": 0.18371854229919313,
+          "candidate": 0.17821451917140885,
+          "difference": -0.00550402312778428
+        }
+      }
+    },
+    {
+      "node": "FI0 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FI",
+      "provisional_observed_zone": "FI",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -8.085935368789542,
+          "candidate": -7.986069276867995,
+          "difference": 0.09986609192154727
+        },
+        "mae_eur_mwh": {
+          "reference": 36.53009568936554,
+          "candidate": 36.613003499484954,
+          "difference": 0.08290781011941561
+        },
+        "rmse_eur_mwh": {
+          "reference": 52.699227290598806,
+          "candidate": 52.82385452978798,
+          "difference": 0.12462723918917362
+        },
+        "correlation": {
+          "reference": 0.18371854229919518,
+          "candidate": 0.1782145191714108,
+          "difference": -0.005504023127784391
+        }
+      }
+    },
+    {
+      "node": "FI0 2AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FI",
+      "provisional_observed_zone": "FI",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -8.08593536878965,
+          "candidate": -7.986069276868098,
+          "difference": 0.0998660919215526
+        },
+        "mae_eur_mwh": {
+          "reference": 36.53009568936549,
+          "candidate": 36.61300349948492,
+          "difference": 0.08290781011942983
+        },
+        "rmse_eur_mwh": {
+          "reference": 52.699227290598785,
+          "candidate": 52.82385452978798,
+          "difference": 0.12462723918919494
+        },
+        "correlation": {
+          "reference": 0.18371854229919676,
+          "candidate": 0.1782145191714115,
+          "difference": -0.005504023127785251
+        }
+      }
+    },
+    {
+      "node": "FR2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -25.690945904129652,
+          "candidate": -25.79279581790026,
+          "difference": -0.10184991377060726
+        },
+        "mae_eur_mwh": {
+          "reference": 36.09258543742152,
+          "candidate": 36.181886645740114,
+          "difference": 0.08930120831859512
+        },
+        "rmse_eur_mwh": {
+          "reference": 45.23256657875178,
+          "candidate": 45.37204413946369,
+          "difference": 0.1394775607119101
+        },
+        "correlation": {
+          "reference": 0.6614490657589939,
+          "candidate": 0.6581747222197936,
+          "difference": -0.0032743435392003084
+        }
+      }
+    },
+    {
+      "node": "FR2 10AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -20.976508874704688,
+          "candidate": -21.05427027004553,
+          "difference": -0.07776139534084336
+        },
+        "mae_eur_mwh": {
+          "reference": 34.36318318486981,
+          "candidate": 34.41514930814352,
+          "difference": 0.051966123273707865
+        },
+        "rmse_eur_mwh": {
+          "reference": 42.75623415567611,
+          "candidate": 42.83788386016713,
+          "difference": 0.08164970449102071
+        },
+        "correlation": {
+          "reference": 0.6932853472053999,
+          "candidate": 0.6924093130275463,
+          "difference": -0.0008760341778536462
+        }
+      }
+    },
+    {
+      "node": "FR2 11AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -23.024115164381914,
+          "candidate": -23.10620807226832,
+          "difference": -0.08209290788640544
+        },
+        "mae_eur_mwh": {
+          "reference": 34.83246729865318,
+          "candidate": 34.89750911046278,
+          "difference": 0.06504181180959989
+        },
+        "rmse_eur_mwh": {
+          "reference": 43.51121610193122,
+          "candidate": 43.60663822553617,
+          "difference": 0.09542212360495483
+        },
+        "correlation": {
+          "reference": 0.6891123856782294,
+          "candidate": 0.6877488533795681,
+          "difference": -0.001363532298661263
+        }
+      }
+    },
+    {
+      "node": "FR2 12AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -20.45493808767559,
+          "candidate": -20.53579089266177,
+          "difference": -0.0808528049861792
+        },
+        "mae_eur_mwh": {
+          "reference": 34.24879843402024,
+          "candidate": 34.30386169345435,
+          "difference": 0.05506325943411383
+        },
+        "rmse_eur_mwh": {
+          "reference": 42.6677993567555,
+          "candidate": 42.75824843362066,
+          "difference": 0.09044907686515558
+        },
+        "correlation": {
+          "reference": 0.6848449718612638,
+          "candidate": 0.6834287373824207,
+          "difference": -0.0014162344788430925
+        }
+      }
+    },
+    {
+      "node": "FR2 13AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -24.00708666727151,
+          "candidate": -24.101822434551927,
+          "difference": -0.09473576728041877
+        },
+        "mae_eur_mwh": {
+          "reference": 35.467999254536316,
+          "candidate": 35.54990047705126,
+          "difference": 0.08190122251494358
+        },
+        "rmse_eur_mwh": {
+          "reference": 44.453024769359146,
+          "candidate": 44.5812989480353,
+          "difference": 0.12827417867615054
+        },
+        "correlation": {
+          "reference": 0.6637361993995698,
+          "candidate": 0.6607319218216893,
+          "difference": -0.0030042775778805764
+        }
+      }
+    },
+    {
+      "node": "FR2 14AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -24.652139035786305,
+          "candidate": -24.761956005453673,
+          "difference": -0.1098169696673672
+        },
+        "mae_eur_mwh": {
+          "reference": 35.848398013638835,
+          "candidate": 35.95482145604394,
+          "difference": 0.10642344240510226
+        },
+        "rmse_eur_mwh": {
+          "reference": 45.28654849044441,
+          "candidate": 45.4705899098105,
+          "difference": 0.1840414193660891
+        },
+        "correlation": {
+          "reference": 0.6278511273148162,
+          "candidate": 0.6216171397644555,
+          "difference": -0.006233987550360642
+        }
+      }
+    },
+    {
+      "node": "FR2 15AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -23.845426554893642,
+          "candidate": -23.925580654556278,
+          "difference": -0.08015409966263576
+        },
+        "mae_eur_mwh": {
+          "reference": 35.43339884559812,
+          "candidate": 35.497653425174946,
+          "difference": 0.06425457957682568
+        },
+        "rmse_eur_mwh": {
+          "reference": 44.15405921730204,
+          "candidate": 44.247266731570974,
+          "difference": 0.09320751426893281
+        },
+        "correlation": {
+          "reference": 0.6838394156061447,
+          "candidate": 0.6825893811432392,
+          "difference": -0.0012500344629055027
+        }
+      }
+    },
+    {
+      "node": "FR2 16AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -18.435248621187913,
+          "candidate": -18.505574253501557,
+          "difference": -0.07032563231364364
+        },
+        "mae_eur_mwh": {
+          "reference": 33.687283953758524,
+          "candidate": 33.72026719578605,
+          "difference": 0.03298324202752667
+        },
+        "rmse_eur_mwh": {
+          "reference": 41.77194191330542,
+          "candidate": 41.8295505225683,
+          "difference": 0.057608609262878474
+        },
+        "correlation": {
+          "reference": 0.6929736226211549,
+          "candidate": 0.6930395822146228,
+          "difference": 6.595959346789027e-05
+        }
+      }
+    },
+    {
+      "node": "FR2 17AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -23.74649028386187,
+          "candidate": -23.836177178193626,
+          "difference": -0.0896868943317557
+        },
+        "mae_eur_mwh": {
+          "reference": 35.21331093953416,
+          "candidate": 35.287127822894284,
+          "difference": 0.0738168833601236
+        },
+        "rmse_eur_mwh": {
+          "reference": 44.041830379562164,
+          "candidate": 44.154638671820244,
+          "difference": 0.1128082922580802
+        },
+        "correlation": {
+          "reference": 0.6792206966494785,
+          "candidate": 0.6770896796794621,
+          "difference": -0.002131016970016386
+        }
+      }
+    },
+    {
+      "node": "FR2 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -22.84443906867415,
+          "candidate": -22.924249511171627,
+          "difference": -0.07981044249747882
+        },
+        "mae_eur_mwh": {
+          "reference": 34.84065843775107,
+          "candidate": 34.90257549481111,
+          "difference": 0.061917057060043135
+        },
+        "rmse_eur_mwh": {
+          "reference": 43.45374409884277,
+          "candidate": 43.54411656831306,
+          "difference": 0.09037246947028876
+        },
+        "correlation": {
+          "reference": 0.6920795010191064,
+          "candidate": 0.6909316192837422,
+          "difference": -0.0011478817353641757
+        }
+      }
+    },
+    {
+      "node": "FR2 2AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -28.926276611002955,
+          "candidate": -29.06679506722967,
+          "difference": -0.14051845622671522
+        },
+        "mae_eur_mwh": {
+          "reference": 37.967874792061245,
+          "candidate": 38.11798416490308,
+          "difference": 0.15010937284183257
+        },
+        "rmse_eur_mwh": {
+          "reference": 48.62535647210537,
+          "candidate": 48.91341012571904,
+          "difference": 0.28805365361366597
+        },
+        "correlation": {
+          "reference": 0.5529419454325487,
+          "candidate": 0.5420461929810504,
+          "difference": -0.01089575245149832
+        }
+      }
+    },
+    {
+      "node": "FR2 3AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -22.906721097167985,
+          "candidate": -22.988007897035594,
+          "difference": -0.081286799867609
+        },
+        "mae_eur_mwh": {
+          "reference": 34.80014018215581,
+          "candidate": 34.86414504913961,
+          "difference": 0.06400486698380092
+        },
+        "rmse_eur_mwh": {
+          "reference": 43.45494340072704,
+          "candidate": 43.548673045737345,
+          "difference": 0.09372964501030623
+        },
+        "correlation": {
+          "reference": 0.6902362885327646,
+          "candidate": 0.6889398167005767,
+          "difference": -0.001296471832187951
+        }
+      }
+    },
+    {
+      "node": "FR2 4AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -23.574847858140323,
+          "candidate": -23.662730357194278,
+          "difference": -0.08788249905395418
+        },
+        "mae_eur_mwh": {
+          "reference": 35.12149838660035,
+          "candidate": 35.193235906527114,
+          "difference": 0.07173751992676358
+        },
+        "rmse_eur_mwh": {
+          "reference": 43.91340662512898,
+          "candidate": 44.021998934555334,
+          "difference": 0.10859230942635634
+        },
+        "correlation": {
+          "reference": 0.6817574434809177,
+          "candidate": 0.679821055848957,
+          "difference": -0.0019363876319606899
+        }
+      }
+    },
+    {
+      "node": "FR2 5AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -23.069853304502043,
+          "candidate": -23.154150808198033,
+          "difference": -0.0842975036959892
+        },
+        "mae_eur_mwh": {
+          "reference": 35.376866968294664,
+          "candidate": 35.44295116672027,
+          "difference": 0.06608419842560664
+        },
+        "rmse_eur_mwh": {
+          "reference": 44.07031309695325,
+          "candidate": 44.16403018029148,
+          "difference": 0.09371708333823392
+        },
+        "correlation": {
+          "reference": 0.6682475646020258,
+          "candidate": 0.6670453206556444,
+          "difference": -0.001202243946381465
+        }
+      }
+    },
+    {
+      "node": "FR2 6AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -22.340396916968434,
+          "candidate": -22.43143685933849,
+          "difference": -0.09103994237005608
+        },
+        "mae_eur_mwh": {
+          "reference": 34.81850771044657,
+          "candidate": 34.897564074358854,
+          "difference": 0.07905636391228654
+        },
+        "rmse_eur_mwh": {
+          "reference": 43.661254454177794,
+          "candidate": 43.78973406185054,
+          "difference": 0.12847960767274458
+        },
+        "correlation": {
+          "reference": 0.6675746790696746,
+          "candidate": 0.6642547602104659,
+          "difference": -0.0033199188592086815
+        }
+      }
+    },
+    {
+      "node": "FR2 7AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -22.839007253512996,
+          "candidate": -22.91716729975449,
+          "difference": -0.07816004624149286
+        },
+        "mae_eur_mwh": {
+          "reference": 34.607904237995065,
+          "candidate": 34.66949091124542,
+          "difference": 0.061586673250353385
+        },
+        "rmse_eur_mwh": {
+          "reference": 43.25825811565767,
+          "candidate": 43.34465296423842,
+          "difference": 0.08639484858075264
+        },
+        "correlation": {
+          "reference": 0.6920075353845927,
+          "candidate": 0.6909990671391975,
+          "difference": -0.0010084682453952443
+        }
+      }
+    },
+    {
+      "node": "FR2 8AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -23.574847858140323,
+          "candidate": -23.662730357194278,
+          "difference": -0.08788249905395418
+        },
+        "mae_eur_mwh": {
+          "reference": 35.12149838660035,
+          "candidate": 35.193235906527114,
+          "difference": 0.07173751992676358
+        },
+        "rmse_eur_mwh": {
+          "reference": 43.91340662512898,
+          "candidate": 44.021998934555334,
+          "difference": 0.10859230942635634
+        },
+        "correlation": {
+          "reference": 0.6817574434809177,
+          "candidate": 0.679821055848957,
+          "difference": -0.0019363876319606899
+        }
+      }
+    },
+    {
+      "node": "FR2 9AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -22.592637304838085,
+          "candidate": -22.678334358494524,
+          "difference": -0.08569705365643898
+        },
+        "mae_eur_mwh": {
+          "reference": 34.808458002614636,
+          "candidate": 34.87630739034714,
+          "difference": 0.06784938773250104
+        },
+        "rmse_eur_mwh": {
+          "reference": 43.495877648454154,
+          "candidate": 43.601413851404246,
+          "difference": 0.10553620295009125
+        },
+        "correlation": {
+          "reference": 0.6838211025633311,
+          "candidate": 0.6818998624582838,
+          "difference": -0.0019212401050472394
+        }
+      }
+    },
+    {
+      "node": "FR6 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "FR",
+      "provisional_observed_zone": "FR",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": 15.146998260120899,
+          "candidate": 15.143565091327538,
+          "difference": -0.0034331687933608634
+        },
+        "mae_eur_mwh": {
+          "reference": 39.02975129900879,
+          "candidate": 39.024135316424335,
+          "difference": -0.005615982584451729
+        },
+        "rmse_eur_mwh": {
+          "reference": 47.48892046665464,
+          "candidate": 47.48152931607767,
+          "difference": -0.007391150576971484
+        },
+        "correlation": {
+          "reference": 0.24172039678332094,
+          "candidate": 0.24225934981030475,
+          "difference": 0.0005389530269838128
+        }
+      }
+    },
+    {
+      "node": "GB1 0AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "GB1 1AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "GB1 2AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "GB1 3AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "GB1 4AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "GB1 5AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "GB1 6AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "GB1 7AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "GB1 8AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "GB3 0AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "GB5 0AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "GR2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "GR",
+      "provisional_observed_zone": "GR",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -71.35099290148435,
+          "candidate": -71.40089249778066,
+          "difference": -0.049899596296313575
+        },
+        "mae_eur_mwh": {
+          "reference": 76.51734771422599,
+          "candidate": 76.5677055479177,
+          "difference": 0.05035783369170588
+        },
+        "rmse_eur_mwh": {
+          "reference": 89.58734481854196,
+          "candidate": 89.65202585181649,
+          "difference": 0.06468103327452468
+        },
+        "correlation": {
+          "reference": 0.3508759102392027,
+          "candidate": 0.3478341608146572,
+          "difference": -0.003041749424545548
+        }
+      }
+    },
+    {
+      "node": "GR2 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "GR",
+      "provisional_observed_zone": "GR",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -71.35099290148435,
+          "candidate": -71.40089249778066,
+          "difference": -0.049899596296313575
+        },
+        "mae_eur_mwh": {
+          "reference": 76.51734771422599,
+          "candidate": 76.5677055479177,
+          "difference": 0.05035783369170588
+        },
+        "rmse_eur_mwh": {
+          "reference": 89.58734481854196,
+          "candidate": 89.65202585181649,
+          "difference": 0.06468103327452468
+        },
+        "correlation": {
+          "reference": 0.3508759102392027,
+          "candidate": 0.3478341608146572,
+          "difference": -0.003041749424545548
+        }
+      }
+    },
+    {
+      "node": "HR2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "HR",
+      "provisional_observed_zone": "HR",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -72.86237839883663,
+          "candidate": -72.93203200450405,
+          "difference": -0.06965360566742618
+        },
+        "mae_eur_mwh": {
+          "reference": 77.82256395495172,
+          "candidate": 77.89298254024699,
+          "difference": 0.0704185852952719
+        },
+        "rmse_eur_mwh": {
+          "reference": 88.551407380148,
+          "candidate": 88.63749184433645,
+          "difference": 0.08608446418844551
+        },
+        "correlation": {
+          "reference": 0.37064726478790433,
+          "candidate": 0.36719868817540857,
+          "difference": -0.0034485766124957573
+        }
+      }
+    },
+    {
+      "node": "HU2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "HU",
+      "provisional_observed_zone": "HU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -76.26007500586564,
+          "candidate": -76.33360186013134,
+          "difference": -0.07352685426569394
+        },
+        "mae_eur_mwh": {
+          "reference": 81.39139250228155,
+          "candidate": 81.46548759339595,
+          "difference": 0.07409509111440116
+        },
+        "rmse_eur_mwh": {
+          "reference": 94.3960004524463,
+          "candidate": 94.48950738666313,
+          "difference": 0.09350693421683332
+        },
+        "correlation": {
+          "reference": 0.3819226730694536,
+          "candidate": 0.3784983022990413,
+          "difference": -0.0034243707704122994
+        }
+      }
+    },
+    {
+      "node": "IE3 0AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "IT2 0AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "IT2 10AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "IT2 1AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "IT2 2AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "IT2 3AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "IT2 4AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "IT2 5AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "IT2 6AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "IT2 7AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "IT2 8AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "IT2 9AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "IT4 0AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "LT2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "LT",
+      "provisional_observed_zone": "LT",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -51.47407028617692,
+          "candidate": -51.503438945981074,
+          "difference": -0.02936865980415604
+        },
+        "mae_eur_mwh": {
+          "reference": 61.07764734860726,
+          "candidate": 61.06622008858299,
+          "difference": -0.01142726002426997
+        },
+        "rmse_eur_mwh": {
+          "reference": 86.6347876462025,
+          "candidate": 86.66392570517827,
+          "difference": 0.02913805897577504
+        },
+        "correlation": {
+          "reference": 0.3351487807859837,
+          "candidate": 0.33278971242509425,
+          "difference": -0.002359068360889449
+        }
+      }
+    },
+    {
+      "node": "LU2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "LU",
+      "provisional_observed_zone": "DE-LU",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -54.99780314909304,
+          "candidate": -55.0682439150265,
+          "difference": -0.07044076593346205
+        },
+        "mae_eur_mwh": {
+          "reference": 62.545601212589744,
+          "candidate": 62.6107498409369,
+          "difference": 0.06514862834715274
+        },
+        "rmse_eur_mwh": {
+          "reference": 72.0217349669182,
+          "candidate": 72.08622541165492,
+          "difference": 0.06449044473671961
+        },
+        "correlation": {
+          "reference": 0.5021241765990356,
+          "candidate": 0.5025779949389162,
+          "difference": 0.00045381833988056286
+        }
+      }
+    },
+    {
+      "node": "LV2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "LV",
+      "provisional_observed_zone": "LV",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -51.89727919028642,
+          "candidate": -51.92664785009058,
+          "difference": -0.029368659804163144
+        },
+        "mae_eur_mwh": {
+          "reference": 61.235288433731704,
+          "candidate": 61.223954632439856,
+          "difference": -0.011333801291847578
+        },
+        "rmse_eur_mwh": {
+          "reference": 86.75023893951807,
+          "candidate": 86.77940658017536,
+          "difference": 0.029167640657291827
+        },
+        "correlation": {
+          "reference": 0.3321843114822989,
+          "candidate": 0.3298710255396293,
+          "difference": -0.002313285942669552
+        }
+      }
+    },
+    {
+      "node": "ME2 0AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "MK2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "MK",
+      "provisional_observed_zone": "MK",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -75.7106345531999,
+          "candidate": -75.76212478735397,
+          "difference": -0.05149023415407328
+        },
+        "mae_eur_mwh": {
+          "reference": 79.46225357530139,
+          "candidate": 79.51470267603425,
+          "difference": 0.0524491007328578
+        },
+        "rmse_eur_mwh": {
+          "reference": 92.301064391641,
+          "candidate": 92.37257198868274,
+          "difference": 0.07150759704173026
+        },
+        "correlation": {
+          "reference": 0.37195809101783633,
+          "candidate": 0.3681908946387542,
+          "difference": -0.0037671963790821272
+        }
+      }
+    },
+    {
+      "node": "NL2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "NL",
+      "provisional_observed_zone": "NL",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -51.49915854622677,
+          "candidate": -51.59674818134183,
+          "difference": -0.0975896351150638
+        },
+        "mae_eur_mwh": {
+          "reference": 58.88020664064653,
+          "candidate": 58.96721066557661,
+          "difference": 0.08700402493008141
+        },
+        "rmse_eur_mwh": {
+          "reference": 67.2791687267643,
+          "candidate": 67.35493987529033,
+          "difference": 0.07577114852603017
+        },
+        "correlation": {
+          "reference": 0.5213517186650843,
+          "candidate": 0.5224740255016432,
+          "difference": 0.001122306836558895
+        }
+      }
+    },
+    {
+      "node": "NL2 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "NL",
+      "provisional_observed_zone": "NL",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -51.092828531168905,
+          "candidate": -51.20257478184937,
+          "difference": -0.10974625068046606
+        },
+        "mae_eur_mwh": {
+          "reference": 58.48386510933753,
+          "candidate": 58.57613512987169,
+          "difference": 0.09227002053415845
+        },
+        "rmse_eur_mwh": {
+          "reference": 67.05341071046001,
+          "candidate": 67.12746239234427,
+          "difference": 0.07405168188425648
+        },
+        "correlation": {
+          "reference": 0.5086911192881999,
+          "candidate": 0.5108270562903391,
+          "difference": 0.00213593700213921
+        }
+      }
+    },
+    {
+      "node": "NL2 2AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "NL",
+      "provisional_observed_zone": "NL",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -50.50871201872518,
+          "candidate": -50.58072442262204,
+          "difference": -0.07201240389686347
+        },
+        "mae_eur_mwh": {
+          "reference": 58.01715518003415,
+          "candidate": 58.082572868489855,
+          "difference": 0.06541768845570317
+        },
+        "rmse_eur_mwh": {
+          "reference": 66.46957132065266,
+          "candidate": 66.52575471025833,
+          "difference": 0.05618338960566405
+        },
+        "correlation": {
+          "reference": 0.5189220655309739,
+          "candidate": 0.5193522965532553,
+          "difference": 0.0004302310222814576
+        }
+      }
+    },
+    {
+      "node": "NL2 3AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "NL",
+      "provisional_observed_zone": "NL",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -51.60726015699882,
+          "candidate": -51.69871890483373,
+          "difference": -0.09145874783491337
+        },
+        "mae_eur_mwh": {
+          "reference": 59.05613060082996,
+          "candidate": 59.1398332763557,
+          "difference": 0.08370267552574262
+        },
+        "rmse_eur_mwh": {
+          "reference": 67.4138994548367,
+          "candidate": 67.49027593498141,
+          "difference": 0.07637648014471665
+        },
+        "correlation": {
+          "reference": 0.5196832372435345,
+          "candidate": 0.5201493796112406,
+          "difference": 0.00046614236770614603
+        }
+      }
+    },
+    {
+      "node": "NO0 0AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "NO0 1AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "NO0 2AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "NO0 3AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "NO0 4AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "PL2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "PL",
+      "provisional_observed_zone": "PL",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -73.26189152890466,
+          "candidate": -73.30369695503936,
+          "difference": -0.04180542613470095
+        },
+        "mae_eur_mwh": {
+          "reference": 78.03714457277293,
+          "candidate": 78.07718543338784,
+          "difference": 0.040040860614908524
+        },
+        "rmse_eur_mwh": {
+          "reference": 87.63921622886495,
+          "candidate": 87.69390335752664,
+          "difference": 0.05468712866168346
+        },
+        "correlation": {
+          "reference": 0.36563489332744903,
+          "candidate": 0.3634722118094375,
+          "difference": -0.002162681518011522
+        }
+      }
+    },
+    {
+      "node": "PL2 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "PL",
+      "provisional_observed_zone": "PL",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -73.20270046329887,
+          "candidate": -73.24890560473403,
+          "difference": -0.0462051414351663
+        },
+        "mae_eur_mwh": {
+          "reference": 77.87961442496471,
+          "candidate": 77.92345126824553,
+          "difference": 0.04383684328081472
+        },
+        "rmse_eur_mwh": {
+          "reference": 87.46089983996897,
+          "candidate": 87.51783703294234,
+          "difference": 0.05693719297336486
+        },
+        "correlation": {
+          "reference": 0.3803153014686009,
+          "candidate": 0.37852097207053875,
+          "difference": -0.0017943293980621222
+        }
+      }
+    },
+    {
+      "node": "PL2 2AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "PL",
+      "provisional_observed_zone": "PL",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -72.8711990667514,
+          "candidate": -72.92499655789516,
+          "difference": -0.05379749114375443
+        },
+        "mae_eur_mwh": {
+          "reference": 77.60593218016477,
+          "candidate": 77.65629088376356,
+          "difference": 0.050358703598789134
+        },
+        "rmse_eur_mwh": {
+          "reference": 87.15453895775096,
+          "candidate": 87.21573227084046,
+          "difference": 0.06119331308950393
+        },
+        "correlation": {
+          "reference": 0.3802589158630536,
+          "candidate": 0.37888649489863857,
+          "difference": -0.0013724209644150331
+        }
+      }
+    },
+    {
+      "node": "PL2 3AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "PL",
+      "provisional_observed_zone": "PL",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -73.28038209289387,
+          "candidate": -73.32106750768075,
+          "difference": -0.04068541478687848
+        },
+        "mae_eur_mwh": {
+          "reference": 78.08922282568578,
+          "candidate": 78.12864249303095,
+          "difference": 0.03941966734517166
+        },
+        "rmse_eur_mwh": {
+          "reference": 87.7184310842378,
+          "candidate": 87.77329937801771,
+          "difference": 0.05486829377990432
+        },
+        "correlation": {
+          "reference": 0.35812045551889704,
+          "candidate": 0.3557189512697077,
+          "difference": -0.0024015042491893346
+        }
+      }
+    },
+    {
+      "node": "PL2 4AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "PL",
+      "provisional_observed_zone": "PL",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -73.1374021984301,
+          "candidate": -73.18358649956829,
+          "difference": -0.04618430113819727
+        },
+        "mae_eur_mwh": {
+          "reference": 77.87659516579468,
+          "candidate": 77.92033561278113,
+          "difference": 0.04374044698644752
+        },
+        "rmse_eur_mwh": {
+          "reference": 87.4501668450335,
+          "candidate": 87.5071796473483,
+          "difference": 0.05701280231480155
+        },
+        "correlation": {
+          "reference": 0.37475244506288213,
+          "candidate": 0.37290526691168535,
+          "difference": -0.0018471781511967822
+        }
+      }
+    },
+    {
+      "node": "PL2 5AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "PL",
+      "provisional_observed_zone": "PL",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -73.5635757727085,
+          "candidate": -73.59624174630544,
+          "difference": -0.03266597359693435
+        },
+        "mae_eur_mwh": {
+          "reference": 78.33912310089397,
+          "candidate": 78.37050202693165,
+          "difference": 0.031378926037675114
+        },
+        "rmse_eur_mwh": {
+          "reference": 87.95765620416086,
+          "candidate": 88.0040918943437,
+          "difference": 0.046435690182846656
+        },
+        "correlation": {
+          "reference": 0.35734663973299613,
+          "candidate": 0.3551862419743366,
+          "difference": -0.0021603977586595047
+        }
+      }
+    },
+    {
+      "node": "PT2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "PT",
+      "provisional_observed_zone": "PT",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -0.7277001675338867,
+          "candidate": -0.7340662735890703,
+          "difference": -0.006366106055183618
+        },
+        "mae_eur_mwh": {
+          "reference": 30.200458989219094,
+          "candidate": 30.16287235809925,
+          "difference": -0.037586631119843616
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.258639851909315,
+          "candidate": 37.20710833054434,
+          "difference": -0.051531521364978516
+        },
+        "correlation": {
+          "reference": 0.620785269008429,
+          "candidate": 0.6228331150749966,
+          "difference": 0.0020478460665676046
+        }
+      }
+    },
+    {
+      "node": "PT2 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "PT",
+      "provisional_observed_zone": "PT",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -1.0536475928140019,
+          "candidate": -1.0605310747504066,
+          "difference": -0.006883481936404756
+        },
+        "mae_eur_mwh": {
+          "reference": 30.02322248247475,
+          "candidate": 29.986250979285867,
+          "difference": -0.03697150318888376
+        },
+        "rmse_eur_mwh": {
+          "reference": 37.01292408524809,
+          "candidate": 36.96192923560806,
+          "difference": -0.050994849640026985
+        },
+        "correlation": {
+          "reference": 0.6303930346738934,
+          "candidate": 0.6324198597894325,
+          "difference": 0.002026825115539088
+        }
+      }
+    },
+    {
+      "node": "RO2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "RO",
+      "provisional_observed_zone": "RO",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -75.99335356297101,
+          "candidate": -76.03524427097952,
+          "difference": -0.04189070800850914
+        },
+        "mae_eur_mwh": {
+          "reference": 80.76286856703665,
+          "candidate": 80.80547301560537,
+          "difference": 0.04260444856872425
+        },
+        "rmse_eur_mwh": {
+          "reference": 94.09654038310535,
+          "candidate": 94.15446880937752,
+          "difference": 0.057928426272169986
+        },
+        "correlation": {
+          "reference": 0.3589664100163346,
+          "candidate": 0.3559462127712064,
+          "difference": -0.0030201972451281978
+        }
+      }
+    },
+    {
+      "node": "RO2 1AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "RO",
+      "provisional_observed_zone": "RO",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -76.01006449699867,
+          "candidate": -76.05029475710003,
+          "difference": -0.04023026010136732
+        },
+        "mae_eur_mwh": {
+          "reference": 80.7771319456995,
+          "candidate": 80.81811784932557,
+          "difference": 0.04098590362607979
+        },
+        "rmse_eur_mwh": {
+          "reference": 94.11323311020197,
+          "candidate": 94.1692129375644,
+          "difference": 0.05597982736242102
+        },
+        "correlation": {
+          "reference": 0.3585244133162449,
+          "candidate": 0.3555853027632056,
+          "difference": -0.0029391105530393036
+        }
+      }
+    },
+    {
+      "node": "RS2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "RS",
+      "provisional_observed_zone": "RS",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -75.58578463606666,
+          "candidate": -75.63900203634526,
+          "difference": -0.05321740027859789
+        },
+        "mae_eur_mwh": {
+          "reference": 78.75736021119464,
+          "candidate": 78.8114573768039,
+          "difference": 0.0540971656092637
+        },
+        "rmse_eur_mwh": {
+          "reference": 90.73539295233292,
+          "candidate": 90.80857006488922,
+          "difference": 0.07317711255630854
+        },
+        "correlation": {
+          "reference": 0.371866020793885,
+          "candidate": 0.36802470913571883,
+          "difference": -0.0038413116581661466
+        }
+      }
+    },
+    {
+      "node": "SE0 0AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "SE0 1AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "SE0 2AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "SE0 3AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "SE0 4AC",
+      "status": "unresolved_geographic_mapping"
+    },
+    {
+      "node": "SI2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "SI",
+      "provisional_observed_zone": "SI",
+      "matched_hours": 8759,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -71.86691465206005,
+          "candidate": -71.94661178287622,
+          "difference": -0.07969713081617158
+        },
+        "mae_eur_mwh": {
+          "reference": 76.95872789835308,
+          "candidate": 77.0393717754801,
+          "difference": 0.0806438771270308
+        },
+        "rmse_eur_mwh": {
+          "reference": 87.50035293521962,
+          "candidate": 87.59425419010424,
+          "difference": 0.09390125488461365
+        },
+        "correlation": {
+          "reference": 0.34647530649360264,
+          "candidate": 0.3430509749904213,
+          "difference": -0.0034243315031813326
+        }
+      }
+    },
+    {
+      "node": "SK2 0AC",
+      "status": "conditional_nodal_vs_observed_zonal_diagnostic_not_validation",
+      "country": "SK",
+      "provisional_observed_zone": "SK",
+      "matched_hours": 8760,
+      "metrics": {
+        "bias_eur_mwh": {
+          "reference": -70.61134946462307,
+          "candidate": -70.68078609863404,
+          "difference": -0.06943663401096956
+        },
+        "mae_eur_mwh": {
+          "reference": 75.83767838056376,
+          "candidate": 75.90780471213833,
+          "difference": 0.0701263315745706
+        },
+        "rmse_eur_mwh": {
+          "reference": 86.87968793016627,
+          "candidate": 86.97087085519557,
+          "difference": 0.09118292502930103
+        },
+        "correlation": {
+          "reference": 0.4376886917109432,
+          "candidate": 0.4344865374009918,
+          "difference": -0.0032021543099514105
+        }
+      }
+    },
+    {
+      "node": "XK2 0AC",
+      "status": "unresolved_geographic_mapping"
+    }
+  ],
+  "compared_nodes": 88,
+  "annual_feasible_cost_change_eur": -28605721.255378723,
+  "maximum_absolute_bias_change_eur_mwh": 0.14051845622671522,
+  "acceptance": {
+    "annual_optimum": false,
+    "bidding_zone_mapping": false,
+    "empirical_validation": false,
+    "investment_validation": false
+  },
+  "producer_sha256": "49aa12d311fd892573af5bdee135c7a7a3e52ad133aa7b06baf25f3cc5e737bb",
+  "dependencies": {
+    "compare_native_price_observations.py": "5322d9e905b377b474bb822153e608474e649f6f4a71a305c912eca9b1a53537",
+    "submonthly_inventory_driver.py": "c1c9b76752cbfb183e8e89bed1430f8444e5db5ed756d53309e16720837e8521",
+    "monthly_dispatch.py": "214236f2425772e8943faeb8e742711aa70fc81fabe70f941ab2683db8aff407"
+  },
+  "limitations": [
+    "Two feasible fixed-inventory trajectories, not annual optima or solver implementations.",
+    "Same original capacities, costs and renewable availability; only linked inventory states differ.",
+    "Conditional nodal dual versus observed zonal diagnostics use provisional national mapping.",
+    "Differences of error metrics are not dispatch cost differences or investment benefits.",
+    "No empirical acceptance, held-out calibration, avoided emissions or investment validity inferred."
+  ]
+}

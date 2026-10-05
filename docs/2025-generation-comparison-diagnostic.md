@@ -148,3 +148,59 @@ full-year source identity, unique model-node inventory, monthly matched-hour
 accounting and finite, consistent error metrics before producing the artifact.
 Three publication-gate tests reject changed sources/partial years/duplicate nodes,
 promoted validation statuses, inconsistent errors and coverage.
+
+## Inventory-state sensitivity: candidate 001 versus candidate 006
+
+The candidate 006 witness has now been mapped independently across all 59 blocks
+and 8,760 hours, after objective, bounds, equality/RHS and inequality/RHS identity
+against the original model. Both witnesses retain the same original generation
+availability, network, capacities and operating costs. Their linked inventory
+states differ. These are two feasible trajectories, **not two annual optima or
+two solver implementations**.
+
+The operating cost decreases from €50,662,078,462.99544 to
+€50,633,472,741.74006: **€28.606 million**, approximately 0.0565%. This is improved
+dispatch at another feasible inventory state, not an investment benefit. No new
+transmission or storage capacity was added.
+
+The price comparison uses the same observed price files, provisional geography
+and matched hours for both witnesses. Across 88 compared nodes, the largest
+absolute change in mean price bias is only **€0.141/MWh**. The large German and
+Polish underprediction persists.
+
+| Provisional country | Nodes | Candidate 001 bias range (€/MWh) | Candidate 006 bias range (€/MWh) | Paired change in bias (€/MWh) |
+| --- | ---: | ---: | ---: | ---: |
+| FR | 19 | −28.93 to 15.15 | −29.07 to 15.14 | −0.141 to −0.003 |
+| DE | 18 | −63.01 to −53.33 | −63.04 to −53.42 | −0.093 to −0.030 |
+| PL | 6 | −73.56 to −72.87 | −73.60 to −72.92 | −0.054 to −0.033 |
+| AT | 2 | −68.15 to −67.00 | −68.19 to −67.07 | −0.067 to −0.049 |
+| BG | 1 | −74.68 | −74.72 | −0.047 |
+
+Ranges describe individual nodes. The paired change is computed for each same
+node before taking its range; it is not a difference between range endpoints.
+Negative bias means the model's conditional price is below the observed price.
+
+![Candidate 001 and candidate 006 conditional price biases against the same 2025 observations, with an unchanged-bias diagonal.](../../research/network-benchmark-2025/inventory-price-sensitivity.svg)
+
+Each point represents a single provisional model node. Points near the diagonal
+have similar errors in both witnesses; agreement with observed prices would
+instead require small errors near zero. Colors/markers distinguish model
+countries, not validated bidding zones. Overlapping points do not remove nodes
+from the downloadable report.
+
+**What this shows:** this particular feasible inventory improvement does not
+resolve the price mismatch. **What it does not show:** that wider inventory
+changes cannot matter, that either witness has converged, or that carbon costs
+alone explain the errors. Both witnesses come from the conservative fixed-anchor
+search; annual convergence and controlled cost/outage/network investigations
+remain open. There is no calibration or newly selected acceptance threshold.
+
+[Download paired node metrics, source hashes and explicit unpassed acceptance gates](../../research/network-benchmark-2025/inventory-price-sensitivity.json).
+`compare_native_price_witnesses.py` rechecks both complete annual chains and
+native mappings, then compares the same immutable price observations. Three tests
+reject mismatched source/geography/coverage, duplicate or absent node domains and
+nonfinite metrics, while preserving signed changes and undefined correlations.
+`plot_native_price_witnesses.py` retains every compared node and embeds the JSON
+and plotting-producer hashes in the SVG. Original candidate 001 diagnostics
+remain unchanged; this sensitivity is separate from observed-data acceptance
+and the 2013 weekly/2025 conditional-window benchmarks.
