@@ -247,3 +247,13 @@ research retains its separate integration gates.
   is not annual linkage; replay all blocks against one global state and check
   cyclic closure before accepting an annual upper bound. SOC from a verified
   primal can seed inventories; generation dispatch cannot seed availability.
+
+- `prepare_submonthly_dual_calendar.py` transfers source-matched monthly row
+  prices into the shorter layout and independently replays saved supports.
+  Inspect the supervisor and child PIDs under `submonthly-dual-calendar/` before
+  restarting. All existing `tools/*.py` hashes and package versions are frozen
+  during the locked pass; documentation/frontend changes remain independent.
+  January is reused from `submonthly-dual-support/01-indexed/`; the earlier
+  300-second stop in `01/` is retained and supplies no accepted cut. Full-calendar
+  support replay still needs explicit annual master adoption; do not treat
+  transferred multipliers as a new native optimal-termination record.
