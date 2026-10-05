@@ -1357,3 +1357,51 @@ Preparing all 59 blocks still does not establish a linked annual solution.
 All 117 storage tests pass, including label-domain mismatch, cut projection and
 changed-artifact rejection tests. Annual dispatch, convergence, empirical and
 investment acceptance gates remain unchanged.
+
+
+### Annual shorter-block feasible witness — 5 October 2026
+
+The guarded restriction pass finished all twelve months. It reused the saved,
+independently checked monthly primal witnesses: no new dispatch solve was run.
+Each parent LP was reconstructed and its objective, bounds, right-hand sides and
+native matrices compared exactly with the saved monthly coefficients. Variables
+were restricted by component names and coordinates, never by guessed array
+positions. Internal inventories came from the verified storage state of charge;
+**generation dispatch was not substituted for renewable availability**.
+
+A separate audit then joined the boundary pieces into one 9,600-variable annual
+state, retained the exact original monthly anchor at month boundaries, and
+replayed every restricted primal against that global state. Adjacent pieces must
+agree within the existing 1e-7 MWh feasibility tolerance; missing or conflicting
+boundaries fail. Annual capacity/source bounds and cyclic closure are checked
+before all original block equalities, inequalities and variable bounds.
+
+The replay verifies:
+
+- 59 chronological blocks, 8,760 hourly intervals and 160 storage units;
+- maximum original-unit equality residual **1.437e-10**;
+- exact annual cyclic closure;
+- feasible annual cost **€50,745,703,158.61136**, reproducing the existing
+  monthly incumbent exactly under the declared compensated summation.
+
+[Download the annual shorter-block feasibility audit](../research/network-benchmark-2025/submonthly-annual-feasibility.json).
+The prepared matrices and full primal arrays remain in the ignored offline
+workspace. Reproduce the independent audit with
+`tools/audit_submonthly_warm_calendar.py`; its inputs are the source network,
+monthly witness workspace, shorter-block coefficient calendar and restricted
+witness calendar. Existing output evidence is never overwritten.
+
+This establishes a feasible upper bound in the shorter layout, **not** annual
+convergence. The last accepted lower bound remains €13,751,128,000.556618 and
+the gap remains approximately **72.90%**. There is no new annual native/fast
+benchmark, ENTSO-E fit or investment result in this artifact.
+
+A synthetic dual-transfer test also checks the omitted next-hour storage price:
+when a block ends inside a month, its terminal-inventory multiplier must include
+the following interval's standing-loss retention times the original energy-balance
+multiplier. Internal boundary prices cancel when the two supports are summed.
+These transferred multipliers are candidate affine LP supports, not new solver
+termination records; actual-source supports still require finite-bound and
+independent replay checks before entering the annual master. All 124 prescribed
+storage tests pass. Feasibility alone does not bypass optimisation, empirical
+validation or paired-intervention gates.
