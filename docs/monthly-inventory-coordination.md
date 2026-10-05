@@ -1501,3 +1501,13 @@ and **−37,129,214.607** at the verified annual anchor. The constructed elastic
 primal is not an economic dispatch witness or a Phase-I optimum. The cut may
 now be explicitly adopted into the next inventory master; it has not yet
 changed the annual bounds above.
+
+
+The subsequent checkpoint explicitly adopted this cut in the 59-block layout.
+Its saved original-unit master multipliers independently reproduce lower support
+€28,082,849,504.480568, a €4,363.19 improvement; the gap remains approximately
+44.66%. The changed first-week stocks satisfy this cut but native dispatch still
+reported infeasible after 31.02 seconds at 0.85 GiB. This failure is retained;
+necessary cuts are not sufficient dispatch proofs. Five new donor tests reject
+changed sources, implicit monthly layouts, nonpositive separation and cuts that
+exclude the verified anchor. All 141 storage tests pass.
