@@ -6,6 +6,7 @@ records. Replay original coefficients and finite-bound support before adoption.
 import numpy as np
 from scipy.optimize import OptimizeResult
 from submonthly_primal_mapping import native_positions,restrict_primal
+from native_coordinate_restriction import restrict
 
 
 def restrict_row_prices(parent,child,prices):
@@ -36,7 +37,7 @@ def restrict_duals(network,parent,child,arrays,last_snapshot):
         raise ValueError('Parent dual dimensions differ from native layout')
     prices=np.empty(len(sense));prices[sense=='=']=y[:-ns]
     less=int(np.sum(sense=='<'));prices[sense=='<']=z[:less];prices[sense=='>']=-z[less:]
-    child_prices=restrict_row_prices(parent,child,prices)
+    child_prices=restrict(parent,child,prices,'constraints')
     # A terminal +SOC row replaces the omitted next-hour energy balance's
     # retained previous-SOC coefficient. Preserve the final monthly terminal
     # multiplier when this is the last sub-block instead.
@@ -55,5 +56,5 @@ def restrict_duals(network,parent,child,arrays,last_snapshot):
     return OptimizeResult(
         eqlin=OptimizeResult(marginals=np.r_[child_prices[child_sense=='='],terminal]),
         ineqlin=OptimizeResult(marginals=np.r_[child_prices[child_sense=='<'],-child_prices[child_sense=='>']]),
-        lower=OptimizeResult(marginals=restrict_primal(parent,child,arrays['lower_marginals'])),
-        upper=OptimizeResult(marginals=restrict_primal(parent,child,arrays['upper_marginals'])))
+        lower=OptimizeResult(marginals=restrict(parent,child,arrays['lower_marginals'],'variables')),
+        upper=OptimizeResult(marginals=restrict(parent,child,arrays['upper_marginals'],'variables')))
