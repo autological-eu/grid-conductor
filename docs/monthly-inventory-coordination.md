@@ -1256,3 +1256,25 @@ source hashes, rejects changed producers, and writes a new isolated workspace
 with the interpolation fraction and producer hash. Prior attempts and the prior
 master report remain preserved. Two additional storage tests check the convex
 step and reject malformed states/fractions; all 107 storage tests pass.
+
+
+### Interior-trial timeout and conditioning diagnostic
+
+The 5% interior trial reached the January 600-second solver limit; whole-worker
+elapsed was 607.37 seconds and peak RSS was 3,648,880,640 bytes. No primal/dual
+witness, new annual upper bound or infeasibility proof was accepted.
+
+The next isolated diagnostic multiplies the economic objective by the exact
+positive factor 1/128. This preserves the mathematical minimisers and every
+constraint; it does not change prices, costs or physical inputs in the model.
+Multipliers are divided by that factor before original-unit support checks.
+Native optimal termination is still required. Original-coefficient primal
+correction and numerical witness replay retain their existing gates.
+
+`tools/diagnose_scaled_monthly_solver.py` uses a separate diagnostic directory,
+a 6 GiB memory guard, 600-second solver limit and 900-second whole-worker limit.
+Its output is not an accepted monthly receipt or annual result. Production
+adapter changes require reviewing the diagnostic and preserving original producer
+fingerprints. An isolated analytical native test verifies the unchanged optimum
+and restored original-unit duals; all 108 storage tests pass. This tests a
+conditioning hypothesis, not a demonstrated speed improvement on the annual data.
