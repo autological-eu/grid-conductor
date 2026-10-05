@@ -1178,3 +1178,55 @@ The verified upper/lower bounds above remain unchanged. A separately guarded
 boundary-row Phase-I diagnostic follows; only a positive independently replayed
 dual support can justify another feasibility cut. No failure receipt is treated
 as an annual result.
+
+
+### Nonoptimal dual recovery — 5 October 2026
+
+Candidate 002's ordinary boundary-row Phase-I reached the 600-second native
+solver limit, with whole-worker elapsed 608.35 seconds and peak RSS
+3,654,496,256 bytes. No feasibility cut was accepted from that attempt.
+
+Optimal Phase-I termination is sufficient but unnecessary for a feasibility
+cut. **Any** affine Lagrangian lower support that is independently checked and
+positive at the candidate proves that its zero-slack monthly problem is
+infeasible. This does not require a tight Phase-I objective bound, and it does
+not provide an economic optimum or market prices.
+
+`tools/phase_one_dual_probe.py` explores this recovery separately. It rescales
+only the unit-penalty elastic objective by the exact positive factor 1/128,
+restores row multipliers to original units, projects inequality multipliers to
+the proper sign and uniformly shrinks them where needed to avoid unbounded
+unit-slack reduced-cost directions. Unsupported unbounded zero-cost directions
+are rejected. The checked primal is constructed from the verified feasible
+anchor with boundary slacks; the solver's incomplete primal is never adopted.
+A positive support, original-unit residuals and retention of the feasible anchor
+must all pass, then the saved witness must independently replay. Zero or invalid
+supports are not cuts. Original economic solves still require optimal native
+status and their existing primal/dual gates.
+
+Five tests cover a positive nonoptimal dual support, rejection of zero supports
+and economic LPs, repair of an unbounded slack direction, and original-unit
+support recovery through a native analytical LP. The probe retains the
+6 GiB memory guard, 600-second solver limit and 900-second whole-worker deadline.
+It has a separate directory and producer identity; earlier receipts and the
+first verified cut remain preserved.
+
+### Finite automatic coordination driver
+
+`tools/annual_inventory_driver.py` is an offline Linux research driver, not an
+application server. An exclusive file lock and actual process inspection prevent
+duplicate jobs. It freezes source/code/package fingerprints, retains chronological
+candidate workspaces, independently replays completed witnesses, combines verified
+objective/feasibility cuts and prepares subsequent candidates. Failed diagnostics,
+changed inputs/code, insufficient disk space and candidate limits stop progress
+explicitly; none is a convergence certificate.
+
+Its finite candidate limit is 200. Its numerical stopping check uses the existing
+generic coordinator defaults, absolute gap 1e-5 euros plus relative gap 1e-9 times
+the feasible cost. Meeting that check only pauses for the remaining annual
+verification; it is not a new product acceptance gate, an interval certificate,
+empirical validation, or permission to publish investment claims. The matched
+annual comparison and supported app integration remain separate requirements.
+The driver preserves all accepted data and cuts and never regenerates renewable
+availability from dispatch. Seven orchestration tests cover process/lock safety,
+replay ordering, diagnostic recovery and explicit stopping.

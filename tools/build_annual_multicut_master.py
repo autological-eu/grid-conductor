@@ -58,7 +58,8 @@ def build(folders,feasibility_paths=()):
         receipt=json.loads(receipt_path.read_text())
         if digest(receipt_path)!=cut['producer_receipt_sha256'] or digest(path.parent/f'{month:02d}-witness.npz')!=cut['witness_sha256']:
             raise ValueError('Replayed feasibility witness changed')
-        if receipt['tool_sha256']!=digest(Path(__file__).with_name('annual_inventory_phase_one.py')):
+        producer='phase_one_dual_probe.py' if receipt.get('producer_kind')=='dual_probe' else 'annual_inventory_phase_one.py'
+        if receipt['tool_sha256']!=digest(Path(__file__).with_name(producer)):
             raise ValueError('Feasibility producer changed')
         for name,value in receipt['dependencies'].items():
             if digest(Path(__file__).with_name(name))!=value:raise ValueError('Feasibility dependency changed')

@@ -203,3 +203,23 @@ research retains its separate integration gates.
   publish their cached raw or derived values. Use `publish_entsoe_zone_prices.py`
   with offline `ENTSOE_API_KEY` for remaining zones. Raw caches/credentials stay
   ignored under `data/price-trace/`; public provenance excludes security tokens.
+
+
+## Automatic annual research driver
+
+- `tools/annual_inventory_driver.py` is a finite Linux-only offline driver, with
+  an exclusive lock at `annual-coordination/driver.lock` and checkpoints at
+  `driver-status.json`/`driver-manifest.json`. Inspect its actual PID and child jobs
+  before manually starting monthly audits or diagnostics. It can follow already
+  running jobs; status files alone do not establish liveness.
+- Source, calculation code and Python package versions are frozen while it runs.
+  Do not edit those calculation modules under a live driver; stop/review the
+  checkpoint and preserve prior evidence before any deliberate migration.
+  Frontend/documentation work does not require rewriting calculation manifests.
+- Economic solves keep strict optimal-status requirements. The separate elastic
+  dual probe may yield a necessary feasibility cut from nonoptimal multipliers
+  only after global support checks and independent primal/dual witness replay.
+  Never use Phase-I multipliers as economic objectives or market prices.
+- Candidate limits, unresolved diagnostics and resource stops are explicit
+  incomplete states. A numerical gap check never bypasses annual comparison,
+  observed-data validation or supported app-integration gates.

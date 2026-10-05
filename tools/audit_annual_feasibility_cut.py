@@ -11,15 +11,18 @@ from disk_storage_blocks import load_block
 from monthly_dispatch import digest,save
 
 
-def audit(folder,anchor,month,mode):
-    output=folder/('phase-one-boundary' if mode=='boundary' else 'phase-one')
+def audit(folder,anchor,month,mode,probe=False):
+    output=folder/('phase-one-boundary-dual-probe' if probe else ('phase-one-boundary' if mode=='boundary' else 'phase-one'))
     path=output/f'{month:02d}-witness.json';receipt=json.loads(path.read_text())
     signature=receipts(argparse.Namespace(folder=folder),month)
     if receipt['month']!=month or receipt['mode']!=mode or any(receipt.get(k)!=v for k,v in signature.items()):
         raise ValueError('Feasibility witness identity/source mismatch')
-    if receipt['tool_sha256']!=digest(Path(__file__).with_name('annual_inventory_phase_one.py')):
+    producer='phase_one_dual_probe.py' if probe else 'annual_inventory_phase_one.py'
+    if probe and (mode!='boundary' or receipt.get('producer_kind')!='dual_probe'):raise ValueError('Unsupported dual-probe identity')
+    if receipt['tool_sha256']!=digest(Path(__file__).with_name(producer)):
         raise ValueError('Elastic witness producer changed')
     expected={'native_storage_solver.py','check_storage_dual_bounds.py','disk_storage_blocks.py'}
+    if probe:expected.add('annual_inventory_phase_one.py')
     if set(receipt['dependencies'])!=expected:raise ValueError('Incomplete feasibility witness dependencies')
     for name,value in receipt['dependencies'].items():
         if digest(Path(__file__).with_name(name))!=value:raise ValueError('Feasibility witness dependency changed')
@@ -43,7 +46,7 @@ def audit(folder,anchor,month,mode):
     support=feasibility_support(block,state,result,anchor_state)
     if support['feasibility_limit']!=receipt['feasibility_limit'] or support['anchor_support']!=receipt['anchor_support']:
         raise ValueError('Feasibility cut/anchor replay mismatch')
-    report=dict(status='independently_replayed_numerical_feasibility_cut',month=month,mode=mode,
+    report=dict(status='independently_replayed_numerical_feasibility_cut',month=month,mode=mode,producer_kind='dual_probe' if probe else 'optimal_phase_one',
         input_sha256=signature['input_sha256'],block_sha256=signature['block_sha256'],
         warm_state_sha256=signature['warm_state_sha256'],producer_receipt_sha256=digest(path),
         witness_sha256=digest(witness),anchor_audit_sha256=digest(anchor_path),
@@ -51,8 +54,8 @@ def audit(folder,anchor,month,mode):
     save(output/f'{month:02d}-verified-cut.json',report);return report
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--folder',type=Path,required=True);parser.add_argument('--anchor',type=Path,required=True);parser.add_argument('--month',type=int,required=True);parser.add_argument('--mode',choices=['all','boundary'],required=True)
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--folder',type=Path,required=True);parser.add_argument('--anchor',type=Path,required=True);parser.add_argument('--month',type=int,required=True);parser.add_argument('--mode',choices=['all','boundary'],required=True);parser.add_argument('--probe',action='store_true')
     args=parser.parse_args()
     if not 1<=args.month<=12:parser.error('Invalid month')
-    report=audit(args.folder,args.anchor,args.month,args.mode)
+    report=audit(args.folder,args.anchor,args.month,args.mode,args.probe)
     print('Positive numerical feasibility cut independently replayed; no annual convergence claim.')
