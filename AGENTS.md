@@ -276,3 +276,18 @@ research retains its separate integration gates.
   Driver iteration limits and numerical gap status do not bypass N3–N5, the
   smaller monolithic reference or observed-data/intervention gates. Preserve
   failed probe/ray evidence; never repeat the same failed job from a stale status.
+
+
+## Read-only native exchange mapping
+
+- `map_submonthly_exchange_calendar.py` maps saved candidate 001 branch witnesses,
+  without solving. Inspect its supervisor/worker and `mapping.lock` before resuming;
+  source, annual replay, explicit mapper dependencies and package versions are frozen.
+  Never retry failed/partial folders or change these modules under its live pass.
+- `map_submonthly_exchanges.py` preserves native coefficient identity and both
+  branch terminal signs. Country grouping is not verified bidding-zone exchange;
+  internal branches stay out of external-trade sums. Native efficiency algebra
+  is not proof of metered losses or scheduled flows. Workers are bounded at
+  1 GiB/180 seconds; no annual result until all 59 blocks cover 8,760 UTC hours.
+- Outputs stay ignored under `data/pypsa-eur/annual-exchange-mapping/`. Correct
+  ENTSO-E A11/A09 source receipts, geography and empirical gates remain required.

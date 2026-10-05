@@ -194,3 +194,22 @@ tests pass. Commit e9de73b passed CI/Pages runs 37312595406/37312586509.
 The public chart decoded, maths rendered without KaTeX errors, document overflow
 checks passed at 1,440/390/320px, and downloaded JSON bytes matched the repository. The annual source and frozen calculation
 modules remain unchanged; no new product decision or weaker acceptance gate.
+
+
+### Native exchange groundwork (V2/V3)
+
+`map_submonthly_exchanges.py` recreates branch identities only after native
+objective/bounds/equality/RHS/inequality coefficient identity. The 168-hour pilot
+passed for 330 branches and 34 model countries in 10.01s, sampled peak RSS
+905,809,920 bytes, with all native efficiencies 1.0. Both terminal signs and
+reverse flows are retained; within-country branches do not become external trade.
+Evidence: `data/pypsa-eur/annual-exchange-mapping/pilot-00/`. This is candidate 001,
+not a new solve, accepted bidding-zone mapping or observed-flow validation.
+Six targeted tests preserve reversal/native terminal accounting and reject
+changed chronology/quantities, wrong exports and failed worker reuse.
+`map_submonthly_exchange_calendar.py` provides exclusive locking, frozen
+source/code/packages and exact annual chronology with guarded 1 GiB/180s workers.
+Next: finish the saved-witness calendar and audit correctly scoped ENTSO-E
+exchanges. Current environment readiness reports no configured secret/runtime
+bindings; original flow banks/receipts remain absent. No source relabelling or
+numerical target change is supported by this preparation.
