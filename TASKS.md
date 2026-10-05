@@ -257,3 +257,24 @@ exchange accounting/reference/publication tests pass. This explicitly leaves
 hourly ENTSO-E, bidding-zone, annual-optimum and investment acceptance false.
 Current observed-flow retrieval remains dependent on an environment secret
 binding; the pending credential-configuration question is not treated as answered.
+
+
+Verified provenance requirement clarified (P2): the sidebar must not assert that
+archived flows are scheduled rather than physical while original request receipts
+are missing and collector descriptions conflict. The primary congestion-rent
+name, signed values, annual display floor and calculation remain unchanged. The
+sidebar now qualifies source classification and links the flow audit; PRODUCT.md
+and AGENTS.md require an audited type or an explicit unknown. Browser smoke checks
+include this limitation and the correctly based audit link. This is a verified
+provenance correction, not a new model, numerical target change or weaker gate.
+
+
+Provenance UI verification: lint passes with six existing warnings; typecheck,
+28 frontend tests and production build pass. The workbench smoke passes at
+1,440/390/320/667px, checking the unknown flow classification/audit link alongside
+selection, highlights, scenarios, persistence, evaluation and overflow. Historical
+screening/example papers retain their equations/numbers with a dated audit note.
+Recent generation/exchange articles now use repository Markdown links so the
+publication loader resolves them to public routes instead of GitHub blob paths.
+The prior trade diagnostic commit ec3be30 passed CI/Pages 37316602493/37316596242;
+public signed table, maths and exact JSON passed at desktop/mobile widths.

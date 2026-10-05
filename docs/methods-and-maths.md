@@ -4,6 +4,9 @@ Grid Conductor is an experimental workbench for finding European electricity-gri
 
 **A concrete example:** the map's **SE4 → PL market opportunity of €229.9 million/year** is a modelled welfare bound. It combines **6,860.5 congestion hours**, a **€57.4655/MWh mean spread**, and an **assumed price-response slope**. [Follow the complete calculation and its source fields](worked-example-se4-pl.md).
 
+> **Flow provenance update — 5 October 2026:** historical descriptions below call the archived flow series scheduled exchanges. The collector requests A11 and describes physical flows, but the original 2025 request receipts are unavailable, so that classification is not verified. Equations, archived numbers and signed annual calculations are preserved. See the [flow-source audit](2025-exchange-validation.md) before interpreting these estimates as scheduled exchanges or TSO income.
+
+
 ## 1. From source data to the map
 
 The publication chain is:

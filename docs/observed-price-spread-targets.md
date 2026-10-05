@@ -16,6 +16,9 @@ The archived screening publishes a 500 MW fixed-price ladder in each direction. 
 
 Scenario evaluations retain their separate experimental welfare methodology. Their bound is labelled separately in the sidebar; it no longer defines the map colour or headline.
 
+> **Flow provenance update — 5 October 2026:** historical descriptions below call the archived flow series scheduled exchanges. The collector requests A11 and describes physical flows, but the original 2025 request receipts are unavailable, so that classification is not verified. Equations, archived numbers and signed annual calculations are preserved. See the [flow-source audit](2025-exchange-validation.md) before interpreting these estimates as scheduled exchanges or TSO income.
+
+
 ## Hourly details
 
 Select a corridor and open **Hourly price difference** in the sidebar. The plot shows signed hourly mean prices, destination minus origin, and observed-hour coverage. Missing observations break the line.

@@ -50,6 +50,13 @@ try {
       await page.getByRole("combobox", { name: "Choose a bottleneck" }).selectOption("FR>IT-North");
     }
     await page.getByRole("combobox", { name: "Choose a bottleneck" }).selectOption("FR>IT-North");
+    await page
+      .getByText(/classification is unverified: original ENTSO-E request receipts are unavailable/)
+      .waitFor();
+    const sourceAuditHref = await page
+      .getByRole("link", { name: "Flow-source audit" })
+      .getAttribute("href");
+    assert(sourceAuditHref?.includes("docs/2025-exchange-validation"));
     // Numeric bidding-zone suffixes must still select the country polygons.
     for (const [border, countries] of [
       ["SE4>PL", ["PL", "SE"]],

@@ -1,5 +1,6 @@
 import { ProductionCarbonDetails } from "@/components/ProductionCarbonDetails";
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ChevronDown, ChevronRight, Loader2, Play, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
@@ -148,11 +149,18 @@ export function TargetSidebar({
           />
         </dl>
         <p className="mt-2 text-xs text-muted-foreground">
-          2025 observed baseline. Mean absolute spread over covered hours; rent sums scheduled
+          2025 observed baseline. Mean absolute spread over covered hours; rent sums archived
           cross-border flow × signed price difference × interval hours in both directions. Negative
           contributions remain in the calculation; only the displayed annual total is floored at
-          zero. This is a scheduled-exchange value, not verified TSO income. Source uses ENTSO-E
-          scheduled flows, not metered physical flows.
+          zero. This flow–price estimate is not verified TSO income. Scheduled-versus-physical
+          classification is unverified: original ENTSO-E request receipts are unavailable.{" "}
+          <Link
+            to="/docs/$slug"
+            params={{ slug: "2025-exchange-validation" }}
+            className="underline underline-offset-2"
+          >
+            Flow-source audit
+          </Link>
         </p>
         <PriceSpreadDetails key={target.id} a={target.zone_a} b={target.zone_b} />
         <ProductionCarbonDetails a={target.zone_a} b={target.zone_b} />

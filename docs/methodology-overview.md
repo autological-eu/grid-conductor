@@ -27,6 +27,9 @@ How to read this document
 
 0
 
+> **Flow provenance update — 5 October 2026:** historical descriptions below call the archived flow series scheduled exchanges. The collector requests A11 and describes physical flows, but the original 2025 request receipts are unavailable, so that classification is not verified. Equations, archived numbers and signed annual calculations are preserved. See the [flow-source audit](2025-exchange-validation.md) before interpreting these estimates as scheduled exchanges or TSO income.
+
+
 ## Data
 
 Use a common time window and consistent zone boundaries. The screening snapshot uses the last 30 complete UTC days available in the archive, not today’s rolling window; a full year provides seasonal context. Store timestamps in UTC and convert to local time only for display.

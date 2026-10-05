@@ -128,9 +128,9 @@ identical retry. Six targeted tests preserve reverse-flow signs and terminal
 accounting and reject changed chronology/quantities, false country exports and
 failed worker reuse.
 
-See the [preliminary generation/price diagnostics](../2025-generation-comparison-diagnostic/),
-[annual inventory coordination](../monthly-inventory-coordination/) and
-[matched 2025 conditional-window benchmark](../2025-conditional-network-benchmark/).
+See the [preliminary generation/price diagnostics](2025-generation-comparison-diagnostic.md),
+[annual inventory coordination](monthly-inventory-coordination.md) and
+[matched 2025 conditional-window benchmark](2025-conditional-network-benchmark.md).
 Their scopes and acceptance gates remain separate from the 2013 weekly study
 and from future verified annual investment results.
 

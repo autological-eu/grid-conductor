@@ -1,6 +1,6 @@
 # Grid Conductor — product requirements
 
-Current product direction, 4 October 2026. Requirements express intended behaviour;
+Current product direction, 5 October 2026. Requirements express intended behaviour;
 implementation and verification status belong in [TASKS.md](TASKS.md).
 
 ## Purpose and audience
@@ -26,7 +26,7 @@ A new visitor should understand this workflow within roughly 30 seconds.
 | ID | Requirement | Acceptance criteria |
 | --- | --- | --- |
 | P1 | Map-first workbench | One edge per unordered zone pair; both related countries highlight on selection; reverse directional scenario selection works. |
-| P2 | Clear baseline evidence | Primary annual congestion-rent estimate, floored at zero for display; secondary mean absolute price spread. Explain scheduled flows, coverage and signed calculation. Preserve signed source values. Neither metric is investment welfare or verified TSO income. |
+| P2 | Clear baseline evidence | Primary annual congestion-rent estimate, floored at zero for display; secondary mean absolute price spread. Explain coverage, signed calculation and audited flow-source type. If historical scheduled/physical classification is unverified, show that limitation rather than asserting a type. Preserve signed source values. Neither metric is investment welfare or verified TSO income. |
 | P3 | Inspectable prices | Every displayed border has two hourly price lines with shaded separation, UTC month/year selection, coverage and provenance. Missing hours remain gaps. |
 | P4 | Local scenarios | Create, revisit, edit and remove interventions without login. Refresh retains state; edits invalidate old results. No cloud database. |
 | P5 | Honest evaluation | Preserve screening equations and caps. Separate experimental network dispatch from screening; identify period, physics, inputs and assumptions. Do not extrapolate partial windows to annual benefits. |

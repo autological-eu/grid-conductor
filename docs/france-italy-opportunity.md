@@ -4,6 +4,9 @@ The number is an **experimental screening welfare bound**, not a €1,529.8 mill
 
 ![Monthly evidence and accumulation of the France–Italy screening bound](../public/research/fr-it-screening/accumulation.svg)
 
+> **Flow provenance update — 5 October 2026:** historical descriptions below call the archived flow series scheduled exchanges. The collector requests A11 and describes physical flows, but the original 2025 request receipts are unavailable, so that classification is not verified. Equations, archived numbers and signed annual calculations are preserved. See the [flow-source audit](2025-exchange-validation.md) before interpreting these estimates as scheduled exchanges or TSO income.
+
+
 ## Hour-by-hour historical price trace
 
 ![Hourly France–Italy price spread and fixed-spread accumulation](../public/research/fr-it-screening/hourly-price-trace.svg)

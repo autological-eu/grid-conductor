@@ -80,9 +80,9 @@ Next: reconcile geographic and fuel-accounting scopes; predeclare supported
 bidding-zone mapping, price aggregation, coverage and held-out validation;
 compare prices, monthly fuel shares and correctly scoped exchanges; investigate
 mismatches before paired investment claims. The annual coordinator's bounds are
-reported separately in [inventory coordination](../monthly-inventory-coordination/).
-The [2025 conditional-window comparison](../2025-conditional-network-benchmark/)
-and [2013 weekly comparison](../network-benchmark-comparison/) retain their own
+reported separately in [inventory coordination](monthly-inventory-coordination.md).
+The [2025 conditional-window comparison](2025-conditional-network-benchmark.md)
+and [2013 weekly comparison](network-benchmark-comparison.md) retain their own
 periods and acceptance gates. No emissions or investment validity follows from
 this generation table.
 

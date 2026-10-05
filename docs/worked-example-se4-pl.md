@@ -6,6 +6,9 @@ The exact published value is **229.8925178625 M€/year**. The calculation can b
 
 [Methods overview](methods-and-maths.md) · [Annual input JSON](../public/research/entsoe-fast-targets.json) · [Workbench](/)
 
+> **Flow provenance update — 5 October 2026:** historical descriptions below call the archived flow series scheduled exchanges. The collector requests A11 and describes physical flows, but the original 2025 request receipts are unavailable, so that classification is not verified. Equations, archived numbers and signed annual calculations are preserved. See the [flow-source audit](2025-exchange-validation.md) before interpreting these estimates as scheduled exchanges or TSO income.
+
+
 ## 1. Locate the annual row
 
 Open the JSON and find the object in `targets` with `border: "SE4>PL"` and `month: "2025"`. Do not use the separate monthly diagnostic rows.

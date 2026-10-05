@@ -192,9 +192,9 @@ research retains its separate integration gates.
 ## Observed Stage-1 map and price charts
 
 - The map's primary baseline metric is signed annual congestion rent (M€/year),
-  summing both directed scheduled exchanges × signed price difference × hours.
+  summing both archived directed cross-border flows × signed price difference × hours.
   Mean absolute price spread (€/MWh) is secondary. Neither is investment welfare.
-  Source exchanges are scheduled, not metered physical flows. Preserve signed research values; floor only the displayed annual total at zero and label it congestion rent, with an explanation that scheduled-flow × price-spread estimates are not verified TSO income.
+  Historical scheduled/physical classification is unverified: original request receipts are absent, and the collector/code descriptions conflict with legacy labels. Link the flow-source audit and do not assert a type until provenance is recovered. Preserve signed research values; floor only the displayed annual total at zero and label it congestion rent, with an explanation that the flow–price proxy is not verified TSO income.
 - Static hourly price arrays and source/coverage manifest live under
   `public/research/zone-prices-2025/`. The sidebar shows two price lines, shaded
   separation, UTC month/year selection and missing-hour coverage. Gaps are not filled.
