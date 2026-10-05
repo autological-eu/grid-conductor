@@ -1230,3 +1230,29 @@ annual comparison and supported app integration remain separate requirements.
 The driver preserves all accepted data and cuts and never regenerates renewable
 availability from dispatch. Seven orchestration tests cover process/lock safety,
 replay ordering, diagnostic recovery and explicit stopping.
+
+
+### Conservative interior trial — 5 October 2026
+
+Candidate 002's dual probe stopped after 647.35 seconds with peak RSS
+3,751,256,064 bytes. Its restored multipliers did not yield a checked positive
+lower support. No feasibility cut was accepted; this does not prove that the
+candidate is feasible. The finite driver stopped explicitly for review.
+
+A separate trial uses the convex inventory step
+
+$$s_{\mathrm{trial}} = s_{\mathrm{incumbent}} + 0.05
+(s_{\mathrm{master}}-s_{\mathrm{incumbent}}).$$
+
+This is a conservative evaluation heuristic. It preserves the linear inventory
+domain but does **not** establish full network dispatch feasibility. The original
+monthly LP coefficients, renewable availability, chronology and unrestricted
+master lower bound are unchanged. Every month must still solve optimally and its
+saved primal/dual witness must independently replay before a new annual feasible
+cost is accepted. No annual optimisation or empirical-validation gate is relaxed.
+
+`tools/prepare_damped_annual_candidate.py` checks the existing proposal/incumbent
+source hashes, rejects changed producers, and writes a new isolated workspace
+with the interpolation fraction and producer hash. Prior attempts and the prior
+master report remain preserved. Two additional storage tests check the convex
+step and reject malformed states/fractions; all 107 storage tests pass.
