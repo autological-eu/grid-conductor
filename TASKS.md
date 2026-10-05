@@ -32,7 +32,13 @@ This adds empirical validation alongside N1–N5; it does not replace their gate
   hash-pinned published price files: 39 nodes remain unresolved (24 in split-zone
   DK/IT/NO/SE, 15 without matching published observations). Three mapping tests
   pass; this is a provisional inventory, not an accepted mapping or validation.
-  Audit constituent-bus geography before assigning split-country clusters.
+  The constituent-geography audit now explicitly composes the simplification and
+  clustering bus maps: all 6,569 original buses map to 128 model nodes, with zero
+  country mismatches. It records geographic extents and hashes of both maps and
+  both networks; five tests reject incomplete/duplicate mappings and nonfinite
+  coordinates. Country consistency does not establish bidding-zone consistency:
+  authoritative zone boundaries and mixed-zone cluster handling remain required.
+  Offline evidence: `data/pypsa-eur/2025-cluster-geography.json`.
 - [ ] V2: Audit reference observations and provenance: existing 2025 hourly price
   artifacts, generation mix and cross-border exchanges with correct scheduled/
   physical scope. Keep missing observations and proxies explicit.
