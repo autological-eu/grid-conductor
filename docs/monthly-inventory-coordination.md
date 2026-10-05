@@ -1564,7 +1564,7 @@ The smaller analytical calendar tests reject gaps, missing blocks, changed
 inventories, altered primals and tampered cached costs. All 163 storage tests
 pass; these tests are implementation checks, not observed-data validation.
 
-The remaining conditional blocks and full annual linkage are still pending.
+At this initial first-week checkpoint the remaining conditional blocks and full annual linkage were still pending; the completed pass is reported below.
 The 2013 weekly benchmark, matched 2025 conditional-window benchmark and future
 annual investment comparisons retain their separate scopes and acceptance gates.
 
@@ -1609,3 +1609,70 @@ carbon-price calibration and held-out checks remain separate from computational
 parity. The read-only audit is `audit_2025_operating_cost_inputs.py`, with five
 tests for units, efficiency, missing factors and invalid inputs. Offline evidence
 is `data/pypsa-eur/2025-operating-cost-assumptions.json`.
+
+
+### Linked economic year and tighter lower support — 5 October 2026
+
+All 59 month-aligned economic blocks passed independent replay at one exact
+annual inventory vector. The complete-calendar audit then re-evaluated their
+saved primals and duals against the original coefficients, checked the common
+boundary state and covered all 8,760 hours in order. Cyclic closure residual is
+zero; the maximum original-unit equality residual is $3.135\times10^{-8}$,
+below the unchanged $10^{-7}$ acceptance gate. Original renewable availability
+was preserved. This establishes a **feasible full-year economic dispatch**,
+not an annual optimum or observed-market agreement.
+
+The subsequent unrestricted master includes 130 objective cuts: the 71 initial
+supports plus the 59 new independently replayed block supports. Its numerical
+lower support was independently recomputed from the saved original-unit matrices
+and multipliers. It may be combined with the earlier feasible incumbent because
+both bound the same source-matched annual problem; they need not use the same
+trial inventory vector.
+
+| Evidence snapshot | Replayed lower support | Feasible annual cost | Relative gap |
+| --- | ---: | ---: | ---: |
+| Initial shorter-block relaxation | €28.083 billion | €50.746 billion | 44.66% |
+| Completed economic calendar and subsequent master | €42.437 billion | €50.662 billion | 16.24% |
+
+![Replayed lower support and feasible annual operating-cost bounds, with an unresolved numerical gap.](../../research/network-benchmark-2025/submonthly-economic-annual-bounds.svg)
+
+The new incumbent improves model operating cost by €83.625 million. This is an
+algorithmic improvement **without an investment**, not an avoided-emissions,
+congestion-rent or intervention-benefit estimate. The much larger gap reduction
+comes mainly from strengthening the lower relaxation with new cuts.
+
+For feasible upper bound $U$ and independently replayed lower support $L$,
+
+$$
+U-L=\text{€}8.226\text{ billion},\qquad
+\frac{U-L}{U}=16.24\%.
+$$
+
+The 59 conditional workers sum to 2,906.89 seconds (48.45 minutes), with maximum
+sampled worker RSS 0.868 GiB. These figures exclude preparation, masters,
+independent replays and complete coordination wall time; sampled RSS is not an
+exact peak-memory measurement. The finite coordinator continues tightening the
+relaxation. **16.24% is not convergence**, and floating-point replay is not an
+interval certificate. Full-year native/fast parity, observed 2025 prices/mix/
+exchanges, paired interventions and supported app integration remain open.
+The source's zero operational carbon price and 2024 nuclear-availability proxy
+also remain explicit empirical-validation limitations.
+
+[Download the complete economic annual bounds and per-worker audit](../../research/network-benchmark-2025/submonthly-economic-annual-bounds.json).
+
+Reproduce the compact publication only from the replayed offline evidence:
+
+```sh
+python tools/publish_submonthly_economic_bounds.py \
+  --folder data/pypsa-eur/submonthly-coordination/stabilised-001/candidate-001 \
+  --master data/pypsa-eur/submonthly-coordination/stabilised-001/candidate-002/master.json \
+  --workspace data/pypsa-eur/submonthly-inventory-workspace \
+  --input data/pypsa-eur/upstream/resources/gridfix-2025/networks/base_s_128_elec_.nc \
+  --output public/research/network-benchmark-2025/submonthly-economic-annual-bounds.json
+```
+
+The publication tool rechecks input/workspace hashes, the complete witness chain,
+the numerical lower support and annual closure/domain constraints. It rejects
+partial calendars or failed original-unit residual gates. Five targeted gate
+tests pass. This publication is separate from the 2013 weekly and matched 2025
+conditional-window investment benchmarks.
