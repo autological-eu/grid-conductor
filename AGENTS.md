@@ -238,3 +238,12 @@ research retains its separate integration gates.
   sub-block objectives. Do not use an old cut with a new state layout implicitly.
   Full prepared coefficients still need linked inventories, source-consistent
   feasible witnesses and original convergence/empirical/investment gates.
+
+- `prepare_submonthly_warm_calendar.py` restricts independently verified monthly
+  primal witnesses into the shorter layout without solving again. While its
+  locked pass is live, **all `tools/*.py` hashes are frozen**: inspect actual
+  supervisor/worker processes before edits. Output is under
+  `data/pypsa-eur/submonthly-warm-witness/`. A completed monthly restriction
+  is not annual linkage; replay all blocks against one global state and check
+  cyclic closure before accepting an annual upper bound. SOC from a verified
+  primal can seed inventories; generation dispatch cannot seed availability.
