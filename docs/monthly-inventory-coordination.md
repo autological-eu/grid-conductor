@@ -1305,3 +1305,55 @@ and feasibility cuts map to the additional boundaries. Existing monthly evidence
 and bounds remain preserved; no cut is reused with a different state layout
 without that explicit correspondence. Annual, empirical and investment gates
 remain unchanged.
+
+
+### Source-matched coefficient equivalence — 5 October 2026
+
+The original prepared 2025 network passes a stronger structural check than
+objective comparison alone. After substituting the first block's terminal state
+of charge for the shared intermediate inventory and reordering native variable
+and constraint labels, two linked 24-hour blocks reproduce the monolithic
+48-hour LP:
+
+| Check | Maximum difference |
+| --- | ---: |
+| Objective coefficients | 0 |
+| Equality coefficients and external-boundary coefficients | 0 |
+| Inequality coefficients and external-boundary coefficients | 0 |
+| Equality and inequality right-hand sides | 0 |
+| Variable bounds | Identical |
+
+The comparison covers 98,592 variables, 20,512 equality rows, 188,256 inequality
+rows and 160 storage units. The declared coefficient tolerance is 1e-12; every
+measured difference is zero. The guarded audit finished in 15.01 seconds with
+839,278,592 bytes peak RSS.
+
+This uses source hash
+`4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec`.
+It is a coefficient audit of the prepared full-year source, **not** a new dispatch
+benchmark, annual solution, or rerun of the separately published matched
+48-hour intervention case. A synthetic fixture also checks standing loss,
+charging/discharging efficiency, inflow and removal of the internal boundary.
+
+[Download the compact coefficient audit](../research/network-benchmark-2025/submonthly-coefficient-equivalence.json).
+Reproduce with the pinned research interpreter and
+`tools/audit_submonthly_equivalence.py --input <prepared-2025-network.nc>
+--output <new-audit.json>`; existing audit evidence is never overwritten.
+
+`tools/submonthly_inventory_mapping.py` defines the exact monthly-boundary
+projection from the 59-block layout and its transpose operation for cut gradients.
+Tests check that a lifted cut evaluated on a submonthly state equals the original
+cut evaluated on its monthly projection, including negative gradients; internal
+inventories do not affect the old cut. A monthly objective cut must constrain
+**the sum** of its sub-block objective variables, not each individual sub-block.
+These mapping helpers are not yet an adopted annual master or feasible warm-state
+witness. Prior cuts still require matching source/provenance and explicit adoption.
+
+`tools/prepare_submonthly_calendar.py` resumes coefficient preparation under an
+exclusive lock. It freezes input/audit/code/package hashes, verifies each saved
+artifact and its calendar position, and uses the existing 6 GiB/300-second
+per-worker guards. The first prepared pilot is reused rather than recomputed.
+Preparing all 59 blocks still does not establish a linked annual solution.
+All 117 storage tests pass, including label-domain mismatch, cut projection and
+changed-artifact rejection tests. Annual dispatch, convergence, empirical and
+investment acceptance gates remain unchanged.
