@@ -291,3 +291,17 @@ research retains its separate integration gates.
   1,280 MiB/180 seconds; no annual result until all 59 blocks cover 8,760 UTC hours.
 - Outputs stay ignored under `data/pypsa-eur/annual-exchange-mapping/`. Correct
   ENTSO-E A11/A09 source receipts, geography and empirical gates remain required.
+
+- `prepare_submonthly_continuation.py` prepares a new search root only after
+  verified finite-budget exhaustion, acquiring the donor driver locks and
+  rejecting live research workers. It rechecks source/packages, lower supports,
+  annual chains and independently replayed cut donors; local symlinks avoid
+  copying ignored large witnesses. `--inspect-only` never starts a job. Keep
+  original driver/calculation files frozen while active. A larger fixed-anchor
+  proposal weight is a search heuristic, not a convergence or feasibility proof;
+  original availability, chronology and convergence tolerances remain unchanged.
+- `run_submonthly_continuation.py` may be waiting for the existing finite pass.
+  Inspect its real process and the target `.waiting.lock`/`.waiting.json` before
+  preparing another continuation. It replaces itself with the original driver
+  only after verified budget exhaustion and idle/lock checks; disappearance,
+  failure, a met numerical gate or wait timeout requires review, not a restart.

@@ -1569,6 +1569,60 @@ The 2013 weekly benchmark, matched 2025 conditional-window benchmark and future
 annual investment comparisons retain their separate scopes and acceptance gates.
 
 
+### Fixed-anchor damping and preserving evidence across search runs
+
+A fixed small $\lambda$ is a practical search heuristic, **not a convergence
+guarantee**. If every trial is interpolated toward the same original anchor,
+the search can keep returning points close to that anchor even while the
+unrestricted lower bound correctly identifies a much better possibility.
+The lower bound is still useful; the feasible upper bound need not improve.
+More candidate solves alone do not remove this limitation.
+
+A reference with two chronological one-hour blocks makes the distinction explicit.
+The first block has free generation and demand 5 MWh; the second has generation
+costing €100/MWh and demand 15 MWh. Each block has generation capacity 20 MW,
+charge/discharge limits 10 MW and a 10 MWh cyclic store. All efficiencies are
+one for this deliberately analytical reference. The initial inventories are
+zero, giving a €1,500 feasible cost. The monolithic solution shifts 10 MWh and
+costs €500. Original capacities and availability are identical in every solve.
+
+| Fixed-anchor proposal weight | Independently solved trial cost | Unrestricted master lower support |
+| --- | ---: | ---: |
+| 0.01 | €1,490 | €500 |
+| 0.1 | €1,400 | €500 |
+| 0.5 | €1,000 | €500 |
+| 1.0 | €500 | €500 |
+
+`test_submonthly_continuation.py` checks this reference against a monolithic LP,
+including cyclic closure. This explains a possible search failure; it neither
+attributes the entire European gap to damping nor establishes that a full step
+is dispatch-feasible in the European network. Network feasibility cuts and all
+independent saved-witness checks remain necessary.
+
+`prepare_submonthly_continuation.py` can prepare a **new** finite search root
+with an explicitly changed proposal weight after the preceding driver exhausts
+its candidate budget. It preserves the preceding source and exact convergence
+settings, recomputes cached master supports, verifies complete annual witness
+chains, and checks independently replayed objective/feasibility donors. It
+links the existing ignored witness directories locally rather than copying
+gigabytes or placing them in Git. A partial replay can supply a checked cut;
+it cannot supply an annual feasible cost.
+
+Preparation acquires the original driver locks and rejects live research
+workers, failed drivers, existing output directories and changes inside donor
+trees. An `--inspect-only` pass verifies evidence without preparing or starting
+a job. Preparation itself also starts no dispatch job. The original driver
+continues to recheck donor hashes before adoption. A larger fixed step remains
+a heuristic; budget exhaustion remains **not converged**, and annual empirical
+validation and paired-investment gates remain separate.
+
+`run_submonthly_continuation.py` adds an exclusively locked, bounded wait for the
+original finite pass. It starts the unchanged driver only after that pass has
+actually exited with candidate-budget exhaustion and preparation has passed.
+A disappeared process with a stale executing status, failed worker, already-met
+numerical gap or exhausted wait budget requires review; it never restarts an old
+solve. The supervisor has no effect on the current driver's mathematics.
+
 ### Operating-cost assumptions before observed-market comparison
 
 A read-only audit of the hash-pinned annual input

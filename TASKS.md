@@ -285,3 +285,23 @@ exchange methods rendered maths without errors or overflow at 1,440/390/320px;
 the related annual-method link and historical screening audit note were verified
 at 390px. The existing PID 34190 remained live, replaying candidate 007 through
 block 51; no duplicate job or annual acceptance was introduced.
+
+N3 search continuation groundwork: `prepare_submonthly_continuation.py` verifies
+old source/package fingerprints, independently replayed supports and annual
+chains before preparing a separate finite search root with unchanged convergence
+gates. Original driver locks and live-worker checks prevent a duplicate job;
+existing/failed evidence is preserved and local symlinks avoid large copies.
+Ten targeted tests pass, including a chronological two-block monolithic
+reference: fixed-anchor 1% damping gives €1,490 while the valid unrestricted lower
+support and monolithic optimum are €500; a full proposal reaches that optimum
+in the small reference. This exposes a search limitation, not a European optimum.
+The read-only 10% continuation inspection verified the current donor chain at
+U €50,633,472,741.74006 / L €43,570,477,136.23662. No continuation was prepared
+or started while PID 34190 remained live. Next: finish the frozen finite pass,
+review terminal evidence, then explicitly continue with preserved cuts and a
+reviewed search weight; retain feasibility and annual validation gates.
+
+`run_submonthly_continuation.py` provides a separate locked, bounded wait and
+starts the unchanged driver only after the original finite pass exits with
+verified candidate-budget exhaustion. Disappeared processes, failures, met gap
+gates and wait limits require review. No old solve is automatically restarted.
