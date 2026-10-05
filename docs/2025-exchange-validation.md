@@ -133,3 +133,90 @@ See the [preliminary generation/price diagnostics](../2025-generation-comparison
 [matched 2025 conditional-window benchmark](../2025-conditional-network-benchmark/).
 Their scopes and acceptance gates remain separate from the 2013 weekly study
 and from future verified annual investment results.
+
+
+## Complete native year and secondary national trade diagnostic
+
+The reviewed full-002 branch mapping completed all 59 blocks and 8,760 hours.
+The country-accounting audit reproduced signed terminal sums; the maximum
+absolute sum across all countries was $2.513\times10^{-11}$ MW for this lossless
+input. The 59 mapping workers summed to 540.83 seconds, with maximum sampled RSS
+1,084,973,056 bytes. These are identity-mapping worker measurements, excluding
+coordination and supervision; they are not annual dispatch solve performance.
+
+`2025-fixed-inventory-native-exchanges.json` now contains complete monthly/annual
+model-country accounting. Positive and negative country net totals are kept
+separately after aggregating simultaneous native branches; these are not gross
+bilateral allocations. This remains candidate 001, matching the earlier
+production/price diagnostics, rather than the newer best annual incumbent.
+
+A cached [Ember annual national reference](https://storage.googleapis.com/emb-prod-bkt-publicdata/public-downloads/yearly_full_release_long_format.csv)
+contains 2025 country-year `Net Imports` records in TWh. The table below negates
+those signed reference values to put both columns on the **net-export** convention:
+positive means net exporter, negative means net importer. This is a secondary
+annual energy-balance comparison, **not an audited hourly ENTSO-E flow comparison**.
+Country/mainland coverage, balance conventions and shared upstream sources remain
+unreconciled. No missing reference is zero-filled.
+
+| Model country | Model net exports (TWh) | Secondary reference net exports (TWh) | Model minus reference (TWh) |
+| --- | ---: | ---: | ---: |
+| AT | -20.676 | -4.110 | -16.566 |
+| BA | 12.386 | 2.290 | +10.096 |
+| BE | -36.234 | -13.400 | -22.834 |
+| BG | 27.731 | 1.320 | +26.411 |
+| CH | -14.632 | -0.060 | -14.572 |
+| CZ | 0.787 | 7.430 | -6.643 |
+| DE | 156.559 | -19.540 | +176.099 |
+| DK | 2.699 | -7.410 | +10.109 |
+| EE | -4.290 | -2.710 | -1.580 |
+| ES | -17.855 | 12.790 | -30.645 |
+| FI | -2.391 | -5.560 | +3.169 |
+| FR | 80.086 | 93.350 | -13.264 |
+| GB | 5.806 | -29.070 | +34.876 |
+| GR | -13.506 | 2.530 | -16.036 |
+| HR | -8.474 | -5.320 | -3.154 |
+| HU | -15.836 | -9.000 | -6.836 |
+| IE | -3.065 | -6.130 | +3.065 |
+| IT | -121.609 | -46.890 | -74.719 |
+| LT | -6.609 | -3.600 | -3.009 |
+| LU | -4.516 | -4.930 | +0.414 |
+| LV | -3.154 | -1.400 | -1.754 |
+| ME | 0.025 | -1.030 | +1.055 |
+| MK | 2.678 | -1.380 | +4.058 |
+| NL | -18.013 | 13.910 | -31.923 |
+| NO | -18.384 | 23.080 | -41.464 |
+| PL | 3.935 | -1.040 | +4.975 |
+| PT | -17.804 | -9.290 | -8.514 |
+| RO | -0.860 | -3.820 | +2.960 |
+| RS | 8.436 | -1.320 | +9.756 |
+| SE | 16.655 | 33.580 | -16.925 |
+| SI | 7.818 | 0.490 | +7.328 |
+| SK | 0.756 | 2.350 | -1.594 |
+| XK | 4.673 | -1.550 | +6.223 |
+
+Germany illustrates a large discrepancy: the model exports 156.559 TWh net,
+whereas the secondary reference reports 19.54 TWh of net imports. Bulgaria's
+model exports also greatly exceed its secondary reference. France remains a net
+exporter in both. These differences help connect generation and price diagnostics
+to network exchanges, but do not isolate causality or establish a calibrated
+baseline. The zero-carbon-price assumption is a hypothesis to investigate through
+separate controlled variants, not a demonstrated complete explanation.
+
+Five targeted accounting/reference tests preserve signed imports/exports,
+unknown references and rejection of duplicate/nonfinite records or partial years.
+Reproduce the ignored diagnostic with:
+
+```sh
+python tools/summarize_native_exchanges.py \
+  --folder data/pypsa-eur/annual-exchange-mapping/full-002 \
+  --output data/pypsa-eur/2025-fixed-inventory-native-exchanges-new.json
+python tools/compare_native_exchange_reference.py \
+  --model data/pypsa-eur/2025-fixed-inventory-native-exchanges-new.json \
+  --reference data/pypsa-eur/observations-reference/ember/yearly.csv \
+  --output data/pypsa-eur/2025-fixed-inventory-exchange-reference-new.json
+```
+
+Existing outputs are preserved; use new paths for reviewed reruns. The comparison
+checks the accounting producer and records original CSV/model/source hashes.
+The missing ENTSO-E flow receipt, bidding-zone, held-out validation, convergence
+and investment gates remain open.

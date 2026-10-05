@@ -233,3 +233,17 @@ scope distinction, not the missing archived request provenance. Methods are in
 `docs/2025-exchange-validation.md`. The reviewed full-002 mapper is live at PID
 35116 and has passed the previously guarded block; all numerical gates remain
 unchanged. Publication requires the new CI/Pages and live route checks.
+
+
+Full native exchange mapping completed: full-002 contains all 59 blocks/8,760
+hours, checked country/terminal algebra and exact chronology. The annual streamed
+accounting passed; maximum country-sum residual 2.5125e-11 MW. Worker sum 540.83s,
+maximum sampled RSS 1,084,973,056 bytes (mapping only, not solve performance).
+Candidate 001 model exchanges now exist at
+`2025-fixed-inventory-native-exchanges.json`. Secondary annual Ember Net Imports
+comparisons (`2025-fixed-inventory-exchange-reference.json`) show Germany model
+net exports 156.559 TWh versus reference net imports 19.54 TWh, and Bulgaria
+exports 27.731 TWh versus reference exports 1.32 TWh. This is unreconciled national
+trade groundwork, not audited hourly ENTSO-E A11/A09 comparison or empirical
+acceptance. Five accounting/reference tests pass. Methods/table are prepared in
+`docs/2025-exchange-validation.md`; updated publication awaits CI/live checks.
