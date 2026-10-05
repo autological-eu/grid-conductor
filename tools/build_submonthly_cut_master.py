@@ -66,6 +66,10 @@ def build(args):
         U=sparse.vstack([U,sparse.csr_matrix((P.T@g).reshape(1,-1))],format='csr');limit=np.r_[limit,cut['feasibility_limit']]
         feasibility.append(dict(path=str(path),sha256=digest(path)))
     witness=args.output.with_suffix('.witness.npz') if args.include_equalities else None
+    from submonthly_objective_donor import load as load_objective
+    objective_evidence=[]
+    for path in args.objective:
+        cut,e=load_objective(path,domain);cuts.append(cut);objective_evidence.append(e)
     from submonthly_feasibility_donor import load as load_feasibility
     for path in args.submonthly_feasibility:
         g,b,e=load_feasibility(path,domain,state['warm_state_mwh'])
@@ -75,12 +79,19 @@ def build(args):
                  domain['objective_floors_eur'],cuts,state['warm_state_mwh'],include_equalities=args.include_equalities,witness_path=witness)
     upper=domain['annual_feasible_cost_eur']
     if result['lower_bound_eur']>upper+1e-7:raise ValueError('Master lower support exceeds verified annual incumbent')
+    from submonthly_proposal import stabilise
+    result['unrestricted_proposal_mwh']=result['proposal_mwh']
+    result['proposal_mwh']=stabilise(result['proposal_mwh'],state['warm_state_mwh'],args.proposal_weight,
+        [tuple(b) for b in state['bounds']],sparse.load_npz(args.workspace/'master-equality.npz'),state['rhs'],U,limit).tolist()
+    result['proposal_weight']=args.proposal_weight
+    result['proposal_scope']='Convex search point toward verified annual anchor; unrestricted relaxation and lower support are unchanged. Dispatch feasibility is not inferred.'
     result.update(input_sha256=source,annual_feasible_cost_eur=upper,annual_gap_eur=upper-result['lower_bound_eur'],
         adopted_support_months=adopted,support_evidence=evidence,monthly_objective_groups=12,objective_cuts=len(cuts),feasibility_evidence=feasibility,
+        additional_objective_evidence=objective_evidence,
         inventory_workspace_sha256=digest(args.workspace/'master-workspace.json'),producer_sha256=digest(Path(__file__)),
         master_equalities_priced=args.include_equalities,
         master_witness_sha256=None if witness is None else digest(witness),
-        dependencies={name:digest(tools/name) for name in ['grouped_storage_master.py','grouped_master_dual.py','prepare_submonthly_inventory_workspace.py','prepare_submonthly_dual_calendar.py','storage_master_dual.py','storage_coordinator.py','submonthly_feasibility_donor.py']},
+        dependencies={name:digest(tools/name) for name in ['grouped_storage_master.py','grouped_master_dual.py','prepare_submonthly_inventory_workspace.py','prepare_submonthly_dual_calendar.py','storage_master_dual.py','storage_coordinator.py','submonthly_feasibility_donor.py','submonthly_objective_donor.py','submonthly_proposal.py']},
         scope='Explicitly mapped floating-point cut relaxation only; an envelope-feasible proposal is not verified dispatch. Missing support months weaken the relaxation and do not shorten the calendar.')
     save(args.output,result);return result
 
@@ -90,5 +101,7 @@ if __name__=='__main__':
     for name in ['input','monthly','calendar','workspace','support','output']:parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--feasibility',type=Path,action='append',default=[])
     parser.add_argument('--submonthly-feasibility',type=Path,action='append',default=[],help='Independently replayed necessary cut in the explicit short-block inventory layout')
+    parser.add_argument('--objective',type=Path,action='append',default=[],help='Independently replayed singleton economic objective support')
+    parser.add_argument('--proposal-weight',type=float,default=1.,help='Convex search weight toward unrestricted proposal; does not restrict the master or alter its lower support')
     parser.add_argument('--include-equalities',action='store_true',help='Restore and price original-unit annual equality multipliers')
     result=build(parser.parse_args());print(f"Grouped master lower support EUR {result['lower_bound_eur']:.6f}; {result['objective_cuts']} cuts. Proposal still needs dispatch verification.")

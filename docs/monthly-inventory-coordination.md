@@ -1511,3 +1511,59 @@ reported infeasible after 31.02 seconds at 0.85 GiB. This failure is retained;
 necessary cuts are not sufficient dispatch proofs. Five new donor tests reject
 changed sources, implicit monthly layouts, nonpositive separation and cuts that
 exclude the verified anchor. All 141 storage tests pass.
+
+
+### Stabilised search and resumable shorter-block coordination
+
+The second scaled elastic probe supplied no accepted support after 612.52 seconds
+at 0.99 GiB: its proposed multipliers did not yield a positive globally supported
+feasibility cut. Requesting a native ray from the original economic-cost model
+also supplied no usable ray after 123.06 seconds at 1.35 GiB. Both failures remain
+in the offline checkpoint history. Economic costs can guide that diagnosis, but
+any accepted ray is evaluated against the **zero-objective feasible set**; a
+positive economic objective alone never establishes infeasibility.
+
+A subsequent search uses the independently feasible annual inventory vector
+$s^a$ and the unrestricted master proposal $s^m$:
+
+$$
+s^{\mathrm{trial}}=(1-\lambda)s^a+\lambda s^m,
+\qquad 0<\lambda\le1.
+$$
+
+This is a search stabilisation, **not a restriction of the annual master**.
+Its matrices, original-unit multipliers and lower support remain unchanged.
+Convex interpolation preserves checked inventory bounds, closure and necessary
+linear envelopes; it does **not** establish network dispatch feasibility.
+All local original-coefficient LPs still need economic optimal termination and
+independent primal/dual replay. Original renewable availability is unchanged.
+
+With $\lambda=0.01$, the first 168-hour economic solve completed in 67.05 seconds
+at 0.85 GiB. Independent saved-witness replay reproduced cost
+€1,081,944,313.445089 and lower support €1,081,944,313.4442534, with maximum equality
+residual $7.09\times10^{-11}$. This is one conditional week, not a new annual
+incumbent, an annual optimum or an investment benefit. The unrestricted annual
+lower support remains €28,082,849,504.480568 (gap approximately 44.66%).
+
+`submonthly_inventory_driver.py` provides finite resumable coordination with an
+exclusive lock and frozen source, calculation and package fingerprints. It
+inspects actual live workers before launching a job. Stale running receipts,
+partial directories and failed resource guards block automatic identical retries.
+Objective supports and separate necessary feasibility supports enter subsequent
+masters only after independent replay. Monthly cuts still constrain sums of
+short-block objectives; each new economic support applies to its own block.
+The numerical gap gate retains the configured absolute/relative tolerances and
+does not declare empirical validation or investment validity.
+
+`audit_submonthly_economic_calendar.py` accepts an annual upper bound only after
+all 59 economic witnesses share **one exact annual inventory vector**, cover
+8,760 hours in order, close cyclic storage and pass original-unit replay.
+A prefix is rejected. Cached master lower supports are recomputed from saved
+matrices/multipliers; cached annual costs require the full replay/hash chain.
+The smaller analytical calendar tests reject gaps, missing blocks, changed
+inventories, altered primals and tampered cached costs. All 163 storage tests
+pass; these tests are implementation checks, not observed-data validation.
+
+The remaining conditional blocks and full annual linkage are still pending.
+The 2013 weekly benchmark, matched 2025 conditional-window benchmark and future
+annual investment comparisons retain their separate scopes and acceptance gates.

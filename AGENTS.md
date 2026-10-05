@@ -257,3 +257,22 @@ research retains its separate integration gates.
   300-second stop in `01/` is retained and supplies no accepted cut. Full-calendar
   support replay still needs explicit annual master adoption; do not treat
   transferred multipliers as a new native optimal-termination record.
+
+
+## Shorter-block coordination driver
+
+- `submonthly_inventory_driver.py` is finite and exclusively locked at its
+  `--root/driver.lock`. Inspect its actual supervisor/worker before starting
+  another shorter-block or monthly audit. Its manifest freezes calculation code,
+  package versions, source/domain hashes and seed cut hashes. Do not edit those
+  modules under a live pass or implicitly resume after reconstruction changes.
+- `--proposal-weight` changes only a convex search point toward the verified
+  annual anchor. It never restricts the unrestricted master or changes its lower
+  support. A necessary-envelope-feasible point is not dispatch. Every new
+  economic support requires `replay_submonthly_candidate.py`; separate elastic
+  and zero-objective ray supports must remain feasibility cuts, not euro values.
+- `audit_submonthly_economic_calendar.py` requires all 59 blocks at one exact
+  annual state, complete 2025 chronology, cyclic closure and original-unit replay.
+  Driver iteration limits and numerical gap status do not bypass N3–N5, the
+  smaller monolithic reference or observed-data/intervention gates. Preserve
+  failed probe/ray evidence; never repeat the same failed job from a stale status.

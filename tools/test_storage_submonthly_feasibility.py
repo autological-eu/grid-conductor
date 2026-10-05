@@ -43,5 +43,11 @@ class DonorTests(unittest.TestCase):
         self.cut['dual_support']=0.
         with self.assertRaises(ValueError):self.adopt()
 
+    def test_accept_only_replayed_necessary_ray(self):
+        self.cut['status']='independently_replayed_farkas_feasibility_cut'
+        self.adopt()
+        self.cut['status']='farkas_support_requires_independent_replay'
+        with self.assertRaises(ValueError):self.adopt()
+
 
 if __name__=='__main__':unittest.main()

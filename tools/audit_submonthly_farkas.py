@@ -25,6 +25,10 @@ def worker(args):
     with np.load(args.annual/'annual-state.npz',allow_pickle=False) as data:anchor=data['inventories_mwh'].copy()
     with np.load(primal,allow_pickle=False) as data:point=data['primal'].copy()
     primal_checks(block,anchor,point)
+    dependencies=['submonthly_farkas_support.py','check_storage_dual_bounds.py','audit_submonthly_warm_calendar.py']
+    if args.economic_ray:
+        from economic_infeasibility_ray import native_ray
+        dependencies.append('economic_infeasibility_ray.py')
     ray,termination=native_ray(block,state,seconds=120.)
     value,result,g,intercept,at_anchor,sign,norm=checked_support(block,state,anchor,ray)
     np.savez_compressed(args.output/'witness.npz',ray=ray,equality_duals=result.eqlin.marginals,inequality_duals=result.ineqlin.marginals,
@@ -33,7 +37,8 @@ def worker(args):
        master_sha256=digest(args.master),anchor_audit_sha256=digest(args.annual/'verified.json'),block_sha256=digest(path),anchor_primal_sha256=digest(primal),
        witness_sha256=digest(args.output/'witness.npz'),native_termination=termination,dual_support=value,gradient=g.tolist(),intercept=intercept,
        feasibility_limit=1e-7-intercept,anchor_support=at_anchor,ray_orientation=sign,ray_normalisation=norm,
-       producer_sha256=digest(Path(__file__)),dependencies={name:digest(tools/name) for name in ['submonthly_farkas_support.py','check_storage_dual_bounds.py','audit_submonthly_warm_calendar.py']},
+       producer_sha256=digest(Path(__file__)),dependencies={name:digest(tools/name) for name in dependencies},
+       diagnostic_objective='Original economic coefficients; ray supported against zero-objective feasible set' if args.economic_ray else 'Zero objective',
        scope='Source-bounded zero-objective feasibility support only; not an economic objective, price or welfare estimate. Independent saved-witness replay required before adoption.'))
 
 
@@ -43,6 +48,7 @@ def run(args):
     with (args.output/'worker.log').open('w') as log:
         command=[sys.executable,__file__]
         for name in ['input','calendar','warm','annual','master','output']:command+=['--'+name,str(getattr(args,name))]
+        if args.economic_ray:command+=['--economic-ray']
         child=subprocess.Popen(command+['--index',str(args.index),'--worker'],stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
         started=time.monotonic();peak=0;save(args.output/'status.json',dict(status='diagnosing_native_dual_ray',pid=child.pid,index=args.index))
         while child.poll() is None:
@@ -57,6 +63,8 @@ def run(args):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     for name in ['input','calendar','warm','annual','master','output']:parser.add_argument('--'+name,type=Path,required=True)
-    parser.add_argument('--index',type=int,required=True);parser.add_argument('--worker',action='store_true');args=parser.parse_args()
+    parser.add_argument('--index',type=int,required=True);parser.add_argument('--worker',action='store_true')
+    parser.add_argument('--economic-ray',action='store_true',help='Diagnose original-cost IPM model before requesting its ray; support still uses zero objective')
+    args=parser.parse_args()
     if not 0<=args.index<59:parser.error('Invalid block index')
     worker(args) if args.worker else run(args)

@@ -6,6 +6,15 @@ from submonthly_farkas_support import checked_support,native_ray
 
 
 class FarkasSupportTests(unittest.TestCase):
+    def test_original_cost_ray_has_only_zero_objective_interpretation(self):
+        from economic_infeasibility_ray import native_ray as economic_ray
+        block=Block(np.array([100.]),[(0.,1.)],sparse.csr_matrix([[1.]]),np.array([0.]),
+            sparse.csr_matrix([[-1.]]),sparse.csr_matrix((0,1)),np.zeros(0),sparse.csr_matrix((0,1)))
+        state=np.array([2.]);anchor=np.array([.5]);ray,status=economic_ray(block,state,seconds=5.)
+        value,result,g,intercept,at_anchor,sign,norm=checked_support(block,state,anchor,ray)
+        self.assertEqual(status,'Infeasible');self.assertAlmostEqual(value,1.)
+        for feasible in np.linspace(0.,1.,11):self.assertLessEqual(float(g@np.array([feasible])+intercept),1e-12)
+
     def test_native_ray_separates_impossible_stock_from_feasible_anchor(self):
         # x=s with physical x in [0,1]; s=2 cannot be reached. Economic cost
         # is arbitrary and must be removed before inferring feasibility.

@@ -11,15 +11,18 @@ def load(path, domain, anchor):
     producer=path.parent/'verified.json'
     receipt=json.loads(producer.read_text())
     index=cut['index']
-    if (cut['status']!='independently_replayed_submonthly_feasibility_cut'
-            or cut['input_sha256']!=domain['input_sha256']
+    kinds={'independently_replayed_submonthly_feasibility_cut':('replay_submonthly_feasibility.py','audit_submonthly_feasibility.py'),
+           'independently_replayed_farkas_feasibility_cut':('replay_submonthly_farkas.py','audit_submonthly_farkas.py')}
+    if cut['status'] not in kinds:raise ValueError('Independent necessary feasibility replay required')
+    replay_tool,producer_tool=kinds[cut['status']]
+    if (cut['input_sha256']!=domain['input_sha256']
             or cut['anchor_audit_sha256']!=domain['annual_primal_audit_sha256']
             or not 0<=index<len(domain['blocks'])
             or cut['block_sha256']!=domain['block_sha256'][index]
             or cut['producer_receipt_sha256']!=digest(producer)
             or cut['witness_sha256']!=digest(path.parent/'witness.npz')
-            or cut['tool_sha256']!=digest(tools/'replay_submonthly_feasibility.py')
-            or receipt['producer_sha256']!=digest(tools/'audit_submonthly_feasibility.py')):
+            or cut['tool_sha256']!=digest(tools/replay_tool)
+            or receipt['producer_sha256']!=digest(tools/producer_tool)):
         raise ValueError('Source-matched replayed submonthly feasibility donor required')
     for record in [cut,receipt]:
         for name,value in record['dependencies'].items():
