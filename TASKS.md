@@ -208,8 +208,18 @@ not a new solve, accepted bidding-zone mapping or observed-flow validation.
 Six targeted tests preserve reversal/native terminal accounting and reject
 changed chronology/quantities, wrong exports and failed worker reuse.
 `map_submonthly_exchange_calendar.py` provides exclusive locking, frozen
-source/code/packages and exact annual chronology with guarded 1 GiB/180s workers.
+source/code/packages and exact annual chronology with guarded 1,280 MiB/180s workers.
 Next: finish the saved-witness calendar and audit correctly scoped ENTSO-E
 exchanges. Current environment readiness reports no configured secret/runtime
 bindings; original flow banks/receipts remain absent. No source relabelling or
 numerical target change is supported by this preparation.
+
+
+Exchange mapper resource review: the first annual pass (`full-001/`) stopped at
+block 01 with sampled RSS 1,084,088,320 bytes, exceeding its 1 GiB guard. Its
+partial folder and failure log are retained and not accepted or retried unchanged.
+The parent pass is no longer live. A separate versioned pass will use a reviewed
+1,280 MiB worker cap (still 180 seconds), below the available cgroup headroom;
+this changes only the resource guard, not native coefficients or acceptance.
+All six exchange tests still pass. Recreate label receipts under the new producer
+hash rather than relabelling the previous pilot's provenance.

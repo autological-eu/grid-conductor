@@ -288,6 +288,6 @@ research retains its separate integration gates.
   branch terminal signs. Country grouping is not verified bidding-zone exchange;
   internal branches stay out of external-trade sums. Native efficiency algebra
   is not proof of metered losses or scheduled flows. Workers are bounded at
-  1 GiB/180 seconds; no annual result until all 59 blocks cover 8,760 UTC hours.
+  1,280 MiB/180 seconds; no annual result until all 59 blocks cover 8,760 UTC hours.
 - Outputs stay ignored under `data/pypsa-eur/annual-exchange-mapping/`. Correct
   ENTSO-E A11/A09 source receipts, geography and empirical gates remain required.

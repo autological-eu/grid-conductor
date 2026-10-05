@@ -94,7 +94,7 @@ def run(args):
             try:rss=sum(int(l.split()[1])*1024 for l in Path(f'/proc/{child.pid}/status').read_text().splitlines() if l.startswith('VmRSS:'))
             except FileNotFoundError:rss=0
             peak=max(peak,rss)
-            if rss>2**30 or time.monotonic()-started>180:
+            if rss>1280*2**20 or time.monotonic()-started>180:
                 terminate_worker(child);save(args.output/'status.json',dict(status='resource_guard_requires_review',peak_rss_bytes=peak));return
             time.sleep(1)
         save(args.output/'status.json',dict(status='mapping_complete' if child.returncode==0 else 'failed_requires_review',
