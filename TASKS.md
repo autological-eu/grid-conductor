@@ -278,3 +278,10 @@ Recent generation/exchange articles now use repository Markdown links so the
 publication loader resolves them to public routes instead of GitHub blob paths.
 The prior trade diagnostic commit ec3be30 passed CI/Pages 37316602493/37316596242;
 public signed table, maths and exact JSON passed at desktop/mobile widths.
+
+Publication verified: provenance/link correction 318da71 passed CI/Pages runs
+37318985116/37318991195, including deployed workbench/browser checks. The public
+exchange methods rendered maths without errors or overflow at 1,440/390/320px;
+the related annual-method link and historical screening audit note were verified
+at 390px. The existing PID 34190 remained live, replaying candidate 007 through
+block 51; no duplicate job or annual acceptance was introduced.
