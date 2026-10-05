@@ -59,6 +59,8 @@ fuel-factor/efficiency units, missing factors and invalid values. Evidence:
 `data/pypsa-eur/2025-operating-cost-assumptions.json`; methods are in the
 [coordination publication](docs/monthly-inventory-coordination.md).
 
+Native identity groundwork: `map_submonthly_witness.py` recreates native labels without solving and rejects any objective, bounds, equality/RHS or inequality/RHS mismatch against the replayed block. A guarded first-week pilot passed (168 hours, 1,151 generator series, 127 nodal-price series, 9.01s/782,008,320 bytes sampled RSS). These are conditional fixed-inventory dual prices, not converged annual market prices or empirical validation. Five tests preserve price signs and reject changed demand/cost and missing/duplicate identities. Evidence: `data/pypsa-eur/annual-witness-mapping/pilot-00/`. Next: map hydro/PHS charge and discharge separately, account explicitly for absent native nodal-price rows, then stream the full calendar before preparing observation comparisons.
+
 - [ ] V3 (requires verified annual dispatch): Report per-zone price bias/MAE,
   correlation and seasonal patterns; border-spread magnitude/direction/duration;
   generation and exchange errors. Record memory/runtime/restart and solver bounds.
