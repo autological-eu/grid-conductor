@@ -1,5 +1,8 @@
 import unittest
-from audit_2025_price_observations import summarize
+import json
+import tempfile
+from pathlib import Path
+from audit_2025_price_observations import summarize, audit
 
 
 class ObservationTests(unittest.TestCase):
@@ -26,3 +29,11 @@ class ObservationTests(unittest.TestCase):
             with self.assertRaises(ValueError):summarize([bad]*8760,8760)
         with self.assertRaises(ValueError):summarize([0.]*8760,8759)
         with self.assertRaises(ValueError):summarize([0.]*8759,8759)
+
+    def test_publication_year_and_fingerprint_must_match(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            (root/'manifest.json').write_text('{}')
+            for coverage in [{'year':2024,'manifest_sha256':'wrong'}, {'year':2025,'manifest_sha256':'wrong'}]:
+                (root/'coverage.json').write_text(json.dumps(coverage))
+                with self.assertRaises(ValueError):audit(root)

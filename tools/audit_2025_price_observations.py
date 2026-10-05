@@ -30,6 +30,9 @@ def summarize(values, declared_hours):
 
 def audit(folder):
     path=folder/'manifest.json';manifest=json.loads(path.read_text());rows=[]
+    coverage=json.loads((folder/'coverage.json').read_text())
+    if coverage.get('year') != 2025 or coverage.get('manifest_sha256') != digest(path):
+        raise ValueError('Publication year/manifest coverage fingerprint mismatch')
     for zone,item in sorted(manifest.items()):
         if item['status'] != 'published':
             raise ValueError('Unpublished zone in observation inventory')
@@ -38,8 +41,9 @@ def audit(folder):
                          **summarize(json.loads(file.read_text()),item['known_hours'])))
     return dict(status='observations_inventory_only', year=2025, unit='EUR/MWh',
                 start='2025-01-01T00:00:00Z', end_exclusive='2026-01-01T00:00:00Z', step_hours=1,
-                manifest_sha256=digest(path), producer_sha256=digest(Path(__file__)), zones=rows,
-                limitations=['Hourly arrays inherit their published provider/interval aggregation provenance.',
+                manifest_sha256=digest(path), coverage_sha256=digest(folder/'coverage.json'), producer_sha256=digest(Path(__file__)), zones=rows,
+                limitations=['Chronology is implicit in array positions and inherited from publication; raw provider timestamps are not re-audited here.',
+                             'Hourly arrays inherit their published provider/interval aggregation provenance.',
                              'No missing observations filled; negative prices remain observations.',
                              'Coverage and summary statistics do not validate dispatch or price agreement.',
                              'Bidding-zone mapping, held-out protocol and acceptance thresholds remain open.',
