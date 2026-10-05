@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import pypsa
 from pypsa_storage_blocks import block
-from map_submonthly_witness import native_model,verify_layout,values
+from map_submonthly_witness import native_model,verify_layout,values,quantities
 
 
 class WitnessMapping(unittest.TestCase):
@@ -40,6 +40,21 @@ class WitnessMapping(unittest.TestCase):
 
     def test_price_sign_and_negative_prices_preserved(self):
         np.testing.assert_array_equal(values(np.array([9,3]),np.array([3,9]),np.array([50.,-10.])),[-10.,50.])
+
+    def test_storage_charge_discharge_and_inventory_remain_separate(self):
+        n=self.fixture();b=block(n,n.snapshots,0,2);n,m=native_model(n,n.snapshots)
+        arrays=dict(primal=np.arange(len(b.cost),dtype=float),equality_duals=-np.arange(len(b.rhs),dtype=float))
+        q=quantities(n,m,b,arrays)
+        self.assertEqual(q['storage_ids'],['battery'])
+        for key in ('storage_charge_mw','storage_discharge_mw','storage_soc_mwh'):
+            self.assertEqual(q[key].shape,(2,1))
+        self.assertFalse(np.array_equal(q['storage_charge_mw'],q['storage_discharge_mw']))
+        self.assertEqual(q['buses_without_price_rows'],[])
+
+    def test_nonunit_generator_sign_requires_unit_accounting(self):
+        n=self.fixture();b=block(n,n.snapshots,0,2);n,m=native_model(n,n.snapshots)
+        n.generators.loc['gas','sign']=.001
+        with self.assertRaises(ValueError):quantities(n,m,b,dict(primal=np.ones(len(b.cost)),equality_duals=np.zeros(len(b.rhs))))
 
 
 if __name__=='__main__':unittest.main()

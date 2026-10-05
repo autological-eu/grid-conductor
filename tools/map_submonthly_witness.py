@@ -61,7 +61,14 @@ def quantities(network,model,block,arrays):
     generation=values(p.values,cols,arrays['primal'])
     prices=values(balance.values,rows,arrays['equality_duals'])/network.snapshot_weightings.objective.to_numpy()[:,None]
     if (generation < -1e-7).any():raise ValueError('Unexpected negative generator output')
-    return dict(snapshots=[str(v) for v in p.coords['snapshot'].values],
+    storage={}
+    for key,name in [('storage_discharge_mw','StorageUnit-p_dispatch'),('storage_charge_mw','StorageUnit-p_store'),('storage_soc_mwh','StorageUnit-state_of_charge')]:
+        labels=model.variables[name].labels.transpose('snapshot','name')
+        storage[key]=values(labels.values,cols,arrays['primal'])
+    if not (network.storage_units.sign==1.).all():raise ValueError('Nonunit storage sign needs explicit injection accounting')
+    return dict(storage_ids=labels.coords['name'].values.tolist(),**storage,
+        buses_without_price_rows=sorted(set(network.buses.index)-set(balance.coords['name'].values)),
+        snapshots=[str(v) for v in p.coords['snapshot'].values],
         generator_ids=p.coords['name'].values.tolist(),bus_ids=balance.coords['name'].values.tolist(),
         generation_mw=generation,nodal_price_eur_per_mwh=prices)
 
@@ -91,22 +98,35 @@ def worker(args):
     block=load_block(path)
     with np.load(folder/'witness.npz',allow_pickle=False) as data:arrays={k:data[k].copy() for k in ['primal','equality_duals']}
     q=quantities(n,model,block,arrays)
-    generation=q.pop('generation_mw');prices=q.pop('nodal_price_eur_per_mwh')
-    out=args.output/'quantities.npz';np.savez_compressed(out,generation_mw=generation,nodal_price_eur_per_mwh=prices)
+    numeric={key:q.pop(key) for key in ('generation_mw','nodal_price_eur_per_mwh','storage_discharge_mw','storage_charge_mw','storage_soc_mwh')}
+    generation=numeric['generation_mw']
+    if q['storage_ids']!=domain['storage_ids']:raise ValueError('Storage identity order differs from annual state')
+    with np.load(folder/'boundary-state.npz',allow_pickle=False) as data:state=data['inventories_mwh']
+    ns=len(q['storage_ids']);end=state[(args.index+1)*ns:(args.index+2)*ns]
+    if np.max(abs(numeric['storage_soc_mwh'][-1]-end),initial=0.)>1e-7:raise ValueError('Mapped terminal inventory differs from replayed annual state')
+    out=args.output/'quantities.npz';np.savez_compressed(out,**numeric)
     assets=[]
     for gid in q['generator_ids']:
         g=n.generators.loc[gid];assets.append(dict(id=gid,bus=str(g.bus),country=str(n.buses.loc[g.bus,'country']),carrier=str(g.carrier)))
+    storage_assets=[]
+    for sid in q['storage_ids']:
+        unit=n.storage_units.loc[sid]
+        storage_assets.append(dict(id=sid,bus=str(unit.bus),country=str(n.buses.loc[unit.bus,'country']),
+            carrier=str(unit.carrier),p_min_pu=float(unit.p_min_pu),
+            role='Unidirectional reservoir' if unit.carrier=='hydro' and float(unit.p_min_pu)==0 else
+                 'Pumped storage' if unit.carrier=='PHS' else 'Unclassified storage; do not assume primary generation'))
     tools=Path(__file__).parent
     save(args.output/'verified.json',dict(status='native_witness_identity_mapping_verified_not_market_validation',
         **row,input_sha256=source,annual_replay_sha256=digest(annual_path),block_sha256=digest(path),
         witness_sha256=digest(folder/'witness.npz'),replay_sha256=digest(folder/'independent-replay.json'),
-        quantities_sha256=digest(out),**q,generators=assets,
+        quantities_sha256=digest(out),**q,generators=assets,storage_units=storage_assets,
         generator_energy_mwh=float(np.sum(generation)),
         producer_sha256=digest(Path(__file__)),dependencies={name:digest(tools/name) for name in
             ['disk_storage_blocks.py','submonthly_objective_donor.py','prepare_annual_coordination.py','monthly_dispatch.py','submonthly_inventory_driver.py']},
         limitations=['Fixed-boundary conditional nodal duals; not converged annual market prices.',
             'Native bus identity is not verified bidding-zone assignment; aggregation requires geographic gates.',
             'Generation dispatch remains output, never original renewable availability or a lifecycle factor.',
+            'Reservoir discharge and pumped-storage charge/discharge are retained separately; absent nodal-price rows are explicit.',
             'No fitted costs, empirical acceptance, annual optimum or investment benefits inferred.']))
 
 
