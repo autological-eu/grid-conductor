@@ -305,3 +305,16 @@ reviewed search weight; retain feasibility and annual validation gates.
 starts the unchanged driver only after the original finite pass exits with
 verified candidate-budget exhaustion. Disappeared processes, failures, met gap
 gates and wait limits require review. No old solve is automatically restarted.
+
+Continuation publication/operation verified: 7d6c128 passed CI/Pages runs
+37321326980/37321340379. The public methods section, reference costs/table and
+maths passed at 1,440/390/320px with no document overflow. Ten new continuation
+tests and 45 existing shorter-block tests pass; lint has zero errors (six existing
+warnings), and production build passes. Candidate 007 completed all 59 linked
+blocks/8,760 hours at €50,634,921,071.36147, above incumbent 006. Candidate 008's
+independently replayed lower support is €43,575,112,977.743: best feasible gap
+13.9401%, still not converged. PID 34190 continues candidate 008. The separate
+supervisor PID 38841 is live, waiting under its own lock for the original finite
+pass; continuation-001 is configured for a 10% step, five candidates and six-hour
+wait limit. No continuation dispatch has started. Inspect both real processes
+and locks before taking over; numerical, empirical and investment gates stay open.
