@@ -42,6 +42,13 @@ This adds empirical validation alongside N1–N5; it does not replace their gate
 - [ ] V2: Audit reference observations and provenance: existing 2025 hourly price
   artifacts, generation mix and cross-border exchanges with correct scheduled/
   physical scope. Keep missing observations and proxies explicit.
+  The price-observation inventory now verifies all 39 published arrays against
+  declared coverage, exact 8,760-hour chronology and UTC monthly partitions;
+  source/file hashes, monthly means and negative-price counts are retained offline
+  at `data/pypsa-eur/2025-price-observations-audit.json`. Four observation tests
+  reject malformed values/coverage and preserve nulls and negative prices; all
+  12 targeted 2025 audit tests pass. This is coverage/provenance groundwork, not
+  empirical agreement. Generation and exchange audits remain open.
 - [ ] V3 (requires verified annual dispatch): Report per-zone price bias/MAE,
   correlation and seasonal patterns; border-spread magnitude/direction/duration;
   generation and exchange errors. Record memory/runtime/restart and solver bounds.
