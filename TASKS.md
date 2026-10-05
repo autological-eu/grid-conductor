@@ -50,6 +50,14 @@ This adds empirical validation alongside N1–N5; it does not replace their gate
   reject malformed values/coverage and preserve nulls and negative prices; all
   13 targeted 2025 audit tests pass. This is coverage/provenance groundwork, not
   empirical agreement. Generation quantity groundwork now replays raw A75/A16 XML into the stored hourly energy integrals for all 456/468 available area-months, with zero maximum MWh difference. Sixteen areas have 8,760 complete reported-category hours; this does not prove whole-fleet completeness or independent annual totals. Storage discharge stays separate from primary generation and the German national proxy excludes Luxembourg. Eight tests reject changed quantities, zone/time identity and falsely complete missing data. Evidence: `data/pypsa-eur/2025-generation-observations-audit.json`. Independent generation totals, model comparison and correctly scoped exchange audits remain open.
+The prepared-input operating-cost audit confirms cost year 2025, disabled
+emission pricing at €0/tCO2, and no enabled CO2 budget. Coal coefficients are
+€21.38–27.80/MWh. This is a material price/mix/exchange validation limitation,
+not a reason to alter the live algorithm-study input. Five tests verify direct
+fuel-factor/efficiency units, missing factors and invalid values. Evidence:
+`data/pypsa-eur/2025-operating-cost-assumptions.json`; methods are in the
+[coordination publication](docs/monthly-inventory-coordination.md).
+
 - [ ] V3 (requires verified annual dispatch): Report per-zone price bias/MAE,
   correlation and seasonal patterns; border-spread magnitude/direction/duration;
   generation and exchange errors. Record memory/runtime/restart and solver bounds.

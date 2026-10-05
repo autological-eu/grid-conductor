@@ -105,6 +105,9 @@ Acceptance requires:
   calibration/held-out split before fitting or assessing the model. Numerical
   thresholds are not yet selected. Do not tune and claim validation on the same
   observations or select only favourable zones/hours after seeing errors.
+- Declare fuel-cost year, operational carbon-pricing assumptions and any policy
+  or calibrated variants, with separate input hashes and matched baselines. Keep
+  operational pricing factors distinct from production lifecycle accounting.
 - Publish supported zones/periods, error metrics, validation failures, assumptions
   and limitations. Explain fuel-cost, outage, fleet, weather and market-design
   mismatches; do not force exact price matching through undocumented changes.

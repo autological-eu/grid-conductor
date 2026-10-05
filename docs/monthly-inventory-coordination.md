@@ -1567,3 +1567,45 @@ pass; these tests are implementation checks, not observed-data validation.
 The remaining conditional blocks and full annual linkage are still pending.
 The 2013 weekly benchmark, matched 2025 conditional-window benchmark and future
 annual investment comparisons retain their separate scopes and acceptance gates.
+
+
+### Operating-cost assumptions before observed-market comparison
+
+A read-only audit of the hash-pinned annual input
+(`4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec`)
+confirms a 2025 cost-year setting but **disabled emission pricing**, configured
+at €0/tCO2, and no enabled CO2 budget. Selected assembled static generator costs
+are:
+
+| Technology | Marginal operating cost (€/MWh electrical output) |
+| --- | ---: |
+| Coal | 21.38–27.80 |
+| Lignite | 24.03–28.17 |
+| CCGT | 67.62–140.95 |
+| OCGT | 108.42–118.12 |
+| Nuclear | 27.32 |
+
+These are model coefficients, not observed wholesale prices or verified plant
+bids. Omitting carbon allowance costs can favour fossil generation and distort
+price levels, fuel mix and cross-border exchanges. The 2025 cost-year label alone
+does not establish observed hourly fuel prices, actual outages or fleet coverage.
+The running algorithm study retains its original input; this finding supplies
+no permission to silently alter its objective or resume its cuts against a
+changed network.
+
+For a separate policy-price sensitivity, a generator's additive marginal cost
+would be
+
+$$
+\Delta c_g=a\,\frac{e_g}{\eta_g},
+$$
+
+where $a$ is an explicitly assumed allowance price in €/tCO2, $e_g$ is the
+source **direct operational** factor in tCO2/MWh of thermal fuel, and $\eta_g$
+is electrical efficiency. This is not a lifecycle factor or an observed zonal
+carbon intensity. No particular $a$ is claimed to represent 2025 here.
+A variant needs its own source hash and matched baseline/intervention cases;
+carbon-price calibration and held-out checks remain separate from computational
+parity. The read-only audit is `audit_2025_operating_cost_inputs.py`, with five
+tests for units, efficiency, missing factors and invalid inputs. Offline evidence
+is `data/pypsa-eur/2025-operating-cost-assumptions.json`.
