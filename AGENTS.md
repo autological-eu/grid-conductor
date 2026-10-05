@@ -223,3 +223,18 @@ research retains its separate integration gates.
 - Candidate limits, unresolved diagnostics and resource stops are explicit
   incomplete states. A numerical gap check never bypasses annual comparison,
   observed-data validation or supported app-integration gates.
+
+
+## Shorter-block preparation
+
+- `tools/prepare_submonthly_calendar.py` prepares the 59 month-aligned windows
+  under `submonthly-preparation/calendar-168h/`, with its own exclusive lock,
+  `preparation-manifest.json` and `status.json`. Check its actual supervisor and
+  the current block's worker before restarting or starting another preparation.
+  Frozen source/code/package hashes and partial failures require explicit review.
+- The coefficient equivalence audit is a structural 48h check, not a dispatch or
+  annual certificate. `submonthly_inventory_mapping.py` projects monthly
+  boundaries and lifts gradients; monthly objective cuts constrain sums of their
+  sub-block objectives. Do not use an old cut with a new state layout implicitly.
+  Full prepared coefficients still need linked inventories, source-consistent
+  feasible witnesses and original convergence/empirical/investment gates.
