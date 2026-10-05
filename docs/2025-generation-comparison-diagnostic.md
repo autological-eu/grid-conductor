@@ -130,3 +130,21 @@ constant-series undefined correlation, and malformed/misaligned-data rejection.
 The stopped first diagnostic attempt repeatedly decompressed generation arrays;
 the completed implementation instead directly replays the mapping gates. Neither
 attempt changes dispatch, renewable availability or the annual coordinator.
+
+
+![Conditional nodal-price bias and mean absolute error for every provisionally compared country.](../../research/network-benchmark-2025/conditional-annual-price-diagnostic.svg)
+
+Each dot represents one native node; connecting lines show the minimum and
+maximum across that country's compared nodes. They are not confidence intervals
+or aggregated zonal prices. Every compared country is shown, including large
+errors. Unresolved mappings and absent price rows remain listed in the
+[downloadable node/month metrics and provenance](../../research/network-benchmark-2025/conditional-annual-price-diagnostic.json).
+The artifact explicitly leaves empirical validation, annual optimum, held-out
+acceptance and investment validation false. These are reported error diagnostics,
+not acceptance thresholds or automatic calibration targets.
+
+The publication tool checks the diagnostic producer, observed file hashes,
+full-year source identity, unique model-node inventory, monthly matched-hour
+accounting and finite, consistent error metrics before producing the artifact.
+Three publication-gate tests reject changed sources/partial years/duplicate nodes,
+promoted validation statuses, inconsistent errors and coverage.
