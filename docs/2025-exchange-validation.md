@@ -220,3 +220,11 @@ Existing outputs are preserved; use new paths for reviewed reruns. The compariso
 checks the accounting producer and records original CSV/model/source hashes.
 The missing ENTSO-E flow receipt, bidding-zone, held-out validation, convergence
 and investment gates remain open.
+
+
+[Download the native country/month quantities, secondary comparisons and provenance](../../research/network-benchmark-2025/native-country-exchange-diagnostic.json).
+The publication tool replays the complete mapped-year accounting and secondary
+CSV comparison, checks source/producer/data fingerprints against the original
+annual model input, and leaves annual optimum, hourly ENTSO-E exchange validation,
+bidding-zone validation and investment validation explicitly false. The national
+reference is attributed to Ember; original large caches remain outside Git.

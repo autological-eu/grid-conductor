@@ -1,0 +1,3969 @@
+{
+  "schema_version": 1,
+  "status": "native_country_exchange_and_secondary_reference_not_validated",
+  "year": 2025,
+  "input_sha256": "4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec",
+  "annual_replay_sha256": "99c17a7378d823695440f5a5c4ce903253d4ce5ee0d0a6e7c92460c184e9544b",
+  "publication_tool_sha256": "c095fa84ac855276ed648d8dbbe97bd77579de4dcd53f5f8923224671f4f9563",
+  "model_accounting_sha256": "04677bc5147ed87273dea58ac121935e03dd9cd8d9901ee7a338cc9ec123ab92",
+  "secondary_comparison_sha256": "1dbe8141e996bdf5eb09e4c98c5f5ff4b04bc932a45d9f1bbfa8672cb15f286c",
+  "acceptance": {
+    "annual_optimum": false,
+    "entsoe_hourly_exchange_validation": false,
+    "bidding_zone_validation": false,
+    "investment_validation": false
+  },
+  "native_accounting": {
+    "status": "fixed_inventory_native_country_exchange_diagnostic_not_validation",
+    "year": 2025,
+    "hours": 8760,
+    "input_sha256": "4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec",
+    "annual_replay_sha256": "99c17a7378d823695440f5a5c4ce903253d4ce5ee0d0a6e7c92460c184e9544b",
+    "mapping_calendar_sha256": "bb3acacb32861e13ce8ed88c9ef38d7e2b3abe8a866a935503ba53237c0351a5",
+    "producer_sha256": "7957888e4b9b44c846a47b8a44afc13da884c1d5e694afde7220478b12bc9f5c",
+    "countries": [
+      {
+        "country": "AL",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -247738.77886121476,
+            "positive_net_export_mwh": 121368.0497597363,
+            "negative_net_import_mwh": 369106.828620951,
+            "positive_net_export_hours": 212,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -279875.30892788735,
+            "positive_net_export_mwh": 87394.03183775234,
+            "negative_net_import_mwh": 367269.3407656397,
+            "positive_net_export_hours": 133,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -87616.3380524401,
+            "positive_net_export_mwh": 223680.7887035675,
+            "negative_net_import_mwh": 311297.1267560076,
+            "positive_net_export_hours": 232,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -32649.12277977491,
+            "positive_net_export_mwh": 218406.76354765135,
+            "negative_net_import_mwh": 251055.88632742627,
+            "positive_net_export_hours": 221,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -131085.42600711714,
+            "positive_net_export_mwh": 155166.86495705938,
+            "negative_net_import_mwh": 286252.2909641765,
+            "positive_net_export_hours": 173,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -412202.35474271094,
+            "positive_net_export_mwh": 34340.366183810154,
+            "negative_net_import_mwh": 446542.7209265211,
+            "positive_net_export_hours": 53,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -608500.8317959663,
+            "positive_net_export_mwh": 12772.341848396662,
+            "negative_net_import_mwh": 621273.1736443631,
+            "positive_net_export_hours": 29,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -581997.6513575512,
+            "positive_net_export_mwh": 11969.23539665551,
+            "negative_net_import_mwh": 593966.8867542066,
+            "positive_net_export_hours": 24,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -424387.582752486,
+            "positive_net_export_mwh": 20508.932112526978,
+            "negative_net_import_mwh": 444896.51486501296,
+            "positive_net_export_hours": 32,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -166219.069412163,
+            "positive_net_export_mwh": 163700.13679880108,
+            "negative_net_import_mwh": 329919.20621096407,
+            "positive_net_export_hours": 164,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 227505.26070190474,
+            "positive_net_export_mwh": 416201.144952772,
+            "negative_net_import_mwh": 188695.8842508673,
+            "positive_net_export_hours": 412,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -375707.0897599187,
+            "positive_net_export_mwh": 84578.4782496122,
+            "negative_net_import_mwh": 460285.5680095309,
+            "positive_net_export_hours": 161,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -3120474.2937473254,
+        "positive_net_export_mwh": 1550087.1343483415,
+        "negative_net_import_mwh": 4670561.428095667,
+        "positive_net_export_hours": 1846,
+        "hours": 8760
+      },
+      {
+        "country": "AT",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -3880339.652264232,
+            "positive_net_export_mwh": 322098.62532650225,
+            "negative_net_import_mwh": 4202438.277590734,
+            "positive_net_export_hours": 117,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -2987037.8022663193,
+            "positive_net_export_mwh": 442301.41501416126,
+            "negative_net_import_mwh": 3429339.2172804805,
+            "positive_net_export_hours": 133,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -3213522.986928011,
+            "positive_net_export_mwh": 175456.4274399893,
+            "negative_net_import_mwh": 3388979.4143680003,
+            "positive_net_export_hours": 95,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -1200899.2646069226,
+            "positive_net_export_mwh": 425465.3774163928,
+            "negative_net_import_mwh": 1626364.6420233154,
+            "positive_net_export_hours": 247,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 22665.148926520662,
+            "positive_net_export_mwh": 777957.2033767402,
+            "negative_net_import_mwh": 755292.0544502196,
+            "positive_net_export_hours": 441,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -438515.7019567547,
+            "positive_net_export_mwh": 617510.607624007,
+            "negative_net_import_mwh": 1056026.3095807617,
+            "positive_net_export_hours": 342,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -76777.59792200163,
+            "positive_net_export_mwh": 825459.9426764634,
+            "negative_net_import_mwh": 902237.540598465,
+            "positive_net_export_hours": 405,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": 6436.834526056449,
+            "positive_net_export_mwh": 792716.9604562586,
+            "negative_net_import_mwh": 786280.1259302022,
+            "positive_net_export_hours": 437,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -685551.9481102362,
+            "positive_net_export_mwh": 391928.5189899163,
+            "negative_net_import_mwh": 1077480.4671001525,
+            "positive_net_export_hours": 317,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -1871911.4969380714,
+            "positive_net_export_mwh": 366425.7712432878,
+            "negative_net_import_mwh": 2238337.2681813594,
+            "positive_net_export_hours": 218,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -2776634.42838699,
+            "positive_net_export_mwh": 291085.25343042484,
+            "negative_net_import_mwh": 3067719.681817415,
+            "positive_net_export_hours": 131,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -3574133.758702492,
+            "positive_net_export_mwh": 168147.36195684675,
+            "negative_net_import_mwh": 3742281.120659339,
+            "positive_net_export_hours": 72,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -20676222.654629454,
+        "positive_net_export_mwh": 5596553.464950991,
+        "negative_net_import_mwh": 26272776.119580444,
+        "positive_net_export_hours": 2955,
+        "hours": 8760
+      },
+      {
+        "country": "BA",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 822964.6904784736,
+            "positive_net_export_mwh": 847363.1429830607,
+            "negative_net_import_mwh": 24398.45250458718,
+            "positive_net_export_hours": 714,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 879171.8091067197,
+            "positive_net_export_mwh": 891277.1863164582,
+            "negative_net_import_mwh": 12105.377209738557,
+            "positive_net_export_hours": 653,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 911775.5517694149,
+            "positive_net_export_mwh": 1116093.9956685966,
+            "negative_net_import_mwh": 204318.44389918164,
+            "positive_net_export_hours": 491,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 1325227.4606635908,
+            "positive_net_export_mwh": 1373253.5332186106,
+            "negative_net_import_mwh": 48026.07255501974,
+            "positive_net_export_hours": 606,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 1504263.4403950623,
+            "positive_net_export_mwh": 1507869.7551408121,
+            "negative_net_import_mwh": 3606.3147457498076,
+            "positive_net_export_hours": 724,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 1288882.017766472,
+            "positive_net_export_mwh": 1289027.324537094,
+            "negative_net_import_mwh": 145.30677062198168,
+            "positive_net_export_hours": 718,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": 1223149.1241746852,
+            "positive_net_export_mwh": 1237644.0877181243,
+            "negative_net_import_mwh": 14494.963543439091,
+            "positive_net_export_hours": 726,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": 1158514.2846787362,
+            "positive_net_export_mwh": 1158610.6567585296,
+            "negative_net_import_mwh": 96.37207979337165,
+            "positive_net_export_hours": 743,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": 1144559.2039571777,
+            "positive_net_export_mwh": 1154499.2507318468,
+            "negative_net_import_mwh": 9940.046774668954,
+            "positive_net_export_hours": 709,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 925298.3722592839,
+            "positive_net_export_mwh": 1000147.8136506409,
+            "negative_net_import_mwh": 74849.44139135697,
+            "positive_net_export_hours": 661,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 413276.8953143299,
+            "positive_net_export_mwh": 718375.396245849,
+            "negative_net_import_mwh": 305098.500931519,
+            "positive_net_export_hours": 440,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 789066.465718433,
+            "positive_net_export_mwh": 800345.078010446,
+            "negative_net_import_mwh": 11278.61229201301,
+            "positive_net_export_hours": 731,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 12386149.316282379,
+        "positive_net_export_mwh": 13094507.220980069,
+        "negative_net_import_mwh": 708357.9046976893,
+        "positive_net_export_hours": 7916,
+        "hours": 8760
+      },
+      {
+        "country": "BE",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -2763519.100727907,
+            "positive_net_export_mwh": 1466.0515650209509,
+            "negative_net_import_mwh": 2764985.1522929277,
+            "positive_net_export_hours": 3,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -2172053.56879831,
+            "positive_net_export_mwh": 29445.787141760604,
+            "negative_net_import_mwh": 2201499.355940071,
+            "positive_net_export_hours": 35,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -2873633.047046636,
+            "positive_net_export_mwh": 607.7037264721446,
+            "negative_net_import_mwh": 2874240.7507731086,
+            "positive_net_export_hours": 3,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -3005802.5582247255,
+            "positive_net_export_mwh": 58.82544937310604,
+            "negative_net_import_mwh": 3005861.3836740986,
+            "positive_net_export_hours": 1,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -3975372.9611841757,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 3975372.9611841757,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -3698069.297673781,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 3698069.297673781,
+            "positive_net_export_hours": 0,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -2853047.542094489,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 2853047.542094489,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -2977480.40352666,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 2977480.40352666,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -3231109.616545015,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 3231109.616545015,
+            "positive_net_export_hours": 0,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -3467400.9358551903,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 3467400.9358551903,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -2622437.896922396,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 2622437.896922396,
+            "positive_net_export_hours": 0,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -2594411.903206215,
+            "positive_net_export_mwh": 39779.409289092335,
+            "negative_net_import_mwh": 2634191.312495307,
+            "positive_net_export_hours": 31,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -36234338.8318055,
+        "positive_net_export_mwh": 71357.77717171914,
+        "negative_net_import_mwh": 36305696.60897722,
+        "positive_net_export_hours": 73,
+        "hours": 8760
+      },
+      {
+        "country": "BG",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 3020085.763138379,
+            "positive_net_export_mwh": 3021236.2737630224,
+            "negative_net_import_mwh": 1150.510624643473,
+            "positive_net_export_hours": 742,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 2527169.485937113,
+            "positive_net_export_mwh": 2527169.485937113,
+            "negative_net_import_mwh": 0.0,
+            "positive_net_export_hours": 672,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 1687911.2549915311,
+            "positive_net_export_mwh": 1803776.2641876962,
+            "negative_net_import_mwh": 115865.00919616512,
+            "positive_net_export_hours": 532,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 399162.3504781502,
+            "positive_net_export_mwh": 599198.9140681648,
+            "negative_net_import_mwh": 200036.56359001456,
+            "positive_net_export_hours": 400,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 923051.6478182918,
+            "positive_net_export_mwh": 941202.9253801587,
+            "negative_net_import_mwh": 18151.277561866787,
+            "positive_net_export_hours": 669,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 2212031.795513149,
+            "positive_net_export_mwh": 2212680.944052424,
+            "negative_net_import_mwh": 649.148539274993,
+            "positive_net_export_hours": 714,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": 2896725.0974654164,
+            "positive_net_export_mwh": 2896958.3441540995,
+            "negative_net_import_mwh": 233.24668868301856,
+            "positive_net_export_hours": 741,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": 2916068.342283021,
+            "positive_net_export_mwh": 2916805.9702405822,
+            "negative_net_import_mwh": 737.6279575613227,
+            "positive_net_export_hours": 740,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": 2504544.37134684,
+            "positive_net_export_mwh": 2506804.505816992,
+            "negative_net_import_mwh": 2260.1344701513767,
+            "positive_net_export_hours": 711,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 2677026.1263977927,
+            "positive_net_export_mwh": 2730962.8464566674,
+            "negative_net_import_mwh": 53936.720058874555,
+            "positive_net_export_hours": 648,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 2655841.893316792,
+            "positive_net_export_mwh": 2725010.0917197433,
+            "negative_net_import_mwh": 69168.1984029513,
+            "positive_net_export_hours": 614,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 3311636.746747572,
+            "positive_net_export_mwh": 3319095.51299079,
+            "negative_net_import_mwh": 7458.766243217905,
+            "positive_net_export_hours": 738,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 27731254.87543405,
+        "positive_net_export_mwh": 28200902.078767452,
+        "negative_net_import_mwh": 469647.2033334044,
+        "positive_net_export_hours": 7921,
+        "hours": 8760
+      },
+      {
+        "country": "CH",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -2381147.976968746,
+            "positive_net_export_mwh": 520017.28758848435,
+            "negative_net_import_mwh": 2901165.2645572308,
+            "positive_net_export_hours": 136,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -2146646.3631497994,
+            "positive_net_export_mwh": 354716.6944708214,
+            "negative_net_import_mwh": 2501363.0576206213,
+            "positive_net_export_hours": 116,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -2102587.7625007536,
+            "positive_net_export_mwh": 368112.3217624764,
+            "negative_net_import_mwh": 2470700.0842632297,
+            "positive_net_export_hours": 123,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -625262.2420518792,
+            "positive_net_export_mwh": 696560.4512154495,
+            "negative_net_import_mwh": 1321822.6932673287,
+            "positive_net_export_hours": 239,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 954056.8180091823,
+            "positive_net_export_mwh": 1242505.334463369,
+            "negative_net_import_mwh": 288448.5164541869,
+            "positive_net_export_hours": 532,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -522757.7560100656,
+            "positive_net_export_mwh": 411578.6363574427,
+            "negative_net_import_mwh": 934336.3923675084,
+            "positive_net_export_hours": 265,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -1017035.0257599298,
+            "positive_net_export_mwh": 447414.7432377449,
+            "negative_net_import_mwh": 1464449.7689976748,
+            "positive_net_export_hours": 224,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -805396.0604002014,
+            "positive_net_export_mwh": 441558.223409415,
+            "negative_net_import_mwh": 1246954.2838096162,
+            "positive_net_export_hours": 198,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -690028.5858431826,
+            "positive_net_export_mwh": 564496.5244956051,
+            "negative_net_import_mwh": 1254525.1103387878,
+            "positive_net_export_hours": 245,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -1146282.053999124,
+            "positive_net_export_mwh": 798507.3726674046,
+            "negative_net_import_mwh": 1944789.4266665287,
+            "positive_net_export_hours": 232,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -1753172.4888767733,
+            "positive_net_export_mwh": 626251.2602590512,
+            "negative_net_import_mwh": 2379423.7491358244,
+            "positive_net_export_hours": 176,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -2396180.0781773333,
+            "positive_net_export_mwh": 497762.16264344176,
+            "negative_net_import_mwh": 2893942.2408207753,
+            "positive_net_export_hours": 140,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -14632439.575728606,
+        "positive_net_export_mwh": 6969481.012570706,
+        "negative_net_import_mwh": 21601920.58829931,
+        "positive_net_export_hours": 2626,
+        "hours": 8760
+      },
+      {
+        "country": "CZ",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 2771490.1143743275,
+            "positive_net_export_mwh": 2799763.8021906908,
+            "negative_net_import_mwh": 28273.687816362948,
+            "positive_net_export_hours": 711,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 3271369.606477971,
+            "positive_net_export_mwh": 3271369.606477971,
+            "negative_net_import_mwh": 0.0,
+            "positive_net_export_hours": 672,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 2032090.7334130798,
+            "positive_net_export_mwh": 2350196.321692677,
+            "negative_net_import_mwh": 318105.5882795976,
+            "positive_net_export_hours": 566,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -916796.6790926891,
+            "positive_net_export_mwh": 293813.2543494892,
+            "negative_net_import_mwh": 1210609.9334421782,
+            "positive_net_export_hours": 106,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -2654075.1580177965,
+            "positive_net_export_mwh": 13687.53450518972,
+            "negative_net_import_mwh": 2667762.6925229863,
+            "positive_net_export_hours": 16,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -1993804.7956489706,
+            "positive_net_export_mwh": 65832.35578297217,
+            "negative_net_import_mwh": 2059637.1514319428,
+            "positive_net_export_hours": 44,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -1819153.9710931163,
+            "positive_net_export_mwh": 156224.07334434995,
+            "negative_net_import_mwh": 1975378.0444374664,
+            "positive_net_export_hours": 74,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -2392628.1119043687,
+            "positive_net_export_mwh": 59203.33617364772,
+            "negative_net_import_mwh": 2451831.4480780163,
+            "positive_net_export_hours": 23,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -1477394.4408053115,
+            "positive_net_export_mwh": 188895.75097317135,
+            "negative_net_import_mwh": 1666290.1917784829,
+            "positive_net_export_hours": 63,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 444980.58453381166,
+            "positive_net_export_mwh": 1045644.9526320209,
+            "negative_net_import_mwh": 600664.3680982093,
+            "positive_net_export_hours": 410,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 2040651.4641737884,
+            "positive_net_export_mwh": 2094664.020201614,
+            "negative_net_import_mwh": 54012.55602782545,
+            "positive_net_export_hours": 658,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 1479821.5718073654,
+            "positive_net_export_mwh": 1731486.980285471,
+            "negative_net_import_mwh": 251665.40847810576,
+            "positive_net_export_hours": 586,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 786550.9182180911,
+        "positive_net_export_mwh": 14070781.988609266,
+        "negative_net_import_mwh": 13284231.070391174,
+        "positive_net_export_hours": 3929,
+        "hours": 8760
+      },
+      {
+        "country": "DE",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 16908769.87272774,
+            "positive_net_export_mwh": 16981624.923864894,
+            "negative_net_import_mwh": 72855.05113715083,
+            "positive_net_export_hours": 715,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 12466045.591349356,
+            "positive_net_export_mwh": 12546942.449014202,
+            "negative_net_import_mwh": 80896.85766484629,
+            "positive_net_export_hours": 638,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 13781509.850283815,
+            "positive_net_export_mwh": 13801864.359429572,
+            "negative_net_import_mwh": 20354.509145758093,
+            "positive_net_export_hours": 728,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 13490881.742069518,
+            "positive_net_export_mwh": 13559682.376485089,
+            "negative_net_import_mwh": 68800.6344155709,
+            "positive_net_export_hours": 694,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 11535491.734497441,
+            "positive_net_export_mwh": 11545508.523537323,
+            "negative_net_import_mwh": 10016.789039881227,
+            "positive_net_export_hours": 733,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 8797411.818245677,
+            "positive_net_export_mwh": 8826774.976225222,
+            "negative_net_import_mwh": 29363.15797954489,
+            "positive_net_export_hours": 705,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": 12009337.786744853,
+            "positive_net_export_mwh": 12019583.187347926,
+            "negative_net_import_mwh": 10245.400603072918,
+            "positive_net_export_hours": 735,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": 13191495.00159638,
+            "positive_net_export_mwh": 13201239.272912433,
+            "negative_net_import_mwh": 9744.271316051483,
+            "positive_net_export_hours": 736,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": 12398587.248045538,
+            "positive_net_export_mwh": 12448583.381541435,
+            "negative_net_import_mwh": 49996.13349589793,
+            "positive_net_export_hours": 695,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 14354184.139947701,
+            "positive_net_export_mwh": 14511132.945248721,
+            "negative_net_import_mwh": 156948.80530102042,
+            "positive_net_export_hours": 698,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 11993802.162937198,
+            "positive_net_export_mwh": 12199544.825900836,
+            "negative_net_import_mwh": 205742.66296363727,
+            "positive_net_export_hours": 662,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 15631840.718570827,
+            "positive_net_export_mwh": 15932429.070430469,
+            "negative_net_import_mwh": 300588.3518596421,
+            "positive_net_export_hours": 705,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 156559357.66701603,
+        "positive_net_export_mwh": 157574910.29193813,
+        "negative_net_import_mwh": 1015552.6249220743,
+        "positive_net_export_hours": 8444,
+        "hours": 8760
+      },
+      {
+        "country": "DK",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 28361.046861662486,
+            "positive_net_export_mwh": 345271.52891611744,
+            "negative_net_import_mwh": 316910.482054455,
+            "positive_net_export_hours": 407,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -87076.43068922035,
+            "positive_net_export_mwh": 264019.91625471093,
+            "negative_net_import_mwh": 351096.3469439313,
+            "positive_net_export_hours": 309,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 407807.803188078,
+            "positive_net_export_mwh": 605174.0485248299,
+            "negative_net_import_mwh": 197366.2453367519,
+            "positive_net_export_hours": 488,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 136366.48468999902,
+            "positive_net_export_mwh": 404727.85370654304,
+            "negative_net_import_mwh": 268361.3690165441,
+            "positive_net_export_hours": 363,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 489935.62266387715,
+            "positive_net_export_mwh": 604718.1058458048,
+            "negative_net_import_mwh": 114782.48318192766,
+            "positive_net_export_hours": 547,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 277051.73724515486,
+            "positive_net_export_mwh": 494580.1547528081,
+            "negative_net_import_mwh": 217528.41750765327,
+            "positive_net_export_hours": 475,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": 509684.8151999779,
+            "positive_net_export_mwh": 612855.7032045313,
+            "negative_net_import_mwh": 103170.8880045534,
+            "positive_net_export_hours": 510,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": 420435.5671503794,
+            "positive_net_export_mwh": 557313.8549783648,
+            "negative_net_import_mwh": 136878.2878279854,
+            "positive_net_export_hours": 500,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": 403282.52605210635,
+            "positive_net_export_mwh": 547974.9112789078,
+            "negative_net_import_mwh": 144692.38522680145,
+            "positive_net_export_hours": 495,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 211867.47521549065,
+            "positive_net_export_mwh": 467767.86448373843,
+            "negative_net_import_mwh": 255900.3892682478,
+            "positive_net_export_hours": 427,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -160141.915300564,
+            "positive_net_export_mwh": 268704.51011859626,
+            "negative_net_import_mwh": 428846.4254191603,
+            "positive_net_export_hours": 338,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 61722.07470107169,
+            "positive_net_export_mwh": 403383.7334507593,
+            "negative_net_import_mwh": 341661.65874968766,
+            "positive_net_export_hours": 405,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 2699296.8069780134,
+        "positive_net_export_mwh": 5576492.185515712,
+        "negative_net_import_mwh": 2877195.378537699,
+        "positive_net_export_hours": 5264,
+        "hours": 8760
+      },
+      {
+        "country": "EE",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -474929.2157391458,
+            "positive_net_export_mwh": 1216.9352263220248,
+            "negative_net_import_mwh": 476146.15096546785,
+            "positive_net_export_hours": 5,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -536238.4713960201,
+            "positive_net_export_mwh": 834.1862314875647,
+            "negative_net_import_mwh": 537072.6576275077,
+            "positive_net_export_hours": 6,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -334390.149532003,
+            "positive_net_export_mwh": 20259.14499947276,
+            "negative_net_import_mwh": 354649.29453147575,
+            "positive_net_export_hours": 75,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -269567.981310331,
+            "positive_net_export_mwh": 24902.412368076013,
+            "negative_net_import_mwh": 294470.39367840695,
+            "positive_net_export_hours": 122,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -248500.22481717032,
+            "positive_net_export_mwh": 19354.011888641202,
+            "negative_net_import_mwh": 267854.2367058115,
+            "positive_net_export_hours": 106,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -186303.86129677072,
+            "positive_net_export_mwh": 19995.45201466141,
+            "negative_net_import_mwh": 206299.31331143214,
+            "positive_net_export_hours": 124,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -263412.70276094566,
+            "positive_net_export_mwh": 12255.82758378796,
+            "negative_net_import_mwh": 275668.5303447336,
+            "positive_net_export_hours": 69,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -316039.96820976626,
+            "positive_net_export_mwh": 4680.670713662681,
+            "negative_net_import_mwh": 320720.63892342895,
+            "positive_net_export_hours": 41,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -289021.4408310506,
+            "positive_net_export_mwh": 9440.123727672448,
+            "negative_net_import_mwh": 298461.5645587231,
+            "positive_net_export_hours": 65,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -417975.9124957592,
+            "positive_net_export_mwh": 3676.7136398336092,
+            "negative_net_import_mwh": 421652.6261355928,
+            "positive_net_export_hours": 21,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -473665.25051438686,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 473665.25051438686,
+            "positive_net_export_hours": 0,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -479831.6479316463,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 479831.6479316463,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -4289876.826834996,
+        "positive_net_export_mwh": 116615.47839361767,
+        "negative_net_import_mwh": 4406492.305228613,
+        "positive_net_export_hours": 634,
+        "hours": 8760
+      },
+      {
+        "country": "ES",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 223674.9459892676,
+            "positive_net_export_mwh": 1281133.2501279078,
+            "negative_net_import_mwh": 1057458.3041386404,
+            "positive_net_export_hours": 333,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -746653.7980903154,
+            "positive_net_export_mwh": 553662.4583366642,
+            "negative_net_import_mwh": 1300316.2564269798,
+            "positive_net_export_hours": 184,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -999770.9527226564,
+            "positive_net_export_mwh": 577217.1476308334,
+            "negative_net_import_mwh": 1576988.1003534899,
+            "positive_net_export_hours": 203,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -782854.5352187888,
+            "positive_net_export_mwh": 855502.4142069842,
+            "negative_net_import_mwh": 1638356.9494257732,
+            "positive_net_export_hours": 212,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -1102468.5263213394,
+            "positive_net_export_mwh": 495917.99305074895,
+            "negative_net_import_mwh": 1598386.5193720884,
+            "positive_net_export_hours": 237,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -2717445.5457044663,
+            "positive_net_export_mwh": 112845.28364729953,
+            "negative_net_import_mwh": 2830290.829351766,
+            "positive_net_export_hours": 75,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -2129373.5519479485,
+            "positive_net_export_mwh": 246383.58636803637,
+            "negative_net_import_mwh": 2375757.138315985,
+            "positive_net_export_hours": 124,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -2356265.882102566,
+            "positive_net_export_mwh": 241802.912061087,
+            "negative_net_import_mwh": 2598068.7941636527,
+            "positive_net_export_hours": 117,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -2068014.0821511054,
+            "positive_net_export_mwh": 306767.7632125352,
+            "negative_net_import_mwh": 2374781.8453636407,
+            "positive_net_export_hours": 145,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -1674477.3257554926,
+            "positive_net_export_mwh": 367682.2902752957,
+            "negative_net_import_mwh": 2042159.6160307885,
+            "positive_net_export_hours": 151,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -1440770.9771262347,
+            "positive_net_export_mwh": 459453.1226422608,
+            "negative_net_import_mwh": 1900224.0997684957,
+            "positive_net_export_hours": 151,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -2060901.7773463163,
+            "positive_net_export_mwh": 340083.0213720636,
+            "negative_net_import_mwh": 2400984.79871838,
+            "positive_net_export_hours": 94,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -17855322.00849796,
+        "positive_net_export_mwh": 5838451.242931717,
+        "negative_net_import_mwh": 23693773.25142968,
+        "positive_net_export_hours": 2026,
+        "hours": 8760
+      },
+      {
+        "country": "FI",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 1153272.510401073,
+            "positive_net_export_mwh": 1178637.1517598848,
+            "negative_net_import_mwh": 25364.641358811874,
+            "positive_net_export_hours": 674,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 1137943.3263905058,
+            "positive_net_export_mwh": 1143019.8673895346,
+            "negative_net_import_mwh": 5076.54099902873,
+            "positive_net_export_hours": 654,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 852963.4597111995,
+            "positive_net_export_mwh": 915371.9545531218,
+            "negative_net_import_mwh": 62408.49484192228,
+            "positive_net_export_hours": 638,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 542634.2667643303,
+            "positive_net_export_mwh": 651129.6574197834,
+            "negative_net_import_mwh": 108495.39065545307,
+            "positive_net_export_hours": 526,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -1124744.4776477665,
+            "positive_net_export_mwh": 59713.7017529526,
+            "negative_net_import_mwh": 1184458.179400719,
+            "positive_net_export_hours": 104,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -2975712.8438307466,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 2975712.8438307466,
+            "positive_net_export_hours": 0,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -588818.4641504867,
+            "positive_net_export_mwh": 97960.78922106813,
+            "negative_net_import_mwh": 686779.2533715548,
+            "positive_net_export_hours": 117,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -903919.1262437846,
+            "positive_net_export_mwh": 23402.555540066507,
+            "negative_net_import_mwh": 927321.681783851,
+            "positive_net_export_hours": 55,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -287709.54971654917,
+            "positive_net_export_mwh": 275799.82425513346,
+            "negative_net_import_mwh": 563509.3739716827,
+            "positive_net_export_hours": 275,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -1050411.0238576415,
+            "positive_net_export_mwh": 126319.61877443778,
+            "negative_net_import_mwh": 1176730.6426320793,
+            "positive_net_export_hours": 123,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 477231.75686091324,
+            "positive_net_export_mwh": 595557.69389633,
+            "negative_net_import_mwh": 118325.93703541672,
+            "positive_net_export_hours": 522,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 376733.46078987315,
+            "positive_net_export_mwh": 638499.084677571,
+            "negative_net_import_mwh": 261765.62388769788,
+            "positive_net_export_hours": 475,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -2390536.70452908,
+        "positive_net_export_mwh": 5705411.899239884,
+        "negative_net_import_mwh": 8095948.603768964,
+        "positive_net_export_hours": 4163,
+        "hours": 8760
+      },
+      {
+        "country": "FR",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 2313776.58938192,
+            "positive_net_export_mwh": 3224498.531761305,
+            "negative_net_import_mwh": 910721.9423793848,
+            "positive_net_export_hours": 479,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 4472228.5640155,
+            "positive_net_export_mwh": 4603137.667714298,
+            "negative_net_import_mwh": 130909.10369879802,
+            "positive_net_export_hours": 605,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 7316656.790702465,
+            "positive_net_export_mwh": 7403042.795676792,
+            "negative_net_import_mwh": 86386.00497432667,
+            "positive_net_export_hours": 725,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 7351410.612898884,
+            "positive_net_export_mwh": 7699916.443805734,
+            "negative_net_import_mwh": 348505.8309068491,
+            "positive_net_export_hours": 657,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 8253627.225611052,
+            "positive_net_export_mwh": 8300482.752075715,
+            "negative_net_import_mwh": 46855.5264646642,
+            "positive_net_export_hours": 728,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 7413864.269351289,
+            "positive_net_export_mwh": 7423241.388141452,
+            "negative_net_import_mwh": 9377.118790164026,
+            "positive_net_export_hours": 714,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": 9096460.123065988,
+            "positive_net_export_mwh": 9096460.123065988,
+            "negative_net_import_mwh": 0.0,
+            "positive_net_export_hours": 744,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": 8935455.341969484,
+            "positive_net_export_mwh": 8945575.330988443,
+            "negative_net_import_mwh": 10119.989018958258,
+            "positive_net_export_hours": 735,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": 7942229.017344213,
+            "positive_net_export_mwh": 7942229.017344213,
+            "negative_net_import_mwh": 0.0,
+            "positive_net_export_hours": 720,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 7559267.091871263,
+            "positive_net_export_mwh": 7582367.7935548825,
+            "negative_net_import_mwh": 23100.70168361904,
+            "positive_net_export_hours": 738,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 5501464.1368641015,
+            "positive_net_export_mwh": 5544392.9104401935,
+            "negative_net_import_mwh": 42928.77357609238,
+            "positive_net_export_hours": 676,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 3929959.5555598163,
+            "positive_net_export_mwh": 4106306.5280554118,
+            "negative_net_import_mwh": 176346.97249559572,
+            "positive_net_export_hours": 646,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 80086399.31863597,
+        "positive_net_export_mwh": 81871651.28262442,
+        "negative_net_import_mwh": 1785251.9639884522,
+        "positive_net_export_hours": 8167,
+        "hours": 8760
+      },
+      {
+        "country": "GB",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -359000.8688981834,
+            "positive_net_export_mwh": 1504980.1289097457,
+            "negative_net_import_mwh": 1863980.997807929,
+            "positive_net_export_hours": 361,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 1663058.9218918215,
+            "positive_net_export_mwh": 2465249.885459382,
+            "negative_net_import_mwh": 802190.9635675603,
+            "positive_net_export_hours": 451,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -129758.47217402738,
+            "positive_net_export_mwh": 2130844.8160724128,
+            "negative_net_import_mwh": 2260603.2882464402,
+            "positive_net_export_hours": 371,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -427092.9826190827,
+            "positive_net_export_mwh": 1790845.7982538904,
+            "negative_net_import_mwh": 2217938.7808729727,
+            "positive_net_export_hours": 315,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 198571.28841848363,
+            "positive_net_export_mwh": 1820216.1363282083,
+            "negative_net_import_mwh": 1621644.8479097246,
+            "positive_net_export_hours": 351,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 1798679.2907337493,
+            "positive_net_export_mwh": 2578427.1323646144,
+            "negative_net_import_mwh": 779747.8416308649,
+            "positive_net_export_hours": 508,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -1470671.6973386074,
+            "positive_net_export_mwh": 1005935.5346199826,
+            "negative_net_import_mwh": 2476607.23195859,
+            "positive_net_export_hours": 258,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": 426481.5822884377,
+            "positive_net_export_mwh": 2096618.082141981,
+            "negative_net_import_mwh": 1670136.4998535437,
+            "positive_net_export_hours": 406,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": 1668793.690138921,
+            "positive_net_export_mwh": 2772275.5780560104,
+            "negative_net_import_mwh": 1103481.8879170895,
+            "positive_net_export_hours": 470,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 47062.685147952405,
+            "positive_net_export_mwh": 2374568.563044708,
+            "negative_net_import_mwh": 2327505.877896756,
+            "positive_net_export_hours": 387,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 975344.2815494925,
+            "positive_net_export_mwh": 2319401.472197961,
+            "negative_net_import_mwh": 1344057.1906484682,
+            "positive_net_export_hours": 436,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 1414805.5564750643,
+            "positive_net_export_mwh": 2471008.803307877,
+            "negative_net_import_mwh": 1056203.2468328122,
+            "positive_net_export_hours": 503,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 5806273.275614021,
+        "positive_net_export_mwh": 25330371.930756774,
+        "negative_net_import_mwh": 19524098.65514275,
+        "positive_net_export_hours": 4817,
+        "hours": 8760
+      },
+      {
+        "country": "GR",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -1594310.4091528482,
+            "positive_net_export_mwh": 110263.34649205739,
+            "negative_net_import_mwh": 1704573.7556449054,
+            "positive_net_export_hours": 94,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -1323128.9449739708,
+            "positive_net_export_mwh": 75385.64178905745,
+            "negative_net_import_mwh": 1398514.586763028,
+            "positive_net_export_hours": 72,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -846258.190971428,
+            "positive_net_export_mwh": 397114.7038705187,
+            "negative_net_import_mwh": 1243372.8948419467,
+            "positive_net_export_hours": 201,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -810047.0425222415,
+            "positive_net_export_mwh": 436324.65710785094,
+            "negative_net_import_mwh": 1246371.6996300924,
+            "positive_net_export_hours": 209,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -779607.9777414688,
+            "positive_net_export_mwh": 405855.8977535462,
+            "negative_net_import_mwh": 1185463.875495015,
+            "positive_net_export_hours": 228,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -1057897.9132129624,
+            "positive_net_export_mwh": 246238.30510443143,
+            "negative_net_import_mwh": 1304136.218317394,
+            "positive_net_export_hours": 188,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -2184346.244735351,
+            "positive_net_export_mwh": 67786.74514395196,
+            "negative_net_import_mwh": 2252132.9898793027,
+            "positive_net_export_hours": 87,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -1105377.054197292,
+            "positive_net_export_mwh": 333344.73391510145,
+            "negative_net_import_mwh": 1438721.7881123936,
+            "positive_net_export_hours": 214,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -915891.2048411926,
+            "positive_net_export_mwh": 324075.511965744,
+            "negative_net_import_mwh": 1239966.7168069365,
+            "positive_net_export_hours": 201,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -1112313.71016538,
+            "positive_net_export_mwh": 176558.55608845042,
+            "negative_net_import_mwh": 1288872.2662538304,
+            "positive_net_export_hours": 131,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -772254.1271838649,
+            "positive_net_export_mwh": 242091.4911722246,
+            "negative_net_import_mwh": 1014345.6183560896,
+            "positive_net_export_hours": 183,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -1004907.3858367066,
+            "positive_net_export_mwh": 178396.7174373949,
+            "negative_net_import_mwh": 1183304.1032741016,
+            "positive_net_export_hours": 152,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -13506340.205534706,
+        "positive_net_export_mwh": 2993436.3078403296,
+        "negative_net_import_mwh": 16499776.513375036,
+        "positive_net_export_hours": 1960,
+        "hours": 8760
+      },
+      {
+        "country": "HR",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -683592.4169089746,
+            "positive_net_export_mwh": 15962.956704424987,
+            "negative_net_import_mwh": 699555.3736133996,
+            "positive_net_export_hours": 72,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -761839.0946346379,
+            "positive_net_export_mwh": 6611.982766821871,
+            "negative_net_import_mwh": 768451.0774014598,
+            "positive_net_export_hours": 44,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -91801.25605472927,
+            "positive_net_export_mwh": 173784.17277723938,
+            "negative_net_import_mwh": 265585.4288319687,
+            "positive_net_export_hours": 422,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 39016.48981424852,
+            "positive_net_export_mwh": 219769.31470468937,
+            "negative_net_import_mwh": 180752.82489044085,
+            "positive_net_export_hours": 465,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -326540.28673084534,
+            "positive_net_export_mwh": 134966.85571922158,
+            "negative_net_import_mwh": 461507.1424500669,
+            "positive_net_export_hours": 290,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -835765.4520520978,
+            "positive_net_export_mwh": 27474.52153593919,
+            "negative_net_import_mwh": 863239.973588037,
+            "positive_net_export_hours": 83,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -1070475.9829289813,
+            "positive_net_export_mwh": 14520.589208045974,
+            "negative_net_import_mwh": 1084996.5721370273,
+            "positive_net_export_hours": 55,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -1027635.0253915454,
+            "positive_net_export_mwh": 13023.887000043891,
+            "negative_net_import_mwh": 1040658.9123915893,
+            "positive_net_export_hours": 45,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -880031.1845279214,
+            "positive_net_export_mwh": 19152.17297871289,
+            "negative_net_import_mwh": 899183.3575066343,
+            "positive_net_export_hours": 61,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -874053.0559125782,
+            "positive_net_export_mwh": 26516.30195013944,
+            "negative_net_import_mwh": 900569.3578627177,
+            "positive_net_export_hours": 71,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -792241.7860548431,
+            "positive_net_export_mwh": 26791.879594641603,
+            "negative_net_import_mwh": 819033.6656494847,
+            "positive_net_export_hours": 77,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -1168867.1047792884,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 1168867.1047792884,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -8473826.156162195,
+        "positive_net_export_mwh": 678574.6349399202,
+        "negative_net_import_mwh": 9152400.791102115,
+        "positive_net_export_hours": 1685,
+        "hours": 8760
+      },
+      {
+        "country": "HU",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -1631853.9996970007,
+            "positive_net_export_mwh": 3656.5019926300997,
+            "negative_net_import_mwh": 1635510.5016896306,
+            "positive_net_export_hours": 15,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -1320511.4365589994,
+            "positive_net_export_mwh": 29569.405442852934,
+            "negative_net_import_mwh": 1350080.8420018523,
+            "positive_net_export_hours": 49,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -1310956.0812487747,
+            "positive_net_export_mwh": 67442.28446910482,
+            "negative_net_import_mwh": 1378398.3657178795,
+            "positive_net_export_hours": 81,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -1082164.2635370425,
+            "positive_net_export_mwh": 95984.60641103827,
+            "negative_net_import_mwh": 1178148.8699480807,
+            "positive_net_export_hours": 114,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -1120186.502865167,
+            "positive_net_export_mwh": 66414.5122238883,
+            "negative_net_import_mwh": 1186601.0150890553,
+            "positive_net_export_hours": 109,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -1003112.0378214986,
+            "positive_net_export_mwh": 100895.3415422485,
+            "negative_net_import_mwh": 1104007.379363747,
+            "positive_net_export_hours": 135,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -1109025.9748275331,
+            "positive_net_export_mwh": 57122.72499581944,
+            "negative_net_import_mwh": 1166148.6998233525,
+            "positive_net_export_hours": 95,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -971579.0327875022,
+            "positive_net_export_mwh": 100361.91812844606,
+            "negative_net_import_mwh": 1071940.9509159483,
+            "positive_net_export_hours": 136,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -1213369.0511091114,
+            "positive_net_export_mwh": 41605.54510186633,
+            "negative_net_import_mwh": 1254974.5962109778,
+            "positive_net_export_hours": 73,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -1539100.3739180425,
+            "positive_net_export_mwh": 13244.995211573818,
+            "negative_net_import_mwh": 1552345.3691296163,
+            "positive_net_export_hours": 28,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -1741605.1745792835,
+            "positive_net_export_mwh": 8202.101941974928,
+            "negative_net_import_mwh": 1749807.2765212585,
+            "positive_net_export_hours": 15,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -1793006.7311160548,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 1793006.7311160548,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -15836470.66006601,
+        "positive_net_export_mwh": 584499.9374614435,
+        "negative_net_import_mwh": 16420970.597527454,
+        "positive_net_export_hours": 850,
+        "hours": 8760
+      },
+      {
+        "country": "IE",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 22921.137211103356,
+            "positive_net_export_mwh": 230674.72407122073,
+            "negative_net_import_mwh": 207753.58686011736,
+            "positive_net_export_hours": 280,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 49939.3689145605,
+            "positive_net_export_mwh": 248670.65480400203,
+            "negative_net_import_mwh": 198731.28588944153,
+            "positive_net_export_hours": 269,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -307742.2570354548,
+            "positive_net_export_mwh": 21035.06825879967,
+            "negative_net_import_mwh": 328777.32529425446,
+            "positive_net_export_hours": 59,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -394105.2451286839,
+            "positive_net_export_mwh": 1969.4581139313618,
+            "negative_net_import_mwh": 396074.7032426153,
+            "positive_net_export_hours": 11,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -324060.1867581839,
+            "positive_net_export_mwh": 21579.565229427546,
+            "negative_net_import_mwh": 345639.7519876114,
+            "positive_net_export_hours": 43,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -414740.62569870206,
+            "positive_net_export_mwh": 13414.7660103639,
+            "negative_net_import_mwh": 428155.39170906594,
+            "positive_net_export_hours": 22,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -378573.5417698357,
+            "positive_net_export_mwh": 3439.291993004315,
+            "negative_net_import_mwh": 382012.83376283996,
+            "positive_net_export_hours": 11,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -291645.1890046689,
+            "positive_net_export_mwh": 63267.529745114596,
+            "negative_net_import_mwh": 354912.7187497835,
+            "positive_net_export_hours": 77,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -329602.4421440299,
+            "positive_net_export_mwh": 43915.15608807936,
+            "negative_net_import_mwh": 373517.5982321093,
+            "positive_net_export_hours": 76,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -219671.73131332878,
+            "positive_net_export_mwh": 84108.89091738398,
+            "negative_net_import_mwh": 303780.62223071273,
+            "positive_net_export_hours": 163,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -263483.4273882122,
+            "positive_net_export_mwh": 37750.63074118504,
+            "negative_net_import_mwh": 301234.0581293973,
+            "positive_net_export_hours": 123,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -214503.84629108096,
+            "positive_net_export_mwh": 59319.34599607317,
+            "negative_net_import_mwh": 273823.19228715415,
+            "positive_net_export_hours": 157,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -3065267.986406517,
+        "positive_net_export_mwh": 829145.0819685857,
+        "negative_net_import_mwh": 3894413.0683751027,
+        "positive_net_export_hours": 1291,
+        "hours": 8760
+      },
+      {
+        "country": "IT",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -9102850.293864701,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 9102850.293864701,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -7717396.3639649395,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 7717396.3639649395,
+            "positive_net_export_hours": 0,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -10525463.676466567,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 10525463.676466567,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -9886114.329317285,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 9886114.329317285,
+            "positive_net_export_hours": 0,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -11056890.208624784,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 11056890.208624784,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -10559956.077478502,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 10559956.077478502,
+            "positive_net_export_hours": 0,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -10744802.915535057,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 10744802.915535057,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -10881726.548633639,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 10881726.548633639,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -10572657.62570051,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 10572657.62570051,
+            "positive_net_export_hours": 0,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -10679648.671694731,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 10679648.671694731,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -10046151.995598521,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 10046151.995598521,
+            "positive_net_export_hours": 0,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -9834893.557590086,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 9834893.557590086,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -121608552.26446933,
+        "positive_net_export_mwh": 0.0,
+        "negative_net_import_mwh": 121608552.26446933,
+        "positive_net_export_hours": 0,
+        "hours": 8760
+      },
+      {
+        "country": "LT",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -599021.1029590548,
+            "positive_net_export_mwh": 5303.45386862534,
+            "negative_net_import_mwh": 604324.5568276801,
+            "positive_net_export_hours": 35,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -699108.7692544253,
+            "positive_net_export_mwh": 823.3848254897898,
+            "negative_net_import_mwh": 699932.154079915,
+            "positive_net_export_hours": 10,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -493401.08237333794,
+            "positive_net_export_mwh": 19467.902906134925,
+            "negative_net_import_mwh": 512868.9852794729,
+            "positive_net_export_hours": 68,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -414739.61098910193,
+            "positive_net_export_mwh": 12790.420850350552,
+            "negative_net_import_mwh": 427530.0318394525,
+            "positive_net_export_hours": 65,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -541483.2368627082,
+            "positive_net_export_mwh": 2075.7551453168358,
+            "negative_net_import_mwh": 543558.9920080251,
+            "positive_net_export_hours": 21,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -270651.9934752235,
+            "positive_net_export_mwh": 45479.58600640727,
+            "negative_net_import_mwh": 316131.5794816307,
+            "positive_net_export_hours": 159,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -565600.5205406657,
+            "positive_net_export_mwh": 1455.6306441581314,
+            "negative_net_import_mwh": 567056.1511848238,
+            "positive_net_export_hours": 11,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -486830.87476739543,
+            "positive_net_export_mwh": 3587.307598153892,
+            "negative_net_import_mwh": 490418.1823655493,
+            "positive_net_export_hours": 24,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -495062.2707348863,
+            "positive_net_export_mwh": 9430.008412836609,
+            "negative_net_import_mwh": 504492.2791477229,
+            "positive_net_export_hours": 53,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -570019.8144246998,
+            "positive_net_export_mwh": 4595.473572307693,
+            "negative_net_import_mwh": 574615.2879970074,
+            "positive_net_export_hours": 21,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -796693.0808062028,
+            "positive_net_export_mwh": 2730.165312993009,
+            "negative_net_import_mwh": 799423.2461191958,
+            "positive_net_export_hours": 13,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -676547.7078362525,
+            "positive_net_export_mwh": 8540.981308276223,
+            "negative_net_import_mwh": 685088.6891445288,
+            "positive_net_export_hours": 39,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -6609160.065023954,
+        "positive_net_export_mwh": 116280.07045105027,
+        "negative_net_import_mwh": 6725440.135475004,
+        "positive_net_export_hours": 519,
+        "hours": 8760
+      },
+      {
+        "country": "LU",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -432238.74078503664,
+            "positive_net_export_mwh": 15084.758152550094,
+            "negative_net_import_mwh": 447323.49893758673,
+            "positive_net_export_hours": 35,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -396026.707935027,
+            "positive_net_export_mwh": 11906.937878374647,
+            "negative_net_import_mwh": 407933.6458134017,
+            "positive_net_export_hours": 27,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -405321.1876964527,
+            "positive_net_export_mwh": 19012.648067546903,
+            "negative_net_import_mwh": 424333.83576399967,
+            "positive_net_export_hours": 40,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -350756.3102152179,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 350756.3102152179,
+            "positive_net_export_hours": 0,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -339720.0848452886,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 339720.0848452886,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -344390.04883183533,
+            "positive_net_export_mwh": 3513.207399433733,
+            "negative_net_import_mwh": 347903.25623126904,
+            "positive_net_export_hours": 8,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -362054.1571487266,
+            "positive_net_export_mwh": 342.1063290311159,
+            "negative_net_import_mwh": 362396.2634777577,
+            "positive_net_export_hours": 1,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -329068.7734828832,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 329068.7734828832,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -345838.1158168962,
+            "positive_net_export_mwh": 2324.1610883033654,
+            "negative_net_import_mwh": 348162.2769051996,
+            "positive_net_export_hours": 5,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -382957.20309164067,
+            "positive_net_export_mwh": 12047.284786181603,
+            "negative_net_import_mwh": 395004.4878778223,
+            "positive_net_export_hours": 26,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -411424.0775114057,
+            "positive_net_export_mwh": 24588.296275870638,
+            "negative_net_import_mwh": 436012.37378727633,
+            "positive_net_export_hours": 48,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -416473.76303722325,
+            "positive_net_export_mwh": 22451.911589896947,
+            "negative_net_import_mwh": 438925.67462712014,
+            "positive_net_export_hours": 52,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -4516269.170397634,
+        "positive_net_export_mwh": 111271.31156718904,
+        "negative_net_import_mwh": 4627540.481964823,
+        "positive_net_export_hours": 242,
+        "hours": 8760
+      },
+      {
+        "country": "LV",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -457846.9906489371,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 457846.9906489371,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -370466.9732558038,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 370466.9732558038,
+            "positive_net_export_hours": 0,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -297551.5580223324,
+            "positive_net_export_mwh": 1473.5451397106767,
+            "negative_net_import_mwh": 299025.10316204303,
+            "positive_net_export_hours": 17,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -230150.649623382,
+            "positive_net_export_mwh": 1957.3780055474667,
+            "negative_net_import_mwh": 232108.02762892944,
+            "positive_net_export_hours": 29,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -203001.1312046337,
+            "positive_net_export_mwh": 5352.9307206041,
+            "negative_net_import_mwh": 208354.06192523782,
+            "positive_net_export_hours": 62,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -152301.46962317082,
+            "positive_net_export_mwh": 8555.535524786643,
+            "negative_net_import_mwh": 160857.00514795748,
+            "positive_net_export_hours": 85,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -122045.35629961482,
+            "positive_net_export_mwh": 20629.93480205389,
+            "negative_net_import_mwh": 142675.2911016687,
+            "positive_net_export_hours": 142,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -115924.60873352515,
+            "positive_net_export_mwh": 11447.6864768435,
+            "negative_net_import_mwh": 127372.29521036867,
+            "positive_net_export_hours": 109,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -195890.52831468513,
+            "positive_net_export_mwh": 904.307646863841,
+            "negative_net_import_mwh": 196794.83596154896,
+            "positive_net_export_hours": 17,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -305717.06440326857,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 305717.06440326857,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -350886.61786387186,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 350886.61786387186,
+            "positive_net_export_hours": 0,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -351974.43100100587,
+            "positive_net_export_mwh": 0.0,
+            "negative_net_import_mwh": 351974.43100100587,
+            "positive_net_export_hours": 0,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -3153757.378994231,
+        "positive_net_export_mwh": 50321.31831641012,
+        "negative_net_import_mwh": 3204078.6973106414,
+        "positive_net_export_hours": 461,
+        "hours": 8760
+      },
+      {
+        "country": "ME",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 37643.8597809351,
+            "positive_net_export_mwh": 98216.99609025421,
+            "negative_net_import_mwh": 60573.1363093191,
+            "positive_net_export_hours": 443,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -8873.245716840502,
+            "positive_net_export_mwh": 75833.90309439373,
+            "negative_net_import_mwh": 84707.14881123422,
+            "positive_net_export_hours": 339,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 75494.3646472466,
+            "positive_net_export_mwh": 112372.874453679,
+            "negative_net_import_mwh": 36878.50980643239,
+            "positive_net_export_hours": 558,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 90057.03259436435,
+            "positive_net_export_mwh": 125403.78738472474,
+            "negative_net_import_mwh": 35346.75479036038,
+            "positive_net_export_hours": 550,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 95155.05864307933,
+            "positive_net_export_mwh": 124138.9548506318,
+            "negative_net_import_mwh": 28983.896207552458,
+            "positive_net_export_hours": 443,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -29049.359250209196,
+            "positive_net_export_mwh": 35946.48912282608,
+            "negative_net_import_mwh": 64995.848373035275,
+            "positive_net_export_hours": 216,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -93229.37793466536,
+            "positive_net_export_mwh": 13606.491647860228,
+            "negative_net_import_mwh": 106835.86958252557,
+            "positive_net_export_hours": 103,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -85491.56134219147,
+            "positive_net_export_mwh": 22380.0045672813,
+            "negative_net_import_mwh": 107871.56590947277,
+            "positive_net_export_hours": 123,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -15855.039651378273,
+            "positive_net_export_mwh": 36576.561269564234,
+            "negative_net_import_mwh": 52431.60092094251,
+            "positive_net_export_hours": 224,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -21125.12972694976,
+            "positive_net_export_mwh": 45778.19138369611,
+            "negative_net_import_mwh": 66903.32111064588,
+            "positive_net_export_hours": 251,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 21371.921034543077,
+            "positive_net_export_mwh": 71906.46193991888,
+            "negative_net_import_mwh": 50534.54090537581,
+            "positive_net_export_hours": 395,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -41327.76230947082,
+            "positive_net_export_mwh": 32875.210864034925,
+            "negative_net_import_mwh": 74202.97317350574,
+            "positive_net_export_hours": 278,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 24770.760768463086,
+        "positive_net_export_mwh": 795035.9266688653,
+        "negative_net_import_mwh": 770265.1659004021,
+        "positive_net_export_hours": 3923,
+        "hours": 8760
+      },
+      {
+        "country": "MK",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 6372.027068572807,
+            "positive_net_export_mwh": 61842.2426016176,
+            "negative_net_import_mwh": 55470.2155330448,
+            "positive_net_export_hours": 398,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 51348.25316791003,
+            "positive_net_export_mwh": 93718.34593250172,
+            "negative_net_import_mwh": 42370.09276459168,
+            "positive_net_export_hours": 385,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 70739.56411370514,
+            "positive_net_export_mwh": 169351.24846284874,
+            "negative_net_import_mwh": 98611.6843491436,
+            "positive_net_export_hours": 490,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 128472.0141619395,
+            "positive_net_export_mwh": 211693.87885839902,
+            "negative_net_import_mwh": 83221.8646964595,
+            "positive_net_export_hours": 468,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 333744.72234798095,
+            "positive_net_export_mwh": 355574.454796927,
+            "negative_net_import_mwh": 21829.732448946044,
+            "positive_net_export_hours": 638,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 383406.64832466055,
+            "positive_net_export_mwh": 383875.75159650587,
+            "negative_net_import_mwh": 469.1032718452891,
+            "positive_net_export_hours": 715,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": 374979.5344756933,
+            "positive_net_export_mwh": 376301.23632215365,
+            "negative_net_import_mwh": 1321.7018464603593,
+            "positive_net_export_hours": 733,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": 382887.2145067317,
+            "positive_net_export_mwh": 383407.9112187484,
+            "negative_net_import_mwh": 520.6967120167524,
+            "positive_net_export_hours": 740,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": 341242.67827125906,
+            "positive_net_export_mwh": 343254.85099538264,
+            "negative_net_import_mwh": 2012.17272412358,
+            "positive_net_export_hours": 706,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 246695.66564939154,
+            "positive_net_export_mwh": 262532.2554598335,
+            "negative_net_import_mwh": 15836.589810441907,
+            "positive_net_export_hours": 685,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 199516.60006772165,
+            "positive_net_export_mwh": 243592.0726087327,
+            "negative_net_import_mwh": 44075.47254101106,
+            "positive_net_export_hours": 574,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 158288.33961919145,
+            "positive_net_export_mwh": 192732.2133973921,
+            "negative_net_import_mwh": 34443.87377820066,
+            "positive_net_export_hours": 506,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 2677693.261774758,
+        "positive_net_export_mwh": 3077876.462251043,
+        "negative_net_import_mwh": 400183.20047628524,
+        "positive_net_export_hours": 7038,
+        "hours": 8760
+      },
+      {
+        "country": "NL",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -2262759.036710134,
+            "positive_net_export_mwh": 87265.01605394446,
+            "negative_net_import_mwh": 2350024.0527640786,
+            "positive_net_export_hours": 108,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -1658406.0544996469,
+            "positive_net_export_mwh": 170747.44306793995,
+            "negative_net_import_mwh": 1829153.4975675868,
+            "positive_net_export_hours": 126,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -1366338.8556686537,
+            "positive_net_export_mwh": 238130.97992506155,
+            "negative_net_import_mwh": 1604469.8355937153,
+            "positive_net_export_hours": 202,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -1352554.9105890952,
+            "positive_net_export_mwh": 332822.2637587145,
+            "negative_net_import_mwh": 1685377.1743478097,
+            "positive_net_export_hours": 208,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -928739.9491291658,
+            "positive_net_export_mwh": 249176.85819719298,
+            "negative_net_import_mwh": 1177916.8073263587,
+            "positive_net_export_hours": 221,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -1456968.8879717889,
+            "positive_net_export_mwh": 110354.76626924476,
+            "negative_net_import_mwh": 1567323.6542410336,
+            "positive_net_export_hours": 109,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -1578871.8254862067,
+            "positive_net_export_mwh": 216662.016536299,
+            "negative_net_import_mwh": 1795533.8420225056,
+            "positive_net_export_hours": 158,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -1187697.7727937556,
+            "positive_net_export_mwh": 330484.8882106959,
+            "negative_net_import_mwh": 1518182.6610044516,
+            "positive_net_export_hours": 210,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -1011591.1569060765,
+            "positive_net_export_mwh": 282656.5729919792,
+            "negative_net_import_mwh": 1294247.7298980555,
+            "positive_net_export_hours": 242,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -1777839.6593546579,
+            "positive_net_export_mwh": 70022.9630241258,
+            "negative_net_import_mwh": 1847862.6223787835,
+            "positive_net_export_hours": 105,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -1820454.217353371,
+            "positive_net_export_mwh": 118467.14154979723,
+            "negative_net_import_mwh": 1938921.3589031682,
+            "positive_net_export_hours": 109,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -1611205.5289189038,
+            "positive_net_export_mwh": 101677.31827819125,
+            "negative_net_import_mwh": 1712882.8471970952,
+            "positive_net_export_hours": 104,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -18013427.855381455,
+        "positive_net_export_mwh": 2308468.2278631865,
+        "negative_net_import_mwh": 20321896.083244644,
+        "positive_net_export_hours": 1902,
+        "hours": 8760
+      },
+      {
+        "country": "NO",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -4868684.026532842,
+            "positive_net_export_mwh": 217261.87479567173,
+            "negative_net_import_mwh": 5085945.901328513,
+            "positive_net_export_hours": 95,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -5980553.389841883,
+            "positive_net_export_mwh": 1262.8043612131635,
+            "negative_net_import_mwh": 5981816.194203096,
+            "positive_net_export_hours": 2,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -5530487.126045449,
+            "positive_net_export_mwh": 118169.84966236804,
+            "negative_net_import_mwh": 5648656.975707816,
+            "positive_net_export_hours": 45,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -3679118.4108489505,
+            "positive_net_export_mwh": 396811.7853021588,
+            "negative_net_import_mwh": 4075930.1961511094,
+            "positive_net_export_hours": 160,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 732453.9354399422,
+            "positive_net_export_mwh": 2148355.0186154637,
+            "negative_net_import_mwh": 1415901.0831755216,
+            "positive_net_export_hours": 400,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 5586282.364272042,
+            "positive_net_export_mwh": 5607263.328400414,
+            "negative_net_import_mwh": 20980.96412837225,
+            "positive_net_export_hours": 698,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": 1471494.4598256582,
+            "positive_net_export_mwh": 2378509.3658462665,
+            "negative_net_import_mwh": 907014.9060206087,
+            "positive_net_export_hours": 417,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -1075613.8782448387,
+            "positive_net_export_mwh": 1199432.6702460977,
+            "negative_net_import_mwh": 2275046.5484909364,
+            "positive_net_export_hours": 224,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -977664.9454241279,
+            "positive_net_export_mwh": 1336029.0821840735,
+            "negative_net_import_mwh": 2313694.0276082014,
+            "positive_net_export_hours": 230,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 536593.6925624626,
+            "positive_net_export_mwh": 1903269.4639860187,
+            "negative_net_import_mwh": 1366675.771423556,
+            "positive_net_export_hours": 388,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -1678000.991173466,
+            "positive_net_export_mwh": 1205901.6693037965,
+            "negative_net_import_mwh": 2883902.6604772625,
+            "positive_net_export_hours": 304,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -2921045.864764974,
+            "positive_net_export_mwh": 519224.5838195422,
+            "negative_net_import_mwh": 3440270.448584516,
+            "positive_net_export_hours": 203,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -18384344.180776425,
+        "positive_net_export_mwh": 17031491.496523086,
+        "negative_net_import_mwh": 35415835.67729951,
+        "positive_net_export_hours": 3166,
+        "hours": 8760
+      },
+      {
+        "country": "PL",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 2478044.504837819,
+            "positive_net_export_mwh": 2525039.2973546823,
+            "negative_net_import_mwh": 46994.7925168633,
+            "positive_net_export_hours": 682,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 2480461.2734028767,
+            "positive_net_export_mwh": 2484565.507383034,
+            "negative_net_import_mwh": 4104.233980157579,
+            "positive_net_export_hours": 659,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 2468122.0242548916,
+            "positive_net_export_mwh": 2601703.5720449663,
+            "negative_net_import_mwh": 133581.54779007455,
+            "positive_net_export_hours": 658,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 548482.1284649547,
+            "positive_net_export_mwh": 1025959.6815570014,
+            "negative_net_import_mwh": 477477.55309204676,
+            "positive_net_export_hours": 446,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -1971266.2110172499,
+            "positive_net_export_mwh": 257877.42732805148,
+            "negative_net_import_mwh": 2229143.638345301,
+            "positive_net_export_hours": 167,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -3075048.479235326,
+            "positive_net_export_mwh": 96547.8174236389,
+            "negative_net_import_mwh": 3171596.296658965,
+            "positive_net_export_hours": 97,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -94579.88194896704,
+            "positive_net_export_mwh": 634082.2063393604,
+            "negative_net_import_mwh": 728662.0882883274,
+            "positive_net_export_hours": 346,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -145615.99752232374,
+            "positive_net_export_mwh": 617931.8524502695,
+            "negative_net_import_mwh": 763547.8499725932,
+            "positive_net_export_hours": 322,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -677732.6957519106,
+            "positive_net_export_mwh": 354555.38668333367,
+            "negative_net_import_mwh": 1032288.0824352443,
+            "positive_net_export_hours": 223,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -277849.5621424393,
+            "positive_net_export_mwh": 806119.9626731789,
+            "negative_net_import_mwh": 1083969.5248156183,
+            "positive_net_export_hours": 351,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 1202759.8212317552,
+            "positive_net_export_mwh": 1408659.5643941092,
+            "negative_net_import_mwh": 205899.74316235408,
+            "positive_net_export_hours": 562,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 999505.2455085795,
+            "positive_net_export_mwh": 1191327.4809814547,
+            "negative_net_import_mwh": 191822.23547287518,
+            "positive_net_export_hours": 590,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 3935282.17008266,
+        "positive_net_export_mwh": 14004369.756613081,
+        "negative_net_import_mwh": 10069087.58653042,
+        "positive_net_export_hours": 5103,
+        "hours": 8760
+      },
+      {
+        "country": "PT",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -1342208.7957282758,
+            "positive_net_export_mwh": 205618.5218767706,
+            "negative_net_import_mwh": 1547827.3176050466,
+            "positive_net_export_hours": 127,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -1525366.8959607591,
+            "positive_net_export_mwh": 54105.77159701861,
+            "negative_net_import_mwh": 1579472.6675577776,
+            "positive_net_export_hours": 53,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -1591153.8819981678,
+            "positive_net_export_mwh": 108104.710635028,
+            "negative_net_import_mwh": 1699258.592633196,
+            "positive_net_export_hours": 105,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -1676706.753908461,
+            "positive_net_export_mwh": 123476.38427101857,
+            "negative_net_import_mwh": 1800183.1381794794,
+            "positive_net_export_hours": 101,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -2218496.575186902,
+            "positive_net_export_mwh": 147847.6488933122,
+            "negative_net_import_mwh": 2366344.2240802143,
+            "positive_net_export_hours": 124,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -892700.6487743998,
+            "positive_net_export_mwh": 323732.1430992364,
+            "negative_net_import_mwh": 1216432.7918736362,
+            "positive_net_export_hours": 265,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -1483250.3081783552,
+            "positive_net_export_mwh": 223146.23480298786,
+            "negative_net_import_mwh": 1706396.5429813429,
+            "positive_net_export_hours": 174,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -1230088.9243683626,
+            "positive_net_export_mwh": 279685.1072809967,
+            "negative_net_import_mwh": 1509774.0316493595,
+            "positive_net_export_hours": 212,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -1416139.6268887033,
+            "positive_net_export_mwh": 273478.35281627293,
+            "negative_net_import_mwh": 1689617.9797049763,
+            "positive_net_export_hours": 183,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -1777280.461569099,
+            "positive_net_export_mwh": 182908.14151813445,
+            "negative_net_import_mwh": 1960188.6030872331,
+            "positive_net_export_hours": 127,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -1555312.014167795,
+            "positive_net_export_mwh": 150105.65731946702,
+            "negative_net_import_mwh": 1705417.671487262,
+            "positive_net_export_hours": 125,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -1095465.7882811176,
+            "positive_net_export_mwh": 144704.7333014292,
+            "negative_net_import_mwh": 1240170.5215825466,
+            "positive_net_export_hours": 141,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -17804170.675010398,
+        "positive_net_export_mwh": 2216913.4074116726,
+        "negative_net_import_mwh": 20021084.08242207,
+        "positive_net_export_hours": 1737,
+        "hours": 8760
+      },
+      {
+        "country": "RO",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 405450.17236496793,
+            "positive_net_export_mwh": 658747.6573650213,
+            "negative_net_import_mwh": 253297.4850000534,
+            "positive_net_export_hours": 496,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 129845.37971947537,
+            "positive_net_export_mwh": 397232.41442053946,
+            "negative_net_import_mwh": 267387.03470106405,
+            "positive_net_export_hours": 378,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 280329.23220926046,
+            "positive_net_export_mwh": 827683.7551131583,
+            "negative_net_import_mwh": 547354.5229038979,
+            "positive_net_export_hours": 400,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -472084.6884185448,
+            "positive_net_export_mwh": 337544.7471265109,
+            "negative_net_import_mwh": 809629.4355450558,
+            "positive_net_export_hours": 237,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 530732.9300463812,
+            "positive_net_export_mwh": 905870.5610417443,
+            "negative_net_import_mwh": 375137.630995363,
+            "positive_net_export_hours": 449,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": -320147.62605522823,
+            "positive_net_export_mwh": 278084.2439605963,
+            "negative_net_import_mwh": 598231.8700158244,
+            "positive_net_export_hours": 296,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": -206515.28276693635,
+            "positive_net_export_mwh": 591716.47565816,
+            "negative_net_import_mwh": 798231.7584250964,
+            "positive_net_export_hours": 271,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -427960.4261138452,
+            "positive_net_export_mwh": 443397.60733363323,
+            "negative_net_import_mwh": 871358.0334474784,
+            "positive_net_export_hours": 231,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -688345.7055311961,
+            "positive_net_export_mwh": 355083.69024224876,
+            "negative_net_import_mwh": 1043429.3957734449,
+            "positive_net_export_hours": 194,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -459773.1883501987,
+            "positive_net_export_mwh": 575456.4969204337,
+            "negative_net_import_mwh": 1035229.6852706324,
+            "positive_net_export_hours": 226,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": -183481.92293922685,
+            "positive_net_export_mwh": 559001.2617296274,
+            "negative_net_import_mwh": 742483.1846688542,
+            "positive_net_export_hours": 317,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 551998.6689512525,
+            "positive_net_export_mwh": 759911.67634227,
+            "negative_net_import_mwh": 207913.00739101757,
+            "positive_net_export_hours": 536,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": -859952.4568838387,
+        "positive_net_export_mwh": 6689730.587253944,
+        "negative_net_import_mwh": 7549683.044137782,
+        "positive_net_export_hours": 4031,
+        "hours": 8760
+      },
+      {
+        "country": "RS",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 697909.1999869146,
+            "positive_net_export_mwh": 791554.5584205177,
+            "negative_net_import_mwh": 93645.35843360297,
+            "positive_net_export_hours": 592,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 641400.5104573092,
+            "positive_net_export_mwh": 719267.870142098,
+            "negative_net_import_mwh": 77867.3596847889,
+            "positive_net_export_hours": 542,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": -50893.55898280553,
+            "positive_net_export_mwh": 693163.3369394799,
+            "negative_net_import_mwh": 744056.8959222855,
+            "positive_net_export_hours": 410,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": -73791.13062343217,
+            "positive_net_export_mwh": 589633.1013399978,
+            "negative_net_import_mwh": 663424.2319634301,
+            "positive_net_export_hours": 273,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 656967.848322754,
+            "positive_net_export_mwh": 1108891.044341262,
+            "negative_net_import_mwh": 451923.1960185078,
+            "positive_net_export_hours": 415,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 971763.7429606447,
+            "positive_net_export_mwh": 1254469.2921499298,
+            "negative_net_import_mwh": 282705.549189285,
+            "positive_net_export_hours": 575,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": 1168786.2102340043,
+            "positive_net_export_mwh": 1286618.7371190053,
+            "negative_net_import_mwh": 117832.52688500087,
+            "positive_net_export_hours": 675,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": 1013810.526710445,
+            "positive_net_export_mwh": 1229190.829105229,
+            "negative_net_import_mwh": 215380.3023947839,
+            "positive_net_export_hours": 635,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": 943895.7148028945,
+            "positive_net_export_mwh": 1151052.7584777088,
+            "negative_net_import_mwh": 207157.04367481434,
+            "positive_net_export_hours": 616,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 1090412.6183296142,
+            "positive_net_export_mwh": 1226788.4486833783,
+            "negative_net_import_mwh": 136375.83035376397,
+            "positive_net_export_hours": 679,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 673067.7420059512,
+            "positive_net_export_mwh": 962385.7454560592,
+            "negative_net_import_mwh": 289318.0034501081,
+            "positive_net_export_hours": 551,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 702718.9442334078,
+            "positive_net_export_mwh": 719059.8259438156,
+            "negative_net_import_mwh": 16340.881710407788,
+            "positive_net_export_hours": 712,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 8436048.368437702,
+        "positive_net_export_mwh": 11732075.548118481,
+        "negative_net_import_mwh": 3296027.179680779,
+        "positive_net_export_hours": 6675,
+        "hours": 8760
+      },
+      {
+        "country": "SE",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 1586698.486993995,
+            "positive_net_export_mwh": 1712487.654342083,
+            "negative_net_import_mwh": 125789.16734808794,
+            "positive_net_export_hours": 573,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 360006.36457204435,
+            "positive_net_export_mwh": 678111.080246204,
+            "negative_net_import_mwh": 318104.7156741597,
+            "positive_net_export_hours": 388,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 2039220.826464923,
+            "positive_net_export_mwh": 2125317.755215706,
+            "negative_net_import_mwh": 86096.92875078278,
+            "positive_net_export_hours": 633,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 2332477.7796927826,
+            "positive_net_export_mwh": 2375110.0428486834,
+            "negative_net_import_mwh": 42632.26315590131,
+            "positive_net_export_hours": 630,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 1481166.8547623416,
+            "positive_net_export_mwh": 1691333.3524148685,
+            "negative_net_import_mwh": 210166.49765252657,
+            "positive_net_export_hours": 570,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 2965875.1959930467,
+            "positive_net_export_mwh": 2965875.1959930467,
+            "negative_net_import_mwh": 0.0,
+            "positive_net_export_hours": 720,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": 224619.05351757922,
+            "positive_net_export_mwh": 826744.2211690664,
+            "negative_net_import_mwh": 602125.1676514873,
+            "positive_net_export_hours": 385,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": -356187.5364560139,
+            "positive_net_export_mwh": 630081.1616558986,
+            "negative_net_import_mwh": 986268.6981119125,
+            "positive_net_export_hours": 258,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": -136992.95769478902,
+            "positive_net_export_mwh": 609010.242295112,
+            "negative_net_import_mwh": 746003.199989901,
+            "positive_net_export_hours": 301,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 746728.9696587727,
+            "positive_net_export_mwh": 1154518.7060775156,
+            "negative_net_import_mwh": 407789.73641874304,
+            "positive_net_export_hours": 460,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 2870600.0325117544,
+            "positive_net_export_mwh": 2878046.251007966,
+            "negative_net_import_mwh": 7446.218496211664,
+            "positive_net_export_hours": 707,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 2540776.3585611847,
+            "positive_net_export_mwh": 2576724.9271952165,
+            "negative_net_import_mwh": 35948.568634031675,
+            "positive_net_export_hours": 689,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 16654989.428577622,
+        "positive_net_export_mwh": 20223360.590461366,
+        "negative_net_import_mwh": 3568371.1618837453,
+        "positive_net_export_hours": 6314,
+        "hours": 8760
+      },
+      {
+        "country": "SI",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 463503.8657794559,
+            "positive_net_export_mwh": 537093.1776809031,
+            "negative_net_import_mwh": 73589.31190144723,
+            "positive_net_export_hours": 626,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 514221.5721047807,
+            "positive_net_export_mwh": 545170.542804861,
+            "negative_net_import_mwh": 30948.97070008028,
+            "positive_net_export_hours": 636,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 470266.2002329591,
+            "positive_net_export_mwh": 685635.7474231467,
+            "negative_net_import_mwh": 215369.54719018762,
+            "positive_net_export_hours": 481,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 1000601.814629354,
+            "positive_net_export_mwh": 1013449.358331523,
+            "negative_net_import_mwh": 12847.543702168963,
+            "positive_net_export_hours": 678,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 1077198.1769009882,
+            "positive_net_export_mwh": 1077198.1769009882,
+            "negative_net_import_mwh": 0.0,
+            "positive_net_export_hours": 744,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 851245.9555504988,
+            "positive_net_export_mwh": 851245.9555504988,
+            "negative_net_import_mwh": 0.0,
+            "positive_net_export_hours": 720,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": 816181.1727926796,
+            "positive_net_export_mwh": 828376.5118054262,
+            "negative_net_import_mwh": 12195.339012746548,
+            "positive_net_export_hours": 721,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": 865132.2199013563,
+            "positive_net_export_mwh": 865275.2034236576,
+            "negative_net_import_mwh": 142.9835223013005,
+            "positive_net_export_hours": 743,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": 663461.077761378,
+            "positive_net_export_mwh": 677536.7017992212,
+            "negative_net_import_mwh": 14075.624037843125,
+            "positive_net_export_hours": 701,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 486058.28539345856,
+            "positive_net_export_mwh": 581169.6261646796,
+            "negative_net_import_mwh": 95111.3407712211,
+            "positive_net_export_hours": 636,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 81019.01492489825,
+            "positive_net_export_mwh": 388692.76200641907,
+            "negative_net_import_mwh": 307673.74708152085,
+            "positive_net_export_hours": 373,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 528812.7759725888,
+            "positive_net_export_mwh": 556594.1135911221,
+            "negative_net_import_mwh": 27781.337618533307,
+            "positive_net_export_hours": 710,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 7817702.1319443965,
+        "positive_net_export_mwh": 8607437.877482446,
+        "negative_net_import_mwh": 789735.7455380503,
+        "positive_net_export_hours": 7769,
+        "hours": 8760
+      },
+      {
+        "country": "SK",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": -140218.08720051276,
+            "positive_net_export_mwh": 79712.88231191672,
+            "negative_net_import_mwh": 219930.96951242947,
+            "positive_net_export_hours": 269,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": -214579.2076214846,
+            "positive_net_export_mwh": 55158.02519011386,
+            "negative_net_import_mwh": 269737.23281159846,
+            "positive_net_export_hours": 183,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 79279.12006269938,
+            "positive_net_export_mwh": 257468.79011575575,
+            "negative_net_import_mwh": 178189.67005305635,
+            "positive_net_export_hours": 538,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 213055.65381469944,
+            "positive_net_export_mwh": 309897.1321778628,
+            "negative_net_import_mwh": 96841.47836316336,
+            "positive_net_export_hours": 551,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": -239421.44070377227,
+            "positive_net_export_mwh": 215339.3744536995,
+            "negative_net_import_mwh": 454760.8151574718,
+            "positive_net_export_hours": 417,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 202767.00313781798,
+            "positive_net_export_mwh": 370456.5718362517,
+            "negative_net_import_mwh": 167689.5686984337,
+            "positive_net_export_hours": 594,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": 410349.9204285195,
+            "positive_net_export_mwh": 501667.2263264983,
+            "negative_net_import_mwh": 91317.30589797882,
+            "positive_net_export_hours": 643,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": 109567.76994549565,
+            "positive_net_export_mwh": 341014.5592969678,
+            "negative_net_import_mwh": 231446.78935147217,
+            "positive_net_export_hours": 540,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": 393677.5553540053,
+            "positive_net_export_mwh": 443879.2684909587,
+            "negative_net_import_mwh": 50201.713136953374,
+            "positive_net_export_hours": 645,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": -7360.10299266807,
+            "positive_net_export_mwh": 184831.21931365324,
+            "negative_net_import_mwh": 192191.3223063213,
+            "positive_net_export_hours": 430,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 73529.14336285385,
+            "positive_net_export_mwh": 172132.59391650272,
+            "negative_net_import_mwh": 98603.45055364886,
+            "positive_net_export_hours": 427,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": -124475.84936906534,
+            "positive_net_export_mwh": 98238.57122076789,
+            "negative_net_import_mwh": 222714.42058983323,
+            "positive_net_export_hours": 314,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 756171.478218588,
+        "positive_net_export_mwh": 3029796.214650949,
+        "negative_net_import_mwh": 2273624.736432361,
+        "positive_net_export_hours": 5551,
+        "hours": 8760
+      },
+      {
+        "country": "XK",
+        "monthly": [
+          {
+            "month": 1,
+            "net_export_mwh": 281320.7062711377,
+            "positive_net_export_mwh": 300785.0768616035,
+            "negative_net_import_mwh": 19464.370590465755,
+            "positive_net_export_hours": 721,
+            "hours": 744
+          },
+          {
+            "month": 2,
+            "net_export_mwh": 287628.800028348,
+            "positive_net_export_mwh": 297144.62569406535,
+            "negative_net_import_mwh": 9515.825665717346,
+            "positive_net_export_hours": 662,
+            "hours": 672
+          },
+          {
+            "month": 3,
+            "net_export_mwh": 84481.64547541099,
+            "positive_net_export_mwh": 310311.4709935202,
+            "negative_net_import_mwh": 225829.82551810925,
+            "positive_net_export_hours": 441,
+            "hours": 744
+          },
+          {
+            "month": 4,
+            "net_export_mwh": 85412.88088881705,
+            "positive_net_export_mwh": 283592.3296276624,
+            "negative_net_import_mwh": 198179.44873884536,
+            "positive_net_export_hours": 370,
+            "hours": 720
+          },
+          {
+            "month": 5,
+            "net_export_mwh": 496578.11286215787,
+            "positive_net_export_mwh": 573152.8251792509,
+            "negative_net_import_mwh": 76574.71231709304,
+            "positive_net_export_hours": 612,
+            "hours": 744
+          },
+          {
+            "month": 6,
+            "net_export_mwh": 608280.9372510097,
+            "positive_net_export_mwh": 631924.8998137274,
+            "negative_net_import_mwh": 23643.962562717712,
+            "positive_net_export_hours": 676,
+            "hours": 720
+          },
+          {
+            "month": 7,
+            "net_export_mwh": 618395.4570393325,
+            "positive_net_export_mwh": 628026.9618877337,
+            "negative_net_import_mwh": 9631.504848401173,
+            "positive_net_export_hours": 726,
+            "hours": 744
+          },
+          {
+            "month": 8,
+            "net_export_mwh": 625885.7220281553,
+            "positive_net_export_mwh": 633682.2757700793,
+            "negative_net_import_mwh": 7796.55374192399,
+            "positive_net_export_hours": 731,
+            "hours": 744
+          },
+          {
+            "month": 9,
+            "net_export_mwh": 621608.7147180192,
+            "positive_net_export_mwh": 637622.7954183855,
+            "negative_net_import_mwh": 16014.080700366374,
+            "positive_net_export_hours": 692,
+            "hours": 720
+          },
+          {
+            "month": 10,
+            "net_export_mwh": 473211.8404061296,
+            "positive_net_export_mwh": 515315.93491613027,
+            "negative_net_import_mwh": 42104.09451000071,
+            "positive_net_export_hours": 685,
+            "hours": 744
+          },
+          {
+            "month": 11,
+            "net_export_mwh": 231830.26288941043,
+            "positive_net_export_mwh": 363642.7775386195,
+            "negative_net_import_mwh": 131812.5146492091,
+            "positive_net_export_hours": 531,
+            "hours": 720
+          },
+          {
+            "month": 12,
+            "net_export_mwh": 258175.0930389239,
+            "positive_net_export_mwh": 259166.21480371867,
+            "negative_net_import_mwh": 991.1217647947776,
+            "positive_net_export_hours": 731,
+            "hours": 744
+          }
+        ],
+        "net_export_mwh": 4672810.172896853,
+        "positive_net_export_mwh": 5434368.188504497,
+        "negative_net_import_mwh": 761558.0156076446,
+        "positive_net_export_hours": 7578,
+        "hours": 8760
+      }
+    ],
+    "max_country_sum_terminal_residual_mw": 2.5124791136477143e-11,
+    "scope": "Candidate 001 model-country terminal accounting; not observed or accepted bidding-zone exchange.",
+    "limitations": [
+      "Country net export aggregates simultaneous native border flows before positive/negative totals; not gross bilateral allocation.",
+      "Fixed-inventory candidate 001, not converged annual optimum.",
+      "No A11/A09 receipt recovery, observation agreement, price calibration, carbon or investment validity inferred."
+    ]
+  },
+  "secondary_reference": {
+    "status": "secondary_national_exchange_reference_not_entsoe_flow_validation",
+    "year": 2025,
+    "input_sha256": "4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec",
+    "annual_replay_sha256": "99c17a7378d823695440f5a5c4ce903253d4ce5ee0d0a6e7c92460c184e9544b",
+    "model_accounting_sha256": "04677bc5147ed87273dea58ac121935e03dd9cd8d9901ee7a338cc9ec123ab92",
+    "reference_csv_sha256": "259e1095ee8ffeaf0aff37ad557916ae1823a2da13312da50ba4cec6b4574c3b",
+    "producer_sha256": "224875bce113ca6609dc7080ea077e170bc0c20f49460b49865193fb473e9a26",
+    "reference_source_url": "https://storage.googleapis.com/emb-prod-bkt-publicdata/public-downloads/yearly_full_release_long_format.csv",
+    "comparisons": [
+      {
+        "country": "AL",
+        "status": "national_trade_reference_unavailable",
+        "model_net_export_twh": -3.1204742937473253,
+        "reference_area": null,
+        "reference_net_import_twh": null,
+        "reference_net_export_twh": null,
+        "difference_net_export_twh": null
+      },
+      {
+        "country": "AT",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -20.676222654629456,
+        "reference_area": "Austria",
+        "reference_net_import_twh": 4.11,
+        "reference_net_export_twh": -4.11,
+        "difference_net_export_twh": -16.566222654629456
+      },
+      {
+        "country": "BA",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 12.386149316282378,
+        "reference_area": "Bosnia Herzegovina",
+        "reference_net_import_twh": -2.29,
+        "reference_net_export_twh": 2.29,
+        "difference_net_export_twh": 10.096149316282379
+      },
+      {
+        "country": "BE",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -36.234338831805495,
+        "reference_area": "Belgium",
+        "reference_net_import_twh": 13.4,
+        "reference_net_export_twh": -13.4,
+        "difference_net_export_twh": -22.834338831805496
+      },
+      {
+        "country": "BG",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 27.731254875434047,
+        "reference_area": "Bulgaria",
+        "reference_net_import_twh": -1.32,
+        "reference_net_export_twh": 1.32,
+        "difference_net_export_twh": 26.411254875434047
+      },
+      {
+        "country": "CH",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -14.632439575728606,
+        "reference_area": "Switzerland",
+        "reference_net_import_twh": 0.06,
+        "reference_net_export_twh": -0.06,
+        "difference_net_export_twh": -14.572439575728605
+      },
+      {
+        "country": "CZ",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 0.7865509182180911,
+        "reference_area": "Czechia",
+        "reference_net_import_twh": -7.43,
+        "reference_net_export_twh": 7.43,
+        "difference_net_export_twh": -6.643449081781909
+      },
+      {
+        "country": "DE",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 156.55935766701603,
+        "reference_area": "Germany",
+        "reference_net_import_twh": 19.54,
+        "reference_net_export_twh": -19.54,
+        "difference_net_export_twh": 176.09935766701602
+      },
+      {
+        "country": "DK",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 2.699296806978013,
+        "reference_area": "Denmark",
+        "reference_net_import_twh": 7.41,
+        "reference_net_export_twh": -7.41,
+        "difference_net_export_twh": 10.109296806978014
+      },
+      {
+        "country": "EE",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -4.2898768268349965,
+        "reference_area": "Estonia",
+        "reference_net_import_twh": 2.71,
+        "reference_net_export_twh": -2.71,
+        "difference_net_export_twh": -1.5798768268349965
+      },
+      {
+        "country": "ES",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -17.85532200849796,
+        "reference_area": "Spain",
+        "reference_net_import_twh": -12.79,
+        "reference_net_export_twh": 12.79,
+        "difference_net_export_twh": -30.64532200849796
+      },
+      {
+        "country": "FI",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -2.39053670452908,
+        "reference_area": "Finland",
+        "reference_net_import_twh": 5.56,
+        "reference_net_export_twh": -5.56,
+        "difference_net_export_twh": 3.1694632954709197
+      },
+      {
+        "country": "FR",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 80.08639931863597,
+        "reference_area": "France",
+        "reference_net_import_twh": -93.35,
+        "reference_net_export_twh": 93.35,
+        "difference_net_export_twh": -13.263600681364025
+      },
+      {
+        "country": "GB",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 5.806273275614021,
+        "reference_area": "United Kingdom",
+        "reference_net_import_twh": 29.07,
+        "reference_net_export_twh": -29.07,
+        "difference_net_export_twh": 34.876273275614025
+      },
+      {
+        "country": "GR",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -13.506340205534705,
+        "reference_area": "Greece",
+        "reference_net_import_twh": -2.53,
+        "reference_net_export_twh": 2.53,
+        "difference_net_export_twh": -16.036340205534707
+      },
+      {
+        "country": "HR",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -8.473826156162195,
+        "reference_area": "Croatia",
+        "reference_net_import_twh": 5.32,
+        "reference_net_export_twh": -5.32,
+        "difference_net_export_twh": -3.1538261561621947
+      },
+      {
+        "country": "HU",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -15.836470660066011,
+        "reference_area": "Hungary",
+        "reference_net_import_twh": 9.0,
+        "reference_net_export_twh": -9.0,
+        "difference_net_export_twh": -6.836470660066011
+      },
+      {
+        "country": "IE",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -3.0652679864065173,
+        "reference_area": "Ireland",
+        "reference_net_import_twh": 6.13,
+        "reference_net_export_twh": -6.13,
+        "difference_net_export_twh": 3.0647320135934826
+      },
+      {
+        "country": "IT",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -121.60855226446932,
+        "reference_area": "Italy",
+        "reference_net_import_twh": 46.89,
+        "reference_net_export_twh": -46.89,
+        "difference_net_export_twh": -74.71855226446932
+      },
+      {
+        "country": "LT",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -6.609160065023954,
+        "reference_area": "Lithuania",
+        "reference_net_import_twh": 3.6,
+        "reference_net_export_twh": -3.6,
+        "difference_net_export_twh": -3.0091600650239543
+      },
+      {
+        "country": "LU",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -4.516269170397634,
+        "reference_area": "Luxembourg",
+        "reference_net_import_twh": 4.93,
+        "reference_net_export_twh": -4.93,
+        "difference_net_export_twh": 0.4137308296023656
+      },
+      {
+        "country": "LV",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -3.1537573789942313,
+        "reference_area": "Latvia",
+        "reference_net_import_twh": 1.4,
+        "reference_net_export_twh": -1.4,
+        "difference_net_export_twh": -1.7537573789942313
+      },
+      {
+        "country": "ME",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 0.024770760768463084,
+        "reference_area": "Montenegro",
+        "reference_net_import_twh": 1.03,
+        "reference_net_export_twh": -1.03,
+        "difference_net_export_twh": 1.054770760768463
+      },
+      {
+        "country": "MK",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 2.677693261774758,
+        "reference_area": "North Macedonia",
+        "reference_net_import_twh": 1.38,
+        "reference_net_export_twh": -1.38,
+        "difference_net_export_twh": 4.057693261774758
+      },
+      {
+        "country": "NL",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -18.013427855381455,
+        "reference_area": "Netherlands",
+        "reference_net_import_twh": -13.91,
+        "reference_net_export_twh": 13.91,
+        "difference_net_export_twh": -31.923427855381455
+      },
+      {
+        "country": "NO",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -18.384344180776424,
+        "reference_area": "Norway",
+        "reference_net_import_twh": -23.08,
+        "reference_net_export_twh": 23.08,
+        "difference_net_export_twh": -41.46434418077642
+      },
+      {
+        "country": "PL",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 3.93528217008266,
+        "reference_area": "Poland",
+        "reference_net_import_twh": 1.04,
+        "reference_net_export_twh": -1.04,
+        "difference_net_export_twh": 4.97528217008266
+      },
+      {
+        "country": "PT",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -17.804170675010397,
+        "reference_area": "Portugal",
+        "reference_net_import_twh": 9.29,
+        "reference_net_export_twh": -9.29,
+        "difference_net_export_twh": -8.514170675010398
+      },
+      {
+        "country": "RO",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": -0.8599524568838387,
+        "reference_area": "Romania",
+        "reference_net_import_twh": 3.82,
+        "reference_net_export_twh": -3.82,
+        "difference_net_export_twh": 2.9600475431161613
+      },
+      {
+        "country": "RS",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 8.436048368437701,
+        "reference_area": "Serbia",
+        "reference_net_import_twh": 1.32,
+        "reference_net_export_twh": -1.32,
+        "difference_net_export_twh": 9.756048368437702
+      },
+      {
+        "country": "SE",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 16.654989428577622,
+        "reference_area": "Sweden",
+        "reference_net_import_twh": -33.58,
+        "reference_net_export_twh": 33.58,
+        "difference_net_export_twh": -16.925010571422376
+      },
+      {
+        "country": "SI",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 7.8177021319443964,
+        "reference_area": "Slovenia",
+        "reference_net_import_twh": -0.49,
+        "reference_net_export_twh": 0.49,
+        "difference_net_export_twh": 7.327702131944396
+      },
+      {
+        "country": "SK",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 0.7561714782185881,
+        "reference_area": "Slovakia",
+        "reference_net_import_twh": -2.35,
+        "reference_net_export_twh": 2.35,
+        "difference_net_export_twh": -1.593828521781412
+      },
+      {
+        "country": "XK",
+        "status": "unreconciled_secondary_national_trade_diagnostic",
+        "model_net_export_twh": 4.6728101728968525,
+        "reference_area": "Kosovo",
+        "reference_net_import_twh": 1.55,
+        "reference_net_export_twh": -1.55,
+        "difference_net_export_twh": 6.222810172896852
+      }
+    ],
+    "limitations": [
+      "Secondary country-year Net Imports records; not audited hourly ENTSO-E A11/A09 flows.",
+      "Positive reference Net Imports means imports; displayed reference net exports negate that signed value.",
+      "Model candidate 001 fixed inventories and country/mainland accounting boundaries remain unreconciled.",
+      "Shared upstream observations, national coverage and balance conventions require audit.",
+      "No bidding-zone, annual optimum, empirical acceptance or investment validity inferred."
+    ]
+  },
+  "limitations": [
+    "Fixed-inventory candidate 001 model countries; separate from the newer best feasible annual incumbent.",
+    "Secondary Ember annual Net Imports values are not recovered hourly ENTSO-E A11/A09 observations.",
+    "Accounting/geographic/coverage conventions remain unreconciled; no missing reference zero-filled.",
+    "Only native arithmetic/provenance reproduced; no empirical, convergence or investment acceptance."
+  ]
+}

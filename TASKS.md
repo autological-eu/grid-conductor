@@ -247,3 +247,13 @@ exports 27.731 TWh versus reference exports 1.32 TWh. This is unreconciled natio
 trade groundwork, not audited hourly ENTSO-E A11/A09 comparison or empirical
 acceptance. Five accounting/reference tests pass. Methods/table are prepared in
 `docs/2025-exchange-validation.md`; updated publication awaits CI/live checks.
+
+
+Native trade diagnostic publication is prepared as compact JSON (139 KiB), with
+full mapped-year accounting and the secondary CSV comparison recomputed before
+publication. Three new publication tests reject changed reference/source hashes,
+nonreproducing native quantities and wrong signed comparisons; all eight native
+exchange accounting/reference/publication tests pass. This explicitly leaves
+hourly ENTSO-E, bidding-zone, annual-optimum and investment acceptance false.
+Current observed-flow retrieval remains dependent on an environment secret
+binding; the pending credential-configuration question is not treated as answered.
