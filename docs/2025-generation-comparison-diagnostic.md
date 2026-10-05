@@ -85,3 +85,48 @@ The [2025 conditional-window comparison](../2025-conditional-network-benchmark/)
 and [2013 weekly comparison](../network-benchmark-comparison/) retain their own
 periods and acceptance gates. No emissions or investment validity follows from
 this generation table.
+
+## Provisional hourly price comparison
+
+The same candidate 001 witness provides conditional nodal dual prices. A separate
+read-only diagnostic checks all mapping receipts, quantity hashes, package/code
+versions and the exact 8,760-hour grid, then compares each provisionally mapped
+node with its country's published observed price array. It performs no zonal
+aggregation and no calibration. There are 88 compared nodes; split-country and
+unsupported mappings remain unresolved. Native bus `DE2 16AC` has no nodal-price
+row and is explicitly absent, not zero-priced.
+
+For each node, only matched observed hours enter bias, MAE, RMSE and correlation:
+
+$$
+\mathrm{bias}=\frac{1}{n}\sum_{t\in T}(p^{model}_t-p^{observed}_t),\qquad
+\mathrm{MAE}=\frac{1}{n}\sum_{t\in T}|p^{model}_t-p^{observed}_t|.
+$$
+
+Negative prices remain observations; gaps are not filled. Monthly diagnostics
+retain their own matched-hour counts. The following are **ranges across individual
+nodes**, not load-weighted national prices or confidence intervals.
+
+| Provisional country comparison | Nodes | Matched hours per node | Bias range (€/MWh) | MAE range (€/MWh) |
+| --- | ---: | ---: | ---: | ---: |
+| FR | 19 | 8759 | -28.93 to 15.15 | 33.69 to 39.03 |
+| DE | 18 | 8759 | -63.01 to -53.33 | 61.43 to 68.12 |
+| PL | 6 | 8759 | -73.56 to -72.87 | 77.61 to 78.34 |
+| AT | 2 | 8759 | -68.15 to -67.00 | 72.87 to 73.13 |
+| BG | 1 | 8760 | -74.68 to -74.68 | 79.66 to 79.66 |
+
+These discrepancies do not establish a single causal explanation. The zero
+carbon price, fuel-cost assumptions, geographic aggregation, renewable and outage
+proxies, network representation and fixed-inventory conditions require separate
+controlled investigations. A node's conditional inventory dual is not automatically
+the price of a zonal day-ahead auction. No acceptance threshold was selected after
+seeing these errors; the predeclared held-out validation gate remains open.
+
+Reproduce with `tools/compare_native_price_observations.py`, passing `--folder`
+`data/pypsa-eur/annual-witness-mapping/full-001`, `--network` the hash-matched
+`base_s_128_elec_.nc`, `--prices public/research/zone-prices-2025` and a new ignored
+`--output` path. Three targeted tests preserve signed bias/missing observations,
+constant-series undefined correlation, and malformed/misaligned-data rejection.
+The stopped first diagnostic attempt repeatedly decompressed generation arrays;
+the completed implementation instead directly replays the mapping gates. Neither
+attempt changes dispatch, renewable availability or the annual coordinator.
