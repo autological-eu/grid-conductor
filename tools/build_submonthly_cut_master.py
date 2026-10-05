@@ -65,14 +65,17 @@ def build(args):
         if g.shape!=(13*ns,):raise ValueError('Feasibility gradient layout differs')
         U=sparse.vstack([U,sparse.csr_matrix((P.T@g).reshape(1,-1))],format='csr');limit=np.r_[limit,cut['feasibility_limit']]
         feasibility.append(dict(path=str(path),sha256=digest(path)))
+    witness=args.output.with_suffix('.witness.npz') if args.include_equalities else None
     result=solve([tuple(b) for b in state['bounds']],sparse.load_npz(args.workspace/'master-equality.npz'),state['rhs'],U,limit,
-                 domain['objective_floors_eur'],cuts,state['warm_state_mwh'])
+                 domain['objective_floors_eur'],cuts,state['warm_state_mwh'],include_equalities=args.include_equalities,witness_path=witness)
     upper=domain['annual_feasible_cost_eur']
     if result['lower_bound_eur']>upper+1e-7:raise ValueError('Master lower support exceeds verified annual incumbent')
     result.update(input_sha256=source,annual_feasible_cost_eur=upper,annual_gap_eur=upper-result['lower_bound_eur'],
         adopted_support_months=adopted,support_evidence=evidence,monthly_objective_groups=12,objective_cuts=len(cuts),feasibility_evidence=feasibility,
         inventory_workspace_sha256=digest(args.workspace/'master-workspace.json'),producer_sha256=digest(Path(__file__)),
-        dependencies={name:digest(tools/name) for name in ['grouped_storage_master.py','prepare_submonthly_inventory_workspace.py','prepare_submonthly_dual_calendar.py','storage_master_dual.py','storage_coordinator.py']},
+        master_equalities_priced=args.include_equalities,
+        master_witness_sha256=None if witness is None else digest(witness),
+        dependencies={name:digest(tools/name) for name in ['grouped_storage_master.py','grouped_master_dual.py','prepare_submonthly_inventory_workspace.py','prepare_submonthly_dual_calendar.py','storage_master_dual.py','storage_coordinator.py']},
         scope='Explicitly mapped floating-point cut relaxation only; an envelope-feasible proposal is not verified dispatch. Missing support months weaken the relaxation and do not shorten the calendar.')
     save(args.output,result);return result
 
@@ -81,4 +84,5 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     for name in ['input','monthly','calendar','workspace','support','output']:parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--feasibility',type=Path,action='append',default=[])
+    parser.add_argument('--include-equalities',action='store_true',help='Restore and price original-unit annual equality multipliers')
     result=build(parser.parse_args());print(f"Grouped master lower support EUR {result['lower_bound_eur']:.6f}; {result['objective_cuts']} cuts. Proposal still needs dispatch verification.")

@@ -1405,3 +1405,99 @@ termination records; actual-source supports still require finite-bound and
 independent replay checks before entering the annual master. All 124 prescribed
 storage tests pass. Feasibility alone does not bypass optimisation, empirical
 validation or paired-intervention gates.
+
+
+### Replayed annual lower support — 5 October 2026
+
+All twelve monthly dual-transfer batches and their saved witnesses have now
+passed independent replay, yielding 59 shorter-block supports. The annual master
+also retains the twelve original monthly supports, each applied to **the sum** of
+that month's sub-block objectives. It retains the verified necessary feasibility
+cut through an explicit boundary projection. All 59 source-bounded zero objective
+floors and short-block storage envelopes are audited; the original monthly
+necessary envelopes are also retained.
+
+The full 71-cut relaxation gives these **numerical** annual operating-cost bounds:
+
+| Quantity | Value |
+| --- | ---: |
+| Independently feasible annual incumbent | €50,745,703,158.61136 |
+| Independently replayed lower support | €28,082,845,141.295349 |
+| Remaining gap | €22,662,858,017.31601 |
+| Gap divided by incumbent cost | 44.66% |
+
+These are fixed-asset model system operating costs, not investment benefits,
+congestion rent or investor income. This is progress from the previous 72.90% gap,
+**not convergence** or an annual native/fast benchmark.
+
+The stronger diagnostic includes annual equality multipliers. For master
+constraints $Ax\le b$, $Ex=d$ and bounds $\ell\le x\le u$, choose
+$z\le0$ and unrestricted $y$. With
+$r=c-A^Tz-E^Ty$, a lower support is
+
+$$
+L=z^Tb+y^Td+\sum_j\min_{v\in[\ell_j,u_j]}r_jv.
+$$
+
+Annual inventory columns have finite bounds. Objective epigraphs have no upper
+bound, so their reduced costs must be nonnegative; an unbounded negative
+reduced-cost direction is rejected. Solver multipliers are restored from the
+centered/scaled master into original units. The saved matrices, bounds and
+multipliers are replayed separately without running a solver. A small analytical
+cyclic reference checks that including the equality multiplier restores the
+correct bound; ignoring it remains a valid but weaker diagnostic.
+
+This remains floating-point arithmetic, **not an outward-rounded interval
+certificate**. The scaled master primal has a maximum objective-cut residual of
+€0.00357270. That is disclosed rather than presented as a verified master primal.
+A dual lower support does not require this proposed primal to be feasible; the
+independent annual incumbent supplies the upper bound. The repaired inventory
+proposal separately passes its source bounds, necessary storage envelopes and
+closure checks, but those are insufficient to establish network dispatch.
+
+Native economic checks of the first week reported the proposed boundary
+inventories infeasible. These diagnostics do not invalidate the existing verified
+annual incumbent and do not themselves supply a replayed feasibility cut. A
+separate boundary-elastic LP must produce a positive supported mismatch and
+preserve the verified feasible anchor before a necessary cut can enter the master.
+Its mismatch objective is **not economic welfare or a market price**.
+
+[Download the compact annual bounds report](../research/network-benchmark-2025/submonthly-annual-bounds.json).
+Full matrices, multipliers and candidate inventories remain in the ignored offline
+workspace. Reproduce with `build_submonthly_cut_master.py --include-equalities`
+and `replay_grouped_master_dual.py`. All 136 prescribed storage tests pass.
+Empirical 2025 price/mix/exchange validation and paired annual investment
+comparisons remain open; the 2013 weekly and 2025 conditional-window benchmarks
+remain separate.
+
+
+The first guarded boundary-elastic diagnosis reached its 120-second solver limit
+without a strictly optimal result, so it yielded no accepted cut. A subsequent
+diagnostic tests a native dual ray on the **same constraints with a zero
+objective**. For any feasible point that objective is zero; a positive globally
+supported lower value therefore separates an infeasible boundary vector.
+Finite state-independent variable bounds are priced explicitly, inequality
+multipliers must be nonpositive, and any unbounded reduced-cost direction is
+rejected. The verified annual anchor must remain on the feasible side. A saved
+ray support still requires independent replay before adoption. An analytical
+single-asset test checks the native ray and separation of an impossible stock
+from every feasible stock; this is not an economic price or welfare estimate.
+
+
+The direct-ray diagnostic also reached its 120-second solver limit and supplied
+no accepted ray. The subsequent bounded diagnostic reused the existing scaled elastic
+dual probe (600-second solver, 900-second whole-worker and 6 GiB guards). Its
+primal comes from the independently feasible annual anchor with explicit boundary
+slacks. Nonoptimal row multipliers may support a necessary feasibility cut only
+when global finite-bound pricing is positive at the proposal, preserves the
+verified anchor and passes independent saved-witness replay. This diagnostic does
+not weaken economic optimal-status or dispatch-feasibility gates.
+
+
+That probe completed in 37.02 seconds at 0.99 GiB. Independent saved-witness
+replay passed, with maximum equality residual $7.39\times10^{-10}$. Its
+necessary support is **12,733.884 inventory units** at the rejected proposal
+and **−37,129,214.607** at the verified annual anchor. The constructed elastic
+primal is not an economic dispatch witness or a Phase-I optimum. The cut may
+now be explicitly adopted into the next inventory master; it has not yet
+changed the annual bounds above.
