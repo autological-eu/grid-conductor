@@ -332,3 +332,29 @@ effects. Three new sensitivity tests and six existing price/publication tests
 pass. The compact JSON, individual-node scatter plot and methods are prepared;
 neither cost changes nor paired price errors become investment benefits or
 empirical acceptance. Original candidate 001 publications are preserved.
+
+
+V3 price-sensitivity publication verified: 73a492d passed CI/Pages runs
+37324385357/37324393803. The public generation-comparison article renders the
+88-node scatter plot and exact published JSON at 1,440/390/320px, with no maths
+errors or horizontal overflow. All acceptance gates remain false; this is a
+conditional inventory sensitivity, not an annual optimum or investment result.
+
+V3 operational-carbon reference preparation: `prepare_2025_eua_reference.py`
+audits the official public EEX archive, workbook identity, explicit clearing-price
+units, successful EUA contract, calendar dates and price-times-volume revenue.
+The complete 2025 reference contains 213 auctions, 588,735,000 tCO2, and an
+auction-volume-weighted clearing price of €73.4319308942/tCO2 across all twelve
+months (7 January–15 December). Four targeted tests pass, including retaining
+the first auction immediately after the header and rejecting wrong units/date
+systems. Original archive/workbooks and derived reference remain ignored local
+provider caches, outside Git. No dispatch costs, lifecycle factors or model
+outputs changed. Next: define jurisdiction/asset coverage and a separately
+hashed operational-carbon sensitivity with independent re-solves; this annual
+auction reference is not an hourly allowance series or empirical validation.
+
+Review: PID 34190 was live replaying candidate 008 through block 40, and the
+separate PID 38841 continuation supervisor was live waiting, not dispatching.
+No duplicate annual job was started. Original chronological feasibility and
+convergence gates remain in place; full annual native/fast and empirical
+acceptance are still incomplete.
