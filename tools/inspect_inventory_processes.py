@@ -23,11 +23,15 @@ def matches_process(folder, script, flag, target):
         return False
 
 
-def inspect(root, continuation, proc=Path('/proc')):
+def inspect(root, continuation, proc=Path('/proc'), diagnostics=()):
     root, continuation = root.resolve(), continuation.resolve()
     roles = [('original_driver', 'submonthly_inventory_driver.py', '--root', root, root/'driver-status.json'),
              ('continuation_waiter', 'run_submonthly_continuation.py', '--output', continuation, continuation.with_suffix('.waiting.json')),
              ('continuation_driver', 'submonthly_inventory_driver.py', '--root', continuation, continuation/'driver-status.json')]
+    for target in diagnostics:
+        target = target.resolve()
+        for script in ['audit_submonthly_feasibility.py', 'audit_submonthly_feasibility_extended.py', 'audit_submonthly_farkas.py']:
+            roles.append((f'diagnostic:{target.name}:{script}', script, '--output', target, target/'status.json'))
     rows = []
     for role, script, flag, target, status_path in roles:
         receipt = json.loads(status_path.read_text()) if status_path.exists() else None
@@ -45,5 +49,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, required=True)
     parser.add_argument('--continuation', type=Path, required=True)
+    parser.add_argument('--diagnostic', type=Path, action='append', default=[], help='Inspect supervisor and worker for a diagnostic output; repeat as needed')
     args = parser.parse_args()
-    print(json.dumps(inspect(args.root, args.continuation), indent=2))
+    print(json.dumps(inspect(args.root, args.continuation, diagnostics=args.diagnostic), indent=2))
