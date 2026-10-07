@@ -172,6 +172,11 @@ paired native/fast verification and existing empirical/investment requirements.
 Publish comparative evidence as a readable report with data visualisations,
 clear summary and conclusion, without requiring scenario-menu interaction.
 Retain the separate 2013 weekly benchmark.
+Reports must name the model and actual solve period in tables and charts. Explain
+internal candidate identifiers and whether inventories are fixed, annual bounds
+are converged, and comparisons represent numerical parity or observed-data
+differences. Country/fuel differences must retain missing observations and
+unequal accounting scopes explicitly.
 
 
 ## Accepted direction: hourly zonal dispatch

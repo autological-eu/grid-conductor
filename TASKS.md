@@ -835,3 +835,22 @@ Unequal oil/other-fossil scope stays marked. Original generation and capacity
 values are unchanged. Regeneration, production build and browser checks at
 1440/390/320px passed with all three figures decoded and no horizontal overflow.
 No new solve or acceptance/publication claim.
+
+Recurring review, 7 October 2026: managed workspace accessible; clean public-v1
+before review. Actual original/continuation and all four reviewed diagnostic
+processes are stopped. Fresh source-checked continuation-002 replay confirms
+candidate 002 cost €50,098,008,942.03262 and candidate 004 lower support
+€47,954,698,244.3425 (4.27823529% numerical gap). No new solve or duplicate job;
+failed feasibility/ray diagnostics and N3–N5 blockers remain intact.
+
+Capacity reconciliation, current Ember references and full-year PyPSA-Eur
+comparison through d1ccad0 fast-forwarded to public-v1. CI/Pages run 37689845631
+passed build, tests, coverage, production Chromium checks, Pages deployment
+and live-site browser verification. Public HTTPS comparison/IRENA deep routes,
+all production JS and associated JSON/SVGs independently match 24 local build
+files exactly. Six IRENA/Ember extraction tests passed again. PRODUCT.md now
+records the accepted clear model/period/candidate labels and explicit distinction
+between numerical parity and observed-data differences. These publications do
+not complete annual/empirical/zonal-input gates; recurring review stays enabled.
+Next: reconcile capacity/scope/cost/outage inputs
+for Z0/Z1 and independently checked feasibility support before any N3 recovery.
