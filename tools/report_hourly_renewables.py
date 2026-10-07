@@ -71,6 +71,8 @@ def run():
             ax.plot(np.arange(168),data['FR_'+tech+'_reconstructed_generation_mw'][start:stop]/1000,label='Monthly-constrained estimate')
             ax.set_title('France '+tech+' · 1–7 June 2025 UTC');ax.set_ylabel('GW');ax.grid(alpha=.2);ax.legend()
         axes[-1].set_xlabel('Hour from 1 June 00:00 UTC');fig.tight_layout();fig.savefig(out/'hourly.svg');plt.close(fig)
+    for figure in out.glob('*.svg'):
+        figure.write_text('\n'.join(line.rstrip() for line in figure.read_text().splitlines())+'\n')
     statuses={}
     for row in report['countries']:
         for m in row['months']:statuses[m['status']]=statuses.get(m['status'],0)+1
