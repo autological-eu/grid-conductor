@@ -14,7 +14,7 @@ against live processes; this file is not a job monitor.
 | --- | --- | --- |
 | N1 | Done | Publish matched 2025 conditional-window benchmark. Native/fast baseline, cable and battery objectives agree; comparison and methods are published. See [48-hour benchmark](docs/2025-conditional-network-benchmark.md). This is not an annual result. |
 | N2 | Done: configured numerical reference gates | Two chronological 24-hour blocks passed the €0.001 gap and €0.02 native parity gates at iteration 738. Gap €0.0002267; cost difference €0.007903. Independent final-state re-solves reproduced the objective with maximum equality residual 8.09e-9 and zero variable-bound violation. Floating-point lower bound exceeds native by €0.007676: this is numerical parity, not an exact enclosing certificate. See [coordination methods](docs/monthly-inventory-coordination.md). |
-| N3 | Blocked; feasibility diagnosis under review | Best independently checked full-year feasible cost is continuation-002 candidate 002: €50,098,008,942.03262 over 59 blocks/8,760 hours. Candidate 004 lower support recomputes to €47,954,698,244.3425, numerical gap 4.27824%, not an optimum certificate. Driver PID 51005 stopped at candidate 004 block 12: bounded elastic dual probe failed positive-support verification. No live annual driver; separate native Phase-I diagnostic also stopped at its 120-second optimality limit (123.14s whole worker, 1,047,998,464-byte peak RSS). Both failures are preserved; no live annual or diagnostic worker. Separate versioned 600-second native Phase-I diagnostic stopped at its optimality time limit (602.87s, 1,025,732,608-byte sampled peak RSS); no annual driver resumed. A separate zero-objective Farkas-ray diagnostic is now live under supervisor PID 54113 (120-second solver / 300-second worker bounds). Next: independently replay any valid support, then explicitly review donor/driver migration before recovery; no infeasibility or convergence claim from the failed probe. Published annual bounds remain the earlier 14.04% snapshot; N4/N5 and empirical gates remain open. |
+| N3 | Blocked; feasibility diagnosis under review | Best independently checked full-year feasible cost is continuation-002 candidate 002: €50,098,008,942.03262 over 59 blocks/8,760 hours. Candidate 004 lower support recomputes to €47,954,698,244.3425, numerical gap 4.27824%, not an optimum certificate. Driver PID 51005 stopped at candidate 004 block 12: bounded elastic dual probe failed positive-support verification. No live annual driver; separate native Phase-I diagnostic also stopped at its 120-second optimality limit (123.14s whole worker, 1,047,998,464-byte peak RSS). Both failures are preserved; no live annual or diagnostic worker. Separate versioned 600-second native Phase-I diagnostic stopped at its optimality time limit (602.87s, 1,025,732,608-byte sampled peak RSS); no annual driver resumed. The zero-objective Farkas-ray diagnostic also failed at its 120-second native time limit (123.14s whole worker, 929,906,688-byte peak RSS); supervisor 54113 is a zombie and no support was produced. After idle checks, a distinct original-cost ray diagnostic started under supervisor PID 54437 (120-second solver / 300-second worker bounds); support is still evaluated against the zero-objective feasible set. Next: independently replay any valid support, then explicitly review donor/driver migration before recovery; no infeasibility or convergence claim from the failed probe. Published annual bounds remain the earlier 14.04% snapshot; N4/N5 and empirical gates remain open. |
 | N4 | Pending N3 | Produce and audit full-year native/reference and fast dispatch comparisons plus paired interventions. Preserve original hourly renewable availability and declare proxies. Distinguish sequential feasible dispatch from a certified annual optimum. |
 | N5 | Pending N4 | Publish annual benchmark tables, charts, JSON and methods; integrate supported verified 2025 functionality into the static app. Inspect CI/Pages and public URLs. Disable recurring implementation checks only after the annual benchmark and supported app integration are complete. |
 
@@ -665,3 +665,17 @@ accepted data-first report presentation requirement. Latest ledger 828173a passe
 CI/Pages 37650608449/37650600194; the public report and all three SVGs remain
 byte-identical over verified HTTPS. Requirements/research gates unchanged;
 recurring review enabled.
+
+
+N3 ray recovery review: zero-objective diagnostic failed with “No native
+infeasible ray: Time limit reached”, return code 1; original output is preserved.
+No infeasibility cut, annual result or convergence was accepted. Actual worker
+inspection found no active research jobs before starting the existing distinct
+original-cost ray mode at `continuation-002/review-farkas-004-12-economic/`
+under supervisor 54437. Its 120-second solver, 300-second whole-worker and
+6 GiB memory guards remain unchanged. Independently replay any supported ray
+before reviewing driver recovery; do not repeat failed identical jobs.
+Cgroup OOM/kill counters are zero; disk has 7.3 GiB available. PRODUCT.md
+requirements remain unchanged. HEAD 9fa5d72 passed CI/Pages runs
+37653079335/37653072658; verified public HTTPS report HTML and benefit SVG
+match the tested production build. Recurring review remains enabled.
