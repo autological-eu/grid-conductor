@@ -277,3 +277,67 @@ The [Clarigrid SMARD catalog description](https://www.clarigrid.energy/datasets/
 helped identify this source and its interval-energy units. The public MCP endpoint
 requires account sign-in and has not been used to retrieve these observations.
 Catalog inclusion does not verify historical coverage or independent provenance.
+
+
+## Operational carbon-cost coefficient diagnostic
+
+The frozen 2025 algorithm-study baseline has **zero operational carbon pricing**.
+To quantify this assumption without changing the running model, we audited the
+original EEX 2025 EUA primary-auction workbook: 213 successful auctions across
+all twelve months, with 588,735,000 tCO₂ auctioned. The auction-volume-weighted
+clearing-price reference is **€73.43193/tCO₂**. It is an annual reference, not an
+hourly spot/futures series, an electricity-price calibration parameter or a
+social-damage estimate.
+
+For a generator to which that allowance price applies, the hypothetical cost
+coefficient is:
+
+$$
+\Delta c_i = P_{\mathrm{EUA}} \,\frac{e_{\mathrm{fuel},i}}{\eta_i},
+\qquad \widetilde c_i = c_i + \Delta c_i.
+$$
+
+Here $c_i$ and $\Delta c_i$ are €/MWh of electrical output, $P_{\mathrm{EUA}}$ is
+€/tCO₂, $e_{\mathrm{fuel},i}$ is the source's direct operational fuel factor in
+tCO₂/MWh of thermal fuel input, and $\eta_i$ is electrical efficiency. Dividing
+by efficiency converts the thermal factor to emissions per MWh of electrical
+output. These are **operational CO₂ factors, not lifecycle CO₂e factors**.
+
+The following ranges include positive-capacity native generators across the
+prepared network. Each asset's own cost and efficiency are paired before
+calculating the total; the table does not combine unrelated minimum/maximum
+values. Zero-capacity assets do not define the ranges.
+
+| Model carrier | Frozen cost (€/MWh) | Hypothetical surcharge (€/MWh) | Hypothetical total (€/MWh) |
+| --- | ---: | ---: | ---: |
+| CCGT | 67.62–140.95 | 19.83–42.31 | 87.45–183.26 |
+| OCGT | 108.42–118.12 | 34.61–37.83 | 143.03–155.95 |
+| coal | 21.38–27.80 | 54.54–74.79 | 75.93–102.59 |
+| lignite | 24.03–28.17 | 74.95–90.54 | 98.98–118.71 |
+| oil | 127.48–130.87 | 52.37–53.94 | 179.84–184.82 |
+
+Coal and lignite receive larger hypothetical surcharges than efficient gas,
+so operational carbon pricing can change their relative position in the dispatch
+order. The coefficient ranges overlap: this table cannot determine which plant
+sets a particular hour's price, predict the resulting generation mix or explain
+the entire observed-model gap. That requires independently solved, separately
+scoped variants, followed by the declared observed-data checks.
+
+**No network or dispatch changed.** This is a read-only coefficient diagnostic,
+not a statement that every listed asset or country faces the same allowance
+price. Country/asset policy coverage, exemptions, UK/Swiss/non-EU treatment and
+the use of a constant annual reference still need explicit treatment before a
+variant can be run. Fuel costs, fleet/CHP representation, outages, weather,
+network aggregation and inventory convergence remain separate issues. Do not
+replace renewable availability with generation dispatch or interpret these
+coefficients as lifecycle intensity, avoided emissions or investment benefits.
+
+Reproduce with `prepare_2025_eua_cost_diagnostic.py`. It re-audits the original
+auction archive/workbook and prepared input, rejects already carbon-priced or
+time-varying sources, and leaves the input hash unchanged. Three targeted tests
+check thermal/electrical units, paired extrema, zero-capacity exclusions and
+unresolved/nonfinite inputs. The full offline diagnostic is intentionally
+separate from dispatch outputs and the public annual benchmark.
+
+Source: [EEX official EUA primary-auction reports](https://www.eex.com/en/market-data/environmental-markets/eua-primary-auction-spot-download).
+The audited archive SHA-256 is `c3ff6ffaaf348cbd17f61d4726fdbd45a7ead089a0006568a490dd63bb080231`; the 2025 workbook SHA-256 is `37baf2b0175624e3c420f0d6ca265b14da0d6e48f4b3d459a18fcacaf0a2a6d8`. The unchanged network SHA-256 is `4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec`.

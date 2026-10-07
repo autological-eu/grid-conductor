@@ -488,3 +488,19 @@ Two targeted tests pass, including stale executing receipts and relative roots.
 Live execution correctly identified the original zombie, absent waiter and
 continuation driver. The previous commit 606a1ec passed CI/Pages
 37576777879/37576772480. No new public model result or app integration is claimed.
+
+
+V3 methods publication preparation: the generation-comparison article now
+explains the independently audited operational-carbon coefficient diagnostic
+with the thermal-to-electrical equation, paired cost/surcharge/total ranges,
+auction-reference provenance and source hashes. It explicitly excludes policy
+coverage, calibrated dispatch, lifecycle intensity and investment claims.
+The running annual source remains unchanged; no separate cost variant was solved.
+Production build passes. Prior implementation 75ae7fc passed CI/Pages
+37581519023/37581513503. The continuation driver remains live under PID 46065,
+processing candidate 001; partial block evidence is not an annual result.
+
+Local publication checks passed at 1,440/390/320px: new operational-carbon
+heading and EUA equation render, no KaTeX errors or horizontal document overflow,
+and the existing gas chart/JSON and unpassed acceptance gates remain intact.
+New publication still requires CI/Pages and verified public assets.
