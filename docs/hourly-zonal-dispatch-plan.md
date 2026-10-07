@@ -33,8 +33,8 @@ costs. It does not reproduce EUPHEMIA orders, acceptance rules or price formatio
 - Perfect foresight over the year is an initial dispatch assumption. Compare
   sensitivity to forecast/terminal assumptions before interpreting storage value
   as realised trading revenue.
-- Preserve the 2013 weekly, 2025 conditional and existing annual research as
-  separate evidence. Existing N1–N5 and empirical gates remain intact.
+- Keep conditional-window verification and annual reference evidence separate;
+  empirical and annual acceptance gates remain intact.
 - The zonal model has its own identity, inputs and verification chain. An
   aggregated solve cannot close the unresolved 128-node annual optimum gate.
   Developing it need not wait for that gate; replacing the public annual

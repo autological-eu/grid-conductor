@@ -130,8 +130,7 @@ try {
       "docs/",
       "docs/worked-example-se4-pl/",
       "docs/fast-entsoe-screening/",
-      "docs/network-benchmark-comparison/",
-      "docs/network-carbon-sensitivity/",
+      "docs/pypsa-fleet-generation-comparison-2025/",
       "targets/",
     ]) {
       const response = await page.goto(`${base}${route}`);

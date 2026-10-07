@@ -13,13 +13,6 @@ const artifacts = [
   ["screening-visuals/walkthrough.json", "Screening curve areas · visual data walkthrough"],
   ["network-benchmark-2025/comparison.json", "2025 conditional window parity · experimental"],
   ["2025-sequential-dispatch-audit.json", "2025 sequential dispatch audit · approximate"],
-  [
-    "network-benchmark/kirchhoff-results.json",
-    "Fast Kirchhoff / native PyPSA parity · experimental",
-  ],
-  ["2025-rebuild-status.json", "2025 rebuild source coverage · in progress"],
-  ["network-benchmark/carbon-sensitivity.json", "Paired carbon-price sensitivity · experimental"],
-  ["network-benchmark/results.json", "Matched real-data weekly dispatch benchmark · experimental"],
   ["entsoe-fast-targets.json", "2025 annual screening · workbench input"],
   ["model-validation.json", "FR–CH validation · experimental, failed gates"],
   ["eu-input-quality.json", "European input coverage · blocked baseline"],
@@ -87,15 +80,14 @@ function Research() {
       </Link>
       <Link
         to="/docs/$slug"
-        params={{ slug: "network-benchmark-comparison" }}
+        params={{ slug: "pypsa-fleet-generation-comparison-2025" }}
         className="mb-6 block max-w-3xl rounded-xl border p-5"
       >
         <span className="block font-semibold">
-          Real-data benchmark: browser dispatch versus PyPSA →
+          2025 PyPSA-Eur generation and capacity comparison →
         </span>
         <span className="mt-1 block text-sm text-muted-foreground">
-          Matched weekly inputs, investment benefits, network-physics differences and measured
-          timings.
+          Full-year hourly generation, IRENA capacities and Ember observations.
         </span>
       </Link>
       <div className="grid gap-10 lg:grid-cols-[14rem_minmax(0,1fr)]">

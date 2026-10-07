@@ -105,9 +105,8 @@ powerplantmatching capacity totals. Existing local ENTSO-E data can help close
 gaps, but country versus bidding-zone geography must be reconciled before merging.
 
 Default upstream demand interpolation, synthetic supplementation and manual
-adjustments are disabled. A new January 2026 ERA5 cutout is configured rather than
-reusing 2013 weather. Its build requires a configured Copernicus CDS account or a
-compatible existing cutout. Neither Windows nor Ubuntu had a CDS configuration
+adjustments are disabled. A January 2026 ERA5 cutout is configured.
+Its build requires a configured Copernicus CDS account or a compatible existing cutout. Neither Windows nor Ubuntu had a CDS configuration
 when this workflow was introduced. These are outstanding operational inputs, not
 reasons to publish zero border opportunity.
 

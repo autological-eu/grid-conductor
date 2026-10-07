@@ -18,33 +18,32 @@ countries; the figures highlight Germany, France, Spain and Poland.
 | Evidence | Period and scope | Interpretation |
 | --- | --- | --- |
 | Prepared PyPSA-Eur network | 128 buses, 1,151 generators, 160 StorageUnits; 8,760 hours in 2025 | Input fleet and original renewable availability |
-| PyPSA-Eur 2025 hourly solve | Candidate 006 from the original inventory search; all 59 chronological blocks | Full-year feasible fixed-inventory trial, not current best or annual optimum |
+| PyPSA-Eur 2025 hourly solve | 8,760 hours; 59 connected chronological blocks | Full-year feasible fixed-inventory trial, not a certified annual optimum |
 | IRENA Renewable capacity statistics 2026 | National end-2024 and end-2025 renewable capacities | Maximum net capacity; not hourly commissioning or generation |
 | Ember current monthly release | National 2025 generation by fuel, twelve months required | Observed-generation comparison; not hourly availability |
 
 The prepared network has SHA-256
 `4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec`.
-Its calendar and weather are 2025, not the separate 2013 weekly benchmark.
 However, a 2025 calendar does not make every underlying fleet record a verified
 2025 observation. Renewables were attached through powerplantmatching/GEM
 records; the IRENASTAT reconciliation path was disabled. The configured
 2025 retirement/commissioning filter retains undated assets. Nuclear availability
 uses a declared 2024 proxy. Costs are 2025 assumptions with zero carbon price.
 
-**Candidate 006 is a PyPSA-Eur-based 2025 hourly dispatch solve using native
-PyPSA**, covering all 8,760 hours in 59 consecutive blocks. The candidate number
-identifies a trial set of storage inventories at the block boundaries, not a
-different fleet or dataset. Each block solves dispatch with those prescribed
-starting/ending inventories; connected boundaries preserve storage continuity.
-The table column **“PyPSA-Eur 2025 solve TWh”** sums that hourly output over the
-year. It is generated electricity, not available energy. This is a decomposed
-full-year solve with fixed trial inventories, not a monolithic annual optimum.
+## The retained 2025 reference solve
 
-Candidate 006 is chosen because complete native hourly quantities are archived
-and independently replayable. It is deliberately not presented as the latest
-best inventory candidate. The latest reported 4.278% optimisation gap concerns
-objective bounds in that separate search: it is neither generation error nor
-ENTSO-E price error. These results do not establish price calibration.
+We use one **PyPSA-Eur 2025 hourly reference solve**, calculated using native
+PyPSA for all 8,760 hours in 59 consecutive blocks. Storage starting/ending
+inventories are fixed, with connected boundaries preserving continuity.
+Its independently checked annual operating cost is **€50.633 billion**.
+It is a feasible annual dispatch, not a proven annual optimum or calibrated
+market-price model. The table's “PyPSA-Eur 2025 solve TWh” sums its hourly
+output; this is generated electricity, not available energy.
+
+The archival identifier is `candidate-006`. It identifies this specific
+fixed-inventory trajectory; it is retained only for reproducibility. Other
+candidate results and checkpoints have been removed. All tables and plots use
+this single reference, with network and annual-witness hashes in the JSON.
 
 ## Capacity comparison
 
@@ -150,7 +149,7 @@ not numerical solver errors, price errors or a validated model-accuracy score.
 ## Availability is not generation
 
 The earlier IRENA experiment holds the original country-weighted weather shapes
-and changes only assumed capacity endpoints. Linear commissioning produces
+and changes only assumed capacity endpoints. Assuming capacity grows linearly between IRENA year-end totals gives
 111.69 TWh of German solar availability against 89.965 TWh Ember generation;
 French solar is 37.03 versus 30.273 TWh. Spanish wind is 44.42 TWh available
 against 55.578 TWh generated. The latter discrepancy remains unresolved.

@@ -155,22 +155,17 @@ research retains its separate integration gates.
 - Python reference regeneration: `python3 tools/check_fast_network_reference.py`.
   Inspect changes to committed analytical fixtures rather than blindly accepting them.
 
-- Public weekly real-data benchmark: `public/research/network-benchmark/`, prepared
-  Zenodo 7646728 37-bus network. 2013 weather/load, 2020 renewable estimates, 2030
-  source costs, zero carbon price; never relabel as the missing 2025 run or SE4.
-  See `docs/network-benchmark-comparison.md` for matched inputs and reproduction.
+- Public reference evidence is the 2025 conditional-window comparison and the
+  retained full-year PyPSA-Eur hourly reference. Obsolete benchmark datasets and
+  alternative annual candidate checkpoints were deleted by user instruction.
+  Preserve the selected reference's source hashes, annual replay, native mapped
+  quantities and coefficient dependencies. Do not restart retired search roots.
+
 - Schema v3 adds explicit finite positive AC reactances and Kirchhoff cycle constraints; the browser uses a cycle basis and Python uses independent node-angle equations. HVDC stays controllable. Keep thermal relief at fixed impedance separate from new parallel-circuit construction. Do not combine AC branches with regional PTDF constraints without a defined coupling model.
 - Schema v2 explicitly supports reservoir inflow, spill bounded by inflow,
   asymmetric charging, standing loss and cyclic initial/final inventory. Schema v1
   rejects those fields. New battery interventions remain empty at both boundaries.
   Preserve paired chronology and signed emissions, including increases.
-
-- Climate robustness study: `docs/network-carbon-sensitivity.md`, four assumed
-  carbon prices with a separate paired baseline at each price. Effective cost is
-  archived cost + assumed price × direct generation intensity. Never add carbon
-  benefit twice or treat allowance price as an automatic social damage value.
-  Reproduce with `tools/carbon_network_sensitivity.py`, then
-  `bun tools/check_carbon_sensitivity.ts`, then the Python publication tool.
 
 ## Inventory coordination validation
 

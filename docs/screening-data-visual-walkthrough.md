@@ -127,7 +127,7 @@ Step 2 uses the published response assumptions for cable and battery scenarios, 
 
 Battery evaluation additionally assumes charging/discharging behavior, efficiency and energy capacity; it is not another identical triangle. See the [worked example](worked-example-se4-pl.md) for the battery and financial calculations.
 
-A network-dispatch investment experiment answers a different question by re-clearing a constrained network before and after an intervention. Keep the [2025 conditional network benchmark](2025-conditional-network-benchmark.md), the 2013 weekly benchmark and this annual price-screening publication distinct.
+A network-dispatch investment experiment answers a different question by re-clearing a constrained network before and after an intervention. Keep the [2025 conditional network benchmark](2025-conditional-network-benchmark.md) and this annual price-screening publication distinct.
 
 ## Reproduce these figures
 

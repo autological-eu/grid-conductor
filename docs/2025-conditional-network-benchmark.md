@@ -1,6 +1,6 @@
 # 2025 conditional network benchmark
 
-This experiment compares native PyPSA and the browser-compatible Kirchhoff solver on the same 128-node network for **1–2 January 2025 (48 hours)**. It is separate from the existing 2013 weekly benchmark. It does not estimate annual investment value.
+This experiment compares native PyPSA and the browser-compatible Kirchhoff solver on the same 128-node network for **1–2 January 2025 (48 hours)**. It does not estimate annual investment value.
 
 ## Matched inputs and boundaries
 

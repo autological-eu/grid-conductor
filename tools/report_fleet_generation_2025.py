@@ -46,7 +46,7 @@ def run(replay):
             observed=None if any(r['ember_twh'] is None for r in months) else math.fsum(r['ember_twh'] for r in months)
             rows.append(dict(country=c['country'],fuel=fuel,model_twh=model,ember_twh=observed,coverage_months=sum(r['ember_twh'] is not None for r in months),difference_twh=None if observed is None else model-observed,relative_difference_pct=None if not observed else 100*(model-observed)/observed,monthly=months))
     out=Path('public/research/fleet-generation-2025');out.mkdir(parents=True,exist_ok=True)
-    result=dict(status='national_accounting_comparison_not_validation',year=2025,hours=8760,trajectory='PyPSA-Eur 2025 hourly solve, candidate 006; fixed inventories across 59 chronological blocks; not current best or optimum',network_sha256=d['input_sha256'],annual_replay_sha256=d['annual_replay_sha256'],accounting_producer_sha256=d['producer_sha256'],accounting_dependencies=d['dependencies'],ember_sha256=digest(ep),irena_pdf_sha256=cap['irena_pdf_sha256'],capacity_inventory=cap['capacity_inventory'],generation=rows,mapping=GROUPS,limitations=['National scope is not audited bidding-zone scope.','Pumped-storage output excluded from primary generation.','Oil-only model comparator does not exhaust Ember other fossil; waste and geothermal are not silently assigned.','IRENA renewable inventory cannot validate fossil or nuclear capacity.'])
+    result=dict(status='national_accounting_comparison_not_validation',year=2025,hours=8760,trajectory='PyPSA-Eur 2025 hourly reference solve; fixed inventories across 59 chronological blocks; feasible, not certified annual optimum',network_sha256=d['input_sha256'],annual_replay_sha256=d['annual_replay_sha256'],accounting_producer_sha256=d['producer_sha256'],accounting_dependencies=d['dependencies'],ember_sha256=digest(ep),irena_pdf_sha256=cap['irena_pdf_sha256'],capacity_inventory=cap['capacity_inventory'],generation=rows,mapping=GROUPS,limitations=['National scope is not audited bidding-zone scope.','Pumped-storage output excluded from primary generation.','Oil-only model comparator does not exhaust Ember other fossil; waste and geothermal are not silently assigned.','IRENA renewable inventory cannot validate fossil or nuclear capacity.'])
     (out/'summary.json').write_text(json.dumps(result,indent=2)+'\n')
     plt.rcParams['svg.fonttype']='none'
     fig,axes=plt.subplots(2,2,figsize=(12,8))
@@ -74,7 +74,7 @@ def run(replay):
     for i in range(len(countries)):
         for j in range(len(fuels)):
             v=values[i,j];ax.text(j,i,'—' if not np.isfinite(v) else f'{v:+.1f}',ha='center',va='center',fontsize=8,color='white' if np.isfinite(v) and abs(v)>.55*bound else 'black')
-    ax.set_title('2025 annual generation differences by country and fuel\nPyPSA-Eur hourly solve (candidate 006) minus Ember, TWh',pad=18)
+    ax.set_title('2025 annual generation differences by country and fuel\nPyPSA-Eur 2025 reference solve minus Ember, TWh',pad=18)
     fig.colorbar(im,ax=ax,label='Difference (TWh): negative = model below Ember',shrink=.65)
     fig.text(.05,.015,'Grey / —: incomplete or missing twelve-month observations. *Oil-only model versus broader Ember category.\nNational scope remains unreconciled; differences are diagnostics, not validated accuracy scores.',fontsize=9)
     fig.tight_layout(rect=(0,.045,1,1));fig.savefig(out/'differences.svg');plt.close(fig)

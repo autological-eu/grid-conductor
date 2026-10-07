@@ -7,7 +7,6 @@ import {
   type DispatchResult,
   type compareDispatch,
 } from "@/lib/network-model/solver";
-import { benchmarkWithCarbonPrice } from "@/lib/network-model/benchmark";
 import { publicAsset } from "@/lib/research";
 import { loadNetworkWorkspace, saveNetworkWorkspace } from "@/lib/network-model/persistence";
 
@@ -30,8 +29,6 @@ function NetworkLab() {
   const [message, setMessage] = useState("Import a complete model input to start.");
   const [busy, setBusy] = useState(false);
   const [loadingInput, setLoadingInput] = useState(false);
-  const [benchmarkCarbon, setBenchmarkCarbon] = useState(0);
-  const [benchmarkPhysics, setBenchmarkPhysics] = useState("kirchhoff");
   const [ready, setReady] = useState(false);
   const [edge, setEdge] = useState("");
   const [mw, setMw] = useState(100);
@@ -45,8 +42,6 @@ function NetworkLab() {
           const data = parseNetworkInput(saved.input);
           applyIntervention(data, saved.patch);
           setInput(data);
-          setBenchmarkPhysics(data.ac_branches ? "kirchhoff" : "transport");
-          setBenchmarkCarbon(Number(data.dataset_id.match(/-carbon-(40|80|120)$/)?.[1] ?? 0));
           setPatch(saved.patch);
           setEdge(data.edges[0]?.id ?? "");
           setZone(data.zones[0] ?? "");
@@ -75,11 +70,9 @@ function NetworkLab() {
   const importModel = (value: unknown) => {
     const data = parseNetworkInput(value);
     setInput(data);
-    setBenchmarkPhysics(data.ac_branches ? "kirchhoff" : "transport");
-    setBenchmarkCarbon(Number(data.dataset_id.match(/-carbon-(40|80|120)$/)?.[1] ?? 0));
     setPatch(emptyPatch);
     setResult(undefined);
-    setEdge(data.edges.find((e) => e.id === "dc:14823")?.id ?? data.edges[0]?.id ?? "");
+    setEdge(data.edges[0]?.id ?? "");
     setZone(data.zones.find((z) => z === "PL1 0") ?? data.zones[0] ?? "");
     setMessage("Input parsed. Source declaration is not independent validation.");
     worker.current?.terminate();
@@ -223,85 +216,7 @@ function NetworkLab() {
           </div>
         )}
       </aside>
-      <aside className="rounded border p-4 text-sm space-y-3">
-        <p>
-          <strong>Real-data technical benchmark available.</strong> The public 37-bus PyPSA archive
-          contains 2013 weather/load, older existing fleet assumptions and hydro inflows. This is a
-          one-week benchmark, not a validated 2025 investment estimate. Swedish cluster IDs are not
-          bidding-zone labels.
-        </p>
-        <label className="block">
-          Network physics
-          <select
-            aria-label="Network physics"
-            className="ml-3 rounded border p-2"
-            value={benchmarkPhysics}
-            disabled={busy || loadingInput}
-            onChange={(event) => setBenchmarkPhysics(event.target.value)}
-          >
-            <option value="kirchhoff">Linearised AC / Kirchhoff</option>
-            <option value="transport">Transport relaxation</option>
-          </select>
-        </label>
-        <label className="block">
-          Assumed carbon price (€/t CO₂)
-          <select
-            aria-label="Assumed carbon price (€/t CO₂)"
-            className="ml-3 rounded border p-2"
-            value={benchmarkCarbon}
-            disabled={busy || loadingInput}
-            onChange={(event) => setBenchmarkCarbon(Number(event.target.value))}
-          >
-            {[0, 40, 80, 120].map((price) => (
-              <option key={price} value={price}>
-                €{price}/t
-              </option>
-            ))}
-          </select>
-        </label>
-        <p>
-          Illustrative addition to the archive’s zero-carbon costs. Load to apply; loading resets
-          interventions. Each price uses its own baseline.
-        </p>
-        <button
-          disabled={busy || loadingInput || !ready}
-          className="rounded border px-3 py-2"
-          onClick={async () => {
-            setLoadingInput(true);
-            setResult(undefined);
-            setMessage("Loading benchmark input…");
-            try {
-              const response = await fetch(
-                publicAsset(
-                  `research/network-benchmark/${benchmarkPhysics === "kirchhoff" ? "kirchhoff-input.json" : "input.json"}`,
-                ),
-              );
-              if (!response.ok) throw new Error(`Dataset unavailable (${response.status})`);
-              importModel(benchmarkWithCarbonPrice(await response.json(), benchmarkCarbon));
-            } catch (error) {
-              setMessage(String(error));
-            } finally {
-              setLoadingInput(false);
-            }
-          }}
-        >
-          Load real-data benchmark
-        </button>
-        <Link
-          to="/docs/$slug"
-          params={{ slug: "network-benchmark-comparison" }}
-          className="ml-3 underline"
-        >
-          Results, speed and AC comparison
-        </Link>
-        <Link
-          to="/docs/$slug"
-          params={{ slug: "network-carbon-sensitivity" }}
-          className="ml-3 underline"
-        >
-          Carbon sensitivity and interpretation
-        </Link>
-      </aside>
+
       <p className="text-sm">
         Import a schema-v1/v2/v3 JSON input from your offline research pipeline. It stays in this
         browser. No weather processing, uploads or server are involved.{" "}

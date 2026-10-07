@@ -39,65 +39,6 @@ try {
     await page.getByTestId("network-run").click();
     await page.getByTestId("network-result").waitFor();
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
-    await page.getByLabel("Network physics", { exact: true }).selectOption("transport");
-    // Exercise a slow fetch: an old dataset must not remain evaluable while loading.
-    let releaseDownload!: () => void;
-    const downloadGate = new Promise<void>((resolve) => {
-      releaseDownload = resolve;
-    });
-    await page.route("**/research/network-benchmark/input.json", async (route) => {
-      await downloadGate;
-      await route.continue();
-    });
-    await page.getByRole("button", { name: "Load real-data benchmark", exact: true }).click();
-    assert(await page.getByTestId("network-run").isDisabled());
-    releaseDownload();
-    await page.getByRole("heading", { name: "pypsa-eur-37-2013-168h", exact: true }).waitFor();
-    await page.unroute("**/research/network-benchmark/input.json");
-    await page.getByLabel("Additional MW", { exact: true }).fill("500");
-    await page.getByRole("button", { name: "Set capacity addition" }).click();
-    await page.getByTestId("network-run").click();
-    await page.getByTestId("network-result").waitFor({ timeout: 30000 });
-    assert.match(await page.getByTestId("network-result").innerText(), /1,392,863/);
-    await page.reload();
-    await page.getByText("dc:14823: +500 MW in both directions").waitFor();
-    await page.getByTestId("network-run").click();
-    await page.getByTestId("network-result").waitFor({ timeout: 30000 });
-    assert.match(await page.getByTestId("network-result").innerText(), /1,392,863/);
-    assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
-    await page.getByLabel("Assumed carbon price (€/t CO₂)", { exact: true }).selectOption("80");
-    await page.getByRole("button", { name: "Load real-data benchmark", exact: true }).click();
-    await page
-      .getByRole("heading", { name: "pypsa-eur-37-2013-168h-carbon-80", exact: true })
-      .waitFor();
-    await page.getByLabel("Additional MW", { exact: true }).fill("500");
-    await page.getByRole("button", { name: "Set capacity addition" }).click();
-    await page.getByTestId("network-run").click();
-    await page.getByTestId("network-result").waitFor({ timeout: 30000 });
-    assert.match(await page.getByTestId("network-result").innerText(), /€553,378\.55/);
-    assert.match(
-      await page.getByTestId("network-result").innerText(),
-      /Dispatch emissions reduction: 17,265/,
-    );
-    await page.reload();
-    await page
-      .getByRole("heading", { name: "pypsa-eur-37-2013-168h-carbon-80", exact: true })
-      .waitFor();
-    assert.equal(
-      await page.getByLabel("Assumed carbon price (€/t CO₂)", { exact: true }).inputValue(),
-      "80",
-    );
-    await page.getByLabel("Network physics", { exact: true }).selectOption("kirchhoff");
-    await page.getByLabel("Assumed carbon price (€/t CO₂)", { exact: true }).selectOption("0");
-    await page.getByRole("button", { name: "Load real-data benchmark", exact: true }).click();
-    await page
-      .getByRole("heading", { name: "pypsa-eur-37-2013-168h-kirchhoff", exact: true })
-      .waitFor();
-    await page.getByLabel("Additional MW", { exact: true }).fill("500");
-    await page.getByRole("button", { name: "Set capacity addition" }).click();
-    await page.getByTestId("network-run").click();
-    await page.getByTestId("network-result").waitFor({ timeout: 30000 });
-    assert.match(await page.getByTestId("network-result").innerText(), /€1,646,179\.37/);
     if (viewport.width > 1000) {
       // Make cancellation observable using a full-period TEST input, never public research.
       const testInput = JSON.parse(await readFile("tests/fixtures/network.json", "utf8"));

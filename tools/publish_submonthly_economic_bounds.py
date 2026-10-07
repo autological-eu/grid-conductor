@@ -36,7 +36,7 @@ def summary(annual,master,upper,lower):
             'Floating-point independently replayed lower support; not interval certification.',
             'A finite gap is reported without claiming an annual optimum or observed-market agreement.',
             'The source has zero operational carbon price and a 2024 nuclear availability proxy.',
-            'Separate from the 2013 weekly and 2025 conditional-window benchmarks.'])
+            'Separate from the 2025 conditional-window benchmark.'])
 
 
 def publish(folder,master_path,workspace,input_path,output):

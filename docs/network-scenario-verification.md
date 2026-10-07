@@ -4,7 +4,8 @@
 
 **The fast Kirchhoff implementation reproduces native PyPSA operating costs and intervention savings to within one cent in the matched 2025 48-hour experiment.** Adding 500 MW to the Sweden–Poland model connection saves **€809,306.59**; adding a 100 MW / 400 MWh battery at its Polish endpoint saves **€5,527.66**. Both figures are gross system operating-cost savings for **1–2 January 2025**, excluding capital costs.
 
-This supports using the fast solver for the tested conditional network calculations. It does **not** establish annual investment value, agreement with observed ENTSO-E prices or a speed advantage. The annual map screening and the older 2013 weekly benchmark remain separate.
+
+This verifies the tested conditional calculations, not annual investment value, observed price agreement or a speed advantage.
 
 ## Question and experimental design
 
@@ -60,17 +61,15 @@ The initial comparison failed because the native run omitted disposal variables 
 
 **The fast implementation was not faster in these recorded trials.** Concurrent workloads and solver/thread settings differed; native IPM used two threads. These are descriptive single-run timings, not a controlled performance comparison. Browser execution, reuse and deployment convenience are useful, but this evidence does not substantiate a 2025 speedup. A controlled repeated benchmark is required.
 
-## Scope: three different kinds of evidence
+## Scope: two kinds of evidence
 
 | Evidence | What it supports | What it does not establish |
 | --- | --- | --- |
 | This 2025 conditional 48-hour comparison | Matched native/fast costs and paired intervention savings | Annual optimum, annual returns or observed market reconstruction |
-| Separate 2013 weekly comparison | Native/fast implementation checks under older archive assumptions; network-physics sensitivity | 2025 evidence or annual scalability |
-| Full-year 2025 coordination research | Verified feasible annual witnesses and numerical lower supports | Convergence, empirical price agreement or accepted annual interventions |
+| Retained full-year 2025 reference | Verified feasible dispatch with fixed linked inventories | Convergence, empirical price agreement or accepted annual interventions |
 
-The [2013 weekly report](network-benchmark-comparison.md) retains its own results and timing evidence. Its weather/load, fleet and cost years differ. It is not pooled with this experiment.
 
-The annual numerical optimisation gap measures unresolved model-objective uncertainty. It is **not percentage error against ENTSO-E day-ahead prices**. Price, generation and exchange comparisons require separate geographic, coverage and empirical gates. [Generation mismatch diagnostic](2025-generation-comparison-diagnostic.md) · [Annual coordination methods](monthly-inventory-coordination.md).
+The annual numerical optimisation gap measures unresolved model-objective uncertainty. It is **not percentage error against ENTSO-E day-ahead prices**. Price, generation and exchange comparisons require separate geographic, coverage and empirical gates. [Generation mismatch diagnostic](pypsa-fleet-generation-comparison-2025.md) · [Annual coordination methods](monthly-inventory-coordination.md).
 
 ## Limitations and next acceptance gates
 

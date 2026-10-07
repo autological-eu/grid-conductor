@@ -119,8 +119,8 @@ own paired-dispatch checks; price agreement alone does not validate them.
 
 ## Model boundaries
 
-Observed ENTSO-E price/flow evidence, reduced-form screening, the 2013 weekly
-network benchmark, the 2025 conditional 48-hour benchmark and future annual
+Observed ENTSO-E price/flow evidence, reduced-form screening,
+the 2025 conditional 48-hour benchmark and annual reference
 results are separate products of separate assumptions. Keep them labelled.
 
 Climate screening uses average-mix proxies, not demonstrated avoided emissions.
@@ -171,7 +171,9 @@ replacement remains gated on complete annual inputs, geography, chronology,
 paired native/fast verification and existing empirical/investment requirements.
 Publish comparative evidence as a readable report with data visualisations,
 clear summary and conclusion, without requiring scenario-menu interaction.
-Retain the separate 2013 weekly benchmark.
+Use one retained 2025 hourly PyPSA-Eur reference for generation/capacity
+comparisons. Retire obsolete result publications and local research candidates;
+retain the selected reference’s reproducible evidence and source inputs.
 Reports must name the model and actual solve period in tables and charts. Explain
 internal candidate identifiers and whether inventories are fixed, annual bounds
 are converged, and comparisons represent numerical parity or observed-data

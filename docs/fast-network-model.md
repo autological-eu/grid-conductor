@@ -5,9 +5,9 @@ The experimental network lab is available at [/network](/network). It solves a
 The existing map and screening calculations are unchanged.
 
 **Current gate:** the browser engine is implemented and tested, but a reproducible
-European annual input has not yet been exported. A matched real-data **168-hour**
-benchmark is now available: [comparison](network-benchmark-comparison.md). Do not interpret the lab as a
-validated European investment model. The input audit is published in
+European annual input has not yet been exported. The matched
+[2025 conditional 48-hour benchmark](2025-conditional-network-benchmark.md)
+provides implementation verification, not a validated European investment model. The input audit is published in
 [network-model-input-audit.json](../public/research/network-model-input-audit.json).
 
 ## 1. Why this can be faster than rebuilding PyPSA
@@ -219,12 +219,10 @@ Cyclic storage has endogenous bounded initial inventory equal to terminal
 inventory; supplied initial/terminal fields must be zero placeholders. Added
 battery interventions cannot receive inflow or free initial/final inventory.
 These semantics are independently matched against native PyPSA in the
-[real-data benchmark](network-benchmark-comparison.md).
+[2025 conditional benchmark](2025-conditional-network-benchmark.md).
 
 ## Kirchhoff input extension (schema v3)
 
 Declare `ac_branches` as unique edge IDs with finite positive `reactance`, using consistent units. The browser constructs a fundamental cycle basis and enforces `Σcycle sign × reactance × flow = 0` in every hour. Tree components have no additional cycle rows; parallel branches form cycles. Controllable HVDC edges must remain outside this inventory. Python independently uses node angles and `reactance × flow = angle_from − angle_to`, with a reference angle in each connected AC component.
 
 Versions 1 and 2 reject these fields. V3 rejects simultaneous regional PTDF declarations because a coupling rule has not been defined. Capacity relief changes an existing branch bound at fixed impedance; constructing a parallel circuit requires a new electrical topology.
-
-See the [matched benchmark](network-benchmark-comparison.md) for native PyPSA agreement and [2025 rebuild](fast-network-2025-rebuild.md) for the remaining source and chronology gates.

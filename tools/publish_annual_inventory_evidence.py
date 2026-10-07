@@ -41,7 +41,7 @@ def publish(folder,output,master_name="initial-cut-master.json"):
           'Floating-point numerical lower bound, not interval certification.',
           'No matched annual native/fast investment benchmark or ENTSO-E empirical validation.',
           '2024 country nuclear availability remains a declared proxy for 2025.'],
-        scope='Annual feasible dispatch evidence and verified cut relaxation; separate from 2013 weekly and 2025 conditional-window benchmarks.')
+        scope='Annual feasible dispatch evidence and verified cut relaxation; separate from the 2025 conditional-window benchmark.')
     save(output,result);return result
 
 if __name__=='__main__':

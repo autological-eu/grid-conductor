@@ -72,16 +72,16 @@ test("complete cycle basis handles parallel branches and disconnected forests", 
     ],
   ]);
 });
-test("published Kirchhoff network reproduces every independent PyPSA AC reference", async () => {
-  const directory = "public/research/network-benchmark";
+test("retained 2025 conditional network reproduces each native PyPSA reference", async () => {
+  const directory = "public/research/network-benchmark-2025";
   const input = parseNetworkInput(
-    JSON.parse(await readFile(`${directory}/kirchhoff-input.json`, "utf8")),
+    JSON.parse(await readFile(`${directory}/input.json`, "utf8")),
   );
-  const manifest = JSON.parse(await readFile(`${directory}/manifest.json`, "utf8")) as {
+  const manifest = JSON.parse(await readFile(`${directory}/comparison.json`, "utf8")) as {
     cases: ({ id: string } & Intervention)[];
   };
-  const native = JSON.parse(await readFile(`${directory}/results.json`, "utf8")) as {
-    cases: { id: string; ac_cost_eur: number }[];
+  const native = JSON.parse(await readFile(`${directory}/comparison.json`, "utf8")) as {
+    results: { id: string; native_cost_eur: number }[];
   };
   const session = new NetworkSolverSession(highs);
   try {
@@ -89,7 +89,7 @@ test("published Kirchhoff network reproduces every independent PyPSA AC referenc
       const result = dispatchNetwork(highs, applyIntervention(input, scenario), session);
       expect(
         Math.abs(
-          result.total_cost_eur - native.cases.find((r) => r.id === scenario.id)!.ac_cost_eur,
+          result.total_cost_eur - native.results.find((r) => r.id === scenario.id)!.native_cost_eur,
         ),
       ).toBeLessThan(0.01);
       expect(result.max_constraint_violation).toBeLessThan(1e-5);
@@ -98,4 +98,4 @@ test("published Kirchhoff network reproduces every independent PyPSA AC referenc
   } finally {
     session.dispose();
   }
-}, 60000);
+}, 180000);

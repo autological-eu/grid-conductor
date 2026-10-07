@@ -31,10 +31,9 @@ running Bun/Node server, authentication, cloud database or paid service is neede
 - `/docs`: research publications sourced from `docs/*.md`, plus published artifacts.
 - `/docs/<document-slug>`: individual Markdown publication.
 - `/network`: experimental HiGHS/WASM coupled dispatch lab; complete local input
-  or load the prepared real-data weekly benchmark; separate IndexedDB workspace.
-  Choose Kirchhoff or transport physics and explicit carbon-price assumptions for paired local re-solves.
-  See [matched PyPSA comparison](docs/network-benchmark-comparison.md) and
-  [climate sensitivity](docs/network-carbon-sensitivity.md). No validated
+  or load the verified 2025 conditional-window input; separate IndexedDB workspace.
+  Annual scenario claims remain gated on verified inputs and paired solves.
+  See [2025 PyPSA-Eur comparison](docs/pypsa-fleet-generation-comparison-2025.md). No validated
   European annual dataset yet. See the [2025 rebuild](docs/fast-network-2025-rebuild.md).
 - `/targets`: separate observed-spread and PyPSA-Eur evidence views.
 - `src/lib/workbench.ts`: versioned IndexedDB persistence; stable IDs, ordered
