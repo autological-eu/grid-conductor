@@ -161,3 +161,12 @@ a changed reconstructed input must not silently resume saved optimisation cuts.
 - [AGENTS.md](AGENTS.md): coding and research operational instructions.
 - `docs/*.md`: public research methods and results, including detailed model plans.
 - `planning/archive/`: historical proposals; not current requirements.
+
+## Accepted direction: network dispatch for scenario screening
+
+Move toward coupled fast network dispatch as the scenario estimator, verified
+against matched native PyPSA baseline/intervention solves. Expose the verified
+2025 conditional window as a clearly labelled experiment now; annual map
+replacement remains gated on complete annual inputs, geography, chronology,
+paired native/fast verification and existing empirical/investment requirements.
+Publish comparative evidence and retain the separate 2013 weekly benchmark.

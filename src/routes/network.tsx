@@ -145,6 +145,85 @@ function NetworkLab() {
         price spreads.
       </p>
       <aside className="rounded border p-4 text-sm space-y-3">
+        <h2 className="font-bold">2025 network scenario screening · 48-hour experiment</h2>
+        <p>
+          Use the matched 128-node network for 1–2 January 2025. Native PyPSA and fast Kirchhoff
+          costs agree within €0.01 for the published baseline, line and battery cases. Fixed storage
+          boundaries condition these results; benefits are for 48 hours, never annualised.
+        </p>
+        <button
+          className="rounded border px-3 py-2"
+          disabled={busy || loadingInput || !ready}
+          onClick={async () => {
+            setLoadingInput(true);
+            try {
+              const response = await fetch(
+                publicAsset("research/network-benchmark-2025/input.json"),
+              );
+              if (!response.ok) throw new Error(`Dataset unavailable (${response.status})`);
+              importModel(await response.json());
+            } catch (error) {
+              setMessage(String(error));
+            } finally {
+              setLoadingInput(false);
+            }
+          }}
+        >
+          Load verified 2025 conditional input
+        </button>
+        <Link
+          to="/docs/$slug"
+          params={{ slug: "network-scenario-verification" }}
+          className="ml-3 underline"
+        >
+          Native PyPSA verification and scope
+        </Link>
+        {input?.dataset_id === "pypsa-eur-128-2025-january-48h-conditional" && (
+          <div className="flex flex-wrap gap-2">
+            <button
+              className="rounded border px-3 py-2"
+              disabled={busy || loadingInput}
+              onClick={() => edit(emptyPatch)}
+            >
+              Matched baseline
+            </button>
+            <button
+              className="rounded border px-3 py-2"
+              disabled={busy || loadingInput}
+              onClick={() =>
+                edit({ edge_additions_mw: { "dc:relation/3392010-450-DC": 500 }, storage: [] })
+              }
+            >
+              Matched Sweden–Poland +500 MW
+            </button>
+            <button
+              className="rounded border px-3 py-2"
+              disabled={busy || loadingInput}
+              onClick={() =>
+                edit({
+                  edge_additions_mw: {},
+                  storage: [
+                    {
+                      id: "benchmark-2025-battery",
+                      zone: "PL2 2AC",
+                      power_mw: 100,
+                      energy_mwh: 400,
+                      initial_mwh: 0,
+                      terminal_mwh: 0,
+                      charge_efficiency: 0.95,
+                      discharge_efficiency: 0.95,
+                      throughput_cost_eur_mwh: 0,
+                    },
+                  ],
+                })
+              }
+            >
+              Matched Poland 100 MW / 400 MWh battery
+            </button>
+          </div>
+        )}
+      </aside>
+      <aside className="rounded border p-4 text-sm space-y-3">
         <p>
           <strong>Real-data technical benchmark available.</strong> The public 37-bus PyPSA archive
           contains 2013 weather/load, older existing fleet assumptions and hydro inflows. This is a

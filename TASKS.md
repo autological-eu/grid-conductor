@@ -630,3 +630,14 @@ require its independent replayer and explicit donor/driver migration; no annual
 resume or accepted cut claimed. Prior commit 4bd4bac passed CI/Pages
 37636938284/37636928188; existing public methods/data assets verified over HTTPS.
 Requirements and recurring-review completion gates remain unchanged.
+
+
+User-authorized network-screening integration: `/network` now directly loads
+the matched 2025 conditional input and offers baseline, +500 MW Sweden–Poland
+and 100 MW/400 MWh Poland battery presets. Map entry links point to this
+experiment and the new verification overview. The annual reduced-form map
+calculation remains separate pending annual gates. PRODUCT.md records the
+accepted direction without weakening acceptance. Existing comparison JSON and
+full methods preserve native/fast <€0.01 objective parity over 48 hours; no
+annualisation, empirical validation or measured speed advantage claimed.
+Publication awaits CI/Pages/public URL verification.

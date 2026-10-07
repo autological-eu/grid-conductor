@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRef, useState, type CSSProperties } from "react";
 import { PanelLeftClose, PanelLeftOpen, PanelRightClose, PanelRightOpen } from "lucide-react";
@@ -140,6 +140,18 @@ function Workbench() {
           Experimental 2025 screening · estimates, not investment advice · scenarios stay in this
           browser.
         </span>
+        <div className="mt-2 flex flex-wrap gap-4">
+          <Link to="/network" className="underline">
+            Try network dispatch scenarios
+          </Link>
+          <Link
+            to="/docs/$slug"
+            params={{ slug: "network-scenario-verification" }}
+            className="underline"
+          >
+            Fast versus native PyPSA verification
+          </Link>
+        </div>
         {summary.isPending && <p role="status">Loading published research…</p>}
         {summary.isError && (
           <p role="alert">
