@@ -719,3 +719,13 @@ retain strict source-bounded support and independent replay gates. PRODUCT.md
 requirements remain unchanged. Latest deployed HEAD 9fa5d72 has successful
 CI/Pages 37653079335/37653072658; public report HTML and benefit SVG match the
 tested build over verified HTTPS. Recurring review stays enabled.
+
+
+Z0 direct-source discovery: Clarigrid public dataset pages link OWID, Ember and
+Energy-Charts original endpoints. Added bounded direct collector with hashed
+ignored caches and replay checks; three tests pass. Actual OWID CSV has no 2025
+rows; Ember has 2025 records across twelve months (49,463 rows/94 area labels,
+not a completeness certificate); German Energy-Charts capacity returns 18
+technology entries with deprecated API metadata. IRENA machine-readable retrieval
+and CDS access remain separate tasks. No source entered the dispatch input,
+no hourly availability inferred from observed generation, no large files in Git.

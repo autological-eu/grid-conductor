@@ -104,6 +104,35 @@ that endpoint. An authenticated custom connection is needed for MCP collection;
 original-provider read-only source audits can proceed independently. Keep
 credentials outside Git and the public app.
 
+### Direct-provider access verified
+
+On 7 October 2026, public Clarigrid dataset pages linked original providers.
+`tools/collect_zonal_source_candidates.py` now collects bounded source files
+directly, records URL/byte count/SHA-256 and rechecks cached identity/coverage.
+No Clarigrid account or browser credential is required for these three sources.
+Provider caches remain ignored under `data/pypsa-eur/zonal-source-candidates/`.
+
+- [OWID CSV](https://nyc3.digitaloceanspaces.com/owid-public/data/energy/owid-energy-data.csv):
+  accessible, but the fetched version has **zero 2025 rows**. It cannot currently
+  supply the proposed 2025 generation cross-check.
+- [Ember monthly CSV](https://storage.googleapis.com/emb-prod-bkt-publicdata/public-downloads/monthly_full_release_long_format.csv):
+  accessible, with 49,463 rows dated in 2025, 94 distinct area labels and records
+  across all twelve months. This is a dataset inventory, not complete generation
+  coverage for every country/fuel; category and accounting audits remain required.
+- [Energy-Charts German 2025 capacity](https://api.energy-charts.info/installed_power?country=de&year=2025):
+  accessible, with 18 technology entries. The response includes a deprecated
+  field; API migration, units and effective-date semantics require review before
+  accepting fleet inputs. No map-wide capacity coverage is inferred.
+- [IRENA](https://www.irena.org/Data): the catalog points to a portal, not a
+  verified machine-readable file; retrieval/schema/2025 coverage remain open.
+- [ERA5](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels):
+  original CDS source identified; new downloads require configured authentication
+  and licence acceptance. Reuse the existing verified weather where suitable.
+
+Three collector tests check absent years, preserved monthly scope, changed schema
+and cache identity rejection. Direct collection connects candidate source access,
+not the dispatch model: Z0 mapping, capacity/cost and coverage gates still apply.
+
 ### Aggregation policy
 
 Start with multiple supply blocks per technology where efficiencies, marginal
