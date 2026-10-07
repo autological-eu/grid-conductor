@@ -14,7 +14,7 @@ against live processes; this file is not a job monitor.
 | --- | --- | --- |
 | N1 | Done | Publish matched 2025 conditional-window benchmark. Native/fast baseline, cable and battery objectives agree; comparison and methods are published. See [48-hour benchmark](docs/2025-conditional-network-benchmark.md). This is not an annual result. |
 | N2 | Done: configured numerical reference gates | Two chronological 24-hour blocks passed the €0.001 gap and €0.02 native parity gates at iteration 738. Gap €0.0002267; cost difference €0.007903. Independent final-state re-solves reproduced the objective with maximum equality residual 8.09e-9 and zero variable-bound violation. Floating-point lower bound exceeds native by €0.007676: this is numerical parity, not an exact enclosing certificate. See [coordination methods](docs/monthly-inventory-coordination.md). |
-| N3 | In progress; bounded continuation running | Incumbent original candidate 008: €50,633,322,720.425575 independently checked feasible cost for all 59 blocks/8,760 chronological hours. The original ten-candidate pass exhausted its budget without convergence; candidate 010 did not improve the incumbent. Continuation-001 is live under PID 46065, with preserved cut/witness donors, 10% proposal weight, five-candidate budget and unchanged feasibility/gap gates. Its first independently replayed master gives lower support €43,580,167,484.864845, gap 13.9299%; not an interval certificate or annual optimum. Published annual bounds remain the earlier 14.04% snapshot. See [historical verification](planning/archive/n3-coordination-verification-2026-10-07.md). Next: tighten bounds, then satisfy matched native/fast and empirical/investment gates. |
+| N3 | In progress; bounded continuation running | Continuation-001 candidate 001: €50,183,555,705.073326 independently checked feasible cost for all 59 blocks/8,760 chronological hours, improving original candidate 008 by €449,767,015.352249. Its independently recomputed master lower support is €43,580,167,484.864845: unresolved numerical gap 13.15847%, not an interval certificate or annual optimum. Actual driver PID 46065 remains live; the five-candidate budget, 10% proposal weight and original feasibility/gap gates are unchanged. Published annual bounds remain the earlier 14.04% snapshot. See [historical verification](planning/archive/n3-coordination-verification-2026-10-07.md). Next: tighten bounds, then satisfy matched native/fast and empirical/investment gates. |
 | N4 | Pending N3 | Produce and audit full-year native/reference and fast dispatch comparisons plus paired interventions. Preserve original hourly renewable availability and declare proxies. Distinguish sequential feasible dispatch from a certified annual optimum. |
 | N5 | Pending N4 | Publish annual benchmark tables, charts, JSON and methods; integrate supported verified 2025 functionality into the static app. Inspect CI/Pages and public URLs. Disable recurring implementation checks only after the annual benchmark and supported app integration are complete. |
 
@@ -511,3 +511,16 @@ public-browser verification remains blocked by the previously documented
 browser CA trust limitation. No TLS verification was disabled.
 Actual continuation PID 46065 remains live, with independent conditional-block
 replays through block 18 of candidate 001; this remains partial evidence.
+
+
+N3 continuation candidate 001 annual-chain review: `verify_annual` checked all
+59 chronological block witnesses, source/code hashes, linked annual-state hash
+and reproduced €50,183,555,705.073326. `verify_master` independently recomputed
+€43,580,167,484.864845 lower support: numerical gap 13.15847019%. This improves
+the previous independently checked feasible incumbent by €449,767,015.352249;
+no annual optimum, empirical agreement or investment claim follows. Actual
+continuation driver PID 46065 is live; no duplicate job was started. Cgroup
+OOM/kill counters remain zero and workspace disk has 8.3 GiB available.
+Requirements remain unchanged. Prior ledger commit 8f67d57 passed CI/Pages
+37588991159/37588980981; verified public HTTPS still serves the tested methods
+article and gas JSON/SVG. Recurring review remains enabled.
