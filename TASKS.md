@@ -398,3 +398,25 @@ Prioritize explicit scheduled/physical exchange provenance and unit outages;
 standardization alone is not independent measurement or complete availability.
 Keep any prepared-input changes in separately hashed variants; no Clarigrid
 values or policy assumptions have entered the frozen annual baseline.
+
+
+V2 German gas source audit: Clarigrid's public catalog identified SMARD filter
+4071; the original provider's hourly endpoint is directly accessible without
+credentials. `audit_smard_2025_gas.py` collected 53 small weekly chunks into an
+ignored, locked cache, verified source URLs/byte counts/SHA-256 receipts and
+aggregated all 8,760 exact UTC hours without filling gaps or using local-month
+files. SMARD reports 60.54900944 TWh versus audited ENTSO-E B04 60.5489692783 TWh,
+a 40.162 MWh difference. Candidate 006 CCGT/OCGT produces only 1.140815866 TWh.
+The near-identical observations are a source-consistency diagnostic, not
+independent measurement or whole-fleet coverage. The large model mismatch
+remains a validation failure; zero carbon pricing and other cost/fleet/outage/
+network assumptions need separately hashed controlled investigations.
+
+`compare_smard_2025_gas.py` replays source caches, generation audit hashes and
+complete native mappings before producing the compact public diagnostic; all
+acceptance gates remain false. Five new tests pass (UTC/calendar integration,
+missing/invalid/duplicate values, changed source receipts and incomplete carrier
+observations). Lint passes with six existing warnings and production build
+passes. The monthly figure/table, methods and JSON are prepared in the generation
+comparison article; live publication awaits CI/Pages and public-route verification.
+Original provider files remain ignored, with no large Git backup.

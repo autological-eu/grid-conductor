@@ -204,3 +204,76 @@ nonfinite metrics, while preserving signed changes and undefined correlations.
 and plotting-producer hashes in the SVG. Original candidate 001 diagnostics
 remain unchanged; this sensitivity is separate from observed-data acceptance
 and the 2013 weekly/2025 conditional-window benchmarks.
+
+
+## German gas-generation consistency check
+
+The newer feasible inventory witness still has a substantial generation-mix
+mismatch. We retrieved Bundesnetzagentur SMARD filter **4071** (German natural-gas
+feed-in), using its public hourly source rather than requiring a Clarigrid
+connection. The source index and 53 weekly chunks have URL, byte-count and SHA-256
+receipts. All **8,760 hours** in the exact 2025 UTC calendar are present. Reported
+values are energy in **MWh per hourly interval**, summed without an additional
+annual or monthly multiplier. Missing values would make the complete total
+unavailable. Local-calendar monthly files are not substituted for UTC months.
+
+| 2025 German gas quantity | Energy (TWh) | Interpretation |
+| --- | ---: | --- |
+| SMARD filter 4071 | 60.549009 | Reported gas feed-in |
+| Audited ENTSO-E B04 | 60.548969 | German national generation proxy, Luxembourg excluded |
+| Native candidate 006 CCGT + OCGT | 1.140816 | Conditional fixed-inventory model dispatch |
+
+SMARD and ENTSO-E differ by only **40.162 MWh** across the year, approximately
+**0.0000663%** of reported gas generation. This is a strong consistency check
+on the reported series and interval integration. It is **not independent
+measurement**: the two publications may use the same underlying TSO observations.
+The small difference is consistent with rounding, but its cause is not audited.
+Neither source establishes complete gross generation, behind-the-meter coverage
+or a fully reconciled model-mainland/CHP taxonomy. The provider's detailed
+time-label and accounting-method audit remains open.
+
+![Monthly German gas feed-in from SMARD and ENTSO-E, compared with candidate 006 native CCGT and OCGT dispatch](../../research/network-benchmark-2025/german-gas-consistency.svg)
+
+| UTC month | SMARD (TWh) | ENTSO-E (TWh) | Candidate 006 gas (TWh) |
+| --- | ---: | ---: | ---: |
+| 01 | 7.928482 | 7.928476 | 0.468921 |
+| 02 | 7.703973 | 7.703972 | 0.543317 |
+| 03 | 5.654577 | 5.654575 | 0.000000 |
+| 04 | 3.686275 | 3.686272 | 0.000000 |
+| 05 | 3.129199 | 3.129195 | 0.000000 |
+| 06 | 2.402675 | 2.402671 | 0.000000 |
+| 07 | 2.919264 | 2.919260 | 0.000000 |
+| 08 | 3.017600 | 3.017595 | 0.000000 |
+| 09 | 3.801115 | 3.801110 | 0.000000 |
+| 10 | 5.259448 | 5.259443 | 0.000000 |
+| 11 | 7.523793 | 7.523793 | 0.041951 |
+| 12 | 7.522609 | 7.522609 | 0.086628 |
+
+The model produces only about **1.88%** of the reported gas quantity. Together
+with the persistent price and exchange mismatches, this is a reason to investigate
+model assumptions before using this baseline for annual investment claims.
+It does not establish that one specific assumption explains the entire error.
+The prepared baseline's zero operational carbon price is a known material
+limitation; fuel costs, fleet/CHP representation, outages, network aggregation
+and the unresolved inventory optimum also need controlled checks. Keep the
+current algorithm-study input unchanged while it runs. A policy-cost or outage
+variant needs separate hashes, declared coverage and independently solved
+baseline/intervention pairs. Observed generation must never replace renewable
+availability. No lifecycle carbon factors or avoided-emission estimates are
+inferred from this gas diagnostic.
+
+[Download the monthly comparison, source receipts and unpassed acceptance gates](../../research/network-benchmark-2025/german-gas-consistency.json).
+Reproduce with `audit_smard_2025_gas.py`, `compare_smard_2025_gas.py` and
+`plot_smard_gas_comparison.py`. Five targeted tests check UTC boundaries, interval
+sums, source receipts, nulls, duplicates, incomplete observations and changed
+calendar/carrier identities. Annual optimisation, empirical validation and
+investment acceptance remain **false**. This is separate from the 2013 weekly
+and matched 2025 conditional-window benchmarks.
+
+Source: Bundesnetzagentur / SMARD, filter 4071. Licence: [German Data Licence
+Attribution 2.0](https://www.govdata.de/dl-de/by-2-0). Values are aggregated to UTC
+months; the chart and comparison are our derivations.
+The [Clarigrid SMARD catalog description](https://www.clarigrid.energy/datasets/smard-actual-natural-gas-4071)
+helped identify this source and its interval-energy units. The public MCP endpoint
+requires account sign-in and has not been used to retrieve these observations.
+Catalog inclusion does not verify historical coverage or independent provenance.
