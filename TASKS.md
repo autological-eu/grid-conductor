@@ -503,4 +503,11 @@ processing candidate 001; partial block evidence is not an annual result.
 Local publication checks passed at 1,440/390/320px: new operational-carbon
 heading and EUA equation render, no KaTeX errors or horizontal document overflow,
 and the existing gas chart/JSON and unpassed acceptance gates remain intact.
-New publication still requires CI/Pages and verified public assets.
+Publication verified for commit `0d4fac9`: CI/Pages runs
+37588536995/37588530661 succeeded. Validated public HTTPS returned the exact
+tested article HTML, gas JSON/SVG and all 14 deployed JavaScript chunks.
+Desktop/mobile rendering was checked locally on that identical build; direct
+public-browser verification remains blocked by the previously documented
+browser CA trust limitation. No TLS verification was disabled.
+Actual continuation PID 46065 remains live, with independent conditional-block
+replays through block 18 of candidate 001; this remains partial evidence.
