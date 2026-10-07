@@ -305,3 +305,11 @@ research retains its separate integration gates.
   preparing another continuation. It replaces itself with the original driver
   only after verified budget exhaustion and idle/lock checks; disappearance,
   failure, a met numerical gate or wait timeout requires review, not a restart.
+
+
+- `inspect_inventory_processes.py --root <original> --continuation <next>` is a
+  read-only liveness check for recurring reviews. It matches actual script and
+  root/output arguments, excludes zombies/reused unrelated PIDs and distinguishes
+  a waiting supervisor from the driver it later executes. Receipt labels are
+  historical observations, not liveness. Pair this with independent witness and
+  lower-support replay before making numerical or acceptance claims.

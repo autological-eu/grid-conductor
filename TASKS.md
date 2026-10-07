@@ -14,7 +14,7 @@ against live processes; this file is not a job monitor.
 | --- | --- | --- |
 | N1 | Done | Publish matched 2025 conditional-window benchmark. Native/fast baseline, cable and battery objectives agree; comparison and methods are published. See [48-hour benchmark](docs/2025-conditional-network-benchmark.md). This is not an annual result. |
 | N2 | Done: configured numerical reference gates | Two chronological 24-hour blocks passed the €0.001 gap and €0.02 native parity gates at iteration 738. Gap €0.0002267; cost difference €0.007903. Independent final-state re-solves reproduced the objective with maximum equality residual 8.09e-9 and zero variable-bound violation. Floating-point lower bound exceeds native by €0.007676: this is numerical parity, not an exact enclosing certificate. See [coordination methods](docs/monthly-inventory-coordination.md). |
-| N3 | In progress; feasible linked year, unresolved numerical gap | Independently checked candidate 008: €50,633,322,720.425575 feasible annual cost, all 59 blocks/8,760 chronological hours, original availability and cyclic closure preserved. Candidate 010 lower support €43,579,568,940.0314 gives 13.9311% numerical gap; not an interval certificate or converged optimum. Frozen original driver resumed after verified interruption under PID 45215 and now computes candidate 010; bounded 10%-weight continuation waiter PID 46065 is live waiting, not dispatching. Published annual bounds remain the earlier 14.04% snapshot. Historical checks are preserved in [N3 verification notes](planning/archive/n3-coordination-verification-2026-10-07.md). Next: tighten bounds, then satisfy matched native/fast and empirical/investment gates. |
+| N3 | In progress; bounded continuation running | Incumbent original candidate 008: €50,633,322,720.425575 independently checked feasible cost for all 59 blocks/8,760 chronological hours. The original ten-candidate pass exhausted its budget without convergence; candidate 010 did not improve the incumbent. Continuation-001 is live under PID 46065, with preserved cut/witness donors, 10% proposal weight, five-candidate budget and unchanged feasibility/gap gates. Its first independently replayed master gives lower support €43,580,167,484.864845, gap 13.9299%; not an interval certificate or annual optimum. Published annual bounds remain the earlier 14.04% snapshot. See [historical verification](planning/archive/n3-coordination-verification-2026-10-07.md). Next: tighten bounds, then satisfy matched native/fast and empirical/investment gates. |
 | N4 | Pending N3 | Produce and audit full-year native/reference and fast dispatch comparisons plus paired interventions. Preserve original hourly renewable availability and declare proxies. Distinguish sequential feasible dispatch from a certified annual optimum. |
 | N5 | Pending N4 | Publish annual benchmark tables, charts, JSON and methods; integrate supported verified 2025 functionality into the static app. Inspect CI/Pages and public URLs. Disable recurring implementation checks only after the annual benchmark and supported app integration are complete. |
 
@@ -465,3 +465,26 @@ pass. No duplicate solve, source change or annual-optimum claim was introduced.
 The preceding documentation reconciliation 8af2b02 passed CI/Pages
 37572570829/37572566653. The existing public German gas JSON remains byte-identical
 over verified HTTPS. No new publication or static-app integration is claimed.
+
+
+N3 search transition verified: the original driver ended with
+`candidate_limit_not_converged`, and PID 45215 is now a zombie. Candidate 010's
+complete annual witness chain independently reproduces €50,634,589,340.595924,
+above incumbent 008. The bounded supervisor prepared continuation-001 with local
+symlinks to the verified original donor witnesses, then replaced itself with
+the unchanged driver under PID 46065. Actual process/root inspection confirms
+this is a continuation driver, no longer a waiting supervisor. The frozen
+preparation manifest's `prepared_not_started` label is historical preparation
+evidence, not live status. Its first 661-cut master lower support independently
+reproduces €43,580,167,484.864845. The new 10% proposal is being economically
+solved/replayed; it is not yet an annual feasible trajectory or convergence.
+No old solve was restarted, and no acceptance gate was changed.
+
+`inspect_inventory_processes.py` now offers read-only recurring-check groundwork:
+it scans actual process state, script identity and exact root/output arguments,
+rejects zombies and unrelated/reused PIDs, and reports whether receipt PIDs match
+live processes. It does not certify a checkpoint, witness, bound or validation.
+Two targeted tests pass, including stale executing receipts and relative roots.
+Live execution correctly identified the original zombie, absent waiter and
+continuation driver. The previous commit 606a1ec passed CI/Pages
+37576777879/37576772480. No new public model result or app integration is claimed.
