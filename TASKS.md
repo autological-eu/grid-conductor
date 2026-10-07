@@ -649,4 +649,4 @@ benefit charts, descriptive timing comparison, limitations and explicit conclusi
 Three standalone SVGs regenerate directly from hash-pinned published comparison;
 no new numerical inputs, solve or annualisation. The report states fast was not
 faster in the recorded uncontrolled 2025 trials and keeps 2013/annual evidence
-separate. Production build passes; publication verification pending CI/Pages.
+separate. Production build and report/browser checks at 1440/390/320px passed, including three SVGs, maths and overflow. Publication verified for 9c1e2eb: CI/Pages run 37650034194 succeeded with deployed public browser checks; public article HTML, all three SVGs and deployed JS chunks match the tested build over verified HTTPS.
