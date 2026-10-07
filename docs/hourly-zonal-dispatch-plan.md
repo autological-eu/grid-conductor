@@ -384,3 +384,30 @@ preprocessing evidence, not accepted bidding-zone demand or independent
 ENTSO-E validation. Country/accounting scope, split-zone allocation and
 observed-demand comparisons remain required before the zonal compiler can
 accept it. The source network and annual optimisation checkpoints are unchanged.
+
+## Original reservoir-inflow preprocessing diagnostic
+
+`tools/prepare_hydro_inflows_2025.py` exports the pinned prepared network's
+original 8760-hour inflows for all 93 hydro reservoirs, retaining individual
+reservoir identities and existing static storage parameters. Pumped storage is
+excluded from primary inflow accounting. The ignored NPZ records UTC hours,
+reservoir IDs and inflow MW; its summary records monthly/annual storage-energy
+MWh and source, producer and output hashes.
+
+```sh
+python tools/prepare_hydro_inflows_2025.py \
+  --network data/pypsa-eur/upstream/resources/gridfix-2025/networks/base_s_128_elec_.nc \
+  --expected-sha256 4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec \
+  --output data/pypsa-eur/hydro-inflows-2025-v1
+```
+
+Use the pinned research Python and a fresh output folder. The source reservoirs
+cannot pump (`p_min_pu = 0`), have zero charging efficiency and 0.9 discharge
+efficiency. Zero charging efficiency is valid here and is preserved; inflows
+are storage-energy inputs, not post-turbine electricity or observed generation.
+Independent replay checks every reservoir/hour against the original source.
+
+This diagnostic does not pool water, infer availability from dispatch or alter
+the retained annual reference. It is not a complete zonal storage compiler:
+source defaults, boundary inventories, bidding-zone assignment and independent
+hydrological validation still require audit before acceptance.

@@ -30,6 +30,13 @@ Three guard tests and independent hourly-total replay passed, preserving
 3008.319464 TWh of prepared-network demand. Zonal allocation and comparison
 against independently audited ENTSO-E demand remain open.
 
+Original reservoir-inflow diagnostic now preserves 93 separate reservoirs across
+all 8760 hours. Three guard tests and independent per-reservoir hourly replay
+passed. Source hydro reservoirs have zero charging efficiency and positive
+discharge efficiency; both are retained without changing inflows. This is
+preprocessing evidence, not an accepted zonal storage compiler: defaults,
+boundary inventories, zone mapping and observed-water validation remain open.
+
 ## Empirical validation
 
 - [ ] V1: Finalise asset-to-zone mapping, price aggregation, UTC/coverage protocol and predeclared calibration/held-out acceptance thresholds.
