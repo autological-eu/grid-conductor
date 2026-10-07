@@ -326,3 +326,38 @@ Open design choices to resolve through Z0: exact supported zone set; external
 boundary treatment; commercial domain source/coverage; supply-block resolution;
 existing reservoir boundary policy; validated 2025 fuel/outage/carbon assumptions;
 numerical and empirical tolerances; reproducible performance hardware/budgets.
+
+## Follow-up: ERA5 access and capacity coverage
+
+On 7 October 2026, the existing ignored project CDS configuration was present
+and the configured client passed an authenticated read-only access check. No
+weather request/download was submitted. The earlier note about authentication
+being required described new-download prerequisites, not absent workspace access.
+Existing prepared annual weather remains the preferred reusable input.
+
+For durable recovery, retain credential-free setup instructions in Git and use
+a managed secret binding for `CDSAPI_KEY`, with `CDSAPI_URL` set to the documented
+CDS endpoint. Never put tokens in chat, Git, publications or recovery bundles.
+The existing build wrapper already supports these variables and the ignored
+project configuration via `CDSAPI_RC`. File-backed access works now; persistence
+across environment replacement is not established. A managed secret binding and
+a fresh-environment authentication check are the recovery acceptance steps,
+not a reason to copy credentials into repository files. Dataset licence acceptance
+remains an account prerequisite for new retrievals.
+
+Energy-Charts installed capacity is not Germany-only. Direct yearly queries for
+DE, FR, ES, SE and PL each returned a 2025 label with `deprecated=false`. This
+is a five-country sample, not verified Europe-wide technology coverage. Official
+API documentation specifies yearly capacity for countries and monthly capacity
+only for Germany. Figures are period-end GW; battery energy is GWh, while net
+installation/decommission changes are MW. Harmonise scope, units and technology
+definitions before comparison. Do not exclude non-German sources by assumption
+or use German-only monthly detail as the standard for all zones.
+
+Correction to the initial collector sample: `/installed_power` does not document
+a `year` parameter. The `year=2025` request returned a series rather than a
+verified year-filtered dataset. Future capacity collection must use documented
+`time_step=yearly` and explicitly select/check the response's 2025 label. Preserve
+the initial cached response as discovery evidence, not accepted 2025 fleet input.
+Source: [Energy-Charts API](https://api.energy-charts.info/); access setup:
+[CDS API instructions](https://cds.climate.copernicus.eu/how-to-api).

@@ -729,3 +729,14 @@ not a completeness certificate); German Energy-Charts capacity returns 18
 technology entries with deprecated API metadata. IRENA machine-readable retrieval
 and CDS access remain separate tasks. No source entered the dispatch input,
 no hourly availability inferred from observed generation, no large files in Git.
+
+
+Z0 source follow-up: existing ignored CDS configuration passed an authenticated
+read-only client check; no download submitted. Managed-secret persistence across
+environment replacement still needs configuration/restore verification; existing
+build wrapper supports CDSAPI_KEY/CDSAPI_URL/CDSAPI_RC. Energy-Charts yearly
+capacity requests for DE/FR/ES/SE/PL all contain 2025, deprecated=false; monthly
+capacity is Germany-only. Initial collector's undocumented year parameter did
+not establish year filtering; preserve sample but do not accept it as 2025 input.
+Next: documented yearly requests with explicit date/unit/technology audits and
+a common supported-zone coverage matrix; no German-only input preference.
