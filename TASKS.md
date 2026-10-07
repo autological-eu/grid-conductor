@@ -740,3 +740,18 @@ capacity is Germany-only. Initial collector's undocumented year parameter did
 not establish year filtering; preserve sample but do not accept it as 2025 input.
 Next: documented yearly requests with explicit date/unit/technology audits and
 a common supported-zone coverage matrix; no German-only input preference.
+
+
+Z1 renewable preprocessing pilot implemented: `hourly_renewable_estimates.py`
+uses unchanged source capacity and weather-derived availability for 66 wind/solar
+series across 34 model countries, all 8760 hours. Separate monthly-constrained
+generation reconstruction matches 645 country/fuel months (16 zero months);
+99 are unattainable under source capacity/positive-weather support, 48 missing.
+No fitted series becomes availability. Four tests pass; report/JSON/monthly and
+hourly SVGs prepared in hourly-renewable-estimates-2025. Fixed fleet capacities,
+national scope and old Ember release remain explicit limitations; Z1 is not
+complete, no hydro/thermal/compiler or annual-dispatch validation claimed.
+Next: reconcile capacity vintages/distributed PV and current Ember release,
+then zone mapping and weather conversion before accepting dispatch inputs.
+
+Renewable report production build and independent hourly/monthly output replay passed.
