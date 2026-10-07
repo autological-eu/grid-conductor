@@ -70,27 +70,28 @@ Existing geographical weights and wind onshore/offshore or PV technology mix
 remain unchanged; new installations have not been located. No coefficient is
 fitted to Ember output. Available energy remains separate from actual generation.
 
-![Capacity sensitivity versus observed generation](../research/irena-capacity-2025/comparison.svg)
+![Capacity sensitivity versus observed generation](../research/irena-capacity-2025/current-reference-comparison.svg)
 
 | Country | Technology | IRENA end-2024 GW | IRENA end-2025 GW | Linear-capacity available TWh | Ember generated TWh |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Germany | Solar PV | 91.204 | 106.272 | 111.69 | 87.47 |
-| France | Solar PV | 25.456 | 31.226 | 37.03 | 30.27 |
-| Spain | Solar PV | 35.860 | 44.903 | 62.96 | 58.70 |
-| Poland | Solar PV | 21.721 | 25.421 | 25.68 | 19.24 |
-| Germany | Wind | 72.745 | 77.808 | 174.68 | 130.67 |
-| France | Wind | 24.241 | 25.655 | 56.22 | 48.62 |
-| Spain | Wind | 32.184 | 33.301 | 44.42 | 55.56 |
-| Poland | Wind | 10.152 | 10.602 | 22.97 | 21.90 |
+| Germany | Solar PV | 91.204 | 106.272 | 111.69 | 89.965 |
+| France | Solar PV | 25.456 | 31.226 | 37.03 | 30.273 |
+| Spain | Solar PV | 35.860 | 44.903 | 62.96 | 58.814 |
+| Poland | Solar PV | 21.721 | 25.421 | 25.68 | 19.228 |
+| Germany | Wind | 72.745 | 77.808 | 174.68 | 131.166 |
+| France | Wind | 24.241 | 25.655 | 56.22 | 48.652 |
+| Spain | Wind | 32.184 | 33.301 | 44.42 | 55.578 |
+| Poland | Wind | 10.152 | 10.602 | 22.97 | 21.894 |
 
 For France, original solar capacity was 13.239 GW and original available energy
 17.364 TWh. IRENA changes the plausible fleet scale substantially. Nevertheless,
-37.03 TWh available versus 30.27 TWh generated is not an estimate of curtailment:
+37.03 TWh available versus 30.273 TWh generated is not an estimate of curtailment:
 weather conversion, distributed generation and accounting differences also matter.
 Spain's wind remains inconsistent, pointing to remaining layout/conversion/scope
 issues. Do not force the remaining gap closed by substituting generation for
-availability. The Ember reference remains the previously hashed old-format
-snapshot; current-release reconciliation is still required.
+availability. The chart and table now use Ember’s current official download, fetched on
+7 October 2026. The earlier reference and chart remain preserved as a versioned
+snapshot; capacity and weather estimates have not changed.
 
 ## Verification and reproduction
 
@@ -123,3 +124,40 @@ geothermal through their own resource/operating constraints, not wind/solar
 profile multiplication. Resolve bidding-zone mapping before integrating this
 variant into the [hourly zonal dispatch model](hourly-zonal-dispatch-plan.md).
 Existing annual numerical, empirical and investment gates remain unchanged.
+
+## Ember release reconciliation completed
+
+Fetched the [current official monthly CSV](https://files.ember-energy.org/public-downloads/generation/outputs/release_generation_monthly_global.csv)
+linked by Ember’s website and compared it with the cached long-format release.
+ISO country identity, month, nonaggregate fuel generation and TWh units align
+the formats; region/aggregate rows are excluded. Missing values remain absent.
+Of 744 shared wind/solar records used by the original 34-country pilot, 689
+changed by more than 1e-9 TWh. No records were added or removed within this
+pilot subset. Differences include precision changes and larger revisions; their
+causes are not inferred from values alone. All 48 previously missing pilot
+country/fuel months remain missing.
+
+Across all national fuel-generation records, 6,741 keys are shared, 154 appear
+only in the old release and 174 only in the current one. That broader schema/
+coverage difference is not treated as automatically equivalent geography or fuel
+scope. The current-release schema includes generation and emissions columns;
+this audit compares generation only, not emissions factors or methodology.
+
+Germany solar totals change from 87.470 to 89.965 TWh; France solar from
+30.270 to 30.273 TWh. The main capacity-reconciliation conclusions survive,
+while exact reference quantities have been updated.
+
+[Reconciliation JSON](../research/irena-capacity-2025/ember-release-reconciliation.json)
+records source URLs/hashes, counts and all changed pilot months.
+[Updated reference summary](../research/irena-capacity-2025/current-reference-summary.json)
+retains unchanged capacity sensitivities with current observed generation.
+The original summary remains available; old hourly fitted-generation arrays
+were not silently overwritten and still describe the old reference version.
+
+Three tests cover changed versus missing keys, excluded aggregates, duplicate
+records and missing generation. Reproduce with `reconcile_ember_release.py`
+using `--old`, `--current` and a new `--output` path, then run
+`publish_ember_reconciliation.py`. Raw current CSV stays ignored locally.
+This closes the cited release-comparison task for wind/solar generation; it
+does not establish hourly validation, complete source-scope equivalence or an
+accepted zonal dispatch input.

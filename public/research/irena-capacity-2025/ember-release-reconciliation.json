@@ -1,0 +1,5541 @@
+{
+  "old_records": 6895,
+  "current_records": 6915,
+  "shared_records": 6741,
+  "unchanged_records": 1508,
+  "changed_records": 5233,
+  "max_absolute_change_twh": 47.17099999999999,
+  "existing_pilot_comparison": {
+    "old_records": 744,
+    "current_records": 744,
+    "shared_records": 744,
+    "unchanged_records": 55,
+    "changed_records": 689,
+    "old_only": [],
+    "current_only": [],
+    "max_absolute_change_twh": 0.645,
+    "changes": [
+      {
+        "iso3": "AUT",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.36,
+        "current_twh": 0.362,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.52,
+        "current_twh": 0.519,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.83,
+        "current_twh": 0.833,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 1.06,
+        "current_twh": 1.065,
+        "difference_twh": 0.004999999999999893
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 1.07,
+        "current_twh": 1.072,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 1.35,
+        "current_twh": 1.348,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 1.1,
+        "current_twh": 1.104,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 1.22,
+        "current_twh": 1.222,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.86,
+        "current_twh": 0.865,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.64,
+        "current_twh": 0.638,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.47,
+        "current_twh": 0.471,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.72,
+        "current_twh": 0.722,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.61,
+        "current_twh": 0.614,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.86,
+        "current_twh": 0.854,
+        "difference_twh": -0.006000000000000005
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.92,
+        "current_twh": 0.925,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.58,
+        "current_twh": 0.575,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.75,
+        "current_twh": 0.747,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.54,
+        "current_twh": 0.537,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.57,
+        "current_twh": 0.572,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 1.03,
+        "current_twh": 1.028,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "AUT",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.78,
+        "current_twh": 0.785,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.21,
+        "current_twh": 0.206,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.47,
+        "current_twh": 0.468,
+        "difference_twh": -0.0019999999999999463
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 1.0,
+        "current_twh": 0.998,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 1.32,
+        "current_twh": 1.319,
+        "difference_twh": -0.001000000000000112
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 1.29,
+        "current_twh": 1.289,
+        "difference_twh": -0.001000000000000112
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 1.28,
+        "current_twh": 1.277,
+        "difference_twh": -0.0030000000000001137
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.98,
+        "current_twh": 0.984,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.46,
+        "current_twh": 0.464,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.32,
+        "current_twh": 0.316,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.25,
+        "current_twh": 0.248,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 1.11,
+        "current_twh": 1.119,
+        "difference_twh": 0.008999999999999897
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.61,
+        "current_twh": 0.601,
+        "difference_twh": -0.009000000000000008
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.72,
+        "current_twh": 0.726,
+        "difference_twh": 0.006000000000000005
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.99,
+        "current_twh": 0.989,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 1.01,
+        "current_twh": 1.016,
+        "difference_twh": 0.006000000000000005
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.65,
+        "current_twh": 0.648,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.72,
+        "current_twh": 0.725,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 1.26,
+        "current_twh": 1.267,
+        "difference_twh": 0.006999999999999895
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 1.31,
+        "current_twh": 1.301,
+        "difference_twh": -0.009000000000000119
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 1.51,
+        "current_twh": 1.511,
+        "difference_twh": 0.0009999999999998899
+      },
+      {
+        "iso3": "BEL",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 1.66,
+        "current_twh": 1.664,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.29,
+        "current_twh": 0.295,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.35,
+        "current_twh": 0.348,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.47,
+        "current_twh": 0.473,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.6,
+        "current_twh": 0.604,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.8,
+        "current_twh": 0.799,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.92,
+        "current_twh": 0.925,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.71,
+        "current_twh": 0.714,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.62,
+        "current_twh": 0.625,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.43,
+        "current_twh": 0.435,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.3,
+        "current_twh": 0.305,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.32,
+        "current_twh": 0.316,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.13,
+        "current_twh": 0.126,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.14,
+        "current_twh": 0.145,
+        "difference_twh": 0.004999999999999977
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.09,
+        "current_twh": 0.092,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.08,
+        "current_twh": 0.079,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.07,
+        "current_twh": 0.073,
+        "difference_twh": 0.002999999999999989
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.07,
+        "current_twh": 0.075,
+        "difference_twh": 0.0049999999999999906
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.07,
+        "current_twh": 0.073,
+        "difference_twh": 0.002999999999999989
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.09,
+        "current_twh": 0.086,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.11,
+        "current_twh": 0.112,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.13,
+        "current_twh": 0.134,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "BGR",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.14,
+        "current_twh": 0.144,
+        "difference_twh": 0.003999999999999976
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.01,
+        "current_twh": 0.014,
+        "difference_twh": 0.004
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.04,
+        "current_twh": 0.037,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.05,
+        "current_twh": 0.047,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.07,
+        "current_twh": 0.062,
+        "difference_twh": -0.008000000000000007
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.07,
+        "current_twh": 0.068,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.06,
+        "current_twh": 0.059,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.06,
+        "current_twh": 0.05,
+        "difference_twh": -0.009999999999999995
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.04,
+        "current_twh": 0.039,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.03,
+        "current_twh": 0.023,
+        "difference_twh": -0.006999999999999999
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.03,
+        "current_twh": 0.024,
+        "difference_twh": -0.005999999999999998
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.02,
+        "current_twh": 0.025,
+        "difference_twh": 0.005000000000000001
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.01,
+        "current_twh": 0.012,
+        "difference_twh": 0.002
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.02,
+        "current_twh": 0.018,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.01,
+        "current_twh": 0.014,
+        "difference_twh": 0.004
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.01,
+        "current_twh": 0.011,
+        "difference_twh": 0.0009999999999999992
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.01,
+        "current_twh": 0.014,
+        "difference_twh": 0.004
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.01,
+        "current_twh": 0.007,
+        "difference_twh": -0.003
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.02,
+        "current_twh": 0.016,
+        "difference_twh": -0.004
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.02,
+        "current_twh": 0.017,
+        "difference_twh": -0.002999999999999999
+      },
+      {
+        "iso3": "BIH",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.01,
+        "current_twh": 0.011,
+        "difference_twh": 0.0009999999999999992
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.2,
+        "current_twh": 0.201,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.28,
+        "current_twh": 0.276,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.66,
+        "current_twh": 0.657,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.97,
+        "current_twh": 0.966,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 1.02,
+        "current_twh": 1.025,
+        "difference_twh": 0.004999999999999893
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 1.21,
+        "current_twh": 1.206,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 1.08,
+        "current_twh": 1.081,
+        "difference_twh": 0.0009999999999998899
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.7,
+        "current_twh": 0.701,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.28,
+        "current_twh": 0.275,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.26,
+        "current_twh": 0.258,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.03,
+        "current_twh": 0.025,
+        "difference_twh": -0.0049999999999999975
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.01,
+        "current_twh": 0.011,
+        "difference_twh": 0.0009999999999999992
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.01,
+        "current_twh": 0.012,
+        "difference_twh": 0.002
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.01,
+        "current_twh": 0.011,
+        "difference_twh": 0.0009999999999999992
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.01,
+        "current_twh": 0.008,
+        "difference_twh": -0.002
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.02,
+        "current_twh": 0.022,
+        "difference_twh": 0.0019999999999999983
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.01,
+        "current_twh": 0.014,
+        "difference_twh": 0.004
+      },
+      {
+        "iso3": "CHE",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.01,
+        "current_twh": 0.009,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.1,
+        "current_twh": 0.104,
+        "difference_twh": 0.00399999999999999
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.25,
+        "current_twh": 0.254,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.45,
+        "current_twh": 0.454,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.54,
+        "current_twh": 0.538,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.59,
+        "current_twh": 0.589,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.65,
+        "current_twh": 0.655,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.56,
+        "current_twh": 0.556,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.62,
+        "current_twh": 0.624,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.43,
+        "current_twh": 0.428,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.27,
+        "current_twh": 0.267,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.16,
+        "current_twh": 0.155,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.08,
+        "current_twh": 0.084,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.07,
+        "current_twh": 0.075,
+        "difference_twh": 0.0049999999999999906
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.04,
+        "current_twh": 0.036,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.04,
+        "current_twh": 0.039,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.04,
+        "current_twh": 0.043,
+        "difference_twh": 0.0029999999999999957
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.04,
+        "current_twh": 0.038,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.03,
+        "current_twh": 0.033,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.03,
+        "current_twh": 0.027,
+        "difference_twh": -0.002999999999999999
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.05,
+        "current_twh": 0.052,
+        "difference_twh": 0.001999999999999995
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.08,
+        "current_twh": 0.084,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.07,
+        "current_twh": 0.071,
+        "difference_twh": 0.000999999999999987
+      },
+      {
+        "iso3": "CZE",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.07,
+        "current_twh": 0.069,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 2.55,
+        "current_twh": 2.554,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 4.02,
+        "current_twh": 4.125,
+        "difference_twh": 0.10500000000000043
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 8.05,
+        "current_twh": 8.25,
+        "difference_twh": 0.1999999999999993
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 10.3,
+        "current_twh": 10.607,
+        "difference_twh": 0.3069999999999986
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 11.68,
+        "current_twh": 11.982,
+        "difference_twh": 0.3019999999999996
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 11.97,
+        "current_twh": 12.277,
+        "difference_twh": 0.3069999999999986
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 10.2,
+        "current_twh": 10.411,
+        "difference_twh": 0.2110000000000003
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 10.99,
+        "current_twh": 11.295,
+        "difference_twh": 0.3049999999999997
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 7.65,
+        "current_twh": 7.857,
+        "difference_twh": 0.20699999999999985
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 4.91,
+        "current_twh": 4.911,
+        "difference_twh": 0.0009999999999994458
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 3.34,
+        "current_twh": 3.241,
+        "difference_twh": -0.09899999999999975
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 1.81,
+        "current_twh": 2.455,
+        "difference_twh": 0.645
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 15.54,
+        "current_twh": 15.383,
+        "difference_twh": -0.15700000000000003
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 9.36,
+        "current_twh": 9.315,
+        "difference_twh": -0.04499999999999993
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 8.24,
+        "current_twh": 8.455,
+        "difference_twh": 0.21499999999999986
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 6.85,
+        "current_twh": 6.963,
+        "difference_twh": 0.11300000000000043
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 9.59,
+        "current_twh": 9.605,
+        "difference_twh": 0.015000000000000568
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 10.34,
+        "current_twh": 10.377,
+        "difference_twh": 0.03700000000000081
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 7.69,
+        "current_twh": 7.442,
+        "difference_twh": -0.24800000000000022
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 7.03,
+        "current_twh": 7.382,
+        "difference_twh": 0.3519999999999994
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 11.91,
+        "current_twh": 11.525,
+        "difference_twh": -0.3849999999999998
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 16.34,
+        "current_twh": 16.528,
+        "difference_twh": 0.18799999999999883
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 12.42,
+        "current_twh": 12.418,
+        "difference_twh": -0.002000000000000668
+      },
+      {
+        "iso3": "DEU",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 15.36,
+        "current_twh": 15.773,
+        "difference_twh": 0.41300000000000026
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.06,
+        "current_twh": 0.061,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.15,
+        "current_twh": 0.154,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.41,
+        "current_twh": 0.413,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.5,
+        "current_twh": 0.499,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.64,
+        "current_twh": 0.646,
+        "difference_twh": 0.006000000000000005
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.57,
+        "current_twh": 0.572,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.63,
+        "current_twh": 0.628,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.62,
+        "current_twh": 0.617,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.48,
+        "current_twh": 0.476,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.25,
+        "current_twh": 0.254,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.11,
+        "current_twh": 0.105,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.06,
+        "current_twh": 0.057,
+        "difference_twh": -0.0029999999999999957
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 2.13,
+        "current_twh": 2.137,
+        "difference_twh": 0.007000000000000117
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 1.48,
+        "current_twh": 1.485,
+        "difference_twh": 0.0050000000000001155
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 1.71,
+        "current_twh": 1.708,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.91,
+        "current_twh": 0.908,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 1.46,
+        "current_twh": 1.461,
+        "difference_twh": 0.001000000000000112
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 1.69,
+        "current_twh": 1.689,
+        "difference_twh": -0.0009999999999998899
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 1.18,
+        "current_twh": 1.175,
+        "difference_twh": -0.004999999999999893
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 1.73,
+        "current_twh": 1.74,
+        "difference_twh": 0.010000000000000009
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 2.17,
+        "current_twh": 2.172,
+        "difference_twh": 0.002000000000000224
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 2.06,
+        "current_twh": 2.054,
+        "difference_twh": -0.006000000000000227
+      },
+      {
+        "iso3": "DNK",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 2.28,
+        "current_twh": 2.282,
+        "difference_twh": 0.002000000000000224
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 2.51,
+        "current_twh": 2.504,
+        "difference_twh": -0.005999999999999783
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 3.58,
+        "current_twh": 3.579,
+        "difference_twh": -0.0009999999999998899
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 3.54,
+        "current_twh": 3.543,
+        "difference_twh": 0.0030000000000001137
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 4.91,
+        "current_twh": 4.911,
+        "difference_twh": 0.0009999999999994458
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 6.12,
+        "current_twh": 6.115,
+        "difference_twh": -0.004999999999999893
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 7.3,
+        "current_twh": 7.299,
+        "difference_twh": -0.0009999999999994458
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 7.74,
+        "current_twh": 7.751,
+        "difference_twh": 0.01100000000000012
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 6.99,
+        "current_twh": 7.0,
+        "difference_twh": 0.009999999999999787
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 5.86,
+        "current_twh": 5.869,
+        "difference_twh": 0.008999999999999453
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 4.51,
+        "current_twh": 4.517,
+        "difference_twh": 0.007000000000000561
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 3.4,
+        "current_twh": 3.387,
+        "difference_twh": -0.0129999999999999
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 2.24,
+        "current_twh": 2.339,
+        "difference_twh": 0.09899999999999975
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 7.43,
+        "current_twh": 7.423,
+        "difference_twh": -0.006999999999999673
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 3.62,
+        "current_twh": 3.619,
+        "difference_twh": -0.0009999999999998899
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 6.55,
+        "current_twh": 6.553,
+        "difference_twh": 0.0030000000000001137
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 4.19,
+        "current_twh": 4.182,
+        "difference_twh": -0.008000000000000007
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 3.24,
+        "current_twh": 3.25,
+        "difference_twh": 0.009999999999999787
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 4.27,
+        "current_twh": 4.259,
+        "difference_twh": -0.010999999999999233
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 3.47,
+        "current_twh": 3.473,
+        "difference_twh": 0.0029999999999996696
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 3.74,
+        "current_twh": 3.756,
+        "difference_twh": 0.01599999999999957
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 4.25,
+        "current_twh": 4.254,
+        "difference_twh": 0.0039999999999995595
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 6.74,
+        "current_twh": 6.741,
+        "difference_twh": 0.0009999999999994458
+      },
+      {
+        "iso3": "ESP",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 5.07,
+        "current_twh": 5.078,
+        "difference_twh": 0.008000000000000007
+      },
+      {
+        "iso3": "EST",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.01,
+        "current_twh": 0.007,
+        "difference_twh": -0.003
+      },
+      {
+        "iso3": "EST",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.03,
+        "current_twh": 0.027,
+        "difference_twh": -0.002999999999999999
+      },
+      {
+        "iso3": "EST",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.1,
+        "current_twh": 0.097,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "EST",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.14,
+        "current_twh": 0.136,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "EST",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.18,
+        "current_twh": 0.177,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "EST",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.13,
+        "current_twh": 0.133,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "EST",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.18,
+        "current_twh": 0.179,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "EST",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.15,
+        "current_twh": 0.149,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "EST",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.05,
+        "current_twh": 0.054,
+        "difference_twh": 0.003999999999999997
+      },
+      {
+        "iso3": "EST",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.01,
+        "current_twh": 0.013,
+        "difference_twh": 0.002999999999999999
+      },
+      {
+        "iso3": "EST",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.01,
+        "current_twh": 0.007,
+        "difference_twh": -0.003
+      },
+      {
+        "iso3": "EST",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.18,
+        "current_twh": 0.178,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "EST",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.08,
+        "current_twh": 0.077,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "EST",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.14,
+        "current_twh": 0.139,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "EST",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.1,
+        "current_twh": 0.101,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "EST",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.09,
+        "current_twh": 0.087,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "EST",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.1,
+        "current_twh": 0.103,
+        "difference_twh": 0.002999999999999989
+      },
+      {
+        "iso3": "EST",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.07,
+        "current_twh": 0.069,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "EST",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.06,
+        "current_twh": 0.064,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "EST",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.09,
+        "current_twh": 0.092,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "EST",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.09,
+        "current_twh": 0.086,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "EST",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.1,
+        "current_twh": 0.101,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "EST",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.17,
+        "current_twh": 0.167,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.01,
+        "current_twh": 0.005,
+        "difference_twh": -0.005
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.02,
+        "current_twh": 0.019,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.07,
+        "current_twh": 0.065,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.11,
+        "current_twh": 0.109,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.16,
+        "current_twh": 0.158,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.16,
+        "current_twh": 0.161,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.19,
+        "current_twh": 0.189,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.14,
+        "current_twh": 0.142,
+        "difference_twh": 0.001999999999999974
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.09,
+        "current_twh": 0.084,
+        "difference_twh": -0.0059999999999999915
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.04,
+        "current_twh": 0.035,
+        "difference_twh": -0.0049999999999999975
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.01,
+        "current_twh": 0.008,
+        "difference_twh": -0.002
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.0,
+        "current_twh": 0.003,
+        "difference_twh": 0.003
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 2.13,
+        "current_twh": 2.24,
+        "difference_twh": 0.11000000000000032
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 2.03,
+        "current_twh": 2.07,
+        "difference_twh": 0.040000000000000036
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 2.32,
+        "current_twh": 2.34,
+        "difference_twh": 0.020000000000000018
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 1.7,
+        "current_twh": 1.702,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 1.53,
+        "current_twh": 1.534,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 1.17,
+        "current_twh": 1.192,
+        "difference_twh": 0.02200000000000002
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.88,
+        "current_twh": 0.901,
+        "difference_twh": 0.02100000000000002
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 1.24,
+        "current_twh": 1.268,
+        "difference_twh": 0.028000000000000025
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 1.73,
+        "current_twh": 1.726,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 2.29,
+        "current_twh": 2.328,
+        "difference_twh": 0.03799999999999981
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 2.13,
+        "current_twh": 2.109,
+        "difference_twh": -0.020999999999999908
+      },
+      {
+        "iso3": "FIN",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 2.41,
+        "current_twh": 2.408,
+        "difference_twh": -0.002000000000000224
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 1.05,
+        "current_twh": 1.047,
+        "difference_twh": -0.0030000000000001137
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 1.54,
+        "current_twh": 1.543,
+        "difference_twh": 0.0029999999999998916
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 2.6,
+        "current_twh": 2.603,
+        "difference_twh": 0.0030000000000001137
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 2.85,
+        "current_twh": 2.853,
+        "difference_twh": 0.0030000000000001137
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 3.31,
+        "current_twh": 3.305,
+        "difference_twh": -0.004999999999999893
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 3.76,
+        "current_twh": 3.761,
+        "difference_twh": 0.001000000000000334
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 4.07,
+        "current_twh": 4.072,
+        "difference_twh": 0.0019999999999997797
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 3.64,
+        "current_twh": 3.641,
+        "difference_twh": 0.0009999999999998899
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 2.3,
+        "current_twh": 2.304,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 1.37,
+        "current_twh": 1.369,
+        "difference_twh": -0.001000000000000112
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 1.1,
+        "current_twh": 1.095,
+        "difference_twh": -0.0050000000000001155
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 5.71,
+        "current_twh": 5.726,
+        "difference_twh": 0.016000000000000014
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 3.61,
+        "current_twh": 3.607,
+        "difference_twh": -0.0029999999999996696
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 4.12,
+        "current_twh": 4.103,
+        "difference_twh": -0.017000000000000348
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 3.58,
+        "current_twh": 3.591,
+        "difference_twh": 0.01100000000000012
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 3.42,
+        "current_twh": 3.426,
+        "difference_twh": 0.006000000000000227
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 2.92,
+        "current_twh": 2.916,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 2.62,
+        "current_twh": 2.615,
+        "difference_twh": -0.004999999999999893
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 3.84,
+        "current_twh": 3.851,
+        "difference_twh": 0.01100000000000012
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 5.25,
+        "current_twh": 5.263,
+        "difference_twh": 0.0129999999999999
+      },
+      {
+        "iso3": "FRA",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 5.75,
+        "current_twh": 5.754,
+        "difference_twh": 0.0039999999999995595
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.46,
+        "current_twh": 0.466,
+        "difference_twh": 0.006000000000000005
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.64,
+        "current_twh": 0.645,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 1.77,
+        "current_twh": 1.78,
+        "difference_twh": 0.010000000000000009
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 2.39,
+        "current_twh": 2.407,
+        "difference_twh": 0.016999999999999904
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 2.67,
+        "current_twh": 2.688,
+        "difference_twh": 0.018000000000000238
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 2.59,
+        "current_twh": 2.605,
+        "difference_twh": 0.015000000000000124
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 2.35,
+        "current_twh": 2.382,
+        "difference_twh": 0.03200000000000003
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 2.16,
+        "current_twh": 2.215,
+        "difference_twh": 0.054999999999999716
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 1.65,
+        "current_twh": 1.719,
+        "difference_twh": 0.06900000000000017
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.83,
+        "current_twh": 0.857,
+        "difference_twh": 0.027000000000000024
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.58,
+        "current_twh": 0.595,
+        "difference_twh": 0.015000000000000013
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.4,
+        "current_twh": 0.417,
+        "difference_twh": 0.01699999999999996
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 7.38,
+        "current_twh": 7.465,
+        "difference_twh": 0.08499999999999996
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 7.81,
+        "current_twh": 8.201,
+        "difference_twh": 0.3910000000000009
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 6.48,
+        "current_twh": 6.671,
+        "difference_twh": 0.19099999999999984
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 4.76,
+        "current_twh": 4.886,
+        "difference_twh": 0.12600000000000033
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 5.57,
+        "current_twh": 5.637,
+        "difference_twh": 0.06699999999999928
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 6.66,
+        "current_twh": 6.86,
+        "difference_twh": 0.20000000000000018
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 4.09,
+        "current_twh": 4.252,
+        "difference_twh": 0.16199999999999992
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 5.48,
+        "current_twh": 5.609,
+        "difference_twh": 0.12899999999999956
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 7.61,
+        "current_twh": 7.808,
+        "difference_twh": 0.1979999999999995
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 8.16,
+        "current_twh": 8.402,
+        "difference_twh": 0.2419999999999991
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 9.54,
+        "current_twh": 9.759,
+        "difference_twh": 0.2190000000000012
+      },
+      {
+        "iso3": "GBR",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 10.03,
+        "current_twh": 10.315,
+        "difference_twh": 0.28500000000000014
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.69,
+        "current_twh": 0.692,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.68,
+        "current_twh": 0.683,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 1.06,
+        "current_twh": 1.054,
+        "difference_twh": -0.006000000000000005
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.88,
+        "current_twh": 0.884,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 1.0,
+        "current_twh": 0.996,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 1.24,
+        "current_twh": 1.242,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 1.49,
+        "current_twh": 1.492,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 1.33,
+        "current_twh": 1.332,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 1.15,
+        "current_twh": 1.154,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.79,
+        "current_twh": 0.788,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.59,
+        "current_twh": 0.587,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.58,
+        "current_twh": 0.581,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.84,
+        "current_twh": 0.844,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 1.03,
+        "current_twh": 1.027,
+        "difference_twh": -0.0030000000000001137
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.7,
+        "current_twh": 0.691,
+        "difference_twh": -0.009000000000000008
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.75,
+        "current_twh": 0.757,
+        "difference_twh": 0.007000000000000006
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.78,
+        "current_twh": 0.782,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.87,
+        "current_twh": 0.866,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 1.15,
+        "current_twh": 1.158,
+        "difference_twh": 0.008000000000000007
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.87,
+        "current_twh": 0.876,
+        "difference_twh": 0.006000000000000005
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.73,
+        "current_twh": 0.735,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 1.14,
+        "current_twh": 1.136,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "GRC",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.84,
+        "current_twh": 0.839,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.03,
+        "current_twh": 0.033,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.05,
+        "current_twh": 0.058,
+        "difference_twh": 0.008
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.11,
+        "current_twh": 0.104,
+        "difference_twh": -0.006000000000000005
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.11,
+        "current_twh": 0.119,
+        "difference_twh": 0.008999999999999994
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.16,
+        "current_twh": 0.156,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.18,
+        "current_twh": 0.178,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.18,
+        "current_twh": 0.187,
+        "difference_twh": 0.007000000000000006
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.17,
+        "current_twh": 0.165,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.13,
+        "current_twh": 0.125,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.11,
+        "current_twh": 0.103,
+        "difference_twh": -0.007000000000000006
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.06,
+        "current_twh": 0.062,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.03,
+        "current_twh": 0.054,
+        "difference_twh": 0.024
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.33,
+        "current_twh": 0.326,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.22,
+        "current_twh": 0.222,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.29,
+        "current_twh": 0.289,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.22,
+        "current_twh": 0.222,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.21,
+        "current_twh": 0.209,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.21,
+        "current_twh": 0.206,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.25,
+        "current_twh": 0.246,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.15,
+        "current_twh": 0.146,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.33,
+        "current_twh": 0.329,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.3,
+        "current_twh": 0.304,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "HRV",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.24,
+        "current_twh": 0.237,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.32,
+        "current_twh": 0.303,
+        "difference_twh": -0.017000000000000015
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.61,
+        "current_twh": 0.583,
+        "difference_twh": -0.027000000000000024
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.87,
+        "current_twh": 0.837,
+        "difference_twh": -0.03300000000000003
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 1.15,
+        "current_twh": 1.137,
+        "difference_twh": -0.0129999999999999
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 1.21,
+        "current_twh": 1.168,
+        "difference_twh": -0.04200000000000004
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 1.56,
+        "current_twh": 1.529,
+        "difference_twh": -0.03100000000000014
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 1.4,
+        "current_twh": 1.379,
+        "difference_twh": -0.020999999999999908
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 1.4,
+        "current_twh": 1.339,
+        "difference_twh": -0.06099999999999994
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 1.02,
+        "current_twh": 0.963,
+        "difference_twh": -0.05700000000000005
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.78,
+        "current_twh": 0.741,
+        "difference_twh": -0.039000000000000035
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.4,
+        "current_twh": 0.367,
+        "difference_twh": -0.03300000000000003
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.23,
+        "current_twh": 0.216,
+        "difference_twh": -0.014000000000000012
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.04,
+        "current_twh": 0.036,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.06,
+        "current_twh": 0.064,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.06,
+        "current_twh": 0.064,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.04,
+        "current_twh": 0.041,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.04,
+        "current_twh": 0.038,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.05,
+        "current_twh": 0.045,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.04,
+        "current_twh": 0.036,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.03,
+        "current_twh": 0.033,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.06,
+        "current_twh": 0.063,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.05,
+        "current_twh": 0.053,
+        "difference_twh": 0.0029999999999999957
+      },
+      {
+        "iso3": "HUN",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.03,
+        "current_twh": 0.032,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.03,
+        "current_twh": 0.029,
+        "difference_twh": -0.0009999999999999974
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.04,
+        "current_twh": 0.039,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.09,
+        "current_twh": 0.087,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.12,
+        "current_twh": 0.119,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.17,
+        "current_twh": 0.173,
+        "difference_twh": 0.002999999999999975
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.14,
+        "current_twh": 0.141,
+        "difference_twh": 0.0009999999999999731
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.16,
+        "current_twh": 0.155,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.1,
+        "current_twh": 0.097,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.05,
+        "current_twh": 0.048,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.03,
+        "current_twh": 0.031,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.02,
+        "current_twh": 0.016,
+        "difference_twh": -0.004
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 1.07,
+        "current_twh": 1.075,
+        "difference_twh": 0.004999999999999893
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 1.41,
+        "current_twh": 1.411,
+        "difference_twh": 0.001000000000000112
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 1.0,
+        "current_twh": 0.996,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.76,
+        "current_twh": 0.761,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.59,
+        "current_twh": 0.589,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.79,
+        "current_twh": 0.787,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.66,
+        "current_twh": 0.658,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.73,
+        "current_twh": 0.727,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 1.07,
+        "current_twh": 1.074,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 1.07,
+        "current_twh": 1.068,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "IRL",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 1.24,
+        "current_twh": 1.245,
+        "difference_twh": 0.0050000000000001155
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 2.07,
+        "current_twh": 2.067,
+        "difference_twh": -0.0029999999999996696
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 3.42,
+        "current_twh": 3.419,
+        "difference_twh": -0.0009999999999998899
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 4.35,
+        "current_twh": 4.354,
+        "difference_twh": 0.004000000000000448
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 5.04,
+        "current_twh": 5.042,
+        "difference_twh": 0.0019999999999997797
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 5.66,
+        "current_twh": 5.663,
+        "difference_twh": 0.0030000000000001137
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 5.57,
+        "current_twh": 5.567,
+        "difference_twh": -0.0030000000000001137
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 5.11,
+        "current_twh": 5.111,
+        "difference_twh": 0.0009999999999994458
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 4.18,
+        "current_twh": 4.181,
+        "difference_twh": 0.001000000000000334
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 3.32,
+        "current_twh": 3.322,
+        "difference_twh": 0.002000000000000224
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 2.28,
+        "current_twh": 2.281,
+        "difference_twh": 0.001000000000000334
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 1.78,
+        "current_twh": 1.778,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 2.56,
+        "current_twh": 2.566,
+        "difference_twh": 0.005999999999999783
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 2.24,
+        "current_twh": 2.235,
+        "difference_twh": -0.0050000000000003375
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 1.94,
+        "current_twh": 1.936,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 1.87,
+        "current_twh": 1.877,
+        "difference_twh": 0.006999999999999895
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 1.22,
+        "current_twh": 1.221,
+        "difference_twh": 0.001000000000000112
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 1.83,
+        "current_twh": 1.829,
+        "difference_twh": -0.001000000000000112
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 1.5,
+        "current_twh": 1.498,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 1.24,
+        "current_twh": 1.244,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 2.33,
+        "current_twh": 2.333,
+        "difference_twh": 0.0030000000000001137
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 1.8,
+        "current_twh": 1.807,
+        "difference_twh": 0.006999999999999895
+      },
+      {
+        "iso3": "ITA",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 1.47,
+        "current_twh": 1.474,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.02,
+        "current_twh": 0.019,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.04,
+        "current_twh": 0.041,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.11,
+        "current_twh": 0.112,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.21,
+        "current_twh": 0.207,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.25,
+        "current_twh": 0.252,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.27,
+        "current_twh": 0.273,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.25,
+        "current_twh": 0.247,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.21,
+        "current_twh": 0.211,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.09,
+        "current_twh": 0.085,
+        "difference_twh": -0.0049999999999999906
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.03,
+        "current_twh": 0.026,
+        "difference_twh": -0.004
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.01,
+        "current_twh": 0.009,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.21,
+        "current_twh": 0.211,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.38,
+        "current_twh": 0.376,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.33,
+        "current_twh": 0.324,
+        "difference_twh": -0.006000000000000005
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.24,
+        "current_twh": 0.246,
+        "difference_twh": 0.006000000000000005
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.39,
+        "current_twh": 0.389,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.18,
+        "current_twh": 0.182,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.21,
+        "current_twh": 0.212,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.28,
+        "current_twh": 0.275,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.39,
+        "current_twh": 0.386,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "LTU",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.5,
+        "current_twh": 0.503,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.01,
+        "current_twh": 0.006,
+        "difference_twh": -0.004
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.01,
+        "current_twh": 0.014,
+        "difference_twh": 0.004
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.06,
+        "current_twh": 0.059,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.06,
+        "current_twh": 0.065,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.06,
+        "current_twh": 0.062,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.06,
+        "current_twh": 0.061,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.03,
+        "current_twh": 0.035,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.02,
+        "current_twh": 0.019,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.01,
+        "current_twh": 0.011,
+        "difference_twh": 0.0009999999999999992
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.01,
+        "current_twh": 0.007,
+        "difference_twh": -0.003
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.05,
+        "current_twh": 0.052,
+        "difference_twh": 0.001999999999999995
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.03,
+        "current_twh": 0.033,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.04,
+        "current_twh": 0.035,
+        "difference_twh": -0.0049999999999999975
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.03,
+        "current_twh": 0.033,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.04,
+        "current_twh": 0.036,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.03,
+        "current_twh": 0.029,
+        "difference_twh": -0.0009999999999999974
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.03,
+        "current_twh": 0.026,
+        "difference_twh": -0.004
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.02,
+        "current_twh": 0.024,
+        "difference_twh": 0.004
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.04,
+        "current_twh": 0.042,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.05,
+        "current_twh": 0.053,
+        "difference_twh": 0.0029999999999999957
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.04,
+        "current_twh": 0.043,
+        "difference_twh": 0.0029999999999999957
+      },
+      {
+        "iso3": "LUX",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.06,
+        "current_twh": 0.058,
+        "difference_twh": -0.001999999999999995
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.0,
+        "current_twh": 0.004,
+        "difference_twh": 0.004
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.02,
+        "current_twh": 0.017,
+        "difference_twh": -0.002999999999999999
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.05,
+        "current_twh": 0.049,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.08,
+        "current_twh": 0.077,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.08,
+        "current_twh": 0.085,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.08,
+        "current_twh": 0.085,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.11,
+        "current_twh": 0.106,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.1,
+        "current_twh": 0.101,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.08,
+        "current_twh": 0.084,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.05,
+        "current_twh": 0.049,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.01,
+        "current_twh": 0.015,
+        "difference_twh": 0.004999999999999999
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.01,
+        "current_twh": 0.007,
+        "difference_twh": -0.003
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.03,
+        "current_twh": 0.031,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.01,
+        "current_twh": 0.012,
+        "difference_twh": 0.002
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.02,
+        "current_twh": 0.025,
+        "difference_twh": 0.005000000000000001
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.02,
+        "current_twh": 0.017,
+        "difference_twh": -0.002999999999999999
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.02,
+        "current_twh": 0.016,
+        "difference_twh": -0.004
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.01,
+        "current_twh": 0.013,
+        "difference_twh": 0.002999999999999999
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.01,
+        "current_twh": 0.007,
+        "difference_twh": -0.003
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.01,
+        "current_twh": 0.008,
+        "difference_twh": -0.002
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.01,
+        "current_twh": 0.014,
+        "difference_twh": 0.004
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.01,
+        "current_twh": 0.013,
+        "difference_twh": 0.002999999999999999
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.02,
+        "current_twh": 0.018,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "LVA",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.03,
+        "current_twh": 0.025,
+        "difference_twh": -0.0049999999999999975
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.06,
+        "current_twh": 0.047,
+        "difference_twh": -0.012999999999999998
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.09,
+        "current_twh": 0.075,
+        "difference_twh": -0.015
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.13,
+        "current_twh": 0.113,
+        "difference_twh": -0.017
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.15,
+        "current_twh": 0.124,
+        "difference_twh": -0.025999999999999995
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.18,
+        "current_twh": 0.147,
+        "difference_twh": -0.033
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.22,
+        "current_twh": 0.182,
+        "difference_twh": -0.038000000000000006
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.21,
+        "current_twh": 0.181,
+        "difference_twh": -0.028999999999999998
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.2,
+        "current_twh": 0.162,
+        "difference_twh": -0.038000000000000006
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.17,
+        "current_twh": 0.142,
+        "difference_twh": -0.028000000000000025
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.1,
+        "current_twh": 0.087,
+        "difference_twh": -0.013000000000000012
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.08,
+        "current_twh": 0.063,
+        "difference_twh": -0.017
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.07,
+        "current_twh": 0.064,
+        "difference_twh": -0.006000000000000005
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.02,
+        "current_twh": 0.015,
+        "difference_twh": -0.005000000000000001
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.02,
+        "current_twh": 0.018,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.03,
+        "current_twh": 0.022,
+        "difference_twh": -0.008
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.03,
+        "current_twh": 0.021,
+        "difference_twh": -0.008999999999999998
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.02,
+        "current_twh": 0.016,
+        "difference_twh": -0.004
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.03,
+        "current_twh": 0.024,
+        "difference_twh": -0.005999999999999998
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.03,
+        "current_twh": 0.022,
+        "difference_twh": -0.008
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.04,
+        "current_twh": 0.035,
+        "difference_twh": -0.0049999999999999975
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.04,
+        "current_twh": 0.031,
+        "difference_twh": -0.009000000000000001
+      },
+      {
+        "iso3": "MKD",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.04,
+        "current_twh": 0.032,
+        "difference_twh": -0.008
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.0,
+        "current_twh": 0.002,
+        "difference_twh": 0.002
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.0,
+        "current_twh": 0.003,
+        "difference_twh": 0.003
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.01,
+        "current_twh": 0.004,
+        "difference_twh": -0.006
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.01,
+        "current_twh": 0.006,
+        "difference_twh": -0.004
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.02,
+        "current_twh": 0.008,
+        "difference_twh": -0.012
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.02,
+        "current_twh": 0.01,
+        "difference_twh": -0.01
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.02,
+        "current_twh": 0.01,
+        "difference_twh": -0.01
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.02,
+        "current_twh": 0.01,
+        "difference_twh": -0.01
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.02,
+        "current_twh": 0.009,
+        "difference_twh": -0.011000000000000001
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.01,
+        "current_twh": 0.007,
+        "difference_twh": -0.003
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.01,
+        "current_twh": 0.005,
+        "difference_twh": -0.005
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.01,
+        "current_twh": 0.004,
+        "difference_twh": -0.006
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.03,
+        "current_twh": 0.034,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.02,
+        "current_twh": 0.021,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.04,
+        "current_twh": 0.038,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.03,
+        "current_twh": 0.031,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.03,
+        "current_twh": 0.026,
+        "difference_twh": -0.004
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.02,
+        "current_twh": 0.018,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.02,
+        "current_twh": 0.019,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.02,
+        "current_twh": 0.019,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.01,
+        "current_twh": 0.013,
+        "difference_twh": 0.002999999999999999
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.03,
+        "current_twh": 0.031,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.03,
+        "current_twh": 0.029,
+        "difference_twh": -0.0009999999999999974
+      },
+      {
+        "iso3": "MNE",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.02,
+        "current_twh": 0.019,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.66,
+        "current_twh": 0.659,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 1.27,
+        "current_twh": 1.273,
+        "difference_twh": 0.0029999999999998916
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 3.0,
+        "current_twh": 2.999,
+        "difference_twh": -0.0009999999999998899
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 3.74,
+        "current_twh": 3.743,
+        "difference_twh": 0.0029999999999996696
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 4.54,
+        "current_twh": 4.542,
+        "difference_twh": 0.0019999999999997797
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 4.39,
+        "current_twh": 4.389,
+        "difference_twh": -0.0009999999999994458
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 4.12,
+        "current_twh": 4.116,
+        "difference_twh": -0.004000000000000448
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 3.93,
+        "current_twh": 3.931,
+        "difference_twh": 0.0009999999999998899
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 2.8,
+        "current_twh": 2.796,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 1.48,
+        "current_twh": 1.482,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.93,
+        "current_twh": 0.932,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.56,
+        "current_twh": 0.558,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 2.93,
+        "current_twh": 2.936,
+        "difference_twh": 0.005999999999999783
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 2.64,
+        "current_twh": 2.637,
+        "difference_twh": -0.0030000000000001137
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 1.86,
+        "current_twh": 1.858,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 1.83,
+        "current_twh": 1.825,
+        "difference_twh": -0.0050000000000001155
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 2.98,
+        "current_twh": 2.975,
+        "difference_twh": -0.004999999999999893
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 1.86,
+        "current_twh": 1.858,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 2.08,
+        "current_twh": 2.073,
+        "difference_twh": -0.007000000000000117
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 3.33,
+        "current_twh": 3.333,
+        "difference_twh": 0.0030000000000001137
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 3.48,
+        "current_twh": 3.478,
+        "difference_twh": -0.0019999999999997797
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 3.78,
+        "current_twh": 3.785,
+        "difference_twh": 0.0050000000000003375
+      },
+      {
+        "iso3": "NLD",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 4.09,
+        "current_twh": 4.083,
+        "difference_twh": -0.006999999999999673
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.0,
+        "current_twh": 0.001,
+        "difference_twh": 0.001
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.0,
+        "current_twh": 0.002,
+        "difference_twh": 0.002
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.0,
+        "current_twh": 0.002,
+        "difference_twh": 0.002
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.0,
+        "current_twh": 0.001,
+        "difference_twh": 0.001
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.0,
+        "current_twh": 0.001,
+        "difference_twh": 0.001
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.0,
+        "current_twh": 0.001,
+        "difference_twh": 0.001
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.0,
+        "current_twh": 0.001,
+        "difference_twh": 0.001
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 1.41,
+        "current_twh": 1.407,
+        "difference_twh": -0.0029999999999998916
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 1.22,
+        "current_twh": 1.219,
+        "difference_twh": -0.0009999999999998899
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 1.43,
+        "current_twh": 1.427,
+        "difference_twh": -0.0029999999999998916
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.94,
+        "current_twh": 0.941,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.94,
+        "current_twh": 0.934,
+        "difference_twh": -0.005999999999999894
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.81,
+        "current_twh": 0.815,
+        "difference_twh": 0.004999999999999893
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.43,
+        "current_twh": 0.432,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 1.0,
+        "current_twh": 0.996,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 1.42,
+        "current_twh": 1.423,
+        "difference_twh": 0.0030000000000001137
+      },
+      {
+        "iso3": "NOR",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 1.64,
+        "current_twh": 1.641,
+        "difference_twh": 0.001000000000000112
+      },
+      {
+        "iso3": "POL",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.94,
+        "current_twh": 0.938,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "POL",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 1.73,
+        "current_twh": 1.734,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "POL",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 2.18,
+        "current_twh": 2.179,
+        "difference_twh": -0.001000000000000334
+      },
+      {
+        "iso3": "POL",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 2.49,
+        "current_twh": 2.487,
+        "difference_twh": -0.0030000000000001137
+      },
+      {
+        "iso3": "POL",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 2.58,
+        "current_twh": 2.577,
+        "difference_twh": -0.0030000000000001137
+      },
+      {
+        "iso3": "POL",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 2.46,
+        "current_twh": 2.455,
+        "difference_twh": -0.004999999999999893
+      },
+      {
+        "iso3": "POL",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 1.83,
+        "current_twh": 1.828,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "POL",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 1.13,
+        "current_twh": 1.132,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "POL",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.63,
+        "current_twh": 0.626,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "POL",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.37,
+        "current_twh": 0.372,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "POL",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 3.14,
+        "current_twh": 3.145,
+        "difference_twh": 0.004999999999999893
+      },
+      {
+        "iso3": "POL",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 1.8,
+        "current_twh": 1.792,
+        "difference_twh": -0.008000000000000007
+      },
+      {
+        "iso3": "POL",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 1.61,
+        "current_twh": 1.609,
+        "difference_twh": -0.001000000000000112
+      },
+      {
+        "iso3": "POL",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 1.56,
+        "current_twh": 1.559,
+        "difference_twh": -0.001000000000000112
+      },
+      {
+        "iso3": "POL",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 2.09,
+        "current_twh": 2.085,
+        "difference_twh": -0.004999999999999893
+      },
+      {
+        "iso3": "POL",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 1.26,
+        "current_twh": 1.263,
+        "difference_twh": 0.0029999999999998916
+      },
+      {
+        "iso3": "POL",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 1.24,
+        "current_twh": 1.239,
+        "difference_twh": -0.0009999999999998899
+      },
+      {
+        "iso3": "POL",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 1.71,
+        "current_twh": 1.707,
+        "difference_twh": -0.0029999999999998916
+      },
+      {
+        "iso3": "POL",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 2.5,
+        "current_twh": 2.504,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "POL",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 1.67,
+        "current_twh": 1.671,
+        "difference_twh": 0.001000000000000112
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.42,
+        "current_twh": 0.416,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.5,
+        "current_twh": 0.495,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.64,
+        "current_twh": 0.625,
+        "difference_twh": -0.015000000000000013
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.63,
+        "current_twh": 0.616,
+        "difference_twh": -0.014000000000000012
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 1.02,
+        "current_twh": 1.003,
+        "difference_twh": -0.017000000000000126
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 1.03,
+        "current_twh": 1.006,
+        "difference_twh": -0.02400000000000002
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 1.16,
+        "current_twh": 1.132,
+        "difference_twh": -0.028000000000000025
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 1.06,
+        "current_twh": 1.035,
+        "difference_twh": -0.025000000000000133
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.92,
+        "current_twh": 0.899,
+        "difference_twh": -0.02100000000000002
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.73,
+        "current_twh": 0.709,
+        "difference_twh": -0.02100000000000002
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.48,
+        "current_twh": 0.472,
+        "difference_twh": -0.008000000000000007
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.39,
+        "current_twh": 0.384,
+        "difference_twh": -0.006000000000000005
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 1.8,
+        "current_twh": 1.798,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.9,
+        "current_twh": 0.908,
+        "difference_twh": 0.008000000000000007
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 1.52,
+        "current_twh": 1.513,
+        "difference_twh": -0.007000000000000117
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 1.18,
+        "current_twh": 1.187,
+        "difference_twh": 0.007000000000000117
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.74,
+        "current_twh": 0.739,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.7,
+        "current_twh": 0.709,
+        "difference_twh": 0.009000000000000008
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 1.0,
+        "current_twh": 0.997,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.82,
+        "current_twh": 0.825,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 1.08,
+        "current_twh": 1.086,
+        "difference_twh": 0.006000000000000005
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.96,
+        "current_twh": 0.956,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 1.41,
+        "current_twh": 1.408,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "PRT",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 1.36,
+        "current_twh": 1.355,
+        "difference_twh": -0.0050000000000001155
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.17,
+        "current_twh": 0.165,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.24,
+        "current_twh": 0.248,
+        "difference_twh": 0.008000000000000007
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.51,
+        "current_twh": 0.499,
+        "difference_twh": -0.01100000000000001
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.61,
+        "current_twh": 0.622,
+        "difference_twh": 0.01200000000000001
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.83,
+        "current_twh": 0.843,
+        "difference_twh": 0.013000000000000012
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.78,
+        "current_twh": 0.783,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.72,
+        "current_twh": 0.728,
+        "difference_twh": 0.008000000000000007
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.59,
+        "current_twh": 0.584,
+        "difference_twh": -0.006000000000000005
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.4,
+        "current_twh": 0.401,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.19,
+        "current_twh": 0.196,
+        "difference_twh": 0.006000000000000005
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.09,
+        "current_twh": 0.152,
+        "difference_twh": 0.062
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.49,
+        "current_twh": 0.495,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.51,
+        "current_twh": 0.507,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.59,
+        "current_twh": 0.596,
+        "difference_twh": 0.006000000000000005
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.51,
+        "current_twh": 0.507,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.49,
+        "current_twh": 0.486,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.39,
+        "current_twh": 0.383,
+        "difference_twh": -0.007000000000000006
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.37,
+        "current_twh": 0.377,
+        "difference_twh": 0.007000000000000006
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.35,
+        "current_twh": 0.344,
+        "difference_twh": -0.006000000000000005
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.4,
+        "current_twh": 0.402,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.6,
+        "current_twh": 0.604,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.56,
+        "current_twh": 0.559,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "ROU",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.62,
+        "current_twh": 0.618,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "SRB",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.11,
+        "current_twh": 0.108,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "SRB",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.15,
+        "current_twh": 0.154,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "SRB",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.14,
+        "current_twh": 0.144,
+        "difference_twh": 0.003999999999999976
+      },
+      {
+        "iso3": "SRB",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.13,
+        "current_twh": 0.135,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "SRB",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.08,
+        "current_twh": 0.084,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "SRB",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.07,
+        "current_twh": 0.072,
+        "difference_twh": 0.001999999999999988
+      },
+      {
+        "iso3": "SRB",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.07,
+        "current_twh": 0.071,
+        "difference_twh": 0.000999999999999987
+      },
+      {
+        "iso3": "SRB",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.1,
+        "current_twh": 0.101,
+        "difference_twh": 0.0010000000000000009
+      },
+      {
+        "iso3": "SRB",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.13,
+        "current_twh": 0.127,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "SRB",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 0.12,
+        "current_twh": 0.125,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "SRB",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.12,
+        "current_twh": 0.118,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "SVK",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.01,
+        "current_twh": 0.015,
+        "difference_twh": 0.004999999999999999
+      },
+      {
+        "iso3": "SVK",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.04,
+        "current_twh": 0.036,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "SVK",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.05,
+        "current_twh": 0.052,
+        "difference_twh": 0.001999999999999995
+      },
+      {
+        "iso3": "SVK",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.06,
+        "current_twh": 0.064,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "SVK",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.07,
+        "current_twh": 0.065,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "SVK",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.08,
+        "current_twh": 0.083,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "SVK",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.07,
+        "current_twh": 0.069,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "SVK",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.07,
+        "current_twh": 0.072,
+        "difference_twh": 0.001999999999999988
+      },
+      {
+        "iso3": "SVK",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.05,
+        "current_twh": 0.049,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "SVK",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.03,
+        "current_twh": 0.035,
+        "difference_twh": 0.0050000000000000044
+      },
+      {
+        "iso3": "SVK",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.02,
+        "current_twh": 0.018,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "SVK",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.01,
+        "current_twh": 0.011,
+        "difference_twh": 0.0009999999999999992
+      },
+      {
+        "iso3": "SVN",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.03,
+        "current_twh": 0.032,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "SVN",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.05,
+        "current_twh": 0.044,
+        "difference_twh": -0.006000000000000005
+      },
+      {
+        "iso3": "SVN",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.11,
+        "current_twh": 0.1,
+        "difference_twh": -0.009999999999999995
+      },
+      {
+        "iso3": "SVN",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.15,
+        "current_twh": 0.138,
+        "difference_twh": -0.011999999999999983
+      },
+      {
+        "iso3": "SVN",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.18,
+        "current_twh": 0.167,
+        "difference_twh": -0.012999999999999984
+      },
+      {
+        "iso3": "SVN",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.24,
+        "current_twh": 0.218,
+        "difference_twh": -0.021999999999999992
+      },
+      {
+        "iso3": "SVN",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.2,
+        "current_twh": 0.185,
+        "difference_twh": -0.015000000000000013
+      },
+      {
+        "iso3": "SVN",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.13,
+        "current_twh": 0.121,
+        "difference_twh": -0.009000000000000008
+      },
+      {
+        "iso3": "SVN",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.15,
+        "current_twh": 0.136,
+        "difference_twh": -0.013999999999999985
+      },
+      {
+        "iso3": "SVN",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.12,
+        "current_twh": 0.107,
+        "difference_twh": -0.012999999999999998
+      },
+      {
+        "iso3": "SVN",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.04,
+        "current_twh": 0.037,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "solar",
+        "month": "2025-01-01",
+        "old_twh": 0.04,
+        "current_twh": 0.044,
+        "difference_twh": 0.003999999999999997
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "solar",
+        "month": "2025-02-01",
+        "old_twh": 0.17,
+        "current_twh": 0.172,
+        "difference_twh": 0.001999999999999974
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "solar",
+        "month": "2025-03-01",
+        "old_twh": 0.48,
+        "current_twh": 0.478,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "solar",
+        "month": "2025-04-01",
+        "old_twh": 0.61,
+        "current_twh": 0.604,
+        "difference_twh": -0.006000000000000005
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "solar",
+        "month": "2025-05-01",
+        "old_twh": 0.61,
+        "current_twh": 0.602,
+        "difference_twh": -0.008000000000000007
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "solar",
+        "month": "2025-06-01",
+        "old_twh": 0.67,
+        "current_twh": 0.665,
+        "difference_twh": -0.0050000000000000044
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "solar",
+        "month": "2025-07-01",
+        "old_twh": 0.65,
+        "current_twh": 0.646,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "solar",
+        "month": "2025-08-01",
+        "old_twh": 0.6,
+        "current_twh": 0.596,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "solar",
+        "month": "2025-09-01",
+        "old_twh": 0.37,
+        "current_twh": 0.367,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "solar",
+        "month": "2025-10-01",
+        "old_twh": 0.18,
+        "current_twh": 0.177,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "solar",
+        "month": "2025-11-01",
+        "old_twh": 0.05,
+        "current_twh": 0.052,
+        "difference_twh": 0.001999999999999995
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "solar",
+        "month": "2025-12-01",
+        "old_twh": 0.03,
+        "current_twh": 0.028,
+        "difference_twh": -0.0019999999999999983
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 4.67,
+        "current_twh": 4.665,
+        "difference_twh": -0.004999999999999893
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 3.37,
+        "current_twh": 3.371,
+        "difference_twh": 0.0009999999999998899
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 4.23,
+        "current_twh": 4.231,
+        "difference_twh": 0.0009999999999994458
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 2.88,
+        "current_twh": 2.881,
+        "difference_twh": 0.0009999999999998899
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 3.28,
+        "current_twh": 3.283,
+        "difference_twh": 0.0030000000000001137
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 2.63,
+        "current_twh": 2.633,
+        "difference_twh": 0.0030000000000001137
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 1.54,
+        "current_twh": 1.539,
+        "difference_twh": -0.001000000000000112
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 2.66,
+        "current_twh": 2.656,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 2.63,
+        "current_twh": 2.634,
+        "difference_twh": 0.0040000000000000036
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "wind",
+        "month": "2025-10-01",
+        "old_twh": 3.18,
+        "current_twh": 3.182,
+        "difference_twh": 0.0019999999999997797
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 3.4,
+        "current_twh": 3.392,
+        "difference_twh": -0.008000000000000007
+      },
+      {
+        "iso3": "SWE",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 4.33,
+        "current_twh": 4.333,
+        "difference_twh": 0.0030000000000001137
+      },
+      {
+        "iso3": "XKX",
+        "fuel": "wind",
+        "month": "2025-01-01",
+        "old_twh": 0.04,
+        "current_twh": 0.042,
+        "difference_twh": 0.0020000000000000018
+      },
+      {
+        "iso3": "XKX",
+        "fuel": "wind",
+        "month": "2025-02-01",
+        "old_twh": 0.02,
+        "current_twh": 0.018,
+        "difference_twh": -0.0020000000000000018
+      },
+      {
+        "iso3": "XKX",
+        "fuel": "wind",
+        "month": "2025-03-01",
+        "old_twh": 0.04,
+        "current_twh": 0.037,
+        "difference_twh": -0.0030000000000000027
+      },
+      {
+        "iso3": "XKX",
+        "fuel": "wind",
+        "month": "2025-04-01",
+        "old_twh": 0.03,
+        "current_twh": 0.033,
+        "difference_twh": 0.0030000000000000027
+      },
+      {
+        "iso3": "XKX",
+        "fuel": "wind",
+        "month": "2025-05-01",
+        "old_twh": 0.04,
+        "current_twh": 0.036,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "XKX",
+        "fuel": "wind",
+        "month": "2025-06-01",
+        "old_twh": 0.02,
+        "current_twh": 0.019,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "XKX",
+        "fuel": "wind",
+        "month": "2025-07-01",
+        "old_twh": 0.03,
+        "current_twh": 0.026,
+        "difference_twh": -0.004
+      },
+      {
+        "iso3": "XKX",
+        "fuel": "wind",
+        "month": "2025-08-01",
+        "old_twh": 0.03,
+        "current_twh": 0.026,
+        "difference_twh": -0.004
+      },
+      {
+        "iso3": "XKX",
+        "fuel": "wind",
+        "month": "2025-09-01",
+        "old_twh": 0.02,
+        "current_twh": 0.019,
+        "difference_twh": -0.0010000000000000009
+      },
+      {
+        "iso3": "XKX",
+        "fuel": "wind",
+        "month": "2025-11-01",
+        "old_twh": 0.04,
+        "current_twh": 0.036,
+        "difference_twh": -0.0040000000000000036
+      },
+      {
+        "iso3": "XKX",
+        "fuel": "wind",
+        "month": "2025-12-01",
+        "old_twh": 0.04,
+        "current_twh": 0.038,
+        "difference_twh": -0.0020000000000000018
+      }
+    ]
+  },
+  "status": "versioned_generation_release_comparison_not_hourly_validation",
+  "old_url": "https://storage.googleapis.com/emb-prod-bkt-publicdata/public-downloads/monthly_full_release_long_format.csv",
+  "current_url": "https://files.ember-energy.org/public-downloads/generation/outputs/release_generation_monthly_global.csv",
+  "old_sha256": "2615fea2b9b644a9703bb19e1c24be370b04131a1a9cceae71e471a298ba2246",
+  "current_sha256": "182bf4a3be2521c650f29d05d5cf8f5afde8828cfea59f40538b3df2af5df893",
+  "producer_sha256": "16fea444ca1eb8f84d9f7e91d26b3f5027c0398fc766710247c2743f9fae1bd4",
+  "scope": "2025 national monthly nonaggregate fuel generation; no price, capacity, emissions or method equivalence inferred",
+  "old_only_records": 154,
+  "current_only_records": 174
+}

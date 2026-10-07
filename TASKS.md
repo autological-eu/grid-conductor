@@ -797,3 +797,14 @@ Three extraction tests pass; report and compact JSON/figure prepared.
 Next: reconcile source scope/commissioning/locations and current Ember release,
 then technology-specific hourly constraints and zonal mapping. No annual
 solver resume, acceptance-gate change or large Git artifact.
+
+
+Ember current-release reconciliation completed for renewable pilot references.
+Official new-format global CSV fetched/hashed separately; 744 wind/solar keys
+shared, 689 changed, no subset additions/removals. All 48 missing pilot months
+remain missing. Germany solar revises 87.470 to 89.965 TWh; France solar
+30.270 to 30.273 TWh. IRENA report/table/chart use updated generation references,
+with original summaries and hourly fits preserved. Three comparison tests pass.
+Broader national fuel inventory has 154 old-only and 174 current-only keys;
+these need scope reconciliation. No emissions-method, hourly-validation or
+capacity/dispatch acceptance follows from this generation release comparison.
