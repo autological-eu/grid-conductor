@@ -14,7 +14,7 @@ against live processes; this file is not a job monitor.
 | --- | --- | --- |
 | N1 | Done | Publish matched 2025 conditional-window benchmark. Native/fast baseline, cable and battery objectives agree; comparison and methods are published. See [48-hour benchmark](docs/2025-conditional-network-benchmark.md). This is not an annual result. |
 | N2 | Done: configured numerical reference gates | Two chronological 24-hour blocks passed the €0.001 gap and €0.02 native parity gates at iteration 738. Gap €0.0002267; cost difference €0.007903. Independent final-state re-solves reproduced the objective with maximum equality residual 8.09e-9 and zero variable-bound violation. Floating-point lower bound exceeds native by €0.007676: this is numerical parity, not an exact enclosing certificate. See [coordination methods](docs/monthly-inventory-coordination.md). |
-| N3 | Blocked; feasibility diagnosis under review | Best independently checked full-year feasible cost is continuation-002 candidate 002: €50,098,008,942.03262 over 59 blocks/8,760 hours. Candidate 004 lower support recomputes to €47,954,698,244.3425, numerical gap 4.27824%, not an optimum certificate. Driver PID 51005 stopped at candidate 004 block 12: bounded elastic dual probe failed positive-support verification. No live annual driver; separate bounded native Phase-I diagnostic PID 52014 started with failed evidence preserved. Next: independently replay a valid diagnosis before any explicit resume; no infeasibility or convergence claim from the failed probe. Published annual bounds remain the earlier 14.04% snapshot; N4/N5 and empirical gates remain open. |
+| N3 | Blocked; feasibility diagnosis under review | Best independently checked full-year feasible cost is continuation-002 candidate 002: €50,098,008,942.03262 over 59 blocks/8,760 hours. Candidate 004 lower support recomputes to €47,954,698,244.3425, numerical gap 4.27824%, not an optimum certificate. Driver PID 51005 stopped at candidate 004 block 12: bounded elastic dual probe failed positive-support verification. No live annual driver; separate native Phase-I diagnostic also stopped at its 120-second optimality limit (123.14s whole worker, 1,047,998,464-byte peak RSS). Both failures are preserved; no live annual or diagnostic worker. Next: implement a separately versioned bounded longer-budget Phase-I diagnostic, then independently replay a valid diagnosis before any explicit resume; no infeasibility or convergence claim from the failed probe. Published annual bounds remain the earlier 14.04% snapshot; N4/N5 and empirical gates remain open. |
 | N4 | Pending N3 | Produce and audit full-year native/reference and fast dispatch comparisons plus paired interventions. Preserve original hourly renewable availability and declare proxies. Distinguish sequential feasible dispatch from a certified annual optimum. |
 | N5 | Pending N4 | Publish annual benchmark tables, charts, JSON and methods; integrate supported verified 2025 functionality into the static app. Inspect CI/Pages and public URLs. Disable recurring implementation checks only after the annual benchmark and supported app integration are complete. |
 
@@ -599,3 +599,16 @@ an annual restart or result; valid support still requires independent replay.
 Prior commit 813271f passed CI/Pages 37620980448/37620971414; existing public
 methods/data assets remain verified over HTTPS. Requirements/gates unchanged,
 recurring review enabled.
+
+
+N3 native diagnostic failure verified: `review-phase-004-12-native/status.json`
+records return code 1, 123.140839s and 1,047,998,464-byte peak RSS; the saved
+traceback explicitly reports HiGHS time limit without optimal status. Actual
+process inspection finds no annual driver; no OOM/kill is recorded. This is
+a solver-budget blocker, not proof of infeasibility. Do not repeat the same
+failed 120-second job or relax optimality/support gates. Next actionable work:
+a separate versioned longer-budget Phase-I producer/replayer, preserving frozen
+old producers and failed receipts, followed by source-matched support verification
+before any explicit driver recovery. PRODUCT.md requirements remain unchanged.
+Commit 56fd566 passed CI/Pages 37629508271/37629502502; existing public methods
+HTML and data JSON/SVG remain verified over HTTPS. Recurring review stays enabled.
