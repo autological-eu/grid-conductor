@@ -531,7 +531,7 @@ for candidates 001–003 and recomputed all four saved master lower supports.
 Candidate 002 costs €50,188,223,255.64121, above 001; candidate 003 improves
 the incumbent to €50,183,034,416.52437. Candidate 004 lower support is
 €46,237,533,728.48881; its partial dispatch supplies no annual upper bound.
-The resulting best numerical gap is 7.86221864%, still unresolved. Actual
+The resulting best numerical gap is 7.86222024%, still unresolved. Actual
 driver PID 46065 is live; no duplicate computation or frozen-source edit occurred.
 No cgroup OOM/kill event is recorded; 8.1 GiB disk remains available. Requirements
 are unchanged. Ledger commit 778f256 passed CI/Pages 37593569013/37593562244;
