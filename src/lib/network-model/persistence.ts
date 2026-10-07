@@ -24,7 +24,12 @@ export async function saveNetworkWorkspace(value: NetworkWorkspace): Promise<voi
 export async function loadNetworkWorkspace(): Promise<NetworkWorkspace | undefined> {
   const database = await db();
   try {
-    return (await database.get("workspace", "current")) as NetworkWorkspace | undefined;
+    const value = (await database.get("workspace", "current")) as NetworkWorkspace | undefined;
+    if (value?.input.dataset_id.startsWith("pypsa-eur-37-")) {
+      await database.delete("workspace", "current");
+      return undefined;
+    }
+    return value;
   } finally {
     database.close();
   }
