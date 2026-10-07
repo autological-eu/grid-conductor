@@ -169,4 +169,6 @@ against matched native PyPSA baseline/intervention solves. Expose the verified
 2025 conditional window as a clearly labelled experiment now; annual map
 replacement remains gated on complete annual inputs, geography, chronology,
 paired native/fast verification and existing empirical/investment requirements.
-Publish comparative evidence and retain the separate 2013 weekly benchmark.
+Publish comparative evidence as a readable report with data visualisations,
+clear summary and conclusion, without requiring scenario-menu interaction.
+Retain the separate 2013 weekly benchmark.

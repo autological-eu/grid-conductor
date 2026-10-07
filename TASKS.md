@@ -650,3 +650,18 @@ Three standalone SVGs regenerate directly from hash-pinned published comparison;
 no new numerical inputs, solve or annualisation. The report states fast was not
 faster in the recorded uncontrolled 2025 trials and keeps 2013/annual evidence
 separate. Production build and report/browser checks at 1440/390/320px passed, including three SVGs, maths and overflow. Publication verified for 9c1e2eb: CI/Pages run 37650034194 succeeded with deployed public browser checks; public article HTML, all three SVGs and deployed JS chunks match the tested build over verified HTTPS.
+
+
+N3 distinct feasibility recovery started after idle checks: both native Phase-I
+120/600-second attempts are retained failures; no annual driver is live. Existing
+`audit_submonthly_farkas.py` now runs a separate zero-objective native ray
+diagnostic for candidate 004 block 12 under supervisor PID 54113, output
+`continuation-002/review-farkas-004-12-zero/`. It has a 120-second solver and
+300-second whole-worker limit and requires positive independently replayed
+source-bounded support; no annual feasible cost or euro benefit follows. Two
+Farkas tests pass. Do not repeat failed elastic jobs or resume the annual driver
+without verified support and explicit recovery review. PRODUCT.md records the
+accepted data-first report presentation requirement. Latest ledger 828173a passed
+CI/Pages 37650608449/37650600194; the public report and all three SVGs remain
+byte-identical over verified HTTPS. Requirements/research gates unchanged;
+recurring review enabled.
