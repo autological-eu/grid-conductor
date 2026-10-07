@@ -74,9 +74,7 @@ test("complete cycle basis handles parallel branches and disconnected forests", 
 });
 test("retained 2025 conditional network reproduces each native PyPSA reference", async () => {
   const directory = "public/research/network-benchmark-2025";
-  const input = parseNetworkInput(
-    JSON.parse(await readFile(`${directory}/input.json`, "utf8")),
-  );
+  const input = parseNetworkInput(JSON.parse(await readFile(`${directory}/input.json`, "utf8")));
   const manifest = JSON.parse(await readFile(`${directory}/comparison.json`, "utf8")) as {
     cases: ({ id: string } & Intervention)[];
   };
