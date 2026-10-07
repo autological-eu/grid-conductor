@@ -18,7 +18,7 @@ countries; the figures highlight Germany, France, Spain and Poland.
 | Evidence | Period and scope | Interpretation |
 | --- | --- | --- |
 | Prepared PyPSA-Eur network | 128 buses, 1,151 generators, 160 StorageUnits; 8,760 hours in 2025 | Input fleet and original renewable availability |
-| Native annual dispatch trial | Original inventory search candidate 006; all 59 chronological blocks | Full-year feasible fixed-inventory trial, not current best or annual optimum |
+| PyPSA-Eur 2025 hourly solve | Candidate 006 from the original inventory search; all 59 chronological blocks | Full-year feasible fixed-inventory trial, not current best or annual optimum |
 | IRENA Renewable capacity statistics 2026 | National end-2024 and end-2025 renewable capacities | Maximum net capacity; not hourly commissioning or generation |
 | Ember current monthly release | National 2025 generation by fuel, twelve months required | Observed-generation comparison; not hourly availability |
 
@@ -30,6 +30,15 @@ However, a 2025 calendar does not make every underlying fleet record a verified
 records; the IRENASTAT reconciliation path was disabled. The configured
 2025 retirement/commissioning filter retains undated assets. Nuclear availability
 uses a declared 2024 proxy. Costs are 2025 assumptions with zero carbon price.
+
+**Candidate 006 is a PyPSA-Eur-based 2025 hourly dispatch solve using native
+PyPSA**, covering all 8,760 hours in 59 consecutive blocks. The candidate number
+identifies a trial set of storage inventories at the block boundaries, not a
+different fleet or dataset. Each block solves dispatch with those prescribed
+starting/ending inventories; connected boundaries preserve storage continuity.
+The table column **“PyPSA-Eur 2025 solve TWh”** sums that hourly output over the
+year. It is generated electricity, not available energy. This is a decomposed
+full-year solve with fixed trial inventories, not a monolithic annual optimum.
 
 Candidate 006 is chosen because complete native hourly quantities are archived
 and independently replayable. It is deliberately not presented as the latest
@@ -67,7 +76,7 @@ outages; marine needs a represented resource model. These are not extensions
 of a solar/wind scaling equation. Renewable waste and parent/child categories
 must be reconciled before being added together.
 
-## Full-year native generation versus Ember
+## PyPSA-Eur 2025 hourly-solve generation versus Ember
 
 ![Annual generation comparison across fuels](../research/fleet-generation-2025/annual.svg)
 
@@ -85,7 +94,7 @@ no substantive negative output is concealed. Country and fuel accounting
 boundaries still need reconciliation, so percentage differences are diagnostics,
 not an accepted model accuracy score.
 
-| Country | Fuel | Native trial TWh | Ember TWh | Difference TWh |
+| Country | Fuel | PyPSA-Eur 2025 solve TWh | Ember TWh | Difference TWh |
 | --- | --- | ---: | ---: | ---: |
 | DE | solar | 55.471 | 89.965 | -34.494 |
 | DE | wind | 193.309 | 131.166 | +62.143 |
@@ -117,6 +126,26 @@ Monthly comparisons expose seasonal and fuel-substitution differences that an
 annual total can hide. Ember is monthly evidence: these plots do not verify
 hour-by-hour dispatch or weather timing. Independent hourly ENTSO-E comparisons,
 including outages, demand, exchanges and prices, remain necessary.
+
+## Generation differences across all countries
+
+![Signed annual generation differences for all 34 model countries](../research/fleet-generation-2025/differences.svg)
+
+Each cell shows **Difference TWh = PyPSA-Eur 2025 hourly-solve generation minus
+Ember generation**, summed over the year for one country and fuel. Red means
+the model produces more; blue means less. A common colour scale makes the size
+of differences comparable, and numeric labels retain small differences.
+Grey cells are missing/incomplete observations, not zero differences.
+
+The plot covers all 34 model countries and eight fuel groups. A country/fuel
+heatmap retains the identities that a pooled histogram would hide. It also
+shows why positive and negative fuel differences should not be combined into
+a single country total: fuel substitution can cancel while the mix remains
+wrong. Large countries naturally contribute larger absolute TWh differences;
+relative differences are available in the downloadable JSON where observed
+annual generation is nonzero. The oil/other-fossil column has unequal scope
+and is marked as a partial comparison. These are observed-data discrepancies,
+not numerical solver errors, price errors or a validated model-accuracy score.
 
 ## Availability is not generation
 

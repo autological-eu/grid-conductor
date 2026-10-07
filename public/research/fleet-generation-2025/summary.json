@@ -2,7 +2,7 @@
   "status": "national_accounting_comparison_not_validation",
   "year": 2025,
   "hours": 8760,
-  "trajectory": "original search candidate 006; fixed inventories; not current best or optimum",
+  "trajectory": "PyPSA-Eur 2025 hourly solve, candidate 006; fixed inventories across 59 chronological blocks; not current best or optimum",
   "network_sha256": "4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec",
   "annual_replay_sha256": "74f7566e8f58e3249fcb42edaa99e75d28c2c027f9395dfd5f8de58980e2328c",
   "accounting_producer_sha256": "c5f1c123e38431c9cac5e66127d7bb2c6476130afb2d4f700e71129501edd95d",

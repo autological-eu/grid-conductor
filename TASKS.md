@@ -826,3 +826,12 @@ public deployment verification.
 Next: reconcile capacity/scope and costs/outages/demand/exchanges, then compile
 zonal inputs and perform matched numerical and held-out empirical validation.
 No annual optimisation job started; N1–N5 and Z0–Z5 gates remain unchanged.
+
+Report clarification: candidate 006 and table/chart legends now explicitly
+identify the PyPSA-Eur 2025 hourly solve with fixed trial storage inventories
+across 59 chronological blocks. Added one signed country/fuel difference heatmap
+for all 34 countries / 272 cells; 48 incomplete observation cells remain unknown.
+Unequal oil/other-fossil scope stays marked. Original generation and capacity
+values are unchanged. Regeneration, production build and browser checks at
+1440/390/320px passed with all three figures decoded and no horizontal overflow.
+No new solve or acceptance/publication claim.
