@@ -641,3 +641,12 @@ accepted direction without weakening acceptance. Existing comparison JSON and
 full methods preserve native/fast <€0.01 objective parity over 48 hours; no
 annualisation, empirical validation or measured speed advantage claimed.
 Local typecheck/build and all 28 frontend tests passed; lint has six existing warnings and no errors. Browser checks passed at 1440/390px, including the actual 2025 paired transmission saving. Publication verified for bb84a9e: CI/Pages run 37648777923 succeeded, including deployed public browser checks. Public map/network/new article HTML, comparison JSON and all JavaScript chunks match the locally tested production build over verified HTTPS. Both actual 2025 transmission and battery preset solves reproduced published savings; desktop/mobile publication checks passed. A transient deployment HTTP 503 cleared on retry.
+
+
+User-requested report presentation: rewrote network-scenario-verification.md
+with summary, matched design, full costs/savings, numerical-error chart, paired
+benefit charts, descriptive timing comparison, limitations and explicit conclusion.
+Three standalone SVGs regenerate directly from hash-pinned published comparison;
+no new numerical inputs, solve or annualisation. The report states fast was not
+faster in the recorded uncontrolled 2025 trials and keeps 2013/annual evidence
+separate. Production build passes; publication verification pending CI/Pages.
