@@ -320,3 +320,10 @@ research retains its separate integration gates.
   without starting computations. Partial candidates never supply annual costs.
   Numerical supports are not interval/optimum certificates; inspect live
   processes separately before acting on its evidence snapshot.
+
+- Extended native Phase-I review uses `audit_submonthly_feasibility_extended.py`
+  and `replay_submonthly_feasibility_extended.py`: 600-second native solve,
+  900-second whole-worker guard, separate producer identity. Inspect actual
+  supervisor/worker PIDs explicitly; legacy worker-name filters omit this tool.
+  Preserve prior failed folders and require independent replay plus explicit
+  donor/driver migration before adoption. No automatic annual resume.
