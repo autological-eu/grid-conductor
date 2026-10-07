@@ -14,7 +14,7 @@ against live processes; this file is not a job monitor.
 | --- | --- | --- |
 | N1 | Done | Publish matched 2025 conditional-window benchmark. Native/fast baseline, cable and battery objectives agree; comparison and methods are published. See [48-hour benchmark](docs/2025-conditional-network-benchmark.md). This is not an annual result. |
 | N2 | Done: configured numerical reference gates | Two chronological 24-hour blocks passed the €0.001 gap and €0.02 native parity gates at iteration 738. Gap €0.0002267; cost difference €0.007903. Independent final-state re-solves reproduced the objective with maximum equality residual 8.09e-9 and zero variable-bound violation. Floating-point lower bound exceeds native by €0.007676: this is numerical parity, not an exact enclosing certificate. See [coordination methods](docs/monthly-inventory-coordination.md). |
-| N3 | In progress; feasible linked year, unresolved numerical gap | Independently checked candidate 008: €50,633,322,720.425575 feasible annual cost, all 59 blocks/8,760 chronological hours, original availability and cyclic closure preserved. Candidate 009 lower support €43,578,259,007.78506 gives 13.9336% numerical gap; not an interval certificate or converged optimum. Frozen original driver resumed after verified interruption under PID 45215 and now computes candidate 009; bounded 10%-weight continuation waiter PID 46065 is live waiting, not dispatching. Published annual bounds remain the earlier 14.04% snapshot. Historical checks are preserved in [N3 verification notes](planning/archive/n3-coordination-verification-2026-10-07.md). Next: tighten bounds, then satisfy matched native/fast and empirical/investment gates. |
+| N3 | In progress; feasible linked year, unresolved numerical gap | Independently checked candidate 008: €50,633,322,720.425575 feasible annual cost, all 59 blocks/8,760 chronological hours, original availability and cyclic closure preserved. Candidate 010 lower support €43,579,568,940.0314 gives 13.9311% numerical gap; not an interval certificate or converged optimum. Frozen original driver resumed after verified interruption under PID 45215 and now computes candidate 010; bounded 10%-weight continuation waiter PID 46065 is live waiting, not dispatching. Published annual bounds remain the earlier 14.04% snapshot. Historical checks are preserved in [N3 verification notes](planning/archive/n3-coordination-verification-2026-10-07.md). Next: tighten bounds, then satisfy matched native/fast and empirical/investment gates. |
 | N4 | Pending N3 | Produce and audit full-year native/reference and fast dispatch comparisons plus paired interventions. Preserve original hourly renewable availability and declare proxies. Distinguish sequential feasible dispatch from a certified annual optimum. |
 | N5 | Pending N4 | Publish annual benchmark tables, charts, JSON and methods; integrate supported verified 2025 functionality into the static app. Inspect CI/Pages and public URLs. Disable recurring implementation checks only after the annual benchmark and supported app integration are complete. |
 
@@ -440,3 +440,28 @@ and the continuation target did not exist, the same guarded bounded waiter
 was explicitly re-armed under PID 46065; it waits for verified finite-budget
 exhaustion and will not restart disappeared/failed jobs. Recurring review remains
 enabled; full annual native/fast, empirical and investment gates remain open.
+
+
+V3 operational-cost diagnostic implemented: `prepare_2025_eua_cost_diagnostic.py`
+re-audits the original EEX archive/workbook and prepared 2025 source before
+computing hypothetical per-asset fossil cost shifts. It rejects already priced
+or dynamic sources, uses direct thermal fuel factors divided by each asset's
+efficiency, and preserves paired cost/factor extrema. Three targeted tests pass.
+The verified €73.43193/tCO2 auction reference would hypothetically add
+€54.54–74.79/MWh to coal, €74.95–90.54/MWh to lignite and €19.83–42.31/MWh to
+CCGT coefficients wherever that price applies. This is not jurisdiction or unit
+ETS-eligibility validation, an hourly price series, lifecycle accounting, a
+modified network or a dispatch result. All original inputs remain unchanged.
+Offline evidence: `2025-eua-cost-coefficients-v2.json`; preserve the earlier
+unpublished producer version. Next: explicitly scope a separate operational
+policy-cost variant and its matched re-solves, after reviewing annual gates.
+
+Current annual evidence: candidate 009's full 59-block witness chain independently
+reproduces €50,634,658,958.63486, above incumbent 008. Candidate 010's unrestricted
+master lower support independently reproduces €43,579,568,940.0314, giving
+13.93105054% unresolved numerical gap against candidate 008. Driver PID 45215
+is live computing candidate 010; waiter PID 46065 is live waiting for the finite
+pass. No duplicate solve, source change or annual-optimum claim was introduced.
+The preceding documentation reconciliation 8af2b02 passed CI/Pages
+37572570829/37572566653. The existing public German gas JSON remains byte-identical
+over verified HTTPS. No new publication or static-app integration is claimed.
