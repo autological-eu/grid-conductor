@@ -40,8 +40,10 @@ has separate evidence; it does not close N3 or weaken annual/empirical gates.
 - [ ] Z4: Validate held-out historical prices/generation/exchanges and sensitivities.
 - [ ] Z5: Publish verified report and integrate supported annual browser scenarios.
 
-Planning only: no new solve, input bundle, runtime or validation claim. Next
-action is Z0's read-only source inventory; PRODUCT.md records accepted direction.
+Z0 remains incomplete. A national wind/solar preprocessing pilot now exists
+([report](docs/hourly-renewable-estimates-2025.md)); it is not an accepted zonal
+input bundle, dispatch solve or validation. Next: reconcile source fleet and
+current Ember coverage, then bidding-zone mapping and commercial constraints.
 
 ## Goal — memory-efficient PyPSA dispatch validated against ENTSO-E 2025
 
@@ -755,3 +757,16 @@ Next: reconcile capacity vintages/distributed PV and current Ember release,
 then zone mapping and weather conversion before accepting dispatch inputs.
 
 Renewable report production build and independent hourly/monthly output replay passed.
+
+
+Renewable report publication gate strengthened: publisher rehashes hourly NPZ,
+checks all 8760 UTC hours, all 792 monthly availability totals, reconstructable
+generation totals/capacity/zero-weather bounds and unavailable-month NaNs.
+Five targeted renewable tests pass, including rejection of modified evidence.
+Actual full replay passed. Report browser checks passed at 1440/390/320px
+(two decoded SVGs, no horizontal overflow). No annual/diagnostic workers are
+live; source-checked annual evidence replay still gives 4.27823529% numerical
+gap. Existing failed diagnostics remain preserved; no duplicate job or frozen
+source change. Latest remote 57b13f3 passed CI/Pages 37667106557/37667101937.
+New zonal plan/source audits/renewable report await deployment verification.
+PRODUCT.md requirements and recurring review completion gates remain unchanged.

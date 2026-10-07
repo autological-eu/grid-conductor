@@ -117,6 +117,9 @@ of zero-weather hours, monthly energy reconciliation, unreachable targets and
 unchanged original shape. Actual processing rejects non-hourly chronology,
 non-unit energy weights, changed Ember hashes, duplicate country/fuel/months and
 missing renewable profiles. It reads input availability fields, not dispatch.
+The publisher additionally checks the saved hourly file hash, exact calendar,
+all monthly energy totals, capacity/zero-weather bounds and unavailable-month
+gaps. A fifth test rejects modified saved evidence.
 The full data pass and independent output reconciliation were run before this
 report was committed.
 

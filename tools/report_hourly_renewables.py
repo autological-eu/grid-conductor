@@ -5,11 +5,50 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from hourly_renewable_estimates import digest
+
+
+def verified_summary(root):
+    report = json.loads((root/'summary.json').read_text())
+    if report['year'] != 2025 or report['hours'] != 8760 or digest(root/'hourly.npz') != report['hourly_sha256']:
+        raise ValueError('Hourly evidence identity changed')
+    with np.load(root/'hourly.npz', allow_pickle=False) as data:
+        expected = np.arange(np.datetime64('2025-01-01T00'), np.datetime64('2026-01-01T00'), np.timedelta64(1, 'h'))
+        if not np.array_equal(data['hours_utc'], expected): raise ValueError('Hourly chronology changed')
+        months = expected.astype('datetime64[M]').astype(int) % 12 + 1
+        seen = set()
+        for row in report['countries']:
+            key = row['country']+'_'+row['technology']
+            if key in seen: raise ValueError('Duplicate country technology')
+            seen.add(key)
+            available = data[key+'_available_mw']; generated = data[key+'_reconstructed_generation_mw']
+            capacity = row['capacity_mw']
+            if available.shape != (8760,) or generated.shape != (8760,) or not np.isfinite(capacity) or capacity <= 0:
+                raise ValueError('Invalid hourly shape or capacity')
+            if not np.isfinite(available).all() or np.any(available < 0) or np.any(available > capacity+1e-6):
+                raise ValueError('Invalid availability')
+            if not np.isclose(available.sum(), row['available_energy_mwh'], rtol=1e-10, atol=1e-5):
+                raise ValueError('Annual availability does not reconcile')
+            if [m['month'] for m in row['months']] != list(range(1,13)): raise ValueError('Incomplete monthly inventory')
+            for month in row['months']:
+                mask = months == month['month']; values = generated[mask]
+                if not np.isclose(available[mask].sum(), month['available_energy_mwh'], rtol=1e-10, atol=1e-5):
+                    raise ValueError('Monthly availability does not reconcile')
+                if month['status'] in ['monthly_constrained_shape_not_availability','zero_reported_generation']:
+                    if not np.isfinite(values).all() or np.any(values < 0) or np.any(values > capacity+1e-6):
+                        raise ValueError('Invalid reconstructed generation')
+                    if np.any(values[available[mask] == 0] != 0): raise ValueError('Generation in zero-weather hours')
+                    if not np.isclose(values.sum(), month['observed_generation_mwh'], rtol=1e-10, atol=1e-5):
+                        raise ValueError('Monthly generation does not reconcile')
+                elif month['status'] in ['missing_observation','target_exceeds_positive_weather_support','no_weather_support','scaling_limit']:
+                    if not np.isnan(values).all(): raise ValueError('Unavailable month was filled')
+                else: raise ValueError('Unknown reconstruction status')
+    return report
 
 
 def run():
     root=Path('data/pypsa-eur/hourly-renewable-estimates-v1')
-    report=json.loads((root/'summary.json').read_text())
+    report=verified_summary(root)
     out=Path('public/research/hourly-renewables-2025');out.mkdir(parents=True,exist_ok=True)
     (out/'summary.json').write_text(json.dumps(report,indent=2)+'\n')
     plt.rcParams.update({'svg.fonttype':'none','font.size':10})
