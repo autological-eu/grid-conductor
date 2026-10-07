@@ -69,4 +69,12 @@ conditional baseline, cable and battery against native PyPSA. All 26 Bun tests,
 typechecking, lint (six existing warnings), production build and desktop/mobile
 workbench, network-worker and maths browser checks passed. Local research
 processes were idle before deletion. Recurring review stays enabled and its
-prompt now respects retired search roots. Publication verification pending.
+prompt now respects retired search roots.
+
+Publication verified through ce2417b: CI/Pages run 37701513423 passed the
+build and live-site browser checks. Twenty HTTPS report/method/JS/figure files
+match the tested production build; removed benchmark pages and old result JSON
+URLs return 404. The initial formatting-only lint failure was fixed before
+this deployment. Browser cache retirement is limited to the obsolete prepared
+benchmark; two tests verify removal and preservation of supported inputs.
+The annual witness and all retained generation values remain unchanged.
