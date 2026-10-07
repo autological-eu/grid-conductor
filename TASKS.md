@@ -782,3 +782,18 @@ in deployment CI. Whitespace cleanup a136c32 is pushed; its final push deploymen
 This publishes national availability/reconstruction diagnostics and a plan, not
 accepted zonal dispatch inputs, annual optimum or carbon-intensity estimates.
 Recurring review remains enabled.
+
+
+Z1 IRENA reconciliation implemented across renewable technologies. Official
+2026 PDF fallback retrieved after API HTTP 503; 417 country/technology rows
+parsed, 40 ambiguous/incomplete rows retained as rejected. Seven capacity
+categories give 238 slots across 34 countries; missing entries unknown.
+Separate 61-series wind/PV hourly capacity sensitivities use held-2024, linear
+commissioning and held-2025 assumptions without overwriting original inputs.
+France solar capacity discrepancy is substantial; Spain wind remains
+unreconciled. Hydro/PHS/bioenergy/geothermal/marine are capacity inventories,
+not weather-scaled generation. Fossil/nuclear sources remain separate.
+Three extraction tests pass; report and compact JSON/figure prepared.
+Next: reconcile source scope/commissioning/locations and current Ember release,
+then technology-specific hourly constraints and zonal mapping. No annual
+solver resume, acceptance-gate change or large Git artifact.
