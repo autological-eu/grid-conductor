@@ -172,3 +172,17 @@ paired native/fast verification and existing empirical/investment requirements.
 Publish comparative evidence as a readable report with data visualisations,
 clear summary and conclusion, without requiring scenario-menu interaction.
 Retain the separate 2013 weekly benchmark.
+
+
+## Accepted direction: hourly zonal dispatch
+
+Build an actual 8,760-hour 2025 bidding-zone dispatch model for paired baseline
+and transmission/battery scenarios. Prepare demand, original renewable
+availability, hydro inflows and other audited inputs once; reuse them across
+solves. Preserve chronological storage and label commercial network assumptions.
+Aim for results in seconds, verified by measured runtime and numerical accuracy;
+precomputed response curves and statistical surrogates are optional future
+alternatives, not the primary calculation. Existing annual and empirical gates
+remain intact; an aggregated model cannot certify the old physical-model optimum.
+See [hourly zonal dispatch plan](docs/hourly-zonal-dispatch-plan.md) for proposed
+implementation, verification and unresolved design choices.

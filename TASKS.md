@@ -19,6 +19,25 @@ against live processes; this file is not a job monitor.
 | N5 | Pending N4 | Publish annual benchmark tables, charts, JSON and methods; integrate supported verified 2025 functionality into the static app. Inspect CI/Pages and public URLs. Disable recurring implementation checks only after the annual benchmark and supported app integration are complete. |
 
 
+## Authorized direction — hourly zonal dispatch
+
+The user selected an actual 8,760-hour zonal solve with preprocessed inputs and
+chronological storage, targeting seconds rather than response-curve interpolation.
+[Detailed plan](docs/hourly-zonal-dispatch-plan.md) defines Z0–Z5. This new model
+has separate evidence; it does not close N3 or weaken annual/empirical gates.
+
+- [ ] Z0: Audit supported bidding zones, mixed-cluster mapping, input coverage and
+  commercial constraints; predeclare numerical/empirical thresholds and runtime protocol.
+- [ ] Z1: Compile hash-pinned annual availability/demand/inflow/cost/capacity inputs.
+- [ ] Z2: Verify small zonal baseline/interventions against independent native PyPSA.
+- [ ] Z3: Benchmark actual annual chronology, aggregation error, benefit bounds,
+  runtime and memory; no representative-hour substitution.
+- [ ] Z4: Validate held-out historical prices/generation/exchanges and sensitivities.
+- [ ] Z5: Publish verified report and integrate supported annual browser scenarios.
+
+Planning only: no new solve, input bundle, runtime or validation claim. Next
+action is Z0's read-only source inventory; PRODUCT.md records accepted direction.
+
 ## Goal — memory-efficient PyPSA dispatch validated against ENTSO-E 2025
 
 User-approved goal; see [PRODUCT.md](PRODUCT.md#goal-memory-efficient-2025-dispatch-with-observed-data-validation).

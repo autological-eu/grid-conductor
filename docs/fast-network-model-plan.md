@@ -1,5 +1,9 @@
 # Fast network model: implementation plan
 
+For the accepted 8,760-hour bidding-zone direction and its separate verification
+chain, see [hourly zonal dispatch plan](hourly-zonal-dispatch-plan.md).
+The dated findings below describe the earlier network implementation plan.
+
 ## Implementation status — 30 September 2026
 
 The first experimental browser implementation is published at `/network`. The
