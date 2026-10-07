@@ -12,10 +12,13 @@ from prepare_submonthly_continuation import source_signature
 from submonthly_inventory_driver import read, verify_annual, verify_master
 
 
-def summarize(root, workspace):
+def summarize(root, workspace, network):
     domain_path = workspace / 'master-workspace.json'
     domain = read(domain_path)
-    source_signature(root, domain['input_sha256'], digest(domain_path))
+    source = digest(network)
+    if source != domain['input_sha256']:
+        raise ValueError('Actual network differs from frozen inventory source')
+    source_signature(root, source, digest(domain_path))
     rows = []
     seen = set()
     for folder in sorted(root.glob('candidate-*')):
@@ -45,7 +48,8 @@ def summarize(root, workspace):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--input', type=Path, required=True)
     parser.add_argument('--root', type=Path, required=True)
     parser.add_argument('--workspace', type=Path, required=True)
     args = parser.parse_args()
-    print(json.dumps(summarize(args.root, args.workspace), indent=2))
+    print(json.dumps(summarize(args.root, args.workspace, args.input), indent=2))

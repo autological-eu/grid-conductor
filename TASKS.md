@@ -14,7 +14,7 @@ against live processes; this file is not a job monitor.
 | --- | --- | --- |
 | N1 | Done | Publish matched 2025 conditional-window benchmark. Native/fast baseline, cable and battery objectives agree; comparison and methods are published. See [48-hour benchmark](docs/2025-conditional-network-benchmark.md). This is not an annual result. |
 | N2 | Done: configured numerical reference gates | Two chronological 24-hour blocks passed the €0.001 gap and €0.02 native parity gates at iteration 738. Gap €0.0002267; cost difference €0.007903. Independent final-state re-solves reproduced the objective with maximum equality residual 8.09e-9 and zero variable-bound violation. Floating-point lower bound exceeds native by €0.007676: this is numerical parity, not an exact enclosing certificate. See [coordination methods](docs/monthly-inventory-coordination.md). |
-| N3 | In progress; reviewed bounded continuation started | Continuation-001 completed five candidates without convergence. Candidate 005 independently checked feasible cost: €50,171,226,278.30085 across all 59 blocks/8,760 hours; independently recomputed lower support €46,258,790,672.12984, numerical gap 7.79817%, not an interval certificate or annual optimum. Continuation-002 is live under actual PID 51005 after locked idle checks and donor/source/package verification, with a separate five-candidate budget and 50% search proposal; original feasibility/gap gates and availability are unchanged. No new continuation-002 annual result exists. Published annual bounds remain the earlier 14.04% snapshot. Next: evaluate the bounded larger-step search, review terminal evidence, then satisfy matched native/fast and empirical/investment gates. |
+| N3 | In progress; bounded continuation running | Best independently checked feasible cost remains continuation-001 candidate 005: €50,171,226,278.30085 over 59 blocks/8,760 hours. Continuation-002 candidate 002 lower support independently recomputes to €46,609,701,660.341675, numerical gap 7.09874%; no complete continuation-002 annual witness exists. Actual driver PID 51005 is live with five-candidate budget and 50% proposal; original feasibility/gap gates and availability unchanged. Candidate 001 has Phase-I evidence and no annual cost: partial/economic or feasibility evidence must not be called annual dispatch. Published annual bounds remain the earlier 14.04% snapshot. Next: finish bounded search and review feasibility/convergence before matched native/fast and empirical/investment gates. |
 | N4 | Pending N3 | Produce and audit full-year native/reference and fast dispatch comparisons plus paired interventions. Preserve original hourly renewable availability and declare proxies. Distinguish sequential feasible dispatch from a certified annual optimum. |
 | N5 | Pending N4 | Publish annual benchmark tables, charts, JSON and methods; integrate supported verified 2025 functionality into the static app. Inspect CI/Pages and public URLs. Disable recurring implementation checks only after the annual benchmark and supported app integration are complete. |
 
@@ -569,3 +569,17 @@ unchanged. Existing evidence is preserved; no duplicate or unbounded job started
 Prior implementation 17020c8 passed CI/Pages 37608090099/37608081566; existing
 public methods/data assets are verified over HTTPS. Requirements remain unchanged
 and recurring review stays enabled.
+
+
+Review-helper source gate strengthened: `summarize_inventory_search.py` now
+requires `--input` and rehashes the actual network before using recorded source
+signatures. A changed-input test confirms rejection before any evidence reuse;
+all three targeted tests pass. Actual execution rehashed the unchanged source
+and checked donor chains/master supports: best feasible cost remains
+€50,171,226,278.30085, strongest support €46,609,701,660.341675 from partial
+continuation-002 candidate 002 (gap 7.09873942%). Candidate 001 has a Phase-I
+folder and no annual replay; it supplies no annual feasible cost. Actual driver
+PID 51005 remains live. Frozen solver modules, requirements and acceptance gates
+are unchanged; no duplicate computation started. Prior commit 0eec788 passed
+CI/Pages 37614453113/37614446328; existing public methods/data assets remain
+verified over HTTPS. Recurring review remains enabled.
