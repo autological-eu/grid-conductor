@@ -14,7 +14,7 @@ against live processes; this file is not a job monitor.
 | --- | --- | --- |
 | N1 | Done | Publish matched 2025 conditional-window benchmark. Native/fast baseline, cable and battery objectives agree; comparison and methods are published. See [48-hour benchmark](docs/2025-conditional-network-benchmark.md). This is not an annual result. |
 | N2 | Done: configured numerical reference gates | Two chronological 24-hour blocks passed the €0.001 gap and €0.02 native parity gates at iteration 738. Gap €0.0002267; cost difference €0.007903. Independent final-state re-solves reproduced the objective with maximum equality residual 8.09e-9 and zero variable-bound violation. Floating-point lower bound exceeds native by €0.007676: this is numerical parity, not an exact enclosing certificate. See [coordination methods](docs/monthly-inventory-coordination.md). |
-| N3 | In progress; bounded continuation running | Best independently checked feasible cost remains continuation-001 candidate 005: €50,171,226,278.30085 over 59 blocks/8,760 hours. Continuation-002 candidate 002 lower support independently recomputes to €46,609,701,660.341675, numerical gap 7.09874%; no complete continuation-002 annual witness exists. Actual driver PID 51005 is live with five-candidate budget and 50% proposal; original feasibility/gap gates and availability unchanged. Candidate 001 has Phase-I evidence and no annual cost: partial/economic or feasibility evidence must not be called annual dispatch. Published annual bounds remain the earlier 14.04% snapshot. Next: finish bounded search and review feasibility/convergence before matched native/fast and empirical/investment gates. |
+| N3 | Blocked; feasibility diagnosis under review | Best independently checked full-year feasible cost is continuation-002 candidate 002: €50,098,008,942.03262 over 59 blocks/8,760 hours. Candidate 004 lower support recomputes to €47,954,698,244.3425, numerical gap 4.27824%, not an optimum certificate. Driver PID 51005 stopped at candidate 004 block 12: bounded elastic dual probe failed positive-support verification. No live annual driver; separate bounded native Phase-I diagnostic PID 52014 started with failed evidence preserved. Next: independently replay a valid diagnosis before any explicit resume; no infeasibility or convergence claim from the failed probe. Published annual bounds remain the earlier 14.04% snapshot; N4/N5 and empirical gates remain open. |
 | N4 | Pending N3 | Produce and audit full-year native/reference and fast dispatch comparisons plus paired interventions. Preserve original hourly renewable availability and declare proxies. Distinguish sequential feasible dispatch from a certified annual optimum. |
 | N5 | Pending N4 | Publish annual benchmark tables, charts, JSON and methods; integrate supported verified 2025 functionality into the static app. Inspect CI/Pages and public URLs. Disable recurring implementation checks only after the annual benchmark and supported app integration are complete. |
 
@@ -583,3 +583,19 @@ PID 51005 remains live. Frozen solver modules, requirements and acceptance gates
 are unchanged; no duplicate computation started. Prior commit 0eec788 passed
 CI/Pages 37614453113/37614446328; existing public methods/data assets remain
 verified over HTTPS. Recurring review remains enabled.
+
+
+N3 blocker review: actual process inspection confirms continuation-002 driver
+is absent; its terminal receipt is `blocked_requires_review`, candidate 004
+block 12. Saved worker traceback rejects nonpositive independently supported
+infeasibility cut; economic infeasibility and Phase-I multipliers are not accepted
+as proof. No OOM/kill event is recorded. Source-checked evidence summary reverified
+complete candidate 002 annual cost €50,098,008,942.03262 and candidate 004 lower
+support €47,954,698,244.3425 (numerical gap 4.27823529%). After idle inspection,
+started the existing bounded native elastic solver separately under PID 52014
+at `continuation-002/review-phase-004-12-native/`; original failed phase folder
+and all calculation/source fingerprints are preserved. This diagnostic is not
+an annual restart or result; valid support still requires independent replay.
+Prior commit 813271f passed CI/Pages 37620980448/37620971414; existing public
+methods/data assets remain verified over HTTPS. Requirements/gates unchanged,
+recurring review enabled.
