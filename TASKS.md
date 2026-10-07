@@ -14,7 +14,7 @@ against live processes; this file is not a job monitor.
 | --- | --- | --- |
 | N1 | Done | Publish matched 2025 conditional-window benchmark. Native/fast baseline, cable and battery objectives agree; comparison and methods are published. See [48-hour benchmark](docs/2025-conditional-network-benchmark.md). This is not an annual result. |
 | N2 | Done: configured numerical reference gates | Two chronological 24-hour blocks passed the €0.001 gap and €0.02 native parity gates at iteration 738. Gap €0.0002267; cost difference €0.007903. Independent final-state re-solves reproduced the objective with maximum equality residual 8.09e-9 and zero variable-bound violation. Floating-point lower bound exceeds native by €0.007676: this is numerical parity, not an exact enclosing certificate. See [coordination methods](docs/monthly-inventory-coordination.md). |
-| N3 | In progress; bounded continuation running | Continuation-001 candidate 001: €50,183,555,705.073326 independently checked feasible cost for all 59 blocks/8,760 chronological hours, improving original candidate 008 by €449,767,015.352249. Its independently recomputed master lower support is €43,580,167,484.864845: unresolved numerical gap 13.15847%, not an interval certificate or annual optimum. Actual driver PID 46065 remains live; the five-candidate budget, 10% proposal weight and original feasibility/gap gates are unchanged. Published annual bounds remain the earlier 14.04% snapshot. See [historical verification](planning/archive/n3-coordination-verification-2026-10-07.md). Next: tighten bounds, then satisfy matched native/fast and empirical/investment gates. |
+| N3 | In progress; bounded continuation running | Continuation-001 candidate 003: €50,183,034,416.52437 independently checked feasible cost for all 59 blocks/8,760 chronological hours. Candidate 004 independently recomputed lower support: €46,237,533,728.48881, unresolved numerical gap 7.86222%; candidate 004 dispatch remains partial. These are numerical supports, not an interval certificate or annual optimum. Actual driver PID 46065 remains live; five-candidate budget, 10% proposal weight and original feasibility/gap gates are unchanged. Published annual bounds remain the earlier 14.04% snapshot. See [historical verification](planning/archive/n3-coordination-verification-2026-10-07.md). Next: finish the finite pass, review terminal evidence and tighten bounds before matched native/fast and empirical/investment acceptance. |
 | N4 | Pending N3 | Produce and audit full-year native/reference and fast dispatch comparisons plus paired interventions. Preserve original hourly renewable availability and declare proxies. Distinguish sequential feasible dispatch from a certified annual optimum. |
 | N5 | Pending N4 | Publish annual benchmark tables, charts, JSON and methods; integrate supported verified 2025 functionality into the static app. Inspect CI/Pages and public URLs. Disable recurring implementation checks only after the annual benchmark and supported app integration are complete. |
 
@@ -524,3 +524,16 @@ OOM/kill counters remain zero and workspace disk has 8.3 GiB available.
 Requirements remain unchanged. Prior ledger commit 8f67d57 passed CI/Pages
 37588991159/37588980981; verified public HTTPS still serves the tested methods
 article and gas JSON/SVG. Recurring review remains enabled.
+
+
+N3 continuation review: independently checked complete annual witness chains
+for candidates 001–003 and recomputed all four saved master lower supports.
+Candidate 002 costs €50,188,223,255.64121, above 001; candidate 003 improves
+the incumbent to €50,183,034,416.52437. Candidate 004 lower support is
+€46,237,533,728.48881; its partial dispatch supplies no annual upper bound.
+The resulting best numerical gap is 7.86221864%, still unresolved. Actual
+driver PID 46065 is live; no duplicate computation or frozen-source edit occurred.
+No cgroup OOM/kill event is recorded; 8.1 GiB disk remains available. Requirements
+are unchanged. Ledger commit 778f256 passed CI/Pages 37593569013/37593562244;
+public HTTPS article/data assets remain byte-identical to the tested build.
+Recurring review and all downstream acceptance gates remain enabled.
