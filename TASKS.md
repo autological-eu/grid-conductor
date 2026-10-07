@@ -14,7 +14,7 @@ against live processes; this file is not a job monitor.
 | --- | --- | --- |
 | N1 | Done | Publish matched 2025 conditional-window benchmark. Native/fast baseline, cable and battery objectives agree; comparison and methods are published. See [48-hour benchmark](docs/2025-conditional-network-benchmark.md). This is not an annual result. |
 | N2 | Done: configured numerical reference gates | Two chronological 24-hour blocks passed the €0.001 gap and €0.02 native parity gates at iteration 738. Gap €0.0002267; cost difference €0.007903. Independent final-state re-solves reproduced the objective with maximum equality residual 8.09e-9 and zero variable-bound violation. Floating-point lower bound exceeds native by €0.007676: this is numerical parity, not an exact enclosing certificate. See [coordination methods](docs/monthly-inventory-coordination.md). |
-| N3 | In progress; final candidate of bounded continuation running | Continuation-001 candidate 004: €50,175,837,375.13854 independently checked feasible cost for all 59 blocks/8,760 chronological hours. Candidate 005 independently recomputed lower support: €46,258,790,672.12984, unresolved numerical gap 7.80664%; candidate 005 dispatch remains partial. These are numerical supports, not an interval certificate or annual optimum. Actual driver PID 46065 remains live; five-candidate budget, 10% proposal weight and original feasibility/gap gates are unchanged. Published annual bounds remain the earlier 14.04% snapshot. See [historical verification](planning/archive/n3-coordination-verification-2026-10-07.md). Next: finish the finite pass, review terminal evidence and tighten bounds before matched native/fast and empirical/investment acceptance. |
+| N3 | In progress; reviewed bounded continuation started | Continuation-001 completed five candidates without convergence. Candidate 005 independently checked feasible cost: €50,171,226,278.30085 across all 59 blocks/8,760 hours; independently recomputed lower support €46,258,790,672.12984, numerical gap 7.79817%, not an interval certificate or annual optimum. Continuation-002 is live under actual PID 51005 after locked idle checks and donor/source/package verification, with a separate five-candidate budget and 50% search proposal; original feasibility/gap gates and availability are unchanged. No new continuation-002 annual result exists. Published annual bounds remain the earlier 14.04% snapshot. Next: evaluate the bounded larger-step search, review terminal evidence, then satisfy matched native/fast and empirical/investment gates. |
 | N4 | Pending N3 | Produce and audit full-year native/reference and fast dispatch comparisons plus paired interventions. Preserve original hourly renewable availability and declare proxies. Distinguish sequential feasible dispatch from a certified annual optimum. |
 | N5 | Pending N4 | Publish annual benchmark tables, charts, JSON and methods; integrate supported verified 2025 functionality into the static app. Inspect CI/Pages and public URLs. Disable recurring implementation checks only after the annual benchmark and supported app integration are complete. |
 
@@ -552,3 +552,20 @@ calculation edit or acceptance change occurred. After finite-budget exhaustion,
 review terminal evidence before any further search; no unbounded restart.
 Prior ledger commit 0c6ee28 passed CI/Pages 37601162867/37601153328, and existing
 public article/JSON/SVG remain verified over HTTPS. Recurring review stays enabled.
+
+
+N3 finite-pass review and safe continuation: continuation-001 ended with
+`candidate_limit_not_converged`; actual process inspection confirms no live
+driver or worker. All donor signatures, lower supports and complete annual
+chains were independently rechecked; candidate 005 reproduces
+€50,171,226,278.30085 / €46,258,790,672.12984, gap 7.79816619%. Ten continuation
+tests pass, including the smaller monolithic reference and 50% proposal.
+After acquiring donor locks and checking idle workers, prepared continuation-002
+with preserved local symlink donors and explicitly started unchanged driver
+PID 51005. Actual script/root inspection confirms it is live. This is a separate
+five-candidate, 50% search heuristic, not a convergence guarantee. Original
+source, chronology, storage, feasibility and absolute/relative gap gates remain
+unchanged. Existing evidence is preserved; no duplicate or unbounded job started.
+Prior implementation 17020c8 passed CI/Pages 37608090099/37608081566; existing
+public methods/data assets are verified over HTTPS. Requirements remain unchanged
+and recurring review stays enabled.
