@@ -808,3 +808,21 @@ with original summaries and hourly fits preserved. Three comparison tests pass.
 Broader national fuel inventory has 154 old-only and 174 current-only keys;
 these need scope reconciliation. No emissions-method, hourly-validation or
 capacity/dispatch acceptance follows from this generation release comparison.
+
+Full-year fleet/generation comparison prepared (7 October 2026):
+`docs/pypsa-fleet-generation-comparison-2025.md` compares 238 IRENA renewable
+capacity slots and 272 country/fuel generation rows, with 224 complete annual
+Ember references. Candidate 006 native quantities independently replayed across
+59 blocks / 8760 UTC hours; monthly and annual accounting exactly matches the
+retained diagnostic. One-block NPZ materialisation avoids repeated decompression
+without editing frozen research modules. Two figures and compact provenance JSON
+cover all 34 countries, including hydro/thermal/nuclear; PHS recycling excluded.
+Germany gas 1.141 versus current Ember 79.325 TWh is a material unresolved
+mix difference. This is a feasible trial, not current best, optimum, price-error
+estimate or accepted zonal input. Three Ember schema tests, annual-total replay
+and production build passed. Local production-browser checks at 1440/390/320px
+passed: both figures decode and there is no horizontal overflow. Report awaits
+public deployment verification.
+Next: reconcile capacity/scope and costs/outages/demand/exchanges, then compile
+zonal inputs and perform matched numerical and held-out empirical validation.
+No annual optimisation job started; N1–N5 and Z0–Z5 gates remain unchanged.
