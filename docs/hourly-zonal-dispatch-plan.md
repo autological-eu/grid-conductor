@@ -71,6 +71,39 @@ Zone mapping must use authoritative geographic/domain evidence. A mixed-zone
 Where necessary, map original asset locations before clustering and reconstruct
 zone-level availability. Missing asset geography stays a blocker.
 
+### Candidate sources identified through Clarigrid
+
+The user identified the following candidate datasets. Treat their 2025 coverage,
+versions, units, licence and geographical scope as audit questions until fetched
+and checked; a catalog entry is not evidence of a complete 2025 input.
+
+| Candidate | Intended role | Required checks and limits |
+| --- | --- | --- |
+| Our World in Data energy dataset | Annual country/technology generation cross-check | Verify actual 2025 rows and original upstream providers. National totals cannot allocate hourly generation or split bidding zones. Shared Ember/other upstream data are not independent validation. |
+| Energy-Charts installed capacity | Fleet capacity cross-check or documented input where sufficiently resolved | Verify technology definitions, geography, effective dates, additions/retirements and net/gross scope. Year-end capacity is not capacity available throughout 2025; national totals need justified zonal allocation. |
+| Ember monthly/yearly electricity | Monthly seasonality and annual generation/mix reconciliation | Verify 2025 coverage, revisions, primary generation versus pumped discharge and net/gross accounting. Existing Ember reference audits can be reused only with matching hashes/scope. No invented hourly profiles from monthly totals. |
+| IRENA renewable capacity/generation | Renewable fleet and annual energy cross-check | Verify reporting year and publication vintage, technology and geographic coverage. Distinguish MW capacity from MWh generation and observed data from estimates. Annual generation is not hourly availability. |
+| ERA5 atmospheric reanalysis | Weather input to hourly wind/solar and catchment/inflow modelling | Requires spatial asset layouts, wind hub height/turbine curves, solar orientation/technology and conversion models. Hydro also needs runoff/catchments/routing and energy conversion, not atmospheric variables alone. Audit hourly timestamps and annual resource weighting. |
+
+Prefer the existing hash-pinned 2025 PyPSA-Eur weather/availability/inflow inputs
+when their scope is suitable; do not download another ERA5 year merely to
+evaluate scenarios. Reconstruct only missing or separately reviewed inputs.
+Observed energy totals can audit or inform a disclosed training-only calibration
+of weather conversion; they must not become dispatch-as-availability or conceal
+curtailment, outages and accounting differences.
+
+Clarigrid may simplify discovery and access; retain original provider provenance
+and the complete transformation chain. It does not supply the missing market
+bids, commercial network domains or operating costs merely by providing energy
+statistics. Commercial capacity and zonal geography remain separate Z0 blockers.
+
+Access check on 7 October 2026: no Clarigrid plugin was returned by plugin
+discovery, and an unauthenticated HTTPS request to the supplied MCP endpoint
+returned 401. No dataset schema, 2025 coverage or licence was verified through
+that endpoint. An authenticated custom connection is needed for MCP collection;
+original-provider read-only source audits can proceed independently. Keep
+credentials outside Git and the public app.
+
 ### Aggregation policy
 
 Start with multiple supply blocks per technology where efficiencies, marginal

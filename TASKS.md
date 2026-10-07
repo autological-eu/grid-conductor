@@ -28,6 +28,11 @@ has separate evidence; it does not close N3 or weaken annual/empirical gates.
 
 - [ ] Z0: Audit supported bidding zones, mixed-cluster mapping, input coverage and
   commercial constraints; predeclare numerical/empirical thresholds and runtime protocol.
+  Include the user's Clarigrid candidates: OWID/Ember/IRENA generation totals,
+  Energy-Charts capacity and ERA5 weather. Audit actual 2025 coverage, original
+  providers, units/licences and zonal allocation before use; annual/monthly totals
+  are cross-checks, not hourly availability. Current access check: no Clarigrid
+  plugin discovered; MCP endpoint returns HTTP 401 without authenticated access.
 - [ ] Z1: Compile hash-pinned annual availability/demand/inflow/cost/capacity inputs.
 - [ ] Z2: Verify small zonal baseline/interventions against independent native PyPSA.
 - [ ] Z3: Benchmark actual annual chronology, aggregation error, benefit bounds,
