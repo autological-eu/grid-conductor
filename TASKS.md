@@ -1,6 +1,6 @@
 # Grid Conductor — implementation tasks
 
-Last reconciled: 5 October 2026. This is the canonical current backlog.
+Last reconciled: 7 October 2026. This is the canonical current backlog.
 [PRODUCT.md](PRODUCT.md) defines acceptance criteria. Historical plans are in
 [planning/archive/](planning/archive/); their checked boxes are not current evidence.
 
@@ -358,3 +358,43 @@ separate PID 38841 continuation supervisor was live waiting, not dispatching.
 No duplicate annual job was started. Original chronological feasibility and
 convergence gates remain in place; full annual native/fast and empirical
 acceptance are still incomplete.
+
+
+7 October review: original driver PID 34190 and continuation waiter PID 38841
+were zombies, with stale executing/waiting receipts. No research workers were
+live. Candidate 008 retained verified solves for blocks 00–52 and independent
+replays through 51. Input, domain, code, packages and seed hashes matched the
+frozen manifest; block 52 was replayable. The original finite driver explicitly
+resumed under PID 45215, reusing evidence instead of repeating completed solves.
+The old waiting receipt is preserved for review; it does not imply a live or
+started continuation. Check actual processes before resuming the waiter.
+
+V3 generation sensitivity: `summarize_native_generation_eager.py` loads each
+compressed quantity array once per bounded block, retaining the original
+accounting equations and source-hash checks in a separate producer. Candidate
+006 accounting verified all 59 blocks/8,760 hours for 34 model countries within
+a 2 GiB address-space/180-second guard. `compare_native_generation_eager.py`
+retains reported-category scopes and gaps, and checks producer/dependency hashes.
+Eleven accounting/comparison tests pass, including original-equation parity,
+single array reads, malformed/oversized inputs and changed provenance. Offline
+evidence is `2025-fixed-inventory-native-generation-candidate-006-v2.json` and
+`2025-fixed-inventory-generation-comparison-candidate-006-v3.json`. Germany's
+reported-generation error remains +45.5972% (001: +45.5396%); Bulgaria +79.8248%
+(001: +80.0011%); Poland +2.6800% (001: +2.8289%). These unreconciled national
+quantities are not whole-fleet validation, carbon estimates or investment gains.
+No updated generation comparison has been published.
+
+V2 Clarigrid investigation requested by the user: the public catalog lists
+European sources alongside U.S. sources, including SMARD generation and Elia
+unit outages. Public dataset pages describe SMARD natural-gas generation as
+MWh per interval (filter 4071), and Elia outages as event-based records for
+units above 100 MW. Neither verifies 2025 hourly coverage. The hosted MCP
+endpoint returned HTTP 401; no connected Clarigrid plugin was found. Its public
+MCP guide describes discovery/schema/fetch tools, 1,000-row response limits and
+a default 31-day request range, with account authorization required. Next:
+authenticate via the connector, audit European catalog coverage and source
+contracts, then test a bounded 2025 sample against original observations.
+Prioritize explicit scheduled/physical exchange provenance and unit outages;
+standardization alone is not independent measurement or complete availability.
+Keep any prepared-input changes in separately hashed variants; no Clarigrid
+values or policy assumptions have entered the frozen annual baseline.
