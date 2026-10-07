@@ -42,8 +42,10 @@ has separate evidence; it does not close N3 or weaken annual/empirical gates.
 
 Z0 remains incomplete. A national wind/solar preprocessing pilot now exists
 ([report](docs/hourly-renewable-estimates-2025.md)); it is not an accepted zonal
-input bundle, dispatch solve or validation. Next: reconcile source fleet and
-current Ember coverage, then bidding-zone mapping and commercial constraints.
+input bundle, dispatch solve or validation. Current Ember wind/solar references
+are reconciled; broader fuel/accounting scopes remain open. Next: reconcile
+source fleet and accounting scopes, then bidding-zone mapping and commercial
+constraints.
 
 ## Goal — memory-efficient PyPSA dispatch validated against ENTSO-E 2025
 
@@ -854,3 +856,20 @@ between numerical parity and observed-data differences. These publications do
 not complete annual/empirical/zonal-input gates; recurring review stays enabled.
 Next: reconcile capacity/scope/cost/outage inputs
 for Z0/Z1 and independently checked feasibility support before any N3 recovery.
+
+
+Z1 original-demand preprocessing advanced: `prepare_national_demand_2025.py`
+exports all 8760 original prepared-network hourly loads into 34 national areas,
+with pinned source/output/producer hashes, monthly/annual MWh and peak MW.
+Three guard tests passed (identity reordering, missing/negative quantities,
+unknown bus, nonunit weights and calendar truncation). Independent output replay
+matches original source demand summed at every hour; production build passed.
+Outputs remain ignored at
+`data/pypsa-eur/national-demand-2025-v1/`; no source or annual-checkpoint mutation.
+Actual annual/preparation/feasibility jobs are absent. Fresh annual evidence
+replay retains the existing 4.27823529% gap and blocked support recovery.
+Latest deployed d1ccad0 CI/Pages and PR checks remain successful; public generation
+comparison JSON was rechecked against the repository. Z0/Z1 remain incomplete:
+next audit original demand against observations and allocate verified bidding
+zones, then combine unchanged availability/inflow/capacity/cost inputs. This
+national export is not accepted zonal demand, empirical validation or an optimum.

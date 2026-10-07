@@ -361,3 +361,26 @@ verified year-filtered dataset. Future capacity collection must use documented
 the initial cached response as discovery evidence, not accepted 2025 fleet input.
 Source: [Energy-Charts API](https://api.energy-charts.info/); access setup:
 [CDS API instructions](https://cds.climate.copernicus.eu/how-to-api).
+
+## Original-demand preprocessing diagnostic
+
+`tools/prepare_national_demand_2025.py` exports the prepared network's original
+load quantities into a separate ignored national bundle. It requires a pinned
+network hash, all 8,760 UTC hours, unit hourly weights, complete unique load
+identities, valid bus/country assignment and finite nonnegative demand. It
+preserves each hour's total rather than interpolating or deriving demand from
+dispatch. The NPZ carries hours, country identities and MW; the summary records
+monthly/annual MWh, peak MW and source/output/producer hashes.
+
+```sh
+python tools/prepare_national_demand_2025.py \
+  --network data/pypsa-eur/upstream/resources/gridfix-2025/networks/base_s_128_elec_.nc \
+  --expected-sha256 4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec \
+  --output data/pypsa-eur/national-demand-2025-v1
+```
+
+Use the pinned research Python and a fresh output folder. This is national
+preprocessing evidence, not accepted bidding-zone demand or independent
+ENTSO-E validation. Country/accounting scope, split-zone allocation and
+observed-demand comparisons remain required before the zonal compiler can
+accept it. The source network and annual optimisation checkpoints are unchanged.
