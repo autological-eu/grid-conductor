@@ -14,7 +14,7 @@ against live processes; this file is not a job monitor.
 | --- | --- | --- |
 | N1 | Done | Publish matched 2025 conditional-window benchmark. Native/fast baseline, cable and battery objectives agree; comparison and methods are published. See [48-hour benchmark](docs/2025-conditional-network-benchmark.md). This is not an annual result. |
 | N2 | Done: configured numerical reference gates | Two chronological 24-hour blocks passed the €0.001 gap and €0.02 native parity gates at iteration 738. Gap €0.0002267; cost difference €0.007903. Independent final-state re-solves reproduced the objective with maximum equality residual 8.09e-9 and zero variable-bound violation. Floating-point lower bound exceeds native by €0.007676: this is numerical parity, not an exact enclosing certificate. See [coordination methods](docs/monthly-inventory-coordination.md). |
-| N3 | In progress; bounded continuation running | Continuation-001 candidate 003: €50,183,034,416.52437 independently checked feasible cost for all 59 blocks/8,760 chronological hours. Candidate 004 independently recomputed lower support: €46,237,533,728.48881, unresolved numerical gap 7.86222%; candidate 004 dispatch remains partial. These are numerical supports, not an interval certificate or annual optimum. Actual driver PID 46065 remains live; five-candidate budget, 10% proposal weight and original feasibility/gap gates are unchanged. Published annual bounds remain the earlier 14.04% snapshot. See [historical verification](planning/archive/n3-coordination-verification-2026-10-07.md). Next: finish the finite pass, review terminal evidence and tighten bounds before matched native/fast and empirical/investment acceptance. |
+| N3 | In progress; final candidate of bounded continuation running | Continuation-001 candidate 004: €50,175,837,375.13854 independently checked feasible cost for all 59 blocks/8,760 chronological hours. Candidate 005 independently recomputed lower support: €46,258,790,672.12984, unresolved numerical gap 7.80664%; candidate 005 dispatch remains partial. These are numerical supports, not an interval certificate or annual optimum. Actual driver PID 46065 remains live; five-candidate budget, 10% proposal weight and original feasibility/gap gates are unchanged. Published annual bounds remain the earlier 14.04% snapshot. See [historical verification](planning/archive/n3-coordination-verification-2026-10-07.md). Next: finish the finite pass, review terminal evidence and tighten bounds before matched native/fast and empirical/investment acceptance. |
 | N4 | Pending N3 | Produce and audit full-year native/reference and fast dispatch comparisons plus paired interventions. Preserve original hourly renewable availability and declare proxies. Distinguish sequential feasible dispatch from a certified annual optimum. |
 | N5 | Pending N4 | Publish annual benchmark tables, charts, JSON and methods; integrate supported verified 2025 functionality into the static app. Inspect CI/Pages and public URLs. Disable recurring implementation checks only after the annual benchmark and supported app integration are complete. |
 
@@ -537,3 +537,18 @@ No cgroup OOM/kill event is recorded; 8.1 GiB disk remains available. Requiremen
 are unchanged. Ledger commit 778f256 passed CI/Pages 37593569013/37593562244;
 public HTTPS article/data assets remain byte-identical to the tested build.
 Recurring review and all downstream acceptance gates remain enabled.
+
+
+N3 evidence-summary implementation: `summarize_inventory_search.py` checks
+the frozen source/domain/code/package signature, recomputes saved master supports
+and verifies complete annual witness chains, including deduplicated local donors.
+Partial candidates can contribute lower support only; invalid annual evidence
+fails instead of being silently omitted. Two targeted tests pass. Actual execution
+reverified all original donor chains and continuation candidates 001–004: best
+feasible cost €50,175,837,375.13854, strongest lower support from partial candidate
+005 €46,258,790,672.12984, numerical gap 7.80663943%. Liveness is explicitly
+separate: actual PID 46065 is live on candidate 005. No duplicate solve, frozen
+calculation edit or acceptance change occurred. After finite-budget exhaustion,
+review terminal evidence before any further search; no unbounded restart.
+Prior ledger commit 0c6ee28 passed CI/Pages 37601162867/37601153328, and existing
+public article/JSON/SVG remain verified over HTTPS. Recurring review stays enabled.

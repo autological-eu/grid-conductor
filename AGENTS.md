@@ -313,3 +313,9 @@ research retains its separate integration gates.
   a waiting supervisor from the driver it later executes. Receipt labels are
   historical observations, not liveness. Pair this with independent witness and
   lower-support replay before making numerical or acceptance claims.
+
+- `summarize_inventory_search.py --root <search> --workspace <inventory>`
+  independently checks saved source signatures, lower supports and annual chains
+  without starting computations. Partial candidates never supply annual costs.
+  Numerical supports are not interval/optimum certificates; inspect live
+  processes separately before acting on its evidence snapshot.
