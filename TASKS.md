@@ -770,3 +770,15 @@ gap. Existing failed diagnostics remain preserved; no duplicate job or frozen
 source change. Latest remote 57b13f3 passed CI/Pages 37667106557/37667101937.
 New zonal plan/source audits/renewable report await deployment verification.
 PRODUCT.md requirements and recurring review completion gates remain unchanged.
+
+
+Publication verified for ef78d0e: CI/Pages push run 37682200097 succeeded.
+Public HTTPS renewable report and zonal plan HTML, diagnostic JSON and all
+deployed JavaScript match the tested production build. Both SVGs match apart
+from the subsequent whitespace-only normalisation; local 1440/390/320px checks
+verify image decoding and no overflow. Direct public browser checks also passed
+in deployment CI. Whitespace cleanup a136c32 is pushed; its final push deployment
+37682257710 is still running at this review snapshot (PR build 37682265682 passed).
+This publishes national availability/reconstruction diagnostics and a plan, not
+accepted zonal dispatch inputs, annual optimum or carbon-intensity estimates.
+Recurring review remains enabled.
