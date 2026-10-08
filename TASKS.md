@@ -462,3 +462,10 @@ No carbon factors, datasets or solver calculations changed. Typecheck, build,
 lint (six existing warnings) and functional browser checks at all four widths
 pass, including visible carbon cards and new Docs sections. Publication pending;
 recurring reviews remain paused.
+
+Carbon/Docs publication verified for `143df78f43982a1678dc40610ac3481c78aa2657`:
+CI/Pages `37848761554` and PR checks `37848770732` succeeded. Independent public
+browser checks passed at 1440, 390, 320 and 667px, including default-visible
+partial carbon estimates, step 3, data references and scenario persistence.
+Official ENTSO-E TYNDP 2024 reference page returned HTTP 200; its linked PDF was
+not retrievable in this environment. No claim of formal guideline compliance.
