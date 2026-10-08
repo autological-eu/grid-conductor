@@ -122,7 +122,7 @@ export function TargetSidebar({
         </p>
         <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
           <Stat
-            label="Annual congestion rent (floor: 0)"
+            label="Annual congestion rent"
             value={
               target.congestion_rent_meur_year == null
                 ? "Unavailable"
@@ -149,11 +149,6 @@ export function TargetSidebar({
           />
         </dl>
         <p className="mt-2 text-xs text-muted-foreground">
-          2025 observed baseline. Mean absolute spread over covered hours; rent sums archived
-          cross-border flow × signed price difference × interval hours in both directions. Negative
-          contributions remain in the calculation; only the displayed annual total is floored at
-          zero. This flow–price estimate is not verified TSO income. Scheduled-versus-physical
-          classification is unverified: original ENTSO-E request receipts are unavailable.{" "}
           <Link
             to="/docs"
             hash="1-identifying-bottlenecks"

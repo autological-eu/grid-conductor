@@ -24,7 +24,7 @@ try {
       if (response.status() >= 400) failures.push(`${response.status()} ${response.url()}`);
     });
     await page.goto(base);
-    await page.getByRole("combobox", { name: "Choose a bottleneck" }).waitFor();
+    await page.locator('g[data-corridor="FR|IT-North"]').waitFor();
     assert.equal(
       await page.getByRole("link", { name: "European targets", exact: true }).count(),
       0,
@@ -35,7 +35,7 @@ try {
     await page.getByRole("heading", { name: "1. Identifying bottlenecks" }).waitFor();
     await page.getByRole("heading", { name: "2. Simulating scenarios" }).waitFor();
     await page.getByRole("link", { name: "Workbench", exact: true }).click();
-    await page.getByRole("combobox", { name: "Choose a bottleneck" }).waitFor();
+    await page.locator('g[data-corridor="FR|IT-North"]').waitFor();
     assert(
       (await page
         .locator('svg[aria-label="Map of European bidding zones and congested borders"] path')
@@ -55,15 +55,13 @@ try {
     );
     await keyboardCorridor.press("Enter");
     await page.getByRole("button", { name: "Hourly price difference" }).waitFor();
-    if (viewport.width > 1000) {
-      await page.locator('g[data-corridor="FR|IT-North"]').click();
-    } else {
-      await page.getByRole("combobox", { name: "Choose a bottleneck" }).selectOption("FR>IT-North");
-    }
-    await page.getByRole("combobox", { name: "Choose a bottleneck" }).selectOption("FR>IT-North");
-    await page
-      .getByText(/classification is unverified: original ENTSO-E request receipts are unavailable/)
-      .waitFor();
+    assert.equal(
+      await page.getByText("Explore European electricity price gaps.", { exact: false }).count(),
+      0,
+    );
+    assert.equal(await page.getByRole("combobox", { name: "Choose a bottleneck" }).count(), 0);
+    assert.equal(await page.getByText("2025 observed baseline.", { exact: false }).count(), 0);
+    assert.equal(await page.getByText(/floor: 0/).count(), 0);
     const sourceAuditHref = await page
       .getByRole("link", { name: "Congestion-rent methodology" })
       .getAttribute("href");
@@ -71,13 +69,12 @@ try {
     // Numeric bidding-zone suffixes must still select the country polygons.
     for (const [border, countries] of [
       ["SE4>PL", ["PL", "SE"]],
-      ["PL>SE4", ["PL", "SE"]],
       ["DK1>NO2", ["DK", "NO"]],
       ["FR>IT-North", ["FR", "IT"]],
     ] as const) {
-      const picker = page.getByRole("combobox", { name: "Choose a bottleneck" });
-      assert.equal(await picker.locator(`option[value="${border}"]`).count(), 1);
-      await picker.selectOption(border);
+      const corridor = border.split(">").sort().join("|");
+      await page.locator(`g[data-corridor="${corridor}"]`).focus();
+      await page.locator(`g[data-corridor="${corridor}"]`).press("Enter");
       const focused = await page
         .locator('path[data-focused="true"]')
         .evaluateAll((elements) =>
@@ -122,7 +119,9 @@ try {
     await page.getByRole("button", { name: "Report", exact: true }).waitFor();
     assert(await page.getByText("Screening data availability", { exact: true }).isVisible());
     await page.reload();
-    await page.getByRole("combobox", { name: "Choose a bottleneck" }).selectOption("FR>IT-North");
+    await page.locator('g[data-corridor="FR|IT-North"]').waitFor();
+    await page.locator('g[data-corridor="FR|IT-North"]').focus();
+    await page.locator('g[data-corridor="FR|IT-North"]').press("Enter");
     await page.getByRole("button", { name: "Run scenario" }).waitFor();
     await page.getByText("Scenario 1", { exact: true }).click();
     await page.getByRole("button", { name: "Report", exact: true }).waitFor();
@@ -189,7 +188,7 @@ try {
       await page.getByText("Inspect recurring price differences", { exact: false }).isVisible(),
     );
     await page.getByRole("link", { name: "Workbench", exact: true }).click();
-    await page.getByRole("combobox", { name: "Choose a bottleneck" }).waitFor();
+    await page.locator('g[data-corridor="FR|IT-North"]').waitFor();
     assert.deepEqual(failures, [], `Browser/asset errors at ${viewport.width}px`);
     console.log(
       `Browser smoke passed at ${viewport.width}px: map, selection, scenarios, interventions, evaluation, reload persistence, removal, direct research/targets routes, asset paths and overflow.`,

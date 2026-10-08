@@ -252,4 +252,10 @@ current workbench's two methods: signed flow–price congestion-rent screening a
 its actual browser scenario solver. Distinguish that live reduced-form solver
 from the separate fixed-reservoir European research pipeline; hiding experimental
 navigation does not authorize replacing calculations or weakening integration gates.
+
+The landing workbench should omit the introductory divider and separate bottleneck
+picker; users select corridors on the map. Metric labels omit “floor: 0”. The
+expanded sidebar links to congestion-rent methodology instead of repeating its
+long explanatory paragraph. Docs retains signed-accounting, display-floor and
+flow-provenance limitations; this presentation cleanup does not change calculations.
 Existing evidence URLs remain available without a public catalogue.

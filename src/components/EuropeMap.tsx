@@ -631,7 +631,7 @@ export function EuropeMap({
                 data-corridor={[t.zone_a, t.zone_b].sort().join("|")}
                 role="button"
                 tabIndex={0}
-                aria-label={`Select ${t.zone_a} – ${t.zone_b} corridor, ${(t.congestion_rent_meur_year == null ? undefined : Math.max(0, t.congestion_rent_meur_year).toFixed(1)) ?? "unavailable"} M€ annual congestion rent (floor: 0)`}
+                aria-label={`Select ${t.zone_a} – ${t.zone_b} corridor, ${(t.congestion_rent_meur_year == null ? undefined : Math.max(0, t.congestion_rent_meur_year).toFixed(1)) ?? "unavailable"} M€ annual congestion rent`}
                 onKeyDown={(event) => {
                   if (event.key === "Enter" || event.key === " ") {
                     event.preventDefault();
@@ -690,7 +690,7 @@ export function EuropeMap({
                   {(t.congestion_rent_meur_year == null
                     ? undefined
                     : Math.max(0, t.congestion_rent_meur_year).toFixed(1)) ?? "unavailable"}{" "}
-                  M€ annual congestion rent (floor: 0);{" "}
+                  M€ annual congestion rent;{" "}
                   {t.mean_absolute_spread_eur_mwh?.toFixed(2) ?? "unavailable"} €/MWh mean absolute
                   price spread.
                 </title>
@@ -734,9 +734,7 @@ export function EuropeMap({
           European bidding zones and congested borders
         </h2>
         <p className="text-xs text-muted-foreground">
-          {metric === "market"
-            ? "Annual congestion rent · 2025 · floor: 0"
-            : "Yearly climate proxy (est.)"}
+          {metric === "market" ? "Annual congestion rent · 2025" : "Yearly climate proxy (est.)"}
         </p>
       </div>
 
@@ -770,9 +768,7 @@ export function EuropeMap({
       <div className="pointer-events-none absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] rounded-lg border border-border bg-card/90 px-3 py-2 text-xs text-muted-foreground backdrop-blur">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="font-medium text-foreground">
-            {metric === "market"
-              ? "Congestion rent (M€/year) · floor: 0"
-              : "Climate proxy (est., ktCO2/y)"}
+            {metric === "market" ? "Congestion rent (M€/year)" : "Climate proxy (est., ktCO2/y)"}
           </span>
           <div className="pointer-events-auto flex rounded-md border border-border p-0.5 text-[10px]">
             {(["market", "climate"] as const).map((m) => (

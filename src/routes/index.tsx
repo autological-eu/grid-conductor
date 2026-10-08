@@ -132,52 +132,19 @@ function Workbench() {
   return (
     <main className="flex min-h-screen flex-col bg-background lg:h-screen">
       <DataBar step={step} />
-      <div className="border-b bg-muted/30 px-5 py-3 text-xs leading-5">
-        Explore European electricity price gaps. Select a border, add a line or battery, then run a
-        local scenario.
-        <span className="text-muted-foreground">
-          {" "}
-          Experimental 2025 screening · estimates, not investment advice · scenarios stay in this
-          browser.
-        </span>
-        {summary.isPending && <p role="status">Loading workbench data…</p>}
-        {summary.isError && (
-          <p role="alert">
-            {summary.error.message}{" "}
-            <button className="underline" onClick={() => void summary.refetch()}>
-              Retry data loading
-            </button>
-          </p>
-        )}
-        {!!rows.length && (
-          <label className="mt-2 flex flex-wrap items-center gap-2">
-            Choose a bottleneck
-            <select
-              aria-label="Choose a bottleneck"
-              className="max-w-full rounded border bg-background px-2 py-1"
-              value={target?.id ?? ""}
-              onChange={(event) => {
-                const next = rows.find((row) => row.id === event.target.value) ?? null;
-                setTarget(next);
-                setScenarioId(null);
-                setSidebarOpen(!!next);
-                setEvalOpen(false);
-              }}
-            >
-              <option value="">Select on the map or here…</option>
-              {rows.map((row) => (
-                <option key={row.id} value={row.id}>
-                  {row.zone_a} → {row.zone_b} ·{" "}
-                  {(row.congestion_rent_meur_year == null
-                    ? undefined
-                    : Math.max(0, row.congestion_rent_meur_year).toFixed(1)) ?? "—"}{" "}
-                  M€ rent · {row.mean_absolute_spread_eur_mwh?.toFixed(2) ?? "—"} €/MWh mean spread
-                </option>
-              ))}
-            </select>
-          </label>
-        )}
-      </div>
+      {summary.isPending && (
+        <p className="px-5 py-3 text-xs" role="status">
+          Loading workbench data…
+        </p>
+      )}
+      {summary.isError && (
+        <p className="px-5 py-3 text-xs" role="alert">
+          {summary.error.message}{" "}
+          <button className="underline" onClick={() => void summary.refetch()}>
+            Retry data loading
+          </button>
+        </p>
+      )}
       <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
         {sidebarOpen ? (
           <div

@@ -429,3 +429,15 @@ functional Chromium checks against the deployed public site passed at 1440,
 390, 320 and 667px, including the simplified navigation, both Docs methodology
 sections, scenario evaluation/persistence and preserved direct evidence routes.
 Public methodology: https://autological-eu.github.io/grid-conductor/docs/.
+
+## Landing-page presentation cleanup
+
+Removed the introduction/divider and separate bottleneck dropdown; map corridor
+selection remains keyboard- and touch-accessible. Removed “floor: 0” labels from
+map, tooltip and sidebar, and replaced the sidebar's explanatory paragraph with
+its existing congestion-rent methodology link. Signed calculation and display
+floor are unchanged; methodology and provenance caveats remain in Docs.
+Typecheck, production build, lint (six existing warnings) and functional browser
+smoke at 1440, 390, 320 and 667px pass, including map-only selection, scenarios
+and reload persistence. Publication verification pending. No science jobs started;
+automatic reviews remain paused.
