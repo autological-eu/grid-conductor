@@ -451,8 +451,8 @@ receipt records source, workspace, replay, state and producer hashes. It never
 changes inventories or starts a solve.
 
 The retained reference has 144 storage units with nonzero initial inventory.
-All annual cyclic boundaries close exactly; no upper-capacity violation was
-found. The largest negative-bound roundoff is approximately 3.03e-14 MWh. The
+All annual cyclic boundaries close exactly. The largest upper-bound roundoff
+is approximately 4.29e-14 MWh, and negative-bound roundoff is 3.03e-14 MWh. The
 1e-6 MWh diagnostic tolerance is a numerical check, not an empirical acceptance
 threshold or annual optimality claim. Hourly feasibility remains established
 by the original independent witness replay, not boundary checks alone.
