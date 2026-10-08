@@ -28,7 +28,11 @@ def check_calendar(blocks):
 
 
 def check_boundaries(state, capacity, cyclic, tolerance=1e-6):
-    if state.ndim != 2 or state.shape[1] != len(capacity) or len(cyclic) != len(capacity):
+    if (not np.isfinite(tolerance) or tolerance < 0):
+        raise ValueError('Finite nonnegative diagnostic tolerance required')
+    if (state.ndim != 2 or state.shape[0] < 2 or capacity.ndim != 1
+            or cyclic.ndim != 1 or cyclic.dtype != np.dtype(bool) or len(capacity) == 0
+            or state.shape[1] != len(capacity) or len(cyclic) != len(capacity)):
         raise ValueError('Inventory layout mismatch')
     if not np.isfinite(state).all() or not np.isfinite(capacity).all() or np.any(capacity < 0):
         raise ValueError('Invalid inventory/capacity')

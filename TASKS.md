@@ -116,3 +116,16 @@ retained annual/conditional comparison JSON URLs returned HTTP 200 with bytes
 identical to the tested build. Three reservoir guard tests and native source
 replay passed; retained annual witness cost reverified unchanged. No research
 solve or retired search was started. Annual and zonal acceptance gates stay open.
+
+## Boundary chronology publication and guard verification
+
+Publication through 0896a1f is verified: CI/Pages 37718245745 and PR checks
+37718250388 completed successfully. The zonal methods page and retained
+annual/conditional JSON returned HTTP 200, byte-identical to the tested build.
+The superseded run was deliberately cancelled, not a model failure.
+
+Boundary guards now reject nonfinite/negative tolerances, empty state layouts,
+broadcastable capacity matrices and nonboolean cyclic masks. Six targeted tests
+and a fresh retained-source audit pass; the 160-unit, 60-boundary state and
+annual feasible cost are unchanged. This improves diagnostic reliability;
+Z0 zone mapping and N3–N5 annual acceptance remain open. No retired solve resumed.

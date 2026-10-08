@@ -14,6 +14,18 @@ class BoundaryTests(unittest.TestCase):
             with self.subTest(state=state),self.assertRaises(ValueError):
                 check_boundaries(state,np.array([5.]),np.array([True]))
 
+    def test_invalid_tolerances_cannot_bypass_feasibility(self):
+        for tolerance in [float('nan'),float('inf'),-1.]:
+            with self.subTest(tolerance=tolerance),self.assertRaises(ValueError):
+                check_boundaries(np.array([[6.],[6.]]),np.array([5.]),np.array([True]),tolerance)
+    def test_empty_broadcastable_and_nonboolean_layouts_rejected(self):
+        for state,capacity,cyclic in [
+            (np.empty((0,1)),np.array([5.]),np.array([True])),
+            (np.empty((2,0)),np.array([]),np.array([],dtype=bool)),
+            (np.array([[4.],[4.]]),np.array([[5.]]),np.array([True])),
+            (np.array([[4.],[4.]]),np.array([5.]),np.array([1]))]:
+            with self.assertRaises(ValueError):check_boundaries(state,capacity,cyclic)
+
 class CalendarTests(unittest.TestCase):
     def test_full_chronological_boundaries(self):
         blocks=[dict(index=0,start_hour=0,end_hour_exclusive=4000,hours=4000),
