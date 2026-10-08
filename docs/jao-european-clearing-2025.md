@@ -13,6 +13,12 @@ check at 0.1 MW tolerance. Core January and December fail that check, by up to
 zero rows; those checks are **unavailable**, not successful or failed solves.
 No constraints were relaxed to make these observations pass.
 
+A separate model-derived physical experiment is now implemented: 256 passive
+AC branches, two declared GSK assumptions and 32 native PyPSA linear-flow
+checks. Maximum branch-flow disagreement is `6.89e−13 MW`. Its constraints and
+GSK sensitivity figure are included below. This verifies a physical aggregation,
+not the JAO commercial formulation.
+
 This is six sampled hours, not a full-year coverage audit. No European dispatch
 or investment calculation was run. Previous 2026 sample evidence stays separate.
 
@@ -126,7 +132,8 @@ PyPSA perturbations, replay feasibility and contingency limits, and assess
 sensitivity to GSKs and margins. Label its output **model-derived physical
 constraints**, with provenance and limitations. It would support scenario
 research, but would not reproduce the actual commercial day-ahead domain or
-certify EUPHEMIA prices. Neither route has been executed as a European solve here.
+certify EUPHEMIA prices. The commercial route remains blocked. The physical route has now been implemented
+as the bounded experiment below; this is not an annual dispatch solve.
 
 ## Auxiliary inputs and virtual hubs
 
@@ -162,6 +169,85 @@ hub coefficients and regional balance, and rejects overlapping regions, unmapped
 hubs and internal bilateral edges. Its analytical tests verify congestion and
 shadow prices. **It does not reconstruct JAO virtual-hub coupling or LTA inclusion.**
 The six samples therefore do not bypass the compiler's coverage and physics gates.
+
+## Executed model-derived physical-constraint experiment
+
+`tools/derive_physical_zonal_constraints.py` loads the retained, source-hashed
+PyPSA-Eur 2025 prepared network and constructs zonal AC sensitivities. It does
+not modify the source network, retained annual reference, renewable availability,
+or JAO data. The snapshot is used only for controlled power-flow tests; no
+historical dispatch or demand is inferred from these synthetic injections.
+
+The implementation follows these steps:
+
+1. Retain source buses, passive lines and transformers. Remove generation, demand,
+   storage and controllable links **from a temporary test copy**, and create
+   controllable test injections at each bus. All 74 original links are excluded;
+   their capacities do not disappear into an unrestricted transfer assumption.
+2. Find source-network AC islands. Within each island, aggregate buses by country
+   and construct a generation shift key from original installed generator capacity
+   at each bus, normalised separately within each country/island. Reject countries
+   with no positive capacity. Also calculate an equal-bus GSK sensitivity case.
+3. Calculate native nodal PTDFs and aggregate them as `zonal PTDF = nodal PTDF × GSK`.
+   The nodal slack convention cancels for balanced transfers. Require zero native
+   reference flows; fail rather than silently omitting nonzero flow offsets.
+4. Monitor every retained passive branch in both directions. Use original
+   `s_nom × s_max_pu` as its MW active-flow limit proxy and hence its zero-base RAM.
+   No additional reliability margin, outage or contingency is assumed.
+5. Apply balanced 100 MW country-to-country injections and compare predicted
+   branch flows against native `Network.lpf()` calculations. Test each country
+   against Germany in the mainland island, Sweden in the Nordic island, and the
+   first country in the remaining multi-country island.
+6. Export signed inequalities, explicit bus-level GSK weights, source/code hashes,
+   package version and numerical checks. Visualise the maximum isolated transfer
+   satisfying **all** branch limits under each GSK.
+
+The source has **four nontrivial AC islands and 256 monitored passive branches**,
+producing 512 directional inequalities. The multi-country islands contain 29,
+4 and 2 country labels; the remaining island contains only GB. Country labels
+are not a verified bidding-zone mapping: DK and GB each occur in multiple islands.
+This output therefore keeps islands separate. It cannot be passed straight to
+our generic country-level market compiler, which rejects overlapping regions.
+Singleton/isolated buses also need explicit treatment before a complete European
+model is assembled.
+
+**Verification:** 32 balanced transfer cases matched native linear power flow
+within `1e−6 MW`; the precise maximum error is recorded in the downloadable JSON.
+Two analytical GSK tests verify normalisation, capacity weighting, the alternative
+weighting and rejection of missing capacity. This verifies linear aggregation,
+not native optimisation parity, AC nonlinear feasibility or observed market prices.
+
+![Physical transfer bounds under two GSK assumptions](../../research/physical-zonal-2025/gsk-sensitivity.svg)
+
+These are deliberately isolated transfer tests with all other net injections
+zero. Bars are **not bilateral commercial capacity**, actual available transfer
+capacity, simultaneous import/export opportunities or investment benefits.
+Their variation measures dependence on the chosen within-zone injection pattern.
+Source branch ratings remain modelling inputs, not independently verified 2025
+operating ratings.
+
+[Download constraints, GSKs and native verification results](../../research/physical-zonal-2025/constraints.json).
+
+### What this enables and what remains
+
+We now have a reproducible physical constraint generator suitable for an explicit
+research sensitivity case. The next coupled implementation needs bidding-zone and
+island variables, bounded controllable-link flows with native efficiencies,
+fixed demand and original generation availability, and chronological storage.
+Each island's injections must balance, with links coupling the appropriate buses
+or island-zone variables. Simply merging repeated country labels would fabricate
+connectivity. Compare the resulting zonal optimisation with a smaller native
+PyPSA dispatch using the **same** GSK restrictions and physical assumptions before
+claiming solver parity. GSK aggregation itself restricts nodal flexibility, so an
+unrestricted nodal optimum need not agree.
+
+For stronger physical constraints, add declared contingencies/outages, monitored
+limits, reliability margins and a feasible nonzero reference operating point;
+then use incremental net positions consistently with reference-flow offsets.
+JAO CNEC identifiers/topology must be matched and the GSK/reference conventions
+established before row-by-row comparisons are meaningful. This experiment does
+not repair the failing JAO replay, replace the commercial constraints, certify
+annual dispatch, or bypass existing empirical and annual acceptance gates.
 
 ## Implementation sequence
 

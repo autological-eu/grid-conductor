@@ -193,3 +193,19 @@ publication, implement explicit virtual-hub/connector mapping and verified exter
 commercial limits before European coupling. Failed checks must not be hidden
 by tolerance changes, constraint deletion or invented RAM. Source details and
 visualisation: docs/jao-european-clearing-2025.md. Raw caches remain ignored.
+
+
+## Model-derived physical zonal constraints
+
+Implemented a source-hashed AC-island PTDF/GSK exporter on the retained 2025
+prepared topology. Four nontrivial AC islands, 256 passive branches and 512 signed
+inequalities; 32 balanced transfers checked against native PyPSA LPF at 1e-6 MW
+tolerance. Two analytical GSK tests pass. Capacity-weighted versus equal-bus GSK
+transfer-bound figure and machine-readable provenance are included in the JAO
+report. Zero-reference N-0 only: 74 controllable links excluded explicitly.
+
+Next: map verified bidding zones and island subdivisions; preserve explicit link
+capacity/efficiency coupling, demand, availability and storage; compare a smaller
+coupled zonal solve with native PyPSA under identical GSK constraints. Add credible
+ratings/outages, N-1 and reference-flow/margin conventions before stronger claims.
+This is linear sensitivity verification, not annual dispatch or JAO reconciliation.
