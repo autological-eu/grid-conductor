@@ -374,3 +374,12 @@ MAE 37.5901 EUR/MWh; Nordic DK 6.1702, FI 2.4542, SE 2.3640. These are between-m
 price differences, not observed-price errors. Cost parity must not validate
 congestion-rent or investment-price estimates. Report now includes all-area price
 difference plot and top-area table, alongside the German comparison.
+
+Fixed-reservoir report publication verified through 13f00cf: CI/Pages
+37779029425 and PR checks 37779038358 succeeded. Public desktop/mobile checks
+confirm the fast timings, Norway price limitation and all ten main-report figures;
+all six new screening assets return HTTP 200 with exact committed bytes. Export
+accounting reconciles all 40 areas and 8760 hours with both price-comparison metrics.
+Local build and two targeted Python tests pass; source and retained annual
+reference are unchanged. No ongoing scientific computation or recurring reviews
+were started by publication.
