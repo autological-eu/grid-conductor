@@ -141,3 +141,7 @@ verified functionality; keep recurring annual review enabled until its gates pas
 
 The first implemented diagnostic and figures are in the
 [Germany synthetic-bid report](synthetic-bids-germany-2025.md).
+
+The [2025 JAO investigation](jao-european-clearing-2025.md) supplies six historical
+samples and explicit failed/unavailable checks. It identifies the next coupling
+compiler work; it does not complete Step 8 or annual coverage.

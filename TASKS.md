@@ -170,3 +170,18 @@ not held-out acceptance. Warm clearing ~0.23s excludes compilation/loading.
 
 Retained annual reference and conditional benchmark remain unchanged; no retired
 search resumed. The diagnostic is not a replacement for annual validation.
+
+## JAO 2025 European constraint investigation
+
+Six fixed historical Core/Nordic hour probes retrieved final domains. Core
+July published positions pass simple PTDF/RAM replay; January and December
+fail with maximum violations 141.574 / 29.914 MW. Nordic netPos endpoint returned
+no rows, so position checks are unavailable. Actual Nordic publication timestamps
+are hourly in sampled January/July and quarter-hourly in December. Eight existing
+JAO numerical/collector tests pass. No full-year coverage or dispatch readiness.
+
+Next: resolve Core quantity/LTA/allocation semantics, locate Nordic position
+publication, implement explicit virtual-hub/connector mapping and verified external
+commercial limits before European coupling. Failed checks must not be hidden
+by tolerance changes, constraint deletion or invented RAM. Source details and
+visualisation: docs/jao-european-clearing-2025.md. Raw caches remain ignored.
