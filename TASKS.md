@@ -45,6 +45,15 @@ boundaries. This closes inspected default ambiguity for the pinned source,
 while boundary mapping, zone allocation and hydrological validation stay open.
 Retained annual witness replay was rechecked on 8 October at its unchanged cost.
 
+
+Retained-reference boundary diagnostic independently verified 160 storage units
+at all 60 saved boundaries, including annual cyclic closure. 144 units have
+nonzero initial trial inventory; they must not be replaced by empty initial
+conditions. Maximum negative-bound roundoff was 3.03e-14 MWh; capacity violation
+and cyclic residual were zero. Two targeted tests reject broken closure,
+over-capacity/negative inventories and missing values. This audit supplements
+the intact 59-block witness chain; it is not a new solve or optimum certificate.
+
 ## Empirical validation
 
 - [ ] V1: Finalise asset-to-zone mapping, price aggregation, UTC/coverage protocol and predeclared calibration/held-out acceptance thresholds.

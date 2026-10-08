@@ -441,3 +441,24 @@ invented storage would change the model. No reservoirs are pooled. These
 findings close the inspected-default ambiguity for this pinned source/version,
 not the remaining boundary mapping, national-to-zone allocation or empirical
 hydrological validation gates.
+
+### Retained-reference boundary audit
+
+`tools/audit_retained_inventory_2025.py` verifies the retained annual witness
+chain before checking the saved 60-by-160 boundary state against native storage
+identities, energy capacities and cyclic flags. The separate ignored audit
+receipt records source, workspace, replay, state and producer hashes. It never
+changes inventories or starts a solve.
+
+The retained reference has 144 storage units with nonzero initial inventory.
+All annual cyclic boundaries close exactly; no upper-capacity violation was
+found. The largest negative-bound roundoff is approximately 3.03e-14 MWh. The
+1e-6 MWh diagnostic tolerance is a numerical check, not an empirical acceptance
+threshold or annual optimality claim. Hourly feasibility remains established
+by the original independent witness replay, not boundary checks alone.
+
+For future matched comparisons, preserve the reference's fixed trial boundary
+conditions explicitly. Replacing them with empty initial inventories, pooling
+reservoir water or reoptimising boundaries creates a different model and needs
+fresh provenance and verification. Zone mapping and paired annual comparisons
+remain open.
