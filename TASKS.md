@@ -66,6 +66,13 @@ Next Z0 action: audit authoritative 2025 zone coverage/geometries, including
 registry omissions, before mapping original assets and allocating demand.
 Neither country labels nor clustered centroids establish accepted geography.
 
+Original-cluster membership export preserves 4160 member IDs and verifies
+exact coverage of all 128 source clusters. Next Z0 action can trace original
+member/plant positions rather than assigning assets by cluster centroids.
+Pinned upstream zone builder has optional TYNDP southern-Norway merging/Crete
+extraction and island removal, plus geometry edits; actual config and raw
+period-specific provenance require audit before adopting processed polygons.
+
 ## Empirical validation
 
 - [ ] V1: Finalise asset-to-zone mapping, price aggregation, UTC/coverage protocol and predeclared calibration/held-out acceptance thresholds.

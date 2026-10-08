@@ -490,3 +490,24 @@ local data. It changes no inputs and starts no solve. Next, establish
 authoritative 2025 polygons and asset-level mapping evidence: clustered bus
 centroids alone do not establish original generator geography, demand allocation
 or commercial transfer constraints.
+
+### Reuse raw mapping evidence before planning-zone transformations
+
+The pinned PyPSA-Eur upstream (`a5408e9`) builder
+[`build_bidding_zones.py`](https://github.com/PyPSA/pypsa-eur/blob/a5408e9db5402c53345d7339fffb52afe96d6e43/scripts/build_bidding_zones.py)
+combines Electricity Maps shapes with entsoe-py Italian shapes, including
+border snapping and subsequent geometry processing. Its optional
+`aggregate_to_tyndp` flag merges NO1/NO2/NO5 and extracts Crete; optional
+`remove_islands` excludes listed islands. Both flags default to false in the
+upstream schema. This is a source-code finding, not evidence that our retained
+network enabled them. Do not assume a processed planning shape is authoritative
+2025 market geography. Audit actual configuration, raw versions and period scope.
+
+`tools/audit_cluster_membership_2025.py` exports the retained original member
+IDs, checking unique complete identities and exact coverage of source clusters.
+The existing bus map has 4160 members across all 128 clusters; the largest has
+159 members. The ignored receipt hashes the network, bus map and producer.
+These IDs provide a route back to original geography, not accepted coordinates
+or zones. Next audit original member/plant positions against period-specific
+raw polygons, flag clusters spanning zones, and retain source quantities without
+assigning every asset to the clustered centroid. No input or solve is changed.
