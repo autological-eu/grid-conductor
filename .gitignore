@@ -50,3 +50,6 @@ test-results/
 
 # Offline historical price responses and credentials
 data/price-trace/
+
+# Coupled physical synthetic-bid working results
+data/synthetic-europe-physical-2025/

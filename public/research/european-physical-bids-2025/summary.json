@@ -1,0 +1,449 @@
+{
+  "status": "annual_independent_hour_physical_synthetic_bid_diagnostic",
+  "hours": 8760,
+  "network_sha256": "4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec",
+  "producer_sha256": "d976fd1f944d6d01ea7d9bbf7e3e2f3405f8e2217af9bc5ac649f37c091305d7",
+  "dependency_sha256": {
+    "synthetic_bids_2025.py": "1af57f8f49390d960681e76c0547e2c838dbbc44674f6ba5b9a976050bcb62d1",
+    "derive_physical_zonal_constraints.py": "11595cb5e1ec7d4303f5f0f87a5fb89f3ee12bf7f6d3fb49cd305f5be2975c65",
+    "hourly_renewable_estimates.py": "342ca9fef28a644c344a07ad8dd9efc8c7d521322f2364bf2e47c4d5e1a5982e"
+  },
+  "observed_price_sha256": "bb2bf788973234b5c15e0ecc0020c1b7814319648e74c01af32d31f1b53b028a",
+  "solver_protocol": {
+    "method": "simplex",
+    "threads": 1,
+    "primal_replay_tolerance_mw": 0.0001,
+    "native_objective_absolute_tolerance_eur": 0.05,
+    "native_objective_relative_tolerance": 1e-08
+  },
+  "area_summary": [
+    {
+      "area": "0:AL",
+      "demand_twh": 7.605935001571655,
+      "primary_generation_twh": 1.3597329951220938,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 109.74849258200548
+    },
+    {
+      "area": "0:AT",
+      "demand_twh": 59.19088129889679,
+      "primary_generation_twh": 39.85613347355037,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 106.54224700929547
+    },
+    {
+      "area": "0:BA",
+      "demand_twh": 8.432011688697814,
+      "primary_generation_twh": 1.8071645008303547,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 109.84713649160759
+    },
+    {
+      "area": "0:BE",
+      "demand_twh": 80.3635647456131,
+      "primary_generation_twh": 64.32666235223711,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 94.0142890974858
+    },
+    {
+      "area": "0:BG",
+      "demand_twh": 37.885283174964904,
+      "primary_generation_twh": 36.02362420683863,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 109.58776864138628
+    },
+    {
+      "area": "0:CH",
+      "demand_twh": 62.346887529045105,
+      "primary_generation_twh": 36.19660900581801,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 102.30380774674524
+    },
+    {
+      "area": "0:CZ",
+      "demand_twh": 62.60863901974487,
+      "primary_generation_twh": 49.428737969336304,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 108.84704018440756
+    },
+    {
+      "area": "0:DE",
+      "demand_twh": 465.6506111974182,
+      "primary_generation_twh": 587.9687154242847,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 99.1056602655929
+    },
+    {
+      "area": "0:DK",
+      "demand_twh": 19.607603345924378,
+      "primary_generation_twh": 28.209763308508755,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 98.51943890459837
+    },
+    {
+      "area": "0:EE",
+      "demand_twh": 7.941961699760437,
+      "primary_generation_twh": 4.304015743436352,
+      "emergency_supply_twh": 0.0005004938450090989,
+      "shortage_hours": 5,
+      "mean_price_eur_mwh": 163.8050710273034
+    },
+    {
+      "area": "0:ES",
+      "demand_twh": 234.74780512442015,
+      "primary_generation_twh": 234.3498458082946,
+      "emergency_supply_twh": 0.0023327457616069427,
+      "shortage_hours": 4,
+      "mean_price_eur_mwh": 98.09026764456875
+    },
+    {
+      "area": "0:FR",
+      "demand_twh": 433.49206001615903,
+      "primary_generation_twh": 523.1760985203097,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 83.79118134774004
+    },
+    {
+      "area": "0:GR",
+      "demand_twh": 50.193771748840334,
+      "primary_generation_twh": 70.95597333531416,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 109.53124104792798
+    },
+    {
+      "area": "0:HR",
+      "demand_twh": 18.230148500198364,
+      "primary_generation_twh": 12.485066196030367,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 109.97366492436473
+    },
+    {
+      "area": "0:HU",
+      "demand_twh": 43.210005968833926,
+      "primary_generation_twh": 39.15910307382065,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 108.99777749100083
+    },
+    {
+      "area": "0:IT",
+      "demand_twh": 272.63240084075926,
+      "primary_generation_twh": 226.3336923916654,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 109.97431702164648
+    },
+    {
+      "area": "0:LT",
+      "demand_twh": 11.772864476242065,
+      "primary_generation_twh": 8.755739425440925,
+      "emergency_supply_twh": 0.0013383386103447408,
+      "shortage_hours": 7,
+      "mean_price_eur_mwh": 163.80507102730337
+    },
+    {
+      "area": "0:LU",
+      "demand_twh": 4.843477593925476,
+      "primary_generation_twh": 0.5300373838323337,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 94.77287604646747
+    },
+    {
+      "area": "0:LV",
+      "demand_twh": 7.201224802078247,
+      "primary_generation_twh": 7.341300773427972,
+      "emergency_supply_twh": 0.001865444714468441,
+      "shortage_hours": 12,
+      "mean_price_eur_mwh": 163.8050710273034
+    },
+    {
+      "area": "0:ME",
+      "demand_twh": 3.0700140779495237,
+      "primary_generation_twh": 0.18322929662587062,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 109.78115627922284
+    },
+    {
+      "area": "0:MK",
+      "demand_twh": 5.324999050476074,
+      "primary_generation_twh": 3.1707539124907322,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 109.78038045737144
+    },
+    {
+      "area": "0:NL",
+      "demand_twh": 116.9040159910431,
+      "primary_generation_twh": 98.08834810165331,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 97.76615112321507
+    },
+    {
+      "area": "0:PL",
+      "demand_twh": 158.3500118000641,
+      "primary_generation_twh": 162.6035390965421,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 107.52377583936787
+    },
+    {
+      "area": "0:PT",
+      "demand_twh": 53.08791996813202,
+      "primary_generation_twh": 41.29542284383049,
+      "emergency_supply_twh": 0.0013202141101305686,
+      "shortage_hours": 2,
+      "mean_price_eur_mwh": 99.1250853163111
+    },
+    {
+      "area": "0:RO",
+      "demand_twh": 53.560333579940796,
+      "primary_generation_twh": 47.25903128006216,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 109.56042013879767
+    },
+    {
+      "area": "0:RS",
+      "demand_twh": 34.3214870015564,
+      "primary_generation_twh": 8.16623922033319,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 109.72136028218438
+    },
+    {
+      "area": "0:SI",
+      "demand_twh": 12.533900388168336,
+      "primary_generation_twh": 12.092481591237446,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 110.69375539394619
+    },
+    {
+      "area": "0:SK",
+      "demand_twh": 25.824788700317384,
+      "primary_generation_twh": 32.227433376019505,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 108.6582289927071
+    },
+    {
+      "area": "0:XK",
+      "demand_twh": 6.780857315383911,
+      "primary_generation_twh": 0.7569894743106099,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 109.76289939064544
+    },
+    {
+      "area": "1:DK",
+      "demand_twh": 18.86310644303894,
+      "primary_generation_twh": 18.60021290226107,
+      "emergency_supply_twh": 0.2938432334846638,
+      "shortage_hours": 197,
+      "mean_price_eur_mwh": 1741.5961794387238
+    },
+    {
+      "area": "1:FI",
+      "demand_twh": 84.55375715096282,
+      "primary_generation_twh": 92.46581141283993,
+      "emergency_supply_twh": 0.21692660263781732,
+      "shortage_hours": 177,
+      "mean_price_eur_mwh": 584.2611423205499
+    },
+    {
+      "area": "1:NO",
+      "demand_twh": 137.04442755136873,
+      "primary_generation_twh": 23.80917074300913,
+      "emergency_supply_twh": 35.46079607148602,
+      "shortage_hours": 8369,
+      "mean_price_eur_mwh": 9576.882127446017
+    },
+    {
+      "area": "1:SE",
+      "demand_twh": 129.5462817512131,
+      "primary_generation_twh": 128.69510452695948,
+      "emergency_supply_twh": 0.21822884501360681,
+      "shortage_hours": 141,
+      "mean_price_eur_mwh": 703.6022683603206
+    },
+    {
+      "area": "2:ES",
+      "demand_twh": 3.66624287525177,
+      "primary_generation_twh": 1.574046511828809,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 91.15937455090175
+    },
+    {
+      "area": "3:FR",
+      "demand_twh": 1.1901393649291991,
+      "primary_generation_twh": 0.5588745352539756,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 109.46648332103933
+    },
+    {
+      "area": "4:GB",
+      "demand_twh": 229.10849491451265,
+      "primary_generation_twh": 271.93128842313183,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 72.26953863727891
+    },
+    {
+      "area": "5:GB",
+      "demand_twh": 7.509675114250183,
+      "primary_generation_twh": 4.405972109921044,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 92.0583803178521
+    },
+    {
+      "area": "5:IE",
+      "demand_twh": 34.52733977433014,
+      "primary_generation_twh": 33.77041240341071,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 92.0583803178521
+    },
+    {
+      "area": "6:GB",
+      "demand_twh": 0.11662641820526123,
+      "primary_generation_twh": 3.284042215929516,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 72.26953863727891
+    },
+    {
+      "area": "7:IT",
+      "demand_twh": 4.477907153114319,
+      "primary_generation_twh": 14.615892301889863,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 108.04966570794419
+    }
+  ],
+  "zones": [
+    "0:AL",
+    "0:AT",
+    "0:BA",
+    "0:BE",
+    "0:BG",
+    "0:CH",
+    "0:CZ",
+    "0:DE",
+    "0:DK",
+    "0:EE",
+    "0:ES",
+    "0:FR",
+    "0:GR",
+    "0:HR",
+    "0:HU",
+    "0:IT",
+    "0:LT",
+    "0:LU",
+    "0:LV",
+    "0:ME",
+    "0:MK",
+    "0:NL",
+    "0:PL",
+    "0:PT",
+    "0:RO",
+    "0:RS",
+    "0:SI",
+    "0:SK",
+    "0:XK",
+    "1:DK",
+    "1:FI",
+    "1:NO",
+    "1:SE",
+    "2:ES",
+    "3:FR",
+    "4:GB",
+    "5:GB",
+    "5:IE",
+    "6:GB",
+    "7:IT"
+  ],
+  "passive_branches": 256,
+  "controllable_links": 74,
+  "generators": 1151,
+  "emergency_supply_bids": 40,
+  "shortage_hours": 8369,
+  "shortage_mwh": 36197151.98966367,
+  "storage_units_excluded": 160,
+  "compile_seconds": 1.7087343209423125,
+  "warm_solve_seconds": 29.048055739025585,
+  "total_operating_cost_eur": 482764568612.67365,
+  "maximum_primal_residual_mw": 1.160203646577429e-05,
+  "cold_basis_retries": [
+    {
+      "hour": 1880,
+      "warm_status": "HighsModelStatus.kUnknown"
+    },
+    {
+      "hour": 7242,
+      "warm_status": "HighsModelStatus.kUnknown"
+    },
+    {
+      "hour": 7658,
+      "warm_status": "HighsModelStatus.kUnknown"
+    },
+    {
+      "hour": 8286,
+      "warm_status": "HighsModelStatus.kUnknown"
+    }
+  ],
+  "native_pypsa_checks": [
+    {
+      "utc": "2025-01-15 12:00:00",
+      "native_objective_eur": 95178018.44635415,
+      "fast_objective_eur": 95178018.44635391,
+      "difference_eur": 2.384185791015625e-07
+    },
+    {
+      "utc": "2025-07-15 12:00:00",
+      "native_objective_eur": 26491170.69213591,
+      "fast_objective_eur": 26491170.692135774,
+      "difference_eur": 1.3783574104309082e-07
+    },
+    {
+      "utc": "2025-12-15 12:00:00",
+      "native_objective_eur": 76079942.8898758,
+      "fast_objective_eur": 76079942.88987575,
+      "difference_eur": 4.470348358154297e-08
+    }
+  ],
+  "germany_comparison": {
+    "observed_hours": 8759,
+    "mae_eur_mwh": 29.063503923968543,
+    "bias_eur_mwh": 9.774310002205024,
+    "rmse_eur_mwh": 43.971106226343665
+  },
+  "pypsa_version": "1.2.4",
+  "highs_version": "1.15.1",
+  "limitations": [
+    "Independent hourly solves: no storage, reservoir inflows or chronological coupling",
+    "Prepared country/island labels are not accepted bidding zones; DE versus DE-LU price comparison is a scope proxy",
+    "N-0 static ratings, no contingencies/outages/margins; zero reference",
+    "Fixed capacity GSK restricts net local injection; HVDC stays at original endpoints with native signed bounds and efficiencies",
+    "Original p_max_pu availability and demand preserved; no dispatch substituted",
+    "Synthetic costs: original plus 80 EUR/t operational carbon; wind/solar -5 EUR/MWh; no calibration or real order books",
+    "No annual native/fast storage benchmark, commercial JAO validation or investment acceptance claim"
+  ]
+}

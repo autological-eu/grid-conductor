@@ -19,8 +19,9 @@ checks. Maximum branch-flow disagreement is `6.89e−13 MW`. Its constraints and
 GSK sensitivity figure are included below. This verifies a physical aggregation,
 not the JAO commercial formulation.
 
-This is six sampled hours, not a full-year coverage audit. No European dispatch
-or investment calculation was run. Previous 2026 sample evidence stays separate.
+The JAO investigation covers six sampled hours, not full-year commercial coverage.
+The separate annual physical screening diagnostic below does not validate JAO
+or establish investment valuations. Previous 2026 evidence stays separate.
 
 ## What was retrieved and checked
 
@@ -228,10 +229,19 @@ operating ratings.
 
 [Download constraints, GSKs and native verification results](../../research/physical-zonal-2025/constraints.json).
 
+### Coupled full-year diagnostic now implemented
+
+The physical constraints now feed an 8760-hour European synthetic-bid diagnostic,
+with explicit island balances and all 74 bounded controllable links at original
+buses. Three fixed hours match native PyPSA GSK-restricted optimisation. Storage
+and reservoir scheduling are omitted, with substantial emergency supply reported.
+See the [full report, area data and figures](european-physical-synthetic-clearing-2025.md).
+This does not repair JAO replay or establish an accepted annual market baseline.
+
 ### What this enables and what remains
 
 We now have a reproducible physical constraint generator suitable for an explicit
-research sensitivity case. The next coupled implementation needs bidding-zone and
+research sensitivity case. The implemented country/island diagnostic still needs audited bidding-zone and
 island variables, bounded controllable-link flows with native efficiencies,
 fixed demand and original generation availability, and chronological storage.
 Each island's injections must balance, with links coupling the appropriate buses

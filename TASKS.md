@@ -209,3 +209,32 @@ capacity/efficiency coupling, demand, availability and storage; compare a smalle
 coupled zonal solve with native PyPSA under identical GSK constraints. Add credible
 ratings/outages, N-1 and reference-flow/margin conventions before stronger claims.
 This is linear sensitivity verification, not annual dispatch or JAO reconciliation.
+
+
+## European physical synthetic-bid annual diagnostic
+
+Implemented all 8760 independent hours: 1151 original generators, 256 passive
+branches, 74 bounded signed controllable links and 40 country/island areas. Warm
+solve/replay/area-accounting loop 29.05s; compilation 1.71s excludes source loading.
+Three fixed native GSK-restricted PyPSA optimisation comparisons pass (maximum
+objective difference 2.38e-7 euros); three analytical tests pass. Maximum hourly
+primal replay residual 1.16e-5 MW. Four unknown warm-basis statuses recovered
+through recorded unchanged-input cold-basis retries.
+
+All 160 storage units/reservoir scheduling are excluded explicitly. Emergency
+supply 36.20 TWh in 8369 hours, almost 98% in Nordic Norway, blocks accepted
+baseline status. DE versus DE-LU descriptive MAE 29.06 EUR/MWh; geography remains
+a proxy, not held-out validation. Numerical parity does not validate market prices.
+Report: docs/european-physical-synthetic-clearing-2025.md.
+
+Next: audit shortage causes and bidding-zone/fleet/demand scope; add original
+hydro/storage with chronological inventories and matched native checks, then
+paired interventions. Z0–Z5, SB2–SB5 and N3–N5 stay open. Fresh retained-reference
+boundary/annual replay passes for 160 units and 60 boundaries, 144 nonzero initial
+inventories and unchanged annual feasible cost. No retired search resumed.
+Latest remote CI/Pages is cbfeff0 (successful); new reports are not yet published
+at this checkpoint.
+
+Local verification: all 26 Bun tests, typecheck, lint (six existing warnings),
+production build and desktop/mobile report/figure checks pass. Three new Python
+clearing tests and fresh native annual-boundary/source replay pass.

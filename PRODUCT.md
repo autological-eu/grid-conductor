@@ -207,3 +207,11 @@ coverage, source scope, errors and failures, followed by coupled model evidence.
 The existing numerical, annual, empirical and paired-investment gates remain
 required before scenario integration. See the step-by-step plan in
 [synthetic zonal clearing](docs/synthetic-zonal-clearing-plan.md).
+
+
+Model-derived physical constraints are an authorized synthetic-clearing sensitivity
+route, kept distinct from verified commercial JAO constraints. Preserve separate
+AC-island accounting and explicit bounded, efficiency-consistent controllable links.
+Independent-hour results that exclude hydro/storage must disclose shortages and
+cannot satisfy chronological annual or scenario-integration gates. Native numerical
+parity and observed-market validity remain separate.
