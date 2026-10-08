@@ -335,3 +335,11 @@ Large primal witnesses stay ignored; published files are compact result exports.
 Publication verification is pending for this report update. Hourly reviews stay
 paused. Next: observed hydrology/zone validation, remaining scarcity diagnosis,
 fast chronological feasibility and paired scenario/native verification.
+
+Annual-report publication verified through 4068b02: CI/Pages 37777061912 and
+PR checks 37777071229 succeeded. Both reports pass public desktop/mobile checks,
+with seven figures in the main report and one in the reservoir-method report,
+no overflow or script errors. All 12 new result files return HTTP 200 and match
+committed bytes. Export-accounting checks pass for hourly/monthly/area totals and
+German price errors. Source/retained-reference and numerical producer hashes
+remain unchanged; research solver and one-off auditor jobs have exited.
