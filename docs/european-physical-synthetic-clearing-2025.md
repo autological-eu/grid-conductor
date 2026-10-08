@@ -1,5 +1,70 @@
 # European physical synthetic-bid clearing — all 2025 hours
 
+## Fast screening: precomputed hourly reservoir output
+
+The verified chronological reservoir schedule can now be reused for fast
+independent-hour network clearing. All **8,760 hours** clear in **19.17
+seconds**, including network replay. Preparation, source checks and replay of the
+full water schedule add **6.73 seconds**. These
+measurements exclude Python imports, the offline 17.1-minute reservoir solve,
+separate native verification and reporting. This demonstrates fast reuse of a
+precomputed schedule, not seconds-scale adaptive reservoir optimisation.
+
+Each of the 93 reservoirs contributes its saved electric turbine output as an
+explicit **fixed injection**, in its original country/island area. Original demand,
+weather-based generator availability, IRENA wind/PV trajectory, GSKs and physical
+constraints remain unchanged. Dispatch is not relabelled as availability. Negative
+residual demand means fixed hydro exceeds that area's load and must be exported;
+original demand itself is not replaced with negative values.
+
+| Metric | Chronological reservoirs | Fixed hourly reservoir schedule |
+| --- | ---: | ---: |
+| Reported LP solve / hourly solve-and-replay seconds | 1027.42 | 19.17 |
+| European emergency supply TWh | 0.0298195 | 0.0298195 |
+| Hours with emergency supply | 4 | 4 |
+| German observed-price MAE €/MWh | 23.07 | 23.10 |
+| German observed-price bias €/MWh | −9.29 | -9.22 |
+| German observed-price RMSE €/MWh | 35.96 | 36.01 |
+
+![Measured offline and reusable solve timings](../../research/fixed-reservoir-screening-2025/runtime-comparison.svg)
+
+Total operating cost differs from the chronological result by only
+**-0.000107 euros**. Fixing the saved conditional
+hydro output leaves an independently solvable network problem per hour; this
+cost agreement checks reuse of that solution under unchanged assumptions. It
+is not verification of a changed-input or investment scenario.
+
+Three January/July/December native PyPSA solves with the same fixed injections
+match objectives within **€0.000003**. Full-year network/bound replay has maximum
+residual **8.38e-06 MW**. Original hourly water balances,
+turbine/energy limits, spill and annual closure are replayed before screening;
+maximum water residual is **2.04e-06 MWh**. 4 nonoptimal
+warm-basis solves recovered through unchanged-input cold retries. Two new tests
+reject double-spent water, broken closure and incorrect area mapping, and check
+fixed-injection accounting when local hydro exceeds demand.
+
+![Hourly-price comparison with chronological hydro and observations](../../research/fixed-reservoir-screening-2025/price-comparison.svg)
+
+German fixed-schedule marginal prices differ from chronological prices by
+**0.277 €/MWh on average**, with maximum absolute
+hourly difference **32.89 €/MWh**.
+Matching operating cost does not require matching dual prices: fixed hydro
+cannot respond at the margin, whereas the chronological LP can reallocate water.
+The observed DE-LU comparison remains an uncalibrated mainland-DE scope proxy.
+
+**Conclusion:** the fixed-schedule variant achieves a seconds-scale annual
+screening loop for this baseline. Hydro cannot respond to new transmission,
+batteries, demand or bid costs. A future intervention case would be conditional
+on the same hydro schedule and would need its own verification; adaptive hydro
+requires water-value bids and enforceable water budgets, or a fresh chronological
+solve. The other 67 battery/PHS units remain excluded. This research pipeline
+has not replaced the browser scenario estimator or closed annual/investment gates.
+
+[Summary, native checks and source/witness hashes](../../research/fixed-reservoir-screening-2025/summary.json),
+[all area comparisons](../../research/fixed-reservoir-screening-2025/area-summary.csv),
+and [hourly German prices](../../research/fixed-reservoir-screening-2025/hourly-de.csv).
+Large calculation witnesses remain in the ignored cloud cache.
+
 ## Reservoir-enabled full-year result
 
 All **8,760 UTC hours of 2025** have now been solved with **93 chronological

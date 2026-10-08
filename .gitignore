@@ -55,3 +55,6 @@ data/price-trace/
 data/synthetic-europe-physical-2025/
 
 data/synthetic-europe-physical-2025-irena-linear/
+
+# Fixed-reservoir screening working witnesses
+data/fixed-reservoir-screening-2025/

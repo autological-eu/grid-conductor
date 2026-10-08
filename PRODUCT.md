@@ -231,3 +231,11 @@ reference, explicitly distinguishing that case from a jointly optimised annual
 solution. Independently replay water/network feasibility and annual closure;
 verify a matched chronological case against native PyPSA before annual execution.
 Do not infer water availability from IRENA capacity or silently reset inventories.
+
+A fast screening variant may reuse an audited hourly reservoir output schedule
+as explicit fixed injections, preserving original generator availability and
+checking the full water balance first. Label this conditional on the offline
+hydro schedule: it cannot estimate hydro response to investments. Keep timing
+of offline preparation separate from reusable screening, and compare marginal
+prices as well as objective cost against chronological and matched native cases.
+Adaptive water-value bids remain a separate, unverified extension.

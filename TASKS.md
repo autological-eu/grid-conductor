@@ -343,3 +343,28 @@ no overflow or script errors. All 12 new result files return HTTP 200 and match
 committed bytes. Export-accounting checks pass for hourly/monthly/area totals and
 German price errors. Source/retained-reference and numerical producer hashes
 remain unchanged; research solver and one-off auditor jobs have exited.
+
+## Fast fixed-hourly reservoir screening
+
+Implemented separate tools/fixed_reservoir_screening_2025.py and report exporter.
+The audited 93-reservoir annual output is a fixed hourly injection, never
+availability. Source demand/weather/IRENA/GSK inputs and annual reference are
+unchanged. All 8760 independent-hour network solves/replays completed in 19.17s;
+preparation/source/water checks took 6.73s. Offline schedule generation, Python
+imports, native verification and report production are outside those timings.
+
+Annual operating-cost difference versus chronological case -0.000106812 EUR;
+emergency supply 0.0298195 TWh in four hours, unchanged. Three fixed-injection
+native PyPSA objectives agree within 2.12e-6 EUR. Network residual 8.38e-6 MW;
+water residual 2.04e-6 MWh and annual closure checked before fast clearing.
+Four warm nonoptimal statuses recovered via unchanged-input cold retries.
+Two new tests cover water double-spending/closure and island/injection accounting.
+DE observed-price MAE 23.1048 EUR/MWh; price MAE versus chronological case 0.2770,
+maximum difference 32.8948 EUR/MWh. Objective agreement is not dual-price identity.
+
+Hydro is fixed and cannot react to investment; other 67 storage units remain
+excluded. No browser integration, adaptive-hydro, annual-optimum or investment
+acceptance claim. New working witnesses are explicitly ignored. Next: verify
+paired fixed-schedule interventions, or develop water-value bids with enforceable
+water budgets and matched chronological tests. Publication verification pending;
+hourly automated reviews remain paused.

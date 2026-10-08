@@ -1,0 +1,493 @@
+{
+  "status": "annual_fixed_reservoir_schedule_screening_not_adaptive_hydro",
+  "hours": 8760,
+  "preparation_and_water_audit_seconds": 6.730918941029813,
+  "warm_solve_replay_seconds": 19.170327664003707,
+  "chronological_solver_seconds": 1027.4205227820203,
+  "solver_time_ratio": 53.594312042522716,
+  "maximum_network_residual_mw": 8.383263093492133e-06,
+  "maximum_water_residual_mwh": 2.035084207818727e-06,
+  "annual_operating_cost_eur": 76055419063.62846,
+  "objective_difference_vs_chronological_eur": -0.0001068115234375,
+  "emergency_supply_twh": 0.02981949509529285,
+  "shortage_hours": 4,
+  "native_checks": [
+    {
+      "utc": "2025-01-15 12:00:00",
+      "native_objective_eur": 18482618.03301943,
+      "fast_objective_eur": 18482618.033017315,
+      "difference_eur": 2.115964889526367e-06
+    },
+    {
+      "utc": "2025-07-15 12:00:00",
+      "native_objective_eur": 477444.4632573029,
+      "fast_objective_eur": 477444.46325729496,
+      "difference_eur": 7.916241884231567e-09
+    },
+    {
+      "utc": "2025-12-15 12:00:00",
+      "native_objective_eur": 8418111.103560992,
+      "fast_objective_eur": 8418111.10356095,
+      "difference_eur": 4.0978193283081055e-08
+    }
+  ],
+  "cold_retries": [
+    349,
+    944,
+    1470,
+    5953
+  ],
+  "germany": {
+    "mae_eur_mwh": 23.104766813442332,
+    "bias_eur_mwh": -9.224925191198245,
+    "rmse_eur_mwh": 36.013373164305726,
+    "price_mae_vs_chronological_eur_mwh": 0.27701196103651343,
+    "maximum_price_difference_vs_chronological_eur_mwh": 32.89476228332931
+  },
+  "area_summary": [
+    {
+      "area": "0:AL",
+      "demand_twh": 7.605935001571655,
+      "fixed_hydro_twh": 3.125727712705969,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 99.17607288547855,
+      "price_mae_vs_chronological_eur_mwh": 0.21797393236868526
+    },
+    {
+      "area": "0:AT",
+      "demand_twh": 59.19088129889679,
+      "fixed_hydro_twh": 23.438965458905265,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 91.27537831531072,
+      "price_mae_vs_chronological_eur_mwh": 0.3202933481173496
+    },
+    {
+      "area": "0:BA",
+      "demand_twh": 8.432011688697814,
+      "fixed_hydro_twh": 4.136915460868458,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 99.1359537702593,
+      "price_mae_vs_chronological_eur_mwh": 0.2277473515073039
+    },
+    {
+      "area": "0:BE",
+      "demand_twh": 80.3635647456131,
+      "fixed_hydro_twh": 0.04411911856892729,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 75.59884898693858,
+      "price_mae_vs_chronological_eur_mwh": 0.37133294553878543
+    },
+    {
+      "area": "0:BG",
+      "demand_twh": 37.885283174964904,
+      "fixed_hydro_twh": 2.308968632567753,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 99.0256803611429,
+      "price_mae_vs_chronological_eur_mwh": 0.2195730722443289
+    },
+    {
+      "area": "0:CH",
+      "demand_twh": 62.346887529045105,
+      "fixed_hydro_twh": 21.288892174080015,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 84.7438353062849,
+      "price_mae_vs_chronological_eur_mwh": 0.39602754680556235
+    },
+    {
+      "area": "0:CZ",
+      "demand_twh": 62.60863901974487,
+      "fixed_hydro_twh": 1.534604662047052,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 95.1953912907093,
+      "price_mae_vs_chronological_eur_mwh": 0.435319052743149
+    },
+    {
+      "area": "0:DE",
+      "demand_twh": 465.6506111974182,
+      "fixed_hydro_twh": 1.5934922862398482,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 80.10692696952707,
+      "price_mae_vs_chronological_eur_mwh": 0.27701196103651343
+    },
+    {
+      "area": "0:DK",
+      "demand_twh": 19.607603345924378,
+      "fixed_hydro_twh": 0.0,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 78.33810325936365,
+      "price_mae_vs_chronological_eur_mwh": 0.33684812922492063
+    },
+    {
+      "area": "0:EE",
+      "demand_twh": 7.941961699760437,
+      "fixed_hydro_twh": 0.0,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 93.58668518479507,
+      "price_mae_vs_chronological_eur_mwh": 0.2861080957968289
+    },
+    {
+      "area": "0:ES",
+      "demand_twh": 234.74780512442015,
+      "fixed_hydro_twh": 23.077940171847665,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 83.53267560278155,
+      "price_mae_vs_chronological_eur_mwh": 0.3381886357767314
+    },
+    {
+      "area": "0:FR",
+      "demand_twh": 433.49206001615903,
+      "fixed_hydro_twh": 29.720403364678713,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 63.530608271354424,
+      "price_mae_vs_chronological_eur_mwh": 0.36471189348426014
+    },
+    {
+      "area": "0:GR",
+      "demand_twh": 50.193771748840334,
+      "fixed_hydro_twh": 3.26415900126429,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 99.09001222854455,
+      "price_mae_vs_chronological_eur_mwh": 0.21230657957557808
+    },
+    {
+      "area": "0:HR",
+      "demand_twh": 18.230148500198364,
+      "fixed_hydro_twh": 3.9304588748438403,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 98.97353215604565,
+      "price_mae_vs_chronological_eur_mwh": 0.24832364367539012
+    },
+    {
+      "area": "0:HU",
+      "demand_twh": 43.210005968833926,
+      "fixed_hydro_twh": 0.10093112059744781,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 96.37016702201235,
+      "price_mae_vs_chronological_eur_mwh": 0.2663447450521044
+    },
+    {
+      "area": "0:IT",
+      "demand_twh": 272.63240084075926,
+      "fixed_hydro_twh": 14.34226263688885,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 99.5586034725902,
+      "price_mae_vs_chronological_eur_mwh": 0.19311652237956187
+    },
+    {
+      "area": "0:LT",
+      "demand_twh": 11.772864476242065,
+      "fixed_hydro_twh": 0.3607897865105928,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 93.58668518479507,
+      "price_mae_vs_chronological_eur_mwh": 0.28610809579682844
+    },
+    {
+      "area": "0:LU",
+      "demand_twh": 4.843477593925476,
+      "fixed_hydro_twh": 0.0,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 84.53952639275755,
+      "price_mae_vs_chronological_eur_mwh": 1.0619214452033714
+    },
+    {
+      "area": "0:LV",
+      "demand_twh": 7.201224802078247,
+      "fixed_hydro_twh": 0.0,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 93.58668518479507,
+      "price_mae_vs_chronological_eur_mwh": 0.2861080957968288
+    },
+    {
+      "area": "0:ME",
+      "demand_twh": 3.0700140779495237,
+      "fixed_hydro_twh": 1.3045776913837048,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 99.20136477096997,
+      "price_mae_vs_chronological_eur_mwh": 0.2208936390552868
+    },
+    {
+      "area": "0:MK",
+      "demand_twh": 5.324999050476074,
+      "fixed_hydro_twh": 0.6431623385769318,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 99.16623504329571,
+      "price_mae_vs_chronological_eur_mwh": 0.2180246578779944
+    },
+    {
+      "area": "0:NL",
+      "demand_twh": 116.9040159910431,
+      "fixed_hydro_twh": 0.0,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 78.63881102596265,
+      "price_mae_vs_chronological_eur_mwh": 0.35764307098336334
+    },
+    {
+      "area": "0:PL",
+      "demand_twh": 158.3500118000641,
+      "fixed_hydro_twh": 0.8567517481509139,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 94.48112049138167,
+      "price_mae_vs_chronological_eur_mwh": 0.17829248324617777
+    },
+    {
+      "area": "0:PT",
+      "demand_twh": 53.08791996813202,
+      "fixed_hydro_twh": 3.485952912232293,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 85.00043977312919,
+      "price_mae_vs_chronological_eur_mwh": 0.3649898111189262
+    },
+    {
+      "area": "0:RO",
+      "demand_twh": 53.560333579940796,
+      "fixed_hydro_twh": 6.3509426570171215,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 98.83486553079841,
+      "price_mae_vs_chronological_eur_mwh": 0.24013192672160558
+    },
+    {
+      "area": "0:RS",
+      "demand_twh": 34.3214870015564,
+      "fixed_hydro_twh": 6.6594789133465895,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 99.31775943931156,
+      "price_mae_vs_chronological_eur_mwh": 0.22620194584461986
+    },
+    {
+      "area": "0:SI",
+      "demand_twh": 12.533900388168336,
+      "fixed_hydro_twh": 0.7714621221672129,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 100.1745238215626,
+      "price_mae_vs_chronological_eur_mwh": 0.31394321573062295
+    },
+    {
+      "area": "0:SK",
+      "demand_twh": 25.824788700317384,
+      "fixed_hydro_twh": 0.31190821282664216,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 95.7176291174574,
+      "price_mae_vs_chronological_eur_mwh": 0.2676030582807682
+    },
+    {
+      "area": "0:XK",
+      "demand_twh": 6.780857315383911,
+      "fixed_hydro_twh": 0.08442776516631764,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 99.20046810579976,
+      "price_mae_vs_chronological_eur_mwh": 0.21873825723810994
+    },
+    {
+      "area": "1:DK",
+      "demand_twh": 18.86310644303894,
+      "fixed_hydro_twh": 0.0,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 73.94656202934442,
+      "price_mae_vs_chronological_eur_mwh": 6.170173271406324
+    },
+    {
+      "area": "1:FI",
+      "demand_twh": 84.55375715096282,
+      "fixed_hydro_twh": 6.6560484030137586,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 56.139302076128736,
+      "price_mae_vs_chronological_eur_mwh": 2.454181394368259
+    },
+    {
+      "area": "1:NO",
+      "demand_twh": 137.04442755136873,
+      "fixed_hydro_twh": 99.77654174819288,
+      "emergency_supply_twh": 0.02981949509529285,
+      "shortage_hours": 4,
+      "mean_price_eur_mwh": 228.0204965126198,
+      "price_mae_vs_chronological_eur_mwh": 37.590109677729885
+    },
+    {
+      "area": "1:SE",
+      "demand_twh": 129.5462817512131,
+      "fixed_hydro_twh": 50.17539510514334,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 54.542195624664245,
+      "price_mae_vs_chronological_eur_mwh": 2.364015009181328
+    },
+    {
+      "area": "2:ES",
+      "demand_twh": 3.66624287525177,
+      "fixed_hydro_twh": 0.0,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 84.01262087330417,
+      "price_mae_vs_chronological_eur_mwh": 0.31937884804495037
+    },
+    {
+      "area": "3:FR",
+      "demand_twh": 1.1901393649291991,
+      "fixed_hydro_twh": 0.6717398589928911,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 97.70866190544918,
+      "price_mae_vs_chronological_eur_mwh": 1.1704225617831183
+    },
+    {
+      "area": "4:GB",
+      "demand_twh": 229.10849491451265,
+      "fixed_hydro_twh": 0.45841265357745037,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 66.25530156560268,
+      "price_mae_vs_chronological_eur_mwh": 0.35870421512939815
+    },
+    {
+      "area": "5:GB",
+      "demand_twh": 7.509675114250183,
+      "fixed_hydro_twh": 0.0,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 90.53477010217235,
+      "price_mae_vs_chronological_eur_mwh": 0.1320791223167058
+    },
+    {
+      "area": "5:IE",
+      "demand_twh": 34.52733977433014,
+      "fixed_hydro_twh": 0.11590009615384571,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 90.53477010217235,
+      "price_mae_vs_chronological_eur_mwh": 0.1320791223167058
+    },
+    {
+      "area": "6:GB",
+      "demand_twh": 0.11662641820526123,
+      "fixed_hydro_twh": 0.0,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 66.25530156560268,
+      "price_mae_vs_chronological_eur_mwh": 0.35870421512939843
+    },
+    {
+      "area": "7:IT",
+      "demand_twh": 4.477907153114319,
+      "fixed_hydro_twh": 0.41169421219000796,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 83.41882586925799,
+      "price_mae_vs_chronological_eur_mwh": 0.2582345686492581
+    }
+  ],
+  "provenance": {
+    "producer_sha256": "ed68a8273493976ee6c74d595cf349152fc01c44ad44708363aec7929aac0586",
+    "source_signature": {
+      "source": "4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec",
+      "producer": "c23988cc33ca6912b2b2d391adcadc93497f9e3e9d84a56250e10e310db51a8d",
+      "base": "7cc2a41645b758e0940ce187cf5386ac5653a401ad840b380707a8f032f561e0",
+      "capacity": "94c04a061b918cb4ca4d72c9e457e1edb4cc1d9a23e162da261acd1571443f6a",
+      "annual_state": "cf4a748fd8259d4b4ae0189bc8d428fcc7c5225566ce9c56aebdca0411b9867d",
+      "workspace": "c23377e44e6870d074640441fb42099bf06e8e1407e518e07f5a9c01a143bcca",
+      "gsk": "11595cb5e1ec7d4303f5f0f87a5fb89f3ee12bf7f6d3fb49cd305f5be2975c65",
+      "cost": "1af57f8f49390d960681e76c0547e2c838dbbc44674f6ba5b9a976050bcb62d1"
+    },
+    "water_replay_sha256": "df7eb79e3402c9bc2d708a51862ed3d9048897985e6973187098e03ac46f5820",
+    "annual_summary_sha256": "35fb0f7dca7ee21b1257d58d18c2cbbcaf4ebffcedf912c3aafe4b4d14819e4d",
+    "witness_sha256": [
+      "74bb3b9298755d5de96c03947be62d3cbea24cf6237633f481f1567b717f5686",
+      "fb7fb2ed62f48419b22eba394edd47844f61526a29011c1612fdd85e474416d5",
+      "42b1f12ae01c0b1a1f971655da28ce265c8e90b55e9a049576b6b023a5648a5c",
+      "e1e373b98af46aba939edadace0df4631c35deeb377442f975540205106cb672",
+      "2e6a6578d317b9933afe89ff3dd61a38986b773aac5787a2f40345d3b247cd69",
+      "6d6917823e9a5221d8b26094f7569c630e42bf30582b5dbba887b7c051387253",
+      "543899d7f8f1a04cc292dafaeb4e976c637438e9a3859cf2b46bd44a79e0a02b",
+      "9d0e7ded00a1561a86dcb73b030c4b697fcc9dfec8968ab37a95c2b82e740367",
+      "2828f3ab456244f74fe1d1ad0ebfae7c18ef6f0044b69d48e795757e2fca81f4",
+      "b64c81403307f4d21131c16ff2f328494721f04b8349567fe16fc13913cbc97f",
+      "c724998b6d741810c509e87ab04d087a24dccf9ab96b33c9bff076571c490b17",
+      "8daf75eae600eccbb6848aba8dfea0a9581767d41d83636ab64ee39cb10d445e",
+      "21a0e14dc3da017b0d8ef035dc0afd1b1bbb90a358f31987fe9b6545f8c5ed9e",
+      "e8a67626d5df75a3faca5817b7f1a5808523332fa94c022501469755a143991f",
+      "fc81a7543d3b9f262f97e8ecf11c4ec66550f5197088f42da1979d909ae3b33c",
+      "70b6e9c308eae03d35a4372849bed91fc8a96d5dc992ab300bf3c0b4e3042e7f",
+      "5230eb75c056ee3cfc033a19b8cb15e3622fc10fea71636e99aab8025e455eb4",
+      "830fa768897bb355e5e35ec03ccc6361231cc1e466dda2cb23b78517e5d21e08",
+      "d6178d950f9618fc948b00fe0f6542a6cf9b54d459aab165b4547cd74fec7888",
+      "77c1b9c90ccd3f7ccfa8dc3829ad5c7e609df48ede6e0546f7b5911df24a8de5",
+      "38b96d20833da288fe1e89025325dfd14b666d198e45d17aa1ff7fb7dd6a4fda",
+      "165e560c951294e53fc2b285e235b747b8c0f4f8ee80b8cc276311f72f57218d",
+      "0a1ccb32ee39ffe9d945959d76fd0fc9c9c91c30f5f2cb415b02257a67c11312",
+      "82963031089cd1a21aaa46b9ee31fb5a11c986d10e9ad28ff0c50efbe3929a76",
+      "3e2011b4b12234bcab4448170ed802a2f53acec4bc11d0d7fb9d6600c276ab07",
+      "32a9d4df0982cc953a43169ae6791da1b4c59b51824ecb456eaa89a91d67c411",
+      "64291593c2212823e19880b93756fb661abc241be2b94bba8c32aa2cfec1a65e",
+      "58ae262b9c7bfece1f235ecc57a76f98be55e524dddc423e9ff9c1362b0196db",
+      "95d8e61dd1966b189788847b7b9282e712360fa7795ef5ad3291cefbda01f7a1",
+      "a89a94eb199e948a816232acdcb9aff16ab6346e46b7c7a62f2458b2d24d8b14",
+      "ef49e21d9a017f91600d57fec804db56f13ff18f336e44c7dac531e9c2f76687",
+      "c04d68451429b84e38afee9a1c84b52ad02d22bd50dfc010d3fd5213a270f165",
+      "07701a73715fd0a27ce5c7b34d133378d9801234f7ca203fb0311dea5f9490e2",
+      "5db3e9797024359bf393c98ef894e2f58df2e9718d2ea69a5455be98a82e683d",
+      "2b056b6f68a79f02cb87dc39f1daf719c39d1b6b0ace7bb76c532cf47ef5101c",
+      "fbdf71de8546909f3336052fe5459b30450c3c9b4763de2880c895b19e72d130",
+      "a5c7b12371137eab9a9bc59be637a613bfdf342e96dc69143a21e335feb985c3",
+      "6e197b810eceb2c6a0b7ca5f5febc08525bbc797a60fa121a0648e408ea4e8f3",
+      "095ebebd294458e361d54b558b572adbf4c30aeb721efca9ec41a6e228d3337e",
+      "37156511c7f095654c0a9a98f3327ac01c84e6c808fad7beaed30a1d825e44ba",
+      "8136864db1d188d87dc356fcb6a67bffd69f708011a1fc5434d1f85d88ebf24b",
+      "ef0d68ee928bdc3f8c350fe3fea539fc27118defe509df66e873863770cdf954",
+      "f04612b226b51eb7e46348fd99af26ffd61835543deb3b114932c2a8d21088d9",
+      "28a61b1a42c96e7e7985f30e6e43b1b83cc193f79bacaa86629cfc8da2907d31",
+      "cb20435325765f21a84c4ed752545b37fadd45524c634b06c359815460fcc7ae",
+      "72fcf81a2b03c5fe24460c06c59d728cda398a42f17ffe3f1eabffaaf61fccd5",
+      "ac6ee05d61d620e91396b50a178090b9264c8d35d7d3db1b38974ad67334cecf",
+      "8ab6a673c50ae25a91f4ea2312f0a577a666cc552b08f9267f140b39c62dde8c",
+      "df9ea51779e4da5d6963e60fea85e746641b55ce2a58f813868fe74c3f17589c",
+      "c52df2c30ee00aa1d8ae05dc254509aa3566a2614c54f48ed35ebc6eb3232253",
+      "f75a6964ee65e687a2fbe6cfb052530dc0f8be4985e5239e148dcf7bd53caf8b",
+      "565443dbb933c25f0c436757a3c946bb663d20556ed018fbfedf789f7b92c860",
+      "bf7415a01db810106368bb9f0c2e39c6fb01154bcc93fc7305e4a5523a2ce2e1",
+      "30b53aa8d79daf4b0cb50f39920a3972f3a0bfa504cf41c087f8fc8d74f466cd",
+      "da7abe2c3bee17f30128553726a8597b927dbc4cade66d22ab3f68cccc940ee4",
+      "0dfba43cc08e60e053caaa016af9a7f9c22fe45d3c6eb65f4c7ecca3dbceb5e5",
+      "d3e1f4163c364c65008815107646211ba4cf1ab03721de52ffe0d365a74bc737",
+      "1fc7131bf0a50b35b060ff674b5f4059dea181f77c24e0c8a23adcd586c31f8f",
+      "416da05874d372e04422f4647b6e5c4e53d0b3d727162c9708da8b92b1d29aef"
+    ],
+    "observed_prices_sha256": "bb2bf788973234b5c15e0ecc0020c1b7814319648e74c01af32d31f1b53b028a"
+  },
+  "limitations": [
+    "Fixed offline reservoir output: no hydro response to investments or changed inputs",
+    "Hourly marginal prices condition on fixed hydro; they need not equal water-coupled marginal prices",
+    "Same source GSK, IRENA wind/PV, original weather and demand; no market or annual optimum acceptance",
+    "Other 67 battery/PHS units excluded; reservoir water feasibility inherited and independently replayed",
+    "Offline schedule and preparation cost excluded from fast-loop timing"
+  ]
+}
