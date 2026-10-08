@@ -415,10 +415,17 @@ limits and explicit statement that fixed-reservoir research is not app-integrate
 Sidebar methodology links now point into Docs; article navigation uses Docs and
 Workbench without target/research-library links. Existing evidence routes and
 scientific data remain intact. Updated production browser checks for this flow.
-Typecheck passes; other local and publication checks pending. No solver changes
+Typecheck passes; subsequent checks and publication evidence recorded below. No solver changes
 or research jobs started; automatic reviews remain paused.
 
 Local verification passes: typecheck, lint (six existing warnings), all 28 Bun
 tests, production build and functional Chromium smoke at 1440, 390, 320 and 667px.
 Checks cover Docs navigation, absence of experimental links, both method sections,
 unchanged scenario evaluation/persistence and direct legacy evidence routes.
+
+Publication verified for commit `b84b624507bbd23ae66d34662d265d6ba1f2ed53`:
+PR checks `37843290291` and CI/Pages `37843282895` both succeeded. Independent
+functional Chromium checks against the deployed public site passed at 1440,
+390, 320 and 667px, including the simplified navigation, both Docs methodology
+sections, scenario evaluation/persistence and preserved direct evidence routes.
+Public methodology: https://autological-eu.github.io/grid-conductor/docs/.
