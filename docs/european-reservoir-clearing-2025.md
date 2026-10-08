@@ -1,16 +1,26 @@
 # European reservoir clearing — Norway and the 2025 chronology
 
-The implementation and 48-hour native comparison are verified. The new full-year
-calculation is running; its annual results have not yet passed the independent
-replay audit and are not presented as accepted results here.
+All **8,760 hours** have completed and all **59 saved block primals** passed
+independent replay, including block joins and annual closure. Norway emergency
+supply is **0.0298 TWh**, compared with **34.35 TWh** when
+reservoirs were omitted. Reservoir LP solve time totals **17.1
+minutes**. These results remain conditional on fixed reference inventories.
+
+The [full results report](european-physical-synthetic-clearing-2025.md) includes
+before/after data, country generation, water inventories and German price plots.
+[Annual summary](../../research/european-reservoir-clearing-2025/summary.json) and
+[independent replay evidence](../../research/european-reservoir-clearing-2025/replay.json)
+provide machine-readable verification.
+
+![Norwegian reservoir inventory and output](../../research/european-reservoir-clearing-2025/norway-hydro.svg)
 
 ## What changed
 
 The European synthetic order book now includes the source network’s **93
 reservoir hydro units**, including Norway’s five reservoirs. The previous
 IRENA-adjusted independent-hour case omitted these turbines entirely and
-reported **34.35 TWh of Norwegian emergency supply**. That shortage was a
-model omission; adding wind/PV capacity could not repair it.
+reported **34.35 TWh of Norwegian emergency supply**. That diagnostic omitted
+reservoir operation; the completed comparison now quantifies its effect.
 
 This extension retains the IRENA wind/PV trajectory, original renewable
 availability, fixed demand, synthetic bid costs, country/island GSKs, physical

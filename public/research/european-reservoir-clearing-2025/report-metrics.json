@@ -1,0 +1,12 @@
+{
+  "joint_observed_hours": 8759,
+  "norway_emergency_twh": 0.029819495095292848,
+  "prior_norway_emergency_twh": 34.34644665932757,
+  "reservoir_generation_twh": 311.0030269007466,
+  "solver_seconds": 1027.4205227820203,
+  "preparation_seconds": 65.90028598991921,
+  "cold_retry_blocks": 0,
+  "report_producer_sha256": "c9c16a971c858aea44663ec395c80e656ba97167511a5bb347f8431402345a5e",
+  "summary_sha256": "35fb0f7dca7ee21b1257d58d18c2cbbcaf4ebffcedf912c3aafe4b4d14819e4d",
+  "replay_sha256": "df7eb79e3402c9bc2d708a51862ed3d9048897985e6973187098e03ac46f5820"
+}

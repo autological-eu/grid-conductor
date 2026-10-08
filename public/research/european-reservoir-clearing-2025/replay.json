@@ -1,0 +1,19 @@
+{
+  "status": "all_59_saved_primals_replayed",
+  "hours": 8760,
+  "maximum_primal_residual_mw": 2.035084946783172e-06,
+  "maximum_water_residual_mwh": 2.035084207818727e-06,
+  "maximum_annual_closure_mwh": 0.0,
+  "total_operating_cost_eur": 76055419063.62993,
+  "source_signature": {
+    "source": "4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec",
+    "producer": "c23988cc33ca6912b2b2d391adcadc93497f9e3e9d84a56250e10e310db51a8d",
+    "base": "7cc2a41645b758e0940ce187cf5386ac5653a401ad840b380707a8f032f561e0",
+    "capacity": "94c04a061b918cb4ca4d72c9e457e1edb4cc1d9a23e162da261acd1571443f6a",
+    "annual_state": "cf4a748fd8259d4b4ae0189bc8d428fcc7c5225566ce9c56aebdca0411b9867d",
+    "workspace": "c23377e44e6870d074640441fb42099bf06e8e1407e518e07f5a9c01a143bcca",
+    "gsk": "11595cb5e1ec7d4303f5f0f87a5fb89f3ee12bf7f6d3fb49cd305f5be2975c65",
+    "cost": "1af57f8f49390d960681e76c0547e2c838dbbc44674f6ba5b9a976050bcb62d1"
+  },
+  "auditor_sha256": "95db932a4fe7a0add5a2d0672761d2988bc5cc5515e497de7fc6351d4eeb51c3"
+}

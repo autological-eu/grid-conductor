@@ -298,3 +298,40 @@ annual computation is still running. A one-off supervisor will run the saved-pri
 replay auditor after all 59 blocks finish; no recurring reviews were enabled.
 Annual summary/figures require audit inspection and a separate reviewed commit
 before publication. Inspect live jobs and this provenance root before resuming.
+
+## Reservoir-enabled annual result and report
+
+All 59 blocks / 8760 UTC hours completed with optimal LP status, followed by
+independent replay of every saved primal, source signature, network/water bound,
+block join and annual closure. Maximum primal residual 2.04e-6 MW, water residual
+2.04e-6 MWh; annual closure difference zero. Operating-cost replay totals
+76,055,419,063.62993 EUR for this distinct GSK-restricted, IRENA-adjusted,
+fixed-reservoir-boundary diagnostic; it is not comparable to the retained native
+reference as an optimality gap. N3–N5 remain open.
+
+European emergency supply 0.0298195 TWh in four hours, all in Norway; Norway's
+prior no-reservoir diagnostic was 34.3464467 TWh. Norwegian turbine generation
+99.7765417 TWh; European reservoir generation 311.0030269 TWh. DE descriptive
+MAE 23.0656 EUR/MWh versus 22.6204 before hydro; this price metric worsens slightly.
+Solve time 1027.42s (17.12min), block preparation/update 65.90s; these exclude
+loading/compilation, native verification and final audit/reporting. Zero cold
+retries. This is not seconds-scale chronological dispatch.
+
+The solver driver's final plot export failed after all 59 witnesses, summary
+and CSVs were saved: it collapsed the hourly axis into a scalar. Recovered chart
+export through tools/report_european_reservoir_clearing.py from audited saved
+results, leaving the frozen numerical producer and original reference untouched.
+Use that separate exporter for this frozen result; any future calculation-driver
+refactor must use fresh provenance rather than silently resuming changed code.
+The pending annual job/supervisor entries above are superseded by this completed
+solve and audit; no research jobs were duplicated or retired searches resumed.
+
+Both European reports now contain verified annual evidence, water/output plots,
+country output, before/after shortages and hourly German price comparisons. The
+main report also distinguishes fixed hydro schedules from water-value bid curves:
+precomputation remains a possible acceleration route, not an implemented result
+or a newly accepted product decision. Three reservoir tests pass again.
+Large primal witnesses stay ignored; published files are compact result exports.
+Publication verification is pending for this report update. Hourly reviews stay
+paused. Next: observed hydrology/zone validation, remaining scarcity diagnosis,
+fast chronological feasibility and paired scenario/native verification.

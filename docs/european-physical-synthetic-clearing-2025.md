@@ -1,13 +1,119 @@
 # European physical synthetic-bid clearing — all 2025 hours
 
-## Reservoir extension
+## Reservoir-enabled full-year result
 
-Chronological reservoir scheduling is now implemented in a separate conditional
-annual pipeline. It restores the original 93 reservoir units, including Norway’s
-five, while preserving the IRENA wind/PV adjustment. See the
-[reservoir implementation and verification report](european-reservoir-clearing-2025.md)
-for water physics, fixed reference boundaries and native PyPSA parity. The
-independent-hour results below remain a separate diagnostic.
+All **8,760 UTC hours of 2025** have now been solved with **93 chronological
+reservoir units** and the IRENA wind/PV capacity adjustment. All 59 saved primal
+witnesses passed an independent replay of water balances, generation and network
+limits, block joins and annual inventory closure. These are **conditional annual
+results**: reservoir inventories at 60 boundaries are fixed to the retained
+PyPSA-Eur reference, rather than jointly optimised over the year.
+
+Norway’s emergency supply changes from **34.35 to
+0.0298 TWh**, a reduction of **34.32 TWh**. Its
+reservoir turbines produce **99.78 TWh**. This directly
+measures the effect of restoring omitted hydro with the same wind/PV trajectory,
+prepared demand, bid costs, physical ratings and GSK assumptions. It does not
+prove that remaining shortages or source hydrology match the observed system.
+
+| Metric | IRENA wind/PV, reservoirs omitted | With chronological reservoirs |
+| --- | ---: | ---: |
+| European emergency supply TWh | 34.77 | 0.0298 |
+| Hours with any emergency supply | 8282 | 4 |
+| Norway emergency supply TWh | 34.3464 | 0.0298 |
+| European reservoir generation TWh | Excluded | 311.00 |
+| German descriptive MAE €/MWh | 22.62 | 23.07 |
+| German descriptive bias €/MWh | −1.67 | -9.29 |
+| German descriptive RMSE €/MWh | 34.98 | 35.96 |
+
+![Emergency supply before and after reservoir scheduling](../../research/european-reservoir-clearing-2025/area-shortages.svg)
+
+### Why this run takes longer
+
+The independent-hour dispatch/replay/accounting loop took **30.56 seconds**.
+Those 8,760 small problems omitted all storage. This extension solves 59 much
+larger chronological problems, usually 168 hours each, with 93 reservoirs’
+turbine-output, inventory and spill variables and inter-hour water equations.
+Recorded LP solve time totals **1027.4 seconds
+(17.1 minutes)**; block construction/update adds
+**65.9 seconds**. These totals exclude source loading,
+initial model compilation, separate native verification and the subsequent annual
+audit/figure production. They are not an end-to-end stopwatch benchmark.
+
+Identical area/cost offers are aggregated exactly, and solver bases are reused
+between equal-length blocks. **0 blocks** needed an
+unchanged-input cold-basis retry. This implementation restores chronological
+physics but has not achieved a seconds-scale reservoir solve. The earlier
+30-second result remains valid for the explicitly simpler independent-hour case.
+
+### Norway’s water and output
+
+![Norwegian reservoir inventories and turbine output](../../research/european-reservoir-clearing-2025/norway-hydro.svg)
+
+Norwegian water-energy inflow totals **112.02 TWh**, spill
+**1.15 TWh**, and electric turbine output
+**99.78 TWh**. The 90% discharge efficiency distinguishes
+water energy from electricity. Initial/final inventory is
+**0.63/0.63 TWh**. Annual
+closure is independently checked for each reservoir, not just the national sum.
+Inherited trial boundaries, source runoff and turbine/energy capacities are model
+assumptions; they are not observed Norwegian reservoir measurements.
+
+![Reservoir generation across all country labels](../../research/european-reservoir-clearing-2025/country-hydro.svg)
+
+### German price comparison and native verification
+
+![Reservoir-enabled German prices and hourly errors](../../research/european-reservoir-clearing-2025/price-comparison.svg)
+
+The mainland-DE model price is compared with observed DE-LU prices for
+**8,759 jointly observed hours**. Missing observations are
+not filled. This is the same country-versus-bidding-zone proxy used below;
+The MAE increases from €22.62 to €23.07/MWh; adding reservoir physics does not
+improve this price-fit metric. MAE is descriptive, without fitting or held-out
+market acceptance. The line plot
+shows seven-day means; the scatter and error histogram use hourly values.
+
+A separate **48-hour native PyPSA chronological solve** agrees with the fast LP
+within **€0.000002**, under identical GSK and reservoir conditions. It uses equal
+initial/final retained initial inventories, rather than the annual first-block
+terminal. This is a small-case numerical check, not full-year native parity.
+Annual independent replay finds maximum network/bound residual
+**2.04e-06 MW**, water residual
+**2.04e-06 MWh**, and closure difference
+**0.00e+00 MWh**, below the 1e−4 diagnostic thresholds.
+
+### Can hydro be precomputed for faster clearing?
+
+Yes: the slow chronological calculation can act as an offline reference. A fixed
+hourly hydro schedule can be reused by independent-hour clearing, preserving
+that baseline water use but preventing hydro from responding to investments.
+Alternatively, precomputed water-value bids can price the opportunity cost of
+saving water, allowing a fast clearing model to vary output. Those curves alone
+do not enforce cumulative water feasibility: the online model must still track
+inventories and respect water budgets, then verify the full chronological replay.
+Scenario changes can invalidate baseline water values, so accuracy needs testing
+against matched chronological baseline/intervention solves. These are possible
+acceleration approaches, not implemented or verified results of this run.
+
+### Conclusion and limits
+
+Restoring reservoir operation makes the shortage diagnostic more complete, with
+an explicitly measured effect on Norway. The fixed-boundary annual result is
+not a certified annual optimum or an investment valuation. The other **67 battery
+and pumped-storage units remain excluded**. Bidding-zone mapping, observed hydro
+and fleet validation, JAO commercial constraints, paired intervention verification
+and annual convergence gates remain open. The browser scenario estimator has not
+been replaced by this research calculation.
+
+[Annual summary and source hashes](../../research/european-reservoir-clearing-2025/summary.json),
+[independent replay](../../research/european-reservoir-clearing-2025/replay.json),
+[all area summaries](../../research/european-reservoir-clearing-2025/area-summary.csv),
+[before/after shortages](../../research/european-reservoir-clearing-2025/shortage-comparison.csv),
+[hourly German prices](../../research/european-reservoir-clearing-2025/hourly-de.csv),
+[hourly Norwegian hydro](../../research/european-reservoir-clearing-2025/norway-hourly.csv),
+[monthly Norwegian totals](../../research/european-reservoir-clearing-2025/norway-monthly.csv),
+and [method and native comparison](european-reservoir-clearing-2025.md).
+Large primal checkpoints remain in the ignored cloud cache, outside Git.
 
 ## Independent-hour default: IRENA linear-capacity inputs
 
