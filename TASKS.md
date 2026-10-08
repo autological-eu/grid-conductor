@@ -264,3 +264,8 @@ Next: implement original reservoir/hydro chronology; capacity interpolation does
 not fix Norway’s omitted reservoir fleet. Missing IRENA/profile coverage, bidding
 zone mapping, observed input validation and annual/investment gates stay open.
 Hourly automated check-ins remain disabled at user request.
+
+Publication verified through d6bb860: CI/Pages 37772232257 and PR checks
+37772239849 passed. Public desktop/mobile checks confirmed the IRENA update
+and all figures; six new JSON/CSV/SVG assets returned HTTP 200 with committed
+bytes. Original-fleet outputs and the retained annual reference remain separate.
