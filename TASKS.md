@@ -383,3 +383,14 @@ accounting reconciles all 40 areas and 8760 hours with both price-comparison met
 Local build and two targeted Python tests pass; source and retained annual
 reference are unchanged. No ongoing scientific computation or recurring reviews
 were started by publication.
+
+## Final-model report cleanup
+
+Rewrote the main European physical-clearing report and its generator to contain
+only the final fixed-reservoir model. Removed superseded no-hydro, original-fleet,
+chronological-result narratives and historical comparison charts from this report.
+Retained current runtime/shortage data, native verification, observed DE-LU price
+validation, water provenance and fixed-hydro/price/investment limitations. New
+figures show only current-model reservoir supply and current versus observed
+German prices. Scientific result files, source inputs and reference are unchanged;
+no calculations or recurring reviews were restarted. Publication checks pending.

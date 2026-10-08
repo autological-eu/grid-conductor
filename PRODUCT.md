@@ -239,3 +239,9 @@ hydro schedule: it cannot estimate hydro response to investments. Keep timing
 of offline preparation separate from reusable screening, and compare marginal
 prices as well as objective cost against chronological and matched native cases.
 Adaptive water-value bids remain a separate, unverified extension.
+
+The public European physical-clearing report should present the final fast
+fixed-reservoir model as one coherent report, with current results, visualisations,
+input/method provenance and numerical/observed-price verification. Omit superseded
+model narratives and comparison charts from that report while retaining supporting
+evidence and material limitations, especially fixed-hydro price sensitivity.

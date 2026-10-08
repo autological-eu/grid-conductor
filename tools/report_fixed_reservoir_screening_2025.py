@@ -1,105 +1,184 @@
-"""Report fixed-reservoir screening separately from adaptive hydro."""
+"""Render the final fixed-reservoir model report from verified result exports."""
 import json
 from pathlib import Path
-import numpy as np
 import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from hourly_renewable_estimates import digest
-ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'public/research/fixed-reservoir-screening-2025'
+ROOT=Path(__file__).resolve().parents[1]
+OUT=ROOT/'public/research/fixed-reservoir-screening-2025'
 
 def run():
-    s=json.loads((OUT/'summary.json').read_text());d=pd.read_csv(OUT/'hourly-de.csv',parse_dates=['utc']);a=pd.read_csv(OUT/'area-summary.csv')
-    if s['hours']!=8760 or len(d)!=8760 or s['provenance']['producer_sha256']!=digest(ROOT/'tools/fixed_reservoir_screening_2025.py'):raise ValueError('Changed producer or incomplete year')
-    if abs((d.fixed_hydro_de_eur_mwh-d.chronological_de_eur_mwh).abs().mean()-s['germany']['price_mae_vs_chronological_eur_mwh'])>1e-9:raise ValueError('Price export mismatch')
-    if abs(a.emergency_supply_twh.sum()-s['emergency_supply_twh'])>1e-9:raise ValueError('Shortage export mismatch')
-    fig,axes=plt.subplots(2,1,figsize=(12,8),layout='constrained');w=d.set_index('utc').resample('7D').mean()
-    for column,label in [('observed_de_lu_eur_mwh','Observed DE-LU'),('chronological_de_eur_mwh','Chronological reservoirs'),('fixed_hydro_de_eur_mwh','Fixed hourly hydro')]:axes[0].plot(w.index,w[column],label=label)
-    axes[0].set(title='German price proxy — seven-day means of all hourly results',ylabel='EUR/MWh');axes[0].legend();axes[1].hist(d.fixed_hydro_de_eur_mwh-d.chronological_de_eur_mwh,bins=60);axes[1].set(title='All 8760 hours — fixed-hydro versus chronological marginal prices',xlabel='Price difference EUR/MWh',ylabel='Hours');fig.savefig(OUT/'price-comparison.svg');plt.close(fig)
-    fig,ax=plt.subplots(figsize=(10,5),layout='constrained');ax.barh(['Chronological LP solves','Fixed-schedule solve/replay loop','Fixed-schedule preparation/water check'],[s['chronological_solver_seconds'],s['warm_solve_replay_seconds'],s['preparation_and_water_audit_seconds']]);ax.set(xlabel='Measured seconds',title='Offline hydro calculation versus reusable fixed-schedule clearing');fig.savefig(OUT/'runtime-comparison.svg');plt.close(fig)
-    ranked=a.sort_values('price_mae_vs_chronological_eur_mwh')
-    fig,ax=plt.subplots(figsize=(12,10),layout='constrained');ax.barh(ranked.area,ranked.price_mae_vs_chronological_eur_mwh);ax.set(xlabel='Mean absolute hourly price difference EUR/MWh',title='All 40 areas — fixed schedule versus chronological hydro');fig.savefig(OUT/'area-price-differences.svg');plt.close(fig)
-    price_rows='\n'.join(f"| {r.area} | {r.price_mae_vs_chronological_eur_mwh:.2f} |" for r in ranked.tail(5).iloc[::-1].itertuples())
-    g=s['germany'];text=f'''## Fast screening: precomputed hourly reservoir output
+    s=json.loads((OUT/'summary.json').read_text())
+    d=pd.read_csv(OUT/'hourly-de.csv',parse_dates=['utc'])
+    a=pd.read_csv(OUT/'area-summary.csv')
+    if s['hours']!=8760 or len(d)!=8760 or s['provenance']['producer_sha256']!=digest(ROOT/'tools/fixed_reservoir_screening_2025.py'):
+        raise ValueError('Changed producer or incomplete year')
+    error=d.fixed_hydro_de_eur_mwh-d.observed_de_lu_eur_mwh
+    if abs(error.abs().mean()-s['germany']['mae_eur_mwh'])>1e-9:
+        raise ValueError('Observed-price export mismatch')
+    if abs(a.emergency_supply_twh.sum()-s['emergency_supply_twh'])>1e-9:
+        raise ValueError('Shortage export mismatch')
+    fig,axes=plt.subplots(2,1,figsize=(12,8),layout='constrained')
+    weekly=d.set_index('utc')[['fixed_hydro_de_eur_mwh','observed_de_lu_eur_mwh']].resample('7D').mean()
+    axes[0].plot(weekly.index,weekly.observed_de_lu_eur_mwh,label='Observed DE-LU')
+    axes[0].plot(weekly.index,weekly.fixed_hydro_de_eur_mwh,label='Current model: mainland DE')
+    axes[0].set(title='German prices — seven-day means of hourly results',ylabel='EUR/MWh');axes[0].legend()
+    axes[1].hist(error.dropna(),bins=60)
+    axes[1].set(title='Hourly error against observed DE-LU prices',xlabel='Model minus observed EUR/MWh',ylabel='Hours')
+    fig.savefig(OUT/'model-prices.svg');plt.close(fig)
+    generation=a.assign(country=a.area.str.split(':').str[-1]).groupby('country').fixed_hydro_twh.sum().sort_values()
+    fig,ax=plt.subplots(figsize=(12,9),layout='constrained')
+    ax.barh(generation.index,generation.values)
+    ax.set(xlabel='Precomputed reservoir generation TWh',title='Current model — fixed reservoir supply by country')
+    fig.savefig(OUT/'model-hydro.svg');plt.close(fig)
+    checks='\n'.join(f"| {c['utc']} | {c['native_objective_eur']:,.2f} | {c['fast_objective_eur']:,.2f} | {abs(c['difference_eur']):.9f} |" for c in s['native_checks'])
+    no=a[a.area.str.endswith(':NO')]
+    g=s['germany']
+    text=f'''# European hourly dispatch — the final fast screening model
 
-The verified chronological reservoir schedule can now be reused for fast
-independent-hour network clearing. All **8,760 hours** clear in **{s['warm_solve_replay_seconds']:.2f}
-seconds**, including network replay. Preparation, source checks and replay of the
-full water schedule add **{s['preparation_and_water_audit_seconds']:.2f} seconds**. These
-measurements exclude Python imports, the offline 17.1-minute reservoir solve,
-separate native verification and reporting. This demonstrates fast reuse of a
-precomputed schedule, not seconds-scale adaptive reservoir optimisation.
+## Summary
 
-Each of the 93 reservoirs contributes its saved electric turbine output as an
-explicit **fixed injection**, in its original country/island area. Original demand,
-weather-based generator availability, IRENA wind/PV trajectory, GSKs and physical
-constraints remain unchanged. Dispatch is not relabelled as availability. Negative
-residual demand means fixed hydro exceeds that area's load and must be exported;
-original demand itself is not replaced with negative values.
+The model clears all **8,760 UTC hours of 2025** across **40 country/island
+areas**, spanning **{len(generation)} country labels**. It combines synthetic generator bids,
+prepared hourly demand, physical network limits and **93 reservoirs’ precomputed
+hourly output**. The annual solve-and-replay loop takes **{s['warm_solve_replay_seconds']:.2f} seconds**;
+preparation and water checks add **{s['preparation_and_water_audit_seconds']:.2f} seconds**.
 
-| Metric | Chronological reservoirs | Fixed hourly reservoir schedule |
-| --- | ---: | ---: |
-| Reported LP solve / hourly solve-and-replay seconds | 1027.42 | {s['warm_solve_replay_seconds']:.2f} |
-| European emergency supply TWh | 0.0298195 | {s['emergency_supply_twh']:.7f} |
-| Hours with emergency supply | 4 | {s['shortage_hours']} |
-| German observed-price MAE €/MWh | 23.07 | {g['mae_eur_mwh']:.2f} |
-| German observed-price bias €/MWh | −9.29 | {g['bias_eur_mwh']:+.2f} |
-| German observed-price RMSE €/MWh | 35.96 | {g['rmse_eur_mwh']:.2f} |
+This is a verified numerical baseline for **fixed-hydro screening**. Reservoir
+output is fixed rather than re-optimised during clearing. Market calibration,
+adaptive hydro and investment-scenario acceptance remain open.
 
-![Measured offline and reusable solve timings](../../research/fixed-reservoir-screening-2025/runtime-comparison.svg)
-
-Total operating cost differs from the chronological result by only
-**{s['objective_difference_vs_chronological_eur']:.6f} euros**. Fixing the saved conditional
-hydro output leaves an independently solvable network problem per hour; this
-cost agreement checks reuse of that solution under unchanged assumptions. It
-is not verification of a changed-input or investment scenario.
-
-Three January/July/December native PyPSA solves with the same fixed injections
-match objectives within **€0.000003**. Full-year network/bound replay has maximum
-residual **{s['maximum_network_residual_mw']:.2e} MW**. Original hourly water balances,
-turbine/energy limits, spill and annual closure are replayed before screening;
-maximum water residual is **{s['maximum_water_residual_mwh']:.2e} MWh**. {len(s["cold_retries"])} nonoptimal
-warm-basis solves recovered through unchanged-input cold retries. Two new tests
-reject double-spent water, broken closure and incorrect area mapping, and check
-fixed-injection accounting when local hydro exceeds demand.
-
-![Hourly-price comparison with chronological hydro and observations](../../research/fixed-reservoir-screening-2025/price-comparison.svg)
-
-German fixed-schedule marginal prices differ from chronological prices by
-**{g['price_mae_vs_chronological_eur_mwh']:.3f} €/MWh on average**, with maximum absolute
-hourly difference **{g['maximum_price_difference_vs_chronological_eur_mwh']:.2f} €/MWh**.
-The difference is materially larger in some other areas: **Norway's mean absolute
-price difference is €37.59/MWh**. This is a difference between model variants,
-not error against Norwegian observed prices.
-
-| Area | Mean absolute price difference versus chronological hydro €/MWh |
+| Result | Current model |
 | --- | ---: |
-{price_rows}
+| Year / hourly solves | 2025 / 8760 |
+| Prepared demand TWh | {a.demand_twh.sum():.2f} |
+| Precomputed reservoir generation TWh | {a.fixed_hydro_twh.sum():.2f} |
+| Norway reservoir generation TWh | {no.fixed_hydro_twh.sum():.2f} |
+| Emergency supply TWh | {s['emergency_supply_twh']:.7f} |
+| Hours with emergency supply | {s['shortage_hours']} |
+| Solve and network replay seconds | {s['warm_solve_replay_seconds']:.2f} |
+| Preparation and water checks seconds | {s['preparation_and_water_audit_seconds']:.2f} |
 
-![Price differences across every country/island area](../../research/fixed-reservoir-screening-2025/area-price-differences.svg)
+All remaining emergency supply is in Norway. Emergency bids at €10,000/MWh
+make shortages visible; these are diagnostic penalties, not observed market bids.
+Runtime excludes Python imports, offline reservoir-schedule generation, separate
+native verification and report production. No browser or end-to-end runtime is
+claimed.
 
-These differences matter for congestion-rent and investment estimates. Matching
-operating cost does not validate price-based valuations. Matching operating cost
-does not require matching dual prices: fixed hydro
-cannot respond at the margin, whereas the chronological LP can reallocate water.
-The observed DE-LU comparison remains an uncalibrated mainland-DE scope proxy.
+## How the model works
 
-**Conclusion:** the fixed-schedule variant achieves a seconds-scale annual
-screening loop for this baseline. Hydro cannot respond to new transmission,
-batteries, demand or bid costs. A future intervention case would be conditional
-on the same hydro schedule and would need its own verification; adaptive hydro
-requires water-value bids and enforceable water budgets, or a fresh chronological
-solve. The other 67 battery/PHS units remain excluded. This research pipeline
-has not replaced the browser scenario estimator or closed annual/investment gates.
+**Supply and demand.** The prepared PyPSA-Eur network supplies 1,151 generators
+and hourly demand. Generator availability retains the original weather profiles;
+wind/PV capacity follows the IRENA end-2024/end-2025 linear trajectory. This applies
+61 country/technology trajectories, with missing capacity/profile coverage recorded
+in the source audit. Linear commissioning is an assumption, not observed dates.
+Synthetic thermal bids add €80/t operational CO2 to source marginal costs;
+wind/solar bids are −€5/MWh. Demand is a prepared-network proxy, not independently
+audited ENTSO-E hourly demand. Actual EUPHEMIA orders, block bids and commitment
+rules are not reconstructed.
 
-[Summary, native checks and source/witness hashes](../../research/fixed-reservoir-screening-2025/summary.json),
-[all area comparisons](../../research/fixed-reservoir-screening-2025/area-summary.csv),
-and [hourly German prices](../../research/fixed-reservoir-screening-2025/hourly-de.csv).
-Large calculation witnesses remain in the ignored cloud cache.
+**Network.** The model retains 256 passive branches and 74 controllable links.
+Countries stay separate within each original AC island. Installed-capacity
+generation shift keys allocate net local injections to original buses; merging
+repeated country labels would invent connectivity. Links retain original endpoints,
+signed bounds and efficiencies. Passive limits use source ratings in both directions.
+These are static N-0 physical limits, without observed outages, contingencies or
+commercial JAO capacity domains.
 
+**Reservoir supply.** Each reservoir’s saved electric output is an explicit fixed
+hourly injection. It is not generator availability. Before clearing, the complete
+schedule is checked against original inflows, discharge efficiency, spill limits,
+turbine capacity, reservoir energy bounds and annual closure. It comes from an
+offline chronological solve with 60 fixed inventory boundaries inherited from
+the retained PyPSA-Eur reference; those inventories are model assumptions, not
+observed water levels or an annual-optimum certificate.
+
+Original demand stays intact. Where hydro exceeds local demand, residual demand
+in the LP becomes negative, representing a fixed injection to be exported.
+With hydro fixed, the network problems separate by hour and can reuse a solver
+basis. The other **67 battery and pumped-storage units remain excluded**.
+
+## Reservoir supply across Europe
+
+![Current-model reservoir generation by country](../../research/fixed-reservoir-screening-2025/model-hydro.svg)
+
+The chart aggregates the fixed schedule by country for display; clearing retains
+all 40 country/island areas. Zero bars mean no reservoir output in this model,
+not proof of no real-world hydro capacity. Source turbine capacities, hydrology
+and geographic coverage still need observed-data validation.
+
+## German price validation
+
+![Current model and observed German prices](../../research/fixed-reservoir-screening-2025/model-prices.svg)
+
+Mainland-DE prices are compared with the observed Energy-Charts/SMARD **DE-LU**
+series for **{int(error.notna().sum()):,} jointly observed hours**. Missing observations are not
+filled. The line chart shows seven-day means; the error histogram uses individual
+hours. Germany and DE-LU have different geographic scope, so this is a descriptive
+proxy comparison, without fitting or held-out market acceptance.
+
+| Metric | Current model versus observed DE-LU |
+| --- | ---: |
+| MAE €/MWh | {g['mae_eur_mwh']:.2f} |
+| Bias €/MWh | {g['bias_eur_mwh']:+.2f} |
+| RMSE €/MWh | {g['rmse_eur_mwh']:.2f} |
+
+## Numerical verification
+
+Three preselected hours are independently solved by native PyPSA with the same
+fixed hydro injections, GSKs, passive network and controllable-link constraints.
+They verify this model’s numerical formulation, not agreement with market prices
+or an unrestricted nodal optimum.
+
+| UTC hour | Native PyPSA objective € | Fast objective € | Absolute difference € |
+| --- | ---: | ---: | ---: |
+{checks}
+
+All 8,760 fast solves terminated optimal after any retry. Independent network
+and bound replay has maximum residual **{s['maximum_network_residual_mw']:.2e} MW**;
+water replay has maximum residual **{s['maximum_water_residual_mwh']:.2e} MWh** and checks
+annual closure. Both are below the declared `1e−4` diagnostic threshold.
+{len(s["cold_retries"])} nonoptimal warm-basis solves recovered through unchanged-input cold retries;
+no bounds were relaxed. Two targeted tests cover double-spent water, broken
+closure and country/island injection accounting, including local hydro surplus.
+
+The underlying chronological water schedule has separate saved-primal replay
+evidence. Numerical cost agreement does not validate marginal prices or
+congestion-rent valuations.
+
+## Conclusion and limitations
+
+The current model provides a seconds-scale, full-year physical dispatch baseline
+with audited fixed reservoir supply and explicit shortage reporting. Its main
+limitation is **fixed hydro**: output cannot respond to new transmission, batteries,
+demand or bid costs. That restriction can materially affect marginal prices,
+especially in Nordic areas. Price-based investment estimates remain unvalidated.
+
+Future interventions would be conditional on the same schedule and need paired
+verification. Adaptive hydro requires enforceable water budgets and water-value
+bids, or a new chronological solve. Bidding-zone mapping, observed fleet/demand/
+hydrology, commercial constraints and empirical validation remain open. This
+research model has not replaced the browser scenario estimator or closed the
+annual/investment acceptance gates.
+
+## Data and reproduction
+
+Run `tools/fixed_reservoir_screening_2025.py` in the pinned Python environment;
+render this report with `tools/report_fixed_reservoir_screening_2025.py`.
+The calculation uses HiGHS 1.15.1 and native PyPSA 1.2.4. Source requests, hashes,
+water witnesses and retry evidence are recorded for reproducibility.
+
+[Current-model summary, native checks and provenance](../../research/fixed-reservoir-screening-2025/summary.json),
+[all 40 area summaries](../../research/fixed-reservoir-screening-2025/area-summary.csv),
+[hourly German results](../../research/fixed-reservoir-screening-2025/hourly-de.csv),
+and [water-schedule replay evidence](../../research/european-reservoir-clearing-2025/replay.json).
+The existing machine-readable files retain supporting sensitivity-audit fields;
+the report presents only the final model. Large witnesses stay in the ignored
+cloud cache.
 '''
-    p=ROOT/'docs/european-physical-synthetic-clearing-2025.md';body=p.read_text();start=body.find('## Fast screening: precomputed hourly reservoir output');end=body.index('## Reservoir-enabled full-year result')
-    p.write_text(body[:(start if start>=0 else end)]+text+body[end:]);print('Fixed-hydro report updated')
+    (ROOT/'docs/european-physical-synthetic-clearing-2025.md').write_text(text)
+    print('Final-model report rendered')
 
 if __name__=='__main__':run()
