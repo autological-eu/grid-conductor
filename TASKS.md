@@ -144,3 +144,26 @@ broadcastable capacity matrices and nonboolean cyclic masks. Six targeted tests
 and a fresh retained-source audit pass; the 160-unit, 60-boundary state and
 annual feasible cost are unchanged. This improves diagnostic reliability;
 Z0 zone mapping and N3–N5 annual acceptance remain open. No retired solve resumed.
+
+## Synthetic coupled-clearing implementation
+
+User authorized detailed implementation and publication, including German bid
+curves and simulated versus actual prices. Plan: docs/synthetic-zonal-clearing-plan.md.
+First implemented diagnostic clears 8760 isolated DE/LU prepared-fleet/load
+hours, original generator availability, declared €80/t operational CO2 and
+−€5/MWh wind/solar offers. No imports/storage or fitting. Three analytical
+tests and independent LP objective checks for four fixed example hours pass.
+Observed Energy-Charts/SMARD DE-LU coverage 8759 hours; MAE €28.74/MWh, bias
+−€10.79/MWh, RMSE €42.73/MWh, correlation 0.619. These are descriptive errors,
+not held-out acceptance. Warm clearing ~0.23s excludes compilation/loading.
+
+- [x] SB1: Synthetic merit-order implementation, original-input extraction,
+  declared assumptions and diagnostic figures/data.
+- [ ] SB2: Audited observed demand/fleet/geography and neighbouring-zone coupling.
+- [ ] SB3: Commercial constraints plus chronological hydro/storage.
+- [ ] SB4: Matched native zonal baseline/interventions, complete annual runtime.
+- [ ] SB5: Predeclared calibration/held-out evaluation and supported integration.
+- [ ] SB6: Verify report publication through CI/Pages and public browser figures.
+
+Retained annual reference and conditional benchmark remain unchanged; no retired
+search resumed. The diagnostic is not a replacement for annual validation.

@@ -90,6 +90,19 @@ function Research() {
           Full-year hourly generation, IRENA capacities and Ember observations.
         </span>
       </Link>
+      <Link
+        to="/docs/$slug"
+        params={{ slug: "synthetic-bids-germany-2025" }}
+        className="mb-6 block max-w-3xl rounded-xl border p-5"
+      >
+        <span className="block font-semibold">
+          Germany synthetic bids and 2025 clearing prices →
+        </span>
+        <span className="mt-1 block text-sm text-muted-foreground">
+          Offer curves, hourly observed-price comparisons and the coupled-clearing implementation
+          plan.
+        </span>
+      </Link>
       <div className="grid gap-10 lg:grid-cols-[14rem_minmax(0,1fr)]">
         <nav aria-label="Methods chapters" className="self-start lg:sticky lg:top-5">
           <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
@@ -113,6 +126,19 @@ function Research() {
           The overview is maintained in Markdown alongside these original publications. Read the
           detailed reports and their validation/provenance before interpreting screening results.
         </p>
+        <Link
+          to="/docs/$slug"
+          params={{ slug: "synthetic-bids-germany-2025" }}
+          className="mb-6 block max-w-3xl rounded-xl border p-5"
+        >
+          <span className="block font-semibold">
+            Germany synthetic bids and 2025 clearing prices →
+          </span>
+          <span className="mt-1 block text-sm text-muted-foreground">
+            Offer curves, hourly observed-price comparisons and the coupled-clearing implementation
+            plan.
+          </span>
+        </Link>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
           <section>
             <h2 className="mb-4 text-xl font-semibold">Research publications</h2>

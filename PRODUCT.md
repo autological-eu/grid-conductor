@@ -193,3 +193,17 @@ alternatives, not the primary calculation. Existing annual and empirical gates
 remain intact; an aggregated model cannot certify the old physical-model optimum.
 See [hourly zonal dispatch plan](docs/hourly-zonal-dispatch-plan.md) for proposed
 implementation, verification and unresolved design choices.
+
+## Accepted direction: synthetic coupled market clearing
+
+Implement continuous synthetic supply bids with fixed observed demand as the
+first demand representation, then verified commercial cross-zone constraints
+and chronological resources. It is EUPHEMIA-inspired, not reconstruction of
+actual order books or full nonconvex EUPHEMIA rules. Declare bid assumptions and
+operational carbon pricing separately from lifecycle accounting. Keep
+uncalibrated diagnostics separate from training and held-out validation.
+Publish German offer curves and simulated-versus-observed DE-LU prices with
+coverage, source scope, errors and failures, followed by coupled model evidence.
+The existing numerical, annual, empirical and paired-investment gates remain
+required before scenario integration. See the step-by-step plan in
+[synthetic zonal clearing](docs/synthetic-zonal-clearing-plan.md).
