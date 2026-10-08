@@ -411,3 +411,33 @@ This diagnostic does not pool water, infer availability from dispatch or alter
 the retained annual reference. It is not a complete zonal storage compiler:
 source defaults, boundary inventories, bidding-zone assignment and independent
 hydrological validation still require audit before acceptance.
+
+### Native storage defaults audit
+
+`tools/audit_hydro_defaults_2025.py` independently loads the same pinned source
+through native PyPSA 1.2.4 and compares all exported inflow values and static
+parameters, recording effective defaults separately from explicit source fields.
+The read-only audit passed for 93 reservoirs / 8760 hours. Only `inflow` is a
+nonempty temporal StorageUnit input; additional temporal fields would block this
+audit and require a dedicated export.
+
+```sh
+python tools/audit_hydro_defaults_2025.py \
+  --network data/pypsa-eur/upstream/resources/gridfix-2025/networks/base_s_128_elec_.nc \
+  --bundle data/pypsa-eur/hydro-inflows-2025-v1 \
+  --output data/pypsa-eur/hydro-inflows-2025-v1/native-defaults-audit.json
+```
+
+Use a fresh output path. Effective default values include `p_max_pu = 1`,
+`standing_loss = 0`, `state_of_charge_initial = 0`, and disabled expansion
+and per-period initial/cyclic flags. All 93 reservoirs have the explicit
+annual cyclic flag enabled. A zero initial default does **not** prescribe empty
+annual boundaries when cyclic storage applies; the retained hourly reference's
+fixed trial boundary inventories remain separate evidence.
+
+One source reservoir, `RS2 0AC hydro`, has `max_hours = 0` and thus zero
+storage-energy capacity. Preserve it as supplied: removing it or assigning
+invented storage would change the model. No reservoirs are pooled. These
+findings close the inspected-default ambiguity for this pinned source/version,
+not the remaining boundary mapping, national-to-zone allocation or empirical
+hydrological validation gates.

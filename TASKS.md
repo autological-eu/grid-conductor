@@ -1,6 +1,6 @@
 # Grid Conductor — implementation tasks
 
-Current backlog reconciled 7 October 2026. PRODUCT.md defines requirements.
+Current backlog reconciled 8 October 2026. PRODUCT.md defines requirements.
 User-authorized cleanup retains one full-year PyPSA-Eur 2025 hourly reference
 and the separately verified 48-hour conditional benchmark. Obsolete annual
 search candidates and older benchmark results/caches were removed. Git history
@@ -36,6 +36,14 @@ passed. Source hydro reservoirs have zero charging efficiency and positive
 discharge efficiency; both are retained without changing inflows. This is
 preprocessing evidence, not an accepted zonal storage compiler: defaults,
 boundary inventories, zone mapping and observed-water validation remain open.
+
+Native PyPSA 1.2.4 default/inflow audit independently passed for all 93
+reservoirs / 8760 hours, with only inflow as a nonempty temporal input. Effective
+defaults and explicit fields are recorded separately; the source's single
+zero-energy reservoir is preserved. Cyclic flags do not prescribe empty trial
+boundaries. This closes inspected default ambiguity for the pinned source,
+while boundary mapping, zone allocation and hydrological validation stay open.
+Retained annual witness replay was rechecked on 8 October at its unchanged cost.
 
 ## Empirical validation
 
