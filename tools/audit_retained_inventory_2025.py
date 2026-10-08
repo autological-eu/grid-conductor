@@ -73,7 +73,7 @@ def run(network, reference, workspace, output):
                   annual_replay_sha256=digest(reference / 'annual-replay.json'),
                   producer_sha256=digest(Path(__file__)), pypsa_version=pypsa.__version__,
                   annual_feasible_cost_eur=cost, boundaries=state.shape[0], boundary_hours=boundary_hours,
-                  boundary_times_utc=[str(np.datetime64('2025-01-01T00') + np.timedelta64(h, 'h')) + 'Z' for h in boundary_hours],
+                  boundary_times_utc=[np.datetime_as_string(np.datetime64('2025-01-01T00') + np.timedelta64(h, 'h'), unit='m') + 'Z' for h in boundary_hours],
                   storage=rows,
                   nonzero_initial_inventory_count=int(np.count_nonzero(state[0] > 1e-6)),
                   metrics=metrics,
