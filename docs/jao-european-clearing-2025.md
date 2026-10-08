@@ -58,6 +58,76 @@ rules, published quantity definitions and final-domain/position consistency need
 investigation. We have not established which explains the residuals. Do not add
 an unexplained margin, drop offending rows or call the domain validated.
 
+## Reconciliation experiments
+
+A reproducible follow-up, `tools/reconcile_jao_2025.py`, rehashed the cached
+auxiliary responses and tested two hypotheses without changing published RAM,
+PTDF coefficients or positions. These are diagnostics, not accepted market rules.
+
+| Published position UTC | Direct violation MW | Global sign-flip violation MW | FB/LTA hull hypothesis |
+| --- | ---: | ---: | --- |
+| 15 January 12:00 | 141.574 | 21.771 | infeasible |
+| 15 July 12:00 | 0.000 | 807.762 | feasible; zero LTA weight |
+| 15 December 12:00 | 22.210 | 912.798 | infeasible |
+| 15 December 12:15 | 27.322 | 861.347 | infeasible |
+| 15 December 12:30 | 29.914 | 848.441 | infeasible |
+| 15 December 12:45 | 27.612 | 854.590 | infeasible |
+
+A global sign flip still fails January and substantially worsens July/December.
+It therefore cannot explain these samples by itself.
+
+The second experiment asks whether observed net positions can be expressed as
+`n = y + B b`, where `y` belongs to a scaled final flow-based domain and `b`
+is a scaled directed LTA border-flow vector. Specifically, it imposes
+`A y ≤ λ RAM`, `0 ≤ b ≤ (1 − λ) LTA`, `sum(y) = 0`, and `0 ≤ λ ≤ 1`.
+`B` maps directed border flows to net exports. The objective maximises `λ`.
+All published PTDF hubs remain in the problem. Unknown positive-capacity borders
+are rejected. The single hourly LTA table is assumed applicable to December's
+four position intervals; this assumption needs confirmation from interval metadata.
+
+This simplified convex-hull hypothesis omits allocation constraints, BEX
+restrictions, nominations and explicit virtual-connector coupling. It is **not**
+a verified implementation of Core LTA inclusion. HiGHS reports infeasibility
+(status 2) for January and all four December positions. July's witness has
+`λ = 1`, with independent equality/inequality residuals below `1e−6 MW`.
+These results reject this particular explanation; they do not establish the
+cause of the discrepancy or rule out the correctly specified inclusion mechanism.
+
+[Download the reconciliation results and July witness](../../research/jao-2025-reconciliation.json).
+The next reconciliation step is to establish the exact published position
+quantity, applicable domain version, LTA inclusion rule and connector mappings
+from regional methodology, then replay that formulation against these same hours.
+Do not calibrate synthetic bids to compensate for unresolved network semantics.
+
+## How PyPSA can help
+
+There are two useful routes, with different meanings:
+
+1. **Commercial-domain clearing:** use PyPSA's zonal energy balances and native
+   optimisation model, then add audited JAO PTDF/RAM and auxiliary inequalities
+   through Linopy. Explicit variables must map physical bidding-zone net exports
+   and connector flows to every published hub. LTA/allocation rules and external
+   interfaces must be implemented before the failed samples can validate this
+   route. Adding ordinary physical lines does not repair missing market rules.
+2. **Our own physical constraint model:** use the PyPSA-Eur grid as a backbone,
+   calculate nodal PTDFs and aggregate them to zones using declared generation
+   shift keys (GSKs). Choose monitored elements, contingency cases, ratings,
+   reference flows and reliability margins explicitly. For a chosen convention,
+   `RAM = allowed monitored flow − reference flow`; signs and the base-point
+   definition must be consistent with zonal net-position changes. JAO can inform
+   comparisons of published sensitivities and headroom, but cannot silently
+   supply missing physical assumptions.
+
+The physical route needs a dated topology, transformer/link treatment,
+zone-to-node mapping and credible 2025 ratings/outages. GSKs depend on how
+incremental production is distributed within each zone; installed capacity alone
+is insufficient. Validate nodal-to-zonal sensitivities against small native
+PyPSA perturbations, replay feasibility and contingency limits, and assess
+sensitivity to GSKs and margins. Label its output **model-derived physical
+constraints**, with provenance and limitations. It would support scenario
+research, but would not reproduce the actual commercial day-ahead domain or
+certify EUPHEMIA prices. Neither route has been executed as a European solve here.
+
 ## Auxiliary inputs and virtual hubs
 
 Core returned `allocationConstraint`, `bexRestrictions`, `lta` and `ltn` data

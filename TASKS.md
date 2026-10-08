@@ -178,7 +178,15 @@ July published positions pass simple PTDF/RAM replay; January and December
 fail with maximum violations 141.574 / 29.914 MW. Nordic netPos endpoint returned
 no rows, so position checks are unavailable. Actual Nordic publication timestamps
 are hourly in sampled January/July and quarter-hourly in December. Eight existing
-JAO numerical/collector tests pass. No full-year coverage or dispatch readiness.
+JAO numerical/collector tests pass. Two additional reconciliation tests pass
+(10 total), including an analytical LTA-required witness and infeasible case.
+No full-year coverage or dispatch readiness.
+
+Follow-up replay: global sign reversal fails all sampled Core positions; a
+scaled FB/LTA convex-hull hypothesis is infeasible in January and all four
+December quarters. July passes with zero LTA weight. This diagnostic omits
+allocation/BEX/nominations/connector coupling and does not certify Core rules.
+Machine-readable evidence: public/research/jao-2025-reconciliation.json.
 
 Next: resolve Core quantity/LTA/allocation semantics, locate Nordic position
 publication, implement explicit virtual-hub/connector mapping and verified external

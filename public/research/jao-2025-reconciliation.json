@@ -1,0 +1,126 @@
+{
+  "status": "reconciliation_hypothesis_not_dispatch_ready",
+  "probe_sha256": "db25ee00a0d3e80286882529e16eb972fe6c6d8be5603955e82fa463a40a1665",
+  "producer_sha256": "6a0de2521ac9581632386794178dcf3d9767b8ea910aa0ebf580ea0a9dfdc0bb",
+  "checks": [
+    {
+      "start": "2025-01-15T12:00:00Z",
+      "direct_max_violation_mw": 141.57381699999996,
+      "sign_flipped_max_violation_mw": 21.771026000000006,
+      "convex_hull": {
+        "status": "hypothesis_infeasible",
+        "solver_status": 2
+      }
+    },
+    {
+      "start": "2025-07-15T12:00:00Z",
+      "direct_max_violation_mw": 6.146194664324867e-13,
+      "sign_flipped_max_violation_mw": 807.76218,
+      "convex_hull": {
+        "status": "hypothesis_feasible_not_market_certified",
+        "fb_weight": 1.0,
+        "lta_weight": 0.0,
+        "maximum_inequality_residual_mw": 4.547473508864641e-13,
+        "maximum_equality_residual_mw": 5.684341886080801e-13,
+        "scaled_fb_positions_mw": {
+          "ALBE": -910.1,
+          "ALDE": 910.1,
+          "AT": -2142.8,
+          "BE": -30.8,
+          "CZ": -1131.7,
+          "DE": -2287.5,
+          "FR": 3244.7,
+          "HR": -1019.1,
+          "HU": 933.6,
+          "NL": 4049.7,
+          "PL": 779.0,
+          "RO": -708.0999999999995,
+          "SI": -885.0,
+          "SK": -802.0
+        },
+        "scaled_lta_flows_mw": {
+          "AT>CZ": 0.0,
+          "AT>HU": -0.0,
+          "AT>SI": 0.0,
+          "CZ>AT": 0.0,
+          "CZ>DE": 0.0,
+          "CZ>PL": 0.0,
+          "CZ>SK": 0.0,
+          "DE>BE": 0.0,
+          "DE>CZ": 0.0,
+          "DE>PL": 0.0,
+          "HR>HU": -0.0,
+          "HR>SI": 0.0,
+          "HU>AT": 0.0,
+          "HU>HR": 0.0,
+          "HU>RO": 0.0,
+          "HU>SI": 0.0,
+          "HU>SK": 0.0,
+          "PL>CZ": -0.0,
+          "PL>DE": 0.0,
+          "PL>SK": -0.0,
+          "RO>HU": -0.0,
+          "SI>AT": 0.0,
+          "SI>HR": -0.0,
+          "SI>HU": -0.0,
+          "SK>CZ": 0.0,
+          "SK>HU": -0.0,
+          "SK>PL": 0.0,
+          "AT>DE": 0.0,
+          "BE>NL": -0.0,
+          "BE>FR": -0.0,
+          "DE>AT": -0.0,
+          "BE>DE": -0.0,
+          "DE>FR": 0.0,
+          "DE>NL": 0.0,
+          "FR>BE": 0.0,
+          "FR>DE": -0.0,
+          "NL>BE": 0.0,
+          "NL>DE": -0.0
+        }
+      }
+    },
+    {
+      "start": "2025-12-15T12:00:00Z",
+      "direct_max_violation_mw": 22.210493999999926,
+      "sign_flipped_max_violation_mw": 912.798411,
+      "convex_hull": {
+        "status": "hypothesis_infeasible",
+        "solver_status": 2
+      }
+    },
+    {
+      "start": "2025-12-15T12:15:00Z",
+      "direct_max_violation_mw": 27.321802000000048,
+      "sign_flipped_max_violation_mw": 861.3466679999999,
+      "convex_hull": {
+        "status": "hypothesis_infeasible",
+        "solver_status": 2
+      }
+    },
+    {
+      "start": "2025-12-15T12:30:00Z",
+      "direct_max_violation_mw": 29.914139999999975,
+      "sign_flipped_max_violation_mw": 848.44128,
+      "convex_hull": {
+        "status": "hypothesis_infeasible",
+        "solver_status": 2
+      }
+    },
+    {
+      "start": "2025-12-15T12:45:00Z",
+      "direct_max_violation_mw": 27.612337000000025,
+      "sign_flipped_max_violation_mw": 854.589753,
+      "convex_hull": {
+        "status": "hypothesis_infeasible",
+        "solver_status": 2
+      }
+    }
+  ],
+  "limitations": [
+    "Scaled convex hull of final flow-based domain and directed LTA capacity domain is a tested hypothesis, not an authoritative reconstruction.",
+    "Allocation constraints, BEX restrictions, nominations and connector coupling are not imposed in this diagnostic.",
+    "Passing relaxed hypothesis feasibility does not validate market clearing or counterfactual investment.",
+    "No RAM values, source net positions or PTDF rows changed."
+  ]
+}
