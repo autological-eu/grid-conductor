@@ -204,9 +204,10 @@ tolerance. Two analytical GSK tests pass. Capacity-weighted versus equal-bus GSK
 transfer-bound figure and machine-readable provenance are included in the JAO
 report. Zero-reference N-0 only: 74 controllable links excluded explicitly.
 
-Next: map verified bidding zones and island subdivisions; preserve explicit link
-capacity/efficiency coupling, demand, availability and storage; compare a smaller
-coupled zonal solve with native PyPSA under identical GSK constraints. Add credible
+Country/island coupling and all 74 original controllable links are now implemented
+in the independent-hour diagnostic below; three native GSK-restricted optimisation
+checks pass. Next: verify bidding-zone mapping, add chronological hydro/storage
+and test matched interventions. Add credible
 ratings/outages, N-1 and reference-flow/margin conventions before stronger claims.
 This is linear sensitivity verification, not annual dispatch or JAO reconciliation.
 
@@ -229,11 +230,14 @@ Report: docs/european-physical-synthetic-clearing-2025.md.
 
 Next: audit shortage causes and bidding-zone/fleet/demand scope; add original
 hydro/storage with chronological inventories and matched native checks, then
-paired interventions. Z0–Z5, SB2–SB5 and N3–N5 stay open. Fresh retained-reference
-boundary/annual replay passes for 160 units and 60 boundaries, 144 nonzero initial
-inventories and unchanged annual feasible cost. No retired search resumed.
-Latest remote CI/Pages is cbfeff0 (successful); new reports are not yet published
-at this checkpoint.
+paired interventions. Z0–Z5, SB2–SB5 and N3–N5 stay open. Fresh retained-reference boundary audit and rechecked 59-block annual replay
+provenance chain pass: 160 units, 60 boundaries, 144 nonzero initial inventories
+and unchanged annual feasible cost. No retired search resumed.
+Publication through a532056 is verified: CI/Pages 37744690920 and PR checks
+37744694232 completed successfully. Both new/updated reports pass public
+desktop/mobile browser checks with figures loaded and no overflow or script
+errors. Ten public JSON/CSV/SVG files returned HTTP 200, byte-identical to
+committed assets.
 
 Local verification: all 26 Bun tests, typecheck, lint (six existing warnings),
 production build and desktop/mobile report/figure checks pass. Three new Python
