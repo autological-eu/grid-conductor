@@ -163,7 +163,10 @@ not held-out acceptance. Warm clearing ~0.23s excludes compilation/loading.
 - [ ] SB3: Commercial constraints plus chronological hydro/storage.
 - [ ] SB4: Matched native zonal baseline/interventions, complete annual runtime.
 - [ ] SB5: Predeclared calibration/held-out evaluation and supported integration.
-- [ ] SB6: Verify report publication through CI/Pages and public browser figures.
+- [x] SB6: Initial diagnostic report and plan published through cbfeff0; CI/Pages
+  37737354813 passed. Public desktop/mobile browser checks passed; both report
+  pages, summary, figures and CSV returned HTTP 200 with tested content.
+  This completes initial diagnostic publication, not the later coupled/validated report.
 
 Retained annual reference and conditional benchmark remain unchanged; no retired
 search resumed. The diagnostic is not a replacement for annual validation.
