@@ -289,3 +289,12 @@ block joins and annual closure, then report Norwegian shortage and runtime.
 Production build, typecheck and desktop/mobile implementation-report checks pass.
 Publication of new annual results remains unverified. Observed hydro/inventory
 validation and N3–N5 remain open; automated hourly reviews remain paused.
+
+Implementation-report publication verified through f82aca4: CI/Pages
+37775062678 and PR checks 37775068868 passed. The new report passes public
+desktop/mobile checks, and native-check.json returns HTTP 200 with exact committed
+bytes. This publishes the implementation and 48-hour parity evidence only; the
+annual computation is still running. A one-off supervisor will run the saved-primal
+replay auditor after all 59 blocks finish; no recurring reviews were enabled.
+Annual summary/figures require audit inspection and a separate reviewed commit
+before publication. Inspect live jobs and this provenance root before resuming.
