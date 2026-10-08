@@ -247,9 +247,9 @@ model narratives and comparison charts from that report while retaining supporti
 evidence and material limitations, especially fixed-hydro price sensitivity.
 
 Public workbench navigation should expose a simple Docs entry rather than
-European targets, Network lab or a research catalogue. Docs explains only the
-current workbench's two methods: signed flow–price congestion-rent screening and
-its actual browser scenario solver. Distinguish that live reduced-form solver
+European targets, Network lab or a research catalogue. Docs explains the current
+workbench: signed flow–price congestion-rent screening, its actual browser
+scenario solver, opportunity evaluation and data sources. Distinguish that live reduced-form solver
 from the separate fixed-reservoir European research pipeline; hiding experimental
 navigation does not authorize replacing calculations or weakening integration gates.
 
@@ -258,4 +258,11 @@ picker; users select corridors on the map. Metric labels omit “floor: 0”. Th
 expanded sidebar links to congestion-rent methodology instead of repeating its
 long explanatory paragraph. Docs retains signed-accounting, display-floor and
 flow-provenance limitations; this presentation cleanup does not change calculations.
+
+Show the existing production-lifecycle carbon estimates by default in the left
+sidebar, retaining partial-factor coverage, geography and missing-data labels.
+Docs includes a third step, evaluating opportunities, and an explicit data-source
+reference. It distinguishes historical production intensity from the scenario's
+static unsigned climate proxy and explains the limits relative to ENTSO-E
+cost-benefit reporting; no compliance or avoided-emissions claim is authorized.
 Existing evidence URLs remain available without a public catalogue.

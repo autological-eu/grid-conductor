@@ -28,12 +28,14 @@ export function ProductionCarbonDetails({ a, b }: { a: string; b: string }) {
   });
   const pair = query.data?.borders[[a, b].sort().join(">")];
   return (
-    <details className="mt-3 text-xs">
+    <details open className="mt-3 text-xs">
       <summary className="cursor-pointer py-2 font-medium">
         Production carbon · price-separation hours
       </summary>
       {query.isPending ? (
         <p>Loading published estimates…</p>
+      ) : query.isError ? (
+        <p>Carbon data unavailable. Try reloading the page.</p>
       ) : !pair ? (
         <p>Generation coverage unavailable.</p>
       ) : (
@@ -73,7 +75,10 @@ export function ProductionCarbonDetails({ a, b }: { a: string; b: string }) {
           </p>
         </div>
       )}
-      <a className="mt-2 inline-block underline" href={publicAsset("docs/production-carbon-2025/")}>
+      <a
+        className="mt-2 inline-block underline"
+        href={publicAsset("docs/#3-evaluating-opportunities")}
+      >
         Methods and coverage
       </a>
     </details>

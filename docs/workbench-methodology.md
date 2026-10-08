@@ -85,18 +85,90 @@ Line and battery benefits are added and capped at the border's modelled welfare
 bound. This is not a joint European dispatch optimisation. Marginal battery value
 is estimated by a small power perturbation and a re-solve.
 
-### Reading the results
+## 3. Evaluating opportunities
 
 Annual welfare is compared with the placed units' estimated capital costs.
 The 25-year benefit-minus-capex figure is **undiscounted**, assumes constant annual
 benefit and excludes operating costs, degradation and changing future prices.
 Payback is based on estimated system welfare, not investor cash receipts.
 
-The climate indicator is an **unsigned average-mix proxy**, not verified avoided
-emissions. Screening data availability is not model validation.
+### Carbon: historical intensity and scenario proxy
+
+The left sidebar shows **production lifecycle intensity** for each endpoint during
+jointly observed hourly price gaps strictly greater than €5/MWh. It is an
+energy-weighted estimate, not an average of hourly intensities:
+
+```text
+Intensity (g CO₂e/kWh) = sum[generation (MWh) × lifecycle factor (kg CO₂e/MWh)]
+                       / sum[generation (MWh)]
+```
+
+The units kg/MWh and g/kWh have the same numerical value. ENTSO-E actual generation
+by production type is matched to generic IPCC AR5 lifecycle factors. Lifecycle
+includes upstream fuel and construction impacts as well as operation; these
+medians are technology proxies, not measurements of each country's fleet.
+
+Each card states the complete reported-generation hours, factor-covered energy
+share and geography. Where positive generation has no factor, the full intensity
+is unavailable: the displayed value covers **only the mapped subset**. Missing
+hours are excluded, never assigned zero. Complete reported categories do not
+prove whole-fleet completeness. DE-LU uses a labelled German national generation
+proxy. Pumped-storage output is excluded from primary generation; biomass,
+CHP allocation and unsupported fuels remain limitations. This is production
+accounting, not import-adjusted consumption intensity or marginal emissions.
+
+The scenario's **climate proxy is a different calculation**. The browser uses
+static approximate zone intensities, not the sidebar generation-based values:
+
+```text
+Implied energy (MWh/year) = annual welfare (€) / representative spread (€/MWh)
+Climate proxy (kt/year) = implied energy × abs(zone intensity B − A) / 1,000,000
+```
+
+The contrast uses g/kWh, numerically kg/MWh. The absolute value loses the direction
+of emissions change; welfare divided by spread is also an energy proxy, not
+solved generation. These static factors have no documented year-specific provider
+provenance. The result must not be interpreted as a verified emissions reduction,
+a lifecycle investment assessment, or carbon credit. It does not account for
+hourly marginal generation, imports, storage charging origins, or embodied
+emissions of the added asset. Screening data availability is not model validation.
+
+### Relation to ENTSO-E reporting
+
+ENTSO-E supplies transparency observations; it does not certify our carbon
+factors or scenario estimates. Its [transmission cost-benefit methodology](https://www.entsoe.eu/outlooks/tyndp/2024/)
+provides a reference for evaluating system benefits and costs. Our report's
+legacy B/C indicator names are local screening labels, **not a declaration of
+compliance with an ENTSO-E guideline or its indicator numbering**.
+
+Socio-economic welfare, investment cost and emissions should be reported
+separately with units, scope, assumptions and a baseline-versus-investment
+comparison. A defensible emissions benefit would require matched chronological
+dispatch scenarios, signed changes in generation by technology, justified emission
+factors and storage/flow accounting. Direct operational CO₂ and lifecycle CO₂e
+must remain distinct. The live model does not yet provide those comparisons,
+carbon monetisation, discounted welfare or the complete cost-benefit indicators.
 
 The newer Europe-wide fixed-reservoir dispatch calculation is **not currently
 connected to the workbench's scenario button**. This page describes the solver
 actually used by the public app. Both its reduced-form assumptions and the absence
 of calibrated price, chronology and paired investment validation limit how the
 results should be used: screening questions worth studying, not investment decisions.
+
+## Data: sources and exact workbench inputs
+
+| Input used by the public workbench | Source and published reference | Use and boundary |
+| --- | --- | --- |
+| 2025 annual prices, flows, spread events, slopes and welfare bounds | [ENTSO-E Transparency Platform](https://transparency.entsoe.eu/); [screening JSON](../public/research/entsoe-fast-targets.json), schema 3, January–December | Offline A44 prices and archived cross-border flow banks, quarter-hour accounting. Original A11 receipts absent; flow classification remains unverified. Slopes/bounds are derived screening assumptions. |
+| Hourly price charts and carbon-hour selection | [Price manifest](../public/research/zone-prices-2025/manifest.json), [ENTSO-E](https://transparency.entsoe.eu/) and [Energy-Charts](https://api.energy-charts.info/) | 39 published areas; each manifest entry identifies provider URL/request, coverage, hash and licence. Sources differ by area. UTC hourly alignment; missing observations retained. This is distinct from the annual quarter-hour screening bank. |
+| Reported generation and sidebar carbon | ENTSO-E A75/A16, actual generation per production type; [carbon summary and provenance](../public/research/production-carbon-2025/map-summary.json) | 2025 monthly collection, generation completeness, geography and source hashes per area. Border-specific price-gap hours; incomplete hours and unmapped fuels are explicit. Hourly file references are listed in the summary. |
+| Lifecycle factors | [IPCC AR5 WGIII Annex III](https://archive.ipcc.ch/pdf/assessment-report/ar5/wg3/ipcc_wg3_ar5_annex-iii.pdf); factor registry in carbon summary | Pilot version `ipcc-ar5-annex-iii-medians-pilot-v1`: biomass 230, coal/lignite 820, gas 490, geothermal 38, hydro 24, ocean 17, nuclear 12, solar 48, offshore wind 12, onshore wind 11 g CO₂e/kWh. Generic proxies; unsupported types stay unmapped. |
+| Map positions and scenario carbon contrast | Static `src/lib/entsoeZones.ts` metadata | Approximate zone centroids and manually supplied average-intensity assumptions; not a sourced 2025 emissions dataset. Used by the climate proxy, independently of generation-based lifecycle estimates. |
+| Investment characteristics | User-editable units, defaults in `src/lib/units.ts` | Battery 200 MW / 800 MWh, efficiency 0.88, capex €120m, delivery 24 months; line 700 MW, capex €650m, delivery 72 months. Illustrative assumptions, not vendor quotes. Actual configured units drive evaluation. |
+
+The current browser solver does **not** use ENTSO-E hourly demand, IRENA capacity,
+Ember generation, ERA5 weather, JAO domains or the PyPSA-Eur fleet. Those belong
+to separate research pipelines; they must not be presented as inputs to this
+workbench's scenario results. Raw provider caches and large research witnesses
+remain outside Git; the public app consumes compact static exports. Scenario
+units/results are stored locally in the browser, not uploaded to a server.

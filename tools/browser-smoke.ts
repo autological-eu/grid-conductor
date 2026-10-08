@@ -34,6 +34,8 @@ try {
     await page.getByRole("link", { name: "Docs", exact: true }).click();
     await page.getByRole("heading", { name: "1. Identifying bottlenecks" }).waitFor();
     await page.getByRole("heading", { name: "2. Simulating scenarios" }).waitFor();
+    await page.getByRole("heading", { name: "3. Evaluating opportunities" }).waitFor();
+    await page.getByRole("heading", { name: "Data: sources and exact workbench inputs" }).waitFor();
     await page.getByRole("link", { name: "Workbench", exact: true }).click();
     await page.locator('g[data-corridor="FR|IT-North"]').waitFor();
     assert(
@@ -62,6 +64,8 @@ try {
     assert.equal(await page.getByRole("combobox", { name: "Choose a bottleneck" }).count(), 0);
     assert.equal(await page.getByText("2025 observed baseline.", { exact: false }).count(), 0);
     assert.equal(await page.getByText(/floor: 0/).count(), 0);
+    await page.getByText(/FR: 31\.3 g CO₂e\/kWh · mapped subset only/).waitFor();
+    assert(await page.getByText(/IT-North: 305\.5 g CO₂e\/kWh · mapped subset only/).isVisible());
     const sourceAuditHref = await page
       .getByRole("link", { name: "Congestion-rent methodology" })
       .getAttribute("href");
@@ -97,7 +101,6 @@ try {
     await page.getByRole("combobox", { name: "Price chart period" }).selectOption("0");
     await page.getByText(/Coverage: 744/).waitFor();
     await page.getByRole("button", { name: "Close", exact: true }).click();
-    await page.getByText("Production carbon · price-separation hours", { exact: true }).click();
     await page.getByText(/FR: .*mapped subset only/).waitFor();
     await page.getByRole("button", { name: "New", exact: true }).click();
     await page.getByRole("button", { name: "Run scenario" }).waitFor();
@@ -159,6 +162,10 @@ try {
       if (route === "docs/") {
         await page.getByRole("heading", { name: "1. Identifying bottlenecks" }).waitFor();
         await page.getByRole("heading", { name: "2. Simulating scenarios" }).waitFor();
+        await page.getByRole("heading", { name: "3. Evaluating opportunities" }).waitFor();
+        await page
+          .getByRole("heading", { name: "Data: sources and exact workbench inputs" })
+          .waitFor();
         assert.equal(await page.getByRole("link", { name: "European targets" }).count(), 0);
         assert.equal(await page.getByRole("link", { name: "Network lab" }).count(), 0);
         assert.equal(await page.getByRole("heading", { name: "Research publications" }).count(), 0);

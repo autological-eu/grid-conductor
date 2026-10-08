@@ -448,3 +448,17 @@ functional browser checks passed at 1440, 390, 320 and 667px, confirming removed
 copy/dropdown/floor labels, retained methodology link, map-only selection and
 unchanged scenario evaluation/persistence. Public root:
 https://autological-eu.github.io/grid-conductor/.
+
+## Visible production carbon and evaluation/data Docs
+
+Existing border-specific production lifecycle estimates now open by default in
+the sidebar, with partial-factor coverage, selected-hour coverage and geography
+retained. Fetch failures are explicit. Methods link points to Docs step 3.
+Docs explains economic evaluation, generation-weighted lifecycle accounting,
+the separate unsigned static scenario carbon proxy and limits relative to ENTSO-E
+cost-benefit reporting. Added exact public data artifacts, provider references,
+factor registry, unit defaults and research inputs not used by the browser.
+No carbon factors, datasets or solver calculations changed. Typecheck, build,
+lint (six existing warnings) and functional browser checks at all four widths
+pass, including visible carbon cards and new Docs sections. Publication pending;
+recurring reviews remain paused.

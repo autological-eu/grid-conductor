@@ -23,8 +23,8 @@ function Docs() {
       </nav>
       <h1 className="mb-4 text-4xl font-bold">Docs</h1>
       <p className="mb-8 leading-7 text-muted-foreground">
-        How the current workbench identifies bottlenecks and estimates the effect of a line or
-        battery.
+        How the current workbench identifies bottlenecks, simulates scenarios and evaluates
+        opportunities, with data sources and limitations.
       </p>
       <ResearchArticle content={methodology?.content.replace(/^# .+\n/, "") ?? ""} />
     </main>
