@@ -368,3 +368,9 @@ acceptance claim. New working witnesses are explicitly ignored. Next: verify
 paired fixed-schedule interventions, or develop water-value bids with enforceable
 water budgets and matched chronological tests. Publication verification pending;
 hourly automated reviews remain paused.
+
+Europe-wide price diagnostic: Norway fixed-schedule versus chronological price
+MAE 37.5901 EUR/MWh; Nordic DK 6.1702, FI 2.4542, SE 2.3640. These are between-model
+price differences, not observed-price errors. Cost parity must not validate
+congestion-rent or investment-price estimates. Report now includes all-area price
+difference plot and top-area table, alongside the German comparison.

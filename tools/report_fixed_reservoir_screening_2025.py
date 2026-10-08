@@ -18,6 +18,9 @@ def run():
     for column,label in [('observed_de_lu_eur_mwh','Observed DE-LU'),('chronological_de_eur_mwh','Chronological reservoirs'),('fixed_hydro_de_eur_mwh','Fixed hourly hydro')]:axes[0].plot(w.index,w[column],label=label)
     axes[0].set(title='German price proxy — seven-day means of all hourly results',ylabel='EUR/MWh');axes[0].legend();axes[1].hist(d.fixed_hydro_de_eur_mwh-d.chronological_de_eur_mwh,bins=60);axes[1].set(title='All 8760 hours — fixed-hydro versus chronological marginal prices',xlabel='Price difference EUR/MWh',ylabel='Hours');fig.savefig(OUT/'price-comparison.svg');plt.close(fig)
     fig,ax=plt.subplots(figsize=(10,5),layout='constrained');ax.barh(['Chronological LP solves','Fixed-schedule solve/replay loop','Fixed-schedule preparation/water check'],[s['chronological_solver_seconds'],s['warm_solve_replay_seconds'],s['preparation_and_water_audit_seconds']]);ax.set(xlabel='Measured seconds',title='Offline hydro calculation versus reusable fixed-schedule clearing');fig.savefig(OUT/'runtime-comparison.svg');plt.close(fig)
+    ranked=a.sort_values('price_mae_vs_chronological_eur_mwh')
+    fig,ax=plt.subplots(figsize=(12,10),layout='constrained');ax.barh(ranked.area,ranked.price_mae_vs_chronological_eur_mwh);ax.set(xlabel='Mean absolute hourly price difference EUR/MWh',title='All 40 areas — fixed schedule versus chronological hydro');fig.savefig(OUT/'area-price-differences.svg');plt.close(fig)
+    price_rows='\n'.join(f"| {r.area} | {r.price_mae_vs_chronological_eur_mwh:.2f} |" for r in ranked.tail(5).iloc[::-1].itertuples())
     g=s['germany'];text=f'''## Fast screening: precomputed hourly reservoir output
 
 The verified chronological reservoir schedule can now be reused for fast
@@ -66,7 +69,19 @@ fixed-injection accounting when local hydro exceeds demand.
 German fixed-schedule marginal prices differ from chronological prices by
 **{g['price_mae_vs_chronological_eur_mwh']:.3f} €/MWh on average**, with maximum absolute
 hourly difference **{g['maximum_price_difference_vs_chronological_eur_mwh']:.2f} €/MWh**.
-Matching operating cost does not require matching dual prices: fixed hydro
+The difference is materially larger in some other areas: **Norway's mean absolute
+price difference is €37.59/MWh**. This is a difference between model variants,
+not error against Norwegian observed prices.
+
+| Area | Mean absolute price difference versus chronological hydro €/MWh |
+| --- | ---: |
+{price_rows}
+
+![Price differences across every country/island area](../../research/fixed-reservoir-screening-2025/area-price-differences.svg)
+
+These differences matter for congestion-rent and investment estimates. Matching
+operating cost does not validate price-based valuations. Matching operating cost
+does not require matching dual prices: fixed hydro
 cannot respond at the margin, whereas the chronological LP can reallocate water.
 The observed DE-LU comparison remains an uncalibrated mainland-DE scope proxy.
 

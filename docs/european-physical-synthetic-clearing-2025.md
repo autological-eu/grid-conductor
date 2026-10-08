@@ -48,7 +48,23 @@ fixed-injection accounting when local hydro exceeds demand.
 German fixed-schedule marginal prices differ from chronological prices by
 **0.277 €/MWh on average**, with maximum absolute
 hourly difference **32.89 €/MWh**.
-Matching operating cost does not require matching dual prices: fixed hydro
+The difference is materially larger in some other areas: **Norway's mean absolute
+price difference is €37.59/MWh**. This is a difference between model variants,
+not error against Norwegian observed prices.
+
+| Area | Mean absolute price difference versus chronological hydro €/MWh |
+| --- | ---: |
+| 1:NO | 37.59 |
+| 1:DK | 6.17 |
+| 1:FI | 2.45 |
+| 1:SE | 2.36 |
+| 3:FR | 1.17 |
+
+![Price differences across every country/island area](../../research/fixed-reservoir-screening-2025/area-price-differences.svg)
+
+These differences matter for congestion-rent and investment estimates. Matching
+operating cost does not validate price-based valuations. Matching operating cost
+does not require matching dual prices: fixed hydro
 cannot respond at the margin, whereas the chronological LP can reallocate water.
 The observed DE-LU comparison remains an uncalibrated mainland-DE scope proxy.
 
