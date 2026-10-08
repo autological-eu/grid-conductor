@@ -441,3 +441,10 @@ Typecheck, production build, lint (six existing warnings) and functional browser
 smoke at 1440, 390, 320 and 667px pass, including map-only selection, scenarios
 and reload persistence. Publication verification pending. No science jobs started;
 automatic reviews remain paused.
+
+Landing cleanup publication verified at `e35adb59c345b90ed24069f4b941a4dcbd7566ac`:
+CI/Pages `37845088581` and PR checks `37845098140` succeeded. Independent public
+functional browser checks passed at 1440, 390, 320 and 667px, confirming removed
+copy/dropdown/floor labels, retained methodology link, map-only selection and
+unchanged scenario evaluation/persistence. Public root:
+https://autological-eu.github.io/grid-conductor/.
