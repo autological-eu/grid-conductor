@@ -93,3 +93,13 @@ URLs return 404. The initial formatting-only lint failure was fixed before
 this deployment. Browser cache retirement is limited to the obsolete prepared
 benchmark; two tests verify removal and preservation of supported inputs.
 The annual witness and all retained generation values remain unchanged.
+
+## 8 October input-audit publication verification
+
+Native reservoir defaults audit and original-inflow preprocessing are published
+through 977b292. CI/Pages run 37708496804 completed successfully, including
+production and live-site browser checks. The hourly zonal methods page and
+retained annual/conditional comparison JSON URLs returned HTTP 200 with bytes
+identical to the tested build. Three reservoir guard tests and native source
+replay passed; retained annual witness cost reverified unchanged. No research
+solve or retired search was started. Annual and zonal acceptance gates stay open.
