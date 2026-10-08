@@ -223,3 +223,11 @@ weather profiles and recording unreconciled coverage. Linear net capacity change
 is an assumption, not observed commissioning dates. Retain the original-fleet
 comparison and do not infer reservoir water/inventory or other technology inputs
 from renewable turbine/generator MW alone.
+
+The reservoir extension must schedule original hourly inflows with turbine,
+energy, efficiency and standing-loss limits and continuous inventories across
+blocks. A first conditional run may fix boundaries to the retained annual
+reference, explicitly distinguishing that case from a jointly optimised annual
+solution. Independently replay water/network feasibility and annual closure;
+verify a matched chronological case against native PyPSA before annual execution.
+Do not infer water availability from IRENA capacity or silently reset inventories.

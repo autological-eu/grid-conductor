@@ -1,6 +1,15 @@
 # European physical synthetic-bid clearing — all 2025 hours
 
-## Current default: IRENA linear-capacity inputs
+## Reservoir extension
+
+Chronological reservoir scheduling is now implemented in a separate conditional
+annual pipeline. It restores the original 93 reservoir units, including Norway’s
+five, while preserving the IRENA wind/PV adjustment. See the
+[reservoir implementation and verification report](european-reservoir-clearing-2025.md)
+for water physics, fixed reference boundaries and native PyPSA parity. The
+independent-hour results below remain a separate diagnostic.
+
+## Independent-hour default: IRENA linear-capacity inputs
 
 The simulator now defaults to `--capacity-variant irena-linear`. It applies the
 previously tested IRENA end-2024/end-2025 wind and PV interpolation, with a

@@ -260,8 +260,8 @@ availability totals replay the prior interpolation experiment within 2.98e-8 MWh
 New output: public/research/european-physical-bids-2025-irena-linear/. Original
 fleet results and retained source/reference files are preserved.
 
-Next: implement original reservoir/hydro chronology; capacity interpolation does
-not fix Norway’s omitted reservoir fleet. Missing IRENA/profile coverage, bidding
+Reservoir implementation is now recorded below; capacity interpolation alone
+does not fix Norway’s omitted reservoir fleet. Missing IRENA/profile coverage, bidding
 zone mapping, observed input validation and annual/investment gates stay open.
 Hourly automated check-ins remain disabled at user request.
 
@@ -269,3 +269,23 @@ Publication verified through d6bb860: CI/Pages 37772232257 and PR checks
 37772239849 passed. Public desktop/mobile checks confirmed the IRENA update
 and all figures; six new JSON/CSV/SVG assets returned HTTP 200 with committed
 bytes. Original-fleet outputs and the retained annual reference remain separate.
+
+## Chronological reservoir order-book extension
+
+Implemented tools/european_reservoir_clearing_2025.py with 93 original reservoirs,
+IRENA-adjusted wind/PV and fixed source network/GSK constraints. All 60 reservoir
+boundaries come from the verified retained reference; 59 linked blocks preserve
+annual closure. No retired search is resumed. The other 67 storage units are
+excluded explicitly; this is conditional dispatch, not a new annual optimum.
+
+Fresh 48-hour matched native PyPSA objective difference: 1.73e-6 EUR. Three
+reservoir/aggregation tests pass. Annual job is running under a separate frozen
+hydro-warm-v1 provenance root, with exclusive lock, bounded memory/time and
+per-block saved primal witnesses. The initial cold-basis job was intentionally
+stopped after checkpointing; do not resume it under the changed producer.
+
+Next: finish all 8760 hours, independently replay saved network/water balances,
+block joins and annual closure, then report Norwegian shortage and runtime.
+Production build, typecheck and desktop/mobile implementation-report checks pass.
+Publication of new annual results remains unverified. Observed hydro/inventory
+validation and N3–N5 remain open; automated hourly reviews remain paused.
