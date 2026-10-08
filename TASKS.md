@@ -394,3 +394,11 @@ validation, water provenance and fixed-hydro/price/investment limitations. New
 figures show only current-model reservoir supply and current versus observed
 German prices. Scientific result files, source inputs and reference are unchanged;
 no calculations or recurring reviews were restarted. Publication checks pending.
+
+Final-model report publication verified through f232cf7: CI/Pages 37780469316
+and PR checks 37780477620 succeeded. Public desktop/mobile checks confirm only
+the final model sections and exactly two current-model figures, both loaded with
+no overflow/script errors. Both figure downloads and unchanged summary return
+HTTP 200 with committed bytes. Report generator now replaces the report rather
+than appending superseded sections. Scientific calculation/source/reference files
+and acceptance gates are unchanged.
