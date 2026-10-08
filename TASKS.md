@@ -58,6 +58,14 @@ Boundary audit now also verifies contiguous ordered block intervals, the exact
 Four targeted tests cover storage feasibility and gap/overlap/order/calendar
 failures; actual retained-source replay passed without changing inventories.
 
+Mapping-scope diagnostic reconciles all 128 buses, 1151 generators, 128 loads
+and 160 storage units across 34 national areas. Existing registry candidates
+require split-zone geography for DK/IT/NO/SE, shared DE/LU accounting and explicit
+XK scope (no registry candidate). Every accepted assignment remains null.
+Next Z0 action: audit authoritative 2025 zone coverage/geometries, including
+registry omissions, before mapping original assets and allocating demand.
+Neither country labels nor clustered centroids establish accepted geography.
+
 ## Empirical validation
 
 - [ ] V1: Finalise asset-to-zone mapping, price aggregation, UTC/coverage protocol and predeclared calibration/held-out acceptance thresholds.

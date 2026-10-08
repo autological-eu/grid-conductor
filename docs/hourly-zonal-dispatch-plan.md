@@ -469,3 +469,24 @@ Its receipt records boundary hour offsets and UTC timestamps, including the
 exclusive endpoint 2026-01-01T00:00Z. This endpoint labels the year-end state;
 it is not an extra dispatch hour. Gaps, overlaps, reordered or truncated blocks
 are rejected before inventory accounting.
+
+## Mapping scope diagnostic
+
+`tools/audit_zonal_mapping_scope_2025.py` compares the pinned source network's
+country/asset identities with the existing project zone registry. It reconciles
+128 buses, 1151 generators, 128 loads and 160 storage units across 34 national
+areas. All accepted assignments remain null; this is a work inventory, not
+validated bidding-zone geography.
+
+The registry suggests split-zone work for Denmark, Italy, Norway and Sweden,
+shared Germany/Luxembourg accounting, and no current Kosovo (`XK`) candidate.
+The registry is discovery scope and may itself omit 2025 zones; audit it against
+authoritative period-specific coverage before using these candidates. Preserve
+all assets while resolving scope rather than silently dropping unmatched areas.
+Single-country candidates also need accounting/geography checks.
+
+The diagnostic hashes the source, registry and producer and stays in ignored
+local data. It changes no inputs and starts no solve. Next, establish
+authoritative 2025 polygons and asset-level mapping evidence: clustered bus
+centroids alone do not establish original generator geography, demand allocation
+or commercial transfer constraints.
