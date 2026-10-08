@@ -8,6 +8,25 @@ from monthly_dispatch import digest
 from submonthly_inventory_driver import verify_annual
 
 
+def check_calendar(blocks):
+    """Require one ordered, gap-free full year; retain block boundary identities."""
+    if not blocks:
+        raise ValueError('Empty block calendar')
+    cursor = 0
+    boundaries = [0]
+    for index, block in enumerate(blocks):
+        start, end = block['start_hour'], block['end_hour_exclusive']
+        if (block['index'] != index or not isinstance(start, int)
+                or not isinstance(end, int) or start != cursor or end <= start
+                or block['hours'] != end - start or end > 8760):
+            raise ValueError('Unordered, overlapping or incomplete block calendar')
+        cursor = end
+        boundaries.append(end)
+    if cursor != 8760:
+        raise ValueError('Full 8760-hour calendar required')
+    return boundaries
+
+
 def check_boundaries(state, capacity, cyclic, tolerance=1e-6):
     if state.ndim != 2 or state.shape[1] != len(capacity) or len(cyclic) != len(capacity):
         raise ValueError('Inventory layout mismatch')
@@ -28,8 +47,12 @@ def run(network, reference, workspace, output):
     domain = json.loads(workspace.read_text())
     if digest(network) != domain['input_sha256']:
         raise ValueError('Source hash mismatch')
+    boundary_hours = check_calendar(domain['blocks'])
     cost = verify_annual(reference, domain)
     n = pypsa.Network(network)
+    expected = np.datetime64('2025-01-01T00', 'ns') + np.arange(8760).astype('timedelta64[h]')
+    np.testing.assert_array_equal(n.snapshots.values, expected)
+    np.testing.assert_array_equal(n.snapshot_weightings.stores.values, np.ones(8760))
     ids = domain['storage_ids']
     if len(ids) != len(set(ids)) or set(ids) != set(n.storage_units.index):
         raise ValueError('Storage identity mismatch')
@@ -49,7 +72,9 @@ def run(network, reference, workspace, output):
                   annual_state_sha256=digest(reference / 'annual-state.npz'),
                   annual_replay_sha256=digest(reference / 'annual-replay.json'),
                   producer_sha256=digest(Path(__file__)), pypsa_version=pypsa.__version__,
-                  annual_feasible_cost_eur=cost, boundaries=state.shape[0], storage=rows,
+                  annual_feasible_cost_eur=cost, boundaries=state.shape[0], boundary_hours=boundary_hours,
+                  boundary_times_utc=[str(np.datetime64('2025-01-01T00') + np.timedelta64(h, 'h')) + 'Z' for h in boundary_hours],
+                  storage=rows,
                   nonzero_initial_inventory_count=int(np.count_nonzero(state[0] > 1e-6)),
                   metrics=metrics,
                   limitations=['Boundary diagnostic supplements the intact annual witness replay; does not replace hourly physics checks.',

@@ -1,6 +1,7 @@
 import unittest
+import copy
 import numpy as np
-from audit_retained_inventory_2025 import check_boundaries
+from audit_retained_inventory_2025 import check_boundaries, check_calendar
 
 class BoundaryTests(unittest.TestCase):
     def test_nonempty_cyclic_state_and_roundoff_preserved(self):
@@ -13,4 +14,17 @@ class BoundaryTests(unittest.TestCase):
             with self.subTest(state=state),self.assertRaises(ValueError):
                 check_boundaries(state,np.array([5.]),np.array([True]))
 
-if __name__=='__main__':unittest.main()
+class CalendarTests(unittest.TestCase):
+    def test_full_chronological_boundaries(self):
+        blocks=[dict(index=0,start_hour=0,end_hour_exclusive=4000,hours=4000),
+                dict(index=1,start_hour=4000,end_hour_exclusive=8760,hours=4760)]
+        self.assertEqual(check_calendar(blocks),[0,4000,8760])
+    def test_gaps_overlaps_reordering_and_truncation_rejected(self):
+        base=[dict(index=0,start_hour=0,end_hour_exclusive=4000,hours=4000),
+              dict(index=1,start_hour=4000,end_hour_exclusive=8760,hours=4760)]
+        for field,value in [('start_hour',4001),('start_hour',3999),('index',0),('hours',1),('end_hour_exclusive',8759)]:
+            blocks=copy.deepcopy(base);blocks[1][field]=value
+            with self.subTest(field=field,value=value),self.assertRaises(ValueError):check_calendar(blocks)
+        with self.assertRaises(ValueError):check_calendar([])
+
+if __name__=='__main__' :unittest.main()

@@ -462,3 +462,10 @@ conditions explicitly. Replacing them with empty initial inventories, pooling
 reservoir water or reoptimising boundaries creates a different model and needs
 fresh provenance and verification. Zone mapping and paired annual comparisons
 remain open.
+
+The boundary audit also requires ordered contiguous blocks covering hours
+0 through 8760, exact hourly 2025 native snapshots and unit storage weights.
+Its receipt records boundary hour offsets and UTC timestamps, including the
+exclusive endpoint 2026-01-01T00:00Z. This endpoint labels the year-end state;
+it is not an extra dispatch hour. Gaps, overlaps, reordered or truncated blocks
+are rejected before inventory accounting.
