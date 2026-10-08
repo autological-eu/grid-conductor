@@ -1,0 +1,1615 @@
+{
+  "status": "annual_independent_hour_physical_synthetic_bid_diagnostic",
+  "capacity_variant": "irena-linear",
+  "capacity_reconciliation": {
+    "irena_summary_sha256": "63078cfc19eba64b186faa12cdb2ecc21723842ca85f15e6d5ffd9dc7b7b0c89",
+    "irena_pdf_sha256": "fc580bd4f4ee39ef20de6b1ce3926005a4e3e3b8e2c92fd6a16d175a52515921",
+    "producer_sha256": "94c04a061b918cb4ca4d72c9e457e1edb4cc1d9a23e162da261acd1571443f6a",
+    "source_url": "https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2026/Mar/IRENA_DAT_RE_capacity_statistics_2026.pdf",
+    "rule": "C(t)=C_end_2024+(C_end_2025-C_end_2024)*t/8760; t=0..8759 UTC",
+    "audit": [
+      {
+        "country": "AL",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 354.2,
+        "capacity_2024": {
+          "mw": 720.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 876.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 720.0,
+        "last_hour_capacity_mw": 875.982191780822,
+        "original_available_twh": 0.5191943433000215,
+        "adjusted_available_twh": 1.1672180645946664
+      },
+      {
+        "country": "AL",
+        "technology": "Wind energy",
+        "source_capacity_mw": 150.0,
+        "status": "missing_irena_endpoints_original_retained"
+      },
+      {
+        "country": "AT",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 915.7764,
+        "capacity_2024": {
+          "mw": 8904.0,
+          "source_flag": "e"
+        },
+        "capacity_2025": {
+          "mw": 10304.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 8904.0,
+        "last_hour_capacity_mw": 10303.840182648402,
+        "original_available_twh": 1.1214087864835363,
+        "adjusted_available_twh": 11.716773889475427
+      },
+      {
+        "country": "AT",
+        "technology": "Wind energy",
+        "source_capacity_mw": 2788.6,
+        "capacity_2024": {
+          "mw": 4092.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 4292.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 4092.0,
+        "last_hour_capacity_mw": 4291.977168949772,
+        "original_available_twh": 2.863943087810452,
+        "adjusted_available_twh": 4.3028598121621275
+      },
+      {
+        "country": "BA",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 564.5,
+        "capacity_2024": {
+          "mw": 608.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 668.0,
+          "source_flag": "o"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 608.0,
+        "last_hour_capacity_mw": 667.9931506849315,
+        "original_available_twh": 0.7529050005222075,
+        "adjusted_available_twh": 0.8498720722667298
+      },
+      {
+        "country": "BA",
+        "technology": "Wind energy",
+        "source_capacity_mw": 244.0,
+        "capacity_2024": {
+          "mw": 219.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 244.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 219.0,
+        "last_hour_capacity_mw": 243.99714611872145,
+        "original_available_twh": 0.0998228294818824,
+        "adjusted_available_twh": 0.09376503440263433
+      },
+      {
+        "country": "BE",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 937.5999999999999,
+        "capacity_2024": {
+          "mw": 9642.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 10398.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 9642.0,
+        "last_hour_capacity_mw": 10397.913698630136,
+        "original_available_twh": 1.0674734191357944,
+        "adjusted_available_twh": 11.374720060177635
+      },
+      {
+        "country": "BE",
+        "technology": "Wind energy",
+        "source_capacity_mw": 4505.76,
+        "capacity_2024": {
+          "mw": 5644.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 5851.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 5644.0,
+        "last_hour_capacity_mw": 5850.976369863014,
+        "original_available_twh": 16.22674407245512,
+        "adjusted_available_twh": 20.72391727448901
+      },
+      {
+        "country": "BG",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 3604.0,
+        "capacity_2024": {
+          "mw": 4560.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 5910.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 4560.0,
+        "last_hour_capacity_mw": 5909.845890410959,
+        "original_available_twh": 4.977907841694104,
+        "adjusted_available_twh": 7.174547113922362
+      },
+      {
+        "country": "BG",
+        "technology": "Wind energy",
+        "source_capacity_mw": 608.0,
+        "capacity_2024": {
+          "mw": 706.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 706.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 706.0,
+        "last_hour_capacity_mw": 706.0,
+        "original_available_twh": 0.6046536032995269,
+        "adjusted_available_twh": 0.7021142169892531
+      },
+      {
+        "country": "CH",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 98.79724,
+        "capacity_2024": {
+          "mw": 7764.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 9114.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 7764.0,
+        "last_hour_capacity_mw": 9113.84589041096,
+        "original_available_twh": 0.1376496788239381,
+        "adjusted_available_twh": 11.7137990270705
+      },
+      {
+        "country": "CH",
+        "technology": "Wind energy",
+        "source_capacity_mw": 55.0,
+        "capacity_2024": {
+          "mw": 102.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 111.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 102.0,
+        "last_hour_capacity_mw": 110.99897260273973,
+        "original_available_twh": 0.023031218034580758,
+        "adjusted_available_twh": 0.04437752681096156
+      },
+      {
+        "country": "CZ",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 2957.005,
+        "capacity_2024": {
+          "mw": 3984.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 4541.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 3984.0,
+        "last_hour_capacity_mw": 4540.936415525114,
+        "original_available_twh": 3.4178355022080855,
+        "adjusted_available_twh": 4.905580237655174
+      },
+      {
+        "country": "CZ",
+        "technology": "Wind energy",
+        "source_capacity_mw": 155.26,
+        "capacity_2024": {
+          "mw": 363.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 369.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 363.0,
+        "last_hour_capacity_mw": 368.99931506849316,
+        "original_available_twh": 0.19443261707833426,
+        "adjusted_available_twh": 0.45828551132790146
+      },
+      {
+        "country": "DE",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 48773.25401999999,
+        "capacity_2024": {
+          "mw": 91204.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 106272.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 91204.0,
+        "last_hour_capacity_mw": 106270.2799086758,
+        "original_available_twh": 55.47638619564319,
+        "adjusted_available_twh": 111.68973009576015
+      },
+      {
+        "country": "DE",
+        "technology": "Wind energy",
+        "source_capacity_mw": 84495.8089,
+        "capacity_2024": {
+          "mw": 72745.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 77808.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 72745.0,
+        "last_hour_capacity_mw": 77807.42203196348,
+        "original_available_twh": 195.74326032932385,
+        "adjusted_available_twh": 174.67706993843373
+      },
+      {
+        "country": "DK",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 3383.9,
+        "capacity_2024": {
+          "mw": 3945.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 5046.0,
+          "source_flag": "o"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 3945.0,
+        "last_hour_capacity_mw": 5045.874315068493,
+        "original_available_twh": 3.8005172038656716,
+        "adjusted_available_twh": 5.009003861980665
+      },
+      {
+        "country": "DK",
+        "technology": "Wind energy",
+        "source_capacity_mw": 4639.3,
+        "capacity_2024": {
+          "mw": 7512.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 7547.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 7512.0,
+        "last_hour_capacity_mw": 7546.99600456621,
+        "original_available_twh": 19.19592856930595,
+        "adjusted_available_twh": 31.15662419514333
+      },
+      {
+        "country": "EE",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 1158.7,
+        "capacity_2024": {
+          "mw": 877.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 984.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 877.0,
+        "last_hour_capacity_mw": 983.9877853881278,
+        "original_available_twh": 1.0869984285071723,
+        "adjusted_available_twh": 0.8691748733801361
+      },
+      {
+        "country": "EE",
+        "technology": "Wind energy",
+        "source_capacity_mw": 688.0,
+        "capacity_2024": {
+          "mw": 693.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 705.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 693.0,
+        "last_hour_capacity_mw": 704.9986301369863,
+        "original_available_twh": 1.8629403564790812,
+        "adjusted_available_twh": 1.8928243499376685
+      },
+      {
+        "country": "ES",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 41268.5,
+        "capacity_2024": {
+          "mw": 35860.0,
+          "source_flag": "e"
+        },
+        "capacity_2025": {
+          "mw": 44903.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 35860.0,
+        "last_hour_capacity_mw": 44901.967694063926,
+        "original_available_twh": 64.44301286570033,
+        "adjusted_available_twh": 62.96211580288138
+      },
+      {
+        "country": "ES",
+        "technology": "Wind energy",
+        "source_capacity_mw": 31812.7,
+        "capacity_2024": {
+          "mw": 32184.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 33301.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 32184.0,
+        "last_hour_capacity_mw": 33300.87248858447,
+        "original_available_twh": 43.202543825613155,
+        "adjusted_available_twh": 44.42267663332814
+      },
+      {
+        "country": "FI",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 253.40000000000003,
+        "capacity_2024": {
+          "mw": 1219.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 1566.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 1219.0,
+        "last_hour_capacity_mw": 1565.960388127854,
+        "original_available_twh": 0.22981037729807266,
+        "adjusted_available_twh": 1.2480215101558114
+      },
+      {
+        "country": "FI",
+        "technology": "Wind energy",
+        "source_capacity_mw": 8658.3,
+        "capacity_2024": {
+          "mw": 8360.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 9383.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 8360.0,
+        "last_hour_capacity_mw": 9382.883219178082,
+        "original_available_twh": 16.99246059232795,
+        "adjusted_available_twh": 17.395213626425612
+      },
+      {
+        "country": "FR",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 13238.81398,
+        "capacity_2024": {
+          "mw": 25456.0,
+          "source_flag": "e"
+        },
+        "capacity_2025": {
+          "mw": 31226.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 25456.0,
+        "last_hour_capacity_mw": 31225.341324200912,
+        "original_available_twh": 17.363839235119613,
+        "adjusted_available_twh": 37.02948648553917
+      },
+      {
+        "country": "FR",
+        "technology": "Wind energy",
+        "source_capacity_mw": 26278.000000000004,
+        "capacity_2024": {
+          "mw": 24241.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 25655.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 24241.0,
+        "last_hour_capacity_mw": 25654.838584474885,
+        "original_available_twh": 59.14788782348068,
+        "adjusted_available_twh": 56.222883259948674
+      },
+      {
+        "country": "GB",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 13627.9,
+        "capacity_2024": {
+          "mw": 19000.0,
+          "source_flag": "o"
+        },
+        "capacity_2025": {
+          "mw": 21662.0,
+          "source_flag": "o"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 19000.0,
+        "last_hour_capacity_mw": 21661.696118721462,
+        "original_available_twh": 15.111457812988496,
+        "adjusted_available_twh": 22.441602697215714
+      },
+      {
+        "country": "GB",
+        "technology": "Wind energy",
+        "source_capacity_mw": 39058.5,
+        "capacity_2024": {
+          "mw": 32146.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 33396.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 32146.0,
+        "last_hour_capacity_mw": 33395.85730593607,
+        "original_available_twh": 155.3093590415433,
+        "adjusted_available_twh": 130.41489312390124
+      },
+      {
+        "country": "GR",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 11358.699999999999,
+        "capacity_2024": {
+          "mw": 8827.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 11077.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 8827.0,
+        "last_hour_capacity_mw": 11076.743150684932,
+        "original_available_twh": 16.489894809640795,
+        "adjusted_available_twh": 14.407005972895648
+      },
+      {
+        "country": "GR",
+        "technology": "Wind energy",
+        "source_capacity_mw": 6093.4,
+        "capacity_2024": {
+          "mw": 5366.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 5706.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 5366.0,
+        "last_hour_capacity_mw": 5705.9611872146115,
+        "original_available_twh": 8.966931910341984,
+        "adjusted_available_twh": 8.141945206901672
+      },
+      {
+        "country": "HR",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 366.8,
+        "capacity_2024": {
+          "mw": 902.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 1319.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 902.0,
+        "last_hour_capacity_mw": 1318.952397260274,
+        "original_available_twh": 0.475287397170535,
+        "adjusted_available_twh": 1.4288353538798673
+      },
+      {
+        "country": "HR",
+        "technology": "Wind energy",
+        "source_capacity_mw": 1140.0,
+        "capacity_2024": {
+          "mw": 1303.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 1375.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 1303.0,
+        "last_hour_capacity_mw": 1374.991780821918,
+        "original_available_twh": 0.9332696040182987,
+        "adjusted_available_twh": 1.0925736458705064
+      },
+      {
+        "country": "HU",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 4064.9,
+        "capacity_2024": {
+          "mw": 7166.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 8177.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 7166.0,
+        "last_hour_capacity_mw": 8176.884589041096,
+        "original_available_twh": 5.057063132837186,
+        "adjusted_available_twh": 9.507187671542876
+      },
+      {
+        "country": "HU",
+        "technology": "Wind energy",
+        "source_capacity_mw": 319.0,
+        "capacity_2024": {
+          "mw": 325.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 325.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 325.0,
+        "last_hour_capacity_mw": 325.0,
+        "original_available_twh": 0.38858824571600614,
+        "adjusted_available_twh": 0.3958971155413856
+      },
+      {
+        "country": "IE",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 1394.7,
+        "capacity_2024": {
+          "mw": 1489.0,
+          "source_flag": "e"
+        },
+        "capacity_2025": {
+          "mw": 2494.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 1489.0,
+        "last_hour_capacity_mw": 2493.8852739726026,
+        "original_available_twh": 1.403560244367762,
+        "adjusted_available_twh": 1.9652116211392292
+      },
+      {
+        "country": "IE",
+        "technology": "Wind energy",
+        "source_capacity_mw": 4587.7,
+        "capacity_2024": {
+          "mw": 4943.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 5128.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 4943.0,
+        "last_hour_capacity_mw": 5127.978881278539,
+        "original_available_twh": 13.50112356337393,
+        "adjusted_available_twh": 14.826597517470095
+      },
+      {
+        "country": "IT",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 6438.0,
+        "capacity_2024": {
+          "mw": 35437.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 41183.0,
+          "source_flag": "o"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 35437.0,
+        "last_hour_capacity_mw": 41182.34406392694,
+        "original_available_twh": 9.38245861192131,
+        "adjusted_available_twh": 55.772900192214486
+      },
+      {
+        "country": "IT",
+        "technology": "Wind energy",
+        "source_capacity_mw": 10372.5,
+        "capacity_2024": {
+          "mw": 12960.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 13568.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 12960.0,
+        "last_hour_capacity_mw": 13567.930593607305,
+        "original_available_twh": 10.32832772913162,
+        "adjusted_available_twh": 13.185023866631024
+      },
+      {
+        "country": "LT",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 870.2,
+        "capacity_2024": {
+          "mw": 2575.0,
+          "source_flag": "e"
+        },
+        "capacity_2025": {
+          "mw": 3295.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 2575.0,
+        "last_hour_capacity_mw": 3294.917808219178,
+        "original_available_twh": 0.8502060980574908,
+        "adjusted_available_twh": 2.8392833684579672
+      },
+      {
+        "country": "LT",
+        "technology": "Wind energy",
+        "source_capacity_mw": 1493.0,
+        "capacity_2024": {
+          "mw": 1832.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 2510.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 1832.0,
+        "last_hour_capacity_mw": 2509.9226027397262,
+        "original_available_twh": 3.1859995190565686,
+        "adjusted_available_twh": 4.612869088061677
+      },
+      {
+        "country": "LU",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 101.39,
+        "capacity_2024": {
+          "mw": 548.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 774.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 548.0,
+        "last_hour_capacity_mw": 773.974200913242,
+        "original_available_twh": 0.11737045899914852,
+        "adjusted_available_twh": 0.7548000299639748
+      },
+      {
+        "country": "LU",
+        "technology": "Wind energy",
+        "source_capacity_mw": 133.6,
+        "capacity_2024": {
+          "mw": 213.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 232.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 213.0,
+        "last_hour_capacity_mw": 231.9978310502283,
+        "original_available_twh": 0.2624587958971985,
+        "adjusted_available_twh": 0.43759354458764865
+      },
+      {
+        "country": "LV",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 810.3,
+        "capacity_2024": {
+          "mw": 660.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 922.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 660.0,
+        "last_hour_capacity_mw": 921.9700913242009,
+        "original_available_twh": 0.7677593259068547,
+        "adjusted_available_twh": 0.7405723048530172
+      },
+      {
+        "country": "LV",
+        "technology": "Wind energy",
+        "source_capacity_mw": 100.0,
+        "capacity_2024": {
+          "mw": 131.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 133.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 131.0,
+        "last_hour_capacity_mw": 132.99977168949772,
+        "original_available_twh": 0.22958586258495634,
+        "adjusted_available_twh": 0.30303637078339374
+      },
+      {
+        "country": "ME",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 26.1,
+        "status": "missing_irena_endpoints_original_retained"
+      },
+      {
+        "country": "ME",
+        "technology": "Wind energy",
+        "source_capacity_mw": 118.0,
+        "status": "missing_irena_endpoints_original_retained"
+      },
+      {
+        "country": "MK",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 558.9,
+        "capacity_2024": {
+          "mw": 869.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 1058.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 869.0,
+        "last_hour_capacity_mw": 1057.9784246575343,
+        "original_available_twh": 0.790575160560736,
+        "adjusted_available_twh": 1.357359871607406
+      },
+      {
+        "country": "MK",
+        "technology": "Wind energy",
+        "source_capacity_mw": 546.0,
+        "capacity_2024": {
+          "mw": 73.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 103.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 73.0,
+        "last_hour_capacity_mw": 102.99657534246575,
+        "original_available_twh": 0.10698028336938988,
+        "adjusted_available_twh": 0.017264697481619084
+      },
+      {
+        "country": "NL",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 7094.3,
+        "capacity_2024": {
+          "mw": 24772.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 25878.0,
+          "source_flag": "o"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 24772.0,
+        "last_hour_capacity_mw": 25877.873744292236,
+        "original_available_twh": 7.94870993901141,
+        "adjusted_available_twh": 28.325373008386027
+      },
+      {
+        "country": "NL",
+        "technology": "Wind energy",
+        "source_capacity_mw": 11473.4,
+        "capacity_2024": {
+          "mw": 11703.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 11783.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 11703.0,
+        "last_hour_capacity_mw": 11782.990867579909,
+        "original_available_twh": 45.41502403197528,
+        "adjusted_available_twh": 46.49399981670256
+      },
+      {
+        "country": "NO",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 34.6,
+        "capacity_2024": {
+          "mw": 786.0,
+          "source_flag": "e"
+        },
+        "capacity_2025": {
+          "mw": 903.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 786.0,
+        "last_hour_capacity_mw": 902.9866438356164,
+        "original_available_twh": 0.03343886306054344,
+        "adjusted_available_twh": 0.8102307552021677
+      },
+      {
+        "country": "NO",
+        "technology": "Wind energy",
+        "source_capacity_mw": 5154.4,
+        "capacity_2024": {
+          "mw": 5158.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 5158.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 5158.0,
+        "last_hour_capacity_mw": 5158.0,
+        "original_available_twh": 9.700761579462812,
+        "adjusted_available_twh": 9.707536905725046
+      },
+      {
+        "country": "PL",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 9313.3,
+        "capacity_2024": {
+          "mw": 21721.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 25421.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 21721.0,
+        "last_hour_capacity_mw": 25420.577625570775,
+        "original_available_twh": 10.203902244809337,
+        "adjusted_available_twh": 25.680116784642706
+      },
+      {
+        "country": "PL",
+        "technology": "Wind energy",
+        "source_capacity_mw": 9259.5,
+        "capacity_2024": {
+          "mw": 10152.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 10602.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 10152.0,
+        "last_hour_capacity_mw": 10601.948630136987,
+        "original_available_twh": 20.50254233967114,
+        "adjusted_available_twh": 22.970376976341292
+      },
+      {
+        "country": "PT",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 3921.1000000000004,
+        "capacity_2024": {
+          "mw": 5811.0,
+          "source_flag": "e"
+        },
+        "capacity_2025": {
+          "mw": 6949.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 5811.0,
+        "last_hour_capacity_mw": 6948.870091324201,
+        "original_available_twh": 5.9329430991742065,
+        "adjusted_available_twh": 9.65369707551369
+      },
+      {
+        "country": "PT",
+        "technology": "Wind energy",
+        "source_capacity_mw": 5644.0,
+        "capacity_2024": {
+          "mw": 5600.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 5605.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 5600.0,
+        "last_hour_capacity_mw": 5604.999429223744,
+        "original_available_twh": 6.557529709116097,
+        "adjusted_available_twh": 6.50914493583811
+      },
+      {
+        "country": "RO",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 4237.9,
+        "capacity_2024": {
+          "mw": 4257.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 6237.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 4257.0,
+        "last_hour_capacity_mw": 6236.773972602739,
+        "original_available_twh": 5.462381281179305,
+        "adjusted_available_twh": 6.674229374053739
+      },
+      {
+        "country": "RO",
+        "technology": "Wind energy",
+        "source_capacity_mw": 5723.2,
+        "capacity_2024": {
+          "mw": 3095.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 3283.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 3095.0,
+        "last_hour_capacity_mw": 3282.9785388127852,
+        "original_available_twh": 5.563318999085478,
+        "adjusted_available_twh": 3.102362635560479
+      },
+      {
+        "country": "RS",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 181.0,
+        "capacity_2024": {
+          "mw": 296.0,
+          "source_flag": "e"
+        },
+        "capacity_2025": {
+          "mw": 431.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 296.0,
+        "last_hour_capacity_mw": 430.9845890410959,
+        "original_available_twh": 0.2403258975697186,
+        "adjusted_available_twh": 0.47776963916787074
+      },
+      {
+        "country": "RS",
+        "technology": "Wind energy",
+        "source_capacity_mw": 670.1,
+        "capacity_2024": {
+          "mw": 604.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 803.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 604.0,
+        "last_hour_capacity_mw": 802.9772831050228,
+        "original_available_twh": 0.5801025911464108,
+        "adjusted_available_twh": 0.6084922288991459
+      },
+      {
+        "country": "SE",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 681.0999999999999,
+        "capacity_2024": {
+          "mw": 4848.0,
+          "source_flag": "e"
+        },
+        "capacity_2025": {
+          "mw": 5500.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 4848.0,
+        "last_hour_capacity_mw": 5499.925570776256,
+        "original_available_twh": 0.6997186241494722,
+        "adjusted_available_twh": 5.293274881491332
+      },
+      {
+        "country": "SE",
+        "technology": "Wind energy",
+        "source_capacity_mw": 17442.8,
+        "capacity_2024": {
+          "mw": 16819.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 17381.0,
+          "source_flag": null
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 16819.0,
+        "last_hour_capacity_mw": 17380.93584474886,
+        "original_available_twh": 35.59213282407804,
+        "adjusted_available_twh": 34.87366690664179
+      },
+      {
+        "country": "SI",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 90.60000000000001,
+        "capacity_2024": {
+          "mw": 1421.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 1568.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 1421.0,
+        "last_hour_capacity_mw": 1567.9832191780822,
+        "original_available_twh": 0.11028497322560857,
+        "adjusted_available_twh": 1.815771489001175
+      },
+      {
+        "country": "SI",
+        "technology": "Wind energy",
+        "source_capacity_mw": 0.0,
+        "capacity_2024": {
+          "mw": 3.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 4.0,
+          "source_flag": null
+        },
+        "status": "no_original_weather_fleet_original_retained"
+      },
+      {
+        "country": "SK",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 894.3,
+        "capacity_2024": {
+          "mw": 728.0,
+          "source_flag": "u"
+        },
+        "capacity_2025": {
+          "mw": 1028.0,
+          "source_flag": "u"
+        },
+        "status": "linear_capacity_applied",
+        "first_hour_capacity_mw": 728.0,
+        "last_hour_capacity_mw": 1027.9657534246576,
+        "original_available_twh": 1.0604390768824232,
+        "adjusted_available_twh": 1.029338130122495
+      },
+      {
+        "country": "SK",
+        "technology": "Wind energy",
+        "source_capacity_mw": 0.0,
+        "capacity_2024": {
+          "mw": 4.0,
+          "source_flag": null
+        },
+        "capacity_2025": {
+          "mw": 4.0,
+          "source_flag": null
+        },
+        "status": "no_original_weather_fleet_original_retained"
+      },
+      {
+        "country": "XK",
+        "technology": "Solar photovoltaic",
+        "source_capacity_mw": 20.4,
+        "status": "missing_irena_endpoints_original_retained"
+      },
+      {
+        "country": "XK",
+        "technology": "Wind energy",
+        "source_capacity_mw": 135.0,
+        "status": "missing_irena_endpoints_original_retained"
+      }
+    ],
+    "limitations": [
+      "Wind/PV only; parent total wind and total PV used once, not summed with subcategories",
+      "Original weather/technology/location shares retained, including their biases",
+      "Missing endpoints or missing source weather fleets retain original inputs with explicit status",
+      "Hydro, PHS, bioenergy, geothermal, marine and fossil/nuclear unchanged",
+      "Static original GSK retained to isolate capacity change; no weather recalculation or observed commissioning dates",
+      "p_max_pu encodes original weather shape times capacity multiplier and can exceed 1 relative to original p_nom"
+    ]
+  },
+  "hours": 8760,
+  "network_sha256": "4049c130f157305dd4988d47e432c42a89758f4ee30cafe5472b7bc883eef3ec",
+  "producer_sha256": "7cc2a41645b758e0940ce187cf5386ac5653a401ad840b380707a8f032f561e0",
+  "dependency_sha256": {
+    "synthetic_bids_2025.py": "1af57f8f49390d960681e76c0547e2c838dbbc44674f6ba5b9a976050bcb62d1",
+    "derive_physical_zonal_constraints.py": "11595cb5e1ec7d4303f5f0f87a5fb89f3ee12bf7f6d3fb49cd305f5be2975c65",
+    "hourly_renewable_estimates.py": "342ca9fef28a644c344a07ad8dd9efc8c7d521322f2364bf2e47c4d5e1a5982e"
+  },
+  "observed_price_sha256": "bb2bf788973234b5c15e0ecc0020c1b7814319648e74c01af32d31f1b53b028a",
+  "solver_protocol": {
+    "method": "simplex",
+    "threads": 1,
+    "primal_replay_tolerance_mw": 0.0001,
+    "native_objective_absolute_tolerance_eur": 0.05,
+    "native_objective_relative_tolerance": 1e-08
+  },
+  "area_summary": [
+    {
+      "area": "0:AL",
+      "demand_twh": 7.605935001571655,
+      "primary_generation_twh": 2.0051011497622704,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 102.46589793466809
+    },
+    {
+      "area": "0:AT",
+      "demand_twh": 59.19088129889679,
+      "primary_generation_twh": 48.66586754531747,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 96.90797434073988
+    },
+    {
+      "area": "0:BA",
+      "demand_twh": 8.432011688697814,
+      "primary_generation_twh": 1.7461800987946092,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 102.40040932798308
+    },
+    {
+      "area": "0:BE",
+      "demand_twh": 80.3635647456131,
+      "primary_generation_twh": 73.00338259086622,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 82.71587025350131
+    },
+    {
+      "area": "0:BG",
+      "demand_twh": 37.885283174964904,
+      "primary_generation_twh": 36.224468735776306,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 102.33697991152066
+    },
+    {
+      "area": "0:CH",
+      "demand_twh": 62.346887529045105,
+      "primary_generation_twh": 45.98172016357434,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 92.84656039818921
+    },
+    {
+      "area": "0:CZ",
+      "demand_twh": 62.60863901974487,
+      "primary_generation_twh": 47.41034505357297,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 99.565804684122
+    },
+    {
+      "area": "0:DE",
+      "demand_twh": 465.6506111974182,
+      "primary_generation_twh": 578.1154450285494,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 87.66276499144058
+    },
+    {
+      "area": "0:DK",
+      "demand_twh": 19.607603345924378,
+      "primary_generation_twh": 35.29748091496486,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 86.96012180028286
+    },
+    {
+      "area": "0:EE",
+      "demand_twh": 7.941961699760437,
+      "primary_generation_twh": 3.9788105001497915,
+      "emergency_supply_twh": 0.0006405610912117639,
+      "shortage_hours": 4,
+      "mean_price_eur_mwh": 133.30064148386703
+    },
+    {
+      "area": "0:ES",
+      "demand_twh": 234.74780512442015,
+      "primary_generation_twh": 230.20531078812397,
+      "emergency_supply_twh": 0.0017037942022206684,
+      "shortage_hours": 4,
+      "mean_price_eur_mwh": 94.44104127417869
+    },
+    {
+      "area": "0:FR",
+      "demand_twh": 433.49206001615903,
+      "primary_generation_twh": 508.1356743878412,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 78.42952208977734
+    },
+    {
+      "area": "0:GR",
+      "demand_twh": 50.193771748840334,
+      "primary_generation_twh": 64.71968410268136,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 102.36582772233824
+    },
+    {
+      "area": "0:HR",
+      "demand_twh": 18.230148500198364,
+      "primary_generation_twh": 12.285991023512914,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 102.2295193570449
+    },
+    {
+      "area": "0:HU",
+      "demand_twh": 43.210005968833926,
+      "primary_generation_twh": 40.81024477347259,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 100.46642560989922
+    },
+    {
+      "area": "0:IT",
+      "demand_twh": 272.63240084075926,
+      "primary_generation_twh": 225.2281821876139,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 101.23846630786721
+    },
+    {
+      "area": "0:LT",
+      "demand_twh": 11.772864476242065,
+      "primary_generation_twh": 11.51876954568936,
+      "emergency_supply_twh": 0.00149036442787598,
+      "shortage_hours": 8,
+      "mean_price_eur_mwh": 133.30064148386703
+    },
+    {
+      "area": "0:LU",
+      "demand_twh": 4.843477593925476,
+      "primary_generation_twh": 1.2378356073762906,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 82.82774029852312
+    },
+    {
+      "area": "0:LV",
+      "demand_twh": 7.201224802078247,
+      "primary_generation_twh": 6.75899674412389,
+      "emergency_supply_twh": 0.0006921523503031404,
+      "shortage_hours": 7,
+      "mean_price_eur_mwh": 133.30064148386703
+    },
+    {
+      "area": "0:ME",
+      "demand_twh": 3.0700140779495237,
+      "primary_generation_twh": 0.16423254106403823,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 102.47612970138417
+    },
+    {
+      "area": "0:MK",
+      "demand_twh": 5.324999050476074,
+      "primary_generation_twh": 3.411265943060604,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 102.47197085295853
+    },
+    {
+      "area": "0:NL",
+      "demand_twh": 116.9040159910431,
+      "primary_generation_twh": 112.57851750910392,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 85.6981836972038
+    },
+    {
+      "area": "0:PL",
+      "demand_twh": 158.3500118000641,
+      "primary_generation_twh": 161.5090452809977,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 100.05334631123901
+    },
+    {
+      "area": "0:PT",
+      "demand_twh": 53.08791996813202,
+      "primary_generation_twh": 44.09455185882146,
+      "emergency_supply_twh": 0.001289592548176719,
+      "shortage_hours": 2,
+      "mean_price_eur_mwh": 95.49550403419919
+    },
+    {
+      "area": "0:RO",
+      "demand_twh": 53.560333579940796,
+      "primary_generation_twh": 43.2777434090204,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 102.20046470086226
+    },
+    {
+      "area": "0:RS",
+      "demand_twh": 34.3214870015564,
+      "primary_generation_twh": 7.960109068789945,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 102.58440997612996
+    },
+    {
+      "area": "0:SI",
+      "demand_twh": 12.533900388168336,
+      "primary_generation_twh": 13.140808694995634,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 102.95549752473013
+    },
+    {
+      "area": "0:SK",
+      "demand_twh": 25.824788700317384,
+      "primary_generation_twh": 30.449715957052156,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 100.08782535180455
+    },
+    {
+      "area": "0:XK",
+      "demand_twh": 6.780857315383911,
+      "primary_generation_twh": 0.6037584949338197,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 102.49023202613837
+    },
+    {
+      "area": "1:DK",
+      "demand_twh": 18.86310644303894,
+      "primary_generation_twh": 22.27941030863258,
+      "emergency_supply_twh": 0.1695798162980127,
+      "shortage_hours": 146,
+      "mean_price_eur_mwh": 1552.7250584245069
+    },
+    {
+      "area": "1:FI",
+      "demand_twh": 84.55375715096282,
+      "primary_generation_twh": 91.50579102646422,
+      "emergency_supply_twh": 0.14908809807232523,
+      "shortage_hours": 131,
+      "mean_price_eur_mwh": 468.8746188517933
+    },
+    {
+      "area": "1:NO",
+      "demand_twh": 137.04442755136873,
+      "primary_generation_twh": 24.571887661649345,
+      "emergency_supply_twh": 34.34644665932757,
+      "shortage_hours": 8282,
+      "mean_price_eur_mwh": 9480.007283700526
+    },
+    {
+      "area": "1:SE",
+      "demand_twh": 129.5462817512131,
+      "primary_generation_twh": 126.14057229141518,
+      "emergency_supply_twh": 0.09850943604426661,
+      "shortage_hours": 87,
+      "mean_price_eur_mwh": 574.9455251370672
+    },
+    {
+      "area": "2:ES",
+      "demand_twh": 3.66624287525177,
+      "primary_generation_twh": 1.5053408105645882,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 87.53344570615695
+    },
+    {
+      "area": "3:FR",
+      "demand_twh": 1.1901393649291991,
+      "primary_generation_twh": 0.4369711991352101,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 100.78860068592162
+    },
+    {
+      "area": "4:GB",
+      "demand_twh": 229.10849491451265,
+      "primary_generation_twh": 259.950426920467,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 73.37803717396997
+    },
+    {
+      "area": "5:GB",
+      "demand_twh": 7.509675114250183,
+      "primary_generation_twh": 3.8826029110663542,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 91.60616048015585
+    },
+    {
+      "area": "5:IE",
+      "demand_twh": 34.52733977433014,
+      "primary_generation_twh": 35.01676016203525,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 91.60616048015585
+    },
+    {
+      "area": "6:GB",
+      "demand_twh": 0.11662641820526123,
+      "primary_generation_twh": 2.7790991866245665,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 73.37803717396997
+    },
+    {
+      "area": "7:IT",
+      "demand_twh": 4.477907153114319,
+      "primary_generation_twh": 14.961921505283188,
+      "emergency_supply_twh": 0.0,
+      "shortage_hours": 0,
+      "mean_price_eur_mwh": 84.34091742853228
+    }
+  ],
+  "zones": [
+    "0:AL",
+    "0:AT",
+    "0:BA",
+    "0:BE",
+    "0:BG",
+    "0:CH",
+    "0:CZ",
+    "0:DE",
+    "0:DK",
+    "0:EE",
+    "0:ES",
+    "0:FR",
+    "0:GR",
+    "0:HR",
+    "0:HU",
+    "0:IT",
+    "0:LT",
+    "0:LU",
+    "0:LV",
+    "0:ME",
+    "0:MK",
+    "0:NL",
+    "0:PL",
+    "0:PT",
+    "0:RO",
+    "0:RS",
+    "0:SI",
+    "0:SK",
+    "0:XK",
+    "1:DK",
+    "1:FI",
+    "1:NO",
+    "1:SE",
+    "2:ES",
+    "3:FR",
+    "4:GB",
+    "5:GB",
+    "5:IE",
+    "6:GB",
+    "7:IT"
+  ],
+  "passive_branches": 256,
+  "controllable_links": 74,
+  "generators": 1151,
+  "emergency_supply_bids": 40,
+  "shortage_hours": 8282,
+  "shortage_mwh": 34769440.47436196,
+  "storage_units_excluded": 160,
+  "compile_seconds": 1.641055536980275,
+  "warm_solve_seconds": 30.564276925986633,
+  "total_operating_cost_eur": 451332495330.9493,
+  "maximum_primal_residual_mw": 1.3878852769266814e-06,
+  "cold_basis_retries": [
+    {
+      "hour": 600,
+      "warm_status": "HighsModelStatus.kUnknown"
+    },
+    {
+      "hour": 1737,
+      "warm_status": "HighsModelStatus.kUnknown"
+    }
+  ],
+  "native_pypsa_checks": [
+    {
+      "utc": "2025-01-15 12:00:00",
+      "native_objective_eur": 91572514.18356468,
+      "fast_objective_eur": 91572514.1835646,
+      "difference_eur": 7.450580596923828e-08
+    },
+    {
+      "utc": "2025-07-15 12:00:00",
+      "native_objective_eur": 14434579.690168766,
+      "fast_objective_eur": 14434579.690168703,
+      "difference_eur": 6.332993507385254e-08
+    },
+    {
+      "utc": "2025-12-15 12:00:00",
+      "native_objective_eur": 66729682.05507384,
+      "fast_objective_eur": 66729682.05507376,
+      "difference_eur": 8.195638656616211e-08
+    }
+  ],
+  "germany_comparison": {
+    "observed_hours": 8759,
+    "mae_eur_mwh": 22.62039777901386,
+    "bias_eur_mwh": -1.6698916876653291,
+    "rmse_eur_mwh": 34.97834757099806
+  },
+  "pypsa_version": "1.2.4",
+  "highs_version": "1.15.1",
+  "limitations": [
+    "Independent hourly solves: no storage, reservoir inflows or chronological coupling",
+    "Prepared country/island labels are not accepted bidding zones; DE versus DE-LU price comparison is a scope proxy",
+    "N-0 static ratings, no contingencies/outages/margins; zero reference",
+    "Fixed capacity GSK restricts net local injection; HVDC stays at original endpoints with native signed bounds and efficiencies",
+    "Original weather profiles scaled only by declared IRENA capacity trajectory when selected; original demand preserved; no dispatch substituted",
+    "Synthetic costs: original plus 80 EUR/t operational carbon; wind/solar -5 EUR/MWh; no calibration or real order books",
+    "No annual native/fast storage benchmark, commercial JAO validation or investment acceptance claim"
+  ]
+}

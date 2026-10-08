@@ -14,7 +14,7 @@ is preserved; previous publications are not current project evidence.
 | N2 | Done: numerical reference | Two chronological 24h blocks met configured €0.001 gap and €0.02 native parity gates. Gap €0.0002267; native difference €0.007903. Floating-point bounds are numerical parity, not exact enclosing certificates. |
 | N3 | Open | Retained annual reference is feasible, with fixed trial inventories and €50,633,472,741.74006 operating cost across 59 blocks / 8760 hours. No annual optimum claim. Prior search roots are retired; any new optimisation needs a fresh provenance chain, independently checked feasibility support and convergence bounds. |
 | N4 | Pending | Matched full-year native/fast baselines and paired line/battery interventions with original availability and chronological storage. |
-| N5 | Pending | Publish accepted annual benchmark and integrate supported verified scenarios. Keep recurring review enabled until both are complete. |
+| N5 | Pending | Publish accepted annual benchmark and integrate supported verified scenarios. Hourly automated reviews are paused at user request; do not resume automatically. |
 
 ## Hourly zonal dispatch
 
@@ -111,8 +111,8 @@ remain intact. The old dataset parity test now checks the retained 2025
 conditional baseline, cable and battery against native PyPSA. All 26 Bun tests,
 typechecking, lint (six existing warnings), production build and desktop/mobile
 workbench, network-worker and maths browser checks passed. Local research
-processes were idle before deletion. Recurring review stays enabled and its
-prompt now respects retired search roots.
+processes were idle before deletion. The review prompt was updated to respect retired search roots; hourly automated
+reviews were subsequently paused at user request.
 
 Publication verified through ce2417b: CI/Pages run 37701513423 passed the
 build and live-site browser checks. Twenty HTTPS report/method/JS/figure files
@@ -242,3 +242,25 @@ committed assets.
 Local verification: all 26 Bun tests, typecheck, lint (six existing warnings),
 production build and desktop/mobile report/figure checks pass. Three new Python
 clearing tests and fresh native annual-boundary/source replay pass.
+
+
+## IRENA linear-capacity integration
+
+Current simulator default is irena-linear: 61 wind/PV country trajectories use
+end-2024 to end-2025 linear net capacity change with original weather/location
+shares, unchanged demand and fixed original GSKs. Five missing endpoint cases
+and two absent original wind fleets retain original inputs with explicit status.
+Hydro/PHS and other renewable technologies remain unapplied inventory comparisons.
+
+Fresh 8760-hour solve/replay/accounting loop: 30.56s. Emergency supply 34.77 TWh
+in 8282 hours; DE proxy descriptive MAE 22.62 EUR/MWh. Three matched native PyPSA
+checks pass, maximum objective difference 8.20e-8 euros; maximum primal residual
+1.39e-6 MW. Two capacity tests and three clearing tests pass. All 61 annual
+availability totals replay the prior interpolation experiment within 2.98e-8 MWh.
+New output: public/research/european-physical-bids-2025-irena-linear/. Original
+fleet results and retained source/reference files are preserved.
+
+Next: implement original reservoir/hydro chronology; capacity interpolation does
+not fix Norway’s omitted reservoir fleet. Missing IRENA/profile coverage, bidding
+zone mapping, observed input validation and annual/investment gates stay open.
+Hourly automated check-ins remain disabled at user request.

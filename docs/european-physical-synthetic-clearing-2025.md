@@ -1,6 +1,65 @@
 # European physical synthetic-bid clearing — all 2025 hours
 
-## Summary and conclusion
+## Current default: IRENA linear-capacity inputs
+
+The simulator now defaults to `--capacity-variant irena-linear`. It applies the
+previously tested IRENA end-2024/end-2025 wind and PV interpolation, with a
+separate output directory; original-fleet results below remain the comparison.
+All 8760 hours were rerun, with three native PyPSA checks using the same adjusted
+availability. This is still an independent-hour diagnostic without reservoir
+or storage scheduling.
+
+| Metric | Original fleet | IRENA linear wind/PV |
+| --- | ---: | ---: |
+| Warm hourly solve/replay/accounting seconds | 29.05 | 30.56 |
+| Emergency supply TWh | 36.20 | 34.77 |
+| Hours with emergency supply | 8369 | 8282 |
+| German descriptive MAE €/MWh | 29.06 | 22.62 |
+| German descriptive bias €/MWh | +9.77 | −1.67 |
+| German descriptive RMSE €/MWh | 43.97 | 34.98 |
+
+![IRENA-capacity coupled price comparison](../../research/european-physical-bids-2025-irena-linear/price-comparison.svg)
+
+For UTC hour `t = 0..8759`, capacity is
+`C(t) = C_end2024 + (C_end2025 − C_end2024) × t / 8760`. Thus the first hour
+uses end-2024 capacity; the end-2025 endpoint falls at the following January
+boundary. This is assumed net commissioning/retirement, not observed dates.
+Each original generator’s weather profile is multiplied by `C(t)/C_original`,
+retaining the existing within-country technology and location proportions.
+Original demand, costs, physical ratings and fixed original GSKs are retained
+to isolate this capacity change. `p_max_pu` here encodes weather times the
+capacity multiplier and may exceed one relative to original static `p_nom`.
+Native verification receives the same adjusted availability.
+
+The update applies **61 country/technology trajectories**. Five missing endpoint
+cases retain original input: AL wind, ME wind/PV and XK wind/PV. SI and SK wind
+have no original weather fleet, so no new locations/profiles are fabricated.
+Source o/u/e flags are preserved. Total wind and PV are each used once; parent
+and subcategory totals are not added. All 61 annual available-energy totals
+match the earlier linear-capacity experiment within `2.98e−8 MWh`.
+
+Three native objectives match within `8.20e−8 euros`; maximum independent hourly
+primal residual is `1.39e−6 MW`. Two warm-basis unknown statuses (hours 600 and
+1737) recovered through unchanged-input cold-basis retries. Two targeted capacity
+tests verify the UTC trajectory, decreasing capacity, weather/spatial shares,
+source flags and missing-data handling; three clearing tests also pass.
+
+Norway’s solar available energy rises from about 0.033 to 0.810 TWh, while wind
+availability is essentially unchanged. **This does not restore its 31.09 GW of
+omitted reservoir turbines.** Hydro/PHS, bioenergy, geothermal and marine
+capacities are still inventory comparisons, not applied trajectories; fossil
+and nuclear are outside IRENA’s renewable inventory. Reservoir inflow, energy
+capacity and chronology require separate implementation. The improved price
+error is descriptive, with no fitting or held-out acceptance.
+
+[IRENA-run summary and per-country capacity audit](../../research/european-physical-bids-2025-irena-linear/summary.json),
+[prior-experiment replay](../../research/european-physical-bids-2025-irena-linear/capacity-replay.json),
+[all area summaries](../../research/european-physical-bids-2025-irena-linear/area-summary.csv),
+and [hourly German comparison](../../research/european-physical-bids-2025-irena-linear/hourly-de.csv).
+The official PDF and parsed inventory are content-hash checked before application;
+the original source network and annual retained reference are untouched.
+
+## Original-fleet summary and conclusion
 
 The synthetic order-book diagnostic now clears all **8,760 UTC hours of 2025**
 with model-derived AC constraints and bounded controllable links. The hourly
@@ -139,8 +198,7 @@ Next: audit shortage causes and bidding-zone/fleet/demand scope; add original
 hydro/storage with chronological inventories and losses, then repeat native
 comparisons and paired interventions. Commercial JAO reconciliation, N-1/outage
 assumptions and held-out empirical validation remain separate gates. The retained
-annual reference and conditional benchmark are unchanged; recurring review stays
-enabled.
+annual reference and conditional benchmark are unchanged; hourly automated reviews are paused at the user’s request.
 
 See [JAO and physical constraints](jao-european-clearing-2025.md) and
 [synthetic coupled-clearing plan](synthetic-zonal-clearing-plan.md).

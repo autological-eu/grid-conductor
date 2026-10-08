@@ -99,10 +99,16 @@ def native_check(n,m,t,objective):
     if abs(difference)>max(.05,abs(objective)*1e-8):raise ValueError('Native objective mismatch')
     return dict(utc=str(n.snapshots[t]),native_objective_eur=float(p.objective),fast_objective_eur=float(objective),difference_eur=difference)
 
-def run():
+def run(capacity_variant='irena-linear'):
     logging.getLogger('pypsa').setLevel(logging.WARNING)
     if digest(SOURCE)!=HASH:raise ValueError('Source changed')
     n=pypsa.Network(SOURCE)
+    capacity_audit=None
+    if capacity_variant=='irena-linear':
+        from irena_linear_dispatch_capacity import load_and_apply
+        capacity_audit=load_and_apply(n)
+    elif capacity_variant!='original':raise ValueError('Unknown capacity variant')
+    suffix='-irena-linear' if capacity_audit else ''
     np.testing.assert_array_equal(n.snapshots.values,pd.date_range('2025-01-01',periods=8760,freq='h').values)
     np.testing.assert_allclose(n.snapshot_weightings.generators,1)
     started=time.perf_counter()
@@ -110,7 +116,7 @@ def run():
     for (_,country),bs in n.buses.groupby(['sub_network','country']):
         n.add('Generator','emergency:'+bs.index[0],bus=bs.index[0],p_nom=1e6,marginal_cost=10000,carrier='emergency')
     m=compile_model(n);h=solver(m);compile_seconds=time.perf_counter()-started
-    folder=ROOT/'data/synthetic-europe-physical-2025';folder.mkdir(exist_ok=True)
+    folder=ROOT/('data/synthetic-europe-physical-2025'+suffix);folder.mkdir(exist_ok=True)
     prices=[];objectives=[];shortages=[];zone_generation=[];zone_shortage=[];cold_retries=[];max_residual=0.;examples=[];start=time.perf_counter()
     generator_zones=n.generators.bus.map(m['buszone']).values;emergency_mask=n.generators.carrier.values=='emergency'
     selected={348,4692,8364};cols=np.arange(m['ng']+m['nl'],dtype=np.int32);gcols=np.arange(m['ng'],dtype=np.int32);zrows=np.arange(m['nz'],dtype=np.int32)
@@ -131,7 +137,7 @@ def run():
     solve_seconds=time.perf_counter()-start
     np.savez_compressed(folder/'hourly.npz',prices=np.array(prices),objectives=np.array(objectives),zone_generation=np.array(zone_generation),zone_shortage=np.array(zone_shortage))
     checks=[native_check(n,m,t,obj) for t,_,obj in examples]
-    out=ROOT/'public/research/european-physical-bids-2025';out.mkdir(exist_ok=True)
+    out=ROOT/('public/research/european-physical-bids-2025'+suffix);out.mkdir(exist_ok=True)
     p=np.array(prices);zg=np.array(zone_generation);zs=np.array(zone_shortage)
     areas=[dict(area=z,demand_twh=float(m['load'][:,i].sum()/1e6),primary_generation_twh=float((zg[:,i]-zs[:,i]).sum()/1e6),emergency_supply_twh=float(zs[:,i].sum()/1e6),shortage_hours=int(np.count_nonzero(zs[:,i]>1e-6)),mean_price_eur_mwh=float(p[:,i].mean())) for i,z in enumerate(m['zones'])]
     with (out/'area-summary.csv').open('w') as f:
@@ -142,6 +148,9 @@ def run():
     with (out/'hourly-de.csv').open('w') as f:
         w=csv.writer(f);w.writerow(['utc','synthetic_de_eur_mwh','observed_de_lu_eur_mwh'])
         for t in range(8760):w.writerow([str(n.snapshots[t]),p[t,de],observed[t] if valid[t] else ''])
-    summary=dict(status='annual_independent_hour_physical_synthetic_bid_diagnostic',hours=8760,network_sha256=HASH,producer_sha256=digest(__file__),dependency_sha256={name:digest(ROOT/'tools'/name) for name in ['synthetic_bids_2025.py','derive_physical_zonal_constraints.py','hourly_renewable_estimates.py']},observed_price_sha256=digest(ROOT/'public/research/zone-prices-2025/DE-LU.json'),solver_protocol=dict(method='simplex',threads=1,primal_replay_tolerance_mw=1e-4,native_objective_absolute_tolerance_eur=.05,native_objective_relative_tolerance=1e-8),area_summary=areas,zones=m['zones'],passive_branches=len(m['ratings']),controllable_links=m['nl'],generators=original_generators,emergency_supply_bids=m['ng']-original_generators,shortage_hours=int(np.count_nonzero(np.array(shortages)>1e-6)),shortage_mwh=float(sum(shortages)),storage_units_excluded=len(n.storage_units),compile_seconds=compile_seconds,warm_solve_seconds=solve_seconds,total_operating_cost_eur=float(sum(objectives)),maximum_primal_residual_mw=max_residual,cold_basis_retries=cold_retries,native_pypsa_checks=checks,germany_comparison=dict(observed_hours=int(valid.sum()),mae_eur_mwh=float(abs(error).mean()),bias_eur_mwh=float(error.mean()),rmse_eur_mwh=float(np.sqrt((error**2).mean()))),pypsa_version=pypsa.__version__,highs_version=h.version(),limitations=['Independent hourly solves: no storage, reservoir inflows or chronological coupling','Prepared country/island labels are not accepted bidding zones; DE versus DE-LU price comparison is a scope proxy','N-0 static ratings, no contingencies/outages/margins; zero reference','Fixed capacity GSK restricts net local injection; HVDC stays at original endpoints with native signed bounds and efficiencies','Original p_max_pu availability and demand preserved; no dispatch substituted','Synthetic costs: original plus 80 EUR/t operational carbon; wind/solar -5 EUR/MWh; no calibration or real order books','No annual native/fast storage benchmark, commercial JAO validation or investment acceptance claim'])
+    summary=dict(status='annual_independent_hour_physical_synthetic_bid_diagnostic',capacity_variant=capacity_variant,capacity_reconciliation=capacity_audit,hours=8760,network_sha256=HASH,producer_sha256=digest(__file__),dependency_sha256={name:digest(ROOT/'tools'/name) for name in ['synthetic_bids_2025.py','derive_physical_zonal_constraints.py','hourly_renewable_estimates.py']},observed_price_sha256=digest(ROOT/'public/research/zone-prices-2025/DE-LU.json'),solver_protocol=dict(method='simplex',threads=1,primal_replay_tolerance_mw=1e-4,native_objective_absolute_tolerance_eur=.05,native_objective_relative_tolerance=1e-8),area_summary=areas,zones=m['zones'],passive_branches=len(m['ratings']),controllable_links=m['nl'],generators=original_generators,emergency_supply_bids=m['ng']-original_generators,shortage_hours=int(np.count_nonzero(np.array(shortages)>1e-6)),shortage_mwh=float(sum(shortages)),storage_units_excluded=len(n.storage_units),compile_seconds=compile_seconds,warm_solve_seconds=solve_seconds,total_operating_cost_eur=float(sum(objectives)),maximum_primal_residual_mw=max_residual,cold_basis_retries=cold_retries,native_pypsa_checks=checks,germany_comparison=dict(observed_hours=int(valid.sum()),mae_eur_mwh=float(abs(error).mean()),bias_eur_mwh=float(error.mean()),rmse_eur_mwh=float(np.sqrt((error**2).mean()))),pypsa_version=pypsa.__version__,highs_version=h.version(),limitations=['Independent hourly solves: no storage, reservoir inflows or chronological coupling','Prepared country/island labels are not accepted bidding zones; DE versus DE-LU price comparison is a scope proxy','N-0 static ratings, no contingencies/outages/margins; zero reference','Fixed capacity GSK restricts net local injection; HVDC stays at original endpoints with native signed bounds and efficiencies','Original weather profiles scaled only by declared IRENA capacity trajectory when selected; original demand preserved; no dispatch substituted','Synthetic costs: original plus 80 EUR/t operational carbon; wind/solar -5 EUR/MWh; no calibration or real order books','No annual native/fast storage benchmark, commercial JAO validation or investment acceptance claim'])
     (out/'summary.json').write_text(json.dumps(summary,indent=2,allow_nan=False)+'\n');print(json.dumps(summary),flush=True)
-if __name__=='__main__':run()
+if __name__=='__main__':
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('--capacity-variant',choices=['original','irena-linear'],default='irena-linear')
+    run(parser.parse_args().capacity_variant)

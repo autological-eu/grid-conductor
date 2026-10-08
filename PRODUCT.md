@@ -215,3 +215,11 @@ AC-island accounting and explicit bounded, efficiency-consistent controllable li
 Independent-hour results that exclude hydro/storage must disclose shortages and
 cannot satisfy chronological annual or scenario-integration gates. Native numerical
 parity and observed-market validity remain separate.
+
+
+Use the accepted IRENA end-2024 to end-2025 linear capacity trajectory for wind
+and solar in the current synthetic-clearing diagnostic, preserving original
+weather profiles and recording unreconciled coverage. Linear net capacity change
+is an assumption, not observed commissioning dates. Retain the original-fleet
+comparison and do not infer reservoir water/inventory or other technology inputs
+from renewable turbine/generator MW alone.
