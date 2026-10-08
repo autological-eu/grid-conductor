@@ -130,7 +130,7 @@ export function EvaluationPanel({
             </span>
           </div>
           <p className="mt-1 text-muted-foreground">
-            This check is not model validation. See Research for the separate pilot gates.
+            This check is not model validation. See Docs for the methodology and limitations.
           </p>
           <ul className="mt-1 space-y-0.5 text-muted-foreground">
             {Object.entries(validation.data.metrics as Record<string, number>).map(([k, v]) => (

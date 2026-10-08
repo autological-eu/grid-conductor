@@ -155,11 +155,11 @@ export function TargetSidebar({
           zero. This flow–price estimate is not verified TSO income. Scheduled-versus-physical
           classification is unverified: original ENTSO-E request receipts are unavailable.{" "}
           <Link
-            to="/docs/$slug"
-            params={{ slug: "2025-exchange-validation" }}
+            to="/docs"
+            hash="1-identifying-bottlenecks"
             className="underline underline-offset-2"
           >
-            Flow-source audit
+            Congestion-rent methodology
           </Link>
         </p>
         <PriceSpreadDetails key={target.id} a={target.zone_a} b={target.zone_b} />

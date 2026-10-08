@@ -402,3 +402,23 @@ no overflow/script errors. Both figure downloads and unchanged summary return
 HTTP 200 with committed bytes. Report generator now replaces the report rather
 than appending superseded sections. Scientific calculation/source/reference files
 and acceptance gates are unchanged.
+
+## Workbench navigation and focused Docs
+
+Removed European targets, Network lab and Research links from the workbench,
+including the network-experiment promotion. The remaining navigation is Docs.
+Replaced the Docs catalogue with two focused methodology sections: signed 2025
+flow–price bottleneck screening and the live browser line/battery screening model.
+Retained negative rent contributions, display-only zero floor, interval coverage,
+flow provenance caveat, welfare-bound assumptions, battery losses, finance/climate
+limits and explicit statement that fixed-reservoir research is not app-integrated.
+Sidebar methodology links now point into Docs; article navigation uses Docs and
+Workbench without target/research-library links. Existing evidence routes and
+scientific data remain intact. Updated production browser checks for this flow.
+Typecheck passes; other local and publication checks pending. No solver changes
+or research jobs started; automatic reviews remain paused.
+
+Local verification passes: typecheck, lint (six existing warnings), all 28 Bun
+tests, production build and functional Chromium smoke at 1440, 390, 320 and 667px.
+Checks cover Docs navigation, absence of experimental links, both method sections,
+unchanged scenario evaluation/persistence and direct legacy evidence routes.

@@ -245,3 +245,11 @@ fixed-reservoir model as one coherent report, with current results, visualisatio
 input/method provenance and numerical/observed-price verification. Omit superseded
 model narratives and comparison charts from that report while retaining supporting
 evidence and material limitations, especially fixed-hydro price sensitivity.
+
+Public workbench navigation should expose a simple Docs entry rather than
+European targets, Network lab or a research catalogue. Docs explains only the
+current workbench's two methods: signed flow–price congestion-rent screening and
+its actual browser scenario solver. Distinguish that live reduced-form solver
+from the separate fixed-reservoir European research pipeline; hiding experimental
+navigation does not authorize replacing calculations or weakening integration gates.
+Existing evidence URLs remain available without a public catalogue.

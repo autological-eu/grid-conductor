@@ -25,6 +25,17 @@ try {
     });
     await page.goto(base);
     await page.getByRole("combobox", { name: "Choose a bottleneck" }).waitFor();
+    assert.equal(
+      await page.getByRole("link", { name: "European targets", exact: true }).count(),
+      0,
+    );
+    assert.equal(await page.getByRole("link", { name: "Network lab", exact: true }).count(), 0);
+    assert.equal(await page.getByRole("link", { name: "Research", exact: true }).count(), 0);
+    await page.getByRole("link", { name: "Docs", exact: true }).click();
+    await page.getByRole("heading", { name: "1. Identifying bottlenecks" }).waitFor();
+    await page.getByRole("heading", { name: "2. Simulating scenarios" }).waitFor();
+    await page.getByRole("link", { name: "Workbench", exact: true }).click();
+    await page.getByRole("combobox", { name: "Choose a bottleneck" }).waitFor();
     assert(
       (await page
         .locator('svg[aria-label="Map of European bidding zones and congested borders"] path')
@@ -54,9 +65,9 @@ try {
       .getByText(/classification is unverified: original ENTSO-E request receipts are unavailable/)
       .waitFor();
     const sourceAuditHref = await page
-      .getByRole("link", { name: "Flow-source audit" })
+      .getByRole("link", { name: "Congestion-rent methodology" })
       .getAttribute("href");
-    assert(sourceAuditHref?.includes("docs/2025-exchange-validation"));
+    assert(sourceAuditHref?.includes("docs#1-identifying-bottlenecks"));
     // Numeric bidding-zone suffixes must still select the country polygons.
     for (const [border, countries] of [
       ["SE4>PL", ["PL", "SE"]],
@@ -147,18 +158,12 @@ try {
         );
       }
       if (route === "docs/") {
-        await page.getByRole("heading", { name: "2. What market opportunity means" }).waitFor();
-        const anchorsResolve = await page
-          .locator('nav[aria-label="Methods chapters"] a')
-          .evaluateAll((links) =>
-            links.every((link) => document.getElementById(link.getAttribute("href")!.slice(1))),
-          );
-        assert(anchorsResolve, "Every methods chapter links to a rendered section");
-        assert(
-          await page
-            .getByRole("link", { name: "SE4 → PL: reproduce €229.9 million/year →" })
-            .count(),
-        );
+        await page.getByRole("heading", { name: "1. Identifying bottlenecks" }).waitFor();
+        await page.getByRole("heading", { name: "2. Simulating scenarios" }).waitFor();
+        assert.equal(await page.getByRole("link", { name: "European targets" }).count(), 0);
+        assert.equal(await page.getByRole("link", { name: "Network lab" }).count(), 0);
+        assert.equal(await page.getByRole("heading", { name: "Research publications" }).count(), 0);
+        assert((await page.locator("article").innerText()).includes("two-zone screening model"));
       }
       if (route === "docs/worked-example-se4-pl/") {
         await page.getByRole("heading", { name: "3. Reproduce €229.9 million/year" }).waitFor();

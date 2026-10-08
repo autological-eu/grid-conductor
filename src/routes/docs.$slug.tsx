@@ -9,7 +9,7 @@ export const Route = createFileRoute("/docs/$slug")({
     return document;
   },
   head: ({ loaderData }) => ({
-    meta: [{ title: `${loaderData?.title ?? "Research"} | Grid Conductor` }],
+    meta: [{ title: `${loaderData?.title ?? "Docs"} | Grid Conductor` }],
   }),
   component: Publication,
 });
@@ -20,19 +20,12 @@ function Publication() {
     <main className="mx-auto max-w-4xl px-5 py-8">
       <nav className="mb-8 flex flex-wrap gap-5 text-sm">
         <Link to="/docs" className="underline">
-          Research library
+          Docs
         </Link>
         <Link to="/" className="underline">
           Workbench
         </Link>
-        <Link to="/targets" className="underline">
-          Target evidence
-        </Link>
       </nav>
-      <p className="mb-5 rounded-lg border bg-muted/40 p-3 text-sm text-muted-foreground">
-        Research publication · {document.slug}.md · Preserve screening, experimental and validated
-        distinctions when interpreting results.
-      </p>
       <ResearchArticle content={document.content} />
     </main>
   );

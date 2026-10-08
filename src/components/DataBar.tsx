@@ -58,22 +58,10 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
       </ol>
 
       <Link
-        to="/targets"
-        className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
-      >
-        European targets
-      </Link>
-      <Link
-        to="/network"
-        className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
-      >
-        Network lab
-      </Link>
-      <Link
         to="/docs"
         className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
       >
-        Research
+        Docs
       </Link>
     </header>
   );
