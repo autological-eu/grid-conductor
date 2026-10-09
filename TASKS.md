@@ -504,3 +504,10 @@ cannot establish “carbon loss”; that earlier requested total is not pursued.
 Three analytical tests pass for hourwise absolute averaging, threshold/coverage,
 missing data and chronology rejection. Typecheck, lint (six existing warnings)
 and production build pass. Browser/publication verification pending.
+
+Carbon-spread presentation published at
+`3e4bcd7301c1e6dce8e2f64e0cc4938b7e5dd61e`: CI/Pages `37887608205` and PR
+checks `37887612579` succeeded. Local and independent public functional browser
+checks passed at 1440, 390, 320 and 667px, confirming the carbon spread/coverage
+label, absence of production cards, right-hand emissions proxy and scenario
+persistence. Public Docs reflects the revised placement and metric definition.
