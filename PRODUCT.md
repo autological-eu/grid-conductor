@@ -263,6 +263,15 @@ Show the existing production-lifecycle carbon estimates by default in the left
 sidebar, retaining partial-factor coverage, geography and missing-data labels.
 Docs includes a third step, evaluating opportunities, and an explicit data-source
 reference. It distinguishes historical production intensity from the scenario's
-static unsigned climate proxy and explains the limits relative to ENTSO-E
+static directional climate proxy and explains the limits relative to ENTSO-E
 cost-benefit reporting; no compliance or avoided-emissions claim is authorized.
 Existing evidence URLs remain available without a public catalogue.
+
+Carbon intensity replaces observed capacity among the highlighted border figures,
+with both endpoint values and partial-data labels. Scenario emissions changes use
+scenario-minus-baseline sign convention: negative is a saving, positive an increase.
+The directional reduced-form carbon proxy remains distinct from generation-based
+lifecycle accounting; unsigned saved results require rerun, without deleting units.
+A requested “carbon loss” indicator needs an explicit energy basis (generation,
+demand or exchanged flow) and matched-hour coverage; no whole-zone or avoided
+emissions claims may be inferred from incomplete mapped-subset factors.

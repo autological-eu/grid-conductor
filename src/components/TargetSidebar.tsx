@@ -1,4 +1,7 @@
-import { ProductionCarbonDetails } from "@/components/ProductionCarbonDetails";
+import {
+  ProductionCarbonDetails,
+  ProductionCarbonHighlight,
+} from "@/components/ProductionCarbonDetails";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -141,12 +144,7 @@ export function TargetSidebar({
             label="Hours with spread > €5/MWh"
             value={`${target.congested_hours} / ${target.total_hours}`}
           />
-          <Stat
-            label="Observed capacity"
-            value={
-              target.observed_capacity_mw ? `${Math.round(target.observed_capacity_mw)} MW` : "—"
-            }
-          />
+          <ProductionCarbonHighlight a={target.zone_a} b={target.zone_b} />
         </dl>
         <p className="mt-2 text-xs text-muted-foreground">
           <Link

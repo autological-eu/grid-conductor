@@ -21,7 +21,13 @@ export const listScenarios = browserFunction(
   (d: unknown) => z.object({ targetId: z.string().min(1) }).parse(d),
   async ({ data }) => {
     const { listScenariosForTarget } = await import("./workbench");
-    return listScenariosForTarget(data.targetId);
+    const scenarios = await listScenariosForTarget(data.targetId);
+    // Legacy unsigned results must be re-run before displaying signed changes.
+    return scenarios.map((s) =>
+      s.result?.entsoe_indicators["carbon_sign_convention"] === "scenario-minus-baseline-v1"
+        ? s
+        : { ...s, result: null },
+    );
   },
 );
 
@@ -165,12 +171,12 @@ export const runScenario = browserFunction(idIn, async ({ data }) => {
   // the map's market opportunity. The 2-node LP has no CI signal, so the
   // climate side mirrors the Step-1 adapter's locally-estimated "released
   // energy x carbon contrast" quantity from the target's own zone carbon
-  // estimates.
+  // estimates. Negative means lower-carbon A displaces higher-carbon B;
+  // positive means the reverse. This remains an assumed directional proxy.
   const marketMeur = result.annual_welfare_gain_meur;
-  const carbonDelta = Math.abs(
+  const carbonDelta =
     entsoeZoneMeta(scenario.zone_a).carbon_g_per_kwh -
-      entsoeZoneMeta(scenario.zone_b).carbon_g_per_kwh,
-  );
+    entsoeZoneMeta(scenario.zone_b).carbon_g_per_kwh;
   const climateKt =
     result.avg_spread_eur_mwh > 0 ? (marketMeur * carbonDelta) / result.avg_spread_eur_mwh : 0;
 
@@ -184,6 +190,7 @@ export const runScenario = browserFunction(idIn, async ({ data }) => {
   const entsoe = {
     b1_socio_economic_welfare_meur_y: round(marketMeur, 3),
     b2_co2_variation_ktco2_y: round(climateKt, 3),
+    carbon_sign_convention: "scenario-minus-baseline-v1",
     c1_capex_meur: round(capex, 2),
     c2_delivery_months: delivery,
     npv_25y_meur: round(npvMeur, 2),

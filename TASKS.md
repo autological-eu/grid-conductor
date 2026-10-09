@@ -469,3 +469,15 @@ browser checks passed at 1440, 390, 320 and 667px, including default-visible
 partial carbon estimates, step 3, data references and scenario persistence.
 Official ENTSO-E TYNDP 2024 reference page returned HTTP 200; its linked PDF was
 not retrievable in this environment. No claim of formal guideline compliance.
+
+## Highlighted carbon and signed scenario changes
+
+Replaced observed capacity in the border highlights with both endpoint lifecycle
+intensities, preserving partial labels and detailed coverage. Changed scenario
+carbon contrast from absolute difference to directional A−B, so savings are negative
+and increases positive; green benefit styling follows negative values. A version
+marker requires rerun of legacy unsigned results while preserving interventions.
+Docs explains the sign convention. Five targeted browser-store tests pass,
+including both exchange directions and legacy-result handling. “Carbon loss”
+energy basis awaits user choice of generation, demand or exchanged flow; no new
+emissions total has been invented. Publication and browser verification pending.

@@ -66,6 +66,8 @@ try {
     assert.equal(await page.getByText(/floor: 0/).count(), 0);
     await page.getByText(/FR: 31\.3 g CO₂e\/kWh · mapped subset only/).waitFor();
     assert(await page.getByText(/IT-North: 305\.5 g CO₂e\/kWh · mapped subset only/).isVisible());
+    assert.equal(await page.getByText("Observed capacity", { exact: true }).count(), 0);
+    await page.getByText("Carbon intensity · g CO₂e/kWh", { exact: true }).waitFor();
     const sourceAuditHref = await page
       .getByRole("link", { name: "Congestion-rent methodology" })
       .getAttribute("href");

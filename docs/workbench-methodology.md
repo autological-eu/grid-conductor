@@ -122,12 +122,11 @@ static approximate zone intensities, not the sidebar generation-based values:
 
 ```text
 Implied energy (MWh/year) = annual welfare (€) / representative spread (€/MWh)
-Climate proxy (kt/year) = implied energy × abs(zone intensity B − A) / 1,000,000
+Emissions change proxy (kt/year) = implied energy × (zone intensity A − B) / 1,000,000
 ```
 
-The contrast uses g/kWh, numerically kg/MWh. The absolute value loses the direction
-of emissions change; welfare divided by spread is also an energy proxy, not
-solved generation. These static factors have no documented year-specific provider
+The contrast uses g/kWh, numerically kg/MWh. Negative means a saving under the assumed A→B exchange; positive means an
+increase. Welfare divided by spread is an energy proxy, not solved generation. These static factors have no documented year-specific provider
 provenance. The result must not be interpreted as a verified emissions reduction,
 a lifecycle investment assessment, or carbon credit. It does not account for
 hourly marginal generation, imports, storage charging origins, or embodied

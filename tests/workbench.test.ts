@@ -12,7 +12,7 @@ import {
   deleteScenario,
   saveEvaluation,
 } from "../src/lib/workbench";
-import { runScenario } from "../src/lib/scenarios.functions";
+import { runScenario, listScenarios } from "../src/lib/scenarios.functions";
 
 const originalFetch = globalThis.fetch;
 globalThis.fetch = (async () =>
@@ -57,10 +57,39 @@ describe("IndexedDB scenario lifecycle", () => {
     expect(await listScenariosForTarget(row.target_id)).toEqual([]);
   });
 
+  test("reverse exchange reports an emissions increase, and unsigned cached results require rerun", async () => {
+    const row = await createScenario({
+      targetId: "IT-North>FR",
+      name: "Reverse",
+      zoneA: "IT-North",
+      zoneB: "FR",
+      periodStart: "2025-01-01",
+      periodEnd: "2025-12-31",
+    });
+    await line(row.id);
+    const result = await runScenario({ data: { id: row.id } });
+    expect(result.climate_opportunity_ktco2).toBeGreaterThan(0);
+    const unsigned = { ...result, entsoe_indicators: { ...result.entsoe_indicators } };
+    delete unsigned.entsoe_indicators["carbon_sign_convention"];
+    const current = await getScenarioWithDetails(row.id);
+    await saveEvaluation(row.id, current.updated_at, unsigned, {
+      period_start: row.period_start,
+      period_end: row.period_end,
+      metrics: {},
+      passed: true,
+    });
+    const view = (await listScenarios({ data: { targetId: row.target_id } }))[0]!;
+    expect(view.result).toBeNull();
+    expect(view.units).toHaveLength(1);
+  });
+
   test("evaluates locally, saturates huge capacity, and invalidates edited/deleted units", async () => {
     const row = await scenario();
     const unit = await line(row.id, 200000);
     const result = await runScenario({ data: { id: row.id } });
+    expect(result.climate_opportunity_ktco2).toBeLessThan(0);
+    expect(result.entsoe_indicators["b2_co2_variation_ktco2_y"]).toBeLessThan(0);
+    expect((await listScenarios({ data: { targetId: row.target_id } }))[0]!.result).not.toBeNull();
     const published = JSON.parse(readFileSync("public/research/entsoe-fast-targets.json", "utf8"));
     const cap = published.targets.find(
       (item: { border: string }) => item.border === row.target_id,

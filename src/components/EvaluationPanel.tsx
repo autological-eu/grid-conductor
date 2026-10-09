@@ -7,7 +7,7 @@ import { ScenarioReport } from "./ScenarioReport";
 
 const LABELS: Record<string, string> = {
   b1_socio_economic_welfare_meur_y: "B1 Socio-economic welfare (MEUR/y)",
-  b2_co2_variation_ktco2_y: "B2 Climate proxy (est., ktCO2/y)",
+  b2_co2_variation_ktco2_y: "B2 Emissions change proxy (est., kt/year)",
   b3_res_integration_gwh_y: "B3 RES integration (GWh/y)",
   b4_losses_variation_gwh_y: "B4 Grid losses variation (GWh/y)",
   b5_security_of_supply_congested_hours_avoided: "B5 Security of supply (congested hours avoided)",
@@ -89,10 +89,10 @@ export function EvaluationPanel({
                   positive={r.market_opportunity_meur > 0}
                 />
                 <Kpi
-                  label="Climate proxy (est.)"
+                  label="Emissions change (proxy)"
                   value={`${r.climate_opportunity_ktco2.toFixed(1)}`}
                   unit="ktCO2 / year"
-                  positive={r.climate_opportunity_ktco2 > 0}
+                  positive={r.climate_opportunity_ktco2 < 0}
                 />
               </div>
               <button

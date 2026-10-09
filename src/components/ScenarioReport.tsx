@@ -151,9 +151,9 @@ export function ScenarioReport({
           <p className="text-sm">
             The screening estimates {r.market_opportunity_meur.toFixed(1)} MEUR per year of
             additional welfare and {r.climate_opportunity_ktco2.toFixed(1)} ktCO2 per year as a
-            climate proxy (not avoided emissions), at a capital cost of{" "}
-            {String(ind["c1_capex_meur"] ?? "—")} MEUR and a delivery time of{" "}
-            {String(ind["c2_delivery_months"] ?? "—")} months
+            signed emissions-change proxy (negative = saving, positive = increase; not verified
+            avoided emissions), at a capital cost of {String(ind["c1_capex_meur"] ?? "—")} MEUR and
+            a delivery time of {String(ind["c2_delivery_months"] ?? "—")} months
             {ind["simple_payback_years"] != null
               ? `, implying a simple payback of ${String(ind["simple_payback_years"])} years`
               : ""}

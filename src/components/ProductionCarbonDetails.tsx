@@ -1,31 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
 import { publicAsset } from "@/lib/research";
+import { useProductionCarbon } from "@/lib/production-carbon";
 
-type Estimate = {
-  geographic_scope: string;
-  expected_hours: number;
-  complete_generation_hours: number;
-  full_lifecycle_gco2e_kwh: number | null;
-  mapped_subset_gco2e_kwh: number | null;
-  mapped_generation_share: number | null;
-};
-type Report = {
-  schema_version: number;
-  borders: Record<string, { zones: Record<string, Estimate> }>;
-};
 export function ProductionCarbonDetails({ a, b }: { a: string; b: string }) {
-  const query = useQuery({
-    queryKey: ["production-carbon-map-2025"],
-    queryFn: async () => {
-      const response = await fetch(publicAsset("research/production-carbon-2025/map-summary.json"));
-      if (!response.ok) throw new Error("Carbon data unavailable");
-      const value = (await response.json()) as Report;
-      if (value.schema_version !== 1 || !value.borders)
-        throw new Error("Unsupported carbon report");
-      return value;
-    },
-    staleTime: Infinity,
-  });
+  const query = useProductionCarbon();
   const pair = query.data?.borders[[a, b].sort().join(">")];
   return (
     <details open className="mt-3 text-xs">
@@ -82,5 +59,32 @@ export function ProductionCarbonDetails({ a, b }: { a: string; b: string }) {
         Methods and coverage
       </a>
     </details>
+  );
+}
+
+export function ProductionCarbonHighlight({ a, b }: { a: string; b: string }) {
+  const query = useProductionCarbon();
+  const pair = query.data?.borders[[a, b].sort().join(">")];
+  return (
+    <div className="rounded-md bg-muted px-2 py-1.5">
+      <dt className="text-[11px] text-muted-foreground">Carbon intensity · g CO₂e/kWh</dt>
+      <dd className="text-xs font-semibold">
+        {[a, b].map((zone) => {
+          const item = pair?.zones[zone];
+          const intensity = item?.full_lifecycle_gco2e_kwh ?? item?.mapped_subset_gco2e_kwh;
+          return (
+            <div key={zone}>
+              {zone}:{" "}
+              {intensity == null
+                ? query.isPending
+                  ? "Loading…"
+                  : "Unavailable"
+                : intensity.toFixed(1)}
+              {intensity != null && item?.full_lifecycle_gco2e_kwh == null ? " · partial" : ""}
+            </div>
+          );
+        })}
+      </dd>
+    </div>
   );
 }
