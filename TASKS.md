@@ -531,3 +531,11 @@ checks `37889321200` passed. Independent public Chromium checks passed at 1440,
 390, 320 and 667px. Targeted public SE3–SE4 mobile check confirms 42.66px rent
 card, 8px gap to hours card and no mapped-subset caption. Coverage remains visible;
 Docs retains scientific limitations. No numerical/source changes.
+
+## Carbon-spread number only
+
+Removed the matched/selected price-gap hours line from the carbon-spread card,
+leaving label and numeric value with units (or unavailable/loading). Docs and
+requirements retain coverage/mapped-subset methodology and link source evidence.
+No calculation or source changes. Typecheck, build and lint (six existing
+warnings) pass; functional browser/publication verification pending.

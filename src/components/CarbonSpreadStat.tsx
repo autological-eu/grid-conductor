@@ -42,12 +42,6 @@ export function CarbonSpreadStat({ a, b }: { a: string; b: string }) {
             ? "Unavailable"
             : `${estimate.value.toFixed(1)} g CO₂e/kWh`}
       </dd>
-      {estimate?.value != null && (
-        <dd className="text-[11px] text-muted-foreground">
-          {estimate.hours.toLocaleString()} / {estimate.selectedHours.toLocaleString()} price-gap
-          hours
-        </dd>
-      )}
     </div>
   );
 }

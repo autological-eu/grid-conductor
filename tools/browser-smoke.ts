@@ -71,7 +71,7 @@ try {
       0,
     );
     await page.getByText("Mean absolute carbon spread", { exact: true }).waitFor();
-    await page.getByText(/\d[\d,]* \/ \d[\d,]* price-gap hours/).waitFor();
+    assert.equal(await page.getByText(/price-gap hours/).count(), 0);
     const sourceAuditHref = await page
       .getByRole("link", { name: "Congestion-rent methodology" })
       .getAttribute("href");

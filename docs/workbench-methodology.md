@@ -100,7 +100,9 @@ below mean absolute price spread: the arithmetic mean of hourly absolute
 lifecycle-intensity differences during jointly observed price gaps > €5/MWh.
 Both endpoints must have usable generation-based intensities in the same hour.
 If full factor coverage is not available for every selected hour, the displayed
-value compares mapped subsets only, with matched/selected-hour counts. It is not
+value compares mapped subsets only. The compact sidebar shows the number and
+units; matched-hour coverage and factor completeness are available in the linked
+hourly data and provenance. It is not
 the difference of annual means, a demand-weighted quantity, or emissions savings.
 Geographical proxies (including German national data for DE-LU) remain applicable. Historical lifecycle data remains available through the data
 reference below; it is not used to calculate scenario savings.

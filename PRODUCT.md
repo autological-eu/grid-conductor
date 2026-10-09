@@ -262,8 +262,9 @@ flow-provenance limitations; this presentation cleanup does not change calculati
 The right-hand scenario evaluation sidebar shows the signed emissions-change
 proxy. The left sidebar shows mean absolute hourly lifecycle carbon spread below
 mean absolute price spread, restricted to jointly observed > €5/MWh price gaps.
-The card shows matched-hour coverage without a mapped-subset comment; Docs
-retains the mapped-subset limitations. No individual
+The carbon-spread card shows only its label and value with units; it omits
+coverage counts and mapped-subset comments. Docs retains coverage methodology
+and mapped-subset limitations. No individual
 production-intensity cards or production-carbon detail block remain there; observed
 capacity stays removed. Carbon spread is not an estimate of avoided emissions.
 Docs includes opportunity evaluation and exact data sources, distinguishes
