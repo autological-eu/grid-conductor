@@ -44,7 +44,6 @@ export function CarbonSpreadStat({ a, b }: { a: string; b: string }) {
       </dd>
       {estimate?.value != null && (
         <dd className="text-[11px] text-muted-foreground">
-          {estimate.partial ? "Mapped subsets · " : "Reported generation · "}
           {estimate.hours.toLocaleString()} / {estimate.selectedHours.toLocaleString()} price-gap
           hours
         </dd>

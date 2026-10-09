@@ -520,3 +520,7 @@ The reported SE3–SE4 mobile case now has a 42.66px rent card and 8px gap to it
 hours card; screenshot inspected. Typecheck, lint (six existing warnings), build
 and functional Chromium checks at 1440, 390, 320 and 667px pass. Calculation/data
 unchanged. Publication pending.
+
+Follow-up presentation request: removed “Mapped subsets”/“Reported generation”
+from the carbon-spread card's coverage line. Retained matched/selected-hour counts;
+factor coverage and interpretation stay documented in Docs. Calculation unchanged.
