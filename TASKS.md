@@ -539,3 +539,10 @@ leaving label and numeric value with units (or unavailable/loading). Docs and
 requirements retain coverage/mapped-subset methodology and link source evidence.
 No calculation or source changes. Typecheck, build and lint (six existing
 warnings) pass; functional browser/publication verification pending.
+
+Number-only carbon-spread publication verified at
+`59ab533a438d875a68a943be51883e993db59903`: CI/Pages `37890226758` and PR
+checks `37890233558` passed. Local and independent public functional Chromium
+checks passed at 1440, 390, 320 and 667px, including absence of price-gap-hour
+coverage text and unchanged scenario evaluation/persistence. Docs retains the
+calculation/coverage limitations; numerical inputs and output are unchanged.
