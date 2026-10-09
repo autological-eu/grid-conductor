@@ -524,3 +524,10 @@ unchanged. Publication pending.
 Follow-up presentation request: removed “Mapped subsets”/“Reported generation”
 from the carbon-spread card's coverage line. Retained matched/selected-hour counts;
 factor coverage and interpretation stay documented in Docs. Calculation unchanged.
+
+Rent-layout and carbon-caption updates published at
+`65aeb1b740527e02ad2d1afb47a45ceb7481cfb7`: CI/Pages `37889317256` and PR
+checks `37889321200` passed. Independent public Chromium checks passed at 1440,
+390, 320 and 667px. Targeted public SE3–SE4 mobile check confirms 42.66px rent
+card, 8px gap to hours card and no mapped-subset caption. Coverage remains visible;
+Docs retains scientific limitations. No numerical/source changes.
