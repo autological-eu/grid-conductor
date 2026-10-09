@@ -64,10 +64,14 @@ try {
     assert.equal(await page.getByRole("combobox", { name: "Choose a bottleneck" }).count(), 0);
     assert.equal(await page.getByText("2025 observed baseline.", { exact: false }).count(), 0);
     assert.equal(await page.getByText(/floor: 0/).count(), 0);
-    await page.getByText(/FR: 31\.3 g CO₂e\/kWh · mapped subset only/).waitFor();
-    assert(await page.getByText(/IT-North: 305\.5 g CO₂e\/kWh · mapped subset only/).isVisible());
     assert.equal(await page.getByText("Observed capacity", { exact: true }).count(), 0);
-    await page.getByText("Carbon intensity · g CO₂e/kWh", { exact: true }).waitFor();
+    assert.equal(await page.getByText("Carbon intensity · g CO₂e/kWh", { exact: true }).count(), 0);
+    assert.equal(
+      await page.getByText("Production carbon · price-separation hours", { exact: true }).count(),
+      0,
+    );
+    await page.getByText("Mean absolute carbon spread", { exact: true }).waitFor();
+    await page.getByText(/Mapped subsets · .* price-gap hours/).waitFor();
     const sourceAuditHref = await page
       .getByRole("link", { name: "Congestion-rent methodology" })
       .getAttribute("href");
@@ -103,7 +107,6 @@ try {
     await page.getByRole("combobox", { name: "Price chart period" }).selectOption("0");
     await page.getByText(/Coverage: 744/).waitFor();
     await page.getByRole("button", { name: "Close", exact: true }).click();
-    await page.getByText(/FR: .*mapped subset only/).waitFor();
     await page.getByRole("button", { name: "New", exact: true }).click();
     await page.getByRole("button", { name: "Run scenario" }).waitFor();
     if (viewport.width > 1000) {
@@ -122,6 +125,7 @@ try {
     );
     await page.getByRole("button", { name: "Run scenario" }).click();
     await page.getByRole("button", { name: "Report", exact: true }).waitFor();
+    assert(await page.getByText("Emissions change (proxy)", { exact: true }).isVisible());
     assert(await page.getByText("Screening data availability", { exact: true }).isVisible());
     await page.reload();
     await page.locator('g[data-corridor="FR|IT-North"]').waitFor();
@@ -130,6 +134,7 @@ try {
     await page.getByRole("button", { name: "Run scenario" }).waitFor();
     await page.getByText("Scenario 1", { exact: true }).click();
     await page.getByRole("button", { name: "Report", exact: true }).waitFor();
+    assert(await page.getByText("Emissions change (proxy)", { exact: true }).isVisible());
     assert.equal(await page.getByRole("button", { name: "Remove unit" }).count(), 2);
     await page.getByRole("button", { name: "Remove unit" }).first().click();
     await page.waitForFunction(
@@ -138,6 +143,7 @@ try {
     await page.getByRole("button", { name: "Report", exact: true }).waitFor({ state: "detached" });
     await page.getByRole("button", { name: "Run scenario" }).click();
     await page.getByRole("button", { name: "Report", exact: true }).waitFor();
+    assert(await page.getByText("Emissions change (proxy)", { exact: true }).isVisible());
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
     if (process.env["SMOKE_SCREENSHOTS"])
       await page.screenshot({ path: `/tmp/grid-conductor-${viewport.width}.png`, fullPage: true });

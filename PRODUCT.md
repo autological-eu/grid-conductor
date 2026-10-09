@@ -259,19 +259,20 @@ expanded sidebar links to congestion-rent methodology instead of repeating its
 long explanatory paragraph. Docs retains signed-accounting, display-floor and
 flow-provenance limitations; this presentation cleanup does not change calculations.
 
-Show the existing production-lifecycle carbon estimates by default in the left
-sidebar, retaining partial-factor coverage, geography and missing-data labels.
-Docs includes a third step, evaluating opportunities, and an explicit data-source
-reference. It distinguishes historical production intensity from the scenario's
-static directional climate proxy and explains the limits relative to ENTSO-E
-cost-benefit reporting; no compliance or avoided-emissions claim is authorized.
-Existing evidence URLs remain available without a public catalogue.
+The right-hand scenario evaluation sidebar shows the signed emissions-change
+proxy. The left sidebar shows mean absolute hourly lifecycle carbon spread below
+mean absolute price spread, restricted to jointly observed > €5/MWh price gaps.
+Matched-hour coverage and mapped-subset limitations must be explicit. No individual
+production-intensity cards or production-carbon detail block remain there; observed
+capacity stays removed. Carbon spread is not an estimate of avoided emissions.
+Docs includes opportunity evaluation and exact data sources, distinguishes
+historical generation-based lifecycle data from the scenario proxy, and explains
+limits relative to ENTSO-E cost-benefit reporting. Historical carbon artifacts stay
+available as evidence, without implying avoided emissions.
 
-Carbon intensity replaces observed capacity among the highlighted border figures,
-with both endpoint values and partial-data labels. Scenario emissions changes use
-scenario-minus-baseline sign convention: negative is a saving, positive an increase.
-The directional reduced-form carbon proxy remains distinct from generation-based
-lifecycle accounting; unsigned saved results require rerun, without deleting units.
-A requested “carbon loss” indicator needs an explicit energy basis (generation,
-demand or exchanged flow) and matched-hour coverage; no whole-zone or avoided
-emissions claims may be inferred from incomplete mapped-subset factors.
+Scenario emissions use scenario-minus-baseline sign convention: negative is a
+saving, positive an increase. Legacy unsigned results require rerun while
+preserving units. Do not add “carbon loss” from intensity difference times demand
+minus imports: savings require matched dispatch counterfactuals with original
+availability, demand and chronological storage/water constraints. Current browser
+screening does not establish those savings.

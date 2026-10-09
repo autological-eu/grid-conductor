@@ -489,3 +489,18 @@ at 1440, 390, 320 and 667px. Highlighted carbon replaces observed capacity;
 scenario evaluation/persistence remain functional. Typecheck, build and lint
 (six existing warnings) pass. “Carbon loss” remains unimplemented pending the
 explicit energy-basis choice; no emissions total or avoided-emissions claim added.
+
+## Carbon-spread presentation
+
+Latest user decision supersedes individual left-sidebar carbon highlights and
+production-detail cards: show mean absolute carbon spread directly below mean
+absolute price spread, keep signed scenario emissions proxy on the right. New
+metric averages matched hourly absolute lifecycle-intensity differences during
+jointly observed price gaps > €5/MWh. Incomplete factors use explicitly labelled
+mapped subsets with matched/selected-hour coverage. Missing data remains unavailable;
+no whole-zone or avoided-emissions claim. Removed the individual cards/detail block.
+Docs and requirements reflect this presentation and explain why demand-minus-imports
+cannot establish “carbon loss”; that earlier requested total is not pursued.
+Three analytical tests pass for hourwise absolute averaging, threshold/coverage,
+missing data and chronology rejection. Typecheck, lint (six existing warnings)
+and production build pass. Browser/publication verification pending.

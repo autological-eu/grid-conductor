@@ -1,7 +1,4 @@
-import {
-  ProductionCarbonDetails,
-  ProductionCarbonHighlight,
-} from "@/components/ProductionCarbonDetails";
+import { CarbonSpreadStat } from "@/components/CarbonSpreadStat";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -132,19 +129,21 @@ export function TargetSidebar({
                 : `${Math.max(0, target.congestion_rent_meur_year).toFixed(1)} M€`
             }
           />
-          <Stat
-            label="Mean absolute price spread"
-            value={
-              target.mean_absolute_spread_eur_mwh == null
-                ? "Unavailable"
-                : `${target.mean_absolute_spread_eur_mwh.toFixed(2)} €/MWh`
-            }
-          />
+          <div className="space-y-2">
+            <Stat
+              label="Mean absolute price spread"
+              value={
+                target.mean_absolute_spread_eur_mwh == null
+                  ? "Unavailable"
+                  : `${target.mean_absolute_spread_eur_mwh.toFixed(2)} €/MWh`
+              }
+            />
+            <CarbonSpreadStat a={target.zone_a} b={target.zone_b} />
+          </div>
           <Stat
             label="Hours with spread > €5/MWh"
             value={`${target.congested_hours} / ${target.total_hours}`}
           />
-          <ProductionCarbonHighlight a={target.zone_a} b={target.zone_b} />
         </dl>
         <p className="mt-2 text-xs text-muted-foreground">
           <Link
@@ -156,7 +155,6 @@ export function TargetSidebar({
           </Link>
         </p>
         <PriceSpreadDetails key={target.id} a={target.zone_a} b={target.zone_b} />
-        <ProductionCarbonDetails a={target.zone_a} b={target.zone_b} />
         <p className="mt-2 text-xs text-muted-foreground">
           Experimental scenario welfare bound: {target.market_opportunity_meur.toFixed(1)} M€/year
           (directional model).
