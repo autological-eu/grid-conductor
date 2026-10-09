@@ -511,3 +511,12 @@ checks `37887612579` succeeded. Local and independent public functional browser
 checks passed at 1440, 390, 320 and 667px, confirming the carbon spread/coverage
 label, absence of production cards, right-hand emissions proxy and scenario
 persistence. Public Docs reflects the revised placement and metric definition.
+
+## Compact congestion-rent card
+
+Grouped rent/covered hours in the left metric column and price/carbon spread in
+the right, avoiding grid stretch that made the rent card unnecessarily tall.
+The reported SE3–SE4 mobile case now has a 42.66px rent card and 8px gap to its
+hours card; screenshot inspected. Typecheck, lint (six existing warnings), build
+and functional Chromium checks at 1440, 390, 320 and 667px pass. Calculation/data
+unchanged. Publication pending.

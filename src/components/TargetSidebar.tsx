@@ -121,14 +121,20 @@ export function TargetSidebar({
           {target.zone_a_name} to {target.zone_b_name}
         </p>
         <dl className="mt-3 grid grid-cols-2 gap-2 text-xs">
-          <Stat
-            label="Annual congestion rent"
-            value={
-              target.congestion_rent_meur_year == null
-                ? "Unavailable"
-                : `${Math.max(0, target.congestion_rent_meur_year).toFixed(1)} M€`
-            }
-          />
+          <div className="space-y-2">
+            <Stat
+              label="Annual congestion rent"
+              value={
+                target.congestion_rent_meur_year == null
+                  ? "Unavailable"
+                  : `${Math.max(0, target.congestion_rent_meur_year).toFixed(1)} M€`
+              }
+            />
+            <Stat
+              label="Hours with spread > €5/MWh"
+              value={`${target.congested_hours} / ${target.total_hours}`}
+            />
+          </div>
           <div className="space-y-2">
             <Stat
               label="Mean absolute price spread"
@@ -140,10 +146,6 @@ export function TargetSidebar({
             />
             <CarbonSpreadStat a={target.zone_a} b={target.zone_b} />
           </div>
-          <Stat
-            label="Hours with spread > €5/MWh"
-            value={`${target.congested_hours} / ${target.total_hours}`}
-          />
         </dl>
         <p className="mt-2 text-xs text-muted-foreground">
           <Link
