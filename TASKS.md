@@ -481,3 +481,11 @@ Docs explains the sign convention. Five targeted browser-store tests pass,
 including both exchange directions and legacy-result handling. “Carbon loss”
 energy basis awaits user choice of generation, demand or exchanged flow; no new
 emissions total has been invented. Publication and browser verification pending.
+
+Highlighted carbon and signed-proxy publication verified at
+`7bea7ed2dd7c91afb010810940bef966c1859771`: CI/Pages `37886742146` and PR
+checks `37886748114` passed. Independent public functional browser checks passed
+at 1440, 390, 320 and 667px. Highlighted carbon replaces observed capacity;
+scenario evaluation/persistence remain functional. Typecheck, build and lint
+(six existing warnings) pass. “Carbon loss” remains unimplemented pending the
+explicit energy-basis choice; no emissions total or avoided-emissions claim added.
