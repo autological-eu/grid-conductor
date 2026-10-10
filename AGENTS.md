@@ -23,6 +23,11 @@ tools/diagnose_fixed_hydro_errors_2025.py audits capacity/energy and high-price
 sensitivity in the same report. Its demand/GSK probes are diagnostics, not new
 baseline candidates, calibration or accepted physical scenarios. No forecast, adaptive
 hydro or browser replacement is implied. Audited zonal inputs remain outstanding.
+The Norwegian source-input pilot uses prepare_norway_zonal_inputs_2025.py and
+independent audit_norway_zonal_inputs_2025.py. Raw Elhub/NVE observations and
+receipts stay in ignored data/bidding-zone-source-audit-2025/. Preserve UTC/DST,
+group missingness and separate wildcard production; full-hour coverage does not
+certify total-load scope, metering completeness or historical fleet capacity.
 
 Maintain these reproducible models:
 

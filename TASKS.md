@@ -478,3 +478,70 @@ Recommended next input pilot, before any annual solve:
 
 Research updates requirements for boundary-preserving aggregation and reconciles
 the task summary with selected-v2; no numerical output or public article changed.
+
+## Norwegian zonal source-input pilot — 2026-10-10
+
+User authorized proceeding with the source/geometry plan. First implementation
+stage completed; no changed annual dispatch, solver or browser integration.
+Managed runtime connected with enforced unrestricted HTTP, 8 GiB/2 CPU; no
+simulation workers were active before collection. Credential-free Elhub collection
+uses two bounded workers and 45-second request timeouts. No recurring review resumed.
+
+New tools/prepare_norway_zonal_inputs_2025.py collects twelve local-calendar months
+plus a final UTC boundary window for both consumption and production, verifying
+hashed cache reuse and reconciling overlap. Local DST offsets map to actual UTC
+intervals; 23/25-hour market days are not forced into 24 slots. Quantity kWh is
+converted to interval MWh; absent groups remain missing, not zero. Wildcard
+production stays separate pending provider definition, never interpreted as a
+technology aggregate. Annual response revisions/requests remain in receipts.
+
+All five zones have 8760 hours for all five named consumption groups and all
+five named generation groups; no negative group intervals. This establishes
+timestamp/group coverage, not completeness of underlying metering or comparability
+to ENTSO-E total load. Independent audit_norway_zonal_inputs_2025.py reconstructs
+every prepared value and missingness from raw provider bytes without importing
+the collector's parser; maximum replay discrepancy 1.82e-12 MWh.
+
+| 2025 measure | Elhub zonal sum TWh | Ember national TWh | Difference TWh |
+| --- | ---: | ---: | ---: |
+| Metered consumption / national demand | 131.520426 | 134.548000 | -3.027574 |
+| Hydro generation | 145.668586 | 141.598000 | +4.070586 |
+| Wind generation | 13.875631 | 13.505000 | +0.370631 |
+| Solar generation | 0.330641 | 0.009000 | +0.321641 |
+
+Ember raw hash and twelve distinct monthly observations per category verified.
+Do not resolve these discrepancies by rescaling or declare either reporting scope
+interchangeable. Solar discrepancy especially needs provider-definition/coverage
+reconciliation. Unclassified Elhub generation is separately 0.001779 TWh.
+Zonal observed hydro: NO1 18.209, NO2 50.059, NO3 22.057, NO4 23.125,
+NO5 32.219 TWh. These observations remain diagnostics, not availability/inflow.
+
+NVE current hydro turbines sum to 34.127634 GW, excluding pumps. Thirteen current
+plants (42.887 MW) first entered service after 2025; first-operation filtering
+alone cannot reconstruct historical upgrades/retirements. Current turbine and
+wind MW are recorded by zone with an explicit historical-capacity-unverified
+flag; no silent replacement of the IRENA 2025 fleet. Independent source hash checks
+and exact reservoir raw-to-extract comparison pass. Each zone has 52 distinct
+weekly observations dated 5 January–28 December 2025, valid energy/capacity bounds
+and filling-ratio agreement within 1e-5. Adjacent-year boundary weeks are retained;
+no invented hourly inflow or storage reset.
+
+Ignored evidence: data/bidding-zone-source-audit-2025/elhub-annual-v1/ contains
+raw receipts (88.53 MiB), hourly.csv (4.23 MiB), reservoir-stocks.json, summary.json
+and audit.json. Summary SHA256
+7fd809731c21a0691cf4fe05a006d27311655bd6c133b8706c2678368490fe88;
+audit SHA256 91395530a7f9b885dc7642f6fb1e76054790d8742613d78e6817e068035708d4.
+Both record source/producer hashes. Nothing from this raw cache is tracked in Git.
+
+Reproduce with the pinned interpreter: tools/prepare_norway_zonal_inputs_2025.py,
+then tools/audit_norway_zonal_inputs_2025.py. Four targeted tests pass: repeated
+DST hour preservation/energy conversion, conflicting overlap rejection, separate
+wildcard observations, and rejection of naive timestamps/quarter-hour intervals.
+
+Next: reconcile metering/gross-net/loss/self-consumption definitions and the solar
+discrepancy against ENTSO-E/official statistics; obtain dated fleet upgrades and
+retirements. Map assets/original buses to commercial zones and audit 30 unresolved
+members before rebuilding clusters. Then reconcile Nordic JAO net positions/hubs
+and perform native small-case checks. Source-input coverage is not acceptance of
+zonal demand, hydro physics or investment valuation. Public/numerical baseline
+and protected fixed-hydro source/witness chain remain unchanged.
