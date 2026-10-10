@@ -681,3 +681,12 @@ does not validate heuristic investment values. Next: larger fresh paired windows
 rule sensitivity, observed-price/generation comparison and annual feasibility
 before adopting this as a robust scenario estimator. Earlier optimisation-policy
 receipts remain separate and incomplete. No retired search or hourly reviews resumed.
+
+Simple-rule publication verified for `6d40f9a8e38ae5d1f997437b2cc7a2a761707c53`:
+CI/Pages `38023368608` and PR checks `38023371262` succeeded. Production build
+and local/public Chromium checks pass at 1440/390px, including rule tables,
+48h limitation/adverse cost result, project-base evidence links and no page
+overflow/script errors. Both public JSON downloads return HTTP 200 and match
+committed bytes. Eight new rule tests, five thermal tests and six previous daily
+helper tests pass. Public methods: https://autological-eu.github.io/grid-conductor/docs/simple-resource-bidding/.
+No annual numerical acceptance or live-workbench migration is claimed.
