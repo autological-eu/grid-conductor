@@ -288,6 +288,20 @@ transmission, batteries, hydro turbine/reservoir capacity and solar/wind additio
 This benchmark isolates dispatch opportunity under perfect foresight; it does not
 measure resilience to forecast uncertainty or reconstruct actual EUPHEMIA bids.
 
+The accepted market-simulation direction also includes sequential daily synthetic
+clearing: forecast-informed competitive operator bids, one day cleared at a time,
+and storage inventories carried forward. Operators may plan beyond the next day.
+Distinguish perfect forecasts of exogenous demand/weather/inflows from approximate
+endogenous price expectations. Recompute expectations and storage strategies for
+each investment case. Do not use realised ENTSO-E prices as perfect model forecasts.
+Declare terminal energy values, bid-direction rules and end-of-horizon conditions;
+verify future water feasibility without fixing intermediate reference inventories.
+Daily policy simulations are not annual-optimum certificates or strategic bidding
+equilibria. Hourly UTC approximations must disclose the difference from actual
+local delivery days and quarter-hour market periods. Smaller native comparisons,
+independent chronological replay, annual measurements and existing empirical/
+investment/integration gates remain required.
+
 Storage inventories must link every hour with charging/discharging efficiency,
 standing loss, inflow, spill, power/energy bounds and explicit common boundary
 conditions. New batteries start and end empty; hydro capacity does not create
@@ -315,3 +329,23 @@ system operating costs. Nuclear may initially retain its low operating-cost
 offer and prepared availability; minimum output, ramps, outages and restart
 behaviour require separate physical inputs/verification rather than universal
 must-run assumptions. Existing annual/empirical/integration gates remain required.
+
+## Simple resource strategies for daily simulation
+
+Prefer explicit, easily explained resource bidding rules over independent annual
+optimisation for each operator. Wind/solar offer original weather-limited output
+at a declared low price; fossil plants use fuel, efficiency, operational carbon
+and variable O&M; nuclear and other prepared-cost technologies retain explicit
+availability/cost proxies and limitations. Natural reservoir hydro uses a seasonal
+target and inventory-dependent water value. Batteries and pumped hydro use simple
+loss- and wear-adjusted buy/sell thresholds from approximate expected prices.
+Declared horizons and sensitivities are assumptions, not calibrated operator bids.
+
+Daily network clearing determines quantities and retains exact hourly inventory
+physics and actual stock carry. Distinguish opportunity bids/purchase willingness
+from physical variable operating cost, enforce exclusive pump/generate directions,
+and disclose common closing-stock settlement rules. Prepare resource rules with
+arithmetic rather than per-unit annual LPs. Recompute forecasts/rules for investments;
+heuristic dispatch does not guarantee an investment reduces operating cost. Preserve
+original source availability, chronology, water and the existing annual/native/
+observed-data/integration gates. The public browser solver is not replaced implicitly.

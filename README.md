@@ -168,3 +168,18 @@ annual network comparison remains blocked by inventory-coordination validation
 and the unfinished annual coordinator; the annual solved baseline and publication
 manifest are not ready. Do not infer them from dispatch
 outputs or substitute analytical test fixtures for published research.
+
+## Daily market simulation research
+
+The separate offline daily model uses simple, explicit bids for each resource,
+clears 24 hourly UTC periods at a time, and carries inventories into the next day.
+It supports transmission, hydro, batteries, solar and wind through the same paired
+investment schema as the linked perfect-foresight benchmark. See
+[simple resource bidding](docs/simple-resource-bidding.md) for results,
+forecast assumptions, numerical checks and limitations. Producer:
+`tools/simple_daily_market.py`; saved-witness replay and optional independent
+native checks: `tools/audit_simple_daily_market.py`. Defaults:
+`config/simple-bidding/defaults.json`. The earlier optimisation-based operator
+policy remains a separate incomplete diagnostic, with failed annual receipts.
+These experiments do not replace the public
+workbench solver or certify an annual optimum, actual market bids or investments.

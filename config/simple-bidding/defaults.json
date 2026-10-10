@@ -1,0 +1,9 @@
+{
+  "renewable_offer_eur_mwh": 0,
+  "carbon_price_eur_t": 80,
+  "hydro_reference_days": 30,
+  "hydro_inventory_adjustment_eur_mwh": 40,
+  "battery_wear_eur_mwh_discharge": 2,
+  "phs_wear_eur_mwh_discharge": 0,
+  "arbitrage_lookahead_hours": 48
+}

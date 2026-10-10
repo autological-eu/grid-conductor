@@ -596,6 +596,40 @@ mobile heading/annual limitation and overflow checks pass; both public evidence
 JSON files match committed bytes. Deployed workbench smoke passes all four
 viewports (1440/390/320/667px). No annual acceptance or app integration claimed.
 
+## Daily competitive synthetic clearing
+
+User-authorized direction: forecast-informed representative storage operators,
+365 daily clearings at hourly resolution, inventories carried forward. New
+tools/daily_market_clearing.py separates no-arbitrage price forecasting (including
+mean-inflow hydro offers), independent full-horizon hourly operator plans and
+daily clearing with future inventory values. Exact backward water reachability
+preserves feasible final closure without resetting intermediate inventories.
+Submitted charge/sell directions prevent simultaneous cycling; quantities remain
+adaptive. Expectations and strategies are recalculated for each investment.
+
+Six analytical/native tests pass: overnight hydro retention and battery trading,
+negative-price cycling rejection, reachability, free intermediate states and
+forecast-hydro separation. Final-producer paired 48h European window native
+differences below 5.1e-6 EUR; independent replay confirms no emergency supply,
+no cycling and exact closing inventory. Daily operating costs 378,521,208.50 /
+377,947,400.40 EUR, versus linked 48h costs 374,203,491.69 / 373,203,252.64 EUR.
+This is a policy approximation, not observed price error or certified annual gap.
+
+The first fresh annual attempt, data/daily-market-2025/annual-v1, stopped after
+159 saved days: day 160 hit the 60s warm and cold simplex limits. The unchanged
+day reached optimal IPM status in 1.64s with 5.58e-10 replay residual. Failure
+receipts are retained; no partial year has been accepted or extrapolated. Added
+bounded 10s warm/cold simplex attempts followed by a finite IPM fallback; solver
+attempts are explicit, and optimal status remains mandatory. Six tests pass
+again; revised window-v4 witnesses use fresh provenance. Full native bidding-
+objective checks with free terminal inventories are also implemented separately.
+Final annual audit/report/publication remain pending until actual completion.
+Price expectations are not self-consistent perfect price predictions; fixed bid
+modes can bias intervention values. UTC 24h days approximate actual market
+calendar/order types; country/island physical constraints are not verified
+commercial bidding zones. N3–N5/Z0/Z4 and emissions/integration gates stay open.
+No retired searches or recurring reviews have been restarted.
+
 ## Explicit fuel-price thermal bid extension
 
 Added tools/thermal_bid_rules.py and docs/thermal-bidding-rules.md. Gas/oil offers
@@ -615,3 +649,35 @@ passed, but a remaining-eight-day network feasibility diagnostic was infeasible.
 A fourteen-day preview diagnostic hit its 120-second limit and establishes no
 feasibility result. No annual job is live and no retired search was restarted.
 These diagnostics do not establish the specific binding cause or resolve it.
+
+## Simple resource-rule daily driver
+
+Implemented tools/simple_resource_bids.py and tools/simple_daily_market.py:
+every supported generator carrier receives an explicit strategy; unknown types
+fail. Fossil fuel/carbon/O&M costs replace native total costs before aggregation.
+Wind/solar use weather availability and declared low bids; nuclear/biomass/waste/
+geothermal/ror retain labelled prepared proxies. Hydro bids adapt to actual stock
+relative to an inflow-seasonal target. Battery/PHS thresholds account for charging
+and discharge efficiency and declared wear; exclusive directions prevent cycling.
+No per-unit annual strategy LPs; original water/network constraints and carried
+inventories are retained. Closing-day stock settlement is explicit.
+
+Eight analytical tests pass, including overnight battery carry, hydro closure
+and full native daily objectives. Fresh simple-rules-window-v1 European 48h
+baseline/bundle completed; all four native differences below EUR 0.00000537.
+Separate saved-rule/primal replay passes every day, source/code/input hashes,
+network/water constraints, overnight joins and exact closure. No shortages/cycling;
+maximum primal residual 2.41e-9. Strategy preparation plus daily bidding is about
+0.03s per case; daily clearing totals 3.600/4.498s. Full command with source audits,
+compilation and native checks is 83.95s, peak RSS 1757 MiB. No annual extrapolation.
+Compact summary/replay: public/research/simple-resource-bids-2025/. Methods and
+verification: docs/simple-resource-bidding.md. Historical gas/oil quotes remain
+uncollected; default prepared 2025 technology costs and EUR80/t carbon are explicit
+assumptions. Nuclear commitment/ramping/outages, commercial zone validation,
+observed-data and public scenario integration remain open.
+
+Bundle operating cost increased EUR1,062,221.30 in this window; numerical parity
+does not validate heuristic investment values. Next: larger fresh paired windows,
+rule sensitivity, observed-price/generation comparison and annual feasibility
+before adopting this as a robust scenario estimator. Earlier optimisation-policy
+receipts remain separate and incomplete. No retired search or hourly reviews resumed.

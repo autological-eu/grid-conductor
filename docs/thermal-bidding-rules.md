@@ -64,8 +64,12 @@ costs. Input dictionaries are `market.sources`, `market.hours` (UTC timestamp,
 gas/oil EUR/MWh thermal and CO₂ EUR/t), and carrier-specific `assumptions`
 (source, variable O&M and operational emissions factor).
 
-This is a reusable compiler extension, not yet wired into the daily annual driver
-or browser. Future adoption requires a fresh provenance manifest containing price
+This is a reusable compiler extension. The separate
+[simple-resource daily driver](simple-resource-bidding.md) now uses the same
+fuel/carbon/variable-cost arithmetic for all fossil technologies, with explicit
+prepared cost assumptions and optional timestamped gas/oil/carbon inputs. The
+original annual driver and browser have not been migrated. Future historical-data
+adoption requires a fresh provenance manifest containing price
 and assumption hashes, matched native/fast numerical checks, independent replay
 and paired baseline/investment runs. Existing numerical, chronology, empirical
 and integration gates remain unchanged. A fuel-price shock must use the same
