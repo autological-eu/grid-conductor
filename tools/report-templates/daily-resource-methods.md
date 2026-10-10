@@ -1,15 +1,3 @@
-# Simple resource bidding and daily clearing
-
-The European research simulator now has an explicit rule for every supported
-resource. The rules construct offers; a network-constrained market solve accepts
-quantities for the next 24 hourly UTC periods. Storage keeps its actual closing
-inventory for the following day. There is **no annual optimisation per storage
-operator** in this driver.
-
-This is a separate research implementation. The public workbench still uses its
-documented reduced-form line/battery screen. These synthetic bids are not actual
-operator orders, and numerical agreement with PyPSA is not observed-market validation.
-
 ## The rules at a glance
 
 | Resource | Simple bidding rule | Quantity available to clearing |
@@ -119,101 +107,73 @@ unrestricted future modes, not joint network feasibility or feasibility under
 tomorrow's heuristic modes. A failed day stops the run; no slack, water gift or
 partial-year extrapolation bypasses this limitation.
 
-## Inputs, costs and accounting
 
-Default fossil fuel prices, operational CO₂ factors and variable O&M come from
-the cached PyPSA-Eur `resources/gridfix-2025/costs_2025_processed.csv`. These are
-prepared technology assumptions, **not observed 2025 fuel quotes**. The optional
-`--fuel-prices` JSON uses the timestamped gas/oil/CO₂ schema documented in
-[thermal bidding rules](thermal-bidding-rules.md); exact hourly coverage of the
-source network is required. Monthly/daily repetition requires an explicit source
-declaration. Coal/lignite retain the prepared constant fuel assumptions.
-Fuel costs replace the native total thermal offer, avoiding double counting.
-Carbon defaults to €80/t as a declared assumption; these operational factors
-are separate from production lifecycle carbon accounting.
+## Observed 2025 fuel benchmarks
 
-Nuclear retains the documented prepared availability proxy, not observed hourly
-2025 outages. No commitment, minimum-run, restart or ramp constraints are invented.
-Biomass, waste and geothermal retain source costs; those offers do not establish
-validated CHP allocation, environmental pricing or complete emissions accounting.
+The [World Bank Pink Sheet](https://www.worldbank.org/en/research/commodity-markets)
+workbook identifies its European natural-gas series as Netherlands TTF from
+April 2015. It supplies monthly USD/MMBtu gas prices and USD/barrel Brent prices.
+[ECB reference exchange rates](https://data.ecb.europa.eu/data/datasets/EXR/EXR.D.USD.EUR.SP00.A)
+supply USD per EUR on reporting days. The compiler averages their reciprocals
+within each month, then converts the monthly commodity quotes into EUR. These
+are benchmark approximations, not individual plant transaction prices.
 
-The driver saves **two different totals**: the clearing bid objective (including
-water value and battery willingness to buy) and physical variable operating cost
-(including the configured battery wear). Bid expenditure is not system resource
-cost, and neither total is investor revenue. Paired operating-cost changes remain
-policy-dependent; this is not a guarantee of an optimal asset valuation.
+The rule follows the fuel-cost/heat-rate logic described by
+[EIA's spark-spread explanation](https://www.eia.gov/todayinenergy/detail.php?id=9911),
+with operational carbon and variable O&M added. Network clearing accepts the
+cheapest feasible combination of offers to meet fixed demand; generators do not
+individually dispatch from observed electricity prices. Observed power prices
+remain independent validation targets.
 
-## Running and verifying
-
-Use the pinned PyPSA interpreter and a fresh ignored output directory:
-
-```sh
-data/pypsa-eur/upstream/.pixi/envs/default/bin/python tools/simple_daily_market.py \
-  --hours 48 --rules config/simple-bidding/defaults.json \
-  --investments config/perfect-foresight/example-investments.json --native \
-  --output data/daily-market-2025/my-simple-window
-
-data/pypsa-eur/upstream/.pixi/envs/default/bin/python tools/audit_simple_daily_market.py \
-  data/daily-market-2025/my-simple-window \
-  --output data/daily-market-2025/my-simple-window/replay.json
-```
-
-The producer records source, costs, code, boundary and input hashes, each day's
-rules/primal witness, separate forecast/rule/clearing runtimes, peak process RSS,
-failure receipts and sampled native comparisons of the full bid objective with
-free closing inventory. The auditor rebuilds the rules, checks every daily
-coefficient/primal, water balance, join, total and final closure. It can separately
-repeat native checks using `--native`. Observed-price validation, commercial
-bidding-zone mapping, full-year verification and browser integration remain gates.
-
-Eight analytical tests cover loss/wear thresholds, overnight battery inventory,
-hydro scarcity and original inflow closure, pumped-hydro rules, negative-price
-mode exclusivity, explicit generator strategies, arithmetic-only preparation,
-input rejection and matched native daily clearing. European run evidence is
-recorded below after the completed saved witnesses were independently replayed.
-
-## Verified 48-hour European example
-
-The fresh `simple-rules-window-v1` run covers 1–2 January 2025, with 40 physical
-country/island areas, 160 original hydro/PHS units and one additional battery
-in the investment case. The bundle adds a 500 MW controllable DE–FR link,
-100 MW / 400 MWh battery, 100 MW hydro turbine / 1,000 MWh reservoir expansion,
-500 MW solar and 500 MW onshore wind. It is a diagnostic bundle, not a recommended
-investment or an annual result.
-
-| Measurement | Baseline | Investment bundle |
+| Month | Gas benchmark EUR/MWh thermal | Brent proxy EUR/MWh thermal |
 | --- | ---: | ---: |
-| Expected-price pass | 0.093 s | 0.094 s |
-| Storage target/reachability preparation | 0.0053 s | 0.0055 s |
-| Rules for both delivery days | 0.0265 s | 0.0237 s |
-| Clearing both days | 3.600 s | 4.498 s |
-| Physical variable operating cost | €437,403,077.38 | €438,465,298.69 |
-| Emergency supply | 0 MWh | 0 MWh |
-| Simultaneous charge/discharge | 0 unit-hours | 0 unit-hours |
-| Closing-inventory error | 0 MWh | 0 MWh |
+| 01 | 48.32 | 45.00 |
+| 02 | 50.27 | 42.48 |
+| 03 | 41.81 | 39.52 |
+| 04 | 35.28 | 35.53 |
+| 05 | 35.28 | 33.49 |
+| 06 | 36.65 | 36.52 |
+| 07 | 33.96 | 35.77 |
+| 08 | 32.71 | 34.49 |
+| 09 | 32.34 | 34.09 |
+| 10 | 31.95 | 32.72 |
+| 11 | 30.76 | 32.36 |
+| 12 | 27.63 | 31.50 |
 
-The full command took 83.95 seconds and peak process RSS was 1,757 MiB. That
-includes retained-source verification, network loading, full-source cost/profile
-compilation and four independent native checks; it is not merely daily clearing
-time. The rule-generation timings above apply to this 48-hour window and must
-not be presented as measured full-year runtimes.
+Gas conversion uses 1 MMBtu = 0.2930710701722222 MWh. This conversion alone
+does not resolve gross versus net heating values: the demonstration explicitly
+assumes identical benchmark/efficiency bases (multiplier 1), pending verification
+of their compatibility. Oil uses an explicit assumed 1.7 MWh thermal/barrel;
+it is a sensitivity input, not a measured delivered-product heat content.
+CO₂ remains a constant EUR80/t assumption. Coal/lignite fuel costs retain their
+prepared technology-cost assumptions. No historical EUA or oil-product series
+is claimed. Transport, refining, local fuel premiums and start-up costs are absent.
 
-Native PyPSA checked the full daily bid objective with free closing inventories
-for all four case/days. Maximum absolute objective difference was €0.00000537;
-maximum marginal-price difference was below €0.0000000005/MWh. Independent
-saved-witness replay reproduced rules and checked all network/water constraints,
-the overnight inventory join and final closure. Maximum primal residual was
-2.41 × 10⁻⁹. This establishes implementation consistency under these assumptions.
+All 12 months are present and expanded to exactly 8,760 UTC hours by holding each
+monthly value constant. This is retrospective perfect forecasting, with no
+fabricated daily variation or claim that monthly averages were known in advance.
+Raw workbook/FX files stay in ignored local storage. Their SHA-256 hashes and
+source URLs accompany compiled inputs; missing months and duplicate FX dates
+are rejected. This changes bids only, preserving capacity, availability, demand,
+network and reservoir physics.
 
-**The bundle increased operating cost by €1,062,221.30 in this short window.**
-The bidding-rule dispatch is not an operating-cost optimum: changes in supply,
-storage capacity and expected prices can change operator choices adversely.
-Do not translate numerical parity into guaranteed investment benefit. Longer
-paired cases, rule-parameter sensitivity and observed generation/price comparisons
-are still needed before treating this policy as a robust scenario valuation tool.
-The earlier daily model's year-end network feasibility failure also remains
-unresolved; this new 48-hour result does not close that annual gate.
+`tools/prepare_fuel_prices.py` consumes the original workbook and ECB API CSV.
+Specify `--gas-basis-multiplier`, `--oil-mwh-th-per-barrel` and `--carbon-eur-t`
+explicitly. Pass its fresh output to `tools/terminal_daily_market.py --fuel-prices`.
+Use matched fuel inputs for baseline and investment and retain independent native
+checks and primal replay. This opt-in research path does not change the browser
+workbench or imply empirical/annual acceptance.
 
-Download [compact run evidence](../research/simple-resource-bids-2025/summary.json)
-and [independent replay evidence](../research/simple-resource-bids-2025/replay.json).
-Raw hourly witnesses remain in the ignored local research cache.
+
+## Thermal offer equation
+
+For fuel price $f$ in EUR/MWh thermal, efficiency $\eta$, operational carbon
+factor $e$ in tonnes/MWh thermal, carbon price $c$ in EUR/tonne and variable
+O&M $v$ in EUR/MWh electric:
+
+$$
+b = \frac{f + ce}{\eta} + v
+$$
+
+This replaces the native total thermal cost; fuel and carbon are not added twice.
+Individual plant efficiencies are applied before offers are aggregated.

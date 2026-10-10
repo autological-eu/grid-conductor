@@ -164,13 +164,6 @@ function NetworkLab() {
         >
           Load verified 2025 conditional input
         </button>
-        <Link
-          to="/docs/$slug"
-          params={{ slug: "network-scenario-verification" }}
-          className="ml-3 underline"
-        >
-          Native PyPSA verification and scope
-        </Link>
         {input?.dataset_id === "pypsa-eur-128-2025-january-48h-conditional" && (
           <div className="flex flex-wrap gap-2">
             <button
@@ -219,11 +212,8 @@ function NetworkLab() {
 
       <p className="text-sm">
         Import a schema-v1/v2/v3 JSON input from your offline research pipeline. It stays in this
-        browser. No weather processing, uploads or server are involved.{" "}
-        <Link to="/docs/$slug" params={{ slug: "fast-network-model" }} className="underline">
-          Input format, equations and limitations
-        </Link>
-        .
+        browser. No weather processing, uploads or server are involved. This legacy lab is separate
+        from the two retained European research models.
       </p>
       <label className="block">
         Model input (JSON, maximum 25 MiB)

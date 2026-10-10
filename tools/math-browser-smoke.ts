@@ -12,11 +12,11 @@ try {
     page.on("response", (response) => {
       if (response.status() >= 400) failures.push(`${response.status()} ${response.url()}`);
     });
-    await page.goto(`${base}docs/monthly-inventory-coordination/`);
+    await page.goto(`${base}docs/daily-fuel-dispatch-2025/`);
     await page.locator(".katex-display").first().waitFor();
     await page.evaluate(() => document.fonts.ready);
-    assert((await page.locator(".katex-display").count()) >= 6);
-    assert((await page.locator(".katex").count()) > 6, "Inline maths also renders");
+    assert((await page.locator(".katex-display").count()) >= 1);
+    assert((await page.locator(".katex").count()) > 1, "Inline maths also renders");
     assert.equal(await page.locator(".katex-error").count(), 0);
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     assert.deepEqual(failures, []);

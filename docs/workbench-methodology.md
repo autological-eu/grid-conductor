@@ -190,3 +190,12 @@ to separate research pipelines; they must not be presented as inputs to this
 workbench's scenario results. Raw provider caches and large research witnesses
 remain outside Git; the public app consumes compact static exports. Scenario
 units/results are stored locally in the browser, not uploaded to a server.
+
+## Retained European model reports
+
+- [Full-year fixed-hydro checkpoint](european-physical-synthetic-clearing-2025.md):
+  fast hourly supply-curve clearing conditional on an audited reservoir schedule.
+- [Current generator-bidding model](daily-fuel-dispatch-2025.md): resource-specific
+  bids, daily clearing, carried storage and full-year observed-price diagnostics.
+
+These are offline research models. Neither replaces the live browser solver.

@@ -1,351 +1,147 @@
 # Grid Conductor — product requirements
 
-Current product direction, 5 October 2026. Requirements express intended behaviour;
-implementation and verification status belong in [TASKS.md](TASKS.md).
+Accepted direction, 10 October 2026. This file defines requirements;
+[TASKS.md](TASKS.md) records implementation and verification.
 
-## Purpose and audience
+## Purpose and workflow
 
-An experimental European electricity-grid planning and investment workbench for
-students, researchers and planners. Help people identify recurring cross-zone
-price separation, inspect its evidence, and explore transmission and storage
-interventions with transparent assumptions. The map is the landing page.
-The product supports investigation; it does not certify investment returns.
+Help researchers and planners identify European electricity bottlenecks and
+investigate investment opportunities with transparent data and assumptions.
+The map is the landing page. Users inspect observed price/flow evidence, create
+browser-local scenarios and compare a baseline with the same model plus an
+investment. System benefit is not investor income or certified investment return.
 
-## Core journey
+## Maintained models and publications
 
-1. Select a European bidding-zone border on the map or in the accessible picker.
-2. Understand the observed annual metrics and inspect the hourly price evidence.
-3. Create a browser-local scenario and add a line or battery.
-4. Evaluate it with an explicitly identified model.
-5. Review estimated benefits, costs, climate assumptions and limitations.
+Concentrate development and public documentation on two European research models:
 
-A new visitor should understand this workflow within roughly 30 seconds.
+1. **Fixed-hydro annual checkpoint:** hourly synthetic supply-curve clearing with
+   audited, precomputed reservoir injections and physical network constraints.
+   Retain its full-year results, methods, figures, source and replay evidence.
+   Its fixed schedule cannot respond to investments; conditional benefits are
+   not guaranteed conservative estimates.
+2. **Current resource-bidding simulator:** simple, explained strategies per
+   generator type, 24 hourly UTC periods cleared daily, storage carried between
+   days. Improve this model rather than proliferating alternative model families.
+   Retain its annual results, resource/fuel rules and observed-price diagnostics
+   in one report. Target seconds-scale annual scenario estimates, measured honestly.
 
-## Requirements and acceptance criteria
+Keep one workbench methodology page alongside those two reports. Remove superseded
+public articles rather than maintaining a research catalogue. Supporting source
+inputs, numerical fixtures, tools and replay evidence may remain as dependencies;
+retaining them does not make their old experiments active development priorities.
+Do not restore retired annual searches. Git history provides historical context.
 
-| ID | Requirement | Acceptance criteria |
-| --- | --- | --- |
-| P1 | Map-first workbench | One edge per unordered zone pair; both related countries highlight on selection; reverse directional scenario selection works. |
-| P2 | Clear baseline evidence | Primary annual congestion-rent estimate, floored at zero for display; secondary mean absolute price spread. Explain coverage, signed calculation and audited flow-source type. If historical scheduled/physical classification is unverified, show that limitation rather than asserting a type. Preserve signed source values. Neither metric is investment welfare or verified TSO income. |
-| P3 | Inspectable prices | Every displayed border has two hourly price lines with shaded separation, UTC month/year selection, coverage and provenance. Missing hours remain gaps. |
-| P4 | Local scenarios | Create, revisit, edit and remove interventions without login. Refresh retains state; edits invalidate old results. No cloud database. |
-| P5 | Honest evaluation | Preserve screening equations and caps. Separate experimental network dispatch from screening; identify period, physics, inputs and assumptions. Do not extrapolate partial windows to annual benefits. |
-| P6 | Research publication | Maintain methods, maths, worked examples, validation gates and downloadable JSON/CSV through Markdown in `docs/` and artifacts in `public/research/`. |
-| P7 | Mobile and accessibility | Selection, panels, charts and scenarios work on narrow portrait and landscape screens. Dialogs fit and scroll; touch controls are usable; keyboard selection has visible focus. |
-| P8 | Static public hosting | Public GitHub Pages URL, correct project base/deep links, reproducible Bun build and CI. No persistent server, paid service or credentials in the browser. |
-| P10 | Carbon accounting | Separate hourly production, consumption and intervention emissions. Declare operational versus lifecycle factors, spatial scope, missing data, storage attribution and coverage. Full estimates remain unavailable when positive generation lacks factors; validate before replacing map climate proxies. |
-| P9 | Verified annual network planning | Chronological storage and original renewable availability; matched native/fast inputs, feasibility and convergence bounds; smaller monolithic reference before annual-optimum claims. Integrate only verified results. |
+The live browser's two-zone line/battery screen remains in service until a
+verified replacement is explicitly integrated. Neither research model becomes
+the public scenario engine merely because its report is published.
 
-## Milestone: production-based lifecycle carbon intensity
+## Observed bottleneck baseline and public experience
 
-Estimate the carbon intensity of electricity **produced in each supported zone**
-from its observed generation mix and documented lifecycle emissions factors.
-Prioritize full-year 2025 where data coverage supports it; label partial periods.
-Cover the countries/bidding zones displayed on the map and allow inspection
-of production estimates during jointly observed hours with absolute cross-zone
-price spread above €5/MWh. This selection is price separation, not proof of
-physical congestion. Show generation/factor coverage and national proxies
-explicitly; unavailable areas remain unknown.
-This is separate from import-adjusted consumption intensity and avoided emissions
-from investments.
+- Keep the map, one corridor per unordered zone pair, accessible selection,
+  touch/keyboard controls, local scenario persistence and revision invalidation.
+- Report signed annual flow × signed price difference × interval hours, summing
+  both directions. Floor only the displayed annual rent at zero. Preserve missing
+  intervals and signed evidence; do not extrapolate or annualise an annual sum.
+  Flow classification is unverified where original request receipts are absent.
+  The estimate is not verified TSO income or proof of physical congestion.
+- Show mean absolute price spread and hourly price traces with gaps/provenance.
+  Show mean absolute hourly lifecycle carbon spread below price spread, restricted
+  to jointly observed price gaps > EUR5/MWh. The card contains label/value/units;
+  coverage and mapped-subset limitations remain in methodology and source data.
+- Navigation exposes Docs, not a research catalogue, European targets or network
+  lab promotion. Docs explains the solver actually used, opportunity evaluation
+  and exact data sources. No introductory divider, separate bottleneck picker,
+  “floor: 0” labels or long duplicated sidebar explanation.
+- Retain the browser screening equations, welfare caps, battery loss assumptions
+  and undiscounted 25-year benefit-minus-capex interpretation until replacement.
+  Economic screening is not congestion rent or investor cash flow.
 
-Use **g CO2e/kWh of electricity generated** with a consistent lifecycle boundary:
-fuel extraction and processing, manufacturing/construction, operation, and
-decommissioning/end-of-life where included by the selected source. Record the
-boundary rather than claiming every published factor covers identical stages.
-Prefer authoritative harmonised assessments (such as IPCC) and regionally
-appropriate fleet estimates over undocumented constants.
+## Resource bidding and physical constraints
 
-Completion requires:
+Wind/solar offer original weather-limited availability at declared low prices.
+Gas/oil use sourced fuel, efficiency, operational carbon and variable O&M without
+counting fuel/carbon twice. Declare currency, heating-value basis, temporal
+resolution and delivered-product approximations. Nuclear and other technologies
+use labelled cost/availability proxies; unsupported commitment, outages and ramps
+must be disclosed rather than invented.
 
-- Hourly generation by technology, with zone identity, provenance and audited
-  coverage; independent monthly-total checks. National data must not be presented
-  as individual bidding-zone data.
-- A versioned factor registry recording source, technology, units, lifecycle
-  boundary, geography, representative value/range and justified mapping.
-- Explicit treatment of biomass biogenic carbon, waste fossil share, CHP
-  allocation, hydro variation and technology/fleet differences. Unresolved
-  sources remain unknown rather than receiving zero emissions.
-- Energy-weighted hourly, monthly and annual estimates with missing-data and
-  factor-coverage diagnostics, plus sensitivity to plausible factor choices.
-  Full estimates stay unavailable for incomplete generation or positive
-  generation with unresolved factors.
-- Published generation-mix and intensity charts, methods, downloadable artifacts
-  and transparent limitations. Integrate verified production estimates into the
-  app under their own label; do not overwrite consumption or marginal metrics.
-- Separate storage discharge from primary generation until charging-origin
-  attribution prevents double counting.
+Reservoir hydro uses a seasonal inventory target and water-value bid. Battery and
+pumped-hydro bids use loss/wear-adjusted forecast buy/sell thresholds. Forecasts
+use common exogenous demand/weather/inflow assumptions; approximate endogenous
+prices are not perfect predictions or realised ENTSO-E observations. Recompute
+forecasts and strategies for each investment.
 
-A lifecycle factor describes emissions attributed per unit of generated
-electricity across a technology's life; it is not a claim that those emissions
-occur during the displayed hour. Do not combine operational and lifecycle
-factors within one purportedly consistent estimate.
+Clearing preserves original network constraints, hourly water/energy balances,
+efficiencies, standing loss, inflow, spill and power/energy limits. Actual closing
+stock carries forward; no daily inventory reset, water gift or substitution of
+dispatch for renewable availability. IRENA end-2024/end-2025 linear wind/solar
+capacity change is an assumed commissioning trajectory, not observed dates.
+Hydro capacity does not establish water availability.
 
-## Goal: memory-efficient 2025 dispatch with observed-data validation
+Declare identical horizon boundaries for paired cases. New batteries start/end
+empty. A closing-window network prepass must be explicit, optimal and cycling-free,
+with unchanged bid prices/physics/closing stocks and exclusive submitted directions.
+It is a boundary convention, not proof of future joint feasibility or market realism.
 
-Run a full-calendar-year PyPSA-based dispatch within the managed environment's
-memory budget, preserving hourly chronology, network constraints, storage physics
-and original renewable availability. Aim for defensible agreement with observed
-2025 ENTSO-E evidence, rather than numerical solver agreement alone.
+Model-derived N-0 physical constraints and country/AC-island areas are not verified
+commercial bidding zones or JAO domains. Preserve island connectivity and explicit
+link efficiency/bounds. Daily UTC/hourly clearing approximates actual local market
+days and quarter-hour intervals. This is EUPHEMIA-inspired synthetic bidding, not
+reconstruction of actual order books or full nonconvex allocation rules.
 
-Acceptance requires:
+## Verification and integration gates
 
-- Record peak memory, runtime, checkpoint/restart behaviour, exact input/code
-  hashes, feasibility checks and convergence bounds. A feasible annual trial
-  may be reported as experimental; it is not an annual optimum certificate.
-- Define and audit the mapping from model nodes to actual bidding zones. Declare
-  price aggregation, UTC alignment, interval weighting and jointly observed
-  coverage; preserve gaps and spatial proxies. Nodal marginal prices and zonal
-  day-ahead prices are different quantities and need explicit interpretation.
-- Compare hourly price bias, absolute error, correlation and seasonal patterns;
-  prioritise border-spread magnitude, direction and duration. Cross-check
-  generation by technology and scheduled/physical exchanges under their correct
-  labels, so apparent price agreement is supported by plausible dispatch.
-- Predeclare quantitative acceptance thresholds, minimum coverage and the
-  calibration/held-out split before fitting or assessing the model. Numerical
-  thresholds are not yet selected. Do not tune and claim validation on the same
-  observations or select only favourable zones/hours after seeing errors.
-- Declare fuel-cost year, operational carbon-pricing assumptions and any policy
-  or calibrated variants, with separate input hashes and matched baselines. Keep
-  operational pricing factors distinct from production lifecycle accounting.
-- Publish supported zones/periods, error metrics, validation failures, assumptions
-  and limitations. Explain fuel-cost, outage, fleet, weather and market-design
-  mismatches; do not force exact price matching through undocumented changes.
+- Preserve exact source/code/input hashes, resource guards, failures and independent
+  saved-witness replay. Inspect actual jobs before running; stale receipts do not
+  establish progress. Record preparation, solving, native checks, I/O and end-to-end
+  runtime separately, plus memory and calendar/coverage.
+- Require optimal termination and feasibility replay; report shortages and cycling.
+  Matched native PyPSA checks verify formulation, not agreement with market prices.
+  A completed daily policy year is not an annual optimum or strategic equilibrium.
+  Any future annual-optimum claim needs independently checked feasibility/convergence
+  bounds against a smaller monolithic reference; no acceptance gate is waived.
+- Audit model-to-bidding-zone mapping, hourly UTC/interval alignment and observation
+  coverage. Compare price bias/MAE/RMSE, correlation, seasonal errors, negative prices,
+  border-spread direction/duration, generation by technology and exchanges. Keep
+  country proxies and unavailable data explicit.
+- Predeclare numerical/empirical thresholds, coverage and training/held-out periods
+  before fitting or claiming empirical acceptance. Thresholds are not yet selected.
+  Untuned descriptive comparisons are not held-out validation.
+- Before accepting investments, verify matched baseline/intervention cases for
+  transmission, battery, hydro and wind/solar, retaining common inputs/chronology.
+  Heuristic strategies need sensitivity checks; adding an asset need not improve
+  its dispatch under a fixed policy. Report system cost, revenue and rent separately.
+- Integrate only supported, verified scenarios into the static app, then verify
+  numerical consistency, browser runtime/memory, persistence and mobile behaviour.
+  No silent replacement of the live screening model.
 
-Keep computational consistency (matched native/fast solves) separate from
-empirical validation (agreement with observations). Preserve existing research
-and annual acceptance gates. Investment benefits and carbon effects require their
-own paired-dispatch checks; price agreement alone does not validate them.
+## Carbon and opportunity accounting
 
-## Model boundaries
+Keep lifecycle production intensity, operational carbon pricing and intervention
+emissions separate. Historical factors need sources, units, boundaries, geography,
+coverage and sensitivities, including biomass/waste/CHP and storage attribution.
+Positive generation with missing factors cannot receive zero emissions. National
+mixes are not individual bidding-zone data; mapped subsets are not whole-fleet totals.
 
-Observed ENTSO-E price/flow evidence, reduced-form screening,
-the 2025 conditional 48-hour benchmark and annual reference
-results are separate products of separate assumptions. Keep them labelled.
+Scenario emissions use scenario minus baseline: savings negative, increases positive.
+The current browser average-mix energy proxy is not verified avoided emissions.
+Do not introduce “carbon loss” as intensity difference × demand minus imports.
+Verified savings require paired dispatch, complete factors and charging-origin
+accounting. ENTSO-E transparency observations do not certify the model or establish
+compliance with its transmission cost-benefit methodology.
 
-Climate screening uses average-mix proxies, not demonstrated avoided emissions.
-Network climate outputs require signed dispatch differences and complete factors.
-Gross system operating-cost savings are not investor income. The existing
-25-year screening benefit-minus-capex figure is undiscounted.
+## Engineering and recovery
 
-Do not infer physical congestion solely from price separation. Do not replace
-renewable availability with observed or modelled dispatch. Keep offline Python,
-PyPSA-Eur and credential-backed collection outside the browser.
+Static Bun/Vite/React/TanStack Router, IndexedDB and GitHub Pages; correct project
+base/deep links and reproducible builds. No credentials, login, persistent service,
+paid hosting or cloud scenario database. Work on public-v1; no automatic main merge,
+force-push or repository visibility change.
 
-## Scope and exclusions
+Keep large provider inputs locally ignored, with source requests/versions/hashes
+for reconstruction. No multi-gigabyte GitHub or third-party mirror backups. Preserve
+compact recovery/replay evidence and the retained PyPSA-Eur reference dependencies;
+changed inputs must not silently resume saved optimisation states.
 
-Public v1 supports transmission and battery interventions. Authentication,
-cloud synchronization, paid hosting, detailed siting, dispatch-grade certification,
-and unvalidated annual or within-zone investment claims are outside current scope.
-Future extensions require explicit model inputs and verification.
-
-## Engineering constraints
-
-Static Bun/Vite/React/TanStack Router, IndexedDB and published research artifacts.
-Keep useful existing UI and research. Never commit credentials or ignored large
-caches/networks. Work on `public-v1`; reviewed merge only, no force-push.
-
-## Research cache and recovery
-
-Keep large reproducible provider inputs as local caches; do not upload
-multi-gigabyte backups to GitHub or establish third-party bulk backups merely
-to mirror those inputs. Preserve source requests, versions and hashes for
-reconstruction. Prioritise compact solver-state/result recovery with provenance;
-a changed reconstructed input must not silently resume saved optimisation cuts.
-
-## Documentation ownership
-
-- [README.md](README.md): introduction, setup, repository map and deployment.
-- This file: product requirements and acceptance criteria.
-- [TASKS.md](TASKS.md): current priorities, blockers and completion evidence.
-- [AGENTS.md](AGENTS.md): coding and research operational instructions.
-- `docs/*.md`: public research methods and results, including detailed model plans.
-- `planning/archive/`: historical proposals; not current requirements.
-
-## Accepted direction: network dispatch for scenario screening
-
-Move toward coupled fast network dispatch as the scenario estimator, verified
-against matched native PyPSA baseline/intervention solves. Expose the verified
-2025 conditional window as a clearly labelled experiment now; annual map
-replacement remains gated on complete annual inputs, geography, chronology,
-paired native/fast verification and existing empirical/investment requirements.
-Publish comparative evidence as a readable report with data visualisations,
-clear summary and conclusion, without requiring scenario-menu interaction.
-Use one retained 2025 hourly PyPSA-Eur reference for generation/capacity
-comparisons. Retire obsolete result publications and local research candidates;
-retain the selected reference’s reproducible evidence and source inputs.
-Reports must name the model and actual solve period in tables and charts. Explain
-internal candidate identifiers and whether inventories are fixed, annual bounds
-are converged, and comparisons represent numerical parity or observed-data
-differences. Country/fuel differences must retain missing observations and
-unequal accounting scopes explicitly.
-
-
-## Accepted direction: hourly zonal dispatch
-
-Build an actual 8,760-hour 2025 bidding-zone dispatch model for paired baseline
-and transmission/battery scenarios. Prepare demand, original renewable
-availability, hydro inflows and other audited inputs once; reuse them across
-solves. Preserve chronological storage and label commercial network assumptions.
-Aim for results in seconds, verified by measured runtime and numerical accuracy;
-precomputed response curves and statistical surrogates are optional future
-alternatives, not the primary calculation. Existing annual and empirical gates
-remain intact; an aggregated model cannot certify the old physical-model optimum.
-See [hourly zonal dispatch plan](docs/hourly-zonal-dispatch-plan.md) for proposed
-implementation, verification and unresolved design choices.
-
-## Accepted direction: synthetic coupled market clearing
-
-Implement continuous synthetic supply bids with fixed observed demand as the
-first demand representation, then verified commercial cross-zone constraints
-and chronological resources. It is EUPHEMIA-inspired, not reconstruction of
-actual order books or full nonconvex EUPHEMIA rules. Declare bid assumptions and
-operational carbon pricing separately from lifecycle accounting. Keep
-uncalibrated diagnostics separate from training and held-out validation.
-Publish German offer curves and simulated-versus-observed DE-LU prices with
-coverage, source scope, errors and failures, followed by coupled model evidence.
-The existing numerical, annual, empirical and paired-investment gates remain
-required before scenario integration. See the step-by-step plan in
-[synthetic zonal clearing](docs/synthetic-zonal-clearing-plan.md).
-
-
-Model-derived physical constraints are an authorized synthetic-clearing sensitivity
-route, kept distinct from verified commercial JAO constraints. Preserve separate
-AC-island accounting and explicit bounded, efficiency-consistent controllable links.
-Independent-hour results that exclude hydro/storage must disclose shortages and
-cannot satisfy chronological annual or scenario-integration gates. Native numerical
-parity and observed-market validity remain separate.
-
-
-Use the accepted IRENA end-2024 to end-2025 linear capacity trajectory for wind
-and solar in the current synthetic-clearing diagnostic, preserving original
-weather profiles and recording unreconciled coverage. Linear net capacity change
-is an assumption, not observed commissioning dates. Retain the original-fleet
-comparison and do not infer reservoir water/inventory or other technology inputs
-from renewable turbine/generator MW alone.
-
-The reservoir extension must schedule original hourly inflows with turbine,
-energy, efficiency and standing-loss limits and continuous inventories across
-blocks. A first conditional run may fix boundaries to the retained annual
-reference, explicitly distinguishing that case from a jointly optimised annual
-solution. Independently replay water/network feasibility and annual closure;
-verify a matched chronological case against native PyPSA before annual execution.
-Do not infer water availability from IRENA capacity or silently reset inventories.
-
-A fast screening variant may reuse an audited hourly reservoir output schedule
-as explicit fixed injections, preserving original generator availability and
-checking the full water balance first. Label this conditional on the offline
-hydro schedule: it cannot estimate hydro response to investments. Keep timing
-of offline preparation separate from reusable screening, and compare marginal
-prices as well as objective cost against chronological and matched native cases.
-Adaptive water-value bids remain a separate, unverified extension.
-
-The public European physical-clearing report should present the final fast
-fixed-reservoir model as one coherent report, with current results, visualisations,
-input/method provenance and numerical/observed-price verification. Omit superseded
-model narratives and comparison charts from that report while retaining supporting
-evidence and material limitations, especially fixed-hydro price sensitivity.
-
-Public workbench navigation should expose a simple Docs entry rather than
-European targets, Network lab or a research catalogue. Docs explains the current
-workbench: signed flow–price congestion-rent screening, its actual browser
-scenario solver, opportunity evaluation and data sources. Distinguish that live reduced-form solver
-from the separate fixed-reservoir European research pipeline; hiding experimental
-navigation does not authorize replacing calculations or weakening integration gates.
-
-The landing workbench should omit the introductory divider and separate bottleneck
-picker; users select corridors on the map. Metric labels omit “floor: 0”. The
-expanded sidebar links to congestion-rent methodology instead of repeating its
-long explanatory paragraph. Docs retains signed-accounting, display-floor and
-flow-provenance limitations; this presentation cleanup does not change calculations.
-
-The right-hand scenario evaluation sidebar shows the signed emissions-change
-proxy. The left sidebar shows mean absolute hourly lifecycle carbon spread below
-mean absolute price spread, restricted to jointly observed > €5/MWh price gaps.
-The carbon-spread card shows only its label and value with units; it omits
-coverage counts and mapped-subset comments. Docs retains coverage methodology
-and mapped-subset limitations. No individual
-production-intensity cards or production-carbon detail block remain there; observed
-capacity stays removed. Carbon spread is not an estimate of avoided emissions.
-Docs includes opportunity evaluation and exact data sources, distinguishes
-historical generation-based lifecycle data from the scenario proxy, and explains
-limits relative to ENTSO-E cost-benefit reporting. Historical carbon artifacts stay
-available as evidence, without implying avoided emissions.
-
-Scenario emissions use scenario-minus-baseline sign convention: negative is a
-saving, positive an increase. Legacy unsigned results require rerun while
-preserving units. Do not add “carbon loss” from intensity difference times demand
-minus imports: savings require matched dispatch counterfactuals with original
-availability, demand and chronological storage/water constraints. Current browser
-screening does not establish those savings.
-
-## Perfect-foresight hourly investment benchmark
-
-Build a separate hourly European dispatch benchmark in which baseline and
-investment cases know the same declared demand, weather-derived availability,
-inflows and costs across the complete optimisation horizon. It must support
-transmission, batteries, hydro turbine/reservoir capacity and solar/wind additions.
-This benchmark isolates dispatch opportunity under perfect foresight; it does not
-measure resilience to forecast uncertainty or reconstruct actual EUPHEMIA bids.
-
-The accepted market-simulation direction also includes sequential daily synthetic
-clearing: forecast-informed competitive operator bids, one day cleared at a time,
-and storage inventories carried forward. Operators may plan beyond the next day.
-Distinguish perfect forecasts of exogenous demand/weather/inflows from approximate
-endogenous price expectations. Recompute expectations and storage strategies for
-each investment case. Do not use realised ENTSO-E prices as perfect model forecasts.
-Declare terminal energy values, bid-direction rules and end-of-horizon conditions;
-verify future water feasibility without fixing intermediate reference inventories.
-Daily policy simulations are not annual-optimum certificates or strategic bidding
-equilibria. Hourly UTC approximations must disclose the difference from actual
-local delivery days and quarter-hour market periods. Smaller native comparisons,
-independent chronological replay, annual measurements and existing empirical/
-investment/integration gates remain required.
-
-Storage inventories must link every hour with charging/discharging efficiency,
-standing loss, inflow, spill, power/energy bounds and explicit common boundary
-conditions. New batteries start and end empty; hydro capacity does not create
-water. Renewable additions use original weather availability and declared location
-shares, separately from the baseline IRENA commissioning trajectory. Fixing output
-or intermediate reference inventories is not adaptive annual perfect foresight.
-
-Use paired native comparisons, independent feasibility replay and explicit
-resource/optimal-status guards before annual claims. Report simultaneous cycling
-in continuous LPs; resolve it before accepting physical investment performance.
-Retain annual convergence, geography, observed-data and integration gates. Public
-scenario integration remains a separate verified change, not automatic replacement
-of the reduced-form solver. Emissions require audited factors and generation
-attribution; do not infer signed savings from objective improvement alone.
-
-## Explicit thermal bidding inputs
-
-Gas and oil synthetic offers should use explicitly sourced fuel-price trajectories,
-plant efficiency, operational carbon prices/factors and variable O&M. Replace
-total native thermal costs rather than adding fuel or carbon twice. Preserve
-original available capacity and use matched inputs for baseline/investment cases.
-Declare currency, heating-value basis, temporal resolution and delivered-fuel
-approximations. Do not fabricate historical prices or treat offer markups as
-system operating costs. Nuclear may initially retain its low operating-cost
-offer and prepared availability; minimum output, ramps, outages and restart
-behaviour require separate physical inputs/verification rather than universal
-must-run assumptions. Existing annual/empirical/integration gates remain required.
-
-## Simple resource strategies for daily simulation
-
-Prefer explicit, easily explained resource bidding rules over independent annual
-optimisation for each operator. Wind/solar offer original weather-limited output
-at a declared low price; fossil plants use fuel, efficiency, operational carbon
-and variable O&M; nuclear and other prepared-cost technologies retain explicit
-availability/cost proxies and limitations. Natural reservoir hydro uses a seasonal
-target and inventory-dependent water value. Batteries and pumped hydro use simple
-loss- and wear-adjusted buy/sell thresholds from approximate expected prices.
-Declared horizons and sensitivities are assumptions, not calibrated operator bids.
-
-Daily network clearing determines quantities and retains exact hourly inventory
-physics and actual stock carry. Distinguish opportunity bids/purchase willingness
-from physical variable operating cost, enforce exclusive pump/generate directions,
-and disclose common closing-stock settlement rules. Prepare resource rules with
-arithmetic rather than per-unit annual LPs. Recompute forecasts/rules for investments;
-heuristic dispatch does not guarantee an investment reduces operating cost. Preserve
-original source availability, chronology, water and the existing annual/native/
-observed-data/integration gates. The public browser solver is not replaced implicitly.
+README owns setup; AGENTS owns operating instructions; TASKS owns the focused
+backlog. Automatic hourly reviews remain disabled at user request.

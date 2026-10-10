@@ -149,9 +149,8 @@ try {
       await page.screenshot({ path: `/tmp/grid-conductor-${viewport.width}.png`, fullPage: true });
     for (const route of [
       "docs/",
-      "docs/worked-example-se4-pl/",
-      "docs/fast-entsoe-screening/",
-      "docs/pypsa-fleet-generation-comparison-2025/",
+      "docs/european-physical-synthetic-clearing-2025/",
+      "docs/daily-fuel-dispatch-2025/",
       "targets/",
     ]) {
       const response = await page.goto(`${base}${route}`);
@@ -178,25 +177,6 @@ try {
         assert.equal(await page.getByRole("link", { name: "Network lab" }).count(), 0);
         assert.equal(await page.getByRole("heading", { name: "Research publications" }).count(), 0);
         assert((await page.locator("article").innerText()).includes("two-zone screening model"));
-      }
-      if (route === "docs/worked-example-se4-pl/") {
-        await page.getByRole("heading", { name: "3. Reproduce €229.9 million/year" }).waitFor();
-        // Execute the exact published console example against the served artifact.
-        const source = await page.locator("pre code.language-javascript").innerText();
-        const values: number[] = await page.evaluate(async (code) => {
-          const reproduce = new Function(
-            `return (async () => {\n${code}\nreturn [bound, line(500), line(700)]; })()`,
-          );
-          return reproduce();
-        }, source);
-        assert(Math.abs(values[0]! - 229.8925178625) < 1e-9);
-        assert(Math.abs(values[1]! - 154.86579666666665) < 1e-9);
-        assert(Math.abs(values[2]! - 193.14912866666666) < 1e-9);
-        const artifactLink = page.getByRole("link", { name: "Annual input JSON", exact: true });
-        assert.equal(
-          await artifactLink.getAttribute("href"),
-          "/grid-conductor/research/entsoe-fast-targets.json",
-        );
       }
     }
     assert(

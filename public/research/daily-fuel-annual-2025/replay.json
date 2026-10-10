@@ -1,0 +1,35 @@
+{
+  "status": "saved_daily_rules_and_physics_replayed",
+  "summary_sha256": "5b1a888b5fc05a693347d81562173ba183019eafe937224992d92970a0b3d0eb",
+  "checker_sha256": "f8a86b4173e6732cb81a3ecf2b019af4a52ca0989717954f6af5551701d39524",
+  "checks": [
+    {
+      "case": "baseline",
+      "maximum_primal_residual": 1.7204125271064186e-06,
+      "maximum_water_residual": 1.7204125413172733e-06,
+      "maximum_join_residual_mwh": 0.0,
+      "closure_residual_mwh": 0.0,
+      "operating_cost_eur": 92363288110.93475,
+      "bid_objective_eur": 106103554627.98396,
+      "emergency_supply_mwh": 852118.3343949674,
+      "native_checks": [
+        {
+          "day": 0,
+          "difference_eur": 2.2351741790771484e-06,
+          "price_maximum_difference_eur_mwh": 2.6432189770275727e-11
+        },
+        {
+          "day": 182,
+          "difference_eur": -5.960464477539063e-08,
+          "price_maximum_difference_eur_mwh": 8.272138529719086e-11
+        },
+        {
+          "day": 364,
+          "difference_eur": -9.5367431640625e-07,
+          "price_maximum_difference_eur_mwh": 4.663149866246385e-10
+        }
+      ]
+    }
+  ],
+  "scope": "Rule reproduction and chronological primal replay; two closing-day network mode prepasses re-solved; forecast optimality not independently re-solved; no annual optimum/empirical/integration claim"
+}
