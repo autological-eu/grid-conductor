@@ -696,3 +696,13 @@ workbench/math smoke passes at 1440/390/320/667 px. Focused updated-report check
 pass at 1440/390/320 px, including both charts, the evidence JSON and overflow.
 Asset allowlist: 67 files, 5.46 MiB; three new compact assets total 444.2 KiB.
 No raw inputs/full witnesses staged; frozen calculation hashes remain intact.
+
+Publication verified for implementation fe8c3b4: CI/Pages run
+[38083900298](https://github.com/autological-eu/grid-conductor/actions/runs/38083900298)
+succeeded (build and deploy, including production browser checks). Unauthenticated
+report route and all three new assets return HTTP 200; chart/JSON SHA256 values
+match committed bytes exactly. Public Chromium renders the updated article and
+both charts at 1440 and 390 px, fetches its evidence through the page, and passes
+overflow checks. Report:
+https://autological-eu.github.io/grid-conductor/docs/european-physical-synthetic-clearing-2025/
+No main merge, raw-artifact upload or automatic-review activation.
