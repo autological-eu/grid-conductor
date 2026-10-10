@@ -101,3 +101,6 @@ data/daily-market-2025/
 !/public/research/fixed-reservoir-screening-2025/summary.json.gz
 /public/research/daily-fuel-annual-2025/summary.json
 !/public/research/daily-fuel-annual-2025/summary.json.gz
+
+# Sourced Norwegian hydro observations and local reconciliation
+/data/hydro-observations-2025/

@@ -1,8 +1,8 @@
 # Grid Conductor — current tasks
 
 Reconciled 10 October 2026. PRODUCT.md defines scope and acceptance criteria.
-Focus: observed bottlenecks, the retained fixed-hydro checkpoint, and the current
-simple generator-bidding simulator. Superseded public reports are retired;
+Focus: observed bottlenecks and the fast fixed-hydro supply-curve checkpoint.
+Daily generator bidding and compact rolling storage are paused references. Superseded public reports are retired;
 calculation tools and supporting evidence remain for reproducibility, not as
 parallel active model programmes. Automatic hourly reviews remain disabled.
 
@@ -29,33 +29,28 @@ not held-out validation. Prepared demand is not independently audited observed d
 
 ## Ordered next actions
 
-1. **Consolidate publication and operating instructions (this change).** Keep only
-   workbench methodology and the two model reports. Fold current resource/fuel rules
-   into the annual report; remove dead article links and update publication smoke
-   checks. Keep live workbench calculations, caches and verification dependencies.
-   Local checks and deployment evidence must be recorded below before publication claims.
-2. **Profile and simplify the current daily engine.** Measure solver attempts,
-   matrix construction/reuse, forecasting, native verification and file I/O.
-   Investigate cumulative HiGHS timing and redundant daily driver code using small
-   saved cases before another annual run. Preserve producer hashes of existing
-   evidence; any implementation change gets fresh provenance. Seconds-scale target
-   is unmet; do not promise speed without matched numerical/physics checks.
-3. **Resolve adequacy and strategy limitations.** Most artificial shortage is
-   Norway (0.839903 TWh / 127 hours). Diagnose hydro bids, usable stock/inflow,
-   turbine capacity and transfer constraints before changing inputs or rules.
-   Check negative-price behaviour and rule sensitivity; no water gifts or relaxed closure.
-4. **Audit geographic and empirical inputs.** Resolve commercial-zone mapping,
-   fuel heating-value/delivered-oil assumptions, observed EUA/outages and generation/
-   exchange accounting. Predeclare coverage, acceptance thresholds and held-out
-   periods before calibration. Price agreement alone is insufficient.
-5. **Verify paired investment scenarios.** Fresh matched transmission, battery,
-   hydro, solar and wind cases: native comparisons, independent water/network replay,
-   common stocks, no cycling, actual runtime/memory and adverse outcomes reported.
-   Current annual evidence is baseline only, not verified annual investment value.
-6. **Publish accepted evidence and integrate supported scenarios.** Browser solver
-   replacement remains gated on complete annual physics, empirical/geography checks,
-   paired scenarios and functional static-app verification. Carbon attribution is
-   still required before dispatch-based avoided-emissions claims.
+1. **Return to the fast fixed-hydro supply-curve checkpoint (user decision).**
+   Recheck actual source hashes and saved annual water/network witnesses. Keep its
+   report as the active baseline; mark daily bidding/rolling storage paused. Do
+   not publish or resume the parked Norwegian adaptive-hydro trial.
+2. **Reconcile geography and empirical inputs for this checkpoint.** Country/
+   AC-island proxies are not bidding zones. Map buses, generators/reservoirs and
+   demand to commercial zones, particularly NO1–NO5; audit zonal demand and
+   physical/commercial constraints. Fixed schedules avoid short-horizon water
+   decisions but do not establish realistic hydrology. Define held-out periods,
+   coverage and acceptance thresholds before calibration or market claims.
+3. **Verify common-input investment pairs on the fast formulation.** Start with
+   transmission and weather-based wind/solar changes, conditional on the same
+   fixed hydro schedule. Preserve original availability, explicit limitations,
+   native checks and saved-primal replay. Do not claim conditional benefits are
+   necessarily conservative or investment return.
+4. **Add storage only with explicit chronology and verification.** The checkpoint
+   excludes 67 battery/PHS units; adding them needs carried stocks, efficiency,
+   common boundaries, no simultaneous cycling and measured full-year performance.
+   Do not restore the paused daily/rolling engines implicitly.
+5. **Integrate supported scenarios only after acceptance.** The browser remains
+   the two-zone screen. Full empirical/geography, paired-investment, carbon and
+   static-app checks remain required. Automatic hourly reviews stay disabled.
 
 ## Protected dependencies and residual gates
 
@@ -231,3 +226,44 @@ checks pass at 1440/390px, including the new chart/download and no overflow.
 Norwegian country-proxy MAE remains EUR191.57–218.59/MWh: improved shortage/speed is
 not adequate empirical agreement. Publication verification follows successful Pages
 and public checks; no publication inferred from this local record.
+
+
+## Return to fast supply-curve checkpoint — 2026-10-10
+
+User requested returning to the earlier fast supply-curve model. The selected
+checkpoint fixes hourly reservoir output, not merely hydro prices. PRODUCT,
+AGENTS, README and both report introductions now identify it as the active
+baseline; daily/rolling-hydro development is paused. No browser engine change.
+
+Fresh read-only verification reconstructed the retained source, checked every
+source/producer hash and all 59 chronological hydro witnesses, then replayed all
+8760 saved water and network hours. Water residual 2.03508e-6 MWh and network
+residual 8.38326e-6 MW pass the unchanged 1e-4 threshold. Saved hourly witness SHA256
+b21e883315e670896de88c42bec5879e3a401d8a04fc648c31fdd289584dc20b;
+summary SHA256 9e7a41bdc34ab24916e1d2ef6d97fd3b14a9affff3f3b3a4c1b40de557c2b333.
+This was replay, not a fresh optimisation or new timing measurement. Retained
+native checks and 19.17s + 6.73s timing remain historical verified evidence.
+
+The Norwegian compact experiment is parked locally, not published or adopted.
+NVE stocks/Ember net-water reconstruction plus a future-demand reserve reduced
+emergency supply from 0.123890 to 0.025675 TWh (32 to 12 shortage hours), but high
+price hours increased from 142 to 168 and Norwegian proxy MAE remained
+EUR209.20–225.57/MWh. That does not establish market agreement. An input-only trial
+had 49 year-end shortage hours; an intermediate run was deliberately stopped
+before a shorter-horizon indexing correction and replaced with a fresh run.
+Completed final experiment passes native sampled objectives and annual physics,
+but those numerical checks do not justify empirical acceptance. This turn's
+experimental producers/results were archived locally before restoring unchanged
+published computation sources. No retired search was restored.
+
+Next: geographic/zonal input reconciliation and conditional paired investment
+verification on the selected fast checkpoint. It still has four Norway shortage
+hours, inherited model water boundaries, country/AC-island geography and no
+battery/PHS dispatch. These limitations and empirical/storage acceptance gates
+remain explicit. Automatic reviews remain disabled.
+
+Local return-to-checkpoint verification: public-asset/source allowlist passes
+(63 files / 4.88MiB); typecheck, lint (six existing warnings), 14 Bun tests and
+production build pass. Chromium checks confirm the selected report, its two
+figures and no overflow at 1440/390px; retained report maths passes at
+1440/390/320px. Publication is pending CI/Pages and public URL verification.

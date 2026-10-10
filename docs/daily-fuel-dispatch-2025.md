@@ -1,5 +1,11 @@
 # Full-year daily dispatch and observed prices — 2025
 
+**Paused research reference.** Active development has returned to the
+[fast fixed-hydro supply-curve checkpoint](../european-physical-synthetic-clearing-2025/).
+The daily bidding and compact rolling-storage results below remain reproducible
+research evidence; they are not the selected development baseline or browser engine.
+The subsequent Norwegian hydro experiment was parked without publication.
+
 The current simple-resource model completed **365 daily clearings / 8,760 hourly
 periods** across 40 European country/AC-island areas. Storage carries
 between days, with original weather availability, demand, water and exact closing

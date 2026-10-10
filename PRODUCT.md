@@ -13,20 +13,25 @@ investment. System benefit is not investor income or certified investment return
 
 ## Maintained models and publications
 
-Concentrate development and public documentation on two European research models:
+The active development baseline is the fast fixed-hydro supply-curve model, as
+requested on 10 October 2026. Retain two reports, with the daily resource-bidding
+model and compact rolling-storage trial paused as research references:
 
 1. **Fixed-hydro annual checkpoint:** hourly synthetic supply-curve clearing with
    audited, precomputed reservoir injections and physical network constraints.
    Retain its full-year results, methods, figures, source and replay evidence.
+   Develop from this checkpoint; fixed hourly injections must not be described
+   as merely fixed hydro bid prices.
    Its fixed schedule cannot respond to investments; conditional benefits are
    not guaranteed conservative estimates.
 2. **Current resource-bidding simulator:** simple, explained strategies per
    generator type, 24 hourly UTC periods cleared daily, storage carried between
-   days. Improve this model rather than proliferating alternative model families.
+   days. Preserve this paused model for reproducibility; do not continue
+   adaptive-hydro/rolling-policy experiments without a new user request.
    Retain its annual results, resource/fuel rules and observed-price diagnostics
    in one report. Target seconds-scale annual scenario estimates, measured honestly.
 
-The daily simulator may also be tested with a compact zonal transport network and
+The paused daily simulator was tested with a compact zonal transport network and
 short rolling-horizon storage optimisation, as authorized on 10 October 2026.
 Treat this as a formulation experiment within the current model: retain the
 physical/bidding reference and report changes in behaviour as well as speed.
@@ -36,6 +41,12 @@ demand, storage-unit water balances and carried/closing stocks. A declared
 arithmetic seasonal-stock penalty may replace the separate hydro price forecast
 in this trial; it is a heuristic, not an inferred market water value. Do not
 reset reservoirs to daily budgets or adopt the trial as the browser engine.
+
+Returning to the fast checkpoint does not validate its inherited hydrology,
+country aggregation or investment values. Bidding-zone geography and observed
+zonal demand/constraints remain an input priority. Battery/PHS investment support
+requires chronological modelling and fresh verification; these units are excluded
+from the retained fixed-hydro solve. Preserve empirical and paired-scenario gates.
 
 Keep one workbench methodology page alongside those two reports. Remove superseded
 public articles rather than maintaining a research catalogue. Supporting source

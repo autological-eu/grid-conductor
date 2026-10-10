@@ -8,12 +8,17 @@ expose credentials.
 
 ## Focus and publication policy
 
-Maintain two European research models:
+Active work returns to the fixed-hydro supply-curve checkpoint by user request
+(10 October 2026). Maintain two reports; daily bidding and compact rolling storage
+are paused references. Do not restart them or publish the parked Norwegian hydro
+trial without a new user request. Fixed output is not fixed-price bidding.
+
+Maintain these reproducible models:
 
 - Fixed-hydro annual checkpoint: tools/fixed_reservoir_screening_2025.py and
   tools/report_fixed_reservoir_screening_2025.py; report
   docs/european-physical-synthetic-clearing-2025.md.
-- Current daily resource-bidding model: tools/fast_daily_market.py is the experimental performance
+- Paused daily resource-bidding reference: tools/fast_daily_market.py is the experimental performance
   adapter; tools/terminal_daily_market.py is the retained producer,
   tools/terminal_settlement_bids.py, simple_resource_bids.py and shared daily/
   physical compiler modules; independent replay tools/audit_terminal_daily_market.py;
@@ -23,7 +28,7 @@ Maintain two European research models:
   Rules config/simple-bidding/defaults.json; thermal inputs thermal_bid_rules.py
   and prepare_fuel_prices.py; direct validation prices collect_dispatch_validation_prices.py.
 
-Compact daily-formulation trial: tools/compact_zonal_market.py and
+Paused compact daily-formulation trial: tools/compact_zonal_market.py and
 run_compact_zonal_2025.py; report_compact_zonal_2025.py appends evidence to the
 current daily report. Keep its transport/rolling-policy assumptions separate from
 the frozen physical/bidding reference. No daily reservoir resets, dispatch-based

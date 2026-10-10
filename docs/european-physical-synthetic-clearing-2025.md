@@ -2,6 +2,13 @@
 
 ## Summary
 
+**Active development baseline.** We have returned to this fast supply-curve
+checkpoint; adaptive daily/rolling-hydro experiments are paused. Hydro **output**
+is precomputed and fixed, not merely its bid price. Its inherited water inputs and
+country/island geography still require observed-data validation; returning to it
+does not establish accurate Norwegian bidding-zone prices or adaptive-storage
+investment values. The timings below are the retained benchmark, not a new run.
+
 The model clears all **8,760 UTC hours of 2025** across **40 country/island
 areas**, spanning **34 country labels**. It combines synthetic generator bids,
 prepared hourly demand, physical network limits and **93 reservoirs’ precomputed

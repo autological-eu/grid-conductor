@@ -21,8 +21,12 @@ estimates. Its browser-local line/battery scenarios still use a reduced-form
   equations, opportunity/carbon interpretation and exact data sources.
 - [Fixed-hydro annual checkpoint](docs/european-physical-synthetic-clearing-2025.md):
   8760 independent hourly network clearings with audited fixed reservoir injections.
-- [Current resource-bidding simulator](docs/daily-fuel-dispatch-2025.md): generator
+- [Paused resource-bidding research reference](docs/daily-fuel-dispatch-2025.md): generator
   strategies, fuel inputs, daily chronological storage and annual observed-price errors.
+
+Development has returned to the fast fixed-hydro supply-curve checkpoint. The
+daily/rolling-storage experiments are paused. Reservoir injections are fixed,
+not simply hydro bid prices; battery/PHS units are excluded from this checkpoint.
 
 The two European models are offline research. Neither is an accepted investment
 estimator or has replaced the live browser model. Older articles were removed;
@@ -72,7 +76,9 @@ Run from the repository root; inspect each tool's CLI and retained report for
 inputs/provenance. Source data and retained-reference dependencies must not be
 removed merely because their original articles are retired.
 
-For a fresh compact trial using the retained 2025 source/fuel inputs:
+The compact trial is paused; the following is retained reproduction guidance,
+not an instruction to resume it. For a fresh compact trial using the retained
+2025 source/fuel inputs:
 
 ```sh
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
