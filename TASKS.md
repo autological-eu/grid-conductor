@@ -398,4 +398,13 @@ lint (six existing warnings), price coverage, asset/source checks and production
 build. Workbench Chromium smoke passes 1440/390/320/667px; retained maths pass
 1440/390/320px. Final selected report renders at 1440/390/320px with both charts,
 all research downloads and no overflow; new asset bytes match the local build.
-62 public assets / 4.90 MiB. CI/Pages and public verification follow deployment.
+62 public assets / 4.90 MiB. Publication verified for
+805e1a0b6ebf4e285e10e03cb97d6169c09e862c: CI build/Pages/public smoke succeeded
+(run 38059653282). Independent public Chromium checks at 1440/390/320px confirm
+selected report text, both charts, every research download and no overflow; three
+new evidence/figure downloads match repository bytes exactly. Post-cleanup annual
+source/water/primal replay also passes, confirming removed files are unnecessary.
+Public report: https://autological-eu.github.io/grid-conductor/docs/european-physical-synthetic-clearing-2025/.
+Bidding-zone resolution is expected to help but requires audited bus-level hydro,
+demand and flexible-generator placement; labels alone do not repair injection weights.
+This verification follow-up changes only TASKS, not public/numerical evidence.
