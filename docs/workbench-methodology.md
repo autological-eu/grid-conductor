@@ -200,3 +200,10 @@ units/results are stored locally in the browser, not uploaded to a server.
   bids, daily clearing, carried storage and full-year observed-price diagnostics.
 
 These are offline research models. Neither replaces the live browser solver.
+
+The Norwegian hydro-input diagnostic uses NVE weather-driven HBV weekly usable
+inflow and dated reservoir energy stocks/capacity, with original ERA5 hourly
+shapes. Electrical-equivalent quantities are converted before dispatch efficiency
+is applied once. Gross/net energy basis, country pooling and retrospective
+release assumptions are documented in the fixed-hydro report. Elhub/Ember
+generation and ENTSO-E prices remain comparison observations, not fitted inputs.

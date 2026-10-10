@@ -545,3 +545,79 @@ members before rebuilding clusters. Then reconcile Nordic JAO net positions/hubs
 and perform native small-case checks. Source-input coverage is not acceptance of
 zonal demand, hydro physics or investment valuation. Public/numerical baseline
 and protected fixed-hydro source/witness chain remain unchanged.
+
+## Norwegian hydro input correction — 10 October 2026
+
+User authorized source-backed model changes to close the Norwegian energy gap.
+Runtime accessible; live processes inspected before every fresh run. No duplicate
+workers, retired searches or recurring review restarted. Frozen reference and
+producer/dependency hashes remain intact. Active browser baseline is unchanged.
+
+Verified root cause: pinned PyPSA-Eur ERA5 hydro is normalized to 119.519 TWh, the
+EIA historical median substituted because that source has no 2025 observation.
+The source generation-normalized volume also undergoes reservoir efficiency.
+No turbine-capacity increase or observed-generation fitting is used to fix this.
+
+Implemented public NVE table collector, independent HBV/UTC compiler, source-updated
+fixed-hydro producer, saved-water/network/objective auditor and report updater.
+NVE's HBV series is weather-driven; the separate generation/stock-derived inflow
+is excluded. ISO-week total 141.544 TWh; UTC calendar total 141.640655 TWh, retaining
+ERA5 within full weeks and uniform partial boundary-week rates. Stock boundaries
+68.549845 → 62.083351 TWh electrical-equivalent, capacity 87.437580 TWh. Inputs
+are divided by original efficiency 0.9 before stored-unit water accounting. Gross
+stock/net-inflow basis, country pooling, original capacity-share ROR/reservoir
+allocation and revised retrospective HBV release remain explicit assumptions.
+Other countries' original inflows/schedules and Norwegian turbine MW are unchanged.
+
+Final ignored witness: data/hydro-observations-2025/nve-updated-model-v5/.
+All 8760 clearings optimal; annual saved-source water/network/objective replay
+passes. Water residual 1.70384737e-08 MWh; network residual
+2.45909177e-06 MW. Native PyPSA verifies 48 water hours
+exactly and three market hours with objective differences below EUR0.00000008.
+Source-linked comparison audits all 39 observed price areas; four additional
+mapped areas have missing observations. Six targeted tests pass (DST/calendar
+energy, stock drawdown, impossible closure rejection, native efficiency and
+shortage-aware envelope), plus 14 browser-solver unit tests / 2402 assertions.
+
+Norwegian hydro is 145.544891–145.729948 TWh,
+versus frozen 107.217–107.247, Elhub 145.668586 and Ember 141.598. Gap to Elhub is
+now -0.124 to +0.061 TWh; Ember difference +3.947 to +4.132 TWh remains unresolved.
+Zero reservoir spill. Clearing loop 15.51s; one-time
+source/schedule preparation 83.80s; producer
+end to end 128.15s. Preparation is not included in loop timing.
+
+**Not promoted as an accepted price baseline:** Norwegian MAE is 273.69–286.44
+EUR/MWh (previous 196.42–218.69), with 2106 negative model-price hours and mean
+-193.29 EUR/MWh. Germany MAE changes 22.70 → 22.84. Annual energy matching has
+not validated the fixed temporal/geographic injection pattern. Above-1000 prices
+fall 168 → 3; residual emergency energy is 0.0027 MWh over three hours, within
+the explicitly disclosed 0.001 MW envelope allowance. The final market still
+uses original physical/GSK proxies; native parity does not certify their realism.
+
+Earlier internal attempts were stopped/rejected: native fixture setup corrected
+(no objective / incorrect use of charging bound); an unrestricted delivery
+envelope produced avoidable emergency and worse negative prices; the subsequent
+vertex schedule failed at hour3859 under tighter clearing tolerance. Final
+envelopes minimize emergency first and use 1e-9 feasibility tolerance plus a
+0.0001 MW inward margin. Final replay tolerance remains unchanged at 1e-4.
+Retired bulk outputs are removed; only compact failure notes retained.
+
+Summary SHA256 1ead42817b35037e931b3cf4509f5acca385249d5bd2f53f439026eca9de7e56;
+audit SHA256 8fd67794083bfe40d24c81fc69475af6373c31268f050a9fd49fab70e23be01f. Raw NVE release/receipts, Elhub observations
+and full witnesses stay ignored, with no third-party mirrors or bulk Git backups.
+
+Next: reconcile hydro injections/GSK against original bus geography and map assets
+and demand to NO1–NO5. Test the physical representation on native small cases
+before another annual rerun; preserve common source-backed water boundaries and
+report price regressions. Do not fit prices/generation or weaken empirical,
+annual-optimum, paired-investment or browser-integration gates. The source update
+is written into the existing fixed-hydro report, not a third report; deployment
+verification remains pending until CI/Pages and public URLs are checked.
+
+Publication preparation verified: typecheck passes; lint passes with six existing
+React Fast Refresh warnings. Production build passes. Chromium workbench/report
+smoke passes at 1440, 390, 320 and 667 pixels; focused updated-report checks verify
+its image, evidence download and overflow at desktop/mobile widths. Public asset
+allowlist passes: 64 files, 5.03 MiB; new figure/evidence total 124.8 KiB. No raw
+provider inputs or full witnesses are staged. Deployment evidence follows only
+a successful CI/Pages run and unauthenticated public URL verification.

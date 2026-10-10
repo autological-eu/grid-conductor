@@ -1,5 +1,162 @@
 # European hourly dispatch — selected model and error diagnosis
 
+## Norway: source-backed water update
+
+The updated model keeps the same resource-bid formulation and physical network,
+with corrected **2025 Norwegian water inputs**. Hydro generation changes from
+**107.22 to 145.54–145.73 TWh**. Against Ember,
+the signed model-minus-observed difference is now **+3.95 to +4.13 TWh**;
+against Elhub it is **-0.12 to +0.06 TWh**. These datasets differ in scope and
+must not be treated as interchangeable targets. The update is untuned evidence,
+not empirical acceptance or a certified commercial-zone model. **Norwegian price accuracy regresses in at least one observed zone. Keep this as an input diagnostic; do not promote it as an accepted baseline.**
+
+![Norwegian hydro update and all eligible price-area errors](/research/fixed-reservoir-screening-2025/nve-water-update.png)
+
+### What changed, and why
+
+1. The original ERA5 Norwegian hydro profile totals **119.519 TWh** because the
+   pinned PyPSA-Eur compiler substitutes the historical EIA median when its
+   generation series has no 2025 entry. This is a normalization problem, not
+   evidence that turbine capacity alone is inadequate.
+2. Replace that normalization with [NVE's weather-driven HBV usable-inflow series](https://www.nve.no/energi/analyser-og-statistikk/hydrologiske-data-til-kraftsituasjonsrapporten/):
+   **141.544 TWh** over ISO-2025 weeks, or
+   **141.641 TWh** after alignment to 8,760 UTC hours.
+   The separate production/stock-derived inflow column is deliberately excluded.
+   Full weeks retain the original ERA5 hourly shape; partial calendar-boundary
+   weeks use uniform rates over the entire source week. DST weeks have 167/169 hours.
+3. Use NVE reservoir boundary stocks, linearly interpolated from adjacent weekly
+   measurements: **68.550 →
+   62.083 TWh** electrical-equivalent energy.
+   Observed stock drawdown is explicit; no daily resets or additional water.
+   Reported storage-energy capacity is **87.438 TWh**.
+4. Divide electrical-equivalent reservoir inflow, capacity and stocks by original
+   turbine efficiency **0.9** to obtain PyPSA's pre-dispatch stored-energy units.
+   Apply that efficiency once at discharge. Run-of-river availability is electrical
+   output and receives no additional efficiency conversion.
+5. Retain original turbine MW and split reservoir/run-of-river water by their
+   capacity shares. Country-pooled stocks and reservoir output are distributed
+   over the original turbines by MW share. This is a declared allocation proxy.
+6. Compute each hour's physically feasible hydro-delivery interval, holding other
+   countries' schedules fixed, excluding levels that cause avoidable emergency
+   production elsewhere. The envelope permits only the minimum emergency volume
+   feasible that hour, with a 0.001 MW numerical allowance and an inward
+   schedule margin up to 0.0001 MW. Final physics tolerances are unchanged.
+   An offline linear programme penalizes spill at ten times
+   the per-MWh absolute deviation from the retained seasonal pattern. Its target is scaled
+   by the new water budget, not observed generation. It is **not an annual economic optimum**.
+   The resulting fixed schedule then enters the same fast hourly clearing.
+
+NVE revised its HBV history in June 2026. This is a retrospective release, not a
+forecast available to operators in 2025. Gross reservoir stock and net usable
+inflow are assumed to share an electrical-equivalent basis; catchment routing,
+losses, cascade interactions and price-area water allocation remain unresolved.
+NVE capacity is reservoir energy; original turbine MW remains unchanged. Observed
+Elhub/Ember generation and ENTSO-E prices never enter the schedule or bids.
+
+### Verification and runtime
+
+All **8,760 clearings terminate optimal**. Separate saved-witness replay rebuilds
+source coefficients and checks hourly water balance, capacity/turbine bounds,
+spill, prescribed closing stocks, area/island balances, passive limits, link bounds
+and objectives. Maximum water residual is **1.7e-08 MWh**;
+network residual is **2.46e-06 MW**.
+Native PyPSA independently checks 48 chronological water hours and three physical
+market hours. Native objective differences below are formulation checks, not
+price-error percentages.
+
+| UTC hour | Objective difference EUR |
+| --- | ---: |
+| 2025-01-15 12:00:00 | 1.1175871e-08 |
+| 2025-07-15 12:00:00 | 5.5879354e-09 |
+| 2025-12-15 12:00:00 | 7.8231096e-08 |
+
+The hourly clearing loop takes **15.51s**.
+One-time source/schedule preparation takes **83.80s**,
+including 65.26s for network envelopes.
+The producer takes **128.15s** end to end; independent audit
+and report generation are additional. Spill is **0.0000 TWh**.
+Norway still has **3** modeled hours above EUR1,000/MWh.
+Europe-wide emergency supply is **0.0027 MWh**
+over **3 hours**, versus 0.02982 TWh over four hours
+in the frozen reference. The minimum emergency volume allowed by preparation is
+0.00000 TWh; clearing costs can trade off a small
+shortage against costly production. Improved Norwegian energy matching does not
+establish adequacy or price accuracy elsewhere.
+No seconds-scale end-to-end claim is made for regenerating this schedule.
+
+### Observed-price comparison
+
+All 39 eligible areas with observations use the same independently replayed
+ENTSO-E A44 data; four mapped areas with no price observations remain explicitly
+missing in the downloadable audit.
+No price fitting, held-out accuracy claim or exclusion of difficult hours. The
+country-price proxy is repeated across NO1–NO5; finer geography remains necessary.
+
+| Price area | Frozen MAE EUR/MWh | Updated MAE EUR/MWh | Updated bias EUR/MWh |
+| --- | ---: | ---: | ---: |
+| NO2 | 200.55 | 286.44 | -258.69 |
+| NO1 | 198.03 | 281.76 | -251.65 |
+| NO4 | 218.69 | 278.41 | -202.00 |
+| NO5 | 196.42 | 274.77 | -240.21 |
+| NO3 | 208.39 | 273.69 | -214.40 |
+| DK2 | 62.03 | 55.76 | -43.13 |
+| EE | 48.53 | 48.34 | 6.74 |
+| SE4 | 40.80 | 45.37 | -15.72 |
+| LT | 45.18 | 44.98 | 1.83 |
+| LV | 45.11 | 44.94 | 1.40 |
+| FI | 43.90 | 41.36 | 7.84 |
+| SE2 | 42.62 | 39.67 | 28.17 |
+| SE1 | 42.07 | 39.12 | 28.00 |
+| SE3 | 35.79 | 38.26 | -1.53 |
+| AL | 38.17 | 38.14 | -27.93 |
+| BG | 33.36 | 33.30 | -16.92 |
+| RO | 32.68 | 32.65 | -18.20 |
+| HU | 32.30 | 32.27 | -20.15 |
+| GR | 31.84 | 31.78 | -13.80 |
+| MK | 31.76 | 31.72 | -17.58 |
+| RS | 30.17 | 30.14 | -17.53 |
+| IT-CNOR | 28.79 | 28.94 | -27.48 |
+| HR | 28.94 | 28.93 | -15.30 |
+| CH | 28.34 | 28.83 | -23.86 |
+| IT-CSUD | 28.63 | 28.77 | -27.02 |
+| IT-SUD | 28.36 | 28.49 | -25.72 |
+| SI | 28.27 | 28.29 | -13.86 |
+| SK | 28.31 | 28.28 | -14.62 |
+| IT-North | 27.90 | 28.05 | -26.56 |
+| ES | 27.17 | 26.98 | 9.89 |
+| PT | 26.98 | 26.79 | 10.08 |
+| PL | 26.95 | 26.78 | -15.76 |
+| CZ | 25.77 | 25.83 | -8.65 |
+| DK1 | 24.03 | 23.91 | -7.60 |
+| AT | 23.69 | 23.86 | -15.05 |
+| DE-LU | 22.70 | 22.84 | -14.46 |
+| NL | 22.16 | 22.42 | -12.74 |
+| BE | 21.82 | 22.03 | -12.00 |
+| FR | 21.83 | 21.75 | -1.42 |
+
+### Conclusion and reproduction
+
+Norwegian price accuracy regresses in at least one observed zone. Keep this as an input diagnostic; do not promote it as an accepted baseline.
+
+The historical normalization and energy-basis treatment can materially distort
+Norwegian hydro. This update addresses those inputs using independent hydrology
+and observed stock boundaries. Remaining energy/price discrepancies need zonal
+asset mapping, metering/demand-scope reconciliation and a defensible GSK; do not
+remove them by fitting generation or prices. Fixed schedules still cannot respond
+to hydro investments. Paired-investment and browser-integration gates remain open.
+
+Use the pinned interpreter for `tools/update_norway_hydro_2025.py --out <fresh-root>`,
+then `tools/audit_nve_hydro_model_2025.py <fresh-root>` and
+`tools/report_nve_hydro_update_2025.py <fresh-root>`. Collect the public NVE table
+with `tools/collect_nve_hydrology.ts`; raw source bytes and witnesses stay ignored.
+
+[Source hashes, numerical checks and all price metrics](/research/fixed-reservoir-screening-2025/nve-water-update.json)
+
+## Frozen reference diagnostics
+
+The following figures and results describe the preserved **pre-update input reference**.
+They are retained for the controlled comparison above, not the updated water model.
+
 ## Summary and conclusion
 
 We retain **one model: fixed hourly hydro injections, simple resource bids and

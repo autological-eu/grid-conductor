@@ -29,6 +29,19 @@ receipts stay in ignored data/bidding-zone-source-audit-2025/. Preserve UTC/DST,
 group missingness and separate wildcard production; full-hour coverage does not
 certify total-load scope, metering completeness or historical fleet capacity.
 
+The user-authorized Norwegian water-input update uses collect_nve_hydrology.ts,
+nve_hydro_inputs_2025.py and update_norway_hydro_2025.py. Only Norway substitutes
+source-backed NVE HBV inflow and observed reservoir boundary stocks/capacity;
+other countries retain original inflows and fixed schedules. Electrical-equivalent
+inputs are converted to stored units, preserving original turbine efficiency.
+Keep the production/stock-derived NVE inflow column excluded. Independent saved
+water/network/objective replay and all eligible observed-price comparisons use
+audit_nve_hydro_model_2025.py. report_nve_hydro_update_2025.py updates the existing
+fixed-hydro report only. Preserve the frozen source/witness chain. Country pooling,
+net-inflow/gross-stock basis and fixed-schedule limitations remain explicit.
+Improved annual energy agreement alone does not authorize baseline promotion;
+retain adverse price outcomes and reconcile injection geography before acceptance.
+
 Maintain these reproducible models:
 
 - Fixed-hydro annual checkpoint: tools/fixed_reservoir_screening_2025.py and

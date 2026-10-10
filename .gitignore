@@ -107,3 +107,6 @@ data/daily-market-2025/
 !/public/research/fixed-reservoir-screening-2025/resource-bids.json
 !/public/research/fixed-reservoir-screening-2025/resource-bids-curves.png
 !/public/research/fixed-reservoir-screening-2025/resource-bids-errors.png
+
+!/public/research/fixed-reservoir-screening-2025/nve-water-update.json
+!/public/research/fixed-reservoir-screening-2025/nve-water-update.png

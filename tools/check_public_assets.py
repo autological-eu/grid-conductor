@@ -16,6 +16,8 @@ ALLOWED = [
     'fixed-reservoir-screening-2025/resource-bids.json',
     'fixed-reservoir-screening-2025/resource-bids-curves.png',
     'fixed-reservoir-screening-2025/resource-bids-errors.png',
+    'fixed-reservoir-screening-2025/nve-water-update.json',
+    'fixed-reservoir-screening-2025/nve-water-update.png',
     'daily-fuel-annual-2025/compact-zonal.json', 'daily-fuel-annual-2025/compact-zonal.png',
     'daily-fuel-annual-2025/performance.json',
     'daily-fuel-annual-2025/replay.json', 'daily-fuel-annual-2025/price-comparison.json',
@@ -89,6 +91,20 @@ def check():
     for row in diagnosis['capacity_and_energy']:
         assert row['ember_month_counts']['Hydro'] == 12 and row['ember_month_counts']['Demand'] == 12
         assert row['model_total_hydro_bounds_twh'][0] <= row['model_total_hydro_bounds_twh'][1]+1e-6
+    update_path = folder / 'fixed-reservoir-screening-2025/nve-water-update.json'
+    if update_path.exists():
+        update = json.loads(update_path.read_text()); s = update['summary']; a = update['audit']
+        assert update['publication_producer_sha256'] == hashlib.sha256((ROOT / 'tools/report_nve_hydro_update_2025.py').read_bytes()).hexdigest()
+        assert update['image_sha256'] == hashlib.sha256(update_path.with_suffix('.png').read_bytes()).hexdigest()
+        assert a['audit_producer_sha256'] == hashlib.sha256((ROOT / 'tools/audit_nve_hydro_model_2025.py').read_bytes()).hexdigest()
+        for name, sha in s['new_sources'].items():
+            assert hashlib.sha256((ROOT / 'tools' / name).read_bytes()).hexdigest() == sha
+        assert s['optimal_hours'] == 8760 and a['physics'] == s['physics']
+        assert a['water_maximum_residual_mwh'] <= 1e-4 and a['physics']['maximum_residual_mw'] <= 1e-4
+        assert s['water_native']['status'] == 'optimal' and s['water_native']['hours'] == 48
+        assert len(s['native_checks']) == 3
+        assert all(abs(v['difference_eur']) <= max(.05, abs(v['native_objective_eur'])*1e-8) for v in s['native_checks'])
+        assert sum(v['updated']['known_hours'] > 0 for v in a['observed_price_comparisons']) == 39
     carbon = json.loads((folder / 'carbon-spreads-2025.json').read_text())
     assert carbon['year'] == 2025 and len(carbon['borders']) == 68
     assert carbon['metric_sha256'] == hashlib.sha256((ROOT / 'src/lib/carbon-spread.ts').read_bytes()).hexdigest(), 'Changed carbon metric'
