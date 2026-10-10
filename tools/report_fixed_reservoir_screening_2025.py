@@ -11,7 +11,7 @@ OUT=ROOT/'public/research/fixed-reservoir-screening-2025'
 
 def run():
     s=json.loads((OUT/'summary.json').read_text())
-    d=pd.read_csv(OUT/'hourly-de.csv',parse_dates=['utc'])
+    d=pd.read_csv(OUT/'hourly-de.csv.gz',parse_dates=['utc'])
     a=pd.read_csv(OUT/'area-summary.csv')
     if s['hours']!=8760 or len(d)!=8760 or s['provenance']['producer_sha256']!=digest(ROOT/'tools/fixed_reservoir_screening_2025.py'):
         raise ValueError('Changed producer or incomplete year')
@@ -27,12 +27,12 @@ def run():
     axes[0].set(title='2025 fixed-reservoir model — German prices (seven-day means)',ylabel='EUR/MWh');axes[0].legend()
     axes[1].hist(error.dropna(),bins=60)
     axes[1].set(title='2025 fixed-reservoir model — hourly error against DE-LU',xlabel='Model minus observed EUR/MWh',ylabel='Hours')
-    fig.savefig(OUT/'model-prices.svg');plt.close(fig)
+    fig.savefig(OUT/'model-prices.png');plt.close(fig)
     generation=a.assign(country=a.area.str.split(':').str[-1]).groupby('country').fixed_hydro_twh.sum().sort_values()
     fig,ax=plt.subplots(figsize=(12,9),layout='constrained')
     ax.barh(generation.index,generation.values)
     ax.set(xlabel='Precomputed reservoir generation TWh',title='2025 fixed-reservoir model — reservoir supply by country')
-    fig.savefig(OUT/'model-hydro.svg');plt.close(fig)
+    fig.savefig(OUT/'model-hydro.png');plt.close(fig)
     checks='\n'.join(f"| {c['utc']} | {c['native_objective_eur']:,.2f} | {c['fast_objective_eur']:,.2f} | {abs(c['difference_eur']):.9f} |" for c in s['native_checks'])
     no=a[a.area.str.endswith(':NO')]
     g=s['germany']
@@ -102,7 +102,7 @@ basis. The other **67 battery and pumped-storage units remain excluded**.
 
 ## Reservoir supply across Europe
 
-![Current-model reservoir generation by country](../../research/fixed-reservoir-screening-2025/model-hydro.svg)
+![Current-model reservoir generation by country](../../research/fixed-reservoir-screening-2025/model-hydro.png)
 
 The chart aggregates the fixed schedule by country for display; clearing retains
 all 40 country/island areas. Zero bars mean no reservoir output in this model,
@@ -111,7 +111,7 @@ and geographic coverage still need observed-data validation.
 
 ## German price validation
 
-![Current model and observed German prices](../../research/fixed-reservoir-screening-2025/model-prices.svg)
+![Current model and observed German prices](../../research/fixed-reservoir-screening-2025/model-prices.png)
 
 Mainland-DE prices are compared with the observed Energy-Charts/SMARD **DE-LU**
 series for **{int(error.notna().sum()):,} jointly observed hours**. Missing observations are not
@@ -170,9 +170,9 @@ render this report with `tools/report_fixed_reservoir_screening_2025.py`.
 The calculation uses HiGHS 1.15.1 and native PyPSA 1.2.4. Source requests, hashes,
 water witnesses and retry evidence are recorded for reproducibility.
 
-[Current-model summary, native checks and provenance](../../research/fixed-reservoir-screening-2025/summary.json),
+[Current-model summary, native checks and provenance](../../research/fixed-reservoir-screening-2025/summary.json.gz),
 [all 40 area summaries](../../research/fixed-reservoir-screening-2025/area-summary.csv),
-[hourly German results](../../research/fixed-reservoir-screening-2025/hourly-de.csv),
+[hourly German results, gzip CSV](../../research/fixed-reservoir-screening-2025/hourly-de.csv.gz),
 and [water-schedule replay evidence](../../research/european-reservoir-clearing-2025/replay.json).
 The existing machine-readable files retain supporting sensitivity-audit fields;
 the report presents only the final model. Large witnesses stay in the ignored

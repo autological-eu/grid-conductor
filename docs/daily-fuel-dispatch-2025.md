@@ -95,7 +95,7 @@ For Germany, 8,760 matched hours give **MAE EUR22.22/MWh**, bias EUR-9.65/MWh an
 
 No 2025 A44 observations were retrieved for: BA, GB, IE, ME. They remain unavailable, not zero-priced, and their failed-month records are retained.
 
-![Hourly German example and annual errors](../research/daily-fuel-annual-2025/germany-prices.svg)
+![Hourly German example and annual errors](../research/daily-fuel-annual-2025/germany-prices.png)
 
 | Observed zone | Model area | Matched hours | MAE EUR/MWh | Bias EUR/MWh | RMSE EUR/MWh | Correlation |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -139,9 +139,9 @@ No 2025 A44 observations were retrieved for: BA, GB, IE, ME. They remain unavail
 | SI | 0:SI | 8760 | 30.10 | -8.31 | 45.78 | 0.590 |
 | SK | 0:SK | 8760 | 30.48 | -8.56 | 45.95 | 0.668 |
 
-![Errors for every available mapped zone](../research/daily-fuel-annual-2025/zone-errors.svg)
+![Errors for every available mapped zone](../research/daily-fuel-annual-2025/zone-errors.png)
 
-![Monthly price-error patterns](../research/daily-fuel-annual-2025/monthly-errors.svg)
+![Monthly price-error patterns](../research/daily-fuel-annual-2025/monthly-errors.png)
 
 ## Geography and border-price separation
 
@@ -396,6 +396,6 @@ Large raw inputs and witnesses remain ignored; public artifacts are compact.
 Download [price metrics and source receipts](../research/daily-fuel-annual-2025/price-comparison.json),
 [zone errors CSV](../research/daily-fuel-annual-2025/zone-errors.csv),
 [border errors CSV](../research/daily-fuel-annual-2025/border-errors.csv),
-[German hourly pairs](../research/daily-fuel-annual-2025/germany-hourly.csv),
-[run summary](../research/daily-fuel-annual-2025/summary.json) and
+[German hourly pairs](../research/daily-fuel-annual-2025/germany-hourly.csv.gz),
+[run summary](../research/daily-fuel-annual-2025/summary.json.gz) and
 [independent replay](../research/daily-fuel-annual-2025/replay.json).

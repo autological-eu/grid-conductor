@@ -28,7 +28,7 @@ Concentrate development and public documentation on two European research models
 
 Keep one workbench methodology page alongside those two reports. Remove superseded
 public articles rather than maintaining a research catalogue. Supporting source
-inputs, numerical fixtures, tools and replay evidence may remain as dependencies;
+inputs, tools and minimal retained-model replay evidence may remain as dependencies;
 retaining them does not make their old experiments active development priorities.
 Do not restore retired annual searches. Git history provides historical context.
 
@@ -145,3 +145,19 @@ changed inputs must not silently resume saved optimisation states.
 
 README owns setup; AGENTS owns operating instructions; TASKS owns the focused
 backlog. Automatic hourly reviews remain disabled at user request.
+
+## Minimal data retention
+
+Cache only external inputs used by the 2025 models/baseline (including processed
+ERA5 and generation inputs, IRENA, ENTSO-E, fuel/FX and relevant constraints), plus
+minimal indispensable retained-model source/reference/replay witnesses. The IRENA
+2026 release and end-2024 capacity endpoints are prerequisites for the 2025
+commissioning trajectory, not a separate 2026 model. Toolchain installations are
+not data caches. Remove unused runs, duplicate pilots, derived exports and old
+search support. Do not keep bulk computed reports as public data.
+
+Git contains the live baseline targets/prices, a compact carbon baseline with
+coverage/provenance, immutable model input prerequisites and minimal assets for
+the two retained reports. Prefer compact baseline metrics over shipping complete
+intermediate arrays. Carbon metrics must reproduce the original hourly function
+for every displayed border. Chart/download format changes must preserve values.

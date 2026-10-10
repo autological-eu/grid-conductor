@@ -1,4 +1,5 @@
 """Untuned annual A44 comparison; physical-area prices remain labelled proxies."""
+import gzip
 import argparse
 import csv
 import datetime as dt
@@ -191,7 +192,7 @@ def compare(folder, observed_root, output):
                   acceptance='No selected thresholds, fitting or empirical acceptance claim',
                   zones=records, excluded=excluded, borders=spread_records,
                   model_areas_without_observed_comparison=sorted(set(areas) - {r['model_area'] for r in records if r['known_hours']}))
-    (output / 'price-comparison.json').write_text(json.dumps(result, indent=2, allow_nan=False) + '\n')
+    (output / 'price-comparison.json').write_text(json.dumps(result, separators=(',', ':'), allow_nan=False) + '\n')
     for name in ('summary.json', 'replay.json'):
         (output / name).write_bytes((folder / name).read_bytes())
     with (output / 'zone-errors.csv').open('w') as f:
@@ -204,7 +205,7 @@ def compare(folder, observed_root, output):
     fig, ax = plt.subplots(figsize=(11, 9), layout='constrained')
     ax.barh([r['zone'] for r in eligible], [r['mae_eur_mwh'] for r in eligible])
     ax.set(xlabel='Mean absolute error, EUR/MWh', title='All available zones: physical-area proxy versus ENTSO-E'); ax.invert_yaxis()
-    fig.savefig(output / 'zone-errors.svg'); plt.close(fig)
+    fig.savefig(output / 'zone-errors.png'); plt.close(fig)
     if 'DE-LU' in observations:
         de = prices[:, areas.index('0:DE')]; obs = observations['DE-LU']; valid = np.isfinite(obs)
         fig, axes = plt.subplots(2, 1, figsize=(11, 7), layout='constrained')
@@ -213,7 +214,7 @@ def compare(folder, observed_root, output):
         axes[0].set(ylabel='EUR/MWh', title='First calendar week: no example-week selection'); axes[0].legend()
         axes[1].hist(de[valid] - obs[valid], bins=70)
         axes[1].set(xlabel='Model minus observed, EUR/MWh', ylabel='Hours', title='Germany: annual hourly error distribution (all matched hours)')
-        fig.savefig(output / 'germany-prices.svg'); plt.close(fig)
+        fig.savefig(output / 'germany-prices.png'); plt.close(fig)
         with (output / 'germany-hourly.csv').open('w') as f:
             writer = csv.writer(f); writer.writerow(['utc', 'model_de_country_eur_mwh', 'observed_entsoe_de_lu_eur_mwh'])
             for t in range(8760):
@@ -222,7 +223,7 @@ def compare(folder, observed_root, output):
     heat = np.array([[m.get('mae_eur_mwh', np.nan) for m in r['monthly']] for r in eligible])
     im = ax.imshow(heat, aspect='auto', interpolation='nearest')
     ax.set(xticks=range(12), xticklabels=range(1, 13), yticks=range(len(eligible)), yticklabels=[r['zone'] for r in eligible], xlabel='UTC month', title='Monthly absolute price errors: no gap filling')
-    fig.colorbar(im, ax=ax, label='MAE, EUR/MWh'); fig.savefig(output / 'monthly-errors.svg'); plt.close(fig)
+    fig.colorbar(im, ax=ax, label='MAE, EUR/MWh'); fig.savefig(output / 'monthly-errors.png'); plt.close(fig)
     return s, replay, result
 
 
@@ -326,7 +327,7 @@ this report is descriptive and does not claim held-out validation.
     unavailable = [z['zone'] for z in comparison['zones'] if not z['known_hours']]
     if unavailable:
         text += 'No 2025 A44 observations were retrieved for: ' + ', '.join(unavailable) + '. They remain unavailable, not zero-priced, and their failed-month records are retained.\n\n'
-    text += '''![Hourly German example and annual errors](../research/daily-fuel-annual-2025/germany-prices.svg)
+    text += '''![Hourly German example and annual errors](../research/daily-fuel-annual-2025/germany-prices.png)
 
 | Observed zone | Model area | Matched hours | MAE EUR/MWh | Bias EUR/MWh | RMSE EUR/MWh | Correlation |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -335,9 +336,9 @@ this report is descriptive and does not claim held-out validation.
         corr = 'unavailable' if z['correlation'] is None else f"{z['correlation']:.3f}"
         text += f"| {z['zone']} | {z['model_area']} | {z['known_hours']} | {z['mae_eur_mwh']:.2f} | {z['bias_eur_mwh']:+.2f} | {z['rmse_eur_mwh']:.2f} | {corr} |\n"
     text += '''
-![Errors for every available mapped zone](../research/daily-fuel-annual-2025/zone-errors.svg)
+![Errors for every available mapped zone](../research/daily-fuel-annual-2025/zone-errors.png)
 
-![Monthly price-error patterns](../research/daily-fuel-annual-2025/monthly-errors.svg)
+![Monthly price-error patterns](../research/daily-fuel-annual-2025/monthly-errors.png)
 
 ## Geography and border-price separation
 
@@ -412,8 +413,8 @@ Large raw inputs and witnesses remain ignored; public artifacts are compact.
 Download [price metrics and source receipts](../research/daily-fuel-annual-2025/price-comparison.json),
 [zone errors CSV](../research/daily-fuel-annual-2025/zone-errors.csv),
 [border errors CSV](../research/daily-fuel-annual-2025/border-errors.csv),
-[German hourly pairs](../research/daily-fuel-annual-2025/germany-hourly.csv),
-[run summary](../research/daily-fuel-annual-2025/summary.json) and
+[German hourly pairs](../research/daily-fuel-annual-2025/germany-hourly.csv.gz),
+[run summary](../research/daily-fuel-annual-2025/summary.json.gz) and
 [independent replay](../research/daily-fuel-annual-2025/replay.json).
 '''
     return text
@@ -431,5 +432,8 @@ if __name__ == '__main__':
     methods = (Path(__file__).parent / 'report-templates/daily-resource-methods.md').read_text()
     a.document.write_text(rendered.replace('## Conclusion and next steps', methods + '\n## Conclusion and next steps'))
     for artifact in a.output.iterdir():
-        if artifact.suffix in ('.svg', '.csv'):
+        if artifact.suffix == '.csv':
             artifact.write_text('\n'.join(line.rstrip() for line in artifact.read_text().splitlines()) + '\n')
+    hourly = a.output / 'germany-hourly.csv'
+    (a.output / 'germany-hourly.csv.gz').write_bytes(gzip.compress(hourly.read_bytes(), mtime=0))
+    hourly.unlink()

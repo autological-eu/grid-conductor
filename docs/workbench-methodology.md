@@ -101,10 +101,10 @@ lifecycle-intensity differences during jointly observed price gaps > €5/MWh.
 Both endpoints must have usable generation-based intensities in the same hour.
 If full factor coverage is not available for every selected hour, the displayed
 value compares mapped subsets only. The compact sidebar shows the number and
-units; matched-hour coverage and factor completeness are available in the linked
-hourly data and provenance. It is not
+units; matched-hour coverage and factor completeness are available in the published
+baseline metric and provenance. It is not
 the difference of annual means, a demand-weighted quantity, or emissions savings.
-Geographical proxies (including German national data for DE-LU) remain applicable. Historical lifecycle data remains available through the data
+Geographical proxies (including German national data for DE-LU) remain applicable. Historical lifecycle baseline metrics remain available through the data
 reference below; it is not used to calculate scenario savings.
 
 There is no “carbon loss” total: an intensity difference multiplied by demand
@@ -179,7 +179,7 @@ results should be used: screening questions worth studying, not investment decis
 | --- | --- | --- |
 | 2025 annual prices, flows, spread events, slopes and welfare bounds | [ENTSO-E Transparency Platform](https://transparency.entsoe.eu/); [screening JSON](../public/research/entsoe-fast-targets.json), schema 3, January–December | Offline A44 prices and archived cross-border flow banks, quarter-hour accounting. Original A11 receipts absent; flow classification remains unverified. Slopes/bounds are derived screening assumptions. |
 | Hourly price charts and carbon-hour selection | [Price manifest](../public/research/zone-prices-2025/manifest.json), [ENTSO-E](https://transparency.entsoe.eu/) and [Energy-Charts](https://api.energy-charts.info/) | 39 published areas; each manifest entry identifies provider URL/request, coverage, hash and licence. Sources differ by area. UTC hourly alignment; missing observations retained. This is distinct from the annual quarter-hour screening bank. |
-| Historical generation and lifecycle carbon | ENTSO-E A75/A16, actual generation per production type; [carbon summary and provenance](../public/research/production-carbon-2025/map-summary.json) | 2025 monthly collection, generation completeness, geography and source hashes per area. Border-specific price-gap hours; incomplete hours and unmapped fuels are explicit. Hourly file references are listed in the summary. |
+| Historical generation and lifecycle carbon | ENTSO-E A75/A16, actual generation per production type; [carbon baseline and provenance](../public/research/carbon-spreads-2025.json) | 2025 monthly collection, generation completeness, geography and source hashes per area. Border-specific price-gap hours; incomplete hours and unmapped fuels are explicit. The same hourly computation is performed offline; only the 68 border metrics, coverage, factor registry and source receipts are published. |
 | Lifecycle factors | [IPCC AR5 WGIII Annex III](https://archive.ipcc.ch/pdf/assessment-report/ar5/wg3/ipcc_wg3_ar5_annex-iii.pdf); factor registry in carbon summary | Pilot version `ipcc-ar5-annex-iii-medians-pilot-v1`: biomass 230, coal/lignite 820, gas 490, geothermal 38, hydro 24, ocean 17, nuclear 12, solar 48, offshore wind 12, onshore wind 11 g CO₂e/kWh. Generic proxies; unsupported types stay unmapped. |
 | Map positions and scenario carbon contrast | Static `src/lib/entsoeZones.ts` metadata | Approximate zone centroids and manually supplied average-intensity assumptions; not a sourced 2025 emissions dataset. Used by the climate proxy, independently of generation-based lifecycle estimates. |
 | Investment characteristics | User-editable units, defaults in `src/lib/units.ts` | Battery 200 MW / 800 MWh, efficiency 0.88, capex €120m, delivery 24 months; line 700 MW, capex €650m, delivery 72 months. Illustrative assumptions, not vendor quotes. Actual configured units drive evaluation. |

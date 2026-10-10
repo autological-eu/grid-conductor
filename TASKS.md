@@ -16,7 +16,8 @@ parallel active model programmes. Automatic hourly reviews remain disabled.
 The current model's first arithmetic-only annual attempt stopped after 363 days;
 last-48h storage directions caused infeasibility despite a verified physical path.
 The retained completed run explicitly uses two terminal mode-selection prepasses.
-Its original source/witnesses and failed-attempt diagnosis remain ignored locally.
+Its compact failure diagnosis, immediate preceding state and original source
+remain ignored locally; obsolete partial-year witnesses were deleted.
 Do not extrapolate the failed attempt or silently remove the boundary exception.
 
 Direct ENTSO-E A44 collection has 41 complete series out of 45 attempted; BA/GB/IE/ME
@@ -64,8 +65,8 @@ not held-out validation. Prepared demand is not independently audited observed d
 - Conditional-window and smaller monolithic/native fixtures remain supporting
   checks; removing their articles does not turn policy runs into annual optima.
   Future optimisation still needs explicit feasibility/convergence bounds.
-- Keep observed screening JSON, hourly price/carbon inputs, browser network fixtures
-  and other artifacts consumed by preserved routes. Reports are removed, not app data.
+- Keep observed screening JSON, hourly price inputs and compact carbon baseline
+  metrics. Legacy browser-lab routes/fixtures and unused derived exports are retired.
 - Original flow classification remains unverified; full production lifecycle factor
   coverage and charging-origin attribution remain open. The sidebar carbon spread
   and signed scenario proxy are not demonstrated avoided emissions.
@@ -87,3 +88,36 @@ downloads match committed bytes. Public Docs: https://autological-eu.github.io/g
 No simulation job was
 running during the cleanup. Large local caches and source/replay witnesses were
 not deleted. Publication removal preserves Git history.
+
+## Minimal workspace/data cleanup
+
+User authorization supersedes the prior broad supporting-artifact retention.
+Removed obsolete public exports, browser network lab/targets routes, unused
+Python tools and historical plans. Retained current source/hash dependencies;
+frozen reference producer files remain where replay actually verifies their hashes.
+Retained report charts use PNG and German hourly CSV downloads use lossless gzip;
+verbose comparison metrics are compact JSON. Frozen input/summary bytes are preserved.
+
+All 68 sidebar carbon metrics were computed with the existing hourly function,
+source/price hashes checked, and direction-reversal parity verified. Public arrays
+are replaced by carbon-spreads-2025.json, with coverage and source/factor provenance.
+Processed external generation inputs stay ignored and reconstructible from original
+2025 source months. 1.22 GiB of obsolete local runs/coordination/pilot output removed;
+current annual/water witnesses, reference coefficients, toolchain and source data remain.
+
+Post-cleanup verification: all 365 current daily witnesses/rules replay with
+source hashes intact; all 59 water/network blocks replay to byte-identical original
+audit evidence. Four immutable metadata archives decompress byte-for-byte, and
+static checks verify current daily replay and fixed-hydro source/replay hash links.
+14 live-app Bun tests, eight resource-rule tests, five thermal-rule tests, three
+price-comparison tests and two terminal-mode tests pass. Typecheck, lint (six
+existing warnings), price coverage, build, mobile/desktop workbench/report/charts/
+downloads and maths checks pass. Legacy-lab tests were removed with that retired
+implementation; retained-model native and chronological gates remain unchanged.
+Final branch diff and publication verification are recorded after deployment. Automatic reviews stay disabled.
+
+Measured staged diff versus origin/main after cleanup: approximately 19,100
+added lines (was 320,400), 80,109 deleted, about 8.4 MB binary patch text
+(was 33.9 MB). Public assets: 60 files / 4.67 MiB, down from roughly 35 MiB.
+Publication verification for this data cleanup is pending. The exact final count
+may change slightly with this verification record.

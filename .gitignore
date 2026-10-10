@@ -65,3 +65,39 @@ data/daily-market-2025/
 
 # Raw historical fuel benchmarks and expanded hourly research inputs
 /data/fuel-prices/
+
+# Only live baseline/source prerequisites and two retained reports are published.
+/public/research/*
+!/public/research/entsoe-fast-targets.json
+!/public/research/carbon-spreads-2025.json
+!/public/research/zone-prices-2025/
+!/public/research/irena-capacity-2025/
+/public/research/irena-capacity-2025/*
+!/public/research/irena-capacity-2025/summary.json
+!/public/research/european-reservoir-clearing-2025/
+/public/research/european-reservoir-clearing-2025/*
+!/public/research/european-reservoir-clearing-2025/summary.json
+!/public/research/european-reservoir-clearing-2025/replay.json
+!/public/research/fixed-reservoir-screening-2025/
+/public/research/fixed-reservoir-screening-2025/*
+!/public/research/fixed-reservoir-screening-2025/summary.json
+!/public/research/fixed-reservoir-screening-2025/area-summary.csv
+!/public/research/fixed-reservoir-screening-2025/hourly-de.csv.gz
+!/public/research/fixed-reservoir-screening-2025/model-*.png
+!/public/research/daily-fuel-annual-2025/
+/public/research/daily-fuel-annual-2025/*
+!/public/research/daily-fuel-annual-2025/*.json
+!/public/research/daily-fuel-annual-2025/*.png
+!/public/research/daily-fuel-annual-2025/zone-errors.csv
+!/public/research/daily-fuel-annual-2025/border-errors.csv
+!/public/research/daily-fuel-annual-2025/germany-hourly.csv.gz
+
+# Losslessly archived immutable metadata; hydrated JSON is local only.
+/public/research/irena-capacity-2025/summary.json
+!/public/research/irena-capacity-2025/summary.json.gz
+/public/research/european-reservoir-clearing-2025/summary.json
+!/public/research/european-reservoir-clearing-2025/summary.json.gz
+/public/research/fixed-reservoir-screening-2025/summary.json
+!/public/research/fixed-reservoir-screening-2025/summary.json.gz
+/public/research/daily-fuel-annual-2025/summary.json
+!/public/research/daily-fuel-annual-2025/summary.json.gz

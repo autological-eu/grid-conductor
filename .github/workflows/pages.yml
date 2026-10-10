@@ -28,6 +28,7 @@ jobs:
       - run: bun run test
       - name: Verify static hourly coverage for every map corridor
         run: python3 tools/check_zone_price_traces.py
+      - run: python3 tools/check_public_assets.py
       - run: bun run build
       - name: Install Chromium for interaction checks
         run: bunx playwright install --with-deps chromium
@@ -43,7 +44,6 @@ jobs:
             sleep 1
           done
           bun run test:browser
-          bun tools/network-browser-smoke.ts
           bun tools/math-browser-smoke.ts
       - uses: actions/upload-pages-artifact@v5
         if: github.event_name != 'pull_request'
@@ -78,5 +78,4 @@ jobs:
           SMOKE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
           bun run test:browser
-          bun tools/network-browser-smoke.ts
           bun tools/math-browser-smoke.ts

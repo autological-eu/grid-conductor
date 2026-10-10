@@ -11,8 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocsRouteImport } from './routes/docs'
-import { Route as NetworkRouteImport } from './routes/network'
-import { Route as TargetsRouteImport } from './routes/targets'
 import { Route as DocsSlugRouteImport } from './routes/docs.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -25,16 +23,6 @@ const DocsRoute = DocsRouteImport.update({
   path: '/docs',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NetworkRoute = NetworkRouteImport.update({
-  id: '/network',
-  path: '/network',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TargetsRoute = TargetsRouteImport.update({
-  id: '/targets',
-  path: '/targets',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DocsSlugRoute = DocsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -44,38 +32,30 @@ const DocsSlugRoute = DocsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/docs': typeof DocsRouteWithChildren
-  '/network': typeof NetworkRoute
-  '/targets': typeof TargetsRoute
   '/docs/$slug': typeof DocsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/docs': typeof DocsRouteWithChildren
-  '/network': typeof NetworkRoute
-  '/targets': typeof TargetsRoute
   '/docs/$slug': typeof DocsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/docs': typeof DocsRouteWithChildren
-  '/network': typeof NetworkRoute
-  '/targets': typeof TargetsRoute
   '/docs/$slug': typeof DocsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/docs' | '/network' | '/targets' | '/docs/$slug'
+  fullPaths: '/' | '/docs' | '/docs/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/docs' | '/network' | '/targets' | '/docs/$slug'
-  id: '__root__' | '/' | '/docs' | '/network' | '/targets' | '/docs/$slug'
+  to: '/' | '/docs' | '/docs/$slug'
+  id: '__root__' | '/' | '/docs' | '/docs/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DocsRoute: typeof DocsRouteWithChildren
-  NetworkRoute: typeof NetworkRoute
-  TargetsRoute: typeof TargetsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,20 +72,6 @@ declare module '@tanstack/react-router' {
       path: '/docs'
       fullPath: '/docs'
       preLoaderRoute: typeof DocsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/network': {
-      id: '/network'
-      path: '/network'
-      fullPath: '/network'
-      preLoaderRoute: typeof NetworkRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/targets': {
-      id: '/targets'
-      path: '/targets'
-      fullPath: '/targets'
-      preLoaderRoute: typeof TargetsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/docs/$slug': {
@@ -131,8 +97,6 @@ const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DocsRoute: DocsRouteWithChildren,
-  NetworkRoute: NetworkRoute,
-  TargetsRoute: TargetsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -45,7 +45,7 @@ def publish():
   if len(pa)!=8760 or len(pb)!=8760:raise ValueError('Price chronology length mismatch')
   indices=[i for i,(x,y) in enumerate(zip(pa,pb)) if x is not None and y is not None and abs(x-y)>5]
   borders[a+'>'+b]=dict(hours_with_spread_gt_5=len(indices),zones={z:dict(geographic_scope=areas[z]['scope'],**period_estimate(bank[z],indices)) for z in (a,b)})
- output=ROOT/'public/research/production-carbon-2025';output.mkdir(exist_ok=True)
+ output=ROOT/'data/carbon-pilot/baseline-inputs-2025';output.mkdir(exist_ok=True)
  hourly=output/'hourly';hourly.mkdir(exist_ok=True);hourly_files={}
  for zone in areas:
   values=[]

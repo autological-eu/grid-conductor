@@ -45,7 +45,7 @@ results. The 25-year benefit-minus-capex figure is undiscounted; signed carbon
 proxies are not demonstrated avoided emissions.
 
 `src/` contains the app, `tests/` Bun tests, `tools/` and `config/` offline research,
-`docs/` the three public articles, and `public/research/` compact evidence/app data.
+`docs/` the three public articles, and `public/research/` the allowlisted baseline and retained report assets.
 Ignored `data/` holds provider caches, source networks and large replay witnesses.
 Never commit secrets or multi-gigabyte artifacts. Python research uses the pinned
 `data/pypsa-eur/upstream/.pixi/envs/default/bin/python` interpreter.
@@ -68,11 +68,22 @@ CI/Pages and public URLs before claiming publication. To check a preview:
 
 ```sh
 bun run test:browser
-bun tools/network-browser-smoke.ts
 bun tools/math-browser-smoke.ts
 ```
 
 Set `SMOKE_URL` to the preview/public project root. Browser checks use Chromium;
-physical iPhone/Safari verification remains separate. Legacy `/network` and
-`/targets` routes remain accessible with supporting data but are not promoted
-as active model programmes.
+physical iPhone/Safari verification remains separate. Legacy `/network` and `/targets` experiments have been removed. Source inputs
+and original replay witnesses stay outside Git; they are not public report caches.
+
+`bun tools/publish_carbon_spreads.ts` publishes the 68 baseline carbon numbers
+from ignored processed 2025 ENTSO-E inputs using the actual metric function.
+`python3 tools/check_public_assets.py` prevents obsolete public datasets returning.
+Report charts are PNG; full-year German CSV downloads use gzip without changing
+values. External source caches and the minimal retained-model reference/witnesses
+remain local; unused experiment exports and runs are removed.
+
+Immutable IRENA/reference/run metadata is stored losslessly as `.json.gz`. Before
+offline model work run `python3 tools/pack_model_metadata.py --restore`; after
+report generation run it without `--restore`, then the public-asset check. Original
+decompressed bytes and calculation hashes are preserved. Hydrated JSON is local
+only and omitted from the static build.

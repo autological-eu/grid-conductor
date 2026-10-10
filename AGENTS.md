@@ -20,7 +20,7 @@ Maintain two European research models:
 
 Only these two reports and docs/workbench-methodology.md are active publications.
 Do not recreate removed reports or restart retired model/search programmes.
-Existing tools, historical compact artifacts and numerical fixtures may remain
+Only used source tools and minimal retained-model evidence may remain
 as supporting dependencies; their presence is not an instruction to develop them.
 Keep methods/provenance/limitations in retained reports, not a proliferating catalogue.
 Preserve the single retained PyPSA-Eur 2025 reference (archival candidate-006), source
@@ -61,8 +61,9 @@ No obsolete candidate restoration. Automatic hourly reviews are disabled.
   Gross system cost savings are not investor income or congestion rent.
 - Raw provider inputs and large witnesses stay in ignored data/. No Git bulk backups,
   secrets or third-party input mirrors. Compact public outputs need provenance.
-- Keep failed evidence needed to explain retained results. This publication cleanup
-  does not authorize deletion of current caches or source/replay dependencies.
+- Keep only compact failed diagnostics needed to explain retained results and
+  the immediate preceding state. Delete obsolete runs; protect current source/replay
+  dependencies and never infer a deleted result has passed verification.
 
 ## Source/toolchain notes
 
@@ -92,18 +93,36 @@ Do not regenerate them blindly or treat a structural fixture as annual evidence.
   checks, quarter-hour annual sums and welfare caps. Do not replace it implicitly.
 - IndexedDB persistence in workbench.ts: stable UUIDs, ordered units, revision
   checks and edit invalidation. No cloud synchronization; only line/battery UI.
-- Preserve schema-v3 observed screening, zone-prices-2025 and production-carbon-2025
-  app data. Signed annual rent combines directed flows; floor display only.
+- Preserve schema-v3 observed screening, zone-prices-2025 and carbon-spreads-2025
+  baseline data. Publish carbon metrics with tools/publish_carbon_spreads.ts after
+  offline publish_map_carbon_2025.py; hourly generation-derived inputs stay ignored. Signed annual rent combines directed flows; floor display only.
   Scheduled/physical classification remains unverified without original receipts.
 - Left carbon card: mean absolute hourly lifecycle spread during observed >EUR5/MWh
   price gaps, label/value/units only. Coverage/proxy limits remain in Docs/evidence.
   Right scenario proxy: savings negative, increases positive; not avoided emissions.
   Lifecycle factors, operational pricing and dispatch emissions are separate.
   Missing factors remain unknown; no intensity × demand-minus-imports “carbon loss”.
-- Navigation stays Workbench/Docs. Preserved legacy /network and /targets routes
-  are not active model promotions; retain data they consume and remove dead links.
+- Navigation stays Workbench/Docs. Legacy /network and /targets routes, browser
+  network-lab code and their derived exports are retired; do not restore them.
 - Run appropriate checks: bun run lint, typecheck, test, build; production Chromium
-  workbench/network/math smoke checks. Verify mobile overflow, images, downloads
+  workbench/math smoke checks. Verify mobile overflow, images, downloads
   and project-base deep links. Never claim unperformed checks.
 - Publication claims require successful CI/Pages and unauthenticated public URL
   verification; a build or push is insufficient. Name material failures explicitly.
+
+## Data allowlist
+
+Only 2025 external inputs used by models/baseline belong in local caches, with
+necessary adjacent-year endpoints/release provenance labelled. Keep the fixed
+hydro reference, native coefficients, current annual witness and water schedule
+because the retained models require them. Keep installed pinned toolchains.
+No unused experiment exports, duplicate model runs or alternative search state.
+Public research assets are allowlisted in tools/check_public_assets.py and
+.gitignore; run the asset check before builds. Do not commit ignored intermediates
+or republish old charts just because a frozen historical producer can write them.
+
+Before offline model/report work in a fresh checkout, run
+`python3 tools/pack_model_metadata.py --restore`. This restores exact immutable
+JSON bytes from Git's gzip archives without modifying calculation source hashes.
+After successful report generation, run the packer without --restore and the
+asset check. Hydrated JSON remains ignored/local and is excluded from dist.

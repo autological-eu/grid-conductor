@@ -151,21 +151,11 @@ try {
       "docs/",
       "docs/european-physical-synthetic-clearing-2025/",
       "docs/daily-fuel-dispatch-2025/",
-      "targets/",
     ]) {
       const response = await page.goto(`${base}${route}`);
       assert.equal(response?.status(), 200, `Direct navigation to ${route}`);
       await page.getByRole("heading", { level: 1 }).first().waitFor();
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
-      if (route.startsWith("docs/network-")) {
-        await page.locator("article img").scrollIntoViewIfNeeded();
-        await page.waitForFunction(() =>
-          Array.from(document.images).every((img) => img.complete && img.naturalWidth > 0),
-        );
-        assert(
-          await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
-        );
-      }
       if (route === "docs/") {
         await page.getByRole("heading", { name: "1. Identifying bottlenecks" }).waitFor();
         await page.getByRole("heading", { name: "2. Simulating scenarios" }).waitFor();
@@ -179,14 +169,11 @@ try {
         assert((await page.locator("article").innerText()).includes("two-zone screening model"));
       }
     }
-    assert(
-      await page.getByText("Inspect recurring price differences", { exact: false }).isVisible(),
-    );
     await page.getByRole("link", { name: "Workbench", exact: true }).click();
     await page.locator('g[data-corridor="FR|IT-North"]').waitFor();
     assert.deepEqual(failures, [], `Browser/asset errors at ${viewport.width}px`);
     console.log(
-      `Browser smoke passed at ${viewport.width}px: map, selection, scenarios, interventions, evaluation, reload persistence, removal, direct research/targets routes, asset paths and overflow.`,
+      `Browser smoke passed at ${viewport.width}px: map, selection, scenarios, interventions, evaluation, reload persistence, removal, retained report routes, asset paths and overflow.`,
     );
     await context.close();
   }

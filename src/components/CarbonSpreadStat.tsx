@@ -1,33 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import { publicAsset } from "@/lib/research";
-import { meanCarbonSpread, type CarbonHour } from "@/lib/carbon-spread";
+import { type meanCarbonSpread } from "@/lib/carbon-spread";
 
 export function CarbonSpreadStat({ a, b }: { a: string; b: string }) {
   const query = useQuery({
     queryKey: ["carbon-spread-2025", ...[a, b].sort()],
     queryFn: async () => {
-      const paths = [
-        `research/zone-prices-2025/${a}.json`,
-        `research/zone-prices-2025/${b}.json`,
-        `research/production-carbon-2025/hourly/${a}.json`,
-        `research/production-carbon-2025/hourly/${b}.json`,
-      ];
-      const data = await Promise.all(
-        paths.map(async (path) => {
-          const response = await fetch(publicAsset(path));
-          if (!response.ok) throw new Error("Carbon spread data unavailable");
-          const rows: unknown = await response.json();
-          if (!Array.isArray(rows) || rows.length !== 8760)
-            throw new Error("Invalid hourly chronology");
-          return rows;
-        }),
-      );
-      return meanCarbonSpread(
-        data[0] as (number | null)[],
-        data[1] as (number | null)[],
-        data[2] as CarbonHour[],
-        data[3] as CarbonHour[],
-      );
+      const response = await fetch(publicAsset("research/carbon-spreads-2025.json"));
+      if (!response.ok) throw new Error("Carbon spread data unavailable");
+      const report = (await response.json()) as {
+        schema_version: number;
+        year: number;
+        borders: Record<string, ReturnType<typeof meanCarbonSpread>>;
+      };
+      if (report.schema_version !== 1 || report.year !== 2025 || !report.borders)
+        throw new Error("Unsupported carbon baseline");
+      return report.borders[[a, b].sort().join(">")] ?? null;
     },
     staleTime: Infinity,
   });
