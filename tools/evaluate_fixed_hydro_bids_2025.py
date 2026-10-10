@@ -1,286 +1,232 @@
-"""Same-observation annual evaluation of fixed hydro with simple resource bids."""
-import argparse
-import json
+"""Publish the single selected fixed-hydro model and independently sourced diagnostics."""
+import argparse,json
 from pathlib import Path
-import numpy as np
-import pandas as pd
+import numpy as np,pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from hybrid_fixed_hydro_2025 import ROOT,VARIANTS,HOURS,load,compiled,resource_costs,verified_fuel
+from hybrid_fixed_hydro_2025 import ROOT,HOURS,load,compiled,resource_costs,verified_fuel,FUEL
 from simple_resource_bids import cost_assumptions
-from compare_daily_dispatch_prices import metrics,model_area,audit_observations
 from hourly_renewable_estimates import digest
 OUT=ROOT/'public/research/fixed-reservoir-screening-2025'
-LABELS=dict(legacy='Legacy fixed hydro',fuel_only='Gas/oil fuel update',resource_bids='Combined simple resource bids')
 
 
-def evaluate(folder):
-    summary=json.loads((folder/'summary.json').read_text());replay=json.loads((folder/'replay.json').read_text())
-    if summary['hours']!=8760 or replay['summary_sha256']!=digest(folder/'summary.json'):raise ValueError('Complete replayed annual run required')
-    for name,sha in summary['provenance']['dependencies'].items():
-        if digest(ROOT/'tools'/name)!=sha:raise ValueError('Changed calculation source')
-    prices={}
-    for variant in VARIANTS:
-        if digest(folder/(variant+'.npz'))!=summary['cases'][variant]['witness_sha256']:raise ValueError('Changed annual witness')
-        with np.load(folder/(variant+'.npz'),allow_pickle=False) as a:prices[variant]=a['prices'].copy()
-    areas=summary['zones'];root=ROOT/'data/price-trace/dispatch-validation-2025-v2'
-    manifest=json.loads((root/'manifest.json').read_text());rows=[];excluded=[];observations={}
-    dates=pd.date_range('2025-01-01',periods=8760,freq='h');monthly=[]
-    for zone,meta in sorted(manifest['zones'].items()):
-        area,scope=model_area(zone);path=root/(zone+'.json')
-        if area not in areas:excluded.append(dict(zone=zone,reason=scope));continue
-        if digest(path)!=meta['hourly_sha256']:raise ValueError('Changed observations')
-        observed=np.array([np.nan if v is None else v for v in json.loads(path.read_text())])
-        audit_observations(zone,meta,observed)
-        if not np.isfinite(observed).any():excluded.append(dict(zone=zone,reason='No observed A44 prices available'));continue
-        observations[zone]=observed;models={}
-        for variant in VARIANTS:
-            models[variant]=metrics(prices[variant][:,areas.index(area)],observed)
-            monthly.append(dict(zone=zone,variant=variant,months=[metrics(prices[variant][dates.month==i,areas.index(area)],observed[dates.month==i]) for i in range(1,13)]))
-        rows.append(dict(zone=zone,area=area,mapping_scope=scope,observation_sha256=digest(path),models=models))
-    # Equal weight per physical area; repeated Norway/Sweden/Italy proxies are not extra areas.
-    macro={}
-    for variant in VARIANTS:
-        area_mae={area:np.mean([r['models'][variant]['mae_eur_mwh'] for r in rows if r['area']==area]) for area in sorted({r['area'] for r in rows})}
-        macro[variant]=dict(physical_areas=len(area_mae),mean_area_mae_eur_mwh=float(np.mean(list(area_mae.values()))),area_mae_eur_mwh=area_mae)
-    targets=json.loads((ROOT/'public/research/entsoe-fast-targets.json').read_text())['targets'];pairs=sorted({tuple(sorted(r['border'].split('>'))) for r in targets});borders=[]
-    for a,b in pairs:
-        if a not in observations or b not in observations:continue
-        za,_=model_area(a);zb,_=model_area(b);observed=observations[a]-observations[b];valid=np.isfinite(observed);gap=valid&(abs(observed)>5)
-        record=dict(border=a+'|'+b,known_hours=int(valid.sum()),observed_gap_hours=int(gap.sum()),same_model_area=za==zb,models={})
-        for variant in VARIANTS:
-            modeled=prices[variant][:,areas.index(za)]-prices[variant][:,areas.index(zb)];error=modeled[valid]-observed[valid]
-            record['models'][variant]=dict(mae_eur_mwh=float(abs(error).mean()),bias_eur_mwh=float(error.mean()),
-                modeled_gap_hours=int(np.count_nonzero(valid&(abs(modeled)>5))),
-                direction_agreement_on_observed_gaps=float(np.mean(np.sign(modeled[gap])==np.sign(observed[gap]))) if gap.any() else None)
-        borders.append(record)
-    n,base,common=load();market=verified_fuel(ROOT/summary['provenance']['fuel_path']);assumptions,_=cost_assumptions()
-    curves=[]
-    for variant in VARIANTS:
-        m=compiled(n,base,resource_costs(n,base['cost'],market,assumptions,variant));z=areas.index('0:DE');mask=m['offer_zones']=='0:DE'
-        mask&=~m['emergency_mask']
-        for hour in HOURS:
-            bids=m['cost'][hour,mask];volume=m['availability'][hour,mask];order=np.argsort(bids,kind='stable')
-            curves.append(dict(variant=variant,utc=str(dates[hour]),cost_eur_mwh=bids[order].tolist(),volume_mw=volume[order].tolist(),
-                clearing_price_eur_mwh=float(prices[variant][hour,z]),observed_de_lu_eur_mwh=float(observations['DE-LU'][hour]),
-                residual_domestic_demand_mw=float(base['load'][hour,z])))
-    fig,axes=plt.subplots(3,1,figsize=(12,10),layout='constrained')
-    for j,hour in enumerate(HOURS):
-        for c in [c for c in curves if c['utc']==str(dates[hour])]:
-            axes[j].step(np.r_[0,np.cumsum(c['volume_mw'])]/1000,np.r_[c['cost_eur_mwh'][0],c['cost_eur_mwh']],where='pre',label=LABELS[c['variant']])
-        c=next(c for c in curves if c['utc']==str(dates[hour]) and c['variant']=='resource_bids')
-        axes[j].axhline(c['clearing_price_eur_mwh'],color='black',linestyle='--',label='Combined network clearing price')
-        axes[j].axhline(c['observed_de_lu_eur_mwh'],color='gray',linestyle=':',label='Observed DE-LU price')
-        axes[j].axvline(c['residual_domestic_demand_mw']/1000,color='gray',alpha=.4)
-        axes[j].set(title=c['utc']+' UTC — domestic offers, network clearing includes trade',ylabel='EUR/MWh',xlabel='Cumulative domestic offered capacity GW');axes[j].legend(fontsize=8,ncol=2)
-    bid_image=OUT/'resource-bids-curves.png';fig.savefig(bid_image,dpi=120);plt.close(fig)
-    fig,axes=plt.subplots(3,1,figsize=(12,11),layout='constrained');z=areas.index('0:DE')
-    observed=pd.Series(observations['DE-LU'],index=dates).resample('7D').mean();axes[0].plot(observed.index,observed,label='Observed ENTSO-E DE-LU',color='black')
-    for variant in VARIANTS:
-        series=pd.Series(prices[variant][:,z],index=dates).resample('7D').mean();axes[0].plot(series.index,series,label=LABELS[variant],alpha=.8)
-    axes[0].set(title='2025 German price proxy: seven-day means, identical observed coverage',ylabel='EUR/MWh');axes[0].legend(fontsize=8)
-    x=np.arange(1,13)
-    for j,variant in enumerate(VARIANTS):
-        r=next(r for r in monthly if r['zone']=='DE-LU' and r['variant']==variant)
-        axes[1].bar(x+(j-1)*.25,[m['mae_eur_mwh'] for m in r['months']],width=.25,label=LABELS[variant])
-    axes[1].set(xticks=x,xlabel='Month',ylabel='MAE EUR/MWh',title='German proxy: monthly absolute error');axes[1].legend(fontsize=8)
-    x=np.arange(len(rows))
-    for j,variant in enumerate(VARIANTS):axes[2].bar(x+(j-1)*.25,[r['models'][variant]['mae_eur_mwh'] for r in rows],width=.25,label=LABELS[variant])
-    axes[2].set(xticks=x,xticklabels=[r['zone'] for r in rows],ylabel='MAE EUR/MWh',title='All mapped observed zones, including adverse outcomes');axes[2].tick_params(axis='x',rotation=90);axes[2].legend(fontsize=8)
-    price_image=OUT/'resource-bids-errors.png';fig.savefig(price_image,dpi=120);plt.close(fig)
-    p=summary['provenance'].copy();audit=p.pop('capacity_audit');p['capacity_audit_canonical_sha256']=__import__('hashlib').sha256(json.dumps(audit,sort_keys=True).encode()).hexdigest()
-    public=dict(status=summary['status'],hours=8760,zones=areas,cases=summary['cases'],provenance=p,replay=replay,
-        water_residual_mwh=summary['water_residual_mwh'],common_preparation_seconds=summary['common_preparation_seconds'],
-        elapsed_seconds=summary['elapsed_seconds'],peak_rss_mib=summary['peak_rss_mib'],
-        retained_legacy_maximum_objective_difference_eur=summary['retained_legacy_maximum_objective_difference_eur'],
-        retained_legacy_maximum_dual_difference_eur_mwh=summary['retained_legacy_maximum_dual_difference_eur_mwh'],
-        mapped_zone_errors=rows,excluded=excluded,monthly_errors=monthly,physical_area_weighted_diagnostic=macro,border_spreads=borders,
-        german_offer_examples=curves,fuel_monthly_inputs=market['monthly'],raw_fuel_provenance=market['provenance'],
-        publication_producer_sha256=digest(__file__),source_summary_sha256=digest(folder/'summary.json'),
-        observed_manifest_sha256=digest(root/'manifest.json'),images={p.name:digest(p) for p in [bid_image,price_image]})
+def publish(folder,diagnostics):
+    s=json.loads((folder/'summary.json').read_text());r=json.loads((folder/'replay.json').read_text());d=json.loads(diagnostics.read_text())
+    if set(s['cases'])!={'resource_bids'} or r['summary_sha256']!=digest(folder/'summary.json') or d['annual_summary_sha256']!=digest(folder/'summary.json'):raise ValueError('Detached selected evidence')
+    if d['producer_sha256']!=digest(ROOT/'tools/diagnose_fixed_hydro_errors_2025.py'):raise ValueError('Changed diagnostic producer')
+    for name,sha in s['provenance']['dependencies'].items():
+        if digest(ROOT/'tools'/name)!=sha:raise ValueError('Changed selected producer')
+    c=s['cases']['resource_bids'];witness=folder/'resource_bids.npz'
+    if digest(witness)!=c['witness_sha256']:raise ValueError('Changed primal')
+    with np.load(witness,allow_pickle=False) as a:prices=a['prices'].copy()
+    n,b,common=load();fuel=verified_fuel(FUEL);m=compiled(n,b,resource_costs(n,b['cost'],fuel,cost_assumptions()[0],'resource_bids'))
+    dates=n.snapshots;curves=[];de=s['zones'].index('0:DE')
+    observation_root=ROOT/'data/price-trace/dispatch-validation-2025-v2'
+    if digest(observation_root/'manifest.json')!=d['observed_manifest_sha256']:raise ValueError('Changed observed manifest')
+    meta=json.loads((observation_root/'manifest.json').read_text())['zones']['DE-LU']
+    if digest(observation_root/'DE-LU.json')!=meta['hourly_sha256']:raise ValueError('Changed DE observations')
+    obs=np.array([np.nan if x is None else x for x in json.load(open(ROOT/'data/price-trace/dispatch-validation-2025-v2/DE-LU.json'))])
+    fig,axes=plt.subplots(3,1,figsize=(11,9),layout='constrained')
+    for ax,t in zip(axes,HOURS):
+        mask=(m['offer_zones']=='0:DE')&~m['emergency_mask'];cost=m['cost'][t,mask];vol=m['availability'][t,mask];order=np.argsort(cost)
+        cost=cost[order];vol=vol[order];ax.step(np.r_[0,np.cumsum(vol)]/1000,np.r_[cost[0],cost],where='pre',label='Selected domestic offers')
+        ax.axhline(prices[t,de],color='black',ls='--',label='Coupled clearing');ax.axhline(obs[t],color='gray',ls=':',label='Observed DE-LU');ax.axvline(m['load'][t,de]/1000,color='gray',alpha=.4)
+        ax.set(title=str(dates[t])+' UTC',xlabel='Cumulative domestic offered GW',ylabel='EUR/MWh');ax.legend(fontsize=8)
+        curves.append(dict(utc=str(dates[t]),cost_eur_mwh=cost.tolist(),volume_mw=vol.tolist(),modeled_price_eur_mwh=float(prices[t,de]),observed_price_eur_mwh=float(obs[t])))
+    curves_path=OUT/'resource-bids-curves.png';fig.savefig(curves_path,dpi=120);plt.close(fig)
+    fig,axes=plt.subplots(3,1,figsize=(11,10),layout='constrained');top=d['ranked_errors'][:12];x=np.arange(len(top))
+    axes[0].bar(x-.17,[v['annual']['mae_eur_mwh'] for v in top],width=.34,label='All hours');axes[0].bar(x+.17,[v['non_spike']['mae_eur_mwh'] for v in top],width=.34,label='Excluding modeled >1000 EUR/MWh')
+    axes[0].set(xticks=x,xticklabels=[v['zone'] for v in top],ylabel='MAE EUR/MWh',title='Largest observed-price errors; excluded spikes remain in official annual metrics');axes[0].legend(fontsize=8)
+    no=d['norway'];p=no['price_interval_probes'];axes[1].plot([v['saved_price'] for v in p],label='Saved Norwegian price');axes[1].plot([v['downward_incremental_cost_eur_mwh'] for v in p],label='One-MW downward demand probe');axes[1].plot([v['price_eur_mwh'] for v in no['hydro_capacity_gsk_probe']],label='Hydro-inclusive injection-weight probe')
+    axes[1].set(xlabel='Index of 168 high-price hours, chronological',ylabel='EUR/MWh',title='Diagnostic probes only: water/capacity unchanged');axes[1].legend(fontsize=8)
+    areas=d['capacity_and_energy'];x=np.arange(len(areas));axes[2].bar(x-.18,[v['model_total_hydro_bounds_twh'][0] for v in areas],width=.36,label='Model hydro lower allocation bound');axes[2].bar(x+.18,[v['ember_2025_twh']['Hydro'] for v in areas],width=.36,label='Ember observed national hydro')
+    axes[2].errorbar(x-.18,[v['model_total_hydro_bounds_twh'][0] for v in areas],yerr=np.array([[0]*len(areas),[max(0.,v['model_total_hydro_bounds_twh'][1]-v['model_total_hydro_bounds_twh'][0]) for v in areas]]),fmt='none',color='black',capsize=3)
+    axes[2].set(xticks=x,xticklabels=[v['country'] for v in areas],ylabel='TWh',title='Hydro energy comparison; allocation bounds retain merged-offer ambiguity');axes[2].legend(fontsize=8)
+    errors_path=OUT/'resource-bids-errors.png';fig.savefig(errors_path,dpi=120);plt.close(fig)
+    provenance=s['provenance'].copy();audit=provenance.pop('capacity_audit');provenance['capacity_audit_canonical_sha256']=__import__('hashlib').sha256(json.dumps(audit,sort_keys=True).encode()).hexdigest()
+    public=dict(status=s['status'],hours=8760,cases=s['cases'],provenance=provenance,replay=r,water_residual_mwh=s['water_residual_mwh'],source_summary_sha256=digest(folder/'summary.json'),
+        diagnostics=d,fuel_monthly_inputs=fuel['monthly'],raw_fuel_provenance=fuel['provenance'],german_offer_examples=curves,common_preparation_seconds=s['common_preparation_seconds'],elapsed_seconds=s['elapsed_seconds'],peak_rss_mib=s['peak_rss_mib'],
+        publication_producer_sha256=digest(__file__),images={p.name:digest(p) for p in [curves_path,errors_path]})
     (OUT/'resource-bids.json').write_text(json.dumps(public,separators=(',',':'),allow_nan=False)+'\n')
-    de=next(r for r in rows if r['zone']=='DE-LU')['models']
-    table='\n'.join(f"| {LABELS[v]} | {summary['cases'][v]['loop_with_live_replay_seconds']:.2f} | {de[v]['mae_eur_mwh']:.2f} | {de[v]['bias_eur_mwh']:.2f} | {de[v]['rmse_eur_mwh']:.2f} | {macro[v]['mean_area_mae_eur_mwh']:.2f} |" for v in VARIANTS)
-    cases='\n'.join(f"| {LABELS[v]} | {summary['cases'][v]['solver_seconds']:.2f} | {summary['cases'][v]['bid_compilation_seconds']:.2f} | {summary['cases'][v]['physics']['emergency_supply_twh']:.7f} | {summary['cases'][v]['physics']['shortage_hours']} |" for v in VARIANTS)
-    checks='\n'.join(f"| {LABELS[v]} | {c['utc']} | {c['difference_eur']:.8g} |" for v in VARIANTS for c in summary['cases'][v]['native_checks'])
-    no=[r for r in rows if r['zone'].startswith('NO')]
-    no_table='\n'.join(f"| {r['zone']} | {r['models']['legacy']['mae_eur_mwh']:.2f} | {r['models']['fuel_only']['mae_eur_mwh']:.2f} | {r['models']['resource_bids']['mae_eur_mwh']:.2f} |" for r in no)
-    delta=de['resource_bids']['mae_eur_mwh']-de['legacy']['mae_eur_mwh']
-    improves=sum(r['models']['resource_bids']['mae_eur_mwh']<r['models']['legacy']['mae_eur_mwh'] for r in rows)
-    conclusion=f"The combined bids {'reduce' if delta<0 else 'increase'} German MAE by EUR{abs(delta):.2f}/MWh, and improve MAE in {improves} of {len(rows)} mapped observed zones."
-    text=f'''# European hourly dispatch — fixed hydro with resource bids
+    de_error=next(v for v in d['ranked_errors'] if v['zone']=='DE-LU')['annual'];nr=next(v for v in areas if v['country']=='NO')
+    lower=np.median([v['downward_incremental_cost_eur_mwh'] for v in no['price_interval_probes']]);gsk_med=np.median([v['price_eur_mwh'] for v in no['hydro_capacity_gsk_probe']]);remaining=sum(v['price_eur_mwh']>1000 for v in no['hydro_capacity_gsk_probe'])
+    errors='\n'.join(f"| {v['zone']} | {v['annual']['mae_eur_mwh']:.2f} | {v['non_spike']['mae_eur_mwh']:.2f} | {100*v['above_1000_error_fraction']:.1f}% |" for v in top)
+    fleet='\n'.join(f"| {v['country']} | {v['source_hydro_including_ror_gw']:.2f} | {v['irena_hydropower_2025_gw']:.2f} | {v['model_total_hydro_bounds_twh'][0]:.2f}–{v['model_total_hydro_bounds_twh'][1]:.2f} | {v['ember_2025_twh']['Hydro']:.2f} | {v['source_demand_twh']:.2f} | {v['ember_2025_twh']['Demand']:.2f} |" for v in areas)
+    native='\n'.join(f"| {v['utc']} | {v['difference_eur']:.8g} |" for v in c['native_checks'])
+    (ROOT/'docs/european-physical-synthetic-clearing-2025.md').write_text(f'''# European hourly dispatch — selected model and error diagnosis
 
 ## Summary and conclusion
 
-We implemented the proposed combination: **fast hourly physical-network clearing,
-precomputed fixed hydro, and simple resource-specific generator offers**. It covers
-all **8,760 UTC hours of 2025** in {summary['areas']} country/AC-island areas. No
-price forecast, adaptive reservoir solve or observed electricity-price input is used.
+We retain **one model: fixed hourly hydro injections, simple resource bids and
+physical-network clearing** over all 8,760 UTC hours of 2025. The legacy and
+fuel-only comparison variants have been removed from code, publication and local
+checkpoints. Their small bid differences did not justify maintaining three versions.
+The paused daily-storage reference remains separate; the browser still uses its
+two-zone screen.
 
-{conclusion} The combined annual clearing/update/live-replay loop takes
-**{summary['cases']['resource_bids']['loop_with_live_replay_seconds']:.2f} seconds**.
-This is an untuned comparative experiment, **not accepted market-price accuracy**.
-Audited commercial-zone mapping and observed zonal demand remain incomplete.
-The browser still uses its existing two-zone screen.
+The selected model clears the year in **{c['loop_with_live_replay_seconds']:.2f}s**
+including updates and live checks, plus {s['common_preparation_seconds']:.2f}s common
+preparation. German price MAE is **EUR{de_error['mae_eur_mwh']:.2f}/MWh**.
+Norway dominates the errors. Its turbine capacity is relatively close to IRENA,
+but modeled hydro energy is low and the assumed grid injection pattern creates
+large price sensitivity. **Changing a fixed hydro price cannot fix this model:
+hydro output is injected directly, with no price-setting hydro offer.**
 
-| Bid formulation | Annual loop s | DE MAE EUR/MWh | DE bias EUR/MWh | DE RMSE EUR/MWh | Equal-area mean MAE EUR/MWh |
-| --- | ---: | ---: | ---: | ---: | ---: |
-{table}
+## Model and data
 
-Both price comparisons use the **same direct ENTSO-E A44 series**, hours and
-geographic proxy. The older checkpoint's published EUR23.10/MWh used a different
-DE-LU observation series; it must not be substituted into this comparison.
-Equal-area MAE first averages zone errors sharing one physical area, then weights
-each represented physical area equally ({macro['legacy']['physical_areas']} areas).
-It is not demand-weighted European market accuracy.
+- Wind/PV offer original weather-limited volumes at EUR0/MWh. IRENA end-2024/end-2025
+  linear commissioning scales fleet availability; observed commissioning is unknown.
+- Gas/oil bids use hashed World Bank monthly TTF/Brent and ECB FX, efficiency,
+  operational emissions and variable O&M. Coal/lignite use prepared fuel constants.
+  Carbon remains an assumed EUR80/t; heating-value and delivered-oil proxies are explicit.
+- Nuclear, biomass, waste, geothermal and run-of-river use prepared cost/availability
+  proxies. Commitment, ramps and historical outages are unresolved; nuclear profiles
+  ending in 2024 are declared proxies. Observed electricity prices do not enter bids.
+- Reservoir output comes from the retained, independently replayed chronological
+  water schedule. Capacity does not supply extra water. No battery/PHS dispatch is
+  included. Weather availability is never replaced with realized generation.
+- Forty country/AC-island areas, 256 passive branches and 74 controllable links use
+  native bounds/efficiencies and PTDF/GSK constraints. These are N-0 approximations,
+  not commercial zones or accepted JAO capacities. Prepared demand is still a proxy.
 
-## Generator strategies and data
+Identical offers merge exactly; a persistent one-thread HiGHS basis is reused for
+hourly updates. There is no forecast or reservoir optimization stage. Full command,
+including three native checks, component replay and witness export: {s['elapsed_seconds']:.2f}s;
+peak RSS {s['peak_rss_mib']:.0f} MiB. Historical hydro preparation, independent audit
+and diagnosis/report generation are additional; loop timing is not end-to-end timing.
 
-- **Gas/CCGT/OCGT and oil:** offer = fuel price / efficiency + carbon price ×
-  operational emission factor / efficiency + variable O&M. Replace the prepared
-  total cost; do not add fuel or carbon twice. Gas/oil inputs are twelve observed
-  World Bank monthly TTF/Brent benchmarks, converted with ECB daily FX and repeated
-  over UTC hours. Carbon is a constant **EUR80/t assumption**, not historical EUA.
-  Heating-value multiplier 1 and Brent at 1.7 MWh thermal/barrel remain proxies;
-  Brent is not delivered power-plant oil fuel. No daily fluctuations are invented.
-- **Coal/lignite:** the same explicit formula, with prepared technology-table
-  fuel constants rather than observed 2025 commodity quotes.
-- **Wind/solar:** weather-limited availability and EUR0/MWh offers in the complete
-  simple-bid variant. Legacy and fuel-only retain EUR−5/MWh offers. This low-price
-  rule is an assumption; subsidy-specific or strategic bids are not reconstructed.
-- **Nuclear, biomass, waste, geothermal and run-of-river:** labelled prepared
-  operating-cost/availability proxies. Nuclear has no commitment/ramp/must-run
-  representation; source availability ending in 2024 is explicitly a 2025 proxy.
-- **Reservoir hydro:** the same audited precomputed hourly electrical injections
-  in every variant, never renewable availability or a variable bid volume.
-  Turbine/inflow/efficiency/spill/stock/closure checks preserve the retained source
-  schedule and its inherited model inventory boundaries. These are not observed
-  Norwegian reservoir stocks. Other 67 battery/PHS units remain excluded.
+## Supply-curve examples
 
-The **fuel-only** ablation changes gas/oil bids alone, keeping other legacy offers.
-The **complete simple-bid** variant uses the current resource-bidding compiler's
-rules, including all five thermal types and zero-price renewables. These variants
-were specified before this annual run. No electricity-price fitting, parameter
-selection for market acceptance or empirical pass threshold is claimed.
+![Selected German offers and coupled prices](/research/fixed-reservoir-screening-2025/resource-bids-curves.png)
 
-IRENA end-2024/end-2025 linear wind/PV commissioning, original hourly weather,
-generator capacity/availability, prepared network demand, GSKs and all constraints
-are identical across variants. Demand is currently the **prepared PyPSA-Eur proxy**,
-not an independently audited ENTSO-E zonal-demand input. The requested observed-demand
-and bidding-zone upgrade remains blocked on source/mapping verification; schematic
-map centroids are not geographic asset mappings. No missing zonal data are fabricated.
+Domestic curves are illustrative: their intersection with domestic demand is not
+the coupled European solution. Imports, exports and physical constraints determine
+clearing. Observed DE-LU prices are comparison data, not inputs.
 
-## Physical clearing and speed
+## Where the errors are largest
 
-Each hour clears synthetic supply against inelastic residual demand, after fixed
-hydro injections. Original passive-network PTDF/GSK constraints and
-{summary['passive_branches']} branch ratings are preserved, along with
-{summary['controllable_links']} native controllable links, signed bounds and efficiencies.
-These are N-0 physical approximations, not audited commercial JAO capacities.
-Country labels remain separate by AC island, not NO1–NO5 commercial zones.
+![Largest errors, Norwegian price probes and national hydro energy](/research/fixed-reservoir-screening-2025/resource-bids-errors.png)
 
-Identical-column, identical-hourly-price offers can be merged exactly: each has the
-same area and network effect. Installed-capacity GSKs do not change with merging.
-Hourly vectors update a persistent one-thread HiGHS simplex model and reuse its basis.
-There is no temporal reservoir/forecast optimisation. Per-hour deadlines use the
-solver's cumulative clock correctly; unchanged-input cold retries are recorded.
+All 39 eligible A44 observations are rehashed and independently reparsed, preserving
+UTC aggregation and missingness. Four unavailable series and unresolved Italian
+islands remain excluded. Norway's five observed zones share one model price, as do
+other declared country proxies. Full metrics for every eligible zone are in the download.
 
-| Variant | Actual solver s | Bid compilation/merge s | Emergency TWh | Shortage hours |
-| --- | ---: | ---: | ---: | ---: |
-{cases}
-
-Common source/hydro preparation took {summary['common_preparation_seconds']:.2f}s.
-The full command for **three annual variants, nine native checks, component replay
-and witness export** took {summary['elapsed_seconds']:.2f}s, peak RSS
-{summary['peak_rss_mib']:.0f} MiB. These are separate from report generation and the
-subsequent independent audit. The highlighted loop is not end-to-end runtime or a
-browser benchmark. Offline hydro-schedule creation is excluded. The retained
-legacy benchmark remains 19.17s plus 6.73s preparation; today's controlled legacy
-run measures the same formulation with exact offer aggregation.
-
-## German supply curves and clearing examples
-
-![Domestic German supply offers and coupled clearing prices](/research/fixed-reservoir-screening-2025/resource-bids-curves.png)
-
-Three preselected January/July/December hours show domestic offered capacity by
-price. The vertical line is domestic residual demand; horizontal lines show the
-network-cleared combined price and observed DE-LU price. **The domestic curve's
-intersection is not the coupled clearing solution**: imports, exports and physical
-constraints enter the Europe-wide solve. Examples and all bid volumes/prices are
-included in the compact data download.
-
-## Full-year observed-price evaluation
-
-![Annual, monthly and all-zone price comparisons](/research/fixed-reservoir-screening-2025/resource-bids-errors.png)
-
-All {len(rows)} eligible mapped observed zones are included, preserving missingness
-and signed prices. Raw A44 request domains, response hashes and hourly aggregation
-are rechecked. Full-year, monthly, negative-price and border-spread diagnostics are
-available in the download: {len(borders)} observed border pairs. No congestion-rent
-or investment benefit follows merely from price agreement.
-
-The German combined model has {de['resource_bids']['model_negative_hours']} negative
-hours versus {de['resource_bids']['observed_negative_hours']} observed. Simple
-renewable and nuclear rules cannot reconstruct all negative-price behaviour.
-Four unavailable observed series and unresolved Italian island mappings are
-excluded explicitly in the data; country prices reused for Norway, Sweden and
-mainland Italy are disclosed.
-
-| Observed Norwegian zone | Legacy MAE EUR/MWh | Fuel-only MAE EUR/MWh | Complete bids MAE EUR/MWh |
+| Observed zone | Annual MAE EUR/MWh | MAE outside modeled >1000 spikes | Absolute error from spikes |
 | --- | ---: | ---: | ---: |
-{no_table}
+{errors}
 
-These five observations are compared with one Norwegian country proxy. Fixed
-hydro avoids the rolling experiment's scheduling decisions, but does not validate
-hydrology, resolve internal bottlenecks or recover distinct Norwegian prices.
+Removing spikes here is a **diagnostic only**; official annual errors retain them.
+This is untuned descriptive evidence, not held-out empirical acceptance.
 
-## Numerical verification
+## Capacity gap or hydro energy gap?
 
-Every variant completes 8760 optimal hours. An independent process reconstructs
-sources/offers and saved primals, checks generation/link bounds and area balances,
-then reconstructs nodal injections from GSKs and native link endpoints, checks
-island balances and computes passive flows outside the LP constraint matrix.
-All component residuals pass 1e−4 MW; water residual is
-{summary['water_residual_mwh']:.3g} MWh with unchanged annual closure. No adaptive
-storage or simultaneous charge/discharge is introduced.
+IRENA country hydropower is compared with reservoir turbines plus run-of-river,
+using parent totals once. Prepared fleet and IRENA year-end capacity have different
+scopes/dates. [IRENA source capacity and provenance](/research/irena-capacity-2025/summary.json.gz)
+and [Ember monthly source](https://files.ember-energy.org/public-downloads/generation/outputs/release_generation_monthly_global.csv)
+are independently hashed. Ember supplies all twelve 2025 months per country. It reports national
+hydro generation, including categories that are not perfectly identical to the model.
 
-| Variant | UTC hour | Native PyPSA minus fast objective EUR |
-| --- | --- | ---: |
-{checks}
+| Country | Model hydro GW | IRENA end-2025 GW | Model hydro TWh bounds | Ember hydro TWh | Model demand TWh | Ember demand TWh |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+{fleet}
 
-Native PyPSA independently builds the same physical network and zonal GSK
-constraints with fixed injections. Agreement verifies formulation, not market
-prices. Controlled legacy hourly objectives reproduce the retained checkpoint
-within EUR{summary['retained_legacy_maximum_objective_difference_eur']:.6f}; dual prices
-can differ under degeneracy (maximum difference
-EUR{summary['retained_legacy_maximum_dual_difference_eur_mwh']:.6f}/MWh).
+Zero-cost run-of-river can merge with wind/PV. Its dispatched share is not uniquely
+identified, so the table reports rigorous bounds from total merged dispatch and
+individual availability; it does not invent a proportional allocation.
 
-## What remains before scenario acceptance
+Norway has {nr['source_hydro_including_ror_gw']:.2f} GW versus
+{nr['irena_hydropower_2025_gw']:.2f} GW in IRENA—a modest capacity difference.
+Fixed reservoir output is {nr['fixed_reservoir_output_twh']:.2f} TWh; source reservoir
+inflow is {no['source_reservoir_inflow_water_twh']:.2f} TWh of stored water-equivalent
+energy, or {no['source_reservoir_inflow_electrical_equivalent_twh']:.2f} TWh after turbine
+efficiency. Those reservoir quantities exclude run-of-river. Modeled total hydro
+bounds above remain below observed generation. Extra turbine MW alone would not
+close an inflow/schedule energy gap; it must be reconciled with stocks and spill.
 
-This establishes a fast, reproducible combined baseline and a fair price comparison.
-It does not show that added bid complexity automatically improves prices everywhere.
-Next are audited bidding-zone assets/demand, outages and commercial constraints,
-explicit training/untouched validation periods and empirical thresholds, followed
-by common-input native/replay investment pairs. Transmission and wind/solar cases
-remain conditional on fixed hydro; adaptive battery/hydro valuation needs chronology.
-No paused adaptive-hydro search or browser replacement has been resumed.
+During the 168 Norwegian price spikes, unused turbine headroom averages
+{no['turbine_headroom_mean_on_spikes_mw']/1000:.2f} GW and is never below
+{no['turbine_headroom_min_on_spikes_mw']/1000:.2f} GW. This is power headroom, **not
+proof that additional water is available**. It argues against turbine scarcity as
+the sole cause. Retained model inventories are not observed NVE stocks.
 
-[Combined results, source/fuel provenance, all-zone/monthly/border errors and bid examples](/research/fixed-reservoir-screening-2025/resource-bids.json)
+## Fixed-volume and network effects
 
-[Retained fixed-hydro checkpoint summary](/research/fixed-reservoir-screening-2025/summary.json.gz)
-· [retained area summaries](/research/fixed-reservoir-screening-2025/area-summary.csv)
-· [retained German hourly results](/research/fixed-reservoir-screening-2025/hourly-de.csv.gz)
+There are 168 Norwegian hours above EUR1000/MWh, {no['high_price_hours_without_emergency']}
+without emergency generation. A one-MW demand increase at these hours costs roughly
+EUR10000/MWh, while the median cost saved by a one-MW demand decrease is
+EUR{lower:.2f}/MWh. The asymmetric response exposes a tight volume/network boundary:
+a dual price can jump despite negligible actual shortage.
+
+The compiler's injection weights use ordinary-generator capacity and **omit reservoir
+turbines**. In hydro-dominated Norway this is a material geographic approximation.
+We tested the same 168 hours with Norwegian reservoir capacity included in the
+injection weights, leaving turbine capacity, water, fixed output, demand, bids and
+line ratings unchanged. Median Norwegian probe price is EUR{gsk_med:.2f}/MWh;
+only {remaining} of these hours remain above EUR1000/MWh. A sampled native PyPSA
+check agrees within EUR{abs(no['hydro_gsk_native_check']['difference_eur']):.8g}.
+
+This isolates sensitivity to injection geometry; **it is not an accepted replacement
+GSK, annual improvement claim or relaxation of physical limits**. Those weights still
+aggregate a country and do not reproduce actual nodal demand, hydro injections or
+commercial NO1–NO5 geography. Lower probe prices alone do not validate them.
+
+**Would bidding-zone resolution help?** Likely, because it separates northern and
+southern hydro, loads and interconnectors that a single Norwegian country price
+collapses. Zone labels alone are insufficient: fixed hydro must enter at its
+physical buses, demand needs a verified spatial allocation, and flexible generator
+injections need defensible within-zone distribution. More zones with the same
+incorrect weights can retain artificial spikes. Test audited NO1–NO5 mapping and
+nodal injection placement together, then repeat native and sensitivity checks.
+
+## Other high-error areas and next improvements
+
+- **Eastern Denmark:** its large spikes partly accompany the Norwegian island-price
+  distortion. Reconcile injection geometry and DK1/DK2 commercial boundaries first;
+  national fleet totals do not establish DK2 supply.
+- **Estonia/Baltics:** inspect fossil technology classification and interconnection
+  assumptions. Ember records about 1.983 TWh of Estonian other-fossil generation;
+  the prepared fleet has a 0.251 GW oil category priced as Brent fuel and no explicit
+  oil-shale strategy. That is a classification/cost concern, not proof of missing
+  capacity. Baltic topology/outages and demand need independent reconciliation.
+- **Finland/Sweden:** hydro energy and country-versus-zone aggregation remain relevant;
+  their fleet/energy comparisons above identify input priorities without price fitting.
+
+Priority: correct nodal/zonal demand and hydro injection representation, then audit
+Norwegian water energy against monthly Ember and observed NVE stock changes. Keep
+original chronology, efficiency, stocks and spill; do not simply scale fixed output
+to observed generation. If hydro offers are introduced, use explicit water-value
+bids and available turbine/water volumes with carried stocks. Price tuning alone
+cannot change an injection-only schedule. The daily-storage reference remains paused.
+
+## Numerical checks and provenance
+
+All 8760 selected hours terminate optimal. Saved-primal replay independently checks
+bounds, area/island balances and passive flows outside the producer matrix. Water
+residual {s['water_residual_mwh']:.3g} MWh and network residual
+{c['physics']['maximum_residual_mw']:.3g} MW pass 1e-4; closure remains unchanged.
+Emergency supply is {c['physics']['emergency_supply_twh']:.7f} TWh in four hours.
+
+| UTC hour | Native PyPSA minus fast objective EUR |
+| --- | ---: |
+{native}
+
+Native parity verifies the formulation. Empirical thresholds/held-out periods,
+paired investments, adaptive storage and supported browser integration remain open.
+
+[Selected results, all-zone errors, capacity/energy sources, price probes and replay](/research/fixed-reservoir-screening-2025/resource-bids.json)
+
+[Retained hydro source metadata](/research/fixed-reservoir-screening-2025/summary.json.gz)
 · [water replay](/research/european-reservoir-clearing-2025/replay.json).
 
-Reproduction: tools/hybrid_fixed_hydro_2025.py with a fresh --output directory,
-then the same tool with --audit, then tools/evaluate_fixed_hydro_bids_2025.py --run.
-Use the pinned Python environment, bounded resources and existing verified source
-caches; raw inputs and full annual primals remain outside Git.
-'''
-    (ROOT/'docs/european-physical-synthetic-clearing-2025.md').write_text(text)
-    print(json.dumps(dict(germany=de,macro=macro,zone_improvements=improves,mapped_zones=len(rows)),allow_nan=False))
-
+Reproduce with tools/hybrid_fixed_hydro_2025.py in a fresh output root, then --audit;
+run tools/diagnose_fixed_hydro_errors_2025.py --run ROOT --out ROOT/diagnostics.json,
+and tools/evaluate_fixed_hydro_bids_2025.py --run ROOT --diagnostics ROOT/diagnostics.json.
+Use pinned Python and verified ignored provider/source/water caches. Raw observations
+and annual witnesses stay outside Git. Only this model is maintained for this report.
+''')
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path,required=True);args=p.parse_args();evaluate(args.run)
+    p=argparse.ArgumentParser();p.add_argument('--run',type=Path,required=True);p.add_argument('--diagnostics',type=Path,required=True);a=p.parse_args();publish(a.run,a.diagnostics)

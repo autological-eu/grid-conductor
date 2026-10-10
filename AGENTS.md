@@ -17,8 +17,11 @@ The user subsequently authorized the fixed-hydro/resource-bid combination. Its
 fresh producer is tools/hybrid_fixed_hydro_2025.py; independent --audit reconstructs
 annual physics, and tools/evaluate_fixed_hydro_bids_2025.py publishes controlled
 same-observation comparisons in the existing fixed-hydro report. Preserve the
-frozen checkpoint producer and sources. The three predeclared bid ablations are
-comparison evidence, not a revived annual inventory search. No forecast, adaptive
+frozen checkpoint producer and sources. By subsequent user decision, keep only the complete resource-bid formulation.
+Legacy/fuel-only variants, their checkpoints and comparison exports are retired.
+tools/diagnose_fixed_hydro_errors_2025.py audits capacity/energy and high-price
+sensitivity in the same report. Its demand/GSK probes are diagnostics, not new
+baseline candidates, calibration or accepted physical scenarios. No forecast, adaptive
 hydro or browser replacement is implied. Audited zonal inputs remain outstanding.
 
 Maintain these reproducible models:

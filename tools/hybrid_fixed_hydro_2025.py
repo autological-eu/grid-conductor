@@ -1,6 +1,6 @@
 """Fixed-hydro physical hourly clearing with simple resource/fuel offers.
 
-Fresh controlled bid ablations; frozen hydro/reference producers are untouched.
+Single selected resource-bid formulation; frozen hydro source is untouched.
 No electricity-price inputs, forecast stage, adaptive hydro or battery/PHS dispatch.
 """
 import argparse
@@ -28,7 +28,7 @@ from hourly_renewable_estimates import digest
 from daily_market_clearing import write_json
 ROOT=Path(__file__).resolve().parents[1]
 FUEL=ROOT/'data/daily-market-2025/monthly-fuel-annual-v2/fuel-inputs.json'
-VARIANTS=('legacy','fuel_only','resource_bids')
+VARIANTS=('resource_bids',)
 HOURS=(348,4692,8364)
 TOL=1e-4
 
@@ -36,20 +36,19 @@ TOL=1e-4
 def resource_costs(n,legacy,market,assumptions,variant):
     """Vectorised audited thermal rule, replacing rather than adding total cost."""
     if variant not in VARIANTS:raise ValueError('Unknown bid variant')
-    if variant=='legacy':return legacy.copy()
     rows=validate_market(market,n.snapshots)
     gas=np.array([r['gas_eur_mwh_th'] for r in rows]);oil=np.array([r['oil_eur_mwh_th'] for r in rows])
     carbon=np.array([r['co2_eur_t'] for r in rows])
-    cost=legacy.copy() if variant=='fuel_only' else n.get_switchable_as_dense('Generator','marginal_cost').to_numpy().copy()
+    cost=n.get_switchable_as_dense('Generator','marginal_cost').to_numpy().copy()
     for j,(_,g) in enumerate(n.generators.iterrows()):
         carrier=g.carrier
         if carrier not in RENEWABLES|THERMAL|OTHER:raise ValueError('Unsupported carrier '+str(carrier))
-        replace=carrier in ('CCGT','OCGT','oil') if variant=='fuel_only' else carrier in THERMAL
+        replace=carrier in THERMAL
         if replace:
             if not np.isfinite(g.efficiency) or not 0<g.efficiency<=1:raise ValueError('Invalid turbine efficiency')
             a=assumptions[carrier];fuel=gas if carrier in ('CCGT','OCGT') else oil if carrier=='oil' else a['fuel_eur_mwh_th']
             cost[:,j]=(fuel+carbon*a['emissions_t_mwh_th'])/g.efficiency+a['variable_om_eur_mwh_el']
-        elif variant=='resource_bids' and carrier in RENEWABLES:cost[:,j]=0.
+        elif carrier in RENEWABLES:cost[:,j]=0.
     if not np.isfinite(cost).all():raise ValueError('Nonfinite offers')
     return cost
 
@@ -179,15 +178,10 @@ def run(args):
             for hour in HOURS:checks.append(native_check(n,native_m,hour,float(a['objectives'][hour])))
         r['component_replay_and_native_seconds']=time.perf_counter()-start;r['native_checks']=checks
         write_json(args.output/(variant+'-summary.json'),r);results[variant]=r
-    with np.load(ROOT/'data/fixed-reservoir-screening-2025/hourly.npz',allow_pickle=False) as old,np.load(args.output/'legacy.npz',allow_pickle=False) as fresh:
-        gap=float(abs(old['objectives']-fresh['objectives']-common['fixed_cost']).max())
-        pricegap=float(abs(old['prices']-fresh['prices']).max())
-        if gap>.05:raise ValueError('Controlled legacy no longer reproduces retained objectives')
-    summary=dict(status='completed_fixed_hydro_resource_bid_comparison',hours=8760,areas=base['nz'],passive_branches=len(base['ratings']),controllable_links=base['nl'],
+    summary=dict(status='completed_fixed_hydro_resource_bids',hours=8760,areas=base['nz'],passive_branches=len(base['ratings']),controllable_links=base['nl'],
         zones=base['zones'],provenance=p,common_preparation_seconds=common['preparation_seconds'],water_residual_mwh=common['water_residual_mwh'],
-        retained_legacy_maximum_objective_difference_eur=gap,retained_legacy_maximum_dual_difference_eur_mwh=pricegap,
         cases=results,elapsed_seconds=time.perf_counter()-begin,peak_rss_mib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024)
-    write_json(args.output/'summary.json',summary);print(json.dumps({k:summary[k] for k in ['elapsed_seconds','peak_rss_mib','retained_legacy_maximum_objective_difference_eur']}),flush=True)
+    write_json(args.output/'summary.json',summary);print(json.dumps({k:summary[k] for k in ['elapsed_seconds','peak_rss_mib']}),flush=True)
 
 
 def audit(args):
@@ -202,7 +196,7 @@ def audit(args):
         m=compiled(n,base,resource_costs(n,base['cost'],market,assumptions,variant))
         with np.load(path,allow_pickle=False) as a:results[variant]=component_replay(n,m,a['values'])
         if results[variant]!=r['physics']:raise ValueError('Independent replay changed')
-    write_json(args.output/'replay.json',dict(status='all_three_8760_hour_component_replays_passed',summary_sha256=digest(args.output/'summary.json'),cases=results,water_residual_mwh=common['water_residual_mwh']))
+    write_json(args.output/'replay.json',dict(status='selected_8760_hour_component_replay_passed',summary_sha256=digest(args.output/'summary.json'),cases=results,water_residual_mwh=common['water_residual_mwh']))
     print('Independent source, fuel, water, area, island, passive-flow and bound replay passed',flush=True)
 
 

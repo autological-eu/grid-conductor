@@ -331,3 +331,71 @@ workflow deployment at https://autological-eu.github.io/grid-conductor/.
 Report: https://autological-eu.github.io/grid-conductor/docs/european-physical-synthetic-clearing-2025/.
 This follow-up changes only this verification record, not numerical sources,
 research evidence or the public report.
+
+
+## Single-model consolidation and largest-error diagnosis — 2026-10-10
+
+Latest user decision supersedes retaining three bid ablations. Keep complete
+resource bids with fixed hydro and physical clearing; remove legacy/fuel-only code,
+comparison tables/figures, their annual checkpoints and duplicate old fast primal.
+54.36 MiB local outputs removed; four superseded public checkpoint artifacts removed.
+Protected hydro source metadata, all 59 water witnesses, provider caches and the
+single archival source reference remain intact. Paused daily report is unchanged.
+
+Fresh selected-v2: 8760 optimal hours, 15.86s clearing/update/live-check loop,
+6.27s common preparation, 51.54s complete command including three native checks,
+component replay and export; 975 MiB peak RSS. Independent saved-primal/source/water
+replay passes; network 4.70e-6 MW, water 2.04e-6 MWh, closure unchanged. Three focused
+formula/input/native-physics tests pass. No alternative baseline search or browser
+integration. Published selected metrics derive only from this current witness.
+
+New diagnose_fixed_hydro_errors_2025.py rechecks all 39 eligible A44 series and
+ranks errors, separates spike contribution, hashes source Ember/IRENA and requires
+12 national generation/demand months. Exact merged offers leave ROR allocation
+ambiguous; publish feasible lower/upper generation bounds instead of inventing a
+proportional allocation. A first diagnostic exported no Ember countries because
+its category filter was wrong; the explicit twelve-month guard caught it before
+publication, then the filter was corrected in a fresh diagnostic run. Plotting
+roundoff at a coincident bound was handled without changing numerical evidence.
+
+Findings: Norway's prepared reservoir+ROR capacity 33.18 GW versus IRENA end-2025
+34.65 GW (about 4% low). Total modeled hydro output 107.217–107.247 TWh versus
+Ember 141.598 TWh; fixed reservoir alone 99.777 TWh. Source reservoir inflow
+112.015 TWh stored-energy equivalent / 100.814 TWh after efficiency. Capacity alone
+cannot provide this missing water energy. Model demand 137.04 versus Ember 134.55
+TWh; national measures are different scopes, not audited zonal-demand replacements.
+
+168 Norwegian hours above EUR1000 account for 73–81% of NO-zone absolute price
+error; 164 have no emergency dispatch. Turbine headroom on them averages 22.15 GW,
+minimum 19.14 GW. One-MW demand probes: upward incremental cost EUR10000; median
+downward saving EUR1149.58. Fixed injection volumes/tight network constraints
+create sharp marginal boundaries; changing hydro marginal_cost cannot affect
+injected output or set its clearing price.
+
+Important network finding: GSK installed-capacity weights omit reservoir turbines.
+Adding Norwegian hydro capacity to weights ONLY in 168 diagnostic hours, while
+holding all actual capacity, water, output, demand, bids and ratings unchanged,
+reduces their median price to EUR121.73 and leaves four >EUR1000 probe hours.
+One native PyPSA probe agrees within EUR0.000000064. This is geographic sensitivity,
+not an adopted GSK, verified annual improvement or evidence that other hours improve.
+Raw model prices/official annual errors remain untouched. Country weights still
+fail to represent NO1–NO5 commercial and nodal demand/hydro injection geography.
+
+Largest remaining groups include DK2 (MAE62.03), Estonia (48.53), Lithuania (45.18),
+Latvia (45.11), Finland (43.90) and Sweden proxies (about42). DK2 shares some Norwegian
+spikes; Estonia other-fossil generation 1.983 TWh is not explicitly oil-shale modeled:
+its prepared oil category 0.251 GW receives Brent pricing. This is a technology/
+cost concern, not yet demonstrated missing capacity. Complete country capacity,
+hydro, demand and observation-source comparisons are in the current report/data.
+
+Next: audit nodal/zonal demand and hydro injection geometry before choosing GSKs;
+reconcile Norwegian inflow, stocks, spill and generation against Ember/NVE without
+scaling away water physics. If introducing water-value offers, make volumes flexible
+only with explicit carried water stocks and closing bounds. Preserve held-out/
+empirical/native/paired-investment gates. No price calibration or retired search.
+Local checks pass: three focused Python tests, all 14 live-app tests, typecheck,
+lint (six existing warnings), price coverage, asset/source checks and production
+build. Workbench Chromium smoke passes 1440/390/320/667px; retained maths pass
+1440/390/320px. Final selected report renders at 1440/390/320px with both charts,
+all research downloads and no overflow; new asset bytes match the local build.
+62 public assets / 4.90 MiB. CI/Pages and public verification follow deployment.

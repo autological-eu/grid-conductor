@@ -16,9 +16,6 @@ ALLOWED = [
     'fixed-reservoir-screening-2025/resource-bids.json',
     'fixed-reservoir-screening-2025/resource-bids-curves.png',
     'fixed-reservoir-screening-2025/resource-bids-errors.png',
-    'fixed-reservoir-screening-2025/area-summary.csv',
-    'fixed-reservoir-screening-2025/hourly-de.csv.gz',
-    'fixed-reservoir-screening-2025/model-prices.png', 'fixed-reservoir-screening-2025/model-hydro.png',
     'daily-fuel-annual-2025/compact-zonal.json', 'daily-fuel-annual-2025/compact-zonal.png',
     'daily-fuel-annual-2025/performance.json',
     'daily-fuel-annual-2025/replay.json', 'daily-fuel-annual-2025/price-comparison.json',
@@ -69,7 +66,7 @@ def check():
     assert hashlib.sha256(archived['european-reservoir-clearing-2025/summary.json']).hexdigest() == fixed['annual_summary_sha256'], 'Detached hydro source'
     assert hashlib.sha256((folder / 'european-reservoir-clearing-2025/replay.json').read_bytes()).hexdigest() == fixed['water_replay_sha256'], 'Detached water replay'
     combined = json.loads((folder / 'fixed-reservoir-screening-2025/resource-bids.json').read_text())
-    assert combined['hours'] == 8760 and len(combined['cases']) == 3
+    assert combined['hours'] == 8760 and set(combined['cases']) == {'resource_bids'}
     assert combined['source_summary_sha256'] == combined['replay']['summary_sha256'], 'Detached combined replay'
     assert combined['provenance']['reference_summary_sha256'] == hashlib.sha256(archived['fixed-reservoir-screening-2025/summary.json']).hexdigest(), 'Detached fixed reference'
     assert combined['water_residual_mwh'] <= 1e-4
@@ -83,7 +80,15 @@ def check():
     assert combined['publication_producer_sha256'] == hashlib.sha256((ROOT / 'tools/evaluate_fixed_hydro_bids_2025.py').read_bytes()).hexdigest()
     for name, sha in combined['images'].items():
         assert hashlib.sha256((folder / 'fixed-reservoir-screening-2025' / name).read_bytes()).hexdigest() == sha, 'Changed combined figure'
-    assert len(combined['mapped_zone_errors']) == 39 and len(combined['german_offer_examples']) == 9
+    assert len(combined['diagnostics']['ranked_errors']) == 39 and len(combined['german_offer_examples']) == 3
+    diagnosis = combined['diagnostics']
+    assert diagnosis['annual_summary_sha256'] == combined['source_summary_sha256']
+    assert diagnosis['producer_sha256'] == hashlib.sha256((ROOT / 'tools/diagnose_fixed_hydro_errors_2025.py').read_bytes()).hexdigest()
+    assert diagnosis['annual_witness_sha256'] == combined['cases']['resource_bids']['witness_sha256']
+    assert len(diagnosis['norway']['price_interval_probes']) == diagnosis['norway']['high_price_hours']
+    for row in diagnosis['capacity_and_energy']:
+        assert row['ember_month_counts']['Hydro'] == 12 and row['ember_month_counts']['Demand'] == 12
+        assert row['model_total_hydro_bounds_twh'][0] <= row['model_total_hydro_bounds_twh'][1]+1e-6
     carbon = json.loads((folder / 'carbon-spreads-2025.json').read_text())
     assert carbon['year'] == 2025 and len(carbon['borders']) == 68
     assert carbon['metric_sha256'] == hashlib.sha256((ROOT / 'src/lib/carbon-spread.ts').read_bytes()).hexdigest(), 'Changed carbon metric'

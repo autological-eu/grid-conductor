@@ -30,12 +30,6 @@ class HybridTests(unittest.TestCase):
         self.assertAlmostEqual(cost[0,0],115.32);self.assertAlmostEqual(cost[1,0],155.32)
         np.testing.assert_array_equal(cost[:,1],0.);np.testing.assert_array_equal(cost[:,2],12.)
         pd.testing.assert_frame_equal(n.generators,before);np.testing.assert_array_equal(m['availability'],av)
-        original=resource_costs(n,m['cost'],market,a,'legacy');np.testing.assert_array_equal(original,m['cost'])
-
-    def test_fuel_only_ablation_keeps_negative_renewable_offer(self):
-        n,market,a=fixture();m=compile_model(n);cost=resource_costs(n,m['cost'],market,a,'fuel_only')
-        np.testing.assert_array_equal(cost[:,1],-5.);np.testing.assert_array_equal(cost[:,2],m['cost'][:,2])
-
     def test_reject_gaps_or_invalid_efficiency(self):
         n,market,a=fixture();m=compile_model(n);n.generators.loc['gas','efficiency']=0.
         with self.assertRaisesRegex(ValueError,'efficiency'):resource_costs(n,m['cost'],market,a,'resource_bids')

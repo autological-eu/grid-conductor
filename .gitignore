@@ -81,9 +81,6 @@ data/daily-market-2025/
 !/public/research/fixed-reservoir-screening-2025/
 /public/research/fixed-reservoir-screening-2025/*
 !/public/research/fixed-reservoir-screening-2025/summary.json
-!/public/research/fixed-reservoir-screening-2025/area-summary.csv
-!/public/research/fixed-reservoir-screening-2025/hourly-de.csv.gz
-!/public/research/fixed-reservoir-screening-2025/model-*.png
 !/public/research/daily-fuel-annual-2025/
 /public/research/daily-fuel-annual-2025/*
 !/public/research/daily-fuel-annual-2025/*.json

@@ -22,8 +22,12 @@ model and compact rolling-storage trial paused as research references:
    Retain its full-year results, methods, figures, source and replay evidence.
    The authorized combined formulation adds simple resource-specific offers,
    including sourced monthly gas/oil bids, to these same hourly physical clearings.
-   Evaluate it against the unchanged checkpoint on identical observation coverage;
-   publish adverse outcomes and all eligible areas. Keep observed electricity prices
+   Keep only the complete resource-bid model; retire the legacy/fuel-only
+   comparison variants. Retain indispensable hydro source/replay evidence.
+   Diagnose largest errors using independently sourced capacity, generation,
+   demand and water data; isolate injection geometry from physical capacity and
+   hydro water/schedule assumptions. Sensitivity probes do not establish acceptance.
+   Publish adverse outcomes and all eligible areas. Keep observed electricity prices
    out of bid construction. This does not authorize adaptive-hydro experiments.
    Develop from this checkpoint; fixed hourly injections must not be described
    as merely fixed hydro bid prices.
