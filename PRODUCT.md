@@ -302,3 +302,16 @@ Retain annual convergence, geography, observed-data and integration gates. Publi
 scenario integration remains a separate verified change, not automatic replacement
 of the reduced-form solver. Emissions require audited factors and generation
 attribution; do not infer signed savings from objective improvement alone.
+
+## Explicit thermal bidding inputs
+
+Gas and oil synthetic offers should use explicitly sourced fuel-price trajectories,
+plant efficiency, operational carbon prices/factors and variable O&M. Replace
+total native thermal costs rather than adding fuel or carbon twice. Preserve
+original available capacity and use matched inputs for baseline/investment cases.
+Declare currency, heating-value basis, temporal resolution and delivered-fuel
+approximations. Do not fabricate historical prices or treat offer markups as
+system operating costs. Nuclear may initially retain its low operating-cost
+offer and prepared availability; minimum output, ramps, outages and restart
+behaviour require separate physical inputs/verification rather than universal
+must-run assumptions. Existing annual/empirical/integration gates remain required.

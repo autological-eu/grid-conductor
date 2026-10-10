@@ -595,3 +595,23 @@ run `38014019252` and PR checks `38014022784` succeeded. Public report HTTP 200,
 mobile heading/annual limitation and overflow checks pass; both public evidence
 JSON files match committed bytes. Deployed workbench smoke passes all four
 viewports (1440/390/320/667px). No annual acceptance or app integration claimed.
+
+## Explicit fuel-price thermal bid extension
+
+Added tools/thermal_bid_rules.py and docs/thermal-bidding-rules.md. Gas/oil offers
+replace total costs using fuel/efficiency, operational CO2/efficiency and explicit
+variable O&M. The opt-in compiler applies asset-specific costs before aggregation
+and preserves original availability/GSK and native comparison costs. Nuclear
+offers remain unchanged; commitment, ramps and observed outages are unsupported.
+Five tests pass with pinned PyPSA, including a two-hour native/fast dispatch
+comparison within EUR 0.00001, price shocks, no double counting and input guards.
+No historical fuel data collected, annual rerun, daily-driver migration, browser
+integration or publication claim. Next: sourced 2025 price/assumption series, fresh
+provenance and matched paired numerical/empirical verification before adoption.
+
+Actual daily annual attempt annual-v2 stopped after 357 saved baseline days;
+day 358 is infeasible, not an accepted annual result. Water-only reachability
+passed, but a remaining-eight-day network feasibility diagnostic was infeasible.
+A fourteen-day preview diagnostic hit its 120-second limit and establishes no
+feasibility result. No annual job is live and no retired search was restarted.
+These diagnostics do not establish the specific binding cause or resolve it.
