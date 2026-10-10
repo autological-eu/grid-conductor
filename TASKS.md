@@ -268,7 +268,8 @@ Local return-to-checkpoint verification: public-asset/source allowlist passes
 (63 files / 4.88MiB); typecheck, lint (six existing warnings), 14 Bun tests and
 production build pass. Chromium checks confirm the selected report, its two
 figures and no overflow at 1440/390px; retained report maths passes at
-1440/390/320px. Publication is pending CI/Pages and public URL verification.
+1440/390/320px. CI/Pages for this checkpoint subsequently succeeded in run
+38039874816; its report is superseded by the verified combined publication below.
 
 
 ## Combined fixed-hydro/resource bids — 2026-10-10
@@ -321,4 +322,12 @@ at 1440/390/320/667px. The updated report renders with no overflow at 1440/390/3
 both charts and all report download links resolve, and three new assets match
 committed bytes. The first smoke invocation used an unsupported CLI argument and
 failed to connect to its default port; rerunning with SMOKE_URL passes.
-Deployment/public verification follows a successful Pages run.
+Retained maths/fonts also pass at 1440/390/320px. Publication verified for
+7804a5d195866fe559cee2ef92e3b3b108a6dbd5: CI build and Pages deploy both succeeded
+(run 38058164348). Fresh unauthenticated public Chromium checks at 1440/390/320px
+confirm current report text, chart loading, every download link and no overflow;
+all three new evidence/PNG assets match repository bytes exactly. Pages API confirms
+workflow deployment at https://autological-eu.github.io/grid-conductor/.
+Report: https://autological-eu.github.io/grid-conductor/docs/european-physical-synthetic-clearing-2025/.
+This follow-up changes only this verification record, not numerical sources,
+research evidence or the public report.
