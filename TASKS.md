@@ -572,8 +572,8 @@ convergence bounds against this smaller monolithic/native reference; then annual
 runtime/memory, cycling, observed-data/geography and paired intervention gates.
 Emissions attribution and supported browser integration remain unimplemented.
 Report: docs/perfect-foresight-dispatch.md; compact verification JSON public/research/
-perfect-foresight-2025/. Raw witnesses stay ignored. Independent saved-primal replay
-and publication checks pending; automatic recurring reviews remain disabled.
+perfect-foresight-2025/. Raw witnesses stay ignored. Independent replay and publication verification are
+recorded below; automatic recurring reviews remain disabled.
 
 Independent saved-primal replay completed for both final paired witnesses: source/
 producer/dependency/witness hashes checked, operating costs replay within 1.4e-6
@@ -587,5 +587,11 @@ preflight before matrix construction. All producer/source hashes still match.
 Saved-witness replay additionally confirms zero emergency supply in both 48h
 cases. Typecheck, lint (six existing warnings), build and workbench browser checks
 at 1440/390/320/667px pass; new report renders on mobile without overflow.
-No ongoing calculation/research supervisors remain from this task. Publication
-pending; annual scaling and cycling remain material blockers.
+No ongoing calculation/research supervisors remain from this task. Annual scaling
+and cycling remain material blockers.
+
+Publication verified for `22caf16081e952ce4673aadcc182893e1527f37d`: CI/Pages
+run `38014019252` and PR checks `38014022784` succeeded. Public report HTTP 200,
+mobile heading/annual limitation and overflow checks pass; both public evidence
+JSON files match committed bytes. Deployed workbench smoke passes all four
+viewports (1440/390/320/667px). No annual acceptance or app integration claimed.
