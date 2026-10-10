@@ -128,3 +128,11 @@ may change slightly with this verification record.
 Removed the unused legacy full-year weather downloader after the import audit
 found it depended on a retired benchmark collector. Monthly weather preparation
 and its compact adapter remain. No retained calculation producer was changed.
+
+## Alpha promotion — 2026-10-10
+
+The user authorized publishing the consolidated workbench to main as an alpha.
+README labels the release and distinguishes the live two-zone screen from the
+two offline European models. This release does not accept the research models
+as investment estimators or relax numerical, empirical or integration gates.
+Development continues on public-v1; automatic hourly reviews remain disabled.

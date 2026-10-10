@@ -1,6 +1,14 @@
-# Grid Conductor
+# Grid Conductor — Alpha
 
-Experimental European electricity bottleneck and investment workbench.
+**Alpha release:** an experimental European electricity bottleneck and investment
+workbench. The interface and models are still being validated; scenario results
+are screening estimates, not validated investment returns.
+
+The current alpha includes the observed 2025 bottleneck map, browser-local
+line/battery scenarios, and reports for two offline European dispatch models.
+European dispatch is not yet integrated into the browser scenario simulator.
+Observed-price discrepancies, geographic mapping and supply adequacy remain
+open validation work; passing numerical checks does not establish market realism.
 Public site: https://autological-eu.github.io/grid-conductor/.
 
 The map identifies price separation using signed ENTSO-E flow–price congestion-rent
@@ -63,7 +71,9 @@ removed merely because their original articles are retired.
 
 The Pages workflow runs lint/types/tests/build and production browser checks.
 `tools/prepare-pages.ts` generates deep-link HTML under the project base. Pushes
-to public-v1 deploy; no automatic main merge or history rewrite. Verify successful
+to main and public-v1 deploy. Main contains the alpha release; development continues
+on public-v1, with main promotions requiring explicit user authorization. Never
+rewrite published history. Verify successful
 CI/Pages and public URLs before claiming publication. To check a preview:
 
 ```sh

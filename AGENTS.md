@@ -1,8 +1,10 @@
 # Grid Conductor — agent instructions
 
 Read PRODUCT.md and TASKS.md first. PRODUCT owns requirements, TASKS owns current
-priorities/evidence, README owns setup. Work on public-v1. Never merge main,
-force-push, rewrite published history, change visibility or expose credentials.
+priorities/evidence, README owns setup. Develop on public-v1. Main promotions
+require explicit user authorization; the alpha promotion was authorized on
+2026-10-10. Never force-push, rewrite published history, change visibility or
+expose credentials.
 
 ## Focus and publication policy
 
