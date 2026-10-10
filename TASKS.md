@@ -119,5 +119,12 @@ Final branch diff and publication verification are recorded after deployment. Au
 Measured staged diff versus origin/main after cleanup: approximately 19,100
 added lines (was 320,400), 80,109 deleted, about 8.4 MB binary patch text
 (was 33.9 MB). Public assets: 60 files / 4.67 MiB, down from roughly 35 MiB.
-Publication verification for this data cleanup is pending. The exact final count
+Data cleanup publication verified for `7817af9f67c4a3c8c577febe105c98ae49c21020`:
+CI/Pages `38031042202` and PR checks `38031044164` succeeded. Public report/charts/
+download checks pass at 1440/390px; seven baseline/JSON/gzip downloads match
+committed bytes and gzip payloads decompress successfully. Legacy routes are retired. The exact final count
 may change slightly with this verification record.
+
+Removed the unused legacy full-year weather downloader after the import audit
+found it depended on a retired benchmark collector. Monthly weather preparation
+and its compact adapter remain. No retained calculation producer was changed.
