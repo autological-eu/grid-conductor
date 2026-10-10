@@ -13,6 +13,9 @@ ALLOWED = [
     'european-reservoir-clearing-2025/summary.json.gz',
     'european-reservoir-clearing-2025/replay.json',
     'fixed-reservoir-screening-2025/summary.json.gz',
+    'fixed-reservoir-screening-2025/resource-bids.json',
+    'fixed-reservoir-screening-2025/resource-bids-curves.png',
+    'fixed-reservoir-screening-2025/resource-bids-errors.png',
     'fixed-reservoir-screening-2025/area-summary.csv',
     'fixed-reservoir-screening-2025/hourly-de.csv.gz',
     'fixed-reservoir-screening-2025/model-prices.png', 'fixed-reservoir-screening-2025/model-hydro.png',
@@ -65,6 +68,22 @@ def check():
     fixed = json.loads(archived['fixed-reservoir-screening-2025/summary.json'])['provenance']
     assert hashlib.sha256(archived['european-reservoir-clearing-2025/summary.json']).hexdigest() == fixed['annual_summary_sha256'], 'Detached hydro source'
     assert hashlib.sha256((folder / 'european-reservoir-clearing-2025/replay.json').read_bytes()).hexdigest() == fixed['water_replay_sha256'], 'Detached water replay'
+    combined = json.loads((folder / 'fixed-reservoir-screening-2025/resource-bids.json').read_text())
+    assert combined['hours'] == 8760 and len(combined['cases']) == 3
+    assert combined['source_summary_sha256'] == combined['replay']['summary_sha256'], 'Detached combined replay'
+    assert combined['provenance']['reference_summary_sha256'] == hashlib.sha256(archived['fixed-reservoir-screening-2025/summary.json']).hexdigest(), 'Detached fixed reference'
+    assert combined['water_residual_mwh'] <= 1e-4
+    for variant, record in combined['cases'].items():
+        assert record['optimal_hours'] == 8760 and record['physics'] == combined['replay']['cases'][variant]
+        assert record['maximum_live_residual_mw'] <= 1e-4 and record['physics']['maximum_residual_mw'] <= 1e-4
+        assert len(record['native_checks']) == 3
+        assert all(abs(row['difference_eur']) <= max(.05, abs(row['native_objective_eur'])*1e-8) for row in record['native_checks'])
+    for name, sha in combined['provenance']['dependencies'].items():
+        assert hashlib.sha256((ROOT / 'tools' / name).read_bytes()).hexdigest() == sha, 'Changed combined calculation source'
+    assert combined['publication_producer_sha256'] == hashlib.sha256((ROOT / 'tools/evaluate_fixed_hydro_bids_2025.py').read_bytes()).hexdigest()
+    for name, sha in combined['images'].items():
+        assert hashlib.sha256((folder / 'fixed-reservoir-screening-2025' / name).read_bytes()).hexdigest() == sha, 'Changed combined figure'
+    assert len(combined['mapped_zone_errors']) == 39 and len(combined['german_offer_examples']) == 9
     carbon = json.loads((folder / 'carbon-spreads-2025.json').read_text())
     assert carbon['year'] == 2025 and len(carbon['borders']) == 68
     assert carbon['metric_sha256'] == hashlib.sha256((ROOT / 'src/lib/carbon-spread.ts').read_bytes()).hexdigest(), 'Changed carbon metric'

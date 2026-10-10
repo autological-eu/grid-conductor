@@ -13,6 +13,14 @@ Active work returns to the fixed-hydro supply-curve checkpoint by user request
 are paused references. Do not restart them or publish the parked Norwegian hydro
 trial without a new user request. Fixed output is not fixed-price bidding.
 
+The user subsequently authorized the fixed-hydro/resource-bid combination. Its
+fresh producer is tools/hybrid_fixed_hydro_2025.py; independent --audit reconstructs
+annual physics, and tools/evaluate_fixed_hydro_bids_2025.py publishes controlled
+same-observation comparisons in the existing fixed-hydro report. Preserve the
+frozen checkpoint producer and sources. The three predeclared bid ablations are
+comparison evidence, not a revived annual inventory search. No forecast, adaptive
+hydro or browser replacement is implied. Audited zonal inputs remain outstanding.
+
 Maintain these reproducible models:
 
 - Fixed-hydro annual checkpoint: tools/fixed_reservoir_screening_2025.py and

@@ -29,10 +29,12 @@ not held-out validation. Prepared demand is not independently audited observed d
 
 ## Ordered next actions
 
-1. **Return to the fast fixed-hydro supply-curve checkpoint (user decision).**
-   Recheck actual source hashes and saved annual water/network witnesses. Keep its
-   report as the active baseline; mark daily bidding/rolling storage paused. Do
-   not publish or resume the parked Norwegian adaptive-hydro trial.
+1. **Combined fixed-hydro/resource-bid implementation completed.** Fresh three-way
+   annual comparison, independent component replay, nine native checks and common
+   A44 observations are verified below. Use the existing fixed-hydro report;
+   daily/rolling storage and the Norwegian adaptive-hydro trial remain paused.
+   Bid changes alone offer only marginal accuracy gains; do not promote them as an
+   empirically accepted replacement or fit observed prices without a declared split.
 2. **Reconcile geography and empirical inputs for this checkpoint.** Country/
    AC-island proxies are not bidding zones. Map buses, generators/reservoirs and
    demand to commercial zones, particularly NO1–NO5; audit zonal demand and
@@ -267,3 +269,56 @@ Local return-to-checkpoint verification: public-asset/source allowlist passes
 production build pass. Chromium checks confirm the selected report, its two
 figures and no overflow at 1440/390px; retained report maths passes at
 1440/390/320px. Publication is pending CI/Pages and public URL verification.
+
+
+## Combined fixed-hydro/resource bids — 2026-10-10
+
+User authorized implementation and evaluation of the proposed combination. New
+hybrid_fixed_hydro_2025.py preserves the frozen checkpoint source, weather/capacity,
+prepared demand, physical PTDF/GSK constraints and audited fixed hourly hydro.
+It updates one persistent hourly LP and merges exactly equivalent generator offers.
+No reservoir forecast/optimisation or observed electricity-price input enters bids.
+The fresh resource-bids-v1 root contains three predeclared bid ablations: unchanged
+legacy, gas/oil monthly fuel-only, and complete simple resource bids. These are
+controlled comparisons, not alternative inventory-search candidates.
+
+All three complete 8760 optimal hours. Combined solve 11.55s; update/live-replay
+loop 13.78s; common preparation 6.92s; bid compilation 0.42s. Full three-case command,
+nine native checks, component replay/export: 132.89s, peak RSS 1211 MiB. Preparation
+of the historical hydro schedule is excluded; report generation and subsequent
+independent audit are separate. Nine January/July/December native objectives agree
+within EUR0.00000006. Legacy reproduces retained hourly objectives within EUR0.000917;
+dual differences under degeneracy are disclosed. Independent saved annual primals
+pass generation/link bounds, area and island balances, source-network passive flows
+and unchanged water closure. Maximum component residual 5.50e-6 MW; water 2.04e-6 MWh.
+Four targeted formula, input-validation, aggregation and native-physics tests pass.
+
+The fuel inputs reconstruct exactly from hashed World Bank monthly TTF/Brent and
+ECB raw responses. All 39 eligible A44 price series are rehashed/reparsed, with
+identical observation coverage per variant and all adverse results reported.
+German MAE: legacy 22.56, gas/oil-only 22.74, complete bids 22.70 EUR/MWh (8760 pairs).
+Complete bids improve 23/39 mapped-zone MAEs; equal-area mean MAE 38.36 to 38.11.
+This is descriptive, untuned and not held-out empirical acceptance. The older
+23.10 figure uses a different DE-LU observation series and is not this comparator.
+Norway errors remain 196.42–218.69 EUR/MWh with one proxy for five zones. All variants
+retain four shortage hours / 0.0298195 TWh. Speed and numerical parity do not resolve
+hydrology or geography. No model is adopted merely by choosing its lower aggregate error.
+
+Current publisher evaluate_fixed_hydro_bids_2025.py replaces the existing physical
+report with data, source rules, three German supply-curve examples, annual/monthly/
+all-zone plots and compact price/border/replay evidence. Only three new compact
+public assets; raw provider sources/full witnesses remain ignored. Historical
+checkpoint summary/water evidence remain intact, no third report or retired search.
+Audited observed zonal demand, commercial asset geography (especially NO1–NO5),
+outages/commitment, heating-value/delivered-oil and historical EUA remain unresolved.
+Those are next inputs before held-out acceptance and conditional investment pairs.
+Browser two-zone engine unchanged; main promotion/reviews remain disabled.
+
+Local verification: four new Python numerical tests and all 14 live-app tests
+pass; typecheck, lint (six existing warnings), coverage, public asset allowlist
+(66 files / 5.96 MiB) and production build pass. Workbench Chromium smoke passes
+at 1440/390/320/667px. The updated report renders with no overflow at 1440/390/320px;
+both charts and all report download links resolve, and three new assets match
+committed bytes. The first smoke invocation used an unsupported CLI argument and
+failed to connect to its default port; rerunning with SMOKE_URL passes.
+Deployment/public verification follows a successful Pages run.

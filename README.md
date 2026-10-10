@@ -20,7 +20,8 @@ estimates. Its browser-local line/battery scenarios still use a reduced-form
 - [Workbench methodology](docs/workbench-methodology.md): bottlenecks, live scenario
   equations, opportunity/carbon interpretation and exact data sources.
 - [Fixed-hydro annual checkpoint](docs/european-physical-synthetic-clearing-2025.md):
-  8760 independent hourly network clearings with audited fixed reservoir injections.
+  8760 independent hourly physical clearings, fixed reservoir injections, simple
+  resource bids and controlled same-observation price comparisons.
 - [Paused resource-bidding research reference](docs/daily-fuel-dispatch-2025.md): generator
   strategies, fuel inputs, daily chronological storage and annual observed-price errors.
 
@@ -64,7 +65,10 @@ Never commit secrets or multi-gigabyte artifacts. Python research uses the pinne
 
 Current research entry points:
 
-- `fixed_reservoir_screening_2025.py`, `report_fixed_reservoir_screening_2025.py`.
+- `hybrid_fixed_hydro_2025.py` (active combined producer and independent --audit),
+  `evaluate_fixed_hydro_bids_2025.py` (current report publisher).
+- `fixed_reservoir_screening_2025.py`, `report_fixed_reservoir_screening_2025.py`
+  (frozen checkpoint; the historical publisher would overwrite the current report).
 - `fast_daily_market.py` (experimental performance adapter), `terminal_daily_market.py`
   (retained producer), `audit_terminal_daily_market.py`.
 - `simple_resource_bids.py`, `thermal_bid_rules.py`, `prepare_fuel_prices.py`.
@@ -75,6 +79,29 @@ Current research entry points:
 Run from the repository root; inspect each tool's CLI and retained report for
 inputs/provenance. Source data and retained-reference dependencies must not be
 removed merely because their original articles are retired.
+
+To reproduce the combined comparison with the verified local caches, first restore
+immutable metadata, then use a new output directory (never overwrite a retained run):
+
+```sh
+python3 tools/pack_model_metadata.py --restore
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
+  tools/hybrid_fixed_hydro_2025.py --output data/fixed-reservoir-screening-2025/new-comparison
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
+  tools/hybrid_fixed_hydro_2025.py --audit --output data/fixed-reservoir-screening-2025/new-comparison
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
+  tools/evaluate_fixed_hydro_bids_2025.py --run data/fixed-reservoir-screening-2025/new-comparison
+python3 tools/pack_model_metadata.py
+python3 tools/check_public_assets.py
+```
+
+This compares legacy, gas/oil-only and complete resource bids. The 13.78s combined
+annual loop excludes source preparation, native checks, export and independent
+audit. It is not a browser timing or empirical acceptance. Country/AC-island demand
+and geography still need commercial-zone reconciliation; battery/PHS remain excluded.
 
 The compact trial is paused; the following is retained reproduction guidance,
 not an instruction to resume it. For a fresh compact trial using the retained

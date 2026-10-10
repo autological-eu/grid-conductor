@@ -1,150 +1,184 @@
-# European hourly dispatch — the final fast screening model
+# European hourly dispatch — fixed hydro with resource bids
 
-## Summary
+## Summary and conclusion
 
-**Active development baseline.** We have returned to this fast supply-curve
-checkpoint; adaptive daily/rolling-hydro experiments are paused. Hydro **output**
-is precomputed and fixed, not merely its bid price. Its inherited water inputs and
-country/island geography still require observed-data validation; returning to it
-does not establish accurate Norwegian bidding-zone prices or adaptive-storage
-investment values. The timings below are the retained benchmark, not a new run.
+We implemented the proposed combination: **fast hourly physical-network clearing,
+precomputed fixed hydro, and simple resource-specific generator offers**. It covers
+all **8,760 UTC hours of 2025** in 40 country/AC-island areas. No
+price forecast, adaptive reservoir solve or observed electricity-price input is used.
 
-The model clears all **8,760 UTC hours of 2025** across **40 country/island
-areas**, spanning **34 country labels**. It combines synthetic generator bids,
-prepared hourly demand, physical network limits and **93 reservoirs’ precomputed
-hourly output**. The annual solve-and-replay loop takes **19.17 seconds**;
-preparation and water checks add **6.73 seconds**.
+The combined bids increase German MAE by EUR0.14/MWh, and improve MAE in 23 of 39 mapped observed zones. The combined annual clearing/update/live-replay loop takes
+**13.78 seconds**.
+This is an untuned comparative experiment, **not accepted market-price accuracy**.
+Audited commercial-zone mapping and observed zonal demand remain incomplete.
+The browser still uses its existing two-zone screen.
 
-This is a verified numerical baseline for **fixed-hydro screening**. Reservoir
-output is fixed rather than re-optimised during clearing. Market calibration,
-adaptive hydro and investment-scenario acceptance remain open.
+| Bid formulation | Annual loop s | DE MAE EUR/MWh | DE bias EUR/MWh | DE RMSE EUR/MWh | Equal-area mean MAE EUR/MWh |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Legacy fixed hydro | 15.06 | 22.56 | -9.59 | 34.23 | 38.36 |
+| Gas/oil fuel update | 14.33 | 22.74 | -13.76 | 35.13 | 38.27 |
+| Combined simple resource bids | 13.78 | 22.70 | -13.23 | 35.05 | 38.11 |
 
-| Result | Current model |
-| --- | ---: |
-| Year / hourly solves | 2025 / 8760 |
-| Prepared demand TWh | 3008.32 |
-| Precomputed reservoir generation TWh | 311.00 |
-| Norway reservoir generation TWh | 99.78 |
-| Emergency supply TWh | 0.0298195 |
-| Hours with emergency supply | 4 |
-| Solve and network replay seconds | 19.17 |
-| Preparation and water checks seconds | 6.73 |
+Both price comparisons use the **same direct ENTSO-E A44 series**, hours and
+geographic proxy. The older checkpoint's published EUR23.10/MWh used a different
+DE-LU observation series; it must not be substituted into this comparison.
+Equal-area MAE first averages zone errors sharing one physical area, then weights
+each represented physical area equally (29 areas).
+It is not demand-weighted European market accuracy.
 
-All remaining emergency supply is in Norway. Emergency bids at €10,000/MWh
-make shortages visible; these are diagnostic penalties, not observed market bids.
-Runtime excludes Python imports, offline reservoir-schedule generation, separate
-native verification and report production. No browser or end-to-end runtime is
-claimed.
+## Generator strategies and data
 
-## How the model works
+- **Gas/CCGT/OCGT and oil:** offer = fuel price / efficiency + carbon price ×
+  operational emission factor / efficiency + variable O&M. Replace the prepared
+  total cost; do not add fuel or carbon twice. Gas/oil inputs are twelve observed
+  World Bank monthly TTF/Brent benchmarks, converted with ECB daily FX and repeated
+  over UTC hours. Carbon is a constant **EUR80/t assumption**, not historical EUA.
+  Heating-value multiplier 1 and Brent at 1.7 MWh thermal/barrel remain proxies;
+  Brent is not delivered power-plant oil fuel. No daily fluctuations are invented.
+- **Coal/lignite:** the same explicit formula, with prepared technology-table
+  fuel constants rather than observed 2025 commodity quotes.
+- **Wind/solar:** weather-limited availability and EUR0/MWh offers in the complete
+  simple-bid variant. Legacy and fuel-only retain EUR−5/MWh offers. This low-price
+  rule is an assumption; subsidy-specific or strategic bids are not reconstructed.
+- **Nuclear, biomass, waste, geothermal and run-of-river:** labelled prepared
+  operating-cost/availability proxies. Nuclear has no commitment/ramp/must-run
+  representation; source availability ending in 2024 is explicitly a 2025 proxy.
+- **Reservoir hydro:** the same audited precomputed hourly electrical injections
+  in every variant, never renewable availability or a variable bid volume.
+  Turbine/inflow/efficiency/spill/stock/closure checks preserve the retained source
+  schedule and its inherited model inventory boundaries. These are not observed
+  Norwegian reservoir stocks. Other 67 battery/PHS units remain excluded.
 
-**Supply and demand.** The prepared PyPSA-Eur network supplies 1,151 generators
-and hourly demand. Generator availability retains the original weather profiles;
-wind/PV capacity follows the IRENA end-2024/end-2025 linear trajectory. This applies
-61 country/technology trajectories, with missing capacity/profile coverage recorded
-in the source audit. Linear commissioning is an assumption, not observed dates.
-Synthetic thermal bids add €80/t operational CO2 to source marginal costs;
-wind/solar bids are −€5/MWh. Demand is a prepared-network proxy, not independently
-audited ENTSO-E hourly demand. Actual EUPHEMIA orders, block bids and commitment
-rules are not reconstructed.
+The **fuel-only** ablation changes gas/oil bids alone, keeping other legacy offers.
+The **complete simple-bid** variant uses the current resource-bidding compiler's
+rules, including all five thermal types and zero-price renewables. These variants
+were specified before this annual run. No electricity-price fitting, parameter
+selection for market acceptance or empirical pass threshold is claimed.
 
-**Network.** The model retains 256 passive branches and 74 controllable links.
-Countries stay separate within each original AC island. Installed-capacity
-generation shift keys allocate net local injections to original buses; merging
-repeated country labels would invent connectivity. Links retain original endpoints,
-signed bounds and efficiencies. Passive limits use source ratings in both directions.
-These are static N-0 physical limits, without observed outages, contingencies or
-commercial JAO capacity domains.
+IRENA end-2024/end-2025 linear wind/PV commissioning, original hourly weather,
+generator capacity/availability, prepared network demand, GSKs and all constraints
+are identical across variants. Demand is currently the **prepared PyPSA-Eur proxy**,
+not an independently audited ENTSO-E zonal-demand input. The requested observed-demand
+and bidding-zone upgrade remains blocked on source/mapping verification; schematic
+map centroids are not geographic asset mappings. No missing zonal data are fabricated.
 
-**Reservoir supply.** Each reservoir’s saved electric output is an explicit fixed
-hourly injection. It is not generator availability. Before clearing, the complete
-schedule is checked against original inflows, discharge efficiency, spill limits,
-turbine capacity, reservoir energy bounds and annual closure. It comes from an
-offline chronological solve with 60 fixed inventory boundaries inherited from
-the retained PyPSA-Eur reference; those inventories are model assumptions, not
-observed water levels or an annual-optimum certificate.
+## Physical clearing and speed
 
-Original demand stays intact. Where hydro exceeds local demand, residual demand
-in the LP becomes negative, representing a fixed injection to be exported.
-With hydro fixed, the network problems separate by hour and can reuse a solver
-basis. The other **67 battery and pumped-storage units remain excluded**.
+Each hour clears synthetic supply against inelastic residual demand, after fixed
+hydro injections. Original passive-network PTDF/GSK constraints and
+256 branch ratings are preserved, along with
+74 native controllable links, signed bounds and efficiencies.
+These are N-0 physical approximations, not audited commercial JAO capacities.
+Country labels remain separate by AC island, not NO1–NO5 commercial zones.
 
-## Reservoir supply across Europe
+Identical-column, identical-hourly-price offers can be merged exactly: each has the
+same area and network effect. Installed-capacity GSKs do not change with merging.
+Hourly vectors update a persistent one-thread HiGHS simplex model and reuse its basis.
+There is no temporal reservoir/forecast optimisation. Per-hour deadlines use the
+solver's cumulative clock correctly; unchanged-input cold retries are recorded.
 
-![Current-model reservoir generation by country](../../research/fixed-reservoir-screening-2025/model-hydro.png)
+| Variant | Actual solver s | Bid compilation/merge s | Emergency TWh | Shortage hours |
+| --- | ---: | ---: | ---: | ---: |
+| Legacy fixed hydro | 12.44 | 0.36 | 0.0298195 | 4 |
+| Gas/oil fuel update | 11.93 | 0.41 | 0.0298195 | 4 |
+| Combined simple resource bids | 11.55 | 0.42 | 0.0298195 | 4 |
 
-The chart aggregates the fixed schedule by country for display; clearing retains
-all 40 country/island areas. Zero bars mean no reservoir output in this model,
-not proof of no real-world hydro capacity. Source turbine capacities, hydrology
-and geographic coverage still need observed-data validation.
+Common source/hydro preparation took 6.92s.
+The full command for **three annual variants, nine native checks, component replay
+and witness export** took 132.89s, peak RSS
+1211 MiB. These are separate from report generation and the
+subsequent independent audit. The highlighted loop is not end-to-end runtime or a
+browser benchmark. Offline hydro-schedule creation is excluded. The retained
+legacy benchmark remains 19.17s plus 6.73s preparation; today's controlled legacy
+run measures the same formulation with exact offer aggregation.
 
-## German price validation
+## German supply curves and clearing examples
 
-![Current model and observed German prices](../../research/fixed-reservoir-screening-2025/model-prices.png)
+![Domestic German supply offers and coupled clearing prices](/research/fixed-reservoir-screening-2025/resource-bids-curves.png)
 
-Mainland-DE prices are compared with the observed Energy-Charts/SMARD **DE-LU**
-series for **8,759 jointly observed hours**. Missing observations are not
-filled. The line chart shows seven-day means; the error histogram uses individual
-hours. Germany and DE-LU have different geographic scope, so this is a descriptive
-proxy comparison, without fitting or held-out market acceptance.
+Three preselected January/July/December hours show domestic offered capacity by
+price. The vertical line is domestic residual demand; horizontal lines show the
+network-cleared combined price and observed DE-LU price. **The domestic curve's
+intersection is not the coupled clearing solution**: imports, exports and physical
+constraints enter the Europe-wide solve. Examples and all bid volumes/prices are
+included in the compact data download.
 
-| Metric | Current model versus observed DE-LU |
-| --- | ---: |
-| MAE €/MWh | 23.10 |
-| Bias €/MWh | -9.22 |
-| RMSE €/MWh | 36.01 |
+## Full-year observed-price evaluation
+
+![Annual, monthly and all-zone price comparisons](/research/fixed-reservoir-screening-2025/resource-bids-errors.png)
+
+All 39 eligible mapped observed zones are included, preserving missingness
+and signed prices. Raw A44 request domains, response hashes and hourly aggregation
+are rechecked. Full-year, monthly, negative-price and border-spread diagnostics are
+available in the download: 67 observed border pairs. No congestion-rent
+or investment benefit follows merely from price agreement.
+
+The German combined model has 140 negative
+hours versus 479 observed. Simple
+renewable and nuclear rules cannot reconstruct all negative-price behaviour.
+Four unavailable observed series and unresolved Italian island mappings are
+excluded explicitly in the data; country prices reused for Norway, Sweden and
+mainland Italy are disclosed.
+
+| Observed Norwegian zone | Legacy MAE EUR/MWh | Fuel-only MAE EUR/MWh | Complete bids MAE EUR/MWh |
+| --- | ---: | ---: | ---: |
+| NO1 | 199.88 | 201.18 | 198.03 |
+| NO2 | 202.49 | 203.67 | 200.55 |
+| NO3 | 210.47 | 211.79 | 208.39 |
+| NO4 | 220.69 | 222.22 | 218.69 |
+| NO5 | 198.42 | 199.70 | 196.42 |
+
+These five observations are compared with one Norwegian country proxy. Fixed
+hydro avoids the rolling experiment's scheduling decisions, but does not validate
+hydrology, resolve internal bottlenecks or recover distinct Norwegian prices.
 
 ## Numerical verification
 
-Three preselected hours are independently solved by native PyPSA with the same
-fixed hydro injections, GSKs, passive network and controllable-link constraints.
-They verify this model’s numerical formulation, not agreement with market prices
-or an unrestricted nodal optimum.
+Every variant completes 8760 optimal hours. An independent process reconstructs
+sources/offers and saved primals, checks generation/link bounds and area balances,
+then reconstructs nodal injections from GSKs and native link endpoints, checks
+island balances and computes passive flows outside the LP constraint matrix.
+All component residuals pass 1e−4 MW; water residual is
+2.04e-06 MWh with unchanged annual closure. No adaptive
+storage or simultaneous charge/discharge is introduced.
 
-| UTC hour | Native PyPSA objective € | Fast objective € | Absolute difference € |
-| --- | ---: | ---: | ---: |
-| 2025-01-15 12:00:00 | 18,482,618.03 | 18,482,618.03 | 0.000002116 |
-| 2025-07-15 12:00:00 | 477,444.46 | 477,444.46 | 0.000000008 |
-| 2025-12-15 12:00:00 | 8,418,111.10 | 8,418,111.10 | 0.000000041 |
+| Variant | UTC hour | Native PyPSA minus fast objective EUR |
+| --- | --- | ---: |
+| Legacy fixed hydro | 2025-01-15 12:00:00 | 5.5879354e-08 |
+| Legacy fixed hydro | 2025-07-15 12:00:00 | -1.3504177e-08 |
+| Legacy fixed hydro | 2025-12-15 12:00:00 | 3.9115548e-08 |
+| Gas/oil fuel update | 2025-01-15 12:00:00 | -2.6077032e-08 |
+| Gas/oil fuel update | 2025-07-15 12:00:00 | 5.2386895e-10 |
+| Gas/oil fuel update | 2025-12-15 12:00:00 | -3.3527613e-08 |
+| Combined simple resource bids | 2025-01-15 12:00:00 | 5.5879354e-08 |
+| Combined simple resource bids | 2025-07-15 12:00:00 | 2.7939677e-09 |
+| Combined simple resource bids | 2025-12-15 12:00:00 | 1.3969839e-08 |
 
-All 8,760 fast solves terminated optimal after any retry. Independent network
-and bound replay has maximum residual **8.38e-06 MW**;
-water replay has maximum residual **2.04e-06 MWh** and checks
-annual closure. Both are below the declared `1e−4` diagnostic threshold.
-4 nonoptimal warm-basis solves recovered through unchanged-input cold retries;
-no bounds were relaxed. Two targeted tests cover double-spent water, broken
-closure and country/island injection accounting, including local hydro surplus.
+Native PyPSA independently builds the same physical network and zonal GSK
+constraints with fixed injections. Agreement verifies formulation, not market
+prices. Controlled legacy hourly objectives reproduce the retained checkpoint
+within EUR0.000916; dual prices
+can differ under degeneracy (maximum difference
+EUR627.500883/MWh).
 
-The underlying chronological water schedule has separate saved-primal replay
-evidence. Numerical cost agreement does not validate marginal prices or
-congestion-rent valuations.
+## What remains before scenario acceptance
 
-## Conclusion and limitations
+This establishes a fast, reproducible combined baseline and a fair price comparison.
+It does not show that added bid complexity automatically improves prices everywhere.
+Next are audited bidding-zone assets/demand, outages and commercial constraints,
+explicit training/untouched validation periods and empirical thresholds, followed
+by common-input native/replay investment pairs. Transmission and wind/solar cases
+remain conditional on fixed hydro; adaptive battery/hydro valuation needs chronology.
+No paused adaptive-hydro search or browser replacement has been resumed.
 
-The current model provides a seconds-scale, full-year physical dispatch baseline
-with audited fixed reservoir supply and explicit shortage reporting. Its main
-limitation is **fixed hydro**: output cannot respond to new transmission, batteries,
-demand or bid costs. That restriction can materially affect marginal prices,
-especially in Nordic areas. Price-based investment estimates remain unvalidated.
+[Combined results, source/fuel provenance, all-zone/monthly/border errors and bid examples](/research/fixed-reservoir-screening-2025/resource-bids.json)
 
-Future interventions would be conditional on the same schedule and need paired
-verification. Adaptive hydro requires enforceable water budgets and water-value
-bids, or a new chronological solve. Bidding-zone mapping, observed fleet/demand/
-hydrology, commercial constraints and empirical validation remain open. This
-research model has not replaced the browser scenario estimator or closed the
-annual/investment acceptance gates.
+[Retained fixed-hydro checkpoint summary](/research/fixed-reservoir-screening-2025/summary.json.gz)
+· [retained area summaries](/research/fixed-reservoir-screening-2025/area-summary.csv)
+· [retained German hourly results](/research/fixed-reservoir-screening-2025/hourly-de.csv.gz)
+· [water replay](/research/european-reservoir-clearing-2025/replay.json).
 
-## Data and reproduction
-
-Run `tools/fixed_reservoir_screening_2025.py` in the pinned Python environment;
-render this report with `tools/report_fixed_reservoir_screening_2025.py`.
-The calculation uses HiGHS 1.15.1 and native PyPSA 1.2.4. Source requests, hashes,
-water witnesses and retry evidence are recorded for reproducibility.
-
-[Current-model summary, native checks and provenance](../../research/fixed-reservoir-screening-2025/summary.json.gz),
-[all 40 area summaries](../../research/fixed-reservoir-screening-2025/area-summary.csv),
-[hourly German results, gzip CSV](../../research/fixed-reservoir-screening-2025/hourly-de.csv.gz),
-and [water-schedule replay evidence](../../research/european-reservoir-clearing-2025/replay.json).
-The existing machine-readable files retain supporting sensitivity-audit fields;
-the report presents only the final model. Large witnesses stay in the ignored
-cloud cache.
+Reproduction: tools/hybrid_fixed_hydro_2025.py with a fresh --output directory,
+then the same tool with --audit, then tools/evaluate_fixed_hydro_bids_2025.py --run.
+Use the pinned Python environment, bounded resources and existing verified source
+caches; raw inputs and full annual primals remain outside Git.

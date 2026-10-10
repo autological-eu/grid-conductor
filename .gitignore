@@ -104,3 +104,8 @@ data/daily-market-2025/
 
 # Sourced Norwegian hydro observations and local reconciliation
 /data/hydro-observations-2025/
+
+# Controlled fixed-hydro resource-bid evaluation (compact evidence only).
+!/public/research/fixed-reservoir-screening-2025/resource-bids.json
+!/public/research/fixed-reservoir-screening-2025/resource-bids-curves.png
+!/public/research/fixed-reservoir-screening-2025/resource-bids-errors.png

@@ -1,7 +1,7 @@
 # Full-year daily dispatch and observed prices — 2025
 
 **Paused research reference.** Active development has returned to the
-[fast fixed-hydro supply-curve checkpoint](../european-physical-synthetic-clearing-2025/).
+[fast fixed-hydro/resource-bid model](../european-physical-synthetic-clearing-2025/).
 The daily bidding and compact rolling-storage results below remain reproducible
 research evidence; they are not the selected development baseline or browser engine.
 The subsequent Norwegian hydro experiment was parked without publication.

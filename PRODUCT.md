@@ -20,6 +20,11 @@ model and compact rolling-storage trial paused as research references:
 1. **Fixed-hydro annual checkpoint:** hourly synthetic supply-curve clearing with
    audited, precomputed reservoir injections and physical network constraints.
    Retain its full-year results, methods, figures, source and replay evidence.
+   The authorized combined formulation adds simple resource-specific offers,
+   including sourced monthly gas/oil bids, to these same hourly physical clearings.
+   Evaluate it against the unchanged checkpoint on identical observation coverage;
+   publish adverse outcomes and all eligible areas. Keep observed electricity prices
+   out of bid construction. This does not authorize adaptive-hydro experiments.
    Develop from this checkpoint; fixed hourly injections must not be described
    as merely fixed hydro bid prices.
    Its fixed schedule cannot respond to investments; conditional benefits are
@@ -88,7 +93,8 @@ resolution and delivered-product approximations. Nuclear and other technologies
 use labelled cost/availability proxies; unsupported commitment, outages and ramps
 must be disclosed rather than invented.
 
-Reservoir hydro uses a seasonal inventory target and water-value bid. Battery and
+In the paused daily reference, reservoir hydro uses a seasonal inventory target
+and water-value bid. Battery and
 pumped-hydro bids use loss/wear-adjusted forecast buy/sell thresholds. Forecasts
 use common exogenous demand/weather/inflow assumptions; approximate endogenous
 prices are not perfect predictions or realised ENTSO-E observations. Recompute
