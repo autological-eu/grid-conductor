@@ -1,4 +1,65 @@
-# European hourly dispatch — Norwegian water and location diagnosis
+"""Publish verified water/geography diagnostics in the existing fixed-hydro report."""
+import json
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from nve_hydro_diagnostics import ROOT, NVE, digest
+
+BASE=ROOT/'data/hydro-observations-2025'
+OUT=ROOT/'public/research/fixed-reservoir-screening-2025'
+
+def publish():
+    annual=BASE/'bus-geography-annual-v1';window=BASE/'bounded-windows-v1';point=BASE/'price-geography-v1'
+    a=json.loads((annual/'summary.json').read_text());w=json.loads((window/'summary.json').read_text());p=json.loads((point/'summary.json').read_text());audit=json.loads((annual/'diagnostic-audit.json').read_text())
+    assert audit['audit_producer_sha256']==digest(ROOT/'tools/audit_nve_hydro_diagnostics_2025.py')
+    for key,folder in [('annual_summary_sha256',annual),('window_summary_sha256',window),('point_summary_sha256',point)]:assert audit[key]==digest(folder/'summary.json')
+    assert a['optimal_hours']==8760 and audit['annual_network_residual_mw']<=1e-4
+    assert len(audit['windows'])==6 and all(r['status']=='Optimal' for r in w['records'])
+    s=json.loads((NVE/'summary.json').read_text());source=s['hydro_source']
+    rows=[v for v in a['observed_price_comparisons'] if v['relocated']['known_hours']]
+    rows=sorted(rows,key=lambda v:v['relocated']['mae_eur_mwh'],reverse=True)
+    assert len(rows)==39
+    elhub=ROOT/'data/bidding-zone-source-audit-2025/elhub-annual-v1'
+    e=json.loads((elhub/'audit.json').read_text());assert e['summary_sha256']==digest(elhub/'summary.json')
+    with np.load(annual/'annual.npz',allow_pickle=False) as z:prices=z['prices'].copy()
+    # Area ordering is from the source model, not selected from observations.
+    from nve_hydro_diagnostics import rebuild
+    n,m,hp,mask,water,_=rebuild();j=m['zones'].index('1:NO')
+    with np.load(NVE/'resource_bids.npz',allow_pickle=False) as z:oldprices=z['prices'].copy()
+    fig,axes=plt.subplots(2,1,figsize=(12,10),layout='constrained');x=np.arange(len(rows))
+    axes[0].bar(x-.18,[r['all_original_hours']['mae_eur_mwh'] for r in rows],.36,label='NVE water, country-distributed load/hydro',color='#94a3b8')
+    axes[0].bar(x+.18,[r['relocated']['mae_eur_mwh'] for r in rows],.36,label='Same water/volumes, original load/hydro buses',color='#2563eb')
+    axes[0].set(xticks=x,xticklabels=[r['zone'] for r in rows],ylabel='Price MAE EUR/MWh',title='All 39 observed areas — country proxies, no observed-price fitting')
+    axes[0].tick_params(axis='x',labelrotation=90);axes[0].legend(fontsize=9)
+    dates=n.snapshots;months=np.array(dates.month);obsfile=ROOT/'data/price-trace/dispatch-validation-2025-v2/NO2.json'
+    obs=np.array(json.loads(obsfile.read_text()),dtype=float)
+    for label,series,color in [('Country-distributed',oldprices[:,j],'#94a3b8'),('Original buses',prices[:,j],'#2563eb'),('Observed NO2',obs,'#15803d')]:
+        axes[1].plot(range(1,13),[np.nanmean(series[months==month]) for month in range(1,13)],marker='o',label=label,color=color)
+    axes[1].set(xlabel='UTC month of 2025',ylabel='Mean price EUR/MWh',title='Monthly prices: remaining hydro and geography errors are visible');axes[1].legend()
+    fig.savefig(OUT/'nve-geography-errors.png',dpi=110);plt.close(fig)
+    fig,axes=plt.subplots(3,2,figsize=(12,10),layout='constrained')
+    with np.load(window/'windows.npz',allow_pickle=False) as z:
+        for i,label in enumerate(['original_extreme','ordinary_july','relocated_extreme']):
+            r=next(r for r in w['records'] if r['label']==label and r['case']=='hydro_and_demand_buses');start,end=r['start_hour'],r['end_hour_exclusive'];prefix=label+'_hydro_and_demand_buses_'
+            axes[i,0].plot(range(48),hp[start:end][:,mask].sum(axis=1)/1000,label='Fixed schedule',color='#94a3b8')
+            axes[i,0].plot(range(48),z[prefix+'power'].sum(axis=1)/1000,label='Bounded ±20%',color='#2563eb')
+            axes[i,0].set(ylabel='Norwegian reservoir output GW',title=str(dates[start])[:10]+' · same water and closing stocks')
+            axes[i,1].plot(range(48),prices[start:end,j],label='Fixed schedule',color='#94a3b8')
+            axes[i,1].plot(range(48),z[prefix+'prices'][:,j],label='Bounded ±20%',color='#2563eb')
+            axes[i,1].set(ylabel='Country proxy price EUR/MWh',title='Flexibility does not guarantee better prices')
+            for ax in axes[i]:ax.set_xlabel('Hour within 48-hour window');ax.legend(fontsize=8)
+    fig.savefig(OUT/'nve-bounded-hydro.png',dpi=110);plt.close(fig)
+    images={name:digest(OUT/name) for name in ['nve-geography-errors.png','nve-bounded-hydro.png']}
+    # Remove a misleading inherited old-generation field without rewriting frozen receipts.
+    public_annual={k:v for k,v in a.items() if k!='fixed_no_hydro_twh'}
+    payload=dict(annual=public_annual,windows=w,points=p,audit=audit,nve_source=source,source_summary_sha256=digest(NVE/'summary.json'),elhub_audit_sha256=digest(elhub/'audit.json'),elhub_national_comparison=e['national_comparison'],publication_producer_sha256=digest(__file__),images=images)
+    (OUT/'nve-hydro-diagnostics.json').write_text(json.dumps(payload,separators=(',',':'),allow_nan=False)+'\n')
+    errors='\n'.join(f"| {r['zone']} | {r['relocated']['known_hours']} | {r['all_original_hours']['mae_eur_mwh']:.2f} | {r['relocated']['mae_eur_mwh']:.2f} | {r['relocated']['bias_eur_mwh']:+.2f} | {r['relocated']['correlation']:.3f} |" for r in rows)
+    windows='\n'.join(f"| {str(dates[r['start_hour']])[:10]} | {'Original buses' if r['case']!='country' else 'Country-distributed'} | {r['objective_change_eur']/1e6:+.6f} | {r['fixed_mean_no_price_eur_mwh']:.2f} → {r['flexible_mean_no_price_eur_mwh']:.2f} | {r['fixed_negative_hours']} → {r['flexible_negative_hours']} |" for r in w['records'])
+    native='\n'.join(f"| {str(dates[r['hour']])} | {r['objective_difference_eur']:.3g} |" for r in a['native_checks'])
+    lo,hi=audit['total_hydro_bounds_twh'];demand=audit['source_no_demand_twh']
+    text=f'''# European hourly dispatch — Norwegian water and location diagnosis
 
 ## Summary and conclusion
 
@@ -7,12 +68,12 @@ hydro output and demand on the physical grid.** Keeping every hourly reservoir
 output and demand volume unchanged, but placing both on their original clustered
 PyPSA-Eur buses, reduces Norwegian price MAE from **EUR274–286/MWh to EUR56–69/MWh**.
 All **8,760 hourly clearings are optimal**, with **zero emergency generation**.
-The annual clearing loop takes **16.03 seconds**; source preparation,
+The annual clearing loop takes **{a['loop_seconds']:.2f} seconds**; source preparation,
 native verification and independent audit are additional.
 
 This identifies a representation error. It does **not** establish realistic
-Norwegian market prices. Mean modeled price is **EUR17.33/MWh**,
-correlations with NO1–NO5 remain near zero, and **348 materially
+Norwegian market prices. Mean modeled price is **EUR{a['no_mean_price_eur_mwh']:.2f}/MWh**,
+correlations with NO1–NO5 remain near zero, and **{a['no_negative_price_hours']} materially
 negative hours** remain. Small, water-conserving hydro rescheduling trials lower
 synthetic system cost but do not consistently improve prices. Next priority:
 audited bidding-zone asset/demand mapping, followed by a defensible water-value
@@ -30,8 +91,8 @@ IRENA end-2024/end-2025 wind/solar capacity interpolation is assumed commissioni
 not observed installation dates. Original renewable availability remains separate
 from dispatched generation. Nuclear availability ending in 2024 is a declared proxy.
 
-Norwegian water now uses [NVE weather-driven HBV inflow](https://www.nve.no/energi/analyser-og-statistikk/hydrologiske-data-til-kraftsituasjonsrapporten/),
-**141.641 TWh** across 8,760 UTC hours. The earlier
+Norwegian water now uses [NVE weather-driven HBV inflow]({source['method_url']}),
+**{source['calendar_inflow_twh']:.3f} TWh** across 8,760 UTC hours. The earlier
 ERA5 normalization used a historical EIA median because its generation series
 lacked 2025. It understated available water. NVE's separate production/stock-derived
 inflow column is excluded: observed generation never sets the water input.
@@ -39,8 +100,8 @@ Full weeks preserve ERA5 hourly shape; calendar-boundary weeks use uniform rates
 over their source week, and DST weeks retain 167/169 hours.
 
 NVE electrical-equivalent opening/closing stocks are
-**68.550 → 62.083 TWh**;
-capacity is **87.438 TWh**. Divide those water
+**{source['initial_electrical_stock_twh']:.3f} → {source['final_electrical_stock_twh']:.3f} TWh**;
+capacity is **{source['storage_electrical_capacity_twh']:.3f} TWh**. Divide those water
 quantities by original turbine efficiency 0.9 to obtain stored-energy units, then
 apply efficiency once on discharge. Keep original turbine MW. Country-pooled
 reservoir/run-of-river water is allocated by original capacity shares. The fixed
@@ -54,8 +115,8 @@ catchment routing, cascades and price-area water allocation remain unresolved.
 
 ### Generation and demand checks
 
-Fixed Norwegian reservoir production is **139.215 TWh**.
-Current total hydro is **145.646–146.165 TWh**, compared with Elhub **145.669 TWh**
+Fixed Norwegian reservoir production is **{audit['reservoir_twh']:.3f} TWh**.
+Current total hydro is **{lo:.3f}–{hi:.3f} TWh**, compared with Elhub **145.669 TWh**
 and Ember **141.598 TWh**. The range reflects ambiguity when run-of-river shares
 an identical-price aggregate offer with other generators: bounds come from the
 saved primal and original available capacities. Run-of-river dispatch can change
@@ -63,7 +124,7 @@ with grid placement, even though its availability does not. The previous
 country-distributed case's total was 145.545–145.730 TWh; those bounds must not be
 reused for the relocated case. Reservoir output itself is unchanged.
 
-Norwegian source demand is **137.044 TWh**, versus Elhub metered **131.520 TWh**
+Norwegian source demand is **{demand:.3f} TWh**, versus Elhub metered **131.520 TWh**
 and Ember **134.548 TWh**. These scopes differ; total-load losses, metering coverage
 and original hourly demand provenance need reconciliation before substitution.
 Neither demand nor inflow has been scaled to match generation or observed prices.
@@ -114,45 +175,7 @@ not a training input or the only reported area.
 
 | Observed area | Hours | Country-distributed MAE | Original-bus MAE | Original-bus bias | Correlation |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| NO2 | 8760 | 286.44 | 68.56 | -48.08 | 0.074 |
-| NO1 | 8760 | 281.76 | 63.88 | -41.03 | 0.068 |
-| NO4 | 8760 | 278.41 | 60.75 | +8.61 | 0.001 |
-| NO5 | 8760 | 274.77 | 56.89 | -29.60 | 0.065 |
-| NO3 | 8760 | 273.69 | 55.76 | -3.79 | 0.040 |
-| DK2 | 8760 | 55.76 | 52.84 | -40.70 | 0.241 |
-| EE | 8760 | 48.34 | 48.29 | +6.64 | 0.419 |
-| LT | 8760 | 44.98 | 44.93 | +1.73 | 0.446 |
-| LV | 8760 | 44.94 | 44.89 | +1.30 | 0.439 |
-| SE4 | 8760 | 45.37 | 44.01 | -15.30 | 0.162 |
-| FI | 8760 | 41.36 | 42.00 | +3.62 | 0.134 |
-| SE2 | 8760 | 39.67 | 39.23 | +28.59 | 0.060 |
-| SE1 | 8760 | 39.12 | 38.71 | +28.41 | 0.068 |
-| AL | 8760 | 38.14 | 38.15 | -27.96 | 0.477 |
-| SE3 | 8760 | 38.26 | 36.84 | -1.11 | 0.186 |
-| BG | 8760 | 33.30 | 33.29 | -16.94 | 0.603 |
-| RO | 8760 | 32.65 | 32.65 | -18.22 | 0.617 |
-| HU | 8760 | 32.27 | 32.28 | -20.18 | 0.655 |
-| GR | 8760 | 31.78 | 31.77 | -13.82 | 0.601 |
-| MK | 8760 | 31.72 | 31.71 | -17.60 | 0.618 |
-| RS | 8760 | 30.14 | 30.14 | -17.56 | 0.617 |
-| IT-CNOR | 8760 | 28.94 | 28.96 | -27.51 | 0.685 |
-| HR | 8760 | 28.93 | 28.93 | -15.33 | 0.655 |
-| CH | 8760 | 28.83 | 28.82 | -23.86 | 0.764 |
-| IT-CSUD | 8760 | 28.77 | 28.79 | -27.04 | 0.690 |
-| IT-SUD | 8760 | 28.49 | 28.51 | -25.75 | 0.683 |
-| SI | 8760 | 28.29 | 28.29 | -13.89 | 0.634 |
-| SK | 8760 | 28.28 | 28.28 | -14.65 | 0.690 |
-| IT-North | 8760 | 28.05 | 28.07 | -26.58 | 0.694 |
-| ES | 8760 | 26.98 | 26.98 | +9.89 | 0.702 |
-| PT | 8760 | 26.79 | 26.79 | +10.08 | 0.687 |
-| PL | 8760 | 26.78 | 26.78 | -15.80 | 0.658 |
-| CZ | 8760 | 25.83 | 25.83 | -8.69 | 0.646 |
-| DK1 | 8760 | 23.91 | 23.88 | -7.57 | 0.709 |
-| AT | 8760 | 23.86 | 23.86 | -15.06 | 0.767 |
-| DE-LU | 8760 | 22.84 | 22.81 | -14.44 | 0.776 |
-| NL | 8760 | 22.42 | 22.41 | -12.72 | 0.771 |
-| BE | 8760 | 22.03 | 22.03 | -12.00 | 0.796 |
-| FR | 8760 | 21.75 | 21.75 | -1.42 | 0.784 |
+{errors}
 
 MAE and bias are EUR/MWh. The annual material-negative count uses price
 < −0.000001 EUR/MWh. The inherited metric's strict price < 0 count is 935,
@@ -174,12 +197,7 @@ no water moves between reservoirs, and each unit's total output is unchanged.
 
 | Window starts UTC | Placement | System cost change million EUR | Mean NO price fixed → flexible | Negative hours fixed → flexible |
 | --- | --- | ---: | ---: | ---: |
-| 2025-01-03 | Country-distributed | -0.000009 | -1617.12 → -2736.33 | 45 → 45 |
-| 2025-01-03 | Original buses | -2.427773 | -609.72 → -148.86 | 28 → 42 |
-| 2025-07-14 | Country-distributed | -1.707795 | -143.39 → 22.15 | 20 → 0 |
-| 2025-07-14 | Original buses | -1.041316 | 14.63 → 22.38 | 0 → 0 |
-| 2025-01-01 | Country-distributed | -0.000006 | -1426.81 → -2295.71 | 44 → 44 |
-| 2025-01-01 | Original buses | -1.148845 | -1085.81 → -1257.65 | 41 → 41 |
+{windows}
 
 All six cases are optimal, taking **1.65–2.17 seconds per window** for the solver
 alone. These are joint 48-hour optimisations, not an implemented annual or daily
@@ -193,8 +211,8 @@ rent or an asset investment benefit. Paired investment and empirical gates remai
 An independent saved-witness auditor rebuilds source coefficients and replays
 area balances, native passive flows, controllable-link bounds, objectives,
 water balance, turbine/energy bounds and prescribed closing stocks. Annual
-network residual is **1.95e-06 MW**;
-water residual **1.7e-08 MWh**. All six window
+network residual is **{audit['annual_network_residual_mw']:.3g} MW**;
+water residual **{audit['annual_water_residual_mwh']:.3g} MWh**. All six window
 network/water replays pass the unchanged 0.0001 tolerance. Three numerical
 fixtures check zero-sum placement, analytical two-hour water scheduling/native
 parity and native PTDF flows.
@@ -203,10 +221,7 @@ Four independent native PyPSA hourly objectives verify the relocated formulation
 
 | UTC hour | Native minus fast objective EUR |
 | --- | ---: |
-| 2025-01-04 16:00:00 | 2.24e-08 |
-| 2025-01-15 12:00:00 | 7.45e-09 |
-| 2025-07-15 12:00:00 | -6.03e-08 |
-| 2025-12-15 12:00:00 | -6.52e-09 |
+{native}
 
 Two native PyPSA 48-hour formulations also agree: maximum objective difference
 is **EUR0.000081**, under the declared absolute/relative tolerance. This checks
@@ -235,3 +250,8 @@ unchanged exogenous volumes and native checks must remain intact. A full-year
 adaptive optimum needs independent feasibility/convergence bounds and smaller
 monolithic validation. The browser still uses its reduced two-zone screen;
 this diagnostic does not replace it or certify investment/carbon outcomes.
+'''
+    (ROOT/'docs/european-physical-synthetic-clearing-2025.md').write_text(text)
+    print('Published existing report with',len(rows),'price areas and six audited windows')
+
+if __name__=='__main__':publish()

@@ -207,3 +207,10 @@ shapes. Electrical-equivalent quantities are converted before dispatch efficienc
 is applied once. Gross/net energy basis, country pooling and retrospective
 release assumptions are documented in the fixed-hydro report. Elhub/Ember
 generation and ENTSO-E prices remain comparison observations, not fitted inputs.
+Controlled diagnostics now place Norwegian fixed hydro and demand at their original
+clustered buses rather than distributing their net injection with one generation
+shift key. Hourly volumes remain unchanged. Bounded 48-hour rescheduling tests
+preserve each reservoir's water and opening/closing stocks; they are not an annual
+strategy. Better annual error after the location change does not certify commercial
+zones or investment benefits. The report retains remaining price regressions,
+native checks and unresolved demand-scope differences.

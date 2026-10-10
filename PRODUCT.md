@@ -28,7 +28,10 @@ model and compact rolling-storage trial paused as research references:
    demand and water data; isolate injection geometry from physical capacity and
    hydro water/schedule assumptions. Sensitivity probes do not establish acceptance.
    Publish adverse outcomes and all eligible areas. Keep observed electricity prices
-   out of bid construction. This does not authorize adaptive-hydro experiments.
+   out of bid construction. Bounded chronological hydro diagnostics were subsequently
+   authorized: preserve each unit's source water and exact opening/closing stocks,
+   cap output changes and compare native formulations. These tests do not authorize
+   an annual adaptive policy, investment valuation or empirical baseline promotion.
    The authorized Norwegian input update uses independently sourced NVE weather-driven
    HBV inflow, dated reservoir energy capacity and observed calendar-boundary stocks.
    Keep generation-derived inflow out of input construction. Convert electrical-
@@ -38,6 +41,10 @@ model and compact rolling-storage trial paused as research references:
    Preserve the frozen pre-update input reference for controlled verification.
    Regenerate a physically feasible fixed schedule without observed-price or
    generation fitting; this does not authorize adaptive hydro or change acceptance.
+   Separate fixed hydro and demand locations from generation-offer shift keys.
+   Original clustered bus placement is a controlled physical diagnostic, not a
+   certified commercial-zone mapping. Publish remaining adverse price outcomes
+   and reconcile observed demand scope before replacing hourly demand inputs.
    Develop from this checkpoint; fixed hourly injections must not be described
    as merely fixed hydro bid prices.
    Its fixed schedule cannot respond to investments; conditional benefits are

@@ -42,6 +42,20 @@ net-inflow/gross-stock basis and fixed-schedule limitations remain explicit.
 Improved annual energy agreement alone does not authorize baseline promotion;
 retain adverse price outcomes and reconcile injection geography before acceptance.
 
+Subsequent authorization permits targeted price/geography diagnostics and bounded
+48-hour hydro rescheduling. nve_hydro_diagnostics.py reconstructs verified sources;
+diagnose_nve_hydro_prices_2025.py checks price derivatives and bus placement;
+run_nve_bus_geography_2025.py tests unchanged Norwegian hydro AND demand at their
+original buses. run_nve_hydro_windows_2025.py / nve_hydro_flexibility.py retain each
+unit's inflow, efficiency, zero spill, capacity and exact opening/closing stocks,
+with ±20% hourly output bounds capped by turbine MW. No annual adaptive policy.
+audit_nve_hydro_diagnostics_2025.py independently replays saved component physics;
+report_nve_hydro_diagnostics_2025.py rewrites the existing fixed-hydro report only.
+Keep these completed producers frozen. Relocated run-of-river dispatch may change:
+use independently replayed current hydro bounds, not the annual producer's inherited
+fixed_no_hydro_twh field. Material-negative counts use price < -1e-6 EUR/MWh;
+strict <0 legacy metrics include numerical zeros and must stay distinguishable.
+
 Maintain these reproducible models:
 
 - Fixed-hydro annual checkpoint: tools/fixed_reservoir_screening_2025.py and

@@ -33,13 +33,17 @@ not held-out validation. Prepared demand is not independently audited observed d
    selected-v2 annual witness, independent component replay, three native checks
    and common A44 observations are verified below. Earlier ablations are retired;
    use the existing fixed-hydro report.
-   Daily/rolling storage and the Norwegian adaptive-hydro trial remain paused.
+   Daily/rolling storage and the retired Norwegian adaptive trial remain paused.
+   New bounded 48-hour diagnostics are authorized and verified below; they are
+   not an annual adaptive strategy or another active model programme.
    Bid changes alone offer only marginal accuracy gains; do not promote them as an
    empirically accepted replacement or fit observed prices without a declared split.
 2. **Reconcile geography and empirical inputs for this checkpoint.** Country/
    AC-island proxies are not bidding zones. Map buses, generators/reservoirs and
    demand to commercial zones, particularly NO1–NO5; audit zonal demand and
-   physical/commercial constraints. Fixed schedules avoid short-horizon water
+   physical/commercial constraints. Original Norwegian bus placement has now
+   been independently verified with unchanged volumes; commercial-zone mapping
+   and demand-scope reconciliation remain open. Fixed schedules avoid short-horizon water
    decisions but do not establish realistic hydrology. Define held-out periods,
    coverage and acceptance thresholds before calibration or market claims.
 3. **Verify common-input investment pairs on the fast formulation.** Start with
@@ -630,3 +634,65 @@ local committed bytes. Production Chromium renders the public new section/chart
 at mobile width. Public report:
 https://autological-eu.github.io/grid-conductor/docs/european-physical-synthetic-clearing-2025/
 No main merge, visibility change, bulk artifacts or recurring-review activation.
+
+## Norwegian water/location diagnosis — 10 October 2026
+
+User authorized price-derivative checks, original-bus placement and bounded
+chronological hydro tests. Live processes were inspected before computations;
+no duplicate worker or retired search was started. Source NVE water, original
+turbine MW, offers, hourly demand/output and other countries remain unchanged.
+
+Price tests cover nine purposive hours and ±0.1/±1 MW demand changes. Extreme
+negative prices match upward cost derivatives; downward perturbations can be
+infeasible. They are feasibility-boundary sensitivities, not merely sign errors.
+Moving hydro alone makes five selected hours infeasible; relocating BOTH fixed
+hydro and demand to original clustered buses resolves all nine. Original
+generation-offer GSK remains in place; commercial bidding zones are not certified.
+
+Retained annual diagnostic: data/hydro-observations-2025/bus-geography-annual-v1/.
+8760 optimal hours, zero emergency MWh, 16.030s clearing loop (preparation/native
+checks/audit additional). Independent saved component replay checks native flows,
+links, area/island balances and objective: maximum residual 1.9492e-6 MW. Fixed
+water replay residual 1.7038e-8 MWh. Four native PyPSA objectives agree within
+EUR6.1e-8. All 39 eligible observed-price areas use hashed/reparsed A44 inputs;
+four mapped areas remain missing. Norway MAE 55.757–68.556 EUR/MWh, versus
+273.69–286.44 in the preceding NVE country-distributed representation. Germany
+MAE 22.813. Norwegian mean 17.327 EUR/MWh; materially negative (<-1e-6) hours
+348. Strict <0 legacy count 935 includes floating zeros. Correlations remain
+near zero; model is not accepted market-price or investment estimation.
+
+Current reservoir output 139.214513 TWh; ROR dispatch bounds independently rebuilt
+from current saved offers yield total hydro 145.645848–146.164844 TWh. The annual
+producer's fixed_no_hydro_twh field inherited previous ROR bounds; the new public
+evidence excludes it and explicitly uses diagnostic-audit.json. Source Norway
+demand 137.044428 TWh vs Elhub 131.520426 / Ember 134.548: scope unresolved, no
+scaling to force agreement. NVE gross-stock/net-inflow equivalence and country
+water allocation remain declared assumptions.
+
+Bounded-windows-v1 retains three 48-hour windows under two placements, all six
+optimal. Each unit preserves source inflow/efficiency/capacity/zero spill and
+exact original opening/closing stocks; output ±20%, capped at original turbine
+MW. Independent saved replay passes all six; max water/bounds/energy residual
+4.354e-8 MWh. Native PyPSA verifies two 48-hour windows with max objective
+difference EUR0.000081. Solver-only time 1.65–2.17s/window. Corrected-placement
+window system-cost reductions EUR2.428m, EUR1.041m and EUR1.149m, but prices
+do NOT improve consistently: first-January window mean -1085.81 → -1257.65.
+These are selected finite-window cost changes, not annual policy, returns or
+investment benefits. Three new numerical fixtures pass. Retained source/primal
+chains stay frozen; raw inputs and bulk witnesses stay ignored.
+
+Next: audit buses/assets/demand to NO1–NO5 and demand-scope differences; define
+held-out water-value/schedule diagnostics and thresholds before calibration.
+No broader data hunt or new capacity assumptions are justified merely by the
+former negative-price regression. Keep annual-optimum, paired-investment and
+static-app gates unchanged. Current work rewrites the existing fixed-hydro report
+with two compact figures and a provenance download; no third report or browser
+engine replacement. Publication verification follows successful deployment.
+
+Verification before publication: three targeted native/physics fixtures pass;
+14 browser-solver tests / 2402 assertions pass. Typecheck and production build
+pass; lint has only the six existing Fast Refresh warnings. Production Chromium
+workbench/math smoke passes at 1440/390/320/667 px. Focused updated-report checks
+pass at 1440/390/320 px, including both charts, the evidence JSON and overflow.
+Asset allowlist: 67 files, 5.46 MiB; three new compact assets total 444.2 KiB.
+No raw inputs/full witnesses staged; frozen calculation hashes remain intact.
