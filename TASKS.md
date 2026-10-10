@@ -546,3 +546,46 @@ checks `37890233558` passed. Local and independent public functional Chromium
 checks passed at 1440, 390, 320 and 667px, including absence of price-gap-hour
 coverage text and unchanged scenario evaluation/persistence. Docs retains the
 calculation/coverage limitations; numerical inputs and output are unchanged.
+
+## Perfect-foresight hourly investment implementation
+
+New isolated tools/perfect_foresight_dispatch.py links every hourly inventory across
+one optimisation horizon, with all 93 reservoirs and 67 PHS units, plus new batteries.
+Supports controllable transmission additions/expansion, hydro turbine/energy
+capacity and solar/wind additions on original weather/location profiles. Baseline
+IRENA commissioning stays separate from added renewable MW. Original GSK/network
+coefficients and paired demand/costs are preserved; no intermediate fixed reference
+inventories, water gifts, retired searches or app-solver replacement.
+
+Five analytical tests pass, including native checks for all five new-investment
+families, future battery opportunity, hydrology and capacity trajectory guards.
+Fresh 48h European baseline/bundle native objective differences are +2.03e-6 / −1.37e-6
+EUR; solves 5.891 / 6.225 seconds, all primal/water/terminal checks pass. Bundle cost
+change −1,000,239.05 EUR is a 48h diagnostic only, not an annual benefit. Earlier 24h
+prototype had 22 simultaneous pump/generate unit-hours; the 48h pair had zero.
+Continuous cycling remains an acceptance blocker, not an omitted result.
+
+Actual 8760-hour preflight fails at estimated 9.17 GiB versus 4 GiB working budget,
+before matrix construction/optimisation. No annual witness or optimum claim.
+Next: sparse reduction or fresh coordinated decomposition with explicit feasibility/
+convergence bounds against this smaller monolithic/native reference; then annual
+runtime/memory, cycling, observed-data/geography and paired intervention gates.
+Emissions attribution and supported browser integration remain unimplemented.
+Report: docs/perfect-foresight-dispatch.md; compact verification JSON public/research/
+perfect-foresight-2025/. Raw witnesses stay ignored. Independent saved-primal replay
+and publication checks pending; automatic recurring reviews remain disabled.
+
+Independent saved-primal replay completed for both final paired witnesses: source/
+producer/dependency/witness hashes checked, operating costs replay within 1.4e-6
+EUR, maximum primal residual 3.86e-10. No optimisation was run by this auditor.
+
+A separate final-producer 24h native check confirms 22 simultaneous cycling
+unit-hours and objective agreement within 2.69e-7 EUR; this limitation is not based
+on an old producer receipt. Added and passed the sixth test for annual memory
+preflight before matrix construction. All producer/source hashes still match.
+
+Saved-witness replay additionally confirms zero emergency supply in both 48h
+cases. Typecheck, lint (six existing warnings), build and workbench browser checks
+at 1440/390/320/667px pass; new report renders on mobile without overflow.
+No ongoing calculation/research supervisors remain from this task. Publication
+pending; annual scaling and cycling remain material blockers.

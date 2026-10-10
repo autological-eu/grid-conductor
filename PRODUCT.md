@@ -278,3 +278,27 @@ preserving units. Do not add “carbon loss” from intensity difference times d
 minus imports: savings require matched dispatch counterfactuals with original
 availability, demand and chronological storage/water constraints. Current browser
 screening does not establish those savings.
+
+## Perfect-foresight hourly investment benchmark
+
+Build a separate hourly European dispatch benchmark in which baseline and
+investment cases know the same declared demand, weather-derived availability,
+inflows and costs across the complete optimisation horizon. It must support
+transmission, batteries, hydro turbine/reservoir capacity and solar/wind additions.
+This benchmark isolates dispatch opportunity under perfect foresight; it does not
+measure resilience to forecast uncertainty or reconstruct actual EUPHEMIA bids.
+
+Storage inventories must link every hour with charging/discharging efficiency,
+standing loss, inflow, spill, power/energy bounds and explicit common boundary
+conditions. New batteries start and end empty; hydro capacity does not create
+water. Renewable additions use original weather availability and declared location
+shares, separately from the baseline IRENA commissioning trajectory. Fixing output
+or intermediate reference inventories is not adaptive annual perfect foresight.
+
+Use paired native comparisons, independent feasibility replay and explicit
+resource/optimal-status guards before annual claims. Report simultaneous cycling
+in continuous LPs; resolve it before accepting physical investment performance.
+Retain annual convergence, geography, observed-data and integration gates. Public
+scenario integration remains a separate verified change, not automatic replacement
+of the reduced-form solver. Emissions require audited factors and generation
+attribution; do not infer signed savings from objective improvement alone.

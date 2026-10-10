@@ -1,0 +1,20 @@
+{
+  "summary_sha256": "3c53a01b93d62c07a4f1100c4d36a9cbbf3767d9abc60c6d20dd50105e875f02",
+  "auditor_sha256": "aa5fe28df9d0ca8923f937aacba5ab7350cd18dc9b42f4f855d33751ca62637a",
+  "checks": [
+    {
+      "case": "baseline",
+      "maximum_primal_residual": 3.8562575355172157e-10,
+      "objective_difference_eur": -1.2516975402832031e-06,
+      "emergency_supply_mwh": 0.0,
+      "witness_sha256": "2aeb02006f8504bc1828ca095737aab27c34a7d7993015a0aef0e9191716909c"
+    },
+    {
+      "case": "investment",
+      "maximum_primal_residual": 1.5552359400317073e-10,
+      "objective_difference_eur": -1.3709068298339844e-06,
+      "emergency_supply_mwh": 0.0,
+      "witness_sha256": "c991fc0890ee47bba37185ced2f4fa9d69e6c70e99bdf069748dec2d2b85be59"
+    }
+  ]
+}

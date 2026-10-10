@@ -1,0 +1,38 @@
+[
+  {
+    "id": "new-cable",
+    "type": "new_line",
+    "bus0": "DE2 0AC",
+    "bus1": "FR2 0AC",
+    "power_mw": 500
+  },
+  {
+    "id": "battery",
+    "type": "battery",
+    "bus": "DE2 0AC",
+    "power_mw": 100,
+    "energy_mwh": 400,
+    "round_trip_efficiency": 0.9
+  },
+  {
+    "id": "hydro",
+    "type": "hydro",
+    "asset": "NO0 0AC hydro",
+    "power_mw": 100,
+    "energy_mwh": 1000
+  },
+  {
+    "id": "pv",
+    "type": "solar",
+    "carrier": "solar",
+    "area": "0:DE",
+    "power_mw": 500
+  },
+  {
+    "id": "wind",
+    "type": "wind",
+    "carrier": "onwind",
+    "area": "0:DE",
+    "power_mw": 500
+  }
+]

@@ -58,3 +58,6 @@ data/synthetic-europe-physical-2025-irena-linear/
 
 # Fixed-reservoir screening working witnesses
 data/fixed-reservoir-screening-2025/
+
+# Perfect-foresight dispatch witnesses and offline verification
+data/perfect-foresight-2025/
