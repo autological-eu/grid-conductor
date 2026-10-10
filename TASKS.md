@@ -611,8 +611,8 @@ and demand to NO1–NO5. Test the physical representation on native small cases
 before another annual rerun; preserve common source-backed water boundaries and
 report price regressions. Do not fit prices/generation or weaken empirical,
 annual-optimum, paired-investment or browser-integration gates. The source update
-is written into the existing fixed-hydro report, not a third report; deployment
-verification remains pending until CI/Pages and public URLs are checked.
+is published in the existing fixed-hydro report, not a third report; deployment
+verification is recorded below.
 
 Publication preparation verified: typecheck passes; lint passes with six existing
 React Fast Refresh warnings. Production build passes. Chromium workbench/report
@@ -621,3 +621,12 @@ its image, evidence download and overflow at desktop/mobile widths. Public asset
 allowlist passes: 64 files, 5.03 MiB; new figure/evidence total 124.8 KiB. No raw
 provider inputs or full witnesses are staged. Deployment evidence follows only
 a successful CI/Pages run and unauthenticated public URL verification.
+
+Deployment verified for implementation commit 57cf523: CI/Pages run
+[38078551999](https://github.com/autological-eu/grid-conductor/actions/runs/38078551999)
+completed successfully (build and deploy). Unauthenticated report-route, new
+chart and evidence JSON requests return HTTP 200; both asset hashes exactly match
+local committed bytes. Production Chromium renders the public new section/chart
+at mobile width. Public report:
+https://autological-eu.github.io/grid-conductor/docs/european-physical-synthetic-clearing-2025/
+No main merge, visibility change, bulk artifacts or recurring-review activation.
