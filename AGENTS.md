@@ -13,10 +13,13 @@ Maintain two European research models:
 - Fixed-hydro annual checkpoint: tools/fixed_reservoir_screening_2025.py and
   tools/report_fixed_reservoir_screening_2025.py; report
   docs/european-physical-synthetic-clearing-2025.md.
-- Current daily resource-bidding model: tools/terminal_daily_market.py,
+- Current daily resource-bidding model: tools/fast_daily_market.py is the experimental performance
+  adapter; tools/terminal_daily_market.py is the retained producer,
   tools/terminal_settlement_bids.py, simple_resource_bids.py and shared daily/
   physical compiler modules; independent replay tools/audit_terminal_daily_market.py;
   report tools/compare_daily_dispatch_prices.py → docs/daily-fuel-dispatch-2025.md.
+  The adapter records its source hash in fresh manifests and leaves archived
+  producer/dependency files intact. Forecasts and bids remain model-generated.
   Rules config/simple-bidding/defaults.json; thermal inputs thermal_bid_rules.py
   and prepare_fuel_prices.py; direct validation prices collect_dispatch_validation_prices.py.
 

@@ -16,6 +16,7 @@ ALLOWED = [
     'fixed-reservoir-screening-2025/area-summary.csv',
     'fixed-reservoir-screening-2025/hourly-de.csv.gz',
     'fixed-reservoir-screening-2025/model-prices.png', 'fixed-reservoir-screening-2025/model-hydro.png',
+    'daily-fuel-annual-2025/performance.json',
     'daily-fuel-annual-2025/replay.json', 'daily-fuel-annual-2025/price-comparison.json',
     'daily-fuel-annual-2025/summary.json.gz', 'daily-fuel-annual-2025/germany-prices.png',
     'daily-fuel-annual-2025/monthly-errors.png', 'daily-fuel-annual-2025/zone-errors.png',
@@ -37,6 +38,17 @@ def check():
         assert isinstance(json.loads(raw), dict), 'Invalid archived JSON'
     daily = json.loads((folder / 'daily-fuel-annual-2025/replay.json').read_text())
     assert hashlib.sha256(archived['daily-fuel-annual-2025/summary.json']).hexdigest() == daily['summary_sha256'], 'Detached daily replay'
+    performance = json.loads((folder / 'daily-fuel-annual-2025/performance.json').read_text())
+    assert performance['reference_summary_sha256'] == daily['summary_sha256'], 'Detached performance baseline'
+    assert performance['execution_driver_sha256'] == hashlib.sha256((ROOT / 'tools/fast_daily_market.py').read_bytes()).hexdigest(), 'Changed performance adapter'
+    assert performance['coefficient_days_checked'] == 365 and len(performance['selected_days']) == 18
+    for engine in performance['records']:
+        assert all(row['attempts'][-1]['status'] == 'HighsModelStatus.kOptimal' for row in engine['days'])
+    annual = performance['annual_validation']
+    assert annual['hours'] == 8760 and annual['days'] == 365 and annual['preparation_arrays_identical']
+    assert annual['execution_driver_sha256'] == performance['execution_driver_sha256']
+    assert annual['replay']['closure_residual_mwh'] == 0 and annual['replay']['maximum_join_residual_mwh'] == 0
+    assert annual['replay']['maximum_primal_residual'] <= 1e-4 and annual['simultaneous_storage_hours'] == 0
     fixed = json.loads(archived['fixed-reservoir-screening-2025/summary.json'])['provenance']
     assert hashlib.sha256(archived['european-reservoir-clearing-2025/summary.json']).hexdigest() == fixed['annual_summary_sha256'], 'Detached hydro source'
     assert hashlib.sha256((folder / 'european-reservoir-clearing-2025/replay.json').read_bytes()).hexdigest() == fixed['water_replay_sha256'], 'Detached water replay'

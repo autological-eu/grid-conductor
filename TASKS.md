@@ -136,3 +136,40 @@ README labels the release and distinguishes the live two-zone screen from the
 two offline European models. This release does not accept the research models
 as investment estimators or relax numerical, empirical or integration gates.
 Development continues on public-v1; automatic hourly reviews remain disabled.
+
+## Daily clearing performance investigation — 2026-10-10
+
+Kept model-generated forecasts and all bidding/physical rules. Added an experimental
+performance adapter, preserving frozen archived producers/dependencies. It reuses
+the invariant matrix, fixes cumulative-clock solver deadlines and logs iterations.
+All 365 saved-day LP coefficient arrays/matrices match the independent original
+builder exactly. Four targeted tests cover changing inputs, stock carry, deadline
+renewal and truthful adapter provenance/restoration on failure.
+
+Controlled same-input 18-day benchmark: 35.75 → 31.41 s (12%); matched objective
+error below €0.000002, price difference below €0.000000003/MWh. Other solver methods,
+edge-weight variants and exact fixed-column elimination were not adopted: they did
+not provide a useful speed improvement; Dantzig trials included time-limit exits.
+
+Fresh chronological year: 365/8760, 510.12 s end-to-end versus 533.03 previously;
+424.48 s clearing versus 445.65; preparation 2.93 s versus 9.26. No retries/cycling;
+full independent replay passes, water/primal maximum 3.64e-7, joins/closure zero.
+First/middle/last native objectives agree within €0.000006. Forecast/preparation
+arrays are bitwise unchanged. Optimal LP tie choices change storage paths and later
+heuristic bids: operating cost €93.002bn versus €92.363bn; emergency supply 0.856940
+versus 0.852118 TWh. The adapter is not promoted as a replacement baseline.
+The current published price benchmark stays attached to its original witnesses.
+Performance evidence is compact; additional year bulk witnesses removed after replay,
+retaining summary/manifest/audit diagnostics. No retired searches or reviews resumed.
+
+The user supplied da-market-sim for comparison. Its four-zone synthetic example
+uses 91 supply steps, four lossless NTC links, five storage units and two fixed daily
+hydro budgets. One-thread local timing: 365-day no-lookahead LP 1.20 s; 364-day
+24h-lookahead LP 2.10 s; relaxed-UC version 29.04 s. These are synthetic examples,
+not Europe-wide empirical verification or an adopted model. Its transport-network
+and daily-budget simplifications explain the main speed difference. Its realised-
+generation availability, reset hydro budgets, interpolated observations, parallel
+block resets and incomplete lookahead tail do not satisfy current gates unchanged.
+Next: evaluate a compact zonal formulation while preserving weather availability,
+explicit seasonal reservoir inventories and verified geographic/constraint inputs;
+no requirement weakening or automatic integration is authorized by this review.

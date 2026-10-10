@@ -373,6 +373,59 @@ $$
 This replaces the native total thermal cost; fuel and carbon are not added twice.
 Individual plant efficiencies are applied before offers are aggregated.
 
+## Performance work: unchanged forecasts and bidding rules
+
+The performance adapter `tools/fast_daily_market.py` uses the same model-generated
+price expectations, resource bids, capacities, chronology and physical constraints.
+Observed electricity prices remain validation data. It reuses the invariant daily
+sparse matrix, updates all hourly costs/bounds and records solver iterations.
+HiGHS uses a cumulative runtime clock: the adapter sets each attempt's deadline
+relative to that clock, preventing later days or cold retries from inheriting an
+exhausted time allowance. The archived producer remains intact for reproducibility.
+
+A controlled benchmark checked cached LP coefficients/bounds **exactly against the
+original builder for all 365 saved days**, then cleared the same saved bids on
+18 selected days (the first ten, several previously slow days, midyear and closing).
+These are sampled-day timings, not a chronological annual run:
+
+| Same 18 daily problems | Original path | Performance adapter |
+| --- | ---: | ---: |
+| Clearing plus preparation/replay | 35.75 s | 31.41 s |
+| Solver time | 34.99 s | 31.14 s |
+| Matrix/solver preparation | 0.669 s | 0.209 s |
+
+The measured improvement is about **12%**. Objectives agree within €0.000002 and
+maximum price differences are below €0.000000003/MWh on these matched problems.
+Tests cover changing hourly inputs, inventory carry, battery/PHS/reservoir physics
+and a fresh cumulative-clock budget for every solver attempt.
+
+Primal simplex, cold dual simplex and cold IPM did not outperform the warm dual
+approach. Exploratory edge-weight changes and exact fixed-column elimination did
+not provide a useful improvement, so they are not included in the production path.
+No approximate storage aggregation or relaxed physical constraints were adopted.
+A fresh 365-day chronological run took **510.12 seconds end to end**, versus
+533.03 seconds for the retained published run: approximately **4.3% faster**.
+Clearing took 424.48 seconds (previously 445.65); matrix/solver preparation fell
+from 9.26 to 2.93 seconds. All days terminate optimal without retries or cycling.
+Independent full-year replay checks primal/water residuals below 3.64e-7,
+zero overnight join error and exact annual closure. Three native day checks agree
+within €0.000006. The forecast and all strategy-preparation arrays are bitwise
+identical to the retained run.
+
+Annual outcomes are nevertheless **not identical**: different optimal basis/tie
+choices change carried inventories and subsequent heuristic bids. Physical
+operating cost is €93.002 billion versus €92.363 billion, and emergency supply is
+0.856940 TWh versus 0.852118 TWh. These are policy-sensitivity diagnostics, not a
+new accepted baseline. The price charts and benchmark above still refer to the
+retained original execution. The adapter remains an experimental performance
+option; this modest gain does not meet the seconds-scale annual target.
+
+Only compact diagnostics are retained for this additional performance year after
+independent replay; its duplicate bulk witnesses are removed. The original
+published annual witness and fixed-hydro dependencies remain intact.
+Hardware, source hashes, individual timings and limitations are available in the
+[performance evidence](../research/daily-fuel-annual-2025/performance.json).
+
 ## Conclusion and next steps
 
 Completing and replaying the year establishes that this rule-based daily model

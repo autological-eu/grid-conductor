@@ -61,7 +61,8 @@ Never commit secrets or multi-gigabyte artifacts. Python research uses the pinne
 Current research entry points:
 
 - `fixed_reservoir_screening_2025.py`, `report_fixed_reservoir_screening_2025.py`.
-- `terminal_daily_market.py`, `audit_terminal_daily_market.py`.
+- `fast_daily_market.py` (experimental performance adapter), `terminal_daily_market.py`
+  (retained producer), `audit_terminal_daily_market.py`.
 - `simple_resource_bids.py`, `thermal_bid_rules.py`, `prepare_fuel_prices.py`.
 - `collect_dispatch_validation_prices.py`, `compare_daily_dispatch_prices.py`.
 
