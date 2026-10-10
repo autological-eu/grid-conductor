@@ -79,6 +79,11 @@ build pass. Five targeted price-comparison/terminal-mode tests pass. Current
 report regeneration rechecked saved annual and raw-observation evidence. Chromium
 workbench checks pass at 1440/390/320/667px, network at 1440/390px, and retained
 report maths/fonts at 1440/390/320px. Retained article/asset links resolve.
-CI/Pages and public URL verification remain pending. No simulation job was
+Publication verified for `5c7a7b8cb5f351e3d34b2ec05b399d867d004943`: CI/Pages
+run `38029430399` and PR checks `38029432976` succeeded. Independent public
+Chromium checks at 1440/390px confirm both retained reports, chart loading, all
+report downloads, Docs links and removal of a retired article. Six annual JSON/CSV
+downloads match committed bytes. Public Docs: https://autological-eu.github.io/grid-conductor/docs/.
+No simulation job was
 running during the cleanup. Large local caches and source/replay witnesses were
 not deleted. Publication removal preserves Git history.
