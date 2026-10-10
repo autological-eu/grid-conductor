@@ -452,3 +452,104 @@ Download [price metrics and source receipts](../research/daily-fuel-annual-2025/
 [German hourly pairs](../research/daily-fuel-annual-2025/germany-hourly.csv.gz),
 [run summary](../research/daily-fuel-annual-2025/summary.json.gz) and
 [independent replay](../research/daily-fuel-annual-2025/replay.json).
+
+## Compact zonal rolling-storage trial
+
+This fresh Europe-wide experiment simplifies the current daily engine rather than
+changing the observed bottleneck baseline or browser simulator. It clears **365
+UTC days / 8,760 hours** across **40 country/AC-island areas**, with
+344 equivalent offers, 133 transport links and all 160
+original storage inventories. No observed electricity price is an optimisation input.
+
+### What changed
+
+Cross-area passive AC lines become lossless transport corridors bounded by the
+**sum of their original N-0 ratings**. Original controllable links retain their
+hourly signed bounds and efficiencies. Internal passive constraints, Kirchhoff
+relations and GSK/PTDF rows are omitted. These are optimistic **model-derived
+transport envelopes**, not commercial NTC, JAO constraints or a physical grid
+feasibility certificate; country/island geography is still not audited bidding zones.
+
+A sparse persistent LP optimises today plus tomorrow and implements today only.
+The final window is shortened to 24 hours: no missing 31 December and no fabricated
+2026 tail. Generator offers and original 2025 availability/demand are unchanged,
+including IRENA linear wind/solar commissioning and the same monthly TTF/Brent,
+EUR80/t carbon and prepared thermal efficiencies/costs. Reservoirs keep original
+inflow, spill, losses, turbine limits and actual carried water stocks. PHS/batteries
+keep charge/discharge efficiency and power/energy bounds. Only identically zero
+charging/spill modes are removed from the sparse matrix; storage units are not merged.
+
+The separate expected-price forecast and threshold-bid stage is replaced here by
+**central short-horizon dispatch**, not independently strategic operator bidding.
+Natural reservoirs receive a soft end-window seasonal-stock target: initial stock
+plus cumulative inflow minus a uniform annual release budget, clipped to capacity.
+Absolute deviation costs **EUR40 per stored MWh**, a declared untuned heuristic
+using the existing inventory-adjustment scale, not an observed or forecast water
+price. Short storage has no soft seasonal target. Backward per-unit reachability
+protects the same year-end stocks; future network feasibility is not guaranteed
+by these bounds alone. Charge/discharge friction is EUR0.001/MWh; battery wear
+remains EUR2/MWh discharged. No daily water budgets or stock resets are used.
+
+### Measured runtime and verification
+
+| Measurement | Compact trial |
+| --- | ---: |
+| Actual daily/window solver time | 61.80 s |
+| Hourly vectors/solver updates | 4.84 s |
+| Input compilation and source checks | 16.29 s |
+| Three native checks, including native construction | 56.03 s |
+| Full command including native checks and witness export | 141.96 s |
+| Full command minus native-check time | 85.93 s |
+| Peak process RSS | 1202 MiB |
+| Typical 48-hour LP | 46,122 variables / 9,693 rows / 68,711 nonzeros |
+| Independently replayed component residual | 5.8e-10 |
+| Closing-stock residual | 0 MWh |
+| Simultaneous charge/discharge | 0 unit-hours |
+| Emergency supply | 0.123890 TWh |
+| Implemented-hour variable operating cost | EUR 73.282 billion |
+
+All 365 windows terminate optimal and pass live LP residual checks. A separate
+process reconstructs the source case and replays saved **implemented** generation,
+transfers, power/energy bounds, hourly water balances, carried stocks and closure
+using component equations rather than the producer's matrix. Lookahead objectives
+and seasonal penalties are not summed into annual operating cost: overlapping
+forecast hours would double-count energy. Replay/native timings are separate;
+these checks do not certify an annual optimum or empirical agreement.
+
+| UTC starting day | Window hours | Native minus custom objective, EUR | Maximum dual-price difference, EUR/MWh |
+| --- | ---: | ---: | ---: |
+| 1 | 48 | 1.055e-05 | 7.10543e-14 |
+| 183 | 48 | 4.52995e-06 | 7.10543e-14 |
+| 365 | 24 | -1.04904e-05 | 2.07291 |
+
+Native PyPSA independently formulates the same zonal links, storage equations,
+reachability and soft targets. Equal objectives can coexist with different dual
+prices under degeneracy; native agreement verifies this simplified formulation,
+not the original physical grid or actual market prices.
+
+### Observed-price diagnostics and conclusion
+
+German country-proxy MAE is **EUR25.74/MWh**, bias
+EUR-9.75/MWh, RMSE EUR37.99/MWh and correlation
+0.699 over 8,760 observed pairs. The model has
+0 negative-price hours versus 479
+observed. The retained physical/bidding reference has German MAE EUR22.22/MWh and
+0.852118 TWh emergency supply; these policy/network changes are **not an exact
+acceleration of that reference**. All 39 eligible mapped observed zones
+are reported, without clipping errors, fitting parameters or filling missing prices.
+The primary comparison uses the same direct A44 validation series as the retained
+reference, rather than the older workbench price series; both are labelled in the
+compact evidence. Raw A44 requests/hashes/hourly aggregation are rechecked; Norway, Sweden and mainland
+Italy still reuse country proxies. This is descriptive evidence, not held-out acceptance.
+
+Norwegian country-proxy price MAE remains EUR191.57–218.59/MWh across mapped Norwegian zones;
+less shortage has not resolved hydro valuation or internal-zone geography.
+
+![Compact zonal trial: observed prices and all mapped zone errors](/research/daily-fuel-annual-2025/compact-zonal.png)
+
+[Compact trial timings, assumptions, native checks, replay and zone diagnostics](/research/daily-fuel-annual-2025/compact-zonal.json)
+
+The simplified formulation establishes a measured European baseline for further
+work. It has not replaced the retained model or browser screen. Commercial transfer
+limits, geographic reconciliation, hydro-target/lookahead sensitivity and paired
+investment/native tests remain necessary before using it to value investments.

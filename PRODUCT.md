@@ -26,6 +26,17 @@ Concentrate development and public documentation on two European research models
    Retain its annual results, resource/fuel rules and observed-price diagnostics
    in one report. Target seconds-scale annual scenario estimates, measured honestly.
 
+The daily simulator may also be tested with a compact zonal transport network and
+short rolling-horizon storage optimisation, as authorized on 10 October 2026.
+Treat this as a formulation experiment within the current model: retain the
+physical/bidding reference and report changes in behaviour as well as speed.
+Summed cross-area branch ratings are model-derived transport envelopes, not
+commercial NTC or a physical-feasibility certificate. Preserve original weather,
+demand, storage-unit water balances and carried/closing stocks. A declared
+arithmetic seasonal-stock penalty may replace the separate hydro price forecast
+in this trial; it is a heuristic, not an inferred market water value. Do not
+reset reservoirs to daily budgets or adopt the trial as the browser engine.
+
 Keep one workbench methodology page alongside those two reports. Remove superseded
 public articles rather than maintaining a research catalogue. Supporting source
 inputs, tools and minimal retained-model replay evidence may remain as dependencies;
@@ -72,7 +83,7 @@ use common exogenous demand/weather/inflow assumptions; approximate endogenous
 prices are not perfect predictions or realised ENTSO-E observations. Recompute
 forecasts and strategies for each investment.
 
-Clearing preserves original network constraints, hourly water/energy balances,
+The retained physical formulation preserves original network constraints, hourly water/energy balances,
 efficiencies, standing loss, inflow, spill and power/energy limits. Actual closing
 stock carries forward; no daily inventory reset, water gift or substitution of
 dispatch for renewable availability. IRENA end-2024/end-2025 linear wind/solar

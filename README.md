@@ -64,11 +64,29 @@ Current research entry points:
 - `fast_daily_market.py` (experimental performance adapter), `terminal_daily_market.py`
   (retained producer), `audit_terminal_daily_market.py`.
 - `simple_resource_bids.py`, `thermal_bid_rules.py`, `prepare_fuel_prices.py`.
+- `compact_zonal_market.py`, `run_compact_zonal_2025.py` (experimental transport /
+  rolling-storage simplification), `report_compact_zonal_2025.py` (same daily report).
 - `collect_dispatch_validation_prices.py`, `compare_daily_dispatch_prices.py`.
 
 Run from the repository root; inspect each tool's CLI and retained report for
 inputs/provenance. Source data and retained-reference dependencies must not be
 removed merely because their original articles are retired.
+
+For a fresh compact trial using the retained 2025 source/fuel inputs:
+
+```sh
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
+  tools/run_compact_zonal_2025.py --native --output data/daily-market-2025/compact-new
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
+  tools/run_compact_zonal_2025.py --audit --output data/daily-market-2025/compact-new
+```
+
+Use a fresh output directory; inspect live processes first. `--hours`, `--lookahead`
+and `--penalty` are declared trial parameters. This baseline trial does not yet
+accept investment inputs or replace the workbench. Its transport limits are not
+commercial capacities; the daily report explains its scope and checks.
 
 The Pages workflow runs lint/types/tests/build and production browser checks.
 `tools/prepare-pages.ts` generates deep-link HTML under the project base. Pushes

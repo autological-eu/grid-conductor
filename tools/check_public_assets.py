@@ -16,6 +16,7 @@ ALLOWED = [
     'fixed-reservoir-screening-2025/area-summary.csv',
     'fixed-reservoir-screening-2025/hourly-de.csv.gz',
     'fixed-reservoir-screening-2025/model-prices.png', 'fixed-reservoir-screening-2025/model-hydro.png',
+    'daily-fuel-annual-2025/compact-zonal.json', 'daily-fuel-annual-2025/compact-zonal.png',
     'daily-fuel-annual-2025/performance.json',
     'daily-fuel-annual-2025/replay.json', 'daily-fuel-annual-2025/price-comparison.json',
     'daily-fuel-annual-2025/summary.json.gz', 'daily-fuel-annual-2025/germany-prices.png',
@@ -49,6 +50,18 @@ def check():
     assert annual['execution_driver_sha256'] == performance['execution_driver_sha256']
     assert annual['replay']['closure_residual_mwh'] == 0 and annual['replay']['maximum_join_residual_mwh'] == 0
     assert annual['replay']['maximum_primal_residual'] <= 1e-4 and annual['simultaneous_storage_hours'] == 0
+    compact = json.loads((folder / 'daily-fuel-annual-2025/compact-zonal.json').read_text())
+    assert compact['hours'] == 8760 and compact['days'] == 365 and compact['window_statistics']['optimal_days'] == 365
+    assert compact['source_summary_sha256'] == compact['replay']['summary_sha256'], 'Detached compact replay'
+    assert compact['physics'] == compact['replay']['physics']
+    assert compact['physics']['maximum_residual'] <= 1e-4 and compact['physics']['closure_mwh'] == 0
+    assert compact['physics']['simultaneous_storage_hours'] == 0
+    for name, sha in compact['provenance']['dependencies'].items():
+        assert hashlib.sha256((ROOT / 'tools' / name).read_bytes()).hexdigest() == sha, 'Changed compact calculation source'
+    assert compact['publication_producer_sha256'] == hashlib.sha256((ROOT / 'tools/report_compact_zonal_2025.py').read_bytes()).hexdigest()
+    assert compact['image_sha256'] == hashlib.sha256((folder / 'daily-fuel-annual-2025/compact-zonal.png').read_bytes()).hexdigest()
+    assert len(compact['native_checks']) == 3
+    assert all(abs(row['objective_difference_eur']) <= max(.05, abs(row['native_objective_eur'])*1e-8) for row in compact['native_checks'])
     fixed = json.loads(archived['fixed-reservoir-screening-2025/summary.json'])['provenance']
     assert hashlib.sha256(archived['european-reservoir-clearing-2025/summary.json']).hexdigest() == fixed['annual_summary_sha256'], 'Detached hydro source'
     assert hashlib.sha256((folder / 'european-reservoir-clearing-2025/replay.json').read_bytes()).hexdigest() == fixed['water_replay_sha256'], 'Detached water replay'

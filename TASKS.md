@@ -173,3 +173,61 @@ block resets and incomplete lookahead tail do not satisfy current gates unchange
 Next: evaluate a compact zonal formulation while preserving weather availability,
 explicit seasonal reservoir inventories and verified geographic/constraint inputs;
 no requirement weakening or automatic integration is authorized by this review.
+
+## Compact European daily formulation — 2026-10-10
+
+User-authorized trial implemented within the daily simulator, retaining the original
+physical/bidding reference. New compact_zonal_market.py / run_compact_zonal_2025.py
+use the same 2025 source, IRENA trajectory, fuel and weather/demand inputs; country/
+AC-island geography remains. 344 equivalent offers, 133 transport links, 160 original
+storage inventories. Passive cross-area ratings form an optimistic transport envelope;
+internal constraints/Kirchhoff/PTDF/GSK are omitted, not claimed commercial NTC.
+
+The 48h rolling LP implements 24h daily and shortens the final window, covering all
+365 days / 8760 hours. Direct storage dispatch replaces the forecast/threshold stage;
+reservoirs keep inflow, losses, spill and actual stocks, with a declared EUR40/stored-MWh
+soft arithmetic seasonal target. No daily hydro resets or unit aggregation. Original
+closing stocks and backward reachability are retained. This is a changed policy and
+network approximation, not an exact acceleration or an annual optimum.
+
+Fresh compact-zonal-annual-v1: solver 61.80s, vectors 4.84s, source/input preparation
+16.29s, three native checks including construction 56.03s, full command 141.96s;
+85.93s after subtracting measured native-check time (not a separately timed rerun).
+Peak RSS 1202 MiB. 48h LP: 46,122 variables / 9,693 rows / 68,711 nonzeros.
+All windows optimal; independent saved implemented-hour component replay passes:
+maximum residual 5.80e-10, water 3.55e-10, closure zero, cycling zero.
+Native windows days 1/183/365 agree in objective within EUR0.000011; final dual prices
+can differ by EUR2.07/MWh despite matched objectives (degeneracy). Native checks
+verify the transport formulation, not the original passive network.
+
+Emergency supply 0.123890 TWh, all Norway / 32 hours, versus 0.852118 TWh in the
+retained bidding reference. Operating cost EUR73.282bn is implemented-hour cost;
+overlapping lookahead objectives/seasonal penalties are not summed into annual cost.
+These changes are not investment savings. Same direct A44 observation comparison:
+German proxy MAE EUR25.74/MWh versus 22.22 in the reference, bias -9.75, correlation
+0.699; zero versus 479 observed negative-price hours. All 39 eligible mapped zones
+reported with raw request/hash/aggregation checks. Four unavailable price series
+and two unresolved Italian island mappings are excluded explicitly. Initial report
+export failed on all-null observations; missing-data handling was corrected, no
+simulation changed. Older workbench-series diagnostics are labelled separately.
+
+Four targeted new tests cover carried/lossy battery stocks, hydro conservation and
+corruption rejection, native signed link losses/island geography, and cached updates.
+Four adapter regression tests and 14 Bun tests pass; types/lint/build/asset/browser
+and deployment verification are recorded at completion. Compact evidence and one
+chart append to the existing daily report. One 15MiB ignored annual witness plus
+sample native windows remain; superseded small pilot deleted, original references
+intact. No browser replacement, main promotion, recurring reviews or retired search.
+
+Next: test lookahead and seasonal-penalty sensitivity; reconcile real commercial
+transfer limits/geography and remaining Norway shortage; then verify common-input
+investment pairs. Seconds-scale target remains unmet at European scale. Empirical
+and investment acceptance gates are unchanged.
+
+Compact trial local verification: four new numerical tests, four retained adapter
+tests, 14 Bun tests, typecheck and lint pass (six existing lint warnings). Static
+asset check: 63 files / 4.88MiB. Production build and desktop/mobile retained-report
+checks pass at 1440/390px, including the new chart/download and no overflow.
+Norwegian country-proxy MAE remains EUR191.57–218.59/MWh: improved shortage/speed is
+not adequate empirical agreement. Publication verification follows successful Pages
+and public checks; no publication inferred from this local record.

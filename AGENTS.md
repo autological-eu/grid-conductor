@@ -23,6 +23,13 @@ Maintain two European research models:
   Rules config/simple-bidding/defaults.json; thermal inputs thermal_bid_rules.py
   and prepare_fuel_prices.py; direct validation prices collect_dispatch_validation_prices.py.
 
+Compact daily-formulation trial: tools/compact_zonal_market.py and
+run_compact_zonal_2025.py; report_compact_zonal_2025.py appends evidence to the
+current daily report. Keep its transport/rolling-policy assumptions separate from
+the frozen physical/bidding reference. No daily reservoir resets, dispatch-based
+renewable availability or silent commercial-capacity claims. Retain one current
+annual trial/witness and small numerical fixtures; do not create a third report.
+
 Only these two reports and docs/workbench-methodology.md are active publications.
 Do not recreate removed reports or restart retired model/search programmes.
 Only used source tools and minimal retained-model evidence may remain
