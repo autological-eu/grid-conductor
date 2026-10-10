@@ -56,6 +56,10 @@ country aggregation or investment values. Bidding-zone geography and observed
 zonal demand/constraints remain an input priority. Battery/PHS investment support
 requires chronological modelling and fresh verification; these units are excluded
 from the retained fixed-hydro solve. Preserve empirical and paired-scenario gates.
+For bidding-zone inputs, preserve commercial boundaries during grid aggregation;
+do not assign a mixed-zone cluster wholly from its centroid. Distinguish dated
+fleet records, metered zonal generation/demand, weekly reservoir stocks and weather
+availability. Observed generation is validation evidence, not renewable availability.
 
 Keep one workbench methodology page alongside those two reports. Remove superseded
 public articles rather than maintaining a research catalogue. Supporting source

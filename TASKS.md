@@ -10,10 +10,10 @@ parallel active model programmes. Automatic hourly reviews remain disabled.
 
 | Model | Concrete evidence | Limits |
 | --- | --- | --- |
-| Fixed-hydro annual supply-curve clearing | 8760 hours / 40 country-island areas; 19.17s solve/network replay + 6.73s preparation/water checks; 3 matched native hours; annual water/network replay. Report: docs/european-physical-synthetic-clearing-2025.md; evidence: public/research/fixed-reservoir-screening-2025 and european-reservoir-clearing-2025/replay.json. | Offline hydro preparation excluded from runtime; fixed output cannot adapt to investments. 0.0298195 TWh emergency supply; German proxy MAE EUR23.10/MWh over 8759 pairs. Not accepted market or investment valuation. |
-| Current generator-specific bidding | Fresh monthly-fuel-annual-v2: 365 days / 8760 hours, carried inventories, exact year-end closure, no cycling. Independent annual primal/rule replay; native checks on days 1/183/365 differ below EUR0.000003. Report: docs/daily-fuel-dispatch-2025.md; compact evidence: public/research/daily-fuel-annual-2025. | 533.03s end-to-end, 445.65s clearing, 1575 MiB peak RSS; 0.852118 TWh emergency supply. German proxy MAE EUR22.22/MWh, bias -9.65, correlation 0.781; 5 model versus 479 observed negative-price hours. No empirical/investment acceptance. |
+| Selected resource bids with fixed-hydro annual clearing | Fresh selected-v2: 8760 optimal hours / 40 country-island areas; 15.86s clearing/update/live checks, 6.27s preparation, 51.54s complete command including three native checks, component replay and export; 975 MiB peak RSS. Independent annual primal/source/water replay passes. Report: docs/european-physical-synthetic-clearing-2025.md. | Offline hydro preparation excluded; fixed output cannot adapt to investments. 0.0298195 TWh emergency supply; country proxies and Norwegian hydro energy/geography discrepancies remain. Legacy/fuel-only variants are retired. Not accepted market or investment valuation. |
+| Paused daily generator-specific bidding reference | Fresh monthly-fuel-annual-v2: 365 days / 8760 hours, carried inventories, exact year-end closure, no cycling. Independent annual primal/rule replay; native checks on days 1/183/365 differ below EUR0.000003. Report: docs/daily-fuel-dispatch-2025.md; compact evidence: public/research/daily-fuel-annual-2025. | 533.03s end-to-end, 445.65s clearing, 1575 MiB peak RSS; 0.852118 TWh emergency supply. German proxy MAE EUR22.22/MWh, bias -9.65, correlation 0.781; 5 model versus 479 observed negative-price hours. No empirical/investment acceptance; not an active parallel programme. |
 
-The current model's first arithmetic-only annual attempt stopped after 363 days;
+The paused daily reference's first arithmetic-only annual attempt stopped after 363 days;
 last-48h storage directions caused infeasibility despite a verified physical path.
 The retained completed run explicitly uses two terminal mode-selection prepasses.
 Its compact failure diagnosis, immediate preceding state and original source
@@ -29,10 +29,11 @@ not held-out validation. Prepared demand is not independently audited observed d
 
 ## Ordered next actions
 
-1. **Combined fixed-hydro/resource-bid implementation completed.** Fresh three-way
-   annual comparison, independent component replay, nine native checks and common
-   A44 observations are verified below. Use the existing fixed-hydro report;
-   daily/rolling storage and the Norwegian adaptive-hydro trial remain paused.
+1. **Keep the selected fixed-hydro/resource-bid implementation.** The single
+   selected-v2 annual witness, independent component replay, three native checks
+   and common A44 observations are verified below. Earlier ablations are retired;
+   use the existing fixed-hydro report.
+   Daily/rolling storage and the Norwegian adaptive-hydro trial remain paused.
    Bid changes alone offer only marginal accuracy gains; do not promote them as an
    empirically accepted replacement or fit observed prices without a declared split.
 2. **Reconcile geography and empirical inputs for this checkpoint.** Country/
@@ -408,3 +409,72 @@ Public report: https://autological-eu.github.io/grid-conductor/docs/european-phy
 Bidding-zone resolution is expected to help but requires audited bus-level hydro,
 demand and flexible-generator placement; labels alone do not repair injection weights.
 This verification follow-up changes only TASKS, not public/numerical evidence.
+
+## Bidding-zone source research — 2026-10-10
+
+User requested source research, including JAO, for commercial bidding-zone resolution.
+Managed workspace access and small live provider requests succeeded. No solver,
+annual collection, baseline replacement or retired programme was started. The
+source audit is ignored at data/bidding-zone-source-audit-2025/summary.json;
+individual response receipts retain request URL, retrieval time and SHA256.
+Current snapshots are not asserted to be historical 2025 fleet/boundary records.
+
+| Input | Primary source / use | Verification and remaining work |
+| --- | --- | --- |
+| Norwegian zone geography | [NVE Elspot GIS](https://gis3.nve.no/map/rest/services/Mapservices/Omradekonsesjoner/MapServer/0) | Live GeoJSON query returns NO1–NO5. Generalised N5000 boundaries require boundary/offshore and historical checks. Prefer explicit plant zone IDs when available. |
+| Hydro and wind capacity by zone | [NVE hydro API](https://api.nve.no/doc/vannkraftdatabase/) and [wind API](https://api.nve.no/doc/vindkraftdatabase/) | Both live APIs accessible without authentication; hydro returned 1863 records, including 1821 ordinary plants, 9 pumped plants and 33 pumps. Every record has an Elspot zone number. Use plant/turbine dates, retired-unit records and historical upgrades before constructing 2025 capacities; current MW and normal-year GWh are not actual 2025 generation or water supply. |
+| Norwegian hourly consumption/generation | [Elhub Energy Data API](https://api.elhub.no/energy-data-api) | Metadata and 15 July 2025 local-day samples accessible without authentication for all five zones: 24 hours per zone, five consumption groups and hydro/wind/solar/thermal/other generation. NO5 also has wildcard production rows: audit their meaning before aggregation, avoiding double counting. Open hourly datasets accept at most one month per request. Full-year coverage, completeness, losses and self-consumption scope remain unaudited. |
+| Zonal reservoir stocks | [NVE reservoir statistics](https://api.nve.no/doc/magasinstatistikk/) | Live history has 52 ISO-2025 weekly observations in each EL area 1–5, including stored TWh, storage capacity and filling fraction. EL areas differ from VASS catchment areas. Audit calendar boundaries and reporting conventions; stocks do not directly provide hourly inflow, spill or plant-level reservoir routing. |
+| Nordic commercial constraints | [JAO Nordic handbook](https://publicationtool.jao.eu/PublicationHandbook/Nordic_PublicationTool_Handbook_v1.1.pdf) and [Nordic RCC data](https://nordic-rcc.net/flow-based/data-tools/) | Fresh finalComputation request for 15 July 2025 12:00–13:00 UTC returns all 117 filtered nonredundant rows, one timestamp, 31 real/virtual hub PTDF columns including NO1–NO5 and RAM. This is one verified hour, not annual completeness or a feasible market replay. RCC provides historical CNEC declassification keys for physical branch matching. |
+| Rest of Europe: demand, output, prices, exchanges | [ENTSO-E Transparency](https://transparency.entsoe.eu/) | Request actual load and generation with genuine bidding-zone EIC domains, distinguish control areas, and audit per-zone coverage/units. Existing A44 observations support validation, not bid construction. API credential/collection and annual coverage not tested by this research. Country IRENA/Ember totals remain fleet/energy crosschecks, not zonal allocation weights. |
+| Wider zone shapes and physical backbone | [PyPSA-Eur region rules](https://pypsa-eur.readthedocs.io/en/latest/rules/regions/) | Reuse underlying Electricity Maps / entsoe-py shapes with TSO checks and a pinned vintage. Pinned build_bidding_zones.py merges NO1/NO2/NO5 when aggregate_to_tyndp is enabled; disable that transformation for real market geography. Keep asset locations and ERA5/atlite weather availability before zone aggregation. |
+| Other TSO alternatives | [Energinet API](https://energidataservice.dk/guides/api-guides), [Svenska kraftnat statistics](https://www.svk.se/elstatistik), [Terna transmission](https://developer.terna.it/docs/read/apis_catalog/transmission) | Documented candidates for DK1/DK2, SE1–SE4 and Italian market zones. No live annual audits yet. Swedish Mimer production moved to eSett from 18 March 2025; historical/current portals cannot be assumed to cover the entire year identically. |
+
+Direct geometry diagnostic: spatially joined original base.nc bus coordinates to
+NVE polygons using Shapely covers, then joined exact bus IDs to the cached
+busmap_base_s_128.csv. Of 212 Norwegian original members, 182 fall in one polygon
+and 30 remain unmapped. Three of five Norwegian clusters contain mapped buses in
+multiple zones: NO0 0AC spans NO2/NO3/NO5; NO0 1AC spans NO1/NO2/NO3/NO5;
+NO0 2AC spans NO3/NO4. This preliminary current-shape diagnostic demonstrates
+why centroid assignment is unsafe; it is not an accepted historical mapping.
+The ignored receipt hashes the original grid, membership table and polygons.
+
+JAO integration must keep sum(PTDF[z] * net_export[z]) <= RAM per CNEC/MTU,
+full virtual-HVDC hub balances/bounds and external-region coupling. Core is a
+separate capacity-calculation region, not all Europe and not the Nordic domain.
+Max bilateral exchanges are projections of the joint domain, not independent
+simultaneously available border capacities. Published RAM is not a branch rating
+to scale for new investments. Compare a JAO historical-domain baseline against
+model-derived physical constraints separately; new-grid scenarios need freshly
+derived physical coefficients and explicit limits on market-domain interpretation.
+
+The [SDAC interval change](https://nordic-rcc.net/15-minute-market-time-unit-mtu-has-been-implemented-in-the-day-ahead-market/)
+starts with delivery 1 October 2025. The existing JAO month_summary helper assumes
+15-minute Nordic records from a January 2026 check: do not use that assumption
+for all 2025. Preserve native intervals, UTC/DST and dated schema/backup domains.
+An hourly approximation after the switch needs a declared method; averaging
+PTDF/RAM rows arbitrarily does not preserve their feasible domain.
+
+Recommended next input pilot, before any annual solve:
+
+1. Collect/reconcile 2025 Elhub and ENTSO-E zonal demand, technology output and
+   exchanges; explicitly handle group wildcards, missing intervals, losses and
+   revisions. Check zonal sums against country totals without scaling away errors.
+2. Match NVE hydro/wind assets to original buses, preserving explicit zone IDs,
+   historical capacity dates, catchments and weather/inflow provenance. Use NVE
+   weekly zonal stocks and output to diagnose the Norwegian water-energy gap;
+   do not replace renewable availability with observed generation.
+3. Build a zone-preserving bus/asset aggregation, auditing mixed/unmapped/offshore
+   members, hydro injection locations and demand distribution. Retain internal
+   grid detail where needed; commercial zones need not be copperplates.
+4. Reconcile selected Nordic JAO domains, actual zonal net positions and HVDC
+   virtual hubs with dated declassification keys before broadening collection.
+   Define coupling to Core and non-flow-based borders rather than stacking domains
+   blindly onto the existing physical model.
+5. Verify changed geography/constraints against native small cases, saved-primal
+   replay, zonal energy balances and held-out price/spread observations before
+   a fresh 8760-hour benchmark or paired investment claims. Retain the single
+   selected model and all existing acceptance gates.
+
+Research updates requirements for boundary-preserving aggregation and reconciles
+the task summary with selected-v2; no numerical output or public article changed.
