@@ -690,3 +690,18 @@ overflow/script errors. Both public JSON downloads return HTTP 200 and match
 committed bytes. Eight new rule tests, five thermal tests and six previous daily
 helper tests pass. Public methods: https://autological-eu.github.io/grid-conductor/docs/simple-resource-bidding/.
 No annual numerical acceptance or live-workbench migration is claimed.
+
+
+### Historical monthly fuel-price integration
+
+Implemented tools/prepare_fuel_prices.py for observed World Bank 2025 monthly
+TTF/Brent benchmarks and ECB daily FX, expanded without invented fluctuations
+to 8,760 UTC inputs. Fresh monthly-fuel-window-v1 48h baseline completed; both
+native checks agree within EUR0.000003, independent replay passes, no cycling,
+exact closure, maximum physical residual 3.75e-10. Clearing 3.74s; full command
+44.07s/1350 MiB. Conversion/calendar failure tests and existing thermal tests pass.
+Raw inputs remain ignored; compact evidence public/research/monthly-fuel-bids-2025.
+Gas thermal-basis compatibility remains unverified (explicit multiplier1);
+Brent uses assumed1.7MWh/barrel, not delivered oil. EUA remains EUR80/t assumption.
+Next: resolve bases/products/EUA, paired larger windows and empirical comparison.
+No annual acceptance or browser migration; reviews remain disabled.

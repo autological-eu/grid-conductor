@@ -2,8 +2,9 @@
 
 These are price-taking synthetic offers for the European research simulator,
 not reconstructed operator bids. Fuel and operational carbon prices must be
-supplied explicitly. No historical price series has been collected for this
-extension, and the existing annual runs have not been recalculated with it.
+supplied explicitly. A reproducible monthly 2025 TTF/Brent benchmark input is now available for
+the simple daily research driver. Existing annual runs have not been recalculated
+with it; oil remains a crude-price proxy and carbon remains an assumption.
 
 ## Gas and oil
 
@@ -82,3 +83,80 @@ offers, missing timestamps/sources, currency/heat-content conversion and a small
 two-hour dispatch comparison against native PyPSA. In that synthetic case,
 native and fast operating costs agree within €0.00001; this is numerical parity,
 not validation against observed market prices or a European annual benchmark.
+
+## Observed 2025 fuel benchmarks
+
+The [World Bank Pink Sheet](https://www.worldbank.org/en/research/commodity-markets)
+workbook identifies its European natural-gas series as Netherlands TTF from
+April 2015. It supplies monthly USD/MMBtu gas prices and USD/barrel Brent prices.
+[ECB reference exchange rates](https://data.ecb.europa.eu/data/datasets/EXR/EXR.D.USD.EUR.SP00.A)
+supply USD per EUR on reporting days. The compiler averages their reciprocals
+within each month, then converts the monthly commodity quotes into EUR. These
+are benchmark approximations, not individual plant transaction prices.
+
+The rule follows the fuel-cost/heat-rate logic described by
+[EIA's spark-spread explanation](https://www.eia.gov/todayinenergy/detail.php?id=9911),
+with operational carbon and variable O&M added. Network clearing accepts the
+cheapest feasible combination of offers to meet fixed demand; generators do not
+individually dispatch from observed electricity prices. Observed power prices
+remain independent validation targets.
+
+| Month | Gas benchmark EUR/MWh thermal | Brent proxy EUR/MWh thermal |
+| --- | ---: | ---: |
+| 01 | 48.32 | 45.00 |
+| 02 | 50.27 | 42.48 |
+| 03 | 41.81 | 39.52 |
+| 04 | 35.28 | 35.53 |
+| 05 | 35.28 | 33.49 |
+| 06 | 36.65 | 36.52 |
+| 07 | 33.96 | 35.77 |
+| 08 | 32.71 | 34.49 |
+| 09 | 32.34 | 34.09 |
+| 10 | 31.95 | 32.72 |
+| 11 | 30.76 | 32.36 |
+| 12 | 27.63 | 31.50 |
+
+Gas conversion uses 1 MMBtu = 0.2930710701722222 MWh. This conversion alone
+does not resolve gross versus net heating values: the demonstration explicitly
+assumes identical benchmark/efficiency bases (multiplier 1), pending verification
+of their compatibility. Oil uses an explicit assumed 1.7 MWh thermal/barrel;
+it is a sensitivity input, not a measured delivered-product heat content.
+CO₂ remains a constant EUR80/t assumption. Coal/lignite fuel costs retain their
+prepared technology-cost assumptions. No historical EUA or oil-product series
+is claimed. Transport, refining, local fuel premiums and start-up costs are absent.
+
+All 12 months are present and expanded to exactly 8,760 UTC hours by holding each
+monthly value constant. This is retrospective perfect forecasting, with no
+fabricated daily variation or claim that monthly averages were known in advance.
+Raw workbook/FX files stay in ignored local storage. Their SHA-256 hashes and
+source URLs accompany compiled inputs; missing months and duplicate FX dates
+are rejected. This changes bids only, preserving capacity, availability, demand,
+network and reservoir physics.
+
+`tools/prepare_fuel_prices.py` consumes the original workbook and ECB API CSV.
+Specify `--gas-basis-multiplier`, `--oil-mwh-th-per-barrel` and `--carbon-eur-t`
+explicitly. Pass its fresh output to `tools/simple_daily_market.py --fuel-prices`.
+Use matched fuel inputs for baseline and investment and retain independent native
+checks and primal replay. This opt-in research path does not change the browser
+workbench or imply empirical/annual acceptance.
+
+### Fresh integration verification
+
+A fresh 1–2 January 2025 Europe-wide baseline used these inputs and the simple
+resource rules, with unchanged source demand, renewable availability and water.
+Both native PyPSA daily objective differences were below EUR0.000003; maximum
+price difference was below 1e-10 EUR/MWh. Independent saved-input/primal replay
+passed, including stock carry, exact terminal closure and no simultaneous
+storage charging/discharging. Maximum physical residual was 3.75e-10.
+Daily clearing took 3.74 seconds; the full command, including source preparation
+and native checks, took 44.07 seconds and 1,350 MiB peak RSS. This is a 48-hour
+baseline test, not annual validation or paired investment evidence.
+
+[Monthly benchmarks and source hashes](../research/monthly-fuel-bids-2025/benchmarks.json),
+[run summary](../research/monthly-fuel-bids-2025/summary.json) and
+[independent replay](../research/monthly-fuel-bids-2025/replay.json).
+
+Next: resolve fuel heating-value compatibility, obtain delivered oil-product and
+historical EUA inputs, then test paired investments and observed power-price/
+generation errors over broader windows. Benchmark-price realism and numerical
+solver agreement are separate gates.
