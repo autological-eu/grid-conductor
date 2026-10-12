@@ -214,3 +214,14 @@ preserve each reservoir's water and opening/closing stocks; they are not an annu
 strategy. Better annual error after the location change does not certify commercial
 zones or investment benefits. The report retains remaining price regressions,
 native checks and unresolved demand-scope differences.
+
+The offline dispatch model now clears the full retained network at bidding-zone
+resolution: Nordic and Italian zones separately, with common balances for DE-LU
+and Ireland's Single Electricity Market. Physical island balances and HVDC losses
+remain explicit even within a common market zone. Boundary-preserving grid
+preparation replaces country-only clustering/stub removal. Original hourly
+available supply, demand and fixed hydro are conserved; unresolved aggregate
+fleet/weather and demand splits remain declared location proxies. The report
+compares country and zonal pools on the same rebuilt grid and retains failed
+control hours. This changes the research model, not the live browser solver;
+commercial-domain, empirical and paired-investment acceptance remains open.

@@ -1,6 +1,6 @@
 # Grid Conductor — current tasks
 
-Reconciled 10 October 2026. PRODUCT.md defines scope and acceptance criteria.
+Reconciled 12 October 2026. PRODUCT.md defines scope and acceptance criteria.
 Focus: observed bottlenecks and the fast fixed-hydro supply-curve checkpoint.
 Daily generator bidding and compact rolling storage are paused references. Superseded public reports are retired;
 calculation tools and supporting evidence remain for reproducibility, not as
@@ -38,7 +38,11 @@ not held-out validation. Prepared demand is not independently audited observed d
    not an annual adaptive strategy or another active model programme.
    Bid changes alone offer only marginal accuracy gains; do not promote them as an
    empirically accepted replacement or fit observed prices without a declared split.
-2. **Reconcile geography and empirical inputs for this checkpoint.** Country/
+2. **Complete input verification for the implemented whole-network zones.** The
+   48-area implementation and controlled common-grid year are recorded below.
+   Regional fleet/weather allocation, observed-demand scope and dated boundaries
+   remain unresolved; the old country-to-commercial-zone proxy issue is addressed
+   structurally, not empirically accepted. Country/
    AC-island proxies are not bidding zones. Map buses, generators/reservoirs and
    demand to commercial zones, particularly NO1–NO5; audit zonal demand and
    physical/commercial constraints. Original Norwegian bus placement has now
@@ -706,3 +710,82 @@ both charts at 1440 and 390 px, fetches its evidence through the page, and passe
 overflow checks. Report:
 https://autological-eu.github.io/grid-conductor/docs/european-physical-synthetic-clearing-2025/
 No main merge, raw-artifact upload or automatic-review activation.
+
+## Whole-network bidding-zone implementation — 12 October 2026
+
+User explicitly authorized all-network bidding-zone modelling. Implemented
+bidding_zone_network_2025.py and global_bidding_zone_2025.py with fresh source
+provenance. Sources: pinned Electricity Maps geographic areas, official NVE NO1–NO5
+polygons, entsoe-py seven Italian zones, retained raw grid/demand/plant records.
+13 old clusters cross boundaries; refining them gives 145 buses. A deeper audit
+found three crossings already collapsed during country-only stub elimination.
+The final backbone starts before that stage, retaining those source branches.
+Voltage/converter/DC-chain routines use pinned upstream code; original uniform
+0.7 line-security factor remains. Do not assign mixed clusters from centroids.
+
+Global market-area balances give one price per area across AC islands while
+retaining separate physical-island RHS constraints and actual HVDC losses/bounds.
+DE/LU merge into DE-LU, IE/Northern Ireland into IE-SEM, Mallorca into ES. Nordic
+and Italian zones are separate. Peripheral FR-COR/XK source areas remain explicit
+proxies outside any claimed certified SDAC scope. Original parent hourly demand,
+availability/costs and fixed reservoir output are conserved. Dated plant capacity
+allocates mixed thermal/hydro fleets; remaining mixed renewable/unsupported-fuel
+locations use declared member-count proxies. Preaggregated demand splits remain
+proxies, not newly audited metered zonal load. Added missing-area EUR10,000
+emergency offers follow the existing rule and are excluded from real capacity.
+
+Current ignored root: data/bidding-zone-network-2025/annual-v7/. Zonal model: all
+8760 hours optimal, 48 clearing areas, zero emergency MWh, 33.476s clearing loop.
+Country control on the same backbone: 8759 optimal / one fresh-solver
+confirmed Infeasible hour (8264), zero emergency on solved hours, 33.085s loop.
+Retain this failure; common-hour comparisons do not fill it from another model.
+Producer preparation 123.539s, complete two-control/native/export command
+418.108s, peak RSS 2584 MiB. Source preparation and replay are not loop timing.
+Three sampled native objectives per formulation agree; zonal maximum absolute
+difference EUR1.10e-7. New native fixtures (three tests) pass: ambiguous/bounded
+polygon handling, cross-zone price separation, and a common zone spanning islands
+with cable losses. No annual storage-optimum or strategic-equilibrium claim.
+
+Full zonal Norway MAE: NO1 42.861, NO2 41.596, NO3 35.023, NO4 35.863,
+NO5 46.628 EUR/MWh. Correlations remain weak (NO5 -0.133): finer geography is
+not empirical acceptance. Germany MAE 23.097, correlation .776. Italy's previously
+unmapped SARD/SICI are now represented (MAE 38.408 / 35.181). Same-grid controls
+and all eligible A44 comparisons belong in the existing fixed-hydro report.
+No observed prices/generation used for fitting. Native parity checks formulation.
+
+Earlier preflights: generic area handling corrected; a per-island trial returned
+Not Set at hours4922/4923 (not a proven hydro infeasibility). Deeper boundary
+protection superseded that trial. Raw Unicode WKT inflated to >1.6 GiB and full
+preclustered demand needed another 276 MiB: unused WKT/tags are excluded and demand
+is streamed in 128-bus blocks under the existing 5 GiB address-space guard.
+Descriptive cluster attributes and static-load defaults were corrected before
+final production. Do not restore superseded trial witnesses; keep only compact
+failure notes and the final source/replay chain. Recurring reviews stay disabled.
+
+Independent saved-source allocation/physics replay and publication checks follow
+below. Next priority after structural zoning: replace member-count fleet/weather
+and demand allocations with audited zonal inputs, reconcile demand definitions
+and NVE regional water allocation, and investigate fixed-schedule/GSK extremes
+with predeclared held-out tests. Historical boundaries and commercial JAO domains
+remain unaccepted; paired-investment/browser integration gates remain unchanged.
+
+Independent saved replay passes both controls. Parent available-supply conservation
+error <=1.819e-12 MW; hourly demand change exactly zero; fixed hydro change
+<=5.821e-11 MW. Per-reservoir shares independently reconstruct fixed injections.
+Maximum zonal native-component balance/flow residual 9.761e-6 MW; country
+1.377e-6 MW, unchanged 1e-4 tolerance. Objective replay errors <=2.608e-8 EUR.
+All 41 eligible observed price areas are byte-hashed/XML-reparsed, including the
+previously unmapped Italian islands. Detailed source membership and allocation
+remain ignored; public evidence is compact. Obsolete preflight arrays are deleted,
+with compact failure notes retained. No protected source/reference was removed.
+
+Publication preparation: three native/physical fixtures pass; 14 browser unit
+tests / 2402 assertions pass. Typecheck passes; lint has only the six existing
+Fast Refresh warnings. Production build and 1440/390/320/667 px workbench/report
+smoke pass. Focused 1440/390/320 px zonal article checks pass, including retained
+water methodology, chart, 48-area evidence, 41 observations, the failed control
+hour and no document overflow. Asset allowlist: 69 files / 5.70 MiB, two new
+compact assets about 246 KiB. Raw geographies, demand/weather and large saved
+primals remain ignored. Pinned geographic-source recovery collector verifies
+all nine external inputs and rejects mutable-release changes. Deployment
+verification will be recorded after successful CI/Pages and public URL checks.

@@ -56,6 +56,19 @@ use independently replayed current hydro bounds, not the annual producer's inher
 fixed_no_hydro_twh field. Material-negative counts use price < -1e-6 EUR/MWh;
 strict <0 legacy metrics include numerical zeros and must stay distinguishable.
 
+Whole-network bidding-zone work is authorized (12 October 2026).
+bidding_zone_network_2025.py protects boundaries before stub removal, uses pinned
+geographic sources/plant records and conserves original parent hourly volumes.
+global_bidding_zone_2025.py projects physical rows to one balance per market area,
+retaining separate island RHS corrections and HVDC losses. Do not silently use
+provider reporting-area labels as certified commercial zones. Mixed aggregate
+renewable/unsupported-fuel location shares remain explicitly marked proxies.
+run_bidding_zone_network_2025.py uses a common country/zonal backbone with native
+checks; audit_bidding_zone_network_2025.py independently replays source allocation
+and component physics. report_bidding_zone_network_2025.py updates the existing
+fixed-hydro article only. Require fresh roots and finite guards; distinguish
+unresolved solver status from proven infeasibility. No browser engine replacement.
+
 Maintain these reproducible models:
 
 - Fixed-hydro annual checkpoint: tools/fixed_reservoir_screening_2025.py and

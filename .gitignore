@@ -58,6 +58,7 @@ data/synthetic-europe-physical-2025-irena-linear/
 
 # Fixed-reservoir screening working witnesses
 data/fixed-reservoir-screening-2025/
+data/bidding-zone-network-2025/
 
 # Perfect-foresight dispatch witnesses and offline verification
 data/perfect-foresight-2025/
@@ -113,3 +114,5 @@ data/daily-market-2025/
 !/public/research/fixed-reservoir-screening-2025/nve-hydro-diagnostics.json
 !/public/research/fixed-reservoir-screening-2025/nve-geography-errors.png
 !/public/research/fixed-reservoir-screening-2025/nve-bounded-hydro.png
+!/public/research/fixed-reservoir-screening-2025/bidding-zone-model.json
+!/public/research/fixed-reservoir-screening-2025/bidding-zone-errors.png

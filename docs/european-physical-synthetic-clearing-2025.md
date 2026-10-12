@@ -1,237 +1,224 @@
-# European hourly dispatch — Norwegian water and location diagnosis
+# European hourly dispatch — whole-network bidding-zone model
 
 ## Summary and conclusion
 
-**The Norwegian price regression was largely caused by where the model placed
-hydro output and demand on the physical grid.** Keeping every hourly reservoir
-output and demand volume unchanged, but placing both on their original clustered
-PyPSA-Eur buses, reduces Norwegian price MAE from **EUR274–286/MWh to EUR56–69/MWh**.
-All **8,760 hourly clearings are optimal**, with **zero emergency generation**.
-The annual clearing loop takes **16.03 seconds**; source preparation,
-native verification and independent audit are additional.
+The model now uses **48 distinct clearing areas across the entire
+retained European network**, including NO1–NO5, SE1–SE4, DK1/DK2 and Italy's seven
+zones. DE and LU share DE-LU; Ireland/Northern Ireland share the Single Electricity
+Market. Mallorca joins ES. Separate peripheral source areas such as Corsica and
+Kosovo are retained and explicitly lack observed-price verification; they are not
+claims of SDAC participation or certified commercial boundaries.
 
-This identifies a representation error. It does **not** establish realistic
-Norwegian market prices. Mean modeled price is **EUR17.33/MWh**,
-correlations with NO1–NO5 remain near zero, and **348 materially
-negative hours** remain. Small, water-conserving hydro rescheduling trials lower
-synthetic system cost but do not consistently improve prices. Next priority:
-audited bidding-zone asset/demand mapping, followed by a defensible water-value
-and schedule policy tested on declared held-out observations. Do not add capacity
-or fit prices merely to remove these errors.
+**13 old clusters crossed zone boundaries.** Rebuilding them
+from source bus membership, rather than assigning a centroid, increases the grid
+to **145 buses**. The audit also identified **3
+crossings lost at the earlier stub-removal stage**; the new backbone starts before
+that removal. Original uniform security factor **0.7** remains.
 
-## Model and data
+All 8,760 zonal hours terminate optimal. Annual zonal clearing takes **33.48s**, excluding one-time
+preparation, native checks, replay, export and reporting. Emergency generation is
+**0.000000 MWh** over 0 solved hours. The model is
+an untuned diagnostic, not an accepted market-price or investment estimator.
 
-The retained model clears Europe hourly using synthetic resource-specific supply
-offers, fixed demand and model-derived passive-grid/HVDC constraints. Monthly
-gas/oil offers use World Bank TTF/Brent and ECB exchange rates; other offers retain
-the documented simple resource rules. The grid/fleet and weather profiles come
-from pinned PyPSA-Eur v2026.08.0, with the retained 2025 hourly source/replay chain.
-IRENA end-2024/end-2025 wind/solar capacity interpolation is assumed commissioning,
-not observed installation dates. Original renewable availability remains separate
-from dispatched generation. Nuclear availability ending in 2024 is a declared proxy.
+The comparison below isolates country versus bidding-zone pooling on **the same
+rebuilt grid**. It is not directly attributable to the geography change alone when
+compared with the earlier 128-bus report: topology and branch aggregation also changed.
+All original hourly parent demand, available supply and fixed reservoir output are
+conserved. We have not fitted supply, demand or water to ENTSO-E prices.
 
-Norwegian water now uses [NVE weather-driven HBV inflow](https://www.nve.no/energi/analyser-og-statistikk/hydrologiske-data-til-kraftsituasjonsrapporten/),
-**141.641 TWh** across 8,760 UTC hours. The earlier
-ERA5 normalization used a historical EIA median because its generation series
-lacked 2025. It understated available water. NVE's separate production/stock-derived
-inflow column is excluded: observed generation never sets the water input.
-Full weeks preserve ERA5 hourly shape; calendar-boundary weeks use uniform rates
-over their source week, and DST weeks retain 167/169 hours.
+Country-control failures: **2025-12-11T08:00:00 UTC: Infeasible**. A fresh solver reproduced the
+reported termination. Its comparisons use common solved hours; the zonal model
+still covers the full year. Country pooling restricts spatial dispatch through
+its GSK and can fail where finer zonal decisions find a feasible allocation.
 
-NVE electrical-equivalent opening/closing stocks are
-**68.550 → 62.083 TWh**;
-capacity is **87.438 TWh**. Divide those water
-quantities by original turbine efficiency 0.9 to obtain stored-energy units, then
-apply efficiency once on discharge. Keep original turbine MW. Country-pooled
-reservoir/run-of-river water is allocated by original capacity shares. The fixed
-schedule uses a shortage-aware delivery envelope and seasonal-pattern penalty,
-not observed prices/generation or an annual economic optimum. There is no spill,
-daily reset or additional water; other countries retain their source schedules.
+## Geographic and physical formulation
 
-NVE revised HBV history in June 2026: this is retrospective information. Gross
-stocks and net usable inflow are assumed compatible electrical equivalents;
-catchment routing, cascades and price-area water allocation remain unresolved.
+1. Retrieve and hash pinned [Electricity Maps geographic areas](https://github.com/electricitymaps/electricitymaps-contrib/tree/master/geo),
+   [NVE's official Norwegian price-area polygons](https://gis3.nve.no/map/rest/services/Mapservices/Omradekonsesjoner/MapServer/0)
+   and [entsoe-py's Italian zones](https://github.com/EnergieID/entsoe-py/tree/master/entsoe/geo/geojson), including Calabria.
+   These are retrospective releases; historical 2025 boundary certification is open.
+2. Map original onshore buses to polygons. Uncontained coastal points use a bounded
+   nearest-polygon proxy, explicitly recorded. Offshore nodes use an electrical
+   path to a same-country shore connection, not a cluster-centroid assignment.
+3. Apply pinned upstream voltage-layer, converter and DC-chain routines. Do not
+   remove country-only stubs. Split each old cluster by actual member zone BEFORE
+   branch aggregation, preserving cross-zone branches and native HVDC bounds/losses.
+4. Maintain **one clearing balance and price per modeled market area**, including
+   areas spanning AC islands. Physical island balances remain separate. Capacity
+   GSK fractions distribute generation; actual fixed hydro and demand enter at
+   their allocated physical buses. Native PTDFs retain constraints inside zones;
+   membership in a common zone does not create an unconstrained inter-island link.
+5. Check source-reconstructed demand, offers, hydro and saved-primal physics.
+   Compare against native PyPSA formulations and report every failed hour.
 
-### Generation and demand checks
+This is a synthetic zonal dispatch model with model-derived N-0 constraints,
+not EUPHEMIA's full order allocation, published JAO commercial domains, outages,
+contingencies or operator redispatch. Static generation shift keys remain a proxy
+for intrazonal dispatch. Native parity verifies the formulation, not market realism.
 
-Fixed Norwegian reservoir production is **139.215 TWh**.
-Current total hydro is **145.646–146.165 TWh**, compared with Elhub **145.669 TWh**
-and Ember **141.598 TWh**. The range reflects ambiguity when run-of-river shares
-an identical-price aggregate offer with other generators: bounds come from the
-saved primal and original available capacities. Run-of-river dispatch can change
-with grid placement, even though its availability does not. The previous
-country-distributed case's total was 145.545–145.730 TWh; those bounds must not be
-reused for the relocated case. Reservoir output itself is unchanged.
+## Conserved supply, demand and water inputs
 
-Norwegian source demand is **137.044 TWh**, versus Elhub metered **131.520 TWh**
-and Ember **134.548 TWh**. These scopes differ; total-load losses, metering coverage
-and original hourly demand provenance need reconciliation before substitution.
-Neither demand nor inflow has been scaled to match generation or observed prices.
+Original generator cost and weather-availability time series remain unchanged.
+For a mixed cluster, sourced dated plant-capacity shares allocate thermal and
+reservoir assets between child areas. Missing or unsupported location detail,
+including aggregate renewable profiles, uses explicit raw-member-count shares.
+These are allocation assumptions, not newly measured bidding-zone capacity or
+weather. Allocation methods across original generators/reservoirs: **{'pure_cluster': 1146, 'source_plant_capacity': 51, 'source_member_count_proxy': 87}**.
+Commissioning/out-of-service dates filter the plant-location weights where known.
 
-## What the location experiment changes
+Demand uses the existing preclustered 2025 hourly series, with member-count splits
+where its earlier spatial aggregation crossed a boundary. Each original parent's
+hourly load remains exactly conserved. This does not turn inherited source demand
+into independently audited observed zonal load. The Norwegian 137.04 versus
+131.52/134.55 TWh scope discrepancy remains unresolved; no scaling forces agreement.
 
-Previously the model distributed each country's **net injection** using a single
-generation shift key (GSK), weighted by generator capacity. Norwegian reservoir
-turbines were not in those generator weights. The subtraction of fixed demand
-and hydro therefore placed both at the remaining generation buses, rather than
-their source locations. Larger corrected hydro volumes amplified this mismatch.
+Fixed reservoir schedules split by the same source shares, preserving each parent's
+hourly output, inflow/efficiency, inventory trajectory and terminal boundaries.
+No rescheduling, new water, spill or dispatch-for-availability substitution occurs.
+Newly separate areas receive the existing EUR10,000 emergency-offer rule where
+needed (9 additional diagnostic offers); those MW are never
+reported as real fleet capacity. Shortage energy is disclosed separately.
 
-The experiment adds a zero-sum bus-injection correction: actual fixed hydro minus
-GSK-distributed hydro, plus GSK-distributed demand minus actual demand. Native
-PTDFs translate that correction into passive-branch constraints. Country/island
-energy, every hourly exogenous volume, all offers and original branch ratings
-remain unchanged. Only Norwegian fixed hydro and demand move; generation offers
-and other countries still use the existing GSK. Original clustered buses are
-physical-model locations, not certified commercial bidding zones.
+### Resource bids and source-backed hydro
 
-Moving **hydro alone** makes five of nine selected diagnostic hours infeasible.
-Moving **hydro and demand together** makes all nine feasible. The combined
-placement was therefore tested over the full year; it is not a new calibrated
-baseline or accepted investment model.
+Simple resource offers retain sourced monthly gas/oil prices (World Bank TTF/Brent
+and ECB FX) and the existing carbon/efficiency assumptions. Observed electricity
+prices do not enter bid construction. The pinned PyPSA-Eur v2026.08.0 backbone
+uses retained 2025 weather profiles and source/replay coefficients. IRENA linear
+end-2024/end-2025 wind/solar capacity interpolation is assumed commissioning,
+not observed installation dates. Nuclear availability ending in 2024 is a proxy.
 
-### Are the extreme prices a calculation error?
+Norway uses [NVE's weather-driven HBV usable inflow](https://www.nve.no/energi/analyser-og-statistikk/hydrologiske-data-til-kraftsituasjonsrapporten/),
+**141.641 TWh** aligned to 8,760 UTC hours. Full weeks
+preserve the original ERA5 hourly shape; partial boundary weeks use uniform rates
+over their source week. DST weeks retain 167/169 hours. The generation/stock-derived
+inflow column is excluded. Observed generation does not set the water budget.
 
-Nine purposively selected hours include quarterly modeled extremes, a median
-hour and original native-check hours. Demand perturbations of ±0.1 and ±1 MW
-confirm that the severe negative prices agree with upward objective derivatives.
-In several such hours, reducing demand makes the fixed schedule infeasible.
-The dual is then a one-sided feasibility-boundary sensitivity, not evidence of
-a realistic freely adjustable supply market. At the high-price kink, upward
-and downward derivatives differ. Neither native objective parity nor a small
-numerical gap means the model recovers ENTSO-E prices with that percentage error.
+Electrical-equivalent opening/closing stocks are
+**68.550 → 62.083 TWh**,
+with **87.438 TWh** reservoir capacity.
+Water, stocks and capacity are converted to stored units by dividing by original
+turbine efficiency 0.9; efficiency is applied once on discharge. Original turbine
+MW remains unchanged. A shortage-aware delivery envelope and seasonal-pattern
+penalty prepare the fixed schedule, not an annual economic optimum. Other countries
+retain their source schedules. No daily reset or additional water is introduced.
 
-## Full-year observed-price comparison
+HBV history was revised in June 2026, so inputs are retrospective. Gross reservoir
+stock/net usable inflow are assumed compatible electrical equivalents; catchment
+routing, cascades, country-pooled reservoir/run-of-river shares and regional water
+allocation remain unresolved. Fixed Norwegian reservoir output remains 139.215 TWh;
+total hydro including dispatched run-of-river may change with network constraints.
+Previous-model total-generation bounds are not reused for this new model.
 
-![All eligible price-area errors and Norwegian monthly prices](/research/fixed-reservoir-screening-2025/nve-geography-errors.png)
 
-All **39 eligible observed areas** use byte-hashed and XML-reparsed ENTSO-E A44
-day-ahead observations, UTC-aligned hourly. Four mapped areas with unavailable
-prices remain missing in the download. Each available hour is retained; there is
-no observed-price fitting or held-out accuracy claim. Norway's single country
-price is repeated across NO1–NO5, so the comparison does not model their internal
-congestion. The monthly NO2 curve above is an illustrative observed comparator,
-not a training input or the only reported area.
+## Full-year price comparison
 
-| Observed area | Hours | Country-distributed MAE | Original-bus MAE | Original-bus bias | Correlation |
+![Controlled full-year errors and separate Norwegian modeled prices](/research/fixed-reservoir-screening-2025/bidding-zone-errors.png)
+
+All 41 eligible observed areas use hashed and XML-reparsed ENTSO-E
+A44 observations, UTC-aligned hourly. Country and zonal MAE below use common
+available hours; downloads also contain all available zonal-hour metrics.
+Missing model observations: **BA, IT-CALA, ME, XK, FR-COR, GB, IE-SEM**. Observations never enter offers.
+This is descriptive full-year evidence, not a declared held-out acceptance test.
+
+| Observed area | Common hours | Country-pool MAE | Zonal MAE | Zonal bias | Correlation |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| NO2 | 8760 | 286.44 | 68.56 | -48.08 | 0.074 |
-| NO1 | 8760 | 281.76 | 63.88 | -41.03 | 0.068 |
-| NO4 | 8760 | 278.41 | 60.75 | +8.61 | 0.001 |
-| NO5 | 8760 | 274.77 | 56.89 | -29.60 | 0.065 |
-| NO3 | 8760 | 273.69 | 55.76 | -3.79 | 0.040 |
-| DK2 | 8760 | 55.76 | 52.84 | -40.70 | 0.241 |
-| EE | 8760 | 48.34 | 48.29 | +6.64 | 0.419 |
-| LT | 8760 | 44.98 | 44.93 | +1.73 | 0.446 |
-| LV | 8760 | 44.94 | 44.89 | +1.30 | 0.439 |
-| SE4 | 8760 | 45.37 | 44.01 | -15.30 | 0.162 |
-| FI | 8760 | 41.36 | 42.00 | +3.62 | 0.134 |
-| SE2 | 8760 | 39.67 | 39.23 | +28.59 | 0.060 |
-| SE1 | 8760 | 39.12 | 38.71 | +28.41 | 0.068 |
-| AL | 8760 | 38.14 | 38.15 | -27.96 | 0.477 |
-| SE3 | 8760 | 38.26 | 36.84 | -1.11 | 0.186 |
-| BG | 8760 | 33.30 | 33.29 | -16.94 | 0.603 |
-| RO | 8760 | 32.65 | 32.65 | -18.22 | 0.617 |
-| HU | 8760 | 32.27 | 32.28 | -20.18 | 0.655 |
-| GR | 8760 | 31.78 | 31.77 | -13.82 | 0.601 |
-| MK | 8760 | 31.72 | 31.71 | -17.60 | 0.618 |
-| RS | 8760 | 30.14 | 30.14 | -17.56 | 0.617 |
-| IT-CNOR | 8760 | 28.94 | 28.96 | -27.51 | 0.685 |
-| HR | 8760 | 28.93 | 28.93 | -15.33 | 0.655 |
-| CH | 8760 | 28.83 | 28.82 | -23.86 | 0.764 |
-| IT-CSUD | 8760 | 28.77 | 28.79 | -27.04 | 0.690 |
-| IT-SUD | 8760 | 28.49 | 28.51 | -25.75 | 0.683 |
-| SI | 8760 | 28.29 | 28.29 | -13.89 | 0.634 |
-| SK | 8760 | 28.28 | 28.28 | -14.65 | 0.690 |
-| IT-North | 8760 | 28.05 | 28.07 | -26.58 | 0.694 |
-| ES | 8760 | 26.98 | 26.98 | +9.89 | 0.702 |
-| PT | 8760 | 26.79 | 26.79 | +10.08 | 0.687 |
-| PL | 8760 | 26.78 | 26.78 | -15.80 | 0.658 |
-| CZ | 8760 | 25.83 | 25.83 | -8.69 | 0.646 |
-| DK1 | 8760 | 23.91 | 23.88 | -7.57 | 0.709 |
-| AT | 8760 | 23.86 | 23.86 | -15.06 | 0.767 |
-| DE-LU | 8760 | 22.84 | 22.81 | -14.44 | 0.776 |
-| NL | 8760 | 22.42 | 22.41 | -12.72 | 0.771 |
-| BE | 8760 | 22.03 | 22.03 | -12.00 | 0.796 |
-| FR | 8760 | 21.75 | 21.75 | -1.42 | 0.784 |
+| DK2 | 8759 | 33.39 | 50.43 | -37.97 | 0.303 |
+| EE | 8759 | 48.34 | 48.38 | +7.55 | 0.426 |
+| NO5 | 8759 | 45.56 | 46.63 | -22.13 | -0.133 |
+| LT | 8759 | 44.85 | 44.89 | +2.63 | 0.454 |
+| LV | 8759 | 44.83 | 44.86 | +2.21 | 0.447 |
+| NO1 | 8759 | 52.66 | 42.86 | -21.16 | 0.037 |
+| FI | 8759 | 42.12 | 41.72 | +1.19 | 0.112 |
+| NO2 | 8759 | 57.43 | 41.60 | -19.69 | 0.166 |
+| SE4 | 8759 | 42.67 | 41.01 | -15.94 | 0.263 |
+| IT-SARD | 8759 | 29.87 | 38.41 | -36.78 | 0.615 |
+| AL | 8759 | 36.88 | 37.16 | -25.91 | 0.486 |
+| SE2 | 8759 | 37.67 | 36.32 | +24.65 | 0.047 |
+| NO4 | 8759 | 48.83 | 35.87 | +27.54 | 0.007 |
+| SE1 | 8759 | 37.14 | 35.84 | +23.81 | 0.044 |
+| IT-SICI | 8759 | 30.39 | 35.18 | -33.54 | 0.636 |
+| NO3 | 8759 | 43.89 | 35.02 | +10.23 | 0.016 |
+| SE3 | 8759 | 35.63 | 34.86 | -2.98 | 0.222 |
+| IT-CSUD | 8759 | 29.32 | 33.70 | -32.46 | 0.644 |
+| BG | 8759 | 32.47 | 32.75 | -14.79 | 0.614 |
+| IT-SUD | 8759 | 28.82 | 32.72 | -31.16 | 0.659 |
+| GR | 8759 | 31.75 | 32.12 | -12.39 | 0.588 |
+| RO | 8759 | 31.69 | 31.95 | -15.96 | 0.630 |
+| HU | 8759 | 31.05 | 31.32 | -17.15 | 0.668 |
+| IT-CNOR | 8759 | 29.54 | 31.27 | -30.06 | 0.670 |
+| MK | 8759 | 30.58 | 30.80 | -15.03 | 0.633 |
+| RS | 8759 | 29.02 | 29.35 | -15.33 | 0.632 |
+| HR | 8759 | 27.92 | 28.27 | -12.90 | 0.661 |
+| SI | 8759 | 27.41 | 27.80 | -11.67 | 0.635 |
+| CH | 8759 | 27.00 | 27.59 | -21.66 | 0.762 |
+| SK | 8759 | 27.35 | 27.57 | -11.12 | 0.698 |
+| CZ | 8759 | 27.14 | 27.30 | -0.30 | 0.570 |
+| DK1 | 8759 | 31.89 | 26.57 | -14.02 | 0.690 |
+| ES | 8759 | 26.51 | 26.55 | +8.78 | 0.708 |
+| PT | 8759 | 26.28 | 26.32 | +9.03 | 0.695 |
+| PL | 8759 | 26.13 | 26.09 | -14.91 | 0.669 |
+| IT-North | 8759 | 28.65 | 25.40 | -23.37 | 0.714 |
+| BE | 8759 | 24.16 | 24.31 | -15.27 | 0.784 |
+| DE-LU | 8759 | 23.09 | 23.10 | -15.25 | 0.776 |
+| NL | 8759 | 23.10 | 23.09 | -14.94 | 0.775 |
+| FR | 8759 | 22.82 | 22.74 | -4.91 | 0.766 |
+| AT | 8759 | 22.49 | 22.60 | -12.37 | 0.781 |
 
-MAE and bias are EUR/MWh. The annual material-negative count uses price
-< −0.000001 EUR/MWh. The inherited metric's strict price < 0 count is 935,
-including tiny floating-point negatives; both definitions remain transparent
-in the evidence. Mean-price improvement does not eliminate remaining extremes.
+Errors are EUR/MWh. Separate zone prices do not guarantee better MAE: inherited
+capacity, demand, intrazonal GSK and fixed hydro schedules may still be wrong.
+The download includes all metrics, shortage counts and failure/retry records.
+Failed zonal hours: **None**. No failed hour is filled with another model's price.
 
-## Bounded chronological hydro tests
+## Numerical verification and measured runtime
 
-Three 48-hour windows cover the original minimum modeled price, a July native
-check hour and the relocated minimum modeled price. Selection uses model
-outcomes, not observations, so this is diagnosis rather than out-of-sample validation.
-Each window is solved under both geographic representations. Each of the five
-Norwegian reservoirs retains its source inflow, efficiency, capacity, zero spill
-and **exact original opening and closing stocks**. Hourly output stays within
-±20% of its reference, capped by original turbine MW. Inventories carry hourly;
-no water moves between reservoirs, and each unit's total output is unchanged.
+Independent saved replay rebuilds sources and checks parent-level supply conservation,
+hourly demand/hydro conservation, generator/link bounds, zonal and physical-island
+balances, native passive flows and objectives. Maximum changes after allocation:
+available supply **1.82e-12 MW**,
+demand **0 MW**, fixed hydro
+**5.82e-11 MW**. Replay tolerance remains 0.0001.
+Country optimal hours: **8759**; zonal: **8760**.
 
-![Fixed and bounded hydro output and resulting prices in three windows](/research/fixed-reservoir-screening-2025/nve-bounded-hydro.png)
+| Native formulation | Hour index | Native minus fast objective EUR |
+| --- | ---: | ---: |
+| country | 348 | 7.45e-09 |
+| country | 4692 | 5.59e-09 |
+| country | 8364 | 5.49e-08 |
+| bidding_zone | 348 | 7.82e-08 |
+| bidding_zone | 4692 | -7.92e-09 |
+| bidding_zone | 8364 | -1.1e-07 |
 
-| Window starts UTC | Placement | System cost change million EUR | Mean NO price fixed → flexible | Negative hours fixed → flexible |
-| --- | --- | ---: | ---: | ---: |
-| 2025-01-03 | Country-distributed | -0.000009 | -1617.12 → -2736.33 | 45 → 45 |
-| 2025-01-03 | Original buses | -2.427773 | -609.72 → -148.86 | 28 → 42 |
-| 2025-07-14 | Country-distributed | -1.707795 | -143.39 → 22.15 | 20 → 0 |
-| 2025-07-14 | Original buses | -1.041316 | 14.63 → 22.38 | 0 → 0 |
-| 2025-01-01 | Country-distributed | -0.000006 | -1426.81 → -2295.71 | 44 → 44 |
-| 2025-01-01 | Original buses | -1.148845 | -1085.81 → -1257.65 | 41 → 41 |
+Three targeted fixtures verify boundary assignment/rejection, constrained cross-zone
+prices and native parity, and common-zone clearing across AC islands with HVDC
+losses. The latter rejects fictitious free energy transfer. Source allocation and
+physical replay are required independently of objective agreement.
 
-All six cases are optimal, taking **1.65–2.17 seconds per window** for the solver
-alone. These are joint 48-hour optimisations, not an implemented annual or daily
-bidding policy. Negative-price periods can persist or worsen despite lower
-system cost. Do not extrapolate these windows to annual returns. Cost changes
-are gross synthetic production-cost changes, not investor income, congestion
-rent or an asset investment benefit. Paired investment and empirical gates remain open.
+One-time preparation **123.54s**; country clearing
+**33.08s**; zonal clearing **33.48s**;
+complete producer with both controls/native checks/export **418.11s**;
+peak RSS **2584 MiB**. Independent audit and publishing are additional.
+No seconds-scale end-to-end claim is made for rebuilding source inputs.
 
-## Verification, reproduction and remaining gates
+## Reproduction and next weaknesses
 
-An independent saved-witness auditor rebuilds source coefficients and replays
-area balances, native passive flows, controllable-link bounds, objectives,
-water balance, turbine/energy bounds and prescribed closing stocks. Annual
-network residual is **1.95e-06 MW**;
-water residual **1.7e-08 MWh**. All six window
-network/water replays pass the unchanged 0.0001 tolerance. Three numerical
-fixtures check zero-sum placement, analytical two-hour water scheduling/native
-parity and native PTDF flows.
+Restore geographic sources with `python3 tools/collect_bidding_zone_sources_2025.py`;
+pinned hashes reject changes to mutable provider releases. Restore packed metadata
+with `python3 tools/pack_model_metadata.py --restore`.
+Use the pinned interpreter for `tools/run_bidding_zone_network_2025.py --out <fresh-root>`,
+then `tools/audit_bidding_zone_network_2025.py <fresh-root>` and
+`tools/report_bidding_zone_network_2025.py <fresh-root>`. Geographic source bytes
+and full witnesses stay ignored under `data/bidding-zone-network-2025/`; compact
+downloads contain source/code hashes, checks and all observed metrics. Do not
+overwrite a completed root or resume with changed coefficients.
 
-Four independent native PyPSA hourly objectives verify the relocated formulation:
+**Next:** replace member-count supply/demand allocations with audited zonal fleet,
+site/weather and demand data; reconcile total-load definitions. Investigate remaining
+fixed-schedule failures/extremes and GSK sensitivity before changing hydro strategy.
+Historical boundaries, commercial constraints, empirical thresholds/held-out periods,
+paired-investment and static-app integration gates remain open. The public browser
+still uses its reduced two-zone screen; publication does not replace that engine.
 
-| UTC hour | Native minus fast objective EUR |
-| --- | ---: |
-| 2025-01-04 16:00:00 | 2.24e-08 |
-| 2025-01-15 12:00:00 | 7.45e-09 |
-| 2025-07-15 12:00:00 | -6.03e-08 |
-| 2025-12-15 12:00:00 | -6.52e-09 |
-
-Two native PyPSA 48-hour formulations also agree: maximum objective difference
-is **EUR0.000081**, under the declared absolute/relative tolerance. This checks
-the formulation, not commercial constraints or observed-market accuracy.
-
-Restore packed metadata with `python3 tools/pack_model_metadata.py --restore`.
-Use the pinned interpreter to run `tools/diagnose_nve_hydro_prices_2025.py`,
-`tools/run_nve_bus_geography_2025.py` and `tools/run_nve_hydro_windows_2025.py`,
-each with a fresh `--out` directory. Run price and geography probes first; the
-window runner uses the retained audited annual diagnostic. Verify saved inputs
-with `tools/audit_nve_hydro_diagnostics_2025.py`, then publish with
-`tools/report_nve_hydro_diagnostics_2025.py`. Default paths identify retained
-roots; do not overwrite them or resume with changed producers. Provider bytes
-and full witnesses stay ignored locally; downloads contain compact hashes,
-checks and metrics. Producer receipts retain an inherited prior hydro-total field;
-the published current total is explicitly replaced by the independent replay.
-
-[Current diagnostic evidence and all price metrics](/research/fixed-reservoir-screening-2025/nve-hydro-diagnostics.json)
- · [NVE input evidence](/research/fixed-reservoir-screening-2025/nve-water-update.json)
- · [Frozen resource-bid reference](/research/fixed-reservoir-screening-2025/resource-bids.json)
+[Current zonal evidence and all price comparisons](/research/fixed-reservoir-screening-2025/bidding-zone-model.json)
+ · [Previous source-backed water/location evidence](/research/fixed-reservoir-screening-2025/nve-hydro-diagnostics.json)
  · [Workbench methodology](/docs/workbench-methodology/)
-
-**Next:** reconcile commercial-zone locations and demand scope, then predeclare
-water-value/schedule tests and empirical acceptance periods. Source-backed inflow,
-unchanged exogenous volumes and native checks must remain intact. A full-year
-adaptive optimum needs independent feasibility/convergence bounds and smaller
-monolithic validation. The browser still uses its reduced two-zone screen;
-this diagnostic does not replace it or certify investment/carbon outcomes.

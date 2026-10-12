@@ -21,6 +21,8 @@ ALLOWED = [
     'fixed-reservoir-screening-2025/nve-hydro-diagnostics.json',
     'fixed-reservoir-screening-2025/nve-geography-errors.png',
     'fixed-reservoir-screening-2025/nve-bounded-hydro.png',
+    'fixed-reservoir-screening-2025/bidding-zone-model.json',
+    'fixed-reservoir-screening-2025/bidding-zone-errors.png',
     'daily-fuel-annual-2025/compact-zonal.json', 'daily-fuel-annual-2025/compact-zonal.png',
     'daily-fuel-annual-2025/performance.json',
     'daily-fuel-annual-2025/replay.json', 'daily-fuel-annual-2025/price-comparison.json',
@@ -124,6 +126,25 @@ def check():
         assert all(r['network_residual_mw'] <= 1e-4 and r['water_bounds_energy_residual_mwh'] <= 1e-4 for r in d['audit']['windows'])
         for name, sha in d['images'].items():
             assert hashlib.sha256((diagnostic_path.parent / name).read_bytes()).hexdigest() == sha
+    zonal_path = folder / 'fixed-reservoir-screening-2025/bidding-zone-model.json'
+    if zonal_path.exists():
+        z = json.loads(zonal_path.read_text()); s = z['summary']; a = z['audit']
+        assert z['publication_producer_sha256'] == hashlib.sha256((ROOT / 'tools/report_bidding_zone_network_2025.py').read_bytes()).hexdigest()
+        assert z['image_sha256'] == hashlib.sha256(zonal_path.with_name('bidding-zone-errors.png').read_bytes()).hexdigest()
+        assert a['audit_producer_sha256'] == hashlib.sha256((ROOT / 'tools/audit_bidding_zone_network_2025.py').read_bytes()).hexdigest()
+        assert s['producer_sha256'] == hashlib.sha256((ROOT / 'tools/run_bidding_zone_network_2025.py').read_bytes()).hexdigest()
+        assert s['compiler_sha256'] == hashlib.sha256((ROOT / 'tools/bidding_zone_network_2025.py').read_bytes()).hexdigest()
+        assert z['source_collection_producer_sha256'] == hashlib.sha256((ROOT / 'tools/collect_bidding_zone_sources_2025.py').read_bytes()).hexdigest()
+        for name, sha in s['dependencies'].items():
+            assert hashlib.sha256((ROOT / 'tools' / name).read_bytes()).hexdigest() == sha
+        assert a['maximum_parent_available_supply_change_mw'] < 1e-6
+        assert a['maximum_hourly_demand_change_mw'] < 1e-6 and a['maximum_fixed_hydro_change_mw'] < 1e-6
+        for key, r in a['cases'].items():
+            assert r['optimal_hours'] == s['cases'][key]['optimal_hours']
+            assert r['maximum_component_residual_mw'] <= 1e-4
+            assert r['optimal_hours'] + len(s['cases'][key]['failures']) == 8760
+            assert len(s['cases'][key]['native_checks']) == 3
+            assert all(abs(v['objective_difference_eur']) <= max(.05,abs(v['native_objective_eur'])*1e-8) for v in s['cases'][key]['native_checks'])
     carbon = json.loads((folder / 'carbon-spreads-2025.json').read_text())
     assert carbon['year'] == 2025 and len(carbon['borders']) == 68
     assert carbon['metric_sha256'] == hashlib.sha256((ROOT / 'src/lib/carbon-spread.ts').read_bytes()).hexdigest(), 'Changed carbon metric'

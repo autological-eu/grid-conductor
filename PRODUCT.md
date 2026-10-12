@@ -76,6 +76,15 @@ For bidding-zone inputs, preserve commercial boundaries during grid aggregation;
 do not assign a mixed-zone cluster wholly from its centroid. Distinguish dated
 fleet records, metered zonal generation/demand, weekly reservoir stocks and weather
 availability. Observed generation is validation evidence, not renewable availability.
+The 12 October 2026 authorization extends bidding-zone modelling to the entire
+retained European network, not Norway alone. Preserve boundaries through grid
+simplification as well as clustering. Combined markets need one clearing price
+while retaining separate AC-island balances and explicit HVDC losses/bounds.
+Isolate country-versus-zone pooling on a common backbone, with unchanged source
+bids, parent-level hourly demand/availability and fixed reservoir chronology.
+Label aggregate asset/weather allocation and historical-boundary gaps explicitly;
+provider reporting areas are not automatically commercial market zones. Keep
+failed hours and all eligible observed comparisons; no implicit baseline promotion.
 
 Keep one workbench methodology page alongside those two reports. Remove superseded
 public articles rather than maintaining a research catalogue. Supporting source
