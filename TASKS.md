@@ -789,3 +789,13 @@ compact assets about 246 KiB. Raw geographies, demand/weather and large saved
 primals remain ignored. Pinned geographic-source recovery collector verifies
 all nine external inputs and rejects mutable-release changes. Deployment
 verification will be recorded after successful CI/Pages and public URL checks.
+
+Publication verified for implementation ea582a7: CI/Pages run
+[38286800176](https://github.com/autological-eu/grid-conductor/actions/runs/38286800176)
+completed successfully (build and deploy, including production browser checks).
+Unauthenticated report route and new chart/evidence return HTTP 200; both assets'
+SHA256 values exactly match committed bytes. Public Chromium verifies the current
+48-area / 8760-hour / 41-observation evidence, water methodology, country-control
+failed hour, chart and overflow at 1440/390 px. Published report:
+https://autological-eu.github.io/grid-conductor/docs/european-physical-synthetic-clearing-2025/
+No main merge, visibility change, bulk-data publication or recurring-review restart.
