@@ -23,6 +23,15 @@ orchestration is the agreed workflow to implement, not an already verified featu
 Preserve frozen producers/references and give any changed implementation fresh
 provenance. TASKS owns the concise model inventory and current priorities.
 
+A fresh regional-water candidate is authorized on 13 October 2026. Use
+regional_water_candidate_2025.py, run_regional_water_candidate_2025.py and
+independent audit_regional_water_candidate_2025.py with a new ignored output root.
+Protect annual-v7 and all frozen dependency files. Regional HBV/EL1–EL5 stock
+inputs replace national pooling only for Norway; keep provenance, electrical/stored
+unit conversion, chronology, turbine bounds and adverse observed-price results.
+365 daily groups still contain independent hourly clears with fixed hydro schedules.
+The candidate is not accepted or integrated merely by completing a run.
+
 Active work returns to the fixed-hydro supply-curve checkpoint by user request
 (10 October 2026). Maintain two reports; daily bidding and compact rolling storage
 are paused references. Do not restart them or publish the parked Norwegian hydro

@@ -45,6 +45,15 @@ Seconds-scale annual clearing remains the performance aim; report preparation,
 clearing and complete-command times separately. The browser replacement remains
 a separate integration gate.
 
+The 13 October 2026 follow-up authorizes a fresh candidate within this framework:
+replace Norwegian national water pooling with source-backed NO1–NO5 regional
+inflow, reservoir capacity and opening/closing stocks, preserving turbine
+locations, other countries' fixed hydro, demand, bids and network physics for a
+controlled comparison. Regional pooled water and reservoir/run-of-river allocation
+remain declared approximations. Evaluate all eligible observed zones and failed
+hours; do not promote a candidate merely because source granularity improved.
+Daily orchestration does not imply adaptive hydro or a joint daily storage auction.
+
 ## Maintained models and publications
 
 The active development baseline is the fast fixed-hydro supply-curve model, as

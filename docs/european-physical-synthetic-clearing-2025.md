@@ -200,6 +200,89 @@ complete producer with both controls/native checks/export **418.11s**;
 peak RSS **2584 MiB**. Independent audit and publishing are additional.
 No seconds-scale end-to-end claim is made for rebuilding source inputs.
 
+## Regional-water candidate evaluation — 13 October 2026
+
+**Decision: retain the complete baseline; reject this candidate as a replacement.**
+The fresh candidate uses NO1–NO5 HBV inflow, regional reservoir capacity and
+observed opening/closing stocks. Turbine locations/MW, bids, demand, weather
+availability outside Norwegian run-of-river, non-Norwegian reservoir schedules
+and the physical grid remain unchanged. Reservoir/run-of-river inflow is split
+by regional turbine MW, still a proxy. A water-only L1 adjustment preserves the
+baseline seasonal output pattern as far as feasible; it is not price fitting.
+Within-week inflow keeps the national weather shape. Regional pools do not
+resolve catchment routing/cascades or guarantee realistic intermediate stocks.
+Electrical-equivalent stocks/flows correspond to stored units divided by 0.9,
+with turbine efficiency applied once. No daily inventory reset occurs.
+
+The producer attempted all 365 UTC days / 8760 hourly clears, but only
+**7496 hours** were valid. There were **1152 fresh-solver-confirmed
+infeasible hours** and **112 unresolved Not Set/Unknown hours**. Failed prices
+remain missing. This is not a complete feasible annual benchmark. June accounts
+for 519 failures, May 245 and July 184; spring/summer delivery is a priority.
+Emergency generation on solved hours totals **47.521 GWh**.
+Prepared annual reservoir output is 139.881 TWh versus the baseline schedule's
+139.215 TWh (about 0.48% higher); this is scheduled output, not a verified
+delivered full-year generation total for a run with missing hours.
+
+Across all 41 observed zones, equal-weight mean MAE on the **same 7496 hours**
+rises from **EUR32.83 to EUR71.57/MWh**. The baseline's full-year mean MAE
+is EUR33.23/MWh; it is not the matched-hour comparator. Missing hours can bias
+these descriptive comparisons. No parameters were fitted; previously inspected
+2025 observations do not constitute an untouched held-out test.
+
+| Zone | Baseline MAE | Candidate MAE | Baseline correlation | Candidate correlation |
+| --- | ---: | ---: | ---: | ---: |
+| DE-LU | 22.14 | 22.07 | 0.800 | 0.800 |
+| DK2 | 46.91 | 47.02 | 0.343 | 0.333 |
+| FI | 43.81 | 43.10 | 0.093 | 0.085 |
+| NO1 | 38.50 | 154.93 | 0.055 | 0.050 |
+| NO2 | 37.09 | 43.05 | 0.219 | 0.088 |
+| NO3 | 37.11 | 432.61 | -0.025 | 0.027 |
+| NO4 | 40.36 | 764.54 | -0.031 | 0.015 |
+| NO5 | 43.80 | 330.04 | -0.163 | 0.048 |
+| SE1 | 39.78 | 57.45 | 0.006 | 0.009 |
+| SE2 | 40.19 | 80.04 | 0.018 | -0.009 |
+| SE3 | 35.64 | 36.00 | 0.224 | 0.133 |
+| SE4 | 39.74 | 43.08 | 0.288 | 0.112 |
+
+MAE units are EUR/MWh. Some sign changes in correlations occur close to zero;
+they do not establish predictive skill. Large adverse Norwegian price tails
+remain: NO4 reaches about -EUR180938/MWh. These are conditional marginal values
+under fixed injections and GSK/physical constraints, not plausible reconstructed
+market bids. Do not clip them to manufacture agreement. Regional water data
+alone does not repair fixed-schedule deliverability or commercial price formation.
+
+Clearing/retry loop: **158.848s**; grid/source/water preparation: **119.424s**;
+complete producer/export: **306.342s**, peak RSS **2583 MiB**. Daily orchestration
+contains independent hourly clears with precomputed hydro, not a joint daily
+adaptive-storage auction. The initial driver stopped at an Optimal-labelled
+solution failing the unchanged 1e-4 primal guard. A fresh driver/root retried
+invalid hours and retained failures without relaxing tolerances.
+
+Independent saved-source/water/native-component replay passes for the **7496
+valid hours**, not for failed hours. Maximum electrical water-balance residual
+is 3.76e-8 MWh (stored basis 4.19e-8); network residual 6.30e-5 MW stays below
+the unchanged 1e-4 guard. Objective replay error is 2.98e-8 EUR; non-Norwegian
+fixed output changes by exactly zero. All 41 eligible price series were rehashed
+and XML-reparsed. This validates the saved feasible subset, not annual feasibility
+or price realism. Six targeted water/calendar/guard tests pass. Native PyPSA
+objective matching was not used as the acceptance target.
+
+Reproduce using the pinned Python interpreter:
+`tools/run_regional_water_candidate_2025.py <fresh-root>`, then
+`tools/audit_regional_water_candidate_2025.py <root>`.
+The current ignored witness is `data/bidding-zone-network-2025/regional-water-v2/`;
+source/allocation manifests, water arrays, all 41 zone comparisons and failed-hour
+records stay there. No browser integration or baseline promotion follows.
+
+**Next:** diagnose binding constraints and physical/GSK price sensitivities on
+failed/extreme hours; reconcile regional reservoir/run-of-river routing and load
+scope. Then test network-aware bounded daily hydro flexibility with carried water
+and fixed common boundaries, rather than reusing inflexible regional seasonal
+output. Commercial Nordic constraints and source allocation remain separate
+unresolved gates. Capacity increases or arbitrary negative bids are not fixes
+established by this experiment.
+
 ## Reproduction and next weaknesses
 
 Restore geographic sources with `python3 tools/collect_bidding_zone_sources_2025.py`;
