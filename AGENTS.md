@@ -23,6 +23,14 @@ orchestration is the agreed workflow to implement, not an already verified featu
 Preserve frozen producers/references and give any changed implementation fresh
 provenance. TASKS owns the concise model inventory and current priorities.
 
+Input-sensitivity diagnostics are authorized on 13 October 2026. Use
+input_sensitivity_2025.py, run_input_sensitivity_2025.py and independent
+audit_input_sensitivity_2025.py. Predeclared +/-10% wind availability, gas, oil
+and carbon cases keep annual-v7 hydro, demand, capacity/GSK and grid fixed.
+These are measured sensitivities, not source corrections, causal error shares or
+new accepted baseline candidates. Elhub generation is comparison evidence only;
+never use it as renewable availability. Preserve failures and all eligible zones.
+
 A fresh regional-water candidate is authorized on 13 October 2026. Use
 regional_water_candidate_2025.py, run_regional_water_candidate_2025.py and
 independent audit_regional_water_candidate_2025.py with a new ignored output root.

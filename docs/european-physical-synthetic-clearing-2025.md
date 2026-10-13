@@ -200,6 +200,114 @@ complete producer with both controls/native checks/export **418.11s**;
 peak RSS **2584 MiB**. Independent audit and publishing are additional.
 No seconds-scale end-to-end claim is made for rebuilding source inputs.
 
+## Wind and thermal-input sensitivity — 13 October 2026
+
+**Conclusion:** gas and carbon assumptions influence modeled price levels; oil
+has no material price effect within the tested range. Uniform wind scaling does
+not resolve the Nordic timing errors. Independent wind-source comparisons reveal
+large regional inconsistencies, making dated fleet geography and weather profiles
+a stronger next priority than an oil-price data upgrade. No perturbation is adopted.
+
+The design was fixed before clearing: each input independently +/-10%, an unchanged
+control, and one combined +10% case. Hydro schedules/water, prepared demand,
+installed capacity, GSK weights, network topology/ratings and non-target inputs
+remain unchanged. Wind **availability**, not installed MW, is scaled and capped
+at existing capacity; solar stays unchanged. Gas/oil thermal-input components and
+carbon costs are divided by original plant efficiency, with no double counting.
+Carbon tests use EUR72/t and EUR88/t around the existing EUR80/t assumption.
+These are **sensitivities**, not verified source corrections, causal percentages
+of error, recovered operator bids or a held-out calibration exercise.
+
+All ten cases attempt all 8760 hours. Eight solve the complete year; gas +10%
+retains one unresolved Not Set hour (4028), carbon +10% another (4609), after fresh
+solver retries. Cost-only changes cannot establish new physical infeasibility of
+the unchanged feasible formulation. No prices are filled from another case.
+All rankings below use the **same 8758 hours and 41 observed zones**.
+Values are equal-zone averages, not demand-weighted; r is the arithmetic mean of
+zonal correlations, not one pooled Europe correlation.
+
+| Test | Mean absolute price response | Price MAE | Change in MAE | Mean zonal r | NO+SE MAE |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Control | 0.00 | 33.23 | +0.00 | 0.5017 | 38.89 |
+| Wind availability -10% | 2.61 | 33.70 | +0.47 | 0.4926 | 41.20 |
+| Wind availability +10% | 1.60 | 33.30 | +0.07 | 0.5018 | 38.25 |
+| Gas -10% | 3.78 | 34.56 | +1.33 | 0.5063 | 37.90 |
+| Gas +10% | 3.56 | 32.48 | -0.75 | 0.4974 | 39.80 |
+| Oil -10% | 0.00 | 33.23 | +0.00 | 0.5017 | 38.89 |
+| Oil +10% | 0.00 | 33.23 | +0.00 | 0.5017 | 38.89 |
+| Carbon -10% | 2.55 | 34.02 | +0.80 | 0.4987 | 37.99 |
+| Carbon +10% | 2.43 | 32.67 | -0.55 | 0.5043 | 39.75 |
+| All four +10% | 6.69 | 32.23 | -0.99 | 0.5002 | 39.99 |
+
+Price/error units are EUR/MWh. Oil has zero area-hours with a price response
+above 1e-4 EUR/MWh; this does not establish irrelevance beyond +/-10% or in other
+market conditions. Gas +10% improves aggregate MAE by EUR0.75/MWh but worsens
+mean zonal correlation and Nordic MAE. Carbon +10% improves aggregate MAE by
+EUR0.55/MWh while worsening Nordic MAE. These can offset other model errors;
+observed-price fit does not prove that historical fuel/carbon quotes were too low.
+
+For NO1–NO5 and SE1–SE4, mean zonal correlation is 0.0744 in the control and
+0.0780 with wind +10%; gas +10% gives 0.0767. No tested adjustment solves the
+Nordic timing problem. The combined positive case produces a mean absolute
+nonadditive price response of **EUR0.751/MWh**
+(maximum EUR140.25/MWh). Individual
+responses therefore cannot be summed into causal shares of the observed error.
+
+### Independent Norwegian wind comparison
+
+The control's weather-limited availability is compared with hashed Elhub hourly
+named wind generation, not substituted by it. The NVE inventory column is the
+cached **current** fleet pilot; it is not certified historical 2025 capacity.
+Technology, offshore/grid-connection and metering scope require reconciliation.
+
+| Area | Model wind MW | Current NVE wind MW | Model available TWh | Elhub generated TWh | Availability/generation shape r |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| NO1 | 343.8 | 384.7 | 0.433 | 1.172873 | 0.747 |
+| NO2 | 1327.9 | 1427.0 | 2.601 | 4.060274 | 0.785 |
+| NO3 | 915.8 | 2107.8 | 1.663 | 5.520565 | 0.728 |
+| NO4 | 1600.9 | 1159.2 | 3.111 | 3.121915 | 0.748 |
+| NO5 | 966.0 | 0.0 | 1.899 | 0.000005 | Too little observed wind |
+
+Modeled national wind availability is **9.708 TWh**, while named metered wind
+production totals **13.876 TWh**. NO3 reports generation above modeled availability
+in **8172 hours** by more than 1 MWh/h. NO5 has about **966 modeled MW** but zero
+farms in the current NVE inventory and negligible named metered generation.
+These are strong inconsistency flags, not a proof that all differences are missing
+capacity: plant coverage, curtailment, weather conversion, offshore classification
+and dates matter. Generation below availability is expected under curtailment.
+This experiment scales volumes; it does **not** correct geographical allocation,
+GSK weights or hourly weather shape, and cannot measure their causal error shares.
+
+### Verification, runtime and next action
+
+Fresh control prices and objectives reproduce annual-v7 exactly. Independent
+coefficient reconstruction and component-physics replay pass for every valid
+case/hour; maximum network residual is 2.59e-5 MW, below the unchanged 1e-4
+guard, and maximum objective replay error is 3.36e-8 EUR. All 41 price sources
+are rehashed/XML-reparsed. No case uses emergency generation on its valid hours.
+Six isolation/units/cap fixtures pass. Fixed water and baseline source chains
+are preserved; native PyPSA objective matching is not the empirical target.
+
+Per-case clearing loops take **26.16–53.64s** for an attempted year. Shared
+preparation is **88.05s**; the ten-case producer including
+compilation, hashing and saved-witness exports takes **516.75s**,
+peak RSS **2584 MiB**. Independent replay/evaluation adds
+**624.91s**; it is not included in clearing-loop claims.
+
+Reproduce with pinned Python: `tools/run_input_sensitivity_2025.py <fresh-root>`,
+then `tools/audit_input_sensitivity_2025.py <root>`. Current ignored evidence:
+`data/bidding-zone-network-2025/input-sensitivity-v1/` (predeclared design, source
+hashes, saved primals, failed-hour records and all 41-zone comparisons). No new
+baseline, browser engine, public data mirror or annual optimisation claim follows.
+
+**Next priority:** verify dated Norwegian wind-farm commissioning, capacity,
+bidding-zone and grid-connection scope; correct regional allocation and rebuild
+site-weighted weather profiles without using dispatch as availability. Validate
+with independent generation and held-out price periods. Gas heating-value and
+plant-efficiency compatibility plus sourced daily gas/EUA are secondary priorities.
+Retain adverse regional outcomes; no blanket fuel uplift or wind rescaling is
+justified by these sensitivities. Oil refinement has low priority within this model.
+
 ## Regional-water candidate evaluation — 13 October 2026
 
 **Decision: retain the complete baseline; reject this candidate as a replacement.**

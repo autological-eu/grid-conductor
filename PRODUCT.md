@@ -54,6 +54,13 @@ remain declared approximations. Evaluate all eligible observed zones and failed
 hours; do not promote a candidate merely because source granularity improved.
 Daily orchestration does not imply adaptive hydro or a joint daily storage auction.
 
+Controlled input-error diagnostics are authorized: vary wind availability, gas,
+oil and operational carbon cost independently while retaining the baseline's
+water, demand and network. Compare observed-price errors and nonlinear interactions
+before selecting source improvements. Distinguish sensitivity from verified input
+correction and causal attribution; observed generation remains validation evidence.
+Do not adopt perturbations simply because they offset another model error.
+
 ## Maintained models and publications
 
 The active development baseline is the fast fixed-hydro supply-curve model, as
