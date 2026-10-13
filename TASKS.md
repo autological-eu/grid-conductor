@@ -72,6 +72,103 @@ price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
    the two-zone screen. Full empirical/geography, paired-investment, carbon and
    static-app checks remain required. Automatic hourly reviews stay disabled.
 
+## Model-improvement research — 13 October 2026
+
+Read-only review of active compiler/bid rules, current annual-v7 summary and saved
+prices, cached NVE source tables, and primary external documentation. No model
+rerun, new candidate, baseline promotion or website publication. Recommendations
+below are hypotheses, not accepted model changes or measured accuracy gains.
+Managed access was current/connected; no matching simulation worker was found.
+
+Current equal-zone mean MAE across the 41 eligible, complete 8760-hour price
+series is 33.226 EUR/MWh (arithmetic mean of zone MAEs, not demand-weighted).
+Largest zone MAEs include DK2 50.426, EE 48.382, NO5 46.628, LT 44.894,
+LV 44.860, NO1 42.861 and FI 41.718 EUR/MWh. Nordic mean-price biases change
+sign: northern Sweden/NO4 too high, southern Norway/SE4/DK2 too low. A uniform
+capacity uplift or price offset therefore lacks a demonstrated causal basis.
+
+Rehashing annual.npz against its summary and counting saved prices below
+-1e-6 EUR/MWh removes numerical-zero artefacts in the historical strict-negative
+metric. NO5 still has 1258 materially negative model hours vs 34 observed;
+NO1 1051 vs 57. SE2/SE3/SE4, DK2, FI and DE-LU have zero materially negative
+model hours. These are descriptive recounts, not a new independent annual audit;
+current report strict <0 counts are not interchangeable with these counts.
+The large Norwegian negatives can arise as marginal demand values under fixed
+injections/GSK/physical constraints; they do not prove negative hydro bids.
+Do not clip prices or insert arbitrary bids to hide them.
+
+Recommended research sequence:
+
+1. **Audit error mechanisms before tuning.** Tag worst hours by season, residual
+   demand, fixed hydro, binding branches/GSK placement and marginal technology.
+   Check price derivatives, zonal net-position/exchange errors and total-load
+   scope. Prespecify masks/metrics before any tuning; 2025 aggregate metrics have
+   already been inspected, so do not describe a later split as untouched blind
+   evidence. Retain all eligible zones, failures and fixed-hydro water replay.
+2. **Use regional hydro and audited fixed demand first.** Cached NVE stock JSON
+   already has EL1–EL5 records. The cached HBV workbook has 52 ISO-2025 weeks
+   without missing HBV inflow for each NO1–NO5; current compiler pools national
+   water and capacity-splits the schedule. Regional HBV totals sum to about the
+   national total; ISO-week totals are not UTC-calendar-year totals. Reconcile
+   catchment routing, reservoir/run-of-river scope, energy equivalents, regional
+   capacities/boundary stocks and turbine locations before using those inputs.
+   Swedish Mimer directs production from 2025-03-18 onwards and consumption from
+   2023 onwards to eSett Open Data. Audit settlement versus ENTSO-E total-load
+   definitions and coverage before replacing demand. Preprocessing should leave
+   the hourly clearing matrix essentially unchanged; runtime benefit unmeasured.
+3. **Audit Nordic commercial constraints against the physical backbone.** Nordic
+   operational flow-based inputs are published on JAO, distinct from Core.
+   Review finalComputation PTDF/RAM and HVDC virtual-area conventions, contingencies,
+   losses, publication versions and residual external flows. Compare observed
+   net positions against each domain before an integration pilot. Do not append
+   commercial and physical rows without defined coupling, treat bilateral maxima
+   as simultaneously available capacities, or infer capacity from realised flow.
+   A commercial-domain clear and separate physical replay need an explicit
+   methodology; current N-0 rows with uniform 0.7 rating factor are not that domain.
+   Full 2025 download/coverage and computational overhead are not verified.
+4. **Consider small flexible hydro bid blocks after input/constraint diagnosis.**
+   Literature supports stored water's opportunity cost and monotone bid curves.
+   A proposal is a small number of blocks around a seasonal, stock/inflow-dependent
+   water value, precomputed cheaply, with carried inventories and 24-hour water
+   balances. Fixed hydro bid prices alone cannot change exact fixed injections.
+   Bounded rescheduling must conserve water/efficiency and common boundary stocks,
+   not create daily independent MW budgets. This is a future policy change, not
+   authorization to restart paused annual hydro trials. Speed/accuracy unmeasured.
+5. **Improve regional supply and offers without a solver overhaul.** Replace
+   mixed-cluster member-count shares with dated site-capacity/weather profiles;
+   retain IRENA national totals as checks, not zonal allocation evidence. Audit
+   2025 nuclear outages rather than retaining the 2024 availability proxy.
+   Thermal bids currently use monthly gas/oil and fixed EUR80/t carbon; EEX
+   publishes 2025 primary EUA auction reports, a labelled proxy rather than a
+   complete daily secondary-market series. Source and align fuel/EUA before use.
+   Negative renewable offers/CHP must-run blocks require support/contract evidence
+   or declared held-out calibration, not blanket negative bidding. Vector/bound
+   updates should be inexpensive; extra bid blocks add columns and need timing.
+
+Primary sources checked (research access 13 October 2026):
+
+- [NVE hydrological inputs](https://www.nve.no/energi/analyser-og-statistikk/hydrologiske-data-til-kraftsituasjonsrapporten/)
+  and [reservoir API](https://api.nve.no/doc/magasinstatistikk/).
+- [Swedish production source transition](https://mimer.svk.se/ProductionConsumption/ProductionIndex),
+  [consumption source transition](https://mimer.svk.se/ProductionConsumption/ConsumptionIndex),
+  [eSett public API](https://api.opendata.esett.com/) and
+  [ENTSO-E load XML examples](https://gitlab.entsoe.eu/transparency/xml-examples/-/tree/ab1dffd76226932461fce4aca2aab791cd4b227e/Load).
+- [Nordic RCC data/tools](https://nordic-rcc.net/flow-based/data-tools/),
+  [Nordic JAO handbook](https://publicationtool.jao.eu/nordic/Nordic_PublicationHandbook)
+  and [operational Q&A](https://nordic-rcc.net/flow-based/qa-post-go-live/).
+  Handbook lists domain/shadow-flow/net-position APIs. Full archival API coverage
+  was not tested; de-anonymisation mapping link failed in the research browser.
+- [SINTEF hydro bid-curve research](https://www.sintef.no/en/publications/publication/0198cc3de1cb-e2ed0548-36fe-4e97-8003-1e35bc1e001d/)
+  and [Aneo operational bidding study](https://link.springer.com/article/10.1007/s10287-024-00525-y).
+  These support opportunity-value bidding, not claimed correlation gains for us.
+- [SMHI regulation assumptions](https://www.smhi.se/data/sjoar-och-vattendrag/vattenwebb/om-data-i-vattenwebb/indata-for-vattenkraftsregleringar-i-vattenwebb):
+  regulated S-HYPE flow already includes simplified dispatch/seasonal regulation;
+  do not silently use it as natural inflow and then regulate it a second time.
+- [EEX emissions data](https://www.eex.com/en/market-data/market-data-hub/environmentals-data).
+- [Nordic 15-minute SDAC transition](https://nordic-rcc.net/15-minute-market-time-unit-mtu-has-been-implemented-in-the-day-ahead-market/):
+  delivery from 2025-10-01. Retain hourly modelling but validate against aligned
+  hourly averages, label the approximation and separate pre/post-change errors.
+
 ## Protected dependencies and residual gates
 
 - Preserve the single retained PyPSA-Eur 2025 hourly reference (archival candidate-006),
