@@ -1,6 +1,6 @@
 # Grid Conductor — product requirements
 
-Accepted direction, 10 October 2026. This file defines requirements;
+Accepted direction, updated 13 October 2026. This file defines requirements;
 [TASKS.md](TASKS.md) records implementation and verification.
 
 ## Purpose and workflow
@@ -10,6 +10,40 @@ investigate investment opportunities with transparent data and assumptions.
 The map is the landing page. Users inspect observed price/flow evidence, create
 browser-local scenarios and compare a baseline with the same model plus an
 investment. System benefit is not investor income or certified investment return.
+
+## Active modelling approach and accuracy goal
+
+Accepted clarification, 13 October 2026: develop one fast European bidding-zone
+market-clearing model. Construct simple, transparent supply bids by resource
+against observed, fixed zonal demand; clear under explicit dispatch/network
+constraints. The target workflow clears each day with hourly quantities and
+prices across the 2025 year. This is synthetic, EUPHEMIA-inspired clearing, not
+recovery of actual order books or a reproduction of EUPHEMIA allocation rules.
+
+The primary empirical target is improved correlation with observed ENTSO-E
+zonal day-ahead prices. Also reduce MAE and disclose bias, RMSE, seasonal/tail
+errors and negative-price behaviour, so correlation gains cannot conceal worse
+price levels. Report all eligible zones and aggregate weighting/coverage; focus
+error diagnosis on Norway and Sweden without excluding adverse results elsewhere.
+Use declared development/held-out periods before tuning and select acceptance
+thresholds explicitly; no numerical accuracy threshold has yet been agreed.
+Observed electricity prices remain validation targets, not supply-bid inputs.
+
+Native PyPSA agreement is not a product objective or empirical acceptance target.
+Optional native comparisons can diagnose compiler/formulation errors; mandatory
+checks are independent feasibility/physics replay, chronology, conservation,
+solver status and transparent provenance. Any annual-optimum claim still requires
+its separate feasibility/convergence evidence. Preserve existing reference evidence.
+
+Develop from the current fixed-hydro/resource-bid formulation. Its precomputed
+hourly reservoir injections are conditional schedules, not adaptive storage.
+Daily orchestration is a target workflow, not a reason to restart the paused
+daily/rolling model families. Fixed independent hours may be batched by day;
+that alone adds neither intertemporal optimisation nor new hydro flexibility.
+Storage changes require carried stocks, common boundaries and fresh verification.
+Seconds-scale annual clearing remains the performance aim; report preparation,
+clearing and complete-command times separately. The browser replacement remains
+a separate integration gate.
 
 ## Maintained models and publications
 
@@ -30,7 +64,7 @@ model and compact rolling-storage trial paused as research references:
    Publish adverse outcomes and all eligible areas. Keep observed electricity prices
    out of bid construction. Bounded chronological hydro diagnostics were subsequently
    authorized: preserve each unit's source water and exact opening/closing stocks,
-   cap output changes and compare native formulations. These tests do not authorize
+   cap output changes and independently verify feasibility. These tests do not authorize
    an annual adaptive policy, investment valuation or empirical baseline promotion.
    The authorized Norwegian input update uses independently sourced NVE weather-driven
    HBV inflow, dated reservoir energy capacity and observed calendar-boundary stocks.
@@ -49,7 +83,7 @@ model and compact rolling-storage trial paused as research references:
    as merely fixed hydro bid prices.
    Its fixed schedule cannot respond to investments; conditional benefits are
    not guaranteed conservative estimates.
-2. **Current resource-bidding simulator:** simple, explained strategies per
+2. **Paused daily resource-bidding reference:** simple, explained strategies per
    generator type, 24 hourly UTC periods cleared daily, storage carried between
    days. Preserve this paused model for reproducibility; do not continue
    adaptive-hydro/rolling-policy experiments without a new user request.
@@ -158,7 +192,8 @@ reconstruction of actual order books or full nonconvex allocation rules.
   establish progress. Record preparation, solving, native checks, I/O and end-to-end
   runtime separately, plus memory and calendar/coverage.
 - Require optimal termination and feasibility replay; report shortages and cycling.
-  Matched native PyPSA checks verify formulation, not agreement with market prices.
+  Native PyPSA checks are optional formulation diagnostics, not a target or
+  evidence of agreement with market prices.
   A completed daily policy year is not an annual optimum or strategic equilibrium.
   Any future annual-optimum claim needs independently checked feasibility/convergence
   bounds against a smaller monolithic reference; no acceptance gate is waived.

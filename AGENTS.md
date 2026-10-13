@@ -8,6 +8,21 @@ expose credentials.
 
 ## Focus and publication policy
 
+The 13 October 2026 user clarification governs current priorities: develop one
+fast, whole-network bidding-zone synthetic supply-bid model against observed
+fixed zonal demand, under dispatch/network constraints, with daily clearing and
+hourly prices. Improve observed ENTSO-E price correlations, alongside MAE/bias
+and seasonal/tail diagnostics; diagnose Norway/Sweden without dropping other
+eligible zones. Native PyPSA matching is not a target or required empirical gate;
+use it only when useful as a numerical diagnostic. Independent physics/feasibility,
+chronology, source provenance and held-out validation requirements remain.
+Keep validation prices out of bid construction and predeclare splits/thresholds
+before tuning. Maintain one active model; do not restart paused model families.
+The current annual-v7 witness clears independent hours with fixed hydro; daily
+orchestration is the agreed workflow to implement, not an already verified feature.
+Preserve frozen producers/references and give any changed implementation fresh
+provenance. TASKS owns the concise model inventory and current priorities.
+
 Active work returns to the fixed-hydro supply-curve checkpoint by user request
 (10 October 2026). Maintain two reports; daily bidding and compact rolling storage
 are paused references. Do not restart them or publish the parked Norwegian hydro

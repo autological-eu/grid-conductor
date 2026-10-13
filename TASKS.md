@@ -1,17 +1,29 @@
 # Grid Conductor — current tasks
 
-Reconciled 12 October 2026. PRODUCT.md defines scope and acceptance criteria.
-Focus: observed bottlenecks and the fast fixed-hydro supply-curve checkpoint.
-Daily generator bidding and compact rolling storage are paused references. Superseded public reports are retired;
-calculation tools and supporting evidence remain for reproducibility, not as
-parallel active model programmes. Automatic hourly reviews remain disabled.
+Reconciled 13 October 2026. PRODUCT.md defines scope and acceptance criteria.
+One active programme: fast European bidding-zone synthetic supply bids against
+observed fixed zonal demand, under dispatch/network constraints. Target daily
+clearing with hourly prices and improved observed-price correlations, alongside
+lower MAE and transparent bias/seasonal diagnostics. Native PyPSA parity is an
+optional numerical diagnostic, not the development target. Automatic hourly
+reviews remain disabled.
 
-## Retained checkpoints
+## Model overview and current evidence
 
-| Model | Concrete evidence | Limits |
+| Role | Implementation / checkpoint | Evidence and limits |
 | --- | --- | --- |
-| Selected resource bids with fixed-hydro annual clearing | Fresh selected-v2: 8760 optimal hours / 40 country-island areas; 15.86s clearing/update/live checks, 6.27s preparation, 51.54s complete command including three native checks, component replay and export; 975 MiB peak RSS. Independent annual primal/source/water replay passes. Report: docs/european-physical-synthetic-clearing-2025.md. | Offline hydro preparation excluded; fixed output cannot adapt to investments. 0.0298195 TWh emergency supply; country proxies and Norwegian hydro energy/geography discrepancies remain. Legacy/fuel-only variants are retired. Not accepted market or investment valuation. |
-| Paused daily generator-specific bidding reference | Fresh monthly-fuel-annual-v2: 365 days / 8760 hours, carried inventories, exact year-end closure, no cycling. Independent annual primal/rule replay; native checks on days 1/183/365 differ below EUR0.000003. Report: docs/daily-fuel-dispatch-2025.md; compact evidence: public/research/daily-fuel-annual-2025. | 533.03s end-to-end, 445.65s clearing, 1575 MiB peak RSS; 0.852118 TWh emergency supply. German proxy MAE EUR22.22/MWh, bias -9.65, correlation 0.781; 5 model versus 479 observed negative-price hours. No empirical/investment acceptance; not an active parallel programme. |
+| **One active research model** | Whole-network fixed-hydro/resource-bid zonal dispatch; tools/run_bidding_zone_network_2025.py, tools/global_bidding_zone_2025.py; data/bidding-zone-network-2025/annual-v7/ | 48 clearing areas / 145 buses; 8760 optimal hours, zero emergency supply, independent saved-source/physics replay. Clearing loop 33.476s; complete two-control/check/export command 418.108s, preparation 123.539s, peak RSS 2584 MiB. Fixed hourly hydro; independent hourly clears, not yet daily orchestration or adaptive storage. Regional allocation/demand proxies and price accuracy remain unresolved. |
+| Controlled comparison within active framework | Country-pooling control on the same refined grid | 8759 optimal hours; one fresh-solver-confirmed infeasible hour. Compare common solved hours, never fill failures from the zonal case. Not another active candidate. |
+| Earlier active-lineage checkpoints / diagnostics | selected-v2; NVE input/geography and bounded hydro diagnostics | Historical comparison/source dependencies, not current baseline candidates. Preserve necessary replay evidence; do not use older headline metrics as current status. |
+| Paused daily resource-bidding family | monthly-fuel-annual-v2; tools/terminal_daily_market.py and performance adapter | Retained annual chronological reference, 533.03s complete command. No active development or implicit restart. |
+| Paused compact rolling-storage family | tools/compact_zonal_market.py; local compact-zonal trial checkpoints | Historical formulation experiments. Several old versions remain locally; inventory dependencies before pruning, not parallel active candidates. |
+| Retained native reference | PyPSA-Eur 2025 archival candidate-006 | Source/replay and fixed-hydro preparation dependency; not an empirical target or competing candidate. |
+| Live browser engine | src/lib/fast-entsoe-lp.ts | Older two-zone line/battery screen, not yet replaced by the European research model. |
+
+The v7 suffix is a preparation/run revision, not seven candidate models. Current
+report: docs/european-physical-synthetic-clearing-2025.md. Historical numerical
+checks remain evidence, not goals for the next model iteration. No calculations
+or new empirical acceptance were performed for this context reconciliation.
 
 The paused daily reference's first arithmetic-only annual attempt stopped after 363 days;
 last-48h storage directions caused infeasibility despite a verified physical path.
@@ -20,41 +32,38 @@ Its compact failure diagnosis, immediate preceding state and original source
 remain ignored locally; obsolete partial-year witnesses were deleted.
 Do not extrapolate the failed attempt or silently remove the boundary exception.
 
-Direct ENTSO-E A44 collection has 41 complete series out of 45 attempted; BA/GB/IE/ME
-remain unavailable. Report comparisons cover 39 mapped observed zones; IT-SARD and
-IT-SICI are excluded for unresolved mapping. Norway/Sweden/mainland Italy reuse
-country proxies, and 6 of 67 comparable borders collapse to one model area.
-All source observations are rehashed/reparsed; descriptive errors are untuned,
-not held-out validation. Prepared demand is not independently audited observed demand.
+Direct ENTSO-E A44 collection has 41 complete series out of 45 attempted;
+BA/GB/IE/ME remain unavailable. The current zonal report compares all 41 eligible
+observed areas, including IT-SARD/IT-SICI. Observations were independently
+rehashed/reparsed. Prepared demand and mixed fleet/weather allocations retain
+scope/location proxies; geographic structure does not establish input accuracy.
+Comparisons are descriptive, untuned and not held-out validation. Norway/Sweden
+price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
 
 ## Ordered next actions
 
-1. **Keep the selected fixed-hydro/resource-bid implementation.** The single
-   selected-v2 annual witness, independent component replay, three native checks
-   and common A44 observations are verified below. Earlier ablations are retired;
-   use the existing fixed-hydro report.
-   Daily/rolling storage and the retired Norwegian adaptive trial remain paused.
-   New bounded 48-hour diagnostics are authorized and verified below; they are
-   not an annual adaptive strategy or another active model programme.
-   Bid changes alone offer only marginal accuracy gains; do not promote them as an
-   empirically accepted replacement or fit observed prices without a declared split.
-2. **Complete input verification for the implemented whole-network zones.** The
-   48-area implementation and controlled common-grid year are recorded below.
-   Regional fleet/weather allocation, observed-demand scope and dated boundaries
-   remain unresolved; the old country-to-commercial-zone proxy issue is addressed
-   structurally, not empirically accepted. Country/
-   AC-island proxies are not bidding zones. Map buses, generators/reservoirs and
-   demand to commercial zones, particularly NO1–NO5; audit zonal demand and
-   physical/commercial constraints. Original Norwegian bus placement has now
-   been independently verified with unchanged volumes; commercial-zone mapping
-   and demand-scope reconciliation remain open. Fixed schedules avoid short-horizon water
-   decisions but do not establish realistic hydrology. Define held-out periods,
-   coverage and acceptance thresholds before calibration or market claims.
+1. **Improve observed-price agreement within the single active zonal model.**
+   Use annual-v7 as the current diagnostic checkpoint; retain the existing report.
+   Define development/held-out periods, metric weighting/coverage and empirical
+   thresholds before calibration. Diagnose Nordic timing/seasonal price errors,
+   regional hydro schedules/water allocation, fleet/weather shares and demand
+   scope. Compare correlations, MAE, bias and seasonal/tail behaviour for all
+   eligible zones; separate input changes from bidding-rule changes. Native
+   matching is optional debugging, never the success criterion.
+2. **Align the active model with the daily/hourly target workflow.**
+   Verify observed fixed zonal demand and historical bidding-zone definitions;
+   replace member-count fleet/weather allocations with audited zonal inputs.
+   Implement daily orchestration of hourly constrained supply-bid clears within
+   this framework, preserving current fixed hydro chronology and seconds-scale
+   clearing. Do not claim the existing independent-hour producer already performs
+   daily joint optimisation or restart paused daily/rolling engines. Measure
+   preparation, clearing and total runtime separately. No storage policy change
+   or baseline promotion follows merely from batching hours into days.
 3. **Verify common-input investment pairs on the fast formulation.** Start with
    transmission and weather-based wind/solar changes, conditional on the same
    fixed hydro schedule. Preserve original availability, explicit limitations,
-   native checks and saved-primal replay. Do not claim conditional benefits are
-   necessarily conservative or investment return.
+   independent saved-primal/physics replay; native checks only if useful. Do not
+   claim conditional benefits are necessarily conservative or investment return.
 4. **Add storage only with explicit chronology and verification.** The checkpoint
    excludes 67 battery/PHS units; adding them needs carried stocks, efficiency,
    common boundaries, no simultaneous cycling and measured full-year performance.
@@ -79,7 +88,7 @@ not held-out validation. Prepared demand is not independently audited observed d
 - Physical iPhone/Safari verification remains open; Chromium emulation is not a
   device test. No automated recurring reviews or retired computation resumed.
 
-## Verification of this consolidation
+## Historical consolidation verification
 
 Local typecheck, lint (six existing warnings), all 32 Bun tests and production
 build pass. Five targeted price-comparison/terminal-mode tests pass. Current
