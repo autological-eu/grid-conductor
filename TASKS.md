@@ -14,6 +14,7 @@ reviews remain disabled.
 | --- | --- | --- |
 | **One active research model** | Whole-network fixed-hydro/resource-bid zonal dispatch; tools/run_bidding_zone_network_2025.py, tools/global_bidding_zone_2025.py; data/bidding-zone-network-2025/annual-v7/ | 48 clearing areas / 145 buses; 8760 optimal hours, zero emergency supply, independent saved-source/physics replay. Clearing loop 33.476s; complete two-control/check/export command 418.108s, preparation 123.539s, peak RSS 2584 MiB. Fixed hourly hydro; independent hourly clears, not yet daily orchestration or adaptive storage. Regional allocation/demand proxies and price accuracy remain unresolved. |
 | **Current input-sensitivity diagnostics** | input-sensitivity-v1; wind/gas/oil/carbon +/-10%, plus combined positive case | Ten full-year attempts; 8758 hours common to all cases / 41 observed zones. Independent coefficients/components replay passes; control exactly reproduces annual-v7. Gas price response 3.56–3.78 EUR/MWh, wind 1.60–2.61, carbon 2.43–2.55, oil none material. Wind fleet/profile inconsistencies need dated source correction. No baseline promotion. |
+| **Wind-geography diagnostic** | norway-wind-geography-v1; separate new producer/auditor | Dated NVE onshore zone shares; national hourly availability conserved, GSKs recomputed. 8760 optimal / zero emergency; independent replay passes. All-41-area MAE 33.226 → 33.260 EUR/MWh; mean zonal r .50171 → .50106. Baseline retained. Clearing 73.93s; preparation 196.06s. Site weather/total availability remain unresolved. |
 | **Fresh rejected candidate** | regional-water-v2; regional_water_candidate_2025.py and separate runner/auditor | All 8760 hours attempted, 7496 valid; 1152 confirmed infeasible / 112 unresolved. Matched-hour equal-zone MAE 32.83 → 71.57 EUR/MWh; 47.521 GWh emergency. Saved water/network/source replay passes only the valid subset. Baseline retained; full evaluation below. |
 | Controlled comparison within active framework | Country-pooling control on the same refined grid | 8759 optimal hours; one fresh-solver-confirmed infeasible hour. Compare common solved hours, never fill failures from the zonal case. Not another active candidate. |
 | Earlier active-lineage checkpoints / diagnostics | selected-v2; NVE input/geography and bounded hydro diagnostics | Historical comparison/source dependencies, not current baseline candidates. Preserve necessary replay evidence; do not use older headline metrics as current status. |
@@ -1120,3 +1121,37 @@ SHA256 values exactly match committed bytes. Public Chromium verifies the curren
 failed hour, chart and overflow at 1440/390 px. Published report:
 https://autological-eu.github.io/grid-conductor/docs/european-physical-synthetic-clearing-2025/
 No main merge, visibility change, bulk-data publication or recurring-review restart.
+
+## Wind-source follow-up — 13 October 2026
+
+The user authorized the dated Norwegian wind-source follow-up. The fresh
+geography diagnostic is complete and independently replayed; annual-v7 remains
+the baseline because price accuracy is essentially unchanged/slightly worse.
+Do not adopt source shares as a certified weather correction or restore older
+searches. The existing report contains all 41 observed-zone outcomes; local
+witnesses stay ignored. No live publication claim is made for this update.
+
+NVE turbine batches have complete commissioning dates and unique batch IDs in
+returned records; no recorded 2025 fleet events. Current-operating coverage is
+not complete historical-fleet certification. The test changes onshore zone shares,
+common national weather allocation and capacity-derived GSKs together, preserving
+9.159 TWh national onshore availability and the inherited IRENA trajectory.
+Offshore allocations and hydro/demand/fuels/grid remain unchanged. NO5's residual
+approximately 51 MW offshore allocation still needs commercial-connection checks.
+Network residual 2.892e-6 MW; objective error 2.235e-8 EUR; hourly national wind
+conservation error 9.095e-13 MW. All 8760 valid / zero emergency, all 41 A44 series
+rehashed/XML-reparsed; full seasonal, bias/RMSE/tail metrics saved. Producer total
+272.72s, peak RSS 2582 MiB; independent replay/evaluation 284.75s. Five targeted
+calendar/data-integrity tests pass. No fitting or held-out acceptance claim.
+
+Next actionable wind work: NVE GIS ID matches 62/65 farms across 61 site points;
+Raggovidda extensions share a point, with separate turbine batches. Lindesnes,
+Nye Sandøy and Valsneset (24.05 MW current) remain unmatched. Raw GIS receipts
+and joins live in data/bidding-zone-source-audit-2025/nve-wind-sites-v1/; independent
+raw-hash/count/registry-ID checks pass. The 2025 processed ERA5 converted grid is
+available under data/pypsa-eur/monthly-weather/, but site weighting, model/hub-height
+compatibility, historical/offshore scope and actual grid connections are unverified.
+Resolve those before a fresh source-backed site-weather/available-volume candidate;
+never normalize renewable availability to observed dispatched generation. Retain
+all eligible areas and the unchanged acceptance/physics gates. Source/API coverage,
+demand scope, hydro schedules and commercial GSK constraints remain separate issues.

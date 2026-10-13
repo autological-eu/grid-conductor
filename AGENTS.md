@@ -31,6 +31,17 @@ These are measured sensitivities, not source corrections, causal error shares or
 new accepted baseline candidates. Elhub generation is comparison evidence only;
 never use it as renewable availability. Preserve failures and all eligible zones.
 
+The subsequent wind-source follow-up uses norway_wind_geography_2025.py and
+separate run/audit_norway_wind_geography_2025.py producers. Dated NVE turbine
+batches supply onshore zone shares only: preserve national hourly available MW,
+the inherited IRENA trajectory and all non-target inputs; recompute capacity GSKs
+explicitly. Common national weather and within-zone bus shares are diagnostic
+proxies, not verified site profiles. Preserve this fresh witness/dependency chain.
+Current-operating registries do not prove complete historical fleets. The public
+NVE GIS collector inventories site points only; extensions may share a point and
+must not duplicate turbine capacity. No generation-target scaling, baseline
+promotion, browser replacement or recurring-review restart is implied.
+
 A fresh regional-water candidate is authorized on 13 October 2026. Use
 regional_water_candidate_2025.py, run_regional_water_candidate_2025.py and
 independent audit_regional_water_candidate_2025.py with a new ignored output root.

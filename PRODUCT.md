@@ -61,6 +61,14 @@ before selecting source improvements. Distinguish sensitivity from verified inpu
 correction and causal attribution; observed generation remains validation evidence.
 Do not adopt perturbations simply because they offset another model error.
 
+The subsequent wind-source correction work must distinguish fleet geography,
+national capacity trajectory and site weather. A controlled geography test may
+use dated turbine capacity shares while conserving national hourly availability;
+this does not certify available-energy magnitude or regional weather. Current
+operating registries need historical coverage checks, and shared site records
+must not double-count expansions. Preserve IRENA normalization explicitly;
+observed generation is comparison evidence, never available supply.
+
 ## Maintained models and publications
 
 The active development baseline is the fast fixed-hydro supply-curve model, as

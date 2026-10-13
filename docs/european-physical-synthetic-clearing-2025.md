@@ -308,6 +308,160 @@ plant-efficiency compatibility plus sourced daily gas/EUA are secondary prioriti
 Retain adverse regional outcomes; no blanket fuel uplift or wind rescaling is
 justified by these sensitivities. Oil refinement has low priority within this model.
 
+## Dated Norwegian wind-geography test — 13 October 2026
+
+**Retain the baseline: source geography improves, but observed-price accuracy does not.**
+A fresh candidate relocates Norwegian **onshore** wind using dated NVE turbine
+batches. It solves all 8760 hours with zero emergency supply. Across all 41
+eligible observed areas, equal-zone mean MAE changes from **EUR33.226 to
+EUR33.260/MWh**; arithmetic mean zonal correlation changes from **0.50171 to
+0.50106**. These are descriptive, untuned comparisons on already-inspected
+2025 observations, not held-out acceptance or causal error attribution.
+
+### What changes, and what remains conditional
+
+The [NVE operating-farm registry](https://api.nve.no/web/WindPowerplant/GetWindPowerPlantsInOperation)
+was retrieved on 10 October 2026. All 65 returned farm records have dated turbine
+batches; no duplicate batch IDs, missing commissioning dates or recorded 2025
+capacity events were found. Include each batch from commissioning until retirement
+(exclusive), multiplying turbine count by rated kW. The resulting dated fleet is
+5082.375 MW. This differs from a current installed-MW snapshot: retirement dates
+matter. The current-operating endpoint can omit previously retired farms, so this
+is not proof of complete historical 2025 capacity coverage.
+
+Registry MW determine **zone shares**, not a replacement national capacity total.
+Keep the existing 5016.4 MW onshore source normalization and its inherited IRENA
+hourly trajectory. Preserve national hourly available MW exactly; apply the same
+national wind curve to every destination zone, then distribute within each zone
+using existing bus-capacity weights. Recompute physical GSKs from the relocated
+nameplates. Thus this tests spatial redistribution with a common weather proxy;
+it does not independently identify capacity-location, regional timing and GSK
+contributions. Site-specific weather and intra-zone grid connections remain unresolved.
+Non-Norwegian generators, Norwegian offshore wind, hydro schedules, demand,
+fuel bids, grid topology and ratings remain unchanged.
+
+| Zone | Dated registry MW | Source normalization before MW | After MW | Available before TWh | After TWh |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| NO1 | 384.7 | 343.8 | 379.7 | 0.433 | 0.693 |
+| NO2 | 1430.6 | 1258.9 | 1412.1 | 2.327 | 2.578 |
+| NO3 | 2107.8 | 897.6 | 2080.4 | 1.590 | 3.798 |
+| NO4 | 1159.3 | 1600.9 | 1144.2 | 3.111 | 2.089 |
+| NO5 | 0.0 | 915.2 | 0.0 | 1.698 | 0.000 |
+
+The table covers onshore wind only; its national available energy remains
+**9.159 TWh**. The earlier 9.708 TWh wind comparison includes offshore supply.
+Removing onshore wind from NO5 therefore does **not** remove its remaining
+approximately 51 MW / 0.202 TWh modeled offshore allocation, whose market/grid
+connection scope still needs reconciliation. Source normalization is not certified
+2025 end-year nameplate capacity: the inherited IRENA trajectory is encoded in
+availability and can exceed 1 relative to that older normalization. No clipping,
+second IRENA scaling, observed-generation substitution or generation-target fitting
+is applied. Redistribution cannot repair the national available-energy shortfall.
+
+### Full-year observed-price comparison
+
+All rows use the same 8760 valid hours and source-verified A44 observations.
+MAE is EUR/MWh; correlation is Pearson r. Bias, RMSE, tail errors and seasonal
+comparisons for every area are retained in the ignored audit witness.
+
+| Area | Baseline MAE | Candidate MAE | Baseline r | Candidate r |
+| --- | ---: | ---: | ---: | ---: |
+| AL | 37.16 | 37.16 | 0.486 | 0.486 |
+| AT | 22.60 | 22.60 | 0.781 | 0.781 |
+| BE | 24.31 | 24.32 | 0.784 | 0.784 |
+| BG | 32.74 | 32.74 | 0.614 | 0.614 |
+| CH | 27.59 | 27.59 | 0.762 | 0.762 |
+| CZ | 27.30 | 27.30 | 0.570 | 0.570 |
+| DE-LU | 23.10 | 23.09 | 0.776 | 0.776 |
+| DK1 | 26.57 | 26.59 | 0.690 | 0.690 |
+| DK2 | 50.43 | 50.31 | 0.303 | 0.305 |
+| EE | 48.38 | 48.38 | 0.426 | 0.426 |
+| ES | 26.55 | 26.55 | 0.708 | 0.708 |
+| FI | 41.72 | 41.77 | 0.112 | 0.113 |
+| FR | 22.74 | 22.74 | 0.766 | 0.766 |
+| GR | 32.12 | 32.12 | 0.588 | 0.588 |
+| HR | 28.27 | 28.27 | 0.661 | 0.661 |
+| HU | 31.32 | 31.32 | 0.668 | 0.668 |
+| IT-CNOR | 31.27 | 31.27 | 0.670 | 0.670 |
+| IT-CSUD | 33.70 | 33.70 | 0.644 | 0.644 |
+| IT-North | 25.40 | 25.41 | 0.714 | 0.714 |
+| IT-SARD | 38.41 | 38.39 | 0.615 | 0.615 |
+| IT-SICI | 35.18 | 35.18 | 0.636 | 0.636 |
+| IT-SUD | 32.73 | 32.73 | 0.659 | 0.659 |
+| LT | 44.89 | 44.89 | 0.454 | 0.454 |
+| LV | 44.86 | 44.86 | 0.447 | 0.447 |
+| MK | 30.79 | 30.79 | 0.633 | 0.633 |
+| NL | 23.09 | 23.09 | 0.775 | 0.775 |
+| NO1 | 42.86 | 43.42 | 0.037 | 0.025 |
+| NO2 | 41.60 | 42.79 | 0.166 | 0.139 |
+| NO3 | 35.02 | 35.10 | 0.016 | 0.016 |
+| NO4 | 35.86 | 36.22 | 0.007 | 0.007 |
+| NO5 | 46.63 | 45.47 | -0.133 | -0.122 |
+| PL | 26.09 | 26.09 | 0.669 | 0.669 |
+| PT | 26.32 | 26.32 | 0.695 | 0.695 |
+| RO | 31.95 | 31.95 | 0.630 | 0.630 |
+| RS | 29.34 | 29.34 | 0.632 | 0.632 |
+| SE1 | 35.84 | 35.94 | 0.044 | 0.044 |
+| SE2 | 36.31 | 36.43 | 0.047 | 0.047 |
+| SE3 | 34.85 | 34.97 | 0.222 | 0.221 |
+| SE4 | 41.01 | 41.07 | 0.263 | 0.262 |
+| SI | 27.80 | 27.80 | 0.635 | 0.635 |
+| SK | 27.57 | 27.57 | 0.698 | 0.698 |
+
+NO5 improves modestly while NO1/NO2/NO4 worsen. NO3 stays near zero correlation
+although its available energy more than doubles. Winter NO3 MAE remains around
+EUR58.6/MWh; seasonal timing errors are not repaired by source-backed shares alone.
+Keep adverse results; do not tune a wind multiplier to offset hydro or demand errors.
+
+Independent replay checks every dated share, unchanged non-target availability,
+demand/fixed hydro/costs/grid, each hourly national volume, individual capacity
+allocation, and saved native-component balances/flows/bounds. Maximum network
+residual is **2.89e-06 MW**, below the unchanged 1e-4 guard;
+objective replay error is **2.24e-08 EUR**. Maximum national
+hourly wind change is 9.09e-13 MW. All 41 eligible observed
+price areas are rehashed and XML-reparsed. Five targeted calendar/expansion/
+retirement/missing-date/duplicate tests pass. These checks establish the feasibility
+of this conditional diagnostic, not empirical acceptance or investment readiness.
+
+Clearing loop: **73.93s**; source/grid preparation: **196.06s**;
+complete producer/export: **272.72s**, peak RSS **2582 MiB**.
+Independent replay/evaluation adds **284.75s**. Daily orchestration groups
+independent hourly clears; no adaptive hydro or joint daily storage optimisation.
+
+Reproduce with the pinned interpreter: `tools/run_norway_wind_geography_2025.py
+<fresh-root>`, then `tools/audit_norway_wind_geography_2025.py <root>`.
+Evidence stays in `data/bidding-zone-network-2025/norway-wind-geography-v1/`:
+predeclared design, source/dependency hashes, complete saved primals and full
+41-area/seasonal comparison. The retained annual-v7 baseline is unchanged.
+
+### Site/weather correction: source inventory and remaining work
+
+The fresh [NVE operating-site GIS service](https://kart.nve.no/enterprise/rest/services/Vindkraft2/MapServer/0)
+matches 62 of 65 registry farms, representing 5054.725 MW of the current installed
+snapshot, across 61 distinct site IDs. Raggovidda and Raggovidda 2 share a GIS point;
+keep separate turbine batches without double counting their capacity. Lindesnes,
+Nye Sandøy and Valsneset (24.05 MW current total) have no ID match and remain
+explicitly unresolved. GIS site points are not individual turbine coordinates.
+Raw bytes, retrieval receipts and joins stay ignored in
+`data/bidding-zone-source-audit-2025/nve-wind-sites-v1/`;
+`tools/collect_nve_wind_locations_2025.py <fresh-root>` reproduces collection.
+
+A separate processed ERA5 cache, `data/pypsa-eur/monthly-weather/europe-2025-compact.nc`,
+contains all 8760 hours of gridded wind conversions, with an annual hash receipt.
+The runoff cutout and sparse node-weather pilot are insufficient by themselves,
+but this converted cache is a possible reusable weather input. Its existing
+Vestas V112 and offshore generic turbine assumptions are not certified matches to
+NVE turbine models/hub heights. Presence of the file is not a completed site-profile audit.
+
+**Next:** reconcile the three unmatched farms and historical/offshore market
+coverage; verify farm-to-grid connections and the converted-cache receipt/calendar;
+construct capacity-weighted site profiles with explicit turbine/height and weather
+resolution limitations. Preserve the national IRENA trajectory or document a
+source-backed reconciliation before changing totals. Compare availability with
+Elhub generation without substituting it, then evaluate a fresh full-year candidate
+with source/component replay and predeclared validation. No browser replacement,
+new accepted baseline, public bulk-data mirror or recurring-review restart follows.
+
 ## Regional-water candidate evaluation — 13 October 2026
 
 **Decision: retain the complete baseline; reject this candidate as a replacement.**
