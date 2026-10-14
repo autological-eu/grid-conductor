@@ -1,6 +1,6 @@
 # Grid Conductor — product requirements
 
-Accepted direction, updated 13 October 2026. This file defines requirements;
+Accepted direction, updated 14 October 2026. This file defines requirements;
 [TASKS.md](TASKS.md) records implementation and verification.
 
 ## Purpose and workflow
@@ -68,6 +68,15 @@ this does not certify available-energy magnitude or regional weather. Current
 operating registries need historical coverage checks, and shared site records
 must not double-count expansions. Preserve IRENA normalization explicitly;
 observed generation is comparison evidence, never available supply.
+
+Before selecting another price-model correction, audit hourly residual demand
+across the retained European bidding-zone network. Define subtraction families
+explicitly and separate weather availability, nuclear/other available supply and
+fixed hydro schedules from dispatch. Compare independently reported quantities
+with matching geography/coverage; keep national demand checks separate from zonal
+observations. Above-availability generation and demand-total differences flag
+scope/fleet/profile inconsistencies, not measured causal price-error shares.
+Do not fit renewable availability to generation or infer missing demand is zero.
 
 ## Maintained models and publications
 

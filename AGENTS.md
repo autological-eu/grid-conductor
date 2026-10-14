@@ -145,6 +145,17 @@ No obsolete candidate restoration. Automatic hourly reviews are disabled.
 
 ## Research operating rules
 
+The 14 October 2026 follow-up authorizes a Europe-wide residual-demand source
+audit before selecting another input correction. Use residual_demand_audit_2025.py
+and independent replay_residual_demand_audit_2025.py with a fresh ignored root.
+Protect retained model producers; this audit does not change coefficients or run
+another market solve. Distinguish available wind/solar from reported generation,
+full low-cost availability envelopes from dispatched supply, fixed hydro from
+adaptive water, and national/reference demand from certified zonal demand.
+One-MW supply and five-percent national-demand flags are investigation thresholds,
+not empirical acceptance gates or calibrated causal error shares. Preserve missing
+types/hours, source scope and all 48 modeled / all eligible observed areas.
+
 - Inspect actual supervisor/worker processes and locks before computations.
   Receipts do not establish liveness or progress. If the managed environment is
   inaccessible, say verification is unavailable; do not rely on stale status.

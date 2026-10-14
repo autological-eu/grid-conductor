@@ -116,3 +116,5 @@ data/daily-market-2025/
 !/public/research/fixed-reservoir-screening-2025/nve-bounded-hydro.png
 !/public/research/fixed-reservoir-screening-2025/bidding-zone-model.json
 !/public/research/fixed-reservoir-screening-2025/bidding-zone-errors.png
+# Europe-wide source audit: raw replay manifests and hourly matrices stay local.
+/data/residual-demand-audit-2025/

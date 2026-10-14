@@ -1,6 +1,6 @@
 # Grid Conductor — current tasks
 
-Reconciled 13 October 2026. PRODUCT.md defines scope and acceptance criteria.
+Reconciled 14 October 2026. PRODUCT.md defines scope and acceptance criteria.
 One active programme: fast European bidding-zone synthetic supply bids against
 observed fixed zonal demand, under dispatch/network constraints. Target daily
 clearing with hourly prices and improved observed-price correlations, alongside
@@ -14,6 +14,7 @@ reviews remain disabled.
 | --- | --- | --- |
 | **One active research model** | Whole-network fixed-hydro/resource-bid zonal dispatch; tools/run_bidding_zone_network_2025.py, tools/global_bidding_zone_2025.py; data/bidding-zone-network-2025/annual-v7/ | 48 clearing areas / 145 buses; 8760 optimal hours, zero emergency supply, independent saved-source/physics replay. Clearing loop 33.476s; complete two-control/check/export command 418.108s, preparation 123.539s, peak RSS 2584 MiB. Fixed hourly hydro; independent hourly clears, not yet daily orchestration or adaptive storage. Regional allocation/demand proxies and price accuracy remain unresolved. |
 | **Current input-sensitivity diagnostics** | input-sensitivity-v1; wind/gas/oil/carbon +/-10%, plus combined positive case | Ten full-year attempts; 8758 hours common to all cases / 41 observed zones. Independent coefficients/components replay passes; control exactly reproduces annual-v7. Gas price response 3.56–3.78 EUR/MWh, wind 1.60–2.61, carbon 2.43–2.55, oil none material. Wind fleet/profile inconsistencies need dated source correction. No baseline promotion. |
+| **Europe-wide input audit** | residual-demand-audit-2025/v1; source audit plus independent reconstruction | All 48 areas × 8760 hours; 456 generation area-months replayed, all 41 price areas verified. Residual/observed-price mean r .644 versus cleared-price .502; not a price estimator or causal attribution. Wind quantity flags in ES/PT; national demand scope gaps; flat FR nuclear availability; Nordic price formation remains a priority. Baseline unchanged. |
 | **Wind-geography diagnostic** | norway-wind-geography-v1; separate new producer/auditor | Dated NVE onshore zone shares; national hourly availability conserved, GSKs recomputed. 8760 optimal / zero emergency; independent replay passes. All-41-area MAE 33.226 → 33.260 EUR/MWh; mean zonal r .50171 → .50106. Baseline retained. Clearing 73.93s; preparation 196.06s. Site weather/total availability remain unresolved. |
 | **Fresh rejected candidate** | regional-water-v2; regional_water_candidate_2025.py and separate runner/auditor | All 8760 hours attempted, 7496 valid; 1152 confirmed infeasible / 112 unresolved. Matched-hour equal-zone MAE 32.83 → 71.57 EUR/MWh; 47.521 GWh emergency. Saved water/network/source replay passes only the valid subset. Baseline retained; full evaluation below. |
 | Controlled comparison within active framework | Country-pooling control on the same refined grid | 8759 optimal hours; one fresh-solver-confirmed infeasible hour. Compare common solved hours, never fill failures from the zonal case. Not another active candidate. |
@@ -46,6 +47,11 @@ price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
 ## Ordered next actions
 
 1. **Improve observed-price agreement within the single active zonal model.**
+   The 14 October Europe-wide audit below guides next corrections: source-check
+   ES/PT wind magnitude/site conversion, national and Norwegian zonal demand scope,
+   French nuclear outage timing, and Nordic fixed-hydro/GSK price responses. Raw
+   residual-demand correlation is not a replacement price model or acceptance.
+
    Use annual-v7 as the current diagnostic checkpoint; retain the existing report.
    The regional-water candidate below is rejected: diagnose fixed-schedule delivery
    and GSK price sensitivity before further volume changes or baseline promotion.
@@ -1155,3 +1161,56 @@ Resolve those before a fresh source-backed site-weather/available-volume candida
 never normalize renewable availability to observed dispatched generation. Retain
 all eligible areas and the unchanged acceptance/physics gates. Source/API coverage,
 demand scope, hydro schedules and commercial GSK constraints remain separate issues.
+
+## Europe-wide hourly residual-demand audit — 14 October 2026
+
+Authorized audit completed on the unchanged annual-v7 backbone; no new market
+solve, input substitution or candidate promotion. Fresh tools:
+residual_demand_audit_2025.py, replay_residual_demand_audit_2025.py and
+report_residual_demand_audit_2025.py. Ignored root:
+data/residual-demand-audit-2025/v1/. Dedicated ignore rule excludes hourly matrices,
+raw replay manifests and plots from Git. Existing fixed-hydro report updated locally;
+no current CI/Pages or public-URL claim. Automatic hourly reviews remain disabled.
+
+Coverage: all 48 clearing areas / 8760 UTC hours, 456 raw A75/A16 generation
+area-months, all 41 eligible A44 series rehashed/XML-reparsed. Missing technology
+hours/months and unreported categories remain unknown. Source-input replay
+reconstructs zonal demand, wind/solar/nuclear/ROR/biomass/thermal availability,
+fixed hydro and both residual identities; maximum sum difference exactly zero.
+National monthly model/Ember totals also replay. Norwegian Elhub raw receipts
+rehashed against the retained source audit; metered-consumption scope remains
+unreconciled with total load. Four targeted coverage/threshold tests pass.
+Producer/source work 373.00s, peak RSS 2603 MiB; independent reconstruction
+155.45s. These are audit timings, not clearing-loop benchmarks.
+
+Key findings (diagnostic, no fitted corrections):
+- Mean zonal correlation with observed price: demand-minus-available-wind/solar
+  .64383, current cleared prices .50171. Residual correlation is higher in 31/41
+  zones. NO5 .618 versus -.133; NO3 .582 versus .016; SE4 .631 versus .263.
+  This raw MW signal is not a calibrated price estimator or a causal decomposition.
+  Investigate Nordic fixed injections/water opportunity costs and GSK/commercial
+  constraints alongside source improvements; data changes alone are not proven fixes.
+- ES wind available/generated 44.19/55.45 TWh on 8723 known hours; PT 6.51/13.48
+  on 8760. Shape r .880/.862: inspect dated capacity/site conversion and coverage.
+  Positive hourly excess sums are inconsistency flags, not missing capacity or
+  curtailment. Spain solar annual envelope exceeds generation but hourly flags
+  remain; annual matching does not validate timing/technology/geographic scope.
+- 33/34 national Ember demand years complete; 16 differ by >5%. DE -6.3%,
+  AT -16.1%, GB -20.1%. Net/gross/embedded generation/loss/coverage boundaries
+  remain unreconciled: no proportional scaling adopted. Norwegian NO1 model
+  38.99 vs metered 32.42 TWh; NO3 22.80 vs 28.10, with shape r .989/.950.
+  Zonal allocation and demand definitions need independent reconciliation.
+- French nuclear available envelope is flat; reported generation varies. Obtain
+  dated fleet/outage evidence, not generation-derived availability. ROR flags
+  (AT/FR/FI/NO, etc.) need B11/B12 versus model ROR/reservoir classification and
+  combined hydro routing checks before inferring missing capacity/water.
+
+Next: prioritize source-backed ES/PT wind profile/magnitude correction, load-scope
+and Norwegian allocation reconciliation, dated French nuclear availability, and
+controlled Nordic hydro/GSK/binding-constraint diagnostics. Keep these contributions
+separate, use fresh provenance/common inputs, preserve chronology/physics and all
+eligible areas, and predeclare validation/acceptance before tuning. No blanket fuel
+uplift, generation-as-availability, retired search restart, accepted baseline or
+browser replacement is justified by this audit. The retained report includes all
+48 input/price-association rows, all complete national demand comparisons, largest
+resource flags, provenance and limitations; PNG/SVG scientific plots remain local.
