@@ -78,6 +78,14 @@ observations. Above-availability generation and demand-total differences flag
 scope/fleet/profile inconsistencies, not measured causal price-error shares.
 Do not fit renewable availability to generation or infer missing demand is zero.
 
+Price-mechanism diagnostics must distinguish local interior aggregate-offer
+evidence from unique real market price setters. Preserve mixed/tied offers and
+dual nonuniqueness; model network shadow contributions are not causal shares of
+observed-price error. Monthly fuel associations cannot by themselves explain
+intraday price setting. Fixed hydro has no variable marginal water bid: adding
+a price to its fixed quantity does not create bidding flexibility. Any correction
+requires separately verified chronology, water and stock boundaries.
+
 ## Maintained models and publications
 
 The active development baseline is the fast fixed-hydro supply-curve model, as

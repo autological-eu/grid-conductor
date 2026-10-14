@@ -308,6 +308,194 @@ plant-efficiency compatibility plus sourced daily gas/EUA are secondary prioriti
 Retain adverse regional outcomes; no blanket fuel uplift or wind rescaling is
 justified by these sensitivities. Oil refinement has low priority within this model.
 
+## Hourly marginal-bid and constraint investigation — 14 October 2026
+
+**What was investigated:** which local offers are consistent with marginality,
+how model constraints enter zonal prices, and how observed electricity prices
+associate with the retained monthly gas/oil inputs. This reruns the **unchanged**
+annual-v7 coefficients to save primal and dual witnesses; it is not a new candidate.
+All 8760 hours solve, with original demand, availability, fixed hydro, network,
+GSK and fuel bids. All 264 predeclared calendar demand probes are feasible.
+
+**Main result:** monthly gas/oil associations with observed prices are modest
+(mean zonal r 0.190/0.183, versus the residual-demand audit's 0.644).
+This does not make fuel bids irrelevant, but fuel prices alone do not explain
+the hourly price signal. In the Nordic zones, local-interior offer evidence is
+mostly absent; reservoir hydro cannot bid in this fixed-injection formulation.
+Model island coupling and passive constraints therefore need investigation
+alongside hydro water value, rather than an arbitrary fuel-price uplift.
+
+### Gas, oil and the remaining supply stack
+
+An interior aggregate offer has both positive dispatch and remaining headroom
+greater than 0.001 MW, and its bid matches the local price within 1e-5 EUR/MWh.
+This is local marginal-offer evidence in this LP, not identification of a unique
+real market generator. Equal-cost wind/solar/run-of-river offers are merged;
+mixed and tied identities remain ambiguous. A zone can have an import- or
+constraint-dependent price with **no local interior offer**. These categories
+partition all 41 observed-zone × 8760 hours, with equal area weighting.
+The absence of a local interior offer is common in a coupled market and does not
+establish a model fault: an upstream resource can influence several areas.
+Carrier sets retain full-year aggregate membership, including constituents that
+may be unavailable in a particular hour; this conservative classification does
+not infer an hourly dispatch split. "No local interior" is witness-specific,
+not evidence that the real market had no marginal generator.
+
+| Local offer evidence | Share of observed-zone hours |
+| --- | ---: |
+| Gas | 9.20% |
+| Nuclear | 3.08% |
+| Coal/lignite | 1.81% |
+| Mixed/tied | 2.40% |
+| No local interior | 82.48% |
+| Other local | 1.02% |
+
+Monthly gas-input/observed-price correlation has mean zonal **r = 0.190**;
+the analogous oil association is **0.183**. These use the source-verified
+World Bank/ECB thermal-input series, not a new daily fuel dataset. Monthly inputs
+cannot explain intraday variation by themselves, and seasonal/common drivers can
+produce correlation without causal price setting. The assumed EUR80/t carbon
+price is constant, so its correlation is undefined, not zero. Observed electricity
+prices never enter bid construction. The earlier +/-10% gas diagnostic showed
+price influence; oil perturbations did not materially affect this baseline.
+Fuel-price correlation and residual-demand correlation measure different relationships.
+
+### How network shadows enter the recorded price
+
+Free zonal net-injection stationarity gives:
+
+**Zonal price = island-balance contribution + passive-network contribution.**
+
+Each contribution is the relevant row shadow prices multiplied by that area's
+injection column. This is an exact algebraic identity for the saved dual witness.
+Island contributions include cross-island HVDC coupling, losses and cable scarcity;
+they are not a single unconstrained European energy price. Passive contributions
+reflect the model's PTDF, GSK and line limits, not verified JAO commercial constraints,
+physical congestion rent or an independent share of market price error. Degeneracy
+can change the decomposition without changing costs; do not treat it as unique
+causal attribution. Nonzero shadow prices are distinct from merely binding limits.
+
+Passive rows have nonzero shadow prices in **8720 of 8760 hours**
+somewhere in the network. The table keeps all 48 clearing areas, including areas
+without an observed-price target. "Passive >1" counts a zonal contribution whose
+absolute value exceeds EUR1/MWh. Shares refer to local interior offers, not all
+upstream price influence. All means retain signed contributions and negative prices.
+
+| Area | Local gas % | Local nuclear % | No local interior % | Mean island term | Mean passive term | Passive >1 hours | Negative-price hours |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| AL | 0.0 | 0.0 | 100.0 | 88.23 | 4.09 | 4216 | 0 |
+| AT | 7.6 | 0.0 | 92.2 | 88.23 | -1.37 | 2547 | 0 |
+| BA | 0.0 | 0.0 | 99.7 | 88.23 | 4.25 | 4089 | 8 |
+| BE | 8.9 | 3.8 | 86.6 | 88.23 | -20.92 | 6893 | 0 |
+| BG | 2.4 | 1.2 | 95.1 | 88.23 | 3.87 | 4518 | 0 |
+| CH | 0.2 | 1.2 | 98.5 | 88.23 | -8.20 | 6670 | 0 |
+| CZ | 12.0 | 3.8 | 64.9 | 88.23 | 8.30 | 5588 | 2 |
+| DE-LU | 15.5 | 0.0 | 50.2 | 88.23 | -13.77 | 6748 | 0 |
+| DK1 | 7.7 | 0.0 | 85.9 | 88.23 | -21.14 | 6933 | 22 |
+| EE | 2.5 | 0.0 | 97.4 | 88.23 | -0.27 | 5817 | 0 |
+| ES | 50.2 | 10.5 | 34.9 | 87.97 | -13.90 | 6306 | 0 |
+| FR | 9.4 | 51.2 | 38.1 | 88.23 | -32.06 | 7373 | 0 |
+| GR | 35.9 | 0.0 | 64.0 | 88.23 | 2.98 | 4727 | 0 |
+| HR | 4.3 | 0.0 | 95.2 | 88.23 | 4.22 | 4013 | 12 |
+| HU | 5.3 | 0.9 | 93.7 | 88.23 | 3.13 | 4164 | 0 |
+| IT-CALA | 10.7 | 0.0 | 87.9 | 88.23 | -4.69 | 5713 | 0 |
+| IT-CNOR | 7.1 | 0.0 | 92.8 | 88.23 | -1.51 | 5653 | 0 |
+| IT-CSUD | 24.3 | 0.0 | 72.2 | 88.23 | -4.37 | 5692 | 0 |
+| IT-North | 49.3 | 0.0 | 50.5 | 88.23 | 4.26 | 6041 | 0 |
+| IT-SICI | 0.5 | 0.0 | 90.5 | 88.23 | -5.70 | 5719 | 0 |
+| IT-SUD | 20.5 | 0.0 | 77.6 | 88.23 | -4.37 | 5691 | 0 |
+| LT | 11.8 | 0.0 | 87.7 | 88.23 | -0.27 | 5817 | 0 |
+| LV | 10.7 | 0.0 | 89.2 | 88.23 | -0.27 | 5817 | 0 |
+| ME | 0.0 | 0.0 | 100.0 | 88.23 | 4.23 | 4196 | 1 |
+| MK | 1.4 | 0.0 | 97.9 | 88.23 | 4.72 | 4714 | 0 |
+| NL | 9.9 | 0.2 | 82.7 | 88.23 | -16.35 | 6793 | 0 |
+| PL | 25.3 | 0.0 | 57.2 | 88.23 | 1.16 | 5906 | 0 |
+| PT | 15.6 | 0.0 | 79.2 | 88.23 | -13.02 | 6634 | 18 |
+| RO | 10.8 | 0.6 | 88.4 | 88.23 | 3.97 | 4138 | 0 |
+| RS | 3.3 | 0.0 | 96.4 | 88.23 | 4.30 | 4280 | 0 |
+| SI | 1.2 | 0.7 | 97.0 | 88.23 | 4.74 | 4149 | 23 |
+| SK | 2.8 | 1.1 | 95.8 | 88.23 | 3.34 | 4736 | 1 |
+| XK | 0.0 | 0.0 | 99.9 | 88.23 | 4.44 | 4572 | 0 |
+| DK2 | 0.2 | 0.0 | 92.9 | 44.53 | 0.00 | 0 | 0 |
+| FI | 4.6 | 22.1 | 59.0 | 44.53 | -2.85 | 2947 | 0 |
+| NO1 | 0.0 | 0.0 | 93.8 | 44.53 | -7.33 | 3536 | 1051 |
+| NO2 | 0.0 | 0.0 | 85.4 | 44.53 | 1.19 | 3637 | 95 |
+| NO3 | 0.0 | 0.0 | 95.4 | 44.53 | -13.19 | 3592 | 685 |
+| NO4 | 0.8 | 0.0 | 92.9 | 44.53 | -8.28 | 3549 | 337 |
+| NO5 | 0.4 | 0.0 | 89.9 | 44.53 | -19.73 | 3646 | 1258 |
+| SE1 | 0.1 | 0.0 | 97.0 | 44.53 | -4.00 | 3090 | 87 |
+| SE2 | 0.0 | 0.0 | 95.5 | 44.53 | -3.35 | 3154 | 0 |
+| SE3 | 0.3 | 28.9 | 64.6 | 44.53 | -1.27 | 1290 | 0 |
+| SE4 | 1.0 | 0.0 | 97.8 | 44.53 | -0.03 | 70 | 0 |
+| FR-COR | 9.6 | 0.0 | 90.4 | 87.97 | 0.00 | 0 | 0 |
+| GB | 25.9 | 10.1 | 46.7 | 58.57 | 0.00 | 4 | 0 |
+| IE-SEM | 71.8 | 0.0 | 19.1 | 80.84 | 0.00 | 0 | 0 |
+| IT-SARD | 13.6 | 0.0 | 65.3 | 75.38 | 0.00 | 0 | 0 |
+
+Contribution units are EUR/MWh. Passive adjustments may raise or lower a zone's
+price; a negative contribution is not negative congestion rent. Exact offer
+carrier sets, every area's full category counts, top passive-row/link-bound
+shadow diagnostics and all observed/fuel associations remain in the ignored audit.
+
+### Hydro's structural limitation
+
+Reservoir hydro is **fixed injection**, subtracted from load before clearing.
+It has no variable offer or marginal water value in this LP. Changing the cost
+of a fixed quantity adds a constant to the objective; it cannot repair prices.
+A hydro-bidding correction therefore requires bounded dispatch flexibility with
+explicit inflow, efficiency, turbine/stock constraints and common stock boundaries,
+not simply a hydro-price multiplier. This audit does not implement or validate
+that correction or identify when hydro actually set the observed market price.
+
+### Verification and demand probes
+
+Independent native-component replay verifies the annual saved primal. Dual replay
+checks stationarity, bound/row complementary slackness, strong duality and the
+price identity; it verifies that recorded prices are legitimate LP sensitivities,
+not that the market model is empirically correct. Interior offer columns are
+independently checked to contain only their zonal balance, and interior bid/price
+agreement is tested. All 41 eligible observed prices are rehashed/XML-reparsed.
+
+| Check | Maximum difference |
+| --- | ---: |
+| Baseline price reproduction EUR/MWh | 0 |
+| Baseline objective reproduction EUR | 0 |
+| Native-component residual MW | 9.76e-06 |
+| Dual stationarity EUR/MWh | 9.77e-09 |
+| Strong-duality gap EUR | 0.00033 |
+| Complementarity EUR | 0.00123 |
+| Price-decomposition EUR/MWh | 9.21e-09 |
+
+Demand probes use each month's fifteenth day at noon UTC for DE-LU, FR, NO1-NO5,
+SE1-SE4, with +/-1 MW along the unchanged GSK. They preserve all supply/water
+inputs and physical limits. This tests the model's assumed marginal withdrawal
+pattern, not independently observed demand locations. The supporting-price slope
+must lie between downward/upward objective secants; kinked prices need not equal
+both secants. All 264 saved feasible primals and objective differences replay.
+Four targeted identity/constraint-sign/mixed-offer/boundary fixtures pass.
+
+Annual clearing/dual capture: **73.05s**; source/grid preparation
+**239.78s**; producer including probes/export
+**329.50s**, peak RSS **2584 MiB**.
+Independent physics/dual/probe/source replay adds **519.67s**.
+These timings do not change the retained baseline's benchmark receipt.
+
+Reproduce with pinned Python: `tools/run_price_mechanism_2025.py <fresh-root>`,
+`tools/audit_price_mechanism_2025.py <root>`, then
+`tools/report_price_mechanism_2025.py <root>`. Ignored root:
+`data/bidding-zone-network-2025/price-mechanism-v1/`. Primal/dual/probe witnesses,
+all-area evidence and PNG/SVG charts remain outside Git. The local plot shows
+offer evidence and NO5's monthly decomposition. This report update is local;
+no new live-publication or baseline/browser-integration claim follows.
+
+**Next:** interpret the verified Nordic constraint contributions alongside the
+residual-demand signal; reconcile commercial GSKs and test bounded hydro flexibility
+with preserved water/stock boundaries. Keep wind, demand and nuclear source
+corrections separate. Fuel influence is established within this model, but neither
+monthly fuel correlation nor constraint shadows identify causal observed-price errors.
+No price fitting, arbitrary network relaxation, annual-optimum claim or retired
+search restart is authorized by these diagnostic results.
+
 ## Europe-wide residual-demand audit — 14 October 2026
 
 **Main finding: improve supply/demand inputs, but also diagnose price formation.**

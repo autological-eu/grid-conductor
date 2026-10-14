@@ -145,6 +145,18 @@ No obsolete candidate restoration. Automatic hourly reviews are disabled.
 
 ## Research operating rules
 
+The subsequent price-mechanism investigation captures a fresh unchanged-baseline
+primal/dual witness with run_price_mechanism_2025.py and independent
+audit_price_mechanism_2025.py; price_mechanism_2025.py defines offer grouping and
+dual checks. Preserve full-year mixed/tied membership, local-interior ambiguity
+and dual degeneracy; local marginal evidence is not a unique real price setter.
+Island-balance terms include HVDC coupling/losses; passive PTDF/GSK contributions
+are witness identities, not causal error shares or certified commercial congestion.
+Predeclared calendar +/-1 MW probes change demand along the GSK and retain source
+water, bids and ratings; independently replay saved primals and supporting slopes.
+Monthly fuel-price association is distinct from hourly residual demand and causal
+fuel sensitivity. No adaptive-hydro/search restart or baseline promotion follows.
+
 The 14 October 2026 follow-up authorizes a Europe-wide residual-demand source
 audit before selecting another input correction. Use residual_demand_audit_2025.py
 and independent replay_residual_demand_audit_2025.py with a fresh ignored root.

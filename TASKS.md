@@ -14,6 +14,7 @@ reviews remain disabled.
 | --- | --- | --- |
 | **One active research model** | Whole-network fixed-hydro/resource-bid zonal dispatch; tools/run_bidding_zone_network_2025.py, tools/global_bidding_zone_2025.py; data/bidding-zone-network-2025/annual-v7/ | 48 clearing areas / 145 buses; 8760 optimal hours, zero emergency supply, independent saved-source/physics replay. Clearing loop 33.476s; complete two-control/check/export command 418.108s, preparation 123.539s, peak RSS 2584 MiB. Fixed hourly hydro; independent hourly clears, not yet daily orchestration or adaptive storage. Regional allocation/demand proxies and price accuracy remain unresolved. |
 | **Current input-sensitivity diagnostics** | input-sensitivity-v1; wind/gas/oil/carbon +/-10%, plus combined positive case | Ten full-year attempts; 8758 hours common to all cases / 41 observed zones. Independent coefficients/components replay passes; control exactly reproduces annual-v7. Gas price response 3.56–3.78 EUR/MWh, wind 1.60–2.61, carbon 2.43–2.55, oil none material. Wind fleet/profile inconsistencies need dated source correction. No baseline promotion. |
+| **Hourly price-mechanism diagnostic** | price-mechanism-v1; unchanged-baseline dual witness and calendar probes | All 8760 optimal; baseline prices/objectives reproduce exactly. Independent component and primal/dual replay plus all 264 GSK-aligned +/-1 MW probes pass. Monthly gas/oil correlations .190/.183; local interior offers are witness evidence, not unique real price setters. Fixed hydro has no water bid; model constraint terms warrant further Nordic diagnostics. |
 | **Europe-wide input audit** | residual-demand-audit-2025/v1; source audit plus independent reconstruction | All 48 areas × 8760 hours; 456 generation area-months replayed, all 41 price areas verified. Residual/observed-price mean r .644 versus cleared-price .502; not a price estimator or causal attribution. Wind quantity flags in ES/PT; national demand scope gaps; flat FR nuclear availability; Nordic price formation remains a priority. Baseline unchanged. |
 | **Wind-geography diagnostic** | norway-wind-geography-v1; separate new producer/auditor | Dated NVE onshore zone shares; national hourly availability conserved, GSKs recomputed. 8760 optimal / zero emergency; independent replay passes. All-41-area MAE 33.226 → 33.260 EUR/MWh; mean zonal r .50171 → .50106. Baseline retained. Clearing 73.93s; preparation 196.06s. Site weather/total availability remain unresolved. |
 | **Fresh rejected candidate** | regional-water-v2; regional_water_candidate_2025.py and separate runner/auditor | All 8760 hours attempted, 7496 valid; 1152 confirmed infeasible / 112 unresolved. Matched-hour equal-zone MAE 32.83 → 71.57 EUR/MWh; 47.521 GWh emergency. Saved water/network/source replay passes only the valid subset. Baseline retained; full evaluation below. |
@@ -1214,3 +1215,58 @@ uplift, generation-as-availability, retired search restart, accepted baseline or
 browser replacement is justified by this audit. The retained report includes all
 48 input/price-association rows, all complete national demand comparisons, largest
 resource flags, provenance and limitations; PNG/SVG scientific plots remain local.
+
+## Hourly marginal-bid and constraint investigation — 14 October 2026
+
+The user authorized continuing the price-mechanism investigation. Fresh tools:
+price_mechanism_2025.py, run_price_mechanism_2025.py,
+audit_price_mechanism_2025.py, report_price_mechanism_2025.py. Ignored root:
+data/bidding-zone-network-2025/price-mechanism-v1/. One unchanged baseline
+reproduction, not another model candidate or source correction. Existing fixed-hydro
+report updated locally; no public CI/Pages claim. Recurring reviews stay disabled.
+
+All 8760 hours optimal; prices and objectives reproduce annual-v7 exactly.
+Independent native-component residual 9.761e-6 MW, objective replay within existing
+EUR0.05 tolerance. Dual stationarity residual 9.773e-9 EUR/MWh, decomposition error
+9.209e-9 EUR/MWh; maximum strong-duality gap EUR0.00033014, complementary-slackness
+product EUR0.00122841. Original 1e-4 primal gate unchanged. Four targeted fixtures
+pass (congested two-area identity, wrong-sign rejection, mixed offers, bounds).
+All 264 calendar-fixed probes (monthly fifteenth noon; DE-LU/FR/NO1-NO5/SE1-SE4,
++/-1 MW along GSK) feasible and component/objective-replayed. Supporting-slope
+violation <=6.595e-8 EUR/MWh. Probes test the assumed withdrawal geography, not
+actual metered load placement, and do not change water/bids/network ratings.
+
+All 41 eligible A44 targets rehashed/XML-reparsed; monthly fuel inputs reconstructed
+from pinned World Bank/ECB data. Mean observed-price/monthly gas correlation .18956,
+oil .18330; carbon price constant, correlation undefined. These associations are
+not causal fuel-error shares; gas influences other zones through imports, and the
+previous cost perturbation remains different evidence from fuel-price correlation.
+Local interior aggregate-offer evidence over 359160 observed-zone-hours: gas
+33035 (9.20%), nuclear 11062 (3.08%), no local interior 296241 (82.48%). Mixed/tied
+full-year groups remain ambiguous, including constituents unavailable in some hours.
+No local interior is normal in coupled markets and is not proof of a defect or
+absence of a real marginal resource; do not interpret local shares as total price
+influence. Exact carrier sets and all 48 area counts stay in the audit witness.
+
+Price identity uses free net-injection stationarity: island-balance term plus
+passive PTDF/GSK-row term. Island term includes HVDC losses/bounds/coupling; neither
+term is a certified commercial market decomposition. Nonzero passive row shadows
+somewhere in 8720/8760 hours. NO5 mean island term 44.53 EUR/MWh, passive term
+-19.73 (mean absolute 20.84); 1258 materially negative-price hours. NO5 has no local
+interior offer in 7875 hours (~89.90%). Contributions depend on the dual witness
+and do not estimate the result of removing a constraint or causal price error.
+
+Verified structural limitation: reservoir hydro is fixed injection, not a bid
+with marginal water opportunity cost. A cost on fixed volume changes only the
+objective constant and cannot fix prices. Next useful model work must consider
+bounded dispatch flexibility with source water/efficiency, turbine/stock bounds
+and common boundaries; preserve fixed-hydro/GSK/injection-geometry effects as
+separate controls, report adverse outcomes and predeclare validation before tuning.
+Commercial GSK/constraint scope plus wind/demand/nuclear source gaps remain open.
+Do not restore retired water searches or adopt a fuel uplift based on correlation.
+
+Clearing/dual capture 73.05s, source/grid preparation 239.78s; producer including
+264 probe solves and exports 329.50s, peak RSS 2584 MiB. Independent primal/dual,
+source and 264 native-component probe replays 519.67s; audit overhead is not annual
+clearing-loop time. All arrays, probes, row/link diagnostics and PNG/SVG charts
+remain ignored; no raw/large files staged or baseline/browser replacement.
