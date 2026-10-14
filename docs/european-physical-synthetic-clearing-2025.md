@@ -308,6 +308,178 @@ plant-efficiency compatibility plus sourced daily gas/EUA are secondary prioriti
 Retain adverse regional outcomes; no blanket fuel uplift or wind rescaling is
 justified by these sensitivities. Oil refinement has low priority within this model.
 
+## Simpler supply stacks and a residual-price reference — 14 October 2026
+
+**Decision: keep hydro fixed; investigate fleet inputs and price-response modelling.**
+The user redirected work away from further hydro flexibility after earlier tests
+added complexity without consistent price gains. This iteration tests a new,
+simple hourly supply-stack/transport diagnostic and a separate statistical price
+reference. It does not restart the paused rolling-storage model or alter the
+retained physical baseline/browser engine.
+
+**Main result:** the simpler coupled clearing runs in **10.15s**
+for 8760 hours, but full-year mean zonal MAE worsens **EUR33.23 → EUR34.62/MWh**
+and mean correlation **0.502 → 0.498**. Simplification alone does not fix price
+agreement. A monotone residual-demand price reference fitted on January–June
+performs better on July–December: **EUR24.60/MWh MAE / r 0.656**, versus the
+physical baseline's **EUR32.21/MWh / r 0.407** on exactly that evaluation period.
+This is a price-prediction benchmark, not improved dispatch or investment valuation.
+
+### Supply-stack controls and transmission scope
+
+The fresh producer uses unchanged source-generator bids and hourly availability,
+demand and fixed reservoir injections. No hydro rescheduling, source-capacity
+scaling, weather reconstruction, fitted bid or observed-price forecast is used
+in either dispatch control. Group only identical cost profiles within an island/
+zone; all original available MW are conserved. Daily orchestration batches
+independent hourly clears, not a joint storage auction.
+
+**Isolated control:** sort each island/zone's bids and dispatch the cheapest
+available quantities. At a supply-stack knot, report the right-hand marginal bid.
+Fixed-hydro surplus requires export: its prices and dispatch stay NaN, not zero,
+and no dumping sink or reservoir spill is invented. Original EUR10,000/MWh
+emergency offers expose isolated supply deficits. They are not real fleet capacity.
+The control has **42096 export-required node-hours**
+and **55.31 TWh** emergency supply
+on valid node-hours. Its paired MAE is approximately EUR2086/MWh;
+that is a diagnostic of unsupported isolation, not an annual Europe forecast.
+Missing surplus hours and unequal comparison cohorts remain explicit in the audit.
+
+**Coupled control:** 50 separate island/zone balances, 109 links. Preserve every
+controllable link and its bounds/efficiency; lossy signed reverse flow is rejected
+rather than silently creating energy. Cross-zone AC corridors use the **sum of
+retained N-0/security-adjusted ratings**. Omit internal AC constraints, Kirchhoff
+relationships and GSK allocation. These are optimistic source-model transport
+envelopes, not independently validated commercial NTC/ATC or JAO domains.
+Cached JAO evidence covers selected January/July/December 2025 hours, not a
+complete reconciled Europe-wide annual constraint dataset. Supported commercial
+coupling therefore remains an open input gate.
+
+Separate electrical islands cannot exchange energy without a link. ES and GB
+each span two modeled islands; choose the largest-annual-demand island for the
+observed-area price comparison, before inspecting prices. This is an explicitly
+labelled price proxy, not proof of a common commercial clearing price. All 48
+market-area labels and their 50 node results remain in the witness. Native AC
+feasibility is **not** certified by passing transport balances.
+
+All 8760 coupled hours solve, zero emergency MWh; independent source and per-edge
+balance/bound replay passes with maximum residual **1.24e-10 MW**,
+objective replay error **2.61e-08 EUR**. Five fixtures pass:
+merit ordering/kink, unresolved fixed surplus, missing capacity, transfer-limited
+prices and no implicit island connection. Source preparation takes
+**121.29s**; complete producer/export **134.16s**,
+peak RSS **2581 MiB**. Isolated vectorized evaluation takes
+**1.38s**; source/transport replay and all 41 A44 raw-source
+comparisons add **174.02s**. Preparation/audit is not loop timing.
+
+### Temporal residual-demand price reference
+
+Train a **single univariate monotone isotonic curve per area** on January–June
+(4344 UTC hours). Input is model demand minus available wind and solar, not observed
+renewable generation. Duplicate feature values receive count weights; interpolate
+between fitted levels and clip beyond the training feature range to its endpoint.
+Keep negative training prices. Evaluate July–December (4416 hours) without refitting,
+parameter/split searches or bid construction from observed electricity prices.
+
+Only this separate statistical reference fits A44 electricity prices. The dispatch
+models' bids remain unchanged and independent of those prices. All 41 eligible
+areas have the same evaluation hours for each comparison. Source prices are
+hashed/XML-reparsed; independent replay checks that training-only fitted values
+satisfy monotonicity and isotonic optimality, then reconstructs predictions and
+temporal MAE/bias/RMSE. Maximum training optimality residual is
+**3.17e-09**. Five curve fixtures pass.
+
+| July–December comparison | Equal-zone MAE EUR/MWh | Mean zonal r |
+| --- | ---: | ---: |
+| Physical baseline | 32.21 | 0.407 |
+| Transport diagnostic | 33.41 | 0.405 |
+| Training mean | 29.15 | Undefined (constant) |
+| Residual reference | 24.60 | 0.656 |
+
+The training-mean reference distinguishes learned price levels from the additional
+residual-demand signal. The residual curve improves on its EUR29.15/MWh MAE;
+the gain over physical dispatch is not solely a test of transmission modelling.
+All 2025 aggregate results had already been inspected before this experiment:
+the algorithm withholds evaluation targets from fitting, but this is **retrospective
+temporal evaluation, not an untouched held-out year or empirical acceptance**.
+Future feature values use the same realized-year model inputs, not a verified
+operational weather/demand forecast. Out-of-training-range counts, all seasonal
+dispatch metrics and reference errors/bias/RMSE remain in the local evidence.
+
+| Area | Jul–Dec physical MAE | Coupled MAE | Residual reference MAE | Physical r | Reference r |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| AL | 38.20 | 43.11 | 34.38 | 0.355 | 0.487 |
+| AT | 22.82 | 27.09 | 20.63 | 0.693 | 0.752 |
+| BE | 20.92 | 19.79 | 22.61 | 0.730 | 0.708 |
+| BG | 32.58 | 35.40 | 29.21 | 0.563 | 0.648 |
+| CH | 27.36 | 29.64 | 22.97 | 0.611 | 0.582 |
+| CZ | 25.27 | 26.18 | 27.67 | 0.454 | 0.595 |
+| DE-LU | 23.35 | 24.00 | 18.30 | 0.692 | 0.830 |
+| DK1 | 26.53 | 26.05 | 26.14 | 0.636 | 0.585 |
+| DK2 | 56.30 | 57.80 | 29.34 | 0.073 | 0.534 |
+| EE | 50.04 | 50.47 | 42.07 | 0.343 | 0.607 |
+| ES | 22.55 | 23.59 | 18.79 | 0.688 | 0.831 |
+| FI | 38.15 | 39.19 | 27.73 | -0.035 | 0.496 |
+| FR | 20.71 | 24.68 | 23.18 | 0.685 | 0.730 |
+| GR | 33.28 | 34.09 | 36.00 | 0.487 | 0.661 |
+| HR | 26.86 | 31.14 | 30.20 | 0.604 | 0.642 |
+| HU | 30.43 | 34.84 | 28.22 | 0.605 | 0.680 |
+| IT-CNOR | 34.30 | 32.90 | 16.82 | 0.530 | 0.774 |
+| IT-CSUD | 36.77 | 38.09 | 19.58 | 0.510 | 0.688 |
+| IT-North | 27.08 | 31.50 | 15.05 | 0.564 | 0.759 |
+| IT-SARD | 39.64 | 39.95 | 21.21 | 0.543 | 0.645 |
+| IT-SICI | 38.35 | 38.72 | 18.40 | 0.527 | 0.654 |
+| IT-SUD | 35.25 | 36.56 | 17.83 | 0.538 | 0.747 |
+| LT | 44.81 | 45.99 | 41.31 | 0.395 | 0.610 |
+| LV | 44.87 | 46.06 | 41.62 | 0.393 | 0.588 |
+| MK | 30.94 | 35.09 | 30.82 | 0.560 | 0.601 |
+| NL | 21.73 | 21.52 | 24.06 | 0.705 | 0.687 |
+| NO1 | 40.53 | 35.64 | 20.82 | -0.216 | 0.523 |
+| NO2 | 39.60 | 43.00 | 22.15 | 0.039 | 0.454 |
+| NO3 | 27.56 | 22.19 | 14.70 | -0.099 | 0.780 |
+| NO4 | 27.08 | 28.20 | 8.60 | 0.047 | 0.731 |
+| NO5 | 43.67 | 27.61 | 20.33 | -0.371 | 0.696 |
+| PL | 27.02 | 32.53 | 20.26 | 0.585 | 0.761 |
+| PT | 22.73 | 23.55 | 25.11 | 0.675 | 0.687 |
+| RO | 31.59 | 35.10 | 25.17 | 0.583 | 0.768 |
+| RS | 29.20 | 33.14 | 32.64 | 0.576 | 0.473 |
+| SE1 | 27.50 | 28.52 | 13.55 | 0.037 | 0.680 |
+| SE2 | 27.69 | 28.93 | 11.72 | 0.053 | 0.722 |
+| SE3 | 33.76 | 35.02 | 23.54 | 0.030 | 0.624 |
+| SE4 | 42.15 | 43.90 | 27.81 | 0.131 | 0.615 |
+| SI | 26.32 | 30.24 | 27.04 | 0.565 | 0.615 |
+| SK | 24.95 | 28.93 | 31.16 | 0.616 | 0.624 |
+
+### Implication and next work
+
+Residual demand contains usable price information. The current source-bid stack
+does not reproduce that response well, and simply removing the physical/GSK layer
+does not improve Europe-wide agreement. The fast transport diagnostic is a useful
+iteration control, but it is not accepted as the investment simulator. The fitted
+reference has no dispatch, conservation, fuel or transfer constraints; its response
+to a new line/generator/storage asset is **not** a verified counterfactual benefit.
+
+Keep fixed hydro while improving the fleet's capacity/availability and bid-response
+representation: prioritize Spain/Portugal wind site conversion, demand definitions/
+zonal allocation and dated nuclear outages, then inspect resource cost dispersion
+and operating constraints. Test each source-backed change against the same temporal
+reference rather than tuning to inspected evaluation prices. Reconcile genuine
+commercial transfer constraints before supported coupled-scenario acceptance.
+Any use of historical prices to calibrate dispatch bids needs a separately declared
+development/validation design; this benchmark does not silently authorize it.
+
+Reproduce with pinned Python: `tools/run_simple_supply_stack_2025.py <fresh-root>`,
+`tools/audit_simple_supply_stack_2025.py <root>`,
+`tools/residual_price_benchmark_2025.py <root>`,
+`tools/replay_residual_price_benchmark_2025.py <root>`, then
+`tools/report_simple_supply_stack_2025.py <root>`. Current ignored root:
+`data/bidding-zone-network-2025/simple-stack-v1/`. Cached compiled inputs allow
+later diagnostic iterations without repeating preparation, provided their exact
+source/coefficient hashes are preserved; source changes require rebuilding.
+Full inputs/primals/curves, all comparisons and PNG/SVG charts stay outside Git.
+This report update is local; no new CI/Pages claim, browser replacement, automatic
+review restart or accepted baseline follows. Only one model programme remains active.
+
 ## Hourly marginal-bid and constraint investigation — 14 October 2026
 
 **What was investigated:** which local offers are consistent with marginality,

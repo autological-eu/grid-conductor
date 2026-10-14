@@ -168,6 +168,22 @@ One-MW supply and five-percent national-demand flags are investigation threshold
 not empirical acceptance gates or calibrated causal error shares. Preserve missing
 types/hours, source scope and all 48 modeled / all eligible observed areas.
 
+The subsequent 14 October user direction keeps hydro fixed and prioritizes
+whole-fleet residual-demand/supply-stack improvements over further flexible-hydro
+experiments. The simple_supply_stack_2025.py diagnostic has separate run/audit
+producers; preserve electrical islands, original offers/availability and fixed
+injections. Summed physical corridor ratings are model-derived transport envelopes,
+not verified JAO commercial limits. Passing transport balances does not establish
+native AC/PTDF feasibility or authorize baseline promotion.
+
+A separate residual_price_benchmark_2025.py reference may fit historical prices
+in its declared training period only, with independent training-optimality and
+prediction replay. This exception applies to the statistical reference, never
+dispatch bids or investment valuation. Declare temporal cohorts before fitting;
+2025 has already been inspected, so call its split retrospective temporal evaluation,
+not untouched held-out validation. Keep all eligible areas, negative prices and
+source missingness. Reference accuracy cannot certify dispatch or scenario effects.
+
 - Inspect actual supervisor/worker processes and locks before computations.
   Receipts do not establish liveness or progress. If the managed environment is
   inaccessible, say verification is unavailable; do not rely on stale status.

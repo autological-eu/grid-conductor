@@ -16,6 +16,7 @@ reviews remain disabled.
 | **Current input-sensitivity diagnostics** | input-sensitivity-v1; wind/gas/oil/carbon +/-10%, plus combined positive case | Ten full-year attempts; 8758 hours common to all cases / 41 observed zones. Independent coefficients/components replay passes; control exactly reproduces annual-v7. Gas price response 3.56–3.78 EUR/MWh, wind 1.60–2.61, carbon 2.43–2.55, oil none material. Wind fleet/profile inconsistencies need dated source correction. No baseline promotion. |
 | **Hourly price-mechanism diagnostic** | price-mechanism-v1; unchanged-baseline dual witness and calendar probes | All 8760 optimal; baseline prices/objectives reproduce exactly. Independent component and primal/dual replay plus all 264 GSK-aligned +/-1 MW probes pass. Monthly gas/oil correlations .190/.183; local interior offers are witness evidence, not unique real price setters. Fixed hydro has no water bid; model constraint terms warrant further Nordic diagnostics. |
 | **Europe-wide input audit** | residual-demand-audit-2025/v1; source audit plus independent reconstruction | All 48 areas × 8760 hours; 456 generation area-months replayed, all 41 price areas verified. Residual/observed-price mean r .644 versus cleared-price .502; not a price estimator or causal attribution. Wind quantity flags in ES/PT; national demand scope gaps; flat FR nuclear availability; Nordic price formation remains a priority. Baseline unchanged. |
+| **Supply-stack controls and temporal price reference** | simple-stack-v1; new transport/source auditor and training-only residual-price replay | 8760 optimal coupled hours, zero emergency; 10.15s loop. Full-year mean MAE worsens 33.23 → 34.62 EUR/MWh; baseline retained. Separate Jan–June-fitted residual reference improves July–December MAE 32.21 → 24.60 and mean r .407 → .656 across all 41 areas. Retrospective evaluation, not accepted dispatch or investment model. |
 | **Wind-geography diagnostic** | norway-wind-geography-v1; separate new producer/auditor | Dated NVE onshore zone shares; national hourly availability conserved, GSKs recomputed. 8760 optimal / zero emergency; independent replay passes. All-41-area MAE 33.226 → 33.260 EUR/MWh; mean zonal r .50171 → .50106. Baseline retained. Clearing 73.93s; preparation 196.06s. Site weather/total availability remain unresolved. |
 | **Fresh rejected candidate** | regional-water-v2; regional_water_candidate_2025.py and separate runner/auditor | All 8760 hours attempted, 7496 valid; 1152 confirmed infeasible / 112 unresolved. Matched-hour equal-zone MAE 32.83 → 71.57 EUR/MWh; 47.521 GWh emergency. Saved water/network/source replay passes only the valid subset. Baseline retained; full evaluation below. |
 | Controlled comparison within active framework | Country-pooling control on the same refined grid | 8759 optimal hours; one fresh-solver-confirmed infeasible hour. Compare common solved hours, never fill failures from the zonal case. Not another active candidate. |
@@ -47,21 +48,21 @@ price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
 
 ## Ordered next actions
 
-1. **Improve observed-price agreement within the single active zonal model.**
-   The 14 October Europe-wide audit below guides next corrections: source-check
-   ES/PT wind magnitude/site conversion, national and Norwegian zonal demand scope,
-   French nuclear outage timing, and Nordic fixed-hydro/GSK price responses. Raw
-   residual-demand correlation is not a replacement price model or acceptance.
+1. **Improve whole-fleet supply response with hydro fixed.** The latest user
+   direction supersedes earlier recommendations to prioritize flexible hydro.
+   Use annual-v7 as the physical checkpoint. The new transport control is faster
+   but worsens Europe-wide errors; do not promote it. The temporal statistical
+   reference establishes predictive information in residual demand, not verified
+   investment effects or a causal diagnosis of physical-model errors.
 
-   Use annual-v7 as the current diagnostic checkpoint; retain the existing report.
-   The regional-water candidate below is rejected: diagnose fixed-schedule delivery
-   and GSK price sensitivity before further volume changes or baseline promotion.
-   Define development/held-out periods, metric weighting/coverage and empirical
-   thresholds before calibration. Diagnose Nordic timing/seasonal price errors,
-   regional hydro schedules/water allocation, fleet/weather shares and demand
-   scope. Compare correlations, MAE, bias and seasonal/tail behaviour for all
-   eligible zones; separate input changes from bidding-rule changes. Native
-   matching is optional debugging, never the success criterion.
+   Source-check ES/PT wind magnitude/site conversion, national and zonal demand
+   scope, and French nuclear outage timing. Test source-backed changes separately
+   from bid-response and network changes, retaining all eligible zones and failures.
+   Preserve the existing report and independent physics/source replay. Historical
+   prices may train the separate statistical reference only, never dispatch bids.
+   Declare evaluation cohorts, metric weighting and acceptance thresholds before
+   calibration; the inspected 2025 split is retrospective, not untouched validation.
+   Further hydro flexibility and paused daily/rolling engines remain out of scope.
 2. **Align the active model with the daily/hourly target workflow.**
    Verify observed fixed zonal demand and historical bidding-zone definitions;
    replace member-count fleet/weather allocations with audited zonal inputs.
@@ -1258,10 +1259,10 @@ and do not estimate the result of removing a constraint or causal price error.
 
 Verified structural limitation: reservoir hydro is fixed injection, not a bid
 with marginal water opportunity cost. A cost on fixed volume changes only the
-objective constant and cannot fix prices. Next useful model work must consider
-bounded dispatch flexibility with source water/efficiency, turbine/stock bounds
-and common boundaries; preserve fixed-hydro/GSK/injection-geometry effects as
-separate controls, report adverse outcomes and predeclare validation before tuning.
+objective constant and cannot fix prices. The later user direction supersedes this diagnostic's recommendation to pursue
+flexibility next: keep hydro fixed and investigate whole-fleet supply response.
+Any future flexibility still requires source water/efficiency, turbine/stock bounds
+and common boundaries. Preserve fixed-hydro/GSK/injection-geometry controls.
 Commercial GSK/constraint scope plus wind/demand/nuclear source gaps remain open.
 Do not restore retired water searches or adopt a fuel uplift based on correlation.
 
@@ -1270,3 +1271,54 @@ Clearing/dual capture 73.05s, source/grid preparation 239.78s; producer includin
 source and 264 native-component probe replays 519.67s; audit overhead is not annual
 clearing-loop time. All arrays, probes, row/link diagnostics and PNG/SVG charts
 remain ignored; no raw/large files staged or baseline/browser replacement.
+
+
+## Fixed-hydro supply-stack controls and temporal reference — 14 October 2026
+
+Fresh ignored root: data/bidding-zone-network-2025/simple-stack-v1/. No retired
+search resumed or baseline changed. The new producer preserves source demand,
+fixed hydro and all original offers/availability. Fifty island/zone nodes retain
+109 transfers; ES and GB island prices use a predefined largest-demand-node proxy.
+Summed physical cross-zone ratings are optimistic model-derived envelopes, not
+reconciled JAO commercial limits; internal AC/PTDF constraints are omitted.
+
+All 8760 coupled hours optimal, zero emergency. Independent source aggregation,
+corridor reconstruction, saved balance/bound/objective and A44 replay pass;
+maximum balance/bound error 1.24e-10 MW, objective error 2.61e-8 EUR. This verifies
+the transport formulation only, not native AC feasibility. Clearing 10.148s,
+preparation 121.287s, complete producer 134.164s; peak RSS 2580.75 MiB.
+Full-year all-41 equal-zone MAE 33.226 → 34.622 EUR/MWh; mean r .50171 → .49804.
+NO5 improves, but overall accuracy worsens: retain annual-v7. Isolated stacks have
+42096 export-required node-hours with unknown prices and 55.307 TWh emergency
+on valid node-hours; they are not complete annual price or investment models.
+
+Separate monotone residual-demand reference: one training-only curve per area,
+Jan–June (4344h) fit, July–December (4416h) evaluation. Residual input is demand
+minus available wind/solar, not dispatched or observed renewable generation.
+Historical prices enter this reference alone. Endpoint clipping and negative
+prices are explicit. Independent weighted training-optimality/prediction replay
+passes for all 41 areas (maximum optimality residual 3.17e-9); evaluation MAE,
+bias and RMSE replay. Five stack tests and five benchmark tests pass.
+
+Same-period, equal-zone July–December comparisons:
+
+| Reference | MAE EUR/MWh | Mean zonal correlation |
+| --- | ---: | ---: |
+| Physical baseline | 32.206 | .40729 |
+| Transport control | 33.413 | .40502 |
+| Constant training mean | 29.147 | Undefined |
+| Residual-demand reference | 24.603 | .65550 |
+
+These are retrospective temporal results: 2025 was already inspected, and realized
+availability inputs do not establish an operational forecasting service. Improvement
+combines learned price level and residual response, not a causal share of input or
+network error. The reference has no dispatch/conservation/network or asset model.
+No empirical acceptance, browser replacement or investment claim follows. Existing
+report updated locally with all-zone tables; PNG/SVG and arrays remain ignored.
+No CI/Pages/public-URL verification or publication is claimed for this update.
+Next: source-backed whole-fleet inputs and transparent bid-response controls,
+keeping fixed hydro and unchanged feasibility/acceptance gates.
+
+Final checks: production build passes; four model metadata archives verify
+losslessly; public asset allowlist passes (69 files, 5.70 MiB). No bulk data or
+plots enter Git.

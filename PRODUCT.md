@@ -86,6 +86,20 @@ intraday price setting. Fixed hydro has no variable marginal water bid: adding
 a price to its fixed quantity does not create bidding flexibility. Any correction
 requires separately verified chronology, water and stock boundaries.
 
+The subsequent 14 October 2026 direction prioritizes whole-fleet residual-demand
+and supply-stack improvements while retaining fixed hydro. Further hydro flexibility
+is not the next development step. Diagnose available supply, demand scope and
+network representation separately, with common-input controls before adoption.
+
+A separate statistical price reference may learn a simple residual-demand response
+from historical prices in a predeclared training period. Report temporal evaluation
+against both the dispatch model and a constant training-price reference, including
+all eligible zones and extrapolation limitations. Such fitting is confined to the
+reference: observed prices remain excluded from dispatch bids. A statistical price
+reference does not clear supply, enforce network feasibility or value investments.
+Already inspected 2025 observations cannot establish untouched held-out validation;
+empirical acceptance still requires the existing separately declared gates.
+
 ## Maintained models and publications
 
 The active development baseline is the fast fixed-hydro supply-curve model, as
