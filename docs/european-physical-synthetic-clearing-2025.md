@@ -308,6 +308,213 @@ plant-efficiency compatibility plus sourced daily gas/EUA are secondary prioriti
 Retain adverse regional outcomes; no blanket fuel uplift or wind rescaling is
 justified by these sensitivities. Oil refinement has low priority within this model.
 
+## Residual-demand response and fleet-stack diagnosis — 15 October 2026
+
+**What this adds:** compare observed and simulated prices at comparable residual
+demand, then inspect the unchanged fleet's available quantities and bid structure.
+Hydro remains fixed. No new clearing solve, calibrated dispatch bids, candidate,
+browser change or empirical acceptance is introduced.
+
+**Main finding: the price response is too weak, not simply too low everywhere.**
+Equal-zone mean dispatch bias is EUR-1.69/MWh in the lowest residual band
+and EUR-49.75/MWh in the highest. Observed high-minus-low prices average
+EUR79.37/MWh, versus EUR31.32/MWh for dispatch; the dispatch
+contrast is smaller in 36/41 areas. Each area uses its own bands
+and hour counts. These are conditional contrasts, not causal demand derivatives.
+
+### Comparable response bands
+
+For each zone, January–June residual demand defines four quintile boundaries.
+Evaluate all five bands on July–December only, using identical known hours for
+observed A44 prices, annual-v7 dispatch and the separate statistical reference.
+Residual demand is prepared demand minus **available** wind and solar, not actual
+renewable generation. All 41 eligible price areas retain 4416 evaluation
+hours; ties and empty bands remain explicit. Training quantiles do not guarantee
+equally sized evaluation bands. Negative prices/residuals are preserved.
+
+The local PNG/SVG `residual-response` figure shows DE-LU, FR and NO5; full area
+coverage is in the table below. These are conditional means, **not inferred
+physical supply curves**: seasonal fuel conditions, outages, hydro and imports
+can differ between bands. Already inspected 2025 remains retrospective evidence.
+
+Observed mean prices rise from the lowest to highest band in
+41/41 areas with both bands populated.
+The dispatch response moves in the opposite direction despite that observed rise
+in 4 areas (NO1, NO3, NO4, NO5).
+Differences in level and response shape must be investigated separately; a
+zone-wide price offset alone cannot correct a wrong direction or slope.
+
+Bias is dispatch minus observed. High-minus-low contrasts describe band means,
+not derivatives or causal effects of adding capacity. All prices are EUR/MWh.
+
+| Area | Low / high band hours | Low-band bias | High-band bias | Observed high−low | Dispatch high−low |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| AL | 643 / 1124 | -5.39 | -57.54 | 71.38 | 19.23 |
+| AT | 779 / 853 | -0.63 | -42.76 | 88.46 | 46.32 |
+| BE | 793 / 552 | -1.51 | -29.49 | 85.22 | 57.24 |
+| BG | 904 / 404 | 21.95 | -52.05 | 102.83 | 28.83 |
+| CH | 768 / 992 | -22.29 | -32.35 | 48.97 | 38.91 |
+| CZ | 1172 / 666 | 13.11 | -30.67 | 71.74 | 27.96 |
+| DE-LU | 822 / 642 | -14.05 | -53.96 | 116.62 | 76.71 |
+| DK1 | 917 / 747 | 5.73 | -27.87 | 76.88 | 43.28 |
+| DK2 | 862 / 764 | -16.49 | -82.18 | 76.59 | 10.90 |
+| EE | 588 / 750 | 39.47 | -54.43 | 127.87 | 33.97 |
+| ES | 883 / 953 | 4.31 | -24.21 | 94.73 | 66.21 |
+| FI | 998 / 490 | 18.30 | -44.62 | 77.02 | 14.09 |
+| FR | 1203 / 353 | 10.17 | -12.01 | 76.81 | 54.62 |
+| GR | 774 / 1188 | 30.76 | -52.17 | 109.16 | 26.22 |
+| HR | 452 / 1090 | 8.43 | -49.41 | 89.82 | 31.99 |
+| HU | 778 / 773 | 11.46 | -63.98 | 113.25 | 37.81 |
+| IT-CNOR | 846 / 1016 | -50.58 | -48.16 | 47.14 | 49.56 |
+| IT-CSUD | 927 / 1078 | -61.79 | -44.27 | 39.70 | 57.22 |
+| IT-North | 761 / 1040 | -18.63 | -41.08 | 43.55 | 21.09 |
+| IT-SARD | 886 / 1130 | -74.46 | -34.95 | 48.02 | 87.54 |
+| IT-SICI | 884 / 1116 | -61.62 | -42.75 | 45.30 | 64.17 |
+| IT-SUD | 790 / 1022 | -55.54 | -44.86 | 51.17 | 61.86 |
+| LT | 636 / 900 | 20.24 | -60.48 | 123.80 | 43.08 |
+| LV | 594 / 963 | 28.70 | -52.68 | 120.97 | 39.59 |
+| MK | 853 / 576 | 21.04 | -41.85 | 92.86 | 29.97 |
+| NL | 610 / 721 | -15.12 | -32.83 | 87.92 | 70.20 |
+| NO1 | 1548 / 313 | -22.25 | -107.93 | 60.84 | -24.84 |
+| NO2 | 1438 / 325 | -35.51 | -58.78 | 41.79 | 18.52 |
+| NO3 | 1544 / 345 | 16.04 | -85.53 | 67.92 | -33.65 |
+| NO4 | 1386 / 452 | 23.06 | -34.75 | 57.25 | -0.56 |
+| NO5 | 1343 / 357 | -3.25 | -148.80 | 70.80 | -74.75 |
+| PL | 673 / 998 | 0.01 | -57.93 | 108.93 | 50.99 |
+| PT | 866 / 878 | 1.36 | -16.31 | 77.71 | 60.03 |
+| RO | 837 / 804 | 18.83 | -76.16 | 127.22 | 32.23 |
+| RS | 1085 / 553 | 5.91 | -38.97 | 59.43 | 14.55 |
+| SE1 | 847 / 774 | 24.81 | -24.19 | 53.89 | 4.89 |
+| SE2 | 726 / 950 | 26.58 | -20.45 | 52.11 | 5.08 |
+| SE3 | 1100 / 330 | 9.00 | -69.80 | 93.31 | 14.52 |
+| SE4 | 874 / 463 | 7.47 | -63.48 | 93.61 | 22.66 |
+| SI | 736 / 865 | 12.89 | -42.42 | 85.75 | 30.44 |
+| SK | 1141 / 808 | 10.03 | -40.43 | 75.72 | 25.26 |
+
+### Supply quantities and bid dispersion
+
+Rebuild the frozen source fleet and aggregate original generator columns by area
+and carrier, retaining original p_max_pu × p_nom. Emergency supply is excluded.
+Reservoir injections stay separate, never converted to flexible available supply.
+The prepared p_nom anchor below is **not annual-average 2025 in-service capacity**;
+renewable commissioning trajectories remain encoded in the inherited profiles.
+
+Bid range covers the full year and positive available MW. “Profiles” is the maximum
+number of distinct annual bid-price sequences within one area/carrier, not the
+number of real plants or operators. Efficiency is the prepared conversion factor.
+Counts compare exact stored sequences and can distinguish negligible floating-point
+differences; interpret them together with actual bid/efficiency ranges.
+Zero-capacity source placeholders remain explicit; their profile counts do not
+represent active supply and their unavailable bid ranges are not filled with zero.
+
+| Carrier | Prepared p_nom GW | Areas | Max profiles / area | Bid range EUR/MWh | Efficiency range |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| CCGT | 219.94 | 40 | 19 | 65.03–198.13 | 0.344–0.733 |
+| OCGT | 6.11 | 1 | 12 | 109.48–178.04 | 0.384–0.420 |
+| biomass | 25.11 | 30 | 9 | 19.98–21.32 | 0.442–0.468 |
+| coal | 45.17 | 13 | 15 | 80.80–109.28 | 0.330–0.453 |
+| geothermal | 0.90 | 8 | 1 | 0.00–0.00 | 1.000–1.000 |
+| lignite | 61.81 | 17 | 7 | 105.68–126.81 | 0.330–0.399 |
+| nuclear | 112.50 | 14 | 2 | 27.32–27.32 | 0.326–0.326 |
+| offwind-ac | 48.73 | 40 | 1 | 0.00–0.00 | 1.000–1.000 |
+| offwind-dc | 0.00 | 32 | 1 | No available MW | 1.000–1.000 |
+| offwind-float | 0.00 | 40 | 1 | No available MW | 1.000–1.000 |
+| oil | 17.08 | 25 | 9 | 152.45–195.35 | 0.350–0.361 |
+| onwind | 235.81 | 48 | 1 | 0.00–0.00 | 1.000–1.000 |
+| ror | 47.32 | 40 | 1 | 0.00–0.00 | 0.900–0.900 |
+| solar | 183.59 | 48 | 1 | 0.00–0.00 | 1.000–1.000 |
+| solar-hsat | 0.00 | 48 | 1 | No available MW | 1.000–1.000 |
+| waste | 8.07 | 25 | 4 | 35.93–35.93 | 0.205–0.316 |
+
+Nuclear availability is constant through the year in 14/14
+modeled nuclear areas (BE, BG, CH, CZ, ES, FR, HU, NL, RO, SI, SK, FI, SE3, GB). Its inherited
+availability is a declared 2024 proxy, not an audited 2025 outage calendar.
+Gas has one annual bid profile per area/technology in
+23/41 nonempty area/carrier
+groups. These are structural simplifications, not proof of missing physical MW.
+In France, nuclear available MW stays at 46.97 GW,
+against a prepared nameplate anchor of 65.69 GW, every hour.
+In contrast, German CCGT already has 19 stored
+profiles and efficiencies 0.459–0.583:
+the present gas stack is not uniformly one bid per technology across Europe.
+All 41 gas area/carrier groups nevertheless have constant available MW
+through the year; dated outages/deratings are a separate missing input dimension.
+All inventoried generator offers are nonnegative. Negative Norwegian dispatch
+prices therefore do not come from a negative gas or renewable bid: the fixed
+injections and coupled physical/GSK formulation permit such marginal prices.
+The response bands alone cannot attribute the effect to one constraint or prove
+that those model constraints represent actual commercial price formation.
+
+Thermal offers inherit monthly World Bank gas/oil and ECB FX inputs, a fixed
+EUR80/t carbon assumption and prepared technology costs/efficiencies. Nuclear and
+other nonthermal offers retain their source costs. Low-cost renewables remain
+weather-limited. Available quantities, operational bids and observed generation
+are different objects; generation is not substituted for availability.
+
+### Where to inspect first
+
+The ten largest absolute band-mean price biases below are selected **after**
+evaluation, requiring at least 100 hours. They prioritize diagnosis, not validation.
+Available nuclear/thermal columns are mean local MW in those hours, not dispatch.
+The final column is local generator availability bidding ≤EUR60/MWh plus fixed
+reservoir output minus demand. It excludes emergency but ignores imports,
+commitment, reserves and network deliverability: positive values are local supply
+envelopes, not proof of feasible surplus or erroneous market prices.
+
+| Area / band | Hours | Observed price | Dispatch price | Bias | Nuclear GW | Thermal GW | Local ≤EUR60 envelope−demand GW |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| NO5 / 5 | 357 | 96.88 | -51.92 | -148.80 | 0.00 | 0.29 | 3.65 |
+| NO1 / 5 | 313 | 106.45 | -1.48 | -107.93 | 0.00 | 0.00 | -3.31 |
+| NO3 / 5 | 345 | 76.05 | -9.48 | -85.53 | 0.00 | 0.00 | 0.14 |
+| DK2 / 5 | 764 | 123.29 | 41.11 | -82.18 | 0.00 | 0.16 | -0.74 |
+| RO / 5 | 804 | 175.01 | 98.85 | -76.16 | 1.24 | 8.17 | -3.08 |
+| IT-SARD / 1 | 886 | 76.03 | 1.57 | -74.46 | 0.00 | 2.32 | 1.83 |
+| SE3 / 5 | 330 | 111.00 | 41.21 | -69.80 | 5.83 | 2.25 | -1.88 |
+| HU / 5 | 773 | 164.28 | 100.30 | -63.98 | 1.82 | 4.16 | -3.79 |
+| SE4 / 5 | 463 | 114.26 | 50.78 | -63.48 | 0.00 | 1.55 | -2.58 |
+| IT-CSUD / 1 | 927 | 93.19 | 31.41 | -61.79 | 0.00 | 7.74 | 3.62 |
+
+The full witness includes envelopes at EUR0/30/60/100/200, all carrier availability
+and per-area bid/efficiency inventory. Network coupling may make a local price
+differ from a local offer; unchanged physical/GSK and transport controls remain
+separate evidence, not additive causal shares of price error.
+
+### Implications for the next model change
+
+1. **Correct supply timing and scope before fitting bids.** Prioritize dated nuclear
+   outages and existing ES/PT wind/demand flags. Constant availability and inherited
+   fleet/weather proxies need source verification; do not scale to observed prices
+   or replace renewable availability with generated energy.
+2. **Test transparent resource-level bid dispersion.** Audit whether technology-wide
+   efficiencies/cost profiles collapse genuinely different units into a few steps.
+   Use sourced efficiency, variable cost and outage information, with unchanged fuel
+   inputs and fixed hydro as controls. More bid steps do not automatically improve
+   empirical accuracy; evaluate all areas and adverse outcomes.
+   Existing German gas dispersion means a blanket “add more steps” change is not
+   supported by this inventory. Prioritize source-backed availability timing first.
+3. **Keep network effects explicit.** Wrong local responses can reflect neighboring
+   markets or physical/GSK constraints as well as local supply. Neither this
+   association nor the statistical reference authorizes replacing dispatch with a
+   fitted regional price curve or double-counting imports.
+   The Norwegian reversed conditional response remains a network/fixed-injection
+   investigation, not evidence that hydro needs a higher bid or more installed MW.
+
+### Provenance and verification
+
+Fresh ignored root: `data/bidding-zone-network-2025/response-diagnostic-v1/`.
+Producer `tools/diagnose_residual_response_2025.py` seals source/witness and code
+hashes before reading prices. Independent `tools/audit_residual_response_2025.py`
+rebuilds original columns, MW tiers, demand/fixed hydro, chronological residual
+identities, efficiency/profile inventory, training quantiles, common-hour means
+and diagnostic ranking. All 41 areas / 469 fleet
+rows replay; maximum MW aggregation difference 2.04e-10.
+Three fixtures cover training-only boundaries, tied/empty bands, training exclusion,
+missing prices and negative-price retention. Preparation 233.99s;
+complete source/price producer 337.15s; independent replay
+321.16s. These times are diagnostics, not clearing-loop times.
+Figures and arrays remain local/ignored. Report updated locally; no CI/Pages or
+public-URL publication claim follows.
+
 ## Simpler supply stacks and a residual-price reference — 14 October 2026
 
 **Decision: keep hydro fixed; investigate fleet inputs and price-response modelling.**

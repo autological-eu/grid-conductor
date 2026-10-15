@@ -1,6 +1,6 @@
 # Grid Conductor — current tasks
 
-Reconciled 14 October 2026. PRODUCT.md defines scope and acceptance criteria.
+Reconciled 15 October 2026. PRODUCT.md defines scope and acceptance criteria.
 One active programme: fast European bidding-zone synthetic supply bids against
 observed fixed zonal demand, under dispatch/network constraints. Target daily
 clearing with hourly prices and improved observed-price correlations, alongside
@@ -17,6 +17,7 @@ reviews remain disabled.
 | **Hourly price-mechanism diagnostic** | price-mechanism-v1; unchanged-baseline dual witness and calendar probes | All 8760 optimal; baseline prices/objectives reproduce exactly. Independent component and primal/dual replay plus all 264 GSK-aligned +/-1 MW probes pass. Monthly gas/oil correlations .190/.183; local interior offers are witness evidence, not unique real price setters. Fixed hydro has no water bid; model constraint terms warrant further Nordic diagnostics. |
 | **Europe-wide input audit** | residual-demand-audit-2025/v1; source audit plus independent reconstruction | All 48 areas × 8760 hours; 456 generation area-months replayed, all 41 price areas verified. Residual/observed-price mean r .644 versus cleared-price .502; not a price estimator or causal attribution. Wind quantity flags in ES/PT; national demand scope gaps; flat FR nuclear availability; Nordic price formation remains a priority. Baseline unchanged. |
 | **Supply-stack controls and temporal price reference** | simple-stack-v1; new transport/source auditor and training-only residual-price replay | 8760 optimal coupled hours, zero emergency; 10.15s loop. Full-year mean MAE worsens 33.23 → 34.62 EUR/MWh; baseline retained. Separate Jan–June-fitted residual reference improves July–December MAE 32.21 → 24.60 and mean r .407 → .656 across all 41 areas. Retrospective evaluation, not accepted dispatch or investment model. |
+| **Residual-response / fleet diagnosis** | response-diagnostic-v1; fresh source inventory and independent replay | All 41 price areas / 469 area-carrier rows replay. Observed low-to-high residual-band price contrast averages 79.37 EUR/MWh versus dispatch 31.32; smaller dispatch contrast in 36/41 areas, opposite in NO1/NO3/NO4/NO5. Nuclear and gas available MW are flat through the year; existing German CCGT bid dispersion is material. No coefficients or baseline changed. |
 | **Wind-geography diagnostic** | norway-wind-geography-v1; separate new producer/auditor | Dated NVE onshore zone shares; national hourly availability conserved, GSKs recomputed. 8760 optimal / zero emergency; independent replay passes. All-41-area MAE 33.226 → 33.260 EUR/MWh; mean zonal r .50171 → .50106. Baseline retained. Clearing 73.93s; preparation 196.06s. Site weather/total availability remain unresolved. |
 | **Fresh rejected candidate** | regional-water-v2; regional_water_candidate_2025.py and separate runner/auditor | All 8760 hours attempted, 7496 valid; 1152 confirmed infeasible / 112 unresolved. Matched-hour equal-zone MAE 32.83 → 71.57 EUR/MWh; 47.521 GWh emergency. Saved water/network/source replay passes only the valid subset. Baseline retained; full evaluation below. |
 | Controlled comparison within active framework | Country-pooling control on the same refined grid | 8759 optimal hours; one fresh-solver-confirmed infeasible hour. Compare common solved hours, never fill failures from the zonal case. Not another active candidate. |
@@ -54,6 +55,12 @@ price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
    but worsens Europe-wide errors; do not promote it. The temporal statistical
    reference establishes predictive information in residual demand, not verified
    investment effects or a causal diagnosis of physical-model errors.
+
+   The 15 October response/fleet diagnostic below completes the initial comparable-
+   residual-band and supply-stack inspection. Prioritize source-backed 2025 nuclear/
+   thermal outage and derating timing; do not add generic bid steps as an assumed
+   fix (German CCGT already has efficiency-based dispersion). Separately investigate
+   Nordic physical/GSK/fixed-injection responses while retaining fixed hydro.
 
    Source-check ES/PT wind magnitude/site conversion, national and zonal demand
    scope, and French nuclear outage timing. Test source-backed changes separately
@@ -1322,3 +1329,68 @@ keeping fixed hydro and unchanged feasibility/acceptance gates.
 Final checks: production build passes; four model metadata archives verify
 losslessly; public asset allowlist passes (69 files, 5.70 MiB). No bulk data or
 plots enter Git.
+
+
+## Comparable residual response and fleet inventory — 15 October 2026
+
+User authorized both comparing price responses at similar residual demand and
+inspecting the corresponding supply stack. Fresh source-only diagnostic:
+diagnose_residual_response_2025.py; independent audit_residual_response_2025.py;
+existing-article updater report_residual_response_2025.py. Ignored root:
+data/bidding-zone-network-2025/response-diagnostic-v1/. No new solve, price-fitted
+dispatch bid, flexible hydro, model candidate or baseline/browser change.
+
+January–June residual-demand quintiles define five bands per area; July–December
+uses all 4416 hours for all 41 eligible A44 price areas. Ties, empty bands, negatives
+and source missingness remain explicit. Evaluation-bin means are descriptive,
+not causal supply curves or untouched validation. Worst-band selection requires
+100 hours and is explicitly post-hoc diagnostic ranking, not acceptance.
+
+Equal-zone mean low/high-band bias: -1.69 / -49.75 EUR/MWh. Observed high-minus-low
+price contrast averages 79.37 versus dispatch 31.32 EUR/MWh. All 41 observed
+contrasts rise; dispatch contrast is smaller in 36/41 and reverses in NO1, NO3,
+NO4 and NO5. NO5 low/high observed mean 26.08 / 96.88 versus dispatch 22.84 /
+-51.92 EUR/MWh (1343 / 357 hours). Germany observed 31.34 / 147.96 versus
+17.29 / 93.99. A constant price-level correction does not address this shape.
+
+Independent fleet rebuild inventories all 469 area/carrier rows: available MW,
+prepared p_nom anchors, efficiencies, stored annual bid profiles and local
+available-supply envelopes at EUR0/30/60/100/200. Emergency excluded; fixed hydro
+separate. Price-tier envelopes ignore imports/deliverability/commitment and do
+not establish feasible surpluses. Source availability is never replaced by
+observed generation. Exact profile counts can distinguish trivial floating-point
+differences; interpret actual bid/efficiency ranges, not counts alone.
+
+Nuclear availability is flat in all 14 modeled nuclear areas: France 46.96835 GW
+available every hour, prepared nameplate 65.69 GW, inherited 2024 availability
+proxy rather than audited 2025 outages. All 40 CCGT area groups and Germany's
+OCGT group also have constant available MW. German CCGT already has 19 stored
+profiles and efficiencies .459–.583; adding generic bid steps alone is not a
+supported explanation/fix. All source generator offers are nonnegative; negative
+Nordic marginal prices require the coupled physical/fixed-injection formulation,
+not negative fuel bids. These observations are not additive causal error shares.
+
+Independent source-column, tier, demand/fixed-hydro, chronological residual,
+profile/efficiency, quantile, common-hour price/bias and ranking replay passes:
+maximum source aggregation error 2.04e-10 MW. Three targeted tests pass for
+training-only boundaries, tied/empty cohorts, missing and negative prices.
+Source preparation 233.99s, complete source/price diagnostic 337.15s; separate
+independent rebuild/replay 321.16s. No clearing-loop timing is implied.
+
+Existing report updated locally with all-zone data and local PNG/SVG response
+plots for DE-LU/FR/NO5. Raw fleet/hourly data and plots remain ignored. Next:
+audit dated nuclear/thermal outages and deratings, alongside existing ES/PT wind
+and demand-scope flags; isolate Nordic network/GSK responses without resuming
+hydro flexibility. Common-input controls and unchanged feasibility/empirical/
+investment/integration gates remain mandatory. No live publication is claimed.
+
+Additional inventory flag: FI CCGT includes a prepared efficiency 0.73324;
+verify electricity-only versus CHP/heat and fuel heating-value basis before using
+it as a physical electrical conversion factor. This is an audit target, not a
+verified correction. Zero-capacity offwind-dc/offwind-float/solar-hsat placeholders
+remain explicit with unavailable bid ranges; a report-formatting failure on these
+empty ranges was corrected without changing numerical results.
+Final verification: three targeted tests, independent source/response replay,
+production build, four lossless metadata archives and the public asset allowlist
+(69 files, 5.70 MiB) pass. Figures visually inspected locally. No CI/Pages check
+or public deployment is claimed; all bulk diagnostic data remains ignored.

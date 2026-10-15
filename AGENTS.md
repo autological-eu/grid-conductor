@@ -184,6 +184,15 @@ dispatch bids or investment valuation. Declare temporal cohorts before fitting;
 not untouched held-out validation. Keep all eligible areas, negative prices and
 source missingness. Reference accuracy cannot certify dispatch or scenario effects.
 
+The 15 October follow-up uses diagnose_residual_response_2025.py and separate
+source/response replay audit_residual_response_2025.py. Training-only residual
+quintiles define July–December descriptive cohorts, not causal supply curves or
+untouched validation. Inventory original available MW, bid profiles and efficiencies;
+exclude emergency from real supply and distinguish local price-tier envelopes from
+network-deliverable dispatch. Exact profile counts may include negligible floating
+point differences. Preserve fixed hydro and frozen baseline; the report producer
+updates the existing article only, with full arrays/plots locally ignored.
+
 - Inspect actual supervisor/worker processes and locks before computations.
   Receipts do not establish liveness or progress. If the managed environment is
   inaccessible, say verification is unavailable; do not rely on stale status.
