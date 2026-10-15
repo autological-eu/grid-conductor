@@ -223,6 +223,23 @@ The declared score selected unchanged bids. Preserve primary selection separatel
 from the two training-selected nonzero annual diagnostics; no baseline promotion.
 report_bid_calibration_2025.py updates the existing article, with figures local.
 
+The subsequent user authorization extends this experiment to bidding-zone/resource
+offsets and monotone two-block thermal offers. Use fresh zonal_bid_blocks_2025.py
+and run/audit_zonal_bid_blocks_2025.py; freeze completed global-offset producers.
+Declare training-only proposal estimators, finite strengths, shrinkage and search
+before solving. Partition original thermal availability; never create new capacity.
+Keep physical rows/GSKs/hydro/demand fixed and independently replay original
+component physics after collapsing block dispatch. Evaluate both training-selected
+stages with all eligible zones and quantity/trade checks; no automatic promotion.
+The completed authoritative root is zonal-bid-blocks-v2 with verification-v1;
+stage-one offsets select zero, stage-two selects 21 upper spreads. Six targeted
+tests and independent block-collapse/native-component/dual/selection replay pass.
+Retain common-formulation control: equal-cost column splitting can change optimal
+dual price witnesses despite equivalent capacity/feasible sets. No price identity
+or empirical acceptance claim. Initial interrupted v1 has no retained NPZs and
+must not be resumed. report_zonal_bid_blocks_2025.py updates the same article;
+plots and all bulk witnesses stay ignored locally. Preserve completed producers.
+
 - Inspect actual supervisor/worker processes and locks before computations.
   Receipts do not establish liveness or progress. If the managed environment is
   inaccessible, say verification is unavailable; do not rely on stale status.

@@ -2,6 +2,8 @@
 
 ## Summary and conclusion
 
+The geographic/annual results below describe the retained **uncalibrated annual-v7 baseline**. The latest [zonal bid/block experiment](#zonal-resource-bids-and-two-block-supply-curves--15-october-2026) changes training-fitted offers only and remains a diagnostic, with separate evaluation results.
+
 The model now uses **48 distinct clearing areas across the entire
 retained European network**, including NO1–NO5, SE1–SE4, DK1/DK2 and Italy's seven
 zones. DE and LU share DE-LU; Ireland/Northern Ireland share the Single Electricity
@@ -17,14 +19,16 @@ that removal. Original uniform security factor **0.7** remains.
 
 All 8,760 zonal hours terminate optimal. Annual zonal clearing takes **33.48s**, excluding one-time
 preparation, native checks, replay, export and reporting. Emergency generation is
-**0.000000 MWh** over 0 solved hours. The model is
+**0.000000 MWh**, with emergency used in **0 of 8760 solved hours**. The model is
 an untuned diagnostic, not an accepted market-price or investment estimator.
 
 The comparison below isolates country versus bidding-zone pooling on **the same
 rebuilt grid**. It is not directly attributable to the geography change alone when
 compared with the earlier 128-bus report: topology and branch aggregation also changed.
 All original hourly parent demand, available supply and fixed reservoir output are
-conserved. We have not fitted supply, demand or water to ENTSO-E prices.
+conserved. These baseline results do not fit supply, demand or water to ENTSO-E prices.
+The separately labelled later calibration experiments fit bids on training prices
+while preserving demand, original available quantities and fixed hydro.
 
 Country-control failures: **2025-12-11T08:00:00 UTC: Infeasible**. A fresh solver reproduced the
 reported termination. Its comparisons use common solved hours; the zonal model
@@ -58,7 +62,8 @@ for intrazonal dispatch. Native parity verifies the formulation, not market real
 
 ## Conserved supply, demand and water inputs
 
-Original generator cost and weather-availability time series remain unchanged.
+The annual-v7 baseline retains original generator cost and weather-availability
+time series. Later bid-calibration diagnostics change offers only, as labelled.
 For a mixed cluster, sourced dated plant-capacity shares allocate thermal and
 reservoir assets between child areas. Missing or unsupported location detail,
 including aggregate renewable profiles, uses explicit raw-member-count shares.
@@ -307,6 +312,332 @@ with independent generation and held-out price periods. Gas heating-value and
 plant-efficiency compatibility plus sourced daily gas/EUA are secondary priorities.
 Retain adverse regional outcomes; no blanket fuel uplift or wind rescaling is
 justified by these sensitivities. Oil refinement has low priority within this model.
+
+## Zonal resource bids and two-block supply curves — 15 October 2026
+
+**Result:** The training-selected two-stage result improves evaluation MAE by 0.33 EUR/MWh; mean zonal correlation changes by +0.004. This is a finite bid-shape experiment, not an accepted replacement.
+
+The experiment keeps the complete European physical network, fixed demand,
+original renewable/thermal availability and precomputed hydro unchanged. These
+are generator **offer** adjustments; clearing prices still result from coupled
+dispatch. The original annual-v7 baseline and browser remain unchanged.
+
+### Evaluation summary
+
+Same July–December 4416 hours, all 41 eligible observed price areas.
+MAE is the equal-area mean in EUR/MWh; correlation is the mean zonal correlation.
+Generation/trade columns are normalized monthly interval-distance errors, not
+percentages or observed physical border-flow errors. Lower errors are better.
+
+| Formulation | Price MAE | Mean r | Generation-range error | Trade-range error |
+| --- | ---: | ---: | ---: | ---: |
+| Control | 32.21 | 0.407 | 0.40928 | 0.22507 |
+| Zonal offsets | 32.21 | 0.407 | 0.40928 | 0.22507 |
+| Zonal blocks | 31.87 | 0.411 | 0.40589 | 0.22032 |
+
+**Regional interpretation:** France's correlation improves
+**0.685 → 0.744**, but MAE changes
+**20.71 → 20.83 EUR/MWh** and signed bias
+**+0.01 → +8.37 EUR/MWh**. Better timing
+does not mean better price levels. Spain MAE changes
+**22.55 → 22.70 EUR/MWh**. Nordic errors
+remain substantial, including adverse areas below. The modest aggregate gain
+does not establish an empirically accepted replacement.
+
+The constant-offset proposals lowered training price error but worsened quantities
+and trade. Their shared strength is selected as zero. That rejects the proposed
+bundle under this score, not every individual zonal offset or joint offset/spread
+combination. Each stage has one common strength across its regional proposal;
+there is no exhaustive or per-zone numerical optimization. Correcting the level
+and slope together would require a separately declared training-only experiment,
+not a post-evaluation adjustment to this result.
+
+The full-year saved dispatch, half-year negative-price/tail records and figures are
+local under `data/bidding-zone-network-2025/zonal-bid-blocks-v2/`. The reproducible
+PNG/SVG chart is in `presentation-v1/zonal-bid-blocks`; no ignored figure is linked
+as a public asset. Hourly errors cannot be inferred from the seven-day mean plots.
+
+### What changed
+
+1. **Zonal offsets:** gas (CCGT/OCGT), coal/lignite and nuclear each receive a
+   constant effective adjustment in each physically present zone/resource pair.
+   Bounds are ±30/±30/±15 EUR/MWh electricity respectively. Original monthly
+   fuel, efficiency, operational-carbon and variable-cost anchors remain in place.
+2. **Bid shape:** partition each original thermal group's hourly available MW
+   into 70% lower and 30% upper blocks. Both have the original physical column;
+   only the upper bid adds a nonnegative spread, bounded by 60/60/30 EUR/MWh.
+   Their sum cannot exceed original capacity. Renewables, oil, other resources,
+   fixed hydro and emergency offers are unchanged. Offers have an explicit zero
+   floor after adjustments; this does not introduce negative generator bids.
+
+Stage one proposes offsets from median **training** observed-minus-model errors
+on local interior-offer hours, shrinking by n/(n+168). A local offer must be more
+than 0.001 MW from both bounds and within 1e-5 EUR/MWh of the local clearing price.
+This is model marginal evidence, not unique real price-setting identification.
+Unsupported zone/resource pairs receive zero adjustment, not fabricated evidence.
+
+Stage two retains the training-selected offsets. It proposes an upper spread
+from the difference in median training price residuals between ≥70% and <70%
+resource utilization, on local-interior hours. Both cohorts require 24 hours;
+shrink by min(n_low,n_high)/(min(n_low,n_high)+168), clip to nonnegative bounds.
+This is a proposal heuristic, not a causal estimate of a true supply curve.
+
+Each stage tests exactly strengths 0, 0.5 and 1 inside the **coupled** network
+over all 4344 training hours. Repeated parameters reuse their witness. The score
+equally averages control-normalized price MAE, country/fuel/month generation
+allocation-interval error and implied net-export interval error. Add 0.05 times
+mean squared bound-normalized offsets, plus the same penalty for spreads, across
+physically present zone/resource pairs. These settings are declared experimental
+choices, not empirical acceptance thresholds. Ties prefer smaller penalties then
+earlier trials. This finite search does not optimize every regional parameter.
+
+Design/proposals/selection are sealed before opening evaluation targets. Both
+training-selected stages receive annual evaluation; evaluation never chooses
+between them. 2025 has already been inspected: the chronological split is
+**retrospective, not untouched validation**. No observed prices enter evaluation
+bid construction. No new data collection, availability fitting or source correction.
+
+### Complete training trace
+
+Selected trial indices: offsets **0**, blocks
+**4**. A zero upper-block choice is a result,
+not an omitted formulation. Parameters are effective offers, not recovered orders.
+
+| Trial | Nonzero offsets | Nonzero spreads | Price MAE | Generation error | Trade error | Penalty | Joint score |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | 0 | 0 | 34.26 | 0.33772 | 0.18349 | 0.00000 | 1.00000 |
+| 1 | 65 | 0 | 33.10 | 0.37693 | 0.19643 | 0.00175 | 1.05261 |
+| 2 | 65 | 0 | 32.25 | 0.38867 | 0.20257 | 0.00699 | 1.07236 |
+| 3 | 0 | 21 | 34.13 | 0.33896 | 0.18337 | 0.00022 | 0.99995 |
+| 4 | 0 | 21 | 34.10 | 0.33812 | 0.18217 | 0.00090 | 0.99734 |
+
+### Every eligible evaluation area
+
+Each cell: **MAE EUR/MWh / correlation / signed bias EUR/MWh**. Adverse regions
+are retained; unavailable BA/GB/IE/ME observations are not replaced by zero.
+
+| Area | Control | Zonal offsets | Zonal blocks |
+| --- | ---: | ---: | ---: |
+| AL | 38.20 / 0.355 / -30.56 | 38.20 / 0.355 / -30.56 | 37.52 / 0.362 / -29.50 |
+| AT | 22.82 / 0.693 / -16.35 | 22.82 / 0.693 / -16.35 | 22.25 / 0.696 / -15.57 |
+| BE | 20.92 / 0.730 / -13.26 | 20.92 / 0.730 / -13.26 | 18.43 / 0.754 / -8.49 |
+| BG | 32.58 / 0.563 / -17.62 | 32.58 / 0.563 / -17.62 | 32.12 / 0.571 / -16.48 |
+| CH | 27.36 / 0.611 / -24.20 | 27.36 / 0.611 / -24.20 | 26.15 / 0.619 / -22.82 |
+| CZ | 25.27 / 0.454 / -3.67 | 25.27 / 0.454 / -3.67 | 24.88 / 0.461 / -2.89 |
+| DE-LU | 23.35 / 0.692 / -17.90 | 23.35 / 0.692 / -17.90 | 22.61 / 0.694 / -16.47 |
+| DK1 | 26.53 / 0.636 / -16.58 | 26.53 / 0.636 / -16.58 | 25.23 / 0.645 / -14.32 |
+| EE | 50.04 / 0.343 / +9.04 | 50.04 / 0.343 / +9.04 | 50.37 / 0.344 / +10.66 |
+| ES | 22.55 / 0.688 / +3.12 | 22.55 / 0.688 / +3.12 | 22.70 / 0.691 / +4.84 |
+| FR | 20.71 / 0.685 / +0.01 | 20.71 / 0.685 / +0.01 | 20.83 / 0.744 / +8.37 |
+| GR | 33.28 / 0.487 / -13.37 | 33.28 / 0.487 / -13.37 | 32.42 / 0.518 / -11.69 |
+| HR | 26.86 / 0.604 / -15.48 | 26.86 / 0.604 / -15.48 | 26.51 / 0.603 / -14.43 |
+| HU | 30.43 / 0.605 / -20.62 | 30.43 / 0.605 / -20.62 | 29.96 / 0.609 / -19.61 |
+| IT-CNOR | 34.30 / 0.530 / -33.97 | 34.30 / 0.530 / -33.97 | 33.87 / 0.536 / -33.53 |
+| IT-CSUD | 36.77 / 0.510 / -36.45 | 36.77 / 0.510 / -36.45 | 36.42 / 0.516 / -36.09 |
+| IT-North | 27.08 / 0.564 / -26.50 | 27.08 / 0.564 / -26.50 | 26.65 / 0.565 / -26.02 |
+| IT-SICI | 38.35 / 0.527 / -37.35 | 38.35 / 0.527 / -37.35 | 38.15 / 0.527 / -37.15 |
+| IT-SUD | 35.25 / 0.538 / -34.39 | 35.25 / 0.538 / -34.39 | 34.89 / 0.545 / -34.03 |
+| LT | 44.81 / 0.395 / -0.25 | 44.81 / 0.395 / -0.25 | 44.95 / 0.396 / +1.37 |
+| LV | 44.87 / 0.393 / -0.28 | 44.87 / 0.393 / -0.28 | 45.01 / 0.393 / +1.34 |
+| MK | 30.94 / 0.560 / -17.45 | 30.94 / 0.560 / -17.45 | 30.80 / 0.561 / -16.80 |
+| NL | 21.73 / 0.705 / -15.53 | 21.73 / 0.705 / -15.53 | 20.26 / 0.708 / -12.71 |
+| PL | 27.02 / 0.585 / -20.86 | 27.02 / 0.585 / -20.86 | 26.10 / 0.585 / -19.61 |
+| PT | 22.73 / 0.675 / +3.83 | 22.73 / 0.675 / +3.83 | 22.80 / 0.680 / +5.16 |
+| RO | 31.59 / 0.583 / -18.79 | 31.59 / 0.583 / -18.79 | 31.17 / 0.588 / -17.75 |
+| RS | 29.20 / 0.576 / -18.46 | 29.20 / 0.576 / -18.46 | 28.78 / 0.580 / -17.51 |
+| SI | 26.32 / 0.565 / -14.12 | 26.32 / 0.565 / -14.12 | 26.02 / 0.558 / -13.01 |
+| SK | 24.95 / 0.616 / -12.01 | 24.95 / 0.616 / -12.01 | 24.57 / 0.619 / -11.01 |
+| DK2 | 56.30 / 0.073 / -47.24 | 56.30 / 0.073 / -47.24 | 56.03 / 0.064 / -46.62 |
+| FI | 38.15 / -0.035 / -9.62 | 38.15 / -0.035 / -9.62 | 38.45 / -0.042 / -9.11 |
+| NO1 | 40.53 / -0.216 / -30.98 | 40.53 / -0.216 / -30.98 | 40.28 / -0.216 / -30.25 |
+| NO2 | 39.60 / 0.039 / -30.84 | 39.60 / 0.039 / -30.84 | 38.61 / 0.043 / -29.43 |
+| NO3 | 27.56 / -0.099 / -1.50 | 27.56 / -0.099 / -1.50 | 27.95 / -0.098 / -1.18 |
+| NO4 | 27.08 / 0.047 / +16.89 | 27.08 / 0.047 / +16.89 | 27.51 / 0.045 / +17.37 |
+| NO5 | 43.67 / -0.371 / -31.70 | 43.67 / -0.371 / -31.70 | 44.34 / -0.373 / -31.79 |
+| SE1 | 27.50 / 0.037 / +10.85 | 27.50 / 0.037 / +10.85 | 27.90 / 0.031 / +11.35 |
+| SE2 | 27.69 / 0.053 / +11.76 | 27.69 / 0.053 / +11.76 | 28.10 / 0.047 / +12.27 |
+| SE3 | 33.76 / 0.030 / -14.52 | 33.76 / 0.030 / -14.52 | 33.87 / 0.025 / -13.91 |
+| SE4 | 42.15 / 0.131 / -26.04 | 42.15 / 0.131 / -26.04 | 42.01 / 0.126 / -25.41 |
+| IT-SARD | 39.62 / 0.543 / -38.21 | 39.62 / 0.543 / -38.21 | 39.33 / 0.546 / -37.88 |
+
+### Monthly price performance
+
+Independent replay calculates these equal-zone **MAE / mean correlation** pairs
+from saved annual prices. January–June is in-sample; later months are retrospective
+evaluation. Monthly correlation cannot be compared directly to half-year correlation.
+
+| Month | Control | Zonal offsets | Zonal blocks |
+| --- | ---: | ---: | ---: |
+| 2025-01 (training) | 36.62 / 0.352 | 36.62 / 0.352 | 36.40 / 0.358 |
+| 2025-02 (training) | 43.46 / 0.380 | 43.46 / 0.380 | 43.00 / 0.430 |
+| 2025-03 (training) | 35.64 / 0.510 | 35.64 / 0.510 | 35.83 / 0.511 |
+| 2025-04 (training) | 29.77 / 0.528 | 29.77 / 0.528 | 29.89 / 0.532 |
+| 2025-05 (training) | 29.64 / 0.560 | 29.64 / 0.560 | 29.46 / 0.565 |
+| 2025-06 (training) | 31.09 / 0.530 | 31.09 / 0.530 | 30.67 / 0.539 |
+| 2025-07 (evaluation) | 28.17 / 0.416 | 28.17 / 0.416 | 27.74 / 0.421 |
+| 2025-08 (evaluation) | 30.39 / 0.493 | 30.39 / 0.493 | 30.01 / 0.497 |
+| 2025-09 (evaluation) | 32.86 / 0.421 | 32.86 / 0.421 | 32.47 / 0.431 |
+| 2025-10 (evaluation) | 35.64 / 0.412 | 35.64 / 0.412 | 35.11 / 0.410 |
+| 2025-11 (evaluation) | 37.26 / 0.263 | 37.26 / 0.263 | 37.23 / 0.262 |
+| 2025-12 (evaluation) | 29.10 / 0.347 | 29.10 / 0.347 | 28.88 / 0.353 |
+
+### France and Spain: generation checks
+
+July–December TWh, conditional bounds given saved equal-bid group/block totals.
+Separate label extremes need not be jointly attainable; these are not all
+alternative primal optima. National Ember/gross-net/CHP/taxonomy differences and
+implied generation-minus-demand trade limitations remain unchanged. Targets
+outside available energy stay soft checks; bids cannot manufacture missing supply.
+
+| Country | Fuel | Ember | Control interval | Zonal-offset interval | Zonal-block interval |
+| --- | --- | ---: | ---: | ---: | ---: |
+| FR | Wind | 25.66 | 30.34–30.34 | 30.34–30.34 | 30.34–30.34 |
+| FR | Solar | 15.16 | 18.22–18.22 | 18.22–18.22 | 18.22–18.22 |
+| FR | Nuclear | 190.52 | 180.18–180.18 | 180.18–180.18 | 175.85–175.85 |
+| FR | Gas | 7.27 | 4.21–4.21 | 4.21–4.21 | 4.16–4.16 |
+| FR | Coal | 0.66 | 0.00–0.00 | 0.00–0.00 | 0.00–0.00 |
+| ES | Wind | 27.56 | 20.85–21.17 | 20.85–21.17 | 20.85–21.17 |
+| ES | Solar | 30.86 | 32.75–33.07 | 32.75–33.07 | 32.75–33.07 |
+| ES | Nuclear | 26.93 | 24.06–24.06 | 24.06–24.06 | 24.64–24.64 |
+| ES | Gas | 29.66 | 28.49–28.49 | 28.49–28.49 | 28.39–28.39 |
+| ES | Coal | 0.09 | 0.00–0.00 | 0.00–0.00 | 0.00–0.00 |
+
+### Selected parameters and evidence coverage
+
+Offsets belong to stage one; stage two keeps them. Spread cohorts use stage-one
+dispatch, not observed generation. Entries with no supporting local hours remain
+zero. Nuclear being cheaper in one zone is a synthetic fit, not demonstrated
+physical cost differences. Interconnected zones can change through imports even
+where no local bid changes. Fixed hydro has no calibrated marginal water offer.
+
+| Zone | Resource | Offset evidence hours | Offset EUR/MWh | Spread low/high hours | Upper spread EUR/MWh |
+| --- | --- | ---: | ---: | ---: | ---: |
+| AT | gas | 365 | +0.00 | 263 / 102 | 2.45 |
+| BA | coal/lignite | 0 | +0.00 | 0 / 0 | 0.00 |
+| BE | gas | 225 | +0.00 | 190 / 35 | 1.98 |
+| BE | nuclear | 170 | +0.00 | 122 / 48 | 8.96 |
+| BG | gas | 115 | +0.00 | 80 / 35 | 0.00 |
+| BG | coal/lignite | 20 | +0.00 | 20 / 0 | 0.00 |
+| BG | nuclear | 66 | +0.00 | 44 / 22 | 0.00 |
+| CH | gas | 4 | +0.00 | 3 / 1 | 0.00 |
+| CH | nuclear | 65 | +0.00 | 35 / 30 | 0.00 |
+| CZ | gas | 626 | +0.00 | 427 / 199 | 2.19 |
+| CZ | coal/lignite | 1130 | +0.00 | 1105 / 25 | 2.83 |
+| CZ | nuclear | 184 | +0.00 | 114 / 70 | 0.69 |
+| DE-LU | gas | 285 | +0.00 | 285 / 0 | 0.00 |
+| DE-LU | coal/lignite | 1310 | +0.00 | 1158 / 152 | 6.86 |
+| DK1 | gas | 187 | +0.00 | 127 / 60 | 2.50 |
+| DK1 | coal/lignite | 41 | +0.00 | 27 / 14 | 0.00 |
+| EE | gas | 55 | +0.00 | 36 / 19 | 0.00 |
+| ES | gas | 1720 | +0.00 | 1703 / 17 | 0.00 |
+| ES | coal/lignite | 0 | +0.00 | 0 / 0 | 0.00 |
+| ES | nuclear | 574 | +0.00 | 297 / 277 | 9.69 |
+| FR | gas | 260 | +0.00 | 250 / 10 | 0.00 |
+| FR | coal/lignite | 53 | +0.00 | 52 / 1 | 0.00 |
+| FR | nuclear | 2491 | +0.00 | 915 / 1576 | 30.00 |
+| GR | gas | 1464 | +0.00 | 957 / 507 | 5.10 |
+| GR | coal/lignite | 4 | +0.00 | 1 / 3 | 0.00 |
+| HR | gas | 187 | +0.00 | 129 / 58 | 0.00 |
+| HR | coal/lignite | 7 | +0.00 | 4 / 3 | 0.00 |
+| HU | gas | 333 | +0.00 | 228 / 105 | 0.57 |
+| HU | coal/lignite | 0 | +0.00 | 0 / 0 | 0.00 |
+| HU | nuclear | 52 | +0.00 | 36 / 16 | 0.00 |
+| IT-CALA | gas | 0 | +0.00 | 0 / 0 | 0.00 |
+| IT-CNOR | gas | 310 | +0.00 | 253 / 57 | 2.50 |
+| IT-CSUD | gas | 815 | +0.00 | 702 / 113 | 8.78 |
+| IT-North | gas | 1981 | +0.00 | 1958 / 23 | 0.00 |
+| IT-SICI | gas | 3 | +0.00 | 3 / 0 | 0.00 |
+| IT-SUD | gas | 892 | +0.00 | 654 / 238 | 9.35 |
+| LT | gas | 345 | +0.00 | 205 / 140 | 9.66 |
+| LV | gas | 309 | +0.00 | 180 / 129 | 10.75 |
+| ME | coal/lignite | 0 | +0.00 | 0 / 0 | 0.00 |
+| MK | gas | 51 | +0.00 | 39 / 12 | 0.00 |
+| MK | coal/lignite | 29 | +0.00 | 21 / 8 | 0.00 |
+| NL | gas | 308 | +0.00 | 308 / 0 | 0.00 |
+| NL | coal/lignite | 210 | +0.00 | 147 / 63 | 0.00 |
+| NL | nuclear | 12 | +0.00 | 9 / 3 | 0.00 |
+| PL | gas | 1053 | +0.00 | 706 / 347 | 4.66 |
+| PL | coal/lignite | 516 | +0.00 | 515 / 1 | 0.00 |
+| PT | gas | 845 | +0.00 | 447 / 398 | 0.00 |
+| RO | gas | 566 | +0.00 | 472 / 94 | 8.18 |
+| RO | coal/lignite | 8 | +0.00 | 8 / 0 | 0.00 |
+| RO | nuclear | 35 | +0.00 | 22 / 13 | 0.00 |
+| RS | gas | 168 | +0.00 | 118 / 50 | 0.00 |
+| RS | coal/lignite | 31 | +0.00 | 31 / 0 | 0.00 |
+| SI | gas | 57 | +0.00 | 38 / 19 | 0.00 |
+| SI | coal/lignite | 39 | +0.00 | 27 / 12 | 0.00 |
+| SI | nuclear | 50 | +0.00 | 32 / 18 | 0.00 |
+| SK | gas | 153 | +0.00 | 108 / 45 | 0.00 |
+| SK | coal/lignite | 2 | +0.00 | 2 / 0 | 0.00 |
+| SK | nuclear | 58 | +0.00 | 39 / 19 | 0.00 |
+| XK | coal/lignite | 0 | +0.00 | 0 / 0 | 0.00 |
+| DK2 | gas | 5 | +0.00 | 4 / 1 | 0.00 |
+| FI | gas | 298 | +0.00 | 267 / 31 | 0.00 |
+| FI | coal/lignite | 86 | +0.00 | 69 / 17 | 0.00 |
+| FI | nuclear | 645 | +0.00 | 367 / 278 | 0.00 |
+| NO4 | gas | 42 | +0.00 | 29 / 13 | 0.00 |
+| NO5 | gas | 24 | +0.00 | 18 / 6 | 0.00 |
+| SE1 | gas | 3 | +0.00 | 2 / 1 | 0.00 |
+| SE3 | gas | 14 | +0.00 | 10 / 4 | 0.00 |
+| SE3 | nuclear | 604 | +0.00 | 420 / 184 | 0.77 |
+| SE4 | gas | 47 | +0.00 | 37 / 10 | 0.00 |
+| FR-COR | gas | 0 | +0.00 | 0 / 0 | 0.00 |
+| GB | gas | 0 | +0.00 | 0 / 0 | 0.00 |
+| GB | nuclear | 0 | +0.00 | 0 / 0 | 0.00 |
+| IE-SEM | gas | 0 | +0.00 | 0 / 0 | 0.00 |
+| IE-SEM | coal/lignite | 0 | +0.00 | 0 / 0 | 0.00 |
+| IT-SARD | gas | 764 | +0.00 | 675 / 89 | 6.21 |
+| IT-SARD | coal/lignite | 710 | +0.00 | 393 / 317 | 0.00 |
+
+### Verification, timing and interpretation
+
+Six targeted tests pass for physical/capacity equivalence, zonal separation,
+monotone bids, training-only input boundaries, unsupported evidence, selection
+signed-zero cache equivalence and an analytical upper-block clearing example.
+Independent replay reconstructs the original fleet, partitions capacity afresh,
+collapses saved block output and checks native component balances, islands, HVDC
+and passive-network ratings. It separately checks adjusted objectives and LP dual
+certificates, proposal medians/counts/shrinkage, finite-stage selection, source
+targets, all-area price metrics and monthly generation/trade interval errors.
+Completed LP certificates **6**; maximum native
+physical residual **7.05e-06 MW**, duality gap **EUR0.00033**. Numeric gates
+remain 1e-4 MW / EUR0.05; feasibility is not evidence of empirical accuracy.
+
+Reproduction uses the pinned Python interpreter and the retained source/cache
+chain: `tools/run_zonal_bid_blocks_2025.py <fresh-output-root>`, followed by
+`tools/audit_zonal_bid_blocks_2025.py <output-root>` and
+`tools/report_zonal_bid_blocks_2025.py <output-root>`. The producer and auditor
+have 5 GiB virtual-memory / 1800-second outer guards, and each hourly solver call
+retains finite retry limits. Set OPENBLAS_NUM_THREADS, OMP_NUM_THREADS and
+MKL_NUM_THREADS to 1. Completed roots are immutable; do not resume them with
+changed code or coefficients. Source and parameter hashes are in each summary.
+
+Source/grid preparation **76.37s**; complete fitting,
+annual stage evaluation and export **243.69s**. Annual
+clearing times: Control 43.14s, Zonal offsets 43.14s, Zonal blocks 34.09s.
+Aliased stage witnesses reuse the same solve. Independent replay
+**110.95s**; peak producer RSS **2586 MiB**.
+Fresh zero-spread split-control maximum price difference from the frozen unsplit
+control **107
+EUR/MWh**; report comparisons use the fresh common-formulation control.
+The difference exceeds EUR0.0001/MWh in
+**116 of
+420480 modeled area-hours**;
+mean absolute difference **0.00703
+EUR/MWh**. Maximum objective difference is
+**EUR0.000035**.
+The feasible set is equivalent by the block-collapse/capacity proof, but optimal
+dual price witnesses need not be unique. No perfect price identity or improvement
+from merely splitting bids is claimed; retain these outliers and the common control.
+
+These are independent hourly clears grouped by day, not intertemporal daily
+storage optimization. Fitting can absorb incorrect availability, demand or
+commercial constraint assumptions; local-marginal evidence can be absent when
+imports/constraints determine prices. The small finite proposal family does not
+establish that all zonal bid models succeed or fail. Consider price shape,
+generation, trade and adverse zones together before a separately declared next
+experiment. No automatic baseline/investment acceptance or browser integration;
+no live publication or CI/Pages claim for this local report update.
 
 ## Bounded fuel-anchored bid calibration — 15 October 2026
 

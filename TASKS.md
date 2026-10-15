@@ -14,6 +14,7 @@ reviews remain disabled.
 | --- | --- | --- |
 | **One active research model** | Whole-network fixed-hydro/resource-bid zonal dispatch; tools/run_bidding_zone_network_2025.py, tools/global_bidding_zone_2025.py; data/bidding-zone-network-2025/annual-v7/ | 48 clearing areas / 145 buses; 8760 optimal hours, zero emergency supply, independent saved-source/physics replay. Clearing loop 33.476s; complete two-control/check/export command 418.108s, preparation 123.539s, peak RSS 2584 MiB. Fixed hourly hydro; independent hourly clears, not yet daily orchestration or adaptive storage. Regional allocation/demand proxies and price accuracy remain unresolved. |
 | **Bounded bid-calibration diagnostic** | bid-calibration-v1; run/audit_bid_calibration_2025.py and training-selected diagnostic-evaluation-v1 | Seven Jan–June training tuples, original physics unchanged; declared regularized price/generation/trade score selects zero adders. Independently replayed nine complete LP witnesses and training-only selection. Jul–Dec EU MAE 32.21; supplementary gas +30 lowers it to 31.60 but worsens FR 20.71→25.18 and ES 22.55→31.55 EUR/MWh. Nuclear −15 gives EU 32.29. No promotion; retrospective evaluation, not untouched validation. |
+| **Zonal bids / two-block experiment** | zonal-bid-blocks-v2; zonal_bid_blocks_2025.py and separate run/audit/report tools | Five training states; constant-offset proposal rejected by joint score, 21 zone/resource upper-block spreads selected. All 8760 annual hours optimal. Jul–Dec equal-zone MAE 32.205→31.874; mean r .40729→.41130; generation/trade interval errors improve slightly. France r .685→.744 but MAE 20.71→20.83 and bias +0.01→+8.37; Spain 22.55→22.70 MAE; Nordic regressions retained. Six complete LP certificates and original-component/block-capacity replay pass. Diagnostic only, no baseline promotion. |
 | **Current input-sensitivity diagnostics** | input-sensitivity-v1; wind/gas/oil/carbon +/-10%, plus combined positive case | Ten full-year attempts; 8758 hours common to all cases / 41 observed zones. Independent coefficients/components replay passes; control exactly reproduces annual-v7. Gas price response 3.56–3.78 EUR/MWh, wind 1.60–2.61, carbon 2.43–2.55, oil none material. Wind fleet/profile inconsistencies need dated source correction. No baseline promotion. |
 | **Hourly price-mechanism diagnostic** | price-mechanism-v1; unchanged-baseline dual witness and calendar probes | All 8760 optimal; baseline prices/objectives reproduce exactly. Independent component and primal/dual replay plus all 264 GSK-aligned +/-1 MW probes pass. Monthly gas/oil correlations .190/.183; local interior offers are witness evidence, not unique real price setters. Fixed hydro has no water bid; model constraint terms warrant further Nordic diagnostics. |
 | **Europe-wide input audit** | residual-demand-audit-2025/v1; source audit plus independent reconstruction | All 48 areas × 8760 hours; 456 generation area-months replayed, all 41 price areas verified. Residual/observed-price mean r .644 versus cleared-price .502; not a price estimator or causal attribution. Wind quantity flags in ES/PT; national demand scope gaps; flat FR nuclear availability; Nordic price formation remains a priority. Baseline unchanged. |
@@ -51,6 +52,41 @@ price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
 
 ## Ordered next actions
 
+Completed zonal offsets followed by 70/30 thermal bid blocks, with no added
+availability or changed physical rows. Authoritative root zonal-bid-blocks-v2,
+verification-v1/audit.json; Jan–June fits and Jul–Dec retrospective evaluation. Declared
+local-interior residual medians and 168-hour shrinkage generate bounded proposals;
+each stage tests strengths 0/0.5/1 with the same joint price/generation/trade score.
+Upper-block evidence requires 24 local-interior hours on each side of 70% resource
+utilization. Both training-selected stages receive annual evaluation; evaluation
+never selects one. Full design lives with the fresh producer, not acceptance gates.
+
+Stage-one regional proposals improve training price MAE 34.26→32.25 at full
+strength but worsen generation/trade errors; the common strength selects zero.
+This rejects that bundled proposal, not every individual zonal intercept. Stage
+two selects full strength for 21 nonnegative upper spreads, including FR nuclear
++30 and ES nuclear +9.69 EUR/MWh on the upper 30% only. Five distinct training
+states; stage-one annual result reuses control. Across all 41 evaluation areas,
+28 improve MAE and 13 worsen. Generation error .40928→.40589; implied-trade error
+.22507→.22032. No selection or acceptance based on these evaluation outcomes.
+
+Independent replay checks training-only medians/cohorts/shrinkage, selection,
+source targets, every saved price metric, monthly metrics and allocation intervals,
+expanded LP certificates, and collapsed original-component physics. Maximum native
+residual 7.05e-6 MW, duality gap EUR0.000335, unchanged gates. Source prep 76.37s;
+annual control 43.14s, blocks 34.09s; full fit/evaluate/export 243.69s, independent
+audit 110.95s; peak producer RSS 2586 MiB. No hourly hydro/storage policy change.
+
+Zero-spread block splitting is capacity/feasible-set equivalent but returns
+different optimal dual prices in 116/420480 modeled area-hours (>EUR0.0001/MWh),
+mostly unobserved Corsica; mean absolute difference EUR0.00703/MWh and maximum
+EUR106.65/MWh. Objectives differ by at most EUR0.000035. Comparisons use a fresh
+common-formulation control; do not claim price identity or hide outliers. Six
+targeted tests include analytical block clearing and signed-zero cache equivalence.
+An initial v1 process was deliberately stopped to fix duplicate signed-zero cache
+states. Its obsolete NPZs were deleted; compact interrupted metadata is not verified
+evidence and must not be resumed. No model/parameter-search design changed.
+
 The completed bid-calibration replay checks source hashes, unchanged physical
 coefficients, seven training scores/selection, all 41 evaluation areas, generation
 and implied-trade intervals, and nine complete primal/dual witnesses. Maximum
@@ -70,10 +106,12 @@ or publication claim, model promotion, browser replacement or review restart.
 
 Latest user priority (15 October): improve synthetic supply bids inside the existing
 European network before correcting other inputs. The bounded training-only global
-offset trial is complete and independently replayed; baseline retained. Next,
-declare a small zonal/scarcity-dependent bid-shape experiment, keeping fuel anchors
-and original physics/availability/hydro/demand fixed. Uniform gas uplift does not
-fix France/Spain; do not select a replacement using these evaluation outcomes.
+offset and subsequent zonal/block trials are complete and independently replayed;
+baseline retained. Bid shape gives a modest improvement but leaves France's price
+level and Nordic performance unresolved. Next declare a joint local intercept/
+bid-slope experiment, rather than assuming an all-zone offset proposal fixes
+every area, keeping fuel anchors and original physical inputs fixed. Any further
+experiment needs fresh provenance/design; no post-evaluation adjustment to v2.
 The earlier input priorities below remain findings, not blockers to bid research.
 Declare a fresh training design and evaluation/acceptance checks before fitting;
 the inspected 2025 split cannot be called untouched validation.

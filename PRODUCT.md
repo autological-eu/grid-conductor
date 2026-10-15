@@ -125,6 +125,15 @@ synthetic offers, not uniquely recovered market bids; they may compensate for
 incorrect constraints or other inputs. Experimental search bounds/weights are not
 product acceptance thresholds. No automatic baseline or investment-model promotion.
 
+The subsequent accepted extension permits bidding-zone-specific resource offers
+and simple increasing-price blocks within each resource's original available
+capacity. Preserve fuel-cost anchors and a transparent training-only calibration;
+shrink weakly supported regional differences rather than assigning observed
+clearing prices directly to generators. Compare constant zonal adjustments with
+the added bid-shape flexibility under the same coupled constraints. Disclose
+unsupported parameters and overfitting/identifiability limits. Regional bids are
+effective offers, not verified regional production costs or recovered order books.
+
 ## Maintained models and publications
 
 The active development baseline is the fast fixed-hydro supply-curve model, as
