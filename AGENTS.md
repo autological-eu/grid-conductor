@@ -193,6 +193,18 @@ network-deliverable dispatch. Exact profile counts may include negligible floati
 point differences. Preserve fixed hydro and frozen baseline; the report producer
 updates the existing article only, with full arrays/plots locally ignored.
 
+Generation-mix validation uses generation_mix_2025.py and compare_dispatch_mix_2025.py
+with a fresh ignored root. Independent audit_dispatch_mix_2025.py writes a fresh
+verification subdirectory; report_dispatch_mix_2025.py updates the retained article.
+Compare saved dispatch, not available supply. Equal-bid disaggregation is conditional:
+report proportional illustrations plus label-specific bounds, regrouping capacities
+before computing country/combined-fuel bounds. Those bounds are not jointly
+attainable or a search over all primal optima. Country source placements under GSKs
+and implied generation-minus-demand exports are not verified physical border flows.
+Require all constituent zones and explicit type coverage; storage B10/B25 stays
+separate from primary generation. Preserve source taxonomy/gross-net differences,
+no generation-derived availability fitting, no new solve or baseline promotion.
+
 - Inspect actual supervisor/worker processes and locks before computations.
   Receipts do not establish liveness or progress. If the managed environment is
   inaccessible, say verification is unavailable; do not rely on stale status.

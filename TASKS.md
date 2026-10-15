@@ -18,6 +18,7 @@ reviews remain disabled.
 | **Europe-wide input audit** | residual-demand-audit-2025/v1; source audit plus independent reconstruction | All 48 areas × 8760 hours; 456 generation area-months replayed, all 41 price areas verified. Residual/observed-price mean r .644 versus cleared-price .502; not a price estimator or causal attribution. Wind quantity flags in ES/PT; national demand scope gaps; flat FR nuclear availability; Nordic price formation remains a priority. Baseline unchanged. |
 | **Supply-stack controls and temporal price reference** | simple-stack-v1; new transport/source auditor and training-only residual-price replay | 8760 optimal coupled hours, zero emergency; 10.15s loop. Full-year mean MAE worsens 33.23 → 34.62 EUR/MWh; baseline retained. Separate Jan–June-fitted residual reference improves July–December MAE 32.21 → 24.60 and mean r .407 → .656 across all 41 areas. Retrospective evaluation, not accepted dispatch or investment model. |
 | **Residual-response / fleet diagnosis** | response-diagnostic-v1; fresh source inventory and independent replay | All 41 price areas / 469 area-carrier rows replay. Observed low-to-high residual-band price contrast averages 79.37 EUR/MWh versus dispatch 31.32; smaller dispatch contrast in 36/41 areas, opposite in NO1/NO3/NO4/NO5. Nuclear and gas available MW are flat through the year; existing German CCGT bid dispersion is material. No coefficients or baseline changed. |
+| **Dispatch generation-mix validation** | generation-mix-v1; saved dispatch with conditional equal-bid allocation ranges | 34 source countries; 33 complete Ember national annual references; 306 country/fuel rows independently replay. Generation totals can conceal large fuel errors: DE gas -56.49 / wind +41.04 TWh against Ember. Demand scope (DE/GB/IT), wind magnitude (DE/GB versus ES/PT) and PL coal/trade now guide corrections. Baseline unchanged; country/taxonomy and tie-allocation caveats retained. |
 | **Wind-geography diagnostic** | norway-wind-geography-v1; separate new producer/auditor | Dated NVE onshore zone shares; national hourly availability conserved, GSKs recomputed. 8760 optimal / zero emergency; independent replay passes. All-41-area MAE 33.226 → 33.260 EUR/MWh; mean zonal r .50171 → .50106. Baseline retained. Clearing 73.93s; preparation 196.06s. Site weather/total availability remain unresolved. |
 | **Fresh rejected candidate** | regional-water-v2; regional_water_candidate_2025.py and separate runner/auditor | All 8760 hours attempted, 7496 valid; 1152 confirmed infeasible / 112 unresolved. Matched-hour equal-zone MAE 32.83 → 71.57 EUR/MWh; 47.521 GWh emergency. Saved water/network/source replay passes only the valid subset. Baseline retained; full evaluation below. |
 | Controlled comparison within active framework | Country-pooling control on the same refined grid | 8759 optimal hours; one fresh-solver-confirmed infeasible hour. Compare common solved hours, never fill failures from the zonal case. Not another active candidate. |
@@ -61,6 +62,12 @@ price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
    thermal outage and derating timing; do not add generic bid steps as an assumed
    fix (German CCGT already has efficiency-based dispersion). Separately investigate
    Nordic physical/GSK/fixed-injection responses while retaining fixed hydro.
+
+   The subsequent generation-mix check below adds country/technology quantities,
+   not just prices. Reconcile DE/GB/IT demand scope and regional wind magnitude
+   (DE/GB excess versus ES/PT deficits), then isolate PL coal/bid/trade effects.
+   Keep dated outage work, but do not presume it explains these annual mix gaps
+   or apply a uniform European wind/fuel adjustment.
 
    Source-check ES/PT wind magnitude/site conversion, national and zonal demand
    scope, and French nuclear outage timing. Test source-backed changes separately
@@ -1394,3 +1401,96 @@ Final verification: three targeted tests, independent source/response replay,
 production build, four lossless metadata archives and the public asset allowlist
 (69 files, 5.70 MiB) pass. Figures visually inspected locally. No CI/Pages check
 or public deployment is claimed; all bulk diagnostic data remains ignored.
+
+
+## Country generation mix, demand and implied trade — 15 October 2026
+
+User authorized comparing actual simulated generation with national/technology
+observations, annual/monthly quantities and hourly timing, alongside demand/trade.
+Fresh unchanged-dispatch producer compare_dispatch_mix_2025.py with helper
+generation_mix_2025.py; independent audit_dispatch_mix_2025.py. Root:
+data/bidding-zone-network-2025/generation-mix-v1/. Retained article updater:
+report_dispatch_mix_2025.py. No new clearing, fitted bids/availability, hydro
+flexibility, candidate promotion or browser change.
+
+Coverage: all 34 source countries; 33 have twelve-month Ember Total generation
+(AL unavailable). All 306 country/fuel comparisons retained, including unknown
+references. ENTSO-E gives 122 country/PSR series with all 8760 hours; partial
+series retain matched-hour metrics, not extrapolated annual totals. Fresh raw
+A75/A16 quarter-hour/source-request replay covers 456 area-months. Country
+aggregation requires every constituent zone: NO5 and IT-CALA/IT-SICI absence
+prevents complete Norwegian/Italian hourly country totals. Ember national
+monthly comparisons remain separate. Germany's A75 national domain excludes LU;
+LU receives no German observation. National/gross-net and IE/GB scope remain
+explicitly unreconciled. Storage B10/B25 discharge is separate from primary supply.
+
+Equal-price group output does not uniquely determine technology/country output.
+For group output q, availability A and selected-label availability a, conditional
+bounds are max(0,q-(A-a)) to min(q,a). Illustrative allocation q*a/A preserves
+saved dispatch, costs and caps. Compute country/combined-fuel bounds by grouping
+capacities first, not summing individually attainable bounds. The intervals are
+conditional on saved group totals, not a search over other primal optima, and
+separate-label extremes need not be jointly attainable. Original available MW
+and fixed reservoir quantities remain separate. Implied net export is generation
+minus prepared demand, not a reconstructed/validated physical border flow.
+
+Selected full-year model versus Ember quantities (TWh; model illustrative point):
+
+| Country/fuel | Model | Ember | Difference |
+| --- | ---: | ---: | ---: |
+| GB gas | 20.51 | 90.58 | -70.07 |
+| DE gas | 22.84 | 79.33 | -56.49 |
+| PL coal | 27.57 | 82.81 | -55.25 |
+| GB wind | 128.56 | 85.86 | +42.70 |
+| DE wind | 172.20 | 131.17 | +41.04 |
+| FR nuclear | 345.09 | 371.69 | -26.60 |
+
+These discrepancies exceed within-group allocation freedom; they are not causal
+error shares or automatic capacity deficits. GB gas available energy is 311.17 TWh
+and DE gas 323.21 TWh, far above reported generation: annual capacity absence alone
+does not explain their underdispatch. ES wind availability is 44.42 TWh versus
+reported generation above that envelope; PT also has a substantial available-
+energy shortfall. Fleet/weather, capacity trajectory and reporting-scope checks
+are required; do not replace availability with observed generation.
+
+DE total generation is only +2.19 TWh versus Ember, hiding its large mix error.
+DE demand -31.19 TWh / implied net exports +33.37 TWh; GB demand -59.38 TWh /
+implied net exports +30.69 TWh. Italy generation -20.29 TWh nearly matches demand
+-20.35 TWh with net-export difference only +0.07 TWh. Poland demand is close
+(-0.61 TWh), but implied net imports 41.91 versus 1.02 TWh accompanies the coal
+deficit. Separate demand scope, wind inputs and bid/commitment/network-trade tests;
+do not infer one universal model correction.
+
+Reported sources themselves differ: DE gas A75 totals 60.55 TWh on 8760 known
+hours versus Ember 79.33 TWh. The model is below both, but complete hourly coverage
+is not whole-fleet coverage. Preserve CHP/autoproduction/gross-net and hydro/PHS
+or ROR/reservoir taxonomy differences; do not silently choose the lower error.
+Full monthly and known-hour country/PSR bias, MAE, RMSE, correlation and range
+exceedances are local, plus annual absolute quantities and shares.
+
+Verification: independent source-column regrouping, proportional allocations and
+bounds, raw/processed fingerprints, observed PSR data, national reference records,
+monthly/yearly quantities, timing metrics, shares, demand/implied trade and storage
+coverage pass. All 34 countries / 306 annual fuel rows; allocation difference zero,
+native-component residual 9.76e-6 MW, global generation-demand-link-loss closure
+2.81e-7 MW (unchanged 1e-4 MW gate). Four targeted tests cover marginal versus
+combined bounds, zero availability, emergency exclusion and missing hours/zones.
+Producer including raw/source reconstruction 342.26s; completed independent
+verification-v2 106.58s. These are audit timings; no new clearing was run.
+
+Two incomplete audit processes were stopped: one to freeze an added storage check
+consistently, one to avoid repeatedly decompressing unchanged arrays. The final
+fresh verifier loads each sealed array once and completes all checks. Neither
+interruption is a solver/model failure or a completed verification receipt.
+Only the completed verification-v2/audit.json is authoritative for this diagnostic.
+All arrays, raw-observation replay and PNG/SVG figures remain ignored locally;
+no bulk Git artifacts or publication claims. PRODUCT now explicitly requires mix,
+demand/trade and non-unique allocation disclosure alongside price validation.
+
+Final checks: four targeted tests, full independent generation-mix replay,
+production build, metadata archive verification and public asset allowlist pass.
+Authoritative plots/receipt are in presentation-v2 (unknown component shares
+remain explicit rather than propagating missing values through stacked bars).
+Obsolete initial presentation files and the empty interrupted verification
+subdirectory were removed; the sealed source/quantity witnesses remain intact.
+Charts inspected locally; no publication or live CI/Pages verification claimed.

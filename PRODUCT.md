@@ -1,6 +1,6 @@
 # Grid Conductor — product requirements
 
-Accepted direction, updated 14 October 2026. This file defines requirements;
+Accepted direction, updated 15 October 2026. This file defines requirements;
 [TASKS.md](TASKS.md) records implementation and verification.
 
 ## Purpose and workflow
@@ -28,6 +28,16 @@ error diagnosis on Norway and Sweden without excluding adverse results elsewhere
 Use declared development/held-out periods before tuning and select acceptance
 thresholds explicitly; no numerical accuracy threshold has yet been agreed.
 Observed electricity prices remain validation targets, not supply-bid inputs.
+
+Validate simulated generation quantities alongside prices: annual and monthly
+country/technology TWh, generation shares and hourly timing where observations
+support them. Compare demand and signed trade on matching scope before treating
+a generation difference as a supply error. Preserve incomplete country-zone and
+technology coverage, gross/net and storage boundaries, and differences between
+ENTSO-E and Ember reporting. Agreement in total generation does not establish
+agreement in the mix. Where equal-price aggregation leaves technology/country
+output non-unique, disclose an illustrative allocation rule and feasible ranges
+conditional on retained group totals; do not claim unique physical plant dispatch.
 
 Native PyPSA agreement is not a product objective or empirical acceptance target.
 Optional native comparisons can diagnose compiler/formulation errors; mandatory

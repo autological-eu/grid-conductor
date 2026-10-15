@@ -308,6 +308,269 @@ plant-efficiency compatibility plus sourced daily gas/EUA are secondary prioriti
 Retain adverse regional outcomes; no blanket fuel uplift or wind rescaling is
 justified by these sensitivities. Oil refinement has low priority within this model.
 
+## Dispatch generation mix, demand and trade — 15 October 2026
+
+**This compares actual saved dispatch quantities with observations**, rather than
+comparing available supply with generated energy. The retained annual-v7 baseline
+is unchanged. All 34 source countries are included; 33
+have twelve-month Ember total-generation references. ENTSO-E provides
+211 country/technology comparisons with some known hours, of which
+122 have all 8760 hours. Coverage does not certify whole-fleet scope.
+
+The largest ranked core-fuel discrepancy that cannot be removed by changing only
+the within-group allocation is **GB Gas**:
+model 20.51 TWh, conditional range
+[20.51, 20.51], versus
+Ember 90.58 TWh. This flags a quantity mismatch, not an estimate
+of missing installed capacity or a causal share of price error.
+
+**What this changes in the diagnosis:** Germany's total generation differs by
+only 2.19 TWh, but wind is
++41.04 and gas
+-56.49 TWh. Matching total generation is not
+matching the supply mix. Germany and the UK comparison also have demand differences
+of -31.19 and -59.38 TWh: reconcile national
+load boundaries before interpreting all generation errors as supply problems.
+Italy's generation difference -20.29 TWh nearly
+matches its demand difference -20.35 TWh, while implied net exports
+differ by only +0.07 TWh.
+
+In Poland, demand is much closer (-0.61 TWh), but model implied
+net imports are 41.91 TWh versus
+1.02 reported, alongside coal generation
+-55.25 TWh below the reference. This motivates
+separate supply-cost, commitment and network/trade tests; it does not identify
+which mechanism caused the error. DE/GB wind excess and ES/PT wind deficits also
+argue against a uniform European wind multiplier.
+
+Spain's modeled wind availability integrates to 44.42
+TWh, versus 55.58 TWh reported generation;
+Portugal's figures are 6.51 versus
+13.48 TWh. Even the available envelope is below
+reported generation, so dispatch/bid changes alone cannot close those gaps with
+the current inputs and boundaries. Audit fleet/capacity, weather normalization and
+reporting scope first; do not substitute observed generation for availability.
+
+### Equal-price dispatch is not a unique technology mix
+
+The solver combines offers with identical annual bid sequences and balance columns.
+Wind, solar and run-of-river can consequently share a zero-price offer. Its saved
+output does not uniquely identify which of those technologies generated it.
+
+For every retained group with output q, total available MW A and a selected
+technology/country subset with available MW a, feasible subset generation lies
+between max(0, q − (A − a)) and min(q, a). The illustrative point q × a/A preserves
+the group's dispatch, cost and caps. Country and Ember-fuel bounds are computed
+after aggregating source capacities to those labels, **not** by summing individual
+technology bounds. Bounds for different labels need not be jointly attainable.
+Fixed reservoir output is added exactly and remains separate from available MW.
+
+These ranges are conditional on the retained aggregate offer outputs. They do not
+explore other primal optima or rerun dispatch. Source-country placements within
+shared zones, especially DE/LU and IE/GB, remain conditional under the zonal GSK
+formulation. A point mix is not a uniquely predicted physical plant dispatch.
+
+### Sources, calendar and accounting
+
+- **Model:** annual-v7, all 8760 optimal UTC hours; source fleet, fixed hydro,
+  original availability and bid profiles reconstructed; saved network physics replayed.
+- **ENTSO-E:** cached A75/A16 production by PSR type, freshly replayed from raw
+  intervals and integrated to hourly MWh. B19 is onshore wind; B18 offshore.
+  Missing types and hours remain unknown. Country aggregates require every
+  constituent zone. Germany's generation domain excludes Luxembourg and is compared
+  with source-country DE; it is not treated as DE-LU or Luxembourg production.
+- **Ember:** cached current-release national 2025 monthly generation, total demand
+  and Net imports, with source receipt/hash. Annual references require all twelve
+  months; explicit reported zeros remain zeros. Ember may share ENTSO-E upstream
+  observations and is not necessarily an independent measurement.
+- **Storage:** model battery/PHS dispatch is absent. Observed B10 pumped discharge
+  and B25 storage discharge are kept separately, never added to primary generation.
+  Ember Hydro/storage, gross/net generation, own use, charging and demand scope
+  remain unreconciled. Bioenergy uses modeled biomass; all modeled waste is grouped
+  with Other fossil as an explicit accounting proxy, not a verified biogenic split.
+  Other renewables includes modeled geothermal but lacks some reported categories.
+
+Incomplete national hourly geography: AL: AL; BA: BA; GB: GB, IE-SEM; IE: IE-SEM; IT: IT-CALA, IT-SICI; LU: no matching national domain; ME: ME; NO: NO5; XK: XK. Italy's missing IT-CALA/IT-SICI
+and Norway's missing NO5 are not replaced by zero or partial-country annual totals.
+ENTSO-E reported-primary totals cover only source-reported types; they are not
+certified complete national generation. Ember country totals provide broader
+comparisons where complete, with their accounting limitations retained.
+For example, German gas generation is 60.55
+TWh in the 8760-hour ENTSO-E PSR series but 79.33 TWh
+in Ember. The model is below both, but their difference needs reporting-scope,
+CHP/autoproduction and gross/net reconciliation; complete hours alone do not prove
+complete fleet coverage. Reservoir versus run-of-river classification also needs
+reconciliation before interpreting a PSR-subtype difference as missing water.
+
+### Annual production, demand and implied trade
+
+All values are TWh; differences are model minus Ember. The model generation point
+uses the illustrative tie split, with its conditional allocation range in brackets.
+Implied model net exports = primary generation − prepared demand. Ember exports
+negate its signed Net imports. This is **not** independently validated hourly
+branch flow or bilateral trade; storage/loss/demand conventions can differ.
+Generation differences must be read alongside demand and trade differences.
+
+| Country | Model generation [range] | Ember generation | Generation difference | Demand difference | Implied net-export difference |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| AL | 5.13 [5.13, 5.13] | Unknown | Unknown | Unknown | Unknown |
+| AT | 73.48 [73.48, 73.48] | 65.38 | 8.10 | -11.34 | 19.44 |
+| BA | 5.16 [5.16, 5.16] | 11.41 | -6.25 | -0.74 | -5.51 |
+| BE | 71.88 [71.88, 71.88] | 68.08 | 3.80 | -1.80 | 5.60 |
+| BG | 31.78 [31.78, 31.78] | 36.49 | -4.71 | 2.72 | -7.43 |
+| CH | 67.53 [67.53, 67.53] | 67.69 | -0.17 | -7.88 | 7.71 |
+| CZ | 51.73 [51.73, 51.73] | 70.40 | -18.67 | -0.28 | -18.39 |
+| DE | 480.89 [480.86, 481.05] | 478.70 | 2.19 | -31.19 | 33.37 |
+| DK | 51.85 [51.85, 51.85] | 33.77 | 18.08 | -2.75 | 20.83 |
+| EE | 4.16 [4.16, 4.16] | 4.82 | -0.66 | 0.10 | -0.76 |
+| ES | 225.42 [225.42, 225.42] | 256.22 | -30.80 | -8.97 | -21.83 |
+| FI | 79.02 [79.02, 79.02] | 80.41 | -1.39 | -1.35 | -0.03 |
+| FR | 511.15 [511.15, 511.15] | 526.67 | -15.52 | 0.10 | -15.62 |
+| GB | 248.42 [248.10, 248.56] | 277.12 | -28.70 | -59.38 | 30.69 |
+| GR | 69.26 [69.26, 69.26] | 50.11 | 19.15 | 2.49 | 16.66 |
+| HR | 13.88 [13.88, 13.88] | 12.96 | 0.91 | -0.61 | 1.52 |
+| HU | 42.75 [42.75, 42.75] | 37.71 | 5.04 | -3.64 | 8.69 |
+| IE | 32.92 [32.77, 33.24] | 28.92 | 4.00 | -0.07 | 4.07 |
+| IT | 230.29 [230.29, 230.29] | 250.58 | -20.29 | -20.35 | 0.07 |
+| LT | 13.13 [13.13, 13.13] | 8.54 | 4.58 | -1.48 | 6.06 |
+| LU | 1.29 [1.13, 1.32] | 1.35 | -0.07 | 0.00 | -0.06 |
+| LV | 8.08 [8.08, 8.08] | 5.79 | 2.29 | 0.01 | 2.28 |
+| ME | 1.40 [1.40, 1.40] | 2.17 | -0.77 | -1.18 | 0.42 |
+| MK | 3.74 [3.74, 3.74] | 6.17 | -2.42 | -1.77 | -0.65 |
+| NL | 101.08 [101.08, 101.08] | 137.39 | -36.31 | -6.49 | -29.82 |
+| NO | 155.50 [155.50, 155.50] | 157.00 | -1.50 | 2.50 | -4.00 |
+| PL | 116.44 [116.44, 116.44] | 157.94 | -41.50 | -0.61 | -40.89 |
+| PT | 45.10 [45.10, 45.10] | 45.33 | -0.23 | -1.49 | 1.26 |
+| RO | 51.82 [51.82, 51.82] | 50.31 | 1.50 | -0.47 | 1.97 |
+| RS | 12.99 [12.99, 12.99] | 33.41 | -20.42 | -0.91 | -19.51 |
+| SE | 156.91 [156.91, 156.91] | 162.01 | -5.10 | 1.16 | -6.26 |
+| SI | 12.22 [12.22, 12.22] | 13.69 | -1.47 | -0.67 | -0.80 |
+| SK | 31.67 [31.67, 31.67] | 28.39 | 3.28 | -0.11 | 3.40 |
+| XK | 0.25 [0.25, 0.25] | 5.86 | -5.61 | -0.68 | -4.93 |
+
+### Annual generation differences by technology
+
+TWh, model illustrative allocation minus Ember. Unknown means incomplete reference,
+not zero. Hydro comparisons retain the pumped-storage boundary caveat. The local
+`generation-mix` PNG/SVG includes a full-country heatmap and monthly FR nuclear /
+ES wind examples; `generation-shares` shows DE/FR/ES/NO composition. Share errors
+and absolute TWh errors are distinct: normalization can hide a wrong total.
+Figures are in the fresh `presentation-v2/` subdirectory. Missing component shares
+remain unknown; charts show known shares and any unallocated total separately,
+rather than treating an unreported fuel as verified zero.
+
+| Country | Wind | Solar | Hydro | Nuclear | Gas | Coal |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| AL | Unknown | Unknown | Unknown | Unknown | Unknown | Unknown |
+| AT | -4.24 | 1.90 | -3.34 | Unknown | 14.64 | 0.00 |
+| BA | -0.08 | 0.37 | 0.31 | Unknown | Unknown | -6.85 |
+| BE | 8.18 | 1.17 | -0.01 | 4.23 | -6.24 | -0.05 |
+| BG | -0.56 | 0.82 | 0.02 | 0.21 | 1.83 | -6.88 |
+| CH | -0.11 | 3.54 | -6.56 | 4.19 | Unknown | Unknown |
+| CZ | -0.15 | 0.19 | 0.02 | -1.63 | 6.77 | -18.61 |
+| DE | 41.04 | 18.24 | 2.40 | 0.00 | -56.49 | -19.76 |
+| DK | 9.82 | 0.12 | -0.01 | Unknown | 0.91 | -0.77 |
+| EE | 0.63 | -0.23 | -0.01 | Unknown | 0.69 | Unknown |
+| ES | -11.47 | 3.59 | -5.87 | -5.82 | -9.34 | -1.31 |
+| FI | -4.43 | 0.27 | 0.01 | -15.05 | 1.91 | 0.39 |
+| FR | 7.57 | 6.76 | 6.70 | -26.60 | -8.58 | 0.36 |
+| GB | 42.70 | 3.02 | -0.43 | -2.69 | -70.07 | 0.00 |
+| GR | -2.36 | 2.92 | 0.81 | Unknown | 20.52 | -2.73 |
+| HR | -1.97 | 0.07 | 0.50 | Unknown | 2.81 | 0.14 |
+| HU | -0.17 | -1.06 | -0.05 | 0.14 | 7.05 | -1.54 |
+| IE | 2.92 | 0.83 | 0.12 | Unknown | 1.26 | -0.78 |
+| IT | -8.62 | 7.81 | -1.31 | Unknown | -5.20 | -1.31 |
+| LT | 0.77 | 1.20 | 0.08 | Unknown | 2.70 | Unknown |
+| LU | -0.03 | 0.30 | -0.07 | Unknown | -0.06 | Unknown |
+| LV | 0.10 | 0.06 | -0.12 | Unknown | 2.45 | Unknown |
+| ME | -0.26 | -0.04 | 0.06 | Unknown | Unknown | -0.52 |
+| MK | -0.26 | -0.03 | -0.23 | 0.00 | 0.16 | -2.02 |
+| NL | 12.64 | -4.00 | -0.02 | -0.83 | -40.66 | -3.44 |
+| NO | -5.08 | 0.68 | 4.52 | Unknown | -0.82 | Unknown |
+| PL | 1.07 | 6.41 | 0.45 | Unknown | 11.53 | -55.25 |
+| PT | -7.22 | 0.20 | -3.88 | Unknown | 10.16 | 0.00 |
+| RO | -2.78 | 1.05 | 2.08 | 0.34 | 6.93 | -5.95 |
+| RS | -0.74 | Unknown | 0.24 | Unknown | 1.71 | -21.89 |
+| SE | -4.18 | 0.85 | -8.19 | -13.61 | 0.27 | Unknown |
+| SI | -0.01 | 0.44 | -0.44 | -0.04 | 0.11 | -1.39 |
+| SK | -0.00 | 0.46 | 0.93 | 2.13 | 1.91 | 0.44 |
+| XK | -0.33 | Unknown | -0.07 | Unknown | Unknown | -5.24 |
+
+### Largest core-fuel gaps beyond within-group allocation
+
+Sorted by distance of the twelve-month reference from the conditional allocation
+range; hydro and waste/bioenergy proxies are excluded from this ranking. All other
+countries/fuels remain in the data. “Outside range” means the mismatch cannot be
+removed solely by redistributing the saved group outputs between equal-price
+members. It does not distinguish fleet/weather, bid, demand, trade or reporting error.
+Available energy is original available MW integrated over the year, **not dispatch**;
+it ignores delivery and commitment. Where available energy exceeds reported
+generation but dispatch is low, an annual capacity shortage alone is not an
+explanation. Hourly timing, bids, imports, demand or other constraints may still matter.
+
+| Country | Technology | Available TWh | Model TWh [range] | Ember TWh | Point difference | Outside range TWh |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| GB | Gas | 311.17 | 20.51 [20.51, 20.51] | 90.58 | -70.07 | 70.07 |
+| DE | Gas | 323.21 | 22.84 [22.84, 22.84] | 79.33 | -56.49 | 56.49 |
+| PL | Coal | 186.51 | 27.57 [27.57, 27.57] | 82.81 | -55.25 | 55.25 |
+| GB | Wind | 130.41 | 128.56 [127.59, 130.05] | 85.86 | 42.70 | 41.73 |
+| NL | Gas | 124.38 | 6.94 [6.94, 6.94] | 47.60 | -40.66 | 40.66 |
+| DE | Wind | 174.68 | 172.20 [169.32, 174.46] | 131.17 | 41.04 | 38.15 |
+| FR | Nuclear | 411.44 | 345.09 [345.09, 345.09] | 371.69 | -26.60 | 26.60 |
+| RS | Coal | 42.20 | 0.01 [0.01, 0.01] | 21.90 | -21.89 | 21.89 |
+| GR | Gas | 73.90 | 43.41 [43.41, 43.41] | 22.89 | 20.52 | 20.52 |
+| DE | Coal | 348.73 | 75.10 [75.10, 75.10] | 94.86 | -19.76 | 19.76 |
+| CZ | Coal | 83.35 | 5.11 [5.11, 5.11] | 23.72 | -18.61 | 18.61 |
+| DE | Solar | 111.69 | 108.20 [105.88, 111.13] | 89.97 | 18.24 | 15.91 |
+
+### Hourly timing and monthly quantities
+
+The full local comparison contains monthly totals and matched-hour bias, MAE, RMSE,
+correlation and allocation-range exceedances for every available country/type.
+Monthly and annual ENTSO-E sums use only their known hours; a partial sum is not
+annualized. The examples below show matched-hour TWh and MW MAE. Correlation may
+be unknown for constant or unavailable series. Point timing metrics inherit the
+declared allocation rule; interval exceedances help identify robust discrepancies.
+
+| Country | PSR technology | Known hours | Model matched TWh | Observed matched TWh | MAE MW | Correlation |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| FR | nuclear | 8754 | 344.83 | 371.40 | 6563.75 | 0.694 |
+| DE | gas | 8760 | 22.84 | 60.55 | 5144.78 | 0.542 |
+| ES | onshore_wind | 8723 | 43.85 | 55.45 | 2010.72 | 0.891 |
+| PT | onshore_wind | 8760 | 6.20 | 13.42 | 836.09 | 0.853 |
+| SE | reservoir | 8760 | 50.18 | 68.42 | 3637.24 | 0.453 |
+
+### Verification and next action
+
+Four fixtures verify sharp marginal bounds and regrouping, zero availability,
+emergency exclusion, missing hours and missing constituent zones, and B18/B19
+identity. Independent `audit_dispatch_mix_2025.py` rebuilds source columns and
+saved dispatch, checks proportional allocations and conditional bounds, rereads
+PSR observations and Ember records, and replays monthly/annual quantities,
+hourly metrics, shares, demand and implied trade. All 34 countries /
+306 annual fuel rows pass. Maximum allocation
+difference 0 MW; native-component residual
+9.76e-06 MW; global generation-demand-link-loss
+closure 2.81e-07 MW, below 1e-4 MW.
+
+Fresh ignored root `data/bidding-zone-network-2025/generation-mix-v1/` contains
+the declared design, raw-observation replay, source/code hashes, full monthly /
+hourly metrics, quantities and figures. Producer `compare_dispatch_mix_2025.py`
+plus helper `generation_mix_2025.py` takes 342.26s including
+source reconstruction and raw observation replay; independent audit
+106.58s. No new clearing was run; these are audit timings.
+
+Prioritize national demand-scope reconciliation, regional wind fleet/weather inputs,
+then source-backed outage timing and separate bid/network/trade controls. In
+particular, cheap supply and imports displacing thermal generation warrant a joint
+quantity/price check before adding generic bid steps or raising fuel prices.
+A reference outside
+modeled availability flags input/scope issues; sufficient availability but different
+dispatch motivates bid/constraint investigation, without establishing causality.
+Do not fit generation into renewable availability. Hydro remains fixed, price and
+mix accuracy gates remain open, and no investment or browser integration is accepted.
+This report update is local; no CI/Pages or live-publication claim follows.
+
 ## Residual-demand response and fleet-stack diagnosis — 15 October 2026
 
 **What this adds:** compare observed and simulated prices at comparable residual
