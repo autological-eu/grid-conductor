@@ -13,6 +13,7 @@ reviews remain disabled.
 | Role | Implementation / checkpoint | Evidence and limits |
 | --- | --- | --- |
 | **One active research model** | Whole-network fixed-hydro/resource-bid zonal dispatch; tools/run_bidding_zone_network_2025.py, tools/global_bidding_zone_2025.py; data/bidding-zone-network-2025/annual-v7/ | 48 clearing areas / 145 buses; 8760 optimal hours, zero emergency supply, independent saved-source/physics replay. Clearing loop 33.476s; complete two-control/check/export command 418.108s, preparation 123.539s, peak RSS 2584 MiB. Fixed hourly hydro; independent hourly clears, not yet daily orchestration or adaptive storage. Regional allocation/demand proxies and price accuracy remain unresolved. |
+| **Bounded bid-calibration diagnostic** | bid-calibration-v1; run/audit_bid_calibration_2025.py and training-selected diagnostic-evaluation-v1 | Seven Jan–June training tuples, original physics unchanged; declared regularized price/generation/trade score selects zero adders. Independently replayed nine complete LP witnesses and training-only selection. Jul–Dec EU MAE 32.21; supplementary gas +30 lowers it to 31.60 but worsens FR 20.71→25.18 and ES 22.55→31.55 EUR/MWh. Nuclear −15 gives EU 32.29. No promotion; retrospective evaluation, not untouched validation. |
 | **Current input-sensitivity diagnostics** | input-sensitivity-v1; wind/gas/oil/carbon +/-10%, plus combined positive case | Ten full-year attempts; 8758 hours common to all cases / 41 observed zones. Independent coefficients/components replay passes; control exactly reproduces annual-v7. Gas price response 3.56–3.78 EUR/MWh, wind 1.60–2.61, carbon 2.43–2.55, oil none material. Wind fleet/profile inconsistencies need dated source correction. No baseline promotion. |
 | **Hourly price-mechanism diagnostic** | price-mechanism-v1; unchanged-baseline dual witness and calendar probes | All 8760 optimal; baseline prices/objectives reproduce exactly. Independent component and primal/dual replay plus all 264 GSK-aligned +/-1 MW probes pass. Monthly gas/oil correlations .190/.183; local interior offers are witness evidence, not unique real price setters. Fixed hydro has no water bid; model constraint terms warrant further Nordic diagnostics. |
 | **Europe-wide input audit** | residual-demand-audit-2025/v1; source audit plus independent reconstruction | All 48 areas × 8760 hours; 456 generation area-months replayed, all 41 price areas verified. Residual/observed-price mean r .644 versus cleared-price .502; not a price estimator or causal attribution. Wind quantity flags in ES/PT; national demand scope gaps; flat FR nuclear availability; Nordic price formation remains a priority. Baseline unchanged. |
@@ -50,6 +51,34 @@ price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
 
 ## Ordered next actions
 
+The completed bid-calibration replay checks source hashes, unchanged physical
+coefficients, seven training scores/selection, all 41 evaluation areas, generation
+and implied-trade intervals, and nine complete primal/dual witnesses. Maximum
+component residual is 0.00000977 MW; maximum duality gap EUR0.00892. Control and
+both nonzero annual diagnostics solve all 8760 hours. The supplementary choices
+(nuclear −15 and gas +30 EUR/MWh) were sealed from training results before their
+evaluation; the primary regularized criterion remains unchanged. Nuclear −15
+slightly improves all three raw training metrics but loses after the declared
+penalty: this does not establish that every possible bid calibration fails.
+Source preparation/control clearing/full primary command: 213.44/42.65/389.66s;
+supplementary annual clears 52.97s and 35.57s, total command 203.05s; independent
+audit 173.62s. Witnesses/plots remain ignored locally, report updated in place.
+Of 810 known training generation targets, 190 exceed the available-energy envelope
+by >0.001 TWh (37.92 TWh summed excess); these remain soft checks, not discarded
+targets or forced availability corrections. Evaluation is retrospective. No push
+or publication claim, model promotion, browser replacement or review restart.
+
+Latest user priority (15 October): improve synthetic supply bids inside the existing
+European network before correcting other inputs. The bounded training-only global
+offset trial is complete and independently replayed; baseline retained. Next,
+declare a small zonal/scarcity-dependent bid-shape experiment, keeping fuel anchors
+and original physics/availability/hydro/demand fixed. Uniform gas uplift does not
+fix France/Spain; do not select a replacement using these evaluation outcomes.
+The earlier input priorities below remain findings, not blockers to bid research.
+Declare a fresh training design and evaluation/acceptance checks before fitting;
+the inspected 2025 split cannot be called untouched validation.
+
+
 1. **Improve whole-fleet supply response with hydro fixed.** The latest user
    direction supersedes earlier recommendations to prioritize flexible hydro.
    Use annual-v7 as the physical checkpoint. The new transport control is faster
@@ -72,8 +101,9 @@ price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
    Source-check ES/PT wind magnitude/site conversion, national and zonal demand
    scope, and French nuclear outage timing. Test source-backed changes separately
    from bid-response and network changes, retaining all eligible zones and failures.
-   Preserve the existing report and independent physics/source replay. Historical
-   prices may train the separate statistical reference only, never dispatch bids.
+   Preserve the existing report and independent physics/source replay. Evaluation
+   prices never enter fitting. The latest authorization permits declared historical
+   training prices in the bounded calibration, without changing original availability.
    Declare evaluation cohorts, metric weighting and acceptance thresholds before
    calibration; the inspected 2025 split is retrospective, not untouched validation.
    Further hydro flexibility and paused daily/rolling engines remain out of scope.

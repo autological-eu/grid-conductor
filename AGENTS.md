@@ -16,8 +16,9 @@ and seasonal/tail diagnostics; diagnose Norway/Sweden without dropping other
 eligible zones. Native PyPSA matching is not a target or required empirical gate;
 use it only when useful as a numerical diagnostic. Independent physics/feasibility,
 chronology, source provenance and held-out validation requirements remain.
-Keep validation prices out of bid construction and predeclare splits/thresholds
-before tuning. Maintain one active model; do not restart paused model families.
+Keep evaluation prices out of bid construction and predeclare splits/thresholds
+before tuning. Historical training prices may enter only the explicitly authorized
+15 October bounded calibration described below. Maintain one active model; do not restart paused model families.
 The current annual-v7 witness clears independent hours with fixed hydro; daily
 orchestration is the agreed workflow to implement, not an already verified feature.
 Preserve frozen producers/references and give any changed implementation fresh
@@ -178,8 +179,8 @@ native AC/PTDF feasibility or authorize baseline promotion.
 
 A separate residual_price_benchmark_2025.py reference may fit historical prices
 in its declared training period only, with independent training-optimality and
-prediction replay. This exception applies to the statistical reference, never
-dispatch bids or investment valuation. Declare temporal cohorts before fitting;
+prediction replay. That reference remains separate from dispatch and investment valuation; the
+later authorized bid-calibration experiment has its own training-only exception. Declare temporal cohorts before fitting;
 2025 has already been inspected, so call its split retrospective temporal evaluation,
 not untouched held-out validation. Keep all eligible areas, negative prices and
 source missingness. Reference accuracy cannot certify dispatch or scenario effects.
@@ -204,6 +205,23 @@ and implied generation-minus-demand exports are not verified physical border flo
 Require all constituent zones and explicit type coverage; storage B10/B25 stays
 separate from primary generation. Preserve source taxonomy/gross-net differences,
 no generation-derived availability fitting, no new solve or baseline promotion.
+
+The latest 15 October user request explicitly authorizes bounded fuel-anchored
+bid calibration inside the unchanged coupled European model, before further input
+corrections. This supersedes earlier blanket bans on price-fitted dispatch bids
+only for the declared training period/experiment. Evaluation prices and generation
+must not enter fitting/selection. Keep availability, demand, fixed hydro, GSKs and
+network constraints fixed; learn few transparent gas/coal/nuclear adjustments.
+Use generation allocation intervals and declared monthly trade comparisons as
+soft training checks, never impose infeasible generation or treat implied exports
+as verified border flows. Predeclare bounds, objective weights and finite search;
+2025 temporal evaluation remains retrospective. Baseline promotion, investment
+acceptance and empirical thresholds are separate gates. Preserve frozen producers.
+The completed trial uses bid_calibration_2025.py, run_bid_calibration_2025.py,
+evaluate_bid_calibration_probes_2025.py and independent audit_bid_calibration_2025.py.
+The declared score selected unchanged bids. Preserve primary selection separately
+from the two training-selected nonzero annual diagnostics; no baseline promotion.
+report_bid_calibration_2025.py updates the existing article, with figures local.
 
 - Inspect actual supervisor/worker processes and locks before computations.
   Receipts do not establish liveness or progress. If the managed environment is

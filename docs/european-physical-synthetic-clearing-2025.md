@@ -308,6 +308,259 @@ plant-efficiency compatibility plus sourced daily gas/EUA are secondary prioriti
 Retain adverse regional outcomes; no blanket fuel uplift or wind rescaling is
 justified by these sensitivities. Oil refinement has low priority within this model.
 
+## Bounded fuel-anchored bid calibration — 15 October 2026
+
+**Result:** The declared joint training criterion selects the unchanged bids. This bounded trial does not support a calibrated replacement.
+Selected global adders [gas, coal/lignite, nuclear] are **[0.0, 0.0, 0.0]
+EUR/MWh electricity**. July–December equal-zone MAE changes
+**EUR32.21 → EUR32.21/MWh**;
+mean zonal correlation **0.407 →
+0.407**. The physical annual-v7 baseline
+and browser remain unchanged; no calibrated candidate is promoted.
+
+### Training-selected nonzero diagnostics
+
+The primary score chose unchanged bids. Nuclear −15 improved all three raw
+training metrics slightly, but not enough to offset the predeclared penalty.
+Gas +30 had the lowest training price MAE among the visited nonzero tuples but
+worsened generation agreement. Their annual diagnostics below were separately
+declared and selected from training results only, before running their evaluation.
+The primary weights/decision remain intact; no diagnostic is adopted because it
+looks better on evaluation. This is exploratory follow-up, not an untouched test.
+
+Control evaluation MAE: EU 32.21, France
+20.71, Spain 22.55 EUR/MWh. Generation/trade columns use the same normalized
+interval-error metrics. These three global offsets do not test country/seasonal
+bid shapes or establish uniquely identifiable market offers.
+
+| Diagnostic | Adders [gas, coal, nuclear] | EU MAE | Mean r | FR MAE | ES MAE | Generation error | Trade error |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Nuclear −15 | [0.0, 0.0, -15.0] | 32.29 | 0.411 | 21.11 | 22.51 | 0.40582 | 0.22100 |
+| Gas +30 | [30.0, 0.0, 0.0] | 31.60 | 0.400 | 25.18 | 31.55 | 0.33320 | 0.16584 |
+
+**Interpretation for France and Spain:** the gas uplift modestly reduces the
+European average MAE but substantially worsens both countries. Their control
+mean biases are already approximately +0.01 and +3.12 EUR/MWh, respectively;
+a uniform upward price adjustment misses the hourly shape/timing problem.
+The nuclear reduction offers no material joint price improvement there either.
+This does not rule out bid calibration: it rejects promoting these particular
+global-offset diagnostics. A next bid-focused experiment should test a few
+transparent zonal or scarcity-dependent offer blocks, anchored to fuel costs,
+with a fresh training-only design and the same network/quantity checks. It must
+not widen this search or choose parameters after inspecting these evaluation data.
+
+FR/ES generation intervals under the nonzero diagnostics, July–December TWh;
+references and control intervals appear in the main quantity table below.
+
+| Diagnostic | Country | Fuel | Allocation interval TWh |
+| --- | --- | --- | ---: |
+| Nuclear −15 | FR | Nuclear | 185.96–185.96 |
+| Nuclear −15 | FR | Gas | 4.22–4.22 |
+| Nuclear −15 | FR | Coal | 0.00–0.00 |
+| Nuclear −15 | ES | Nuclear | 24.04–24.04 |
+| Nuclear −15 | ES | Gas | 28.48–28.48 |
+| Nuclear −15 | ES | Coal | 0.00–0.00 |
+| Gas +30 | FR | Nuclear | 180.39–180.39 |
+| Gas +30 | FR | Gas | 1.89–1.89 |
+| Gas +30 | FR | Coal | 2.02–2.02 |
+| Gas +30 | ES | Nuclear | 23.57–23.57 |
+| Gas +30 | ES | Gas | 23.59–23.59 |
+| Gas +30 | ES | Coal | 0.00–0.00 |
+
+Source preparation for the diagnostics 107.38s; total
+source/two-annual-solve/export command 203.05s. Per-probe
+clearing times: Nuclear −15 52.97s, Gas +30 35.57s.
+The full diagnostic design, code hashes and witnesses are in
+`diagnostic-evaluation-v1/`; their training selectors and all outcomes are included
+in the independent replay. The local figure shows these diagnostics alongside the
+control rather than presenting zero fitted adders as a new predictor.
+
+### What was fitted, and what stayed fixed
+
+The user explicitly authorized historical **training** prices/generation to inform
+effective synthetic bids inside the coupled European dispatch model. Each offer
+retains its original fuel/efficiency, operational carbon and variable cost anchor,
+plus one constant resource-level adder. Gas includes CCGT/OCGT; coal includes
+hard coal/lignite. Renewable, oil, other-resource and emergency bids are unchanged.
+There is no fitted hourly price curve, renewable scaling, new supply block,
+country-specific markup or hydro rescheduling in this first trial.
+
+Training: January–June, 4344 UTC hours. Evaluation: July–December, 4416 hours,
+without refitting or selecting parameters using evaluation outcomes. All eligible
+A44 price areas enter the comparison. 2025 was already inspected, so this is
+**retrospective temporal evaluation, not untouched validation**. Future bid anchors
+use the same realized fuel inputs; this does not establish operational forecasting.
+
+Demand, original generator availability, fixed reservoir output, physical PTDFs,
+GSKs, electrical islands and controllable-link bounds/efficiencies remain identical.
+All economic dispatch changes therefore follow from changed bids within the same
+modeled constraints. Those constraints remain model-derived, not certified JAO
+commercial domains; fitted costs may compensate for their inaccuracies.
+
+### Declared search and joint objective
+
+Finite levels: gas and coal/lignite −30/0/+30 EUR/MWh; nuclear −15/0/+15 EUR/MWh.
+Exactly two coordinate sweeps in gas/coal/nuclear order, caching repeated tuples.
+7 distinct training tuples were visited; the
+unchanged bids remain selectable. Ties within 1e-12 prefer smaller normalized
+adders, then lexicographic order. The selection manifest is sealed before creating
+the evaluation-target artifact. No bounds, split or weights change after results.
+This is a bounded coordinate experiment, not globally optimal inverse clearing
+or unique recovery of historical market offers.
+
+The objective averages three training errors, each divided by its control value:
+
+1. Equal-zone price MAE across every eligible observed area.
+2. Mean country/fuel/month distance from the feasible **saved-group allocation
+   interval**, divided by max(reference generation, 0.25 TWh). Fit Wind, Solar,
+   Nuclear, Gas and Coal, excluding hydro/waste accounting proxies from this term.
+3. Mean country/month distance from the implied net-export allocation interval,
+   divided by max(model monthly demand, 1 TWh). Source net exports negate Ember
+   Net imports; these are not verified physical/bilateral border flows.
+
+Add a regularization penalty of 0.05 times the mean squared bid adjustments divided
+by their respective bounds. These weights, floors and bounds are experimental
+settings, not empirical acceptance thresholds. Missing observations stay unknown;
+known country/fuel/month rows have equal weight within the quantity term, so
+coverage affects its composition. Generation intervals are marginal/conditional,
+not jointly attainable extremes or a search over all primal optima.
+
+Of 810 known generation
+training targets, 190
+exceed their original available-energy envelope by more than 0.001 TWh. They remain
+soft diagnostic targets, not imposed equalities or silently discarded hours.
+Their summed positive envelope excess is
+37.92 TWh. No bid can manufacture
+missing available energy; source fleet/weather/scope inconsistencies remain open.
+
+| Period | Price MAE control → fit | Mean correlation control → fit | Generation-range error control → fit | Trade-range error control → fit |
+| --- | ---: | ---: | ---: | ---: |
+| training | 34.26 → 34.26 | 0.574 → 0.574 | 0.33761 → 0.33761 | 0.18363 → 0.18363 |
+| evaluation | 32.21 → 32.21 | 0.407 → 0.407 | 0.40938 → 0.40938 | 0.22539 → 0.22539 |
+
+Quantity/trade errors are the normalized monthly metrics above, not percentages
+of total European energy or causal shares. Read them separately: a joint objective
+does not guarantee every error component or country improves.
+
+### France and Spain: prices and generation together
+
+The local `bid-calibration` PNG/SVG shows the training trace, evaluation error
+ratios, and FR/ES seven-day evaluation price means. The following half-year
+generation ranges retain the equal-price allocation uncertainty and accounting
+caveats from the preceding quantity audit. All values are TWh, July–December.
+
+| Country | Fuel | Ember | Control allocation range | Calibrated allocation range |
+| --- | --- | ---: | ---: | ---: |
+| FR | Wind | 25.66 | 30.34–30.34 | 30.34–30.34 |
+| FR | Solar | 15.16 | 18.22–18.22 | 18.22–18.22 |
+| FR | Nuclear | 190.52 | 180.18–180.18 | 180.18–180.18 |
+| FR | Gas | 7.27 | 4.23–4.23 | 4.23–4.23 |
+| FR | Coal | 0.66 | 0.00–0.00 | 0.00–0.00 |
+| ES | Wind | 27.56 | 20.85–21.17 | 20.85–21.17 |
+| ES | Solar | 30.86 | 32.75–33.07 | 32.75–33.07 |
+| ES | Nuclear | 26.93 | 24.07–24.07 | 24.07–24.07 |
+| ES | Gas | 29.66 | 28.47–28.47 | 28.47–28.47 |
+| ES | Coal | 0.09 | 0.00–0.00 | 0.00–0.00 |
+
+### All eligible evaluation price areas
+
+Control MAE is EUR/MWh; each diagnostic cell is MAE / correlation. All eligible
+areas, including adverse regions, are retained. Complete bias/RMSE/tail metrics
+remain in each local outcome record. These are retrospective evaluation results,
+not an evaluation-driven winner selection.
+
+| Area | Control MAE | Nuclear −15 MAE / r | Gas +30 MAE / r |
+| --- | ---: | ---: | ---: |
+| AL | 38.20 | 38.68 / 0.337 | 32.60 / 0.300 |
+| AT | 22.82 | 22.60 / 0.691 | 20.04 / 0.686 |
+| BE | 20.92 | 22.41 / 0.728 | 21.17 / 0.722 |
+| BG | 32.58 | 31.96 / 0.558 | 33.72 / 0.518 |
+| CH | 27.36 | 28.01 / 0.626 | 18.54 / 0.655 |
+| CZ | 25.27 | 24.92 / 0.467 | 32.12 / 0.482 |
+| DE-LU | 23.35 | 23.81 / 0.690 | 21.29 / 0.711 |
+| DK1 | 26.53 | 27.37 / 0.629 | 25.81 / 0.656 |
+| EE | 50.04 | 49.83 / 0.334 | 55.29 / 0.321 |
+| ES | 22.55 | 22.51 / 0.687 | 31.55 / 0.693 |
+| FR | 20.71 | 21.11 / 0.697 | 25.18 / 0.698 |
+| GR | 33.28 | 32.67 / 0.489 | 35.53 / 0.492 |
+| HR | 26.86 | 26.34 / 0.605 | 28.24 / 0.562 |
+| HU | 30.43 | 29.99 / 0.597 | 29.27 / 0.580 |
+| IT-CNOR | 34.30 | 34.77 / 0.530 | 20.84 / 0.526 |
+| IT-CSUD | 36.77 | 36.95 / 0.510 | 23.41 / 0.514 |
+| IT-North | 27.08 | 28.04 / 0.552 | 15.96 / 0.534 |
+| IT-SICI | 38.35 | 38.47 / 0.527 | 23.92 / 0.528 |
+| IT-SUD | 35.25 | 35.40 / 0.539 | 22.54 / 0.542 |
+| LT | 44.81 | 44.59 / 0.387 | 48.71 / 0.378 |
+| LV | 44.87 | 44.67 / 0.385 | 48.76 / 0.375 |
+| MK | 30.94 | 30.53 / 0.557 | 31.75 / 0.505 |
+| NL | 21.73 | 22.72 / 0.700 | 21.19 / 0.707 |
+| PL | 27.02 | 27.13 / 0.575 | 22.93 / 0.574 |
+| PT | 22.73 | 22.84 / 0.674 | 33.09 / 0.680 |
+| RO | 31.59 | 31.02 / 0.577 | 32.37 / 0.535 |
+| RS | 29.20 | 28.83 / 0.570 | 30.18 / 0.513 |
+| SI | 26.32 | 25.71 / 0.577 | 28.86 / 0.521 |
+| SK | 24.95 | 24.51 / 0.608 | 26.46 / 0.602 |
+| DK2 | 56.30 | 60.59 / 0.073 | 56.53 / 0.079 |
+| FI | 38.15 | 38.05 / -0.033 | 39.84 / -0.039 |
+| NO1 | 40.53 | 42.82 / -0.185 | 42.29 / -0.213 |
+| NO2 | 39.60 | 44.04 / 0.051 | 42.21 / 0.064 |
+| NO3 | 27.56 | 25.29 / -0.053 | 30.56 / -0.087 |
+| NO4 | 27.08 | 22.17 / 0.090 | 29.13 / 0.063 |
+| NO5 | 43.67 | 43.01 / -0.355 | 47.83 / -0.376 |
+| SE1 | 27.50 | 24.02 / 0.064 | 29.45 / 0.044 |
+| SE2 | 27.69 | 24.19 / 0.076 | 29.60 / 0.060 |
+| SE3 | 33.76 | 36.52 / 0.034 | 35.37 / 0.031 |
+| SE4 | 42.15 | 45.33 / 0.129 | 43.06 / 0.136 |
+| IT-SARD | 39.64 | 39.68 / 0.543 | 28.58 / 0.543 |
+
+### Complete training trace
+
+Adders are [gas, coal/lignite, nuclear], EUR/MWh. Generation/trade columns use the
+declared relative interval-error metrics. Failed trials are ineligible, not filled
+from another case. Each tuple is a controlled training probe, not a separately
+accepted annual model or a restarted retired search.
+
+| Trial | Adders | Joint score | Price MAE | Generation error | Trade error |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 0 | [0.0, 0.0, 0.0] | 1.00000 | 34.26 | 0.33761 | 0.18363 |
+| 1 | [-30.0, 0.0, 0.0] | 1.21087 | 41.53 | 0.40618 | 0.21438 |
+| 2 | [30.0, 0.0, 0.0] | 1.01112 | 33.96 | 0.35136 | 0.17472 |
+| 3 | [0.0, -30.0, 0.0] | 1.03008 | 35.84 | 0.35271 | 0.17436 |
+| 4 | [0.0, 30.0, 0.0] | 1.12068 | 34.12 | 0.39449 | 0.21077 |
+| 5 | [0.0, 0.0, -15.0] | 1.00896 | 34.06 | 0.33513 | 0.18183 |
+| 6 | [0.0, 0.0, 15.0] | 1.02661 | 34.81 | 0.34028 | 0.18472 |
+
+### Verification, runtime and interpretation
+
+Fresh ignored root `data/bidding-zone-network-2025/bid-calibration-v1/` contains
+the predeclared design, source/code hashes, training targets, every training
+primal/dual witness, sealed selection, subsequent evaluation targets and the
+control/selected annual witnesses. Four fixtures check resource-only changes,
+chronological target separation, joint-error tradeoffs and deterministic selection.
+Independent `audit_bid_calibration_2025.py` rebuilds unchanged inputs, replays
+9 complete primal/dual LP certificates, objective
+values, generation/trade intervals, raw training losses, every coordinate choice,
+and all temporal MAE/bias/RMSE/correlation and quantity tables. Failed training
+trials: 0. Numeric feasibility and dual tolerances are
+unchanged; no source or acceptance gate is relaxed.
+
+Source/target preparation 213.44s; control annual clearing
+42.65s; selected annual clearing
+42.65s (uses control if unchanged); complete bounded
+fit/evaluation/export command 389.66s. Independent replay
+173.62s. Offline fitting includes repeated training solves;
+it is not the runtime of one annual scenario. Fresh-control maximum price
+difference from the legacy saved baseline is
+0 EUR/MWh.
+
+Effective adders are not observed generator margins, uniquely identified bids or
+proof of realistic constraint data. A parameter at its bound calls for a separately
+declared future sensitivity, not widening the search after inspecting evaluation.
+Do not adopt a different training tuple based on the evaluation tables. Keep the
+current physical baseline; empirical thresholds, matched investment scenarios and
+supported app integration remain separate gates. This report update is local;
+no CI/Pages/live-publication claim follows. Full arrays and figures stay ignored.
+
 ## Dispatch generation mix, demand and trade — 15 October 2026
 
 **This compares actual saved dispatch quantities with observations**, rather than

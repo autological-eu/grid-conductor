@@ -27,7 +27,8 @@ price levels. Report all eligible zones and aggregate weighting/coverage; focus
 error diagnosis on Norway and Sweden without excluding adverse results elsewhere.
 Use declared development/held-out periods before tuning and select acceptance
 thresholds explicitly; no numerical accuracy threshold has yet been agreed.
-Observed electricity prices remain validation targets, not supply-bid inputs.
+Evaluation electricity prices remain validation targets. Historical training prices
+may inform the explicitly authorized bounded bid calibration described below.
 
 Validate simulated generation quantities alongside prices: annual and monthly
 country/technology TWh, generation shares and hourly timing where observations
@@ -104,11 +105,25 @@ network representation separately, with common-input controls before adoption.
 A separate statistical price reference may learn a simple residual-demand response
 from historical prices in a predeclared training period. Report temporal evaluation
 against both the dispatch model and a constant training-price reference, including
-all eligible zones and extrapolation limitations. Such fitting is confined to the
-reference: observed prices remain excluded from dispatch bids. A statistical price
+all eligible zones and extrapolation limitations. This statistical reference remains separate from dispatch; the subsequent
+explicitly authorized bid-calibration trial is governed by its own training split. A statistical price
 reference does not clear supply, enforce network feasibility or value investments.
 Already inspected 2025 observations cannot establish untouched held-out validation;
 empirical acceptance still requires the existing separately declared gates.
+
+The latest 15 October 2026 decision authorizes a controlled bid-calibration trial
+before other input corrections. Learn a small number of transparent fuel-anchored
+resource bid adjustments inside the coupled European dispatch model, retaining
+original demand, available supply, fixed hydro and all network/GSK constraints.
+Historical prices and generation may be used only in the declared training period;
+compare generation allocation ranges and trade alongside prices to discourage
+price improvements achieved through less realistic dispatch. Do not force observed
+generation outside the available envelope or fit renewable availability to it.
+Evaluate a separate chronological period without refitting and report all eligible
+European areas, with detailed France/Spain examples. Fitted bids are effective
+synthetic offers, not uniquely recovered market bids; they may compensate for
+incorrect constraints or other inputs. Experimental search bounds/weights are not
+product acceptance thresholds. No automatic baseline or investment-model promotion.
 
 ## Maintained models and publications
 
@@ -126,8 +141,8 @@ model and compact rolling-storage trial paused as research references:
    Diagnose largest errors using independently sourced capacity, generation,
    demand and water data; isolate injection geometry from physical capacity and
    hydro water/schedule assumptions. Sensitivity probes do not establish acceptance.
-   Publish adverse outcomes and all eligible areas. Keep observed electricity prices
-   out of bid construction. Bounded chronological hydro diagnostics were subsequently
+   Publish adverse outcomes and all eligible areas. Keep evaluation electricity prices
+   out of bid construction; the later bounded calibration permits training prices only. Bounded chronological hydro diagnostics were subsequently
    authorized: preserve each unit's source water and exact opening/closing stocks,
    cap output changes and independently verify feasibility. These tests do not authorize
    an annual adaptive policy, investment valuation or empirical baseline promotion.
