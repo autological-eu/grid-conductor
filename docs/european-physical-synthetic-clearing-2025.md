@@ -2,7 +2,7 @@
 
 ## Summary and conclusion
 
-The geographic/annual results below describe the retained **uncalibrated annual-v7 baseline**. The latest [zonal bid/block experiment](#zonal-resource-bids-and-two-block-supply-curves--15-october-2026) changes training-fitted offers only and remains a diagnostic, with separate evaluation results.
+The geographic/annual results below describe the retained **uncalibrated annual-v7 baseline**. The latest [hourly offer-curve experiment](#hourly-price-shape-and-resource-offer-curves--16-october-2026) changes training-fitted offers only and remains a diagnostic, with separate evaluation results.
 
 The model now uses **48 distinct clearing areas across the entire
 retained European network**, including NO1–NO5, SE1–SE4, DK1/DK2 and Italy's seven
@@ -312,6 +312,273 @@ with independent generation and held-out price periods. Gas heating-value and
 plant-efficiency compatibility plus sourced daily gas/EUA are secondary priorities.
 Retain adverse regional outcomes; no blanket fuel uplift or wind rescaling is
 justified by these sensitivities. Oil refinement has low priority within this model.
+
+## Hourly price-shape and resource offer curves — 16 October 2026
+
+**Result:** July–December equal-zone MAE **32.20 → 30.03 EUR/MWh**,
+mean correlation **0.407 → 0.448**, and
+within-day correlation **0.361 → 0.403**.
+Spain daily range is **81.61 EUR/MWh**, against observed
+**98.10** and control **66.47**.
+This is a verified finite retrospective experiment, not an accepted baseline replacement.
+
+Thermal selection: **[0.0, 0.5, 0.0]**; combined selection: **[0.0, 0.5, 0.0]**.
+Parameter order is [zonal-offset strength, thermal-curve strength, renewable discount EUR/MWh].
+The chosen renewable discount is **0 EUR/MWh**; zero is a legitimate
+result, not an omitted negative-bid implementation. France selected bias is
+**+0.43 EUR/MWh**. Adverse zones and quantities remain below.
+
+### What was implemented
+
+- Each original gas/coal offer retains its plant fuel/efficiency/carbon/VOM anchor
+  and splits available MW into **50/35/15%** blocks. Adders are [0, 35%, 100%] of
+  the curve strength times EUR120/MWh gas or EUR90/MWh coal. Nuclear retains one
+  running-cost block, with bounded zonal adjustment and no peaking adder.
+- Jointly test offset strengths 0/0.5/1 and thermal strengths 0/0.5/1. Offsets
+  come from Jan–April local-interior price residual medians, shrunk n/(n+168),
+  bounded ±30/30/15 for gas/coal/nuclear. Each proposal has one shared strength;
+  this is not unrestricted per-zone inverse optimization.
+- A separate stage tests discounts 0/10/30 EUR/MWh on the lower **50%** of wind/
+  solar offers, retaining the selected thermal curve. Negative bidding is an
+  effective synthetic assumption, not a measured subsidy or inferred actual order.
+  Mixed zero-cost wind/solar/run-of-river groups are separated by source membership
+  first: run-of-river and other resources never inherit a renewable discount.
+- Every block keeps its original network column and total original availability.
+  No renewable generation is substituted for availability; no extra capacity,
+  hydro flexibility, time shift, outage correction, hard minimum output, ramping,
+  unit commitment or storage policy is introduced.
+
+The daily loop contains independent hourly physical LPs; it is not intertemporal
+daily market optimization. Block prices respond through cleared utilization;
+there are no fitted hour-of-day electricity prices or new forecast prepasses.
+
+### Chronological fitting and selection
+
+January–April (2880 hours) constructs proposals and fitting scores. The best two
+nonzero joint thermal states by fitting score, plus control, enter May–June
+(1464 hours) selection. Thermal parameters are fixed before the renewable stage;
+all three renewable states then receive fit/selection scores. Final selections
+are sealed before July–December (4416 hours) evaluation. All 2025 has already been
+inspected: **retrospective evaluation, not untouched validation**. Both selected
+stages receive annual evaluation; identical parameters reuse their witness.
+
+The score equally averages control-normalized overall MAE, daily-demeaned MAE,
+monthly generation-allocation interval error and implied-net-export interval
+error, plus declared regularization on offsets, slope and renewable discount.
+Original generation/trade normalization and missingness rules remain unchanged.
+Weights, blocks and bounds are experimental settings, not empirical acceptance
+thresholds. The finite search does not recover actual bids or a global optimum.
+
+| Formulation | MAE EUR/MWh | Mean r | Within-day r | Demeaned MAE EUR/MWh | Generation error | Implied-trade error |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Control | 32.20 | 0.407 | 0.361 | 22.00 | 0.41035 | 0.22541 |
+| Thermal curves | 30.03 | 0.448 | 0.403 | 21.38 | 0.33264 | 0.19658 |
+| Selected combined | 30.03 | 0.448 | 0.403 | 21.38 | 0.33264 | 0.19658 |
+
+### Diagnostic findings and input limits
+
+The separately replayed saved-data diagnosis covers all eligible zones, daily
+range/ramp/tail errors, training-defined residual bands and ES/FR local profiles.
+Residual demand subtracts **available** wind/solar from demand; fixed hydro is
+separate. Renewable availability-versus-reported-generation lags −3…+3 hours
+are descriptive checks, not time-shift prescriptions or evidence of available
+supply derived from dispatch. Source missingness is retained.
+
+Spain solar's unshifted availability/generation correlation is 0.921; comparing
+available[t+1] with reported[t] gives 0.944. This flags interval/time conventions,
+curtailment or fleet coverage for investigation, not a proven one-hour error.
+No source correction is applied. Spanish gas availability remains 27.696 GW
+and nuclear 6.460 GW every hour, without dated outage/derating timing. Independent
+headroom inventory in the local summary is local availability minus dispatch,
+not deliverable system reserve or a causal explanation of price errors.
+Spanish control gas headroom has median **{esgas['control_headroom_median_mw']/1000:.2f} GW**
+and tenth percentile **{esgas['control_headroom_p10_mw']/1000:.2f} GW**. Physical
+national gas capacity is therefore often far from exhausted. Curve improvements
+reflect changed economic offers and coupled dispatch, not proof of actual physical
+capacity scarcity or a source-backed outage correction.
+
+Negative offers on half of renewable supply need not create negative clearing
+prices: a nonnegative resource can still be marginal. Missing negative prices
+therefore cannot be fixed merely by declaring a discount. Likewise a steeper
+thermal curve cannot prove that its scarcity volume is physically realistic.
+
+### Levels, ranges, ramps, tails and timing
+
+Ranges and tail counts show observed / modeled values. All statistics use UTC
+days; local-hour plots handle DST explicitly. Peak timing is the minimum circular
+distance between observed/model maximum-price hour sets; flat modeled plateaus
+can make it optimistic. Tie counts and trough distances remain in the audit.
+
+| Zone | Formulation | Bias EUR/MWh | Daily range obs/model | Ramp MAE EUR/MWh | Negative hours obs/model | >EUR150 hours obs/model | Peak set-distance hours |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| ES | Control | +3.12 | 98.10 / 66.47 | 12.49 | 97 / 0 | 54 / 0 | 1.66 |
+| ES | Thermal curves | +7.58 | 98.10 / 81.61 | 12.75 | 97 / 0 | 54 / 0 | 2.45 |
+| ES | Selected combined | +7.58 | 98.10 / 81.61 | 12.75 | 97 / 0 | 54 / 0 | 2.45 |
+| FR | Control | +0.01 | 82.51 / 46.43 | 12.56 | 150 / 0 | 22 / 0 | 3.70 |
+| FR | Thermal curves | +0.43 | 82.51 / 51.32 | 12.55 | 150 / 0 | 22 / 0 | 3.60 |
+| FR | Selected combined | +0.43 | 82.51 / 51.32 | 12.55 | 150 / 0 | 22 / 0 | 3.60 |
+| DE-LU | Control | -17.90 | 114.33 / 56.44 | 11.96 | 142 / 0 | 232 / 0 | 3.13 |
+| DE-LU | Thermal curves | -13.76 | 114.33 / 63.87 | 11.80 | 142 / 0 | 232 / 0 | 3.30 |
+| DE-LU | Selected combined | -13.76 | 114.33 / 63.87 | 11.80 | 142 / 0 | 232 / 0 | 3.30 |
+| NO5 | Control | -31.70 | 30.71 / 79.81 | 14.92 | 25 / 608 | 43 / 0 | 4.52 |
+| NO5 | Thermal curves | -31.79 | 30.71 / 83.43 | 15.44 | 25 / 601 | 43 / 0 | 4.51 |
+| NO5 | Selected combined | -31.79 | 30.71 / 83.43 | 15.44 | 25 / 601 | 43 / 0 | 4.51 |
+
+### All eligible evaluation areas
+
+Each cell: overall **MAE / correlation / within-day correlation**. All 41 price
+areas remain; unsupported observations stay unknown, never zero-filled.
+
+| Area | Control | Thermal curves | Selected combined |
+| --- | ---: | ---: | ---: |
+| AL | 38.20 / 0.355 / 0.355 | 33.05 / 0.407 / 0.427 | 33.05 / 0.407 / 0.427 |
+| AT | 22.82 / 0.693 / 0.655 | 18.31 / 0.728 / 0.690 | 18.31 / 0.728 / 0.690 |
+| BE | 20.92 / 0.730 / 0.637 | 20.19 / 0.741 / 0.654 | 20.19 / 0.741 / 0.654 |
+| BG | 32.58 / 0.563 / 0.505 | 28.05 / 0.650 / 0.607 | 28.05 / 0.650 / 0.607 |
+| CH | 27.36 / 0.611 / 0.627 | 22.47 / 0.646 / 0.649 | 22.47 / 0.646 / 0.649 |
+| CZ | 25.27 / 0.454 / 0.475 | 26.10 / 0.509 / 0.553 | 26.10 / 0.509 / 0.553 |
+| DE-LU | 23.35 / 0.692 / 0.611 | 21.37 / 0.717 / 0.634 | 21.37 / 0.717 / 0.634 |
+| DK1 | 26.53 / 0.636 / 0.535 | 25.53 / 0.657 / 0.556 | 25.53 / 0.657 / 0.556 |
+| EE | 50.04 / 0.343 / 0.272 | 51.60 / 0.373 / 0.300 | 51.60 / 0.373 / 0.300 |
+| ES | 22.55 / 0.688 / 0.718 | 20.57 / 0.745 / 0.761 | 20.57 / 0.745 / 0.761 |
+| FR | 20.71 / 0.685 / 0.580 | 20.46 / 0.698 / 0.599 | 20.46 / 0.698 / 0.599 |
+| GR | 33.28 / 0.487 / 0.447 | 28.62 / 0.626 / 0.598 | 28.62 / 0.626 / 0.598 |
+| HR | 26.86 / 0.604 / 0.549 | 22.62 / 0.678 / 0.634 | 22.62 / 0.678 / 0.634 |
+| HU | 30.43 / 0.605 / 0.557 | 26.14 / 0.658 / 0.624 | 26.14 / 0.658 / 0.624 |
+| IT-CNOR | 34.30 / 0.530 / 0.513 | 28.50 / 0.618 / 0.587 | 28.50 / 0.618 / 0.587 |
+| IT-CSUD | 36.77 / 0.510 / 0.501 | 31.41 / 0.579 / 0.560 | 31.41 / 0.579 / 0.560 |
+| IT-North | 27.08 / 0.564 / 0.530 | 21.61 / 0.679 / 0.638 | 21.61 / 0.679 / 0.638 |
+| IT-SICI | 38.35 / 0.527 / 0.535 | 33.03 / 0.581 / 0.585 | 33.03 / 0.581 / 0.585 |
+| IT-SUD | 35.25 / 0.538 / 0.539 | 29.89 / 0.600 / 0.591 | 29.89 / 0.600 / 0.591 |
+| LT | 44.81 / 0.395 / 0.317 | 45.49 / 0.427 / 0.344 | 45.49 / 0.427 / 0.344 |
+| LV | 44.87 / 0.393 / 0.313 | 45.55 / 0.424 / 0.341 | 45.55 / 0.424 / 0.341 |
+| MK | 30.94 / 0.560 / 0.507 | 26.87 / 0.635 / 0.594 | 26.87 / 0.635 / 0.594 |
+| NL | 21.73 / 0.705 / 0.632 | 20.55 / 0.723 / 0.657 | 20.55 / 0.723 / 0.657 |
+| PL | 27.02 / 0.585 / 0.537 | 22.37 / 0.622 / 0.569 | 22.37 / 0.622 / 0.569 |
+| PT | 22.73 / 0.675 / 0.709 | 21.04 / 0.736 / 0.754 | 21.04 / 0.736 / 0.754 |
+| RO | 31.59 / 0.583 / 0.524 | 27.06 / 0.659 / 0.616 | 27.06 / 0.659 / 0.616 |
+| RS | 29.20 / 0.576 / 0.520 | 24.32 / 0.656 / 0.616 | 24.32 / 0.656 / 0.616 |
+| SI | 26.32 / 0.565 / 0.511 | 22.12 / 0.651 / 0.601 | 22.12 / 0.651 / 0.601 |
+| SK | 24.95 / 0.616 / 0.575 | 22.33 / 0.662 / 0.631 | 22.33 / 0.662 / 0.631 |
+| DK2 | 56.30 / 0.073 / 0.056 | 56.37 / 0.082 / 0.067 | 56.37 / 0.082 / 0.067 |
+| FI | 38.15 / -0.035 / -0.030 | 38.59 / -0.038 / -0.031 | 38.59 / -0.038 / -0.031 |
+| NO1 | 40.53 / -0.216 / -0.250 | 41.27 / -0.231 / -0.262 | 41.27 / -0.231 / -0.262 |
+| NO2 | 39.60 / 0.039 / -0.010 | 40.15 / 0.037 / -0.010 | 40.15 / 0.037 / -0.010 |
+| NO3 | 27.56 / -0.099 / -0.186 | 28.34 / -0.098 / -0.192 | 28.34 / -0.098 / -0.192 |
+| NO4 | 27.08 / 0.047 / -0.142 | 27.65 / 0.048 / -0.143 | 27.65 / 0.048 / -0.143 |
+| NO5 | 43.67 / -0.371 / -0.413 | 44.71 / -0.378 / -0.432 | 44.71 / -0.378 / -0.432 |
+| SE1 | 27.50 / 0.037 / -0.071 | 28.00 / 0.037 / -0.070 | 28.00 / 0.037 / -0.070 |
+| SE2 | 27.69 / 0.053 / -0.045 | 28.16 / 0.054 / -0.045 | 28.16 / 0.054 / -0.045 |
+| SE3 | 33.76 / 0.030 / -0.008 | 34.17 / 0.035 / -0.003 | 34.17 / 0.035 / -0.003 |
+| SE4 | 42.15 / 0.131 / 0.070 | 42.37 / 0.139 / 0.079 | 42.37 / 0.139 / 0.079 |
+| IT-SARD | 39.61 / 0.543 / 0.552 | 34.36 / 0.584 / 0.580 | 34.36 / 0.584 / 0.580 |
+
+### Monthly performance
+
+Each cell: **MAE / within-day correlation**. Fitting and selection months are
+in-sample development evidence, not evaluation results.
+
+| Month | Control | Thermal curves | Selected combined |
+| --- | ---: | ---: | ---: |
+| 2025-01 fit | 36.62 / 0.245 | 35.25 / 0.347 | 35.25 / 0.347 |
+| 2025-02 fit | 43.46 / 0.283 | 41.53 / 0.427 | 41.53 / 0.427 |
+| 2025-03 fit | 35.64 / 0.478 | 34.35 / 0.519 | 34.35 / 0.519 |
+| 2025-04 fit | 29.77 / 0.545 | 29.23 / 0.559 | 29.23 / 0.559 |
+| 2025-05 selection | 29.64 / 0.507 | 29.50 / 0.508 | 29.50 / 0.508 |
+| 2025-06 selection | 31.09 / 0.511 | 30.36 / 0.531 | 30.36 / 0.531 |
+| 2025-07 evaluation | 28.17 / 0.407 | 26.23 / 0.456 | 26.23 / 0.456 |
+| 2025-08 evaluation | 30.39 / 0.492 | 29.13 / 0.517 | 29.13 / 0.517 |
+| 2025-09 evaluation | 32.86 / 0.402 | 31.07 / 0.455 | 31.07 / 0.455 |
+| 2025-10 evaluation | 35.64 / 0.331 | 32.95 / 0.389 | 32.95 / 0.389 |
+| 2025-11 evaluation | 37.26 / 0.261 | 34.50 / 0.295 | 34.50 / 0.295 |
+| 2025-12 evaluation | 29.10 / 0.279 | 26.51 / 0.317 | 26.51 / 0.317 |
+
+### Generation checks
+
+July–December TWh, national Ember references versus conditional saved-block
+allocation intervals. Separate label extremes are not jointly attainable or all
+possible primal optima. Retain gross/net/CHP/taxonomy/geographic source limits.
+Implied exports are generation minus prepared demand, not verified bilateral flows.
+
+| Country | Fuel | Ember | Control interval | Thermal interval | Selected interval |
+| --- | --- | ---: | ---: | ---: | ---: |
+| ES | Wind | 27.56 | 20.88–21.17 | 20.88–21.17 | 20.88–21.17 |
+| ES | Solar | 30.86 | 32.75–33.04 | 32.75–33.04 | 32.75–33.04 |
+| ES | Nuclear | 26.93 | 24.07–24.07 | 24.24–24.24 | 24.24–24.24 |
+| ES | Gas | 29.66 | 28.49–28.49 | 30.18–30.18 | 30.18–30.18 |
+| ES | Coal | 0.09 | 0.00–0.00 | 0.00–0.00 | 0.00–0.00 |
+| FR | Wind | 25.66 | 30.34–30.34 | 30.34–30.34 | 30.34–30.34 |
+| FR | Solar | 15.16 | 18.22–18.22 | 18.22–18.22 | 18.22–18.22 |
+| FR | Nuclear | 190.52 | 180.18–180.18 | 179.74–179.74 | 179.74–179.74 |
+| FR | Gas | 7.27 | 4.20–4.20 | 3.93–3.93 | 3.93–3.93 |
+| FR | Coal | 0.66 | 0.00–0.00 | 0.06–0.06 | 0.06–0.06 |
+| DE | Wind | 71.07 | 93.47–94.60 | 93.44–94.60 | 93.44–94.60 |
+| DE | Solar | 40.17 | 48.52–49.65 | 48.50–49.66 | 48.50–49.66 |
+| DE | Nuclear | 0.00 | 0.00–0.00 | 0.00–0.00 | 0.00–0.00 |
+| DE | Gas | 38.53 | 18.50–18.50 | 25.79–25.79 | 25.79–25.79 |
+| DE | Coal | 45.32 | 15.88–15.88 | 20.30–20.30 | 20.30–20.30 |
+
+### Complete finite search
+
+| Index | [offset strength, thermal strength, renewable discount] | Fitting score | May–June selection score |
+| --- | --- | ---: | ---: |
+| 0 | [0.0, 0.0, 0.0] | 1.00000 | 1.00000 |
+| 1 | [0.0, 0.5, 0.0] | 0.90150 | 0.96857 |
+| 2 | [0.0, 1.0, 0.0] | 0.91404 | Not shortlisted |
+| 3 | [0.5, 0.0, 0.0] | 1.02809 | Not shortlisted |
+| 4 | [0.5, 0.5, 0.0] | 0.91234 | 0.97207 |
+| 5 | [0.5, 1.0, 0.0] | 0.92705 | Not shortlisted |
+| 6 | [1.0, 0.0, 0.0] | 1.04469 | Not shortlisted |
+| 7 | [1.0, 0.5, 0.0] | 0.93043 | Not shortlisted |
+| 8 | [1.0, 1.0, 0.0] | 0.93315 | Not shortlisted |
+| 9 | [0.0, 0.5, 10.0] | 0.90814 | 0.98101 |
+| 10 | [0.0, 0.5, 30.0] | 0.95422 | 1.03187 |
+
+### Verification, runtime and next decision
+
+Seven targeted tests verify mixed-source capacity partitioning, renewable-only
+negative offers, a known upper-block clearing price, daily level/shape separation,
+missing days, material-negative counts, temporal input boundaries and selection.
+Independent replay reconstructs original source membership/capacity and physical
+columns, collapses all saved block dispatch to original components, verifies
+physical balances/islands/HVDC/passive ratings and LP objectives/dual certificates.
+It independently reconstructs proposal medians, fitting/selection scores and
+shortlists, all price/shape metrics, quantity/trade bounds, source lag diagnostics,
+residual cohorts, local DST profiles, headroom, monthly metrics and timing sets.
+
+Completed LP certificates: **16**; maximum original
+physical residual **6.7e-06 MW**, maximum duality gap **EUR0.00014**.
+Unchanged numerical gates: 1e-4 MW / EUR0.05. Expanded-control versus previous
+control differs in **126** modeled
+area-hours above EUR0.0001/MWh (mean absolute difference
+**0.00925 EUR/MWh**).
+Equivalent feasible sets can have nonunique dual witnesses; use the fresh common
+formulation control, not a claim of exact price identity across representations.
+Annual emergency supply from verified witnesses and independently replayed
+source group membership: Control 0.000000 MWh / 0 hours, Thermal curves 0.000000 MWh / 0 hours, Selected combined 0.000000 MWh / 0 hours.
+No failed annual hour is filled with another formulation. Source membership
+provenance and shortage totals are sealed in the presentation receipt.
+
+Source preparation **112.63s**; complete fitting/selection/
+annual evaluation/export **337.97s**. Annual clearing:
+Control 29.71s, Thermal curves 38.92s, Selected combined 38.92s.
+Aliases reuse one solve. Independent replay **154.81s**;
+peak producer RSS **2589 MiB**. No forecast optimization prepass.
+
+Reproduce with the pinned interpreter and single-thread BLAS/OMP: run
+`tools/run_hourly_offer_curves_2025.py <fresh-root>`, then
+`tools/audit_hourly_offer_curves_2025.py <root>` and
+`tools/report_hourly_offer_curves_2025.py <root>`. Diagnostics use
+`tools/diagnose_hourly_price_shape_2025.py <fresh-diagnostic-root>`; the retained
+authoritative diagnostic is hourly-shape-diagnosis-v2. Completed roots and producer
+hashes are immutable. Raw arrays and PNG/SVG charts stay ignored under
+`data/bidding-zone-network-2025/hourly-offer-curves-v1/presentation-v3/`.
+
+Assess price movements, price levels and generation together. This result does
+not authorize a new baseline or investment/browser integration. Audit timestamp
+conventions and operational availability separately before altering inputs;
+do not improve price fit by silently shifting weather or manufacturing scarcity.
+No CI/Pages deployment or public-URL verification is claimed for this local update.
 
 ## Zonal resource bids and two-block supply curves — 15 October 2026
 

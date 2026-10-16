@@ -134,6 +134,17 @@ the added bid-shape flexibility under the same coupled constraints. Disclose
 unsupported parameters and overfitting/identifiability limits. Regional bids are
 effective offers, not verified regional production costs or recovered order books.
 
+Accepted 16 October extension: target within-day price shape alongside levels.
+Diagnose daily-demeaned correlation/error, price ranges, ramps and surplus/scarcity
+tails for all eligible zones. Jointly evaluate regional intercepts and resource-
+specific thermal curves, with a separate bounded renewable negative-offer test.
+Nuclear retains low-running-cost offers rather than generic peaking blocks.
+Keep installed/available supply separate; negative effective offers do not prove
+subsidies or recover order books. Check timing, source scope and flat availability
+before attributing missing price movements to bids; input corrections are separate
+experiments. Preserve source quantities, network physics and fixed hydro. Report
+DST-aware local profiles and retain the retrospective qualification for 2025.
+
 ## Maintained models and publications
 
 The active development baseline is the fast fixed-hydro supply-curve model, as

@@ -240,6 +240,23 @@ or empirical acceptance claim. Initial interrupted v1 has no retained NPZs and
 must not be resumed. report_zonal_bid_blocks_2025.py updates the same article;
 plots and all bulk witnesses stay ignored locally. Preserve completed producers.
 
+The 16 October implementation authorizes joint resource curves and hourly-shape
+validation. hourly_offer_curves_2025.py preserves capacity and physical columns,
+splitting mixed zero-cost groups by renewable versus other source membership
+before applying negative offers. Nuclear has no peaking blocks. Freeze the
+Jan–April fit / May–June selection / Jul–Dec retrospective evaluation design;
+use all eligible zones, generation/trade checks and independent original-component
+and selection replay. No input time-shift or outage correction merely from a lag
+correlation; no unit commitment, hydro/storage restart, browser or baseline promotion.
+The completed authoritative hourly-offer-curves-v1/verification-v1 replay covers
+11 fit states and 16 LP certificates, selecting [0,.5,0]. Preserve this producer,
+hourly_offer_curves_2025.py and diagnosis-v2. The selected renewable discount is
+zero; negative-offer tests were implemented and rejected by declared selection.
+Current presentation-v2 updates the existing report. Seven tests and independent
+capacity/physics/duals/chronological-selection/hourly-metric/diagnostic replay pass.
+The next step is source timing/operational availability, not post-evaluation tuning
+of the frozen design. Thermal/combined aliases share one selected annual witness.
+
 - Inspect actual supervisor/worker processes and locks before computations.
   Receipts do not establish liveness or progress. If the managed environment is
   inaccessible, say verification is unavailable; do not rely on stale status.
