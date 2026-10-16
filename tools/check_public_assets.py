@@ -51,7 +51,7 @@ def check():
     assert comparison['report_audit']['maximum_hourly_allocation_difference_mw'] < 1e-6
     model = comparison['model_verification']
     assert model['optimal_hours'] == 8760 and model['maximum_physical_residual_mw'] <= 1e-4
-    assert model['maximum_duality_gap_eur'] < .05 and model['complete_lp_certificates'] == 10
+    assert model['maximum_duality_gap_eur'] < .05 and model['complete_lp_certificates'] == 11
     for role in ['producer', 'helper', 'auditor']:
         assert hashlib.sha256((ROOT / 'tools' / model[role + '_file']).read_bytes()).hexdigest() == model[role + '_sha256']
     assert comparison['article_sha256'] == hashlib.sha256((ROOT / 'docs/european-physical-synthetic-clearing-2025.md').read_bytes()).hexdigest()

@@ -13,11 +13,15 @@ investment. System benefit is not investor income or certified investment return
 
 ## Active modelling approach and accuracy goal
 
-Hourly price-shape improvements may use bounded, transparent intraday resource
-bid rules driven by model residual demand and a training-fitted smooth local-time
-pattern. Separate hourly bidding from daily intertemporal optimization. Keep
-evaluation prices out of construction, preserve the unchanged physical baseline,
-and report daily-shape/ramp/tail outcomes as well as an all-zone price-MAE grid.
+The latest direction uses bounded, transparent resource bids driven by smooth
+seasonal and local-time patterns, excluding residual demand as a fitted hourly
+bid predictor. Source demand and weather availability still enter physical clearing.
+Ember monthly generation may inform training-month national resource bid signals
+and mix checks, never hourly availability or recovered observed bids. Evaluate
+season-spanning disjoint whole-month cohorts and distinguish retrospective seasonal
+interpolation from future-year forecasting. Any all-year-calibrated reconstruction
+is in-sample and separate from out-of-fold evidence. Preserve the physical baseline,
+daily-shape/ramp/tail diagnostics, all-zone MAE grid and independent acceptance gates.
 
 Accepted clarification, 13 October 2026: develop one fast European bidding-zone
 market-clearing model. Construct simple, transparent supply bids by resource

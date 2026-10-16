@@ -136,15 +136,17 @@ renewable availability or silent commercial-capacity claims. Retain one current
 annual trial/witness and small numerical fixtures; do not create a third report.
 
 Only these two reports and docs/workbench-methodology.md are active publications.
-The current report uses prepare_intraday_dispatch_report_2025.py,
-independent audit_intraday_dispatch_report_2025.py and
+The current report uses prepare_seasonal_dispatch_report_2025.py,
+independent audit_seasonal_dispatch_report_2025.py and
 write_concise_dispatch_report_2025.py. Its derived root is
-intraday-report-v1/verification-v1; concise-report-v1 is the previous reference.
+seasonal-report-v1/verification-v1; intraday-report-v1 is the previous reference.
 Maintain the concise baseline/exploratory structure and four tracked figures,
 including the all-zone MAE grid; do not rerun historical append-style report
 producers over it. Physical producers and original witnesses remain frozen.
-All primary comparisons use Jul–Dec; national Ember checks are separate from
-zonal A75 coverage. NO5 generation is missing, DE excludes LU, FR is national.
+Primary comparisons now use full-2025 seasonal out-of-fold predictions; never mix
+them with older Jul–Dec headlines or the in-sample all-year refit. National Ember
+checks remain separate from zonal A75 coverage. NO5 generation is missing,
+DE excludes LU, FR is national.
 Do not recreate removed reports or restart retired model/search programmes.
 Only used source tools and minimal retained-model evidence may remain
 as supporting dependencies; their presence is not an instruction to develop them.
@@ -278,6 +280,22 @@ The completed intraday-offers-v1/verification-v1 independently replays ten LP
 certificates and selects [1,1]. Freeze its helper/runner and source inputs.
 Generation/report derivation has separate fresh provenance; prior hourly-curve
 and annual-v7 witnesses remain reference evidence, not competing active searches.
+
+The subsequent user direction replaces residual-demand bid predictors with
+seasonal/time-of-day bids. Fresh seasonal_calendar_bids_2025.py and separate
+run/audit producers use calendar-only seasonal/daily interactions and an optional
+training-month Ember national fuel signal. Demand/weather remain physical inputs,
+not fitted hourly bid predictors; generation never becomes availability. Use
+three whole-month seasonal rotations, each with disjoint fit/selection/test
+months and 48-hour price-boundary purges. Report all-year out-of-fold interpolation
+separately from any all-year-fitted reconstruction; neither is future-year or
+untouched validation. This explicitly supersedes Jul–Dec-only reporting for the
+new experiment, without changing earlier frozen evidence or acceptance gates.
+Completed seasonal-calendar-v1/verification-v1 independently replays eleven LP
+certificates. All folds select calendar+Ember on the joint score; Ember worsens
+selection-price MAE versus calendar-only while improving quantity/trade checks.
+Report that trade-off; calendar-only outer-test accuracy has not been measured.
+Keep the three-fold OOF witness distinct from the all-year in-sample refit.
 
 - Inspect actual supervisor/worker processes and locks before computations.
   Receipts do not establish liveness or progress. If the managed environment is

@@ -1,116 +1,120 @@
-# European dispatch: baseline and exploratory supply bids
+# European dispatch: seasonal supply bids and price validation
 
 ## Summary
 
-The exploratory model combines stepped thermal supply curves with **hourly bid adjustments** driven by residual demand and a training-fitted local-time pattern. Demand, fleet, weather, fixed hydro and network constraints retain the baseline values. Across **41 price zones**, July–December mean zonal price MAE changes **32.20 → 28.29 EUR/MWh**, and mean correlation **0.407 → 0.524**. Generation and Nordic price errors remain material. This is an exploratory bid model, not an accepted investment estimator or replacement for the browser engine.
+The exploratory model now uses **seasonal and time-of-day supply-bid patterns, without residual demand as a fitted bid predictor**. Demand and weather-dependent available supply still enter the physical clearing problem. Monthly Ember generation informs an optional resource-specific seasonal bid correction; ENTSO-E prices validate the resulting coupled clearing prices.
 
-All comparisons below use **July–December 2025: 4,416 UTC hours**. Both saved runs cover all 8,760 hours; using their evaluation period here keeps generation and price results comparable. Earlier experiments are omitted from this report.
+Across **41 observed-price zones**, full-2025 out-of-fold price MAE changes **33.23 → 29.18 EUR/MWh**, mean correlation **0.502 → 0.565**, and within-day correlation **0.407 → 0.527**. MAE improves in **38/41 zones**; Belgium, France and NO5 worsen. These are retrospective reconstruction/interpolation results, not verified actual bids or an accepted investment model.
 
-The hourly update improves on the previous constant-markup exploration: price MAE **30.03 → 28.29 EUR/MWh**, within-day correlation **0.403 → 0.529**, and daily-demeaned MAE **21.38 → 18.55 EUR/MWh**. The main figures compare the unchanged physical baseline with the updated exploration.
+## 1. Baseline model and data
 
-## 1. Baseline model
+**Clearing.** An hourly sparse linear program minimizes accepted resource-bid cost under fixed demand, original available generation and network constraints. Zonal balance duals provide prices. Hours are independent: daily processing does not add ramping, unit commitment, batteries or intertemporal reservoir optimization.
 
-**Clearing.** The model minimizes accepted supply-bid cost subject to fixed demand, available generation and physical network constraints. A sparse linear program clears each hour independently; zonal balance duals provide hourly prices. Hours are orchestrated in daily batches, but there is **no intertemporal daily optimization**. No ramping, unit commitment, endogenous battery operation or reservoir rescheduling is included.
+**Geography.** The retained network has **48 clearing areas and 145 physical buses**, with separate NO1–NO5, SE1–SE4, DK1/DK2 and seven Italian zones. DE-LU is combined; peripheral modeled areas are not all certified commercial bidding zones. Capacity-based generation shift keys locate zonal supply on physical buses. AC flow sensitivities, electrical-island balances, intrazonal branch limits and HVDC bounds/losses remain. A uniform **0.7 security factor** applies to branch ratings. These are model-derived N-0 constraints, not JAO commercial domains, explicit N-1 security or full EUPHEMIA allocation.
 
-**Geography and constraints.** The retained European backbone has **48 clearing areas and 145 physical buses**, separating Norway's five zones, Sweden's four, Denmark's two and Italy's seven. DE-LU and Ireland's shared market are combined; peripheral modeled areas are not all certified commercial bidding zones. Capacity-based generation shift keys (GSKs) locate zonal dispatch on physical buses. AC flow sensitivities, separate electrical-island balances, intrazonal branch constraints and HVDC bounds/losses remain. A uniform **0.7 security factor** limits branch ratings. These are model-derived N-0 constraints, not JAO commercial capacity domains, explicit N-1 security or full EUPHEMIA order allocation.
-
-**Supply and demand.** Each generator contributes its original hourly available MW and resource bid. Wind/solar retain low-cost offers; thermal bids use fuel cost divided by efficiency, plus carbon and variable operating costs. Other technologies retain their source cost profiles. Demand is fixed, using the prepared 2025 series; spatial splits across newly separated zones include proxies. It is not yet independently certified observed load in every bidding zone. Emergency offers at 10,000 EUR/MWh diagnose shortage and are excluded from real generation-mix totals.
-
-**Hydro.** Reservoir output is precomputed and fixed hour by hour. Norwegian preparation uses NVE weather-driven HBV inflow and reservoir boundary stocks, preserving turbine limits, chronological inventories and efficiency once on discharge. Other countries retain their reference schedules. Run-of-river remains a dispatchable available offer. Reservoirs cannot respond to changed bids or investments during clearing; national Norwegian water pooling and location assumptions remain limitations.
-
-### Data used
+**Supply, demand and hydro.** Original resource bids use plant fuel/efficiency/carbon/operating-cost profiles; wind/solar retain zero offers. No earlier price-fitted thermal step markups are inherited in this experiment. Prepared 2025 demand is fixed, with source/member allocation proxies where historical aggregation crossed zones; it is not certified metered zonal load everywhere. Reservoir output is precomputed and fixed hourly. Norway uses NVE weather-driven HBV inflow and boundary stocks; other countries retain source schedules. Inventories, turbine limits and efficiency remain unchanged, without daily water resets. Run-of-river is an available offer. Fixed reservoir output cannot adapt to an investment or acquired bidding flexibility. Emergency offers at 10,000 EUR/MWh diagnose shortage and are excluded from real generation totals.
 
 | Component | Source and treatment |
 | --- | --- |
-| Grid, plants, efficiencies and inherited profiles | Pinned [PyPSA-Eur](https://github.com/PyPSA/pypsa-eur) v2026.08.0 backbone; original source/replay evidence retained. Nuclear availability ending in 2024 is a proxy; gas/nuclear available MW can be flat. |
-| Wind/solar capacity and weather | [IRENA](https://www.irena.org/Data) end-2024/end-2025 capacities interpolated linearly through 2025, with retained ERA5-derived hourly profiles. This assumes commissioning dates; observed generation is never substituted for availability. Mixed-cluster location shares include proxies. |
-| Fuel bids | [World Bank](https://www.worldbank.org/en/research/commodity-markets) monthly TTF gas/Brent oil and [ECB](https://data.ecb.europa.eu/) FX, inherited efficiency/carbon/VOM assumptions. Delivered-fuel, heating-value and EUA assumptions need further validation. |
-| Norwegian reservoir inputs | [NVE hydrological data](https://www.nve.no/energi/analyser-og-statistikk/hydrologiske-data-til-kraftsituasjonsrapporten/): weather-driven inflow, stocks and capacity; retrospective revisions and gross-stock/net-inflow compatibility remain caveats. |
-| Prices and hourly generation checks | [ENTSO-E Transparency](https://transparency.entsoe.eu/) A44 day-ahead prices and A75 generation by production type, with hashed source replay and UTC alignment. |
-| National generation cross-check | [Ember](https://ember-energy.org/data/) monthly generation by fuel, July–December summed separately from hourly ENTSO-E checks. |
+| Grid, plants, demand and inherited profiles | Pinned [PyPSA-Eur](https://github.com/PyPSA/pypsa-eur) v2026.08.0 backbone and retained source/replay coefficients. Location/load splits include proxies; nuclear availability ending in 2024 is a proxy, not audited 2025 outages. |
+| Wind/solar availability | [IRENA](https://www.irena.org/Data) end-2024/end-2025 capacity interpolation plus retained ERA5-derived hourly profiles. Linear commissioning is assumed; observed generation never replaces availability. |
+| Fuel and baseline bids | [World Bank](https://www.worldbank.org/en/research/commodity-markets) monthly TTF/Brent, [ECB](https://data.ecb.europa.eu/) FX, inherited carbon/efficiency/VOM assumptions. Delivered fuel, heating-value and EUA details remain imperfect. |
+| Norwegian reservoir water | [NVE](https://www.nve.no/energi/analyser-og-statistikk/hydrologiske-data-til-kraftsituasjonsrapporten/) HBV inflow, stocks and capacity, with chronological stored/electrical-unit conversion. Retrospective revisions, national pooling and gross-stock/net-inflow compatibility remain limitations. |
+| Price targets / hourly generation checks | [ENTSO-E Transparency](https://transparency.entsoe.eu/) A44 prices and A75 generation by type, source-hashed and UTC-aligned. Test-month prices do not construct bids. |
+| Monthly generation signal and national check | [Ember](https://ember-energy.org/data/) national monthly fuel generation. Only fitting months inform bid corrections; each test month's generation remains excluded from its calibration and selection. |
 
-## 2. Exploratory model: what changes
+## 2. Exploratory seasonal bids
 
-Both **quantity-dependent bid steps and hour-dependent offer prices** change. The earlier constant-markup experiment responded hourly through dispatch, but did not explicitly vary markups within the day. The new rule addresses the previously weak daily price response; it neither adds capacity nor imposes observed prices on the solver.
+The bids themselves change **before clearing**; predicted prices are never overwritten afterward. Physical demand, fleet capacity, hourly availability, hydro, GSKs and network rows stay identical to the baseline.
 
-| Offer component | Baseline | Exploratory |
-| --- | --- | --- |
-| Gas available MW | Original resource bid | 50% at original bid; 35% at +21; 15% at +60 EUR/MWh |
-| Coal/lignite available MW | Original resource bid | 50% at original bid; 35% at +15.75; 15% at +45 EUR/MWh |
-| Nuclear | Original running-cost offer | No peaking blocks; small hourly bid adjustment |
-| Regional offsets / renewable discount | Zero | Zero: tested adjustments were not selected |
-| Hourly gas/coal adjustment | None | Residual-demand and local-time terms, capped at ±30 EUR/MWh |
-| Hourly nuclear adjustment | None | One quarter of the gas/coal hourly adjustment, capped at ±7.5 EUR/MWh |
-| Demand, physical inputs, hydro and other bids | Retained baseline | Identical |
+**Calendar pattern.** Each zone has a smooth annual level plus daily morning/evening harmonics. Annual sine/cosine terms also change the daily pattern through the seasons, rather than reusing one winter profile in summer. The 15 calendar coefficients comprise an intercept, two annual terms, four daily terms and eight seasonal–daily interactions. Local clock hours include DST. Ridge fitting uses only fitting-month observed-minus-baseline price errors, clipped at ±100 EUR/MWh; unsupported price zones get zero coefficients. No residual-demand, demand or observed-generation series enters this hourly feature vector.
 
-**Hourly rule.** Residual demand is prepared demand minus fixed reservoir output minus available wind/solar. Its deviation from each UTC day's mean is scaled by Jan–April variability. Local-clock sine/cosine terms capture broad morning/evening patterns with DST. Each zone fits five ridge-regularized coefficients to the Jan–April observed-minus-previous-model price error after daily demeaning; extreme training errors are clipped at ±100 EUR/MWh. These terms alter gas/coal bids, and nuclear at quarter strength, before coupled clearing. The ±30 cap and zero offer floor preserve monotone thermal blocks, but can introduce daily mean shifts. Renewables and fixed hydro do not acquire new flexibility.
+**Ember signal.** Monthly data cannot identify hourly generation or orders. For gas, coal and nuclear, a national generation target above the baseline's conditional generation range proposes a lower bid; a target below the range proposes a higher bid. Within-range targets propose zero. The normalized correction is bounded and smoothed with an annual intercept/sine/cosine, using fitting months only. Original nameplate membership weights this national signal into mixed offers; it does not allocate observed generation to bidding zones or create capacity.
 
-**Selection and limits.** Five predeclared residual/calendar strength pairs include the unchanged previous model. May–June selects **[1.0, 1.0]**, without refitting, using equally weighted prior-normalized price MAE, daily-demeaned MAE, monthly generation-interval error and implied-trade error, plus a small squared-shift penalty. July–December is evaluated afterward. Evaluation prices/generation never enter fitting or selection; runtime features require only calendar and model inputs, assuming perfect exogenous daily forecasts. Zones without training prices receive zero fitted corrections. These are synthetic effective bids, not measured orders or causal flexibility costs, and may compensate for incorrect inputs or constraints. Development months have been reused across experiments; previously inspected 2025 gives **retrospective temporal evaluation**, not untouched validation.
+| Resource | Change relative to baseline |
+| --- | --- |
+| Gas and coal/lignite | Calendar correction, optionally plus Ember seasonal signal; total adjustment capped at ±30 EUR/MWh |
+| Nuclear | Quarter-strength correction, capped at ±7.5 EUR/MWh; no peaking blocks |
+| Wind, solar and other offers | Unchanged |
+| Final bids / physical quantities | Offers floored at zero; available MW and all physical constraints unchanged |
 
-Baseline and exploration use the same split-column representation; equivalent LPs can have different non-unique price witnesses. Original annual-v7 and the preceding experiment remain immutable evidence. Daily features add no ramping, commitment or intertemporal storage optimization.
+This is a transparent effective-bid hypothesis. Price fitting may compensate for incorrect capacity, demand, constraints or outages; it does not uniquely recover actual supply orders. Generation and implied-trade checks therefore accompany price validation. Fixed-hydro areas can remain poorly priced even with better thermal bids.
 
-## 3. Generation and price performance
+## 3. Validation across seasons
 
-![Generation and price errors for every covered area; points below the diagonal improve](/research/dispatch-comparison-2025/overview.png)
+The earlier Jan–April/May–June/July–December split tested extrapolation from early-year conditions. It did not represent every season in fitting. The new design rotates **whole months**, with one month from each quarter in each role:
 
-Price coverage is **41 of 48 modeled areas**; BA, GB, IE-SEM, ME, IT-CALA, FR-COR and XK have no comparison price. Generation coverage is **38 reporting areas**, with differing fuel/hour coverage. NO1–NO4 have zonal hourly generation, but NO5 has none. Germany's generation comparison is **DE national, excluding LU**, while its price comparison is DE-LU. France's generation comparison uses national model membership including modeled Corsica. National reporting areas and modeled geography are not automatically identical commercial zones.
+| Fold | Fit months | Select months | Test months | Selected variant | Test price MAE: baseline → exploratory |
+| --- | --- | --- | --- | --- | ---: |
+| 1 | 3, 6, 9, 12 | 2, 5, 8, 11 | 1, 4, 7, 10 | Calendar + Ember | 32.57 → 28.24 |
+| 2 | 1, 4, 7, 10 | 3, 6, 9, 12 | 2, 5, 8, 11 | Calendar + Ember | 34.96 → 31.28 |
+| 3 | 2, 5, 8, 11 | 1, 4, 7, 10 | 3, 6, 9, 12 | Calendar + Ember | 32.18 → 28.05 |
 
-| Metric, July–December | Baseline | Exploratory |
+Each fold fits its own coefficients, then selects among exactly **unchanged, calendar-only, calendar-plus-Ember** bids. The selection score gives equal weight to control-normalized hourly price MAE, daily-demeaned MAE, monthly generation-interval error and implied-trade interval error, plus a small bid-size penalty. The simplest variant wins numerical ties. First/last 48 hours of fitting and selection months are excluded from price fitting/scoring; monthly Ember checks retain whole months. No test-month price or generation target participates in its fold's fitting or selection.
+
+**Price/mix trade-off:** adding Ember worsened selection-period price MAE relative to calendar-only bids (fold 1: 30.81 → 31.58; fold 2: 27.06 → 27.47; fold 3: 28.19 → 28.75 EUR/MWh), while improving the joint generation/trade score. That combined score selected it; this is not evidence that Ember alone improves prices. Calendar-only bids were not separately evaluated on the outer test months, so their out-of-fold price accuracy remains unmeasured.
+
+The primary comparison stitches the three disjoint test sets into **all 8,760 hours of 2025**. It is an **out-of-fold composite of three fitted models**, not one deployed annual policy. Ramps exclude boundaries between fold fits. This tests **within-year seasonal interpolation**, using other months that may be later in calendar time. Purging reduces boundary dependence; it does not make months or coupled zones statistically independent. Previously inspected 2025 and reused model architecture prevent an untouched-validation claim. A subsequent year is needed to test genuine forecasting; capacity/weather inputs also assume perfect exogenous information. These scores are not directly comparable to earlier July–December-only headlines.
+
+A separate final reconstruction uses **Calendar + Ember**, chosen by the mode of inner-selection winners, then refits on all 2025 fitting information. Its MAE is **28.96 EUR/MWh**, correlation **0.573**: **in-sample**, not additional validation. Its witness is retained separately; all primary figures below use out-of-fold results.
+
+## 4. Generation and price results
+
+![All-area generation and price errors, baseline versus out-of-fold seasonal bids](/research/dispatch-comparison-2025/overview.png)
+
+| Full-2025 metric | Baseline | Exploratory, out of fold |
 | --- | ---: | ---: |
-| Equal-zone hourly price MAE, EUR/MWh | 32.20 | 28.29 |
-| Mean zonal price correlation | 0.407 | 0.524 |
-| Mean within-day price correlation | 0.361 | 0.529 |
-| Daily-demeaned price MAE, EUR/MWh | 22.00 | 18.55 |
-| Median covered-fuel generation volume error, % | 54.1 | 45.2 |
+| Equal-zone hourly price MAE, EUR/MWh | 33.23 | 29.18 |
+| Mean zonal price correlation | 0.502 | 0.565 |
+| Mean within-day price correlation | 0.407 | 0.527 |
+| Daily-demeaned price MAE, EUR/MWh | 23.03 | 20.32 |
+| Median covered-fuel generation volume error, % | 50.1 | 42.2 |
 
-Price MAE improves in **38/41 zones** and worsens in 3; generation volume error improves in **28/38 areas**. Generation error sums absolute fuel-volume differences and divides by observed generation, using only each fuel's known hours. It can exceed 100%; it is not a generation-share percentage-point error or a complete-fleet score. Coverage differs between areas, so comparisons are paired within each area. This descriptive metric differs from the monthly interval-based fitting score.
+![Every modeled zone's baseline and out-of-fold price MAE](/research/dispatch-comparison-2025/zone-mae-grid.png)
 
-![Per-zone hourly price MAE grid comparing baseline and updated exploratory model](/research/dispatch-comparison-2025/zone-mae-grid.png)
+Each tile shows baseline → exploratory MAE and signed change; blue improves, red worsens. Gray areas have no observed price: BA, GB, IE-SEM, ME, IT-CALA, FR-COR and XK. [Open the full-size grid](/research/dispatch-comparison-2025/zone-mae-grid.png). All 48 areas remain visible, including every adverse outcome.
 
-Every tile gives **baseline → exploratory MAE**, then the signed change. Blue means lower error, red higher error; gray denotes unavailable observed prices. All 48 modeled areas remain visible. [Open the full-size grid](/research/dispatch-comparison-2025/zone-mae-grid.png).
+Generation comparison covers **38 reporting areas**, with different fuel/hour coverage. Its error sums absolute fuel-volume differences and divides by observed generation on matched known hours; it can exceed 100% and is not a share percentage-point error or complete-fleet score. **31/38** areas improve. Saved equal-bid group dispatch is allocated proportionally to original available MW for illustration. Downloads retain conditional lower/upper allocations; they are not jointly attainable or all possible LP optima. Missing observations stay unknown; pumped-storage output remains separate from primary generation.
 
-Saved dispatch is disaggregated proportionally to original available MW within equal-bid groups. These fuel allocations are **illustrative**, not uniquely identified dispatch. Downloads include conditional lower/upper allocations; those bounds are not jointly attainable and do not span all possible LP optima. Missing observations stay missing; pumped-storage production is excluded from primary generation.
+Within-day metrics subtract each complete UTC day's mean; the example profiles below instead group by local clock hour with DST.
 
-## 4. Norway, Germany, Spain and France
+## 5. Norway, Germany, Spain and France
 
-![National fuel shares and covered generation totals for Norway, Germany, Spain and France](/research/dispatch-comparison-2025/national-mix.png)
+![National annual generation shares and covered-fuel TWh against Ember](/research/dispatch-comparison-2025/national-mix.png)
 
-National Ember cross-check, same six months. Shares and TWh totals cover only fuels with all six observed months: NO nuclear/coal and FR other renewables are unavailable and excluded from all three bars, not filled with zero. National Norwegian totals include NO5; they are not allocated into its missing zonal observations. Model bars use illustrative fuel allocation; the CSV includes bounds and all modeled fuel volumes.
+This national Ember cross-check uses all twelve months, separately from hourly ENTSO-E reporting areas. Only fuels with complete monthly references enter all three bars; missing types are excluded, never filled with zero. National Norwegian totals include NO5, which has no comparable hourly zonal generation. Germany's generation excludes Luxembourg while its price is DE-LU. France uses national model membership including modeled Corsica. Geographic, gross/net and taxonomy differences remain material.
 
 | Area | Generation volume error, %: baseline → exploratory | Price MAE, EUR/MWh: baseline → exploratory | Price correlation: baseline → exploratory |
 | --- | ---: | ---: | ---: |
-| NO1 | 74.5 → 74.4 | 40.53 → 41.16 | -0.216 → -0.232 |
-| NO2 | 38.5 → 38.5 | 39.60 → 38.70 | 0.039 → 0.081 |
-| NO3 | 47.3 → 47.3 | 27.56 → 27.95 | -0.099 → -0.106 |
-| NO4 | 19.9 → 19.8 | 27.08 → 27.02 | 0.047 → 0.049 |
-| NO5 | — → — | 43.67 → 45.60 | -0.371 → -0.383 |
-| DE-LU | 52.8 → 50.1 | 23.35 → 19.75 | 0.692 → 0.783 |
-| ES | 16.2 → 16.3 | 22.55 → 19.26 | 0.688 → 0.785 |
-| FR | 13.1 → 13.2 | 20.71 → 19.33 | 0.685 → 0.731 |
+| NO1 | 75.4 → 75.4 | 42.86 → 42.65 | 0.037 → 0.027 |
+| NO2 | 29.3 → 29.3 | 41.60 → 39.37 | 0.166 → 0.195 |
+| NO3 | 41.9 → 41.8 | 35.02 → 34.66 | 0.016 → 0.009 |
+| NO4 | 17.9 → 15.5 | 35.86 → 35.08 | 0.007 → 0.007 |
+| NO5 | — → — | 46.63 → 47.33 | -0.133 → -0.147 |
+| DE-LU | 58.9 → 48.2 | 23.10 → 21.22 | 0.776 → 0.825 |
+| ES | 18.9 → 17.3 | 26.55 → 24.34 | 0.708 → 0.763 |
+| FR | 15.4 → 15.1 | 22.74 → 23.63 | 0.766 → 0.797 |
 
-Generation in the DE-LU row means **Germany national**; FR is national; Norway rows use their available zonal series. A dash denotes unavailable generation verification.
+DE-LU generation means Germany national; FR is national. Norway rows use available zonal series. A dash denotes unavailable generation verification.
 
-**Norway:** national modeled hydro is **74.83 TWh**, against Ember's **68.06 TWh**. National totals cannot establish correct zonal water allocation: NO1's covered-fuel error is **74.4%**, with price MAE **41.16 EUR/MWh**. The table retains all five zones and adverse results. NO2 illustrates a local price profile below, not a national Norwegian price; adjusting bids cannot reschedule fixed reservoir water.
+**Norway:** modeled national hydro is **146.11 TWh** versus Ember **141.60 TWh**. NO5 price correlation is **-0.147**, MAE **47.33 EUR/MWh**. National volume agreement cannot certify regional water allocation, and new thermal bids cannot reschedule fixed reservoir injections.
 
-**Germany:** gas changes **18.50 → 26.51 TWh**, against Ember's **38.53 TWh**; coal **15.88 → 20.64 TWh**, against **45.32 TWh**. Wind is **94.05 TWh** versus **71.07 TWh** observed. Price correlation is **0.783**, but bids alone have not resolved the large fleet/weather/demand-scope discrepancies.
+**Germany:** gas is **58.25 TWh** versus Ember **79.33**, coal **48.30** versus **94.86**, wind **172.12** versus **131.17**. Price correlation **0.825** must be read alongside those quantity mismatches and demand-scope assumptions.
 
-**Spain:** national gas changes **28.49 → 30.55 TWh** versus **29.66 TWh** observed. Price correlation changes **0.688 → 0.785**, mean bias **+3.12 → +6.46 EUR/MWh**. Wind is **21.07 TWh** versus **27.56 TWh**; similarity in total generation does not establish accurate fuel quantities or hourly timing.
+**Spain:** price MAE is **24.34 EUR/MWh**, bias **+0.85**, within-day correlation **0.746**. National gas is **57.11 TWh** versus **52.13** observed; wind **43.86** versus **55.58**.
 
-**France:** nuclear changes **180.18 → 180.85 TWh**, against **190.52 TWh** observed; hydro is **15.92** versus **22.55 TWh**. Generation error changes **13.1 → 13.2%**. Inherited nuclear availability and fixed hydro remain assumptions to investigate, irrespective of price improvement.
+**France:** nuclear is **345.37 TWh** versus **371.69**, hydro **58.33** versus **51.63**. Price MAE is **23.63 EUR/MWh**. Nuclear availability/outages and fixed hydro remain source assumptions, irrespective of fitted price accuracy.
 
-![Observed and simulated average local-hour price profiles for NO2, DE-LU, ES and FR](/research/dispatch-comparison-2025/daily-prices.png)
+![Winter and summer observed versus out-of-fold mean local-hour prices in NO2, DE-LU, ES and FR](/research/dispatch-comparison-2025/daily-prices.png)
 
-Profiles average evaluation-period prices by **local clock hour, with DST applied**; they are not a selected day or an hourly forecast trace. Aggregate within-day metrics remove each UTC day's mean. Spain's mean daily range changes **66.47 → 97.37**, versus observed **98.10 EUR/MWh**; within-day correlation **0.718 → 0.809**. Hour-to-hour ramp MAE changes **12.49 → 12.36 EUR/MWh**, with **0 modeled versus 97 observed negative-price hours**. A better average profile is not a complete hourly fit.
+Profiles separate **winter (Jan/Feb/Dec) and summer (Jun/Jul/Aug)** mean local-hour prices, with DST; solid lines are observed, dashed modeled. They are not an individual day's forecast. Spain's annual mean daily range is **80.13** versus observed **98.16 EUR/MWh**; ramp MAE **12.07**, with **0 modeled versus 556 observed negative-price hours**. Seasonal mean profiles can conceal particular-day/tail errors; downloads include them.
 
-## Conclusion and verification
+## Conclusion and reproducibility
 
-Hourly bid rules explicitly represent intraday variation while physical supply remains unchanged. Evaluate the improvement using both the all-zone grid and daily-shape metrics, rather than a single average profile. **Retain the baseline; keep this as an exploratory bid model.** Source timing/operational availability, wind quantities, Nordic water/geography and demand scope remain priorities. Matching totals or passing numerical replay does not validate investment effects, adaptive storage value or commercial congestion rents.
+Seasonal calendar bids offer a direct way to vary supply offers daily and annually without a residual-demand predictor. Ember adds a generation-consistency signal, rather than an artificial hourly supply series. The fold selections and out-of-fold results assess that hypothesis under unchanged physical constraints. **Keep the unfitted baseline and the in-sample reconstruction separate from the validation evidence.** Prices alone cannot identify true bids or validate investment effects; fleet/weather quantities, outages, Nordic water/geography and demand scope still require source work.
 
-Both annual witnesses have **8,760 optimal hours**; exploratory emergency generation is **0.000000 MWh**. Independent replay covers source inputs, original component feasibility, capacity conservation, hourly feature construction, training-only fitting, LP duals and chronological selection: maximum physical residual **1.3e-05 MW**, duality gap **EUR 0.000023**. Annual clearing took **29.71s baseline / 47.75s exploratory**, excluding preparation; the new fitting/selection/evaluation command took **281.34s**. Report derivation separately replays generation geography, allocations, observations and metrics. Full source/hourly witnesses remain local; no deployment or investment acceptance is implied.
+Independent replay checks calendar/DST features, month exclusion, price/Ember proposals, selection, original component physics, cost/LP duals, stitched test witnesses and separate refit. Maximum physical residual is **2.6e-06 MW**, duality gap **EUR 0.000033**. The out-of-fold year has **8,760 optimal hours**, emergency supply **0.000000 MWh**. Fresh test clearing totals **38.20s**; full preparation/selection/tests/refit command **282.10s**. Independent report replay additionally verifies generation geography, source observations, allocations and metrics. No empirical acceptance, browser replacement or deployment is implied.
 
-### Data and reproducibility
-
-- [All-zone price metrics](/research/dispatch-comparison-2025/prices-by-zone.csv), including bias, hourly errors, within-day metrics and missing coverage.
-- [Generation coverage and errors by area](/research/dispatch-comparison-2025/generation-by-area.csv), [fuel volumes, hourly errors and conditional bounds](/research/dispatch-comparison-2025/generation-by-fuel.csv), and [national Ember comparison](/research/dispatch-comparison-2025/national-generation.csv).
-- [Compact provenance and verification receipt](/research/dispatch-comparison-2025/summary.json), with hashes linking the original model, source replay and report assets. Full source/hourly witnesses stay locally cached outside Git.
-- Model formulation: [intraday_offer_bids_2025.py](tools/intraday_offer_bids_2025.py); [independent model replay](tools/audit_intraday_offer_bids_2025.py). Report derivation: [prepare_intraday_dispatch_report_2025.py](tools/prepare_intraday_dispatch_report_2025.py), [independent report replay](tools/audit_intraday_dispatch_report_2025.py), [figure/report renderer](tools/write_concise_dispatch_report_2025.py).
+- [All-zone price metrics](/research/dispatch-comparison-2025/prices-by-zone.csv), [generation coverage/errors](/research/dispatch-comparison-2025/generation-by-area.csv), [fuel volumes/hourly errors/conditional bounds](/research/dispatch-comparison-2025/generation-by-fuel.csv), [national Ember comparison](/research/dispatch-comparison-2025/national-generation.csv).
+- [Compact provenance and verification receipt](/research/dispatch-comparison-2025/summary.json). Bulk hourly/source/replay evidence stays locally cached outside Git.
+- [Seasonal bid formulation](tools/seasonal_calendar_bids_2025.py), [independent model replay](tools/audit_seasonal_calendar_bids_2025.py), [report derivation](tools/prepare_seasonal_dispatch_report_2025.py), [independent report replay](tools/audit_seasonal_dispatch_report_2025.py), [renderer](tools/write_concise_dispatch_report_2025.py).

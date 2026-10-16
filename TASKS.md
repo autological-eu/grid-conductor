@@ -13,7 +13,8 @@ reviews remain disabled.
 | Role | Implementation / checkpoint | Evidence and limits |
 | --- | --- | --- |
 | **One active research model** | Whole-network fixed-hydro/resource-bid zonal dispatch; tools/run_bidding_zone_network_2025.py, tools/global_bidding_zone_2025.py; data/bidding-zone-network-2025/annual-v7/ | 48 clearing areas / 145 buses; 8760 optimal hours, zero emergency supply, independent saved-source/physics replay. Clearing loop 33.476s; complete two-control/check/export command 418.108s, preparation 123.539s, peak RSS 2584 MiB. Fixed hourly hydro; independent hourly clears, not yet daily orchestration or adaptive storage. Regional allocation/demand proxies and price accuracy remain unresolved. |
-| **Current exploratory hourly bids** | intraday-offers-v1; intraday_offer_bids_2025.py and separate run/audit tools | Training-only daily residual-pressure plus local-clock harmonic bid adjustments; May–June selects [1,1] from five fixed pairs. 8760 optimal hours / zero emergency; ten independent physics/dual/feature/fitting/selection certificates. Jul–Dec MAE 28.294, raw r .52414, within-day r .52913; previous exploration 30.033/.44770/.40258. Physical inputs unchanged; NO5 worsens; no baseline/browser promotion. |
+| **Current exploratory seasonal bids** | seasonal-calendar-v1; seasonal_calendar_bids_2025.py and separate run/audit tools | No residual-demand bid predictor. Calendar seasonal/daily interactions plus training-month Ember fuel signal; three season-spanning fit/select/test month rotations, 48-hour price purges. All select calendar+Ember jointly; 8760 OOF hours optimal / zero emergency, eleven independent LP/source/fold certificates. Full-year OOF MAE 33.225→29.177, raw r .50171→.56533, within-day r .40725→.52674. Separate all-year refit MAE 28.964 is in-sample. Physical inputs unchanged; no baseline/browser promotion. |
+| Previous residual/time-of-day reference | intraday-offers-v1; frozen intraday_offer_bids_2025.py and run/audit tools | Earlier Jul–Dec experiment, not current bid architecture or directly comparable full-year scores. Source/replay retained; no restarted search. |
 | **Bounded bid-calibration diagnostic** | bid-calibration-v1; run/audit_bid_calibration_2025.py and training-selected diagnostic-evaluation-v1 | Seven Jan–June training tuples, original physics unchanged; declared regularized price/generation/trade score selects zero adders. Independently replayed nine complete LP witnesses and training-only selection. Jul–Dec EU MAE 32.21; supplementary gas +30 lowers it to 31.60 but worsens FR 20.71→25.18 and ES 22.55→31.55 EUR/MWh. Nuclear −15 gives EU 32.29. No promotion; retrospective evaluation, not untouched validation. |
 | **Zonal bids / two-block experiment** | zonal-bid-blocks-v2; zonal_bid_blocks_2025.py and separate run/audit/report tools | Five training states; constant-offset proposal rejected by joint score, 21 zone/resource upper-block spreads selected. All 8760 annual hours optimal. Jul–Dec equal-zone MAE 32.205→31.874; mean r .40729→.41130; generation/trade interval errors improve slightly. France r .685→.744 but MAE 20.71→20.83 and bias +0.01→+8.37; Spain 22.55→22.70 MAE; Nordic regressions retained. Six complete LP certificates and original-component/block-capacity replay pass. Diagnostic only, no baseline promotion. |
 | **Hourly-shape / joint resource curves** | hourly-offer-curves-v1; separate diagnose/run/audit/report_hourly tools; verified diagnostic hourly-shape-diagnosis-v2 | Jan–April fit, May–June selection, Jul–Dec retrospective evaluation; 11 fit states, 16 independently replayed LP certificates. Selected [offset strength 0, thermal strength .5, renewable discount 0]. All annual 8760 hours optimal; EU MAE 32.205→30.033, mean r .40729→.44770, within-day r .36122→.40258. ES MAE 22.55→20.57 and daily range 66.47→81.61 versus observed 98.10; positive bias and Nordic regressions remain. No baseline/browser promotion. |
@@ -53,6 +54,44 @@ Comparisons are descriptive, untuned and not held-out validation. Norway/Sweden
 price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
 
 ## Ordered next actions
+
+Completed authorized seasonal-calendar-v1/verification-v1. No residual demand in
+hourly bid features: 15 local-time/annual interaction columns fit training-month
+price errors; optional national gas/coal/nuclear seasonal signal uses training-month
+Ember generation outside baseline allocation intervals. Original resource anchors,
+available MW, demand, fixed hydro, GSK and physical rows are unchanged; no inherited
+price-fitted step markups. Nested whole-month seasonal rotations hold out each of
+12 months once, with disjoint fit/selection/test roles and 48-hour price purges.
+This is retrospective interpolation using some later months, not future forecasting.
+
+All folds select calendar+Ember on the predeclared joint score. Ember worsens
+selection-price MAE versus calendar-only: 30.806→31.581, 27.058→27.473,
+28.194→28.746 EUR/MWh; improved generation/trade scores drive selection. Do not
+claim Ember alone improves prices; calendar-only outer-test results are unmeasured.
+Full-year OOF headline versus unfitted control: MAE 33.225→29.177, raw correlation
+.50171→.56533, within-day correlation .40725→.52674, demeaned MAE 23.028→20.315.
+Generation/trade interval scores .37481→.30898 / .20450→.17860. All 8760 hours
+optimal / zero emergency. Final mode-selected all-year refit MAE 28.964, r .57312
+is in-sample and separately retained, never substituted for OOF validation.
+Five targeted fixtures and eleven independent LP/source/calendar/Ember/fold/metric
+certificates pass. Max original residual 2.571e-6 MW, duality gap EUR0.00003293;
+unchanged gates. Preparation 82.14s; test clearing total 38.20s, separate annual
+refit 36.46s; complete selection/test/refit command 282.10s, independent replay
+135.82s. No annual joint-storage optimum, empirical acceptance or browser promotion.
+Keep the concise report and MAE grid on this new full-year cohort; older H2 metrics
+remain historical evidence. Next: source-backed inputs/Nordic errors and genuinely
+separate-year validation, not further tuning on these already inspected test months.
+Current report root seasonal-report-v1/verification-v1 separately replays full-year
+generation geography, source observations, conditional allocations and price metrics:
+38 generation reporting areas / 41 price zones; maximum allocation difference
+7.28e-12 MW. Median covered-fuel volume error 50.1→42.2%; 31/38 generation areas
+improve. Price MAE improves in 38/41 areas; BE/FR/NO5 worsen. Four tracked figures
+now use the full-year OOF cohort, including winter/summer local-hour profiles and
+the MAE grid. Fourteen bid fixtures pass; no bulk hourly artifacts enter Git.
+Four metadata archives verify losslessly; public asset/provenance checks and
+production build pass. Local Chromium checks at 1440/390/320px load four figures
+and six evidence links without page errors or overflow; OOF/refit and selection
+trade-off labels verified. No deployment or live CI/Pages/public-URL claim.
 
 Completed authorized hourly-bid update in intraday-offers-v1/verification-v1.
 Gas/coal shifts use daily-centered residual demand and smooth DST-aware local
