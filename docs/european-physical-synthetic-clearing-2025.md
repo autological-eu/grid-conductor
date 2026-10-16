@@ -6,6 +6,41 @@ The seasonal/time-of-day **calendar + Ember** supply-bid model is now the accept
 
 These are **2025 in-sample reconstruction scores**: 2025 prices informed bids. Generation agreement and independently replayed physics are complementary checks, not statistical cross-validation. The model changes offers before physical clearing; it never replaces cleared prices afterward. Fixed hydro and all physical constraints remain unchanged. This acceptance does not replace the browser scenario engine or validate investment effects.
 
+## Research target and accepted-baseline diagnosis
+
+The target is **below 10 EUR/MWh equal-zone MAE for all 8,760 hours of 2025**, across all 41 complete observed-price areas, with per-zone results retained. Seven modeled areas still lack complete observed prices. Reaching 10 from the accepted baseline requires a further **65.5% reduction**; that improvement is a research goal, not a demonstrated outcome.
+
+| Largest price errors | Annual MAE, EUR/MWh | Signed bias, EUR/MWh |
+| --- | ---: | ---: |
+| DK2 | 50.15 | -38.55 |
+| NO5 | 47.29 | -24.46 |
+| EE | 44.56 | +9.21 |
+| NO1 | 42.57 | -22.59 |
+| FI | 40.88 | +0.16 |
+| LV | 40.82 | +3.87 |
+| LT | 40.82 | +4.29 |
+
+Both daily levels and intraday movements matter. Mean daily-level error is **22.96 EUR/MWh**; after removing each day's mean error, within-day error remains **20.06 EUR/MWh**. These are descriptive diagnostics calculated with observed prices; their MAEs do not add and they are not usable forecast corrections. Daily fuel changes alone cannot correct all hourly shape errors.
+
+The following national quantities come from the **accepted single annual refit**, independently re-aggregated and checked against twelve-month Ember references. Coal combines hard coal and lignite. Model points illustrate saved-group allocations; conditional bounds and national/technology scope differences remain relevant.
+
+| Country / resource | Model TWh | Ember TWh | Difference TWh |
+| --- | ---: | ---: | ---: |
+| DE / Wind | 172.13 | 131.17 | +40.97 |
+| DE / Solar | 108.10 | 89.97 | +18.13 |
+| DE / Coal | 45.71 | 94.86 | -49.15 |
+| DE / Gas | 62.06 | 79.33 | -17.26 |
+| FR / Nuclear | 345.40 | 371.69 | -26.29 |
+| ES / Wind | 43.95 | 55.58 | -11.63 |
+
+**Next controlled improvements:** first reconcile country-specific wind/solar capacity and weather conversion, biomass/coal classification and reporting coverage; audit dated nuclear/thermal outages. Compare price and mix changes together. Do not scale weather availability to observed generation. Then test source-backed daily thermal costs with current bid coefficients fixed, followed by a separately labelled refit if warranted. Explore resource-specific operating bids and negative-price behaviour after those source checks; a uniform negative-bid change would not explain the excess negative prices already present in some Norwegian zones.
+
+**Fuel precision today:** gas uses monthly World Bank TTF benchmarks; oil uses monthly Brent, both converted using monthly mean reciprocal ECB FX. Carbon is fixed at **80 EUR/t** and coal/lignite retain technology-cost assumptions. These are not daily fuel quotes. Resource bids use fuel/efficiency + carbon × emissions/efficiency + variable O&M, before the bounded seasonal correction. Gas needs gas-hub data rather than oil as a proxy.
+
+[Ember's daily fuel-cost methodology](https://ember-energy.org/data/european-electricity-prices-and-costs/) identifies national gas hubs, API2 coal and EU/UK carbon contracts, but its embedded fuel chart explicitly restricts downloads because of licensing; no series has been adopted. [MIBGAS's 2025 archive](https://www.mibgas.es/en/file-access?path=AGNO_2025/XLS) now has **365 source-replayed delivery days** of Spanish PVB and Portuguese VTP last/average day-ahead indices. These are source-computed indices, including provider estimates in illiquid periods; they are not a Europe-wide TTF substitute and have not entered the model. [EIA daily Brent](https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls) is an oil-proxy candidate. Delivery/gas-day dates, nontrading days, heating-value basis, units, coverage and permitted reuse must be reconciled before a model-input correction.
+
+## Secondary development evidence
+
 The sections and figures below retain the **previous unfitted baseline versus out-of-fold seasonal-model comparison** as secondary development evidence. Their “baseline” labels mean the previous control; their “exploratory” results combine three fits and are **not the accepted single annual refit**. Do not mix those generation/price results with the annual-refit headline.
 
 

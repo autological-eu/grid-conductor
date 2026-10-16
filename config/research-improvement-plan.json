@@ -1,0 +1,61 @@
+{
+  "target": {
+    "metric": "equal-zone mean hourly absolute price error",
+    "threshold_eur_mwh": 10,
+    "comparison": "strictly below",
+    "year": 2025,
+    "hours": 8760,
+    "current_observed_price_zones": 41,
+    "modeled_areas": 48,
+    "coverage": "All complete observed zones; preserve missing areas and report every zone, negative hours and extremes",
+    "scope": "Full-year price-calibrated reconstruction; independent forecasts are separate"
+  },
+  "baseline": "config/research-baseline.json",
+  "diagnosis_folder": "data/bidding-zone-network-2025/accepted-baseline-mix-v1",
+  "priorities": [
+    {
+      "order": 1,
+      "work": "Reconcile low-cost supply and reporting coverage",
+      "details": "Check dated wind/solar capacity, fleet geography and weather conversion against independent capacity/site sources; reconcile national Ember and A75 gross/net/embedded scope. Investigate German biomass and coal/lignite taxonomy/operational assumptions. Never scale available MW to observed generation."
+    },
+    {
+      "order": 2,
+      "work": "Daily delivered thermal-cost inputs",
+      "details": "Collect source-backed gas-hub, coal and EU/UK carbon inputs with delivery dates, currency and HHV/LHV basis; daily Brent is an oil proxy, not gas. First change inputs with accepted bid coefficients frozen. Report separate gas, carbon, oil and combined full-year cases; no assumed improvement or baseline promotion."
+    },
+    {
+      "order": 3,
+      "work": "Dated nuclear/thermal operational availability",
+      "details": "Audit French/Swedish nuclear and thermal outages/deratings from independent dated fleet or outage records, not dispatch-derived availability. Preserve capacities and all hours; record incompleteness."
+    },
+    {
+      "order": 4,
+      "work": "Resource bid shapes and negative-price behaviour",
+      "details": "Investigate resource-specific variable costs, simple operating/CHP conditions and bounded low/negative renewable offers; compare mix and daily price shape. Current zero renewable bids and clipped thermal bids miss many negative-price episodes. Nordic excess negative prices need fixed-injection/geography/constraint diagnosis, not a universal negative-bid fix. No hydro-flexibility restart."
+    }
+  ],
+  "experiment_policy": "One source correction at a time from accepted refit; keep fixed-hydro chronology/network physics; freeze inherited calibration for input-only attribution, then label any refit separately. Every candidate needs complete annual clearing, independent physics and price/mix replay. Price MAE reductions do not excuse material unexplained mix regressions.",
+  "sources": [
+    {
+      "name": "Ember European electricity prices and costs",
+      "url": "https://ember-energy.org/data/european-electricity-prices-and-costs/",
+      "verified": "Methodology describes daily national gas-hub settlement prices, API2 coal and EU/UK ETS front-December contracts. Embedded fuel-cost chart says data unavailable for download due to licensing; no series adopted."
+    },
+    {
+      "name": "MIBGAS",
+      "url": "https://www.mibgas.es/en/file-access?path=AGNO_2025/XLS",
+      "verified": "Downloaded official MIBGAS_Data_2025.xlsx from linked 2025 archive; workbook disclaimer permits reuse preserving content and attribution. Extracted and independently replayed 365 delivery days for both PVB/VTP last and average day-ahead indices. Source-computed indices may estimate illiquid periods. Gas-day UTC and heating-value conventions remain unreconciled; not adopted in model or substituted for TTF/THE.",
+      "evidence_folder": "data/fuel-prices/mibgas-daily-source-v1"
+    },
+    {
+      "name": "EIA daily Brent",
+      "url": "https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls",
+      "verified": "Public historical workbook returned HTTP200. Candidate oil proxy only; full-year extraction and nontrading-day treatment not yet integrated."
+    },
+    {
+      "name": "Bundesnetzagentur THE gas prices",
+      "url": "https://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_svg/Gaspreise/Gaspreise.html",
+      "verified": "Page describes daily THE day-ahead/front-month gas prices, sourced from EEX; explicitly says no machine-readable download. Not ingested."
+    }
+  ]
+}

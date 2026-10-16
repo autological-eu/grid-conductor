@@ -59,6 +59,16 @@ def check():
                       (comparison.get('derived_producer_file', 'prepare_concise_dispatch_report_2025.py'), comparison['derived_producer_sha256']),
                       (comparison['report_audit'].get('auditor_file', 'audit_concise_dispatch_report_2025.py'), comparison['report_audit']['auditor_sha256'])]:
         assert hashlib.sha256((ROOT / 'tools' / file).read_bytes()).hexdigest() == sha
+    direction = comparison['research_direction']
+    assert direction['audit']['diagnosis_sha256'] == direction['diagnosis_sha256']
+    assert direction['audit']['price_zones'] == 41 and direction['audit']['hours'] == 8760
+    assert direction['mix_audit']['maximum_hourly_allocation_difference_mw'] < 1e-6
+    for name, sha in [('diagnose_accepted_baseline_2025.py', direction['producer_sha256']),
+                      ('audit_accepted_baseline_diagnosis_2025.py', direction['audit']['auditor_sha256']),
+                      ('prepare_accepted_baseline_mix_2025.py', direction['mix_producer_sha256']),
+                      ('audit_accepted_baseline_mix_2025.py', direction['mix_auditor_sha256'])]:
+        assert hashlib.sha256((ROOT / 'tools' / name).read_bytes()).hexdigest() == sha
+    assert direction['plan_sha256'] == hashlib.sha256((ROOT / 'config/research-improvement-plan.json').read_bytes()).hexdigest()
     expected = {'overview.png', 'national-mix.png', 'daily-prices.png', 'zone-mae-grid.png', 'prices-by-zone.csv',
                 'generation-by-area.csv', 'generation-by-fuel.csv', 'national-generation.csv'}
     assert set(comparison['assets']) == expected

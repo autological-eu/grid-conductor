@@ -17,6 +17,15 @@ Physical inputs, fixed hydro, chronology and feasibility gates remain unchanged.
 Browser integration, adaptive storage and investment validation are separate work.
 Automatic hourly reviews remain disabled.
 
+The subsequent user direction prioritizes accepted-refit price/mix diagnosis and
+source-backed input improvements toward <10 EUR/MWh full-2025 equal-zone MAE.
+Use the accepted single annual refit for diagnostics, not the OOF composite.
+Investigate daily gas/coal/carbon and oil inputs, availability, reporting scope
+and resource-specific bids in controlled cases. Gas is not an oil-price proxy.
+Current gas/oil series are monthly and carbon constant; never invent daily values.
+Retain original availability, source units/calendar and licensed-data boundaries.
+No observed-generation scaling, new hydro search or browser replacement follows.
+
 Read PRODUCT.md and TASKS.md first. PRODUCT owns requirements, TASKS owns current
 priorities/evidence, README owns setup. Develop on public-v1. Main promotions
 require explicit user authorization; the alpha promotion was authorized on

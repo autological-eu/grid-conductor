@@ -29,8 +29,8 @@ reviews remain disabled.
 
 | Role | Implementation / checkpoint | Evidence and limits |
 | --- | --- | --- |
-| **One active research model** | Whole-network fixed-hydro/resource-bid zonal dispatch; tools/run_bidding_zone_network_2025.py, tools/global_bidding_zone_2025.py; data/bidding-zone-network-2025/annual-v7/ | 48 clearing areas / 145 buses; 8760 optimal hours, zero emergency supply, independent saved-source/physics replay. Clearing loop 33.476s; complete two-control/check/export command 418.108s, preparation 123.539s, peak RSS 2584 MiB. Fixed hourly hydro; independent hourly clears, not yet daily orchestration or adaptive storage. Regional allocation/demand proxies and price accuracy remain unresolved. |
-| **Current exploratory seasonal bids** | seasonal-calendar-v1; seasonal_calendar_bids_2025.py and separate run/audit tools | No residual-demand bid predictor. Calendar seasonal/daily interactions plus training-month Ember fuel signal; three season-spanning fit/select/test month rotations, 48-hour price purges. All select calendar+Ember jointly; 8760 OOF hours optimal / zero emergency, eleven independent LP/source/fold certificates. Full-year OOF MAE 33.225→29.177, raw r .50171→.56533, within-day r .40725→.52674. Separate all-year refit MAE 28.964 is in-sample. Physical inputs unchanged; no baseline/browser promotion. |
+| Historical physical/unfitted control | Whole-network fixed-hydro/resource-bid zonal dispatch; tools/run_bidding_zone_network_2025.py, tools/global_bidding_zone_2025.py; data/bidding-zone-network-2025/annual-v7/ | 48 clearing areas / 145 buses; 8760 optimal hours, zero emergency supply, independent saved-source/physics replay. Clearing loop 33.476s; complete two-control/check/export command 418.108s, preparation 123.539s, peak RSS 2584 MiB. Fixed hourly hydro; independent hourly clears, not yet daily orchestration or adaptive storage. Regional allocation/demand proxies and price accuracy remain unresolved. |
+| **Accepted active seasonal-bid baseline** | seasonal-calendar-v1; seasonal_calendar_bids_2025.py and separate run/audit tools | No residual-demand bid predictor. Calendar seasonal/daily interactions plus training-month Ember fuel signal; three season-spanning fit/select/test month rotations, 48-hour price purges. All select calendar+Ember jointly; 8760 OOF hours optimal / zero emergency, eleven independent LP/source/fold certificates. Full-year OOF MAE 33.225→29.177, raw r .50171→.56533, within-day r .40725→.52674. Accepted all-year refit MAE 28.964 is in-sample; use refit for new comparisons. Physical inputs unchanged; browser integration remains separate. |
 | Previous residual/time-of-day reference | intraday-offers-v1; frozen intraday_offer_bids_2025.py and run/audit tools | Earlier Jul–Dec experiment, not current bid architecture or directly comparable full-year scores. Source/replay retained; no restarted search. |
 | **Bounded bid-calibration diagnostic** | bid-calibration-v1; run/audit_bid_calibration_2025.py and training-selected diagnostic-evaluation-v1 | Seven Jan–June training tuples, original physics unchanged; declared regularized price/generation/trade score selects zero adders. Independently replayed nine complete LP witnesses and training-only selection. Jul–Dec EU MAE 32.21; supplementary gas +30 lowers it to 31.60 but worsens FR 20.71→25.18 and ES 22.55→31.55 EUR/MWh. Nuclear −15 gives EU 32.29. No promotion; retrospective evaluation, not untouched validation. |
 | **Zonal bids / two-block experiment** | zonal-bid-blocks-v2; zonal_bid_blocks_2025.py and separate run/audit/report tools | Five training states; constant-offset proposal rejected by joint score, 21 zone/resource upper-block spreads selected. All 8760 annual hours optimal. Jul–Dec equal-zone MAE 32.205→31.874; mean r .40729→.41130; generation/trade interval errors improve slightly. France r .685→.744 but MAE 20.71→20.83 and bias +0.01→+8.37; Spain 22.55→22.70 MAE; Nordic regressions retained. Six complete LP certificates and original-component/block-capacity replay pass. Diagnostic only, no baseline promotion. |
@@ -69,6 +69,72 @@ rehashed/reparsed. Prepared demand and mixed fleet/weather allocations retain
 scope/location proxies; geographic structure does not establish input accuracy.
 Comparisons are descriptive, untuned and not held-out validation. Norway/Sweden
 price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
+
+## Current diagnosis and source improvements — 16 October 2026
+
+The user targets **<10 EUR/MWh equal-zone full-2025 hourly MAE**, all 41 currently
+complete observed-price areas / 8760 hours; report each zone and all 48 modeled
+areas' coverage. This is annual reconstruction accuracy, not future forecasting.
+No zone, negative-price hour or high-price tail may be removed to meet the target.
+This section supersedes historical priorities below. Machine-readable research
+sequence and verified source leads: config/research-improvement-plan.json.
+
+Completed source-membership and generation replay of the **accepted refit**, not
+the OOF composite: prepare_accepted_baseline_mix_2025.py and independent
+audit_accepted_baseline_mix_2025.py; ignored accepted-baseline-mix-v1/verification-v1.
+The derived `combined` array key is a legacy format alias for **refit**, never OOF.
+Independent replay covers all 38 eligible generation areas, all 41 price areas,
+allocations/bounds, reporting geography and observations; original accepted annual
+physics remains linked. Ramps use every adjacent hour for both annual references.
+Joint price/month/fuel diagnosis: diagnose_accepted_baseline_2025.py and independent
+audit_accepted_baseline_diagnosis_2025.py, diagnosis.json / diagnosis-audit.json.
+No new market solve, input correction or baseline replacement was performed.
+
+Accepted-refit MAE remains 28.964; reaching 10 needs >65.47% further reduction.
+Daily-level error MAE 22.955 and daily-demeaned error MAE 20.063 are descriptive
+and do not add. Worst zones: DK2 50.15, NO5 47.29, EE 44.56, NO1 42.57, FI 40.88,
+LV 40.82, LT 40.82 EUR/MWh. Top ten account for 35.52% of absolute price error.
+Generation-source scope must be reconciled, not treated as known total-fleet truth.
+Accepted-refit national quantities versus Ember (TWh): DE wind 172.13/131.17,
+solar 108.10/89.97, coal+lignite 45.71/94.86, gas 62.06/79.33; FR nuclear
+345.40/371.69; ES wind 43.95/55.58. These supersede OOF mix figures for current
+baseline diagnosis. Large over/underproduction patterns are not proof of capacity
+errors; competing bids, allocation, demand and constraints can also explain them.
+
+Next actions, in order:
+1. Reconcile dated wind/solar capacity and site/weather conversion, national/A75
+   coverage and thermal/biomass taxonomy. Never derive available MW by scaling
+   to reported dispatch. Check DE overproduction and ES wind shortfall separately.
+2. Collect daily national gas, coal and EU/UK carbon inputs; oil uses its own
+   delivered-product/Brent proxy. Current inputs are monthly WB TTF/Brent with
+   monthly reciprocal ECB FX, flat EUR80/t carbon and coal/lignite cost constants.
+   Test daily inputs first with accepted coefficients frozen, then any refit as
+   separate work. Heating-value/efficiency, currency and delivery dates must agree.
+3. Obtain independent dated nuclear/thermal outage/derating data (FR/SE priority).
+4. Test simple resource-specific operating/negative-price bids against both mix
+   and hourly shape, preserving fixed hydro. Current renewable zero bids and
+   positive thermal floors miss negative episodes in DE/ES/FR, while Nordic fixed
+   injections already cause excess negatives: no universal bid shift follows.
+
+Source checks: Ember's current European electricity costs tool documents daily
+national gas hubs, API2 and ETS, but explicitly restricts fuel-chart downloads
+because of licensing; no embedded series ingested. Bundesnetzagentur's THE chart
+also states no machine-readable download. MIBGAS exposes a public 2025 XLS archive. prepare_mibgas_daily_2025.py extracts
+365 delivery days for PVB/VTP last and average day-ahead indices; independent
+audit_mibgas_daily_2025.py reparses original cells and verifies every quote,
+missingness, date and fingerprint. Local source/CSV/receipt/audit remain ignored
+in data/fuel-prices/mibgas-daily-source-v1/. The workbook permits reuse with
+content preservation and attribution. Provider estimates in illiquid periods
+remain explicit. Reconcile gas-day UTC and heating basis before model adoption;
+these Iberian prices are not a default TTF/THE replacement. EIA daily Brent workbook
+responds successfully but is only an oil-proxy lead. No daily source has yet
+changed the model, and no accuracy improvement is claimed from these leads.
+The retained report includes this diagnosis; no new report or live deployment.
+Verification completed: accepted-refit generation derivation 114.16s, independent
+source/allocation replay 78.95s (maximum difference 7.28e-12 MW); separate joint
+price/monthly-mix replay and original-cell replay of all four 365-day MIBGAS
+indices pass. Production build, public asset/source fingerprints and diff checks
+pass. These are diagnostic/source timings, not new clearing benchmarks.
 
 ## Ordered next actions
 

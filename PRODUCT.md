@@ -53,7 +53,16 @@ errors and negative-price behaviour, so correlation gains cannot conceal worse
 price levels. Report all eligible zones and aggregate weighting/coverage; focus
 error diagnosis on Norway and Sweden without excluding adverse results elsewhere.
 Use declared development/held-out periods before tuning and select acceptance
-thresholds explicitly; no numerical accuracy threshold has yet been agreed.
+thresholds explicitly. The accepted 16 October research target is below **10 EUR/MWh**
+equal-zone mean absolute error across every currently eligible observed-price zone
+and all **8,760 hours of 2025**. Report each zone separately; this aggregate target
+does not mean every zone is below 10. Preserve all negative/extreme hours, coverage
+and weighting. The current 41 observed-price areas are not all 48 modeled areas;
+additional areas enter when complete source-backed observations are available.
+Price-calibrated annual results are reconstruction accuracy, not independent
+forecast accuracy. Improving source-backed generation mix and transparent
+resource bids is the current priority; do not obtain this target by overwriting
+cleared prices, substituting generation for availability or relaxing physics.
 Evaluation electricity prices remain validation targets. Historical training prices
 may inform the explicitly authorized bounded bid calibration described below.
 

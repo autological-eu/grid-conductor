@@ -1,4 +1,44 @@
 {
+  "research_direction": {
+    "plan_sha256": "2110f63fec9468541833bb13bf325b3051c7ad34bbafba8a616031d77698dc8d",
+    "diagnosis_sha256": "832ee83b2c8d5db92c8c80c986b53709052c82ad9d51472ccb79ccaf539a084c",
+    "audit": {
+      "status": "accepted_refit_price_monthly_mix_and_target_metrics_replayed",
+      "diagnosis_sha256": "832ee83b2c8d5db92c8c80c986b53709052c82ad9d51472ccb79ccaf539a084c",
+      "auditor_sha256": "d10523e525eb256e452cb177c185f72c8ed5279095ccd3fa859da658244f1080",
+      "zones": 48,
+      "price_zones": 41,
+      "hours": 8760
+    },
+    "producer_sha256": "b70d4630918c37be4d5c159231f90d2bf3a9c152d4655b90d17188d95fbf30cb",
+    "mix_producer_sha256": "7f0e42c46b8a3e3f2579c991bf64fde9db78f9c2f01bb9518e93633c792e9d73",
+    "mix_auditor_sha256": "c56fd05f0e6cdc7da2f1cd43cf7c63c0f8da5a20d83e2679fd8160bffa750c9a",
+    "mix_audit": {
+      "auditor_file": "audit_accepted_baseline_mix_2025.py",
+      "status": "concise_report_generation_geography_allocation_observations_and_metrics_replayed",
+      "summary_sha256": "ef8a991898d842b981a137fc5becfcad335f277c7fdbd0508a276bafe6721d8e",
+      "auditor_sha256": "c56fd05f0e6cdc7da2f1cd43cf7c63c0f8da5a20d83e2679fd8160bffa750c9a",
+      "maximum_hourly_allocation_difference_mw": 7.275957614183426e-12,
+      "generation_areas": 38,
+      "price_areas": 41,
+      "elapsed_seconds": 78.94912540097721,
+      "scope": "Reporting derivation only; original annual feasibility/cost/selection replay remains linked; no new solve or model acceptance"
+    },
+    "target": {
+      "metric": "equal-zone mean hourly absolute price error",
+      "threshold_eur_mwh": 10,
+      "comparison": "strictly below",
+      "year": 2025,
+      "hours": 8760,
+      "current_observed_price_zones": 41,
+      "modeled_areas": 48,
+      "coverage": "All complete observed zones; preserve missing areas and report every zone, negative hours and extremes",
+      "scope": "Full-year price-calibrated reconstruction; independent forecasts are separate"
+    },
+    "equal_zone_mae": 28.9639751169547,
+    "mean_daily_level_error_mae": 22.955307491801943,
+    "mean_within_day_error_mae": 20.06347356650509
+  },
   "accepted_baseline": {
     "model": "seasonal-calendar-v1",
     "annual_case": "refit",
@@ -84,8 +124,8 @@
   },
   "derived_producer_sha256": "a47c8743536ca208c44a6f469adef88be51f5801120d570b60fb836d8cba9b85",
   "derived_producer_file": "prepare_seasonal_dispatch_report_2025.py",
-  "renderer_sha256": "67db0e5e2e8bf55ea179ce3bb07d2c39a9db23c9cdd9a6aa2ab8dbbf8eaa7e09",
-  "article_sha256": "9c0fc8158b1a966c02f70295a9595ac25c3c57d882b3b8b5c0fc3f1954169fd2",
+  "renderer_sha256": "159039e8a3e9a70a8354818ceb68d9aa51e478ef5a77247e4b2d5e9378853f6a",
+  "article_sha256": "2ee4fc832f362945f8b1a34a90be25fd68ee5abc9622b5be3c4c32770d8bd57c",
   "assets": {
     "daily-prices.png": "e6f39cc33c519d07425c68a6e44b2c6827e968151d4160e098c0de4980d9a4c1",
     "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",

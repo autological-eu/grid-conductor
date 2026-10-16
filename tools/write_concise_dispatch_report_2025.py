@@ -241,6 +241,29 @@ def write(folder):
     assert baseline['summary_sha256'] == digest(model / 'summary.json')
     assert baseline['audit_sha256'] == digest(model / 'verification-v1/audit.json')
     assert baseline['witness']['witness_sha256'] == digest(model / baseline['witness']['witness'])
+    direction = json.loads((ROOT / 'config/research-improvement-plan.json').read_text())
+    diagnostic_folder = ROOT / direction['diagnosis_folder']
+    diagnosis = json.loads((diagnostic_folder / 'diagnosis.json').read_text())
+    diagnosis_audit = json.loads((diagnostic_folder / 'diagnosis-audit.json').read_text())
+    assert diagnosis_audit['diagnosis_sha256'] == digest(diagnostic_folder / 'diagnosis.json')
+    assert diagnosis_audit['auditor_sha256'] == digest(ROOT / 'tools/audit_accepted_baseline_diagnosis_2025.py')
+    assert diagnosis['producer_sha256'] == digest(ROOT / 'tools/diagnose_accepted_baseline_2025.py')
+    assert diagnosis['baseline_config_sha256'] == digest(ROOT / 'config/research-baseline.json')
+    assert diagnosis['equal_zone_mae'] == refit['equal_zone_mae']
+    diagnostic_summary = json.loads((diagnostic_folder / 'summary.json').read_text())
+    diagnostic_mix_audit = json.loads((diagnostic_folder / 'verification-v1/audit.json').read_text())
+    assert diagnostic_mix_audit['summary_sha256'] == digest(diagnostic_folder / 'summary.json') == diagnosis['derivation_summary_sha256']
+    assert diagnostic_summary['producer_sha256'] == digest(ROOT / 'tools/prepare_accepted_baseline_mix_2025.py')
+    assert diagnostic_mix_audit['auditor_sha256'] == digest(ROOT / 'tools/audit_accepted_baseline_mix_2025.py')
+    ranked = sorted([r for r in diagnosis['zones'] if r['known_price_hours']], key=lambda r:-r['mae_eur_mwh'])
+    diagnostic_table = '\n'.join(f"| {r['zone']} | {r['mae_eur_mwh']:.2f} | {r['bias_eur_mwh']:+.2f} |" for r in ranked[:7])
+    with np.load(diagnostic_folder / 'comparison.npz') as dz:
+        mix_rows = []
+        for country, fuel in [('DE','Wind'),('DE','Solar'),('DE','Coal'),('DE','Gas'),('FR','Nuclear'),('ES','Wind')]:
+            ci=diagnostic_summary['countries'].index(country);fi=diagnostic_summary['ember_fuels'].index(fuel)
+            pred=dz['combined_country_point_twh'][ci,fi];actual=dz['ember_reference_twh'][ci,fi]
+            mix_rows.append(f"| {country} / {fuel} | {pred:.2f} | {actual:.2f} | {pred-actual:+.2f} |")
+        diagnostic_mix_table = '\n'.join(mix_rows)
     report = f'''# European dispatch: accepted seasonal-bid baseline
 
 ## Accepted baseline: single full-year reconstruction
@@ -248,6 +271,30 @@ def write(folder):
 The seasonal/time-of-day **calendar + Ember** supply-bid model is now the accepted research baseline. Its single annual `refit` solves all **8,760 hours of 2025**, with mean zonal MAE **{refit['equal_zone_mae']:.2f} EUR/MWh**, **{baseline['mae_reduction_percent']:.1f}% lower** than the previous unfitted control ({baseline['previous_mae_eur_mwh']:.2f}). Mean price correlation is **{refit['mean_correlation']:.3f}** and within-day correlation **{refit['mean_demeaned_correlation']:.3f}**. Annual clearing took **{baseline['witness']['clearing_seconds']:.2f}s**, excluding preparation, fitting and audits; all hours were optimal with zero emergency supply.
 
 These are **2025 in-sample reconstruction scores**: 2025 prices informed bids. Generation agreement and independently replayed physics are complementary checks, not statistical cross-validation. The model changes offers before physical clearing; it never replaces cleared prices afterward. Fixed hydro and all physical constraints remain unchanged. This acceptance does not replace the browser scenario engine or validate investment effects.
+
+## Research target and accepted-baseline diagnosis
+
+The target is **below 10 EUR/MWh equal-zone MAE for all 8,760 hours of 2025**, across all 41 complete observed-price areas, with per-zone results retained. Seven modeled areas still lack complete observed prices. Reaching 10 from the accepted baseline requires a further **{diagnosis['remaining_reduction_percent']:.1f}% reduction**; that improvement is a research goal, not a demonstrated outcome.
+
+| Largest price errors | Annual MAE, EUR/MWh | Signed bias, EUR/MWh |
+| --- | ---: | ---: |
+{diagnostic_table}
+
+Both daily levels and intraday movements matter. Mean daily-level error is **{diagnosis['mean_daily_level_error_mae']:.2f} EUR/MWh**; after removing each day's mean error, within-day error remains **{diagnosis['mean_within_day_error_mae']:.2f} EUR/MWh**. These are descriptive diagnostics calculated with observed prices; their MAEs do not add and they are not usable forecast corrections. Daily fuel changes alone cannot correct all hourly shape errors.
+
+The following national quantities come from the **accepted single annual refit**, independently re-aggregated and checked against twelve-month Ember references. Coal combines hard coal and lignite. Model points illustrate saved-group allocations; conditional bounds and national/technology scope differences remain relevant.
+
+| Country / resource | Model TWh | Ember TWh | Difference TWh |
+| --- | ---: | ---: | ---: |
+{diagnostic_mix_table}
+
+**Next controlled improvements:** first reconcile country-specific wind/solar capacity and weather conversion, biomass/coal classification and reporting coverage; audit dated nuclear/thermal outages. Compare price and mix changes together. Do not scale weather availability to observed generation. Then test source-backed daily thermal costs with current bid coefficients fixed, followed by a separately labelled refit if warranted. Explore resource-specific operating bids and negative-price behaviour after those source checks; a uniform negative-bid change would not explain the excess negative prices already present in some Norwegian zones.
+
+**Fuel precision today:** gas uses monthly World Bank TTF benchmarks; oil uses monthly Brent, both converted using monthly mean reciprocal ECB FX. Carbon is fixed at **80 EUR/t** and coal/lignite retain technology-cost assumptions. These are not daily fuel quotes. Resource bids use fuel/efficiency + carbon × emissions/efficiency + variable O&M, before the bounded seasonal correction. Gas needs gas-hub data rather than oil as a proxy.
+
+[Ember's daily fuel-cost methodology](https://ember-energy.org/data/european-electricity-prices-and-costs/) identifies national gas hubs, API2 coal and EU/UK carbon contracts, but its embedded fuel chart explicitly restricts downloads because of licensing; no series has been adopted. [MIBGAS's 2025 archive](https://www.mibgas.es/en/file-access?path=AGNO_2025/XLS) now has **365 source-replayed delivery days** of Spanish PVB and Portuguese VTP last/average day-ahead indices. These are source-computed indices, including provider estimates in illiquid periods; they are not a Europe-wide TTF substitute and have not entered the model. [EIA daily Brent](https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls) is an oil-proxy candidate. Delivery/gas-day dates, nontrading days, heating-value basis, units, coverage and permitted reuse must be reconciled before a model-input correction.
+
+## Secondary development evidence
 
 The sections and figures below retain the **previous unfitted baseline versus out-of-fold seasonal-model comparison** as secondary development evidence. Their “baseline” labels mean the previous control; their “exploratory” results combine three fits and are **not the accepted single annual refit**. Do not mix those generation/price results with the annual-refit headline.
 
@@ -365,7 +412,13 @@ Independent replay checks calendar/DST features, month exclusion, price/Ember pr
 '''
     ARTICLE.write_text(report)
     assets = {path.name: digest(path) for path in sorted(PUBLIC.iterdir()) if path.name != 'summary.json'}
-    receipt = dict(accepted_baseline=baseline, period=s['period'], models=LABELS, generation_reporting_areas=38, observed_price_zones=41,
+    receipt = dict(research_direction=dict(plan_sha256=digest(ROOT/'config/research-improvement-plan.json'),
+                       diagnosis_sha256=digest(diagnostic_folder/'diagnosis.json'),audit=diagnosis_audit,
+                       producer_sha256=diagnosis['producer_sha256'],mix_producer_sha256=diagnostic_summary['producer_sha256'],
+                       mix_auditor_sha256=diagnostic_mix_audit['auditor_sha256'],mix_audit=diagnostic_mix_audit,
+                       target=direction['target'],equal_zone_mae=diagnosis['equal_zone_mae'],
+                       mean_daily_level_error_mae=diagnosis['mean_daily_level_error_mae'],
+                       mean_within_day_error_mae=diagnosis['mean_within_day_error_mae']), accepted_baseline=baseline, period=s['period'], models=LABELS, generation_reporting_areas=38, observed_price_zones=41,
                    derived_summary_sha256=digest(folder / 'summary.json'), derived_witness_sha256=s['witness_sha256'],
                    report_audit=audit, report_audit_sha256=digest(audit_path),
                    original_model_summary_sha256=s['original_model_summary_sha256'],
