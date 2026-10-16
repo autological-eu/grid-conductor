@@ -15,6 +15,11 @@ The map identifies price separation using signed ENTSO-E flow–price congestion
 estimates. Its browser-local line/battery scenarios still use a reduced-form
 **two-zone screening model**, not European hourly dispatch or certified returns.
 
+The accepted research baseline is the seasonal/time-of-day bid model pinned in
+[config/research-baseline.json](config/research-baseline.json): full-year 2025
+reconstruction MAE **28.96 EUR/MWh**, 12.8% below the previous unfitted control.
+This price-calibrated reconstruction is not independent forecast validation.
+
 ## Current documentation and models
 
 - [Workbench methodology](docs/workbench-methodology.md): bottlenecks, live scenario

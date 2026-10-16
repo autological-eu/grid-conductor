@@ -236,7 +236,22 @@ def write(folder):
         return a['ember_reference_twh'][s['countries'].index(country),s['ember_fuels'].index(fuel)]
     test_seconds=sum(f['test']['clearing_seconds'] for f in ms['folds'] if not f['test'].get('external'))
     refit=ms['outcomes']['refit']['prices']
-    report = f'''# European dispatch: seasonal supply bids and price validation
+    baseline = json.loads((ROOT / 'config/research-baseline.json').read_text())
+    assert baseline['annual_case'] == 'refit'
+    assert baseline['summary_sha256'] == digest(model / 'summary.json')
+    assert baseline['audit_sha256'] == digest(model / 'verification-v1/audit.json')
+    assert baseline['witness']['witness_sha256'] == digest(model / baseline['witness']['witness'])
+    report = f'''# European dispatch: accepted seasonal-bid baseline
+
+## Accepted baseline: single full-year reconstruction
+
+The seasonal/time-of-day **calendar + Ember** supply-bid model is now the accepted research baseline. Its single annual `refit` solves all **8,760 hours of 2025**, with mean zonal MAE **{refit['equal_zone_mae']:.2f} EUR/MWh**, **{baseline['mae_reduction_percent']:.1f}% lower** than the previous unfitted control ({baseline['previous_mae_eur_mwh']:.2f}). Mean price correlation is **{refit['mean_correlation']:.3f}** and within-day correlation **{refit['mean_demeaned_correlation']:.3f}**. Annual clearing took **{baseline['witness']['clearing_seconds']:.2f}s**, excluding preparation, fitting and audits; all hours were optimal with zero emergency supply.
+
+These are **2025 in-sample reconstruction scores**: 2025 prices informed bids. Generation agreement and independently replayed physics are complementary checks, not statistical cross-validation. The model changes offers before physical clearing; it never replaces cleared prices afterward. Fixed hydro and all physical constraints remain unchanged. This acceptance does not replace the browser scenario engine or validate investment effects.
+
+The sections and figures below retain the **previous unfitted baseline versus out-of-fold seasonal-model comparison** as secondary development evidence. Their “baseline” labels mean the previous control; their “exploratory” results combine three fits and are **not the accepted single annual refit**. Do not mix those generation/price results with the annual-refit headline.
+
+
 
 ## Summary
 
@@ -340,9 +355,9 @@ Profiles separate **winter (Jan/Feb/Dec) and summer (Jun/Jul/Aug)** mean local-h
 
 ## Conclusion and reproducibility
 
-Seasonal calendar bids offer a direct way to vary supply offers daily and annually without a residual-demand predictor. Ember adds a generation-consistency signal, rather than an artificial hourly supply series. The fold selections and out-of-fold results assess that hypothesis under unchanged physical constraints. **Keep the unfitted baseline and the in-sample reconstruction separate from the validation evidence.** Prices alone cannot identify true bids or validate investment effects; fleet/weather quantities, outages, Nordic water/geography and demand scope still require source work.
+Seasonal calendar bids offer a direct way to vary supply offers daily and annually without a residual-demand predictor. Ember adds a generation-consistency signal, rather than an artificial hourly supply series. The fold selections and out-of-fold results assess that hypothesis under unchanged physical constraints. **The annual refit is the accepted research baseline; retain the unfitted control and out-of-fold evidence separately.** Prices alone cannot identify true bids or validate investment effects; fleet/weather quantities, outages, Nordic water/geography and demand scope still require source work.
 
-Independent replay checks calendar/DST features, month exclusion, price/Ember proposals, selection, original component physics, cost/LP duals, stitched test witnesses and separate refit. Maximum physical residual is **{physical_residual:.2g} MW**, duality gap **EUR {duality_gap:.6f}**. The out-of-fold year has **8,760 optimal hours**, emergency supply **{ms['annuals']['combined']['emergency_mwh']:.6f} MWh**. Fresh test clearing totals **{test_seconds:.2f}s**; full preparation/selection/tests/refit command **{ms['end_to_end_seconds']:.2f}s**. Independent report replay additionally verifies generation geography, source observations, allocations and metrics. No empirical acceptance, browser replacement or deployment is implied.
+Independent replay checks calendar/DST features, month exclusion, price/Ember proposals, selection, original component physics, cost/LP duals, stitched test witnesses and separate refit. Maximum physical residual is **{physical_residual:.2g} MW**, duality gap **EUR {duality_gap:.6f}**. The out-of-fold year has **8,760 optimal hours**, emergency supply **{ms['annuals']['combined']['emergency_mwh']:.6f} MWh**. Fresh test clearing totals **{test_seconds:.2f}s**; full preparation/selection/tests/refit command **{ms['end_to_end_seconds']:.2f}s**. Independent report replay additionally verifies generation geography, source observations, allocations and metrics. Research-baseline promotion is user-authorized; browser replacement, investment acceptance and deployment are separate.
 
 - [All-zone price metrics]({PREFIX}prices-by-zone.csv), [generation coverage/errors]({PREFIX}generation-by-area.csv), [fuel volumes/hourly errors/conditional bounds]({PREFIX}generation-by-fuel.csv), [national Ember comparison]({PREFIX}national-generation.csv).
 - [Compact provenance and verification receipt]({PREFIX}summary.json). Bulk hourly/source/replay evidence stays locally cached outside Git.
@@ -350,7 +365,7 @@ Independent replay checks calendar/DST features, month exclusion, price/Ember pr
 '''
     ARTICLE.write_text(report)
     assets = {path.name: digest(path) for path in sorted(PUBLIC.iterdir()) if path.name != 'summary.json'}
-    receipt = dict(period=s['period'], models=LABELS, generation_reporting_areas=38, observed_price_zones=41,
+    receipt = dict(accepted_baseline=baseline, period=s['period'], models=LABELS, generation_reporting_areas=38, observed_price_zones=41,
                    derived_summary_sha256=digest(folder / 'summary.json'), derived_witness_sha256=s['witness_sha256'],
                    report_audit=audit, report_audit_sha256=digest(audit_path),
                    original_model_summary_sha256=s['original_model_summary_sha256'],

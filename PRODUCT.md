@@ -1,5 +1,22 @@
 # Grid Conductor — product requirements
 
+## Current baseline decision — 16 October 2026
+
+The user accepted **seasonal-calendar-v1, annual case `refit`** as the single
+research baseline. `config/research-baseline.json` pins its verified source summary,
+audit and full-year witness. Use `proposal-refit.json` for subsequent common-input
+comparisons; the older unfitted model is a historical control, not the active baseline.
+Full 2025, 8,760-hour equal-zone price MAE is **28.964 EUR/MWh** versus
+33.225 previously (**12.83% lower**), across all 41 observed-price zones.
+This is an all-year-calibrated reconstruction, not independent forecast accuracy.
+Generation agreement and feasibility are complementary checks, not statistical
+cross-validation. The three-fit out-of-fold composite remains secondary evidence
+(MAE 29.177); never describe it as the single accepted annual model.
+This decision supersedes older no-promotion/current-baseline wording below.
+Physical inputs, fixed hydro, chronology and feasibility gates remain unchanged.
+Browser integration, adaptive storage and investment validation are separate work.
+Automatic hourly reviews remain disabled.
+
 Accepted direction, updated 16 October 2026. This file defines requirements;
 [TASKS.md](TASKS.md) records implementation and verification.
 

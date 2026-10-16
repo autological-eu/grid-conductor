@@ -1,4 +1,35 @@
 {
+  "accepted_baseline": {
+    "model": "seasonal-calendar-v1",
+    "annual_case": "refit",
+    "proposal": "proposal-refit.json",
+    "decision_date": "2026-10-16",
+    "role": "accepted research baseline",
+    "evaluation": "2025 in-sample reconstruction; not independent forecast validation",
+    "summary_path": "data/bidding-zone-network-2025/seasonal-calendar-v1/summary.json",
+    "summary_sha256": "02dac50d9859fed81583ded48ff6d81d6cdf78b100663adeb9418ea3756d80f4",
+    "audit_path": "data/bidding-zone-network-2025/seasonal-calendar-v1/verification-v1/audit.json",
+    "audit_sha256": "dfccf8a98e312c0ef1556dc3bdb1e210ef91185e50973574202b47cca2330c84",
+    "witness": {
+      "witness": "refit.npz",
+      "witness_sha256": "2b89af50c32f40e05fea1377657efd8f287a1e375613f5620e1afb76a2741693",
+      "optimal_hours": 8760,
+      "hours": 8760,
+      "failures": [],
+      "clearing_seconds": 36.46489929201198,
+      "emergency_mwh": 0.0,
+      "emergency_hours": 0
+    },
+    "prices": {
+      "equal_zone_mae": 28.9639751169547,
+      "mean_correlation": 0.5731187286259649,
+      "mean_demeaned_correlation": 0.5351306856563512,
+      "mean_demeaned_mae": 20.06347356650509
+    },
+    "previous_mae_eur_mwh": 33.22528643738816,
+    "mae_reduction_percent": 12.825506646763586,
+    "browser_integration": false
+  },
   "period": "Full 2025: 8760 UTC hours; out-of-fold seasonal interpolation, separate from the in-sample annual refit",
   "models": {
     "control": "Baseline",
@@ -53,8 +84,8 @@
   },
   "derived_producer_sha256": "a47c8743536ca208c44a6f469adef88be51f5801120d570b60fb836d8cba9b85",
   "derived_producer_file": "prepare_seasonal_dispatch_report_2025.py",
-  "renderer_sha256": "652e8bb6626d13b9ffdce6701046e8c6f9d4d8ba72b9319391487e78e87f8029",
-  "article_sha256": "38c27f44ea4c70fdbeeb6ca2b6976d7782e188cdf823baffb53cfb3c5d8a2530",
+  "renderer_sha256": "67db0e5e2e8bf55ea179ce3bb07d2c39a9db23c9cdd9a6aa2ab8dbbf8eaa7e09",
+  "article_sha256": "9c0fc8158b1a966c02f70295a9595ac25c3c57d882b3b8b5c0fc3f1954169fd2",
   "assets": {
     "daily-prices.png": "e6f39cc33c519d07425c68a6e44b2c6827e968151d4160e098c0de4980d9a4c1",
     "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",

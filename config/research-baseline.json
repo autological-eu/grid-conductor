@@ -1,0 +1,31 @@
+{
+  "model": "seasonal-calendar-v1",
+  "annual_case": "refit",
+  "proposal": "proposal-refit.json",
+  "decision_date": "2026-10-16",
+  "role": "accepted research baseline",
+  "evaluation": "2025 in-sample reconstruction; not independent forecast validation",
+  "summary_path": "data/bidding-zone-network-2025/seasonal-calendar-v1/summary.json",
+  "summary_sha256": "02dac50d9859fed81583ded48ff6d81d6cdf78b100663adeb9418ea3756d80f4",
+  "audit_path": "data/bidding-zone-network-2025/seasonal-calendar-v1/verification-v1/audit.json",
+  "audit_sha256": "dfccf8a98e312c0ef1556dc3bdb1e210ef91185e50973574202b47cca2330c84",
+  "witness": {
+    "witness": "refit.npz",
+    "witness_sha256": "2b89af50c32f40e05fea1377657efd8f287a1e375613f5620e1afb76a2741693",
+    "optimal_hours": 8760,
+    "hours": 8760,
+    "failures": [],
+    "clearing_seconds": 36.46489929201198,
+    "emergency_mwh": 0.0,
+    "emergency_hours": 0
+  },
+  "prices": {
+    "equal_zone_mae": 28.9639751169547,
+    "mean_correlation": 0.5731187286259649,
+    "mean_demeaned_correlation": 0.5351306856563512,
+    "mean_demeaned_mae": 20.06347356650509
+  },
+  "previous_mae_eur_mwh": 33.22528643738816,
+  "mae_reduction_percent": 12.825506646763586,
+  "browser_integration": false
+}

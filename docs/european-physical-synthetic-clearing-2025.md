@@ -1,4 +1,14 @@
-# European dispatch: seasonal supply bids and price validation
+# European dispatch: accepted seasonal-bid baseline
+
+## Accepted baseline: single full-year reconstruction
+
+The seasonal/time-of-day **calendar + Ember** supply-bid model is now the accepted research baseline. Its single annual `refit` solves all **8,760 hours of 2025**, with mean zonal MAE **28.96 EUR/MWh**, **12.8% lower** than the previous unfitted control (33.23). Mean price correlation is **0.573** and within-day correlation **0.535**. Annual clearing took **36.46s**, excluding preparation, fitting and audits; all hours were optimal with zero emergency supply.
+
+These are **2025 in-sample reconstruction scores**: 2025 prices informed bids. Generation agreement and independently replayed physics are complementary checks, not statistical cross-validation. The model changes offers before physical clearing; it never replaces cleared prices afterward. Fixed hydro and all physical constraints remain unchanged. This acceptance does not replace the browser scenario engine or validate investment effects.
+
+The sections and figures below retain the **previous unfitted baseline versus out-of-fold seasonal-model comparison** as secondary development evidence. Their “baseline” labels mean the previous control; their “exploratory” results combine three fits and are **not the accepted single annual refit**. Do not mix those generation/price results with the annual-refit headline.
+
+
 
 ## Summary
 
@@ -111,9 +121,9 @@ Profiles separate **winter (Jan/Feb/Dec) and summer (Jun/Jul/Aug)** mean local-h
 
 ## Conclusion and reproducibility
 
-Seasonal calendar bids offer a direct way to vary supply offers daily and annually without a residual-demand predictor. Ember adds a generation-consistency signal, rather than an artificial hourly supply series. The fold selections and out-of-fold results assess that hypothesis under unchanged physical constraints. **Keep the unfitted baseline and the in-sample reconstruction separate from the validation evidence.** Prices alone cannot identify true bids or validate investment effects; fleet/weather quantities, outages, Nordic water/geography and demand scope still require source work.
+Seasonal calendar bids offer a direct way to vary supply offers daily and annually without a residual-demand predictor. Ember adds a generation-consistency signal, rather than an artificial hourly supply series. The fold selections and out-of-fold results assess that hypothesis under unchanged physical constraints. **The annual refit is the accepted research baseline; retain the unfitted control and out-of-fold evidence separately.** Prices alone cannot identify true bids or validate investment effects; fleet/weather quantities, outages, Nordic water/geography and demand scope still require source work.
 
-Independent replay checks calendar/DST features, month exclusion, price/Ember proposals, selection, original component physics, cost/LP duals, stitched test witnesses and separate refit. Maximum physical residual is **2.6e-06 MW**, duality gap **EUR 0.000033**. The out-of-fold year has **8,760 optimal hours**, emergency supply **0.000000 MWh**. Fresh test clearing totals **38.20s**; full preparation/selection/tests/refit command **282.10s**. Independent report replay additionally verifies generation geography, source observations, allocations and metrics. No empirical acceptance, browser replacement or deployment is implied.
+Independent replay checks calendar/DST features, month exclusion, price/Ember proposals, selection, original component physics, cost/LP duals, stitched test witnesses and separate refit. Maximum physical residual is **2.6e-06 MW**, duality gap **EUR 0.000033**. The out-of-fold year has **8,760 optimal hours**, emergency supply **0.000000 MWh**. Fresh test clearing totals **38.20s**; full preparation/selection/tests/refit command **282.10s**. Independent report replay additionally verifies generation geography, source observations, allocations and metrics. Research-baseline promotion is user-authorized; browser replacement, investment acceptance and deployment are separate.
 
 - [All-zone price metrics](/research/dispatch-comparison-2025/prices-by-zone.csv), [generation coverage/errors](/research/dispatch-comparison-2025/generation-by-area.csv), [fuel volumes/hourly errors/conditional bounds](/research/dispatch-comparison-2025/generation-by-fuel.csv), [national Ember comparison](/research/dispatch-comparison-2025/national-generation.csv).
 - [Compact provenance and verification receipt](/research/dispatch-comparison-2025/summary.json). Bulk hourly/source/replay evidence stays locally cached outside Git.
