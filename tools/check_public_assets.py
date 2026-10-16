@@ -11,6 +11,7 @@ ALLOWED = [
     'dispatch-comparison-2025/overview.png',
     'dispatch-comparison-2025/national-mix.png',
     'dispatch-comparison-2025/daily-prices.png',
+    'dispatch-comparison-2025/zone-mae-grid.png',
     'dispatch-comparison-2025/prices-by-zone.csv',
     'dispatch-comparison-2025/generation-by-area.csv',
     'dispatch-comparison-2025/generation-by-fuel.csv',
@@ -48,12 +49,17 @@ def check():
     assert comparison['generation_reporting_areas'] == 38 and comparison['observed_price_zones'] == 41
     assert comparison['report_audit']['summary_sha256'] == comparison['derived_summary_sha256']
     assert comparison['report_audit']['maximum_hourly_allocation_difference_mw'] < 1e-6
+    model = comparison['model_verification']
+    assert model['optimal_hours'] == 8760 and model['maximum_physical_residual_mw'] <= 1e-4
+    assert model['maximum_duality_gap_eur'] < .05 and model['complete_lp_certificates'] == 10
+    for role in ['producer', 'helper', 'auditor']:
+        assert hashlib.sha256((ROOT / 'tools' / model[role + '_file']).read_bytes()).hexdigest() == model[role + '_sha256']
     assert comparison['article_sha256'] == hashlib.sha256((ROOT / 'docs/european-physical-synthetic-clearing-2025.md').read_bytes()).hexdigest()
     for file, sha in [('write_concise_dispatch_report_2025.py', comparison['renderer_sha256']),
-                      ('prepare_concise_dispatch_report_2025.py', comparison['derived_producer_sha256']),
-                      ('audit_concise_dispatch_report_2025.py', comparison['report_audit']['auditor_sha256'])]:
+                      (comparison.get('derived_producer_file', 'prepare_concise_dispatch_report_2025.py'), comparison['derived_producer_sha256']),
+                      (comparison['report_audit'].get('auditor_file', 'audit_concise_dispatch_report_2025.py'), comparison['report_audit']['auditor_sha256'])]:
         assert hashlib.sha256((ROOT / 'tools' / file).read_bytes()).hexdigest() == sha
-    expected = {'overview.png', 'national-mix.png', 'daily-prices.png', 'prices-by-zone.csv',
+    expected = {'overview.png', 'national-mix.png', 'daily-prices.png', 'zone-mae-grid.png', 'prices-by-zone.csv',
                 'generation-by-area.csv', 'generation-by-fuel.csv', 'national-generation.csv'}
     assert set(comparison['assets']) == expected
     for file, sha in comparison['assets'].items():

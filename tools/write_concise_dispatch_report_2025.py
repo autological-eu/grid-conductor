@@ -43,8 +43,12 @@ def write(folder):
     audit = json.loads(audit_path.read_text())
     assert audit['summary_sha256'] == digest(folder / 'summary.json')
     assert audit['generation_areas'] == 38 and audit['price_areas'] == 41
-    assert audit['auditor_sha256'] == digest(ROOT / 'tools/audit_concise_dispatch_report_2025.py')
-    assert s['producer_sha256'] == digest(ROOT / 'tools/prepare_concise_dispatch_report_2025.py')
+    auditor_file = audit.get('auditor_file', 'audit_concise_dispatch_report_2025.py')
+    producer_file = s.get('producer_file', 'prepare_concise_dispatch_report_2025.py')
+    assert auditor_file in ['audit_concise_dispatch_report_2025.py', 'audit_intraday_dispatch_report_2025.py']
+    assert producer_file in ['prepare_concise_dispatch_report_2025.py', 'prepare_intraday_dispatch_report_2025.py']
+    assert audit['auditor_sha256'] == digest(ROOT / 'tools' / auditor_file)
+    assert s['producer_sha256'] == digest(ROOT / 'tools' / producer_file)
     assert s['witness_sha256'] == digest(folder / 'comparison.npz')
     for name, sha in s['source_hashes'].items():
         assert digest(ROOT / name) == sha
@@ -52,7 +56,13 @@ def write(folder):
         assert digest(ROOT / 'tools' / name) == sha
     with np.load(folder / 'comparison.npz') as f:
         a = {k: f[k] for k in f.files}
-    model = ROOT / 'data/bidding-zone-network-2025/hourly-offer-curves-v1'
+    model = ROOT / s.get('model_folder', 'data/bidding-zone-network-2025/hourly-offer-curves-v1')
+    ms = json.loads((model / 'summary.json').read_text())
+    ma = json.loads((model / 'verification-v1/audit.json').read_text())
+    assert digest(model / 'summary.json') == s['original_model_summary_sha256'] == ma['summary_sha256']
+    selected = json.loads((model / 'selection.json').read_text())
+    params = selected['records'][selected['selected_index']]['params']
+    assert ms['status'] == 'intraday_offer_bids_retrospective_not_promoted', 'Renderer now targets the intraday-bid experiment'
     with np.load(model / 'evaluation-targets.npz') as f:
         observed_price = f['prices']
     PUBLIC.mkdir(parents=True, exist_ok=True)
@@ -123,6 +133,32 @@ def write(folder):
     fig.suptitle('July–December 2025 · points below the diagonal improve', fontsize=12)
     save(fig, 'overview.png')
 
+    # One tile per modeled area, ordered by area name, with common delta scale.
+    from matplotlib.colors import TwoSlopeNorm
+    changes = [p['combined'][z]['mae_eur_mwh'] - p['control'][z]['mae_eur_mwh']
+               for z in s['zones'] if p['control'][z]['known_hours']]
+    limit = max(1., max(abs(v) for v in changes))
+    norm = TwoSlopeNorm(vmin=-limit, vcenter=0., vmax=limit)
+    cmap = plt.get_cmap('RdBu_r')
+    fig, ax = plt.subplots(figsize=(12, 8), layout='constrained')
+    for i, area in enumerate(sorted(s['zones'])):
+        row, col = divmod(i, 6)
+        known = p['control'][area]['known_hours'] > 0
+        if known:
+            old = p['control'][area]['mae_eur_mwh']; new = p['combined'][area]['mae_eur_mwh']; delta = new - old
+            color = cmap(norm(delta)); text = f'{area}\n{old:.1f} → {new:.1f}\nΔ {delta:+.1f}'
+            ink = 'white' if abs(delta) > .6 * limit else BLACK
+        else:
+            color = '#e6e9ed'; text = f'{area}\nNo observed price'; ink = '#53606d'
+        ax.add_patch(plt.Rectangle((col, row), 1, 1, facecolor=color, edgecolor='white', linewidth=3))
+        ax.text(col+.5, row+.5, text, ha='center', va='center', color=ink, fontsize=10)
+    ax.set(xlim=(0, 6), ylim=(8, 0), xticks=[], yticks=[],
+           title='Price MAE by zone · baseline → exploratory (EUR/MWh)\nJuly–December 2025 · blue improves, red worsens')
+    for spine in ax.spines.values():spine.set_visible(False)
+    fig.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=cmap), ax=ax, shrink=.7,
+                 label='Change in MAE: exploratory − baseline (EUR/MWh)')
+    save(fig, 'zone-mae-grid.png')
+
     # National references are separate from the zonal ENTSO-E comparison above.
     colors = ['#5697cc', '#edc24d', '#9676b5', '#3d9b9a', '#da8455', '#626b73', '#91ac60', '#bc9c87', '#c7afce']
     fig, axes = plt.subplots(2, 2, figsize=(11, 7), layout='constrained')
@@ -174,13 +210,24 @@ def write(folder):
     gm = {n: np.median([r['volume_error_percent'] for r in g[n].values() if r['volume_error_percent'] is not None]) for n in LABELS}
     improved_g = sum(g['combined'][area]['volume_error_percent'] < row['volume_error_percent'] for area, row in g['control'].items() if row['volume_error_percent'] is not None)
     improved_p = sum(p['combined'][area]['mae_eur_mwh'] < row['mae_eur_mwh'] for area, row in p['control'].items() if row['known_hours'])
+    def cv(country, fuel, name='combined'):
+        return a[name + '_country_point_twh'][s['countries'].index(country), s['ember_fuels'].index(fuel)]
+    def pr(area, key, name='combined'):
+        return p[name][area][key]
+    new = aggregate['combined']
+    previous = ms['outcomes']['previous']['evaluation']['prices']
+    certs = ma['certificates']
+    physical_residual = max(r['original_physical_residual_mw'] for r in certs)
+    duality_gap = max(r['duality_gap_maximum_eur'] for r in certs)
     report = f'''# European dispatch: baseline and exploratory supply bids
 
 ## Summary
 
-The exploratory model makes thermal supply curves steeper while retaining the baseline's demand, fleet, weather, fixed hydro and network constraints. Across **41 price zones**, July–December mean zonal price MAE improves **32.20 → 30.03 EUR/MWh**, and mean correlation **0.407 → 0.448**. Generation agreement improves in some areas, but substantial quantity and Nordic price errors remain. This is a useful bid experiment, not an accepted investment estimator or replacement for the workbench's browser engine.
+The exploratory model combines stepped thermal supply curves with **hourly bid adjustments** driven by residual demand and a training-fitted local-time pattern. Demand, fleet, weather, fixed hydro and network constraints retain the baseline values. Across **41 price zones**, July–December mean zonal price MAE changes **32.20 → {new['equal_zone_mae']:.2f} EUR/MWh**, and mean correlation **0.407 → {new['mean_correlation']:.3f}**. Generation and Nordic price errors remain material. This is an exploratory bid model, not an accepted investment estimator or replacement for the browser engine.
 
 All comparisons below use **July–December 2025: 4,416 UTC hours**. Both saved runs cover all 8,760 hours; using their evaluation period here keeps generation and price results comparable. Earlier experiments are omitted from this report.
+
+The hourly update improves on the previous constant-markup exploration: price MAE **{previous['equal_zone_mae']:.2f} → {new['equal_zone_mae']:.2f} EUR/MWh**, within-day correlation **{previous['mean_demeaned_correlation']:.3f} → {new['mean_demeaned_correlation']:.3f}**, and daily-demeaned MAE **{previous['mean_demeaned_mae']:.2f} → {new['mean_demeaned_mae']:.2f} EUR/MWh**. The main figures compare the unchanged physical baseline with the updated exploration.
 
 ## 1. Baseline model
 
@@ -205,19 +252,23 @@ All comparisons below use **July–December 2025: 4,416 UTC hours**. Both saved 
 
 ## 2. Exploratory model: what changes
 
-Only the **shape of gas and coal/lignite bids** changes. Original available capacity is partitioned into three progressively more expensive blocks; no capacity is added.
+Both **quantity-dependent bid steps and hour-dependent offer prices** change. The earlier constant-markup experiment responded hourly through dispatch, but did not explicitly vary markups within the day. The new rule addresses the previously weak daily price response; it neither adds capacity nor imposes observed prices on the solver.
 
 | Offer component | Baseline | Exploratory |
 | --- | --- | --- |
 | Gas available MW | Original resource bid | 50% at original bid; 35% at +21; 15% at +60 EUR/MWh |
 | Coal/lignite available MW | Original resource bid | 50% at original bid; 35% at +15.75; 15% at +45 EUR/MWh |
-| Nuclear | Original running-cost offer | Same; no peaking blocks |
+| Nuclear | Original running-cost offer | No peaking blocks; small hourly bid adjustment |
 | Regional offsets / renewable discount | Zero | Zero: tested adjustments were not selected |
+| Hourly gas/coal adjustment | None | Residual-demand and local-time terms, capped at ±30 EUR/MWh |
+| Hourly nuclear adjustment | None | One quarter of the gas/coal hourly adjustment, capped at ±7.5 EUR/MWh |
 | Demand, physical inputs, hydro and other bids | Retained baseline | Identical |
 
-The block adders represent synthetic effective bids, not measured exchange orders. Jan–April fits bounded proposals; May–June selects a predeclared finite configuration using equally weighted, control-normalized price MAE, daily-demeaned price MAE, monthly generation-interval error and implied-trade error, plus regularization. July–December is evaluated afterward. Historical training prices enter this experiment; evaluation prices and generation do not enter fitting or selection. Since 2025 was previously inspected, this is **retrospective temporal evaluation**, not untouched validation.
+**Hourly rule.** Residual demand is prepared demand minus fixed reservoir output minus available wind/solar. Its deviation from each UTC day's mean is scaled by Jan–April variability. Local-clock sine/cosine terms capture broad morning/evening patterns with DST. Each zone fits five ridge-regularized coefficients to the Jan–April observed-minus-previous-model price error after daily demeaning; extreme training errors are clipped at ±100 EUR/MWh. These terms alter gas/coal bids, and nuclear at quarter strength, before coupled clearing. The ±30 cap and zero offer floor preserve monotone thermal blocks, but can introduce daily mean shifts. Renewables and fixed hydro do not acquire new flexibility.
 
-Both runs use the same split-column representation, with zero adders for the baseline control. This avoids comparing different formulations' arbitrary dual witnesses; even equivalent LP representations can produce different prices when the optimum is non-unique. The retained annual-v7 baseline is not promoted or overwritten.
+**Selection and limits.** Five predeclared residual/calendar strength pairs include the unchanged previous model. May–June selects **{params}**, without refitting, using equally weighted prior-normalized price MAE, daily-demeaned MAE, monthly generation-interval error and implied-trade error, plus a small squared-shift penalty. July–December is evaluated afterward. Evaluation prices/generation never enter fitting or selection; runtime features require only calendar and model inputs, assuming perfect exogenous daily forecasts. Zones without training prices receive zero fitted corrections. These are synthetic effective bids, not measured orders or causal flexibility costs, and may compensate for incorrect inputs or constraints. Development months have been reused across experiments; previously inspected 2025 gives **retrospective temporal evaluation**, not untouched validation.
+
+Baseline and exploration use the same split-column representation; equivalent LPs can have different non-unique price witnesses. Original annual-v7 and the preceding experiment remain immutable evidence. Daily features add no ramping, commitment or intertemporal storage optimization.
 
 ## 3. Generation and price performance
 
@@ -235,6 +286,10 @@ Price coverage is **41 of 48 modeled areas**; BA, GB, IE-SEM, ME, IT-CALA, FR-CO
 
 Price MAE improves in **{improved_p}/41 zones** and worsens in {41-improved_p}; generation volume error improves in **{improved_g}/38 areas**. Generation error sums absolute fuel-volume differences and divides by observed generation, using only each fuel's known hours. It can exceed 100%; it is not a generation-share percentage-point error or a complete-fleet score. Coverage differs between areas, so comparisons are paired within each area. This descriptive metric differs from the monthly interval-based fitting score.
 
+![Per-zone hourly price MAE grid comparing baseline and updated exploratory model]({PREFIX}zone-mae-grid.png)
+
+Every tile gives **baseline → exploratory MAE**, then the signed change. Blue means lower error, red higher error; gray denotes unavailable observed prices. All 48 modeled areas remain visible. [Open the full-size grid]({PREFIX}zone-mae-grid.png).
+
 Saved dispatch is disaggregated proportionally to original available MW within equal-bid groups. These fuel allocations are **illustrative**, not uniquely identified dispatch. Downloads include conditional lower/upper allocations; those bounds are not jointly attainable and do not span all possible LP optima. Missing observations stay missing; pumped-storage production is excluded from primary generation.
 
 ## 4. Norway, Germany, Spain and France
@@ -249,30 +304,30 @@ National Ember cross-check, same six months. Shares and TWh totals cover only fu
 
 Generation in the DE-LU row means **Germany national**; FR is national; Norway rows use their available zonal series. A dash denotes unavailable generation verification.
 
-**Norway:** the bid change does not fix the main weakness. National modeled hydro remains about **74.83 TWh**, against Ember's **68.06 TWh** for these months. Yet national agreement cannot establish correct zonal water allocation: NO1's covered-fuel error is about 74%, and price correlations remain weak or negative across the five zones. NO2 is the illustrative price profile below, not a national Norwegian price.
+**Norway:** national modeled hydro is **{cv('NO','Hydro'):.2f} TWh**, against Ember's **68.06 TWh**. National totals cannot establish correct zonal water allocation: NO1's covered-fuel error is **{g['combined']['NO1']['volume_error_percent']:.1f}%**, with price MAE **{pr('NO1','mae_eur_mwh'):.2f} EUR/MWh**. The table retains all five zones and adverse results. NO2 illustrates a local price profile below, not a national Norwegian price; adjusting bids cannot reschedule fixed reservoir water.
 
-**Germany:** gas rises **18.50 → 25.79 TWh**, closer to Ember's **38.53 TWh**; coal rises **15.88 → 20.30 TWh**, still below **45.32 TWh**. Wind remains **94.05 TWh** versus **71.07 TWh** observed. Better prices coexist with a large generation mismatch; bids alone have not resolved fleet/weather/demand scope.
+**Germany:** gas changes **18.50 → {cv('DE','Gas'):.2f} TWh**, against Ember's **38.53 TWh**; coal **15.88 → {cv('DE','Coal'):.2f} TWh**, against **45.32 TWh**. Wind is **{cv('DE','Wind'):.2f} TWh** versus **71.07 TWh** observed. Price correlation is **{pr('DE-LU','correlation'):.3f}**, but bids alone have not resolved the large fleet/weather/demand-scope discrepancies.
 
-**Spain:** national mix is comparatively close: gas moves **28.49 → 30.18 TWh** versus **29.66 TWh** observed. Price correlation improves markedly, but mean bias worsens **+3.12 → +7.58 EUR/MWh**. Wind stays about **21.07 TWh** versus Ember's **27.56 TWh**; similarity in totals does not imply each fuel or hour is right.
+**Spain:** national gas changes **28.49 → {cv('ES','Gas'):.2f} TWh** versus **29.66 TWh** observed. Price correlation changes **0.688 → {pr('ES','correlation'):.3f}**, mean bias **+3.12 → {pr('ES','bias_eur_mwh'):+.2f} EUR/MWh**. Wind is **{cv('ES','Wind'):.2f} TWh** versus **27.56 TWh**; similarity in total generation does not establish accurate fuel quantities or hourly timing.
 
-**France:** nuclear remains **180.18 → 179.74 TWh**, below **190.52 TWh** observed; hydro is **15.92** versus **22.55 TWh**. Generation error slightly worsens despite a small price improvement. Inherited nuclear availability and fixed hydro remain source/operational assumptions to investigate.
+**France:** nuclear changes **180.18 → {cv('FR','Nuclear'):.2f} TWh**, against **190.52 TWh** observed; hydro is **{cv('FR','Hydro'):.2f}** versus **22.55 TWh**. Generation error changes **13.1 → {g['combined']['FR']['volume_error_percent']:.1f}%**. Inherited nuclear availability and fixed hydro remain assumptions to investigate, irrespective of price improvement.
 
 ![Observed and simulated average local-hour price profiles for NO2, DE-LU, ES and FR]({PREFIX}daily-prices.png)
 
-Profiles average evaluation-period prices by **local clock hour, with DST applied**; they are not a selected day or an hourly forecast trace. Aggregate within-day metrics above remove each UTC day's mean. The exploratory model captures more daily variation, but still misses price extremes: Spain's mean daily range is **81.61** versus observed **98.10 EUR/MWh**, with **zero modeled versus 97 observed negative-price hours**. Hour-to-hour ramp MAE slightly worsens **12.49 → 12.75 EUR/MWh**. A better average profile is not a complete hourly fit.
+Profiles average evaluation-period prices by **local clock hour, with DST applied**; they are not a selected day or an hourly forecast trace. Aggregate within-day metrics remove each UTC day's mean. Spain's mean daily range changes **66.47 → {pr('ES','model_daily_range_mean'):.2f}**, versus observed **98.10 EUR/MWh**; within-day correlation **0.718 → {pr('ES','demeaned_correlation'):.3f}**. Hour-to-hour ramp MAE changes **12.49 → {pr('ES','ramp_mae'):.2f} EUR/MWh**, with **{pr('ES','model_material_negative_hours')} modeled versus 97 observed negative-price hours**. A better average profile is not a complete hourly fit.
 
 ## Conclusion and verification
 
-Steeper thermal offers improve broad price movement without changing physical supply, but the gains are moderate and uneven. **Retain the baseline; keep this as an exploratory bid model.** Priorities are source timing and operational availability, wind quantities, Nordic water/geography and demand scope, followed by a fresh predeclared evaluation. Matching generation totals or passing numerical replay does not validate investment effects, adaptive storage value or commercial congestion rents.
+Hourly bid rules explicitly represent intraday variation while physical supply remains unchanged. Evaluate the improvement using both the all-zone grid and daily-shape metrics, rather than a single average profile. **Retain the baseline; keep this as an exploratory bid model.** Source timing/operational availability, wind quantities, Nordic water/geography and demand scope remain priorities. Matching totals or passing numerical replay does not validate investment effects, adaptive storage value or commercial congestion rents.
 
-Both annual witnesses have **8,760 optimal hours and zero emergency generation**. Independent replay covers original component feasibility, block-summed availability, LP duals and chronological selection: maximum physical residual **6.71×10⁻⁶ MW**, duality gap **EUR 0.000138**. Annual clearing took **29.71s baseline / 38.92s exploratory**, excluding preparation; the complete fitting/selection/evaluation command took **337.97s**. These are recorded run measurements, not current job-status claims. A separate source-column replay verifies this report's generation geography, allocations, observations and metrics; rewriting ran no new market solve.
+Both annual witnesses have **8,760 optimal hours**; exploratory emergency generation is **{ms['annuals']['combined']['emergency_mwh']:.6f} MWh**. Independent replay covers source inputs, original component feasibility, capacity conservation, hourly feature construction, training-only fitting, LP duals and chronological selection: maximum physical residual **{physical_residual:.2g} MW**, duality gap **EUR {duality_gap:.6f}**. Annual clearing took **29.71s baseline / {ms['annuals']['combined']['clearing_seconds']:.2f}s exploratory**, excluding preparation; the new fitting/selection/evaluation command took **{ms['end_to_end_seconds']:.2f}s**. Report derivation separately replays generation geography, allocations, observations and metrics. Full source/hourly witnesses remain local; no deployment or investment acceptance is implied.
 
 ### Data and reproducibility
 
 - [All-zone price metrics]({PREFIX}prices-by-zone.csv), including bias, hourly errors, within-day metrics and missing coverage.
 - [Generation coverage and errors by area]({PREFIX}generation-by-area.csv), [fuel volumes, hourly errors and conditional bounds]({PREFIX}generation-by-fuel.csv), and [national Ember comparison]({PREFIX}national-generation.csv).
 - [Compact provenance and verification receipt]({PREFIX}summary.json), with hashes linking the original model, source replay and report assets. Full source/hourly witnesses stay locally cached outside Git.
-- Model formulation: [hourly_offer_curves_2025.py](tools/hourly_offer_curves_2025.py); [independent model replay](tools/audit_hourly_offer_curves_2025.py). Report derivation: [prepare_concise_dispatch_report_2025.py](tools/prepare_concise_dispatch_report_2025.py), [independent report replay](tools/audit_concise_dispatch_report_2025.py), [figure/report renderer](tools/write_concise_dispatch_report_2025.py).
+- Model formulation: [intraday_offer_bids_2025.py](tools/intraday_offer_bids_2025.py); [independent model replay](tools/audit_intraday_offer_bids_2025.py). Report derivation: [{producer_file}](tools/{producer_file}), [independent report replay](tools/{auditor_file}), [figure/report renderer](tools/write_concise_dispatch_report_2025.py).
 '''
     ARTICLE.write_text(report)
     assets = {path.name: digest(path) for path in sorted(PUBLIC.iterdir()) if path.name != 'summary.json'}
@@ -281,7 +336,16 @@ Both annual witnesses have **8,760 optimal hours and zero emergency generation**
                    report_audit=audit, report_audit_sha256=digest(audit_path),
                    original_model_summary_sha256=s['original_model_summary_sha256'],
                    original_model_audit_sha256=s['original_model_audit_sha256'],
-                   derived_producer_sha256=s['producer_sha256'], renderer_sha256=digest(__file__),
+                   model_verification=dict(status=ma['status'], selected_params=params,
+                       complete_lp_certificates=ma['complete_lp_certificates'],
+                       maximum_physical_residual_mw=physical_residual, maximum_duality_gap_eur=duality_gap,
+                       producer_file='run_intraday_offer_bids_2025.py', producer_sha256=ms['producer_sha256'],
+                       helper_file='intraday_offer_bids_2025.py', helper_sha256=ms['dependencies']['intraday_offer_bids_2025.py'],
+                       auditor_file='audit_intraday_offer_bids_2025.py', auditor_sha256=ma['auditor_sha256'],
+                       annual_clearing_seconds=ms['annuals']['combined']['clearing_seconds'],
+                       preparation_seconds=ms['preparation_seconds'], complete_command_seconds=ms['end_to_end_seconds'],
+                       optimal_hours=ms['annuals']['combined']['optimal_hours'], emergency_mwh=ms['annuals']['combined']['emergency_mwh']),
+                   derived_producer_sha256=s['producer_sha256'], derived_producer_file=producer_file, renderer_sha256=digest(__file__),
                    article_sha256=digest(ARTICLE), assets=assets, limitations=s['limitations'])
     (PUBLIC / 'summary.json').write_text(json.dumps(receipt, indent=2, allow_nan=False) + '\n')
     print(f'Wrote {len(report.split())} words; {len(assets)} compact assets; no market solve')

@@ -136,11 +136,12 @@ renewable availability or silent commercial-capacity claims. Retain one current
 annual trial/witness and small numerical fixtures; do not create a third report.
 
 Only these two reports and docs/workbench-methodology.md are active publications.
-The 16 October report rewrite uses prepare_concise_dispatch_report_2025.py,
-independent audit_concise_dispatch_report_2025.py and
-write_concise_dispatch_report_2025.py. Its authoritative derived root is
-concise-report-v1/verification-v1. Maintain the concise baseline/exploratory
-structure and three tracked figures; do not rerun historical append-style report
+The current report uses prepare_intraday_dispatch_report_2025.py,
+independent audit_intraday_dispatch_report_2025.py and
+write_concise_dispatch_report_2025.py. Its derived root is
+intraday-report-v1/verification-v1; concise-report-v1 is the previous reference.
+Maintain the concise baseline/exploratory structure and four tracked figures,
+including the all-zone MAE grid; do not rerun historical append-style report
 producers over it. Physical producers and original witnesses remain frozen.
 All primary comparisons use Jul–Dec; national Ember checks are separate from
 zonal A75 coverage. NO5 generation is missing, DE excludes LU, FR is national.
@@ -264,6 +265,19 @@ Current presentation-v2 updates the existing report. Seven tests and independent
 capacity/physics/duals/chronological-selection/hourly-metric/diagnostic replay pass.
 The next step is source timing/operational availability, not post-evaluation tuning
 of the frozen design. Thermal/combined aliases share one selected annual witness.
+
+The subsequent user request authorizes a fresh intraday-bid experiment. Preserve
+the preceding experiment; use intraday_offer_bids_2025.py and separate run/audit
+producers with a fresh root. Jan–Apr training-only residual/time-of-day features,
+May–Jun finite selection and Jul–Dec retrospective evaluation remain distinct.
+Hourly synthetic fuel-anchored bid corrections do not establish measured bidding
+behaviour, new available MW, outages, commitment or adaptive hydro. Keep original
+physics, all eligible price zones and generation/trade checks. Update the concise
+report, including an all-zone MAE grid; no baseline/browser promotion is implied.
+The completed intraday-offers-v1/verification-v1 independently replays ten LP
+certificates and selects [1,1]. Freeze its helper/runner and source inputs.
+Generation/report derivation has separate fresh provenance; prior hourly-curve
+and annual-v7 witnesses remain reference evidence, not competing active searches.
 
 - Inspect actual supervisor/worker processes and locks before computations.
   Receipts do not establish liveness or progress. If the managed environment is

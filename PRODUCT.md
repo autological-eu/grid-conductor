@@ -1,6 +1,6 @@
 # Grid Conductor — product requirements
 
-Accepted direction, updated 15 October 2026. This file defines requirements;
+Accepted direction, updated 16 October 2026. This file defines requirements;
 [TASKS.md](TASKS.md) records implementation and verification.
 
 ## Purpose and workflow
@@ -12,6 +12,12 @@ browser-local scenarios and compare a baseline with the same model plus an
 investment. System benefit is not investor income or certified investment return.
 
 ## Active modelling approach and accuracy goal
+
+Hourly price-shape improvements may use bounded, transparent intraday resource
+bid rules driven by model residual demand and a training-fitted smooth local-time
+pattern. Separate hourly bidding from daily intertemporal optimization. Keep
+evaluation prices out of construction, preserve the unchanged physical baseline,
+and report daily-shape/ramp/tail outcomes as well as an all-zone price-MAE grid.
 
 Accepted clarification, 13 October 2026: develop one fast European bidding-zone
 market-clearing model. Construct simple, transparent supply bids by resource

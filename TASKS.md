@@ -13,6 +13,7 @@ reviews remain disabled.
 | Role | Implementation / checkpoint | Evidence and limits |
 | --- | --- | --- |
 | **One active research model** | Whole-network fixed-hydro/resource-bid zonal dispatch; tools/run_bidding_zone_network_2025.py, tools/global_bidding_zone_2025.py; data/bidding-zone-network-2025/annual-v7/ | 48 clearing areas / 145 buses; 8760 optimal hours, zero emergency supply, independent saved-source/physics replay. Clearing loop 33.476s; complete two-control/check/export command 418.108s, preparation 123.539s, peak RSS 2584 MiB. Fixed hourly hydro; independent hourly clears, not yet daily orchestration or adaptive storage. Regional allocation/demand proxies and price accuracy remain unresolved. |
+| **Current exploratory hourly bids** | intraday-offers-v1; intraday_offer_bids_2025.py and separate run/audit tools | Training-only daily residual-pressure plus local-clock harmonic bid adjustments; May–June selects [1,1] from five fixed pairs. 8760 optimal hours / zero emergency; ten independent physics/dual/feature/fitting/selection certificates. Jul–Dec MAE 28.294, raw r .52414, within-day r .52913; previous exploration 30.033/.44770/.40258. Physical inputs unchanged; NO5 worsens; no baseline/browser promotion. |
 | **Bounded bid-calibration diagnostic** | bid-calibration-v1; run/audit_bid_calibration_2025.py and training-selected diagnostic-evaluation-v1 | Seven Jan–June training tuples, original physics unchanged; declared regularized price/generation/trade score selects zero adders. Independently replayed nine complete LP witnesses and training-only selection. Jul–Dec EU MAE 32.21; supplementary gas +30 lowers it to 31.60 but worsens FR 20.71→25.18 and ES 22.55→31.55 EUR/MWh. Nuclear −15 gives EU 32.29. No promotion; retrospective evaluation, not untouched validation. |
 | **Zonal bids / two-block experiment** | zonal-bid-blocks-v2; zonal_bid_blocks_2025.py and separate run/audit/report tools | Five training states; constant-offset proposal rejected by joint score, 21 zone/resource upper-block spreads selected. All 8760 annual hours optimal. Jul–Dec equal-zone MAE 32.205→31.874; mean r .40729→.41130; generation/trade interval errors improve slightly. France r .685→.744 but MAE 20.71→20.83 and bias +0.01→+8.37; Spain 22.55→22.70 MAE; Nordic regressions retained. Six complete LP certificates and original-component/block-capacity replay pass. Diagnostic only, no baseline promotion. |
 | **Hourly-shape / joint resource curves** | hourly-offer-curves-v1; separate diagnose/run/audit/report_hourly tools; verified diagnostic hourly-shape-diagnosis-v2 | Jan–April fit, May–June selection, Jul–Dec retrospective evaluation; 11 fit states, 16 independently replayed LP certificates. Selected [offset strength 0, thermal strength .5, renewable discount 0]. All annual 8760 hours optimal; EU MAE 32.205→30.033, mean r .40729→.44770, within-day r .36122→.40258. ES MAE 22.55→20.57 and daily range 66.47→81.61 versus observed 98.10; positive bias and Nordic regressions remain. No baseline/browser promotion. |
@@ -52,6 +53,34 @@ Comparisons are descriptive, untuned and not held-out validation. Norway/Sweden
 price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
 
 ## Ordered next actions
+
+Completed authorized hourly-bid update in intraday-offers-v1/verification-v1.
+Gas/coal shifts use daily-centered residual demand and smooth DST-aware local
+clock terms; nuclear receives quarter strength. Training ridge coefficients use
+Jan–Apr only; May–Jun fixed-grid selection [1,1], Jul–Dec retrospective evaluation.
+No demand, availability, hydro, physical-row or GSK change; no storage/commitment
+restart. Development periods have been reused, not independent untouched validation.
+
+Against the preceding exploration, MAE 30.033→28.294 EUR/MWh, raw correlation
+.44770→.52414, within-day correlation .40258→.52913, demeaned MAE 21.384→18.549.
+MAE improves in 33/41 areas against that predecessor, 38/41 against baseline.
+ES daily range 81.61→97.37 versus observed 98.10; ramp MAE 12.75→12.36.
+NO5 MAE worsens 44.71→45.60; Nordic fixed-water/geography problems remain.
+Generation/trade interval errors .33264→.32447 / .19658→.18726. Six new targeted
+tests pass (13 including prior offer-curve fixtures). Independent ten-certificate replay: maximum original residual
+1.264e-5 MW, duality gap EUR0.0000230; unchanged gates. Preparation 108.64s,
+annual clearing 47.75s, complete command 281.34s; independent replay 117.60s.
+The concise report compares the unchanged baseline with this updated exploration,
+including an all-zone MAE grid. Source/availability and Nordic errors remain next
+investigations; no acceptance, browser replacement or recurring-review restart.
+Report root intraday-report-v1/verification-v1 separately replays 38 generation
+reporting areas / 41 price areas and conditional allocation arrays (maximum
+difference 7.28e-12 MW). Covered-fuel median volume error 54.1→45.2% versus baseline;
+28/38 areas improve. Four tracked figures and compact CSVs retain national/zonal
+scope and missingness; no hourly arrays added to Git.
+Production build, public asset/provenance checks and local Chromium report checks
+at 1440/390/320px pass: four figures, six evidence links, no errors or page overflow.
+Not deployed; no CI/Pages or public-URL verification claimed for this update.
 
 Completed requested report rewrite: retained article reduced from 2,502 lines to
 a concise baseline/exploratory comparison with three tracked figures, NO/DE/ES/FR
