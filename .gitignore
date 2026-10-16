@@ -118,3 +118,15 @@ data/daily-market-2025/
 !/public/research/fixed-reservoir-screening-2025/bidding-zone-errors.png
 # Europe-wide source audit: raw replay manifests and hourly matrices stay local.
 /data/residual-demand-audit-2025/
+
+# Concise two-model report: finite figures/tables only, no hourly witnesses.
+!/public/research/dispatch-comparison-2025/
+/public/research/dispatch-comparison-2025/*
+!/public/research/dispatch-comparison-2025/overview.png
+!/public/research/dispatch-comparison-2025/national-mix.png
+!/public/research/dispatch-comparison-2025/daily-prices.png
+!/public/research/dispatch-comparison-2025/prices-by-zone.csv
+!/public/research/dispatch-comparison-2025/generation-by-area.csv
+!/public/research/dispatch-comparison-2025/generation-by-fuel.csv
+!/public/research/dispatch-comparison-2025/national-generation.csv
+!/public/research/dispatch-comparison-2025/summary.json

@@ -226,6 +226,13 @@ inputs, tools and minimal retained-model replay evidence may remain as dependenc
 retaining them does not make their old experiments active development priorities.
 Do not restore retired annual searches. Git history provides historical context.
 
+The European dispatch report should concisely describe the baseline, the latest
+exploratory changes, and paired generation/observed-price performance over the
+same evaluation period. Use a few summary figures and NO/DE/ES/FR examples;
+keep historical experiment logs out of the article. Distinguish zonal generation
+verification from national cross-checks, disclose missing coverage and equal-bid
+allocation ambiguity, and provide compact per-area data with provenance.
+
 The live browser's two-zone line/battery screen remains in service until a
 verified replacement is explicitly integrated. Neither research model becomes
 the public scenario engine merely because its report is published.

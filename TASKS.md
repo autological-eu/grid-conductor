@@ -53,6 +53,19 @@ price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
 
 ## Ordered next actions
 
+Completed requested report rewrite: retained article reduced from 2,502 lines to
+a concise baseline/exploratory comparison with three tracked figures, NO/DE/ES/FR
+examples and four compact data tables. Same Jul–Dec cohort for price and generation;
+41 observed-price zones / 38 generation reporting areas, with explicit national
+scope and missingness. Fresh concise-report-v1/verification-v1 source-column replay
+passes (maximum allocation difference 7.28e-12 MW); no market solve, changed
+coefficients or baseline promotion. Source/witness data remain ignored locally.
+Use write_concise_dispatch_report_2025.py for this article; historical append-style
+producers are frozen evidence, not the current publication workflow.
+Public asset/hash checks and production build pass. Local Chromium checks at
+1440/390/320px load all three figures and five evidence downloads without page
+errors or horizontal page overflow. Not deployed; no public URL verification claimed.
+
 Completed authorized hourly-shape diagnosis and joint 50/35/15 thermal curves,
 followed by a separate lower-half renewable negative-offer test. Authoritative
 roots hourly-offer-curves-v1/verification-v1 and hourly-shape-diagnosis-v2. Jan–April

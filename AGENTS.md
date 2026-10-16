@@ -136,6 +136,14 @@ renewable availability or silent commercial-capacity claims. Retain one current
 annual trial/witness and small numerical fixtures; do not create a third report.
 
 Only these two reports and docs/workbench-methodology.md are active publications.
+The 16 October report rewrite uses prepare_concise_dispatch_report_2025.py,
+independent audit_concise_dispatch_report_2025.py and
+write_concise_dispatch_report_2025.py. Its authoritative derived root is
+concise-report-v1/verification-v1. Maintain the concise baseline/exploratory
+structure and three tracked figures; do not rerun historical append-style report
+producers over it. Physical producers and original witnesses remain frozen.
+All primary comparisons use Jul–Dec; national Ember checks are separate from
+zonal A75 coverage. NO5 generation is missing, DE excludes LU, FR is national.
 Do not recreate removed reports or restart retired model/search programmes.
 Only used source tools and minimal retained-model evidence may remain
 as supporting dependencies; their presence is not an instruction to develop them.

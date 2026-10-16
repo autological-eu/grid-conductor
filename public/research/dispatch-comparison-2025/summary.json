@@ -1,0 +1,41 @@
+{
+  "period": "July\u2013December 2025: 4416 UTC hours, all comparisons use this same evaluation period",
+  "models": {
+    "control": "Baseline",
+    "combined": "Exploratory"
+  },
+  "generation_reporting_areas": 38,
+  "observed_price_zones": 41,
+  "derived_summary_sha256": "387fb8111e7628632b12c200dffaffe91398bc96f6a07aa43a91bf4cbb4f4ab3",
+  "derived_witness_sha256": "e8e8bf1c2b29d4887d0681647ee478f77b6c043870eb01137dab29cb84939a1b",
+  "report_audit": {
+    "status": "concise_report_generation_geography_allocation_observations_and_metrics_replayed",
+    "summary_sha256": "387fb8111e7628632b12c200dffaffe91398bc96f6a07aa43a91bf4cbb4f4ab3",
+    "auditor_sha256": "ef9c600a3b409d057f2f6534606313f6934f63a640fb9a49a5bb9134edaa2c91",
+    "maximum_hourly_allocation_difference_mw": 7.275957614183426e-12,
+    "generation_areas": 38,
+    "price_areas": 41,
+    "elapsed_seconds": 130.28844149399083,
+    "scope": "Reporting derivation only; original annual feasibility/cost/selection replay remains linked; no new solve or model acceptance"
+  },
+  "report_audit_sha256": "fc23b1a43bb19b69de22441a7458a2736b2b6c65167fa046a7ec29c9d566a5a1",
+  "original_model_summary_sha256": "b42c45825d45bd4a8531e95af572227e30abf895bed313c2e098e814d29b0fb8",
+  "original_model_audit_sha256": "0edd96773c6c5c653195df5b7f8591ac2c57660b48ea891ec38585d843486737",
+  "derived_producer_sha256": "99ed5b49745b3ab6b8196d11fb3aa8be6d491f7c606db7fe9ac8bc314503c7f6",
+  "renderer_sha256": "b79347ee138eb0e40ebe376c1d1b5bb9636bb8960067e99a3b7bfe5cb297fff4",
+  "article_sha256": "39a258e2180c9f4f4a55bffacd74922fff153cbb19142688b2e254f36a4a26c2",
+  "assets": {
+    "daily-prices.png": "ff01305fb104aae85feb126a944ec831e825da65a98a4dbd7d482b87189f7d67",
+    "generation-by-area.csv": "162d061caf2c89167ad16d7b245d4fc341fefa5882801fa03c4ed22d935cbb59",
+    "generation-by-fuel.csv": "912616ab0fd10950f7901ec5487adc0572bf738d50a90d792b5598c1de587bdb",
+    "national-generation.csv": "a65b8b52c3252f9a1be188787fb4c3aa551a856554a2ada9cedaae9b7e284ad1",
+    "national-mix.png": "fadb26231592c969bf71e04ed2da946b2df3118d5d38030aab77ab231cfef0ab",
+    "overview.png": "57be24f463f7cd214ed8c071a345bf16434c69856415e5e5e89138b983942599",
+    "prices-by-zone.csv": "c99a85592749e0259c800474e33d26047b8e8fee3f05a6c60c5af2c48d756fb0"
+  },
+  "limitations": [
+    "Country Ember and zonal A75 sources are separate. Germany generation excludes LU; France uses national model membership including FR-COR.",
+    "Missing types/hours remain unknown; per-area error covers reported fuels only. Not certified total-fleet generation or exact commercial geography.",
+    "Point allocations proportional to original availability within saved equal-price blocks; conditional bounds not jointly attainable or all primal optima. No new solve, input change or promotion."
+  ]
+}

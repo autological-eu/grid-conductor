@@ -8,6 +8,14 @@ from pack_model_metadata import FILES
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED = [
+    'dispatch-comparison-2025/overview.png',
+    'dispatch-comparison-2025/national-mix.png',
+    'dispatch-comparison-2025/daily-prices.png',
+    'dispatch-comparison-2025/prices-by-zone.csv',
+    'dispatch-comparison-2025/generation-by-area.csv',
+    'dispatch-comparison-2025/generation-by-fuel.csv',
+    'dispatch-comparison-2025/national-generation.csv',
+    'dispatch-comparison-2025/summary.json',
     'entsoe-fast-targets.json', 'carbon-spreads-2025.json',
     'zone-prices-2025/*.json', 'irena-capacity-2025/summary.json.gz',
     'european-reservoir-clearing-2025/summary.json.gz',
@@ -36,6 +44,20 @@ ALLOWED = [
 
 def check():
     folder = ROOT / 'public/research'
+    comparison = json.loads((folder / 'dispatch-comparison-2025/summary.json').read_text())
+    assert comparison['generation_reporting_areas'] == 38 and comparison['observed_price_zones'] == 41
+    assert comparison['report_audit']['summary_sha256'] == comparison['derived_summary_sha256']
+    assert comparison['report_audit']['maximum_hourly_allocation_difference_mw'] < 1e-6
+    assert comparison['article_sha256'] == hashlib.sha256((ROOT / 'docs/european-physical-synthetic-clearing-2025.md').read_bytes()).hexdigest()
+    for file, sha in [('write_concise_dispatch_report_2025.py', comparison['renderer_sha256']),
+                      ('prepare_concise_dispatch_report_2025.py', comparison['derived_producer_sha256']),
+                      ('audit_concise_dispatch_report_2025.py', comparison['report_audit']['auditor_sha256'])]:
+        assert hashlib.sha256((ROOT / 'tools' / file).read_bytes()).hexdigest() == sha
+    expected = {'overview.png', 'national-mix.png', 'daily-prices.png', 'prices-by-zone.csv',
+                'generation-by-area.csv', 'generation-by-fuel.csv', 'national-generation.csv'}
+    assert set(comparison['assets']) == expected
+    for file, sha in comparison['assets'].items():
+        assert hashlib.sha256((folder / 'dispatch-comparison-2025' / file).read_bytes()).hexdigest() == sha
     files = [p for p in folder.rglob('*') if p.is_file()]
     hydrated = [p for p in files if str(p.relative_to(folder)) in FILES]
     for p in hydrated:
