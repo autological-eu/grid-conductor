@@ -26,6 +26,15 @@ Current gas/oil series are monthly and carbon constant; never invent daily value
 Retain original availability, source units/calendar and licensed-data boundaries.
 No observed-generation scaling, new hydro search or browser replacement follows.
 
+The 17 October daily-fuel request authorizes daily_fuel_inputs_2025.py and
+run_daily_fuel_dispatch_2025.py with independent audit_daily_fuel_dispatch_2025.py.
+Keep the accepted annual refit coefficients frozen and run the four declared
+source/shape controls. MIBGAS applies only to ES/PT; other gas stays monthly TTF.
+Preserve first-day fallbacks, quote carry flags, gas-day DST and inherited basis
+assumptions; do not claim audited delivered fuel prices or Europe-wide daily gas.
+All annual hours and source/native-physics/dual/quantity checks remain mandatory.
+No automatic baseline promotion or browser integration follows.
+
 Read PRODUCT.md and TASKS.md first. PRODUCT owns requirements, TASKS owns current
 priorities/evidence, README owns setup. Develop on public-v1. Main promotions
 require explicit user authorization; the alpha promotion was authorized on

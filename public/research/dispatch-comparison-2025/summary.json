@@ -1,6 +1,169 @@
 {
+  "daily_fuel_evaluation": {
+    "summary_sha256": "d35671088a790734ea8f44e43279ad2cf8444442d0050f5d63bf62aabae32279",
+    "audit": {
+      "status": "daily_fuel_sources_costs_original_physics_duals_prices_and_monthly_mix_replayed",
+      "summary_sha256": "d35671088a790734ea8f44e43279ad2cf8444442d0050f5d63bf62aabae32279",
+      "auditor_sha256": "ccf22bcfdf7916de23a54eba7c9feabb8aa577222ef25c49edae83ea4473e1b7",
+      "source_replay": {
+        "status": "daily_brent_fx_and_original_gas_index_cells_and_dst_replayed",
+        "gas_day_law_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32017R0459",
+        "gas_day_law_sha256": "c91e4f5107fcb36637682ed7a02604a472ba13a618280b4fb3d93e55f42b4969",
+        "oil_daily_hours": 8736,
+        "gas_daily_hours_per_zone": 8755
+      },
+      "certificates": [
+        {
+          "case": "baseline",
+          "hours": 8760,
+          "original_physical_residual_mw": 1.3295419805103847e-06,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "oil_generation_lower_twh": 0.0,
+          "oil_generation_upper_twh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.7689174286749108e-09,
+          "complementarity_maximum_eur": 0.00011862650426054302,
+          "duality_gap_maximum_eur": 1.2088567018508911e-05,
+          "price_decomposition_maximum_eur_mwh": 2.7689139869835344e-09
+        },
+        {
+          "case": "oil_daily",
+          "hours": 8760,
+          "original_physical_residual_mw": 1.3295419805103847e-06,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "oil_generation_lower_twh": 0.0,
+          "oil_generation_upper_twh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.7689174286749108e-09,
+          "complementarity_maximum_eur": 0.00011862650426054302,
+          "duality_gap_maximum_eur": 1.2088567018508911e-05,
+          "price_decomposition_maximum_eur_mwh": 2.7689139869835344e-09
+        },
+        {
+          "case": "gas_daily_ES_PT",
+          "hours": 8760,
+          "original_physical_residual_mw": 2.9300514370333985e-06,
+          "objective_error_eur": 4.0978193283081055e-08,
+          "oil_generation_lower_twh": 0.0,
+          "oil_generation_upper_twh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 6.481570835603634e-10,
+          "complementarity_maximum_eur": 0.00019082107725414387,
+          "duality_gap_maximum_eur": 3.829598426818848e-06,
+          "price_decomposition_maximum_eur_mwh": 6.481570835603634e-10
+        },
+        {
+          "case": "both_daily",
+          "hours": 8760,
+          "original_physical_residual_mw": 2.9300514370333985e-06,
+          "objective_error_eur": 4.0978193283081055e-08,
+          "oil_generation_lower_twh": 0.0,
+          "oil_generation_upper_twh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 6.481570835603634e-10,
+          "complementarity_maximum_eur": 0.00019082107725414387,
+          "duality_gap_maximum_eur": 3.829598426818848e-06,
+          "price_decomposition_maximum_eur_mwh": 6.481570835603634e-10
+        },
+        {
+          "case": "both_daily_shape_only",
+          "hours": 8760,
+          "original_physical_residual_mw": 2.060255155811319e-06,
+          "objective_error_eur": 3.725290298461914e-08,
+          "oil_generation_lower_twh": 0.0,
+          "oil_generation_upper_twh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 1.843289965108852e-10,
+          "complementarity_maximum_eur": 4.403090881267293e-05,
+          "duality_gap_maximum_eur": 1.905485987663269e-06,
+          "price_decomposition_maximum_eur_mwh": 1.843289965108852e-10
+        }
+      ],
+      "elapsed_seconds": 113.44819999599713
+    },
+    "producer_sha256": "42f93ef9c01eb35c2e87313d86fd1259395cecd70828daf41b5203a6e6620761",
+    "inputs_producer_sha256": "34ad26978ccd6198f0cafbd0ce49a3bf0dbb9fce9cabff593427555cedae7deb",
+    "source_coverage": {
+      "status": "daily_brent_fx_and_original_gas_index_cells_and_dst_replayed",
+      "gas_day_law_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32017R0459",
+      "gas_day_law_sha256": "c91e4f5107fcb36637682ed7a02604a472ba13a618280b4fb3d93e55f42b4969",
+      "oil_daily_hours": 8736,
+      "gas_daily_hours_per_zone": 8755
+    },
+    "outcomes": {
+      "baseline": {
+        "equal_zone_mae": 28.9639751169547,
+        "mean_correlation": 0.5731187286259649,
+        "quantity_errors": {
+          "price": 28.9639751169547,
+          "generation": 0.2994748680764233,
+          "trade": 0.17190582677419325,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "oil_daily": {
+        "equal_zone_mae": 28.9639751169547,
+        "mean_correlation": 0.5731187286259649,
+        "quantity_errors": {
+          "price": 28.9639751169547,
+          "generation": 0.2994748680764233,
+          "trade": 0.17190582677419325,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "gas_daily_ES_PT": {
+        "equal_zone_mae": 28.950202762013078,
+        "mean_correlation": 0.5734458557581892,
+        "quantity_errors": {
+          "price": 28.950202762013078,
+          "generation": 0.29942741053545235,
+          "trade": 0.17186694802048677,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "both_daily": {
+        "equal_zone_mae": 28.950202762013078,
+        "mean_correlation": 0.5734458557581892,
+        "quantity_errors": {
+          "price": 28.950202762013078,
+          "generation": 0.29942741053545235,
+          "trade": 0.17186694802048677,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "both_daily_shape_only": {
+        "equal_zone_mae": 28.957465962970623,
+        "mean_correlation": 0.573221139277644,
+        "quantity_errors": {
+          "price": 28.957465962970623,
+          "generation": 0.2994150433857497,
+          "trade": 0.17187656549181154,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      }
+    },
+    "annual_clearing_seconds": {
+      "oil_daily": 40.83815035701264,
+      "gas_daily_ES_PT": 47.323401493020356,
+      "both_daily": 33.114524073986104,
+      "both_daily_shape_only": 29.358601047017146
+    },
+    "preparation_seconds": 78.25929612800246,
+    "finalization_command_seconds": 91.17316323399427,
+    "producer_role": "re-export and source/cost replay of sealed initial clears"
+  },
   "research_direction": {
-    "plan_sha256": "2110f63fec9468541833bb13bf325b3051c7ad34bbafba8a616031d77698dc8d",
+    "plan_sha256": "a5c458e4c80e0e8f6a40fdc512d7a3c78221d1d1490e5869418facc90d7edcff",
     "diagnosis_sha256": "832ee83b2c8d5db92c8c80c986b53709052c82ad9d51472ccb79ccaf539a084c",
     "audit": {
       "status": "accepted_refit_price_monthly_mix_and_target_metrics_replayed",
@@ -124,9 +287,10 @@
   },
   "derived_producer_sha256": "a47c8743536ca208c44a6f469adef88be51f5801120d570b60fb836d8cba9b85",
   "derived_producer_file": "prepare_seasonal_dispatch_report_2025.py",
-  "renderer_sha256": "159039e8a3e9a70a8354818ceb68d9aa51e478ef5a77247e4b2d5e9378853f6a",
-  "article_sha256": "2ee4fc832f362945f8b1a34a90be25fd68ee5abc9622b5be3c4c32770d8bd57c",
+  "renderer_sha256": "d11fbced3ce8577bd5abebe52106b35879a4552607c46e951b2bc582edfaaa9a",
+  "article_sha256": "860dfb3d9598f8fe0fd29f24cfa1fcca1edee71798a6a756a845c38b85de75f4",
   "assets": {
+    "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
     "daily-prices.png": "e6f39cc33c519d07425c68a6e44b2c6827e968151d4160e098c0de4980d9a4c1",
     "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",
     "generation-by-fuel.csv": "29d66b4145d615de418a7f56514c6f75e18f0eb0bcc49f5b9ad3232032ab4dfd",

@@ -264,6 +264,57 @@ def write(folder):
             pred=dz['combined_country_point_twh'][ci,fi];actual=dz['ember_reference_twh'][ci,fi]
             mix_rows.append(f"| {country} / {fuel} | {pred:.2f} | {actual:.2f} | {pred-actual:+.2f} |")
         diagnostic_mix_table = '\n'.join(mix_rows)
+    daily_section = ''
+    daily_receipt = None
+    if direction.get('daily_fuel_experiment_folder'):
+        dfolder = ROOT / direction['daily_fuel_experiment_folder']
+        ds = json.loads((dfolder/'summary.json').read_text())
+        da = json.loads((dfolder/'verification-v1/audit.json').read_text())
+        assert da['summary_sha256'] == digest(dfolder/'summary.json')
+        assert da['auditor_sha256'] == digest(ROOT/'tools/audit_daily_fuel_dispatch_2025.py')
+        assert ds['producer_sha256'] == digest(ROOT/'tools/run_daily_fuel_dispatch_2025.py')
+        assert len(da['certificates']) == 5 and all(c['hours']==8760 for c in da['certificates'])
+        assert all(info['optimal_hours']==8760 and info['emergency_mwh']==0 for info in ds['annuals'].values())
+        for name, sha in ds['dependencies'].items():assert digest(ROOT/'tools'/name)==sha
+        din = json.loads((ROOT/ds['inputs_folder']/'summary.json').read_text())
+        assert din['producer_sha256']==digest(ROOT/'tools/daily_fuel_inputs_2025.py')
+        names={'baseline':'Accepted baseline','oil_daily':'Daily oil','gas_daily_ES_PT':'Daily gas: ES/PT','both_daily':'Daily oil + ES/PT gas','both_daily_shape_only':'Both, monthly means preserved'}
+        columns={name:{r['zone']:r for r in result['prices']['zones']} for name,result in ds['outcomes'].items()}
+        daily_rows=[]
+        for area in ds['zones']:
+            row={'area':area,'known_hours':columns['baseline'][area]['known_hours']}
+            for name in names:
+                for metric in ['mae_eur_mwh','bias_eur_mwh','correlation','demeaned_mae']:
+                    row[name+'_'+metric]=columns[name][area].get(metric)
+            daily_rows.append(row)
+        csv_file('daily-fuel-prices-by-zone.csv',daily_rows)
+        table=[]
+        for name,title in names.items():
+            price=ds['outcomes'][name]['prices']
+            table.append(f"| {title} | {price['equal_zone_mae']:.3f} | {price['mean_correlation']:.3f} | {columns[name]['ES']['mae_eur_mwh']:.3f} | {columns[name]['PT']['mae_eur_mwh']:.3f} |")
+        table='\n'.join(table)
+        physical=max(c['original_physical_residual_mw'] for c in da['certificates'])
+        gap=max(c['duality_gap_maximum_eur'] for c in da['certificates'])
+        daily_section=f'''## Daily oil and gas experiment — 17 October 2026
+
+Fuel inputs change **before clearing**, with the accepted seasonal/calendar/Ember coefficients frozen. All cases solve **8,760 hours**, retain all 41 observed-price areas and use the same demand, source availability, hydro and network. No electricity prices or generation targets are refitted.
+
+| Case | Mean zonal MAE, EUR/MWh | Mean price correlation | Spain MAE | Portugal MAE |
+| --- | ---: | ---: | ---: | ---: |
+{table}
+
+**Coverage:** oil uses [EIA daily Brent](https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls) and daily ECB FX across oil offers. Gas uses MIBGAS PVB in Spain and VTP in Portugal; **other zones still use monthly TTF**. These are not Europe-wide daily gas quotes. The first {din['oil_monthly_fallback_hours']} oil hours and {din['gas_monthly_fallback_hours_per_zone']} gas hours retain monthly inputs because the 2025 daily series have not started. Oil/FX use the last available same-or-earlier quote over nontrading days; gas follows 05:00 UTC winter / 04:00 summer delivery boundaries, including DST. Same-day oil observations are retrospective perfect-information inputs, not an operational forecast.
+
+Monthly country/fuel generation-interval mismatch (the existing normalized score, lower is better) changes **{ds['outcomes']['baseline']['quantity_errors']['generation']:.6f} → {ds['outcomes']['both_daily']['quantity_errors']['generation']:.6f}** for the combined case. This is not a whole-fleet percentage error.
+
+The direct cases change both price levels and daily shape. The final control preserves each original monthly fuel mean while using daily variation, separating those effects without electricity-price fitting. Retained assumptions include 1.7 MWh thermal/barrel, the existing gas heating-value/efficiency equivalence, and fixed carbon at EUR80/t. Brent is a crude-oil proxy, not delivered generating fuel; the plant heating-value basis remains a limitation.
+
+All four new annual cases are optimal with zero emergency supply. Independent source-cell, cost, original-network/physics, primal/dual, price and monthly generation/trade replay passes: maximum physical residual **{physical:.2g} MW**, duality gap **EUR {gap:.6f}**. [Download every zone's results]({PREFIX}daily-fuel-prices-by-zone.csv). These controlled trials do not replace the accepted baseline.
+
+'''
+        daily_receipt=dict(summary_sha256=digest(dfolder/'summary.json'),audit=da,producer_sha256=ds['producer_sha256'],inputs_producer_sha256=din['producer_sha256'],source_coverage=da['source_replay'],
+                           outcomes={name:dict(equal_zone_mae=v['prices']['equal_zone_mae'],mean_correlation=v['prices']['mean_correlation'],quantity_errors=v['quantity_errors']) for name,v in ds['outcomes'].items()},
+                           annual_clearing_seconds={name:info['clearing_seconds'] for name,info in ds['annuals'].items() if not info.get('external')},preparation_seconds=ds['preparation_seconds'],finalization_command_seconds=ds['end_to_end_seconds'],producer_role=ds['producer_role'])
     report = f'''# European dispatch: accepted seasonal-bid baseline
 
 ## Accepted baseline: single full-year reconstruction
@@ -292,9 +343,9 @@ The following national quantities come from the **accepted single annual refit**
 
 **Fuel precision today:** gas uses monthly World Bank TTF benchmarks; oil uses monthly Brent, both converted using monthly mean reciprocal ECB FX. Carbon is fixed at **80 EUR/t** and coal/lignite retain technology-cost assumptions. These are not daily fuel quotes. Resource bids use fuel/efficiency + carbon × emissions/efficiency + variable O&M, before the bounded seasonal correction. Gas needs gas-hub data rather than oil as a proxy.
 
-[Ember's daily fuel-cost methodology](https://ember-energy.org/data/european-electricity-prices-and-costs/) identifies national gas hubs, API2 coal and EU/UK carbon contracts, but its embedded fuel chart explicitly restricts downloads because of licensing; no series has been adopted. [MIBGAS's 2025 archive](https://www.mibgas.es/en/file-access?path=AGNO_2025/XLS) now has **365 source-replayed delivery days** of Spanish PVB and Portuguese VTP last/average day-ahead indices. These are source-computed indices, including provider estimates in illiquid periods; they are not a Europe-wide TTF substitute and have not entered the model. [EIA daily Brent](https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls) is an oil-proxy candidate. Delivery/gas-day dates, nontrading days, heating-value basis, units, coverage and permitted reuse must be reconciled before a model-input correction.
+[Ember's daily fuel-cost methodology](https://ember-energy.org/data/european-electricity-prices-and-costs/) identifies national gas hubs, API2 coal and EU/UK carbon contracts, but its embedded fuel chart explicitly restricts downloads because of licensing; no series has been adopted. [MIBGAS's 2025 archive](https://www.mibgas.es/en/file-access?path=AGNO_2025/XLS) now has **365 source-replayed delivery days** of Spanish PVB and Portuguese VTP last/average day-ahead indices. These are source-computed indices, including provider estimates in illiquid periods; they are not a Europe-wide TTF substitute. The daily trial below uses them in ES/PT; the accepted baseline remains unchanged. [EIA daily Brent](https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls) is an oil-proxy candidate. The daily trial below documents reconciled delivery dates and nontrading-day treatment; broader gas-hub coverage, heating-value/efficiency and delivered-fuel assumptions remain open.
 
-## Secondary development evidence
+{daily_section}## Secondary development evidence
 
 The sections and figures below retain the **previous unfitted baseline versus out-of-fold seasonal-model comparison** as secondary development evidence. Their “baseline” labels mean the previous control; their “exploratory” results combine three fits and are **not the accepted single annual refit**. Do not mix those generation/price results with the annual-refit headline.
 
@@ -412,7 +463,7 @@ Independent replay checks calendar/DST features, month exclusion, price/Ember pr
 '''
     ARTICLE.write_text(report)
     assets = {path.name: digest(path) for path in sorted(PUBLIC.iterdir()) if path.name != 'summary.json'}
-    receipt = dict(research_direction=dict(plan_sha256=digest(ROOT/'config/research-improvement-plan.json'),
+    receipt = dict(daily_fuel_evaluation=daily_receipt, research_direction=dict(plan_sha256=digest(ROOT/'config/research-improvement-plan.json'),
                        diagnosis_sha256=digest(diagnostic_folder/'diagnosis.json'),audit=diagnosis_audit,
                        producer_sha256=diagnosis['producer_sha256'],mix_producer_sha256=diagnostic_summary['producer_sha256'],
                        mix_auditor_sha256=diagnostic_mix_audit['auditor_sha256'],mix_audit=diagnostic_mix_audit,

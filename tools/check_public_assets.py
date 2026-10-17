@@ -13,6 +13,7 @@ ALLOWED = [
     'dispatch-comparison-2025/daily-prices.png',
     'dispatch-comparison-2025/zone-mae-grid.png',
     'dispatch-comparison-2025/prices-by-zone.csv',
+    'dispatch-comparison-2025/daily-fuel-prices-by-zone.csv',
     'dispatch-comparison-2025/generation-by-area.csv',
     'dispatch-comparison-2025/generation-by-fuel.csv',
     'dispatch-comparison-2025/national-generation.csv',
@@ -71,6 +72,14 @@ def check():
     assert direction['plan_sha256'] == hashlib.sha256((ROOT / 'config/research-improvement-plan.json').read_bytes()).hexdigest()
     expected = {'overview.png', 'national-mix.png', 'daily-prices.png', 'zone-mae-grid.png', 'prices-by-zone.csv',
                 'generation-by-area.csv', 'generation-by-fuel.csv', 'national-generation.csv'}
+    if comparison.get('daily_fuel_evaluation'):
+        daily = comparison['daily_fuel_evaluation']
+        assert daily['audit']['summary_sha256'] == daily['summary_sha256']
+        assert len(daily['audit']['certificates']) == 5
+        assert all(c['hours']==8760 and c['original_physical_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in daily['audit']['certificates'])
+        for file,sha in [('run_daily_fuel_dispatch_2025.py',daily['producer_sha256']),('audit_daily_fuel_dispatch_2025.py',daily['audit']['auditor_sha256']),('daily_fuel_inputs_2025.py',daily['inputs_producer_sha256'])]:
+            assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
+        expected.add('daily-fuel-prices-by-zone.csv')
     assert set(comparison['assets']) == expected
     for file, sha in comparison['assets'].items():
         assert hashlib.sha256((folder / 'dispatch-comparison-2025' / file).read_bytes()).hexdigest() == sha

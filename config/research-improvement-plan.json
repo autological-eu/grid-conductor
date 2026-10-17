@@ -44,18 +44,19 @@
     {
       "name": "MIBGAS",
       "url": "https://www.mibgas.es/en/file-access?path=AGNO_2025/XLS",
-      "verified": "Downloaded official MIBGAS_Data_2025.xlsx from linked 2025 archive; workbook disclaimer permits reuse preserving content and attribution. Extracted and independently replayed 365 delivery days for both PVB/VTP last and average day-ahead indices. Source-computed indices may estimate illiquid periods. Gas-day UTC and heating-value conventions remain unreconciled; not adopted in model or substituted for TTF/THE.",
+      "verified": "Daily PVB/VTP last-price indices incorporated in controlled ES/PT gas trials. EU Regulation 2017/459 gas-day convention (05:00 UTC winter / 04:00 summer) independently replayed, including DST. Other gas remains monthly TTF; inherited heating-basis multiplier=1.0 remains a limitation, not a newly audited plant HHV/LHV correction.",
       "evidence_folder": "data/fuel-prices/mibgas-daily-source-v1"
     },
     {
       "name": "EIA daily Brent",
       "url": "https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls",
-      "verified": "Public historical workbook returned HTTP200. Candidate oil proxy only; full-year extraction and nontrading-day treatment not yet integrated."
+      "verified": "EIA daily Brent and daily ECB FX incorporated in controlled oil trials across modeled oil offers; latest same-or-earlier observations carried over nontrading days (max5 days), first24 hours retain monthly benchmark. Crude proxy and inherited1.7 MWh thermal/barrel remain explicit."
     },
     {
       "name": "Bundesnetzagentur THE gas prices",
       "url": "https://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_svg/Gaspreise/Gaspreise.html",
       "verified": "Page describes daily THE day-ahead/front-month gas prices, sourced from EEX; explicitly says no machine-readable download. Not ingested."
     }
-  ]
+  ],
+  "daily_fuel_experiment_folder": "data/bidding-zone-network-2025/daily-fuel-v2"
 }

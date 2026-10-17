@@ -37,7 +37,27 @@ The following national quantities come from the **accepted single annual refit**
 
 **Fuel precision today:** gas uses monthly World Bank TTF benchmarks; oil uses monthly Brent, both converted using monthly mean reciprocal ECB FX. Carbon is fixed at **80 EUR/t** and coal/lignite retain technology-cost assumptions. These are not daily fuel quotes. Resource bids use fuel/efficiency + carbon × emissions/efficiency + variable O&M, before the bounded seasonal correction. Gas needs gas-hub data rather than oil as a proxy.
 
-[Ember's daily fuel-cost methodology](https://ember-energy.org/data/european-electricity-prices-and-costs/) identifies national gas hubs, API2 coal and EU/UK carbon contracts, but its embedded fuel chart explicitly restricts downloads because of licensing; no series has been adopted. [MIBGAS's 2025 archive](https://www.mibgas.es/en/file-access?path=AGNO_2025/XLS) now has **365 source-replayed delivery days** of Spanish PVB and Portuguese VTP last/average day-ahead indices. These are source-computed indices, including provider estimates in illiquid periods; they are not a Europe-wide TTF substitute and have not entered the model. [EIA daily Brent](https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls) is an oil-proxy candidate. Delivery/gas-day dates, nontrading days, heating-value basis, units, coverage and permitted reuse must be reconciled before a model-input correction.
+[Ember's daily fuel-cost methodology](https://ember-energy.org/data/european-electricity-prices-and-costs/) identifies national gas hubs, API2 coal and EU/UK carbon contracts, but its embedded fuel chart explicitly restricts downloads because of licensing; no series has been adopted. [MIBGAS's 2025 archive](https://www.mibgas.es/en/file-access?path=AGNO_2025/XLS) now has **365 source-replayed delivery days** of Spanish PVB and Portuguese VTP last/average day-ahead indices. These are source-computed indices, including provider estimates in illiquid periods; they are not a Europe-wide TTF substitute. The daily trial below uses them in ES/PT; the accepted baseline remains unchanged. [EIA daily Brent](https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls) is an oil-proxy candidate. The daily trial below documents reconciled delivery dates and nontrading-day treatment; broader gas-hub coverage, heating-value/efficiency and delivered-fuel assumptions remain open.
+
+## Daily oil and gas experiment — 17 October 2026
+
+Fuel inputs change **before clearing**, with the accepted seasonal/calendar/Ember coefficients frozen. All cases solve **8,760 hours**, retain all 41 observed-price areas and use the same demand, source availability, hydro and network. No electricity prices or generation targets are refitted.
+
+| Case | Mean zonal MAE, EUR/MWh | Mean price correlation | Spain MAE | Portugal MAE |
+| --- | ---: | ---: | ---: | ---: |
+| Accepted baseline | 28.964 | 0.573 | 24.068 | 23.545 |
+| Daily oil | 28.964 | 0.573 | 24.068 | 23.545 |
+| Daily gas: ES/PT | 28.950 | 0.573 | 23.840 | 23.265 |
+| Daily oil + ES/PT gas | 28.950 | 0.573 | 23.840 | 23.265 |
+| Both, monthly means preserved | 28.957 | 0.573 | 23.975 | 23.438 |
+
+**Coverage:** oil uses [EIA daily Brent](https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls) and daily ECB FX across oil offers. Gas uses MIBGAS PVB in Spain and VTP in Portugal; **other zones still use monthly TTF**. These are not Europe-wide daily gas quotes. The first 24 oil hours and 5 gas hours retain monthly inputs because the 2025 daily series have not started. Oil/FX use the last available same-or-earlier quote over nontrading days; gas follows 05:00 UTC winter / 04:00 summer delivery boundaries, including DST. Same-day oil observations are retrospective perfect-information inputs, not an operational forecast.
+
+Monthly country/fuel generation-interval mismatch (the existing normalized score, lower is better) changes **0.299475 → 0.299427** for the combined case. This is not a whole-fleet percentage error.
+
+The direct cases change both price levels and daily shape. The final control preserves each original monthly fuel mean while using daily variation, separating those effects without electricity-price fitting. Retained assumptions include 1.7 MWh thermal/barrel, the existing gas heating-value/efficiency equivalence, and fixed carbon at EUR80/t. Brent is a crude-oil proxy, not delivered generating fuel; the plant heating-value basis remains a limitation.
+
+All four new annual cases are optimal with zero emergency supply. Independent source-cell, cost, original-network/physics, primal/dual, price and monthly generation/trade replay passes: maximum physical residual **2.9e-06 MW**, duality gap **EUR 0.000012**. [Download every zone's results](/research/dispatch-comparison-2025/daily-fuel-prices-by-zone.csv). These controlled trials do not replace the accepted baseline.
 
 ## Secondary development evidence
 

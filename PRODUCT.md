@@ -66,6 +66,13 @@ cleared prices, substituting generation for availability or relaxing physics.
 Evaluation electricity prices remain validation targets. Historical training prices
 may inform the explicitly authorized bounded bid calibration described below.
 
+Daily fuel inputs must identify quote/delivery dates, hub coverage, currency and
+thermal heating-value basis. Apply them to source fuel costs before the retained
+resource bid adjustments and clearing. Keep unavailable hubs explicit; regional
+indices cannot silently stand in for European TTF. Declare nontrading-day carries
+and boundary fallbacks. Distinguish direct source-level changes from controls
+that preserve monthly fuel means, and retain generation checks alongside prices.
+
 Validate simulated generation quantities alongside prices: annual and monthly
 country/technology TWh, generation shares and hourly timing where observations
 support them. Compare demand and signed trade on matching scope before treating

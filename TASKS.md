@@ -70,6 +70,72 @@ scope/location proxies; geographic structure does not establish input accuracy.
 Comparisons are descriptive, untuned and not held-out validation. Norway/Sweden
 price correlations remain weak; Germany MAE 23.097 EUR/MWh, correlation 0.776.
 
+## Daily oil and Iberian gas trial — 17 October 2026
+
+The user authorized incorporating daily oil/gas prices. Fresh producer
+`daily_fuel_inputs_2025.py` prepares daily EIA Brent with daily ECB USD/EUR and
+MIBGAS last day-ahead PVB/VTP indices. `run_daily_fuel_dispatch_2025.py` keeps the
+accepted annual refit's resource grouping, all seasonal/Ember coefficients and
+physical inputs fixed. Independent `audit_daily_fuel_dispatch_2025.py` reparses
+EIA cells, original MIBGAS cells and FX, independently reconstructs source costs,
+checks original native component physics, LP duals and all hourly/monthly metrics.
+Four targeted fixtures cover gas delivery dates, 23/25-hour DST days, no future
+quote filling, hub/resource scope and rejection of unequal merged-member costs.
+
+Authoritative ignored roots: `data/fuel-prices/daily-inputs-v1/` and
+`data/bidding-zone-network-2025/daily-fuel-v2/`, with verification-v1 as the final
+audit location. Config/research-improvement-plan.json points to this trial.
+All four new cases clear all 8760 hours; accepted baseline is an external saved
+reference, not a fresh fifth solve. No price or generation refit. Carbon remains
+EUR80/t, coal/lignite assumptions unchanged. All 41 complete price areas retained.
+
+| Full-year case | Equal-zone MAE EUR/MWh | ES MAE | PT MAE |
+| --- | ---: | ---: | ---: |
+| Accepted baseline | 28.963975 | 24.067837 | 23.544744 |
+| Daily oil | 28.963975 | 24.067837 | 23.544744 |
+| Daily gas in ES/PT | 28.950203 | 23.839840 | 23.264928 |
+| Both daily inputs | 28.950203 | 23.839840 | 23.264928 |
+| Both daily shapes, original monthly means retained | 28.957466 | 23.974643 | 23.438192 |
+
+Daily gas applies only in Spain/Portugal; all other gas retains monthly TTF.
+The first 24 oil hours and first five gas hours retain monthly values; no hours
+are excluded. Oil uses same-or-earlier 2025 quotes across nontrading days, at most
+five-day gaps, never future filling. The harmonized gas day is 05:00 UTC winter /
+04:00 summer (EU Regulation 2017/459, definition 16), equivalent to 06:00 Madrid.
+Retain 1.7 MWh thermal/barrel and gas basis multiplier 1.0: gross/plant efficiency
+basis equivalence remains an inherited limitation, not an audited correction.
+MIBGAS source estimates in illiquid periods and Brent's crude-proxy status remain
+explicit. Direct cases change hub/source levels and shape; the shape-only case
+preserves each original monthly mean and is an ex-post diagnostic.
+
+Monthly national fuel-generation interval mismatch score improves marginally
+.299474868→.299427411 (combined), .299415043 (shape-only); these are normalized
+scores, not total-fleet percentage errors. The result does not establish that
+daily TTF inputs elsewhere are unimportant. No baseline promotion, browser
+replacement or restarted hydro/search family; full-year <10 target remains unmet.
+
+Provenance recovery: an initial preparation was stopped before clearing to fix
+JSON serialization. All four cases in v2 then completed, but final metadata export
+failed on a relative input path. Preserved initial driver source, per-case sealed
+witness hashes, design and progress; fixed only export/recovery handling and
+rebuilt source/cost checks without rerunning solvers. The independently verified
+summary records recovery explicitly; finalization time is not a fresh annual
+solve or complete initial-command duration. Per-case original clearing times:
+40.84s oil, 47.32s gas, 33.11s combined, 29.36s shape control. All arrays/raw sources
+stay ignored; only code, compact report evidence and all-zone CSV enter Git.
+
+Verification-v1 completed: five full-year primal/dual/native-component certificates
+(one saved baseline plus four new cases); maximum physical residual 2.9301e-6 MW,
+maximum duality gap EUR0.00001209, unchanged 1e-4 MW / EUR0.05 gates. Monthly
+country/fuel generation and implied-trade checks, price/shape metrics, source
+cells and DST replay pass. Oil generation upper bound is zero in every case,
+consistent with unchanged prices in the oil-only test. Independent full replay
+113.45s; recovery/source/cost re-export 91.17s includes 78.26s rebuilding, and is
+explicitly not a new annual solve or initial complete-command time. Four targeted
+tests, production build, public asset/hash allowlist and diff checks pass. Existing
+report and all-48-area CSV updated locally; no CI/Pages deployment claim.
+
+
 ## Current diagnosis and source improvements — 16 October 2026
 
 The user targets **<10 EUR/MWh equal-zone full-2025 hourly MAE**, all 41 currently
