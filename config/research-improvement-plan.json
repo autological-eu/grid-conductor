@@ -62,5 +62,6 @@
   ],
   "daily_fuel_experiment_folder": "data/bidding-zone-network-2025/daily-fuel-v2",
   "renewable_source_experiment_folder": "data/bidding-zone-network-2025/renewable-source-bids-v1",
-  "nuclear_availability_experiment_folder": "data/bidding-zone-network-2025/nuclear-availability-v1"
+  "nuclear_availability_experiment_folder": "data/bidding-zone-network-2025/nuclear-availability-v1",
+  "inverse_bid_ensemble_folder": "data/bidding-zone-network-2025/inverse-bid-ensemble-v1"
 }

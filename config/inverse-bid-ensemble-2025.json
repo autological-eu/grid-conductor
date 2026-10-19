@@ -1,0 +1,47 @@
+{
+  "name": "inverse-bid-ensemble-v1",
+  "year": 2025,
+  "hours": 8760,
+  "scope": "Full-year in-sample inverse bid calibration, not recovered actual bids, untouched validation, posterior inference or a forecast confidence interval",
+  "baseline": "config/research-baseline.json",
+  "rounds": 2,
+  "steps": [[0.5,0,0],[1,0,0],[0,1,0],[0.5,1,0],[1,1,0],[0.5,1,0.5]],
+  "step_axes": ["local_price_proposal_strength","annual_mix_proposal_strength","thermal_curve_increment"],
+  "maximum_new_annual_solves": 12,
+  "price_proposal": {
+    "resources": ["gas","coal","nuclear"],
+    "features": "Constant, annual sine/cosine, first local-clock daily sine/cosine; existing hashed calendar columns0,1,2,3,4, including DST",
+    "minimum_local_interior_hours": 168,
+    "interior_margin_mw": 0.001,
+    "price_match_eur_mwh": 0.00001,
+    "target_clip_eur_mwh": 100,
+    "ridge": 336,
+    "interpretation": "Fit observed-minus-parent-cleared price only where at least one local resource offer is interior and matches the saved dual. This is a proposal heuristic, not a unique causal marginal-generator label. Unsupported groups get zero coefficients."
+  },
+  "mix_proposal": {
+    "resources": ["Gas","Coal","Nuclear"],
+    "maximum_increment_eur_mwh": 15,
+    "normalization_floor_twh": 1,
+    "coverage": "Require all12 Ember national months; compare annual sum of conditional allocation bounds with annual reference, not an hourly generation-derived availability",
+    "rule": "-15 times signed reference outside annual interval /max(reference,1), clipped +/-15, distributed to columns by original source-nameplate country shares"
+  },
+  "maximum_total_shift_eur_mwh": [45,45,15],
+  "maximum_accumulated_mix_eur_mwh": [30,30,15],
+  "thermal_curve_top_eur_mwh": [60,40],
+  "thermal_curve_rank_multipliers": [0,0.35,1],
+  "bid_rule": "Accepted annual refit bid + clipped accumulated smooth price/mix adjustment + nonnegative monotone gas/coal block premium; final floor0. Nuclear has no peaking block. Other bids and every physical input unchanged.",
+  "objective_weights": {"price":0.55,"daily_demeaned_price":0.2,"generation":0.2,"trade":0.05},
+  "regularization_weight": 0.01,
+  "regularization": "Availability-weighted mean square bid departure from accepted bids, normalized by maximum family departure105/85/15 EUR/MWh",
+  "research_filters": {"price_ratio_maximum":1,"daily_demeaned_ratio_maximum":1.02,"generation_ratio_maximum":1.02,"trade_ratio_maximum":1.02,"optimal_hours":8760,"emergency_mwh":0},
+  "selection": "At each round choose the eligible minimum regularized objective among all completed states, baseline included. Ties prefer lower penalty then earlier ordinal. Exactly two rounds; identical bid hashes reuse an existing witness.",
+  "ensemble": {
+    "maximum_members":5,
+    "score_tolerance":0.01,
+    "price_tolerance_eur_mwh":1,
+    "selection": "Among eligible distinct bid states within both best-score+0.01 and best-MAE+1, retain best first, then greedily maximize minimum normalized RMS parameter distance to retained states; ties prefer lower score then earlier ordinal",
+    "interpretation": "Equal-weight descriptive finite fit ensemble; no probability weights, posterior or calibrated uncertainty claim. Report observed-hour coverage of min/max envelope even if poor. Mean prices are a descriptive average, not a single cleared network. No investment run in this experiment."
+  },
+  "fixed": "Accepted capacity/availability, demand, fixed hydro, source chronology, PTDF/GSK/grid/link/island constraints, monthly fuel anchors and inherited calendar coefficients; no source sensitivity adopted",
+  "gates": "All41 eligible observed-price zones and all48 modeled areas, negative/extreme hours, independent source/native-physics/primal-dual/monthly quantity/search-selection replay. Research filters are experimental screens, not new product acceptance criteria. No automatic baseline or browser promotion."
+}

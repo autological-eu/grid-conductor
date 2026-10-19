@@ -25,6 +25,94 @@ lower MAE and transparent bias/seasonal diagnostics. Native PyPSA parity is an
 optional numerical diagnostic, not the development target. Automatic hourly
 reviews remain disabled.
 
+## Current work — bounded inverse market modelling, 19 October 2026
+
+The user authorized a full inverse-market-modelling report and a finite family of
+bid fits. This supersedes the next-step wording in the source diagnostics below.
+The accepted single seasonal refit remains the baseline; no source sensitivity
+or candidate is silently promoted. New design:
+`config/inverse-bid-ensemble-2025.json`. Implementation:
+`inverse_bid_ensemble_2025.py`, `run_inverse_bid_ensemble_2025.py`, independent
+`audit_inverse_bid_ensemble_2025.py`. Root:
+`data/bidding-zone-network-2025/inverse-bid-ensemble-v1/`.
+
+Two predeclared rounds × six steps produced12 fresh full-year clears plus the
+intact baseline witness. Every case has8760 optimal hours and zero emergency
+supply, all41 price zones retained. Original capacity/availability, source demand,
+fixed hydro, network/GSK/island/link constraints and monthly fuel anchors stay
+identical. Only bounded gas/coal/nuclear smooth bid adjustments, national mix
+signals and monotone thermal block premiums change. All2025 targets inform
+this trial: **in-sample reconstruction, not independent forecast validation**.
+The local-interior proposal is a heuristic, not exact global inverse optimisation,
+unique actual bid recovery or an outer-search convergence certificate.
+
+| State | Equal-zone MAE | Within-day MAE | Generation interval score | Implied-trade interval score |
+| --- | ---: | ---: | ---: | ---: |
+| Accepted baseline | 28.963975 | 20.063474 | 0.299475 | 0.171906 |
+| Joint-score winner r2-s6 | 28.166750 | 19.567808 | 0.255115 | 0.143571 |
+| Price leader r2-s2 | 27.799975 | 19.541478 | 0.291414 | 0.167820 |
+
+The joint winner lowers MAE2.75%, generation mismatch14.81% and trade mismatch
+16.48%; these are relative score changes, not national TWh error percentages.
+Mean zonal r0.573119→0.592731. Germany/Spain MAE improve21.57→19.29 /
+24.07→21.62; France worsens23.83→24.69, NO3/NO4 worsen and remain visible.
+No country/zone-specific acceptance is implied by the aggregate research filters.
+The <10 target remains unmet. These offered-cost objectives contain effective
+premiums, not verified resource cost, welfare or investment returns.
+
+Ten states (baseline included) pass the declared research filters. The primary
+score+0.01 / MAE+1 near-best rule retains only **r2-s6**; do not widen the primary
+rule after seeing outcomes or manufacture five members. Post-run cutoff diagnostics
+on completed states give1/1/5/7 qualifying states at0.005/0.01/0.02/0.03.
+The primary singleton has zero-width spread (0.133% numerical price matches).
+A separately labelled wider envelope of all10 eligible states covers only14.06%
+of observed zone-hours, mean width9.68 EUR/MWh. Neither is a posterior, confidence
+interval or a verified distribution around actual market prices.
+
+The proposal supports39 then40 zone/resource groups (five coefficients each),
+with66 nonzero country/fuel mix signals. No Norwegian local thermal group has
+168 supporting interior hours in either parent witness. Cross-border bids can
+still move Norwegian prices, but this design has little directly identified
+local thermal leverage there. Fixed hydro is an injection, not a water offer.
+National five-fuel Ember checks remain separate from hourly zonal A75 validation;
+updated A75 checks have not been derived for these inverse fits. Prior baseline/
+OOF A75 evidence remains legacy supporting evidence, not new-fit validation.
+
+Independent numerical replay verifies all13 annual primals/duals/source and
+monthly quantity metrics, both proposals, bounded costs, immutable physics,
+round-parent choices, all12 attempts and final diversity-based membership.
+Five targeted tests pass. Preparation110.89s; fresh clearing loops494.91s;
+full search662.29s; peak RSS2585.47 MiB. Maximum physics residual3.69e-06 MW;
+maximum duality gap EUR5.38928e-05.
+The first replay attempt stopped at a NumPy/list comparison serialization error;
+no solves changed. Full replay then passed with independent arithmetic/selection.
+
+`bid_ensemble_report_2025.py` replaces the retained article with a complete,
+concise inverse-modelling report: literature/identifiability, exact baseline and
+search, price–mix trade-offs, full-zone MAE grid, fixedJuly1–7 examples for
+NO5/DE-LU/ES/FR, national generation and investment limitations. Four figure
+filenames remain; historical derivation fields/CSV evidence are explicitly legacy.
+Three compact CSVs expose every search state and shown-model zonal/fuel outcomes.
+`audit_inverse_report_2025.py` independently replays CSVs and both price envelopes.
+All raw observations, hourly witnesses and proposal matrices stay ignored.
+
+Final local verification: independent report CSV/envelope replay passed; public
+asset allowlist passed (86 files, 6.88 MiB); immutable metadata repacked losslessly.
+Production build, TypeScript and 14 browser-independent tests (2,402 assertions)
+passed. Lint has zero errors and six existing Fast Refresh warnings in unchanged
+UI components. Production Chromium workbench/report checks passed at 1440, 390,
+320 and 667 px; both retained mathematical articles render without KaTeX errors
+or overflow at 1440, 390 and 320 px. This verifies the local production build;
+the new report has not been deployed or verified on public Pages.
+
+Next: use the full price/mix frontier to choose future investigations deliberately;
+do not select on price alone or call the singleton an uncertainty distribution.
+Investigate independent supply/network/operational evidence in poorly identified
+areas before expanding physical uncertainty. A larger/likelihood-based fit family,
+out-of-sample forecasting, hourly zonal generation validation and paired investment
+runs require separately verified work. No browser replacement, main merge or
+recurring-review restart.
+
 ## Dated nuclear availability follow-up — 19 October 2026
 
 Source cache: `data/nuclear-availability-2025/rte-source-v1/`;

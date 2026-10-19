@@ -24,9 +24,10 @@ This price-calibrated reconstruction is not independent forecast validation.
 
 - [Workbench methodology](docs/workbench-methodology.md): bottlenecks, live scenario
   equations, opportunity/carbon interpretation and exact data sources.
-- [Fixed-hydro annual checkpoint](docs/european-physical-synthetic-clearing-2025.md):
-  8760 independent hourly physical clearings, fixed reservoir injections, simple
-  resource bids and all-zone price errors and sourced capacity/hydro diagnostics.
+- [Inverse market modelling report](docs/european-physical-synthetic-clearing-2025.md):
+  the fixed-hydro European baseline, bounded resource-bid calibration, all-year
+  price/generation comparisons, fit-set limitations and investment interpretation.
+  The joint-score trial reaches MAE 28.17 EUR/MWh; it has not replaced the baseline.
 - [Paused resource-bidding research reference](docs/daily-fuel-dispatch-2025.md): generator
   strategies, fuel inputs, daily chronological storage and annual observed-price errors.
 
@@ -70,8 +71,12 @@ Never commit secrets or multi-gigabyte artifacts. Python research uses the pinne
 
 Current research entry points:
 
-- `hybrid_fixed_hydro_2025.py` (active combined producer and independent --audit),
-  `evaluate_fixed_hydro_bids_2025.py` (current report publisher).
+- `inverse_bid_ensemble_2025.py`, `run_inverse_bid_ensemble_2025.py` and
+  `audit_inverse_bid_ensemble_2025.py`: finite current bid-calibration trial.
+- `write_concise_dispatch_report_2025.py` delegates the current report to
+  `bid_ensemble_report_2025.py`; `audit_inverse_report_2025.py` replays its CSVs/envelopes.
+- `hybrid_fixed_hydro_2025.py` and `evaluate_fixed_hydro_bids_2025.py` are frozen
+  source/reference tools; do not run their historical publisher over the current report.
 - `fixed_reservoir_screening_2025.py`, `report_fixed_reservoir_screening_2025.py`
   (frozen checkpoint; the historical publisher would overwrite the current report).
 - `fast_daily_market.py` (experimental performance adapter), `terminal_daily_market.py`
@@ -85,33 +90,37 @@ Run from the repository root; inspect each tool's CLI and retained report for
 inputs/provenance. Source data and retained-reference dependencies must not be
 removed merely because their original articles are retired.
 
-To reproduce the selected model and diagnosis with the verified local caches, first restore
-immutable metadata, then use a new output directory (never overwrite a retained run):
+To reproduce the inverse experiment with the verified local caches, restore
+immutable metadata and use a **fresh** ignored output directory. The accepted
+baseline and all provider inputs must already exist; this does not fetch omitted
+large data or restart old searches.
 
 ```sh
 python3 tools/pack_model_metadata.py --restore
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
   data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
-  tools/hybrid_fixed_hydro_2025.py --output data/fixed-reservoir-screening-2025/new-comparison
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+  tools/run_inverse_bid_ensemble_2025.py data/bidding-zone-network-2025/inverse-reproduction-new
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
   data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
-  tools/hybrid_fixed_hydro_2025.py --audit --output data/fixed-reservoir-screening-2025/new-comparison
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+  tools/audit_inverse_bid_ensemble_2025.py data/bidding-zone-network-2025/inverse-reproduction-new
+```
+
+For the retained report, the inverse folder is pinned in
+`config/research-improvement-plan.json`. Only point it at a new trial after that
+trial passes independent replay. With the existing verified report/source caches:
+
+```sh
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
   data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
-  tools/diagnose_fixed_hydro_errors_2025.py --run data/fixed-reservoir-screening-2025/new-comparison --out data/fixed-reservoir-screening-2025/new-comparison/diagnostics.json
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
-  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
-  tools/evaluate_fixed_hydro_bids_2025.py --run data/fixed-reservoir-screening-2025/new-comparison --diagnostics data/fixed-reservoir-screening-2025/new-comparison/diagnostics.json
+  tools/write_concise_dispatch_report_2025.py data/bidding-zone-network-2025/seasonal-report-v1
 python3 tools/pack_model_metadata.py
 python3 tools/check_public_assets.py
 ```
 
-Only the complete resource-bid formulation is retained. Legacy/fuel-only
-variants and their local/public outputs are removed. Probe results diagnose
-price/capacity/water and injection-weight sensitivities; they are not alternative
-accepted models. Timings separate the annual loop from preparation/native checks,
-export and audit. Country/AC-island demand/geography still need commercial-zone
-reconciliation; battery/PHS remain excluded.
+Inverse fits are historical reconstructions, not independently validated actual
+bids, posterior distributions or investment models. Keep the primary near-best
+selection distinct from post-run wider-family diagnostics. Original availability,
+chronology and physics remain unchanged; browser integration remains separate.
 
 The compact trial is paused; the following is retained reproduction guidance,
 not an instruction to resume it. For a fresh compact trial using the retained

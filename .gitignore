@@ -133,6 +133,9 @@ data/daily-market-2025/
 !/public/research/dispatch-comparison-2025/renewable-capacity-audit.csv
 !/public/research/dispatch-comparison-2025/nuclear-availability-prices-by-zone.csv
 !/public/research/dispatch-comparison-2025/nuclear-availability-by-month.csv
+!/public/research/dispatch-comparison-2025/inverse-search-cases.csv
+!/public/research/dispatch-comparison-2025/inverse-prices-by-zone.csv
+!/public/research/dispatch-comparison-2025/inverse-generation-by-country.csv
 !/public/research/dispatch-comparison-2025/generation-by-area.csv
 !/public/research/dispatch-comparison-2025/generation-by-fuel.csv
 !/public/research/dispatch-comparison-2025/national-generation.csv

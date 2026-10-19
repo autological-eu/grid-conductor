@@ -18,6 +18,9 @@ ALLOWED = [
     'dispatch-comparison-2025/renewable-capacity-audit.csv',
     'dispatch-comparison-2025/nuclear-availability-prices-by-zone.csv',
     'dispatch-comparison-2025/nuclear-availability-by-month.csv',
+    'dispatch-comparison-2025/inverse-search-cases.csv',
+    'dispatch-comparison-2025/inverse-prices-by-zone.csv',
+    'dispatch-comparison-2025/inverse-generation-by-country.csv',
     'dispatch-comparison-2025/generation-by-area.csv',
     'dispatch-comparison-2025/generation-by-fuel.csv',
     'dispatch-comparison-2025/national-generation.csv',
@@ -54,7 +57,7 @@ def check():
     assert comparison['generation_reporting_areas'] == 38 and comparison['observed_price_zones'] == 41
     assert comparison['report_audit']['summary_sha256'] == comparison['derived_summary_sha256']
     assert comparison['report_audit']['maximum_hourly_allocation_difference_mw'] < 1e-6
-    model = comparison['model_verification']
+    model = comparison.get('legacy_out_of_fold_model_verification') or comparison['model_verification']
     assert model['optimal_hours'] == 8760 and model['maximum_physical_residual_mw'] <= 1e-4
     assert model['maximum_duality_gap_eur'] < .05 and model['complete_lp_certificates'] == 11
     for role in ['producer', 'helper', 'auditor']:
@@ -101,6 +104,28 @@ def check():
         for file,sha in [('run_nuclear_availability_2025.py',study['producer_sha256']),('nuclear_availability_2025.py',study['helper_sha256']),('audit_nuclear_availability_2025.py',study['audit']['auditor_sha256'])]:
             assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
         expected.update({'nuclear-availability-prices-by-zone.csv','nuclear-availability-by-month.csv'})
+    if comparison.get('inverse_bid_ensemble_evaluation'):
+        study=comparison['inverse_bid_ensemble_evaluation']
+        assert study['audit']['summary_sha256']==study['summary_sha256']
+        assert study['audit']['members']==study['members'] and study['audit']['attempts']==12
+        assert 1<=len(study['members'])<=5 and len(study['audit']['certificates'])==len(study['records'])<=13
+        assert all(c['hours']==8760 and c['original_component_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in study['audit']['certificates'])
+        assert all(c['optimal_hours']==8760 and c['emergency_mwh']==0 for c in study['annuals'].values())
+        for file,sha in [('run_inverse_bid_ensemble_2025.py',study['producer_sha256']),('inverse_bid_ensemble_2025.py',study['helper_sha256']),('audit_inverse_bid_ensemble_2025.py',study['audit']['auditor_sha256']),('bid_ensemble_report_2025.py',study['renderer_sha256'])]:
+            assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
+        assert study['design']==json.loads((ROOT/'config/inverse-bid-ensemble-2025.json').read_text())
+        report_audit=study['report_audit']
+        assert report_audit['source_summary_sha256']==study['summary_sha256'] and report_audit['article_sha256']==comparison['article_sha256']
+        assert report_audit['assets_sha256']==comparison['assets'] and report_audit['primary_members']==len(study['members'])
+        assert hashlib.sha256((ROOT/'tools/audit_inverse_report_2025.py').read_bytes()).hexdigest()==report_audit['auditor_sha256']
+        records={r['id']:r for r in study['records']};winner=records[study['winner']]
+        assert study['winner']==study['audit']['winning_state']==study['members'][0]
+        assert all(records[k]['eligible'] for k in study['members'])
+        for row in study['cutoff_sensitivity']:
+            count=sum(r['eligible'] and r['score']<=winner['score']+row['score_tolerance']+1e-12 and r['metrics']['price']<=winner['metrics']['price']+1+1e-12 for r in records.values())
+            assert row['qualifying_states']==count and row['retained_cap']==min(5,count)
+
+        expected.update({'inverse-search-cases.csv','inverse-prices-by-zone.csv','inverse-generation-by-country.csv'})
     assert set(comparison['assets']) == expected
     for file, sha in comparison['assets'].items():
         assert hashlib.sha256((folder / 'dispatch-comparison-2025' / file).read_bytes()).hexdigest() == sha

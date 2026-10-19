@@ -66,6 +66,19 @@ cleared prices, substituting generation for availability or relaxing physics.
 Evaluation electricity prices remain validation targets. Historical training prices
 may inform the explicitly authorized bounded bid calibration described below.
 
+The accepted inverse-modelling direction permits a bounded, interpretable family
+of resource-bid calibrations inside the unchanged physical market model. Retain
+several distinct plausible fits when supported, rather than declaring a uniquely
+identified order book. Entire2025 observations may calibrate this explicitly
+labelled historical reconstruction; generation/trade/physics checks complement
+price fitting but do not establish independent forecasting. Every retained fit
+must have full-year forward clearing and independent replay. Ensemble spread is
+descriptive within the tested model family, not a posterior or a calibrated
+confidence interval. Any future investment distribution must pair baseline and
+investment under the same member's exogenous assumptions; system benefits,
+price fit and verified investor value remain separate. Calibrated offered-cost objectives may include premiums and must not be represented as verified physical resource cost or social welfare; economic impacts need separate resource-cost and emissions accounting. Source-backed physical
+uncertainty is a later step, not unrestricted capacity/network fitting.
+
 Renewable-source reconciliation must distinguish total wind from onshore/offshore
 subtypes, installed capacity from weather conversion, and available supply from
 dispatched generation. Preserve original within-subtype weather/geography unless

@@ -598,6 +598,10 @@ Independent replay checks calendar/DST features, month exclusion, price/Ember pr
         legacy_start=report.index("![Every modeled zone's baseline and out-of-fold price MAE]")
         legacy_end=report.index('Generation comparison covers',legacy_start)
         report=report[:legacy_start]+"Historical out-of-fold zone metrics remain in the downloads; the all-zone grid above shows the current source/bid experiment.\n\n"+report[legacy_end:]
+    inverse_receipt = None
+    if direction.get('inverse_bid_ensemble_folder'):
+        from bid_ensemble_report_2025 import render
+        report,inverse_receipt=render(ROOT/direction['inverse_bid_ensemble_folder'],PUBLIC,PREFIX)
     ARTICLE.write_text(report)
     assets = {path.name: digest(path) for path in sorted(PUBLIC.iterdir()) if path.name != 'summary.json'}
     receipt = dict(nuclear_availability_evaluation=nuclear_receipt, renewable_source_evaluation=renewable_receipt, daily_fuel_evaluation=daily_receipt, research_direction=dict(plan_sha256=digest(ROOT/'config/research-improvement-plan.json'),
@@ -624,6 +628,17 @@ Independent replay checks calendar/DST features, month exclusion, price/Ember pr
                        optimal_hours=ms['annuals']['combined']['optimal_hours'], emergency_mwh=ms['annuals']['combined']['emergency_mwh']),
                    derived_producer_sha256=s['producer_sha256'], derived_producer_file=producer_file, renderer_sha256=digest(__file__),
                    article_sha256=digest(ARTICLE), assets=assets, limitations=s['limitations'])
+    if inverse_receipt:
+        receipt['inverse_bid_ensemble_evaluation']=inverse_receipt
+        receipt['publication_scope']='Primary report and four figures: bounded inverse bid ensemble; prior seasonal derivation, source controls and out-of-fold verification are legacy supporting evidence.'
+        from audit_inverse_report_2025 import audit_public
+        inverse_receipt['report_audit']=audit_public(ROOT/direction['inverse_bid_ensemble_folder'],receipt,PUBLIC,ARTICLE)
+        receipt['legacy_out_of_fold_model_verification']=receipt.pop('model_verification')
+        receipt['legacy_out_of_fold_models']=receipt.pop('models')
+        receipt['models']={k:('retained inverse fit' if k in inverse_receipt['members'] else 'comparison') for k in inverse_receipt['shown']}
+        receipt['period']='All8760 hours of2025; in-sample bounded inverse reconstruction'
+        receipt['legacy_limitations']=receipt.pop('limitations')
+        receipt['limitations']=['Full2025 fit and selection, not independent forecast validation.','Synthetic effective bids are not uniquely identified actual offers.','Finite fit spread is not a posterior or calibrated confidence interval.','Original physical/input and fixed-hydro limitations remain; no paired investment or browser integration.']
     (PUBLIC / 'summary.json').write_text(json.dumps(receipt, indent=2, allow_nan=False) + '\n')
     print(f'Wrote {len(report.split())} words; {len(assets)} compact assets; no market solve')
 

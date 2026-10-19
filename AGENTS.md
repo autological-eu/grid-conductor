@@ -60,6 +60,19 @@ This is not a per-unit outage reconstruction or day-ahead-known information set.
 Renewables and accepted bids/hydro/grid remain frozen; no automatic promotion.
 Use the existing report/four figures, compact per-zone and monthly CSVs only.
 
+The subsequent user explicitly authorizes bounded inverse market calibration and
+an ensemble report. config/inverse-bid-ensemble-2025.json predeclares two rounds,
+six step tuples per round (at most12 new full-year clears) with accepted physics
+fixed. All2025 prices/generation may inform this new reconstruction only; older
+training-only experiments remain frozen. Fit smooth resource-specific proposals,
+apply bounded bids before clearing, retain multiple eligible near-best states.
+No hour-specific price overwrite, arbitrary capacity fitting, hydro restart or
+claim of recovered bids/posterior confidence. Replay every unique witness and
+search/ensemble selection independently. No automatic baseline/browser promotion.
+Update the existing report, retaining four figures and compact comparison CSVs;
+source/witness/proposal arrays stay ignored. Explain inverse modelling literature,
+identifiability, adverse cases and paired-investment limitations explicitly.
+
 Read PRODUCT.md and TASKS.md first. PRODUCT owns requirements, TASKS owns current
 priorities/evidence, README owns setup. Develop on public-v1. Main promotions
 require explicit user authorization; the alpha promotion was authorized on

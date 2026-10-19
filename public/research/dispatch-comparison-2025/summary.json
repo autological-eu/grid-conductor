@@ -758,7 +758,7 @@
     "producer_role": "re-export and source/cost replay of sealed initial clears"
   },
   "research_direction": {
-    "plan_sha256": "b2e2b17771a866383f063a65e6be540ebd145d19bc14c71462638a257a3dbf0a",
+    "plan_sha256": "fd212a0e60fe9f50b2d9199dd18bd0bcc85db3ef2d0f7609a57f1028e634ae5a",
     "diagnosis_sha256": "832ee83b2c8d5db92c8c80c986b53709052c82ad9d51472ccb79ccaf539a084c",
     "audit": {
       "status": "accepted_refit_price_monthly_mix_and_target_metrics_replayed",
@@ -828,11 +828,7 @@
     "mae_reduction_percent": 12.825506646763586,
     "browser_integration": false
   },
-  "period": "Full 2025: 8760 UTC hours; out-of-fold seasonal interpolation, separate from the in-sample annual refit",
-  "models": {
-    "control": "Baseline",
-    "combined": "Exploratory"
-  },
+  "period": "All8760 hours of2025; in-sample bounded inverse reconstruction",
   "generation_reporting_areas": 38,
   "observed_price_zones": 41,
   "derived_summary_sha256": "b8d8dcf034722a750d36b6985e377d41aa2284301e0771695289af735dde2581",
@@ -851,7 +847,1487 @@
   "report_audit_sha256": "0fbb032ccb9c6627608a6a50f01f3a5def44f64f0de2b228a714ad23b552ea84",
   "original_model_summary_sha256": "02dac50d9859fed81583ded48ff6d81d6cdf78b100663adeb9418ea3756d80f4",
   "original_model_audit_sha256": "dfccf8a98e312c0ef1556dc3bdb1e210ef91185e50973574202b47cca2330c84",
-  "model_verification": {
+  "derived_producer_sha256": "a47c8743536ca208c44a6f469adef88be51f5801120d570b60fb836d8cba9b85",
+  "derived_producer_file": "prepare_seasonal_dispatch_report_2025.py",
+  "renderer_sha256": "30a1651bdfb05ef55d883ac653ff2e6a7a63a93336c4c30a0e60246d2d5bd2d4",
+  "article_sha256": "27a57baf7b7e2ababbb598b7541a5353274230d1200e61ef21f6467e9f9e025b",
+  "assets": {
+    "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
+    "daily-prices.png": "f389e4bcf32bb3b162c2d5d4972bf357634bbd02af3c2f44c29ef24637aebd0a",
+    "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",
+    "generation-by-fuel.csv": "29d66b4145d615de418a7f56514c6f75e18f0eb0bcc49f5b9ad3232032ab4dfd",
+    "inverse-generation-by-country.csv": "d6a52439dacc9719f8f0ae4eb80d5a3ced890e75e07107079168784d7749e34b",
+    "inverse-prices-by-zone.csv": "0a0cb02bb55ac4104227516838b88f24e47ac80c0a9b705053705c7a0430e40c",
+    "inverse-search-cases.csv": "72240571f3da6d96b16ba6c62d67493ab7e6f36de384801d3dfe9473ee7a683f",
+    "national-generation.csv": "218d4a7eee9d94dcb2fed9a9eb524713eb0303bdbfbce16aac4e419566cd7523",
+    "national-mix.png": "c9305104d723e79fe3c337865c9c3755af559a102259d7f338edd551c2b7759b",
+    "nuclear-availability-by-month.csv": "d7e7925ebf1f11f6ae3f0e1aac4c952d027072e3f28816a81b5b6fcf390139b6",
+    "nuclear-availability-prices-by-zone.csv": "b2cf42359fe36e71a92117d5c42b5619d477db892e5ee61ed01d7d4635e0a292",
+    "overview.png": "3530d21d7b7fef037541bc181a5e42b0c6b5b3044ee556716dcbb122b564924d",
+    "prices-by-zone.csv": "99e1a5a06dc88aa8fff022546f9e70f3a83df58df7f42123e9e22b2abab3dcaa",
+    "renewable-capacity-audit.csv": "c60afa3593f8f9aacf105dcb528cc801cf723af0bf6f4083d3dacdb73280137c",
+    "renewable-source-prices-by-zone.csv": "08472614bff37ba147d6a52839da407ff7fa2fde9473edede32e47a246d66345",
+    "zone-mae-grid.png": "b7f3626d94fe13581723002d656cd8dafb24b0219b3b0a4d0cf080efe47b1a79"
+  },
+  "inverse_bid_ensemble_evaluation": {
+    "summary_sha256": "0c577264dec1a363ab859b4a6239272fa86ec94bf415550de8558c8d42ecd0bf",
+    "audit": {
+      "status": "all_inverse_forward_witnesses_proposals_scores_and_finite_ensemble_replayed",
+      "summary_sha256": "0c577264dec1a363ab859b4a6239272fa86ec94bf415550de8558c8d42ecd0bf",
+      "auditor_sha256": "cfc7813ea5c67b84c6126a1deb1883407ecb7052b000b99e11d4b120f2b7c6a8",
+      "certificates": [
+        {
+          "case": "baseline",
+          "hours": 8760,
+          "original_component_residual_mw": 1.3295419805103847e-06,
+          "source_group_bound_residual_mw": 3.6312052886561605e-10,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.7689174286749108e-09,
+          "complementarity_maximum_eur": 0.00011862650426054302,
+          "duality_gap_maximum_eur": 1.2088567018508911e-05,
+          "price_decomposition_maximum_eur_mwh": 2.7689139869835344e-09
+        },
+        {
+          "case": "r1-s1",
+          "hours": 8760,
+          "original_component_residual_mw": 5.850711204402614e-07,
+          "source_group_bound_residual_mw": 1.403094481635609e-11,
+          "objective_error_eur": 4.0978193283081055e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.6594770830001835e-10,
+          "complementarity_maximum_eur": 7.609098382451797e-05,
+          "duality_gap_maximum_eur": 2.4605542421340942e-06,
+          "price_decomposition_maximum_eur_mwh": 2.659419351402903e-10
+        },
+        {
+          "case": "r1-s2",
+          "hours": 8760,
+          "original_component_residual_mw": 9.005975698528346e-07,
+          "source_group_bound_residual_mw": 2.0380221588511386e-11,
+          "objective_error_eur": 3.725290298461914e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 6.477165970242282e-09,
+          "complementarity_maximum_eur": 6.900083341018979e-05,
+          "duality_gap_maximum_eur": 1.3221986591815948e-05,
+          "price_decomposition_maximum_eur_mwh": 6.477165470641921e-09
+        },
+        {
+          "case": "r1-s3",
+          "hours": 8760,
+          "original_component_residual_mw": 6.178870535222813e-07,
+          "source_group_bound_residual_mw": 1.390576542803501e-11,
+          "objective_error_eur": 4.0978193283081055e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 4.72998529232882e-10,
+          "complementarity_maximum_eur": 5.895890247772471e-05,
+          "duality_gap_maximum_eur": 3.07522714138031e-06,
+          "price_decomposition_maximum_eur_mwh": 4.729976410544623e-10
+        },
+        {
+          "case": "r1-s4",
+          "hours": 8760,
+          "original_component_residual_mw": 1.6041158232837915e-06,
+          "source_group_bound_residual_mw": 1.2127886601854089e-11,
+          "objective_error_eur": 5.21540641784668e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.3650414959774935e-10,
+          "complementarity_maximum_eur": 0.00018805125516759753,
+          "duality_gap_maximum_eur": 2.1453015506267548e-06,
+          "price_decomposition_maximum_eur_mwh": 2.3651303138194635e-10
+        },
+        {
+          "case": "r1-s5",
+          "hours": 8760,
+          "original_component_residual_mw": 2.823321665346157e-07,
+          "source_group_bound_residual_mw": 3.552713678800501e-11,
+          "objective_error_eur": 4.470348358154297e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 8.722998989796338e-10,
+          "complementarity_maximum_eur": 2.3328090062704677e-05,
+          "duality_gap_maximum_eur": 2.076849341392517e-06,
+          "price_decomposition_maximum_eur_mwh": 8.722906841285294e-10
+        },
+        {
+          "case": "r1-s6",
+          "hours": 8760,
+          "original_component_residual_mw": 1.0404405657027382e-06,
+          "source_group_bound_residual_mw": 1.0759393376247317e-11,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.1631293423141074e-09,
+          "complementarity_maximum_eur": 0.00012061620605947569,
+          "duality_gap_maximum_eur": 7.111579179763794e-06,
+          "price_decomposition_maximum_eur_mwh": 2.1631336721839034e-09
+        },
+        {
+          "case": "r2-s1",
+          "hours": 8760,
+          "original_component_residual_mw": 2.726808361330768e-07,
+          "source_group_bound_residual_mw": 8.828937581029095e-12,
+          "objective_error_eur": 4.0978193283081055e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 1.635307000924513e-09,
+          "complementarity_maximum_eur": 3.2245368434777316e-05,
+          "duality_gap_maximum_eur": 5.39049506187439e-06,
+          "price_decomposition_maximum_eur_mwh": 1.6352998954971554e-09
+        },
+        {
+          "case": "r2-s2",
+          "hours": 8760,
+          "original_component_residual_mw": 1.2939926818944514e-07,
+          "source_group_bound_residual_mw": 2.489741746103391e-11,
+          "objective_error_eur": 3.725290298461914e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.28902186094615e-09,
+          "complementarity_maximum_eur": 1.473767715861418e-05,
+          "duality_gap_maximum_eur": 1.0963529348373413e-05,
+          "price_decomposition_maximum_eur_mwh": 2.289027634105878e-09
+        },
+        {
+          "case": "r2-s3",
+          "hours": 8760,
+          "original_component_residual_mw": 3.6853962228633463e-06,
+          "source_group_bound_residual_mw": 6.285860720822711e-12,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 4.542214604441597e-09,
+          "complementarity_maximum_eur": 0.00019932907473736985,
+          "duality_gap_maximum_eur": 2.4656765162944794e-05,
+          "price_decomposition_maximum_eur_mwh": 4.542229703474732e-09
+        },
+        {
+          "case": "r2-s4",
+          "hours": 8760,
+          "original_component_residual_mw": 2.3758792053740763e-06,
+          "source_group_bound_residual_mw": 2.3864953683480378e-11,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 9.072579132407554e-09,
+          "complementarity_maximum_eur": 0.00025963037359134786,
+          "duality_gap_maximum_eur": 1.5448778867721558e-05,
+          "price_decomposition_maximum_eur_mwh": 9.072579132407554e-09
+        },
+        {
+          "case": "r2-s5",
+          "hours": 8760,
+          "original_component_residual_mw": 3.208560883649625e-07,
+          "source_group_bound_residual_mw": 9.77148536629176e-11,
+          "objective_error_eur": 2.9802322387695312e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 5.153548903772151e-10,
+          "complementarity_maximum_eur": 4.726694558739704e-05,
+          "duality_gap_maximum_eur": 5.0477683544158936e-06,
+          "price_decomposition_maximum_eur_mwh": 5.153566462468007e-10
+        },
+        {
+          "case": "r2-s6",
+          "hours": 8760,
+          "original_component_residual_mw": 2.35304469242692e-06,
+          "source_group_bound_residual_mw": 7.483261602406896e-11,
+          "objective_error_eur": 3.725290298461914e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 1.6439873462559262e-08,
+          "complementarity_maximum_eur": 0.00030858874542335173,
+          "duality_gap_maximum_eur": 5.3892843425273895e-05,
+          "price_decomposition_maximum_eur_mwh": 1.6439873462559262e-08
+        }
+      ],
+      "proposal_support": [
+        {
+          "round": 1,
+          "parent": "baseline",
+          "supported_zone_resources": 39,
+          "fitted_price_coefficients": 195,
+          "nonzero_mix_signals": 66
+        },
+        {
+          "round": 2,
+          "parent": "r1-s6",
+          "supported_zone_resources": 40,
+          "fitted_price_coefficients": 200,
+          "nonzero_mix_signals": 66
+        }
+      ],
+      "winning_state": "r2-s6",
+      "members": [
+        "r2-s6"
+      ],
+      "attempts": 12,
+      "elapsed_seconds": 250.86582607999935
+    },
+    "design": {
+      "name": "inverse-bid-ensemble-v1",
+      "year": 2025,
+      "hours": 8760,
+      "scope": "Full-year in-sample inverse bid calibration, not recovered actual bids, untouched validation, posterior inference or a forecast confidence interval",
+      "baseline": "config/research-baseline.json",
+      "rounds": 2,
+      "steps": [
+        [
+          0.5,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0.5,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          0.5,
+          1,
+          0.5
+        ]
+      ],
+      "step_axes": [
+        "local_price_proposal_strength",
+        "annual_mix_proposal_strength",
+        "thermal_curve_increment"
+      ],
+      "maximum_new_annual_solves": 12,
+      "price_proposal": {
+        "resources": [
+          "gas",
+          "coal",
+          "nuclear"
+        ],
+        "features": "Constant, annual sine/cosine, first local-clock daily sine/cosine; existing hashed calendar columns0,1,2,3,4, including DST",
+        "minimum_local_interior_hours": 168,
+        "interior_margin_mw": 0.001,
+        "price_match_eur_mwh": 1e-05,
+        "target_clip_eur_mwh": 100,
+        "ridge": 336,
+        "interpretation": "Fit observed-minus-parent-cleared price only where at least one local resource offer is interior and matches the saved dual. This is a proposal heuristic, not a unique causal marginal-generator label. Unsupported groups get zero coefficients."
+      },
+      "mix_proposal": {
+        "resources": [
+          "Gas",
+          "Coal",
+          "Nuclear"
+        ],
+        "maximum_increment_eur_mwh": 15,
+        "normalization_floor_twh": 1,
+        "coverage": "Require all12 Ember national months; compare annual sum of conditional allocation bounds with annual reference, not an hourly generation-derived availability",
+        "rule": "-15 times signed reference outside annual interval /max(reference,1), clipped +/-15, distributed to columns by original source-nameplate country shares"
+      },
+      "maximum_total_shift_eur_mwh": [
+        45,
+        45,
+        15
+      ],
+      "maximum_accumulated_mix_eur_mwh": [
+        30,
+        30,
+        15
+      ],
+      "thermal_curve_top_eur_mwh": [
+        60,
+        40
+      ],
+      "thermal_curve_rank_multipliers": [
+        0,
+        0.35,
+        1
+      ],
+      "bid_rule": "Accepted annual refit bid + clipped accumulated smooth price/mix adjustment + nonnegative monotone gas/coal block premium; final floor0. Nuclear has no peaking block. Other bids and every physical input unchanged.",
+      "objective_weights": {
+        "price": 0.55,
+        "daily_demeaned_price": 0.2,
+        "generation": 0.2,
+        "trade": 0.05
+      },
+      "regularization_weight": 0.01,
+      "regularization": "Availability-weighted mean square bid departure from accepted bids, normalized by maximum family departure105/85/15 EUR/MWh",
+      "research_filters": {
+        "price_ratio_maximum": 1,
+        "daily_demeaned_ratio_maximum": 1.02,
+        "generation_ratio_maximum": 1.02,
+        "trade_ratio_maximum": 1.02,
+        "optimal_hours": 8760,
+        "emergency_mwh": 0
+      },
+      "selection": "At each round choose the eligible minimum regularized objective among all completed states, baseline included. Ties prefer lower penalty then earlier ordinal. Exactly two rounds; identical bid hashes reuse an existing witness.",
+      "ensemble": {
+        "maximum_members": 5,
+        "score_tolerance": 0.01,
+        "price_tolerance_eur_mwh": 1,
+        "selection": "Among eligible distinct bid states within both best-score+0.01 and best-MAE+1, retain best first, then greedily maximize minimum normalized RMS parameter distance to retained states; ties prefer lower score then earlier ordinal",
+        "interpretation": "Equal-weight descriptive finite fit ensemble; no probability weights, posterior or calibrated uncertainty claim. Report observed-hour coverage of min/max envelope even if poor. Mean prices are a descriptive average, not a single cleared network. No investment run in this experiment."
+      },
+      "fixed": "Accepted capacity/availability, demand, fixed hydro, source chronology, PTDF/GSK/grid/link/island constraints, monthly fuel anchors and inherited calendar coefficients; no source sensitivity adopted",
+      "gates": "All41 eligible observed-price zones and all48 modeled areas, negative/extreme hours, independent source/native-physics/primal-dual/monthly quantity/search-selection replay. Research filters are experimental screens, not new product acceptance criteria. No automatic baseline or browser promotion."
+    },
+    "producer_sha256": "fdb70d8dc121daad316d4622ba244e9984fd7ac2112af99160f657ea6cae61c7",
+    "helper_sha256": "712b97d01870b5783ea9cb69ec879994bd8d256193ca5d6fe7a7fc3c2a59cb91",
+    "renderer_sha256": "aa6f14d21abde177d3dd621cdbc04aa7c67ab754ad28b3041343f31de0d38fbf",
+    "winner": "r2-s6",
+    "price_leader": "r2-s2",
+    "members": [
+      "r2-s6"
+    ],
+    "shown": [
+      "baseline",
+      "r2-s6",
+      "r2-s2"
+    ],
+    "records": [
+      {
+        "id": "baseline",
+        "ordinal": 0,
+        "parent": null,
+        "round": 0,
+        "step": [
+          0,
+          0,
+          0
+        ],
+        "bid_sha256": "6804da757016e8a1faf3c31e204c9dd045157ed1819c8edff805625d19ff487f",
+        "metrics": {
+          "price": 28.9639751169547,
+          "daily_demeaned_price": 20.06347356650509,
+          "generation": 0.2994748680764233,
+          "trade": 0.17190582677419325
+        },
+        "score": 1.0,
+        "penalty": 0.0,
+        "normalized": {
+          "price": 1.0,
+          "daily_demeaned_price": 1.0,
+          "generation": 1.0,
+          "trade": 1.0
+        },
+        "eligible": true
+      },
+      {
+        "id": "r1-s1",
+        "ordinal": 1,
+        "parent": "baseline",
+        "round": 1,
+        "step": [
+          0.5,
+          0,
+          0
+        ],
+        "bid_sha256": "52e52ac61952f22abf12fad2f39deb539d70204af50a76fbe5dade6ab14f7ec7",
+        "metrics": {
+          "price": 28.23939391219468,
+          "daily_demeaned_price": 19.699968097416942,
+          "generation": 0.3163342810874153,
+          "trade": 0.1824924863605162
+        },
+        "score": 0.9972264221234481,
+        "penalty": 0.027060560444725438,
+        "normalized": {
+          "price": 0.9749833646164172,
+          "daily_demeaned_price": 0.9818822265305546,
+          "generation": 1.0562965871536492,
+          "trade": 1.0615840648626127
+        },
+        "eligible": false
+      },
+      {
+        "id": "r1-s2",
+        "ordinal": 2,
+        "parent": "baseline",
+        "round": 1,
+        "step": [
+          1,
+          0,
+          0
+        ],
+        "bid_sha256": "ca1f97babb95c701efc671734619a5bad7b646301b2d043ef425cdfc2a08ee2f",
+        "metrics": {
+          "price": 27.878292642353543,
+          "daily_demeaned_price": 19.55953554397826,
+          "generation": 0.32794040874684294,
+          "trade": 0.1893568476272086
+        },
+        "score": 0.9992507749908489,
+        "penalty": 0.08042985200147981,
+        "normalized": {
+          "price": 0.962516109400825,
+          "daily_demeaned_price": 0.9748828127464366,
+          "generation": 1.095051517522183,
+          "trade": 1.1015150049331262
+        },
+        "eligible": false
+      },
+      {
+        "id": "r1-s3",
+        "ordinal": 3,
+        "parent": "baseline",
+        "round": 1,
+        "step": [
+          0,
+          1,
+          0
+        ],
+        "bid_sha256": "5291aec08ed73331b22c5a14154bb1f0756c5707bd9f661ed1f153ba19e9dd07",
+        "metrics": {
+          "price": 29.7105235264527,
+          "daily_demeaned_price": 20.114717372296848,
+          "generation": 0.27112693451926245,
+          "trade": 0.14843497092201782
+        },
+        "score": 0.9890071751685635,
+        "penalty": 0.007849345064450241,
+        "normalized": {
+          "price": 1.025775067354653,
+          "daily_demeaned_price": 1.0025540844471372,
+          "generation": 0.9053411936058463,
+          "trade": 0.8634667812452597
+        },
+        "eligible": false
+      },
+      {
+        "id": "r1-s4",
+        "ordinal": 4,
+        "parent": "baseline",
+        "round": 1,
+        "step": [
+          0.5,
+          1,
+          0
+        ],
+        "bid_sha256": "0ced4c5618dfd0d4c9f4eb4ebb02c23047d6f27bc27777aefc6079604b6a1786",
+        "metrics": {
+          "price": 28.86754822835458,
+          "daily_demeaned_price": 19.786184601889854,
+          "generation": 0.28123151489533965,
+          "trade": 0.15559938109680096
+        },
+        "score": 0.9786664166392747,
+        "penalty": 0.018799897346358733,
+        "normalized": {
+          "price": 0.9966707992183133,
+          "daily_demeaned_price": 0.9861794138639007,
+          "generation": 0.9390821897735068,
+          "trade": 0.9051431473651466
+        },
+        "eligible": true
+      },
+      {
+        "id": "r1-s5",
+        "ordinal": 5,
+        "parent": "baseline",
+        "round": 1,
+        "step": [
+          1,
+          1,
+          0
+        ],
+        "bid_sha256": "81c2b30e68a1cc4a61a64e12afe5f0b1c982e424c312c7cf2f0c78c00fe5116e",
+        "metrics": {
+          "price": 28.436916687332197,
+          "daily_demeaned_price": 19.61534470359302,
+          "generation": 0.2975180180421129,
+          "trade": 0.16786732877543395
+        },
+        "score": 0.9837571281134103,
+        "penalty": 0.07140874359183441,
+        "normalized": {
+          "price": 0.9818029663575433,
+          "daily_demeaned_price": 0.977664442728392,
+          "generation": 0.9934657287041161,
+          "trade": 0.9765074978868281
+        },
+        "eligible": true
+      },
+      {
+        "id": "r1-s6",
+        "ordinal": 6,
+        "parent": "baseline",
+        "round": 1,
+        "step": [
+          0.5,
+          1,
+          0.5
+        ],
+        "bid_sha256": "f7861d7e6c0f1aaeb66403c303dfad9f474484ab7c938a3f320a96fd6e4cf002",
+        "metrics": {
+          "price": 28.373140283121845,
+          "daily_demeaned_price": 19.82027083844897,
+          "generation": 0.26894428761714917,
+          "trade": 0.1508205760088734
+        },
+        "score": 0.9601149352843688,
+        "penalty": 0.028089584956526536,
+        "normalized": {
+          "price": 0.9796010446961406,
+          "daily_demeaned_price": 0.9878783338662687,
+          "generation": 0.8980529462943682,
+          "trade": 0.8773441763959732
+        },
+        "eligible": true
+      },
+      {
+        "id": "r2-s1",
+        "ordinal": 7,
+        "parent": "r1-s6",
+        "round": 2,
+        "step": [
+          0.5,
+          0,
+          0
+        ],
+        "bid_sha256": "e6d20665c368478ab4def9750df5a5eca99caaf0a7c9fdefd53ee8b6cac87db6",
+        "metrics": {
+          "price": 28.051301270821668,
+          "daily_demeaned_price": 19.644193649725857,
+          "generation": 0.2809184068078668,
+          "trade": 0.1599080289165755
+        },
+        "score": 0.9633008824729579,
+        "penalty": 0.06935871247037748,
+        "normalized": {
+          "price": 0.968489344351122,
+          "daily_demeaned_price": 0.9791023266539849,
+          "generation": 0.9380366660222684,
+          "trade": 0.9302071483977244
+        },
+        "eligible": true
+      },
+      {
+        "id": "r2-s2",
+        "ordinal": 8,
+        "parent": "r1-s6",
+        "round": 2,
+        "step": [
+          1,
+          0,
+          0
+        ],
+        "bid_sha256": "9f78de0a28c4cee7d93f213989857e0dd388ff5755c3418b69fefcd679bf3221",
+        "metrics": {
+          "price": 27.799974563644085,
+          "daily_demeaned_price": 19.541478000048155,
+          "generation": 0.29141364767678424,
+          "trade": 0.16782018880128535
+        },
+        "score": 0.9671561954969734,
+        "penalty": 0.10348738991383519,
+        "normalized": {
+          "price": 0.9598121270091396,
+          "daily_demeaned_price": 0.9739827919264998,
+          "generation": 0.973082147255235,
+          "trade": 0.9762332781292249
+        },
+        "eligible": true
+      },
+      {
+        "id": "r2-s3",
+        "ordinal": 9,
+        "parent": "r1-s6",
+        "round": 2,
+        "step": [
+          0,
+          1,
+          0
+        ],
+        "bid_sha256": "0701bf40349f9c55344349977c34813b27b42564a524328e0e4d546bdd262d60",
+        "metrics": {
+          "price": 28.850581418791336,
+          "daily_demeaned_price": 19.75367402826099,
+          "generation": 0.25898941686874877,
+          "trade": 0.143405493904072
+        },
+        "score": 0.9596952379554684,
+        "penalty": 0.026382507848187315,
+        "normalized": {
+          "price": 0.996085009129255,
+          "daily_demeaned_price": 0.9845590277666927,
+          "generation": 0.8648118572763074,
+          "trade": 0.8342096169459233
+        },
+        "eligible": true
+      },
+      {
+        "id": "r2-s4",
+        "ordinal": 10,
+        "parent": "r1-s6",
+        "round": 2,
+        "step": [
+          0.5,
+          1,
+          0
+        ],
+        "bid_sha256": "956e4e028dc3e5365effddf8ac644ab97ccc101271a345bdfad6d3dfbd352673",
+        "metrics": {
+          "price": 28.42653739886878,
+          "daily_demeaned_price": 19.59235485314431,
+          "generation": 0.26439479516087666,
+          "trade": 0.14757627959170683
+        },
+        "score": 0.9551719136502268,
+        "penalty": 0.05777995610548471,
+        "normalized": {
+          "price": 0.981444614700994,
+          "daily_demeaned_price": 0.9765185867841307,
+          "generation": 0.8828613795178482,
+          "trade": 0.8584716548645877
+        },
+        "eligible": true
+      },
+      {
+        "id": "r2-s5",
+        "ordinal": 11,
+        "parent": "r1-s6",
+        "round": 2,
+        "step": [
+          1,
+          1,
+          0
+        ],
+        "bid_sha256": "722e2b89d4b61f6b7815e191cbc6147b0f39f6e3b5ddf55309ae2ab6433c0a69",
+        "metrics": {
+          "price": 28.148328738324764,
+          "daily_demeaned_price": 19.484435707532395,
+          "generation": 0.2762168359519215,
+          "trade": 0.15803386481039716
+        },
+        "score": 0.9601144553063478,
+        "penalty": 0.0942210673354319,
+        "normalized": {
+          "price": 0.9718392805084106,
+          "daily_demeaned_price": 0.9711397003587969,
+          "generation": 0.9223372823439508,
+          "trade": 0.919304876256361
+        },
+        "eligible": true
+      },
+      {
+        "id": "r2-s6",
+        "ordinal": 12,
+        "parent": "r1-s6",
+        "round": 2,
+        "step": [
+          0.5,
+          1,
+          0.5
+        ],
+        "bid_sha256": "143aa8d3adb1a72c7f31b4a2e684e352a1f2e339e31948347f823b5012544938",
+        "metrics": {
+          "price": 28.166750433841177,
+          "daily_demeaned_price": 19.567808036644514,
+          "generation": 0.2551147445304575,
+          "trade": 0.14357111150109245
+        },
+        "score": 0.9429151751949092,
+        "penalty": 0.08613546985873653,
+        "normalized": {
+          "price": 0.9724753014772876,
+          "daily_demeaned_price": 0.9752951288211598,
+          "generation": 0.8518736352372464,
+          "trade": 0.8351730374426468
+        },
+        "eligible": true
+      }
+    ],
+    "cutoff_sensitivity": [
+      {
+        "score_tolerance": 0.005,
+        "qualifying_states": 1,
+        "retained_cap": 1
+      },
+      {
+        "score_tolerance": 0.01,
+        "qualifying_states": 1,
+        "retained_cap": 1
+      },
+      {
+        "score_tolerance": 0.02,
+        "qualifying_states": 5,
+        "retained_cap": 5
+      },
+      {
+        "score_tolerance": 0.03,
+        "qualifying_states": 7,
+        "retained_cap": 5
+      }
+    ],
+    "coverage": [
+      {
+        "zone": "AL",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "AT",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "BA",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "BE",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "BG",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00022831050228310502,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "CH",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "CZ",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "DE-LU",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00034246575342465754,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "DK1",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.002397260273972603,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "EE",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00045662100456621003,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "ES",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.005593607305936073,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "FR",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "GR",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0005707762557077625,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "HR",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "HU",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "IT-CALA",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "IT-CNOR",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00011415525114155251,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "IT-CSUD",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0013698630136986301,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "IT-North",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00011415525114155251,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "IT-SICI",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.006392694063926941,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "IT-SUD",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.005365296803652968,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "LT",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00034246575342465754,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "LV",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00045662100456621003,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "ME",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "MK",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "NL",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0013698630136986301,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "PL",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "PT",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.007876712328767124,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "RO",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00022831050228310502,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "RS",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0014840182648401827,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "SI",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "SK",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "XK",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "DK2",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00045662100456621003,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "FI",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0021689497716894978,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "NO1",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "NO2",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "NO3",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0005707762557077625,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "NO4",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00011415525114155251,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "NO5",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "SE1",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00011415525114155251,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "SE2",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0007990867579908676,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "SE3",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00045662100456621003,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "SE4",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.00011415525114155251,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "FR-COR",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "GB",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "IE-SEM",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 0.0
+      },
+      {
+        "zone": "IT-SARD",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.014954337899543379,
+        "mean_width_eur_mwh": 0.0
+      }
+    ],
+    "all_eligible_ids": [
+      "baseline",
+      "r1-s4",
+      "r1-s5",
+      "r1-s6",
+      "r2-s1",
+      "r2-s2",
+      "r2-s3",
+      "r2-s4",
+      "r2-s5",
+      "r2-s6"
+    ],
+    "all_eligible_coverage": [
+      {
+        "zone": "AL",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.1425799086757991,
+        "mean_width_eur_mwh": 10.282377871448789
+      },
+      {
+        "zone": "AT",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.21187214611872146,
+        "mean_width_eur_mwh": 8.498069813413556
+      },
+      {
+        "zone": "BA",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 8.765044665253468
+      },
+      {
+        "zone": "BE",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.11232876712328767,
+        "mean_width_eur_mwh": 10.865332686338023
+      },
+      {
+        "zone": "BG",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.17796803652968038,
+        "mean_width_eur_mwh": 9.49106629198217
+      },
+      {
+        "zone": "CH",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.1519406392694064,
+        "mean_width_eur_mwh": 8.438364623111987
+      },
+      {
+        "zone": "CZ",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.22945205479452055,
+        "mean_width_eur_mwh": 11.901577015803115
+      },
+      {
+        "zone": "DE-LU",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.19794520547945205,
+        "mean_width_eur_mwh": 9.944101048454593
+      },
+      {
+        "zone": "DK1",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.13961187214611873,
+        "mean_width_eur_mwh": 10.311715181781537
+      },
+      {
+        "zone": "EE",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.09611872146118722,
+        "mean_width_eur_mwh": 11.588194438939253
+      },
+      {
+        "zone": "ES",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.12694063926940638,
+        "mean_width_eur_mwh": 9.552723751128688
+      },
+      {
+        "zone": "FR",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.13162100456621004,
+        "mean_width_eur_mwh": 11.400418576000389
+      },
+      {
+        "zone": "GR",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.19406392694063926,
+        "mean_width_eur_mwh": 10.950354969795683
+      },
+      {
+        "zone": "HR",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.1745433789954338,
+        "mean_width_eur_mwh": 8.578540444997333
+      },
+      {
+        "zone": "HU",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.16027397260273973,
+        "mean_width_eur_mwh": 8.069251227956187
+      },
+      {
+        "zone": "IT-CALA",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 7.594511421002232
+      },
+      {
+        "zone": "IT-CNOR",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.19429223744292237,
+        "mean_width_eur_mwh": 7.070505711236311
+      },
+      {
+        "zone": "IT-CSUD",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.18424657534246575,
+        "mean_width_eur_mwh": 6.99264946579347
+      },
+      {
+        "zone": "IT-North",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.21883561643835617,
+        "mean_width_eur_mwh": 7.77271794024622
+      },
+      {
+        "zone": "IT-SICI",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.1786529680365297,
+        "mean_width_eur_mwh": 7.9201538797792495
+      },
+      {
+        "zone": "IT-SUD",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.19200913242009132,
+        "mean_width_eur_mwh": 6.983441869187674
+      },
+      {
+        "zone": "LT",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.11095890410958904,
+        "mean_width_eur_mwh": 11.588194438939256
+      },
+      {
+        "zone": "LV",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.11175799086757991,
+        "mean_width_eur_mwh": 11.588194438939253
+      },
+      {
+        "zone": "ME",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 8.950964849432617
+      },
+      {
+        "zone": "MK",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.18207762557077625,
+        "mean_width_eur_mwh": 9.69109164782211
+      },
+      {
+        "zone": "NL",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.18961187214611872,
+        "mean_width_eur_mwh": 11.224598667796652
+      },
+      {
+        "zone": "PL",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.2002283105022831,
+        "mean_width_eur_mwh": 10.51696763692296
+      },
+      {
+        "zone": "PT",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.1384703196347032,
+        "mean_width_eur_mwh": 9.806182696452776
+      },
+      {
+        "zone": "RO",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.1771689497716895,
+        "mean_width_eur_mwh": 9.176406803642404
+      },
+      {
+        "zone": "RS",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.18698630136986302,
+        "mean_width_eur_mwh": 9.069447880363851
+      },
+      {
+        "zone": "SI",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.18573059360730593,
+        "mean_width_eur_mwh": 9.36014064197745
+      },
+      {
+        "zone": "SK",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.16404109589041097,
+        "mean_width_eur_mwh": 8.173985122813017
+      },
+      {
+        "zone": "XK",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 9.175551859260432
+      },
+      {
+        "zone": "DK2",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0613013698630137,
+        "mean_width_eur_mwh": 9.827782358942645
+      },
+      {
+        "zone": "FI",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.05958904109589041,
+        "mean_width_eur_mwh": 9.782049010445267
+      },
+      {
+        "zone": "NO1",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.05559360730593607,
+        "mean_width_eur_mwh": 9.5069534138164
+      },
+      {
+        "zone": "NO2",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.05878995433789954,
+        "mean_width_eur_mwh": 9.182698697539719
+      },
+      {
+        "zone": "NO3",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.09200913242009133,
+        "mean_width_eur_mwh": 11.552041678561114
+      },
+      {
+        "zone": "NO4",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.041552511415525115,
+        "mean_width_eur_mwh": 9.926540777943893
+      },
+      {
+        "zone": "NO5",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.0747716894977169,
+        "mean_width_eur_mwh": 14.23716395905349
+      },
+      {
+        "zone": "SE1",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.03721461187214612,
+        "mean_width_eur_mwh": 9.573748079547302
+      },
+      {
+        "zone": "SE2",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.03984018264840183,
+        "mean_width_eur_mwh": 9.579468219436626
+      },
+      {
+        "zone": "SE3",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.10296803652968037,
+        "mean_width_eur_mwh": 9.70321954058324
+      },
+      {
+        "zone": "SE4",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.07819634703196347,
+        "mean_width_eur_mwh": 9.882371634216224
+      },
+      {
+        "zone": "FR-COR",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 9.773978567855256
+      },
+      {
+        "zone": "GB",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 8.981037171084395
+      },
+      {
+        "zone": "IE-SEM",
+        "known_hours": 0,
+        "observed_in_minmax_fraction": null,
+        "mean_width_eur_mwh": 14.71428902277953
+      },
+      {
+        "zone": "IT-SARD",
+        "known_hours": 8760,
+        "observed_in_minmax_fraction": 0.19942922374429223,
+        "mean_width_eur_mwh": 7.3527322529707995
+      }
+    ],
+    "equal_zone_all_eligible_coverage": 0.14057523109477668,
+    "mean_all_eligible_width_eur_mwh": 9.680817961124895,
+    "equal_zone_envelope_coverage": 0.0013280988974273304,
+    "annuals": {
+      "baseline": {
+        "witness": "data/bidding-zone-network-2025/seasonal-calendar-v1/refit.npz",
+        "witness_sha256": "2b89af50c32f40e05fea1377657efd8f287a1e375613f5620e1afb76a2741693",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 36.46489929201198,
+        "emergency_mwh": 0.0,
+        "emergency_hours": 0,
+        "external": true
+      },
+      "r1-s1": {
+        "witness": "r1-s1.npz",
+        "witness_sha256": "a866871b165abfc5585e5fa8dfe2e4bffdce3bbdcd5d6b40cb379be888fb218d",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 52.36322924800061,
+        "emergency_mwh": 0.0
+      },
+      "r1-s2": {
+        "witness": "r1-s2.npz",
+        "witness_sha256": "b72f8be615badf46976b0e15d583746605b76bc18ef67b070667596b313311da",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 44.11675379999997,
+        "emergency_mwh": 0.0
+      },
+      "r1-s3": {
+        "witness": "r1-s3.npz",
+        "witness_sha256": "0a2bda3442f9110b27bebf73ee22407de9495e8aa52ebd6faeb588965e0109a8",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 56.93302035300076,
+        "emergency_mwh": 0.0
+      },
+      "r1-s4": {
+        "witness": "r1-s4.npz",
+        "witness_sha256": "bf2c12dfaf6972a54100e769c62585440732d64f85a4dea0b53f43fa9bcfd22d",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 42.09602770099991,
+        "emergency_mwh": 0.0
+      },
+      "r1-s5": {
+        "witness": "r1-s5.npz",
+        "witness_sha256": "c7e045a71e718faae8b73f1ea37441b781b5b2147dfb7e54b7939957d76b5f49",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 32.12259207700026,
+        "emergency_mwh": 0.0
+      },
+      "r1-s6": {
+        "witness": "r1-s6.npz",
+        "witness_sha256": "d46cd6b05ec28f3d16f5764d3d70a5894e17e14bd006258dbcf0f33a946690ea",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 31.62836788000004,
+        "emergency_mwh": 0.0
+      },
+      "r2-s1": {
+        "witness": "r2-s1.npz",
+        "witness_sha256": "aef6a1a7a8e369f4c6ba8dc990ee6c85340dad99ad4b443a1e51dbd26b6a9376",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 33.791760780000004,
+        "emergency_mwh": 0.0
+      },
+      "r2-s2": {
+        "witness": "r2-s2.npz",
+        "witness_sha256": "afa4a33f92e7f7d236ffeef29a703eba4832444de2b2b8754e29860ca4e41ef1",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 32.49950127500051,
+        "emergency_mwh": 0.0
+      },
+      "r2-s3": {
+        "witness": "r2-s3.npz",
+        "witness_sha256": "4fe2cfa8d0faf6da7abbf735186b3c30a4feb0cd799d7dc1cbebaaf537802f42",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 49.98998360800033,
+        "emergency_mwh": 0.0
+      },
+      "r2-s4": {
+        "witness": "r2-s4.npz",
+        "witness_sha256": "ef447491ae607bf23c07df8b01ea972b7ff9905eefbd328d62a38810e832bc42",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 48.27069025699984,
+        "emergency_mwh": 0.0
+      },
+      "r2-s5": {
+        "witness": "r2-s5.npz",
+        "witness_sha256": "2fc25dc2cc0c03bbb0ccee18bd9561bf0f849fb63df26211f32274fb1c29656b",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 37.55403765899973,
+        "emergency_mwh": 0.0
+      },
+      "r2-s6": {
+        "witness": "r2-s6.npz",
+        "witness_sha256": "55b337e50c89e033555b3a900529b3eadc9c9c943d60201c03ec1d2f8de76f1e",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 33.54194262500005,
+        "emergency_mwh": 0.0
+      }
+    },
+    "parameter_hashes": {
+      "baseline": "2d2fdb9c902dc48c250eee790e5c6667207406c6917041e964bfbb093e33b0d3",
+      "r1-s1": "cd1c31238035d701e1cc124d1ef18c70c9e5fe3460e646acc2e8a45912783d0f",
+      "r1-s2": "3b300f5ed36be08c402263b298eea2132319bc6580e72f172ff1187681dfea8f",
+      "r1-s3": "6d45a44cf61145d7bd8092fa8ad9213337ec0e02bd5008094c9ccf22ff760bdd",
+      "r1-s4": "b88b359e6eb9190d1f6c0617fa16278e3e978aa7b2a06eb6f9db5857a3e3b993",
+      "r1-s5": "17e70d46b43a8cf6c041f531c153bd8e8996034c551407de7b8d3ec600888898",
+      "r1-s6": "c24b28a04446e3f2fee402016aefc111d385ae0b3d1466ffab327a45e4b07022",
+      "r2-s1": "47ce9b32dbcbf151320babe08ea6f94ea3c17a1e3287208022be57564c25b103",
+      "r2-s2": "311055bc0ad03e648e7b8e4441cfda41ab8401db5700dc220ebd27cd5d15c2ae",
+      "r2-s3": "e6f057fb223062185ab5d88744744c6d9737c510047752c6029e68b49b12e15d",
+      "r2-s4": "61b979df2d73242a94c8796bf8aff1b58c24563e819f0aaf3fc43b0062d3c1eb",
+      "r2-s5": "34c58275759ba56ae54d9d5cfbad36d45f09856ed79f9bde1952336c45132e09",
+      "r2-s6": "ddd2f8cf26c91843ad5274bf080b6f158fcd27be5431119128d5cb0b8eae87a8"
+    },
+    "preparation_seconds": 110.89197964800042,
+    "end_to_end_seconds": 662.2915119999998,
+    "peak_rss_mib": 2585.47265625,
+    "report_audit": {
+      "status": "inverse_report_csvs_and_primary_and_broad_envelopes_replayed",
+      "auditor_file": "audit_inverse_report_2025.py",
+      "auditor_sha256": "4e5321cd29bb6968a350cc9a95bd3dd06fd8ff04cf20f1dbc9b364e59d973264",
+      "source_summary_sha256": "0c577264dec1a363ab859b4a6239272fa86ec94bf415550de8558c8d42ecd0bf",
+      "article_sha256": "27a57baf7b7e2ababbb598b7541a5353274230d1200e61ef21f6467e9f9e025b",
+      "assets_sha256": {
+        "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
+        "daily-prices.png": "f389e4bcf32bb3b162c2d5d4972bf357634bbd02af3c2f44c29ef24637aebd0a",
+        "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",
+        "generation-by-fuel.csv": "29d66b4145d615de418a7f56514c6f75e18f0eb0bcc49f5b9ad3232032ab4dfd",
+        "inverse-generation-by-country.csv": "d6a52439dacc9719f8f0ae4eb80d5a3ced890e75e07107079168784d7749e34b",
+        "inverse-prices-by-zone.csv": "0a0cb02bb55ac4104227516838b88f24e47ac80c0a9b705053705c7a0430e40c",
+        "inverse-search-cases.csv": "72240571f3da6d96b16ba6c62d67493ab7e6f36de384801d3dfe9473ee7a683f",
+        "national-generation.csv": "218d4a7eee9d94dcb2fed9a9eb524713eb0303bdbfbce16aac4e419566cd7523",
+        "national-mix.png": "c9305104d723e79fe3c337865c9c3755af559a102259d7f338edd551c2b7759b",
+        "nuclear-availability-by-month.csv": "d7e7925ebf1f11f6ae3f0e1aac4c952d027072e3f28816a81b5b6fcf390139b6",
+        "nuclear-availability-prices-by-zone.csv": "b2cf42359fe36e71a92117d5c42b5619d477db892e5ee61ed01d7d4635e0a292",
+        "overview.png": "3530d21d7b7fef037541bc181a5e42b0c6b5b3044ee556716dcbb122b564924d",
+        "prices-by-zone.csv": "99e1a5a06dc88aa8fff022546f9e70f3a83df58df7f42123e9e22b2abab3dcaa",
+        "renewable-capacity-audit.csv": "c60afa3593f8f9aacf105dcb528cc801cf723af0bf6f4083d3dacdb73280137c",
+        "renewable-source-prices-by-zone.csv": "08472614bff37ba147d6a52839da407ff7fa2fde9473edede32e47a246d66345",
+        "zone-mae-grid.png": "b7f3626d94fe13581723002d656cd8dafb24b0219b3b0a4d0cf080efe47b1a79"
+      },
+      "search_rows": 13,
+      "zone_rows": 144,
+      "generation_rows": 510,
+      "primary_members": 1,
+      "broad_members": 10
+    }
+  },
+  "publication_scope": "Primary report and four figures: bounded inverse bid ensemble; prior seasonal derivation, source controls and out-of-fold verification are legacy supporting evidence.",
+  "legacy_out_of_fold_model_verification": {
     "status": "seasonal_calendar_ember_month_exclusion_selection_physics_duals_oof_and_refit_replayed",
     "fold_winners": [
       2,
@@ -880,28 +2356,24 @@
     "optimal_hours": 8760,
     "emergency_mwh": 0.0
   },
-  "derived_producer_sha256": "a47c8743536ca208c44a6f469adef88be51f5801120d570b60fb836d8cba9b85",
-  "derived_producer_file": "prepare_seasonal_dispatch_report_2025.py",
-  "renderer_sha256": "17dbe45171d3f78119ab831d0a3fcd8d632bef98b9e52dff7f63d647a2724ad1",
-  "article_sha256": "0d47559b98aced6e94be37ebe8fb8528b4f3d30c407b37cbbe70fd77d8d2e682",
-  "assets": {
-    "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
-    "daily-prices.png": "e6f39cc33c519d07425c68a6e44b2c6827e968151d4160e098c0de4980d9a4c1",
-    "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",
-    "generation-by-fuel.csv": "29d66b4145d615de418a7f56514c6f75e18f0eb0bcc49f5b9ad3232032ab4dfd",
-    "national-generation.csv": "218d4a7eee9d94dcb2fed9a9eb524713eb0303bdbfbce16aac4e419566cd7523",
-    "national-mix.png": "ba99246236027a0eaba93b36460fc3d0b250c72ecbf3cf8ce586a75645e1c4c4",
-    "nuclear-availability-by-month.csv": "d7e7925ebf1f11f6ae3f0e1aac4c952d027072e3f28816a81b5b6fcf390139b6",
-    "nuclear-availability-prices-by-zone.csv": "b2cf42359fe36e71a92117d5c42b5619d477db892e5ee61ed01d7d4635e0a292",
-    "overview.png": "16c5b9a09394bdfe1bd1bd40b8935d92d7152e7daafa648510568c1a36488574",
-    "prices-by-zone.csv": "99e1a5a06dc88aa8fff022546f9e70f3a83df58df7f42123e9e22b2abab3dcaa",
-    "renewable-capacity-audit.csv": "c60afa3593f8f9aacf105dcb528cc801cf723af0bf6f4083d3dacdb73280137c",
-    "renewable-source-prices-by-zone.csv": "08472614bff37ba147d6a52839da407ff7fa2fde9473edede32e47a246d66345",
-    "zone-mae-grid.png": "ebd926a4269395b534aa3fcb4fc70f886a8bebf8cf55e2f8ddc68d8582c5b04b"
+  "legacy_out_of_fold_models": {
+    "control": "Baseline",
+    "combined": "Exploratory"
   },
-  "limitations": [
+  "models": {
+    "baseline": "comparison",
+    "r2-s6": "retained inverse fit",
+    "r2-s2": "comparison"
+  },
+  "legacy_limitations": [
     "Country Ember and zonal A75 sources are separate. Germany generation excludes LU; France uses national model membership including FR-COR.",
     "Missing types/hours remain unknown; per-area error covers reported fuels only. Not certified total-fleet generation or exact commercial geography.",
     "Point allocations proportional to original availability within saved equal-price blocks; conditional bounds not jointly attainable or all primal optima. No new solve, input change or promotion."
+  ],
+  "limitations": [
+    "Full2025 fit and selection, not independent forecast validation.",
+    "Synthetic effective bids are not uniquely identified actual offers.",
+    "Finite fit spread is not a posterior or calibrated confidence interval.",
+    "Original physical/input and fixed-hydro limitations remain; no paired investment or browser integration."
   ]
 }
