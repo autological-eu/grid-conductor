@@ -16,7 +16,8 @@
     {
       "order": 1,
       "work": "Reconcile low-cost supply and reporting coverage",
-      "details": "Check dated wind/solar capacity, fleet geography and weather conversion against independent capacity/site sources; reconcile national Ember and A75 gross/net/embedded scope. Investigate German biomass and coal/lignite taxonomy/operational assumptions. Never scale available MW to observed generation."
+      "details": "Check dated wind/solar capacity, fleet geography and weather conversion against independent capacity/site sources; reconcile national Ember and A75 gross/net/embedded scope. Investigate German biomass and coal/lignite taxonomy/operational assumptions. Never scale available MW to observed generation.",
+      "evidence": "Source subtype reconciliation and PVGIS-vs-atlite loss sensitivity tested with frozen coefficients; separate wind/PV negative bid controls also evaluated. Source weather/site/orientation and reporting coverage remain open; no baseline promotion."
     },
     {
       "order": 2,
@@ -58,5 +59,6 @@
       "verified": "Page describes daily THE day-ahead/front-month gas prices, sourced from EEX; explicitly says no machine-readable download. Not ingested."
     }
   ],
-  "daily_fuel_experiment_folder": "data/bidding-zone-network-2025/daily-fuel-v2"
+  "daily_fuel_experiment_folder": "data/bidding-zone-network-2025/daily-fuel-v2",
+  "renewable_source_experiment_folder": "data/bidding-zone-network-2025/renewable-source-bids-v1"
 }

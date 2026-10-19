@@ -25,6 +25,70 @@ lower MAE and transparent bias/seasonal diagnostics. Native PyPSA parity is an
 optional numerical diagnostic, not the development target. Automatic hourly
 reviews remain disabled.
 
+## Wind/solar source and resource-bid follow-up — 19 October 2026
+
+Fresh root: `data/bidding-zone-network-2025/renewable-source-bids-v1/`;
+new source helper, finite annual runner and independent auditor are
+`renewable_source_bids_2025.py`, `run_renewable_source_bids_2025.py` and
+`audit_renewable_source_bids_2025.py`. Accepted seasonal-refit coefficients,
+monthly thermal fuel inputs, fixed hydro, source weather chronology and native
+network/GSK constraints stay frozen. This is separate from the daily-fuel pilot.
+
+- Reconcile total-wind/onshore/offshore IRENA endpoints in 12 source countries.
+  The inherited total-only scaler preserved obsolete subtype shares (NL offshore
+  about 7.3 GW versus IRENA 4.75 GW at the start of 2025). Preserve within-subtype
+  weather and original source-country/geographic distinctions. Twenty-one source
+  countries lack complete applicable records/fleets; Finland has positive offshore
+  capacity without a source offshore weather fleet. Retain their original inputs,
+  never zero-fill or fabricate weather. The independent parser recovers three extra
+  narrow onshore rows (SI/ME/SK), none completing a usable parent/on/off trio.
+- PVGIS's generic 14% overall system loss **replaces** the CSi model's existing
+  10% inverter loss: availability multiplier 0.86/0.90. This is a sensitivity,
+  not audited national PV losses. No generation-derived availability fitting.
+- Separate wind/PV columns with a matched zero-bid control; lower-half -10 EUR/MWh
+  bids are explicit synthetic controls, not measured subsidy behaviour. All other
+  resource bids remain accepted seasonal/calendar/Ember bids without refitting.
+
+| Full-2025 case | Equal-zone MAE EUR/MWh | Monthly generation-interval mismatch |
+| --- | ---: | ---: |
+| Matched control | 28.963873 | 0.300729 |
+| Wind subtype capacity correction | 28.983883 | 0.296533 |
+| Generic PV overall-loss sensitivity | 28.892340 | 0.295188 |
+| Both input changes | 28.911591 | 0.291063 |
+| Both inputs + PV negative block | 28.914182 | 0.291466 |
+| Both inputs + wind negative block | 28.999649 | 0.290810 |
+| Both inputs + both negative blocks | 29.004201 | 0.291202 |
+
+All seven annual witnesses contain 8760 optimal hours with zero emergency supply;
+all 41 eligible price areas remain. The mix score is normalized monthly conditional
+country/fuel interval error, not total-fleet percentage error or all-optima bounds.
+The matched control differs from accepted MAE 28.963975 by ~0.000102 because
+same-cost column splitting can change duals/illustrative allocation.
+Combined inputs improve DE-LU MAE 21.57→20.83 and FR 23.83→23.24, but worsen ES
+24.07→24.25, NO5 47.29→48.70 and several other Nordic areas. Negative bids do not
+improve the combined-input price result. **No baseline promotion**; <10 remains unmet.
+Seven-case preparation 86.12s; full command 375.11s; peak RSS 2585.36 MiB;
+matched-control clearing 39.88s. Raw sources/hourly witnesses remain ignored.
+Independent `verification-v1/audit.json` replays all seven complete source/price/
+quantity/native-component/dual certificates; maximum physics residual 9.16e-06 MW,
+maximum duality gap EUR 0.000183671. Three targeted source/capacity/loss tests pass.
+The initial auditor fingerprint mismatch was floating-point interpolation operation
+order; matching the declared arithmetic preserves exact hashes. Independent source,
+physics and price/quantity reconstructions then pass without changing the solves.
+
+Next: verify actual fleet sites/turbine/panel conversion and operational availability,
+with source-country versus zonal geography and Ember/A75 reporting scope separate.
+Do not treat the generic PV sensitivity or negative-bid controls as measured fleet
+corrections, tune on observed generation to fabricate availability, or restart hydro
+searches. Quantify resource-specific operational/CHP/negative-price offer rules only
+where supported by data; retain adverse zones and unchanged acceptance gates.
+The retained report receives the current all-zone comparison grid and two compact
+CSV downloads, preserving its four-figure limit and secondary OOF evidence.
+Rendered report/CSV coverage and asset provenance checks pass; all 81 allowlisted
+public files total 6.62 MiB. Lint, typecheck, 14 browser-model unit tests and production
+build pass. Chromium smoke checks pass at 1440/390/320/667px, including retained
+report routes, downloads and overflow. These are local checks, not a deployment claim.
+
 ## Model overview and current evidence
 
 | Role | Implementation / checkpoint | Evidence and limits |

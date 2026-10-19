@@ -1,4 +1,272 @@
 {
+  "renewable_source_evaluation": {
+    "summary_sha256": "8fc6098433777cb844bee2d87317c73c8e7b5c98399a399baf5c0b5390e488b9",
+    "audit": {
+      "status": "renewable_capacity_endpoints_availability_resource_bids_physics_duals_and_annual_metrics_replayed",
+      "summary_sha256": "8fc6098433777cb844bee2d87317c73c8e7b5c98399a399baf5c0b5390e488b9",
+      "auditor_sha256": "e628ea8f796e2c2e954d2e36260d9faf032774df964103e17b80a4207f3a927f",
+      "certificates": [
+        {
+          "case": "control",
+          "hours": 8760,
+          "original_component_residual_mw": 3.0332648748299107e-07,
+          "source_group_bound_residual_mw": 2.7621800975690597e-10,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 4.693987420978374e-10,
+          "complementarity_maximum_eur": 2.719153635191227e-05,
+          "duality_gap_maximum_eur": 3.861263394355774e-06,
+          "price_decomposition_maximum_eur_mwh": 4.693987420978374e-10
+        },
+        {
+          "case": "wind_subtypes",
+          "hours": 8760,
+          "original_component_residual_mw": 7.968495339127912e-07,
+          "source_group_bound_residual_mw": 1.8894634868591587e-12,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 9.308040900546377e-10,
+          "complementarity_maximum_eur": 7.623587324588427e-05,
+          "duality_gap_maximum_eur": 1.517217606306076e-05,
+          "price_decomposition_maximum_eur_mwh": 9.308038784183736e-10
+        },
+        {
+          "case": "solar_bos",
+          "hours": 8760,
+          "original_component_residual_mw": 8.296522082673619e-07,
+          "source_group_bound_residual_mw": 1.070526943346314e-10,
+          "objective_error_eur": 2.9802322387695312e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 1.7959012055257517e-09,
+          "complementarity_maximum_eur": 0.00011225076419719332,
+          "duality_gap_maximum_eur": 7.973052561283112e-05,
+          "price_decomposition_maximum_eur_mwh": 1.7959109754883684e-09
+        },
+        {
+          "case": "availability_combined",
+          "hours": 8760,
+          "original_component_residual_mw": 4.6430795919150114e-07,
+          "source_group_bound_residual_mw": 9.11983459681846e-13,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 1.3414349631091227e-09,
+          "complementarity_maximum_eur": 5.697973712640453e-05,
+          "duality_gap_maximum_eur": 8.794013410806656e-06,
+          "price_decomposition_maximum_eur_mwh": 1.3414336308414931e-09
+        },
+        {
+          "case": "solar_bid",
+          "hours": 8760,
+          "original_component_residual_mw": 9.157034583040513e-06,
+          "source_group_bound_residual_mw": 1.2266661162361768e-12,
+          "objective_error_eur": 4.470348358154297e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 5.7355965310534884e-08,
+          "complementarity_maximum_eur": 0.0007305343799726966,
+          "duality_gap_maximum_eur": 0.0001836707815527916,
+          "price_decomposition_maximum_eur_mwh": 5.7355965310534884e-08
+        },
+        {
+          "case": "wind_bid",
+          "hours": 8760,
+          "original_component_residual_mw": 1.432131512046908e-06,
+          "source_group_bound_residual_mw": 0.0,
+          "objective_error_eur": 4.470348358154297e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 1.6002132952053216e-09,
+          "complementarity_maximum_eur": 0.00016507994689751656,
+          "duality_gap_maximum_eur": 1.337006688117981e-05,
+          "price_decomposition_maximum_eur_mwh": 1.6002132952053216e-09
+        },
+        {
+          "case": "both_bids",
+          "hours": 8760,
+          "original_component_residual_mw": 6.534100975841284e-07,
+          "source_group_bound_residual_mw": 4.618527782440651e-14,
+          "objective_error_eur": 4.0978193283081055e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 3.942339787954552e-10,
+          "complementarity_maximum_eur": 7.231069822719258e-05,
+          "duality_gap_maximum_eur": 5.57582825422287e-06,
+          "price_decomposition_maximum_eur_mwh": 3.94237531509134e-10
+        }
+      ],
+      "irena_endpoint_rows": 77,
+      "independent_additional_rows_not_applied": [
+        {
+          "country": "ME",
+          "technology": "Onshore wind energy",
+          "reason": "Producer conservatively rejected narrow cells; no complete independent parent/on/off trio, so original fleet remains."
+        },
+        {
+          "country": "SI",
+          "technology": "Onshore wind energy",
+          "reason": "Producer conservatively rejected narrow cells; no complete independent parent/on/off trio, so original fleet remains."
+        },
+        {
+          "country": "SK",
+          "technology": "Onshore wind energy",
+          "reason": "Producer conservatively rejected narrow cells; no complete independent parent/on/off trio, so original fleet remains."
+        }
+      ],
+      "elapsed_seconds": 117.13521835699999
+    },
+    "producer_sha256": "7a56de0eef9ae5848ff6e5f5b0aa6375764b99b78a0a46eb33401155afce9a9d",
+    "helper_sha256": "7134ab459b38b8bfaebef16eaf0cfda2d491e509a8f5b9a77119b4434d607a67",
+    "outcomes": {
+      "control": {
+        "equal_zone_mae": 28.963872919234092,
+        "within_day_correlation": 0.535133502714058,
+        "quantity_errors": {
+          "price": 28.963872919234092,
+          "generation": 0.300729499232209,
+          "trade": 0.17190217084150547,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "wind_subtypes": {
+        "equal_zone_mae": 28.983883057476955,
+        "within_day_correlation": 0.5353253072142762,
+        "quantity_errors": {
+          "price": 28.983883057476955,
+          "generation": 0.29653348058920004,
+          "trade": 0.17209051375840456,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "solar_bos": {
+        "equal_zone_mae": 28.892339633205665,
+        "within_day_correlation": 0.5352839662785975,
+        "quantity_errors": {
+          "price": 28.892339633205665,
+          "generation": 0.2951878049127334,
+          "trade": 0.1721537556801548,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "availability_combined": {
+        "equal_zone_mae": 28.911590960091793,
+        "within_day_correlation": 0.5356542840322313,
+        "quantity_errors": {
+          "price": 28.911590960091793,
+          "generation": 0.2910630928091876,
+          "trade": 0.17231122042637834,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "solar_bid": {
+        "equal_zone_mae": 28.914182225505705,
+        "within_day_correlation": 0.5355910860760482,
+        "quantity_errors": {
+          "price": 28.914182225505705,
+          "generation": 0.29146568505667253,
+          "trade": 0.1722318445848392,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "wind_bid": {
+        "equal_zone_mae": 28.999648624165847,
+        "within_day_correlation": 0.5350330834246043,
+        "quantity_errors": {
+          "price": 28.999648624165847,
+          "generation": 0.29081041958454823,
+          "trade": 0.17249274042956225,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "both_bids": {
+        "equal_zone_mae": 29.004201180095734,
+        "within_day_correlation": 0.5350103059521272,
+        "quantity_errors": {
+          "price": 29.004201180095734,
+          "generation": 0.2912023274142265,
+          "trade": 0.17249767314017433,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      }
+    },
+    "annuals": {
+      "control": {
+        "witness": "control.npz",
+        "witness_sha256": "19e3d5a9734d37c0d37e6b2b5d26b7df101a9b8cbcdffb7a3d097773e08f79a1",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 39.882719931999986,
+        "emergency_mwh": 0.0
+      },
+      "wind_subtypes": {
+        "witness": "wind_subtypes.npz",
+        "witness_sha256": "847e6eaf50b5efd1c1d4f85f4d07ff2612f8c52d67fcfe9303f5f6e0f2037315",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 29.050569877000044,
+        "emergency_mwh": 0.0
+      },
+      "solar_bos": {
+        "witness": "solar_bos.npz",
+        "witness_sha256": "27802ede0a81a74bf755845fd80a3b7023c03c2f4a8cc34399d4aa59ac419908",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 37.991864211999996,
+        "emergency_mwh": 0.0
+      },
+      "availability_combined": {
+        "witness": "availability_combined.npz",
+        "witness_sha256": "df3bf93c965a261317a32c1145e6f8c8158efa4fd133712ef633e56a58987f47",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 29.366002580999975,
+        "emergency_mwh": 0.0
+      },
+      "solar_bid": {
+        "witness": "solar_bid.npz",
+        "witness_sha256": "8687491cae1c4b9a3a123257fd6f5d238d44d37972c9708088e8b5f51fc451fc",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 32.98402336700008,
+        "emergency_mwh": 0.0
+      },
+      "wind_bid": {
+        "witness": "wind_bid.npz",
+        "witness_sha256": "1257cd4c3640808e50bf2f3af0f599eda2baa64a88b9612241112b137a9d5c2d",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 41.742140965999965,
+        "emergency_mwh": 0.0
+      },
+      "both_bids": {
+        "witness": "both_bids.npz",
+        "witness_sha256": "7399a5720731e2ceefc0493fe4e7fab3eb68a4427181cef8f7c86dc67bbf9efb",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 38.887932190000015,
+        "emergency_mwh": 0.0
+      }
+    },
+    "preparation_seconds": 86.11981828300009,
+    "end_to_end_seconds": 375.10761023300006
+  },
   "daily_fuel_evaluation": {
     "summary_sha256": "d35671088a790734ea8f44e43279ad2cf8444442d0050f5d63bf62aabae32279",
     "audit": {
@@ -163,7 +431,7 @@
     "producer_role": "re-export and source/cost replay of sealed initial clears"
   },
   "research_direction": {
-    "plan_sha256": "a5c458e4c80e0e8f6a40fdc512d7a3c78221d1d1490e5869418facc90d7edcff",
+    "plan_sha256": "d96f769db43c0af167925066ce8c79ededd5697b9b516926b17de16a8354823b",
     "diagnosis_sha256": "832ee83b2c8d5db92c8c80c986b53709052c82ad9d51472ccb79ccaf539a084c",
     "audit": {
       "status": "accepted_refit_price_monthly_mix_and_target_metrics_replayed",
@@ -287,8 +555,8 @@
   },
   "derived_producer_sha256": "a47c8743536ca208c44a6f469adef88be51f5801120d570b60fb836d8cba9b85",
   "derived_producer_file": "prepare_seasonal_dispatch_report_2025.py",
-  "renderer_sha256": "d11fbced3ce8577bd5abebe52106b35879a4552607c46e951b2bc582edfaaa9a",
-  "article_sha256": "860dfb3d9598f8fe0fd29f24cfa1fcca1edee71798a6a756a845c38b85de75f4",
+  "renderer_sha256": "5985feac6224e86c4428c1459fdee48b0775dbfd76d88cce3af552bb72a36467",
+  "article_sha256": "f48c4c2aba1679c323bdd12e31e51b2fe60cfe824b6137327fdeb938b2d1cb9d",
   "assets": {
     "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
     "daily-prices.png": "e6f39cc33c519d07425c68a6e44b2c6827e968151d4160e098c0de4980d9a4c1",
@@ -298,7 +566,9 @@
     "national-mix.png": "ba99246236027a0eaba93b36460fc3d0b250c72ecbf3cf8ce586a75645e1c4c4",
     "overview.png": "16c5b9a09394bdfe1bd1bd40b8935d92d7152e7daafa648510568c1a36488574",
     "prices-by-zone.csv": "99e1a5a06dc88aa8fff022546f9e70f3a83df58df7f42123e9e22b2abab3dcaa",
-    "zone-mae-grid.png": "042e495325fe78994c0ca57aba7ebcf3a564c370d8a7da01c46f4bc872fb71da"
+    "renewable-capacity-audit.csv": "c60afa3593f8f9aacf105dcb528cc801cf723af0bf6f4083d3dacdb73280137c",
+    "renewable-source-prices-by-zone.csv": "08472614bff37ba147d6a52839da407ff7fa2fde9473edede32e47a246d66345",
+    "zone-mae-grid.png": "ca5b39e48483907a4acad4334c3af71f70f3e403e5b9b6176511d12b5211b130"
   },
   "limitations": [
     "Country Ember and zonal A75 sources are separate. Germany generation excludes LU; France uses national model membership including FR-COR.",

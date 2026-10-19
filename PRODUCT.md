@@ -66,6 +66,16 @@ cleared prices, substituting generation for availability or relaxing physics.
 Evaluation electricity prices remain validation targets. Historical training prices
 may inform the explicitly authorized bounded bid calibration described below.
 
+Renewable-source reconciliation must distinguish total wind from onshore/offshore
+subtypes, installed capacity from weather conversion, and available supply from
+dispatched generation. Preserve original within-subtype weather/geography unless
+new independent site/profile evidence supports a change. Do not infer zero
+capacity from missing subtype tables. Generic solar system-loss assumptions
+must account for losses already included in the panel model; label sensitivities
+separately from verified country-fleet corrections. Resource-specific renewable
+offers may be investigated with matched-formulation controls and full-year price
+and generation evidence; synthetic negative bids do not establish actual subsidies.
+
 Daily fuel inputs must identify quote/delivery dates, hub coverage, currency and
 thermal heating-value basis. Apply them to source fuel costs before the retained
 resource bid adjustments and clearing. Keep unavailable hubs explicit; regional

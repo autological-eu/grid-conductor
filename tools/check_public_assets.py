@@ -14,6 +14,8 @@ ALLOWED = [
     'dispatch-comparison-2025/zone-mae-grid.png',
     'dispatch-comparison-2025/prices-by-zone.csv',
     'dispatch-comparison-2025/daily-fuel-prices-by-zone.csv',
+    'dispatch-comparison-2025/renewable-source-prices-by-zone.csv',
+    'dispatch-comparison-2025/renewable-capacity-audit.csv',
     'dispatch-comparison-2025/generation-by-area.csv',
     'dispatch-comparison-2025/generation-by-fuel.csv',
     'dispatch-comparison-2025/national-generation.csv',
@@ -80,6 +82,14 @@ def check():
         for file,sha in [('run_daily_fuel_dispatch_2025.py',daily['producer_sha256']),('audit_daily_fuel_dispatch_2025.py',daily['audit']['auditor_sha256']),('daily_fuel_inputs_2025.py',daily['inputs_producer_sha256'])]:
             assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
         expected.add('daily-fuel-prices-by-zone.csv')
+    if comparison.get('renewable_source_evaluation'):
+        study=comparison['renewable_source_evaluation']
+        assert study['audit']['summary_sha256']==study['summary_sha256']
+        assert len(study['audit']['certificates'])==7
+        assert all(c['hours']==8760 and c['original_component_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in study['audit']['certificates'])
+        for file,sha in [('run_renewable_source_bids_2025.py',study['producer_sha256']),('renewable_source_bids_2025.py',study['helper_sha256']),('audit_renewable_source_bids_2025.py',study['audit']['auditor_sha256'])]:
+            assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
+        expected.update({'renewable-source-prices-by-zone.csv','renewable-capacity-audit.csv'})
     assert set(comparison['assets']) == expected
     for file, sha in comparison['assets'].items():
         assert hashlib.sha256((folder / 'dispatch-comparison-2025' / file).read_bytes()).hexdigest() == sha

@@ -315,6 +315,78 @@ All four new annual cases are optimal with zero emergency supply. Independent so
         daily_receipt=dict(summary_sha256=digest(dfolder/'summary.json'),audit=da,producer_sha256=ds['producer_sha256'],inputs_producer_sha256=din['producer_sha256'],source_coverage=da['source_replay'],
                            outcomes={name:dict(equal_zone_mae=v['prices']['equal_zone_mae'],mean_correlation=v['prices']['mean_correlation'],quantity_errors=v['quantity_errors']) for name,v in ds['outcomes'].items()},
                            annual_clearing_seconds={name:info['clearing_seconds'] for name,info in ds['annuals'].items() if not info.get('external')},preparation_seconds=ds['preparation_seconds'],finalization_command_seconds=ds['end_to_end_seconds'],producer_role=ds['producer_role'])
+    renewable_section = ''
+    renewable_receipt = None
+    if direction.get('renewable_source_experiment_folder'):
+        rfolder=ROOT/direction['renewable_source_experiment_folder']
+        rs=json.loads((rfolder/'summary.json').read_text());ra=json.loads((rfolder/'verification-v1/audit.json').read_text())
+        assert ra['summary_sha256']==digest(rfolder/'summary.json')
+        assert rs['producer_sha256']==digest(ROOT/'tools/run_renewable_source_bids_2025.py')
+        assert ra['auditor_sha256']==digest(ROOT/'tools/audit_renewable_source_bids_2025.py')
+        assert len(ra['certificates'])==7
+        for name,sha in rs['dependencies'].items():assert digest(ROOT/'tools'/name)==sha
+        assert all(c['hours']==8760 and c['original_component_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in ra['certificates'])
+        names={'control':'Matched control','wind_subtypes':'IRENA wind subtypes','solar_bos':'PV system-loss sensitivity','availability_combined':'Both input changes','solar_bid':'Both inputs + PV bids','wind_bid':'Both inputs + wind bids','both_bids':'Both inputs + both bids'}
+        rp={case:{r['zone']:r for r in v['prices']['zones']} for case,v in rs['outcomes'].items()}
+        price_rows=[];deltas=np.full((len(rs['zones']),len(names)),np.nan)
+        for j,zone in enumerate(rs['zones']):
+            row=dict(area=zone,known_hours=rp['control'][zone]['known_hours'])
+            for k,case in enumerate(names):
+                for metric in ['mae_eur_mwh','bias_eur_mwh','correlation','demeaned_mae','demeaned_correlation']:
+                    row[case+'_'+metric]=rp[case][zone].get(metric)
+                if row['known_hours']:deltas[j,k]=rp[case][zone]['mae_eur_mwh']-rp['control'][zone]['mae_eur_mwh']
+            price_rows.append(row)
+        csv_file('renewable-source-prices-by-zone.csv',price_rows)
+        cap_rows=[]
+        for r in rs['capacity_inventory']:
+            row={k:v for k,v in r.items() if k!='irena_endpoints_mw'}
+            if r.get('irena_endpoints_mw'):
+                for family,values in zip(['total_wind','onshore','offshore'],r['irena_endpoints_mw']):
+                    for year,value in zip([2024,2025],values):row[f'irena_{family}_{year}_mw']=value
+            cap_rows.append(row)
+        csv_file('renewable-capacity-audit.csv',cap_rows)
+        limit=max(.5,float(np.nanquantile(abs(deltas),.95)));fig,ax=plt.subplots(figsize=(12,15))
+        cmap=plt.get_cmap('RdBu_r').copy();cmap.set_bad('#eceff2')
+        im=ax.imshow(np.ma.masked_invalid(deltas),cmap=cmap,vmin=-limit,vmax=limit,aspect='auto')
+        ax.set_xticks(range(len(names)),['Control','Wind inputs','PV losses','Both inputs','+ PV bid','+ wind bid','+ both bids'],rotation=25,ha='right')
+        ax.set_yticks(range(len(rs['zones'])),rs['zones']);ax.set_title('2025 hourly price MAE change versus matched control\nEUR/MWh · blue improves, red worsens · gray has no observed prices')
+        for j in range(len(rs['zones'])):
+            for k in range(len(names)):
+                if np.isfinite(deltas[j,k]):ax.text(k,j,f'{deltas[j,k]:+.2f}',ha='center',va='center',fontsize=7,color='white' if abs(deltas[j,k])>limit*.65 else '#182a3b')
+        fig.colorbar(im,ax=ax,shrink=.65,label=f'Change in MAE (colors clipped at ±{limit:.2f}; cell numbers show actual change)')
+        fig.tight_layout();save(fig,'zone-mae-grid.png')
+        table='\n'.join(f"| {label} | {rs['outcomes'][case]['prices']['equal_zone_mae']:.3f} | {rs['outcomes'][case]['prices']['mean_demeaned_correlation']:.3f} | {rs['outcomes'][case]['quantity_errors']['generation']:.4f} |" for case,label in names.items())
+        changed=sum(r['status']=='onshore_offshore_capacity_trajectories_reconciled' for r in rs['capacity_inventory'])
+        renewable_section=f'''## Wind/solar inputs and resource bids — 19 October 2026
+
+**Wind correction:** the accepted baseline scales total national wind but retains the old fleet's onshore/offshore shares. The new case applies separate [IRENA 2026 publication](https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2026/Mar/IRENA_DAT_RE_capacity_statistics_2026.pdf) end-2024/end-2025 subtype trajectories in **{changed} source countries**, preserving original within-subtype weather/location shares. Missing or inconsistent parent/subtype records retain original wind, with status in the [capacity audit]({PREFIX}renewable-capacity-audit.csv). Parent and child capacities are never added. For example, the old Dutch split assigned about 7.3 GW offshore at the start of 2025 versus IRENA 4.75 GW. Source-country identity and geographic/GSK allocation proxies remain distinct; original static GSKs stay fixed to isolate availability effects.
+
+**Solar sensitivity:** the original CSi panel model already includes 10% inverter losses. [PVGIS]({rs['pvgis_url']}) uses 14% as a generic overall system-loss default. Replacing the 10% factor with 14% multiplies available PV by **0.86/0.90**, a 4.44% reduction; applying another 14% would double-count inverter losses. This is a declared generic sensitivity, **not a verified country-specific fleet correction**. Original temperature, irradiance, south-facing 35° geometry, capacity trajectory and chronology remain; observed generation never replaces availability.
+
+**Resource bids:** after both input changes, the lower half of available PV, wind or both is offered at **−10 EUR/MWh**, with the upper half at 0. These are simple synthetic bid controls, not measured subsidy entitlements or forced generation. Accepted gas/coal/nuclear calendar/Ember coefficients, demand, fuel, hydro and grid stay fixed; no refit. An unmodified matched control is necessary because separating formerly equal-price wind/solar columns can change duals and illustrative allocations. Its price MAE is {rs['outcomes']['control']['prices']['equal_zone_mae']:.6f}, versus the retained accepted baseline {rs['accepted_mae']:.6f}.
+
+| Full-year case | Price MAE, EUR/MWh | Within-day correlation | Generation-interval mismatch |
+| --- | ---: | ---: | ---: |
+{table}
+
+All seven cases clear **8,760 optimal hours with zero emergency supply**, retaining all 41 observed-price areas. Generation mismatch is the existing normalized monthly country/fuel interval score, not total-fleet percentage error; conditional allocation intervals do not span every possible equal-cost optimum. No case is promoted automatically. [All-zone hourly-price metrics]({PREFIX}renewable-source-prices-by-zone.csv) include every modeled area, with unknown observations blank.
+
+![Every modeled zone and every source/bid control: price MAE changes]({PREFIX}zone-mae-grid.png)
+
+**Conclusion:** both input changes reduce Europe-wide MAE only from 28.964 to 28.912 EUR/MWh, far from the <10 target. Germany improves from 21.57 to 20.83, while Spain worsens from 24.07 to 24.25. Wind subtype correction improves the quantity score but slightly worsens price MAE on its own; the generic PV loss sensitivity has the lowest price MAE. None of the negative renewable bid controls improves on the combined-input case. These are modest diagnostics, not evidence for adopting a universal negative bid or a measured PV derating.
+
+Independent source-capacity, availability, component-physics, LP dual, price and monthly generation/trade replay verifies all seven cases. Wind/PV source profiles still represent generic turbines, idealized panel geometry and potential-based spatial layouts; subtype capacity corrections do not establish actual site output or resolve curtailment, outages and reporting scope.
+
+'''
+        renewable_receipt=dict(summary_sha256=digest(rfolder/'summary.json'),audit=ra,producer_sha256=rs['producer_sha256'],helper_sha256=rs['dependencies']['renewable_source_bids_2025.py'],
+                               outcomes={case:dict(equal_zone_mae=v['prices']['equal_zone_mae'],within_day_correlation=v['prices']['mean_demeaned_correlation'],quantity_errors=v['quantity_errors']) for case,v in rs['outcomes'].items()},
+                               annuals=rs['annuals'],preparation_seconds=rs['preparation_seconds'],end_to_end_seconds=rs['end_to_end_seconds'])
+        # Keep the previous fuel pilot compact rather than accumulating old narratives.
+        daily_section=f'''## Previous daily-fuel check
+
+Daily EIA Brent/ECB oil quotes and MIBGAS gas indices in ES/PT changed Europe-wide MAE from 28.964 to 28.950 EUR/MWh with coefficients frozen. Gas elsewhere remained monthly TTF; this was not a Europe-wide daily-gas test. Original heating-basis assumptions and explicit first-day fallbacks remained. The source/physics/dual replay is retained; see the [all-zone fuel comparison]({PREFIX}daily-fuel-prices-by-zone.csv). The accepted baseline was unchanged.
+
+'''
     report = f'''# European dispatch: accepted seasonal-bid baseline
 
 ## Accepted baseline: single full-year reconstruction
@@ -345,7 +417,7 @@ The following national quantities come from the **accepted single annual refit**
 
 [Ember's daily fuel-cost methodology](https://ember-energy.org/data/european-electricity-prices-and-costs/) identifies national gas hubs, API2 coal and EU/UK carbon contracts, but its embedded fuel chart explicitly restricts downloads because of licensing; no series has been adopted. [MIBGAS's 2025 archive](https://www.mibgas.es/en/file-access?path=AGNO_2025/XLS) now has **365 source-replayed delivery days** of Spanish PVB and Portuguese VTP last/average day-ahead indices. These are source-computed indices, including provider estimates in illiquid periods; they are not a Europe-wide TTF substitute. The daily trial below uses them in ES/PT; the accepted baseline remains unchanged. [EIA daily Brent](https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls) is an oil-proxy candidate. The daily trial below documents reconciled delivery dates and nontrading-day treatment; broader gas-hub coverage, heating-value/efficiency and delivered-fuel assumptions remain open.
 
-{daily_section}## Secondary development evidence
+{renewable_section}{daily_section}## Secondary development evidence
 
 The sections and figures below retain the **previous unfitted baseline versus out-of-fold seasonal-model comparison** as secondary development evidence. Their “baseline” labels mean the previous control; their “exploratory” results combine three fits and are **not the accepted single annual refit**. Do not mix those generation/price results with the annual-refit headline.
 
@@ -461,9 +533,13 @@ Independent replay checks calendar/DST features, month exclusion, price/Ember pr
 - [Compact provenance and verification receipt]({PREFIX}summary.json). Bulk hourly/source/replay evidence stays locally cached outside Git.
 - [Seasonal bid formulation](tools/seasonal_calendar_bids_2025.py), [independent model replay](tools/audit_seasonal_calendar_bids_2025.py), [report derivation](tools/{producer_file}), [independent report replay](tools/{auditor_file}), [renderer](tools/write_concise_dispatch_report_2025.py).
 '''
+    if renewable_receipt:
+        legacy_start=report.index("![Every modeled zone's baseline and out-of-fold price MAE]")
+        legacy_end=report.index('Generation comparison covers',legacy_start)
+        report=report[:legacy_start]+"Historical out-of-fold zone metrics remain in the downloads; the all-zone grid above shows the current source/bid experiment.\n\n"+report[legacy_end:]
     ARTICLE.write_text(report)
     assets = {path.name: digest(path) for path in sorted(PUBLIC.iterdir()) if path.name != 'summary.json'}
-    receipt = dict(daily_fuel_evaluation=daily_receipt, research_direction=dict(plan_sha256=digest(ROOT/'config/research-improvement-plan.json'),
+    receipt = dict(renewable_source_evaluation=renewable_receipt, daily_fuel_evaluation=daily_receipt, research_direction=dict(plan_sha256=digest(ROOT/'config/research-improvement-plan.json'),
                        diagnosis_sha256=digest(diagnostic_folder/'diagnosis.json'),audit=diagnosis_audit,
                        producer_sha256=diagnosis['producer_sha256'],mix_producer_sha256=diagnostic_summary['producer_sha256'],
                        mix_auditor_sha256=diagnostic_mix_audit['auditor_sha256'],mix_audit=diagnostic_mix_audit,

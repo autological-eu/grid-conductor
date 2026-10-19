@@ -128,6 +128,8 @@ data/daily-market-2025/
 !/public/research/dispatch-comparison-2025/zone-mae-grid.png
 !/public/research/dispatch-comparison-2025/prices-by-zone.csv
 !/public/research/dispatch-comparison-2025/daily-fuel-prices-by-zone.csv
+!/public/research/dispatch-comparison-2025/renewable-source-prices-by-zone.csv
+!/public/research/dispatch-comparison-2025/renewable-capacity-audit.csv
 !/public/research/dispatch-comparison-2025/generation-by-area.csv
 !/public/research/dispatch-comparison-2025/generation-by-fuel.csv
 !/public/research/dispatch-comparison-2025/national-generation.csv

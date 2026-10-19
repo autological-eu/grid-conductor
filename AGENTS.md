@@ -35,6 +35,20 @@ assumptions; do not claim audited delivered fuel prices or Europe-wide daily gas
 All annual hours and source/native-physics/dual/quantity checks remain mandatory.
 No automatic baseline promotion or browser integration follows.
 
+The 19 October source/bid follow-up uses renewable_source_bids_2025.py,
+run_renewable_source_bids_2025.py and independent audit_renewable_source_bids_2025.py.
+IRENA wind parents and on/offshore children remain separate; use complete,
+reconciled endpoints only, preserving missing profiles/values and original
+source-country/geographic distinctions. PVGIS 14% overall-loss replacement is a
+generic sensitivity, not measured country availability; atlite already includes
+10% inverter loss, so never multiply an additional 14% onto it. Retain source
+weather, static original GSK and fixed hydro. Separate wind/PV pricing columns
+require a matched control; preserve conditional-generation-allocation caveats.
+Seven predeclared annual cases keep accepted seasonal coefficients frozen;
+negative renewable offers are synthetic controls, not observed subsidies.
+Retain exactly four report figures; latest all-zone source/bid grid replaces the
+historical OOF grid, with old comparison metrics still separately downloadable.
+
 Read PRODUCT.md and TASKS.md first. PRODUCT owns requirements, TASKS owns current
 priorities/evidence, README owns setup. Develop on public-v1. Main promotions
 require explicit user authorization; the alpha promotion was authorized on

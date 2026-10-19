@@ -39,25 +39,35 @@ The following national quantities come from the **accepted single annual refit**
 
 [Ember's daily fuel-cost methodology](https://ember-energy.org/data/european-electricity-prices-and-costs/) identifies national gas hubs, API2 coal and EU/UK carbon contracts, but its embedded fuel chart explicitly restricts downloads because of licensing; no series has been adopted. [MIBGAS's 2025 archive](https://www.mibgas.es/en/file-access?path=AGNO_2025/XLS) now has **365 source-replayed delivery days** of Spanish PVB and Portuguese VTP last/average day-ahead indices. These are source-computed indices, including provider estimates in illiquid periods; they are not a Europe-wide TTF substitute. The daily trial below uses them in ES/PT; the accepted baseline remains unchanged. [EIA daily Brent](https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls) is an oil-proxy candidate. The daily trial below documents reconciled delivery dates and nontrading-day treatment; broader gas-hub coverage, heating-value/efficiency and delivered-fuel assumptions remain open.
 
-## Daily oil and gas experiment — 17 October 2026
+## Wind/solar inputs and resource bids — 19 October 2026
 
-Fuel inputs change **before clearing**, with the accepted seasonal/calendar/Ember coefficients frozen. All cases solve **8,760 hours**, retain all 41 observed-price areas and use the same demand, source availability, hydro and network. No electricity prices or generation targets are refitted.
+**Wind correction:** the accepted baseline scales total national wind but retains the old fleet's onshore/offshore shares. The new case applies separate [IRENA 2026 publication](https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2026/Mar/IRENA_DAT_RE_capacity_statistics_2026.pdf) end-2024/end-2025 subtype trajectories in **12 source countries**, preserving original within-subtype weather/location shares. Missing or inconsistent parent/subtype records retain original wind, with status in the [capacity audit](/research/dispatch-comparison-2025/renewable-capacity-audit.csv). Parent and child capacities are never added. For example, the old Dutch split assigned about 7.3 GW offshore at the start of 2025 versus IRENA 4.75 GW. Source-country identity and geographic/GSK allocation proxies remain distinct; original static GSKs stay fixed to isolate availability effects.
 
-| Case | Mean zonal MAE, EUR/MWh | Mean price correlation | Spain MAE | Portugal MAE |
-| --- | ---: | ---: | ---: | ---: |
-| Accepted baseline | 28.964 | 0.573 | 24.068 | 23.545 |
-| Daily oil | 28.964 | 0.573 | 24.068 | 23.545 |
-| Daily gas: ES/PT | 28.950 | 0.573 | 23.840 | 23.265 |
-| Daily oil + ES/PT gas | 28.950 | 0.573 | 23.840 | 23.265 |
-| Both, monthly means preserved | 28.957 | 0.573 | 23.975 | 23.438 |
+**Solar sensitivity:** the original CSi panel model already includes 10% inverter losses. [PVGIS](https://joint-research-centre.ec.europa.eu/photovoltaic-geographical-information-system-pvgis/getting-started-pvgis/pvgis-user-manual_en) uses 14% as a generic overall system-loss default. Replacing the 10% factor with 14% multiplies available PV by **0.86/0.90**, a 4.44% reduction; applying another 14% would double-count inverter losses. This is a declared generic sensitivity, **not a verified country-specific fleet correction**. Original temperature, irradiance, south-facing 35° geometry, capacity trajectory and chronology remain; observed generation never replaces availability.
 
-**Coverage:** oil uses [EIA daily Brent](https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls) and daily ECB FX across oil offers. Gas uses MIBGAS PVB in Spain and VTP in Portugal; **other zones still use monthly TTF**. These are not Europe-wide daily gas quotes. The first 24 oil hours and 5 gas hours retain monthly inputs because the 2025 daily series have not started. Oil/FX use the last available same-or-earlier quote over nontrading days; gas follows 05:00 UTC winter / 04:00 summer delivery boundaries, including DST. Same-day oil observations are retrospective perfect-information inputs, not an operational forecast.
+**Resource bids:** after both input changes, the lower half of available PV, wind or both is offered at **−10 EUR/MWh**, with the upper half at 0. These are simple synthetic bid controls, not measured subsidy entitlements or forced generation. Accepted gas/coal/nuclear calendar/Ember coefficients, demand, fuel, hydro and grid stay fixed; no refit. An unmodified matched control is necessary because separating formerly equal-price wind/solar columns can change duals and illustrative allocations. Its price MAE is 28.963873, versus the retained accepted baseline 28.963975.
 
-Monthly country/fuel generation-interval mismatch (the existing normalized score, lower is better) changes **0.299475 → 0.299427** for the combined case. This is not a whole-fleet percentage error.
+| Full-year case | Price MAE, EUR/MWh | Within-day correlation | Generation-interval mismatch |
+| --- | ---: | ---: | ---: |
+| Matched control | 28.964 | 0.535 | 0.3007 |
+| IRENA wind subtypes | 28.984 | 0.535 | 0.2965 |
+| PV system-loss sensitivity | 28.892 | 0.535 | 0.2952 |
+| Both input changes | 28.912 | 0.536 | 0.2911 |
+| Both inputs + PV bids | 28.914 | 0.536 | 0.2915 |
+| Both inputs + wind bids | 29.000 | 0.535 | 0.2908 |
+| Both inputs + both bids | 29.004 | 0.535 | 0.2912 |
 
-The direct cases change both price levels and daily shape. The final control preserves each original monthly fuel mean while using daily variation, separating those effects without electricity-price fitting. Retained assumptions include 1.7 MWh thermal/barrel, the existing gas heating-value/efficiency equivalence, and fixed carbon at EUR80/t. Brent is a crude-oil proxy, not delivered generating fuel; the plant heating-value basis remains a limitation.
+All seven cases clear **8,760 optimal hours with zero emergency supply**, retaining all 41 observed-price areas. Generation mismatch is the existing normalized monthly country/fuel interval score, not total-fleet percentage error; conditional allocation intervals do not span every possible equal-cost optimum. No case is promoted automatically. [All-zone hourly-price metrics](/research/dispatch-comparison-2025/renewable-source-prices-by-zone.csv) include every modeled area, with unknown observations blank.
 
-All four new annual cases are optimal with zero emergency supply. Independent source-cell, cost, original-network/physics, primal/dual, price and monthly generation/trade replay passes: maximum physical residual **2.9e-06 MW**, duality gap **EUR 0.000012**. [Download every zone's results](/research/dispatch-comparison-2025/daily-fuel-prices-by-zone.csv). These controlled trials do not replace the accepted baseline.
+![Every modeled zone and every source/bid control: price MAE changes](/research/dispatch-comparison-2025/zone-mae-grid.png)
+
+**Conclusion:** both input changes reduce Europe-wide MAE only from 28.964 to 28.912 EUR/MWh, far from the <10 target. Germany improves from 21.57 to 20.83, while Spain worsens from 24.07 to 24.25. Wind subtype correction improves the quantity score but slightly worsens price MAE on its own; the generic PV loss sensitivity has the lowest price MAE. None of the negative renewable bid controls improves on the combined-input case. These are modest diagnostics, not evidence for adopting a universal negative bid or a measured PV derating.
+
+Independent source-capacity, availability, component-physics, LP dual, price and monthly generation/trade replay verifies all seven cases. Wind/PV source profiles still represent generic turbines, idealized panel geometry and potential-based spatial layouts; subtype capacity corrections do not establish actual site output or resolve curtailment, outages and reporting scope.
+
+## Previous daily-fuel check
+
+Daily EIA Brent/ECB oil quotes and MIBGAS gas indices in ES/PT changed Europe-wide MAE from 28.964 to 28.950 EUR/MWh with coefficients frozen. Gas elsewhere remained monthly TTF; this was not a Europe-wide daily-gas test. Original heating-basis assumptions and explicit first-day fallbacks remained. The source/physics/dual replay is retained; see the [all-zone fuel comparison](/research/dispatch-comparison-2025/daily-fuel-prices-by-zone.csv). The accepted baseline was unchanged.
 
 ## Secondary development evidence
 
@@ -135,9 +145,7 @@ A separate final reconstruction uses **Calendar + Ember**, chosen by the mode of
 | Daily-demeaned price MAE, EUR/MWh | 23.03 | 20.32 |
 | Median covered-fuel generation volume error, % | 50.1 | 42.2 |
 
-![Every modeled zone's baseline and out-of-fold price MAE](/research/dispatch-comparison-2025/zone-mae-grid.png)
-
-Each tile shows baseline → exploratory MAE and signed change; blue improves, red worsens. Gray areas have no observed price: BA, GB, IE-SEM, ME, IT-CALA, FR-COR and XK. [Open the full-size grid](/research/dispatch-comparison-2025/zone-mae-grid.png). All 48 areas remain visible, including every adverse outcome.
+Historical out-of-fold zone metrics remain in the downloads; the all-zone grid above shows the current source/bid experiment.
 
 Generation comparison covers **38 reporting areas**, with different fuel/hour coverage. Its error sums absolute fuel-volume differences and divides by observed generation on matched known hours; it can exceed 100% and is not a share percentage-point error or complete-fleet score. **31/38** areas improve. Saved equal-bid group dispatch is allocated proportionally to original available MW for illustration. Downloads retain conditional lower/upper allocations; they are not jointly attainable or all possible LP optima. Missing observations stay unknown; pumped-storage output remains separate from primary generation.
 
