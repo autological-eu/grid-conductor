@@ -25,6 +25,69 @@ lower MAE and transparent bias/seasonal diagnostics. Native PyPSA parity is an
 optional numerical diagnostic, not the development target. Automatic hourly
 reviews remain disabled.
 
+## Dated nuclear availability follow-up — 19 October 2026
+
+Source cache: `data/nuclear-availability-2025/rte-source-v1/`;
+finite comparison: `data/bidding-zone-network-2025/nuclear-availability-v1/`.
+`nuclear_availability_2025.py` collects RTE's national daily REMIT-derived
+nuclear availability, with original CSV/page hashes. All 365 source dates of 2025
+are present; Paris-date mapping also uses 1 January 2026 explicitly. The small
+original multi-year download remains for exact replay, not additional model years.
+This source is availability, not generation. Daily values span 33.448–56.234 GW,
+mean 45.724 GW, versus accepted flat 46.968 GW (2024 EAF × source nameplate).
+
+`run_nuclear_availability_2025.py` compares the intact accepted witness against
+three fresh full-year controls: reported annual mean, repeated daily values on
+UTC dates, and repeated daily values on Paris dates. Date timezone/subdaily
+aggregation are not certified by this CSV: both mappings are explicit proxies.
+National MW are assigned to original French source members by retained nameplate
+shares, within unchanged nominal capacity; geographic/GSK allocation stays fixed.
+Keep source-country and model geography distinct. This is not per-unit outage
+reconstruction or a day-ahead-known forecast. No new price/generation fit, renewable
+change, hydro work, network relaxation or automatic baseline promotion.
+
+| Full-2025 case | Europe MAE | FR MAE | FR price r | FR-source nuclear TWh |
+| --- | ---: | ---: | ---: | ---: |
+| Accepted baseline | 28.963975 | 23.829589 | 0.802383 | 345.401 |
+| RTE annual mean | 28.912063 | 22.818329 | 0.812338 | 340.208 |
+| RTE daily / UTC dates | 28.947464 | 24.010800 | 0.816868 | 349.161 |
+| RTE daily / Paris dates | 28.949065 | 24.014568 | 0.817133 | 349.193 |
+
+Every witness has 8760 optimal hours / zero emergency supply; all 41 observed
+price zones and all 48 modeled areas remain. Daily generation moves toward the
+371.69 TWh national Ember reference, but source/geographic and reporting scope
+still need reconciliation. Conditional same-bid allocations are not unique actual
+plant dispatch. Daily availability improves FR correlation and generation while
+slightly worsening FR MAE; the mean control improves MAE but worsens generation.
+European generation-interval score changes only 0.299475→0.299385 (Paris); not
+fleet percentage error. No clear joint winner: accepted refit remains unchanged.
+The <10 EUR/MWh target remains unmet; this French daily proxy does not rule out
+better hourly/unit availability data elsewhere.
+
+Three targeted source/calendar/capacity tests pass. Preparation 65.67s; fresh
+three-case clears 67.05/63.15/35.91s; complete comparison 254.79s; peak RSS
+2583.41 MiB. The baseline is a verified reused witness, not a fourth fresh solve.
+Independent `verification-v1/audit.json` checks all four complete witnesses, raw
+source dates/units, DST/boundary mapping, national MW allocation, original network
+physics, LP duals and all annual price/monthly mix/trade metrics. Maximum physical
+residual 2.16e-05 MW; maximum duality gap EUR 0.00117888.
+The auditor filters source dates before parsing numerical cells: blank daily records
+outside the modeled/boundary interval remain unused, never filled as zero.
+The retained report adds two compact CSVs and three nuclear columns to its
+existing all-zone grid, preserving four figures. Original sources and hourly
+witnesses stay ignored. Lint, typecheck, 14 browser-model unit tests, production
+build and Chromium report/workbench smoke checks at 1440/390/320/667px pass.
+CSV coverage checks retain 48 areas / 41 complete price zones and 48 monthly
+case rows; 83 allowlisted public files total 6.76 MiB. No deployment claim follows
+from local output.
+
+Next: reconcile real wind/solar fleet locations and conversion profiles, preserving
+weather-derived availability and separate curtailment/reporting checks. Nuclear
+source timing alone does not explain European price error. Any bid refit after
+input changes must have fresh provenance and separately labelled reconstruction
+metrics; do not refit the frozen control or adopt mean availability because its
+price score is lower despite worse generation.
+
 ## Wind/solar source and resource-bid follow-up — 19 October 2026
 
 Fresh root: `data/bidding-zone-network-2025/renewable-source-bids-v1/`;

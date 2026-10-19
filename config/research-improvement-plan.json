@@ -27,7 +27,8 @@
     {
       "order": 3,
       "work": "Dated nuclear/thermal operational availability",
-      "details": "Audit French/Swedish nuclear and thermal outages/deratings from independent dated fleet or outage records, not dispatch-derived availability. Preserve capacities and all hours; record incompleteness."
+      "details": "Audit French/Swedish nuclear and thermal outages/deratings from independent dated fleet or outage records, not dispatch-derived availability. Preserve capacities and all hours; record incompleteness.",
+      "evidence": "RTE national daily nuclear availability is tested for France with annual-mean and two explicit daily-date mappings. This is a daily national proxy, not verified hourly plant outages; other fleets remain unchanged. No generation-derived availability or automatic promotion."
     },
     {
       "order": 4,
@@ -60,5 +61,6 @@
     }
   ],
   "daily_fuel_experiment_folder": "data/bidding-zone-network-2025/daily-fuel-v2",
-  "renewable_source_experiment_folder": "data/bidding-zone-network-2025/renewable-source-bids-v1"
+  "renewable_source_experiment_folder": "data/bidding-zone-network-2025/renewable-source-bids-v1",
+  "nuclear_availability_experiment_folder": "data/bidding-zone-network-2025/nuclear-availability-v1"
 }

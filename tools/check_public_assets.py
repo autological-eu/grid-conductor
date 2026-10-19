@@ -16,6 +16,8 @@ ALLOWED = [
     'dispatch-comparison-2025/daily-fuel-prices-by-zone.csv',
     'dispatch-comparison-2025/renewable-source-prices-by-zone.csv',
     'dispatch-comparison-2025/renewable-capacity-audit.csv',
+    'dispatch-comparison-2025/nuclear-availability-prices-by-zone.csv',
+    'dispatch-comparison-2025/nuclear-availability-by-month.csv',
     'dispatch-comparison-2025/generation-by-area.csv',
     'dispatch-comparison-2025/generation-by-fuel.csv',
     'dispatch-comparison-2025/national-generation.csv',
@@ -90,6 +92,15 @@ def check():
         for file,sha in [('run_renewable_source_bids_2025.py',study['producer_sha256']),('renewable_source_bids_2025.py',study['helper_sha256']),('audit_renewable_source_bids_2025.py',study['audit']['auditor_sha256'])]:
             assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
         expected.update({'renewable-source-prices-by-zone.csv','renewable-capacity-audit.csv'})
+    if comparison.get('nuclear_availability_evaluation'):
+        study=comparison['nuclear_availability_evaluation']
+        assert study['audit']['summary_sha256']==study['summary_sha256']
+        assert len(study['audit']['certificates'])==4 and study['audit']['source_days']==365
+        assert all(c['hours']==8760 and c['original_component_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in study['audit']['certificates'])
+        assert all(c['optimal_hours']==8760 and c['emergency_mwh']==0 for c in study['annuals'].values())
+        for file,sha in [('run_nuclear_availability_2025.py',study['producer_sha256']),('nuclear_availability_2025.py',study['helper_sha256']),('audit_nuclear_availability_2025.py',study['audit']['auditor_sha256'])]:
+            assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
+        expected.update({'nuclear-availability-prices-by-zone.csv','nuclear-availability-by-month.csv'})
     assert set(comparison['assets']) == expected
     for file, sha in comparison['assets'].items():
         assert hashlib.sha256((folder / 'dispatch-comparison-2025' / file).read_bytes()).hexdigest() == sha

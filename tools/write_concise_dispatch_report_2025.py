@@ -315,6 +315,59 @@ All four new annual cases are optimal with zero emergency supply. Independent so
         daily_receipt=dict(summary_sha256=digest(dfolder/'summary.json'),audit=da,producer_sha256=ds['producer_sha256'],inputs_producer_sha256=din['producer_sha256'],source_coverage=da['source_replay'],
                            outcomes={name:dict(equal_zone_mae=v['prices']['equal_zone_mae'],mean_correlation=v['prices']['mean_correlation'],quantity_errors=v['quantity_errors']) for name,v in ds['outcomes'].items()},
                            annual_clearing_seconds={name:info['clearing_seconds'] for name,info in ds['annuals'].items() if not info.get('external')},preparation_seconds=ds['preparation_seconds'],finalization_command_seconds=ds['end_to_end_seconds'],producer_role=ds['producer_role'])
+    nuclear_section = ''
+    nuclear_receipt = None
+    nuclear_study = None
+    if direction.get('nuclear_availability_experiment_folder'):
+        nfolder=ROOT/direction['nuclear_availability_experiment_folder']
+        ns=json.loads((nfolder/'summary.json').read_text());na=json.loads((nfolder/'verification-v1/audit.json').read_text())
+        assert na['summary_sha256']==digest(nfolder/'summary.json') and len(na['certificates'])==4
+        assert ns['producer_sha256']==digest(ROOT/'tools/run_nuclear_availability_2025.py')
+        assert na['auditor_sha256']==digest(ROOT/'tools/audit_nuclear_availability_2025.py')
+        for name,sha in ns['dependencies'].items():assert digest(ROOT/'tools'/name)==sha
+        for name,sha in ns['source_hashes'].items():assert digest(ROOT/name)==sha
+        assert all(c['hours']==8760 and c['original_component_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in na['certificates'])
+        nt={case:{r['zone']:r for r in v['prices']['zones']} for case,v in ns['outcomes'].items()}
+        nlabels={'baseline':'Accepted baseline','annual_mean':'RTE annual mean','daily_utc':'RTE daily / UTC dates','daily_paris':'RTE daily / Paris dates'}
+        rows=[]
+        for zone in ns['zones']:
+            row=dict(area=zone,known_hours=nt['baseline'][zone]['known_hours'])
+            for case in nlabels:
+                for metric in ['mae_eur_mwh','bias_eur_mwh','correlation','demeaned_mae','demeaned_correlation']:
+                    row[case+'_'+metric]=nt[case][zone].get(metric)
+            rows.append(row)
+        csv_file('nuclear-availability-prices-by-zone.csv',rows)
+        rows=[]
+        for case in nlabels:
+            for month in range(1,13):
+                rows.append(dict(case=case,month=month,source_fr_nuclear_available_twh=ns['profiles'][case]['monthly_available_twh'][month-1],
+                                 source_fr_nuclear_dispatch_illustration_twh=ns['profiles'][case]['monthly_dispatch_twh'][month-1]))
+        csv_file('nuclear-availability-by-month.csv',rows)
+        ntable='\n'.join(f"| {label} | {ns['outcomes'][case]['prices']['equal_zone_mae']:.3f} | {nt[case]['FR']['mae_eur_mwh']:.3f} | {ns['outcomes'][case]['prices']['mean_demeaned_correlation']:.3f} | {ns['profiles'][case]['nuclear_dispatch_twh']:.2f} | {ns['outcomes'][case]['quantity_errors']['generation']:.4f} |" for case,label in nlabels.items())
+        nuclear_section=f'''## Dated nuclear availability — controlled source test
+
+The accepted model applies a flat 2024 national nuclear energy-availability factor throughout 2025. For its French source fleet this permits **{ns['profiles']['baseline']['mean_mw']/1000:.2f} GW** at every hour. [RTE's daily availability series](https://analysesetdonnees.rte-france.com/production/nucleaire), derived from REMIT reporting, provides all **365 dates of 2025**: reported available power ranges **{ns['profiles']['daily_utc']['minimum_mw']/1000:.2f}–{ns['profiles']['daily_utc']['maximum_mw']/1000:.2f} GW**, averaging **{ns['profiles']['daily_utc']['mean_mw']/1000:.2f} GW**. These are available supply, not observed generation.
+
+Three finite controls replace only French **source-country** nuclear availability: a constant RTE annual mean, daily values mapped to UTC dates, and daily values mapped to Paris dates. The mean control separates level from daily shape approximately. The source dates carry no timezone; both mappings are disclosed assumptions, not a certified correction. Paris mapping uses the adjacent **1 January 2026** boundary record and preserves 23/25-hour local days. Each daily value is repeated within its day: **a daily national proxy is not a verified hourly maximum or unit-level outage schedule**. The data are revised historical observations, not evidence of what bidders knew in advance. [EDF's annual Kd](https://opendata.edf.fr/datasets/disponibilite-du-parc-nucleaire-d-edf-sa-depuis-2002) describes technical availability with different exclusions; fleet/definition differences must be reconciled before treating these sources as interchangeable. No rescaling to Kd or observed generation is performed.
+
+National available MW are allocated by retained source-fleet nameplate shares, within original nominal limits. Source membership, geographic placement and static GSKs stay distinct; plant outage geography is unresolved. All renewable inputs, fuel anchors, accepted seasonal/Ember bids, demand, fixed hydro and grid constraints stay unchanged. This test does **not** combine the preceding renewable changes or refit bids.
+
+| Full-2025 case | European price MAE | FR price MAE | Within-day correlation, Europe | FR-source nuclear dispatch, TWh | Generation-interval mismatch |
+| --- | ---: | ---: | ---: | ---: | ---: |
+{ntable}
+
+Price MAEs are EUR/MWh, equal-zone Europe includes all 41 complete observed-price areas, and all four witnesses retain **8,760 optimal hours with zero emergency supply**. National-source dispatch is a proportional allocation illustration, with conditional bounds in the receipt; national Ember/geographic reporting scope remains separate. The normalized monthly generation score is not total-fleet percentage error. [Every zone's price metrics]({PREFIX}nuclear-availability-prices-by-zone.csv) and [monthly available/dispatch quantities]({PREFIX}nuclear-availability-by-month.csv) retain the full comparison.
+
+**Result:** daily availability raises French-source nuclear dispatch from 345.40 to about 349.2 TWh, closer to the 371.69 TWh national Ember reference but still not a scope-reconciled match. France's price correlation rises from 0.802 to about 0.817, while its MAE worsens from 23.83 to about 24.01 EUR/MWh. Europe-wide MAE only changes from 28.964 to about 28.95. The annual-mean control lowers price MAE further but worsens the nuclear generation total. Neither mapping nor mean-versus-shape controls deliver a clear joint improvement, and the <10 target remains distant. This French daily proxy does not rule out the value of better hourly/unit outage data elsewhere.
+
+The grid below adds the three nuclear controls against the accepted baseline, separately from the wind/PV experiment's matched control. Independent replay checks source records/calendar, national MW allocation, original network physics, LP duals and annual price/mix/trade metrics. No baseline promotion or validated investment effect follows from this test.
+
+'''
+        nuclear_study=(ns,nt)
+        nuclear_receipt=dict(summary_sha256=digest(nfolder/'summary.json'),audit=na,producer_sha256=ns['producer_sha256'],helper_sha256=ns['dependencies']['nuclear_availability_2025.py'],
+                             source=json.loads((ROOT/ns['source_folder']/'receipt.json').read_text()),profiles=ns['profiles'],
+                             outcomes={case:dict(equal_zone_mae=v['prices']['equal_zone_mae'],within_day_correlation=v['prices']['mean_demeaned_correlation'],quantity_errors=v['quantity_errors']) for case,v in ns['outcomes'].items()},
+                             annuals=ns['annuals'],preparation_seconds=ns['preparation_seconds'],end_to_end_seconds=ns['end_to_end_seconds'])
     renewable_section = ''
     renewable_receipt = None
     if direction.get('renewable_source_experiment_folder'):
@@ -345,13 +398,21 @@ All four new annual cases are optimal with zero emergency supply. Independent so
                     for year,value in zip([2024,2025],values):row[f'irena_{family}_{year}_mw']=value
             cap_rows.append(row)
         csv_file('renewable-capacity-audit.csv',cap_rows)
-        limit=max(.5,float(np.nanquantile(abs(deltas),.95)));fig,ax=plt.subplots(figsize=(12,15))
+        columns=['Control','Wind inputs','PV losses','Both inputs','+ PV bid','+ wind bid','+ both bids']
+        if nuclear_study:
+            ns,nt=nuclear_study;assert ns['zones']==rs['zones']
+            extra=np.full((len(rs['zones']),3),np.nan)
+            for j,zone in enumerate(rs['zones']):
+                if nt['baseline'][zone]['known_hours']:
+                    for k,case in enumerate(['annual_mean','daily_utc','daily_paris']):extra[j,k]=nt[case][zone]['mae_eur_mwh']-nt['baseline'][zone]['mae_eur_mwh']
+            deltas=np.column_stack([deltas,extra]);columns+=['FR nuc mean','FR nuc UTC','FR nuc Paris']
+        limit=max(.5,float(np.nanquantile(abs(deltas),.95)));fig,ax=plt.subplots(figsize=(14,15))
         cmap=plt.get_cmap('RdBu_r').copy();cmap.set_bad('#eceff2')
         im=ax.imshow(np.ma.masked_invalid(deltas),cmap=cmap,vmin=-limit,vmax=limit,aspect='auto')
-        ax.set_xticks(range(len(names)),['Control','Wind inputs','PV losses','Both inputs','+ PV bid','+ wind bid','+ both bids'],rotation=25,ha='right')
-        ax.set_yticks(range(len(rs['zones'])),rs['zones']);ax.set_title('2025 hourly price MAE change versus matched control\nEUR/MWh · blue improves, red worsens · gray has no observed prices')
+        ax.set_xticks(range(len(columns)),columns,rotation=30,ha='right')
+        ax.set_yticks(range(len(rs['zones'])),rs['zones']);ax.set_title('2025 hourly price MAE change versus each experiment’s unchanged control\nEUR/MWh · blue improves, red worsens · gray has no observed prices')
         for j in range(len(rs['zones'])):
-            for k in range(len(names)):
+            for k in range(len(columns)):
                 if np.isfinite(deltas[j,k]):ax.text(k,j,f'{deltas[j,k]:+.2f}',ha='center',va='center',fontsize=7,color='white' if abs(deltas[j,k])>limit*.65 else '#182a3b')
         fig.colorbar(im,ax=ax,shrink=.65,label=f'Change in MAE (colors clipped at ±{limit:.2f}; cell numbers show actual change)')
         fig.tight_layout();save(fig,'zone-mae-grid.png')
@@ -417,7 +478,7 @@ The following national quantities come from the **accepted single annual refit**
 
 [Ember's daily fuel-cost methodology](https://ember-energy.org/data/european-electricity-prices-and-costs/) identifies national gas hubs, API2 coal and EU/UK carbon contracts, but its embedded fuel chart explicitly restricts downloads because of licensing; no series has been adopted. [MIBGAS's 2025 archive](https://www.mibgas.es/en/file-access?path=AGNO_2025/XLS) now has **365 source-replayed delivery days** of Spanish PVB and Portuguese VTP last/average day-ahead indices. These are source-computed indices, including provider estimates in illiquid periods; they are not a Europe-wide TTF substitute. The daily trial below uses them in ES/PT; the accepted baseline remains unchanged. [EIA daily Brent](https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls) is an oil-proxy candidate. The daily trial below documents reconciled delivery dates and nontrading-day treatment; broader gas-hub coverage, heating-value/efficiency and delivered-fuel assumptions remain open.
 
-{renewable_section}{daily_section}## Secondary development evidence
+{nuclear_section}{renewable_section}{daily_section}## Secondary development evidence
 
 The sections and figures below retain the **previous unfitted baseline versus out-of-fold seasonal-model comparison** as secondary development evidence. Their “baseline” labels mean the previous control; their “exploratory” results combine three fits and are **not the accepted single annual refit**. Do not mix those generation/price results with the annual-refit headline.
 
@@ -539,7 +600,7 @@ Independent replay checks calendar/DST features, month exclusion, price/Ember pr
         report=report[:legacy_start]+"Historical out-of-fold zone metrics remain in the downloads; the all-zone grid above shows the current source/bid experiment.\n\n"+report[legacy_end:]
     ARTICLE.write_text(report)
     assets = {path.name: digest(path) for path in sorted(PUBLIC.iterdir()) if path.name != 'summary.json'}
-    receipt = dict(renewable_source_evaluation=renewable_receipt, daily_fuel_evaluation=daily_receipt, research_direction=dict(plan_sha256=digest(ROOT/'config/research-improvement-plan.json'),
+    receipt = dict(nuclear_availability_evaluation=nuclear_receipt, renewable_source_evaluation=renewable_receipt, daily_fuel_evaluation=daily_receipt, research_direction=dict(plan_sha256=digest(ROOT/'config/research-improvement-plan.json'),
                        diagnosis_sha256=digest(diagnostic_folder/'diagnosis.json'),audit=diagnosis_audit,
                        producer_sha256=diagnosis['producer_sha256'],mix_producer_sha256=diagnostic_summary['producer_sha256'],
                        mix_auditor_sha256=diagnostic_mix_audit['auditor_sha256'],mix_audit=diagnostic_mix_audit,

@@ -49,6 +49,17 @@ negative renewable offers are synthetic controls, not observed subsidies.
 Retain exactly four report figures; latest all-zone source/bid grid replaces the
 historical OOF grid, with old comparison metrics still separately downloadable.
 
+The subsequent source-availability follow-up uses nuclear_availability_2025.py,
+run_nuclear_availability_2025.py and independent audit_nuclear_availability_2025.py.
+RTE national daily French nuclear availability is separate from generation. Keep
+annual-mean, UTC-date and Paris-date controls separate; source date timezone and
+subdaily aggregation are not certified. Use the adjacent boundary date explicitly,
+never fill missing data. Allocate national available MW by retained source-country
+nameplate shares within existing nominal limits, keeping geographic/GSK proxies.
+This is not a per-unit outage reconstruction or day-ahead-known information set.
+Renewables and accepted bids/hydro/grid remain frozen; no automatic promotion.
+Use the existing report/four figures, compact per-zone and monthly CSVs only.
+
 Read PRODUCT.md and TASKS.md first. PRODUCT owns requirements, TASKS owns current
 priorities/evidence, README owns setup. Develop on public-v1. Main promotions
 require explicit user authorization; the alpha promotion was authorized on

@@ -1,4 +1,331 @@
 {
+  "nuclear_availability_evaluation": {
+    "summary_sha256": "ee9919b5c56e082a0bdc96cf395e081d05365acebe4d561adf4f03520de08122",
+    "audit": {
+      "status": "rte_source_calendar_national_capacity_allocation_physics_duals_prices_and_quantities_replayed",
+      "summary_sha256": "ee9919b5c56e082a0bdc96cf395e081d05365acebe4d561adf4f03520de08122",
+      "auditor_sha256": "4603b80ef6d42af87c8f088861bbb350f34d685a3760affe3842e1680cf55a85",
+      "source_days": 365,
+      "adjacent_boundary_day": "2026-01-01",
+      "certificates": [
+        {
+          "case": "baseline",
+          "hours": 8760,
+          "original_component_residual_mw": 1.3295419805103847e-06,
+          "source_group_bound_residual_mw": 3.6312052886561605e-10,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.7689174286749108e-09,
+          "complementarity_maximum_eur": 0.00011862650426054302,
+          "duality_gap_maximum_eur": 1.2088567018508911e-05,
+          "price_decomposition_maximum_eur_mwh": 2.7689139869835344e-09
+        },
+        {
+          "case": "annual_mean",
+          "hours": 8760,
+          "original_component_residual_mw": 2.0679931367340032e-07,
+          "source_group_bound_residual_mw": 3.563957553258337e-10,
+          "objective_error_eur": 3.725290298461914e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.1544501738191e-09,
+          "complementarity_maximum_eur": 2.8554131870805245e-05,
+          "duality_gap_maximum_eur": 1.2381002306938171e-05,
+          "price_decomposition_maximum_eur_mwh": 2.154450839952915e-09
+        },
+        {
+          "case": "daily_utc",
+          "hours": 8760,
+          "original_component_residual_mw": 2.1595843804789183e-05,
+          "source_group_bound_residual_mw": 1.1973061601825112e-10,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.5557813469745394e-09,
+          "complementarity_maximum_eur": 0.0023401805945749217,
+          "duality_gap_maximum_eur": 0.0011788830161094666,
+          "price_decomposition_maximum_eur_mwh": 2.55579379881965e-09
+        },
+        {
+          "case": "daily_paris",
+          "hours": 8760,
+          "original_component_residual_mw": 3.6603132684831508e-06,
+          "source_group_bound_residual_mw": 1.330614902026207e-10,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.040503321865117e-09,
+          "complementarity_maximum_eur": 0.0003255014794701251,
+          "duality_gap_maximum_eur": 3.252178430557251e-06,
+          "price_decomposition_maximum_eur_mwh": 2.0405224177011405e-09
+        }
+      ],
+      "elapsed_seconds": 149.65150254699984
+    },
+    "producer_sha256": "0588fa42f0845b4f0184f9d733ed5fc86c73c2a454fa7d80bff86636242de5f4",
+    "helper_sha256": "a224782a1f1ec16c34a7bdd803ec6e82cd9f8e58a4e7dfea7ee28d0130d4a3db",
+    "source": {
+      "provider": "RTE",
+      "retrieved_utc": "2026-10-19T06:07:32.023791+00:00",
+      "sources": {
+        "availability.csv": {
+          "url": "https://analysesetdonnees.rte-france.com/system/files/graphDownloads/RTE_PAD_disponibilite_nucleaire.csv",
+          "sha256": "1e97d04f8dd0e00be742c39a7ddf831d38e94544ce83a4e248a3f16f9396bd9b",
+          "bytes": 174228
+        },
+        "methodology.html": {
+          "url": "https://analysesetdonnees.rte-france.com/production/nucleaire",
+          "sha256": "e50c5d68fbbfe9a87f607bdc75c9e805931697a2256002d7a96d530a07c8484e",
+          "bytes": 429378
+        }
+      },
+      "producer_sha256": "a224782a1f1ec16c34a7bdd803ec6e82cd9f8e58a4e7dfea7ee28d0130d4a3db",
+      "days_2025": 365,
+      "minimum_mw": 33447.97,
+      "mean_mw": 45723.52619178082,
+      "maximum_mw": 56234.33,
+      "scope": "French national reported nuclear availability; original small multi-year CSV retained for exact source replay, only2025 plus Paris boundary used."
+    },
+    "profiles": {
+      "baseline": {
+        "minimum_mw": 46968.35,
+        "mean_mw": 46968.34999999999,
+        "maximum_mw": 46968.35,
+        "available_twh": 411.44274599999994,
+        "nuclear_dispatch_twh": 345.40120985809864,
+        "dispatch_lower_twh": 345.40120985809864,
+        "dispatch_upper_twh": 345.40120985809864,
+        "monthly_available_twh": [
+          34.94445239999999,
+          31.56273119999999,
+          34.94445239999999,
+          33.81721199999999,
+          34.94445239999999,
+          33.81721199999999,
+          34.94445239999999,
+          34.94445239999999,
+          33.81721199999999,
+          34.94445239999999,
+          33.81721199999999,
+          34.94445239999999
+        ],
+        "monthly_dispatch_twh": [
+          33.56163700218839,
+          30.88081192895957,
+          31.031677738240262,
+          23.684266276268854,
+          19.48901722552283,
+          25.24510221522524,
+          31.20801442252489,
+          28.878773823977873,
+          26.710544166787734,
+          28.662143975029707,
+          31.630857609427295,
+          34.41836347394592
+        ]
+      },
+      "annual_mean": {
+        "minimum_mw": 45723.52619178081,
+        "mean_mw": 45723.52619178081,
+        "maximum_mw": 45723.52619178081,
+        "available_twh": 400.53808943999985,
+        "nuclear_dispatch_twh": 340.20803456868543,
+        "dispatch_lower_twh": 340.20803456868543,
+        "dispatch_upper_twh": 340.20803456868543,
+        "monthly_available_twh": [
+          34.01830348668492,
+          30.726209600876704,
+          34.01830348668492,
+          32.92093885808218,
+          34.01830348668492,
+          32.92093885808218,
+          34.01830348668492,
+          34.01830348668492,
+          32.92093885808218,
+          34.01830348668492,
+          32.92093885808218,
+          34.01830348668492
+        ],
+        "monthly_dispatch_twh": [
+          32.83294980902087,
+          30.181096068904136,
+          30.48501563491017,
+          23.560802521250004,
+          19.473732183529332,
+          25.15723583751071,
+          30.709834382256965,
+          28.47448316895161,
+          26.47456249669001,
+          28.250449645635545,
+          30.993958793665975,
+          33.613914026360085
+        ]
+      },
+      "daily_utc": {
+        "minimum_mw": 33447.97,
+        "mean_mw": 45723.52619178082,
+        "maximum_mw": 56234.329999999994,
+        "available_twh": 400.53808943999996,
+        "nuclear_dispatch_twh": 349.1605357714886,
+        "dispatch_lower_twh": 349.1605357714886,
+        "dispatch_upper_twh": 349.1605357714886,
+        "monthly_available_twh": [
+          40.300148400000005,
+          32.533995600000004,
+          34.106639040000005,
+          29.573869199999997,
+          29.20221,
+          29.578634159999996,
+          32.4424884,
+          31.94514456,
+          32.80696416,
+          32.5462416,
+          35.295014159999994,
+          40.206740159999995
+        ],
+        "monthly_dispatch_twh": [
+          37.82270885046139,
+          31.85760802383119,
+          30.788381461992294,
+          22.605016588886166,
+          18.98919007242292,
+          24.236973470095684,
+          29.728064411197384,
+          27.367413113253075,
+          26.65492092106801,
+          27.473108188926997,
+          33.00439084397645,
+          38.632759825377036
+        ]
+      },
+      "daily_paris": {
+        "minimum_mw": 33447.97,
+        "mean_mw": 45723.80844863014,
+        "maximum_mw": 56234.329999999994,
+        "available_twh": 400.54056201,
+        "nuclear_dispatch_twh": 349.1930589432708,
+        "dispatch_lower_twh": 349.1930589432708,
+        "dispatch_upper_twh": 349.1930589432708,
+        "monthly_available_twh": [
+          40.298223099999994,
+          32.53116729,
+          34.10531203,
+          29.561811619999997,
+          29.2092825,
+          29.575303899999998,
+          32.4536761,
+          31.9406013,
+          32.818766919999995,
+          32.53253202,
+          35.30428704,
+          40.209598189999994
+        ],
+        "monthly_dispatch_twh": [
+          37.8198361209674,
+          31.85561957472457,
+          30.78916420890237,
+          22.602612434619182,
+          19.004636780275032,
+          24.238223892085173,
+          29.73911486513035,
+          27.364955772417748,
+          26.66237545857137,
+          27.47936984446387,
+          33.00547411397647,
+          38.63167587713727
+        ]
+      }
+    },
+    "outcomes": {
+      "baseline": {
+        "equal_zone_mae": 28.9639751169547,
+        "within_day_correlation": 0.5351306856563512,
+        "quantity_errors": {
+          "price": 28.9639751169547,
+          "generation": 0.2994748680764233,
+          "trade": 0.17190582677419325,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "annual_mean": {
+        "equal_zone_mae": 28.912062731745763,
+        "within_day_correlation": 0.5357884494320105,
+        "quantity_errors": {
+          "price": 28.912062731745763,
+          "generation": 0.299315199846008,
+          "trade": 0.1719671316038601,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "daily_utc": {
+        "equal_zone_mae": 28.947464303323585,
+        "within_day_correlation": 0.5370801518614629,
+        "quantity_errors": {
+          "price": 28.947464303323585,
+          "generation": 0.2993846587204313,
+          "trade": 0.1721416179630584,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      },
+      "daily_paris": {
+        "equal_zone_mae": 28.949065332039325,
+        "within_day_correlation": 0.5369875044345327,
+        "quantity_errors": {
+          "price": 28.949065332039325,
+          "generation": 0.2993852207269791,
+          "trade": 0.17217966607802426,
+          "price_areas": 41,
+          "generation_targets": 1620,
+          "trade_targets": 396
+        }
+      }
+    },
+    "annuals": {
+      "baseline": {
+        "witness": "data/bidding-zone-network-2025/seasonal-calendar-v1/refit.npz",
+        "witness_sha256": "2b89af50c32f40e05fea1377657efd8f287a1e375613f5620e1afb76a2741693",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 36.46489929201198,
+        "emergency_mwh": 0.0,
+        "emergency_hours": 0,
+        "external": true
+      },
+      "annual_mean": {
+        "witness": "annual_mean.npz",
+        "witness_sha256": "6eae394bde16c20b01ff482f563cdc966c24fb25f12dac162b11b5de2f777dc3",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 67.0546049059999,
+        "emergency_mwh": 0.0
+      },
+      "daily_utc": {
+        "witness": "daily_utc.npz",
+        "witness_sha256": "fefb73a31dfb3ab822a3e1237d2953c8cbad7b05b2a9e2b3ca0c61ba0b731cac",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 63.15301744399994,
+        "emergency_mwh": 0.0
+      },
+      "daily_paris": {
+        "witness": "daily_paris.npz",
+        "witness_sha256": "55684ef5de8e286a464356660fc0a6360acaddc7a0babc99325f58383f4de8ff",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 35.910422036,
+        "emergency_mwh": 0.0
+      }
+    },
+    "preparation_seconds": 65.66648333600006,
+    "end_to_end_seconds": 254.79014988400013
+  },
   "renewable_source_evaluation": {
     "summary_sha256": "8fc6098433777cb844bee2d87317c73c8e7b5c98399a399baf5c0b5390e488b9",
     "audit": {
@@ -431,7 +758,7 @@
     "producer_role": "re-export and source/cost replay of sealed initial clears"
   },
   "research_direction": {
-    "plan_sha256": "d96f769db43c0af167925066ce8c79ededd5697b9b516926b17de16a8354823b",
+    "plan_sha256": "b2e2b17771a866383f063a65e6be540ebd145d19bc14c71462638a257a3dbf0a",
     "diagnosis_sha256": "832ee83b2c8d5db92c8c80c986b53709052c82ad9d51472ccb79ccaf539a084c",
     "audit": {
       "status": "accepted_refit_price_monthly_mix_and_target_metrics_replayed",
@@ -555,8 +882,8 @@
   },
   "derived_producer_sha256": "a47c8743536ca208c44a6f469adef88be51f5801120d570b60fb836d8cba9b85",
   "derived_producer_file": "prepare_seasonal_dispatch_report_2025.py",
-  "renderer_sha256": "5985feac6224e86c4428c1459fdee48b0775dbfd76d88cce3af552bb72a36467",
-  "article_sha256": "f48c4c2aba1679c323bdd12e31e51b2fe60cfe824b6137327fdeb938b2d1cb9d",
+  "renderer_sha256": "17dbe45171d3f78119ab831d0a3fcd8d632bef98b9e52dff7f63d647a2724ad1",
+  "article_sha256": "0d47559b98aced6e94be37ebe8fb8528b4f3d30c407b37cbbe70fd77d8d2e682",
   "assets": {
     "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
     "daily-prices.png": "e6f39cc33c519d07425c68a6e44b2c6827e968151d4160e098c0de4980d9a4c1",
@@ -564,11 +891,13 @@
     "generation-by-fuel.csv": "29d66b4145d615de418a7f56514c6f75e18f0eb0bcc49f5b9ad3232032ab4dfd",
     "national-generation.csv": "218d4a7eee9d94dcb2fed9a9eb524713eb0303bdbfbce16aac4e419566cd7523",
     "national-mix.png": "ba99246236027a0eaba93b36460fc3d0b250c72ecbf3cf8ce586a75645e1c4c4",
+    "nuclear-availability-by-month.csv": "d7e7925ebf1f11f6ae3f0e1aac4c952d027072e3f28816a81b5b6fcf390139b6",
+    "nuclear-availability-prices-by-zone.csv": "b2cf42359fe36e71a92117d5c42b5619d477db892e5ee61ed01d7d4635e0a292",
     "overview.png": "16c5b9a09394bdfe1bd1bd40b8935d92d7152e7daafa648510568c1a36488574",
     "prices-by-zone.csv": "99e1a5a06dc88aa8fff022546f9e70f3a83df58df7f42123e9e22b2abab3dcaa",
     "renewable-capacity-audit.csv": "c60afa3593f8f9aacf105dcb528cc801cf723af0bf6f4083d3dacdb73280137c",
     "renewable-source-prices-by-zone.csv": "08472614bff37ba147d6a52839da407ff7fa2fde9473edede32e47a246d66345",
-    "zone-mae-grid.png": "ca5b39e48483907a4acad4334c3af71f70f3e403e5b9b6176511d12b5211b130"
+    "zone-mae-grid.png": "ebd926a4269395b534aa3fcb4fc70f886a8bebf8cf55e2f8ddc68d8582c5b04b"
   },
   "limitations": [
     "Country Ember and zonal A75 sources are separate. Germany generation excludes LU; France uses national model membership including FR-COR.",

@@ -76,6 +76,12 @@ separately from verified country-fleet corrections. Resource-specific renewable
 offers may be investigated with matched-formulation controls and full-year price
 and generation evidence; synthetic negative bids do not establish actual subsidies.
 
+Operational availability inputs must remain distinct from actual generation and
+annual energy factors. National daily availability mapped to hourly plant offers
+is a labelled proxy: disclose units, source dates, timezone/aggregation uncertainty,
+within-country allocation and nominal-capacity limits. Revised historical outage
+information does not establish what was known before day-ahead bidding.
+
 Daily fuel inputs must identify quote/delivery dates, hub coverage, currency and
 thermal heating-value basis. Apply them to source fuel costs before the retained
 resource bid adjustments and clearing. Keep unavailable hubs explicit; regional

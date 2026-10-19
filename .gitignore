@@ -59,6 +59,7 @@ data/synthetic-europe-physical-2025-irena-linear/
 # Fixed-reservoir screening working witnesses
 data/fixed-reservoir-screening-2025/
 data/bidding-zone-network-2025/
+data/nuclear-availability-2025/
 
 # Perfect-foresight dispatch witnesses and offline verification
 data/perfect-foresight-2025/
@@ -130,6 +131,8 @@ data/daily-market-2025/
 !/public/research/dispatch-comparison-2025/daily-fuel-prices-by-zone.csv
 !/public/research/dispatch-comparison-2025/renewable-source-prices-by-zone.csv
 !/public/research/dispatch-comparison-2025/renewable-capacity-audit.csv
+!/public/research/dispatch-comparison-2025/nuclear-availability-prices-by-zone.csv
+!/public/research/dispatch-comparison-2025/nuclear-availability-by-month.csv
 !/public/research/dispatch-comparison-2025/generation-by-area.csv
 !/public/research/dispatch-comparison-2025/generation-by-fuel.csv
 !/public/research/dispatch-comparison-2025/national-generation.csv
