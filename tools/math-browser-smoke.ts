@@ -17,7 +17,19 @@ try {
         if (response.status() >= 400) failures.push(`${response.status()} ${response.url()}`);
       });
       await page.goto(`${base}${article.path}`);
-      await page.locator(".katex").first().waitFor();
+      // Timer polling avoids animation-frame starvation across fresh headless contexts.
+      // Require real rendered geometry, not merely an attached math placeholder.
+      await page.waitForFunction(
+        () => {
+          const math = document.querySelector(".research-prose .katex");
+          if (!math) return false;
+          const box = math.getBoundingClientRect();
+          return box.width > 0 && box.height > 0 && getComputedStyle(math).visibility !== "hidden";
+        },
+        null,
+        { polling: 100, timeout: 30000 },
+      );
+      assert(await page.locator(".katex").first().isVisible());
       await page.evaluate(() => document.fonts.ready);
       if (article.display) assert((await page.locator(".katex-display").count()) >= 1);
       assert((await page.locator(".katex").count()) > 1, "Inline maths also renders");

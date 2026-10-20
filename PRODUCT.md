@@ -436,3 +436,17 @@ coverage/provenance, immutable model input prerequisites and minimal assets for
 the two retained reports. Prefer compact baseline metrics over shipping complete
 intermediate arrays. Carbon metrics must reproduce the original hourly function
 for every displayed border. Chart/download format changes must preserve values.
+
+## Joint supply and network inverse modelling
+
+The user authorized joint calibration against generation mix and observed zonal
+prices, allowing physically consistent changes to supply availability and network
+constraints. Use a small, predeclared parameterization with independent source
+bounds where available; explicitly label experimental bounds when independent
+evidence cannot certify them. Preserve topology, electrical equations, island/link
+physics, original weather chronology and water conservation unless a separately
+specified experiment changes them faithfully. Fit effective limits separately
+from impedance or physical expansion. Observations constrain the forward model;
+never overwrite cleared prices or replace weather availability with dispatch.
+Report multiple explanations and adverse regional outcomes where applicable.
+A fitted grid is not a verified physical network or an investment counterfactual.

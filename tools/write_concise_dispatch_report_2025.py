@@ -602,6 +602,10 @@ Independent replay checks calendar/DST features, month exclusion, price/Ember pr
     if direction.get('inverse_bid_ensemble_folder'):
         from bid_ensemble_report_2025 import render
         report,inverse_receipt=render(ROOT/direction['inverse_bid_ensemble_folder'],PUBLIC,PREFIX)
+    joint_receipt = None
+    if direction.get('joint_network_calibration_folder'):
+        from joint_network_report_2025 import render as render_joint
+        report,joint_receipt=render_joint(ROOT/direction['joint_network_calibration_folder'],PUBLIC,PREFIX)
     ARTICLE.write_text(report)
     assets = {path.name: digest(path) for path in sorted(PUBLIC.iterdir()) if path.name != 'summary.json'}
     receipt = dict(nuclear_availability_evaluation=nuclear_receipt, renewable_source_evaluation=renewable_receipt, daily_fuel_evaluation=daily_receipt, research_direction=dict(plan_sha256=digest(ROOT/'config/research-improvement-plan.json'),
@@ -639,6 +643,14 @@ Independent replay checks calendar/DST features, month exclusion, price/Ember pr
         receipt['period']='All8760 hours of2025; in-sample bounded inverse reconstruction'
         receipt['legacy_limitations']=receipt.pop('limitations')
         receipt['limitations']=['Full2025 fit and selection, not independent forecast validation.','Synthetic effective bids are not uniquely identified actual offers.','Finite fit spread is not a posterior or calibrated confidence interval.','Original physical/input and fixed-hydro limitations remain; no paired investment or browser integration.']
+    if joint_receipt:
+        receipt['joint_network_evaluation']=joint_receipt
+        receipt['publication_scope']='Primary report and four figures: joint supply/network inverse calibration; prior bid-only/source/OOF fields and CSVs are supporting evidence.'
+        from audit_joint_report_2025 import audit_public as audit_joint_public
+        joint_receipt['report_audit']=audit_joint_public(ROOT/direction['joint_network_calibration_folder'],receipt,PUBLIC,ARTICLE)
+        receipt['models']={k:joint_receipt['labels'][k] for k in joint_receipt['shown']}
+        receipt['period']='All8760 hours of2025; in-sample joint supply/network inverse calibration'
+        receipt['limitations']=['All2025 fit/selection, not independent forecasting.','Effective AC headroom/wind derating are experimental bounds, not verified physical corrections.','Topology/PTDF/static GSK/HVDC/demand/fixed hydro remain unchanged.','National five-fuel and implied-export checks are not certified zonal generation or physical border-flow validation.','No recovered true grid/bids, posterior, investment acceptance or browser integration.']
     (PUBLIC / 'summary.json').write_text(json.dumps(receipt, indent=2, allow_nan=False) + '\n')
     print(f'Wrote {len(report.split())} words; {len(assets)} compact assets; no market solve')
 

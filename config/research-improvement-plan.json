@@ -36,7 +36,7 @@
       "details": "Investigate resource-specific variable costs, simple operating/CHP conditions and bounded low/negative renewable offers; compare mix and daily price shape. Current zero renewable bids and clipped thermal bids miss many negative-price episodes. Nordic excess negative prices need fixed-injection/geography/constraint diagnosis, not a universal negative-bid fix. No hydro-flexibility restart."
     }
   ],
-  "experiment_policy": "One source correction at a time from accepted refit; keep fixed-hydro chronology/network physics; freeze inherited calibration for input-only attribution, then label any refit separately. Every candidate needs complete annual clearing, independent physics and price/mix replay. Price MAE reductions do not excuse material unexplained mix regressions.",
+  "experiment_policy": "Input-only source controls retain frozen accepted bids and physics for attribution. The user-authorized joint inverse trial separately allows predeclared bounded effective AC ratings and source-wind availability with two frozen bid anchors; preserve topology/PTDF/static GSK/HVDC/demand/fixed hydro and source chronology. Every case requires full-year and independent changed-source/component-physics/quantity/price replay. No automatic baseline promotion or investment certification.",
   "sources": [
     {
       "name": "Ember European electricity prices and costs",
@@ -63,5 +63,6 @@
   "daily_fuel_experiment_folder": "data/bidding-zone-network-2025/daily-fuel-v2",
   "renewable_source_experiment_folder": "data/bidding-zone-network-2025/renewable-source-bids-v1",
   "nuclear_availability_experiment_folder": "data/bidding-zone-network-2025/nuclear-availability-v1",
-  "inverse_bid_ensemble_folder": "data/bidding-zone-network-2025/inverse-bid-ensemble-v1"
+  "inverse_bid_ensemble_folder": "data/bidding-zone-network-2025/inverse-bid-ensemble-v1",
+  "joint_network_calibration_folder": "data/bidding-zone-network-2025/joint-network-calibration-v4"
 }

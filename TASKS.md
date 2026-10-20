@@ -25,7 +25,91 @@ lower MAE and transparent bias/seasonal diagnostics. Native PyPSA parity is an
 optional numerical diagnostic, not the development target. Automatic hourly
 reviews remain disabled.
 
-## Current work — bounded inverse market modelling, 19 October 2026
+## Current work — joint supply/network calibration, 20 October 2026
+
+User requested extending inverse modelling to underlying network and generation
+inputs. Fresh design: config/joint-network-calibration-2025.json. Two frozen bid
+anchors (accepted refit, prior inverse joint winner), global AC limits0.85/1/1.15,
+wind availability1/0.9 form12 states; four additional Nordic-incident AC limit
+controls use original wind. Exactly16 unique states, two prior anchors and14 new parameter states. Fresh root:
+data/bidding-zone-network-2025/joint-network-calibration-v4/ (linked source trial v3).
+
+The accepted source 0.7 AC limit factor becomes0.595/0.805 where adjusted;
+nameplates, susceptance/PTDF, topology, static GSK, offsets, islands, HVDC bounds/
+losses, demand and fixed hydro remain unchanged. Wind changes preserve weather
+shape and source-country membership and update both clearing and allocation MW.
+These bounds are calibration assumptions, not verified JAO/IRENA corrections.
+No verified physical-border-flow objective is available in this trial: national
+implied net exports are a distinct soft check. Prior inverse states stay frozen.
+
+The first driver was interrupted after tightened AC limits repeatedly reported
+HiGHS Infeasible; it would otherwise scan the year and abort the entire search.
+The complete accepted-bid wind0.9 witness is retained/reused with original producer/
+helper/design hashes in joint-network-calibration-v1/. The amended driver saves
+a numerical Farkas certificate and rejects a candidate at its first certified
+infeasible hour; it never scores partial years. Parameter bounds/objective and
+all complete-year eligibility gates are unchanged. An initial restart stopped
+before new clears because normalized saved JSON was incorrectly compared to the
+original config-byte hash; code-byte and semantic-design preflight was corrected
+and moved before model preparation. Original source hashes remain recorded.
+A small certificate/sign-tamper
+test passes alongside the four parameter/score tests. Interrupted work and reused
+witness runtime must stay separate from the current driver total.
+
+The declared search is computed: eight complete years, six first-hour Farkas
+rejections and two initially unresolved Not Set cases. The latter contain known
+same-bid/same-wind feasible controls under relaxed limits (residuals2.35e-6 /
+1.70e-5 MW); repair_joint_network_calibration_2025.py retries only these identical
+states with HiGHS scheduler reset and presolve off, tolerance still1e-8. Both now
+have complete years, yielding ten annual witnesses plus six numerical rejection
+certificates. No parameter grid/objective changed. Independent replay now passes all ten annuals, six Farkas certificates,
+exact grid/score/selection and two complete matched-backend control years.
+Maximum native residual1.70339e-5 MW; duality gap EUR5.96717e-5. Matched numerical
+backend mean absolute observed-price differences are2.78088e-12 /2.05166e-12
+EUR/MWh; the price gains are not explained by that numerical change. Audit953.74s.
+Numerical/source consistency is not empirical or investment acceptance.
+
+| Case | Price MAE | Within-day MAE | Generation interval score | Implied-trade score |
+| --- | ---: | ---: | ---: | ---: |
+| Accepted baseline | 28.963975 | 20.063474 | 0.299475 | 0.171906 |
+| Prior bid-only joint winner | 28.166750 | 19.567808 | 0.255115 | 0.143571 |
+| Joint winner: inverse bids, Nordic AC×1.15, original wind | 27.751661 | 18.982988 | 0.254754 | 0.143794 |
+| Price leader: inverse bids, all AC×1.15, original wind | 27.740168 | 18.861627 | 0.255563 | 0.147539 |
+
+The joint winner lowers baseline MAE4.19%, within-day error5.39%, generation score
+14.93% and trade score16.35%; mean zonal r0.573119→0.610426. These are score
+changes, not TWh percentage errors or recovered physical capacities. NO5 MAE
+47.29→32.56/r-0.147→0.272, but NO2/NO4, all Swedish zones and France worsen
+against baseline. Wind0.9 is not selected. First rejected certificates involve
+five NO/SE branch rows, not proof of a real-world shortage or unique causal lines.
+The fitted headroom lies at the test boundary and is not a verified JAO domain.
+No baseline or browser promotion. The <10 target remains unmet.
+
+The retained report is rewritten in2,948 words, retaining four figure filenames,
+with all16 cases plus shown-model zonal-price and national fuel CSVs. Independent
+report CSV/selection replay, asset allowlist (89 files /7.14 MiB), lossless metadata
+packing and production build pass. Production Chromium workbench/report smoke
+passes1440/390/320/667 px. The original locator visibility wait timed out both
+concurrently and in isolation; direct checks showed rendered maths at all six
+article/viewport combinations. The smoke check now polls actual formula geometry
+with the same30-second deadline, then checks fonts, errors and overflow; all six
+combinations pass. Final lint/type checks pass (six unchanged Fast Refresh warnings,
+zero errors),14 Bun tests/2,402 assertions and five targeted Python tests pass.
+A trailing-space renderer defect is corrected. Before push, Git normalization
+exposed CRLF CSV hashes differing from committed LF bytes; the exporter now writes
+LF explicitly and report replay checks that format. Verify indexed asset hashes
+before publication. Compact report audits/allowlist and
+the final production build pass. No public deployment is claimed before CI/Pages
+and unauthenticated URL checks.
+
+Next: commit the coherent implementation/report on public-v1 and verify the
+authorized report publication through CI/Pages and public URLs. No main merge,
+baseline promotion or browser-engine replacement. Independently sourced regional
+constraints/injection/GSK evidence, seasonal availability and hourly zonal generation
+validation remain further research, not completion claims.
+Do not promote or certify investments from a lower in-sample error alone.
+
+## Prior bid-only trial — bounded inverse market modelling, 19 October 2026
 
 The user authorized a full inverse-market-modelling report and a finite family of
 bid fits. This supersedes the next-step wording in the source diagnostics below.

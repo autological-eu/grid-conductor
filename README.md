@@ -71,10 +71,13 @@ Never commit secrets or multi-gigabyte artifacts. Python research uses the pinne
 
 Current research entry points:
 
+- `joint_network_calibration_2025.py`, `run_joint_network_calibration_2025.py` and
+  `audit_joint_network_calibration_2025.py`: finite supply/AC-headroom/wind calibration.
 - `inverse_bid_ensemble_2025.py`, `run_inverse_bid_ensemble_2025.py` and
-  `audit_inverse_bid_ensemble_2025.py`: finite current bid-calibration trial.
+  `audit_inverse_bid_ensemble_2025.py`: verified prior bid-only calibration, retained as a frozen anchor.
 - `write_concise_dispatch_report_2025.py` delegates the current report to
-  `bid_ensemble_report_2025.py`; `audit_inverse_report_2025.py` replays its CSVs/envelopes.
+  `joint_network_report_2025.py`; `audit_joint_report_2025.py` checks its CSVs.
+  The prior bid-only renderer/auditor still preserve supporting comparison evidence.
 - `hybrid_fixed_hydro_2025.py` and `evaluate_fixed_hydro_bids_2025.py` are frozen
   source/reference tools; do not run their historical publisher over the current report.
 - `fixed_reservoir_screening_2025.py`, `report_fixed_reservoir_screening_2025.py`
@@ -93,19 +96,25 @@ removed merely because their original articles are retired.
 To reproduce the inverse experiment with the verified local caches, restore
 immutable metadata and use a **fresh** ignored output directory. The accepted
 baseline and all provider inputs must already exist; this does not fetch omitted
-large data or restart old searches.
+large data or restart old searches. The current driver also requires the retained
+interrupted wind-control witness and code/design provenance. The numerical retry
+command below applies when the first driver reports unresolved states; if none
+exist, audit that first directory directly. It never expands the parameter grid.
 
 ```sh
 python3 tools/pack_model_metadata.py --restore
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
   data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
-  tools/run_inverse_bid_ensemble_2025.py data/bidding-zone-network-2025/inverse-reproduction-new
+  tools/run_joint_network_calibration_2025.py data/bidding-zone-network-2025/joint-reproduction-new
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
   data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
-  tools/audit_inverse_bid_ensemble_2025.py data/bidding-zone-network-2025/inverse-reproduction-new
+  tools/repair_joint_network_calibration_2025.py data/bidding-zone-network-2025/joint-reproduction-new data/bidding-zone-network-2025/joint-retry-new
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
+  tools/audit_joint_network_calibration_2025.py data/bidding-zone-network-2025/joint-retry-new
 ```
 
-For the retained report, the inverse folder is pinned in
+For the retained report, the joint-calibration folder is pinned in
 `config/research-improvement-plan.json`. Only point it at a new trial after that
 trial passes independent replay. With the existing verified report/source caches:
 
@@ -117,10 +126,10 @@ python3 tools/pack_model_metadata.py
 python3 tools/check_public_assets.py
 ```
 
-Inverse fits are historical reconstructions, not independently validated actual
-bids, posterior distributions or investment models. Keep the primary near-best
-selection distinct from post-run wider-family diagnostics. Original availability,
-chronology and physics remain unchanged; browser integration remains separate.
+Joint inverse fits are historical reconstructions, not recovered actual grids,
+bids, posterior distributions or investment models. Effective AC headroom and wind
+availability change only under declared bounds; source nameplates, topology, PTDF,
+GSK, HVDC, demand and fixed hydro remain unchanged. Browser integration is separate.
 
 The compact trial is paused; the following is retained reproduction guidance,
 not an instruction to resume it. For a fresh compact trial using the retained

@@ -140,3 +140,7 @@ data/daily-market-2025/
 !/public/research/dispatch-comparison-2025/generation-by-fuel.csv
 !/public/research/dispatch-comparison-2025/national-generation.csv
 !/public/research/dispatch-comparison-2025/summary.json
+
+!public/research/dispatch-comparison-2025/joint-search-cases.csv
+!public/research/dispatch-comparison-2025/joint-prices-by-zone.csv
+!public/research/dispatch-comparison-2025/joint-generation-by-country.csv

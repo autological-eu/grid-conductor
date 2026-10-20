@@ -758,7 +758,7 @@
     "producer_role": "re-export and source/cost replay of sealed initial clears"
   },
   "research_direction": {
-    "plan_sha256": "fd212a0e60fe9f50b2d9199dd18bd0bcc85db3ef2d0f7609a57f1028e634ae5a",
+    "plan_sha256": "d1d8184cc61f70513c735fd70150d4c6536b4b08b36ecd2923ebe5c5bd14448a",
     "diagnosis_sha256": "832ee83b2c8d5db92c8c80c986b53709052c82ad9d51472ccb79ccaf539a084c",
     "audit": {
       "status": "accepted_refit_price_monthly_mix_and_target_metrics_replayed",
@@ -828,7 +828,7 @@
     "mae_reduction_percent": 12.825506646763586,
     "browser_integration": false
   },
-  "period": "All8760 hours of2025; in-sample bounded inverse reconstruction",
+  "period": "All8760 hours of2025; in-sample joint supply/network inverse calibration",
   "generation_reporting_areas": 38,
   "observed_price_zones": 41,
   "derived_summary_sha256": "b8d8dcf034722a750d36b6985e377d41aa2284301e0771695289af735dde2581",
@@ -849,25 +849,28 @@
   "original_model_audit_sha256": "dfccf8a98e312c0ef1556dc3bdb1e210ef91185e50973574202b47cca2330c84",
   "derived_producer_sha256": "a47c8743536ca208c44a6f469adef88be51f5801120d570b60fb836d8cba9b85",
   "derived_producer_file": "prepare_seasonal_dispatch_report_2025.py",
-  "renderer_sha256": "30a1651bdfb05ef55d883ac653ff2e6a7a63a93336c4c30a0e60246d2d5bd2d4",
-  "article_sha256": "27a57baf7b7e2ababbb598b7541a5353274230d1200e61ef21f6467e9f9e025b",
+  "renderer_sha256": "e42bd822accfa55a190fb9981594de6a7dceae00b8db6608a0ac6ef218bc6d90",
+  "article_sha256": "02ba6780b7d71654c997269abb87760c70b9098d41b9d96953fe19d223c5378c",
   "assets": {
     "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
-    "daily-prices.png": "f389e4bcf32bb3b162c2d5d4972bf357634bbd02af3c2f44c29ef24637aebd0a",
+    "daily-prices.png": "46137f5c666608b0b4ffa6e2c01e793bced25c7f26a13d6788b701646a7d6513",
     "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",
     "generation-by-fuel.csv": "29d66b4145d615de418a7f56514c6f75e18f0eb0bcc49f5b9ad3232032ab4dfd",
     "inverse-generation-by-country.csv": "d6a52439dacc9719f8f0ae4eb80d5a3ced890e75e07107079168784d7749e34b",
     "inverse-prices-by-zone.csv": "0a0cb02bb55ac4104227516838b88f24e47ac80c0a9b705053705c7a0430e40c",
     "inverse-search-cases.csv": "72240571f3da6d96b16ba6c62d67493ab7e6f36de384801d3dfe9473ee7a683f",
+    "joint-generation-by-country.csv": "8f0701c725484833c01641f8d42462edf9bdff9ac142586c3a31bb5146e9d43b",
+    "joint-prices-by-zone.csv": "73ca79034ed879e11ba4a5f397fa31ab87ad1afd22cebb5db4f1516512516ef8",
+    "joint-search-cases.csv": "d8b5b1606dfe2a71a438704372e4efc55a10b98bc9cbeff1345ec0288d3b3703",
     "national-generation.csv": "218d4a7eee9d94dcb2fed9a9eb524713eb0303bdbfbce16aac4e419566cd7523",
-    "national-mix.png": "c9305104d723e79fe3c337865c9c3755af559a102259d7f338edd551c2b7759b",
+    "national-mix.png": "0da4084134d78a7d0b754543dd180380bfbb3c6e8373526d0326c5b28da85aac",
     "nuclear-availability-by-month.csv": "d7e7925ebf1f11f6ae3f0e1aac4c952d027072e3f28816a81b5b6fcf390139b6",
     "nuclear-availability-prices-by-zone.csv": "b2cf42359fe36e71a92117d5c42b5619d477db892e5ee61ed01d7d4635e0a292",
-    "overview.png": "3530d21d7b7fef037541bc181a5e42b0c6b5b3044ee556716dcbb122b564924d",
+    "overview.png": "808dc52109a71eabfe65a6cb79c5b249320bf1d71eaab3a954e0c59d52e4f363",
     "prices-by-zone.csv": "99e1a5a06dc88aa8fff022546f9e70f3a83df58df7f42123e9e22b2abab3dcaa",
     "renewable-capacity-audit.csv": "c60afa3593f8f9aacf105dcb528cc801cf723af0bf6f4083d3dacdb73280137c",
     "renewable-source-prices-by-zone.csv": "08472614bff37ba147d6a52839da407ff7fa2fde9473edede32e47a246d66345",
-    "zone-mae-grid.png": "b7f3626d94fe13581723002d656cd8dafb24b0219b3b0a4d0cf080efe47b1a79"
+    "zone-mae-grid.png": "e413ecfdb0ad4d2ad06ef366920906938031da56d14a4fd7519ef4102def0fb5"
   },
   "inverse_bid_ensemble_evaluation": {
     "summary_sha256": "0c577264dec1a363ab859b4a6239272fa86ec94bf415550de8558c8d42ecd0bf",
@@ -2300,24 +2303,27 @@
       "auditor_file": "audit_inverse_report_2025.py",
       "auditor_sha256": "4e5321cd29bb6968a350cc9a95bd3dd06fd8ff04cf20f1dbc9b364e59d973264",
       "source_summary_sha256": "0c577264dec1a363ab859b4a6239272fa86ec94bf415550de8558c8d42ecd0bf",
-      "article_sha256": "27a57baf7b7e2ababbb598b7541a5353274230d1200e61ef21f6467e9f9e025b",
+      "article_sha256": "02ba6780b7d71654c997269abb87760c70b9098d41b9d96953fe19d223c5378c",
       "assets_sha256": {
         "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
-        "daily-prices.png": "f389e4bcf32bb3b162c2d5d4972bf357634bbd02af3c2f44c29ef24637aebd0a",
+        "daily-prices.png": "46137f5c666608b0b4ffa6e2c01e793bced25c7f26a13d6788b701646a7d6513",
         "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",
         "generation-by-fuel.csv": "29d66b4145d615de418a7f56514c6f75e18f0eb0bcc49f5b9ad3232032ab4dfd",
         "inverse-generation-by-country.csv": "d6a52439dacc9719f8f0ae4eb80d5a3ced890e75e07107079168784d7749e34b",
         "inverse-prices-by-zone.csv": "0a0cb02bb55ac4104227516838b88f24e47ac80c0a9b705053705c7a0430e40c",
         "inverse-search-cases.csv": "72240571f3da6d96b16ba6c62d67493ab7e6f36de384801d3dfe9473ee7a683f",
+        "joint-generation-by-country.csv": "8f0701c725484833c01641f8d42462edf9bdff9ac142586c3a31bb5146e9d43b",
+        "joint-prices-by-zone.csv": "73ca79034ed879e11ba4a5f397fa31ab87ad1afd22cebb5db4f1516512516ef8",
+        "joint-search-cases.csv": "d8b5b1606dfe2a71a438704372e4efc55a10b98bc9cbeff1345ec0288d3b3703",
         "national-generation.csv": "218d4a7eee9d94dcb2fed9a9eb524713eb0303bdbfbce16aac4e419566cd7523",
-        "national-mix.png": "c9305104d723e79fe3c337865c9c3755af559a102259d7f338edd551c2b7759b",
+        "national-mix.png": "0da4084134d78a7d0b754543dd180380bfbb3c6e8373526d0326c5b28da85aac",
         "nuclear-availability-by-month.csv": "d7e7925ebf1f11f6ae3f0e1aac4c952d027072e3f28816a81b5b6fcf390139b6",
         "nuclear-availability-prices-by-zone.csv": "b2cf42359fe36e71a92117d5c42b5619d477db892e5ee61ed01d7d4635e0a292",
-        "overview.png": "3530d21d7b7fef037541bc181a5e42b0c6b5b3044ee556716dcbb122b564924d",
+        "overview.png": "808dc52109a71eabfe65a6cb79c5b249320bf1d71eaab3a954e0c59d52e4f363",
         "prices-by-zone.csv": "99e1a5a06dc88aa8fff022546f9e70f3a83df58df7f42123e9e22b2abab3dcaa",
         "renewable-capacity-audit.csv": "c60afa3593f8f9aacf105dcb528cc801cf723af0bf6f4083d3dacdb73280137c",
         "renewable-source-prices-by-zone.csv": "08472614bff37ba147d6a52839da407ff7fa2fde9473edede32e47a246d66345",
-        "zone-mae-grid.png": "b7f3626d94fe13581723002d656cd8dafb24b0219b3b0a4d0cf080efe47b1a79"
+        "zone-mae-grid.png": "e413ecfdb0ad4d2ad06ef366920906938031da56d14a4fd7519ef4102def0fb5"
       },
       "search_rows": 13,
       "zone_rows": 144,
@@ -2326,7 +2332,7 @@
       "broad_members": 10
     }
   },
-  "publication_scope": "Primary report and four figures: bounded inverse bid ensemble; prior seasonal derivation, source controls and out-of-fold verification are legacy supporting evidence.",
+  "publication_scope": "Primary report and four figures: joint supply/network inverse calibration; prior bid-only/source/OOF fields and CSVs are supporting evidence.",
   "legacy_out_of_fold_model_verification": {
     "status": "seasonal_calendar_ember_month_exclusion_selection_physics_duals_oof_and_refit_replayed",
     "fold_winners": [
@@ -2361,9 +2367,10 @@
     "combined": "Exploratory"
   },
   "models": {
-    "baseline": "comparison",
-    "r2-s6": "retained inverse fit",
-    "r2-s2": "comparison"
+    "accepted-unchanged-w100": "Accepted baseline",
+    "inverse_joint-unchanged-w100": "Bid-only fit",
+    "inverse_joint-nordic_higher-w100": "Joint-score winner",
+    "inverse_joint-all_higher-w100": "Price leader"
   },
   "legacy_limitations": [
     "Country Ember and zonal A75 sources are separate. Germany generation excludes LU; France uses national model membership including FR-COR.",
@@ -2371,9 +2378,1442 @@
     "Point allocations proportional to original availability within saved equal-price blocks; conditional bounds not jointly attainable or all primal optima. No new solve, input change or promotion."
   ],
   "limitations": [
-    "Full2025 fit and selection, not independent forecast validation.",
-    "Synthetic effective bids are not uniquely identified actual offers.",
-    "Finite fit spread is not a posterior or calibrated confidence interval.",
-    "Original physical/input and fixed-hydro limitations remain; no paired investment or browser integration."
-  ]
+    "All2025 fit/selection, not independent forecasting.",
+    "Effective AC headroom/wind derating are experimental bounds, not verified physical corrections.",
+    "Topology/PTDF/static GSK/HVDC/demand/fixed hydro remain unchanged.",
+    "National five-fuel and implied-export checks are not certified zonal generation or physical border-flow validation.",
+    "No recovered true grid/bids, posterior, investment acceptance or browser integration."
+  ],
+  "joint_network_evaluation": {
+    "repair_producer_sha256": "fb0b3e176b8e343863af3ae5bb29358aa6bab78ebc8771d7a2a10215ec6b688c",
+    "retry_protocol": {
+      "solver": "HiGHS simplex",
+      "global_scheduler": "reset before each retry model",
+      "presolve": "off",
+      "primal_feasibility_tolerance": 1e-08,
+      "parameter_grid": "unchanged",
+      "feasible_control_checked": true
+    },
+    "stage_timings": {
+      "source_driver_seconds": 996.3502668380006,
+      "retry_preparation_seconds": 386.72587043100066,
+      "retry_driver_seconds": 645.3557114550003
+    },
+    "summary_sha256": "88b4372b500d39ceb81a55c7520905a4b2fcab3ca441d28c363543765bc32b5d",
+    "audit": {
+      "status": "all_joint_modified_source_native_physics_quantities_scores_selection_replayed",
+      "summary_sha256": "88b4372b500d39ceb81a55c7520905a4b2fcab3ca441d28c363543765bc32b5d",
+      "auditor_sha256": "044c964ca48bee8190a2daa86f7e656ac0fa5d5bdb2d01827dd3c4fb1745fa7c",
+      "certificates": [
+        {
+          "case": "accepted-unchanged-w100",
+          "hours": 8760,
+          "native_modified_physics_residual_mw": 1.3295419805103847e-06,
+          "source_group_bound_residual_mw": 3.6312052886561605e-10,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "emergency_mwh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.7689174286749108e-09,
+          "complementarity_maximum_eur": 0.00011862650426054302,
+          "duality_gap_maximum_eur": 1.2088567018508911e-05,
+          "price_decomposition_maximum_eur_mwh": 2.7689139869835344e-09
+        },
+        {
+          "case": "accepted-unchanged-w90",
+          "hours": 8760,
+          "native_modified_physics_residual_mw": 6.479765033873264e-06,
+          "source_group_bound_residual_mw": 1.081924575898792e-11,
+          "objective_error_eur": 3.725290298461914e-08,
+          "emergency_mwh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 1.3902550222155696e-09,
+          "complementarity_maximum_eur": 0.0005098889101095374,
+          "duality_gap_maximum_eur": 8.221250027418137e-06,
+          "price_decomposition_maximum_eur_mwh": 1.390254855682116e-09
+        },
+        {
+          "case": "accepted-all_higher-w100",
+          "hours": 8760,
+          "native_modified_physics_residual_mw": 1.776408510067995e-06,
+          "source_group_bound_residual_mw": 2.0423590888072425e-11,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "emergency_mwh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 1.3375771601431552e-09,
+          "complementarity_maximum_eur": 0.00012023380140506023,
+          "duality_gap_maximum_eur": 3.380700945854187e-06,
+          "price_decomposition_maximum_eur_mwh": 1.3375824892136734e-09
+        },
+        {
+          "case": "accepted-all_higher-w90",
+          "hours": 8760,
+          "native_modified_physics_residual_mw": 3.642724095698213e-07,
+          "source_group_bound_residual_mw": 8.216684587648847e-12,
+          "objective_error_eur": 3.725290298461914e-08,
+          "emergency_mwh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 5.224489729727111e-10,
+          "complementarity_maximum_eur": 3.3426096478013066e-05,
+          "duality_gap_maximum_eur": 3.3080577850341797e-06,
+          "price_decomposition_maximum_eur_mwh": 5.224478627496865e-10
+        },
+        {
+          "case": "accepted-nordic_higher-w100",
+          "hours": 8760,
+          "native_modified_physics_residual_mw": 2.742241122177802e-06,
+          "source_group_bound_residual_mw": 4.496219548910739e-11,
+          "objective_error_eur": 2.9802322387695312e-08,
+          "emergency_mwh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 7.669774260143924e-10,
+          "complementarity_maximum_eur": 0.0001076683962281376,
+          "duality_gap_maximum_eur": 3.594905138015747e-06,
+          "price_decomposition_maximum_eur_mwh": 7.669740398341673e-10
+        },
+        {
+          "case": "inverse_joint-unchanged-w100",
+          "hours": 8760,
+          "native_modified_physics_residual_mw": 2.35304469242692e-06,
+          "source_group_bound_residual_mw": 7.483261602406896e-11,
+          "objective_error_eur": 3.725290298461914e-08,
+          "emergency_mwh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 1.6439873462559262e-08,
+          "complementarity_maximum_eur": 0.00030858874542335173,
+          "duality_gap_maximum_eur": 5.3892843425273895e-05,
+          "price_decomposition_maximum_eur_mwh": 1.6439873462559262e-08
+        },
+        {
+          "case": "inverse_joint-unchanged-w90",
+          "hours": 8760,
+          "native_modified_physics_residual_mw": 1.7033922176779015e-05,
+          "source_group_bound_residual_mw": 3.552713678800501e-15,
+          "objective_error_eur": 4.0978193283081055e-08,
+          "emergency_mwh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.0847431900114467e-08,
+          "complementarity_maximum_eur": 0.0015125772234049018,
+          "duality_gap_maximum_eur": 5.967170000076294e-05,
+          "price_decomposition_maximum_eur_mwh": 2.084743755403906e-08
+        },
+        {
+          "case": "inverse_joint-all_higher-w100",
+          "hours": 8760,
+          "native_modified_physics_residual_mw": 1.0198164090979844e-06,
+          "source_group_bound_residual_mw": 3.360329380348434e-10,
+          "objective_error_eur": 2.9802322387695312e-08,
+          "emergency_mwh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 8.29756929832115e-10,
+          "complementarity_maximum_eur": 8.411026768656997e-05,
+          "duality_gap_maximum_eur": 1.0833144187927246e-05,
+          "price_decomposition_maximum_eur_mwh": 8.297575959659298e-10
+        },
+        {
+          "case": "inverse_joint-all_higher-w90",
+          "hours": 8760,
+          "native_modified_physics_residual_mw": 1.2157237506471574e-05,
+          "source_group_bound_residual_mw": 7.316103278753872e-11,
+          "objective_error_eur": 3.725290298461914e-08,
+          "emergency_mwh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 1.3707732726686572e-09,
+          "complementarity_maximum_eur": 0.0002742108201052726,
+          "duality_gap_maximum_eur": 2.0638108253479004e-06,
+          "price_decomposition_maximum_eur_mwh": 1.3707790458283853e-09
+        },
+        {
+          "case": "inverse_joint-nordic_higher-w100",
+          "hours": 8760,
+          "native_modified_physics_residual_mw": 2.3774191504344344e-06,
+          "source_group_bound_residual_mw": 2.640748481364922e-12,
+          "objective_error_eur": 3.3527612686157227e-08,
+          "emergency_mwh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 4.1155612251486673e-10,
+          "complementarity_maximum_eur": 0.00025419781985660107,
+          "duality_gap_maximum_eur": 1.4953315258026123e-05,
+          "price_decomposition_maximum_eur_mwh": 4.1156056340696523e-10
+        }
+      ],
+      "rejected": [
+        {
+          "case": "accepted-all_lower-w100",
+          "rejected_hour": 0,
+          "certificate": {
+            "row_bound_mw": 13.1965832754785,
+            "column_maximum_mw": 0.8719846177158478,
+            "separation_gap_mw": 12.324598657762653,
+            "free_column_residual": 7.110352744343444e-17
+          },
+          "active_branch_rows": [
+            {
+              "component": "Line",
+              "name": "211",
+              "country0": "NO",
+              "country1": "NO",
+              "coefficient": 0.6941029014384558
+            },
+            {
+              "component": "Line",
+              "name": "219",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -0.07999705484781017
+            },
+            {
+              "component": "Line",
+              "name": "224",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -1.0
+            },
+            {
+              "component": "Line",
+              "name": "225",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -0.25750935369157263
+            },
+            {
+              "component": "Line",
+              "name": "250",
+              "country0": "SE",
+              "country1": "SE",
+              "coefficient": -0.00044062406657197555
+            }
+          ],
+          "optimal_prefix_hours": 0,
+          "prefix_native_residual_mw": 0.0,
+          "prefix_duality_gap_eur": 0.0
+        },
+        {
+          "case": "accepted-all_lower-w90",
+          "rejected_hour": 0,
+          "certificate": {
+            "row_bound_mw": 13.196583275478698,
+            "column_maximum_mw": 0.8719846177157133,
+            "separation_gap_mw": 12.324598657762985,
+            "free_column_residual": 3.2239708466921484e-17
+          },
+          "active_branch_rows": [
+            {
+              "component": "Line",
+              "name": "211",
+              "country0": "NO",
+              "country1": "NO",
+              "coefficient": 0.6941029014384555
+            },
+            {
+              "component": "Line",
+              "name": "219",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -0.07999705484781014
+            },
+            {
+              "component": "Line",
+              "name": "224",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -1.0
+            },
+            {
+              "component": "Line",
+              "name": "225",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -0.2575093536915726
+            },
+            {
+              "component": "Line",
+              "name": "250",
+              "country0": "SE",
+              "country1": "SE",
+              "coefficient": -0.0004406240665719755
+            }
+          ],
+          "optimal_prefix_hours": 0,
+          "prefix_native_residual_mw": 0.0,
+          "prefix_duality_gap_eur": 0.0
+        },
+        {
+          "case": "accepted-nordic_lower-w100",
+          "rejected_hour": 0,
+          "certificate": {
+            "row_bound_mw": 13.19658327547882,
+            "column_maximum_mw": 0.8719846177544442,
+            "separation_gap_mw": 12.324598657724376,
+            "free_column_residual": 4.990040498864534e-17
+          },
+          "active_branch_rows": [
+            {
+              "component": "Line",
+              "name": "211",
+              "country0": "NO",
+              "country1": "NO",
+              "coefficient": 0.6941029014384561
+            },
+            {
+              "component": "Line",
+              "name": "219",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -0.07999705484781021
+            },
+            {
+              "component": "Line",
+              "name": "224",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -1.0
+            },
+            {
+              "component": "Line",
+              "name": "225",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -0.25750935369157324
+            },
+            {
+              "component": "Line",
+              "name": "250",
+              "country0": "SE",
+              "country1": "SE",
+              "coefficient": -0.00044062406657196525
+            }
+          ],
+          "optimal_prefix_hours": 0,
+          "prefix_native_residual_mw": 0.0,
+          "prefix_duality_gap_eur": 0.0
+        },
+        {
+          "case": "inverse_joint-all_lower-w100",
+          "rejected_hour": 0,
+          "certificate": {
+            "row_bound_mw": 13.1965832754785,
+            "column_maximum_mw": 0.8719846177158478,
+            "separation_gap_mw": 12.324598657762653,
+            "free_column_residual": 7.110352744343444e-17
+          },
+          "active_branch_rows": [
+            {
+              "component": "Line",
+              "name": "211",
+              "country0": "NO",
+              "country1": "NO",
+              "coefficient": 0.6941029014384558
+            },
+            {
+              "component": "Line",
+              "name": "219",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -0.07999705484781017
+            },
+            {
+              "component": "Line",
+              "name": "224",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -1.0
+            },
+            {
+              "component": "Line",
+              "name": "225",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -0.25750935369157263
+            },
+            {
+              "component": "Line",
+              "name": "250",
+              "country0": "SE",
+              "country1": "SE",
+              "coefficient": -0.00044062406657197555
+            }
+          ],
+          "optimal_prefix_hours": 0,
+          "prefix_native_residual_mw": 0.0,
+          "prefix_duality_gap_eur": 0.0
+        },
+        {
+          "case": "inverse_joint-all_lower-w90",
+          "rejected_hour": 0,
+          "certificate": {
+            "row_bound_mw": 13.196583275478698,
+            "column_maximum_mw": 0.8719846177157133,
+            "separation_gap_mw": 12.324598657762985,
+            "free_column_residual": 3.2239708466921484e-17
+          },
+          "active_branch_rows": [
+            {
+              "component": "Line",
+              "name": "211",
+              "country0": "NO",
+              "country1": "NO",
+              "coefficient": 0.6941029014384555
+            },
+            {
+              "component": "Line",
+              "name": "219",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -0.07999705484781014
+            },
+            {
+              "component": "Line",
+              "name": "224",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -1.0
+            },
+            {
+              "component": "Line",
+              "name": "225",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -0.2575093536915726
+            },
+            {
+              "component": "Line",
+              "name": "250",
+              "country0": "SE",
+              "country1": "SE",
+              "coefficient": -0.0004406240665719755
+            }
+          ],
+          "optimal_prefix_hours": 0,
+          "prefix_native_residual_mw": 0.0,
+          "prefix_duality_gap_eur": 0.0
+        },
+        {
+          "case": "inverse_joint-nordic_lower-w100",
+          "rejected_hour": 0,
+          "certificate": {
+            "row_bound_mw": 12.80245117107661,
+            "column_maximum_mw": 0.8389099311344005,
+            "separation_gap_mw": 11.96354123994221,
+            "free_column_residual": 3.67544536472586e-17
+          },
+          "active_branch_rows": [
+            {
+              "component": "Line",
+              "name": "211",
+              "country0": "NO",
+              "country1": "NO",
+              "coefficient": 0.6943255351666449
+            },
+            {
+              "component": "Line",
+              "name": "219",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -0.08001462585316824
+            },
+            {
+              "component": "Line",
+              "name": "224",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -1.0
+            },
+            {
+              "component": "Line",
+              "name": "225",
+              "country0": "NO",
+              "country1": "SE",
+              "coefficient": -0.2575270998995833
+            },
+            {
+              "component": "Line",
+              "name": "250",
+              "country0": "SE",
+              "country1": "SE",
+              "coefficient": -0.0005538587439638914
+            },
+            {
+              "component": "Line",
+              "name": "254",
+              "country0": "SE",
+              "country1": "SE",
+              "coefficient": 0.00019398474186731437
+            }
+          ],
+          "optimal_prefix_hours": 0,
+          "prefix_native_residual_mw": 0.0,
+          "prefix_duality_gap_eur": 0.0
+        }
+      ],
+      "matched_backend_controls": [
+        {
+          "case": "inverse_joint-unchanged-w100",
+          "hours": 8760,
+          "witness": "inverse_joint-unchanged-w100-backend.npz",
+          "witness_sha256": "3b88def15e0d67857973e66f5ada0a0494473c44198ac18b7f022e0d470418f4",
+          "native_physics_residual_mw": 2.7040841814596206e-06,
+          "maximum_objective_difference_eur": 6.48079439997673e-05,
+          "observed_price_mean_absolute_difference_eur_mwh": 2.780881639579021e-12,
+          "maximum_zonal_price_difference_eur_mwh": 64.40744817826388,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 1.3474714677386146e-09,
+          "complementarity_maximum_eur": 0.00032515268839905054,
+          "duality_gap_maximum_eur": 4.380941390991211e-05,
+          "price_decomposition_maximum_eur_mwh": 1.347473244095454e-09
+        },
+        {
+          "case": "inverse_joint-unchanged-w90",
+          "hours": 8760,
+          "witness": "inverse_joint-unchanged-w90-backend.npz",
+          "witness_sha256": "886e61537df3404e3d487c3bc3680bf9c7eeaa97e73514fedf1ac539963af323",
+          "native_physics_residual_mw": 1.2730838534480426e-06,
+          "maximum_objective_difference_eur": 8.234009146690369e-05,
+          "observed_price_mean_absolute_difference_eur_mwh": 2.0516628414717483e-12,
+          "maximum_zonal_price_difference_eur_mwh": 2.37548931636411e-08,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 2.1322748011698422e-09,
+          "complementarity_maximum_eur": 0.00015771369773977196,
+          "duality_gap_maximum_eur": 5.755573511123657e-06,
+          "price_decomposition_maximum_eur_mwh": 2.1322819065972e-09
+        }
+      ],
+      "winner": "inverse_joint-nordic_higher-w100",
+      "external_witnesses": 3,
+      "full_year_witnesses": 10,
+      "new_full_year_solves": 7,
+      "new_case_states": 14,
+      "elapsed_seconds": 953.7422090460004
+    },
+    "design": {
+      "name": "joint-network-calibration-v1",
+      "year": 2025,
+      "hours": 8760,
+      "scope": "Full-year in-sample finite calibration of supply bids, wind availability and effective AC ratings; not a recovered physical grid or actual bids",
+      "bid_anchors": [
+        "accepted",
+        "inverse_joint"
+      ],
+      "network_modes": [
+        "unchanged",
+        "all_lower",
+        "all_higher"
+      ],
+      "wind_factors": [
+        1.0,
+        0.9
+      ],
+      "additional_network_modes_at_original_wind": [
+        "nordic_lower",
+        "nordic_higher"
+      ],
+      "maximum_unique_states": 16,
+      "maximum_new_annual_solves": 14,
+      "network_factor_lower": 0.85,
+      "network_factor_higher": 1.15,
+      "nordic_countries": [
+        "NO",
+        "SE",
+        "FI",
+        "DK"
+      ],
+      "network_rule": "Multiply the existing static symmetric AC branch MW limits, globally or on branches with either endpoint in NO/SE/FI/DK. Existing 0.7 rating multiplier becomes 0.595 or 0.805. Preserve susceptance/PTDF, topology, static nameplate GSK, offsets, islands, HVDC bounds and losses. These are experimental effective headroom bounds, not observed JAO domains, N-1 proof or physical expansion.",
+      "wind_rule": "Multiply original source wind available MW by the declared scalar before aggregating existing offer groups; preserve hourly weather shape, source nominal MW and country membership. Update quantity-allocation availability consistently. This is a bounded profile/derating calibration hypothesis, not an IRENA capacity correction, measured outage or dispatch substituted for availability. No target-derived hourly profile.",
+      "fixed": "Demand, hydro/water chronology, nuclear/solar/other availability, nameplates, grouping, topology, susceptance, original GSK, links, islands, offsets, monthly fuel anchors and each chosen bid anchor are unchanged. No new bid fit, arbitrary per-hour constraint fit or retired hydro/search restart.",
+      "objective_weights": {
+        "price": 0.55,
+        "daily_demeaned_price": 0.2,
+        "generation": 0.2,
+        "trade": 0.05
+      },
+      "regularization_weight": 0.01,
+      "regularization": "Old availability-weighted bid penalty against accepted bids plus mean square of [wind deviation/0.1, mean AC deviation/0.15] over three coordinates: wind, Nordic-incident AC, remaining AC. Coordinate departures are counted even if a region is small. All deviation directions are relative to accepted source inputs.",
+      "research_filters": {
+        "price_ratio_maximum": 1.0,
+        "daily_demeaned_ratio_maximum": 1.02,
+        "generation_ratio_maximum": 1.02,
+        "trade_ratio_maximum": 1.02,
+        "optimal_hours": 8760,
+        "emergency_mwh_maximum": 1e-06
+      },
+      "selection": "Lowest eligible regularized score over exactly the declared finite states, ties lower penalty then ordinal. Retain every failed or adverse state. Reuse the two hash-verified unchanged-physics annual witnesses. No adaptive range expansion or automatic baseline promotion.",
+      "observations": "All41 complete A44 observed-price zones, all48 modeled areas, Ember monthly national five-fuel generation and signed net exports with original missingness. Implied export is not physical border flow; no verified hourly JAO/ENTSO-E border-flow fit in this trial.",
+      "acceptance": "Independent modified-source allocation, component-native physics, primal/dual, quantity, metric and selection replay. Research filters are not product acceptance gates; no forecast, posterior, true capacity, investment-value or browser integration claim.",
+      "rejection_policy": "Amended after the first tightened-AC control reported Infeasible: reject a full-year candidate at its first numerically certified infeasible hour, saving a Farkas row ray for independent replay; no annual metric for rejected/partial cases. Uncertified failures remain unresolved. Every selectable case still needs all8760 optimal hours and original no-emergency/quantity gates. Finite parameter grid/objective unchanged. Reuse the complete first wind control with interrupted-producer provenance rather than rerunning it."
+    },
+    "producer_sha256": "23dc5f4624dc550666837b4c804ba86c17e079d2af394ac29c859f7da788f910",
+    "helper_sha256": "28682fc3343a7f62e73bd328740fc2fb789c0adbd79529a8b93fab68668b90ee",
+    "clearer_sha256": "26e6b1558bd8c8526d51ceb7122ac2406327008e35e7cd75c5cacbc4d4f8a21c",
+    "renderer_sha256": "62be4d6d4490d515aa8e644b5877efa374f0f5bdd267738764184b3625062000",
+    "winner": "inverse_joint-nordic_higher-w100",
+    "price_leader": "inverse_joint-all_higher-w100",
+    "best_changed_inputs": "inverse_joint-nordic_higher-w100",
+    "shown": [
+      "accepted-unchanged-w100",
+      "inverse_joint-unchanged-w100",
+      "inverse_joint-nordic_higher-w100",
+      "inverse_joint-all_higher-w100"
+    ],
+    "labels": {
+      "accepted-unchanged-w100": "Accepted baseline",
+      "inverse_joint-unchanged-w100": "Bid-only fit",
+      "inverse_joint-nordic_higher-w100": "Joint-score winner",
+      "inverse_joint-all_higher-w100": "Price leader"
+    },
+    "records": [
+      {
+        "id": "accepted-unchanged-w100",
+        "ordinal": 0,
+        "parameters": {
+          "id": "accepted-unchanged-w100",
+          "bid": "accepted",
+          "network": "unchanged",
+          "wind": 1.0
+        },
+        "bid_sha256": "6804da757016e8a1faf3c31e204c9dd045157ed1819c8edff805625d19ff487f",
+        "physical_inputs": {
+          "availability": "a8c6bdefc8ee227d0e7806f2ac5323d497551afc32e41bf3fb0c53246e1a6110",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "d57d6dee6c70cfeee5f07c446ba51a1febbfe90a79d8eef017657d18ac845268",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": {
+          "price": 28.9639751169547,
+          "daily_demeaned_price": 20.06347356650509,
+          "generation": 0.2994748680764233,
+          "trade": 0.17190582677419325
+        },
+        "score": 1.0,
+        "penalty": 0.0,
+        "normalized": {
+          "price": 1.0,
+          "daily_demeaned_price": 1.0,
+          "generation": 1.0,
+          "trade": 1.0
+        },
+        "eligible": true
+      },
+      {
+        "id": "accepted-unchanged-w90",
+        "ordinal": 1,
+        "parameters": {
+          "id": "accepted-unchanged-w90",
+          "bid": "accepted",
+          "network": "unchanged",
+          "wind": 0.9
+        },
+        "bid_sha256": "6804da757016e8a1faf3c31e204c9dd045157ed1819c8edff805625d19ff487f",
+        "physical_inputs": {
+          "availability": "8f17d64a6aa385d1756f17da33a91090bb225d89a0f3d40da2163789e51737a0",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "d57d6dee6c70cfeee5f07c446ba51a1febbfe90a79d8eef017657d18ac845268",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": {
+          "price": 29.18329173626696,
+          "daily_demeaned_price": 20.079761509875745,
+          "generation": 0.2979468902734771,
+          "trade": 0.17169205215947617
+        },
+        "score": 1.006577708144155,
+        "penalty": 0.3333333333333332,
+        "normalized": {
+          "price": 1.00757204832647,
+          "daily_demeaned_price": 1.0008118207107393,
+          "generation": 0.9948978095799468,
+          "trade": 0.9987564434625135
+        },
+        "eligible": false
+      },
+      {
+        "id": "accepted-all_lower-w100",
+        "ordinal": 2,
+        "parameters": {
+          "id": "accepted-all_lower-w100",
+          "bid": "accepted",
+          "network": "all_lower",
+          "wind": 1.0
+        },
+        "bid_sha256": "6804da757016e8a1faf3c31e204c9dd045157ed1819c8edff805625d19ff487f",
+        "physical_inputs": {
+          "availability": "a8c6bdefc8ee227d0e7806f2ac5323d497551afc32e41bf3fb0c53246e1a6110",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "06ba1b7c2f7a40ce87ce632b88a25a4d98e16b37444d8ba68b8e93d266022928",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": null,
+        "score": null,
+        "penalty": null,
+        "normalized": null,
+        "eligible": false
+      },
+      {
+        "id": "accepted-all_lower-w90",
+        "ordinal": 3,
+        "parameters": {
+          "id": "accepted-all_lower-w90",
+          "bid": "accepted",
+          "network": "all_lower",
+          "wind": 0.9
+        },
+        "bid_sha256": "6804da757016e8a1faf3c31e204c9dd045157ed1819c8edff805625d19ff487f",
+        "physical_inputs": {
+          "availability": "8f17d64a6aa385d1756f17da33a91090bb225d89a0f3d40da2163789e51737a0",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "06ba1b7c2f7a40ce87ce632b88a25a4d98e16b37444d8ba68b8e93d266022928",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": null,
+        "score": null,
+        "penalty": null,
+        "normalized": null,
+        "eligible": false
+      },
+      {
+        "id": "accepted-all_higher-w100",
+        "ordinal": 4,
+        "parameters": {
+          "id": "accepted-all_higher-w100",
+          "bid": "accepted",
+          "network": "all_higher",
+          "wind": 1.0
+        },
+        "bid_sha256": "6804da757016e8a1faf3c31e204c9dd045157ed1819c8edff805625d19ff487f",
+        "physical_inputs": {
+          "availability": "a8c6bdefc8ee227d0e7806f2ac5323d497551afc32e41bf3fb0c53246e1a6110",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "dc03c5edb604fd1fd3fe6d8cbfe4e65cf7531fed39fedf353842c2c5dd5587dd",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": {
+          "price": 28.59727643380533,
+          "daily_demeaned_price": 19.368535766442573,
+          "generation": 0.30163086577480996,
+          "trade": 0.17592162274116233
+        },
+        "score": 0.9953838679735405,
+        "penalty": 0.666666666666666,
+        "normalized": {
+          "price": 0.9873394904646664,
+          "daily_demeaned_price": 0.9653630365769427,
+          "generation": 1.0071992608669802,
+          "trade": 1.023360441250453
+        },
+        "eligible": false
+      },
+      {
+        "id": "accepted-all_higher-w90",
+        "ordinal": 5,
+        "parameters": {
+          "id": "accepted-all_higher-w90",
+          "bid": "accepted",
+          "network": "all_higher",
+          "wind": 0.9
+        },
+        "bid_sha256": "6804da757016e8a1faf3c31e204c9dd045157ed1819c8edff805625d19ff487f",
+        "physical_inputs": {
+          "availability": "8f17d64a6aa385d1756f17da33a91090bb225d89a0f3d40da2163789e51737a0",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "dc03c5edb604fd1fd3fe6d8cbfe4e65cf7531fed39fedf353842c2c5dd5587dd",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": {
+          "price": 28.809681294486083,
+          "daily_demeaned_price": 19.342848383317587,
+          "generation": 0.3007208169769665,
+          "trade": 0.17554938015253904
+        },
+        "score": 1.0017784862066899,
+        "penalty": 0.9999999999999991,
+        "normalized": {
+          "price": 0.9946729058478476,
+          "daily_demeaned_price": 0.9640827306997056,
+          "generation": 1.0041604456111664,
+          "trade": 1.0211950545639839
+        },
+        "eligible": false
+      },
+      {
+        "id": "accepted-nordic_lower-w100",
+        "ordinal": 6,
+        "parameters": {
+          "id": "accepted-nordic_lower-w100",
+          "bid": "accepted",
+          "network": "nordic_lower",
+          "wind": 1.0
+        },
+        "bid_sha256": "6804da757016e8a1faf3c31e204c9dd045157ed1819c8edff805625d19ff487f",
+        "physical_inputs": {
+          "availability": "a8c6bdefc8ee227d0e7806f2ac5323d497551afc32e41bf3fb0c53246e1a6110",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "325304b5bdcdd75a07865b352a15016ce06187109ccb3be937299709686480be",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": null,
+        "score": null,
+        "penalty": null,
+        "normalized": null,
+        "eligible": false
+      },
+      {
+        "id": "accepted-nordic_higher-w100",
+        "ordinal": 7,
+        "parameters": {
+          "id": "accepted-nordic_higher-w100",
+          "bid": "accepted",
+          "network": "nordic_higher",
+          "wind": 1.0
+        },
+        "bid_sha256": "6804da757016e8a1faf3c31e204c9dd045157ed1819c8edff805625d19ff487f",
+        "physical_inputs": {
+          "availability": "a8c6bdefc8ee227d0e7806f2ac5323d497551afc32e41bf3fb0c53246e1a6110",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "30033dafa40c1575614fdfc9d035c3dbbe0f4e928cdeaf7fd04458443983d936",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": {
+          "price": 28.646622889947146,
+          "daily_demeaned_price": 19.519693644773117,
+          "generation": 0.2996037917406383,
+          "trade": 0.17201019497657494
+        },
+        "score": 0.9920029582330944,
+        "penalty": 0.333333333333333,
+        "normalized": {
+          "price": 0.9890432088231638,
+          "daily_demeaned_price": 0.9728970200534077,
+          "generation": 1.0004304991101358,
+          "trade": 1.0006071242862453
+        },
+        "eligible": true
+      },
+      {
+        "id": "inverse_joint-unchanged-w100",
+        "ordinal": 8,
+        "parameters": {
+          "id": "inverse_joint-unchanged-w100",
+          "bid": "inverse_joint",
+          "network": "unchanged",
+          "wind": 1.0
+        },
+        "bid_sha256": "143aa8d3adb1a72c7f31b4a2e684e352a1f2e339e31948347f823b5012544938",
+        "physical_inputs": {
+          "availability": "a8c6bdefc8ee227d0e7806f2ac5323d497551afc32e41bf3fb0c53246e1a6110",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "d57d6dee6c70cfeee5f07c446ba51a1febbfe90a79d8eef017657d18ac845268",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": {
+          "price": 28.166750433841177,
+          "daily_demeaned_price": 19.567808036644514,
+          "generation": 0.2551147445304575,
+          "trade": 0.14357111150109245
+        },
+        "score": 0.9429151751949092,
+        "penalty": 0.08613546985873653,
+        "normalized": {
+          "price": 0.9724753014772876,
+          "daily_demeaned_price": 0.9752951288211598,
+          "generation": 0.8518736352372464,
+          "trade": 0.8351730374426468
+        },
+        "eligible": true
+      },
+      {
+        "id": "inverse_joint-unchanged-w90",
+        "ordinal": 9,
+        "parameters": {
+          "id": "inverse_joint-unchanged-w90",
+          "bid": "inverse_joint",
+          "network": "unchanged",
+          "wind": 0.9
+        },
+        "bid_sha256": "143aa8d3adb1a72c7f31b4a2e684e352a1f2e339e31948347f823b5012544938",
+        "physical_inputs": {
+          "availability": "8f17d64a6aa385d1756f17da33a91090bb225d89a0f3d40da2163789e51737a0",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "d57d6dee6c70cfeee5f07c446ba51a1febbfe90a79d8eef017657d18ac845268",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": {
+          "price": 28.501792913874745,
+          "daily_demeaned_price": 19.582325597930815,
+          "generation": 0.2504205144229889,
+          "trade": 0.14236241093442895
+        },
+        "score": 0.9492688488481554,
+        "penalty": 0.41946880319206975,
+        "normalized": {
+          "price": 0.9840428600972866,
+          "daily_demeaned_price": 0.9760187104700792,
+          "generation": 0.8361987636274167,
+          "trade": 0.828141858864557
+        },
+        "eligible": true
+      },
+      {
+        "id": "inverse_joint-all_lower-w100",
+        "ordinal": 10,
+        "parameters": {
+          "id": "inverse_joint-all_lower-w100",
+          "bid": "inverse_joint",
+          "network": "all_lower",
+          "wind": 1.0
+        },
+        "bid_sha256": "143aa8d3adb1a72c7f31b4a2e684e352a1f2e339e31948347f823b5012544938",
+        "physical_inputs": {
+          "availability": "a8c6bdefc8ee227d0e7806f2ac5323d497551afc32e41bf3fb0c53246e1a6110",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "06ba1b7c2f7a40ce87ce632b88a25a4d98e16b37444d8ba68b8e93d266022928",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": null,
+        "score": null,
+        "penalty": null,
+        "normalized": null,
+        "eligible": false
+      },
+      {
+        "id": "inverse_joint-all_lower-w90",
+        "ordinal": 11,
+        "parameters": {
+          "id": "inverse_joint-all_lower-w90",
+          "bid": "inverse_joint",
+          "network": "all_lower",
+          "wind": 0.9
+        },
+        "bid_sha256": "143aa8d3adb1a72c7f31b4a2e684e352a1f2e339e31948347f823b5012544938",
+        "physical_inputs": {
+          "availability": "8f17d64a6aa385d1756f17da33a91090bb225d89a0f3d40da2163789e51737a0",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "06ba1b7c2f7a40ce87ce632b88a25a4d98e16b37444d8ba68b8e93d266022928",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": null,
+        "score": null,
+        "penalty": null,
+        "normalized": null,
+        "eligible": false
+      },
+      {
+        "id": "inverse_joint-all_higher-w100",
+        "ordinal": 12,
+        "parameters": {
+          "id": "inverse_joint-all_higher-w100",
+          "bid": "inverse_joint",
+          "network": "all_higher",
+          "wind": 1.0
+        },
+        "bid_sha256": "143aa8d3adb1a72c7f31b4a2e684e352a1f2e339e31948347f823b5012544938",
+        "physical_inputs": {
+          "availability": "a8c6bdefc8ee227d0e7806f2ac5323d497551afc32e41bf3fb0c53246e1a6110",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "dc03c5edb604fd1fd3fe6d8cbfe4e65cf7531fed39fedf353842c2c5dd5587dd",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": {
+          "price": 27.740168207287603,
+          "daily_demeaned_price": 18.861626953997526,
+          "generation": 0.2555628827887257,
+          "trade": 0.14753850543595418
+        },
+        "score": 0.9358951835485627,
+        "penalty": 0.7528021365254025,
+        "normalized": {
+          "price": 0.9577472738211712,
+          "daily_demeaned_price": 0.9400977797526555,
+          "generation": 0.8533700488132724,
+          "trade": 0.8582519173695796
+        },
+        "eligible": true
+      },
+      {
+        "id": "inverse_joint-all_higher-w90",
+        "ordinal": 13,
+        "parameters": {
+          "id": "inverse_joint-all_higher-w90",
+          "bid": "inverse_joint",
+          "network": "all_higher",
+          "wind": 0.9
+        },
+        "bid_sha256": "143aa8d3adb1a72c7f31b4a2e684e352a1f2e339e31948347f823b5012544938",
+        "physical_inputs": {
+          "availability": "8f17d64a6aa385d1756f17da33a91090bb225d89a0f3d40da2163789e51737a0",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "dc03c5edb604fd1fd3fe6d8cbfe4e65cf7531fed39fedf353842c2c5dd5587dd",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": {
+          "price": 28.049039767723528,
+          "daily_demeaned_price": 18.813277844593554,
+          "generation": 0.25095252184584127,
+          "trade": 0.14600645886480323
+        },
+        "score": 0.9410871803923812,
+        "penalty": 1.0861354698587355,
+        "normalized": {
+          "price": 0.9684112644919518,
+          "daily_demeaned_price": 0.9376879722363395,
+          "generation": 0.8379752313032172,
+          "trade": 0.8493397903061767
+        },
+        "eligible": true
+      },
+      {
+        "id": "inverse_joint-nordic_lower-w100",
+        "ordinal": 14,
+        "parameters": {
+          "id": "inverse_joint-nordic_lower-w100",
+          "bid": "inverse_joint",
+          "network": "nordic_lower",
+          "wind": 1.0
+        },
+        "bid_sha256": "143aa8d3adb1a72c7f31b4a2e684e352a1f2e339e31948347f823b5012544938",
+        "physical_inputs": {
+          "availability": "a8c6bdefc8ee227d0e7806f2ac5323d497551afc32e41bf3fb0c53246e1a6110",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "325304b5bdcdd75a07865b352a15016ce06187109ccb3be937299709686480be",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": null,
+        "score": null,
+        "penalty": null,
+        "normalized": null,
+        "eligible": false
+      },
+      {
+        "id": "inverse_joint-nordic_higher-w100",
+        "ordinal": 15,
+        "parameters": {
+          "id": "inverse_joint-nordic_higher-w100",
+          "bid": "inverse_joint",
+          "network": "nordic_higher",
+          "wind": 1.0
+        },
+        "bid_sha256": "143aa8d3adb1a72c7f31b4a2e684e352a1f2e339e31948347f823b5012544938",
+        "physical_inputs": {
+          "availability": "a8c6bdefc8ee227d0e7806f2ac5323d497551afc32e41bf3fb0c53246e1a6110",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "30033dafa40c1575614fdfc9d035c3dbbe0f4e928cdeaf7fd04458443983d936",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        },
+        "metrics": {
+          "price": 27.751660740689026,
+          "daily_demeaned_price": 18.98298794723938,
+          "generation": 0.2547540615241996,
+          "trade": 0.1437943417356477
+        },
+        "score": 0.9323606780323609,
+        "penalty": 0.41946880319206953,
+        "normalized": {
+          "price": 0.9581440609802202,
+          "daily_demeaned_price": 0.946146632302518,
+          "generation": 0.8506692503465387,
+          "trade": 0.8364715986301536
+        },
+        "eligible": true
+      }
+    ],
+    "annuals": {
+      "accepted-unchanged-w100": {
+        "witness": "data/bidding-zone-network-2025/seasonal-calendar-v1/refit.npz",
+        "witness_sha256": "2b89af50c32f40e05fea1377657efd8f287a1e375613f5620e1afb76a2741693",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 36.46489929201198,
+        "emergency_mwh": 0.0,
+        "emergency_hours": 0,
+        "external": true,
+        "source_external": true,
+        "reused_source_trial": true
+      },
+      "accepted-unchanged-w90": {
+        "witness": "data/bidding-zone-network-2025/joint-network-calibration-v1/accepted-unchanged-w90.npz",
+        "witness_sha256": "f22a50ef2c9732c22bbc8ae856f11be0810bb30ff6f45e76cbf3398c0046271c",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 141.10702808599945,
+        "emergency_mwh": 0.0,
+        "external": true,
+        "reused_interrupted_driver": true,
+        "source_external": true,
+        "reused_source_trial": true
+      },
+      "accepted-all_lower-w100": {
+        "witness": "data/bidding-zone-network-2025/joint-network-calibration-v3/accepted-all_lower-w100.npz",
+        "witness_sha256": "981974387e96d9f63e8dd73680be5af176e75966d24f31daa696f00215bf82cd",
+        "hours": 0,
+        "optimal_hours": 0,
+        "complete_year": false,
+        "failed_hour": 0,
+        "solver_status": "Infeasible",
+        "rejection": "numerically_certified_infeasible_hour",
+        "farkas_certificate": {
+          "row_bound_mw": 13.196583275478588,
+          "column_maximum_mw": 0.8719846177158479,
+          "separation_gap_mw": 12.32459865776274,
+          "free_column_residual": 7.110352744343444e-17
+        },
+        "clearing_seconds": 0.2990556189997733,
+        "emergency_mwh": null,
+        "external": true,
+        "source_external": false,
+        "reused_source_trial": true
+      },
+      "accepted-all_lower-w90": {
+        "witness": "data/bidding-zone-network-2025/joint-network-calibration-v3/accepted-all_lower-w90.npz",
+        "witness_sha256": "7556fa377c8283faab6eb3f67f8c55e2051477401c43ace1a9f411d34cf92106",
+        "hours": 0,
+        "optimal_hours": 0,
+        "complete_year": false,
+        "failed_hour": 0,
+        "solver_status": "Infeasible",
+        "rejection": "numerically_certified_infeasible_hour",
+        "farkas_certificate": {
+          "row_bound_mw": 13.196583275478758,
+          "column_maximum_mw": 0.8719846177157133,
+          "separation_gap_mw": 12.324598657763046,
+          "free_column_residual": 3.2239708466921484e-17
+        },
+        "clearing_seconds": 0.18151139199926547,
+        "emergency_mwh": null,
+        "external": true,
+        "source_external": false,
+        "reused_source_trial": true
+      },
+      "accepted-all_higher-w100": {
+        "witness": "data/bidding-zone-network-2025/joint-network-calibration-v3/accepted-all_higher-w100.npz",
+        "witness_sha256": "52ebb3b343e3d73acea10bd7e098901284b4d818a7b0d7151fe110ef4a1ad156",
+        "hours": 8760,
+        "optimal_hours": 8760,
+        "complete_year": true,
+        "failures": [],
+        "clearing_seconds": 64.16521103299965,
+        "emergency_mwh": 0.0,
+        "external": true,
+        "source_external": false,
+        "reused_source_trial": true
+      },
+      "accepted-all_higher-w90": {
+        "witness": "data/bidding-zone-network-2025/joint-network-calibration-v3/accepted-all_higher-w90.npz",
+        "witness_sha256": "adaae91dfd579d2717e3a88eb5c98f0fcbebae81307c9fc7efb74c4f92e0f9f4",
+        "hours": 8760,
+        "optimal_hours": 8760,
+        "complete_year": true,
+        "failures": [],
+        "clearing_seconds": 143.53412246100015,
+        "emergency_mwh": 0.0,
+        "external": true,
+        "source_external": false,
+        "reused_source_trial": true
+      },
+      "accepted-nordic_lower-w100": {
+        "witness": "data/bidding-zone-network-2025/joint-network-calibration-v3/accepted-nordic_lower-w100.npz",
+        "witness_sha256": "161ed8f61310c3869735511d3d40d7fc96882dbb59ce3025d0522495d4386438",
+        "hours": 0,
+        "optimal_hours": 0,
+        "complete_year": false,
+        "failed_hour": 0,
+        "solver_status": "Infeasible",
+        "rejection": "numerically_certified_infeasible_hour",
+        "farkas_certificate": {
+          "row_bound_mw": 13.196583275478815,
+          "column_maximum_mw": 0.8719846177544442,
+          "separation_gap_mw": 12.324598657724371,
+          "free_column_residual": 4.990040498864534e-17
+        },
+        "clearing_seconds": 0.2851078849998885,
+        "emergency_mwh": null,
+        "external": true,
+        "source_external": false,
+        "reused_source_trial": true
+      },
+      "accepted-nordic_higher-w100": {
+        "witness": "data/bidding-zone-network-2025/joint-network-calibration-v3/accepted-nordic_higher-w100.npz",
+        "witness_sha256": "a656eeb5bdeead02c87eae86f90586c92a12866df32cb987d312bd0af4d26bca",
+        "hours": 8760,
+        "optimal_hours": 8760,
+        "complete_year": true,
+        "failures": [],
+        "clearing_seconds": 174.92501274200004,
+        "emergency_mwh": 0.0,
+        "external": true,
+        "source_external": false,
+        "reused_source_trial": true
+      },
+      "inverse_joint-unchanged-w100": {
+        "witness": "data/bidding-zone-network-2025/inverse-bid-ensemble-v1/r2-s6.npz",
+        "witness_sha256": "55b337e50c89e033555b3a900529b3eadc9c9c943d60201c03ec1d2f8de76f1e",
+        "optimal_hours": 8760,
+        "hours": 8760,
+        "failures": [],
+        "clearing_seconds": 33.54194262500005,
+        "emergency_mwh": 0.0,
+        "external": true,
+        "source_external": true,
+        "reused_source_trial": true
+      },
+      "inverse_joint-unchanged-w90": {
+        "witness": "data/bidding-zone-network-2025/joint-network-calibration-v3/inverse_joint-unchanged-w90.npz",
+        "witness_sha256": "fe5da56bf5cc25157fb9c400b9569019fd404a9e2068e7390a9a4e73da4de00c",
+        "hours": 8760,
+        "optimal_hours": 8760,
+        "complete_year": true,
+        "failures": [],
+        "clearing_seconds": 106.74387151599967,
+        "emergency_mwh": 0.0,
+        "external": true,
+        "source_external": false,
+        "reused_source_trial": true
+      },
+      "inverse_joint-all_lower-w100": {
+        "witness": "data/bidding-zone-network-2025/joint-network-calibration-v3/inverse_joint-all_lower-w100.npz",
+        "witness_sha256": "981974387e96d9f63e8dd73680be5af176e75966d24f31daa696f00215bf82cd",
+        "hours": 0,
+        "optimal_hours": 0,
+        "complete_year": false,
+        "failed_hour": 0,
+        "solver_status": "Infeasible",
+        "rejection": "numerically_certified_infeasible_hour",
+        "farkas_certificate": {
+          "row_bound_mw": 13.196583275478588,
+          "column_maximum_mw": 0.8719846177158479,
+          "separation_gap_mw": 12.32459865776274,
+          "free_column_residual": 7.110352744343444e-17
+        },
+        "clearing_seconds": 0.3965407489995414,
+        "emergency_mwh": null,
+        "external": true,
+        "source_external": false,
+        "reused_source_trial": true
+      },
+      "inverse_joint-all_lower-w90": {
+        "witness": "data/bidding-zone-network-2025/joint-network-calibration-v3/inverse_joint-all_lower-w90.npz",
+        "witness_sha256": "7556fa377c8283faab6eb3f67f8c55e2051477401c43ace1a9f411d34cf92106",
+        "hours": 0,
+        "optimal_hours": 0,
+        "complete_year": false,
+        "failed_hour": 0,
+        "solver_status": "Infeasible",
+        "rejection": "numerically_certified_infeasible_hour",
+        "farkas_certificate": {
+          "row_bound_mw": 13.196583275478758,
+          "column_maximum_mw": 0.8719846177157133,
+          "separation_gap_mw": 12.324598657763046,
+          "free_column_residual": 3.2239708466921484e-17
+        },
+        "clearing_seconds": 0.39446234600018215,
+        "emergency_mwh": null,
+        "external": true,
+        "source_external": false,
+        "reused_source_trial": true
+      },
+      "inverse_joint-all_higher-w100": {
+        "witness": "inverse_joint-all_higher-w100.npz",
+        "witness_sha256": "521e3013b177438fcab593d35cc9cd5d8079476a2b7d94c108df2d0c3b0a3068",
+        "hours": 8760,
+        "optimal_hours": 8760,
+        "complete_year": true,
+        "failures": [],
+        "clearing_seconds": 95.25332080599946,
+        "source_external": false,
+        "numerical_retry": true,
+        "emergency_mwh": 0.0
+      },
+      "inverse_joint-all_higher-w90": {
+        "witness": "inverse_joint-all_higher-w90.npz",
+        "witness_sha256": "9724982921ae538f8aa9ad9d241b143132539df094d1ed81f996d37794acbd73",
+        "hours": 8760,
+        "optimal_hours": 8760,
+        "complete_year": true,
+        "failures": [],
+        "clearing_seconds": 108.79133695000019,
+        "source_external": false,
+        "numerical_retry": true,
+        "emergency_mwh": 0.0
+      },
+      "inverse_joint-nordic_lower-w100": {
+        "witness": "data/bidding-zone-network-2025/joint-network-calibration-v3/inverse_joint-nordic_lower-w100.npz",
+        "witness_sha256": "33e3c18065e445973f14527f87df9229ec573f137d95bafdd59bed3960320fb0",
+        "hours": 0,
+        "optimal_hours": 0,
+        "complete_year": false,
+        "failed_hour": 0,
+        "solver_status": "Infeasible",
+        "rejection": "numerically_certified_infeasible_hour",
+        "farkas_certificate": {
+          "row_bound_mw": 12.802451171076541,
+          "column_maximum_mw": 0.8389099311344004,
+          "separation_gap_mw": 11.96354123994214,
+          "free_column_residual": 3.67544536472586e-17
+        },
+        "clearing_seconds": 0.2354839390000052,
+        "emergency_mwh": null,
+        "external": true,
+        "source_external": false,
+        "reused_source_trial": true
+      },
+      "inverse_joint-nordic_higher-w100": {
+        "witness": "data/bidding-zone-network-2025/joint-network-calibration-v3/inverse_joint-nordic_higher-w100.npz",
+        "witness_sha256": "f72ef461ffd350e968e03a2cd7c7b269418762228922eb761bb80388cf2d0008",
+        "hours": 8760,
+        "optimal_hours": 8760,
+        "complete_year": true,
+        "failures": [],
+        "clearing_seconds": 105.93358736600021,
+        "emergency_mwh": 0.0,
+        "external": true,
+        "source_external": false,
+        "reused_source_trial": true
+      }
+    },
+    "branch_count": 255,
+    "nordic_branch_count": 37,
+    "preparation_seconds": 299.7427489310003,
+    "end_to_end_seconds": 1641.705978293001,
+    "peak_rss_mib": 2603.1171875,
+    "report_audit": {
+      "status": "joint_report_cases_zonal_prices_national_mix_and_selection_replayed",
+      "auditor_sha256": "1e35627aece211b57330369e5fa52e8d65bdc84ed3c2c7eae10fc7482942592e",
+      "source_summary_sha256": "88b4372b500d39ceb81a55c7520905a4b2fcab3ca441d28c363543765bc32b5d",
+      "article_sha256": "02ba6780b7d71654c997269abb87760c70b9098d41b9d96953fe19d223c5378c",
+      "assets_sha256": {
+        "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
+        "daily-prices.png": "46137f5c666608b0b4ffa6e2c01e793bced25c7f26a13d6788b701646a7d6513",
+        "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",
+        "generation-by-fuel.csv": "29d66b4145d615de418a7f56514c6f75e18f0eb0bcc49f5b9ad3232032ab4dfd",
+        "inverse-generation-by-country.csv": "d6a52439dacc9719f8f0ae4eb80d5a3ced890e75e07107079168784d7749e34b",
+        "inverse-prices-by-zone.csv": "0a0cb02bb55ac4104227516838b88f24e47ac80c0a9b705053705c7a0430e40c",
+        "inverse-search-cases.csv": "72240571f3da6d96b16ba6c62d67493ab7e6f36de384801d3dfe9473ee7a683f",
+        "joint-generation-by-country.csv": "8f0701c725484833c01641f8d42462edf9bdff9ac142586c3a31bb5146e9d43b",
+        "joint-prices-by-zone.csv": "73ca79034ed879e11ba4a5f397fa31ab87ad1afd22cebb5db4f1516512516ef8",
+        "joint-search-cases.csv": "d8b5b1606dfe2a71a438704372e4efc55a10b98bc9cbeff1345ec0288d3b3703",
+        "national-generation.csv": "218d4a7eee9d94dcb2fed9a9eb524713eb0303bdbfbce16aac4e419566cd7523",
+        "national-mix.png": "0da4084134d78a7d0b754543dd180380bfbb3c6e8373526d0326c5b28da85aac",
+        "nuclear-availability-by-month.csv": "d7e7925ebf1f11f6ae3f0e1aac4c952d027072e3f28816a81b5b6fcf390139b6",
+        "nuclear-availability-prices-by-zone.csv": "b2cf42359fe36e71a92117d5c42b5619d477db892e5ee61ed01d7d4635e0a292",
+        "overview.png": "808dc52109a71eabfe65a6cb79c5b249320bf1d71eaab3a954e0c59d52e4f363",
+        "prices-by-zone.csv": "99e1a5a06dc88aa8fff022546f9e70f3a83df58df7f42123e9e22b2abab3dcaa",
+        "renewable-capacity-audit.csv": "c60afa3593f8f9aacf105dcb528cc801cf723af0bf6f4083d3dacdb73280137c",
+        "renewable-source-prices-by-zone.csv": "08472614bff37ba147d6a52839da407ff7fa2fde9473edede32e47a246d66345",
+        "zone-mae-grid.png": "e413ecfdb0ad4d2ad06ef366920906938031da56d14a4fd7519ef4102def0fb5"
+      },
+      "cases": 16,
+      "zone_rows": 192,
+      "generation_rows": 680
+    }
+  }
 }

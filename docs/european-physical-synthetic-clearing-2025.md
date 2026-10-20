@@ -1,132 +1,142 @@
-# Inverse market modelling: European 2025 bid calibration
+# Inverse market modelling: fitting supply and network constraints
 
 ## Summary
 
-**The predeclared near-best ensemble contains only one member; other research-eligible fits exist but are outside that narrow score cutoff.** The accepted seasonal-bid baseline has full-year price MAE **28.964 EUR/MWh**. The score-winning eligible state, **r2-s6**, gives **28.167 EUR/MWh** (2.75% lower), with generation-interval mismatch **0.2995→0.2551** and trade mismatch **0.1719→0.1436**. The unrestricted price leader gives **27.800 EUR/MWh**; eligibility is reported below rather than hidden. The <10 EUR/MWh research target remains unmet.
+We now allow **network limits and generation availability to change alongside supply bids**, rather than fitting bids against a fixed grid. A finite 2025 experiment tests **16 combinations**, using two existing bid anchors and **14 new parameter states**. **10 cases have complete annual witnesses; 6 are rejected by independently replayed infeasibility certificates**. The best joint-score case is **`inverse_joint-nordic_higher-w100`**: price MAE **27.752 EUR/MWh**, versus **28.964** for the accepted baseline and **28.167** for the previous bid-only winner. Generation mismatch is **0.2548**, versus **0.2995** baseline; implied-trade mismatch **0.1438**, versus **0.1719**. The joint winner changes physical inputs.
 
-This is **2025 in-sample reconstruction**, using all 2025 prices and generation to fit and select bids. Generation/trade agreement and independently checked physics are complementary evidence, **not independent forecast validation**. The primary rule retained **1** bid state(s): **r2-s6**. Their min/max price envelope contains observed prices in **0.13%** of eligible zone-hours. This is descriptive coverage of a finite tested family, not a confidence interval or a posterior probability. The accepted baseline and browser scenario engine remain unchanged; these are experimental fits.
+The winner uses **the previous fitted bids**, **15% more headroom on Nordic-incident AC branches**, and **wind availability ×1.0**. These are fitted effective assumptions, **not a recovered real grid**. The lowest price MAE across all tested cases is **27.740 EUR/MWh**; price-only leadership and joint eligibility are distinct. The target below 10 EUR/MWh remains unmet. All targets also inform selection: this is **in-sample reconstruction, not independent forecasting**. Neither the accepted baseline nor the browser scenario engine is replaced.
 
-## 1. What inverse market modelling means
+![Every joint supply/network state, price and generation performance](/research/dispatch-comparison-2025/overview.png)
 
-Our forward problem takes supply bids, available generation, demand and network constraints, clears the system, and produces dispatch and balance-dual prices. The inverse problem asks which plausible bid parameters could explain observed outcomes while retaining that clearing mechanism.
+## 1. What is being estimated?
 
-In compact form, each hour solves $x_t(\theta)\in\arg\min_x c_t(\theta)^T x$ under the same physical constraints; $p_t(\theta)$ is its zonal balance-dual vector. Calibration compares $p_t(\theta)$ and the resulting generation/trade quantities with observations. Observed prices never overwrite the cleared prices.
+Each forward hourly LP chooses dispatch $x_t$ to minimize submitted offer cost $c_t(\theta)^T x_t$, subject to generation bounds and the physical network equations. Its zonal balance duals give cleared prices $p_t(\theta)$. In this experiment, $\theta$ selects a bid anchor, a wind-availability factor and an AC rating factor; **prices are always produced by clearing, never replaced by observations**.
 
-**Identification is the central difficulty.** A 100 EUR/MWh price might reflect a higher gas offer, less available cheap generation, or constrained imports. The same price can arise from different mechanisms with different investment responses. A resource that never influences prices is poorly identified by price data. Equal-price aggregation and LP dual nonuniqueness add ambiguity; national generation totals do not identify actual hourly plant dispatch.
+Inverse modelling selects parameters whose forward prices and generation resemble observations. Price alone cannot distinguish expensive bids from unavailable cheap supply or limited imports. Generation and exchanges add information, but do not make the parameters uniquely identified. Fixed GSKs, aggregated offers and nonunique LP duals add ambiguity. The experiment is a small finite search, not an exact globally solved bilevel problem, exhaustive model distribution or proof of actual market offers.
 
-[Chan, Mahmood and Zhu's review](https://arxiv.org/abs/2109.03920) explains inverse optimisation as estimating objectives or constraints that explain decisions. [Bertsimas, Gupta and Paschalidis](https://arxiv.org/abs/1308.3397) develop data-driven estimation from equilibrium observations. These motivate an optimisation-consistent approach, but do not establish that our approximate European market is the true data-generating mechanism.
+The method follows the inverse-optimisation framing in [Chan, Mahmood and Zhu](https://arxiv.org/abs/2109.03920). [Liang and Dvorkin](https://arxiv.org/html/2302.05498v2) study electricity offer recovery; their identification assumptions do not automatically hold for our aggregated synthetic market. [Birge, Hortaçsu and Pavlin](https://doi.org/10.1287/opre.2017.1606) study constraint recovery from prices. Those results motivate constraint calibration; they do not validate arbitrary European capacity changes or guarantee our fitted parameters are true.
 
-[Liang and Dvorkin](https://arxiv.org/html/2302.05498v2) study marginal offer recovery from electricity-market clearing information. Their recovery guarantees depend on their assumptions and observable marginal behaviour; non-marginal offers remain unidentified. We have zonal prices and aggregated generation rather than complete plant-level clearing observations, so **we do not inherit their uniqueness or convergence guarantees**. [Birge, Hortaçsu and Pavlin's MISO study](https://doi.org/10.1287/opre.2017.1606) investigates constraint recovery from price outcomes under specified assumptions; it does not authorize freely tuning our physical network until prices match. [Babier et al.](https://doi.org/10.1287/ijoo.2019.0045) fit inverse models from multiple decisions; their ensemble-consensus framework differs from our finite set of near-best parameter fits.
+## 2. Baseline model and source data
 
-**Implemented here:** a bounded two-round inverse-calibration heuristic, with actual full-year forward solves and an explicit near-best fit selection rule. It is not an exact global bilevel inverse optimisation, proof of actual bids, exhaustive solution distribution or strategic Nash-equilibrium model.
+The accepted `seasonal-calendar-v1/refit` has **48 modeled areas, 145 physical buses, 41 complete observed-price zones and all 8,760 UTC hours of 2025**. Country-to-zone/source allocation proxies remain. Each hour is an independent sparse LP; daily grouping adds no commitment, ramps or storage optimization. This is EUPHEMIA-inspired synthetic clearing, not reconstruction of actual order books or nonconvex allocation rules.
 
-## 2. Baseline model, sources and what stays fixed
-
-The single accepted reference is `seasonal-calendar-v1/refit`: **48 modeled areas, 145 physical buses, 41 complete observed-price zones and all 8,760 UTC hours of 2025**. Separate Nordic and Italian zones are retained; geographic/source allocation proxies remain. Independent hourly sparse LPs minimize offered supply cost. Daily grouping does not add unit commitment, ramping, storage scheduling or complex block orders. This is EUPHEMIA-inspired synthetic clearing, not EUPHEMIA reproduction.
-
-| Component | Source and treatment |
+| Component | Data and treatment |
 | --- | --- |
-| Physical network and fleet | Pinned [PyPSA-Eur](https://github.com/PyPSA/pypsa-eur) v2026.08.0; PTDF/GSK, electrical islands, HVDC bounds/losses and 0.7 branch-rating factor. Model-derived N-0 limits, not certified JAO commercial domains or explicit N-1 security. |
-| Wind and solar | Original 2025 [ERA5](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels)/[atlite](https://atlite.readthedocs.io/) weather profiles, [IRENA](https://www.irena.org/Data) end-2024/end-2025 capacity interpolation. Assumed commissioning, generic turbines/panels and potential-based layouts; generation never replaces availability. |
-| Demand | Prepared [ENTSO-E](https://transparency.entsoe.eu/)-based 2025 hourly demand, with regional allocation/scope proxies; fixed in every fit. |
-| Hydro and nuclear availability | Retained fixed hourly reservoir schedule and source water/stock evidence; Norway uses NVE HBV/stock inputs. Nuclear retains the 2024 national energy-availability-factor proxy. No adaptive hydro or RTE availability change in this trial. |
-| Bid anchors | [World Bank](https://www.worldbank.org/en/research/commodity-markets) monthly TTF/Brent, [ECB](https://data.ecb.europa.eu/) FX, source efficiency/VOM and 80 EUR/t carbon assumption; accepted seasonal/local-clock and Ember bid correction. Delivered fuel and operational details remain imperfect. |
-| Targets | Source-hashed ENTSO-E A44 hourly price aggregates; [Ember](https://ember-energy.org/data/) monthly national Wind/Solar/Nuclear/Gas/Coal generation and signed net exports. Unknown observations remain unknown. |
+| Grid and fleet | Pinned [PyPSA-Eur](https://github.com/PyPSA/pypsa-eur) v2026.08.0; existing PTDF/GSK, AC islands, original HVDC bounds and losses. Static AC headroom starts at 0.7 of source nominal ratings; N-0 model limits, not certified commercial JAO domains. |
+| Wind/solar | Original 2025 [ERA5](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels)/[atlite](https://atlite.readthedocs.io/) weather profiles and [IRENA](https://www.irena.org/Data) end-2024/end-2025 linear capacity trajectory. Commissioning dates, fleet siting and generic resource conversion are proxies. |
+| Demand | Prepared 2025 [ENTSO-E](https://transparency.entsoe.eu/) demand, fixed in every case; regional allocation and gross/net scope limitations remain. |
+| Hydro/nuclear | Fixed hourly water schedules, with retained Norwegian NVE inflow/stock evidence; unchanged nuclear availability proxy. Capacity does not create water. No hydro or storage search restarted. |
+| Offers | Monthly World Bank TTF/Brent and ECB FX anchors, plant efficiency/VOM, 80 EUR/t carbon assumption, accepted smooth seasonal/hourly bids. The second anchor is the independently verified prior inverse joint winner `r2-s6`; no new bid coefficients are fitted here. |
+| Targets | Source-hashed ENTSO-E A44 hourly prices; [Ember](https://ember-energy.org/data/) monthly national Wind/Solar/Nuclear/Gas/Coal generation and signed net exports. Missing values stay unknown. |
 
-The five-fuel mix score excludes hydro, biomass and other generation; trade is **implied generation minus model demand**, not verified physical border flow. National/zone boundaries and gross/net reporting differ. Updated hourly zonal ENTSO-E A75 generation checks have not been derived for these inverse fits; prior baseline/OOF A75 evidence is separate. Passing the five-fuel national screen does not certify every zone or resource. Allocation points are proportional illustrations; conditional fuel/country bounds preserve saved group totals, are not jointly attainable bounds on all primal optima and do not identify real plant dispatch.
+Generation scores measure distance outside **conditional saved-group allocation bounds**, divided by max(reference,0.25 TWh), averaged over known country/fuel/month observations. Proportional point allocations are illustrative; bounds are not jointly attainable ranges over all optimal dispatches or statistical confidence intervals. Hydro, biomass and other generation are outside the five-fuel score. New-fit hourly zonal A75 generation validation remains outstanding.
 
-Recent source diagnostics remain separate: [wind/PV controls](/research/dispatch-comparison-2025/renewable-source-prices-by-zone.csv), [IRENA capacity audit](/research/dispatch-comparison-2025/renewable-capacity-audit.csv), [RTE nuclear controls](/research/dispatch-comparison-2025/nuclear-availability-prices-by-zone.csv), and [daily-fuel controls](/research/dispatch-comparison-2025/daily-fuel-prices-by-zone.csv). None was silently combined with this accepted-baseline comparison.
+The trade score compares implied generation minus demand with national net exports, normalized by max(model demand,1 TWh). It is **not observed physical border flow**. JAO domains and original-request-classified ENTSO-E flows are not fitted here. Generation/price consistency cannot by itself certify every border constraint.
 
-## 3. Implemented search and safeguards
+## 3. Exact adjustable parameters and search
 
-1. Start from the accepted annual witness and its exact offer grouping. Five features—constant, annual sine/cosine and first local-clock daily sine/cosine—propose smooth **zone/resource** gas, coal and nuclear bid corrections. Fit observed-minus-parent-price residuals only when that model has a local interior offer matching its saved zonal dual. Require 168 supported hours and ridge 336; clip fitting residuals at ±100. An interior offer has neither generation bound active, so its marginal bid equals the local price in this formulation. Re-clearing is essential because the marginal offers and binding network constraints can change after a bid adjustment. This labels supporting model evidence, not unique real price setters. Unsupported groups receive zero proposals.
-2. Add a national annual fuel-mix proposal only when all 12 reference months exist. Underproduction outside the conditional annual allocation interval proposes a lower offer; overproduction proposes a higher offer. Each increment is bounded at ±15 EUR/MWh and weighted into groups by original nameplate membership. It changes **bids, never availability**.
-3. Accumulate the smooth/mix correction, capped at ±45 EUR/MWh for gas/coal and ±15 for nuclear. Thermal block premiums are nonnegative and monotone, capped at 60 gas/40 coal on the upper block; intermediate premium is 35% of that. Nuclear has no peaking block. Final thermal/nuclear bids have a zero floor; renewable and all other bids stay unchanged. Bounds are declared experimental assumptions, not observed market bids or subsidy evidence.
-4. Make exactly two rounds of six declared step tuples, at most 12 new annual clears. Each round uses the best eligible completed state as parent. Identical bid hashes reuse their witness. There are no per-hour fitted prices, extra adaptive rounds or physical-constraint searches. The replay found supported zone/resource groups **[39, 40]** across the two rounds; each supported group estimates five coefficients, plus bounded national fuel signals.
-5. Score every unique state using **55% normalized price MAE +20% normalized daily-demeaned price MAE +20% normalized generation-interval error +5% normalized trade-interval error**, plus 0.01 times availability-weighted squared bid departure. Normalization uses the accepted baseline. A research-eligible state must not increase price MAE, may increase each other score by at most 2%, and must clear all hours with zero emergency. These are predeclared trial filters, **not empirical product acceptance gates**.
-6. Retain at most five distinct eligible bid states within 0.01 of the best regularized score and 1 EUR/MWh of that score winner's MAE. Keep the score winner first, then choose diverse normalized parameter vectors. Equal weights are descriptive; we do not infer a likelihood or assign posterior probabilities. The baseline can remain a member, and the set can collapse to one if alternatives fail.
+**AC constraints:** preserve $|Hq_t+o_t|\leq r(\theta)$, with unchanged PTDF $H$, injection variables $q_t$, offsets $o_t$, topology, impedance, GSK, islands and HVDC physics. Multiply existing symmetric MW limits by **0.85, 1 or 1.15**. The inherited nominal-rating factor becomes 0.595/0.7/0.805. Nothing exceeds source nominal ratings. This changes permitted headroom, not impedance or physical construction, and includes internal AC constraints rather than treating every branch as a commercial border.
 
-The complete [predeclared design](config/inverse-bid-ensemble-2025.json) fixes every step, bound and filter before outcomes. The continuous inverse problem is nonsmooth and nonconvex through changing active constraints. Hourly LP optimality is independently checked; **there is no outer-search global-optimum or convergence certificate**.
+Global controls adjust all **255** passive branches. Nordic controls adjust the **37** branches with either endpoint in NO/SE/FI/DK, including incident cross-region AC lines. HVDC links remain unchanged. These static bounds are **experimental calibration assumptions**, not values verified from JAO, outage records or N-1 studies. Their narrow range is deliberately interpretable; it does not encompass every plausible constraint error.
 
-## 4. Full-year results and model distribution
+**Wind availability:** multiply original source wind available MW by **1 or 0.9**, before aggregation. Preserve chronological weather shape, source country, capacity/nameplate and all solar/other availability. Recompute the available MW used in both clearing and conditional generation allocation. The 0.9 hypothesis can represent a coarse conversion/derating bias; it is not a measured correction or capacity estimate, and no observed hourly dispatch becomes available supply. A spatially uniform annual factor cannot repair wrong site geography or within-year timing.
 
-| State | Price MAE | Mean zonal r | Within-day MAE | Generation score | Trade score | Eligible? |
-| --- | ---: | ---: | ---: | ---: | ---: | --- |
-| Accepted baseline | 28.964 | 0.573 | 20.063 | 0.2995 | 0.1719 | yes |
-| Joint-score fit (r2-s6) | 28.167 | 0.593 | 19.568 | 0.2551 | 0.1436 | yes |
-| Price-focused fit (r2-s2) | 27.800 | 0.594 | 19.541 | 0.2914 | 0.1678 | yes |
+**Bids:** compare two frozen anchors: accepted seasonal bids and prior inverse joint bids. The latter contains bounded smooth gas/coal/nuclear adjustments, Ember mix signals and monotone thermal premiums. Those coefficients are not refitted when the physical parameters change. Therefore this tests joint combinations and interactions, not unrestricted simultaneous continuous estimation.
 
-Price errors are EUR/MWh. Scores for generation/trade are normalized interval discrepancies, not total-fleet percentage errors. Trial IDs describe steps in the same solver: `r2-s6` means round 2, step 6, not a separate network implementation. The joint fit reaches gas/coal upper-block premiums **60/40 EUR/MWh**; the price-focused fit reaches **30/20**. Both also change bounded smooth/mix bid terms; neither changes available generation. **10/13** unique states pass the research filters. The table contains the anchor, every retained member and the overall price leader; [all search states](/research/dispatch-comparison-2025/inverse-search-cases.csv) include excluded cases and exact parent/step provenance.
+The main factorial has 2 bid anchors × 3 global AC choices × 2 wind choices = 12 cases; four extra Nordic lower/higher controls use original wind. Exactly 16 states are retained, including adverse and infeasible outcomes. There is no adaptive widening after seeing results. The all-year objective is 0.55 normalized price MAE + 0.20 within-day demeaned MAE + 0.20 generation mismatch + 0.05 trade mismatch, plus 0.01 times bid/physical departure regularization. Physical regularization averages squared normalized departures in wind, Nordic-incident AC and other AC limits. Bid regularization uses the previous source-availability-weighted offer deviation.
 
-![All search states: price and generation trade-offs](/research/dispatch-comparison-2025/overview.png)
+Eligibility requires price MAE no higher than accepted baseline; demeaned-price, generation and trade scores no more than 2% worse; all 8,760 optimal hours and emergency supply at most 1e-6 MWh. These are declared research filters, **not product acceptance gates**. Selection minimizes the regularized score among eligible states, then penalty and ordinal. No automatic baseline promotion follows.
 
-The retained states are alternative explanations **within one unchanged physical network**, not randomly perturbed networks centered on observations. A narrow envelope can simply mean that the tested bid family misses the same price movements. Coverage of **0.13%** is reported rather than assuming the observed market lies inside the fit distribution. With one member, the envelope has zero width and coverage becomes an approximate numerical equality count, not useful uncertainty quantification. Envelope width excludes uncertainty from weather, capacity, demand scope, network structure and missing market mechanisms. Averaged ensemble prices are not prices from a single cleared system, and are not the primary model metric.
+| # | Case | Price MAE | Generation score | Trade score | Joint score | Eligible |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| 1 | `accepted-unchanged-w100` | 28.964 | 0.2995 | 0.1719 | 1.0000 | yes |
+| 2 | `accepted-unchanged-w90` | 29.183 | 0.2979 | 0.1717 | 1.0066 | no |
+| 3 | `accepted-all_lower-w100` | — | — | — | — | no |
+| 4 | `accepted-all_lower-w90` | — | — | — | — | no |
+| 5 | `accepted-all_higher-w100` | 28.597 | 0.3016 | 0.1759 | 0.9954 | no |
+| 6 | `accepted-all_higher-w90` | 28.810 | 0.3007 | 0.1755 | 1.0018 | no |
+| 7 | `accepted-nordic_lower-w100` | — | — | — | — | no |
+| 8 | `accepted-nordic_higher-w100` | 28.647 | 0.2996 | 0.1720 | 0.9920 | yes |
+| 9 | `inverse_joint-unchanged-w100` | 28.167 | 0.2551 | 0.1436 | 0.9429 | yes |
+| 10 | `inverse_joint-unchanged-w90` | 28.502 | 0.2504 | 0.1424 | 0.9493 | yes |
+| 11 | `inverse_joint-all_lower-w100` | — | — | — | — | no |
+| 12 | `inverse_joint-all_lower-w90` | — | — | — | — | no |
+| 13 | `inverse_joint-all_higher-w100` | 27.740 | 0.2556 | 0.1475 | 0.9359 | yes |
+| 14 | `inverse_joint-all_higher-w90` | 28.049 | 0.2510 | 0.1460 | 0.9411 | yes |
+| 15 | `inverse_joint-nordic_lower-w100` | — | — | — | — | no |
+| 16 | `inverse_joint-nordic_higher-w100` | 27.752 | 0.2548 | 0.1438 | 0.9324 | yes |
 
-**Post-run cutoff diagnostic, not a change to primary selection:** applying wider score tolerances to the same completed states gives the counts below, keeping all other filters and the 1 EUR/MWh limit. No additional solve or primary-member substitution is made. This shows dependence on the analyst's tolerance; it does not establish probabilities. A second diagnostic uses **all 10 research-eligible states**, without the near-best score cutoff. That wider min/max envelope spans observed prices in **14.06%** of eligible zone-hours, with mean width **9.68 EUR/MWh**. Even this broader family is far from bracketing the observed market; the orange band below is not the primary retained ensemble or a confidence interval.
+**Rejected physical combinations.** The first tightened case was initially allowed to continue after HiGHS reported infeasible hours. That diagnostic run was stopped; its completed wind-control witness is reused with original code provenance. Before the remaining search, the failure policy was amended to reject a year at its first numerically certified infeasible hour. Parameter bounds, objective and acceptance filters were unchanged. No partial-year price/mix metric is reported or eligible.
 
-| Score tolerance above winner | Qualifying states | Maximum retained after five-member cap |
+| Rejected case | First rejected UTC hour index | Numerical Farkas separation (MW) |
 | --- | ---: | ---: |
-| 0.005 | 1 | 1 |
-| 0.010 | 1 | 1 |
-| 0.020 | 5 | 5 |
-| 0.030 | 7 | 5 |
+| `accepted-all_lower-w100` | 0 | 12.324599 |
+| `accepted-all_lower-w90` | 0 | 12.324599 |
+| `accepted-nordic_lower-w100` | 0 | 12.324599 |
+| `inverse_joint-all_lower-w100` | 0 | 12.324599 |
+| `inverse_joint-all_lower-w90` | 0 | 12.324599 |
+| `inverse_joint-nordic_lower-w100` | 0 | 11.963541 |
 
-![Per-zone price MAE for baseline, retained members and price leader](/research/dispatch-comparison-2025/zone-mae-grid.png)
+The first rejected case's independently replayed certificate uses **5 AC branch rows** with endpoint countries **NO, SE**. These are participating constraints in one proof, not a unique causal attribution to individual real lines. The certificate therefore localizes a model-consistency issue; it does not establish a real-world shortage.
 
-All 48 areas appear; seven lack complete observed-price series and remain gray. Negative and extreme observations remain in all eligible-zone annual metrics. No zone or failed hour is removed to improve a headline.
+Hour index 0 means 1 January 2025 at 00:00 UTC. A Farkas row ray combines the model's row bounds into a requirement larger than any value allowed by its generation/link bounds, with zero free-injection coefficients to numerical tolerance. The positive separation certifies that hour's constraint set is empty within numerical tolerance. Rays are normalized by their largest absolute row coefficient; the separation magnitude depends on that normalization and is not a physical shortage volume or measured line-capacity deficit. This may expose restricted fixed injection/GSK assumptions, not a real European electricity shortage. Later hours need not be solved to reject a full-year-feasible claim. Changing bid prices cannot repair an empty physical feasible set; reducing only an upper availability bound cannot restore feasibility either. A source-backed constraint or injection/GSK correction would be a different model change, requiring fresh verification.
 
-### Norway, Germany, Spain and France
+`accepted` and `inverse_joint` identify bid anchors; `w100`/`w90` identify original/90% wind availability. All-zone, monthly quantity and tail evidence remain separate from aggregate ranking. See [every case](/research/dispatch-comparison-2025/joint-search-cases.csv), [shown-model zonal metrics](/research/dispatch-comparison-2025/joint-prices-by-zone.csv), and [national fuel volumes/differences](/research/dispatch-comparison-2025/joint-generation-by-country.csv).
 
-Improvements are not uniform: the score winner improves Germany and Spain, but worsens France and NO3/NO4. The all-zone table/grid retain those regressions. Better aggregate generation scores likewise do not establish improvement in every country/fuel.
+## 4. Does changing the network help?
 
-| Zone | Baseline MAE | Score winner MAE | Baseline r | Score winner r |
+The following comparisons hold both bids and original wind availability fixed. Deltas are relative to the unchanged-network case with the **same** bid anchor; negative values improve the error. This isolates effective network-limit changes from bid-fitting gains.
+
+| Bid anchor | Network change | Price MAE delta | Generation-score delta | Eligible |
+| --- | --- | ---: | ---: | --- |
+| accepted | all_lower | rejected: infeasible hour | — | no |
+| accepted | all_higher | -0.367 | +0.0022 | no |
+| accepted | nordic_lower | rejected: infeasible hour | — | no |
+| accepted | nordic_higher | -0.317 | +0.0001 | yes |
+| inverse_joint | all_lower | rejected: infeasible hour | — | no |
+| inverse_joint | all_higher | -0.427 | +0.0004 | yes |
+| inverse_joint | nordic_lower | rejected: infeasible hour | — | no |
+| inverse_joint | nordic_higher | -0.415 | -0.0004 | yes |
+
+![Full-year price MAE for every modeled zone](/research/dispatch-comparison-2025/zone-mae-grid.png)
+
+The grid shows every modeled area, retaining unknown-price cells and regional regressions. NO5 improves from **47.29 to 32.56 EUR/MWh**, with correlation **-0.147→0.272**. But NO2/NO4 and all four Swedish zones have higher MAE than the accepted baseline; France also worsens under the joint winner. The globally relaxed price leader offers a different country trade-off; its near-identical aggregate MAE does not identify which grid is true. National generation agreement is not evidence of correctly located zonal injections. Norway's fixed hydro remains an important structural restriction: AC-limit changes can reroute its fixed production, but cannot create a water-value offer or reschedule water.
+
+| Zone | Accepted MAE | Bid-only MAE | Joint winner MAE | Winner r |
 | --- | ---: | ---: | ---: | ---: |
-| NO1 | 42.57 | 42.74 | 0.032 | 0.033 |
-| NO2 | 39.25 | 40.12 | 0.201 | 0.190 |
-| NO3 | 34.58 | 36.65 | 0.008 | 0.024 |
-| NO4 | 35.21 | 38.56 | 0.004 | 0.016 |
-| NO5 | 47.29 | 46.58 | -0.147 | -0.140 |
-| DE-LU | 21.57 | 19.29 | 0.829 | 0.843 |
-| ES | 24.07 | 21.62 | 0.771 | 0.817 |
-| FR | 23.83 | 24.69 | 0.802 | 0.794 |
+| NO1 | 42.57 | 42.74 | 38.33 | 0.189 |
+| NO2 | 39.25 | 40.12 | 42.39 | 0.128 |
+| NO3 | 34.58 | 36.65 | 31.94 | 0.227 |
+| NO4 | 35.21 | 38.56 | 39.62 | 0.092 |
+| NO5 | 47.29 | 46.58 | 32.56 | 0.272 |
+| DE-LU | 21.57 | 19.29 | 19.42 | 0.843 |
+| ES | 24.07 | 21.62 | 21.62 | 0.817 |
+| FR | 23.83 | 24.69 | 24.66 | 0.794 |
 
-**Where the inverse proposals have leverage.** The last proposal used parent **r1-s6**. Its local interior supporting-hour counts are below; fewer than 168 hours means no local price proposal for that zone/resource.
+![Observed and simulated hourly prices in a fixed July week](/research/dispatch-comparison-2025/daily-prices.png)
 
-| Zone | Gas | Coal | Nuclear |
-| --- | ---: | ---: | ---: |
-| NO1 | 0 | 0 | 0 |
-| NO2 | 0 | 0 | 0 |
-| NO3 | 0 | 0 | 0 |
-| NO4 | 97 | 0 | 0 |
-| NO5 | 33 | 0 | 0 |
-| DE-LU | 1966 | 1933 | 0 |
-| ES | 5108 | 19 | 826 |
-| FR | 838 | 82 | 4708 |
+Examples always use 1–7 July 2025 UTC. All headline scores use the full year, not that week. NO5 is a price illustration; it does not establish complete NO5 generation validation. The five Norwegian price zones remain separate.
 
-All Norwegian groups are below the threshold. Thermal bids there therefore have no directly fitted local price adjustment in this design; cross-border changes can still affect prices. Fixed hydro is an injection, not an adjustable water offer. Expanding a thermal bid search cannot by itself identify missing local price formation. Germany, Spain and France have much stronger supporting model evidence, without proving which actual generators set observed prices.
+![National generation for Norway, Germany, Spain and France](/research/dispatch-comparison-2025/national-mix.png)
 
-![Fixed example week: observed prices, baseline and retained-fit envelope](/research/dispatch-comparison-2025/daily-prices.png)
+The mix comparison shows five fuels for NO/DE/ES/FR. Hydro, biomass and other resources are excluded, so this is not a complete national energy-mix validation. Winner whiskers represent conditional allocation bounds; they are not probabilistic uncertainty. Downloads retain missing reference months and signed model-minus-observed TWh. Lower generation mismatch can accompany worse prices in an individual zone, so neither outcome is hidden by the joint score.
 
-The illustration always uses **1–7 July 2025 UTC**; all headline metrics use the full year. NO5 is a price example, not an assertion of complete NO5 generation observations. The five Norwegian zones remain separate in price comparisons; national generation is checked separately below.
+## 5. Interpretation, limitations and next steps
 
-![National five-fuel generation comparison with Ember](/research/dispatch-comparison-2025/national-mix.png)
+**Joint calibration is implementable at this scale.** This trial changes real forward-model bounds, rather than applying a statistical price correction after solving. It exposes whether coarse source/grid assumptions have more leverage than bids alone. The selected Nordic headroom is at the upper tested bound; that is neither a measured transfer capacity nor justification to widen it without new evidence. Its result is a comparison within a deliberately small parameter family; it cannot rule out better seasonal/regional availability, commercial-domain or operating models.
 
-Whiskers show conditional saved-group allocation bounds, not probabilistic confidence. The [national generation download](/research/dispatch-comparison-2025/inverse-generation-by-country.csv) preserves every shown model/country/fuel, reporting coverage and signed TWh differences. Missing annual references stay blank; they are not summed as zero. The [per-zone price download](/research/dispatch-comparison-2025/inverse-prices-by-zone.csv) includes bias, correlation, tails, negative-hour and daily-shape diagnostics plus envelope coverage.
+A fitted network can compensate for incorrect bids, demand scope, fixed hydro or GSKs. A lower in-sample error therefore supports a hypothesis, not a verified source correction. The next useful refinement should depend on the observed frontier: independently check the constraints/availability that need adjustment, add verified commercial flow/net-position evidence where available, and expand regional/seasonal parameters only with explicit bounds and identifiability checks. The current model still lacks commitment/ramping, adaptive water offers and a fully represented negative-bid mechanism. Do not assign all residual error to transmission.
 
-## 5. What this means for investment scenarios
+For investment analysis, compare each credible fitted model with itself plus the asset, preserving common inputs. Freeze its calibrated parameters within each pair; refitting an intervention to historical baseline prices would suppress the investment effect being estimated. Capacity addition and effective-limit calibration are different interventions; new AC impedance or GSK effects require a faithful network recompile. Effective calibrated bid costs are not verified physical production costs or welfare. Revalue dispatch with independent resource-cost/emission inputs, separating system impacts from revenues/rent. **No investment scenario or posterior distribution is verified by this trial.** Fixed hydro may bias investment effects in either direction. The live browser remains the older two-node line/battery screen.
 
-The experiment supports a way to keep several admissible bid explanations when the observations do not uniquely identify one. It does **not** yet estimate investment benefits. For each future ensemble member, compare its own baseline with the same model plus the asset, preserving common exogenous inputs and physical chronology. Report distributions of system-cost change, emissions, congestion rent and asset revenue separately; system savings are not investor income. Calibrated offer costs include effective premiums: their objective is not verified physical production cost or economic welfare. Revalue dispatch with independently sourced resource costs/emissions when estimating economic impacts; keep cleared-price revenues and transfers separate.
+## 6. Verification and reproduction
 
-A project that looks valuable across credible fits is more robust to this tested bid uncertainty. A project whose sign changes between fits needs further investigation. Neither conclusion establishes robustness to structural model error. Fixed hydro cannot change its water schedule after an investment; this can bias results in either direction. Adaptive hydro/storage would require the separate verified chronology and strategy work. The live browser remains the older two-node line/battery screen.
+Independent replay checks **10 full-year witnesses and 6 rejected-state certificates**, source hashes, exactly declared states, altered source wind MW and group allocation, native component flows against **altered branch limits**, unchanged source physics elsewhere, primal bounds, objective/dual/complementarity, all price/mix/trade metrics, regularization, eligibility and winner selection. Maximum component residual **1.7e-05 MW**; maximum duality gap **EUR 0.000060**.
 
-## 6. Conclusion, limitations and reproduction
+Three complete witnesses are reused intact: two prior anchors and the wind control from the interrupted driver. Fresh verified-driver clearing/rejection/retry loops total **801.73s**; source preparation **299.74s**, retry preparation **386.73s**, sum of verified source/retry driver commands **1641.71s**, peak RSS **2603 MiB**. Independent replay is additional time. An initial restart also stopped at a source-versus-normalized-JSON provenance check before any new clears; that check was corrected and moved before model building. That preparation and the earlier interrupted diagnostic are additional, excluded from this current-driver total; the reused wind-control clearing took 141.11s. This is not a claim of combined end-to-end wall-clock experiment runtime.
 
-The useful result is the **joint price/mix trade-off and the retained set**, not a claim that fitting prices recovers the real European order book. The score-winning MAE is **28.167**, versus the target below 10. Capacity/site weather, operational availability, bid constraints, reporting scope and Nordic fixed-injection/network price formation remain possible sources of error. Effective fitted bids can compensate for these errors. The nonnegative thermal floor and unchanged zero renewable offers also restrict negative-price mechanisms; keeping negative observations in the score does not make those mechanisms identifiable. Wind/solar excess cannot automatically be repaired by changing thermal bids. This finite search neither exhausts plausible bids nor rules out better model formulations.
+Two global-relaxation states initially returned Not Set, not Infeasible. Their unchanged-network solutions are checked as feasible controls, and the same state parameters are retried with a reset HiGHS scheduler and presolve off, preserving the 1e-8 primal tolerance. Every successful retry receives the same independent primal/dual and native-physics audit; unresolved numerical cases are never treated as evidence of infeasibility. The auditor also re-clears **2 complete unchanged-network years** with the retry backend as matched numerical controls, not new fitted states. Their largest observed-hour mean absolute price departure from the saved controls is **2.78088e-12 EUR/MWh**; LP dual nonuniqueness remains an identification caveat.
 
-All 2025 observations inform this reconstruction and its selection. Independent physics and generation consistency do not turn it into a forecast backtest. Any forecasting claim needs separately designed out-of-sample evaluation; investment claims need paired forward scenarios and their acceptance checks. There is no automatic baseline promotion.
+With existing verified source caches, restore immutable metadata with `python3 tools/pack_model_metadata.py --restore`. Use pinned Python `data/pypsa-eur/upstream/.pixi/envs/default/bin/python` with `OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1`; run `tools/run_joint_network_calibration_2025.py` into a **fresh ignored output directory**, then audit the final directory with `tools/audit_joint_network_calibration_2025.py`. When the declared driver records unresolved numerical states, use `tools/repair_joint_network_calibration_2025.py SOURCE FRESH_RETRY_DIRECTORY` before that audit; it retries only the identical failed states and binds both stages. The retained interrupted wind-control/code/config caches are also prerequisites for current replay. The runner enforces 5 GiB address space, a 50-minute alarm and a per-output process lock. Existing directories are never implicitly resumed. Public compact assets alone cannot reproduce numerical runs without the omitted large provider/source caches.
 
-Independent replay verifies **13 complete annual witnesses**, all inverse proposals, bounded costs, physical invariance, original component physics, primal/dual objectives, full price/monthly mix/trade metrics, both round-parent selections, duplicates and diversity-based ensemble membership. Maximum native-component residual is **3.69e-06 MW** and maximum duality gap **EUR 0.000054**. All unique states have 8,760 optimal hours and zero emergency supply. Fresh clearing loops total **494.91s**; preparation **110.89s**, complete search **662.29s**, peak RSS **2585 MiB**. The baseline is reused intact, not counted as a fresh clear.
-
-To reproduce with the pinned local source caches: hydrate the four immutable model-metadata archives with `python3 tools/pack_model_metadata.py --restore`; use the pinned Python at `data/pypsa-eur/upstream/.pixi/envs/default/bin/python` to run the finite driver into a **fresh ignored output directory**, then the independent auditor on that directory. Set `OPENBLAS_NUM_THREADS=1`, `OMP_NUM_THREADS=1` and `MKL_NUM_THREADS=1`. The runner enforces a 5 GiB address-space limit, 40-minute alarm and one process/lock. Existing output directories are never implicitly resumed. A fresh checkout without the authorized large source caches cannot reproduce numerical results from the small public report assets alone.
-
-Implementation: [inverse proposals and selection](tools/inverse_bid_ensemble_2025.py), [finite driver](tools/run_inverse_bid_ensemble_2025.py), [independent replay](tools/audit_inverse_bid_ensemble_2025.py), [report renderer](tools/bid_ensemble_report_2025.py), and [compact provenance receipt](/research/dispatch-comparison-2025/summary.json). Large source inputs, hourly witnesses and proposal arrays remain ignored locally. Prior seasonal out-of-fold evidence remains in its downloads and explicitly labelled legacy receipt fields; it is not this all-year fitted ensemble.
+Sources/method: [joint parameterization](tools/joint_network_calibration_2025.py), [driver](tools/run_joint_network_calibration_2025.py), [independent replay](tools/audit_joint_network_calibration_2025.py), and [provenance receipt](/research/dispatch-comparison-2025/summary.json). Prior [bid-only cases](/research/dispatch-comparison-2025/inverse-search-cases.csv), [zonal metrics](/research/dispatch-comparison-2025/inverse-prices-by-zone.csv) and [mix comparison](/research/dispatch-comparison-2025/inverse-generation-by-country.csv) remain supporting evidence, not a new accepted baseline. Raw observations, hourly arrays and witnesses stay locally ignored. This report does not claim deployment, market certification or independent forecasting.

@@ -1,0 +1,56 @@
+{
+  "name": "joint-network-calibration-v1",
+  "year": 2025,
+  "hours": 8760,
+  "scope": "Full-year in-sample finite calibration of supply bids, wind availability and effective AC ratings; not a recovered physical grid or actual bids",
+  "bid_anchors": [
+    "accepted",
+    "inverse_joint"
+  ],
+  "network_modes": [
+    "unchanged",
+    "all_lower",
+    "all_higher"
+  ],
+  "wind_factors": [
+    1.0,
+    0.9
+  ],
+  "additional_network_modes_at_original_wind": [
+    "nordic_lower",
+    "nordic_higher"
+  ],
+  "maximum_unique_states": 16,
+  "maximum_new_annual_solves": 14,
+  "network_factor_lower": 0.85,
+  "network_factor_higher": 1.15,
+  "nordic_countries": [
+    "NO",
+    "SE",
+    "FI",
+    "DK"
+  ],
+  "network_rule": "Multiply the existing static symmetric AC branch MW limits, globally or on branches with either endpoint in NO/SE/FI/DK. Existing 0.7 rating multiplier becomes 0.595 or 0.805. Preserve susceptance/PTDF, topology, static nameplate GSK, offsets, islands, HVDC bounds and losses. These are experimental effective headroom bounds, not observed JAO domains, N-1 proof or physical expansion.",
+  "wind_rule": "Multiply original source wind available MW by the declared scalar before aggregating existing offer groups; preserve hourly weather shape, source nominal MW and country membership. Update quantity-allocation availability consistently. This is a bounded profile/derating calibration hypothesis, not an IRENA capacity correction, measured outage or dispatch substituted for availability. No target-derived hourly profile.",
+  "fixed": "Demand, hydro/water chronology, nuclear/solar/other availability, nameplates, grouping, topology, susceptance, original GSK, links, islands, offsets, monthly fuel anchors and each chosen bid anchor are unchanged. No new bid fit, arbitrary per-hour constraint fit or retired hydro/search restart.",
+  "objective_weights": {
+    "price": 0.55,
+    "daily_demeaned_price": 0.2,
+    "generation": 0.2,
+    "trade": 0.05
+  },
+  "regularization_weight": 0.01,
+  "regularization": "Old availability-weighted bid penalty against accepted bids plus mean square of [wind deviation/0.1, mean AC deviation/0.15] over three coordinates: wind, Nordic-incident AC, remaining AC. Coordinate departures are counted even if a region is small. All deviation directions are relative to accepted source inputs.",
+  "research_filters": {
+    "price_ratio_maximum": 1.0,
+    "daily_demeaned_ratio_maximum": 1.02,
+    "generation_ratio_maximum": 1.02,
+    "trade_ratio_maximum": 1.02,
+    "optimal_hours": 8760,
+    "emergency_mwh_maximum": 1e-06
+  },
+  "selection": "Lowest eligible regularized score over exactly the declared finite states, ties lower penalty then ordinal. Retain every failed or adverse state. Reuse the two hash-verified unchanged-physics annual witnesses. No adaptive range expansion or automatic baseline promotion.",
+  "observations": "All41 complete A44 observed-price zones, all48 modeled areas, Ember monthly national five-fuel generation and signed net exports with original missingness. Implied export is not physical border flow; no verified hourly JAO/ENTSO-E border-flow fit in this trial.",
+  "acceptance": "Independent modified-source allocation, component-native physics, primal/dual, quantity, metric and selection replay. Research filters are not product acceptance gates; no forecast, posterior, true capacity, investment-value or browser integration claim.",
+  "rejection_policy": "Amended after the first tightened-AC control reported Infeasible: reject a full-year candidate at its first numerically certified infeasible hour, saving a Farkas row ray for independent replay; no annual metric for rejected/partial cases. Uncertified failures remain unresolved. Every selectable case still needs all8760 optimal hours and original no-emergency/quantity gates. Finite parameter grid/objective unchanged. Reuse the complete first wind control with interrupted-producer provenance rather than rerunning it."
+}

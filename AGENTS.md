@@ -73,6 +73,25 @@ Update the existing report, retaining four figures and compact comparison CSVs;
 source/witness/proposal arrays stay ignored. Explain inverse modelling literature,
 identifiability, adverse cases and paired-investment limitations explicitly.
 
+The 20 October user continuation authorizes a fresh joint supply/network inverse
+trial, superseding the previous physics-fixed restriction for this experiment
+only. config/joint-network-calibration-2025.json declares exactly16 states,
+14 new parameter states plus two verified existing anchors. Every selectable
+case needs a complete annual witness; failed physical states need independent
+numerical Farkas replay and no annual metrics. Reuse the completed wind control
+from the interrupted first driver with exact provenance. Fit effective AC
+ratings and a wind-profile derating jointly with two frozen bid anchors; no
+free topology/impedance/GSK, hourly limit or target-generation replacement.
+The numerical +/-15% AC and -10% wind bounds are diagnostic assumptions, not
+verified JAO or weather corrections. Replay modified source availability AND
+native branch limits independently; unchanged-source replay alone is insufficient.
+Retain adverse cases, all zones and original no-emergency/quantity gates. No
+baseline promotion, investment certification, browser replacement or review restart.
+Numerical retries keep identical state parameters and tolerance, bind source/retry
+provenance, and need matched full-year backend controls. Not Set is unresolved,
+never evidence of infeasibility; only independently replayed rays reject a physical
+state. Preserve the two-stage retry source; do not edit frozen calculation helpers.
+
 Read PRODUCT.md and TASKS.md first. PRODUCT owns requirements, TASKS owns current
 priorities/evidence, README owns setup. Develop on public-v1. Main promotions
 require explicit user authorization; the alpha promotion was authorized on

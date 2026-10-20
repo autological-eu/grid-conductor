@@ -18,6 +18,9 @@ ALLOWED = [
     'dispatch-comparison-2025/renewable-capacity-audit.csv',
     'dispatch-comparison-2025/nuclear-availability-prices-by-zone.csv',
     'dispatch-comparison-2025/nuclear-availability-by-month.csv',
+    'dispatch-comparison-2025/joint-search-cases.csv',
+    'dispatch-comparison-2025/joint-prices-by-zone.csv',
+    'dispatch-comparison-2025/joint-generation-by-country.csv',
     'dispatch-comparison-2025/inverse-search-cases.csv',
     'dispatch-comparison-2025/inverse-prices-by-zone.csv',
     'dispatch-comparison-2025/inverse-generation-by-country.csv',
@@ -126,6 +129,24 @@ def check():
             assert row['qualifying_states']==count and row['retained_cap']==min(5,count)
 
         expected.update({'inverse-search-cases.csv','inverse-prices-by-zone.csv','inverse-generation-by-country.csv'})
+    if comparison.get('joint_network_evaluation'):
+        study=comparison['joint_network_evaluation']
+        assert study['audit']['summary_sha256']==study['summary_sha256']
+        assert study['winner']==study['audit']['winner']
+        assert len(study['records'])==len(study['audit']['certificates'])+len(study['audit']['rejected'])==16
+        assert study['audit']['new_case_states']==14 and study['audit']['external_witnesses']==3
+        assert all(c['hours']==8760 and c['native_modified_physics_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in study['audit']['certificates'])
+        assert all(c['certificate']['separation_gap_mw']>1e-4 and c['certificate']['free_column_residual']<=1e-7 for c in study['audit']['rejected'])
+        for file,sha in [('run_joint_network_calibration_2025.py',study['producer_sha256']),('joint_network_calibration_2025.py',study['helper_sha256']),('joint_network_clear_2025.py',study['clearer_sha256']),('audit_joint_network_calibration_2025.py',study['audit']['auditor_sha256']),('joint_network_report_2025.py',study['renderer_sha256'])]:
+            assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
+        if study.get('repair_producer_sha256'):
+            assert hashlib.sha256((ROOT/'tools/repair_joint_network_calibration_2025.py').read_bytes()).hexdigest()==study['repair_producer_sha256']
+        assert study['design']==json.loads((ROOT/'config/joint-network-calibration-2025.json').read_text())
+        r=study['report_audit']
+        assert r['source_summary_sha256']==study['summary_sha256'] and r['article_sha256']==comparison['article_sha256'] and r['assets_sha256']==comparison['assets']
+        assert hashlib.sha256((ROOT/'tools/audit_joint_report_2025.py').read_bytes()).hexdigest()==r['auditor_sha256']
+        assert r['cases']==16 and r['zone_rows']==len(study['shown'])*48
+        expected.update({'joint-search-cases.csv','joint-prices-by-zone.csv','joint-generation-by-country.csv'})
     assert set(comparison['assets']) == expected
     for file, sha in comparison['assets'].items():
         assert hashlib.sha256((folder / 'dispatch-comparison-2025' / file).read_bytes()).hexdigest() == sha
