@@ -66,6 +66,14 @@ cleared prices, substituting generation for availability or relaxing physics.
 Evaluation electricity prices remain validation targets. Historical training prices
 may inform the explicitly authorized bounded bid calibration described below.
 
+The 20 October follow-up prioritizes event-led error diagnosis before further
+calibration: identify when/where prices are over- or understated, daily/weekly/
+seasonal patterns, tail episodes and matching supply/network witness conditions.
+Test an interpretable change within the clearing model, with a matched full-year
+control and generation/physics checks. Diagnostic associations are not causal
+attribution; correcting a calendar pattern does not certify scarcity behaviour,
+Nordic geography or future-year forecasting. The accepted baseline remains pinned.
+
 The accepted inverse-modelling direction permits a bounded, interpretable family
 of resource-bid calibrations inside the unchanged physical market model. Retain
 several distinct plausible fits when supported, rather than declaring a uniquely

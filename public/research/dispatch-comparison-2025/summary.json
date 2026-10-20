@@ -758,7 +758,7 @@
     "producer_role": "re-export and source/cost replay of sealed initial clears"
   },
   "research_direction": {
-    "plan_sha256": "d1d8184cc61f70513c735fd70150d4c6536b4b08b36ecd2923ebe5c5bd14448a",
+    "plan_sha256": "f116e4a1b14671764b802510e4494a056e3121b2bc729d6736564e7300b82fed",
     "diagnosis_sha256": "832ee83b2c8d5db92c8c80c986b53709052c82ad9d51472ccb79ccaf539a084c",
     "audit": {
       "status": "accepted_refit_price_monthly_mix_and_target_metrics_replayed",
@@ -828,7 +828,7 @@
     "mae_reduction_percent": 12.825506646763586,
     "browser_integration": false
   },
-  "period": "All8760 hours of2025; in-sample joint supply/network inverse calibration",
+  "period": "All8760 hours of2025; in-sample error-led weekly supply-bid trial",
   "generation_reporting_areas": 38,
   "observed_price_zones": 41,
   "derived_summary_sha256": "b8d8dcf034722a750d36b6985e377d41aa2284301e0771695289af735dde2581",
@@ -849,13 +849,15 @@
   "original_model_audit_sha256": "dfccf8a98e312c0ef1556dc3bdb1e210ef91185e50973574202b47cca2330c84",
   "derived_producer_sha256": "a47c8743536ca208c44a6f469adef88be51f5801120d570b60fb836d8cba9b85",
   "derived_producer_file": "prepare_seasonal_dispatch_report_2025.py",
-  "renderer_sha256": "e42bd822accfa55a190fb9981594de6a7dceae00b8db6608a0ac6ef218bc6d90",
-  "article_sha256": "02ba6780b7d71654c997269abb87760c70b9098d41b9d96953fe19d223c5378c",
+  "renderer_sha256": "c29be789884b48230f4de8f13b60c3f456169162982ee574933b6c571306b34b",
+  "article_sha256": "834e250631ad9316f89b43f22e5d474b5f522bcb9f8c02bde8c1e6581b2a2cfc",
   "assets": {
     "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
-    "daily-prices.png": "46137f5c666608b0b4ffa6e2c01e793bced25c7f26a13d6788b701646a7d6513",
+    "daily-prices.png": "1866b6d1960dffdb9c4e011d9ef9c6aea47bfded7981b8d0491dd25473cfd9f1",
     "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",
     "generation-by-fuel.csv": "29d66b4145d615de418a7f56514c6f75e18f0eb0bcc49f5b9ad3232032ab4dfd",
+    "hourly-error-periods.csv": "96e6aca5f7355230f59fa372eac6903ba8315262326e5483ced064c19b250ed8",
+    "hourly-error-zones.csv": "9ca05b4dcc21b1a2ff98c599c0e85c25c033fb285bbb4c8d494847d78491d314",
     "inverse-generation-by-country.csv": "d6a52439dacc9719f8f0ae4eb80d5a3ced890e75e07107079168784d7749e34b",
     "inverse-prices-by-zone.csv": "0a0cb02bb55ac4104227516838b88f24e47ac80c0a9b705053705c7a0430e40c",
     "inverse-search-cases.csv": "72240571f3da6d96b16ba6c62d67493ab7e6f36de384801d3dfe9473ee7a683f",
@@ -863,14 +865,14 @@
     "joint-prices-by-zone.csv": "73ca79034ed879e11ba4a5f397fa31ab87ad1afd22cebb5db4f1516512516ef8",
     "joint-search-cases.csv": "d8b5b1606dfe2a71a438704372e4efc55a10b98bc9cbeff1345ec0288d3b3703",
     "national-generation.csv": "218d4a7eee9d94dcb2fed9a9eb524713eb0303bdbfbce16aac4e419566cd7523",
-    "national-mix.png": "0da4084134d78a7d0b754543dd180380bfbb3c6e8373526d0326c5b28da85aac",
+    "national-mix.png": "6848a58899d3fed8c6916fc22b3f82dfc469b4ab31a1320ca50a2fef66c77371",
     "nuclear-availability-by-month.csv": "d7e7925ebf1f11f6ae3f0e1aac4c952d027072e3f28816a81b5b6fcf390139b6",
     "nuclear-availability-prices-by-zone.csv": "b2cf42359fe36e71a92117d5c42b5619d477db892e5ee61ed01d7d4635e0a292",
-    "overview.png": "808dc52109a71eabfe65a6cb79c5b249320bf1d71eaab3a954e0c59d52e4f363",
+    "overview.png": "2601844396e4b54fc19b1b79f5f3c867781da36e7447d36fe5939f946e4b27cd",
     "prices-by-zone.csv": "99e1a5a06dc88aa8fff022546f9e70f3a83df58df7f42123e9e22b2abab3dcaa",
     "renewable-capacity-audit.csv": "c60afa3593f8f9aacf105dcb528cc801cf723af0bf6f4083d3dacdb73280137c",
     "renewable-source-prices-by-zone.csv": "08472614bff37ba147d6a52839da407ff7fa2fde9473edede32e47a246d66345",
-    "zone-mae-grid.png": "e413ecfdb0ad4d2ad06ef366920906938031da56d14a4fd7519ef4102def0fb5"
+    "zone-mae-grid.png": "f4cb9dae46af2f10df58a467a42c58263b5745e72cb495143874c3bf515d67c1"
   },
   "inverse_bid_ensemble_evaluation": {
     "summary_sha256": "0c577264dec1a363ab859b4a6239272fa86ec94bf415550de8558c8d42ecd0bf",
@@ -2303,12 +2305,14 @@
       "auditor_file": "audit_inverse_report_2025.py",
       "auditor_sha256": "4e5321cd29bb6968a350cc9a95bd3dd06fd8ff04cf20f1dbc9b364e59d973264",
       "source_summary_sha256": "0c577264dec1a363ab859b4a6239272fa86ec94bf415550de8558c8d42ecd0bf",
-      "article_sha256": "02ba6780b7d71654c997269abb87760c70b9098d41b9d96953fe19d223c5378c",
+      "article_sha256": "834e250631ad9316f89b43f22e5d474b5f522bcb9f8c02bde8c1e6581b2a2cfc",
       "assets_sha256": {
         "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
-        "daily-prices.png": "46137f5c666608b0b4ffa6e2c01e793bced25c7f26a13d6788b701646a7d6513",
+        "daily-prices.png": "1866b6d1960dffdb9c4e011d9ef9c6aea47bfded7981b8d0491dd25473cfd9f1",
         "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",
         "generation-by-fuel.csv": "29d66b4145d615de418a7f56514c6f75e18f0eb0bcc49f5b9ad3232032ab4dfd",
+        "hourly-error-periods.csv": "96e6aca5f7355230f59fa372eac6903ba8315262326e5483ced064c19b250ed8",
+        "hourly-error-zones.csv": "9ca05b4dcc21b1a2ff98c599c0e85c25c033fb285bbb4c8d494847d78491d314",
         "inverse-generation-by-country.csv": "d6a52439dacc9719f8f0ae4eb80d5a3ced890e75e07107079168784d7749e34b",
         "inverse-prices-by-zone.csv": "0a0cb02bb55ac4104227516838b88f24e47ac80c0a9b705053705c7a0430e40c",
         "inverse-search-cases.csv": "72240571f3da6d96b16ba6c62d67493ab7e6f36de384801d3dfe9473ee7a683f",
@@ -2316,14 +2320,14 @@
         "joint-prices-by-zone.csv": "73ca79034ed879e11ba4a5f397fa31ab87ad1afd22cebb5db4f1516512516ef8",
         "joint-search-cases.csv": "d8b5b1606dfe2a71a438704372e4efc55a10b98bc9cbeff1345ec0288d3b3703",
         "national-generation.csv": "218d4a7eee9d94dcb2fed9a9eb524713eb0303bdbfbce16aac4e419566cd7523",
-        "national-mix.png": "0da4084134d78a7d0b754543dd180380bfbb3c6e8373526d0326c5b28da85aac",
+        "national-mix.png": "6848a58899d3fed8c6916fc22b3f82dfc469b4ab31a1320ca50a2fef66c77371",
         "nuclear-availability-by-month.csv": "d7e7925ebf1f11f6ae3f0e1aac4c952d027072e3f28816a81b5b6fcf390139b6",
         "nuclear-availability-prices-by-zone.csv": "b2cf42359fe36e71a92117d5c42b5619d477db892e5ee61ed01d7d4635e0a292",
-        "overview.png": "808dc52109a71eabfe65a6cb79c5b249320bf1d71eaab3a954e0c59d52e4f363",
+        "overview.png": "2601844396e4b54fc19b1b79f5f3c867781da36e7447d36fe5939f946e4b27cd",
         "prices-by-zone.csv": "99e1a5a06dc88aa8fff022546f9e70f3a83df58df7f42123e9e22b2abab3dcaa",
         "renewable-capacity-audit.csv": "c60afa3593f8f9aacf105dcb528cc801cf723af0bf6f4083d3dacdb73280137c",
         "renewable-source-prices-by-zone.csv": "08472614bff37ba147d6a52839da407ff7fa2fde9473edede32e47a246d66345",
-        "zone-mae-grid.png": "e413ecfdb0ad4d2ad06ef366920906938031da56d14a4fd7519ef4102def0fb5"
+        "zone-mae-grid.png": "f4cb9dae46af2f10df58a467a42c58263b5745e72cb495143874c3bf515d67c1"
       },
       "search_rows": 13,
       "zone_rows": 144,
@@ -2332,7 +2336,7 @@
       "broad_members": 10
     }
   },
-  "publication_scope": "Primary report and four figures: joint supply/network inverse calibration; prior bid-only/source/OOF fields and CSVs are supporting evidence.",
+  "publication_scope": "Hourly error diagnosis and two controlled weekly supply-bid corrections; prior inverse/network/source studies remain supporting evidence.",
   "legacy_out_of_fold_model_verification": {
     "status": "seasonal_calendar_ember_month_exclusion_selection_physics_duals_oof_and_refit_replayed",
     "fold_winners": [
@@ -2368,9 +2372,9 @@
   },
   "models": {
     "accepted-unchanged-w100": "Accepted baseline",
-    "inverse_joint-unchanged-w100": "Bid-only fit",
-    "inverse_joint-nordic_higher-w100": "Joint-score winner",
-    "inverse_joint-all_higher-w100": "Price leader"
+    "accepted-unchanged-w100-weekly": "Baseline + weekly bids",
+    "inverse_joint-nordic_higher-w100": "Joint checkpoint",
+    "inverse_joint-nordic_higher-w100-weekly": "Joint + weekly bids"
   },
   "legacy_limitations": [
     "Country Ember and zonal A75 sources are separate. Germany generation excludes LU; France uses national model membership including FR-COR.",
@@ -3789,12 +3793,14 @@
       "status": "joint_report_cases_zonal_prices_national_mix_and_selection_replayed",
       "auditor_sha256": "1e35627aece211b57330369e5fa52e8d65bdc84ed3c2c7eae10fc7482942592e",
       "source_summary_sha256": "88b4372b500d39ceb81a55c7520905a4b2fcab3ca441d28c363543765bc32b5d",
-      "article_sha256": "02ba6780b7d71654c997269abb87760c70b9098d41b9d96953fe19d223c5378c",
+      "article_sha256": "834e250631ad9316f89b43f22e5d474b5f522bcb9f8c02bde8c1e6581b2a2cfc",
       "assets_sha256": {
         "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
-        "daily-prices.png": "46137f5c666608b0b4ffa6e2c01e793bced25c7f26a13d6788b701646a7d6513",
+        "daily-prices.png": "1866b6d1960dffdb9c4e011d9ef9c6aea47bfded7981b8d0491dd25473cfd9f1",
         "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",
         "generation-by-fuel.csv": "29d66b4145d615de418a7f56514c6f75e18f0eb0bcc49f5b9ad3232032ab4dfd",
+        "hourly-error-periods.csv": "96e6aca5f7355230f59fa372eac6903ba8315262326e5483ced064c19b250ed8",
+        "hourly-error-zones.csv": "9ca05b4dcc21b1a2ff98c599c0e85c25c033fb285bbb4c8d494847d78491d314",
         "inverse-generation-by-country.csv": "d6a52439dacc9719f8f0ae4eb80d5a3ced890e75e07107079168784d7749e34b",
         "inverse-prices-by-zone.csv": "0a0cb02bb55ac4104227516838b88f24e47ac80c0a9b705053705c7a0430e40c",
         "inverse-search-cases.csv": "72240571f3da6d96b16ba6c62d67493ab7e6f36de384801d3dfe9473ee7a683f",
@@ -3802,18 +3808,1626 @@
         "joint-prices-by-zone.csv": "73ca79034ed879e11ba4a5f397fa31ab87ad1afd22cebb5db4f1516512516ef8",
         "joint-search-cases.csv": "d8b5b1606dfe2a71a438704372e4efc55a10b98bc9cbeff1345ec0288d3b3703",
         "national-generation.csv": "218d4a7eee9d94dcb2fed9a9eb524713eb0303bdbfbce16aac4e419566cd7523",
-        "national-mix.png": "0da4084134d78a7d0b754543dd180380bfbb3c6e8373526d0326c5b28da85aac",
+        "national-mix.png": "6848a58899d3fed8c6916fc22b3f82dfc469b4ab31a1320ca50a2fef66c77371",
         "nuclear-availability-by-month.csv": "d7e7925ebf1f11f6ae3f0e1aac4c952d027072e3f28816a81b5b6fcf390139b6",
         "nuclear-availability-prices-by-zone.csv": "b2cf42359fe36e71a92117d5c42b5619d477db892e5ee61ed01d7d4635e0a292",
-        "overview.png": "808dc52109a71eabfe65a6cb79c5b249320bf1d71eaab3a954e0c59d52e4f363",
+        "overview.png": "2601844396e4b54fc19b1b79f5f3c867781da36e7447d36fe5939f946e4b27cd",
         "prices-by-zone.csv": "99e1a5a06dc88aa8fff022546f9e70f3a83df58df7f42123e9e22b2abab3dcaa",
         "renewable-capacity-audit.csv": "c60afa3593f8f9aacf105dcb528cc801cf723af0bf6f4083d3dacdb73280137c",
         "renewable-source-prices-by-zone.csv": "08472614bff37ba147d6a52839da407ff7fa2fde9473edede32e47a246d66345",
-        "zone-mae-grid.png": "e413ecfdb0ad4d2ad06ef366920906938031da56d14a4fd7519ef4102def0fb5"
+        "zone-mae-grid.png": "f4cb9dae46af2f10df58a467a42c58263b5745e72cb495143874c3bf515d67c1"
       },
       "cases": 16,
       "zone_rows": 192,
       "generation_rows": 680
+    }
+  },
+  "weekly_error_evaluation": {
+    "summary_sha256": "5dd39dea3e72dc217d539e3020f4142d1e468ae5ed2b9ba4092ada31b1d209f7",
+    "audit": {
+      "status": "both_weekly_supply_corrections_source_parameters_native_physics_duals_quantities_replayed",
+      "summary_sha256": "5dd39dea3e72dc217d539e3020f4142d1e468ae5ed2b9ba4092ada31b1d209f7",
+      "auditor_sha256": "aa4b49c2fd1e03869f669a191384edc0738e7b3b11bb49545cca204833940556",
+      "certificates": [
+        {
+          "anchor": "accepted-unchanged-w100",
+          "hours": 8760,
+          "native_residual_mw": 1.0851163096958771e-06,
+          "source_offer_bound_mw": 1.3849235938513787e-11,
+          "objective_residual_eur": 3.725290298461914e-08,
+          "emergency_mwh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 8.127258865897602e-09,
+          "complementarity_maximum_eur": 0.00011299071426027065,
+          "duality_gap_maximum_eur": 0.00010067294351756573,
+          "price_decomposition_maximum_eur_mwh": 8.127273076752317e-09
+        },
+        {
+          "anchor": "inverse_joint-nordic_higher-w100",
+          "hours": 8760,
+          "native_residual_mw": 1.0356570783187635e-06,
+          "source_offer_bound_mw": 1.6285639503621496e-11,
+          "objective_residual_eur": 2.60770320892334e-08,
+          "emergency_mwh": 0.0,
+          "stationarity_maximum_eur_mwh": 0.0,
+          "free_injection_reduced_cost_maximum": 6.3333915889529635e-09,
+          "complementarity_maximum_eur": 0.00010561597307692688,
+          "duality_gap_maximum_eur": 3.1715258955955505e-05,
+          "price_decomposition_maximum_eur_mwh": 6.333380042633507e-09
+        }
+      ],
+      "elapsed_seconds": 134.05378507999922
+    },
+    "producer_sha256": "e232fa0afde04be47e9dd500b71189d4796454dd398bfcce1f9672cb3cbe7484",
+    "helper_sha256": "62541aa525a0f983e650e3cb109f294e538f7db5dee5e58bad26ef38a9a1e3af",
+    "diagnosis_producer_sha256": "20d1464a9214ab8179143bc972b7b3e9bef155020236413ad0e10247c4ca1192",
+    "renderer_sha256": "33385ed60420c667a110548a5a04224c3fd5836af56bd372388b33b52e58212c",
+    "design": {
+      "experiment": "hourly-error-led weekly supply-bid correction",
+      "anchors": [
+        "accepted-unchanged-w100",
+        "inverse_joint-nordic_higher-w100"
+      ],
+      "maximum_new_annual_solves": 2,
+      "predictor": "Local Saturday/Sunday indicator minus its full-2025 mean, with DST; no holiday inference, residual demand or hour-specific target lookup",
+      "fit": "All-year in-sample observed-minus-anchor prices, only matching local interior gas/coal/nuclear offers (>0.001 MW from both bounds, price difference <=0.00001). Regress against existing 15 calendar nuisance columns plus centered weekend; retain only weekend coefficient. Clip response +/-100 EUR/MWh; ridge 168 I; at least 168 matching hours and 24 of each day type.",
+      "ridge": 168,
+      "minimum_interior_hours": 168,
+      "minimum_daytype_hours": 24,
+      "coefficient_bounds_eur_mwh": [
+        30,
+        30,
+        7.5
+      ],
+      "resources": [
+        "gas",
+        "coal",
+        "nuclear"
+      ],
+      "offers": "Same family/zone adjustment on every block; floor final offers at zero. All other offers and all physical inputs unchanged relative to each anchor.",
+      "research_filters": "Each correction must reduce its anchor full-year price MAE, with daily-demeaned, generation and trade errors no more than 2% worse; 8760 optimal hours, zero emergency <=1e-6 MWh, independent source/native/dual replay. These are experimental safeguards, not acceptance or automatic promotion.",
+      "scope": "One predetermined correction per anchor, no strength sweep/refit after results. 2025 reconstruction, not independent forecast validation or identified real bids. Previous joint calibration stays a checkpoint. No baseline/browser promotion."
+    },
+    "results": [
+      {
+        "anchor": "accepted-unchanged-w100",
+        "metrics": {
+          "price": 28.662799279303847,
+          "daily_demeaned_price": 20.05356412112202,
+          "generation": 0.29716926588828935,
+          "trade": 0.17270259684855607
+        },
+        "parent_metrics": {
+          "price": 28.9639751169547,
+          "daily_demeaned_price": 20.06347356650509,
+          "generation": 0.2994748680764233,
+          "trade": 0.17190582677419325
+        },
+        "eligible": true,
+        "bid_sha256": "6de25193389e4661b308d383aff148a56eaf1be18230e259903dd4bef8ab8d9a",
+        "physical_inputs": {
+          "availability": "a8c6bdefc8ee227d0e7806f2ac5323d497551afc32e41bf3fb0c53246e1a6110",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "d57d6dee6c70cfeee5f07c446ba51a1febbfe90a79d8eef017657d18ac845268",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        }
+      },
+      {
+        "anchor": "inverse_joint-nordic_higher-w100",
+        "metrics": {
+          "price": 27.487352017016175,
+          "daily_demeaned_price": 18.988532460648248,
+          "generation": 0.2532305611957197,
+          "trade": 0.14381129879358032
+        },
+        "parent_metrics": {
+          "price": 27.751660740689026,
+          "daily_demeaned_price": 18.98298794723938,
+          "generation": 0.2547540615241996,
+          "trade": 0.1437943417356477
+        },
+        "eligible": true,
+        "bid_sha256": "45fe983ba6e948a0022494cd9ec2b554e502668e80ddc106c7412723a5919f17",
+        "physical_inputs": {
+          "availability": "a8c6bdefc8ee227d0e7806f2ac5323d497551afc32e41bf3fb0c53246e1a6110",
+          "load": "1f51e39e86736f89737d2b8c8851a9cc356b9d94e86219dc0bee638b6b144b75",
+          "link_min": "88158f930c5343e49ac5763c703b4f390113c534090f48b825c3e6021523c8cb",
+          "link_max": "966f6efb264c2204955dcba21480d1e3b465f4124b70d791e410b01ed07863dc",
+          "island_rhs": "41e637d2c6e2eb28ef2c43720fda52296bcbdb3d88d40b0ea6f4070d66f4a1bb",
+          "ratings": "30033dafa40c1575614fdfc9d035c3dbbe0f4e928cdeaf7fd04458443983d936",
+          "offsets": "602ffc2e7bf1b46422d74b559cc06219a7b23a7f3c22d2a5d06d43eea42f24c8",
+          "A_data": "ad1ed51d70d8feb877224578c7fd65784296640938fe8bf77ba26553bd4b92c0",
+          "A_indices": "713f115a4581db566e17557116595e1e4a44dc956c01091dcbb7929ba6eea04e",
+          "A_indptr": "49762e2cb31dd0f576e4599f409880a646c2a3f154059e5ec631f83b4fce8f59",
+          "weights": "8ab952243cf9fd3db68e5de1c56e8bbf1d49333c2147269cd2f5395c30e23d81"
+        }
+      }
+    ],
+    "annuals": {
+      "accepted-unchanged-w100": {
+        "witness": "accepted-unchanged-w100-weekly.npz",
+        "witness_sha256": "4a448242d04d44bc8f59ed3ff74da9906daccdd4acda0f85f8bcd290c2262126",
+        "hours": 8760,
+        "optimal_hours": 8760,
+        "complete_year": true,
+        "failures": [],
+        "clearing_seconds": 44.63831470999867,
+        "emergency_mwh": 0.0
+      },
+      "inverse_joint-nordic_higher-w100": {
+        "witness": "inverse_joint-nordic_higher-w100-weekly.npz",
+        "witness_sha256": "3f0d02e0e18a367e562e0c4c6a9522b441cf4f6aed3b9c5ce5b7f8bbe2a2dc9e",
+        "hours": 8760,
+        "optimal_hours": 8760,
+        "complete_year": true,
+        "failures": [],
+        "clearing_seconds": 53.6784647989989,
+        "emergency_mwh": 0.0
+      }
+    },
+    "labels": {
+      "accepted-unchanged-w100": "Accepted baseline",
+      "inverse_joint-nordic_higher-w100": "Joint checkpoint",
+      "accepted-unchanged-w100-weekly": "Baseline + weekly bids",
+      "inverse_joint-nordic_higher-w100-weekly": "Joint + weekly bids"
+    },
+    "shown": [
+      "accepted-unchanged-w100",
+      "accepted-unchanged-w100-weekly",
+      "inverse_joint-nordic_higher-w100",
+      "inverse_joint-nordic_higher-w100-weekly"
+    ],
+    "diagnostics": {
+      "accepted-unchanged-w100": {
+        "equal_zone_mae": 28.9639751169547,
+        "bias": -7.581980652850991,
+        "top_decile_absolute_error_share": 0.359251080804177,
+        "regimes": [
+          {
+            "regime": "negative",
+            "zone_hours": 9676,
+            "mae": 24.99615268059082,
+            "bias": 24.902855739244558,
+            "absolute_error_share": 0.023249996927963326
+          },
+          {
+            "regime": "near-zero",
+            "zone_hours": 58008,
+            "mae": 31.117237651124135,
+            "bias": 28.883052226886367,
+            "absolute_error_share": 0.17351730758095607
+          },
+          {
+            "regime": "20\u201380",
+            "zone_hours": 86090,
+            "mae": 31.154414670753898,
+            "bias": 0.505283930291021,
+            "absolute_error_share": 0.2578256820880093
+          },
+          {
+            "regime": "80\u2013150",
+            "zone_hours": 173775,
+            "mae": 20.370431036455063,
+            "bias": -14.673711016580388,
+            "absolute_error_share": 0.34028388879504523
+          },
+          {
+            "regime": "150\u2013250",
+            "zone_hours": 28392,
+            "mae": 53.459416810182496,
+            "bias": -53.43453173706864,
+            "absolute_error_share": 0.1459063100885332
+          },
+          {
+            "regime": "250+",
+            "zone_hours": 3219,
+            "mae": 191.36838569796836,
+            "bias": -191.36838569796836,
+            "absolute_error_share": 0.05921681451949284
+          }
+        ],
+        "worst_utc_days": [
+          {
+            "utc_date": "2025-11-25",
+            "equal_zone_mae": 88.1992988687784,
+            "mean_bias": -81.35708098141333
+          },
+          {
+            "utc_date": "2025-01-20",
+            "equal_zone_mae": 76.24282499505904,
+            "mean_bias": -62.91208315821543
+          },
+          {
+            "utc_date": "2025-01-15",
+            "equal_zone_mae": 68.83326460181372,
+            "mean_bias": -62.60642141154435
+          },
+          {
+            "utc_date": "2025-11-26",
+            "equal_zone_mae": 67.38506591087283,
+            "mean_bias": -61.67460115592166
+          },
+          {
+            "utc_date": "2025-10-14",
+            "equal_zone_mae": 59.70328029716691,
+            "mean_bias": -56.00767414719553
+          },
+          {
+            "utc_date": "2025-11-21",
+            "equal_zone_mae": 56.90397751351936,
+            "mean_bias": -52.43733833235887
+          },
+          {
+            "utc_date": "2025-11-24",
+            "equal_zone_mae": 52.72804820117805,
+            "mean_bias": -43.330525422516544
+          },
+          {
+            "utc_date": "2025-10-15",
+            "equal_zone_mae": 52.6547482574393,
+            "mean_bias": -49.12131419751692
+          },
+          {
+            "utc_date": "2025-01-22",
+            "equal_zone_mae": 52.13238874809937,
+            "mean_bias": -47.71945484227351
+          },
+          {
+            "utc_date": "2025-01-21",
+            "equal_zone_mae": 51.020726947122746,
+            "mean_bias": -35.54720351157455
+          },
+          {
+            "utc_date": "2025-02-24",
+            "equal_zone_mae": 49.518005060145384,
+            "mean_bias": -4.147977840924178
+          },
+          {
+            "utc_date": "2025-02-13",
+            "equal_zone_mae": 49.15179097985733,
+            "mean_bias": -30.50632447444395
+          },
+          {
+            "utc_date": "2025-02-12",
+            "equal_zone_mae": 48.80793581227226,
+            "mean_bias": -19.983349729286495
+          },
+          {
+            "utc_date": "2025-02-14",
+            "equal_zone_mae": 48.097419788690566,
+            "mean_bias": -32.93183820944875
+          },
+          {
+            "utc_date": "2025-11-20",
+            "equal_zone_mae": 47.58759381023129,
+            "mean_bias": -42.106742112438184
+          }
+        ]
+      },
+      "accepted-unchanged-w100-weekly": {
+        "equal_zone_mae": 28.66279927930385,
+        "bias": -7.564316635069392,
+        "top_decile_absolute_error_share": 0.36051186340995955,
+        "regimes": [
+          {
+            "regime": "negative",
+            "zone_hours": 9676,
+            "mae": 24.260609829914976,
+            "bias": 24.166676410271712,
+            "absolute_error_share": 0.02280294857158238
+          },
+          {
+            "regime": "near-zero",
+            "zone_hours": 58008,
+            "mae": 30.70039863683013,
+            "bias": 28.439221730780126,
+            "absolute_error_share": 0.17299172988078593
+          },
+          {
+            "regime": "20\u201380",
+            "zone_hours": 86090,
+            "mae": 30.98279346765417,
+            "bias": 0.36672211263368865,
+            "absolute_error_share": 0.2590995833069366
+          },
+          {
+            "regime": "80\u2013150",
+            "zone_hours": 173775,
+            "mae": 20.225652721554987,
+            "bias": -14.593384420870416,
+            "absolute_error_share": 0.34141553465533764
+          },
+          {
+            "regime": "150\u2013250",
+            "zone_hours": 28392,
+            "mae": 52.37470416301995,
+            "bias": -52.341233949564625,
+            "absolute_error_share": 0.14444782401092698
+          },
+          {
+            "regime": "250+",
+            "zone_hours": 3219,
+            "mae": 189.46023995037103,
+            "bias": -189.46023995037103,
+            "absolute_error_share": 0.059242379574430494
+          }
+        ],
+        "worst_utc_days": [
+          {
+            "utc_date": "2025-11-25",
+            "equal_zone_mae": 87.25790036900544,
+            "mean_bias": -79.56942955168887
+          },
+          {
+            "utc_date": "2025-01-20",
+            "equal_zone_mae": 74.94698563217979,
+            "mean_bias": -61.28877374304522
+          },
+          {
+            "utc_date": "2025-01-15",
+            "equal_zone_mae": 67.9198487362746,
+            "mean_bias": -61.304431222607114
+          },
+          {
+            "utc_date": "2025-11-26",
+            "equal_zone_mae": 66.71114713383682,
+            "mean_bias": -60.173762228044005
+          },
+          {
+            "utc_date": "2025-10-14",
+            "equal_zone_mae": 58.16166827129188,
+            "mean_bias": -53.97509190996972
+          },
+          {
+            "utc_date": "2025-11-21",
+            "equal_zone_mae": 56.44327051074426,
+            "mean_bias": -51.22495111971568
+          },
+          {
+            "utc_date": "2025-11-24",
+            "equal_zone_mae": 52.13447306307131,
+            "mean_bias": -41.94489138355817
+          },
+          {
+            "utc_date": "2025-10-15",
+            "equal_zone_mae": 51.749616114896654,
+            "mean_bias": -47.85303350778574
+          },
+          {
+            "utc_date": "2025-01-22",
+            "equal_zone_mae": 50.957227987740204,
+            "mean_bias": -46.19894858109832
+          },
+          {
+            "utc_date": "2025-02-24",
+            "equal_zone_mae": 49.79229647909948,
+            "mean_bias": -1.8944760247625074
+          },
+          {
+            "utc_date": "2025-01-21",
+            "equal_zone_mae": 49.68460329557076,
+            "mean_bias": -33.80605839623214
+          },
+          {
+            "utc_date": "2025-02-13",
+            "equal_zone_mae": 48.23506483827476,
+            "mean_bias": -28.85326880071421
+          },
+          {
+            "utc_date": "2025-02-12",
+            "equal_zone_mae": 47.84169326669469,
+            "mean_bias": -17.932063515861763
+          },
+          {
+            "utc_date": "2025-02-14",
+            "equal_zone_mae": 46.948195995192165,
+            "mean_bias": -31.252625946791518
+          },
+          {
+            "utc_date": "2025-11-20",
+            "equal_zone_mae": 46.61243226027572,
+            "mean_bias": -40.432313116200824
+          }
+        ]
+      },
+      "inverse_joint-nordic_higher-w100": {
+        "equal_zone_mae": 27.75166074068903,
+        "bias": -4.067092606044766,
+        "top_decile_absolute_error_share": 0.35939905403925876,
+        "regimes": [
+          {
+            "regime": "negative",
+            "zone_hours": 9676,
+            "mae": 24.64847589135633,
+            "bias": 24.646719867923476,
+            "absolute_error_share": 0.02392814266989356
+          },
+          {
+            "regime": "near-zero",
+            "zone_hours": 58008,
+            "mae": 33.85090583635928,
+            "bias": 32.675930655397075,
+            "absolute_error_share": 0.19700681337347187
+          },
+          {
+            "regime": "20\u201380",
+            "zone_hours": 86090,
+            "mae": 29.958177332589084,
+            "bias": 3.8851377194768486,
+            "absolute_error_share": 0.2587564322450832
+          },
+          {
+            "regime": "80\u2013150",
+            "zone_hours": 173775,
+            "mae": 18.92141479516496,
+            "bias": -11.73850149135647,
+            "absolute_error_share": 0.3298860592990901
+          },
+          {
+            "regime": "150\u2013250",
+            "zone_hours": 28392,
+            "mae": 46.10488284106652,
+            "bias": -45.79850450714982,
+            "absolute_error_share": 0.1313306121329965
+          },
+          {
+            "regime": "250+",
+            "zone_hours": 3219,
+            "mae": 182.97182259385914,
+            "bias": -182.97182259385914,
+            "absolute_error_share": 0.05909194027946471
+          }
+        ],
+        "worst_utc_days": [
+          {
+            "utc_date": "2025-11-25",
+            "equal_zone_mae": 73.58213994371792,
+            "mean_bias": -65.72389672147304
+          },
+          {
+            "utc_date": "2025-01-20",
+            "equal_zone_mae": 73.43643742174179,
+            "mean_bias": -49.2496103341671
+          },
+          {
+            "utc_date": "2025-01-15",
+            "equal_zone_mae": 61.44464830780064,
+            "mean_bias": -52.61205941811
+          },
+          {
+            "utc_date": "2025-10-14",
+            "equal_zone_mae": 56.62827752541437,
+            "mean_bias": -50.0230415450405
+          },
+          {
+            "utc_date": "2025-11-26",
+            "equal_zone_mae": 49.68641421630013,
+            "mean_bias": -41.0112013072725
+          },
+          {
+            "utc_date": "2025-01-21",
+            "equal_zone_mae": 49.08880958472713,
+            "mean_bias": -26.15550983187419
+          },
+          {
+            "utc_date": "2025-02-24",
+            "equal_zone_mae": 48.82504065023808,
+            "mean_bias": 0.21106821236698978
+          },
+          {
+            "utc_date": "2025-11-21",
+            "equal_zone_mae": 47.708764801747556,
+            "mean_bias": -43.07322051030838
+          },
+          {
+            "utc_date": "2025-01-22",
+            "equal_zone_mae": 46.832961869655456,
+            "mean_bias": -38.187286562385346
+          },
+          {
+            "utc_date": "2025-10-15",
+            "equal_zone_mae": 46.6077729459115,
+            "mean_bias": -40.707900706970435
+          },
+          {
+            "utc_date": "2025-02-12",
+            "equal_zone_mae": 45.72554894823551,
+            "mean_bias": -14.00172161651186
+          },
+          {
+            "utc_date": "2025-02-13",
+            "equal_zone_mae": 45.71906398333025,
+            "mean_bias": -24.053161276460298
+          },
+          {
+            "utc_date": "2025-02-14",
+            "equal_zone_mae": 43.87372351882439,
+            "mean_bias": -26.418986251545377
+          },
+          {
+            "utc_date": "2025-11-24",
+            "equal_zone_mae": 43.529410888710714,
+            "mean_bias": -35.28730812249588
+          },
+          {
+            "utc_date": "2025-04-22",
+            "equal_zone_mae": 43.511389443791465,
+            "mean_bias": -40.4510985974738
+          }
+        ]
+      },
+      "inverse_joint-nordic_higher-w100-weekly": {
+        "equal_zone_mae": 27.48735201701617,
+        "bias": -4.051444984292377,
+        "top_decile_absolute_error_share": 0.36033550964289357,
+        "regimes": [
+          {
+            "regime": "negative",
+            "zone_hours": 9676,
+            "mae": 23.947671457878442,
+            "bias": 23.94602353763797,
+            "absolute_error_share": 0.023471361580757938
+          },
+          {
+            "regime": "near-zero",
+            "zone_hours": 58008,
+            "mae": 33.434946294641215,
+            "bias": 32.24491791969433,
+            "absolute_error_share": 0.1964570665156049
+          },
+          {
+            "regime": "20\u201380",
+            "zone_hours": 86090,
+            "mae": 29.802523726599677,
+            "bias": 3.756605493544185,
+            "absolute_error_share": 0.2598871957882296
+          },
+          {
+            "regime": "80\u2013150",
+            "zone_hours": 173775,
+            "mae": 18.79538487625766,
+            "bias": -11.631076582539482,
+            "absolute_error_share": 0.3308397266159443
+          },
+          {
+            "regime": "150\u2013250",
+            "zone_hours": 28392,
+            "mae": 45.25268584287363,
+            "bias": -44.90821185554539,
+            "absolute_error_share": 0.13014260027719804
+          },
+          {
+            "regime": "250+",
+            "zone_hours": 3219,
+            "mae": 181.56687971420934,
+            "bias": -181.56687971420934,
+            "absolute_error_share": 0.059202049222265296
+          }
+        ],
+        "worst_utc_days": [
+          {
+            "utc_date": "2025-11-25",
+            "equal_zone_mae": 72.77046153307624,
+            "mean_bias": -64.17787193579994
+          },
+          {
+            "utc_date": "2025-01-20",
+            "equal_zone_mae": 72.42990058828909,
+            "mean_bias": -47.9750313294702
+          },
+          {
+            "utc_date": "2025-01-15",
+            "equal_zone_mae": 60.74996644944536,
+            "mean_bias": -51.177852029495334
+          },
+          {
+            "utc_date": "2025-10-14",
+            "equal_zone_mae": 55.463631524131,
+            "mean_bias": -48.345422145003745
+          },
+          {
+            "utc_date": "2025-11-26",
+            "equal_zone_mae": 49.14136206522695,
+            "mean_bias": -39.42316539059643
+          },
+          {
+            "utc_date": "2025-02-24",
+            "equal_zone_mae": 49.09621789541423,
+            "mean_bias": 1.7972600281589999
+          },
+          {
+            "utc_date": "2025-01-21",
+            "equal_zone_mae": 48.24873661504246,
+            "mean_bias": -24.905169791532455
+          },
+          {
+            "utc_date": "2025-11-21",
+            "equal_zone_mae": 46.82209976362413,
+            "mean_bias": -41.66847958027376
+          },
+          {
+            "utc_date": "2025-10-15",
+            "equal_zone_mae": 45.80429696997605,
+            "mean_bias": -39.53699981376037
+          },
+          {
+            "utc_date": "2025-01-22",
+            "equal_zone_mae": 45.6815704483244,
+            "mean_bias": -36.6742764788652
+          },
+          {
+            "utc_date": "2025-02-12",
+            "equal_zone_mae": 45.328017598956926,
+            "mean_bias": -12.476852507924225
+          },
+          {
+            "utc_date": "2025-02-13",
+            "equal_zone_mae": 44.98613391328808,
+            "mean_bias": -22.3787159706444
+          },
+          {
+            "utc_date": "2025-03-04",
+            "equal_zone_mae": 43.27137614443319,
+            "mean_bias": 9.969510000239415
+          },
+          {
+            "utc_date": "2025-02-14",
+            "equal_zone_mae": 43.02475929102772,
+            "mean_bias": -25.088029192614105
+          },
+          {
+            "utc_date": "2025-02-11",
+            "equal_zone_mae": 42.881957774528274,
+            "mean_bias": 5.857626488581327
+          }
+        ]
+      }
+    },
+    "active_weekly_coefficients": {
+      "accepted-unchanged-w100": [
+        {
+          "zone": "AT",
+          "resource": "gas",
+          "interior_hours": 318,
+          "weekend_hours": 76,
+          "weekday_hours": 242,
+          "coefficient": -2.611134289609605
+        },
+        {
+          "zone": "BE",
+          "resource": "nuclear",
+          "interior_hours": 341,
+          "weekend_hours": 80,
+          "weekday_hours": 261,
+          "coefficient": -2.9849985899961644
+        },
+        {
+          "zone": "BG",
+          "resource": "gas",
+          "interior_hours": 175,
+          "weekend_hours": 54,
+          "weekday_hours": 121,
+          "coefficient": -4.777705995327432
+        },
+        {
+          "zone": "BG",
+          "resource": "coal",
+          "interior_hours": 1266,
+          "weekend_hours": 328,
+          "weekday_hours": 938,
+          "coefficient": -8.548330573788508
+        },
+        {
+          "zone": "CZ",
+          "resource": "gas",
+          "interior_hours": 416,
+          "weekend_hours": 71,
+          "weekday_hours": 345,
+          "coefficient": -5.506653739570592
+        },
+        {
+          "zone": "CZ",
+          "resource": "coal",
+          "interior_hours": 4336,
+          "weekend_hours": 1108,
+          "weekday_hours": 3228,
+          "coefficient": -13.918090092653637
+        },
+        {
+          "zone": "CZ",
+          "resource": "nuclear",
+          "interior_hours": 254,
+          "weekend_hours": 131,
+          "weekday_hours": 123,
+          "coefficient": -7.12357897459595
+        },
+        {
+          "zone": "DE-LU",
+          "resource": "gas",
+          "interior_hours": 2817,
+          "weekend_hours": 688,
+          "weekday_hours": 2129,
+          "coefficient": -8.933452708614807
+        },
+        {
+          "zone": "DE-LU",
+          "resource": "coal",
+          "interior_hours": 1495,
+          "weekend_hours": 393,
+          "weekday_hours": 1102,
+          "coefficient": -9.172452192795818
+        },
+        {
+          "zone": "ES",
+          "resource": "gas",
+          "interior_hours": 5795,
+          "weekend_hours": 1521,
+          "weekday_hours": 4274,
+          "coefficient": -15.321554325506911
+        },
+        {
+          "zone": "ES",
+          "resource": "nuclear",
+          "interior_hours": 946,
+          "weekend_hours": 288,
+          "weekday_hours": 658,
+          "coefficient": -7.346312602581832
+        },
+        {
+          "zone": "FR",
+          "resource": "gas",
+          "interior_hours": 945,
+          "weekend_hours": 249,
+          "weekday_hours": 696,
+          "coefficient": -5.403302336178483
+        },
+        {
+          "zone": "FR",
+          "resource": "nuclear",
+          "interior_hours": 4622,
+          "weekend_hours": 1464,
+          "weekday_hours": 3158,
+          "coefficient": -7.5
+        },
+        {
+          "zone": "GR",
+          "resource": "gas",
+          "interior_hours": 2040,
+          "weekend_hours": 464,
+          "weekday_hours": 1576,
+          "coefficient": -11.817076779365351
+        },
+        {
+          "zone": "HR",
+          "resource": "gas",
+          "interior_hours": 247,
+          "weekend_hours": 57,
+          "weekday_hours": 190,
+          "coefficient": -4.431671358513042
+        },
+        {
+          "zone": "HU",
+          "resource": "gas",
+          "interior_hours": 324,
+          "weekend_hours": 94,
+          "weekday_hours": 230,
+          "coefficient": -5.121901347663313
+        },
+        {
+          "zone": "IT-CNOR",
+          "resource": "gas",
+          "interior_hours": 1164,
+          "weekend_hours": 232,
+          "weekday_hours": 932,
+          "coefficient": -2.602457812627105
+        },
+        {
+          "zone": "IT-CSUD",
+          "resource": "gas",
+          "interior_hours": 1468,
+          "weekend_hours": 274,
+          "weekday_hours": 1194,
+          "coefficient": -4.793144464515411
+        },
+        {
+          "zone": "IT-North",
+          "resource": "gas",
+          "interior_hours": 5645,
+          "weekend_hours": 1403,
+          "weekday_hours": 4242,
+          "coefficient": -5.8278551750065475
+        },
+        {
+          "zone": "IT-SICI",
+          "resource": "gas",
+          "interior_hours": 396,
+          "weekend_hours": 60,
+          "weekday_hours": 336,
+          "coefficient": -3.554619272901545
+        },
+        {
+          "zone": "IT-SUD",
+          "resource": "gas",
+          "interior_hours": 1340,
+          "weekend_hours": 314,
+          "weekday_hours": 1026,
+          "coefficient": -4.610022452070153
+        },
+        {
+          "zone": "LT",
+          "resource": "gas",
+          "interior_hours": 681,
+          "weekend_hours": 185,
+          "weekday_hours": 496,
+          "coefficient": -9.245605701967483
+        },
+        {
+          "zone": "LV",
+          "resource": "gas",
+          "interior_hours": 892,
+          "weekend_hours": 223,
+          "weekday_hours": 669,
+          "coefficient": -5.708819789974968
+        },
+        {
+          "zone": "NL",
+          "resource": "gas",
+          "interior_hours": 1711,
+          "weekend_hours": 398,
+          "weekday_hours": 1313,
+          "coefficient": -6.234219596434656
+        },
+        {
+          "zone": "NL",
+          "resource": "coal",
+          "interior_hours": 423,
+          "weekend_hours": 93,
+          "weekday_hours": 330,
+          "coefficient": -3.287930738070898
+        },
+        {
+          "zone": "PL",
+          "resource": "gas",
+          "interior_hours": 497,
+          "weekend_hours": 93,
+          "weekday_hours": 404,
+          "coefficient": -7.5241193218069995
+        },
+        {
+          "zone": "PL",
+          "resource": "coal",
+          "interior_hours": 3757,
+          "weekend_hours": 1141,
+          "weekday_hours": 2616,
+          "coefficient": -6.800034640527695
+        },
+        {
+          "zone": "RO",
+          "resource": "gas",
+          "interior_hours": 739,
+          "weekend_hours": 210,
+          "weekday_hours": 529,
+          "coefficient": -8.637965733652399
+        },
+        {
+          "zone": "RO",
+          "resource": "coal",
+          "interior_hours": 707,
+          "weekend_hours": 219,
+          "weekday_hours": 488,
+          "coefficient": -2.30938179734283
+        },
+        {
+          "zone": "RS",
+          "resource": "gas",
+          "interior_hours": 233,
+          "weekend_hours": 69,
+          "weekday_hours": 164,
+          "coefficient": -5.248219001495573
+        },
+        {
+          "zone": "RS",
+          "resource": "coal",
+          "interior_hours": 1277,
+          "weekend_hours": 366,
+          "weekday_hours": 911,
+          "coefficient": -4.692090587233567
+        },
+        {
+          "zone": "SI",
+          "resource": "coal",
+          "interior_hours": 221,
+          "weekend_hours": 72,
+          "weekday_hours": 149,
+          "coefficient": -2.4309413551125876
+        },
+        {
+          "zone": "SK",
+          "resource": "gas",
+          "interior_hours": 213,
+          "weekend_hours": 51,
+          "weekday_hours": 162,
+          "coefficient": -4.987051766915601
+        },
+        {
+          "zone": "FI",
+          "resource": "gas",
+          "interior_hours": 273,
+          "weekend_hours": 76,
+          "weekday_hours": 197,
+          "coefficient": -3.907228382704849
+        },
+        {
+          "zone": "FI",
+          "resource": "nuclear",
+          "interior_hours": 1741,
+          "weekend_hours": 416,
+          "weekday_hours": 1325,
+          "coefficient": -7.5
+        },
+        {
+          "zone": "SE3",
+          "resource": "nuclear",
+          "interior_hours": 2447,
+          "weekend_hours": 635,
+          "weekday_hours": 1812,
+          "coefficient": -7.5
+        },
+        {
+          "zone": "IT-SARD",
+          "resource": "gas",
+          "interior_hours": 1001,
+          "weekend_hours": 206,
+          "weekday_hours": 795,
+          "coefficient": -5.662819292410163
+        },
+        {
+          "zone": "IT-SARD",
+          "resource": "coal",
+          "interior_hours": 1173,
+          "weekend_hours": 323,
+          "weekday_hours": 850,
+          "coefficient": -2.895215727464242
+        }
+      ],
+      "inverse_joint-nordic_higher-w100": [
+        {
+          "zone": "AT",
+          "resource": "gas",
+          "interior_hours": 367,
+          "weekend_hours": 75,
+          "weekday_hours": 292,
+          "coefficient": -2.39676711034554
+        },
+        {
+          "zone": "BE",
+          "resource": "gas",
+          "interior_hours": 622,
+          "weekend_hours": 123,
+          "weekday_hours": 499,
+          "coefficient": -3.1146827085130333
+        },
+        {
+          "zone": "BE",
+          "resource": "nuclear",
+          "interior_hours": 293,
+          "weekend_hours": 73,
+          "weekday_hours": 220,
+          "coefficient": -3.1225645673906386
+        },
+        {
+          "zone": "BG",
+          "resource": "coal",
+          "interior_hours": 735,
+          "weekend_hours": 196,
+          "weekday_hours": 539,
+          "coefficient": -4.524436068079159
+        },
+        {
+          "zone": "CZ",
+          "resource": "gas",
+          "interior_hours": 428,
+          "weekend_hours": 63,
+          "weekday_hours": 365,
+          "coefficient": -2.438328679245394
+        },
+        {
+          "zone": "CZ",
+          "resource": "coal",
+          "interior_hours": 3339,
+          "weekend_hours": 991,
+          "weekday_hours": 2348,
+          "coefficient": -9.60903028639425
+        },
+        {
+          "zone": "CZ",
+          "resource": "nuclear",
+          "interior_hours": 175,
+          "weekend_hours": 96,
+          "weekday_hours": 79,
+          "coefficient": -4.661093090697969
+        },
+        {
+          "zone": "DE-LU",
+          "resource": "gas",
+          "interior_hours": 1861,
+          "weekend_hours": 425,
+          "weekday_hours": 1436,
+          "coefficient": -8.695207392268978
+        },
+        {
+          "zone": "DE-LU",
+          "resource": "coal",
+          "interior_hours": 2014,
+          "weekend_hours": 531,
+          "weekday_hours": 1483,
+          "coefficient": -9.346136159364859
+        },
+        {
+          "zone": "ES",
+          "resource": "gas",
+          "interior_hours": 4608,
+          "weekend_hours": 1238,
+          "weekday_hours": 3370,
+          "coefficient": -12.045580682134657
+        },
+        {
+          "zone": "ES",
+          "resource": "nuclear",
+          "interior_hours": 790,
+          "weekend_hours": 237,
+          "weekday_hours": 553,
+          "coefficient": -4.098646638324749
+        },
+        {
+          "zone": "FR",
+          "resource": "gas",
+          "interior_hours": 757,
+          "weekend_hours": 176,
+          "weekday_hours": 581,
+          "coefficient": -4.583280610959264
+        },
+        {
+          "zone": "FR",
+          "resource": "nuclear",
+          "interior_hours": 4905,
+          "weekend_hours": 1512,
+          "weekday_hours": 3393,
+          "coefficient": -7.5
+        },
+        {
+          "zone": "GR",
+          "resource": "gas",
+          "interior_hours": 1404,
+          "weekend_hours": 370,
+          "weekday_hours": 1034,
+          "coefficient": -6.266278833648967
+        },
+        {
+          "zone": "GR",
+          "resource": "coal",
+          "interior_hours": 175,
+          "weekend_hours": 50,
+          "weekday_hours": 125,
+          "coefficient": -1.0554211137319593
+        },
+        {
+          "zone": "HU",
+          "resource": "gas",
+          "interior_hours": 237,
+          "weekend_hours": 68,
+          "weekday_hours": 169,
+          "coefficient": -4.342142212951072
+        },
+        {
+          "zone": "IT-CNOR",
+          "resource": "gas",
+          "interior_hours": 911,
+          "weekend_hours": 150,
+          "weekday_hours": 761,
+          "coefficient": -1.8605980314508976
+        },
+        {
+          "zone": "IT-CSUD",
+          "resource": "gas",
+          "interior_hours": 1268,
+          "weekend_hours": 249,
+          "weekday_hours": 1019,
+          "coefficient": -2.304179787652202
+        },
+        {
+          "zone": "IT-North",
+          "resource": "gas",
+          "interior_hours": 4671,
+          "weekend_hours": 1096,
+          "weekday_hours": 3575,
+          "coefficient": -4.552572147816256
+        },
+        {
+          "zone": "IT-SICI",
+          "resource": "gas",
+          "interior_hours": 630,
+          "weekend_hours": 149,
+          "weekday_hours": 481,
+          "coefficient": -1.615037548615205
+        },
+        {
+          "zone": "IT-SUD",
+          "resource": "gas",
+          "interior_hours": 885,
+          "weekend_hours": 244,
+          "weekday_hours": 641,
+          "coefficient": -1.135444509783502
+        },
+        {
+          "zone": "LT",
+          "resource": "gas",
+          "interior_hours": 302,
+          "weekend_hours": 69,
+          "weekday_hours": 233,
+          "coefficient": -2.5572170856022143
+        },
+        {
+          "zone": "LV",
+          "resource": "gas",
+          "interior_hours": 308,
+          "weekend_hours": 71,
+          "weekday_hours": 237,
+          "coefficient": -3.1820616213887893
+        },
+        {
+          "zone": "MK",
+          "resource": "coal",
+          "interior_hours": 229,
+          "weekend_hours": 46,
+          "weekday_hours": 183,
+          "coefficient": -2.3639495074372525
+        },
+        {
+          "zone": "NL",
+          "resource": "gas",
+          "interior_hours": 1158,
+          "weekend_hours": 240,
+          "weekday_hours": 918,
+          "coefficient": -4.796880163477858
+        },
+        {
+          "zone": "NL",
+          "resource": "coal",
+          "interior_hours": 384,
+          "weekend_hours": 79,
+          "weekday_hours": 305,
+          "coefficient": -3.5982800629611065
+        },
+        {
+          "zone": "PL",
+          "resource": "gas",
+          "interior_hours": 759,
+          "weekend_hours": 181,
+          "weekday_hours": 578,
+          "coefficient": -4.955831558597652
+        },
+        {
+          "zone": "PL",
+          "resource": "coal",
+          "interior_hours": 3583,
+          "weekend_hours": 930,
+          "weekday_hours": 2653,
+          "coefficient": -8.534433584364793
+        },
+        {
+          "zone": "PT",
+          "resource": "gas",
+          "interior_hours": 972,
+          "weekend_hours": 243,
+          "weekday_hours": 729,
+          "coefficient": -6.368316260590573
+        },
+        {
+          "zone": "RO",
+          "resource": "gas",
+          "interior_hours": 614,
+          "weekend_hours": 170,
+          "weekday_hours": 444,
+          "coefficient": -6.741427707984988
+        },
+        {
+          "zone": "RO",
+          "resource": "coal",
+          "interior_hours": 574,
+          "weekend_hours": 156,
+          "weekday_hours": 418,
+          "coefficient": -4.062196189471504
+        },
+        {
+          "zone": "RS",
+          "resource": "coal",
+          "interior_hours": 704,
+          "weekend_hours": 195,
+          "weekday_hours": 509,
+          "coefficient": -6.969995797195212
+        },
+        {
+          "zone": "FI",
+          "resource": "nuclear",
+          "interior_hours": 1464,
+          "weekend_hours": 376,
+          "weekday_hours": 1088,
+          "coefficient": -7.5
+        },
+        {
+          "zone": "SE3",
+          "resource": "nuclear",
+          "interior_hours": 2308,
+          "weekend_hours": 603,
+          "weekday_hours": 1705,
+          "coefficient": -7.5
+        },
+        {
+          "zone": "IT-SARD",
+          "resource": "gas",
+          "interior_hours": 242,
+          "weekend_hours": 33,
+          "weekday_hours": 209,
+          "coefficient": -0.9180972944302077
+        },
+        {
+          "zone": "IT-SARD",
+          "resource": "coal",
+          "interior_hours": 414,
+          "weekend_hours": 98,
+          "weekday_hours": 316,
+          "coefficient": -0.4818157258894921
+        }
+      ]
+    },
+    "mechanisms": {
+      "accepted-unchanged-w100": [
+        {
+          "zone": "DE-LU",
+          "local_interior_classes": [
+            {
+              "label": "coal",
+              "hours": 1495,
+              "mae": 21.07997135919468,
+              "bias": -15.47423789954694
+            },
+            {
+              "label": "gas",
+              "hours": 2817,
+              "mae": 19.321439754889244,
+              "bias": -15.142003224008672
+            },
+            {
+              "label": "no-local-interior",
+              "hours": 3382,
+              "mae": 23.093197898898246,
+              "bias": -15.301955216909361
+            },
+            {
+              "label": "other",
+              "hours": 579,
+              "mae": 28.626534414109827,
+              "bias": -19.947912038611143
+            },
+            {
+              "label": "renewable",
+              "hours": 487,
+              "mae": 17.03080595482535,
+              "bias": 5.336432238192786
+            }
+          ],
+          "mean_abs_passive_network_term": 18.18381841648222,
+          "mean_abs_energy_term": 93.24185881685554,
+          "maximum_decomposition_residual": 8.071481261140434e-10
+        },
+        {
+          "zone": "ES",
+          "local_interior_classes": [
+            {
+              "label": "coal",
+              "hours": 17,
+              "mae": 16.92395846907724,
+              "bias": 11.038290843291698
+            },
+            {
+              "label": "gas",
+              "hours": 5795,
+              "mae": 27.292875182936154,
+              "bias": -0.30281792184372575
+            },
+            {
+              "label": "no-local-interior",
+              "hours": 1518,
+              "mae": 17.74849688448591,
+              "bias": 4.10707704691084
+            },
+            {
+              "label": "nuclear",
+              "hours": 946,
+              "mae": 21.533326754636544,
+              "bias": -3.128605834261965
+            },
+            {
+              "label": "other",
+              "hours": 185,
+              "mae": 19.210473351813384,
+              "bias": 1.4591962346962228
+            },
+            {
+              "label": "renewable",
+              "hours": 299,
+              "mae": 5.0757608695652525,
+              "bias": -2.94957357859527
+            }
+          ],
+          "mean_abs_passive_network_term": 31.00694861908715,
+          "mean_abs_energy_term": 92.71952850922291,
+          "maximum_decomposition_residual": 2.071146809612401e-09
+        },
+        {
+          "zone": "FR",
+          "local_interior_classes": [
+            {
+              "label": "coal",
+              "hours": 32,
+              "mae": 20.63753413818675,
+              "bias": -18.69253709976673
+            },
+            {
+              "label": "gas",
+              "hours": 945,
+              "mae": 15.703363197545665,
+              "bias": -9.078979720631017
+            },
+            {
+              "label": "no-local-interior",
+              "hours": 3108,
+              "mae": 27.559890488909513,
+              "bias": -20.186632120261006
+            },
+            {
+              "label": "nuclear",
+              "hours": 4622,
+              "mae": 22.861108172444293,
+              "bias": -5.775401007601356
+            },
+            {
+              "label": "other",
+              "hours": 53,
+              "mae": 36.35725797452036,
+              "bias": -28.282825044347824
+            }
+          ],
+          "mean_abs_passive_network_term": 44.433873194376666,
+          "mean_abs_energy_term": 93.24185881685555,
+          "maximum_decomposition_residual": 5.305196282279212e-10
+        },
+        {
+          "zone": "NO5",
+          "local_interior_classes": [
+            {
+              "label": "gas",
+              "hours": 30,
+              "mae": 52.58733974755271,
+              "bias": 52.58733974755271
+            },
+            {
+              "label": "no-local-interior",
+              "hours": 7955,
+              "mae": 47.466366365188435,
+              "bias": -22.72915039836472
+            },
+            {
+              "label": "other",
+              "hours": 120,
+              "mae": 43.02175000000016,
+              "bias": -43.02175000000016
+            },
+            {
+              "label": "renewable",
+              "hours": 655,
+              "mae": 45.656820610687085,
+              "bias": -45.656820610687085
+            }
+          ],
+          "mean_abs_passive_network_term": 22.64368816906376,
+          "mean_abs_energy_term": 43.946329111471606,
+          "maximum_decomposition_residual": 6.423306331271306e-11
+        }
+      ],
+      "inverse_joint-nordic_higher-w100": [
+        {
+          "zone": "DE-LU",
+          "local_interior_classes": [
+            {
+              "label": "coal",
+              "hours": 2014,
+              "mae": 17.69311730157533,
+              "bias": -11.252151376332371
+            },
+            {
+              "label": "gas",
+              "hours": 1861,
+              "mae": 16.955134202953584,
+              "bias": -10.508598362460589
+            },
+            {
+              "label": "no-local-interior",
+              "hours": 3820,
+              "mae": 20.31704894560623,
+              "bias": -12.646818321006215
+            },
+            {
+              "label": "other",
+              "hours": 606,
+              "mae": 28.856243615613582,
+              "bias": -21.218540060848582
+            },
+            {
+              "label": "renewable",
+              "hours": 459,
+              "mae": 16.996372549019554,
+              "bias": 6.367984749455334
+            }
+          ],
+          "mean_abs_passive_network_term": 17.389220122340696,
+          "mean_abs_energy_term": 95.38148139454258,
+          "maximum_decomposition_residual": 2.042668256763136e-10
+        },
+        {
+          "zone": "ES",
+          "local_interior_classes": [
+            {
+              "label": "coal",
+              "hours": 114,
+              "mae": 20.10220064127198,
+              "bias": -7.257280959954448
+            },
+            {
+              "label": "gas",
+              "hours": 4608,
+              "mae": 23.89783754030608,
+              "bias": 6.670043168718809
+            },
+            {
+              "label": "no-local-interior",
+              "hours": 2781,
+              "mae": 20.118808488297447,
+              "bias": -3.27547815661146
+            },
+            {
+              "label": "nuclear",
+              "hours": 790,
+              "mae": 20.264735897678722,
+              "bias": -1.9004339571755862
+            },
+            {
+              "label": "other",
+              "hours": 160,
+              "mae": 21.198893530982964,
+              "bias": 0.6398197061966634
+            },
+            {
+              "label": "renewable",
+              "hours": 307,
+              "mae": 5.375024429967629,
+              "bias": -3.327565146579998
+            }
+          ],
+          "mean_abs_passive_network_term": 32.1820072022326,
+          "mean_abs_energy_term": 94.85595163237782,
+          "maximum_decomposition_residual": 2.7834801130666165e-10
+        },
+        {
+          "zone": "FR",
+          "local_interior_classes": [
+            {
+              "label": "coal",
+              "hours": 96,
+              "mae": 18.65049080868846,
+              "bias": -13.332298978237688
+            },
+            {
+              "label": "gas",
+              "hours": 757,
+              "mae": 18.799662445088877,
+              "bias": -13.471551286309838
+            },
+            {
+              "label": "no-local-interior",
+              "hours": 2947,
+              "mae": 28.050364155653412,
+              "bias": -21.97321456331738
+            },
+            {
+              "label": "nuclear",
+              "hours": 4905,
+              "mae": 23.5855190739594,
+              "bias": -5.692340502385023
+            },
+            {
+              "label": "other",
+              "hours": 55,
+              "mae": 29.586857125097133,
+              "bias": -21.261049261849266
+            }
+          ],
+          "mean_abs_passive_network_term": 47.04192833112281,
+          "mean_abs_energy_term": 95.38148139454259,
+          "maximum_decomposition_residual": 2.7542057523533003e-10
+        },
+        {
+          "zone": "NO5",
+          "local_interior_classes": [
+            {
+              "label": "gas",
+              "hours": 32,
+              "mae": 47.776111959732376,
+              "bias": 39.95372929952427
+            },
+            {
+              "label": "no-local-interior",
+              "hours": 8589,
+              "mae": 32.31680000749566,
+              "bias": -4.474874412226813
+            },
+            {
+              "label": "other",
+              "hours": 13,
+              "mae": 50.35288461538002,
+              "bias": -50.35288461538002
+            },
+            {
+              "label": "renewable",
+              "hours": 126,
+              "mae": 43.36867063492122,
+              "bias": -43.36867063492122
+            }
+          ],
+          "mean_abs_passive_network_term": 5.1529069778459355,
+          "mean_abs_energy_term": 46.65530307654718,
+          "maximum_decomposition_residual": 1.4884449228702579e-10
+        }
+      ]
+    },
+    "report_audit": {
+      "status": "all_weekly_zonal_and_event_csv_metrics_replayed_from_hourly_witnesses",
+      "summary_sha256": "5dd39dea3e72dc217d539e3020f4142d1e468ae5ed2b9ba4092ada31b1d209f7",
+      "auditor_sha256": "8fb79d27666ee6e4cbb56c91185218e78e78f56143361b006d63cba53a3c1e82",
+      "article_sha256": "834e250631ad9316f89b43f22e5d474b5f522bcb9f8c02bde8c1e6581b2a2cfc",
+      "assets_sha256": {
+        "daily-fuel-prices-by-zone.csv": "3481214e7a11ee0309faf388e6a20aa7658fb4b23ddba08ba3078f8480cb9326",
+        "daily-prices.png": "1866b6d1960dffdb9c4e011d9ef9c6aea47bfded7981b8d0491dd25473cfd9f1",
+        "generation-by-area.csv": "d31698d115ef9570ce0521d186f65560d052642ac9b3b42af275561f5a8815f1",
+        "generation-by-fuel.csv": "29d66b4145d615de418a7f56514c6f75e18f0eb0bcc49f5b9ad3232032ab4dfd",
+        "hourly-error-periods.csv": "96e6aca5f7355230f59fa372eac6903ba8315262326e5483ced064c19b250ed8",
+        "hourly-error-zones.csv": "9ca05b4dcc21b1a2ff98c599c0e85c25c033fb285bbb4c8d494847d78491d314",
+        "inverse-generation-by-country.csv": "d6a52439dacc9719f8f0ae4eb80d5a3ced890e75e07107079168784d7749e34b",
+        "inverse-prices-by-zone.csv": "0a0cb02bb55ac4104227516838b88f24e47ac80c0a9b705053705c7a0430e40c",
+        "inverse-search-cases.csv": "72240571f3da6d96b16ba6c62d67493ab7e6f36de384801d3dfe9473ee7a683f",
+        "joint-generation-by-country.csv": "8f0701c725484833c01641f8d42462edf9bdff9ac142586c3a31bb5146e9d43b",
+        "joint-prices-by-zone.csv": "73ca79034ed879e11ba4a5f397fa31ab87ad1afd22cebb5db4f1516512516ef8",
+        "joint-search-cases.csv": "d8b5b1606dfe2a71a438704372e4efc55a10b98bc9cbeff1345ec0288d3b3703",
+        "national-generation.csv": "218d4a7eee9d94dcb2fed9a9eb524713eb0303bdbfbce16aac4e419566cd7523",
+        "national-mix.png": "6848a58899d3fed8c6916fc22b3f82dfc469b4ab31a1320ca50a2fef66c77371",
+        "nuclear-availability-by-month.csv": "d7e7925ebf1f11f6ae3f0e1aac4c952d027072e3f28816a81b5b6fcf390139b6",
+        "nuclear-availability-prices-by-zone.csv": "b2cf42359fe36e71a92117d5c42b5619d477db892e5ee61ed01d7d4635e0a292",
+        "overview.png": "2601844396e4b54fc19b1b79f5f3c867781da36e7447d36fe5939f946e4b27cd",
+        "prices-by-zone.csv": "99e1a5a06dc88aa8fff022546f9e70f3a83df58df7f42123e9e22b2abab3dcaa",
+        "renewable-capacity-audit.csv": "c60afa3593f8f9aacf105dcb528cc801cf723af0bf6f4083d3dacdb73280137c",
+        "renewable-source-prices-by-zone.csv": "08472614bff37ba147d6a52839da407ff7fa2fde9473edede32e47a246d66345",
+        "zone-mae-grid.png": "f4cb9dae46af2f10df58a467a42c58263b5745e72cb495143874c3bf515d67c1"
+      },
+      "zonal_rows": 192,
+      "event_rows": 132
     }
   }
 }

@@ -1,0 +1,15 @@
+{
+  "experiment": "hourly-error-led weekly supply-bid correction",
+  "anchors": ["accepted-unchanged-w100", "inverse_joint-nordic_higher-w100"],
+  "maximum_new_annual_solves": 2,
+  "predictor": "Local Saturday/Sunday indicator minus its full-2025 mean, with DST; no holiday inference, residual demand or hour-specific target lookup",
+  "fit": "All-year in-sample observed-minus-anchor prices, only matching local interior gas/coal/nuclear offers (>0.001 MW from both bounds, price difference <=0.00001). Regress against existing 15 calendar nuisance columns plus centered weekend; retain only weekend coefficient. Clip response +/-100 EUR/MWh; ridge 168 I; at least 168 matching hours and 24 of each day type.",
+  "ridge": 168,
+  "minimum_interior_hours": 168,
+  "minimum_daytype_hours": 24,
+  "coefficient_bounds_eur_mwh": [30, 30, 7.5],
+  "resources": ["gas", "coal", "nuclear"],
+  "offers": "Same family/zone adjustment on every block; floor final offers at zero. All other offers and all physical inputs unchanged relative to each anchor.",
+  "research_filters": "Each correction must reduce its anchor full-year price MAE, with daily-demeaned, generation and trade errors no more than 2% worse; 8760 optimal hours, zero emergency <=1e-6 MWh, independent source/native/dual replay. These are experimental safeguards, not acceptance or automatic promotion.",
+  "scope": "One predetermined correction per anchor, no strength sweep/refit after results. 2025 reconstruction, not independent forecast validation or identified real bids. Previous joint calibration stays a checkpoint. No baseline/browser promotion."
+}

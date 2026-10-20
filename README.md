@@ -24,10 +24,10 @@ This price-calibrated reconstruction is not independent forecast validation.
 
 - [Workbench methodology](docs/workbench-methodology.md): bottlenecks, live scenario
   equations, opportunity/carbon interpretation and exact data sources.
-- [Inverse market modelling report](docs/european-physical-synthetic-clearing-2025.md):
-  the fixed-hydro European baseline, bounded resource-bid calibration, all-year
-  price/generation comparisons, fit-set limitations and investment interpretation.
-  The joint-score trial reaches MAE 28.17 EUR/MWh; it has not replaced the baseline.
+- [Hourly price-error report](docs/european-physical-synthetic-clearing-2025.md):
+  fixed-hydro baseline, event/weekly/seasonal error diagnosis and two controlled
+  weekly supply-bid corrections. MAE28.96→28.66 on the baseline and27.75→27.49
+  on the joint checkpoint; modest in-sample gains, no baseline/browser promotion.
 - [Paused resource-bidding research reference](docs/daily-fuel-dispatch-2025.md): generator
   strategies, fuel inputs, daily chronological storage and annual observed-price errors.
 
@@ -76,7 +76,12 @@ Current research entry points:
 - `inverse_bid_ensemble_2025.py`, `run_inverse_bid_ensemble_2025.py` and
   `audit_inverse_bid_ensemble_2025.py`: verified prior bid-only calibration, retained as a frozen anchor.
 - `write_concise_dispatch_report_2025.py` delegates the current report to
-  `joint_network_report_2025.py`; `audit_joint_report_2025.py` checks its CSVs.
+  `hourly_error_report_2025.py`; `audit_hourly_error_report_2025.py` independently
+  checks its compact zone/event CSVs. Prior joint/bid-only CSVs remain supporting
+  checkpoint evidence.
+- `hourly_error_events_2025.py` inventories hourly errors in both saved anchors;
+  `run_weekly_supply_bids_2025.py` tests the two declared weekly supply-bid
+  corrections, with independent `audit_weekly_supply_bids_2025.py` replay.
   The prior bid-only renderer/auditor still preserve supporting comparison evidence.
 - `hybrid_fixed_hydro_2025.py` and `evaluate_fixed_hydro_bids_2025.py` are frozen
   source/reference tools; do not run their historical publisher over the current report.
@@ -93,7 +98,7 @@ Run from the repository root; inspect each tool's CLI and retained report for
 inputs/provenance. Source data and retained-reference dependencies must not be
 removed merely because their original articles are retired.
 
-To reproduce the inverse experiment with the verified local caches, restore
+To reproduce the prior joint inverse checkpoint with the verified local caches, restore
 immutable metadata and use a **fresh** ignored output directory. The accepted
 baseline and all provider inputs must already exist; this does not fetch omitted
 large data or restart old searches. The current driver also requires the retained
@@ -114,7 +119,19 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
   tools/audit_joint_network_calibration_2025.py data/bidding-zone-network-2025/joint-retry-new
 ```
 
-For the retained report, the joint-calibration folder is pinned in
+For the current weekly-bid correction, retain the accepted/joint witnesses and
+source-bound hourly-error-events-v1 inventory, then use a fresh output root:
+
+```sh
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
+  tools/run_weekly_supply_bids_2025.py data/bidding-zone-network-2025/weekly-reproduction-new
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
+  tools/audit_weekly_supply_bids_2025.py data/bidding-zone-network-2025/weekly-reproduction-new
+```
+
+For the retained report, the weekly-bid and supporting joint folders are pinned in
 `config/research-improvement-plan.json`. Only point it at a new trial after that
 trial passes independent replay. With the existing verified report/source caches:
 

@@ -64,5 +64,7 @@
   "renewable_source_experiment_folder": "data/bidding-zone-network-2025/renewable-source-bids-v1",
   "nuclear_availability_experiment_folder": "data/bidding-zone-network-2025/nuclear-availability-v1",
   "inverse_bid_ensemble_folder": "data/bidding-zone-network-2025/inverse-bid-ensemble-v1",
-  "joint_network_calibration_folder": "data/bidding-zone-network-2025/joint-network-calibration-v4"
+  "joint_network_calibration_folder": "data/bidding-zone-network-2025/joint-network-calibration-v4",
+  "hourly_error_diagnosis_folder": "data/bidding-zone-network-2025/hourly-error-events-v1",
+  "weekly_bids_folder": "data/bidding-zone-network-2025/weekly-bids-v1"
 }

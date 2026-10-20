@@ -21,6 +21,8 @@ ALLOWED = [
     'dispatch-comparison-2025/joint-search-cases.csv',
     'dispatch-comparison-2025/joint-prices-by-zone.csv',
     'dispatch-comparison-2025/joint-generation-by-country.csv',
+    'dispatch-comparison-2025/hourly-error-zones.csv',
+    'dispatch-comparison-2025/hourly-error-periods.csv',
     'dispatch-comparison-2025/inverse-search-cases.csv',
     'dispatch-comparison-2025/inverse-prices-by-zone.csv',
     'dispatch-comparison-2025/inverse-generation-by-country.csv',
@@ -147,6 +149,17 @@ def check():
         assert hashlib.sha256((ROOT/'tools/audit_joint_report_2025.py').read_bytes()).hexdigest()==r['auditor_sha256']
         assert r['cases']==16 and r['zone_rows']==len(study['shown'])*48
         expected.update({'joint-search-cases.csv','joint-prices-by-zone.csv','joint-generation-by-country.csv'})
+    if comparison.get('weekly_error_evaluation'):
+        study=comparison['weekly_error_evaluation'];a=study['audit'];r=study['report_audit']
+        assert a['summary_sha256']==study['summary_sha256']==r['summary_sha256']
+        assert len(a['certificates'])==2
+        assert all(c['hours']==8760 and c['native_residual_mw']<=1e-4 and c['source_offer_bound_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 and c['emergency_mwh']<=1e-6 for c in a['certificates'])
+        for file,sha in [('run_weekly_supply_bids_2025.py',study['producer_sha256']),('weekly_supply_bids_2025.py',study['helper_sha256']),('hourly_error_events_2025.py',study['diagnosis_producer_sha256']),('hourly_error_report_2025.py',study['renderer_sha256']),('audit_weekly_supply_bids_2025.py',a['auditor_sha256']),('audit_hourly_error_report_2025.py',r['auditor_sha256'])]:
+            assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
+        assert study['design']==json.loads((ROOT/'config/weekly-bids-2025.json').read_text())
+        assert r['article_sha256']==comparison['article_sha256'] and r['assets_sha256']==comparison['assets']
+        assert r['zonal_rows']==192 and r['event_rows']==132
+        expected.update({'hourly-error-zones.csv','hourly-error-periods.csv'})
     assert set(comparison['assets']) == expected
     for file, sha in comparison['assets'].items():
         assert hashlib.sha256((folder / 'dispatch-comparison-2025' / file).read_bytes()).hexdigest() == sha

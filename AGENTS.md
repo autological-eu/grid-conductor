@@ -1,5 +1,19 @@
 # Grid Conductor — agent instructions
 
+## Active user direction — 20 October hourly error follow-up
+
+Diagnose the timing and kind of hourly price errors before expanding calibration.
+The joint network trial is a committed checkpoint, not the active next publication.
+Use hourly_error_events_2025.py for source-bound all-year inventories, then the
+two predeclared weekly supply-bid controls in config/weekly-bids-2025.json.
+Only a centered local weekend term is added to supported gas/coal/nuclear offers;
+keep each anchor's physical inputs, fixed hydro and existing bid coefficients.
+All2025 calibration remains explicitly in-sample. Source/native/dual/quantity
+replay is required; retain adverse zones, tails and weak improvements. No automatic
+promotion, browser replacement, retired search or recurring-review restart.
+Update the retained report with exactly four figures; prior calibration CSVs are
+supporting checkpoint evidence, not the new trial's generation results.
+
 ## Current baseline decision — 16 October 2026
 
 The user accepted **seasonal-calendar-v1, annual case `refit`** as the single
