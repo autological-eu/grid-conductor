@@ -45,6 +45,15 @@ confidence intervals. Publish compact per-country files loaded only on demand.
 
 ## Active modelling approach and accuracy goal
 
+Liquid-oil generators require explicit source-backed generating capacity and
+transparent oil/FX/efficiency/carbon/VOM offers, separate from gas, oil shale,
+peat and waste. IRENA renewable capacity cannot fill fossil capacity gaps.
+Distinguish annual installed capacity from hourly availability, and crude oil
+quotes from delivered generating-fuel costs. Retain source geography, reporting
+year and CHP/fuel-switching limitations. The explorer must expose oil separately
+against ENTSO-E B06 even when the national Ember chart groups it as Other fossil;
+compare covered hours consistently and leave unknown observations missing.
+
 The latest direction uses bounded, transparent resource bids driven by smooth
 seasonal and local-time patterns, excluding residual demand as a fitted hourly
 bid predictor. Source demand and weather availability still enter physical clearing.

@@ -1,0 +1,13 @@
+{
+  "year": 2025,
+  "anchor": "weekly-bids-v1/inverse_joint-nordic_higher-w100",
+  "cases": ["control", "daily_oil", "missing_capacity", "capacity_and_daily_oil"],
+  "maximum_annual_solves": 4,
+  "capacity_fill_countries": ["PL", "SK", "SI"],
+  "capacity_rule": "Only fill countries with zero inherited oil MW, using ENTSO-E A68/A33 B06 annual 2025 installed capacity. Existing oil fleets stay unchanged. Do not infer capacity from generation or IRENA renewable statistics.",
+  "allocation": "New oil supply uses the existing single-country market-area balance and unchanged physical GSK. Plant locations, outages and CHP commitments are not reconstructed. Full nameplate availability is an explicit inherited thermal assumption.",
+  "pricing": "Existing monthly World Bank Brent / ECB anchors in control; daily EIA Brent / daily ECB USD per EUR / 1.7 MWh thermal per barrel in daily cases. Fuel and EUR80/t carbon divided by efficiency, plus original oil VOM. New oil uses original technology efficiency 0.35. Daily quotes are retrospective and Brent is not delivered generating fuel.",
+  "fixed": "Keep all original non-oil bids, fitted coefficients, demand, weather availability, fixed hydro chronology, original grid/GSK and the joint anchor's Nordic AC rating factors. No price fitting or model promotion.",
+  "verification": "All 8760 hours, all 41 complete price areas, zero emergency; unchanged 1e-4 MW primal/native gate and EUR0.05 objective/duality gate. Independent annual source, capacity, fuel, physical and quantity replay. Report adverse and zero effects.",
+  "scope": "A targeted oil-capacity correction, not a complete 2025 conventional fleet/outage reconciliation. Other source discrepancies remain explicit. Oil shale, peat and waste are not liquid oil."
+}

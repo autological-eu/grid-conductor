@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 ALLOWED = [
     'country-explorer-2025/manifest.json', 'country-explorer-2025/verification.json',
     'country-explorer-2025/??.json.gz',
+    'oil-supply-2025/summary.json', 'oil-supply-2025/capacity.csv',
+    'oil-supply-2025/prices-by-zone.csv', 'oil-supply-2025/oil-generation.csv',
     'dispatch-comparison-2025/overview.png',
     'dispatch-comparison-2025/national-mix.png',
     'dispatch-comparison-2025/daily-prices.png',
@@ -71,7 +73,8 @@ def check():
     assert model['maximum_duality_gap_eur'] < .05 and model['complete_lp_certificates'] == 11
     for role in ['producer', 'helper', 'auditor']:
         assert hashlib.sha256((ROOT / 'tools' / model[role + '_file']).read_bytes()).hexdigest() == model[role + '_sha256']
-    assert comparison['article_sha256'] == hashlib.sha256((ROOT / 'docs/european-physical-synthetic-clearing-2025.md').read_bytes()).hexdigest()
+    from check_oil_supply_2025 import check as check_oil
+    assert comparison['article_sha256'] == hashlib.sha256(check_oil()).hexdigest()
     for file, sha in [('write_concise_dispatch_report_2025.py', comparison['renderer_sha256']),
                       (comparison.get('derived_producer_file', 'prepare_concise_dispatch_report_2025.py'), comparison['derived_producer_sha256']),
                       (comparison['report_audit'].get('auditor_file', 'audit_concise_dispatch_report_2025.py'), comparison['report_audit']['auditor_sha256'])]:

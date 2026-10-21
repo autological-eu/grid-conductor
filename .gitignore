@@ -60,6 +60,8 @@ data/synthetic-europe-physical-2025-irena-linear/
 data/fixed-reservoir-screening-2025/
 data/bidding-zone-network-2025/
 data/nuclear-availability-2025/
+data/oil-market-2025/
+
 
 # Perfect-foresight dispatch witnesses and offline verification
 data/perfect-foresight-2025/
@@ -151,3 +153,9 @@ data/daily-market-2025/
 !/public/research/country-explorer-2025/manifest.json
 !/public/research/country-explorer-2025/verification.json
 !/public/research/country-explorer-2025/??.json.gz
+
+# Compact audited oil trial only; raw source inputs and annual witnesses stay local.
+!/public/research/oil-supply-2025/
+/public/research/oil-supply-2025/*
+!/public/research/oil-supply-2025/summary.json
+!/public/research/oil-supply-2025/*.csv

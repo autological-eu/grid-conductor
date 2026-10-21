@@ -81,3 +81,104 @@ The useful change is to diagnose errors by event and market regime before changi
 - [All-zone error metrics and weekday/weekend bias](/research/dispatch-comparison-2025/hourly-error-zones.csv), [price regimes, monthly errors and worst event days](/research/dispatch-comparison-2025/hourly-error-periods.csv).
 - [Prior joint calibration cases](/research/dispatch-comparison-2025/joint-search-cases.csv), [joint zonal price metrics](/research/dispatch-comparison-2025/joint-prices-by-zone.csv), [national five-fuel quantities and conditional bounds](/research/dispatch-comparison-2025/joint-generation-by-country.csv). These describe the preceding checkpoint, not the new weekly corrections.
 - [Compact provenance and audit receipt](/research/dispatch-comparison-2025/summary.json). Raw inputs and full hourly witnesses remain locally cached outside Git. [Workbench methodology](/docs/workbench-methodology/).
+
+<!-- oil-supply-2025 -->
+
+## Oil supply: capacity and fuel-price check
+
+Oil was already a modeled fuel, but the displayed joint + weekly checkpoint
+dispatches **zero oil generation** from **17.077 GW** of inherited oil capacity.
+The explorer's annual Ember chart grouped oil with waste as “Other fossil”; it now
+also shows oil separately against ENTSO-E **B06**, including matched-hour totals.
+Oil shale, peat and waste are not liquid oil. IRENA's renewable statistics cannot
+supply missing oil-fired capacity.
+
+A fresh ENTSO-E **A68/A33** annual capacity check identifies three missing fleets.
+The trial adds **709.535 MW** across PL, SK and SI.
+Existing fleets are retained: the other discrepancies below require broader
+fleet/scope reconciliation, rather than silently replacing them all.
+
+| Country | Inherited oil MW | ENTSO-E 2025 oil MW | Added MW |
+| --- | ---: | ---: | ---: |
+| PL | 0.000 | 392.535 | 392.535 |
+| SK | 0.000 | 259.000 | 259.000 |
+| CZ | 0.000 | 0.000 | 0.000 |
+| SI | 0.000 | 58.000 | 58.000 |
+| DE | 5684.346 | 6913.830 | 0.000 |
+| BE | 130.200 | 589.520 | 0.000 |
+| FR | 1308.000 | 2978.897 | 0.000 |
+
+New capacity uses each country's existing zonal balance and unchanged physical
+GSK. This is a location proxy, not a plant-level reconstruction. Installed
+nameplate is assumed fully available, as in the inherited thermal model; annual
+capacity cells do not prove hourly availability or oil/gas fuel-switching capability.
+The source reporting year runs 31 December 23:00 UTC to the next year's same
+boundary; applying its capacity scalar to all 8,760 UTC model hours is explicit.
+
+Oil offers use fuel + carbon + variable O&M: **(oil EUR/MWh thermal + CO₂ EUR/t ×
+emissions t/MWh thermal) / electrical efficiency + VOM**. The control retains
+monthly World Bank Brent and ECB conversion. Daily cases use retained original
+2025 EIA Brent quotes and ECB daily FX, preserving the **1.7 MWh thermal/barrel**
+conversion, original emissions/VOM and **0.35** default oil efficiency. Non-trading
+dates carry the most recent quote for at most five days; 24 hours retain the
+monthly anchor before both daily series begin. These are ex-post crude proxies,
+not delivered diesel/fuel-oil prices or day-ahead-known quotes.
+
+Four predeclared full-year controls keep non-oil bids and coefficients, demand,
+weather, fixed hydro chronology and joint-grid constraints unchanged. No electricity
+prices were fitted for this trial; the anchor remains an in-sample reconstruction.
+
+| Full 2025 case | Equal-zone price MAE €/MWh | Mean zonal r | Modeled oil TWh |
+| --- | ---: | ---: | ---: |
+| Unchanged joint + weekly control | 27.487352 | 0.618003 | 0.000000 |
+| Daily oil prices only | 27.487352 | 0.618003 | 0.000000 |
+| Missing oil capacity only | 27.487356 | 0.618003 | 0.000000 |
+| Capacity + daily oil prices | 27.487356 | 0.618003 | 0.000000 |
+
+| Country | ENTSO-E oil TWh on known hours | Combined trial, same hours TWh | Known hours |
+| --- | ---: | ---: | ---: |
+| DE | 2.8175 | 0.0000 | 8760 |
+| BE | 0.5523 | 0.0000 | 8760 |
+| PL | 1.4880 | 0.0000 | 8760 |
+| SK | 0.4110 | 0.0000 | 8758 |
+| SI | 0.0005 | 0.0000 | 8758 |
+
+ENTSO-E generation above uses the independently audited country exports rounded
+to 0.1 MWh per hour; partial coverage is not annualised. Ember “Other fossil”
+is not an oil-only validation target. All country/zone results, including missing
+observations, are downloadable below. Full-year price metrics retain all 41 complete
+areas and every hour, including negative and extreme prices.
+
+**Result:** All four cases still dispatch zero oil. Daily prices alone reproduce the control; the capacity cases change aggregate price MAE by less than €0.000004/MWh. There is no material price or oil-generation improvement.
+
+Adding columns also selects different dual prices in 7 zone-hours:
+6 without complete observed-price coverage,
+1 within the evaluated areas. The largest differences are
+€64.41/MWh overall and €1.26/MWh in eligible areas.
+With zero oil output and objective differences below €0.00002,
+these differences between optimal witnesses are not evidence of oil-driven price
+improvement. Every evaluated hour remains in the annual metrics.
+
+**Interpretation:** missing oil capacity is a real source gap, but adding nameplate
+does not require oil to dispatch. Relative bids, network delivery and omitted
+cogeneration/operating commitments still determine its use. This controlled test
+does not establish that oil explains Europe's price errors. Do not lower bids or
+turn observed generation into available supply just to force agreement. Broader
+dated conventional-fleet/outage and CHP/fuel-product reconciliation remain open.
+The accepted baseline and displayed country checkpoint are unchanged.
+
+All four years have complete optimal witnesses and zero emergency. Independent
+XML/quote/FX reconstruction, modified source-capacity bounds, native network
+equations, primal/dual optimality, price metrics and country quantities pass the
+original 1e-4 MW / €0.05 gates. Preparation 164.3s; clearing
+52.1–114.5s per full year.
+Audit/export time is separate from clearing time.
+
+[Oil capacity CSV](/research/oil-supply-2025/capacity.csv) ·
+[All-zone price CSV](/research/oil-supply-2025/prices-by-zone.csv) ·
+[All-country oil generation CSV](/research/oil-supply-2025/oil-generation.csv) ·
+[Provenance and replay receipt](/research/oil-supply-2025/summary.json).
+Sources: [ENTSO-E](https://transparency.entsoe.eu/),
+[EIA Brent](https://www.eia.gov/dnav/pet/hist/RBRTED.htm),
+[ECB FX](https://data.ecb.europa.eu/data/datasets/EXR),
+[World Bank Pink Sheet](https://www.worldbank.org/en/research/commodity-markets).

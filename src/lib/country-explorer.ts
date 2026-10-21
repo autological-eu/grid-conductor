@@ -92,6 +92,21 @@ export type PlotPoint = {
 export const YEAR_START = Date.UTC(2025, 0, 1);
 export const HOUR = 3_600_000;
 
+export function technologyTotals(model: Samples, observed: Samples, scale: number) {
+  const known = observed.filter((v) => v !== null).length;
+  const annualModel = model.every((v) => v !== null)
+    ? model.reduce<number>((sum, v) => sum + v!, 0) / scale / 1e6
+    : null;
+  const observation = known
+    ? observed.reduce<number>((sum, v) => sum + (v ?? 0), 0) / scale / 1e6
+    : null;
+  const matchedModel =
+    known && observed.every((v, i) => v === null || model[i] != null)
+      ? observed.reduce<number>((sum, v, i) => sum + (v === null ? 0 : model[i]!), 0) / scale / 1e6
+      : null;
+  return { annualModel, observed: observation, matchedModel, known };
+}
+
 export async function loadManifest(signal: AbortSignal): Promise<ExplorerManifest> {
   const response = await fetch(publicAsset("research/country-explorer-2025/manifest.json"), {
     signal,

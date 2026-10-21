@@ -1,5 +1,20 @@
 # Grid Conductor — agent instructions
 
+## Active user direction — 21 October oil supply
+
+Audit liquid oil explicitly through fleet capacity, availability, fuel/FX/carbon
+bids, dispatch and source generation. Oil already exists in inherited inputs;
+do not describe it as newly invented or confuse Ember Other fossil with oil alone.
+Use config/oil-supply-2025.json for four controlled annual cases against the
+latest verified joint/weekly checkpoint. ENTSO-E A68/A33 B06 fills only the
+missing PL/SK/SI oil fleets; other discrepancies stay flagged. IRENA is renewable
+capacity, not a fossil-oil source. Keep the original grid/GSK and all non-oil
+inputs/bids/hydro frozen. Daily EIA Brent/ECB quotes retain explicit crude/heat
+content, carry and retrospective-information limitations. Independently replay
+modified capacity and native/KKT/quantity equations before publication. No automatic
+baseline/explorer promotion or review restart. Preserve original report receipts
+when appending the separately audited oil extension; keep exactly four figures.
+
 ## Active user direction — 21 October country explorer
 
 The user requests a country selector with source/model generation mix and all

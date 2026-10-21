@@ -26,6 +26,14 @@ try {
     );
     assert(await page.getByText(/full-year Europe MAE €27.49/).isVisible());
     assert.equal(await page.locator("[data-price-zone]").count(), 1);
+    await page
+      .getByRole("heading", { name: "Oil generation (ENTSO-E B06)", exact: true })
+      .waitFor();
+    await page.getByRole("button", { name: "Inspect hourly oil", exact: true }).click();
+    assert.equal(
+      await page.getByRole("combobox", { name: "Technology", exact: true }).inputValue(),
+      "oil",
+    );
     await page.getByText("Original IRENA capacity records", { exact: false }).click();
     await page.getByRole("columnheader", { name: "End 2025 MW", exact: true }).waitFor();
     await selector.selectOption("NO");

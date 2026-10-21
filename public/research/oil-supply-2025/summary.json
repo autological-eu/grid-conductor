@@ -1,0 +1,1822 @@
+{
+  "status": "audited_research_trial_not_promoted",
+  "year": 2025,
+  "design": {
+    "year": 2025,
+    "anchor": "weekly-bids-v1/inverse_joint-nordic_higher-w100",
+    "cases": [
+      "control",
+      "daily_oil",
+      "missing_capacity",
+      "capacity_and_daily_oil"
+    ],
+    "maximum_annual_solves": 4,
+    "capacity_fill_countries": [
+      "PL",
+      "SK",
+      "SI"
+    ],
+    "capacity_rule": "Only fill countries with zero inherited oil MW, using ENTSO-E A68/A33 B06 annual 2025 installed capacity. Existing oil fleets stay unchanged. Do not infer capacity from generation or IRENA renewable statistics.",
+    "allocation": "New oil supply uses the existing single-country market-area balance and unchanged physical GSK. Plant locations, outages and CHP commitments are not reconstructed. Full nameplate availability is an explicit inherited thermal assumption.",
+    "pricing": "Existing monthly World Bank Brent / ECB anchors in control; daily EIA Brent / daily ECB USD per EUR / 1.7 MWh thermal per barrel in daily cases. Fuel and EUR80/t carbon divided by efficiency, plus original oil VOM. New oil uses original technology efficiency 0.35. Daily quotes are retrospective and Brent is not delivered generating fuel.",
+    "fixed": "Keep all original non-oil bids, fitted coefficients, demand, weather availability, fixed hydro chronology, original grid/GSK and the joint anchor's Nordic AC rating factors. No price fitting or model promotion.",
+    "verification": "All 8760 hours, all 41 complete price areas, zero emergency; unchanged 1e-4 MW primal/native gate and EUR0.05 objective/duality gate. Independent annual source, capacity, fuel, physical and quantity replay. Report adverse and zero effects.",
+    "scope": "A targeted oil-capacity correction, not a complete 2025 conventional fleet/outage reconciliation. Other source discrepancies remain explicit. Oil shale, peat and waste are not liquid oil."
+  },
+  "metrics": [
+    {
+      "case": "control",
+      "label": "Unchanged joint + weekly control",
+      "mae_eur_mwh": 27.487352017016175,
+      "mean_correlation": 0.6180029563279809,
+      "oil_twh": 0.0,
+      "generation_score": 0.2532305611957197,
+      "trade_score": 0.14381129879358032,
+      "clearing_seconds": 52.07487791599942
+    },
+    {
+      "case": "daily_oil",
+      "label": "Daily oil prices only",
+      "mae_eur_mwh": 27.487352017016175,
+      "mean_correlation": 0.6180029563279809,
+      "oil_twh": 0.0,
+      "generation_score": 0.2532305611957197,
+      "trade_score": 0.14381129879358032,
+      "clearing_seconds": 57.562531759000194
+    },
+    {
+      "case": "missing_capacity",
+      "label": "Missing oil capacity only",
+      "mae_eur_mwh": 27.487355522566084,
+      "mean_correlation": 0.6180029760357441,
+      "oil_twh": 0.0,
+      "generation_score": 0.25323390114728994,
+      "trade_score": 0.14381483428903666,
+      "clearing_seconds": 114.49097319599969
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "label": "Capacity + daily oil prices",
+      "mae_eur_mwh": 27.487355522566087,
+      "mean_correlation": 0.6180029760357441,
+      "oil_twh": 0.0,
+      "generation_score": 0.25323267126862814,
+      "trade_score": 0.14381478477792478,
+      "clearing_seconds": 67.10276639899985
+    }
+  ],
+  "capacity": [
+    {
+      "country": "PL",
+      "year": 2025,
+      "inherited_oil_mw": 0,
+      "entsoe_a68_oil_mw": 392.535,
+      "added_oil_mw": 392.535,
+      "domain": "10YPL-AREA-----S",
+      "source_xml_sha256": "682c203dd656dc8b5fa5cf4fc72141ff612f5b651d7181526a30303828c82442"
+    },
+    {
+      "country": "SK",
+      "year": 2025,
+      "inherited_oil_mw": 0,
+      "entsoe_a68_oil_mw": 259.0,
+      "added_oil_mw": 259.0,
+      "domain": "10YSK-SEPS-----K",
+      "source_xml_sha256": "ac7715b7a134cb068d8ec8cb98d6f4763a0701c44cdf8198e4b8f9bfe2d2215b"
+    },
+    {
+      "country": "CZ",
+      "year": 2025,
+      "inherited_oil_mw": 0,
+      "entsoe_a68_oil_mw": 0.0,
+      "added_oil_mw": 0,
+      "domain": "10YCZ-CEPS-----N",
+      "source_xml_sha256": "473a7a6a2475e274ccb49906be642fb981505c90a55cdc80ac2c640108af23b5"
+    },
+    {
+      "country": "SI",
+      "year": 2025,
+      "inherited_oil_mw": 0,
+      "entsoe_a68_oil_mw": 58.0,
+      "added_oil_mw": 58.0,
+      "domain": "10YSI-ELES-----O",
+      "source_xml_sha256": "ba59d9264bfc4ea03dc087a940e568009d84941b36f2893a5ce1982fda42238f"
+    },
+    {
+      "country": "DE",
+      "year": 2025,
+      "inherited_oil_mw": 5684.345986,
+      "entsoe_a68_oil_mw": 6913.83,
+      "added_oil_mw": 0,
+      "domain": "10Y1001A1001A83F",
+      "source_xml_sha256": "761ecf6ad1b3ba7af3c7c6aef3f8b78b76f0c53551d8937cdfb853a04d15370e"
+    },
+    {
+      "country": "BE",
+      "year": 2025,
+      "inherited_oil_mw": 130.2,
+      "entsoe_a68_oil_mw": 589.52,
+      "added_oil_mw": 0,
+      "domain": "10YBE----------2",
+      "source_xml_sha256": "b43e1565fed0ebe64618f52ab41dfbd3e915621b4f758d1279c0fbfda1f341e6"
+    },
+    {
+      "country": "FR",
+      "year": 2025,
+      "inherited_oil_mw": 1308.0,
+      "entsoe_a68_oil_mw": 2978.8974,
+      "added_oil_mw": 0,
+      "domain": "10YFR-RTE------C",
+      "source_xml_sha256": "4c256b918e4665c3ce343696e773e57808b7ab1510faaac327707cbf47ac86dd"
+    }
+  ],
+  "generation": [
+    {
+      "case": "control",
+      "country": "AL",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "AT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "BA",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "BE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.552262,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "BG",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "CH",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "CZ",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8759,
+      "observed_twh": 0.010541199999999999,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "DE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 2.8175392,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "DK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8754,
+      "observed_twh": 0.16126490000000002,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "EE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "ES",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8723,
+      "observed_twh": 0.24207,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "FI",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0059719,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "FR",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8748,
+      "observed_twh": 0.9725624,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "GB",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "GR",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "HR",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0034070999999999997,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "HU",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 6592,
+      "observed_twh": 0.004818299999999999,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "IE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "IT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "LT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "LU",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "LV",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "ME",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "MK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8616,
+      "observed_twh": 0.0,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "NL",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "NO",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "PL",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 1.4879702000000001,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "PT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "RO",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "RS",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "SE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "control",
+      "country": "SI",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8758,
+      "observed_twh": 0.0005255,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "SK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8758,
+      "observed_twh": 0.4109865,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "control",
+      "country": "XK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "AL",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "AT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "BA",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "BE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.552262,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "BG",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "CH",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "CZ",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8759,
+      "observed_twh": 0.010541199999999999,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "DE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 2.8175392,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "DK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8754,
+      "observed_twh": 0.16126490000000002,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "EE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "ES",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8723,
+      "observed_twh": 0.24207,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "FI",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0059719,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "FR",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8748,
+      "observed_twh": 0.9725624,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "GB",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "GR",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "HR",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0034070999999999997,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "HU",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 6592,
+      "observed_twh": 0.004818299999999999,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "IE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "IT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "LT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "LU",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "LV",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "ME",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "MK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8616,
+      "observed_twh": 0.0,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "NL",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "NO",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "PL",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 1.4879702000000001,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "PT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "RO",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "RS",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "SE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "daily_oil",
+      "country": "SI",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8758,
+      "observed_twh": 0.0005255,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "SK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8758,
+      "observed_twh": 0.4109865,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "daily_oil",
+      "country": "XK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "AL",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "AT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "BA",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "BE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.552262,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "BG",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "CH",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "CZ",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8759,
+      "observed_twh": 0.010541199999999999,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "DE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 2.8175392,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "DK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8754,
+      "observed_twh": 0.16126490000000002,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "EE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "ES",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8723,
+      "observed_twh": 0.24207,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "FI",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0059719,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "FR",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8748,
+      "observed_twh": 0.9725624,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "GB",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "GR",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "HR",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0034070999999999997,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "HU",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 6592,
+      "observed_twh": 0.004818299999999999,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "IE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "IT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "LT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "LU",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "LV",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "ME",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "MK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8616,
+      "observed_twh": 0.0,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "NL",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "NO",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "PL",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 1.4879702000000001,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "PT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "RO",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "RS",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "SE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "missing_capacity",
+      "country": "SI",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8758,
+      "observed_twh": 0.0005255,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "SK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8758,
+      "observed_twh": 0.4109865,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "missing_capacity",
+      "country": "XK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "AL",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "AT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "BA",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "BE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.552262,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "BG",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "CH",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "CZ",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8759,
+      "observed_twh": 0.010541199999999999,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "DE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 2.8175392,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "DK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8754,
+      "observed_twh": 0.16126490000000002,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "EE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "ES",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8723,
+      "observed_twh": 0.24207,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "FI",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0059719,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "FR",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8748,
+      "observed_twh": 0.9725624,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "GB",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "GR",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "HR",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 0.0034070999999999997,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "HU",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 6592,
+      "observed_twh": 0.004818299999999999,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "IE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "IT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "LT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "LU",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "LV",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "ME",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "MK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8616,
+      "observed_twh": 0.0,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "NL",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "NO",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "PL",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8760,
+      "observed_twh": 1.4879702000000001,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "PT",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "RO",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "RS",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "SE",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "SI",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8758,
+      "observed_twh": 0.0005255,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "SK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 8758,
+      "observed_twh": 0.4109865,
+      "model_matched_hours_twh": 0.0
+    },
+    {
+      "case": "capacity_and_daily_oil",
+      "country": "XK",
+      "model_annual_twh": 0.0,
+      "observed_known_hours": 0,
+      "observed_twh": null,
+      "model_matched_hours_twh": null
+    }
+  ],
+  "sources": {
+    "config/oil-supply-2025.json": "905efac65c47d9d639f13005393e0c5fe6ee4a4c8604bd2bacfe8624f72b2eb3",
+    "data/oil-market-2025/capacity.json": "2f4f763fa58fcfb99471b5aeffddd2edf0de44ef9a9e2fac26120694976f0d63",
+    "data/fuel-prices/daily-inputs-v1/summary.json": "6ccc0344c2ecfc6832c0e4da4ee97c213637aeb3fdd6456f0a199be14f8c79f8",
+    "data/fuel-prices/daily-inputs-v1/inputs.npz": "d40c82d53aded93c40adb6243a4000b871c35d6fa9d0dee7d177ef3f66d3df85",
+    "data/bidding-zone-network-2025/weekly-bids-v1/summary.json": "5dd39dea3e72dc217d539e3020f4142d1e468ae5ed2b9ba4092ada31b1d209f7",
+    "data/bidding-zone-network-2025/weekly-bids-v1/verification-v1/audit.json": "e0a45f9ba5d453ade9f63516c86aac8f3d1b9c60159de08b47a9c9f9bd3741a6",
+    "data/oil-market-2025/entsoe-capacity/PL/dc006fd8e03c41140ab61068.xml": "682c203dd656dc8b5fa5cf4fc72141ff612f5b651d7181526a30303828c82442",
+    "data/oil-market-2025/entsoe-capacity/SK/5a2009308c8d75a992bce722.xml": "ac7715b7a134cb068d8ec8cb98d6f4763a0701c44cdf8198e4b8f9bfe2d2215b",
+    "data/oil-market-2025/entsoe-capacity/CZ/41a29d8b835d77c96e5337a1.xml": "473a7a6a2475e274ccb49906be642fb981505c90a55cdc80ac2c640108af23b5",
+    "data/oil-market-2025/entsoe-capacity/SI/2f917f61938e2f01c42fb567.xml": "ba59d9264bfc4ea03dc087a940e568009d84941b36f2893a5ce1982fda42238f",
+    "data/oil-market-2025/entsoe-capacity/DE-LU/3118fb1f2f6df09612df82e7.xml": "761ecf6ad1b3ba7af3c7c6aef3f8b78b76f0c53551d8937cdfb853a04d15370e",
+    "data/oil-market-2025/entsoe-capacity/BE/606ef708004ba92735c2a431.xml": "b43e1565fed0ebe64618f52ab41dfbd3e915621b4f758d1279c0fbfda1f341e6",
+    "data/oil-market-2025/entsoe-capacity/FR/650c2fbca4c2402d97ace088.xml": "4c256b918e4665c3ce343696e773e57808b7ab1510faaac327707cbf47ac86dd",
+    "public/research/country-explorer-2025/AL.json.gz": "66f7347a7d4e0cce45e05fbe97aa999d942f39332644298cf98708e09ef3adc0",
+    "public/research/country-explorer-2025/AT.json.gz": "3b3b017344c89513e7d1b02cb71e79296d8c76876ea7996d5be82ed941df946e",
+    "public/research/country-explorer-2025/BE.json.gz": "95aab4624c5eb7c57957169861eaed3bc7bfe2fc986a469dc895fe15475a813e",
+    "public/research/country-explorer-2025/BA.json.gz": "5ce6573c0e65b1bcf38f6b2be3fa3efb6a8af5fd0d77bde2e361368ccbfc4d6d",
+    "public/research/country-explorer-2025/BG.json.gz": "a7c91f46633abec2d821a6d0833e3368d74a27fa0a4f4b88e3ed30206c7ccb21",
+    "public/research/country-explorer-2025/HR.json.gz": "314e535b22f1d1f683ac901f93fbd24502714e4728b221f93624bbc252990952",
+    "public/research/country-explorer-2025/CZ.json.gz": "f73eb7e7af5cf6ba14807d844a65903eb0121b5a3017ca56a0ef53ab520cc31e",
+    "public/research/country-explorer-2025/DK.json.gz": "9bced2b88377182fca894fc12f461fed5ac0ce4acddfa84aef55090133819fe1",
+    "public/research/country-explorer-2025/EE.json.gz": "2b02175fd5abc78e0a57e3b8e21277aaa8ad86c4b144c39a2b50af8fbf76993e",
+    "public/research/country-explorer-2025/FI.json.gz": "a8b58905ee7a23d99024d50bcc61e730d81e99262e66d2c974a0044333c69a26",
+    "public/research/country-explorer-2025/FR.json.gz": "e35f1500cd26bb5a998ea9d789408234b9017ddd9717d4068cb488e5422f5df1",
+    "public/research/country-explorer-2025/DE.json.gz": "92b0277dd72abb1195d34d5d6b4da85284232d4e4dfc0dfee9260db22d4a3d44",
+    "public/research/country-explorer-2025/GR.json.gz": "157a7321ca5b32fdcb1f785c77753a26143177917a7215594577746d90e7b675",
+    "public/research/country-explorer-2025/HU.json.gz": "8d81fd1f15c650b31f950f70b13078a2a3a0bacce28b917a18207b53b3cf1c3f",
+    "public/research/country-explorer-2025/IE.json.gz": "01f4209f1c080ad477d647690aaa8226b994527b510d87a6d1eaebf691de71f3",
+    "public/research/country-explorer-2025/IT.json.gz": "73260035d99964f5db349c4ab934bbd0b173721fba49fabdc522289941d25128",
+    "public/research/country-explorer-2025/XK.json.gz": "1654c0ad369a3087efe1e6c648802567cda87952103a27070235a6a70672cda4",
+    "public/research/country-explorer-2025/LV.json.gz": "c65630507986c237a991b100daec4b8b6e110ed9ba1084fa526e4d499fd31905",
+    "public/research/country-explorer-2025/LT.json.gz": "1e07a7334f0558d40e7463351b1cc16d07c598fb12086608e417886b725733c5",
+    "public/research/country-explorer-2025/LU.json.gz": "e89715463a3a9ff68fd66eb3977e2487714b2d710ca692942d34ac40d5a28963",
+    "public/research/country-explorer-2025/ME.json.gz": "d0b565b9e51ae4bfca1856633a05f2c296c7fbf7e34bf2b72b4a2ae2f0015767",
+    "public/research/country-explorer-2025/NL.json.gz": "1ab12117b39a019c923b82f1a9e8faddc0524a1d9efd3f40d9294605ee1037bb",
+    "public/research/country-explorer-2025/MK.json.gz": "1a2718ae14262d6a37771abc130f82287552359024b9fbbee398da4d42717ec0",
+    "public/research/country-explorer-2025/NO.json.gz": "dbf431ba660ca04032e3fa629de27c6d8dadc16170ddde2971c58325c9ccc77e",
+    "public/research/country-explorer-2025/PL.json.gz": "2c782ec438e61dc0c221b8667df9ec277b58c4000dd1f47fdbdfdd2cb145af10",
+    "public/research/country-explorer-2025/PT.json.gz": "398956e853ea12aafa8661bffa6bef6844e1cda5eb60246a2ad5eef09a3ae7ae",
+    "public/research/country-explorer-2025/RO.json.gz": "67a58e1dfa1a3c48b09e4910348b596aa15abba5a9e9a109d322409575140dfa",
+    "public/research/country-explorer-2025/RS.json.gz": "a17ff0f2996bcfab0aff81730cb6e1da2a1ffd30df78e4eebc7b93c3bd02791e",
+    "public/research/country-explorer-2025/SK.json.gz": "cd8f63f5030cdb30e2062c03bc710b4d8e4625dce28daa38776b5402c472ab9f",
+    "public/research/country-explorer-2025/SI.json.gz": "f8ac6eda586358273ab74daa246879fbc4ae364daa362f9f7383efdcf8d333ba",
+    "public/research/country-explorer-2025/ES.json.gz": "3360cc5f2b8bd9ca8dd9c716469674a971cf6581adf92823d478f214d41aa2f7",
+    "public/research/country-explorer-2025/SE.json.gz": "da2a938d80d8aef2c4d000c1b45ced2b929cc9b72afd50c348b1300e35c78d64",
+    "public/research/country-explorer-2025/CH.json.gz": "2e13c3c4702200e7d196ffd45da2d04e7a74ad656ffd58540dd901c0ffb4c4c8",
+    "public/research/country-explorer-2025/GB.json.gz": "ff51083138ba87361182fd0a69a3763ad93950cbbffcc9801090ca0a6b9d9923"
+  },
+  "source_summary_sha256": "9d605fdc7c4fe92d82261af3be471e67612ed271f4736db8a18feab9acbc034f",
+  "audit": {
+    "status": "passed",
+    "summary_sha256": "9d605fdc7c4fe92d82261af3be471e67612ed271f4736db8a18feab9acbc034f",
+    "auditor_sha256": "dd7bb12a6892715128755a83766e59767706c702781cf13ada5582c134f367a6",
+    "certificates": [
+      {
+        "case": "control",
+        "hours": 8760,
+        "native_residual_mw": 1.0356570783187635e-06,
+        "offer_bound_mw": 1.6285639503621496e-11,
+        "objective_error_eur": 2.60770320892334e-08,
+        "emergency_mwh": 0.0,
+        "stationarity_maximum_eur_mwh": 0.0,
+        "free_injection_reduced_cost_maximum": 6.3333915889529635e-09,
+        "complementarity_maximum_eur": 0.00010561597307692688,
+        "duality_gap_maximum_eur": 3.1715258955955505e-05,
+        "price_decomposition_maximum_eur_mwh": 6.333380042633507e-09
+      },
+      {
+        "case": "daily_oil",
+        "hours": 8760,
+        "native_residual_mw": 1.0356570783187635e-06,
+        "offer_bound_mw": 1.6285639503621496e-11,
+        "objective_error_eur": 2.60770320892334e-08,
+        "emergency_mwh": 0.0,
+        "stationarity_maximum_eur_mwh": 0.0,
+        "free_injection_reduced_cost_maximum": 6.3333915889529635e-09,
+        "complementarity_maximum_eur": 0.00010561597307692688,
+        "duality_gap_maximum_eur": 3.1715258955955505e-05,
+        "price_decomposition_maximum_eur_mwh": 6.333380042633507e-09
+      },
+      {
+        "case": "missing_capacity",
+        "hours": 8760,
+        "native_residual_mw": 4.83297753817169e-07,
+        "offer_bound_mw": 1.0162991830258123e-11,
+        "objective_error_eur": 2.9802322387695312e-08,
+        "emergency_mwh": 0.0,
+        "stationarity_maximum_eur_mwh": 0.0,
+        "free_injection_reduced_cost_maximum": 2.3879920263425447e-09,
+        "complementarity_maximum_eur": 1.798652592945106e-05,
+        "duality_gap_maximum_eur": 1.7126090824604034e-05,
+        "price_decomposition_maximum_eur_mwh": 2.3879920263425447e-09
+      },
+      {
+        "case": "capacity_and_daily_oil",
+        "hours": 8760,
+        "native_residual_mw": 4.83297753817169e-07,
+        "offer_bound_mw": 1.0162991830258123e-11,
+        "objective_error_eur": 2.9802322387695312e-08,
+        "emergency_mwh": 0.0,
+        "stationarity_maximum_eur_mwh": 0.0,
+        "free_injection_reduced_cost_maximum": 2.3879920263425447e-09,
+        "complementarity_maximum_eur": 1.798652592945106e-05,
+        "duality_gap_maximum_eur": 1.7126090824604034e-05,
+        "price_decomposition_maximum_eur_mwh": 2.3879920263425447e-09
+      }
+    ],
+    "daily_oil_fallback_hours": 24,
+    "capacity_fill_mw": {
+      "PL": 392.535,
+      "SK": 259.0,
+      "SI": 58.0
+    },
+    "existing_oil_capacity_mw": {
+      "AT": 170.0,
+      "BE": 130.2,
+      "DE": 5684.345986,
+      "DK": 126.0,
+      "EE": 251.1,
+      "ES": 634.0,
+      "FI": 1100.2,
+      "FR": 1308.0,
+      "GB": 455.7,
+      "GR": 1262.0,
+      "HR": 415.0,
+      "HU": 451.0,
+      "IE": 480.0,
+      "IT": 1111.0,
+      "MK": 198.0,
+      "PT": 91.0,
+      "RO": 100.0,
+      "SE": 3109.0
+    },
+    "bid_ranges_eur_mwh": {
+      "control": {
+        "AT": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "BE": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "DE": [
+          152.44548464432214,
+          195.34959972477444
+        ],
+        "DK": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "EE": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "ES": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "FI": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "FR": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "GB": [
+          156.78222057359693,
+          195.34959972477444
+        ],
+        "IE": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "GR": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "HR": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "HU": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "IT": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "MK": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "PT": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "RO": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "SE": [
+          156.78222057359693,
+          195.3495997247744
+        ]
+      },
+      "daily_oil": {
+        "AT": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "BE": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "DE": [
+          148.10624500082534,
+          203.05702920625401
+        ],
+        "DK": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "EE": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "ES": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "FI": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "FR": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "GB": [
+          152.31268911216665,
+          203.05702920625401
+        ],
+        "IE": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "GR": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "HR": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "HU": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "IT": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "MK": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "PT": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "RO": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "SE": [
+          152.31268911216665,
+          203.057029206254
+        ]
+      },
+      "missing_capacity": {
+        "AT": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "BE": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "DE": [
+          152.44548464432214,
+          195.34959972477444
+        ],
+        "DK": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "EE": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "ES": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "FI": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "FR": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "GB": [
+          156.78222057359693,
+          195.34959972477444
+        ],
+        "IE": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "GR": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "HR": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "HU": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "IT": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "MK": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "PT": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "RO": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "SE": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "PL": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "SK": [
+          156.78222057359693,
+          195.3495997247744
+        ],
+        "SI": [
+          156.78222057359693,
+          195.3495997247744
+        ]
+      },
+      "capacity_and_daily_oil": {
+        "AT": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "BE": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "DE": [
+          148.10624500082534,
+          203.05702920625401
+        ],
+        "DK": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "EE": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "ES": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "FI": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "FR": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "GB": [
+          152.31268911216665,
+          203.05702920625401
+        ],
+        "IE": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "GR": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "HR": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "HU": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "IT": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "MK": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "PT": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "RO": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "SE": [
+          152.31268911216665,
+          203.057029206254
+        ],
+        "PL": [
+          152.31268911216662,
+          203.057029206254
+        ],
+        "SK": [
+          152.31268911216662,
+          203.057029206254
+        ],
+        "SI": [
+          152.31268911216662,
+          203.057029206254
+        ]
+      }
+    },
+    "seconds": 320.26268328199967
+  },
+  "price_witness_comparison": {
+    "summary_sha256": "9d605fdc7c4fe92d82261af3be471e67612ed271f4736db8a18feab9acbc034f",
+    "producer_sha256": "d5358ef5f1d4ea1b3da47ac3665b352c604f205a7973540e61fcd23cc3dda869",
+    "changes": {
+      "control": {
+        "maximum_all_area_change": 0.0,
+        "maximum_eligible_change": 0.0,
+        "maximum_objective_change_eur": 0.0,
+        "changed_price_cells": []
+      },
+      "daily_oil": {
+        "maximum_all_area_change": 2.2737367544323206e-12,
+        "maximum_eligible_change": 2.2737367544323206e-12,
+        "maximum_objective_change_eur": 7.450580596923828e-09,
+        "changed_price_cells": []
+      },
+      "missing_capacity": {
+        "maximum_all_area_change": 64.40744817826292,
+        "maximum_eligible_change": 1.2590531329239667,
+        "maximum_objective_change_eur": 1.8174760043621063e-05,
+        "changed_price_cells": [
+          {
+            "utc": "2025-03-10T14",
+            "zone": "FR-COR",
+            "eligible_observed_price": false,
+            "control": 19.97991452991445,
+            "trial": 74.2978339080453
+          },
+          {
+            "utc": "2025-05-11T16",
+            "zone": "IT-SARD",
+            "eligible_observed_price": true,
+            "control": 108.58717885290372,
+            "trial": 107.32812571997975
+          },
+          {
+            "utc": "2025-05-12T14",
+            "zone": "FR-COR",
+            "eligible_observed_price": false,
+            "control": 19.979914529914605,
+            "trial": 58.86334601761694
+          },
+          {
+            "utc": "2025-06-12T13",
+            "zone": "FR-COR",
+            "eligible_observed_price": false,
+            "control": 61.66256834231712,
+            "trial": 2.1117323196457985e-12
+          },
+          {
+            "utc": "2025-06-12T14",
+            "zone": "FR-COR",
+            "eligible_observed_price": false,
+            "control": 61.664215524465774,
+            "trial": 3.3220236107555545e-12
+          },
+          {
+            "utc": "2025-09-15T09",
+            "zone": "FR-COR",
+            "eligible_observed_price": false,
+            "control": 45.94358189513809,
+            "trial": 47.350503766754215
+          },
+          {
+            "utc": "2025-10-22T10",
+            "zone": "FR-COR",
+            "eligible_observed_price": false,
+            "control": 2.6524997662051704e-13,
+            "trial": 64.4074481782632
+          }
+        ]
+      },
+      "capacity_and_daily_oil": {
+        "maximum_all_area_change": 64.40744817826292,
+        "maximum_eligible_change": 1.2590531329239667,
+        "maximum_objective_change_eur": 1.8174760043621063e-05,
+        "changed_price_cells": [
+          {
+            "utc": "2025-03-10T14",
+            "zone": "FR-COR",
+            "eligible_observed_price": false,
+            "control": 19.97991452991445,
+            "trial": 74.2978339080453
+          },
+          {
+            "utc": "2025-05-11T16",
+            "zone": "IT-SARD",
+            "eligible_observed_price": true,
+            "control": 108.58717885290372,
+            "trial": 107.32812571997975
+          },
+          {
+            "utc": "2025-05-12T14",
+            "zone": "FR-COR",
+            "eligible_observed_price": false,
+            "control": 19.979914529914605,
+            "trial": 58.86334601761694
+          },
+          {
+            "utc": "2025-06-12T13",
+            "zone": "FR-COR",
+            "eligible_observed_price": false,
+            "control": 61.66256834231712,
+            "trial": 2.1117323196457985e-12
+          },
+          {
+            "utc": "2025-06-12T14",
+            "zone": "FR-COR",
+            "eligible_observed_price": false,
+            "control": 61.664215524465774,
+            "trial": 3.3220236107555545e-12
+          },
+          {
+            "utc": "2025-09-15T09",
+            "zone": "FR-COR",
+            "eligible_observed_price": false,
+            "control": 45.94358189513809,
+            "trial": 47.350503766754215
+          },
+          {
+            "utc": "2025-10-22T10",
+            "zone": "FR-COR",
+            "eligible_observed_price": false,
+            "control": 2.6524997662051704e-13,
+            "trial": 64.4074481782632
+          }
+        ]
+      }
+    }
+  },
+  "producer_sha256": "0809bb48504e7fc0f45499ecd1510054eb1d11a8931732e5bfb5c04f1155ccaa",
+  "helper_sha256": "1f260e356cd8a72ec3cccf98a51133523adb702e3078840bc88d3af3a24d0421",
+  "renderer_sha256": "d7e01cbf8cd810731da993100a923b08acc49b10ad3175821121b6212af1315e",
+  "base_article_sha256": "834e250631ad9316f89b43f22e5d474b5f522bcb9f8c02bde8c1e6581b2a2cfc",
+  "article_sha256": "f7a9f2e9b1212ca2d8d68bec67c252eb3ffafba6e9b78b8e2d74c4f525733a3b",
+  "section_sha256": "4df0df920d534d9dd90d0af5679450ff34bf44781b829bd17846911b13e5a753",
+  "assets": {
+    "capacity.csv": "20e74e48f3c70e73ca9ad321242a103edf94a3d08bf10de5abb614ed5eab5260",
+    "oil-generation.csv": "752d0e04d7f851709779bfe2eb567300caae0f420015ce51515788e870e32bfa",
+    "prices-by-zone.csv": "cbe5f2b09e212241a63dbc39aa5a05d6d9fe8431a2725a51723244f14f2e9970"
+  }
+}

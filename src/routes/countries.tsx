@@ -25,6 +25,7 @@ import {
   recordCsv,
   saveCsv,
   sourceGenerationCsv,
+  technologyTotals,
   type CountryData,
   type ExplorerManifest,
   type PlotPoint,
@@ -317,6 +318,13 @@ function CountryView({
   const [monthlyFuel, setMonthlyFuel] = useState("Wind");
   const area = data.generation.find((a) => a.id === areaId) ?? data.generation[0]!;
   const ti = manifest.technologies.findIndex((t) => t.id === technology);
+  const national = data.generation.find((a) => a.id === "country:" + data.country)!;
+  const oilIndex = manifest.technologies.findIndex((t) => t.id === "oil");
+  const oil = technologyTotals(
+    data.series[national.model[oilIndex]!]!,
+    data.series[national.observed[oilIndex]!]!,
+    manifest.generation_scale,
+  );
   const hourly = useMemo(
     () =>
       range
@@ -358,7 +366,8 @@ function CountryView({
         <h3 className="mt-6 font-semibold">Annual generation by fuel</h3>
         <p className="mt-1 text-xs text-muted-foreground">
           TWh in 2025 · observed annual totals require all 12 Ember months. Missing is never zero.
-          Hydro and waste classifications remain source/model proxies.
+          Oil is included in the model and grouped with waste under “Other fossil” here. See the
+          separate oil comparison below; Ember does not identify liquid oil on its own.
         </p>
         <div
           className="mt-4 h-96 min-w-0"
@@ -417,6 +426,41 @@ function CountryView({
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="mt-6 rounded-lg border border-border p-4">
+          <h3 className="font-semibold">Oil generation (ENTSO-E B06)</h3>
+          <div className="mt-3 grid gap-4 sm:grid-cols-3">
+            <p className="text-sm">
+              Full-year model
+              <br />
+              <strong>{number(oil.annualModel, 3)} TWh</strong>
+            </p>
+            <p className="text-sm">
+              Observed on covered hours
+              <br />
+              <strong>{number(oil.observed, 3)} TWh</strong>
+            </p>
+            <p className="text-sm">
+              Model on the same hours
+              <br />
+              <strong>{number(oil.matchedModel, 3)} TWh</strong>
+            </p>
+          </div>
+          <p className="mt-3 text-xs leading-5 text-muted-foreground">
+            {number(oil.known, 0)} known hours; partial observations are not annualised. Oil shale,
+            peat and waste are separate technologies. The displayed checkpoint uses inherited oil
+            capacity and monthly Brent-based bids. A source-backed capacity and daily-oil trial is
+            documented in the model report; it has not replaced this checkpoint.
+          </p>
+          <button
+            className={button + " mt-3"}
+            onClick={() => {
+              setArea("country:" + data.country);
+              setTechnology("oil");
+            }}
+          >
+            Inspect hourly oil
+          </button>
         </div>
         <div className="mt-7 flex flex-wrap items-end gap-4">
           <label className="text-sm font-medium">

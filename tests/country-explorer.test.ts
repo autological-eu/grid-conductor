@@ -7,10 +7,31 @@ import {
   plotSeries,
   priceCsv,
   recordCsv,
+  technologyTotals,
   type CountryData,
 } from "../src/lib/country-explorer";
 
 describe("country explorer coverage and exports", () => {
+  test("oil quantities compare the same observed hours without zero-filling missing oil", () => {
+    expect(technologyTotals([10, 20, 30], [5, null, 15], 10)).toEqual({
+      annualModel: 0.000006,
+      observed: 0.000002,
+      matchedModel: 0.000004,
+      known: 2,
+    });
+    expect(technologyTotals([0, 0], [null, null], 10)).toEqual({
+      annualModel: 0,
+      observed: null,
+      matchedModel: null,
+      known: 0,
+    });
+    expect(technologyTotals([0, 0], [0, 0], 10)).toEqual({
+      annualModel: 0,
+      observed: 0,
+      matchedModel: 0,
+      known: 2,
+    });
+  });
   test("integrity checks work whether the host serves gzip or transparently decoded JSON", async () => {
     const value = { country: "NO", source: null, price: -12.25 };
     const json = new TextEncoder().encode(JSON.stringify(value));

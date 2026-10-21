@@ -25,7 +25,64 @@ lower MAE and transparent bias/seasonal diagnostics. Native PyPSA parity is an
 optional numerical diagnostic, not the development target. Automatic hourly
 reviews remain disabled.
 
-## Current work — country data explorer, 21 October 2026
+## Current work — oil supply, 21 October 2026
+
+User requested explicit oil capacity and fuel-priced supply bids. Oil is already
+present in the inherited fleet and monthly Brent/ECB bid rule; the annual Ember
+chart hides it inside Other fossil. Source reconstruction confirms 17.077GW oil
+capacity and zero oil dispatch in the latest joint/weekly witness. Fresh ENTSO-E
+A68/A33 B06 cells identify absent PL392.535MW, SK259MW and SI58MW fleets.
+DE/BE/FR capacity discrepancies are inventoried, not silently overwritten.
+IRENA renewable capacity is not an oil-capacity source.
+
+config/oil-supply-2025.json predeclares four annual controls: unchanged latest
+anchor, daily oil quotes, missing capacity, and both changes. Fresh producers:
+collect_oil_capacity_2025.py, oil_supply_2025.py, run_oil_supply_2025.py; independent
+audit_oil_supply_2025.py. Raw XML and witnesses stay ignored. No other bids,
+coefficients, hydro chronology, demand, weather, grid/GSK or baseline changes.
+An initial preflight failed the exact bid hash before any annual solve because
+slicing calendar features changed NumPy accumulation order. Retry uses the
+original advanced indexing and unchanged tolerances in oil-supply-v2/; no
+retired search or duplicate annual job. Completed oil-supply-v2/ has four complete
+8760-hour optimal witnesses, zero emergency. Control/daily-only price MAE is
+27.487352017; capacity-only/combined27.487355523EUR/MWh. All oil dispatch remains
+zero; no material price or oil-generation improvement. Generation/trade scores
+remain downloadable; no claim that this solves the broader supply-stack error.
+
+Independent verification-v1/audit.json passes raw capacity XML, original daily
+Brent/ECB rows and24-hour monthly fallback, exact non-oil anchor reconstruction,
+modified capacity/source bounds, native equations, KKT and monthly quantities.
+Maximum native residual1.036e-6MW; duality gapEUR0.00003172. Preparation164.30s,
+clearing/witness saving52.07/57.56/114.49/67.10s; total478.27s, peak2599MiB.
+Independent replay320.26s; no further market solves were started for publication.
+
+A separate sealed price-witness comparison retains all7 changed zone-hours:
+6 FR-COR without complete A44 coverage,1 IT-SARD with observed prices. Maximum
+price changes64.41/1.26EUR/MWh overall/eligible, objective change<0.00002EUR;
+zero oil dispatch and equivalent optimal witnesses do not establish an oil-driven
+improvement. All eligible hours, including the Sardinian difference, stay scored.
+
+The explorer now exposes oil B06 separately with annual/model-matched/observed
+covered-hour quantities; Ember Other fossil remains correctly aggregated.
+The retained report adds one compact oil extension and3 small CSVs, keeping its
+original bytes/receipts and four figures intact. check_oil_supply_2025.py verifies
+the extension hash, source/audit binding, all CSV/price aggregates and original
+country-source observations; no old receipt is silently rewritten. Public
+allowlist131files/20.24MiB; only~70KiB of new research assets. No raw XML, fuel
+cache or annual witness is tracked. Accepted baseline and explorer checkpoint
+remain unchanged. Reviews remain disabled.
+
+Next: reconcile remaining dated conventional-fleet discrepancies and oil
+CHP/fuel-product/operating constraints before changing bids to force generation.
+Do not use observed output as available supply. Final local checks: two oil
+fixtures,20 Bun tests/2424assertions, types, lint (six unchanged warnings), build,
+public/source hashes and staged-byte checks pass. Country explorer works at
+1440/390/320px including the oil selector; mobile oil card visually checked.
+Workbench interactions pass1440/390/320/667px and both reports' maths passes
+1440/390/320px. Publication needs CI/Pages and public route/data verification;
+local numerical replay alone is not deployment.
+
+## Completed checkpoint — country data explorer, 21 October 2026
 
 The user requests country-level source/model generation mix and hourly prices for
 every country zone, and explicitly selected the latest verified €27.49/MWh joint
