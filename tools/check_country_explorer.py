@@ -9,7 +9,7 @@ def check():
     public=ROOT/'public/research/country-explorer-2025';manifest=json.loads((public/'manifest.json').read_text());audit=json.loads((public/'verification.json').read_text())
     sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
     assert audit['status']=='all_country_hourly_source_dispatch_prices_and_original_provider_rows_replayed'
-    assert audit['producer_sha256']==sha(ROOT/'tools/export_country_explorer_2025.py') and audit['auditor_sha256']==sha(ROOT/'tools/audit_country_explorer_2025.py')
+    assert audit['producer_sha256']==sha(ROOT/'tools'/audit.get('producer_file','export_country_explorer_2025.py')) and audit['auditor_sha256']==sha(ROOT/'tools'/audit.get('auditor_file','audit_country_explorer_2025.py'))
     transport=audit['transport'];assert transport['producer_sha256']==sha(ROOT/'tools/prepare_country_explorer_transport.py')
     assert transport['manifest_sha256']==sha(public/'manifest.json') and transport['original_manifest_sha256']==audit['manifest_sha256']
     original_audit={k:v for k,v in audit.items() if k!='transport'}

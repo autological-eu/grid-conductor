@@ -225,3 +225,16 @@ fleet/weather and demand splits remain declared location proxies. The report
 compares country and zonal pools on the same rebuilt grid and retains failed
 control hours. This changes the research model, not the live browser solver;
 commercial-domain, empirical and paired-investment acceptance remains open.
+
+### Current research comparison prices
+
+The current European model report and country explorer use original ENTSO-E A44
+main day-ahead observations, with all four quarter-hour samples averaged per UTC
+hour. Germany and Austria explicitly select SDAC auction sequence 1; intraday A07
+is excluded. Other cached markets use the sole unclassified A01 day-ahead series.
+A fresh full-year source replay corrects the former research target selection;
+the archived map prices already agree wherever covered and retain their existing
+coverage. The displayed oil/CHP checkpoint is re-evaluated, not refitted: its earlier
+non-oil bid calibration used the previous targets. See the
+[current report](/docs/european-physical-synthetic-clearing-2025/) for source checks
+and limitations; accepted research baseline and workbench scenario engine are separate.

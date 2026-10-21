@@ -1,6 +1,7 @@
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { gunzipSync } from "node:zlib";
 
 const base = process.env["SMOKE_URL"] ?? "http://127.0.0.1:4173/grid-conductor/";
 const browser = await chromium.launch({ args: ["--no-sandbox"] });
@@ -24,7 +25,15 @@ try {
       ["DE"],
       "Only the selected country's hourly data is downloaded",
     );
-    assert(await page.getByText(/full-year Europe MAE €27.49/).isVisible());
+    const manifest = await (
+      await page.request.get(base + "research/country-explorer-2025/manifest.json")
+    ).json();
+    assert.equal(manifest.model.id, "oil-chp25-sdac-2025");
+    assert(
+      await page
+        .getByText(new RegExp("Europe MAE €" + manifest.model.mae_eur_mwh.toFixed(2)))
+        .isVisible(),
+    );
     assert.equal(await page.locator("[data-price-zone]").count(), 1);
     await page
       .getByRole("heading", { name: "Oil generation (ENTSO-E B06)", exact: true })
@@ -88,6 +97,39 @@ try {
       assert(
         await page.getByText("Shared Germany–Luxembourg price area", { exact: true }).isVisible(),
       );
+    }
+    await page.goto(
+      base + "countries?country=DK&start=2025-01-01&end=2025-01-20&resolution=hourly",
+    );
+    await page.getByRole("heading", { name: "1. Denmark: generation mix", exact: true }).waitFor();
+    assert.equal(await page.locator("[data-price-zone]").count(), 2);
+    assert.equal(
+      await page.getByRole("combobox", { name: "Chart detail", exact: true }).inputValue(),
+      "hourly",
+    );
+    assert.equal(await page.getByLabel("From (UTC)", { exact: true }).inputValue(), "2025-01-01");
+    assert.equal(
+      await page.getByLabel("Through (UTC)", { exact: true }).inputValue(),
+      "2025-01-20",
+    );
+    const dkPayload = JSON.parse(
+      gunzipSync(await readFile("public/research/country-explorer-2025/DK.json.gz")).toString(),
+    );
+    const dkDownload = page.waitForEvent("download");
+    await page
+      .getByRole("button", { name: "Download full-year hourly prices", exact: true })
+      .click();
+    const dkRows = (await readFile((await (await dkDownload).path())!, "utf8"))
+      .trimEnd()
+      .split("\n");
+    assert.equal(dkRows.length, 8761);
+    for (const zone of ["DK1", "DK2"]) {
+      const col = dkRows[0]!.split(",").indexOf(zone + "_observed_eur_mwh");
+      assert(col >= 0);
+      const series =
+        dkPayload.series[dkPayload.prices.find((p: { zone: string }) => p.zone === zone).observed];
+      for (let h = 0; h < 8760; h++)
+        assert.equal(Number(dkRows[h + 1]!.split(",")[col]), series[h] / 1000);
     }
     await page.reload();
     await page.locator("[data-price-zone]").first().waitFor();

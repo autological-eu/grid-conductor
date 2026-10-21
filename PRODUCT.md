@@ -19,7 +19,10 @@ Automatic hourly reviews remain disabled.
 
 The recorded performance above uses retained price targets. The verified
 22 October German auction-selection finding requires re-evaluation before those
-numbers can be represented as SDAC benchmark accuracy. Validate auction identity
+historical numbers can be represented as SDAC benchmark accuracy. The current
+report/explorer use corrected target snapshots and explicitly retain the earlier
+non-oil calibration limitation; an accepted-baseline refit is separate work.
+Validate auction identity
 as well as units, calendar and reproducibility; a higher classification sequence
 is not automatically a newer revision of the same auction. Corrected source
 snapshots and refits require fresh provenance, with historical results preserved.
@@ -37,8 +40,11 @@ investment. System benefit is not investor income or certified investment return
 
 The 21 October country-data request adds a read-only explorer at `/countries`,
 linked from Docs and the research report. A country selector precedes generation
-and price comparisons. Default to the latest verified joint + weekly run
-(27.49 EUR/MWh), as explicitly selected by the user; this is not promotion of the
+and price comparisons. The 22 October user update supersedes the earlier joint +
+weekly default: display the verified oil/CHP 25% checkpoint with corrected ENTSO-E
+main day-ahead hourly targets. This is a frozen-witness re-evaluation, not a refit;
+its existing non-oil calibration used earlier auction targets. This is not promotion
+of the
 accepted baseline or integration into the scenario engine. Show all price zones
 within the selected country, retaining shared-zone and missing-observation labels.
 Support UTC date windows, hourly data, explicit daily aggregation and full-year

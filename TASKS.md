@@ -1,5 +1,42 @@
 # Grid Conductor — current tasks
 
+## Current publication — corrected ENTSO-E targets and oil CHP, 22 October 2026
+
+User authorized the oil-generation-improving checkpoint for the main model report
+and country explorer (including the Danish hourly deep link). Use chp25, not the
+50% sensitivity. No dispatch optimization or bid fit is needed for this update.
+
+- [x] Fresh auction-aware original A44 replay; all41 complete zones retain8760h.
+  Changed targets: AT8662h, DE-LU8756h. No other target changes; no A07 intraday.
+- [x] Independent full-year DE-LU/AT/DK1/DK2 Energy-Charts/SMARD check: max difference
+  exactly0EUR/MWh in every8760-hour comparison. Reference never enters targets.
+- [x] Existing public map price arrays match corrected targets wherever covered;
+  preserve their coverage and the separate bottleneck baseline.
+- [x] Replace the report/explorer with freshly audited chp25 dispatch allocations,
+  corrected prices, provider rows, four figures, all-zone grid and downloadable CSVs.
+- [x] Independent export: all34 countries, original IRENA/Ember rows, every hourly
+  source/dispatch/price cell; maximum allocation replay difference7.28e-12MW.
+  Four figures and source-bound CSVs replace the obsolete report tables.
+- [x] Local release checks: lint (six existing warnings), typecheck,20unit tests,
+  four auction-parser tests, source/asset checks and production build. Desktop/
+  390px/320px workbench/math/country browser checks pass, including the exact
+  Danish hourly deep link and every8760-hour DK1/DK2 CSV price.
+
+Publication completion additionally requires successful exact-head CI/Pages and
+live report/Danish-link checks. The GitHub Actions run for each publication commit
+is the deployment record; do not infer live publication from these asset receipts.
+
+Corrected-target chp25 equal-zone MAE27.576204900945EUR/MWh; merchant control
+27.559547809722. Mean zonal r0.616767661. German oil generation1.405840846TWh
+vs2.8175392TWh B06; hourly oil error185.0493MW vs321.6369 control (~42.47% lower).
+Other four matched countries still produce zero oil. Keep adverse results.
+The formally accepted baseline and browser scenario engine remain unchanged.
+Non-oil bids were calibrated to earlier targets: **not a corrected-target refit**.
+Next research action requires fresh provenance and common corrected targets before
+bid tuning/promotion; no permission is inferred here for a new calibration sweep.
+Original ignored checkpoint: data/bidding-zone-network-2025/oil-chp-bids-v2,
+verification-v2; fresh targets: data/price-trace/sdac-hourly-2025-v1. Reviews stay off.
+
 ## Current baseline decision — 16 October 2026
 
 The user accepted **seasonal-calendar-v1, annual case `refit`** as the single
@@ -25,7 +62,7 @@ lower MAE and transparent bias/seasonal diagnostics. Native PyPSA parity is an
 optional numerical diagnostic, not the development target. Automatic hourly
 reviews remain disabled.
 
-## Blocking source audit — January price spikes, 22 October 2026
+## Historical source diagnostic before correction — January price spikes, 22 October 2026
 
 The user asked whether15/20January2025 price spikes are unpredictable. Read-only
 source diagnosis found a more immediate benchmark defect: frozen

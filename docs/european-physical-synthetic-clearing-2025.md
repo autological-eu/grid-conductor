@@ -1,184 +1,91 @@
-# European hourly clearing: diagnosing the price errors
+# European hourly clearing: current oil/CHP model
 
-Updated 20 October 2026. **The main problem is the shape and timing of prices, not one uniform Europe-wide offset.** The model understates high-price episodes, often overstates low-price hours, and misses a weekly pattern. Nordic errors also change sign by region and season. We traced these patterns through the saved full-year solutions and tested one bounded change to supply bids: a weekday/weekend term.
+Updated 22 October 2026. **The current displayed model includes daily oil costs and a simple CHP heat credit. Germany's hourly oil-generation error falls by 42.5%, but European price accuracy remains far from the below-€10/MWh goal.** The full-year comparison now uses audited ENTSO-E main day-ahead prices, averaged to UTC hours.
 
-This remains a **2025 in-sample market reconstruction**, not independent forecasting, recovered actual order books or investment validation. The accepted research baseline remains the seasonal-calendar annual refit; the earlier joint supply/network fit is a separate checkpoint. Neither this test nor the joint checkpoint replaces the browser's two-zone scenario engine.
+[Explore any country, its generation sources and hourly prices](/countries/) · [Denmark, 1–20 January (hourly)](/countries?country=DK&start=2025-01-01&end=2025-01-20&resolution=hourly)
 
-## 1. What the baseline clears
+## 1. What the model clears
 
-The model clears fixed observed/model-input zonal demand against synthetic resource supply offers for **48 modeled areas**, projected through a **145-bus physical backbone**. Each of the **8,760 hours** has a network-constrained linear dispatch solve. Daily grouping currently contains independent hourly solves; there is no new inter-hour commitment or adaptive reservoir optimisation.
+Fixed hourly demand meets synthetic generator offers in **48 modeled market areas**, through a **145-bus PyPSA-Eur-derived physical backbone**. All **8,760 hours of 2025** are cleared under model transmission constraints. Daily grouping runs independent hourly LPs: it does not add commitment, battery arbitrage or adaptive reservoir optimisation.
 
-Wind/solar offered MW come from retained weather profiles and capacity trajectories. Thermal offers use fuel, efficiency, carbon and operating-cost anchors, split into monotone supply blocks. Nuclear has its own offer. Smooth local-clock and seasonal adjustments, plus national generation consistency signals, are calibrated into the accepted supply bids. Hydro remains the retained fixed hourly injection schedule, not a freely priced reservoir bid. Passive AC constraints use the model PTDF/static generation-shift keys; controllable links retain bounds/losses. These are model-derived constraints, not certified JAO commercial domains.
+- **Demand and geography:** retained ENTSO-E/PyPSA-Eur input and geographical allocation; source-country labels and bidding zones are distinct. Coverage and allocation proxies remain.
+- **Wind and solar:** original processed weather profiles and IRENA end-2024/end-2025 capacity trajectories, with assumed linear commissioning. Availability is never replaced by observed generation or dispatch.
+- **Hydro:** the retained, water-audited fixed hourly reservoir schedule, including NVE-backed Norwegian reconciliation; run-of-river remains a supply resource. Reservoir output cannot adapt to a new investment.
+- **Thermal and nuclear bids:** fuel, efficiency, carbon and variable-cost anchors plus saved monotone gas/coal blocks and calibrated seasonal/local-clock/weekly adjustments. The retained joint checkpoint also includes an inverse gas/coal/nuclear bid correction. Those non-oil coefficients are frozen. Non-oil fuel anchors remain inherited monthly World Bank/ECB inputs and coal/lignite/carbon assumptions; daily gas prices were not adopted.
+- **Network:** model PTDFs, static generation-shift keys and bounded/lossy controllable links. The retained joint fit uses 15% higher effective Nordic-incident AC ratings. This is a calibration assumption, not measured extra capacity or a certified JAO commercial domain.
 
-The **joint checkpoint** additionally uses the frozen prior inverse gas/coal/nuclear bid fit and 15% higher effective Nordic-incident AC limits. It retains original wind availability, topology, impedances, GSKs, HVDC, demand and hydro. The headroom multiplier is a calibration assumption, not a verified grid correction. Its lower aggregate error conceals regressions in NO2/NO4 and Sweden. Full prior search outcomes, including rejected states, remain in the supporting CSVs below.
+This is a transparent zonal-dispatch approximation inspired by market clearing, **not EUPHEMIA or a reconstruction of actual order books**. The workbench's two-zone scenario engine and formally accepted research baseline are unchanged; this report and the country explorer show the newer verified oil/CHP checkpoint.
 
-## 2. When and what kinds of errors occur
+## 2. What changed in oil supply
 
-We compare model minus observed ENTSO-E day-ahead price, $e=p_{model}-p_{observed}$, preserving all **41 complete observed-price zones** and all hours. Positive bias means overpricing. The seven remaining modeled areas have no complete target and stay visibly missing. Local weekday/hour classifications include DST; shared event dates and monthly totals use UTC.
+The audited annual ENTSO-E A68/A33 B06 inventory fills only three missing oil fleets: **PL 392.535 MW, SK 259 MW and SI 58 MW**. Existing fleets remain. Installed nameplate is treated as available supply, not proof of hourly operational readiness. IRENA covers renewable capacity and does not supply these fossil-oil figures.
 
-For both anchors, the three worst days are **25 November, 20 January and 15 January**. In the joint checkpoint, hours above **EUR 150/MWh account for 19.0%** of total absolute error; observed negative-price hours account for **2.4%**. The largest portion still accumulates in ordinary price bands because they contain far more hours. Fixing only rare extremes or negatives cannot close the overall gap.
+Oil's merchant offer is `(fuel + carbon × emissions factor) / electrical efficiency + variable O&M`. Fuel uses daily **EIA Brent and ECB exchange rates**; Brent is a crude-price proxy, not the delivered plant fuel product. The inherited efficiency (typically 35%), thermal emissions factor (0.2571 t/MWh) and operating cost (€8.0148/MWh electrical) remain assumptions.
 
-![Absolute error contributions and signed bias by observed price regime](/research/dispatch-comparison-2025/overview.png)
+EU/EEA oil carbon uses dated **EEX T3PA primary-auction prices**, carried forward: the first 144 hours use €80/t, and the longest carry is 16 days. Outside that jurisdiction the retained €80/t remains unresolved. Primary auctions are not a complete daily spot series.
 
-These bands are diagnostic groupings using the observed target, never predictors passed to the solver. The model's supply stack frequently produces a narrow price range while real prices have deeper troughs and higher peaks. A calendar-only bid cannot reproduce a specific scarcity event merely because it occurred in winter. Zero renewable offers/positive thermal floors also miss negative-price mechanisms in western zones. Prior universal renewable discounts did not establish a satisfactory fleet-wide correction, so they are not silently reintroduced here.
+For **25% of source-labelled, geographically matched oil CHP capacity**, an optional cheaper tranche subtracts an avoided-heat credit: `(0.5 / electrical efficiency) × (monthly gas + carbon × 0.198) / 0.9`. Useful-heat efficiency 0.5 and alternative-boiler efficiency 0.9 are explicit proxies. The remaining capacity keeps the merchant bid. Total hourly MW is conserved; there is no forced heat generation, measured heat-demand schedule or new energy. This tranche is not fitted to electricity prices or oil generation. All non-oil bids, weather, fixed hydro, demand and physical constraints stay frozen.
 
-The weekly mismatch is widespread: modeled-minus-observed bias is more positive on weekends than weekdays, even though source demand already varies hourly. A missing weekly bid effect is therefore a testable hypothesis; it is **not proof** that real suppliers use exactly this rule or that demand inputs are complete. Local interior-offer diagnostics distinguish gas/coal/nuclear support from hours without a matching local marginal offer. Network dual terms are an exact witness decomposition, not causal error shares or uniquely identified real price setters.
+## 3. Full-year results
 
-There are two materially different mechanisms in the saved solutions. In Germany, local gas/coal offers match the joint checkpoint price in 3,875 hours; in France, nuclear matches in 4,905 hours. These provide local bid evidence. In **NO5, 8,589/8,760 hours have no matching local interior offer**: its fixed hydro injection has no water-price decision, and its cleared price depends on the coupled network/links rather than an adjustable local water bid. That explains why this local thermal-bid correction has little leverage there; it does not establish which real constraint or hydro assumption is wrong. On 1 October at 17:00 UTC, DE-LU observed EUR 512.59/MWh versus the joint model's EUR 128.92. On 25 November at 15:00 UTC, NO5 observed EUR 266.26 versus EUR 2.86. These need different investigations, rather than one common price offset.
+**European price MAE is €27.58/MWh**, the equal-weight mean of 41 complete zonal MAEs over all 8,760 hours; mean zonal correlation is **0.617**. The same frozen model with merchant oil bids, missing-capacity additions and daily oil costs scores **€27.56/MWh** against these same corrected observations. Oil CHP improves generation, not aggregate price accuracy.
 
-## 3. The targeted model change
+![European price error and German oil-generation improvement](/research/dispatch-comparison-2025/overview.png)
 
-Each zone/resource receives at most **one new coefficient** multiplying its centered local Saturday/Sunday indicator, $w=I_{weekend}-E[I_{weekend}]$. Existing 15 seasonal/time-of-day columns are included as nuisance controls in fitting; only the new weekly coefficient is applied. Thus we test the omitted weekly pattern without refitting all existing parameters or introducing residual-demand predictors.
+| Zone | Price MAE €/MWh | Bias €/MWh | Correlation |
+| --- | ---: | ---: | ---: |
+| AT | 17.77 | -5.46 | 0.834 |
+| DE-LU | 19.71 | -11.15 | 0.831 |
+| DK1 | 23.42 | -11.61 | 0.774 |
+| ES | 21.20 | 2.13 | 0.825 |
+| FR | 24.43 | -12.10 | 0.799 |
+| DK2 | 49.11 | -35.92 | 0.310 |
+| NO1 | 38.08 | -15.72 | 0.199 |
+| NO2 | 42.15 | -22.02 | 0.138 |
+| NO3 | 31.71 | 21.78 | 0.237 |
+| NO4 | 39.41 | 35.45 | 0.101 |
+| NO5 | 32.34 | -5.12 | 0.279 |
 
-Fit support requires the resource to be locally interior, over 0.001 MW from both bounds, and its offer to match the cleared local price within EUR 0.00001/MWh. At least 168 supported hours and 24 of each day type are required; unsupported resources receive zero correction. All 2025 observed prices inform this explicitly labelled reconstruction. A ridge of 168 and response clipping at +/-EUR 100/MWh reduce isolated-event influence. Weekly coefficient bounds are +/-EUR 30/MWh for gas/coal and +/-EUR 7.5/MWh for nuclear. In the joint case, 20 gas, 10 coal and 6 nuclear zone coefficients have nonzero support.
+The hourly error is $e_t = p_t^{model} - p_t^{ENTSO-E}$; zonal $MAE = (1/8760) \sum_t |e_t|$. Positive bias means model overpricing. All zones and adverse results are in the CSV and explorer. Seven modeled areas lack complete observed targets; none is assigned a zero error.
 
-The same additive adjustment applies to every block of that zone/resource; final bids remain nonnegative and block ordering is preserved. The weekly term has zero annual mean before the final floor. It changes offers **before clearing**, never overwrites a cleared price. At inference it uses calendar and saved coefficients only. Wind/solar availability, fixed hydro, capacities, demand, network constraints and all other bids remain identical to the corresponding anchor.
+![Full-year price MAE for every modeled zone](/research/dispatch-comparison-2025/zone-mae-grid.png)
 
-The declared design tests exactly **two full-year corrections**, one per anchor, with no strength sweep or after-the-fact refit. Each must improve its own anchor's annual price MAE without worsening within-day, generation or trade scores by more than 2%; all 8,760 hours must be optimal with no emergency supply. These are research safeguards, not a product-acceptance or forecasting certificate.
+Germany produces **1.406 TWh oil** against **2.818 TWh observed**; hourly oil MAE falls from **321.64 to 185.05 MW**. Its hourly oil correlation is only **0.127**. This is partial recovery, not a solved timing model. The other four comparable countries still dispatch no oil, despite observed output. Physical B06 output is not necessarily day-ahead market-accepted generation.
 
-## 4. Full-year results
-
-Price and within-day columns are EUR/MWh. Generation and implied-trade scores are normalized monthly distances outside conditional allocation intervals, **not percentage TWh errors**; lower is better. Generation uses Wind/Solar/Nuclear/Gas/Coal national Ember observations; implied trade is generation minus demand, not verified physical border flow. Missing targets stay unknown.
-
-| Anchor → same model with weekly bids | Price MAE | Within-day MAE | Generation score | Trade score | Declared filter |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Accepted baseline | 28.964 → 28.663 | 20.063 → 20.054 | 0.2995 → 0.2972 | 0.1719 → 0.1727 | pass |
-| Joint checkpoint | 27.752 → 27.487 | 18.983 → 18.989 | 0.2548 → 0.2532 | 0.1438 → 0.1438 | pass |
-
-The correction reduces aggregate MAE by **1.04%** on the accepted baseline and **0.95%** on the joint checkpoint. Mean zonal correlation changes **0.573→0.582** and **0.610→0.618**, respectively. Both pass the declared filters. This is a modest improvement: the joint version slightly worsens within-day MAE and implied-trade score, though within the predeclared 2% bound. A successful fit is not a claim that every zone or metric improves.
-
-![All modeled zones: full-year price MAE before and after the weekly supply-bid correction](/research/dispatch-comparison-2025/zone-mae-grid.png)
-
-| Zone | Accepted baseline | Baseline + weekly | Joint checkpoint | Joint + weekly |
+| Country | Matched hours | Observed oil TWh | Model oil TWh | Hourly MAE MW |
 | --- | ---: | ---: | ---: | ---: |
-| NO1 | 42.57 | 42.54 | 38.33 | 38.15 |
-| NO2 | 39.25 | 39.21 | 42.39 | 42.22 |
-| NO3 | 34.58 | 34.54 | 31.94 | 31.80 |
-| NO4 | 35.21 | 35.16 | 39.62 | 39.50 |
-| NO5 | 47.29 | 47.27 | 32.56 | 32.41 |
-| SE1 | 35.05 | 34.87 | 38.39 | 38.15 |
-| SE2 | 35.57 | 35.37 | 39.11 | 38.88 |
-| DE-LU | 21.57 | 21.17 | 19.42 | 19.02 |
-| ES | 24.07 | 23.43 | 21.62 | 21.18 |
-| FR | 23.83 | 23.57 | 24.66 | 24.39 |
+| DE | 8,760 | 2.8175 | 1.4058 | 185.05 |
+| BE | 8,760 | 0.5523 | 0.0000 | 63.04 |
+| PL | 8,760 | 1.4880 | 0.0000 | 169.86 |
+| SK | 8,758 | 0.4110 | 0.0000 | 46.93 |
+| SI | 8,758 | 0.0005 | 0.0000 | 0.06 |
 
-![Weekly error contrast and remaining seasonal regional bias](/research/dispatch-comparison-2025/national-mix.png)
+![National generation by fuel compared with original monthly Ember observations](/research/dispatch-comparison-2025/national-mix.png)
 
-The weekly comparison is descriptive: demand, weather and network conditions differ between day types. The fitted term controls the existing smooth seasonal/local-clock features but cannot establish a causal bidding effect. Nordic north/south and monthly biases remain visible rather than being averaged away.
+Generation totals are **availability-proportional allocations within aggregated equal-offer groups**, not independently identified plant dispatch. The country explorer supplies conditional lower/upper allocation bounds and original source rows. Ember is monthly and national; IRENA is capacity, not hourly generation. Hourly ENTSO-E generation is shown only where original PSR/geographical coverage exists. Missing NO5 prevents a complete Norwegian national hourly source total; its available zonal observations remain visible. Ember's “Other fossil” is broader than oil.
 
-![Hourly observed and modeled prices during a shared November error episode](/research/dispatch-comparison-2025/daily-prices.png)
+![Hourly prices in Germany, France, Spain and Norway during 15–21 January](/research/dispatch-comparison-2025/daily-prices.png)
 
-The November window was chosen from both anchors' error inventory before evaluating the weekly correction. It illustrates a remaining difficult episode; headline metrics use the entire year. A successful calendar correction would still leave resource availability, scarcity premiums, operating constraints and Nordic injection/constraint geography to investigate independently. Fixed hydro has no flexible water bid to calibrate in this formulation.
+The January plot answers the spike question with the corrected auction. On 20 January at 16:00 UTC (17:00 CET), DE-LU's actual day-ahead price is **€583.40/MWh**; on 15 January at the same hour it is **€377.99/MWh**. Missing scarcity premiums, operational constraints, hydro response and imperfect supply/network inputs remain possible contributors. These plots do not establish causal error shares. All headline metrics use the entire year, including negative and extreme prices.
 
-## 5. Data, verification and conclusion
+## 4. Observed prices, provenance and verification
 
-**Observed prices:** retained ENTSO-E A44 series, UTC-aligned to hourly 2025. Demand is the retained ENTSO-E/PyPSA-Eur-derived source input; geographic allocation/proxy limitations persist. **Supply:** PyPSA-Eur plant/network lineage, original processed weather profiles, IRENA end-2024/end-2025 wind/solar trajectories under assumed linear commissioning, retained NVE-backed fixed Norwegian hydro schedule and inherited other-country schedules. **Generation targets:** monthly national Ember; available weather supply is never replaced by reported generation or dispatch. **Fuel anchors:** inherited monthly World Bank TTF/Brent and ECB conversion, flat carbon and coal/lignite assumptions; this experiment does not adopt daily-fuel sensitivities. National capacity/quantity coverage is distinct from commercial bid-zone completeness. The model is EUPHEMIA-inspired, not a reproduction of actual block orders/allocation rules.
+**Every observed comparison price comes from ENTSO-E A44**, in EUR/MWh, for the requested zone. Main day-ahead contract A01 is required; A07 intraday is excluded. Germany and Austria explicitly use **auction sequence 1 (SDAC)**, with no fallback to sequence 2. Other cached markets use their sole unclassified A01 series; non-coupled markets are not labelled SDAC. Four published quarter-hour samples are required for each UTC-hour mean; published block curves are expanded, while missing points remain missing.
 
-Independent replay reconstructs coefficients with an augmented least-squares calculation, altered offer vectors, all original source bounds and native component equations, primal/dual optimality, objectives and monthly quantities. Both tests contain 8,760 optimal hours and zero emergency supply. Maximum native residual **1.1e-06 MW**, duality gap **EUR 0.000101**. New annual clearing loops total **98.32s**; source/model preparation **97.17s**, complete driver **208.03s**, separate independent audit **134.05s**. These runtime components are kept distinct.
+The earlier research importer incorrectly preferred the highest auction sequence in DE-LU and Austria. This publication rebuilds the targets from original XML and independently replays all hourly cells. A separate Energy-Charts/SMARD check agrees **exactly for all 8,760 hours in DE-LU, AT, DK1 and DK2**; that reference never substitutes for ENTSO-E observations. Denmark's targets do not change. The map's archived prices also agree wherever covered; its existing coverage is preserved.
 
-The useful change is to diagnose errors by event and market regime before changing more grid parameters. The weekly term is one controlled supply-bid hypothesis, not a general repair for the high-price tail or Nordic geography. The below-EUR 10/MWh target remains unmet; no automatic baseline promotion, browser integration or verified investment-return claim follows. Fitting 2025 prices and checking generation/physics does not establish future-year forecast accuracy.
+**No model was refitted or re-solved for this source correction.** We re-evaluate the saved verified annual oil/CHP solution. Its non-oil calibration used the earlier auction targets, so the updated MAE is a corrected-target evaluation of that frozen model—not evidence of a new correctly targeted fit, forecasting validation or recovered real bids. Earlier research MAEs are historical retained-target scores and should not be compared directly with the corrected scores here.
 
-- [All-zone error metrics and weekday/weekend bias](/research/dispatch-comparison-2025/hourly-error-zones.csv), [price regimes, monthly errors and worst event days](/research/dispatch-comparison-2025/hourly-error-periods.csv).
-- [Prior joint calibration cases](/research/dispatch-comparison-2025/joint-search-cases.csv), [joint zonal price metrics](/research/dispatch-comparison-2025/joint-prices-by-zone.csv), [national five-fuel quantities and conditional bounds](/research/dispatch-comparison-2025/joint-generation-by-country.csv). These describe the preceding checkpoint, not the new weekly corrections.
-- [Compact provenance and audit receipt](/research/dispatch-comparison-2025/summary.json). Raw inputs and full hourly witnesses remain locally cached outside Git. [Workbench methodology](/docs/workbench-methodology/).
+The displayed witness has 8,760 optimal hours and zero emergency supply. Its independent native-equation residual is **2.01e-07 MW**, maximum duality gap **€2.14e-06**, and objective replay error **€3.35e-08**, within the original gates. The original annual clearing loop took **29.55s**; input preparation and independent audit are separate costs. Numerical feasibility does not certify empirical accuracy.
 
-<!-- oil-supply-2025 -->
+The new export independently replays all countries' saved dispatch allocations, source generation, prices, original IRENA cells and Ember rows before publication. Hourly downloads round generation to 0.1 MW and prices to €0.001/MWh; summary scores use unrounded arrays. Country source coverage, shared DE-LU/IE-SEM areas and conditional bounds remain explicit.
 
-## Oil supply: capacity and fuel-price check
+## Conclusion
 
-Oil was already a modeled fuel, but the displayed joint + weekly checkpoint
-dispatches **zero oil generation** from **17.077 GW** of inherited oil capacity.
-The explorer's annual Ember chart grouped oil with waste as “Other fossil”; it now
-also shows oil separately against ENTSO-E **B06**, including matched-hour totals.
-Oil shale, peat and waste are not liquid oil. IRENA's renewable statistics cannot
-supply missing oil-fired capacity.
+The heat-credit oil bid recovers meaningful German oil generation without forcing output or relaxing the network. It leaves large price and generation gaps. **Correct auction identity is now verified for the published comparisons; the next modeling step is to re-establish calibration against these corrected targets before interpreting further price improvements.** This checkpoint does not validate investment returns, adaptive storage or future-year forecasts.
 
-A fresh ENTSO-E **A68/A33** annual capacity check identifies three missing fleets.
-The trial adds **709.535 MW** across PL, SK and SI.
-Existing fleets are retained: the other discrepancies below require broader
-fleet/scope reconciliation, rather than silently replacing them all.
+- [All-zone full-year price metrics](/research/dispatch-comparison-2025/prices-by-zone.csv)
+- [Matched-hour oil generation](/research/dispatch-comparison-2025/oil-generation.csv) · [Monthly country/fuel generation](/research/dispatch-comparison-2025/national-generation.csv)
+- [Compact source and verification receipt](/research/dispatch-comparison-2025/summary.json) · [Country data and downloads](/countries/) · [Workbench methodology](/docs/workbench-methodology/)
 
-| Country | Inherited oil MW | ENTSO-E 2025 oil MW | Added MW |
-| --- | ---: | ---: | ---: |
-| PL | 0.000 | 392.535 | 392.535 |
-| SK | 0.000 | 259.000 | 259.000 |
-| CZ | 0.000 | 0.000 | 0.000 |
-| SI | 0.000 | 58.000 | 58.000 |
-| DE | 5684.346 | 6913.830 | 0.000 |
-| BE | 130.200 | 589.520 | 0.000 |
-| FR | 1308.000 | 2978.897 | 0.000 |
-
-New capacity uses each country's existing zonal balance and unchanged physical
-GSK. This is a location proxy, not a plant-level reconstruction. Installed
-nameplate is assumed fully available, as in the inherited thermal model; annual
-capacity cells do not prove hourly availability or oil/gas fuel-switching capability.
-The source reporting year runs 31 December 23:00 UTC to the next year's same
-boundary; applying its capacity scalar to all 8,760 UTC model hours is explicit.
-
-Oil offers use fuel + carbon + variable O&M: **(oil EUR/MWh thermal + CO₂ EUR/t ×
-emissions t/MWh thermal) / electrical efficiency + VOM**. The control retains
-monthly World Bank Brent and ECB conversion. Daily cases use retained original
-2025 EIA Brent quotes and ECB daily FX, preserving the **1.7 MWh thermal/barrel**
-conversion, original emissions/VOM and **0.35** default oil efficiency. Non-trading
-dates carry the most recent quote for at most five days; 24 hours retain the
-monthly anchor before both daily series begin. These are ex-post crude proxies,
-not delivered diesel/fuel-oil prices or day-ahead-known quotes.
-
-Four predeclared full-year controls keep non-oil bids and coefficients, demand,
-weather, fixed hydro chronology and joint-grid constraints unchanged. No electricity
-prices were fitted for this trial; the anchor remains an in-sample reconstruction.
-
-| Full 2025 case | Equal-zone price MAE €/MWh | Mean zonal r | Modeled oil TWh |
-| --- | ---: | ---: | ---: |
-| Unchanged joint + weekly control | 27.487352 | 0.618003 | 0.000000 |
-| Daily oil prices only | 27.487352 | 0.618003 | 0.000000 |
-| Missing oil capacity only | 27.487356 | 0.618003 | 0.000000 |
-| Capacity + daily oil prices | 27.487356 | 0.618003 | 0.000000 |
-
-| Country | ENTSO-E oil TWh on known hours | Combined trial, same hours TWh | Known hours |
-| --- | ---: | ---: | ---: |
-| DE | 2.8175 | 0.0000 | 8760 |
-| BE | 0.5523 | 0.0000 | 8760 |
-| PL | 1.4880 | 0.0000 | 8760 |
-| SK | 0.4110 | 0.0000 | 8758 |
-| SI | 0.0005 | 0.0000 | 8758 |
-
-ENTSO-E generation above uses the independently audited country exports rounded
-to 0.1 MWh per hour; partial coverage is not annualised. Ember “Other fossil”
-is not an oil-only validation target. All country/zone results, including missing
-observations, are downloadable below. Full-year price metrics retain all 41 complete
-areas and every hour, including negative and extreme prices.
-
-**Result:** All four cases still dispatch zero oil. Daily prices alone reproduce the control; the capacity cases change aggregate price MAE by less than €0.000004/MWh. There is no material price or oil-generation improvement.
-
-Adding columns also selects different dual prices in 7 zone-hours:
-6 without complete observed-price coverage,
-1 within the evaluated areas. The largest differences are
-€64.41/MWh overall and €1.26/MWh in eligible areas.
-With zero oil output and objective differences below €0.00002,
-these differences between optimal witnesses are not evidence of oil-driven price
-improvement. Every evaluated hour remains in the annual metrics.
-
-**Interpretation:** missing oil capacity is a real source gap, but adding nameplate
-does not require oil to dispatch. Relative bids, network delivery and omitted
-cogeneration/operating commitments still determine its use. This controlled test
-does not establish that oil explains Europe's price errors. Do not lower bids or
-turn observed generation into available supply just to force agreement. Broader
-dated conventional-fleet/outage and CHP/fuel-product reconciliation remain open.
-The accepted baseline and displayed country checkpoint are unchanged.
-
-All four years have complete optimal witnesses and zero emergency. Independent
-XML/quote/FX reconstruction, modified source-capacity bounds, native network
-equations, primal/dual optimality, price metrics and country quantities pass the
-original 1e-4 MW / €0.05 gates. Preparation 164.3s; clearing
-52.1–114.5s per full year.
-Audit/export time is separate from clearing time.
-
-[Oil capacity CSV](/research/oil-supply-2025/capacity.csv) ·
-[All-zone price CSV](/research/oil-supply-2025/prices-by-zone.csv) ·
-[All-country oil generation CSV](/research/oil-supply-2025/oil-generation.csv) ·
-[Provenance and replay receipt](/research/oil-supply-2025/summary.json).
-Sources: [ENTSO-E](https://transparency.entsoe.eu/),
-[EIA Brent](https://www.eia.gov/dnav/pet/hist/RBRTED.htm),
-[ECB FX](https://data.ecb.europa.eu/data/datasets/EXR),
-[World Bank Pink Sheet](https://www.worldbank.org/en/research/commodity-markets).
+Original bulk sources, calibration receipts and hourly solver witnesses remain outside Git. Data providers: [ENTSO-E](https://transparency.entsoe.eu/), [IRENA](https://www.irena.org/Publications), [Ember](https://ember-energy.org/data/), [NVE](https://www.nve.no/), [EIA](https://www.eia.gov/), [ECB](https://www.ecb.europa.eu/), [EEX](https://www.eex.com/), and the retained [PyPSA-Eur](https://github.com/PyPSA/pypsa-eur) source lineage. Independent price check: [Energy-Charts API](https://api.energy-charts.info/), CC BY 4.0 Bundesnetzagentur/SMARD.

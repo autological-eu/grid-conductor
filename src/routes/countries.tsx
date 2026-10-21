@@ -255,7 +255,8 @@ function Countries() {
         <p className="mb-6 text-sm text-muted-foreground">
           <strong className="text-foreground">{manifest.data.model.label}</strong> · full-year
           Europe MAE €{number(manifest.data.model.mae_eur_mwh)}/MWh · in-sample reconstruction. The
-          accepted research baseline and browser scenario engine are unchanged.
+          accepted research baseline and browser scenario engine are unchanged. Non-oil bids retain
+          their earlier calibration; observed day-ahead targets have been corrected.
         </p>
       )}
       {!range && (
@@ -448,9 +449,10 @@ function CountryView({
           </div>
           <p className="mt-3 text-xs leading-5 text-muted-foreground">
             {number(oil.known, 0)} known hours; partial observations are not annualised. Oil shale,
-            peat and waste are separate technologies. The displayed checkpoint uses inherited oil
-            capacity and monthly Brent-based bids. A source-backed capacity and daily-oil trial is
-            documented in the model report; it has not replaced this checkpoint.
+            peat and waste are separate technologies. This checkpoint includes the audited missing
+            PL/SK/SI oil capacity, daily Brent/FX and dated carbon proxies, with an optional
+            heat-credit offer for 25% of source-labelled oil CHP capacity. Remaining oil output gaps
+            are documented in the model report.
           </p>
           <button
             className={button + " mt-3"}
@@ -698,7 +700,7 @@ function CountryView({
           </button>
         </div>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">
-          ENTSO-E observed and modeled EUR/MWh. Each zone stays separate; shared zones are
+          ENTSO-E day-ahead and modeled EUR/MWh. Each zone stays separate; shared zones are
           identified. Price metrics below cover the full year, independent of the selected chart
           window.
         </p>
@@ -727,6 +729,7 @@ function CountryView({
                   resolution,
                 )}
                 unit="EUR/MWh"
+                observedLabel="ENTSO-E day-ahead"
                 resolution={resolution}
                 label={`${p.zone} observed and modeled prices`}
               />

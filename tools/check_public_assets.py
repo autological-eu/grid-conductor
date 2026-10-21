@@ -17,6 +17,7 @@ ALLOWED = [
     'dispatch-comparison-2025/daily-prices.png',
     'dispatch-comparison-2025/zone-mae-grid.png',
     'dispatch-comparison-2025/prices-by-zone.csv',
+    'dispatch-comparison-2025/oil-generation.csv',
     'dispatch-comparison-2025/daily-fuel-prices-by-zone.csv',
     'dispatch-comparison-2025/renewable-source-prices-by-zone.csv',
     'dispatch-comparison-2025/renewable-capacity-audit.csv',
@@ -65,111 +66,115 @@ def check():
     check_countries()
     folder = ROOT / 'public/research'
     comparison = json.loads((folder / 'dispatch-comparison-2025/summary.json').read_text())
-    assert comparison['generation_reporting_areas'] == 38 and comparison['observed_price_zones'] == 41
-    assert comparison['report_audit']['summary_sha256'] == comparison['derived_summary_sha256']
-    assert comparison['report_audit']['maximum_hourly_allocation_difference_mw'] < 1e-6
-    model = comparison.get('legacy_out_of_fold_model_verification') or comparison['model_verification']
-    assert model['optimal_hours'] == 8760 and model['maximum_physical_residual_mw'] <= 1e-4
-    assert model['maximum_duality_gap_eur'] < .05 and model['complete_lp_certificates'] == 11
-    for role in ['producer', 'helper', 'auditor']:
-        assert hashlib.sha256((ROOT / 'tools' / model[role + '_file']).read_bytes()).hexdigest() == model[role + '_sha256']
-    from check_oil_supply_2025 import check as check_oil
-    assert comparison['article_sha256'] == hashlib.sha256(check_oil()).hexdigest()
-    for file, sha in [('write_concise_dispatch_report_2025.py', comparison['renderer_sha256']),
-                      (comparison.get('derived_producer_file', 'prepare_concise_dispatch_report_2025.py'), comparison['derived_producer_sha256']),
-                      (comparison['report_audit'].get('auditor_file', 'audit_concise_dispatch_report_2025.py'), comparison['report_audit']['auditor_sha256'])]:
-        assert hashlib.sha256((ROOT / 'tools' / file).read_bytes()).hexdigest() == sha
-    direction = comparison['research_direction']
-    assert direction['audit']['diagnosis_sha256'] == direction['diagnosis_sha256']
-    assert direction['audit']['price_zones'] == 41 and direction['audit']['hours'] == 8760
-    assert direction['mix_audit']['maximum_hourly_allocation_difference_mw'] < 1e-6
-    for name, sha in [('diagnose_accepted_baseline_2025.py', direction['producer_sha256']),
-                      ('audit_accepted_baseline_diagnosis_2025.py', direction['audit']['auditor_sha256']),
-                      ('prepare_accepted_baseline_mix_2025.py', direction['mix_producer_sha256']),
-                      ('audit_accepted_baseline_mix_2025.py', direction['mix_auditor_sha256'])]:
-        assert hashlib.sha256((ROOT / 'tools' / name).read_bytes()).hexdigest() == sha
-    assert direction['plan_sha256'] == hashlib.sha256((ROOT / 'config/research-improvement-plan.json').read_bytes()).hexdigest()
-    expected = {'overview.png', 'national-mix.png', 'daily-prices.png', 'zone-mae-grid.png', 'prices-by-zone.csv',
-                'generation-by-area.csv', 'generation-by-fuel.csv', 'national-generation.csv'}
-    if comparison.get('daily_fuel_evaluation'):
-        daily = comparison['daily_fuel_evaluation']
-        assert daily['audit']['summary_sha256'] == daily['summary_sha256']
-        assert len(daily['audit']['certificates']) == 5
-        assert all(c['hours']==8760 and c['original_physical_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in daily['audit']['certificates'])
-        for file,sha in [('run_daily_fuel_dispatch_2025.py',daily['producer_sha256']),('audit_daily_fuel_dispatch_2025.py',daily['audit']['auditor_sha256']),('daily_fuel_inputs_2025.py',daily['inputs_producer_sha256'])]:
-            assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
-        expected.add('daily-fuel-prices-by-zone.csv')
-    if comparison.get('renewable_source_evaluation'):
-        study=comparison['renewable_source_evaluation']
-        assert study['audit']['summary_sha256']==study['summary_sha256']
-        assert len(study['audit']['certificates'])==7
-        assert all(c['hours']==8760 and c['original_component_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in study['audit']['certificates'])
-        for file,sha in [('run_renewable_source_bids_2025.py',study['producer_sha256']),('renewable_source_bids_2025.py',study['helper_sha256']),('audit_renewable_source_bids_2025.py',study['audit']['auditor_sha256'])]:
-            assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
-        expected.update({'renewable-source-prices-by-zone.csv','renewable-capacity-audit.csv'})
-    if comparison.get('nuclear_availability_evaluation'):
-        study=comparison['nuclear_availability_evaluation']
-        assert study['audit']['summary_sha256']==study['summary_sha256']
-        assert len(study['audit']['certificates'])==4 and study['audit']['source_days']==365
-        assert all(c['hours']==8760 and c['original_component_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in study['audit']['certificates'])
-        assert all(c['optimal_hours']==8760 and c['emergency_mwh']==0 for c in study['annuals'].values())
-        for file,sha in [('run_nuclear_availability_2025.py',study['producer_sha256']),('nuclear_availability_2025.py',study['helper_sha256']),('audit_nuclear_availability_2025.py',study['audit']['auditor_sha256'])]:
-            assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
-        expected.update({'nuclear-availability-prices-by-zone.csv','nuclear-availability-by-month.csv'})
-    if comparison.get('inverse_bid_ensemble_evaluation'):
-        study=comparison['inverse_bid_ensemble_evaluation']
-        assert study['audit']['summary_sha256']==study['summary_sha256']
-        assert study['audit']['members']==study['members'] and study['audit']['attempts']==12
-        assert 1<=len(study['members'])<=5 and len(study['audit']['certificates'])==len(study['records'])<=13
-        assert all(c['hours']==8760 and c['original_component_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in study['audit']['certificates'])
-        assert all(c['optimal_hours']==8760 and c['emergency_mwh']==0 for c in study['annuals'].values())
-        for file,sha in [('run_inverse_bid_ensemble_2025.py',study['producer_sha256']),('inverse_bid_ensemble_2025.py',study['helper_sha256']),('audit_inverse_bid_ensemble_2025.py',study['audit']['auditor_sha256']),('bid_ensemble_report_2025.py',study['renderer_sha256'])]:
-            assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
-        assert study['design']==json.loads((ROOT/'config/inverse-bid-ensemble-2025.json').read_text())
-        report_audit=study['report_audit']
-        assert report_audit['source_summary_sha256']==study['summary_sha256'] and report_audit['article_sha256']==comparison['article_sha256']
-        assert report_audit['assets_sha256']==comparison['assets'] and report_audit['primary_members']==len(study['members'])
-        assert hashlib.sha256((ROOT/'tools/audit_inverse_report_2025.py').read_bytes()).hexdigest()==report_audit['auditor_sha256']
-        records={r['id']:r for r in study['records']};winner=records[study['winner']]
-        assert study['winner']==study['audit']['winning_state']==study['members'][0]
-        assert all(records[k]['eligible'] for k in study['members'])
-        for row in study['cutoff_sensitivity']:
-            count=sum(r['eligible'] and r['score']<=winner['score']+row['score_tolerance']+1e-12 and r['metrics']['price']<=winner['metrics']['price']+1+1e-12 for r in records.values())
-            assert row['qualifying_states']==count and row['retained_cap']==min(5,count)
+    if comparison.get('schema_version') == 2:
+        from check_sdac_publication_2025 import check as check_current
+        check_current()
+    else:
+        assert comparison['generation_reporting_areas'] == 38 and comparison['observed_price_zones'] == 41
+        assert comparison['report_audit']['summary_sha256'] == comparison['derived_summary_sha256']
+        assert comparison['report_audit']['maximum_hourly_allocation_difference_mw'] < 1e-6
+        model = comparison.get('legacy_out_of_fold_model_verification') or comparison['model_verification']
+        assert model['optimal_hours'] == 8760 and model['maximum_physical_residual_mw'] <= 1e-4
+        assert model['maximum_duality_gap_eur'] < .05 and model['complete_lp_certificates'] == 11
+        for role in ['producer', 'helper', 'auditor']:
+            assert hashlib.sha256((ROOT / 'tools' / model[role + '_file']).read_bytes()).hexdigest() == model[role + '_sha256']
+        from check_oil_supply_2025 import check as check_oil
+        assert comparison['article_sha256'] == hashlib.sha256(check_oil()).hexdigest()
+        for file, sha in [('write_concise_dispatch_report_2025.py', comparison['renderer_sha256']),
+                          (comparison.get('derived_producer_file', 'prepare_concise_dispatch_report_2025.py'), comparison['derived_producer_sha256']),
+                          (comparison['report_audit'].get('auditor_file', 'audit_concise_dispatch_report_2025.py'), comparison['report_audit']['auditor_sha256'])]:
+            assert hashlib.sha256((ROOT / 'tools' / file).read_bytes()).hexdigest() == sha
+        direction = comparison['research_direction']
+        assert direction['audit']['diagnosis_sha256'] == direction['diagnosis_sha256']
+        assert direction['audit']['price_zones'] == 41 and direction['audit']['hours'] == 8760
+        assert direction['mix_audit']['maximum_hourly_allocation_difference_mw'] < 1e-6
+        for name, sha in [('diagnose_accepted_baseline_2025.py', direction['producer_sha256']),
+                          ('audit_accepted_baseline_diagnosis_2025.py', direction['audit']['auditor_sha256']),
+                          ('prepare_accepted_baseline_mix_2025.py', direction['mix_producer_sha256']),
+                          ('audit_accepted_baseline_mix_2025.py', direction['mix_auditor_sha256'])]:
+            assert hashlib.sha256((ROOT / 'tools' / name).read_bytes()).hexdigest() == sha
+        assert direction['plan_sha256'] == hashlib.sha256((ROOT / 'config/research-improvement-plan.json').read_bytes()).hexdigest()
+        expected = {'overview.png', 'national-mix.png', 'daily-prices.png', 'zone-mae-grid.png', 'prices-by-zone.csv',
+                    'generation-by-area.csv', 'generation-by-fuel.csv', 'national-generation.csv'}
+        if comparison.get('daily_fuel_evaluation'):
+            daily = comparison['daily_fuel_evaluation']
+            assert daily['audit']['summary_sha256'] == daily['summary_sha256']
+            assert len(daily['audit']['certificates']) == 5
+            assert all(c['hours']==8760 and c['original_physical_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in daily['audit']['certificates'])
+            for file,sha in [('run_daily_fuel_dispatch_2025.py',daily['producer_sha256']),('audit_daily_fuel_dispatch_2025.py',daily['audit']['auditor_sha256']),('daily_fuel_inputs_2025.py',daily['inputs_producer_sha256'])]:
+                assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
+            expected.add('daily-fuel-prices-by-zone.csv')
+        if comparison.get('renewable_source_evaluation'):
+            study=comparison['renewable_source_evaluation']
+            assert study['audit']['summary_sha256']==study['summary_sha256']
+            assert len(study['audit']['certificates'])==7
+            assert all(c['hours']==8760 and c['original_component_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in study['audit']['certificates'])
+            for file,sha in [('run_renewable_source_bids_2025.py',study['producer_sha256']),('renewable_source_bids_2025.py',study['helper_sha256']),('audit_renewable_source_bids_2025.py',study['audit']['auditor_sha256'])]:
+                assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
+            expected.update({'renewable-source-prices-by-zone.csv','renewable-capacity-audit.csv'})
+        if comparison.get('nuclear_availability_evaluation'):
+            study=comparison['nuclear_availability_evaluation']
+            assert study['audit']['summary_sha256']==study['summary_sha256']
+            assert len(study['audit']['certificates'])==4 and study['audit']['source_days']==365
+            assert all(c['hours']==8760 and c['original_component_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in study['audit']['certificates'])
+            assert all(c['optimal_hours']==8760 and c['emergency_mwh']==0 for c in study['annuals'].values())
+            for file,sha in [('run_nuclear_availability_2025.py',study['producer_sha256']),('nuclear_availability_2025.py',study['helper_sha256']),('audit_nuclear_availability_2025.py',study['audit']['auditor_sha256'])]:
+                assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
+            expected.update({'nuclear-availability-prices-by-zone.csv','nuclear-availability-by-month.csv'})
+        if comparison.get('inverse_bid_ensemble_evaluation'):
+            study=comparison['inverse_bid_ensemble_evaluation']
+            assert study['audit']['summary_sha256']==study['summary_sha256']
+            assert study['audit']['members']==study['members'] and study['audit']['attempts']==12
+            assert 1<=len(study['members'])<=5 and len(study['audit']['certificates'])==len(study['records'])<=13
+            assert all(c['hours']==8760 and c['original_component_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in study['audit']['certificates'])
+            assert all(c['optimal_hours']==8760 and c['emergency_mwh']==0 for c in study['annuals'].values())
+            for file,sha in [('run_inverse_bid_ensemble_2025.py',study['producer_sha256']),('inverse_bid_ensemble_2025.py',study['helper_sha256']),('audit_inverse_bid_ensemble_2025.py',study['audit']['auditor_sha256']),('bid_ensemble_report_2025.py',study['renderer_sha256'])]:
+                assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
+            assert study['design']==json.loads((ROOT/'config/inverse-bid-ensemble-2025.json').read_text())
+            report_audit=study['report_audit']
+            assert report_audit['source_summary_sha256']==study['summary_sha256'] and report_audit['article_sha256']==comparison['article_sha256']
+            assert report_audit['assets_sha256']==comparison['assets'] and report_audit['primary_members']==len(study['members'])
+            assert hashlib.sha256((ROOT/'tools/audit_inverse_report_2025.py').read_bytes()).hexdigest()==report_audit['auditor_sha256']
+            records={r['id']:r for r in study['records']};winner=records[study['winner']]
+            assert study['winner']==study['audit']['winning_state']==study['members'][0]
+            assert all(records[k]['eligible'] for k in study['members'])
+            for row in study['cutoff_sensitivity']:
+                count=sum(r['eligible'] and r['score']<=winner['score']+row['score_tolerance']+1e-12 and r['metrics']['price']<=winner['metrics']['price']+1+1e-12 for r in records.values())
+                assert row['qualifying_states']==count and row['retained_cap']==min(5,count)
 
-        expected.update({'inverse-search-cases.csv','inverse-prices-by-zone.csv','inverse-generation-by-country.csv'})
-    if comparison.get('joint_network_evaluation'):
-        study=comparison['joint_network_evaluation']
-        assert study['audit']['summary_sha256']==study['summary_sha256']
-        assert study['winner']==study['audit']['winner']
-        assert len(study['records'])==len(study['audit']['certificates'])+len(study['audit']['rejected'])==16
-        assert study['audit']['new_case_states']==14 and study['audit']['external_witnesses']==3
-        assert all(c['hours']==8760 and c['native_modified_physics_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in study['audit']['certificates'])
-        assert all(c['certificate']['separation_gap_mw']>1e-4 and c['certificate']['free_column_residual']<=1e-7 for c in study['audit']['rejected'])
-        for file,sha in [('run_joint_network_calibration_2025.py',study['producer_sha256']),('joint_network_calibration_2025.py',study['helper_sha256']),('joint_network_clear_2025.py',study['clearer_sha256']),('audit_joint_network_calibration_2025.py',study['audit']['auditor_sha256']),('joint_network_report_2025.py',study['renderer_sha256'])]:
-            assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
-        if study.get('repair_producer_sha256'):
-            assert hashlib.sha256((ROOT/'tools/repair_joint_network_calibration_2025.py').read_bytes()).hexdigest()==study['repair_producer_sha256']
-        assert study['design']==json.loads((ROOT/'config/joint-network-calibration-2025.json').read_text())
-        r=study['report_audit']
-        assert r['source_summary_sha256']==study['summary_sha256'] and r['article_sha256']==comparison['article_sha256'] and r['assets_sha256']==comparison['assets']
-        assert hashlib.sha256((ROOT/'tools/audit_joint_report_2025.py').read_bytes()).hexdigest()==r['auditor_sha256']
-        assert r['cases']==16 and r['zone_rows']==len(study['shown'])*48
-        expected.update({'joint-search-cases.csv','joint-prices-by-zone.csv','joint-generation-by-country.csv'})
-    if comparison.get('weekly_error_evaluation'):
-        study=comparison['weekly_error_evaluation'];a=study['audit'];r=study['report_audit']
-        assert a['summary_sha256']==study['summary_sha256']==r['summary_sha256']
-        assert len(a['certificates'])==2
-        assert all(c['hours']==8760 and c['native_residual_mw']<=1e-4 and c['source_offer_bound_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 and c['emergency_mwh']<=1e-6 for c in a['certificates'])
-        for file,sha in [('run_weekly_supply_bids_2025.py',study['producer_sha256']),('weekly_supply_bids_2025.py',study['helper_sha256']),('hourly_error_events_2025.py',study['diagnosis_producer_sha256']),('hourly_error_report_2025.py',study['renderer_sha256']),('audit_weekly_supply_bids_2025.py',a['auditor_sha256']),('audit_hourly_error_report_2025.py',r['auditor_sha256'])]:
-            assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
-        assert study['design']==json.loads((ROOT/'config/weekly-bids-2025.json').read_text())
-        assert r['article_sha256']==comparison['article_sha256'] and r['assets_sha256']==comparison['assets']
-        assert r['zonal_rows']==192 and r['event_rows']==132
-        expected.update({'hourly-error-zones.csv','hourly-error-periods.csv'})
-    assert set(comparison['assets']) == expected
-    for file, sha in comparison['assets'].items():
-        assert hashlib.sha256((folder / 'dispatch-comparison-2025' / file).read_bytes()).hexdigest() == sha
+            expected.update({'inverse-search-cases.csv','inverse-prices-by-zone.csv','inverse-generation-by-country.csv'})
+        if comparison.get('joint_network_evaluation'):
+            study=comparison['joint_network_evaluation']
+            assert study['audit']['summary_sha256']==study['summary_sha256']
+            assert study['winner']==study['audit']['winner']
+            assert len(study['records'])==len(study['audit']['certificates'])+len(study['audit']['rejected'])==16
+            assert study['audit']['new_case_states']==14 and study['audit']['external_witnesses']==3
+            assert all(c['hours']==8760 and c['native_modified_physics_residual_mw']<=1e-4 and c['source_group_bound_residual_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 for c in study['audit']['certificates'])
+            assert all(c['certificate']['separation_gap_mw']>1e-4 and c['certificate']['free_column_residual']<=1e-7 for c in study['audit']['rejected'])
+            for file,sha in [('run_joint_network_calibration_2025.py',study['producer_sha256']),('joint_network_calibration_2025.py',study['helper_sha256']),('joint_network_clear_2025.py',study['clearer_sha256']),('audit_joint_network_calibration_2025.py',study['audit']['auditor_sha256']),('joint_network_report_2025.py',study['renderer_sha256'])]:
+                assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
+            if study.get('repair_producer_sha256'):
+                assert hashlib.sha256((ROOT/'tools/repair_joint_network_calibration_2025.py').read_bytes()).hexdigest()==study['repair_producer_sha256']
+            assert study['design']==json.loads((ROOT/'config/joint-network-calibration-2025.json').read_text())
+            r=study['report_audit']
+            assert r['source_summary_sha256']==study['summary_sha256'] and r['article_sha256']==comparison['article_sha256'] and r['assets_sha256']==comparison['assets']
+            assert hashlib.sha256((ROOT/'tools/audit_joint_report_2025.py').read_bytes()).hexdigest()==r['auditor_sha256']
+            assert r['cases']==16 and r['zone_rows']==len(study['shown'])*48
+            expected.update({'joint-search-cases.csv','joint-prices-by-zone.csv','joint-generation-by-country.csv'})
+        if comparison.get('weekly_error_evaluation'):
+            study=comparison['weekly_error_evaluation'];a=study['audit'];r=study['report_audit']
+            assert a['summary_sha256']==study['summary_sha256']==r['summary_sha256']
+            assert len(a['certificates'])==2
+            assert all(c['hours']==8760 and c['native_residual_mw']<=1e-4 and c['source_offer_bound_mw']<=1e-4 and c['duality_gap_maximum_eur']<.05 and c['emergency_mwh']<=1e-6 for c in a['certificates'])
+            for file,sha in [('run_weekly_supply_bids_2025.py',study['producer_sha256']),('weekly_supply_bids_2025.py',study['helper_sha256']),('hourly_error_events_2025.py',study['diagnosis_producer_sha256']),('hourly_error_report_2025.py',study['renderer_sha256']),('audit_weekly_supply_bids_2025.py',a['auditor_sha256']),('audit_hourly_error_report_2025.py',r['auditor_sha256'])]:
+                assert hashlib.sha256((ROOT/'tools'/file).read_bytes()).hexdigest()==sha
+            assert study['design']==json.loads((ROOT/'config/weekly-bids-2025.json').read_text())
+            assert r['article_sha256']==comparison['article_sha256'] and r['assets_sha256']==comparison['assets']
+            assert r['zonal_rows']==192 and r['event_rows']==132
+            expected.update({'hourly-error-zones.csv','hourly-error-periods.csv'})
+        assert set(comparison['assets']) == expected
+        for file, sha in comparison['assets'].items():
+            assert hashlib.sha256((folder / 'dispatch-comparison-2025' / file).read_bytes()).hexdigest() == sha
     files = [p for p in folder.rglob('*') if p.is_file()]
     hydrated = [p for p in files if str(p.relative_to(folder)) in FILES]
     for p in hydrated:

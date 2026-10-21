@@ -1,6 +1,23 @@
 # Grid Conductor — agent instructions
 
-## Blocking source finding — auction identity, 22 October
+## Current publication direction — corrected prices and oil CHP, 22 October
+
+The user explicitly authorized updating the current model report and country
+explorer to the latest oil-generation-improving model. Display oil-chp-bids-v2
+case chp25 (25% source-labelled CHP tranche), not the 50% annual-total sensitivity.
+Use fresh sdac_prices_2025.py and its independent audit: DE-LU/AT select A01
+sequence1 only; other cached markets require sole unclassified A01. Never use
+A07 intraday, sequence2 fallback, or a secondary source as observed targets.
+All8760 DE/AT/DK1/DK2 reference hours match exactly. Map archived A44 prices match
+where covered and remain intact. Preserve frozen helpers and historical receipts.
+New export/audit/report tools have sdac in their names and fresh provenance.
+The displayed €27.576/MWh is corrected-target evaluation of the saved annual
+witness, not a new solve/refit or accepted-baseline promotion. Non-oil calibration
+used earlier targets; further fitting/promotion remains paused pending explicit
+corrected-target research. Reviews stay disabled. Older publication freezes below
+are historical instructions superseded only for the two authorized current pages.
+
+## Historical diagnostic before correction — auction identity, 22 October
 
 The user's January spike question exposed a price-target selection defect.
 Frozen flow_tracing.parse_day_ahead_prices prefers the highest auction sequence;
