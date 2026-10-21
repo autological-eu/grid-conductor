@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-21",
+  "scope": "Read-only audit and source comparison; no model change or new clearing",
+  "output": "data/bidding-zone-network-2025/thermal-bid-audit-v2",
+  "limitations": "Source inspection and isolated oil-cost function parity; neither external model was installed or benchmarked end-to-end",
+  "assume": {
+    "repository": "https://github.com/assume-framework/assume",
+    "commit": "eb3782193bcb176afccd1fbc878113aa41778a3b",
+    "files": {
+      "LICENSE.txt": "db8ec18950ba49a704561faf12f6c10b7e5853789ff2b11179df441a61c867c5",
+      "assume/units/powerplant.py": "b1549fafb47fb14dd1bc60aabfaa6964bfd9d542959c984c1d41f72841cb6d60",
+      "assume/strategies/flexable.py": "ea27ae0957cf76c4bee55c0e1c0ff89cd653b287f21a8ae3aedac485775758d0",
+      "assume/strategies/naive_strategies.py": "41e42a7ef2ad54ca971665fe6f67fe4ac4a18b71ae5569d2d21307df96abbf6b",
+      "assume/markets/clearing_algorithms/complex_clearing.py": "41b647ecbff3c80ec83e42d423ee6b542827de510c709dd0344526311d8f6ea1"
+    }
+  },
+  "osjmm": {
+    "repository": "https://github.com/ude-ewl/osJMM",
+    "commit": "8d8c7ff2097b4283de2b0dec4d5aadc4aa470d2d",
+    "files": {
+      "LICENSE": "99135d7d1a2536a52dbd5d34c8ca36c3e6aacead9bd85f86f9aa0ab55eb4112b",
+      "README.md": "cf955404c1f8f5470ad3960e3b0d5da9ffe6b6c75e3752537cdabedee8ffb9bf",
+      "JMM.gms": "035148b92e70e6de9f664748d304eb74d563843a75e4d49580fd04f2c7ed6e2d",
+      "inc_structure_det/fuelp.inc": "c04857abaca2752b0511d260c6cdf53eb2951db61f0bc784e0180da2845827f5",
+      "AddOns/Load_Flow/EQUDEF_LFB_netexport.inc": "da38912af1fb92e68206207ab5b70af2beb8954437a63a41d9eb90ac63faa412",
+      "AddOns/MIP/MIP_Equations_3.inc": "098ce420ad4169baba13de757aba9575deae0bfa4b387137b88006d2f997a1dc"
+    }
+  }
+}

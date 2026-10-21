@@ -1,5 +1,19 @@
 # Grid Conductor — agent instructions
 
+## Current audit — thermal cost basis and external bidding models, 21 October
+
+The user requested a proper oil/thermal-bid audit and comparison with osJMM and
+ASSUME. config/thermal-bid-audit-2025.json pins inspected external source files;
+audit_thermal_bid_basis_2025.py replays original fuel/FX and technology units,
+34 oil groups over 8760 hours and isolated ASSUME marginal-cost arithmetic.
+The completed thermal-bid-audit-v2 is source/arithmetic evidence, not a new
+dispatch candidate. EEX primary EUA auctions are a separate dated benchmark,
+not a complete daily spot series. Generic diesel assumptions, delivered product,
+electrical efficiency, carbon jurisdiction and operating roles remain unresolved.
+Keep the three published articles/model/baseline unchanged. A two-volume
+minimum-output/flexible-offer heuristic is a research recommendation, not an
+authorized fitted correction or verified accuracy improvement. Reviews stay off.
+
 ## Current diagnostic — supply-bid review, 21 October
 
 The user requested reviewing the actual supply curves after the oil non-dispatch

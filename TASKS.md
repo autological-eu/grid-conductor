@@ -25,6 +25,74 @@ lower MAE and transparent bias/seasonal diagnostics. Native PyPSA parity is an
 optional numerical diagnostic, not the development target. Automatic hourly
 reviews remain disabled.
 
+## Completed audit — thermal cost basis, osJMM and ASSUME, 21 October 2026
+
+User requested source/arithmetic audit and comparison before adding operating-role
+complexity. New source pins: config/thermal-bid-audit-2025.json. New verifier:
+tools/audit_thermal_bid_basis_2025.py. Authoritative local result/report:
+data/bidding-zone-network-2025/thermal-bid-audit-v2/{audit.json,report.md}.
+No annual market solve, fitted correction, model/baseline/explorer change or new
+published article. Three retained website articles stay intact; reviews stay off.
+
+Verified raw technology-data v0.15.0 rows against processed oil/gas/coal/lignite
+fuel, VOM and carbon factors; exact World Bank/ECB monthly-to-hourly reconstruction;
+original review source/array hashes and prior independent certificate. All 34 oil
+groups/8760 hours reproduce original and final costs to 2.85e-14 EUR/MWh;
+isolated pinned ASSUME calc_simple_marginal_cost agrees exactly. This is function
+parity, not running/benchmarking ASSUME or empirical market validation. Carbon is
+not double-counted in the replacement code. Oil remains uncalibrated and all
+source availability, fixed hydro and network constraints are unchanged.
+
+Typical oil input 34.491867 EUR/MWh thermal at 35% electrical efficiency yields
+98.548193 fuel + 58.765714 carbon + 8.014800 VOM = 165.328707 EUR/MWh electric.
+Carbon factor .2571 tCO2/MWh thermal is explicitly diesel-chemistry based; efficiency
+and VOM cite DEA Diesel engine farm, with generic efficiency/2015 entry rather
+than verified 2025 plant-specific electrical heat rates. 40%/45% efficiency would
+give 145.664469/130.370061 at identical inputs: illustrative bid sensitivity only.
+Brent/1.7 MWh thermal per barrel is not delivered diesel/heavy-fuel-oil pricing;
+raw cost-row fuel assumptions differ and are replaced, not added. Gas heating
+basis is still assumed equivalent (multiplier1), coal/lignite fuel is static,
+and carbon is uniformly assumed EUR80/t rather than sourced daily/jurisdictional.
+
+Fresh EEX 2025 T3PA workbook: 213 successful primary auctions, 7 January–15 December,
+59.76–84.60 EUR/t, arithmetic mean73.452488, volume-weighted mean73.431931.
+The latter differs from80 by6.568069 EUR/t, equivalent to4.824716 EUR/MWh on a
+35%-efficient oil bid. These are auction benchmarks, not 365 observed daily spot
+prices; no calendar filling or model replacement performed. UK government confirms
+GB UK ETS differs from Northern Ireland electricity's EU ETS; EU/UK schemes,
+additional taxes and other country applicability require explicit reconciliation.
+
+Inspected osJMM commit8d8c7ff2097b4283de2b0dec4d5aadc4aa470d2d:
+GAMS cost-minimising rolling electricity/heat/reserve scheduling, piecewise fuel
+use with online/no-load term, CHP output restrictions, optional LP/MIP and flow-
+based coupling. Fuel EUR/GJ converts by3.6; kgCO2/GJ by.0036 to tCO2/MWh fuel.
+This is not principally an agent bid-learning model. GAMS/MATLAB/MySQL/CHP tooling
+and separate scenario data are listed prerequisites; no reproducible European2025
+price error/runtime established. Actual LICENSE is MIT despite stale README text.
+
+Inspected ASSUME commiteb3782193bcb176afccd1fbc878113aa41778a3b:
+Python agent/market framework, naive marginal-cost strategy and optional rule-
+based, optimisation and learning strategies. flexable.py splits minimum/flexible
+volumes: off-state startup markup, on-state avoided-restart/heat benefit can lower
+minimum-output bids, flexible volume retains marginal-cost logic with heat-loss
+adjustment. Availability/reserve/heat obligations and ramps affect volumes. The
+heat helper uses a .9 alternative-boiler efficiency proxy, not audited plant heat
+economics. Complex clearing supports NTC/linked/block/minimum-acceptance orders;
+nonconvex price extraction requires fixing acceptance decisions and a re-solve.
+Reinforcement learning is optional; no framework installation or runtime/accuracy
+benchmark was performed. Both projects are references, not drop-in2025 datasets.
+
+Recommended next actions, not implemented changes: (1) source carbon by regime
+and dated fuel product/heating basis; (2) reconcile dated unit identities, fuel,
+electrical efficiencies and market eligibility; (3) test documented heat-led
+minimum volumes separately from flexible marginal bids, preserving reserve scope;
+(4) only then consider startup/part-load rules in controlled annual comparisons.
+Prefer the small ASSUME-style deterministic bid layer on the existing constrained
+solver; retain osJMM as a richer heat/commitment reference. Do not lower every oil
+offer to force generation or copy forecast-price heuristics using evaluation
+prices. Keep all-year price/mix, negative/tail-hour, physics and timing checks.
+The audit cannot attribute price MAE to oil or certify improved scenario values.
+
 ## Completed diagnostic — supply-bid curves, 21 October 2026
 
 Read-only review of all8760hours /773 actual offer columns, using the displayed

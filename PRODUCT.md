@@ -376,6 +376,15 @@ resolution and delivered-product approximations. Nuclear and other technologies
 use labelled cost/availability proxies; unsupported commitment, outages and ramps
 must be disclosed rather than invented.
 
+Cost arithmetic and empirical bid validity are separate checks. Trace fuel,
+emissions factors and electrical efficiency to their technology and vintage;
+a generic diesel entry does not certify every oil plant. Declare the carbon
+pricing jurisdiction and distinguish primary-auction observations from daily
+secondary-market prices. Any heat credit must represent a documented useful-heat
+benefit without deleting combustion emissions or applying total CHP efficiency
+as electrical efficiency. Market-ineligible reserve capacity cannot be made
+eligible by changing its bid price.
+
 In the paused daily reference, reservoir hydro uses a seasonal inventory target
 and water-value bid. Battery and
 pumped-hydro bids use loss/wear-adjusted forecast buy/sell thresholds. Forecasts
