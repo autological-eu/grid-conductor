@@ -25,7 +25,66 @@ lower MAE and transparent bias/seasonal diagnostics. Native PyPSA parity is an
 optional numerical diagnostic, not the development target. Automatic hourly
 reviews remain disabled.
 
-## Current work — hourly error diagnosis and weekly supply bids, 20 October 2026
+## Current work — country data explorer, 21 October 2026
+
+The user requests country-level source/model generation mix and hourly prices for
+every country zone, and explicitly selected the latest verified €27.49/MWh joint
++ weekly run as the default. `/countries` is a read-only explorer linked from
+Docs and report navigation; the accepted baseline, browser scenario engine,
+three articles and four existing report figures remain unchanged.
+
+`export_country_explorer_2025.py` derives the data from the saved weekly witness,
+without another market solve or fit. It exports 34 country files with hourly
+generation point/conditional bounds, observations and all modeled price areas;
+original IRENA end-2024/end-2025 capacity cells/flags; original 2025 Ember monthly
+rows; raw reported ENTSO-E PSR columns; coverage and original-source hashes.
+Country generation uses source-country membership; zonal generation uses inherited
+geographic mapping. DE A75 generation is national/excludes LU; DE-LU prices are
+shared. FR national/model-Corsica scope is not certified identical. Missing NO5
+and Italian generation constituents remain missing, not partial national totals.
+Raw zonal data remains separately inspectable/downloadable. IRENA capacity is not
+generation; Ember monthly observations are never interpolated into hourly data.
+
+Fresh root: `data/bidding-zone-network-2025/country-explorer-v1/`. Export425.02s,
+independent audit193.66s; these are data derivation/replay times, not market solves.
+`audit_country_explorer_2025.py` independently reconstructs source allocations,
+all 83 displayed generation areas and 50 country/price-zone instances (48 unique
+zones plus shared DE-LU/IE-SEM instances). It checks the latest audited country
+generation totals, all original provider cells, source nulls and every rounded
+exported array. Maximum allocation difference7.28e-12MW; generation rounding
+<=0.05MW and price rounding<=0.0005EUR/MWh. Original IRENA rows are reparsed from
+the pinned PDF. Monthly source rows remain exact strings, including missing cells.
+
+Only the selected country's hourly data is loaded. All country payloads together
+are13.04MiB gzip; Germany0.75MiB, largest country Italy1.75MiB. Public asset
+allowlist total127 files /20.17MiB. Full-hour witnesses, model rebuild arrays and
+bulk provider inputs stay ignored. No second model's hourly data is duplicated.
+Hourly and explicit daily-mean charts preserve gaps; full-year CSVs always retain
+all8760 timestamps and source-vs-model/bounds columns. Country/date/detail state
+is shareable in the URL. Price MAE/bias/correlation use unrounded full-year arrays.
+
+Browser testing exposed automatic gzip decoding by the preview host. A separate
+`prepare_country_explorer_transport.py` adds decoded JSON hashes while preserving
+the original source audit and original manifest hash. The client verifies either
+wire encoding; CI reconstructs/rechecks both original receipts and all raw hashes.
+No country payload or source calculation changed for this transport fix. Unit
+tests cover both encodings, tampering, UTC/DST dates, strict missing daily means,
+negative prices, all-hour/multi-zone CSVs and original provider strings.
+
+Final production browser checks pass1440/390/320px, including lazy loading,
+NO's five zones, IT's seven, shared DE-LU prices, missing NO5 national generation,
+zonal inspection, date/detail changes, full-year downloads, reload and overflow.
+The final mobile layout makes date inputs share a row and chart captions identify
+hourly values/daily means. Full-year hourly Germany rendering was visually checked
+with all8760 points; no hidden aggregation/downsampling. All19 Bun tests/2,421
+assertions, final type check, lint (six unchanged warnings, no errors), production
+build and asset checks pass. Existing workbench smoke passes1440/390/320/667px
+and both retained reports' maths passes1440/390/320px. The Pages workflow includes
+country-explorer checks before deployment and against the live site; publication
+claims require successful CI and unauthenticated route/data verification. Automatic hourly
+reviews remain disabled. No promotion, main merge or new modelling experiment.
+
+## Completed checkpoint — hourly error diagnosis and weekly supply bids, 20 October 2026
 
 User pivoted from further network calibration to identifying when/what errors
 occur and testing a correction. Joint calibration was held locally as4ef7b57 at

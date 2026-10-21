@@ -28,6 +28,21 @@ The map is the landing page. Users inspect observed price/flow evidence, create
 browser-local scenarios and compare a baseline with the same model plus an
 investment. System benefit is not investor income or certified investment return.
 
+The 21 October country-data request adds a read-only explorer at `/countries`,
+linked from Docs and the research report. A country selector precedes generation
+and price comparisons. Default to the latest verified joint + weekly run
+(27.49 EUR/MWh), as explicitly selected by the user; this is not promotion of the
+accepted baseline or integration into the scenario engine. Show all price zones
+within the selected country, retaining shared-zone and missing-observation labels.
+Support UTC date windows, hourly data, explicit daily aggregation and full-year
+CSV downloads. Keep source generation (ENTSO-E hourly where available, Ember
+monthly), IRENA capacity cells and modeled dispatch separate. Never invent hourly
+generation from monthly totals, zero-fill missing types/constituent zones, or
+represent partial zone sums as national totals. Show original provider records,
+units, coverage and provenance. Illustrative generation allocation and conditional
+bounds must remain visible; they are not uniquely recovered plant dispatch or
+confidence intervals. Publish compact per-country files loaded only on demand.
+
 ## Active modelling approach and accuracy goal
 
 The latest direction uses bounded, transparent resource bids driven by smooth

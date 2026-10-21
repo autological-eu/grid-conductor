@@ -22,6 +22,12 @@ This price-calibrated reconstruction is not independent forecast validation.
 
 ## Current documentation and models
 
+- [Country data explorer](https://autological-eu.github.io/grid-conductor/countries/):
+  choose among 34 countries and inspect the latest verified joint + weekly run
+  (€27.49/MWh). Compare hourly ENTSO-E generation/prices, monthly national Ember
+  generation and original IRENA capacity cells, with full-year CSV downloads.
+  This read-only viewer does not promote the accepted baseline or replace scenarios.
+
 - [Workbench methodology](docs/workbench-methodology.md): bottlenecks, live scenario
   equations, opportunity/carbon interpretation and exact data sources.
 - [Hourly price-error report](docs/european-physical-synthetic-clearing-2025.md):

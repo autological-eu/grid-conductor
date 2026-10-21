@@ -1,5 +1,21 @@
 # Grid Conductor — agent instructions
 
+## Active user direction — 21 October country explorer
+
+The user requests a country selector with source/model generation mix and all
+country-zone hourly prices. They explicitly selected the latest verified joint
++ weekly run (27.49 EUR/MWh) as the explorer default; no accepted-baseline
+promotion follows. Add a read-only `/countries` route linked from Docs/reports;
+the three existing articles/four report figures and workbench engine stay intact.
+Derive data from the audited saved witness without another solve. Keep raw IRENA
+capacity cells, Ember monthly rows and ENTSO-E hourly PSR observations distinct;
+source coverage, nulls, shared zones and conditional mix allocation remain explicit.
+Use compact lazy gzip country assets and browser-generated CSV downloads; no raw
+bulk provider cache, witness or toolchain goes into Git. Independently replay
+source/dispatch aggregation and rounded exports before publication. Browser checks
+must cover country changes, all Norwegian/Italian zones, date windows, CSVs,
+missing data, direct Pages links and mobile layout. Reviews remain disabled.
+
 ## Active user direction — 20 October hourly error follow-up
 
 Diagnose the timing and kind of hourly price errors before expanding calibration.

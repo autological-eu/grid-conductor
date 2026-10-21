@@ -146,3 +146,8 @@ data/daily-market-2025/
 !public/research/dispatch-comparison-2025/joint-generation-by-country.csv
 !public/research/dispatch-comparison-2025/hourly-error-zones.csv
 !public/research/dispatch-comparison-2025/hourly-error-periods.csv
+!/public/research/country-explorer-2025/
+/public/research/country-explorer-2025/*
+!/public/research/country-explorer-2025/manifest.json
+!/public/research/country-explorer-2025/verification.json
+!/public/research/country-explorer-2025/??.json.gz

@@ -8,6 +8,8 @@ from pack_model_metadata import FILES
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED = [
+    'country-explorer-2025/manifest.json', 'country-explorer-2025/verification.json',
+    'country-explorer-2025/??.json.gz',
     'dispatch-comparison-2025/overview.png',
     'dispatch-comparison-2025/national-mix.png',
     'dispatch-comparison-2025/daily-prices.png',
@@ -57,6 +59,8 @@ ALLOWED = [
 
 
 def check():
+    from check_country_explorer import check as check_countries
+    check_countries()
     folder = ROOT / 'public/research'
     comparison = json.loads((folder / 'dispatch-comparison-2025/summary.json').read_text())
     assert comparison['generation_reporting_areas'] == 38 and comparison['observed_price_zones'] == 41
