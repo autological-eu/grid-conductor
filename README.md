@@ -18,22 +18,25 @@ estimates. Its browser-local line/battery scenarios still use a reduced-form
 The accepted research baseline is the seasonal/time-of-day bid model pinned in
 [config/research-baseline.json](config/research-baseline.json): full-year 2025
 reconstruction MAE **28.96 EUR/MWh**, 12.8% below the previous unfitted control.
-This price-calibrated reconstruction is not independent forecast validation.
+That is a historical score against the former retained targets, not a corrected
+SDAC benchmark. This calibrated reconstruction is not independent forecast validation.
 
 ## Current documentation and models
 
 - [Country data explorer](https://autological-eu.github.io/grid-conductor/countries/):
-  choose among 34 countries and inspect the latest verified joint + weekly run
-  (€27.49/MWh). Compare hourly ENTSO-E generation/prices, monthly national Ember
+  choose among 34 countries and inspect the verified oil/CHP 25% checkpoint
+  (€27.58/MWh against corrected ENTSO-E main day-ahead hourly prices). Compare hourly ENTSO-E generation/prices, monthly national Ember
   generation and original IRENA capacity cells, with full-year CSV downloads.
   This read-only viewer does not promote the accepted baseline or replace scenarios.
 
 - [Workbench methodology](docs/workbench-methodology.md): bottlenecks, live scenario
   equations, opportunity/carbon interpretation and exact data sources.
 - [Hourly price-error report](docs/european-physical-synthetic-clearing-2025.md):
-  fixed-hydro baseline, event/weekly/seasonal error diagnosis and two controlled
-  weekly supply-bid corrections. MAE28.96→28.66 on the baseline and27.75→27.49
-  on the joint checkpoint; modest in-sample gains, no baseline/browser promotion.
+  current fixed-hydro model, daily oil/FX/carbon proxies and optional CHP heat
+  credit, with four figures, all-zone price errors and generation comparisons.
+  German hourly oil error improves42.5%; European price MAE remains€27.58/MWh.
+  This re-evaluates a saved solution: existing non-oil bids were calibrated to
+  earlier auction targets and have not been refitted. No baseline/browser promotion.
 - [Paused resource-bidding research reference](docs/daily-fuel-dispatch-2025.md): generator
   strategies, fuel inputs, daily chronological storage and annual observed-price errors.
 
@@ -75,79 +78,48 @@ Ignored `data/` holds provider caches, source networks and large replay witnesse
 Never commit secrets or multi-gigabyte artifacts. Python research uses the pinned
 `data/pypsa-eur/upstream/.pixi/envs/default/bin/python` interpreter.
 
-Current research entry points:
+Current publication entry points:
 
-- `joint_network_calibration_2025.py`, `run_joint_network_calibration_2025.py` and
-  `audit_joint_network_calibration_2025.py`: finite supply/AC-headroom/wind calibration.
-- `inverse_bid_ensemble_2025.py`, `run_inverse_bid_ensemble_2025.py` and
-  `audit_inverse_bid_ensemble_2025.py`: verified prior bid-only calibration, retained as a frozen anchor.
-- `write_concise_dispatch_report_2025.py` delegates the current report to
-  `hourly_error_report_2025.py`; `audit_hourly_error_report_2025.py` independently
-  checks its compact zone/event CSVs. Prior joint/bid-only CSVs remain supporting
-  checkpoint evidence.
-- `hourly_error_events_2025.py` inventories hourly errors in both saved anchors;
-  `run_weekly_supply_bids_2025.py` tests the two declared weekly supply-bid
-  corrections, with independent `audit_weekly_supply_bids_2025.py` replay.
-  The prior bid-only renderer/auditor still preserve supporting comparison evidence.
-- `hybrid_fixed_hydro_2025.py` and `evaluate_fixed_hydro_bids_2025.py` are frozen
-  source/reference tools; do not run their historical publisher over the current report.
-- `fixed_reservoir_screening_2025.py`, `report_fixed_reservoir_screening_2025.py`
-  (frozen checkpoint; the historical publisher would overwrite the current report).
-- `fast_daily_market.py` (experimental performance adapter), `terminal_daily_market.py`
-  (retained producer), `audit_terminal_daily_market.py`.
-- `simple_resource_bids.py`, `thermal_bid_rules.py`, `prepare_fuel_prices.py`.
-- `compact_zonal_market.py`, `run_compact_zonal_2025.py` (experimental transport /
-  rolling-storage simplification), `report_compact_zonal_2025.py` (same daily report).
-- `collect_dispatch_validation_prices.py`, `compare_daily_dispatch_prices.py`.
+- `sdac_prices_2025.py` and `audit_sdac_prices_2025.py`: fresh original A44 targets,
+  explicit DE-LU/AT sequence1 selection, exclusion of A07 intraday and independent
+  full-year DE/AT/DK reference checks. Secondary references never replace ENTSO-E.
+- `export_sdac_country_explorer_2025.py` and
+  `audit_sdac_country_explorer_2025.py`: saved oil/CHP dispatch, all countries,
+  original IRENA/Ember rows, hourly generation/price coverage and allocation bounds.
+  `prepare_country_explorer_transport.py` binds compressed and decoded JSON hashes.
+- `report_sdac_oil_clearing_2025.py`, `audit_sdac_oil_report_2025.py` and
+  `check_sdac_publication_2025.py`: the current four-figure report, independently
+  replayed CSVs and CI-checkable publication/source/country provenance.
+- `oil_chp_bids_2025.py` and its `run_`/`audit_` tools produced the retained
+  `oil-chp-bids-v2/chp25.npz` solution and `verification-v2` certificate. There is
+  no new optimization or fit for this publication.
 
-Run from the repository root; inspect each tool's CLI and retained report for
-inputs/provenance. Source data and retained-reference dependencies must not be
-removed merely because their original articles are retired.
+Original inputs, annual witnesses and sealed intermediate snapshots stay in
+ignored local data directories. Inspect live jobs and provenance before any new
+computation. Existing producers refuse to overwrite sealed outputs: reproduction
+requires original caches and fresh output/staging paths, then source replay,
+export, independent allocation/provider audit, transport metadata, report and
+report audit in that order. Do not overwrite the current report with historical
+publishers or resume earlier searches as a publication step.
 
-To reproduce the prior joint inverse checkpoint with the verified local caches, restore
-immutable metadata and use a **fresh** ignored output directory. The accepted
-baseline and all provider inputs must already exist; this does not fetch omitted
-large data or restart old searches. The current driver also requires the retained
-interrupted wind-control witness and code/design provenance. The numerical retry
-command below applies when the first driver reports unresolved states; if none
-exist, audit that first directory directly. It never expands the parameter grid.
+Historical joint/inverse/weekly helpers remain frozen dependencies of the saved
+model; their original calibration used the former target selection. They do not
+produce the current report. A new calibration against corrected targets requires
+fresh provenance and unchanged physical/chronological/acceptance gates.
+
+The committed compact publication can be checked without bulk research caches:
 
 ```sh
-python3 tools/pack_model_metadata.py --restore
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
-  tools/run_joint_network_calibration_2025.py data/bidding-zone-network-2025/joint-reproduction-new
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
-  tools/repair_joint_network_calibration_2025.py data/bidding-zone-network-2025/joint-reproduction-new data/bidding-zone-network-2025/joint-retry-new
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
-  tools/audit_joint_network_calibration_2025.py data/bidding-zone-network-2025/joint-retry-new
-```
-
-For the current weekly-bid correction, retain the accepted/joint witnesses and
-source-bound hourly-error-events-v1 inventory, then use a fresh output root:
-
-```sh
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
-  tools/run_weekly_supply_bids_2025.py data/bidding-zone-network-2025/weekly-reproduction-new
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
-  tools/audit_weekly_supply_bids_2025.py data/bidding-zone-network-2025/weekly-reproduction-new
-```
-
-For the retained report, the weekly-bid and supporting joint folders are pinned in
-`config/research-improvement-plan.json`. Only point it at a new trial after that
-trial passes independent replay. With the existing verified report/source caches:
-
-```sh
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  data/pypsa-eur/upstream/.pixi/envs/default/bin/python \
-  tools/write_concise_dispatch_report_2025.py data/bidding-zone-network-2025/seasonal-report-v1
-python3 tools/pack_model_metadata.py
+python3 tools/check_zone_price_traces.py
 python3 tools/check_public_assets.py
+bun run lint
+bun run typecheck
+bun run test
+bun run build
 ```
+
+The Pages workflow additionally runs desktop/mobile workbench, report-maths and
+country-explorer browser checks before deployment and against the live URLs.
 
 Joint inverse fits are historical reconstructions, not recovered actual grids,
 bids, posterior distributions or investment models. Effective AC headroom and wind
