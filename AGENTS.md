@@ -1,5 +1,20 @@
 # Grid Conductor — agent instructions
 
+## Current diagnostic — supply-bid review, 21 October
+
+The user requested reviewing the actual supply curves after the oil non-dispatch
+finding. review_supply_bids_2025.py derives annual bid/quantity diagnostics from
+the frozen joint/weekly book and audited oil trial; audit_supply_bid_review_2025.py
+checks original cost/availability signatures, saved dispatch, weighted CDFs and
+source comparisons without a new solve. report_supply_bid_review_2025.py produces
+a standalone PDF/plots outside Git; the website/three articles stay unchanged.
+Oil/biomass/waste are absent from the five-fuel calibration targets, not absent
+from the physical LP. Distinguish market-eligible supply from installed nameplate
+and realised A75 output: primary operator/regulator sources identify reserve
+generation outside the market. Reconcile unit/date/CHP/reserve roles before
+discounting oil bids or assigning all actual output to day-ahead clearing.
+This is diagnosis, not a new fitted model or baseline promotion. Reviews stay off.
+
 ## Active user direction — 21 October oil supply
 
 Audit liquid oil explicitly through fleet capacity, availability, fuel/FX/carbon

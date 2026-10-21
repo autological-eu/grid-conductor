@@ -25,7 +25,66 @@ lower MAE and transparent bias/seasonal diagnostics. Native PyPSA parity is an
 optional numerical diagnostic, not the development target. Automatic hourly
 reviews remain disabled.
 
-## Current work — oil supply, 21 October 2026
+## Completed diagnostic — supply-bid curves, 21 October 2026
+
+Read-only review of all8760hours /773 actual offer columns, using the displayed
+joint/weekly checkpoint and the audited capacity+daily-oil trial for oil-source
+comparisons. No new annual solve, bid fit, source correction or baseline change.
+Fresh tools: review_supply_bids_2025.py, audit_supply_bid_review_2025.py,
+report_supply_bid_review_2025.py. Ignored root: supply-bid-review-v2/ under
+data/bidding-zone-network-2025/. Standalone PDF,3 scientific PNGs and compact
+CSVs are local artifacts; no new website article, published figure or bulk asset.
+
+Available-MW-weighted final bid P10–P90, EUR/MWh electricity:
+wind/solar0; biomass19.98; nuclear18.84–43.24; waste35.93;
+gas68.51–160.04; coal/lignite86.11–151.43; oil158.00–188.16.
+These are potential supply prices, not cleared-price ranges or observed bids.
+Oil formula is unchanged by calibration; gas/coal/nuclear have fitted temporal
+and resource adjustments. Calibration generation targets cover Wind/Solar/
+Nuclear/Gas/Coal, excluding explicit oil, biomass and waste errors.
+
+Gas50/35/15% blocks generate331.747 /24.938 /0.071TWh. Upper block supplies
+only0.0199% of gas output and uses0.0239% of its offered energy envelope.
+Changing an unused expensive tail alone has little direct price leverage.
+Available-MW/bid errors, market participation and low-cost volume remain separate
+hypotheses: this review does not assign a causal share of Europe's price error.
+
+Oil bids exceed model prices in the five source-comparable cases despite positive
+available capacity and zero dispatch; original LP columns/signatures confirm
+merit-order exclusion rather than a missing oil column. German B06 oil appears
+in all8760hours, including479 negative-price hours. 95.12% of reported DE oil
+energy occurs below our cheapest daily-oil bid (PL93.25%, SK93.32%, BE98.08%).
+SI is different:45 positive-output hours; only16.77% of oil energy below bid.
+Covered-hour comparisons retain SI/SK8758-hour gaps. BE observed peak166.9MW
+exceeds inherited130.2MW in4hours; its broader capacity discrepancy remains open.
+
+Raw plant catalogue labels1177.51MW of DE oil CHP; this is role evidence, not
+identification of generating units. It also contains a720MW Ingolstadt site entry.
+Uniper says Ingolstadt has been TSO-only grid reserve since1April2015:
+https://www.uniper.energy/germany/power-plants-germany/ingolstadt
+BNetzA's28April2025 release confirms domestic reserve operates outside the market:
+https://www.bundesnetzagentur.de/1057990
+Thus actual A75 production need not be day-ahead cleared generation. Site/unit,
+dates and capacity definitions need reconciliation before changing that entry.
+Do not apply an arbitrary universal oil discount to force all B06 into clearing.
+Next: reconcile market-eligible fleet/CHP/reserve roles and delivered-fuel/heat
+accounting, validate omitted fuels explicitly, then test cheap-block volume/bids
+with controlled full-year price/mix comparisons. No new model decision is implied.
+
+The first export failed before saving due to an unavailable fixed-hydro variable;
+its source/failure record remains in supply-bid-review-v1/. The corrected exporter
+reconstructs fixed injection as source demand minus existing net load, without
+changing either. Completed read-only export152.08s. Derivative replay passes
+original bitwise bid/availability signatures, exact saved dispatch/prices,
+8760-hour balance (max1.036e-6MW), weighted quantile bounds, source oil formula,
+all five country observations and raw catalogue roles. Equivalent fuel-expression
+reassociation moved tied prices by one ULP; the CDF audit now checks the exact
+exported samples after independent formula replay, preserving all numerical gates.
+Standalone curves explicitly distinguish current-checkpoint stacks from the oil
+trial;15January noon is an illustrative previously diagnosed stress hour, not a
+representative or independent validation sample. Annual statistics retain all hours.
+
+## Completed checkpoint — oil supply, 21 October 2026
 
 User requested explicit oil capacity and fuel-priced supply bids. Oil is already
 present in the inherited fleet and monthly Brent/ECB bid rule; the annual Ember

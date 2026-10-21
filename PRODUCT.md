@@ -53,6 +53,11 @@ quotes from delivered generating-fuel costs. Retain source geography, reporting
 year and CHP/fuel-switching limitations. The explorer must expose oil separately
 against ENTSO-E B06 even when the national Ember chart groups it as Other fossil;
 compare covered hours consistently and leave unknown observations missing.
+Separate market-eligible capacity from installed nameplate and realised physical
+generation from day-ahead cleared quantities. Actual generation can include
+out-of-market reserve/redispatch or heat-led operations; these observations do not
+by themselves identify supply bids. Retain dated operating-role evidence and
+explain the validation scope before fitting a market model to total generation.
 
 The latest direction uses bounded, transparent resource bids driven by smooth
 seasonal and local-time patterns, excluding residual demand as a fitted hourly
