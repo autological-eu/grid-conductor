@@ -385,6 +385,13 @@ benefit without deleting combustion emissions or applying total CHP efficiency
 as electrical efficiency. Market-ineligible reserve capacity cannot be made
 eligible by changing its bid price.
 
+For simple heat-led bid experiments, conserve each parent offer's hourly available
+MW when splitting a low-price tranche from flexible merchant supply. Distinguish
+an optional cheap offer from a forced minimum or observed heat schedule. Declare
+heat-conversion and alternative-boiler assumptions, keep thermodynamic bounds,
+and report hourly/monthly generation errors and negative-price behaviour alongside
+annual energy. Annual-total agreement alone cannot establish dispatch or bid validity.
+
 In the paused daily reference, reservoir hydro uses a seasonal inventory target
 and water-value bid. Battery and
 pumped-hydro bids use loss/wear-adjusted forecast buy/sell thresholds. Forecasts

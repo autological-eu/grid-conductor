@@ -1,0 +1,20 @@
+{
+  "year": 2025,
+  "anchor": "oil-supply-v2/capacity_and_daily_oil",
+  "cases": ["control", "source_costs", "chp25", "chp50"],
+  "maximum_new_annual_solves": 3,
+  "chp_tranche_fractions": {"control": 0, "source_costs": 0, "chp25": 0.25, "chp50": 0.5},
+  "useful_heat_efficiency_proxy": 0.5,
+  "alternative_gas_boiler_efficiency": 0.9,
+  "alternative_gas_emissions_t_mwh_th": 0.198,
+  "heat_credit": "On the CHP-labelled low tranche only: (0.5 / existing electrical efficiency) * (monthly gas EUR/MWh_th + applicable carbon EUR/t * 0.198) / 0.9. No credit on flexible or non-CHP capacity. No startup/forecast or evaluation-price input.",
+  "tranche_status": "25% and 50% of geographically matched source CHP capacity are predeclared structural sensitivities, not measured minimum output or heat schedules. Useful heat efficiency 0.5 and boiler efficiency 0.9 are explicit proxies; no heat is forced and offers may be curtailed.",
+  "carbon": "Oil and its hypothetical displaced gas boiler only: EEX successful T3PA primary-auction same-date volume-weighted price, carried to following UTC days. First 6 days keep EUR80/t. Last 16 days carry 15 December auction. This is retrospective auction-price proxy, not daily secondary spot or day-ahead-known information.",
+  "carbon_countries": ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "NO", "IS", "LI"],
+  "other_carbon": "Keep inherited EUR80/t outside declared EU/EEA set. Shared IE-SEM supply retains source-country weights; GB units in Northern Ireland are unresolved. This experiment is not a complete UK/other-jurisdiction tax correction.",
+  "fuel": "Daily EIA Brent / daily ECB with inherited explicit 1.7 MWh thermal/barrel; existing first-day fallback retained. No unsupported delivered-product or efficiency correction.",
+  "capacity": "Retain audited source-backed PL/SK/SI additions and all current total hourly oil envelopes; split CHP proportions by source plant parent/location and current refined-bus capacity. Unknown roles and unlocated plants receive no heat credit. Reserve eligibility remains unresolved; no blanket removal or discount.",
+  "fixed": "All non-oil bids, demand, renewable availability, fixed hydro, GSK, topology, HVDC, branch ratings and fitted coefficients remain frozen.",
+  "evaluation": "All 8760 hours and 41 eligible price areas; known-hour ENTSO-E B06 quantities for DE/BE/PL/SK/SI, retaining missing hours. Report annual/monthly/hourly errors, active/negative-price hours and adverse effects. No generation or price target enters bid construction; no automatic best-case/baseline promotion.",
+  "gates": "Every new annual must be complete/optimal with zero emergency, primal/native residual <=1e-4 MW, objective/duality error <EUR0.05. Independent source, two-tranche conservation, country allocation and full-year KKT replay before result claims. Bid objective with heat credits is not reported electricity-only fuel expenditure or complete system heat cost."
+}

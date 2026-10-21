@@ -1,5 +1,19 @@
 # Grid Conductor — agent instructions
 
+## Current experiment — simple oil/CHP bids, 21 October
+
+The user authorized testing the audited source corrections and a simple
+heat-led/flexible bid structure. config/oil-chp-bids-2025.json predeclares a reused
+capacity+daily-oil control and exactly three new annual cases: dated oil carbon
+proxy alone, then 25%/50% of source-labelled CHP MW at an explicit avoided-heat
+credit. No target fitting or unsupported efficiency/delivered-fuel correction.
+Use oil_chp_bids_2025.py, its run/audit/report tools, and authoritative ignored
+oil-chp-bids-v2/verification-v2. Both CHP cases improve German oil quantities but
+hourly r remains about .13; the near-matching annual total is not acceptance.
+Other four comparable countries still have zero modeled oil and Europe price
+MAE slightly worsens. Preserve these adverse results. Neither case is promoted;
+baseline/explorer/three published articles and disabled reviews remain intact.
+
 ## Current audit — thermal cost basis and external bidding models, 21 October
 
 The user requested a proper oil/thermal-bid audit and comparison with osJMM and

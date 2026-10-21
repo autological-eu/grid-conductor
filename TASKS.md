@@ -25,6 +25,80 @@ lower MAE and transparent bias/seasonal diagnostics. Native PyPSA parity is an
 optional numerical diagnostic, not the development target. Automatic hourly
 reviews remain disabled.
 
+## Completed controlled trial — simple oil/CHP bids, 21 October 2026
+
+User authorized implementing/testing simple bids after the source audit.
+config/oil-chp-bids-2025.json declares exactly three new annual clears plus reuse
+of oil-supply-v2/capacity_and_daily_oil as the independently audited control.
+Fresh tools: oil_chp_bids_2025.py, run_oil_chp_bids_2025.py,
+audit_oil_chp_bids_2025.py, report_oil_chp_bids_2025.py and three targeted tests.
+Authoritative ignored root: data/bidding-zone-network-2025/oil-chp-bids-v2/,
+with completed verification-v2/audit.json, report.md, three PNGs, figure PDF and
+country-oil-comparison.csv. No published article, default/explorer/baseline change,
+retired search, native-PyPSA accuracy target or automatic-review restart.
+
+The source-cost control retains daily EIA Brent/ECB and audited PL/SK/SI capacity
+additions, replacing only EU/EEA oil carbon by same-date volume-weighted successful
+EEX T3PA primary auctions carried over UTC days. Six initial days retain EUR80/t;
+maximum final carry16 days. This is an auction-price proxy, not complete daily
+secondary prices or operational forecasts. Other carbon regimes stay inherited;
+GB/NI and further applicability/taxes remain unresolved. Non-oil costs are frozen.
+Electrical efficiencies/VOM and1.7MWh thermal/barrel remain explicit proxies;
+no unsupported40% efficiency or delivered-product correction was applied.
+
+The two structural cases split25%/50% of geographically matched catalogue CHP
+capacity off each original oil offer, conserving total hourly available MW and
+its balance column. Only that optional tranche receives a hypothetical useful-heat
+credit: (.5/electrical efficiency)*(monthly gas+applicable carbon*.198)/.9.
+Useful heat efficiency.5 and alternative boiler efficiency.9 are declared
+sensitivities with electrical+heat efficiency<=1, not sourced unit heat schedules.
+Remaining supply bids merchant cost; no new price/generation fit, forced minimum,
+startup, forecast-price input, reserve eligibility change or heat-balance claim.
+Unknown/PP roles receive no credit. PL/SK/SI lack inherited oil-unit CHP evidence.
+Demand, wind/solar availability, fixed hydro, GSK, grid/HVDC and all non-oil bids
+remain frozen. Heat-credit bid objectives are not complete physical fuel/heat cost.
+
+All cases cover8760 optimal hours / zero emergency. Five source-comparable B06
+countries retain matched coverage: DE/BE/PL8760, SK/SI8758. Germany observed
+2.817539TWh; control and source-cost-only both0. The25% case gives1.405841TWh,
+hourly MAE321.637->185.049MW (-42.47%), r.1268,4907 active hours. The50% case
+gives2.802308TWh (-.54% annual bias), but hourly MAE279.143MW, r.1276 and4901
+active hours versus8760 observed. Both miss oil during all observed-negative-price
+hours. Thus a near-matched annual total hides large timing/amplitude errors.
+BE/PL/SK/SI remain at0 versus observed.552262/1.487970/.410987/.000526TWh.
+No overall European oil-generation accuracy claim follows from the DE result.
+
+Europe modeled oil totals0/0/4.244941/8.445465TWh across control/source/25%/50%;
+these are not comparable to the five-country observed sum. Equal-zone price MAE
+27.487356/27.487356/27.504097/27.523012EUR/MWh; mean r.618003/.618003/.618088/
+.618119. Keep all41 eligible price areas and negative/extreme hours; adverse
+zones remain in the plot. Neither cheap tranche is promoted or identified as
+the true bid curve. Existing non-oil all-year calibration remains in-sample.
+
+Independent audit reparses auctions, raw source-plant dates/roles/geography and
+observed B06 exports; rebuilds new costs, tranche capacities/matrix and country
+allocation without importing the new compiler; replays monthly/hourly quantities,
+all primals, native component bounds/flows and price/dual identities. Maximum
+native residual4.076e-6MW, objective error3.726e-8EUR, duality gap1.713e-5EUR,
+complementarity.000247EUR. Original1e-4MW/EUR.05 gates remain. Three tests cover
+conserved capacity/matrix/country output, heat-credit/carbon arithmetic, unchanged
+non-target supply and no credit without a CHP role. Carbon/calendar preflight passes.
+
+The first preparation failed before any clear because pandas returned a read-only
+array; failed producer/helper snapshots are retained in oil-chp-bids-v1. Retry
+uses an explicit mutable copy and fresh output. Initial verification stopped on
+NumPy-array versus JSON-list monthly comparison; original source/failure receipt
+is retained. Completed verification-v2 losslessly converts types, changes no
+tolerance/model and requires no repeated clear. Only its complete receipt applies.
+Source/model preparation111.20s; new solve+witness stages28.77/29.55/46.57s;
+producer total223.73s, peak2599.75MiB. Independent audit119.49s separately.
+
+Next: source dated unit identities/market roles for BE/PL/SK and actual heat or
+industrial operating obligations/seasonal schedules before refining tranche
+volumes or credits. Do not increase a universal oil discount to match annual
+energy. Preserve the simple deterministic bid layer, source limitations and
+common-input annual price/mix/physics checks; no further tuning is implied.
+
 ## Completed audit — thermal cost basis, osJMM and ASSUME, 21 October 2026
 
 User requested source/arithmetic audit and comparison before adding operating-role
