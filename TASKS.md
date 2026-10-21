@@ -25,6 +25,57 @@ lower MAE and transparent bias/seasonal diagnostics. Native PyPSA parity is an
 optional numerical diagnostic, not the development target. Automatic hourly
 reviews remain disabled.
 
+## Blocking source audit — January price spikes, 22 October 2026
+
+The user asked whether15/20January2025 price spikes are unpredictable. Read-only
+source diagnosis found a more immediate benchmark defect: frozen
+flow_tracing.parse_day_ahead_prices selects the highest classification sequence,
+which for DE January returns sequence2 rather than SDAC sequence1. Raw January
+A44 is receipt/hash-verified; filtering sequence1 matches168/168 independent
+hourly Energy-Charts values sourced from Bundesnetzagentur/SMARD,15–21January,
+with maximum difference exactly0. SDAC peaks17:00–18:00CET15/20January are
+377.99/583.40EUR/MWh. Retained targets at those same hours are414.8875/254.55;
+displayed model gives157.9654/159.1526. This is market-identity selection, not a
+UTC offset or a new physical/solver failure. Earlier parser/source replays
+reproduced the selected series but did not establish the intended auction.
+
+New diagnostic: tools/diagnose_january_price_spikes_2025.py; ignored
+data/bidding-zone-network-2025/january-spike-audit-v1/{summary.json,reference.json}.
+Source hashes cover raw receipt, frozen parser, audited saved inputs/prices,
+country generation export and external reference. The initial diagnostic's unit
+guard rejected Energy-Charts' spaced EUR / MWh spelling before output; the
+completed guard normalizes whitespace only and retains the same unit/calendar
+and168-hour equality requirements. No new market solve, target replacement,
+bid calibration, production parser/website change or review restart occurred.
+
+SMARD annual review independently documents20January's583.40 peak and the
+day-ahead forecasts:69.7GWh consumption vs3.4GWh wind/solar in that hour; actual
+70.6/4.6GWh. Tight residual supply was therefore foreseeable, while exact price
+still depends on bids, committed/eligible capacity and coupled constraints.
+https://www.smard.de/page/en/topic-article/217400/219038
+External reference: https://api.energy-charts.info/price?bzn=DE-LU&start=2025-01-15&end=2025-01-21
+The API reports CC BY4.0 Bundesnetzagentur/SMARD data. E-Control also explicitly
+identifies sequence2 as the separate10:15 EXAA auction in its Austrian reference:
+https://www.e-control.at/de/strom/auffangversorgung
+Do not generalize an arbitrary sequence rule to all zones without source checks.
+
+At20January17:00CET model-prepared DE-LU demand71.414GW, wind/solar availability
+9.649GW versus German observed generation4.602GW; at15January71.125/3.807/2.478GW.
+Availability and generation are distinct; these discrepancies are flags, not
+proof of weather error/curtailment or authority to substitute dispatch. Model
+DE gas availability36.896GW and dispatch14.633GW on20January; unused local
+capacity is not necessarily deliverable. Inspect outages, role/commitment,
+imports/network and marginal-offer limits after target correction; no causal
+allocation or spike-price fitting is established by these two purposive hours.
+
+Priority: pause new price-bid tuning/promotion; implement a fresh explicit
+auction-aware source pipeline, independently cross-check relevant zones/year,
+then regenerate targets/metrics and refits with new provenance. Trace downstream
+country explorer, research calibration and observed congestion-rent inputs;
+their exact affected scope is not yet audited. Previously reported MAEs remain
+historical retained-target metrics, not re-certified SDAC accuracy. Existing
+physics and independently observed oil-generation results are separate evidence.
+
 ## Completed controlled trial — simple oil/CHP bids, 21 October 2026
 
 User authorized implementing/testing simple bids after the source audit.

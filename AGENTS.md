@@ -1,5 +1,24 @@
 # Grid Conductor — agent instructions
 
+## Blocking source finding — auction identity, 22 October
+
+The user's January spike question exposed a price-target selection defect.
+Frozen flow_tracing.parse_day_ahead_prices prefers the highest auction sequence;
+for DE January it picks sequence2 instead of SDAC sequence1. Raw sequence1
+matches all168 independently fetched Energy-Charts/SMARD hours15–21January
+exactly, including377.99/583.40EUR/MWh at17:00CET15/20January; retained targets
+at those same hours are414.8875/254.55. diagnose_january_price_spikes_2025.py and
+ignored january-spike-audit-v1/ preserve source hashes and the independent check.
+Prior replays verified reproducibility, not the correct auction's identity.
+Treat existing price-accuracy numbers as historical retained-target metrics,
+pending corrected-market re-evaluation. Pause further bid fitting/promotion.
+Use fresh explicit per-market auction provenance and corrected target snapshots;
+do not modify frozen helpers/data under old receipts or silently switch all
+zones to a guessed sequence. Audit other zones/year and downstream observed-price
+products, including the bottleneck baseline, before making scope claims.
+No new market solve, production parser/website correction or fit was done for
+this diagnostic. Numerical feasibility and oil-generation replay remain separate.
+
 ## Current experiment — simple oil/CHP bids, 21 October
 
 The user authorized testing the audited source corrections and a simple

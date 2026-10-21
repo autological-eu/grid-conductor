@@ -17,6 +17,13 @@ Physical inputs, fixed hydro, chronology and feasibility gates remain unchanged.
 Browser integration, adaptive storage and investment validation are separate work.
 Automatic hourly reviews remain disabled.
 
+The recorded performance above uses retained price targets. The verified
+22 October German auction-selection finding requires re-evaluation before those
+numbers can be represented as SDAC benchmark accuracy. Validate auction identity
+as well as units, calendar and reproducibility; a higher classification sequence
+is not automatically a newer revision of the same auction. Corrected source
+snapshots and refits require fresh provenance, with historical results preserved.
+
 Accepted direction, updated 16 October 2026. This file defines requirements;
 [TASKS.md](TASKS.md) records implementation and verification.
 
