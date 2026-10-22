@@ -1,5 +1,29 @@
 # Grid Conductor — agent instructions
 
+## Authorized annual source comparison — 22 October
+
+The user explicitly requests a full-year, all-country comparison of the solar
+timing correction. This supersedes the earlier event-only scope for exactly the
+four fixed cases in config/annual-solar-alignment-2025.json (one reused witness,
+three new annual solves). Keep bids and other physical inputs frozen; distinguish
+solar timing from the German reported-stock sensitivity. No refit or promotion.
+Certify the missing final PV coefficient by an independently replayed converter
+nighttime identity over every weather cell and the full interval, or stop. A
+derived endpoint must be disclosed, never represented as retrieved weather or
+silently filled/wrapped. Recheck all annual native/KKT and emergency gates, source
+provenance and corrected targets. Report all zones, EU/Europe coverage and adverse
+outcomes. Public model/accepted baseline and disabled reviews stay unchanged.
+
+Verified annual comparison: annual-solar-alignment-v1 independently replays all
+35,040 hourly LP witnesses; zero emergency in all four cases. Solar-only Europe
+MAE27.5762→27.9844, covered-EU26.7836→27.1726; five zones improve,36 worsen.
+German-stock-only Europe27.5523 / EU26.7418; both27.9616 /27.1315. No refit or
+promotion. 48 modeled zones,41 complete price zones,32 EU; shared/incomplete
+country coverage remains explicit. See research/solar-alignment-2025.md and CSV.
+The full-year PV endpoint is explicitly converter-derived nighttime zero with
+independent geometry/panel proof, not retrieved ERA5. This completed comparison
+does not authorize another search or public-model replacement.
+
 ## Authorized source follow-up — 22 October
 
 The user asks to continue investigating January20 forecast supply, available fleet

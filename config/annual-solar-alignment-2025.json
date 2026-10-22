@@ -1,0 +1,13 @@
+{
+  "hours": 8760,
+  "cases": ["control", "solar_interval", "de_capacity", "solar_capacity"],
+  "maximum_new_annual_solves": 3,
+  "anchor": "oil-chp-bids-v2/chp25; current displayed model, not accepted-baseline promotion",
+  "targets": "sdac-hourly-2025-v1; corrected original ENTSO-E hourly main day-ahead prices",
+  "solar": "All source countries: PV coefficient at t+1 for market interval [t,t+1). Preserve destination-hour IRENA commissioning, original geographic/pooling/tranche shares and wind timestamps.",
+  "endpoint": "No circular roll or missing-data interpolation. The absent 2026-01-01T00:00 coefficient may be derived as exactly zero only if all weather cells are independently certified below the PV converter altitude threshold over the full destination interval; record this as a model-derived endpoint, not a retrieved ERA5 sample. Otherwise stop.",
+  "capacity": "Reuse the separately source-audited German 2025 annual coal/lignite/gas stock factors. No other country capacity change or inferred outage.",
+  "freeze": "Bids, demand, fixed hydro, network, GSK, links, ratings and offsets fixed. No refit, search, price-selected lag, baseline promotion or publication.",
+  "verification": "All 8760 hours and native network/bounds/full LP optimality per case, independent source replay, no emergency supply. All outcomes including worse zones retained.",
+  "metrics": "All 41 complete observed-price zones; report Europe and EU separately. Country summaries average constituent complete price zones, not a fictitious national clearing price; label DE-LU shared and Italy incomplete. No demand weighting. Annual and monthly MAE, bias, RMSE, correlation, ramp and tail diagnostics."
+}

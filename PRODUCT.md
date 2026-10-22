@@ -80,6 +80,16 @@ capacity commissioning and original arrays intact; certify calendar endpoints
 before claiming an annual corrected profile. Do not wrap or silently fill a
 missing weather endpoint.
 
+An otherwise missing nighttime PV endpoint may instead be established as an
+exact converter identity: independently verify solar geometry across every
+weather cell and the complete interval, with a conservative margin below the
+converter cutoff, and verify zero irradiation yields zero retained-panel output.
+Label this endpoint model-derived, not a retrieved weather sample. This does not
+authorize interpolation or filling missing daylight coefficients. Evaluate source
+corrections across the full year and all covered zones, separating EU coverage
+from the larger European network and keeping country summaries explicit about
+shared or missing bidding zones.
+
 Keep reported annual net installed capacity, hourly available capacity and
 actually offered capacity distinct. Proportional reconciliation to an annual
 stock is a source sensitivity, not proof of outages or plant market eligibility.

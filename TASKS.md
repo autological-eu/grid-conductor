@@ -1,5 +1,52 @@
 # Grid Conductor — current tasks
 
+## Annual solar-clock comparison — verified 22 October 2026
+
+The user explicitly requests the full-year, all-country source comparison.
+Use `config/annual-solar-alignment-2025.json` and the fresh ignored checkpoint
+`data/bidding-zone-network-2025/annual-solar-alignment-v1/`; do not expand fitting,
+replace the accepted baseline or public model, or restart recurring reviews.
+
+- [x] Reconstruct and seal the complete current oil/CHP25 book with original
+  calibrated bids, demand, fixed hydro, GSK/grid/links and flow offsets unchanged.
+- [x] Reconstruct all source PV and tracker coefficients before equal-price
+  pooling; change only PV, including where solar and wind share an offer.
+  Preserve wind timing and destination-hour IRENA commissioning across all
+  source countries. Original arrays/checkpoints remain intact.
+- [x] Certify the absent final PV coefficient as a converter-derived nighttime
+  zero across 20,567 weather cells and the full 23–24 UTC interval on December 31.
+  Atlite's maximum solar elevation is -37.42°; even a conservative 2° margin stays
+  below the converter 1° cutoff. Record this as derived, not retrieved ERA5.
+  Daylight missing endpoints still require source weather; no circular roll.
+- [x] Three boundary tests: nighttime certification, daylight rejection, zero
+  irradiation → zero retained-panel output.
+- [x] Four annual cases: one reused current witness and three fresh 8,760-hour
+  clears, all 48 modeled zones; no emergency supply. Score 41 complete price zones,
+  including 32 EU zones. German annual-stock controls stay separate from PV.
+- [x] Independent source/native-component/full KKT replay of all 35,040 witnesses;
+  full-year all-zone/country/monthly CSV, MAE grid and [report](research/solar-alignment-2025.md).
+  Maximum native residual 4.82e-06 MW; duality gap 1.13e-05 EUR; no gates weakened.
+  Independent source/native audit 332.5 s. Original historical explorer validation bytes are
+  verified exactly against Git commit 5e1fe63, not the user-replaced current exports.
+
+Independently verified results (EUR/MWh, equal-zone MAE):
+
+| Case | Europe | Covered EU |
+| --- | ---: | ---: |
+| Current oil/CHP25 model | 27.5762 | 26.7836 |
+| Solar alignment only | 27.9844 | 27.1726 |
+| DE annual thermal stock only | 27.5523 | 26.7418 |
+| Both | 27.9616 | 27.1315 |
+
+Solar alone improves 5 of 41 zones, worsens 36; this is a source-semantic correction,
+not a price-selected improvement. Original bids retain calibration to earlier
+auction targets; no corrected-input refit was performed. Preparation 228.9 s;
+new annual clearing drivers 46.9/59.3/75.5 s, excluding preparation/audit. These are
+full hourly Europe-wide clears, not native commitment or EUPHEMIA auctions.
+EU/Europe and country summaries must disclose coverage, equal zone weights,
+shared DE-LU and incomplete Italian/French coverage; no missing-target imputation or national-price
+claim. Public pages/model stay unchanged pending an explicit adoption decision.
+
 ## January supply-source follow-up — verified 22 October 2026
 
 Continued the user-authorized forecast/fleet investigation with four fixed fast
