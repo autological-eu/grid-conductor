@@ -1,0 +1,71 @@
+{
+  "window": "2025-01-13T00:00Z to 2025-01-23T00:00Z",
+  "evaluation": "2025-01-15 through 2025-01-21 UTC (168hours), after 48-hour warm-up; January20 16UTC reported, never a fitting objective. January22 supplies the last uncommitted forecast day.",
+  "cases": [
+    "control",
+    "ramp",
+    "commitment",
+    "weather_stress",
+    "weather_ramp",
+    "weather_commitment",
+    "firm_stress"
+  ],
+  "maximum_cases": 7,
+  "daily_protocol": "Nine24-hour European clearing outputs; each solves48 hours with perfect one-day operational lookahead, implements the first24 and carries dispatch/online/start/shutdown history. No midnight reset. Initial online MW=min(capacity, prior saved dispatch/minimum stable fraction), with elapsed min-up/down assumed satisfied and no pending starts. Initial state is a proxy; first48 hours excluded from evaluation.",
+  "scope": "Explanatory counterfactuals after inspecting 2025, not causal identification, fitted corrections or baseline promotion. Keep existing oil/CHP bids, demand, fixed hydro, original weather source and network/GSK. No new annual search.",
+  "weather_stress": {
+    "solar": 0.5,
+    "wind": 0.7,
+    "meaning": "Declared supply sensitivities on original available MW, all zones/window; not measured forecasts, not actual generation substituted for availability."
+  },
+  "firm_stress": {
+    "thermal_capacity_fraction": 0.7,
+    "meaning": "Unverified 30% thermal capacity unavailability across gas/coal groups, combined with weather/commitment; not an observed outage dataset."
+  },
+  "parameters": {
+    "coal": {
+      "ramp_fraction_per_hour": 0.6,
+      "minimum_output_fraction": 0.4,
+      "startup_lead_hours": 3,
+      "minimum_up_hours": 3,
+      "minimum_down_hours": 3,
+      "startup_eur_per_mw": 100,
+      "online_eur_per_mw_hour": 2
+    },
+    "lignite": {
+      "ramp_fraction_per_hour": 0.6,
+      "minimum_output_fraction": 0.5,
+      "startup_lead_hours": 6,
+      "minimum_up_hours": 6,
+      "minimum_down_hours": 6,
+      "startup_eur_per_mw": 150,
+      "online_eur_per_mw_hour": 3
+    },
+    "CCGT": {
+      "ramp_fraction_per_hour": 1.2,
+      "minimum_output_fraction": 0.4,
+      "startup_lead_hours": 1,
+      "minimum_up_hours": 2,
+      "minimum_down_hours": 2,
+      "startup_eur_per_mw": 50,
+      "online_eur_per_mw_hour": 1
+    },
+    "OCGT": {
+      "ramp_fraction_per_hour": 2.4,
+      "minimum_output_fraction": 0.4,
+      "startup_lead_hours": 0,
+      "minimum_up_hours": 1,
+      "minimum_down_hours": 1,
+      "startup_eur_per_mw": 20,
+      "online_eur_per_mw_hour": 0.5
+    }
+  },
+  "parameter_status": "Technology-class sensitivity assumptions, not measured European fleet parameters. Ramp/minimum-load/startup-time orders informed by Agora/Fichtner2017; startup/no-load costs and minimum up/down values are explicit experimental proxies. No tuning to583.40EUR/MWh.",
+  "commitment": "Continuous online/start/shutdown MW by retained zone/technology/parent offer group. Capacity-relaxation proxy, not binary unit commitment. All monotone tranches share one group state. Startup delay, stable minimum, minimum up/down and ramp constraints apply to group totals. LP duals are conditional relaxed-dispatch prices, not a claim of EUPHEMIA pricing.",
+  "emergency": "Keep original EUR10000/MWh emergency supply only as diagnostic feasibility slack; any use is reported and disqualifies the alternative as a valid supply model.",
+  "sources": [
+    "https://www.agora-energiewende.org/fileadmin/Projekte/2017/Flexibility_in_thermal_plants/115_flexibility-report-WEB.pdf",
+    "https://docs.pypsa.org/latest/user-guide/optimization/unit-commitment/",
+    "https://www.smard.de/page/en/topic-article/217400/219038"
+  ]
+}

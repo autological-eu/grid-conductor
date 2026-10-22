@@ -1,5 +1,33 @@
 # Grid Conductor — agent instructions
 
+## Authorized January scarcity investigation — 22 October
+
+The user requests alternatives explaining January20 and revisiting daily thermal
+bids, including ramping. This authorizes the bounded seven-case experiment in
+config/thermal-event-2025.json, superseding the earlier fitting/research pause
+only for these event counterfactuals. No target fit or annual search. Retain the
+published oil/CHP model/explorer and accepted baseline. Use daily24h outputs with
+48h operational lookahead, carry thermal dispatch and online/start/stop history;
+never reset states at midnight. Distinguish running-unit ramping from offline
+startup lead time and minimum-output/up/down effects. Continuous group states
+are a relaxation, not plant-level binary commitment or EUPHEMIA pricing.
+Weather/firm-capacity stresses are labelled assumptions on preserved original
+availability, never measured corrections or generation substituted as availability.
+Audit native network equations, chronology, temporal constraints, complete LP
+optimality and finite-difference price checks. Any emergency supply disqualifies
+a trial as a valid supply model; disclose it even during warm-up. Keep all cases,
+including failures/adverse outcomes, separate from the public website. Reviews off.
+
+Verified checkpoint: all seven cases completed, with63 independently replayed
+48h LP witnesses in ignored thermal-event-v1/runs-v7. Six cases use no emergency
+supply. The firm stress is rejected (1666.16MWh emergency, including evaluation).
+Jan20 DE price159.10→165.04EUR/MWh with startup versus583.40 observed; event-week
+MAE42.1466→41.4041, not an annual validation or promotion. The strict stress peaks
+two hours late. See research/january-scarcity-2025.md and TASKS.md. A bounded-job
+continuation reused exact saved daily witnesses; do not resume this completed
+study or expand fitting automatically. Next source work concerns forecasts and
+available thermal fleet, not an assumed generation-as-availability correction.
+
 ## Current publication direction — corrected prices and oil CHP, 22 October
 
 The user explicitly authorized updating the current model report and country

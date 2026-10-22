@@ -43,9 +43,8 @@ linked from Docs and the research report. A country selector precedes generation
 and price comparisons. The 22 October user update supersedes the earlier joint +
 weekly default: display the verified oil/CHP 25% checkpoint with corrected ENTSO-E
 main day-ahead hourly targets. This is a frozen-witness re-evaluation, not a refit;
-its existing non-oil calibration used earlier auction targets. This is not promotion
-of the
-accepted baseline or integration into the scenario engine. Show all price zones
+its existing non-oil calibration used earlier auction targets. This is not
+promotion of the accepted baseline or integration into the scenario engine. Show all price zones
 within the selected country, retaining shared-zone and missing-observation labels.
 Support UTC date windows, hourly data, explicit daily aggregation and full-year
 CSV downloads. Keep source generation (ENTSO-E hourly where available, Ember
@@ -55,6 +54,21 @@ represent partial zone sums as national totals. Show original provider records,
 units, coverage and provenance. Illustrative generation allocation and conditional
 bounds must remain visible; they are not uniquely recovered plant dispatch or
 confidence intervals. Publish compact per-country files loaded only on demand.
+
+## Daily thermal bidding and deliverability
+
+The user requests testing whether thermal flexibility can explain scarcity-price
+events. Daily market outputs should account for delivery across adjacent hours:
+keep running-unit ramping distinct from offline startup delays, minimum stable
+output and minimum up/down times. Carry state across days and state the forecast
+lookahead and initialization assumptions. Test original network and supply bounds
+before attributing an observed spike to physical scarcity or strategic markups.
+Any aggregate continuous commitment approximation must identify its relaxation
+and price interpretation. Source-informed technology parameters remain distinct
+from verified plant-level operating data. Event stresses must not replace original
+renewable availability with observed dispatch, weaken feasibility gates or silently
+promote a calibrated correction. Full-year validation and investment acceptance
+remain separate requirements.
 
 ## Active modelling approach and accuracy goal
 

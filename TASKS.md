@@ -1,5 +1,51 @@
 # Grid Conductor — current tasks
 
+## January scarcity alternatives — verified 22 October 2026
+
+The seven predeclared Europe-wide event cases are complete; the published model,
+country explorer and accepted baseline remain unchanged. Full report and two
+figures: [January scarcity investigation](research/january-scarcity-2025.md).
+
+- [x] Reconstruct the exact oil/CHP book for Jan13–22 UTC; preserve demand,
+  original availability, fixed hydro, PTDF/GSK, links and inherited calibrated bids.
+- [x] Daily24h implementation with48h model-input lookahead; shared thermal-group
+  ramps and continuous online/start/shutdown MW, startup leads, stable minimum and
+  minimum up/down time. Carry dispatch and pending state across midnight.
+- [x] Four toy tests: ramp-induced scarcity, startup/midnight carry, shared-tranche
+  ramps and original wind/solar component stress inside pooled offers.
+- [x] All seven cases:216 implemented hours each,168 evaluated hours after warm-up;
+  compare Jan15/20 and every complete observed-price zone (41).
+- [x] Independent source, native-network, temporal-state and full LP optimality
+  replay:63 daily48h certificates. Native residual<=2.58e-9MW, temporal<=1.41e-10MW,
+  duality gap<=0.000044EUR. Driver load-perturbation checks bracket event prices;
+  auditor checks their recorded objective slopes. Any emergency use, including
+  forecast/warm-up hours, disqualifies a case as a valid supply model.
+
+Jan20 16UTC DE-LU observed583.40EUR/MWh; control/ramp159.10; startup165.04;
+renewable stress160.71; renewable+startup165.39. Startup reduces event-week
+European MAE42.1466→41.4041EUR/MWh (~1.76%); no annual-performance claim.
+The 30% thermal-unavailability+renewable+startup stress gives199.59 at the event
+hour, with a522.95 peak two hours late (observed295.57 then). It fails the supply
+gate:1666.16MWh emergency over216h, including255.10MWh during evaluation;
+maximum forecast shortage1411.06MW. Preserve this adverse outcome.
+
+Authoritative ignored checkpoint: thermal-event-v1/runs-v7 under
+`data/bidding-zone-network-2025`, with summary/audit/report-receipt. Original
+resource replay reconstructs pooled availability within1.1e-11MW. Numerical
+simplex/crossover difficulties were not treated as infeasibility. A20-minute
+orchestration stop required continuation; all completed daily witnesses were
+replayed/reused with identical matrices/bounds/costs and no duplicate solves.
+No scenario parameters or physics/acceptance thresholds changed on retry.
+
+Next source investigation: reconcile excessive German modeled solar at the event
+against dated day-ahead forecasts and original timestamps/geographic weights;
+check coal/gas available fleet, outages and bids, plus dated cross-border limits.
+Unused modeled gas can replace local coal without changing modeled net exports;
+its presence is not proof of actual deliverability. Do not substitute generation
+for availability, infer a timing correction from correlation, or fit a one-off
+scarcity adder. Further fitting/promotion remains outside this completed study.
+Reviews remain disabled.
+
 ## Current publication — corrected ENTSO-E targets and oil CHP, 22 October 2026
 
 User authorized the oil-generation-improving checkpoint for the main model report
