@@ -1,0 +1,17 @@
+{
+  "anchor": "solar-country-fit-v1/country_factors",
+  "cases": {"control": 0, "calendar_half": 0.5, "calendar_full": 1, "resource_full": 1},
+  "fit": "One proposal from unchanged anchor only; corrected ENTSO-E SDAC 2025 prices. No adaptive refit.",
+  "features": "15 seasonal/local-clock columns plus centered local weekend; no residual demand or observed hourly generation",
+  "resources": ["gas", "coal", "nuclear"],
+  "bounds_eur_mwh": [30, 30, 7.5],
+  "ridge": 168,
+  "minimum_hours": 168,
+  "residual_clip_eur_mwh": 100,
+  "resource_fit": "Only positive, interior offers with cost equal to local anchor price within 1e-5 EUR/MWh; unsupported resource-zone fits stay zero",
+  "offers": "Add bounded correction to inherited daily fuel/carbon/VOM and existing bid strategy, floor at zero. Same shift for all tranches within a zone/resource, preserving order. Oil/CHP, renewable bids, emergency and fixed hydro unchanged.",
+  "budget": "Exactly three new 8760-hour clears and one byte-identical reused control; no implicit resume or search expansion",
+  "selection": "Lowest all-year equal-zone MAE among cases with zero emergency, native/KKT certification, fitted-country solar monthly MAE <= 1.05 times control and thermal monthly normalized allocation-interval error <= 1.05 times control. Ties prefer control then earlier declared case.",
+  "generation_guard": "5% tolerance is an experimental selection rule, not a product acceptance gate; all generation results and rejected cases retained",
+  "scope": "Retrospective all-2025 calibration and evaluation, not independent forecast validation or uniquely inferred bids. No public model replacement, storage/investment acceptance or review restart."
+}

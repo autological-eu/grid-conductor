@@ -2,6 +2,12 @@
 
 Verified research comparison, 22 October 2026. Public model and accepted baseline unchanged.
 
+Later decision: the user retained the country solar factors documented below as
+the research starting point. The subsequent [supply-bid comparison](solar-anchor-bids-2025.md)
+uses those same factors and corrected SDAC prices; its price improvement comes
+with a thermal-mix deterioration, so those new bids are not adopted. The earlier
+experiments and numbers in this report remain historical controls.
+
 ## Result
 
 Solar alignment alone changes full-year **European MAE 27.576 → 27.984 €/MWh** and **EU MAE 26.784 → 27.173 €/MWh**. Of 41 complete price zones, 5 improve and 36 worsen. These are actual 8,760-hour clearing comparisons, not extrapolated January results.

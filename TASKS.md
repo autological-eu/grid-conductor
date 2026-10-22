@@ -1,5 +1,37 @@
 # Grid Conductor — current tasks
 
+## Solar-anchor supply bids — verified 22 October 2026
+
+User retains the21 country solar factors and authorizes improved supply bids.
+Fresh config/solar-anchor-bids-2025.json fixes three new full-year trials, one
+unchanged saved control and one proposal fitted to corrected SDAC targets. Gas/
+coal/nuclear seasonal/local-clock shifts are bounded30/30/7.5EUR/MWh; daily fuel,
+oil/CHP, solar, hydro and network inputs stay fixed. Same-year reconstruction.
+
+- [x] Inspect live jobs before starting; no duplicate annual solver was active.
+- [x] Implement finite, locked, memory-bounded annual driver with fresh provenance.
+- [x] Complete all annual trials and independently replay35040 bid/source/native/
+  KKT proofs; zero emergency, max native residual8.14e-6MW and gap.000104EUR.
+  New annual clears51.8–63.4s; independent audit62.0s. Three boundary tests pass.
+- [x] Best price trial resource_full:28.2386→26.7950EUR/MWh (5.11% lower),38/41
+  zones improve. Mean correlation.609→.633, daily-demeanedMAE19.876→18.752.
+  Solar monthlyMAE.08799→.08834TWh, but thermal normalized monthly generation
+  error.31448→.36924 (+17.41%). Both calendar cases also exceed5% thermal guard.
+- [x] Declared selection retains the solar-corrected control; keep every adverse
+  result. [Full report](research/solar-anchor-bids-2025.md), one figure and two
+  compact all-case tables record generation/price trade-offs and missingness.
+  Three focused tests and public-asset check pass.
+
+Next: a fresh joint price/generation-aware bid proposal, rather than relaxing
+this completed study's guards. Exceptional scarcity prices and Nordic errors
+remain unresolved: Jan20 DE162.40→161.34 versus583.40EUR/MWh observed. No new
+search is running. Evidence remains in ignored solar-anchor-bids-v1/; historical
+sources/helpers are unchanged. Commit this coherent result on public-v1.
+
+No website/explorer replacement or review restart is implied. Prior solar-only
+experiment below remains immutable; its old no-further-fit scope is superseded
+only by this newly authorized bid experiment.
+
 ## Country solar regression — verified 22 October 2026
 
 User authorized implementing/testing the proposed monthly constant-factor fit.

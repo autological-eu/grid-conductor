@@ -1,5 +1,21 @@
 # Grid Conductor — product requirements
 
+## Retained solar inputs and bidding direction — 22 October 2026
+
+The user accepts the country solar factors from solar-country-fit-v1 as the
+research starting point, retaining country eligibility/exclusions and empirical
+yield/source-boundary limitations. This supersedes the older research starting
+point below; config/research-baseline.json remains an immutable historical replay
+manifest. Fresh comparisons use config/solar-anchor-bids-2025.json and its pinned
+solar witness. Improve resource-specific supply bids against
+corrected hourly ENTSO-E main day-ahead prices while preserving this generation
+improvement. Keep daily fuel/carbon assumptions explicit; seasonal and local-hour
+effective bid corrections must enter constrained clearing, never replace cleared
+prices with a statistical prediction. Report full-year all-zone errors alongside
+generation mix and numerical feasibility. Same-year fitting is reconstruction,
+not independent forecast validation. This decision does not replace the public
+report/explorer checkpoint or browser scenario engine; automatic reviews stay off.
+
 ## Current baseline decision — 16 October 2026
 
 The user accepted **seasonal-calendar-v1, annual case `refit`** as the single

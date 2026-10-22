@@ -1,5 +1,30 @@
 # Grid Conductor — agent instructions
 
+## Retained solar anchor and authorized bid recalibration — 22 October
+
+The user explicitly chooses to keep country-solar-fit-v1/country_factors and
+requests improved supply bids. This supersedes the earlier no-further-fit scope
+only for the fresh config/solar-anchor-bids-2025.json experiment. Retain all21
+factors/exclusions, original source files and sealed evidence; use corrected
+ENTSO-E SDAC targets. Test exactly three new annual clears against the reused
+solar anchor: half/full calendar correction and resource-specific interior-price
+correction. No iterative refit or adaptive search expansion. Preserve daily fuel/
+carbon inputs, tranche order, oil/CHP bids, fixed hydro, demand and network; adjust
+only gas/coal/nuclear seasonal/local-clock effective bids with declared bounds.
+Require source/native/KKT/zero-emergency checks, generation guards and all-zone
+price/shape results, including rejected cases. Calibration/evaluation on the
+same already-inspected year is retrospective reconstruction, not forecast proof.
+Public website/explorer and browser solver stay unchanged; reviews stay disabled.
+Use fresh ignored solar-anchor-bids-v1 evidence; do not edit frozen helpers.
+
+Verified: all35040 source/bid/native/KKT replays pass, zero emergency. Resource-
+specific bids improve Europe priceMAE28.2386→26.7950 and38/41 zones, but thermal
+monthly normalized generation error.31448→.36924 (+17.41%). Both calendar trials
+also fail the declared5% thermal guard. Retain solar-corrected control; do not
+promote these bids or relax the guard after results. Preserve all three trials
+and their sealed provenance. See research/solar-anchor-bids-2025.md. A joint
+price/mix fit needs a fresh design; this finite study is complete.
+
 ## Authorized country solar regression — 22 October
 
 The user explicitly authorizes implementing/testing the proposed one-factor
