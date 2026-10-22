@@ -1,8 +1,8 @@
 # Research: pricing scarce supply without inventing an emergency
 
-22 October 2026. Literature review and read-only replay of the verified annual
-source-corrected book. No new market solve, fitted bid, baseline promotion or
-website replacement.
+22 October 2026. Literature review, saved-book diagnosis and an implemented,
+independently verified annual reserve-eligibility test. The implementation/results
+are at the end. No fitted scarcity bid, baseline promotion or website replacement.
 
 ## Recommendation
 
@@ -196,7 +196,8 @@ plants operate outside the market. This is not a gas-only deduction or proof
 which units are still double counted in our scaled fleet. The
 [dated plant decisions](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/Versorgungssicherheit/Erzeugungskapazitaeten/Systemrelevante_KW/start.html)
 and [public reserve data center](https://www.regelleistung.net/apps/datacenter/)
-are concrete follow-up sources. No unit mapping has been completed here.
+are concrete follow-up sources. The implemented extension below matches three
+whole plants; the remaining fleet and block-level mappings are unresolved.
 
 [EEX's transparency service](https://www.eex.com/en/market-data/eex-group-datasource/eex-group-transparency-data)
 documents unit non-usability coverage, while
@@ -244,3 +245,46 @@ receipt; it contains source hashes, exact quantities, hour, case and certificate
 Literature was accessed on 22 October 2026. Publication dates and studied event
 years above remain distinct. The current public model, accepted baseline and
 disabled recurring reviews are preserved.
+
+## Implemented reserve-eligibility test — 22 October 2026
+
+The first source correction is now implemented and independently checked for all 8,760 hours. It removes Bexbach, Weiher and Bergkamen from ordinary market supply: **2,101.6 MW on the retained source-unit basis**. It does not reproduce the January spike or establish that all remaining gas capacity is market-eligible. No new scarcity markup was fitted and no public model was replaced.
+
+| Case | Europe MAE | DE-LU MAE | Jan 20 price | DE coal TWh | Coal offered GW | New solve seconds |
+|---|---:|---:|---:|---:|---:|---:|
+| Solar-corrected control | 27.984 | 19.744 | 160.68 | 47.610 | 20.352 | 0.00 |
+| Reserve exclusions | 27.978 | 19.660 | 161.96 | 44.748 | 18.250 | 75.42 |
+| National-stock control | 27.962 | 19.447 | 162.40 | 39.483 | 15.951 | 0.00 |
+| Exclusions + reconciled stock | 27.962 | 19.470 | 162.40 | 40.404 | 15.951 | 67.55 |
+
+Prices/MAE are €/MWh; event is January 20, 16 UTC, observed **583.40**. Coal TWh is modeled dispatch, not an observed-generation validation. MAE weights 41 complete European price zones equally. The 48-zone physical model includes seven zones without complete price targets; no zero-fill. Controls reuse exact audited annual witnesses; timings exclude preparation and independent replay.
+
+**Spike check:** every case still misses all 40 observed German hours above €300/MWh and generates no false German exceedances. The reconciled case leaves **21.18 GW** unused in the unchanged German gas offer inventory at the event, all bid at or below **€252.72/MWh**. These are model quantities, not measured real-world availability. The reserve correction therefore has not resolved the cheap-gas discrepancy.
+
+**Generation check:** the original complete ENTSO-E B05 hourly source sums to **28.159 TWh** for Germany. Reserve exclusion changes modeled coal from 47.610 to 44.748 TWh; stock reconciliation changes 39.483 to 40.404. This checks the affected technology, not the entire generation mix. Germany's source is a national proxy under the DE-LU area code, excluding Luxembourg. Pure coal offer columns are independently established by the annual audit. Original processed hourly observations are hashed and checked against the separately audited rounded public export (≤0.05 MW per hour); none enter availability or bids.
+
+![Eligibility event and annual generation comparison](assets/thermal-eligibility-2025.png)
+
+[All 41 price zones × four cases: MAE, bias, correlation, >€300 observed-price error, missed spikes and false spikes](thermal-eligibility-2025-by-zone.csv).
+
+### Identification and evidence
+
+The [28 February 2024 BNetzA decision for Bexbach/Weiher](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/Versorgungssicherheit/Erzeugungskapazitaeten/Systemrelevante_KW/_DL/AmprionGmbH_II_28022024.pdf?__blob=publicationFile&v=2), p2, documents their existing grid-reserve binding through March 2025 and renewal through March 2031. The [Bergkamen decision](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/Versorgungssicherheit/Erzeugungskapazitaeten/Systemrelevante_KW/_DL/AmprionGmbH_III_28022024.pdf?__blob=publicationFile&v=2), p2, covers November 2024–March 2026. The [April 2024 regulator announcement](https://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/EN/2024/20240430_Netzreserve_Pb.html) confirms temporary market returns had ended and reserve plants cannot operate in the market. This establishes role coverage for all modeled 2025 hours; dates outside 2025 are not an hourly outage reconstruction.
+
+| Source row | Source plant | Regulator identity | Source MW removed |
+|---|---|---|---:|
+| 2574 | Weiher | Weiher 3 / SEE906326984744 | 655.6 |
+| 2594 | Bexbach | Bexbach A / SEE954971534470 | 726.0 |
+| 2581 | Bergkamen | Bergkamen A / SEE930673793902 | 720.0 |
+
+These are manually reviewed aliases, enforced by exact source row/name/country/fuel/bus/MW assertions; the original source rows do not contain the regulator SEE identifiers. Group nameplate totals are replayed against the original native network before mapping through original offer shares. Source MW are retained consistently: the current regulator list rounds Weiher to 656 and reports Bergkamen at 717 MW; neither is silently substituted. The reserve-analysis dispatch table's lower requested MW are not unit nameplate. This is a bounded, partial ledger rather than a complete German fleet reconciliation.
+
+### Avoiding double-counting
+
+The eligibility-only case removes these source units from the solar-corrected, unscaled hard-coal fleet. The reconciled case first removes them, then scales the remaining source coal to the same **15.951 GW** national-stock total used by the stock control: 15,951 / (20,351.945 − 2,101.6). It retains that control's gas/lignite stock factors. Thus the comparison tests offer composition at a common total instead of subtracting the reserves twice. Whether the SMARD annual-stock series already excludes every reserve unit is not independently certified; this is explicitly an overlap sensitivity. Retained identical-price pools do not uniquely identify individual unit dispatch.
+
+### Verification, limits and next action
+
+Two new annual solves and two reused controls pass independent source/volume replay, all 35,040 hourly KKT checks and native component/network bounds. Maximum native residual **1.75e-05 MW**; maximum duality gap **0.000217 EUR**. Every case uses zero emergency energy. Three contract tests cover identity mismatches/duplicate rows, German-local effective dates and stock/reserve overlap. Original files, PV/wind/IRENA, demand, fixed hydro, grid/GSK and bids are preserved.
+
+The three exclusions improve source realism but do not explain the expensive observed marginal bid. Do not introduce a €500 tail while large cheap modeled gas volumes remain usable. Next reconcile gas market roles, source stock/efficiency and dated outages, then test a simple online/startable gas bid structure with finite resource-backed volumes. Scholven/Mannheim overlapping source aggregates, multi-block Karlsruhe/Altbach/Heilbronn and Staudinger remain unresolved; no whole-site removal or synthetic outage was applied. This test does not validate national generation mix, investment value or exact EUPHEMIA block pricing. Existing non-oil bids retain calibration to the earlier auction targets; all 2025 has been inspected, so this is retrospective reconstruction.

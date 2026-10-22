@@ -1,5 +1,42 @@
 # Grid Conductor — current tasks
 
+## Thermal-eligibility implementation — verified 22 October 2026
+
+The user authorized implementation after the scarcity research. Bounded design:
+config/thermal-eligibility-2025.json; new producer/auditor/report/test files named
+thermal_eligibility_2025. No bid fit or public-model promotion.
+
+- [x] Download and hash dated BNetzA decisions and reserve evidence. Match source
+  rows 2574/2594/2581: Weiher, Bexbach, Bergkamen. Explicit aliases, effective
+  periods and source MW; remove 2,101.6 MW before pooling. Regulator reserve
+  dispatch is not nameplate. No present-day status applied retroactively.
+- [x] Two fresh 8,760-hour Europe-wide cases, two exact reused controls: direct
+  exclusions and exclusions reconciled before the existing national-stock factor.
+  Never subtract both corrections blindly. All four use zero emergency supply.
+- [x] Independent source/volume replay, all 35,040 hourly native/KKT certificates.
+  Maximum native residual 1.75e-5 MW, duality gap 0.000218 EUR; unchanged gates.
+  Three contract tests pass. New annual drivers 75.4/67.5 s; audit 50.8 s.
+- [x] Update the [research report](research/scarcity-bidding-2025.md) with one new
+  figure, all-zone CSV, adverse results and original hourly ENTSO-E hard-coal check.
+  Direct exclusions: Europe MAE27.9844→27.9779, DE19.7438→19.6602; event160.68→161.96
+  versus583.40 observed. At common national stock: Europe27.9616→27.9624,
+  DE19.4465→19.4699; event unchanged162.40. All40 DE >300EUR events remain missed.
+  German coal47.610→44.748TWh (direct),39.483→40.404 (reconciled), versus original
+  ENTSO-E B05 national source28.159. Roles improve provenance, not validated prices.
+
+Ignored sealed evidence: data/bidding-zone-network-2025/thermal-eligibility-v1/
+inputs.json, removal.npz, two annual witnesses, summary.json, audit.json and
+report-receipt.json. Controls remain in annual-solar-alignment-v1. Raw PDFs and
+provider records stay outside Git; no duplicate source-book copy.
+
+Next actions/blockers: reconcile gas market roles/efficiency and dated outages
+before simple online/startable offers. Three coal exclusions leave the large
+cheap-gas discrepancy unresolved. Scholven/Mannheim overlapping site aggregates,
+multi-block Karlsruhe/Altbach/Heilbronn and Staudinger need unambiguous block
+mapping; no whole-site deletion. Complete dated thermal outages and historical
+commercial bid curves remain unavailable in this environment. Preserve fixed
+hydro, original availability, accepted/public models and disabled reviews.
+
 ## Scarcity-bid literature and saved-book diagnosis — 22 October 2026
 
 User requested research on the bid/pricing model behind January 20's high prices.

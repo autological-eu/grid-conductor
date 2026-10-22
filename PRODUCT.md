@@ -77,6 +77,13 @@ be bypassed by repricing slack to match an observed spike. Diagnose available
 cheap offers and coherent network constraints before attributing a price error
 to absent peaking supply; inferred offer parameters are not recovered actual bids.
 
+Market eligibility must use dated, identified unit records before offer pooling.
+Reserve redispatch capacity stays outside ordinary market supply. Distinguish a
+whole plant from a block at a multi-unit site, nameplate from reserve dispatch,
+and administrative decision date from its effective period. Preserve unresolved
+matches explicitly. National installed-stock adjustments and unit-role exclusions
+must reconcile their overlap; they are not automatically additive reductions.
+
 ## Hourly source contracts and forecast evidence
 
 Every hourly input must distinguish interval-start, interval-end and instantaneous

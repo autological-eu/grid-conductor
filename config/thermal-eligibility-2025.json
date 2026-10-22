@@ -1,0 +1,66 @@
+{
+  "hours": 8760,
+  "cases": [
+    "solar_control",
+    "eligibility",
+    "stock_control",
+    "reconciled"
+  ],
+  "maximum_new_annual_solves": 2,
+  "anchor": "annual-solar-alignment-v1: solar_interval and solar_capacity; verified full-year witnesses reused",
+  "rules": "Exclude only manually identified whole reserve plants during explicitly supported date ranges. Exact source row, name, carrier, bus and MW assertions; ambiguity fails closed. No fuzzy matching, inferred outage, generation-based availability, bid refit or spike fit.",
+  "overlap": "eligibility removes source-unit nameplate from the unscaled source fleet. reconciled removes those units BEFORE rescaling the remaining hard-coal stock to the same reported 15951 MW; never subtract reserve MW again from the already scaled fleet. This is an overlap sensitivity, not proof of the stock series' market-role scope. Gas/lignite retain the stock-control factors.",
+  "freeze": "Original bids, PV interval correction, wind timing, IRENA commissioning, fixed hydro, demand, network, GSK, links and emergency gate. No public-model replacement. Unmatched reserve blocks remain explicitly unresolved.",
+  "verification": "Independent ledger/source and offer-volume replay; all 8760 native network, bound, primal-dual and zero-emergency checks. Report all complete price zones, generation allocation bounds, tails and false spikes, including adverse results.",
+  "units": [
+    {
+      "source_row": 2574,
+      "name": "Weiher",
+      "official_unit": "Weiher 3",
+      "official_id": "SEE906326984744",
+      "country": "DE",
+      "fuel": "Hard Coal",
+      "bus": "DE2 12AC",
+      "source_mw": 655.6,
+      "start": "2024-04-01",
+      "stop": "2031-04-01",
+      "decision": "AmprionGmbH_II_28022024.pdf",
+      "evidence": "Dated decision p2: already grid-reserve-bound, existing designation through 31 March 2025; renewal 1 April 2025 to 31 March 2031. April 2024 regulator announcement confirms return of temporarily market-active reserves. Whole-plant source MW, not the 510 MW dispatch in the system-analysis table."
+    },
+    {
+      "source_row": 2594,
+      "name": "Bexbach",
+      "official_unit": "Bexbach Block A",
+      "official_id": "SEE954971534470",
+      "country": "DE",
+      "fuel": "Hard Coal",
+      "bus": "DE2 12AC",
+      "source_mw": 726.0,
+      "start": "2024-04-01",
+      "stop": "2031-04-01",
+      "decision": "AmprionGmbH_II_28022024.pdf",
+      "evidence": "Same dated decision/continuity as Weiher. The single source plant is 726 MW; do not use the reserve dispatch table's 565 MW as nameplate."
+    },
+    {
+      "source_row": 2581,
+      "name": "Bergkamen",
+      "official_unit": "Bergkamen A",
+      "official_id": "SEE930673793902",
+      "country": "DE",
+      "fuel": "Hard Coal",
+      "bus": "DE2 15AC",
+      "source_mw": 720.0,
+      "start": "2024-11-01",
+      "stop": "2026-04-01",
+      "decision": "AmprionGmbH_III_28022024.pdf",
+      "evidence": "Dated decision p2: coal-exit auction award; reserve designation 1 November 2024 through 31 March 2026. Entire source plant 720 MW retained as source-unit basis, versus current regulator list 717 MW; no silent basis replacement."
+    }
+  ],
+  "unresolved": [
+    "Scholven: multiple overlapping aggregate source rows, ambiguous block allocation",
+    "Mannheim: duplicate/overlapping site aggregates; GKM7/8 mapping unresolved",
+    "Altbach, Heilbronn, Karlsruhe: multi-block site rows; no automatic full-site deletion",
+    "Staudinger: separate gas/coal blocks and role dates require further source mapping",
+    "Other reserves, capacity reserve, small standby/industrial units and 2025 thermal outages: no complete reconstruction"
+  ]
+}

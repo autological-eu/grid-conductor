@@ -1,5 +1,25 @@
 # Grid Conductor — agent instructions
 
+## Authorized thermal-eligibility implementation — 22 October
+
+The user's “Continue implementing” supersedes the research-only scope below for
+the bounded source-ledger experiment in config/thermal-eligibility-2025.json.
+Match three explicitly identified German reserve plants to source rows and test
+two fresh annual cases against reused solar-clock/stock controls. Exclude roles
+before national-stock reconciliation; never subtract both corrections blindly.
+No price fit, emergency repricing, inferred outages, UC search, public-model
+replacement or review restart. Preserve immutable source/replay evidence and all
+native/KKT/zero-emergency gates. Remaining ambiguous block/site matches are a
+source blocker, not permission to remove whole multi-block sites.
+
+Verified: thermal-eligibility-v1 replays all35,040 source/native/KKT witnesses,
+zero emergency. Direct exclusions change EuropeMAE27.9844→27.9779; reconciled
+stock changes27.9616→27.9624. Peak stays~162 versus583.40; all40 German >300EUR
+hours remain missed. German coal modeled39.48–47.61TWh versus source28.159;
+this partial role correction is not price/mix acceptance. Preserve sealed
+producer/config/witnesses. Next work needs fresh provenance, gas-role/outage
+evidence and coherent resource-backed bids; no silent stock/reserve double cut.
+
 ## Scarcity-bid research — 22 October
 
 The user requests research on improving bids/prices to reproduce high-price
