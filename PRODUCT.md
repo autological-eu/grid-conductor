@@ -1,5 +1,22 @@
 # Grid Conductor — product requirements
 
+## Accepted research baseline — 23 October 2026
+
+Use **solar-anchor-bids-v1, annual case resource_full**, as the active research
+baseline for new comparisons. The user explicitly accepts its better observed-
+price fit together with the documented deterioration in thermal generation mix.
+config/active-research-baseline.json is the authoritative current pointer;
+config/research-baseline.json remains a historical replay manifest. This decision
+supersedes older baseline/control-retention requirements below without changing
+the completed experiment's failed generation guard or its original evidence.
+
+Retain country solar factors and resource-specific seasonal/local-hour thermal
+bid corrections, corrected ENTSO-E SDAC targets, source provenance, and all
+feasibility/zero-emergency requirements. Continue reporting generation mix and
+price performance separately. Acceptance is for calibrated2025 reconstruction,
+not independent forecasting or validated investment estimation. Public explorer
+and browser scenario integration are separate work; automatic reviews stay off.
+
 ## Retained solar inputs and bidding direction — 22 October 2026
 
 The user accepts the country solar factors from solar-country-fit-v1 as the

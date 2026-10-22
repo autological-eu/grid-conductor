@@ -1,5 +1,25 @@
 # Grid Conductor — agent instructions
 
+## User-adopted resource bids baseline — 23 October 2026
+
+The user explicitly accepts solar-anchor-bids-v1/resource_full as the new research
+baseline. This supersedes the no-promotion/control-retention instructions below.
+All new comparisons must read config/active-research-baseline.json. It pins the
+actual retained solar delta, resource proposal, annual witness and independent
+audit. config/research-baseline.json is historical: preserve its exact bytes
+because frozen replay tools and source receipts depend on its hash. Do not run
+old experiment drivers as if they consumed the new active baseline.
+
+Record adoption separately from experimental selection: the old audit correctly
+selected control because all bid trials failed the5% thermal-generation guard.
+The user now accepts that trade-off; do not rewrite eligibility, old reports,
+sealed configs or certificates to suggest it passed. Resource_full has verified
+MAE26.795EUR/MWh across41 complete SDAC zones, with17.41% higher thermal normalized
+generation error than the solar anchor. Numerical feasibility/zero-emergency
+gates remain intact; same-year reconstruction and source/mix limitations remain.
+No public explorer/browser replacement, recurring-review restart or new fitting
+is implied. See research/baseline-decision-2026-10-23.md for the adopted bid rules.
+
 ## Retained solar anchor and authorized bid recalibration — 22 October
 
 The user explicitly chooses to keep country-solar-fit-v1/country_factors and

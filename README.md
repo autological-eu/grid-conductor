@@ -15,11 +15,15 @@ The map identifies price separation using signed ENTSO-E flow–price congestion
 estimates. Its browser-local line/battery scenarios still use a reduced-form
 **two-zone screening model**, not European hourly dispatch or certified returns.
 
-The accepted research baseline is the seasonal/time-of-day bid model pinned in
-[config/research-baseline.json](config/research-baseline.json): full-year 2025
-reconstruction MAE **28.96 EUR/MWh**, 12.8% below the previous unfitted control.
-That is a historical score against the former retained targets, not a corrected
-SDAC benchmark. This calibrated reconstruction is not independent forecast validation.
+The accepted research baseline is **solar-anchor-bids-v1/resource_full**, pinned in
+[config/active-research-baseline.json](config/active-research-baseline.json).
+It retains the country solar corrections and adds resource-specific seasonal/
+local-hour thermal bid corrections: full-year 2025 MAE **26.79 EUR/MWh** against
+corrected hourly ENTSO-E SDAC prices across 41 complete zones. The user accepts
+the 17.41% thermal generation-error increase relative to the solar-corrected control.
+This is calibrated reconstruction, not independent forecast validation or an
+update to the public explorer/browser solver. [Adopted bidding rules and decision](research/baseline-decision-2026-10-23.md).
+The older config/research-baseline.json remains unchanged for historical replays.
 
 ## Current documentation and models
 

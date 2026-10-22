@@ -1,5 +1,22 @@
 # Grid Conductor — current tasks
 
+## Research baseline adopted — 23 October 2026
+
+- [x] Explicit user decision adopts solar-anchor-bids-v1/resource_full, superseding
+  the historical automatic control selection below. Preserve its failed5% mix
+  guard: this is a user-accepted trade-off, not a changed audit result.
+- [x] Verify current source, producer, dependencies, proposal, audit and full-year
+  witness hashes. Pin the exact model in config/active-research-baseline.json;
+  retain config/research-baseline.json bytes for historical replay dependencies.
+- [x] Update requirements, agent instructions and README; document the adopted
+  bid rules in [baseline decision](research/baseline-decision-2026-10-23.md).
+
+Accepted reference: all8760 hours,41 complete corrected-SDAC zones, priceMAE
+26.795EUR/MWh; thermal monthly normalized generation error17.41% above the solar
+anchor. All numerical certificates remain valid; no rerun or refit was needed.
+Next model comparisons use this case and track both price and generation changes.
+Public explorer/browser remain at their published checkpoints. Reviews stay off.
+
 ## Solar-anchor supply bids — verified 22 October 2026
 
 User retains the21 country solar factors and authorizes improved supply bids.
