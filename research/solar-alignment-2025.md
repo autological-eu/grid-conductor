@@ -83,3 +83,91 @@ The solar input issue affects the shared historical network-dispatch pipeline an
 The timing correction fixes a shared input contract, but does not by itself improve annual price recovery with the inherited bids. Keep that distinction explicit: prices may have been calibrated around other input errors, while weather magnitude, available/offered fleet and network constraints retain separate uncertainties. This comparison does not identify which uncertainty explains the remaining error. Further source reconciliation and any corrected-input bid recalibration require fresh provenance; do not choose a physically incorrect clock simply because its MAE is lower.
 
 Source/case plan: `config/annual-solar-alignment-2025.json`. Ignored authoritative evidence: `data/bidding-zone-network-2025/annual-solar-alignment-v1/inputs.json`, `summary.json`, `audit.json`, raw annual witnesses and `report-receipt.json`. Source URLs and original hashes remain chained to the January source audit, corrected-price audit and frozen oil/CHP checkpoint. Six historical explorer validation-file hashes are checked against their exact archived bytes at Git commit 5e1fe632861f402029047e3d1ca0c384a2b6212f, because the user later replaced those public exports; no old hash is waived and no obsolete public data is restored. The previous [January investigation](january-scarcity-2025.md) remains separate.
+
+## Solar-fleet magnitude and hourly-shape audit — 22 October 2026
+
+**The modeled solar supply is too high relative to several reported generation series, but source scope is a major confounder.** One documented loss sensitivity reduces Europe price MAE **27.962 → 27.897 €/MWh**. It improves 15 price zones and worsens 26. This small gain does not establish a corrected national fleet, and the public model remains unchanged.
+
+### What is modeled and what changed
+
+Weather is hourly ERA5 on a **0.3° × 0.3° grid**, roughly 21 × 33 km in Germany, with 20,567 retained cells. Atlite converts weather to PV power before PyPSA-Eur aggregates it into 128 regional profiles for each panel technology. Only **123 fixed-panel source generators have positive nameplate**; every tracker generator has zero nameplate, despite the existence of cached tracking profiles. There are 34 source-country fleets, later mapped into 48 market zones. This is historical reanalysis, not an operational forecast.
+
+The fixed-panel model is CSi/Huld, south-facing, 35° tilt, with 0.90 inverter efficiency. Country capacity follows IRENA end-2024 → end-2025 linear commissioning; within-country source capacity/geographical weights are inherited. Regional profile layouts favor eligible productive land rather than establishing the actual location/orientation of the 2025 fleet. A fine weather grid is therefore not proof of fine installed-fleet geography.
+
+Control is the verified solar-aligned plus German-stock source comparison. The new case replaces the existing 0.90 inverter retention with the [PVGIS generic 0.86 overall system retention](https://joint-research-centre.ec.europa.eu/photovoltaic-geographical-information-system-pvgis/getting-started-pvgis/pvgis-user-manual_en): multiply only PV by 0.86/0.90, a 4.44% reduction. Do not multiply a second 14% loss. Existing irradiance/temperature effects stay in Huld. This is a generic sensitivity, not measured national loss or calibration to generation. Bids, wind, demand, fixed hydro, grid/GSK and all other inputs stay fixed.
+
+| Case | Europe price MAE | Emergency MWh | New annual driver seconds |
+|---|---:|---:|---:|
+| Solar-aligned control | 27.9616 | 0.000000 | 0.00 |
+| Overall-loss sensitivity | 27.8967 | 0.000000 | 73.00 |
+
+Forty-one complete SDAC price zones, 48 physical zones; zero seconds means an exact reused witness. These are the same frozen bids, including the inherited earlier-target calibration limitation.
+
+### National energy and reporting boundaries
+
+![Generation and source coverage](assets/solar-fleet-energy-2025.png)
+
+| Country | Control solar TWh | Loss case TWh | ENTSO-E covered TWh | Hourly coverage | Ember Solar TWh |
+|---|---:|---:|---:|---:|---:|
+| AL | 1.167 | 1.115 | unavailable | 0/8760 | incomplete |
+| AT | 11.674 | 11.172 | 5.665 | 8760/8760 | 9.809 |
+| BA | 0.846 | 0.810 | unavailable | 0/8760 | 0.473 |
+| BE | 11.370 | 10.866 | 10.200 | 8760/8760 | 10.199 |
+| BG | 7.174 | 6.855 | 6.359 | 8760/8760 | 6.359 |
+| CH | 11.714 | 11.192 | 5.107 | 8760/8760 | 8.176 |
+| CZ | 4.896 | 4.681 | 4.707 | 8759/8760 | 4.708 |
+| DE | 108.587 | 104.364 | 73.784 | 8760/8760 | 89.965 |
+| DK | 4.620 | 4.499 | 4.473 | 8752/8760 | 4.482 |
+| EE | 0.869 | 0.831 | 1.098 | 8760/8760 | 1.099 |
+| ES | 62.029 | 59.374 | 52.368 | 8723/8760 | 58.814 |
+| FI | 1.242 | 1.188 | 1.303 | 8760/8760 | 0.978 |
+| FR | 37.029 | 35.383 | 30.261 | 8754/8760 | 30.273 |
+| GB | 21.843 | 20.937 | unavailable | 0/8760 | 18.776 |
+| GR | 14.407 | 13.766 | 11.486 | 8758/8760 | 11.485 |
+| HR | 1.413 | 1.360 | 0.545 | 8760/8760 | 1.344 |
+| HU | 9.507 | 9.085 | 6.812 | 8760/8760 | 10.562 |
+| IE | 1.899 | 1.818 | unavailable | 0/8760 | 1.065 |
+| IT | 52.273 | 50.581 | unavailable | 0/8760 | 44.315 |
+| LT | 2.839 | 2.713 | 1.643 | 8760/8760 | 1.642 |
+| LU | 0.734 | 0.705 | unavailable | 0/8760 | 0.429 |
+| LV | 0.740 | 0.708 | 0.678 | 8760/8760 | 0.679 |
+| ME | 0.037 | 0.035 | unavailable | 0/8760 | 0.078 |
+| MK | 1.357 | 1.297 | unavailable | 0/8760 | 1.387 |
+| NL | 27.429 | 26.392 | 0.498 | 8760/8760 | 31.420 |
+| NO | 0.735 | 0.708 | unavailable | 0/8760 | 0.009 |
+| PL | 25.639 | 24.513 | 19.229 | 8760/8760 | 19.228 |
+| PT | 9.172 | 8.904 | 6.104 | 8760/8760 | 8.792 |
+| RO | 6.674 | 6.377 | 2.718 | 8759/8760 | 5.621 |
+| RS | 0.478 | 0.457 | unavailable | 0/8760 | incomplete |
+| SE | 5.275 | 5.044 | 2.281 | 8760/8760 | 4.431 |
+| SI | 1.773 | 1.711 | 0.783 | 8758/8760 | 1.345 |
+| SK | 1.029 | 0.984 | 0.568 | 8759/8760 | 0.569 |
+| XK | 0.029 | 0.027 | unavailable | 0/8760 | incomplete |
+
+**Germany:** modeled PV108.587→104.364TWh versus Ember89.965 and ENTSO-E73.784. The [BNetzA 2025 report](https://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/EN/2026/20260104_SMARD.html) explicitly excludes household self-consumption from its grid generation figures. [Fraunhofer ISE](https://www.ise.fraunhofer.de/en/press-media/press-releases/2026/german-public-electricity-generation-in-2025-wind-and-solar-power-take-the-lead.html) reports 16.9 TWh self-consumed PV and identifies east/west orientation as a yield factor. This supports a scope/geometry investigation; it does not justify shrinking capacity until the ENTSO-E curve matches. Reconcile demand's grid/gross boundary before splitting self-consumption from market offers, so behind-the-meter energy is not removed twice.
+
+**Netherlands:** the full 8760-hour ENTSO-E source totals only0.498TWh versus Ember31.420. This is a major source-scope conflict; hourly completeness is not national fleet coverage. Reducing modeled output improves its error against the tiny hourly source while moving farther from Ember. Neither metric establishes the correct total. A CBS national-release reconciliation remains open: its webpage was inspectable through web research, but direct frontend/OData retrieval failed, so no CBS dataset or replacement target was ingested.
+
+**Spain:** B16 is Solar rather than an isolated PV measurement. [REE's ENTSO-E comparison definition](https://www.ree.es/en/datos/european-landscape) includes photovoltaic and solar thermal. [REE documents](https://www.sistemaelectrico-ree.es/en/renewable-energies-report/sun/generation/solar-thermal-sun-generation) that stored solar heat extends thermal output to later hours; [its renewable report](https://www.sistemaelectrico-ree.es/en/spanish-electricity-system/generation/renewable-electricity-generation) also distinguishes self-consumption. The retained IRENA2025 parent Solar47206MW exceeds PV44903MW by2303MW (rounded parent-minus-child, not an added measured generator). Our modeled PV does not represent that solar-thermal fleet/storage. Output in the observed Solar series during zero modeled PV cannot automatically be called a PV timing bug. No thermal-storage profile was invented.
+
+Hourly source coverage spans23 countries, with15 complete years. Missing constituent regions/types propagate to missing national observations. Italy, UK and Norway have no complete national hourly comparison here. France lacks 6 hours, Spain 37, Denmark 8. Ember is monthly and national; no hourly Ember profile was manufactured. Its all-Solar and national boundaries need independent reconciliation before treating it as a PV target.
+
+### Hourly and seasonal shape
+
+![Winter and summer hourly solar shapes](assets/solar-fleet-shape-2025.png)
+
+Curves average identical covered UTC intervals grouped by local civil hour and season, including DST. Shaded ranges are conditional resource-allocation bounds inside identical-price offer pools, not confidence intervals; country bounds need not be jointly attainable. Annual modeled generation uses an availability-proportional illustration within those bounds, not identified plant dispatch.
+
+Germany's hourly correlation changes0.97094→0.97242; daily normalized-shape L1 changes0.08440→0.08399. Spain's shape L1 worsens0.20988→0.21048. This diagnostic normalizes each complete UTC day's model/source energy before summing hourly absolute differences (zero-energy days excluded). Loss scaling primarily changes magnitude; it cannot recover different orientations, tracking, cloud errors, reporting boundaries or solar-thermal night generation. France's unchanged shape/correlation is an explicit example.
+
+[Country energy, dispatch bounds, hourly MAE/correlation, daily-energy and normalized-shape diagnostics](solar-fleet-2025-countries.csv) · [All country/month energy and coverage](solar-fleet-2025-monthly.csv) · [All48 zones: price MAE/bias/correlation and missing targets](solar-fleet-2025-prices.csv). Covered-hour sums are not annual totals where hours are missing. No Europe-wide generation score is presented as comparable across incompatible source scopes.
+
+### Verification and next correction
+
+The independent audit reconstructs original PV coefficients, interval shift, IRENA trajectories, original source-country mapping and all original ENTSO-E B16 observations. It replays **17520 hourly native/KKT certificates**, maximum native residual4.82e-06MW and duality gap1.1e-05EUR, with zero emergency. Generation allocation inequalities and original-source/export rounding are replayed. Three tests guard loss double counting, constituent missingness and mixed-offer bounds. Audit runtime171.3s; new-driver timings exclude preparation/audit.
+
+The next material correction is the **fleet and measurement boundary**, followed by geometry: establish grid feed-in versus total PV and compatible demand; separate PV from solar thermal; reconcile IRENA net capacity with PVGIS DC-STC peak-power normalization; then source country/region-specific tilt, azimuth, tracking and system losses. Do not invent an AC/DC factor or use observed dispatch as available power. Germany's and France's residual surplus remains after the generic loss change, while the Netherlands gives opposing signals by source.
+
+The compact weather cache retains converted per-cell fixed/tracking outputs and deletes original raw meteorology only after verification. It correctly rejects changed orientation/panel requests. New orientation physics therefore requires freshly retrieved radiation/temperature or independently supplied coefficients; it cannot be reconstructed by relabeling existing profiles. Existing fixed and horizontal-tracker conversions can be reused if verified fleet shares/geography become available; no shares were guessed here. The precomputation approach remains fast at clearing time. No weather collection or unseen-year validation was performed in this audit, and no model/site promotion follows from this small in-sample price improvement.
+
+Reproduction: config/solar-fleet-audit-2025.json; tools/solar_fleet_audit_2025.py prepare/run, audit_solar_fleet_2025.py, report_solar_fleet_2025.py using the pinned interpreter and original local source caches. Sealed ignored inputs/components, annual witness, source receipts, audit, quantity arrays and renderer receipt are under data/bidding-zone-network-2025/solar-fleet-audit-v1/. Raw provider data and hourly matrices remain outside Git.

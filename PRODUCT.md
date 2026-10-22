@@ -112,6 +112,21 @@ archive is not automatically information available before the historical auction
 Observed generation remains validation evidence, never a substitute for original
 renewable availability. Prices remain original ENTSO-E SDAC hourly targets.
 
+Solar validation must separate available power from market dispatch and retain
+conditional allocation bounds in mixed-resource offers. Check national/monthly
+energy, hourly shape and peak/twilight behavior against generation sources with
+explicit geographical coverage. Distinguish IRENA net generating capacity from
+PV conversion peak-power normalization; do not invent a fleet AC/DC ratio.
+System losses, orientation, tracking shares and actual spatial deployment require
+separate source support. A generic loss benchmark is a sensitivity, not measured
+fleet correction. Preserve the distinction between historical reanalysis and an
+operational forecast, and recompute changed conversions before market clearing.
+Hourly completeness alone must not imply national fleet coverage. Reconcile
+grid-feed-in versus total production and the matching demand boundary before
+splitting behind-the-meter solar into self-consumption and market offers; never
+deduct it twice. Where the observed Solar category includes solar thermal, keep
+that output/storage separate from the modeled PV technology and its validation.
+
 ## Active modelling approach and accuracy goal
 
 Liquid-oil generators require explicit source-backed generating capacity and

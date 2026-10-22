@@ -1,5 +1,53 @@
 # Grid Conductor — current tasks
 
+## Solar-fleet magnitude/shape audit — verified 22 October 2026
+
+User authorized country/month/hour solar diagnosis and source-backed corrections.
+config/solar-fleet-audit-2025.json predeclares one new annual system-loss
+sensitivity and the exact reused solar_capacity control; no refit or promotion.
+
+- [x] Inspect actual source geometry, conversion and fleet: hourly ERA50.3°,
+  20567 cells,128 regional profiles per technology;123 positive fixed-PV source
+  generators, zero installed tracker MW,34 countries and48 market zones. Keep
+  original within-country weights and hourly IRENA commissioning.
+- [x] Reconstruct PV contributions before pooling; match sealed aligned source.
+  Replace inverter0.90 with generic PVGIS overall retention0.86 (0.86/0.90),
+  retaining temperature/irradiance physics. No second14% loss or generation fit.
+- [x] One full8760-hour new solve, one reused control; both zero emergency.
+  Independently replay all17520 native/KKT certificates and original hourly
+  ENTSO-E B16 observations, conditional allocation bounds and missingness.
+  Max native residual4.82e-6MW, gap1.11e-5EUR; three contract tests pass.
+  New annual driver73.0s; independent source/quantity/physics audit171.3s.
+- [x] Country, monthly, local-hour seasonal and daily-energy/shape diagnostics.
+  Sources cover23 countries hourly,15 complete years; no missing-region sums or
+  monthly-to-hourly invention. Keep Ember national monthly Solar separate.
+- [x] Update [solar report](research/solar-alignment-2025.md), two figures and three
+  compact CSVs. EuropeMAE27.9616→27.8967;15 zones improve,26 worsen. German solar
+  allocation108.587→104.364TWh; Spain62.029→59.374; France37.029→35.383. Shape
+  changes little; Spain's normalized daily shape slightly worsens. No fleet claim.
+
+Material findings: DE Ember89.965TWh versus cached ENTSO-E73.784; BNetzA explicitly
+excludes household self-consumption from grid generation. NL complete hourly
+source0.498TWh versus Ember31.420 is a scope conflict, not97% missing physical PV.
+REE says ENTSO-E Solar combines PV/thermal, with stored-heat evening output;
+IRENA Spanish parent Solar47206 minus PV44903MW is2303MW (rounded difference,
+not an added modeled generator). Never fit that observed evening energy into PV.
+
+Next: reconcile grid-feed-in/total-generation and demand boundaries; separate
+PV from solar thermal; verify AC/DC normalization, actual fleet geography,
+tilt/azimuth/tracking and losses before a stronger correction. No guessed ratios,
+observed-output-as-availability or bid refit. Compact converted weather cannot
+change panel/orientation physics without new inputs; existing fixed/tracker
+coefficients can be reused when actual shares are sourced. Direct CBS frontend/
+OData collection failed; no substitute target was ingested. Keep original sources,
+public/accepted models, feasibility gates and disabled reviews.
+
+Ignored authoritative evidence: solar-fleet-audit-v1/inputs.json, components.npz,
+system_losses.npz, summary.json, audit.json, quantity-diagnostics.npz and
+report-receipt.json under data/bidding-zone-network-2025; extra regulator/REE
+reporting-scope downloads have separate report-sources/receipt.json. No large
+hourly matrix, raw weather or provider bulk is added to Git.
+
 ## Thermal-eligibility implementation — verified 22 October 2026
 
 The user authorized implementation after the scarcity research. Bounded design:

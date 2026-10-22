@@ -1,0 +1,11 @@
+{
+  "hours": 8760,
+  "cases": ["control", "system_losses"],
+  "maximum_new_annual_solves": 1,
+  "anchor": "annual-solar-alignment-v1/solar_capacity.npz: verified PV interval correction and German thermal-stock sensitivity; not the public model or accepted baseline",
+  "change": "Replace CSi inverter-only efficiency 0.90 with the PVGIS generic overall system retention 0.86: scale only reconstructed PV contribution by 0.86/0.90. This is a documented generic sensitivity, not a measured fleet loss or generation-fitted correction. Keep weather/temperature effects already in Huld; do not compound a second 14% loss.",
+  "freeze": "Bids, original source geography and within-country capacity weights, hourly destination IRENA commissioning, wind timestamps, non-PV availability, fixed hydro, demand, network/GSK/links and ratings unchanged. No weather shift selected by fit, output substituted for availability, extra capacity removal, forecast fitting or public-model promotion.",
+  "audit": "Reconstruct country/source-PV components before pooling, prove sum matches sealed solar-aligned input, independently replay all 17520 hourly native/bound/KKT certificates and zero emergency. Original ENTSO-E B16 hourly source and Ember national monthly Solar remain separate. Do not zero-fill missing regions, source technologies or months. Report conditional allocation bounds where bids pool solar with other resources.",
+  "diagnostics": "Country/month/hour generation, daylight and nighttime, sunrise/sunset energy, midday peaks, daily energy and shape, source availability versus dispatch, all complete SDAC price zones. IRENA year-end net-capacity definition versus PVGIS DC-STC peak-power normalization is an unresolved basis check; no guessed DC/AC ratio.",
+  "deferred": "Changed orientation/tracking/panel conversion requires new raw meteorology or independently supplied conversion coefficients. The compact cache contains only immutable per-cell converted outputs. Actual 2025 fleet placement, tilt, tracking shares and AC/DC ratios are not verified; do not invent them or claim national energy agreement proves local availability."
+}

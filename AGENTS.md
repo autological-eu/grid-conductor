@@ -1,5 +1,37 @@
 # Grid Conductor — agent instructions
 
+## Authorized solar-fleet audit — 22 October
+
+The user requests the proposed country/month/hour solar audit and source-backed
+input sensitivities. config/solar-fleet-audit-2025.json declares one new annual
+loss sensitivity against the verified solar_capacity witness. Replace inverter
+retention0.90 with the PVGIS generic overall0.86; do not compound a second14% loss
+or call this a measured country correction. Preserve interval alignment, IRENA
+commissioning, original spatial weights, wind, bids, hydro, demand and network.
+Keep ENTSO-E hourly B16 and Ember monthly Solar separate, require all constituent
+regions, and retain pooled-dispatch allocation bounds. No observed generation
+becomes availability. Audit all annual native/KKT and zero-emergency gates.
+Current converted-only weather cache cannot change tilt/tracking/panel models;
+new conversions require source weather. Installed tracker capacity is zero in
+the retained fleet despite cached tracker profiles. AC/DC basis and actual fleet
+locations/orientations remain unverified. No guessed correction or automatic
+public-model promotion, old-search restart or recurring review follows.
+
+Verified solar-fleet-audit-v1: control and loss case pass all17520 source/native/
+KKT replays, zero emergency. EuropeMAE27.9616→27.8967;15 zones improve,26 worsen.
+DE allocated PV108.587→104.364TWh versus Ember89.965 and ENTSO-E73.784; report
+retains allocation bounds. Hourly source exists for23 of34 source countries,
+15 complete years; complete hours do not establish complete fleet coverage.
+NL hourly source0.498TWh conflicts with Ember31.420. BNetzA excludes household
+self-consumed PV from grid-generation reporting; reconcile demand boundary before
+new offer cuts. REE's ENTSO-E Solar grouping includes PV and thermal; do not fit
+Spain's stored-heat evening output with PV. See appended solar-alignment report,
+three compact CSVs and two figures. Keep sealed numerical producers unchanged.
+The generic loss sensitivity is not a promoted/measured fleet correction. Existing
+fixed/tracker conversions may be reused with verified fleet shares; changed
+conversion physics needs source meteorology. Direct CBS downloads were unavailable;
+no replacement country target was ingested. Reviews remain disabled.
+
 ## Authorized thermal-eligibility implementation — 22 October
 
 The user's “Continue implementing” supersedes the research-only scope below for
