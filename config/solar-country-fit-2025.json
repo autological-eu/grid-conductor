@@ -1,0 +1,12 @@
+{
+  "cases": ["control", "country_factors"],
+  "maximum_new_annual_solves": 1,
+  "hours": 8760,
+  "anchor": "solar-fleet-audit-v1/system_losses.npz: verified interval-aligned PV, generic losses and German thermal-stock source control; no public-model promotion",
+  "fit": "One scalar alpha per source country. Zero-intercept OLS of twelve original Ember 2025 monthly Solar TWh against monthly pre-clearing PV energy from loss-adjusted weather/IRENA profiles: alpha=sum(x*y)/sum(x*x). Fit no prices or hourly coefficients. Apply alpha to preserved source PV contribution before offer pooling. Retain original installed nameplate, geography, night zeros, hourly shape and commissioning.",
+  "eligibility": "Require all twelve finite nonnegative monthly values, positive annual energy and complete IRENA parent Solar/PV endpoints. Parent-minus-PV must be within 2 MW rounding tolerance in both years. NL excluded for the independently documented unresolved national-source conflict. No hourly ENTSO-E grid feed-in is used as a gross-PV fit target.",
+  "factor_guard": {"minimum": 0.5, "maximum": 1.0, "action": "Outside this declared research guard: keep factor 1, retain raw regression and reason for review; never clip to manufacture acceptance. This is a conservative reduction-only trial, not a certified physical bound. Missing inputs likewise retain the control."},
+  "freeze": "Bids, demand, non-PV availability, wind timestamps, fixed hydro, topology/GSK/links/ratings unchanged. No iteration, seasonal factors, price fitting, generation copied into hourly availability, capacity deletion or accepted/public model replacement. Original weather and all prior witnesses remain intact.",
+  "scope": "Empirical gross-PV yield calibration, not measured outages, actual orientations, recovered fleet capacity or verified market-offered PV. Gross/grid-feed-in and demand boundary limitations remain explicit. All 2025 has been inspected: generation fit and price evaluation are retrospective, not untouched forecast validation.",
+  "verification": "Independently re-read original Ember rows and IRENA cells, replay regression and changed source contributions, and verify all 17520 native/KKT hourly witnesses with zero emergency. Report post-clearing country/month generation and allocation bounds, unchanged hourly-shape limitations and every complete SDAC price zone including adverse outcomes."
+}

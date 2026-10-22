@@ -171,3 +171,44 @@ The next material correction is the **fleet and measurement boundary**, followed
 The compact weather cache retains converted per-cell fixed/tracking outputs and deletes original raw meteorology only after verification. It correctly rejects changed orientation/panel requests. New orientation physics therefore requires freshly retrieved radiation/temperature or independently supplied coefficients; it cannot be reconstructed by relabeling existing profiles. Existing fixed and horizontal-tracker conversions can be reused if verified fleet shares/geography become available; no shares were guessed here. The precomputation approach remains fast at clearing time. No weather collection or unseen-year validation was performed in this audit, and no model/site promotion follows from this small in-sample price improvement.
 
 Reproduction: config/solar-fleet-audit-2025.json; tools/solar_fleet_audit_2025.py prepare/run, audit_solar_fleet_2025.py, report_solar_fleet_2025.py using the pinned interpreter and original local source caches. Sealed ignored inputs/components, annual witness, source receipts, audit, quantity arrays and renderer receipt are under data/bidding-zone-network-2025/solar-fleet-audit-v1/. Raw provider data and hourly matrices remain outside Git.
+
+## Country solar-factor regression — 22 October 2026
+
+**Implemented and independently tested:** one zero-intercept factor for each of 21 eligible countries, using monthly generation only. All 8,760 hours clear with zero emergency. European price MAE **27.897 → 28.239 €/MWh**; 15 zones improve and 26 worsen. This candidate is not promoted.
+
+### Method and limits
+
+For each country, form twelve monthly energy values $x_m$ from the preserved, interval-aligned weather/IRENA PV profiles after the generic loss correction. Fit original Ember Solar totals $y_m$ with $\alpha=\sum_m x_m y_m/\sum_m x_m^2$, without an intercept. Apply that same factor to every source PV hour and region in the country before offer pooling. No hourly generation is copied into the inputs, and no price enters the regression.
+
+This fits **pre-clearing available energy**, not an assumed linear response of market dispatch. Rerunning the network determines curtailment and generation afterward. One pass only: no seasonal coefficients, dispatch-feedback refit or price-selected iteration. Nameplate, original profile files, night zeros, geography, IRENA commissioning and all non-PV inputs/bids remain unchanged.
+
+Require twelve finite nonnegative Ember months and compatible IRENA Solar/PV parent endpoints within 2 MW rounding tolerance. The Netherlands is excluded for the documented source conflict. Spain and Italy retain their inputs because the strict parent check detects solar thermal (including Italy's small 5 MW difference). A declared reduction-only guard accepts raw factors from 0.5 to 1; rejected values remain reported and their applied factor stays 1, never clipped. The guard is a research assumption, not a verified physical bound.
+
+All 34 countries and exclusion/raw-coefficient records are in the CSV. Norwegian raw factor is about0.0129 and is rejected, rather than removing98.7% of weather-derived PV to reproduce9GWh. Upward fits and missing/incompatible sources are also retained unchanged. Country-specific gross/grid-feed-in, demand, AC/DC and geographical scope remain limitations: this empirical factor can absorb measurement, losses, curtailment or fleet-model errors. It does not identify physical efficiency or market-eligible capacity.
+
+### Generation after clearing
+
+Across the 21 fitted countries, equal-country mean monthly generation MAE against the fitting source changes **0.1683 → 0.0880 TWh/month**; 19 countries improve on that metric. These are post-clearing allocated generation comparisons, not just the regression's algebraic weather fit. They are in-sample and do not establish unseen-year accuracy or uniquely recovered unit dispatch.
+
+| Country | Factor | Control TWh | After clearing TWh | Ember TWh |
+|---|---:|---:|---:|---:|
+| DE | 0.8637 | 104.364 | 91.194 | 89.965 |
+| FR | 0.8761 | 35.383 | 30.998 | 30.273 |
+| GB | 0.9076 | 20.937 | 19.097 | 18.776 |
+| AT | 0.9001 | 11.172 | 10.077 | 9.809 |
+| CH | 0.7752 | 11.192 | 8.676 | 8.176 |
+| PL | 0.8006 | 24.513 | 19.645 | 19.228 |
+
+![Generation and every-zone price comparison](assets/solar-country-fit-2025.png)
+
+Conditional generation-allocation bounds remain explicit. Correcting input PV in one country can change curtailment and generation in other countries whose factor is unchanged. A national energy match also cannot correct an incorrect within-day shape through a single scalar.
+
+### Price result and verification
+
+Generation calibration does not guarantee better prices. Germany and France improve, but the all-zone score worsens; every covered zone is shown in the figure/CSV. Existing bids were calibrated against earlier inputs/auction targets, and source-boundary/network uncertainties remain. This experiment does not identify which of those causes the price trade-off. Price results remain a retrospective cross-target check: all2025 was already inspected, so this is not independent forecasting validation.
+
+Independent audit reads the original Ember provider CSV, checks IRENA scope, solves the regression with a separate least-squares implementation, reconstructs the PV-only delta and replays **17,520 hourly native/KKT certificates**. Maximum native residual **8.14e-06 MW**, duality gap **0.000104 EUR**; zero emergency in both years. New annual driver **86.7s**, independent audit **110.8s**, excluding source preparation. Three tests cover scalar recovery/no intercept, missing data and rejected-factor behavior.
+
+[All country factors, eligibility, raw slopes and post-clearing scores](solar-country-fit-2025.csv) · [Monthly target/control/cleared quantities and bounds](solar-country-fit-2025-monthly.csv) · [All48 price zones, including missing targets](solar-country-fit-2025-prices.csv).
+
+Design: config/solar-country-fit-2025.json. New producer/auditor/renderer are named solar_country_fit_2025; exact local sources, delta, witnesses, source-fit/audit summaries and renderer receipt remain in ignored data/bidding-zone-network-2025/solar-country-fit-v1/. The source-loss control is reused byte-for-byte. Public and accepted baselines remain unchanged; automatic reviews stay disabled.

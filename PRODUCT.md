@@ -127,6 +127,16 @@ splitting behind-the-meter solar into self-consumption and market offers; never
 deduct it twice. Where the observed Solar category includes solar thermal, keep
 that output/storage separate from the modeled PV technology and its validation.
 
+The user authorizes empirical country PV yield calibration: a transparent constant
+factor fitted to monthly generation may adjust the retained weather-derived curve
+without changing installed capacity or copying observed hourly dispatch. Source
+and technology eligibility, rejected coefficients and factor bounds must be
+explicit. Keep generation calibration separate from price evaluation and preserve
+curtailment/network effects by rerunning clearing. Such a factor can absorb source,
+reporting, curtailment and fleet-model errors; it is not a measured loss, outage or
+uniquely identified physical correction. A fit to2025 generation and evaluation
+against2025 prices remains retrospective, even if no prices enter the regression.
+
 ## Active modelling approach and accuracy goal
 
 Liquid-oil generators require explicit source-backed generating capacity and

@@ -1,5 +1,31 @@
 # Grid Conductor — agent instructions
 
+## Authorized country solar regression — 22 October
+
+The user explicitly authorizes implementing/testing the proposed one-factor
+monthly solar regression. This supersedes prior no-generation-fit wording only
+for config/solar-country-fit-2025.json: one zero-intercept annual scalar per
+eligible source country fitted to12 monthly Ember Solar totals, then one new
+8760-hour clearing against the exact loss-adjusted control. No price fit, seasonal
+coefficients or iteration. Keep raw weather, nameplate, source geography, IRENA
+commissioning and other inputs intact; apply the empirical factor before pooling.
+Require target/capacity scope checks, preserve exclusions and rejected raw factors,
+and distinguish yield calibration from measured physical availability. The [.5,1]
+reduction-only guard is a declared research choice, not a certified fleet bound.
+Never clip a rejected factor or turn missing generation into zero supply. Retain
+all native/KKT/zero-emergency gates and post-clearing allocation bounds; report
+generation fit separately from all-zone price errors and in-sample limitations.
+No public/accepted-baseline promotion or recurring-review restart.
+
+Verified solar-country-fit-v1:21 factors applied,13 retained/excluded. Independent
+original-Ember/regression/source/native/KKT replay passes all17520 hourly witnesses,
+zero emergency. Post-clearing monthly MAE over fitted countries.16827→.08799TWh,
+19/21 improve; DE104.364→91.194TWh versus89.965 source, FR35.383→30.998 versus30.273.
+Europe priceMAE27.8967→28.2386 worsens;15 zones improve,26 worsen (DE/FR improve).
+Keep adverse results, allocation bounds, source-boundary and in-sample limits.
+No promotion or further adaptive search. Preserve sealed producer/config/evidence;
+new experiments require fresh provenance. See appended solar-alignment report.
+
 ## Authorized solar-fleet audit — 22 October
 
 The user requests the proposed country/month/hour solar audit and source-backed

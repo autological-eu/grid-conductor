@@ -1,5 +1,38 @@
 # Grid Conductor — current tasks
 
+## Country solar regression — verified 22 October 2026
+
+User authorized implementing/testing the proposed monthly constant-factor fit.
+config/solar-country-fit-2025.json declares one new full-year case and an exact
+reused loss-adjusted control; no bid fit, iteration, seasonal factors or promotion.
+
+- [x] Zero-intercept monthly OLS against original Ember Solar, with IRENA PV/parent
+  scope checks. Apply21 country factors before pooling; leave13 unchanged with
+  explicit reasons/raw slopes. Reduction-only [.5,1] guard rejects rather than
+  clips. NL source conflict and ES/IT solar-thermal scope remain excluded; NO raw
+  slope.01287 is rejected. Weather, nameplate, commissioning and non-PV inputs intact.
+- [x] Full8760-hour clearing, zero emergency. Independent audit reads original
+  Ember CSV, re-solves regression, rebuilds PV-only deltas and checks all17520
+  native/KKT witnesses. Maximum native residual8.14e-6MW, gap.000104EUR; gates
+  unchanged. Three regression contracts pass. Driver86.7s; audit110.8s.
+- [x] Post-clearing monthly generation MAE (equal-country average over21 fitted
+  countries) .16827→.08799TWh/month,47.71% lower;19 improve,2 worsen. DE104.364→
+  91.194TWh against Ember89.965; FR35.383→30.998 against30.273. These are allocated
+  quantities with retained bounds, not uniquely identified plant dispatch.
+- [x] European price MAE27.8967→28.2386EUR/MWh,1.23% worse;15 zones improve,26
+  worsen. DE19.1662→18.8722 and FR24.1511→23.6792 improve. Every complete SDAC zone
+  is retained; no price enters regression. Update [report](research/solar-alignment-2025.md),
+  one figure and three compact factor/monthly/price tables.
+
+Generation is an in-sample fitting target; price results are retrospective and
+existing bids retain earlier calibration. A factor can absorb reporting,
+curtailment or fleet errors and does not establish measured availability or a
+resolved gross/grid-demand boundary. Keep accepted/public models and disabled
+reviews unchanged. No further fitting/search is implied by this completed trial.
+Ignored sealed evidence is solar-country-fit-v1/inputs.json, delta.npz,
+country_factors.npz, summary.json, audit.json and report-receipt.json under
+data/bidding-zone-network-2025; original source profiles and prior witnesses intact.
+
 ## Solar-fleet magnitude/shape audit — verified 22 October 2026
 
 User authorized country/month/hour solar diagnosis and source-backed corrections.
