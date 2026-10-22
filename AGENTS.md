@@ -1,5 +1,21 @@
 # Grid Conductor — agent instructions
 
+## Scarcity-bid research — 22 October
+
+The user requests research on improving bids/prices to reproduce high-price
+events. This authorizes literature/source review and read-only saved-book
+diagnosis, not a new fitted model or extra annual search. See
+research/scarcity-bidding-2025.md and research_scarcity_bids_2025.py. Distinguish
+expensive finite market offers, out-of-market reserves and emergency slack.
+The annual solar_capacity event witness has21.18GW unused German gas, with all
+gas bids below252.73EUR/MWh. An explicit+1MW local-demand primal witness costs
+at most162.5084EUR; adding a small500EUR offer cannot overcome the existing cheap
+headroom. These are modeled quantities, not observed available fleet. Prioritize
+dated eligibility/outages and coherent tranche bids; never infer outages from
+generation, remove capacity to fit one spike, or rename emergency slack. Preserve
+all source/physics gates, fixed hydro, public model and disabled reviews.
+Recommendations are not adopted bid rules or authorization to resume UC/search.
+
 ## Authorized annual source comparison — 22 October
 
 The user explicitly requests a full-year, all-country comparison of the solar

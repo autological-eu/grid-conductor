@@ -70,6 +70,13 @@ renewable availability with observed dispatch, weaken feasibility gates or silen
 promote a calibrated correction. Full-year validation and investment acceptance
 remain separate requirements.
 
+High day-ahead prices alone do not establish unserved demand or emergency
+generation. Keep finite market offers, out-of-market reserves and numerical
+emergency slack distinct. The existing zero-emergency acceptance gate must not
+be bypassed by repricing slack to match an observed spike. Diagnose available
+cheap offers and coherent network constraints before attributing a price error
+to absent peaking supply; inferred offer parameters are not recovered actual bids.
+
 ## Hourly source contracts and forecast evidence
 
 Every hourly input must distinguish interval-start, interval-end and instantaneous

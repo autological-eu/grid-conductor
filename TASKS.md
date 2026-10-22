@@ -1,5 +1,46 @@
 # Grid Conductor — current tasks
 
+## Scarcity-bid literature and saved-book diagnosis — 22 October 2026
+
+User requested research on the bid/pricing model behind January 20's high prices.
+[Research report](research/scarcity-bidding-2025.md) reviews primary regulator,
+exchange, ASSUME and structural bid-stack sources; the new figure uses only the
+saved source-corrected annual witness. No new solve, fit, model promotion or
+public-page replacement.
+
+- [x] Distinguish expensive finite market supply from emergency/unserved energy.
+  BNetzA January commentary and separate 2024 investigations support that high
+  prices do not establish an emergency; 2024 outage/role findings are analogies,
+  not reconstructed 2025 plant availability or transferable deratings.
+- [x] Read-only replay at Jan 20 16 UTC: DE gas 36.614 GW available, 15.431 GW dispatched,
+  21.183 GW unused; all gas offers 135.52–252.72 EUR/MWh. Coal/lignite add 6.544 GW
+  unused. All DE non-emergency offers below 500 leave 33.116 GW unused. These are
+  modeled headroom quantities, not observed real-world unused capacity.
+- [x] Check actual offer columns and an explicit feasible +1 MW zonal demand witness:
+  extra objective cost bounded by 162.5084 EUR, primal residual 1.82e-11 MW, original
+  flows unchanged. This is an algebraic certificate, not a new optimized price.
+  A small expensive tail will not clear ahead of that existing cheap supply.
+- [x] Inspect current code: three thermal tranches already exist. Research next
+  steps concern sourced market-eligible volumes and online/startable/scarce bids,
+  not merely adding more steps, full UC or learning agents.
+
+Recommended next work, not implemented/adopted: match dated public BNetzA reserve/
+retirement records to source units, obtain 2025 thermal outage evidence with
+revision/vintage coverage, and reconcile market availability before controlled
+tranche-bid tests. Keep capacity-stock correction/outage/reserve overlaps explicit;
+do not subtract a whole ancillary-reserve plant or observed generation. EEX and
+Nord Pool aggregated-curve products have access/licensing constraints; Nord Pool
+curves include block volumes and imports/exports, so do not double count them in
+the coupled model. No subscription or credential change authorized or made.
+
+Ignored evidence: scarcity-bid-research-v1/summary.json and figure-receipt.json
+under data/bidding-zone-network-2025. Original annual source/audit/witness hashes
+are checked, unused MW totals are independently re-summed and no optimizer is called. Dated
+Jan20 plant availability remains unresolved; runtime is accessible but has no
+configured authenticated ENTSO-E access or verified EEX entitlement. Retain
+zero-emergency/native/KKT gates, all-year and event/false-spike checks, fixed hydro,
+current public model/accepted baseline and disabled recurring reviews.
+
 ## Annual solar-clock comparison — verified 22 October 2026
 
 The user explicitly requests the full-year, all-country source comparison.
