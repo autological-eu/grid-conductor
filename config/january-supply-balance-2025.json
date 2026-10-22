@@ -1,0 +1,16 @@
+{
+  "window": "2025-01-13T00:00Z to 2025-01-23T00:00Z",
+  "evaluation": "2025-01-15 through 2025-01-21 UTC; all 41 complete price zones, original corrected ENTSO-E prices",
+  "cases": [
+    "control",
+    "solar_interval",
+    "de_capacity",
+    "solar_capacity"
+  ],
+  "maximum_cases": 4,
+  "solar": "ERA5 hourly radiation at t represents preceding hour. Move PV source coefficient t+1 to model hour-start t. Keep wind, destination-hour commissioning and all original arrays. No circular roll or endpoint filling.",
+  "capacity": "Apply German reported 2025 annual net capacity by source calendar year to coal/lignite/gas upper bounds, proportional to existing source-country MW and common tranche shares. No observed-generation cap or outage assumption. Annual snapshot and scope limitations remain explicit.",
+  "freeze": "Existing bids, hydro, demand, network matrix, GSK, links and rating/flow offsets unchanged. No fit or selection. All outcomes reported; emergency use disqualifies a case as a valid supply model.",
+  "forecasts": "SMARD forecast archives for diagnostics only; as-of-auction vintages unverified. No realized generation substituted for available renewable supply.",
+  "annual": "No annual accuracy or investment acceptance claim; year-boundary ERA5 endpoint required before an annual corrected profile can be certified."
+}

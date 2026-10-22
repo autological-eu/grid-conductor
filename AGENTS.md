@@ -1,5 +1,30 @@
 # Grid Conductor — agent instructions
 
+## Authorized source follow-up — 22 October
+
+The user asks to continue investigating January20 forecast supply, available fleet
+and bids. This authorizes a fresh source audit and four bounded fast network
+cases in config/january-supply-balance-2025.json: reused current book, source-
+justified ERA5 solar-interval alignment, German reported annual thermal-capacity
+reconciliation, and their combination. No bid fit, price-selected lag, annual
+search or promotion. Preserve all prior witnesses and original availability.
+Keep wind timestamps, destination-hour IRENA commissioning, original fixed hydro,
+demand, bids and network unchanged. Public forecasts are diagnostics unless an
+original pre-auction vintage is established; annual installed capacity is not
+hourly available capacity. Audit all native LPs and emergency use. Reviews off.
+
+Verified follow-up: january-supply-balance-v1/clearing-v1 independently replays
+960 hourly LP witnesses across four cases, with zero emergency supply. ERA5 PV
+hour-ending coefficients map to hour-start snapshots at t+1; wind and destination-
+hour IRENA commissioning stay fixed. DE reported coal/lignite/gas stock is lower
+than inherited capacity. Combined event-hour price162.40 versus583.40 observed; capacity
+case improves German event-week MAE42.67→40.39, not annual validation. Solar-only
+price MAE slightly worsens: do not select timestamp semantics by price fit.
+Use report_january_supply_2025.py for the current research article; the earlier
+ramp report and figures are archived in this checkpoint and Git3516be8. Preserve
+all frozen numerical producers. Forecast vintages and plant outages are unverified;
+managed ENTSO-E access is unconfigured. No study restart or bid fitting inferred.
+
 ## Authorized January scarcity investigation — 22 October
 
 The user requests alternatives explaining January20 and revisiting daily thermal

@@ -1,129 +1,84 @@
-# January 2025 scarcity and daily thermal bids
+# January 2025 price-spike investigation
 
-Research experiment, 22 October 2026. No baseline promotion or website/model replacement.
+Source follow-up, 22 October 2026. Research evidence; current public model and accepted baseline remain unchanged.
 
-## What was tested
+## Findings
 
-Can running-unit ramps, startup delays and unavailable supply explain the missed January 20 price spike? Seven predeclared alternatives use the current oil/CHP supply book and the same Europe-wide network. No parameter was fitted to the spike.
+**Two input problems are substantiated:** ERA5 solar intervals were carried into hour-start market snapshots one hour late, and the inherited German coal fleet exceeds reported 2025 net installed capacity. Correcting these inputs still leaves the January 20 price spike largely unexplained.
 
-At **16:00 UTC (17:00 CET), January 20**, corrected ENTSO-E day-ahead prices were **€583.40/MWh** in DE-LU, DK1 and DK2. These are SDAC targets, with hourly averaging where needed; Germany selects A01 auction sequence 1. Existing non-oil bids retain calibration to earlier, incorrectly selected auction targets; no corrected-target refit was performed.
+The combined case gives **€162.40/MWh** at January 20, 16:00 UTC, versus **€583.40 observed**. Reported-capacity reconciliation alone improves German event-week MAE **€42.67→€40.39/MWh**. Solar timing alignment alone slightly worsens price MAE: retain that adverse outcome. No price-selected shift, bid fit, model selection or promotion was performed.
 
-## Source mismatch before adding constraints
+## Forecast supply balance
 
-At the event hour, the published current-model generation allocation differs substantially from ENTSO-E. These are German national generation comparisons (not offers or day-ahead forecasts); renewable allocation within pooled offers is illustrative. Prices and national generation have different market/geographic definitions.
+SMARD is the Bundesnetzagentur public source, with TSO/ENTSO-E data and explicit series IDs. Forecast generation, actual generation, modeled available supply and demand have different meanings. Values below refer to Germany; price comparisons use DE-LU. All prices remain corrected original ENTSO-E A44 SDAC targets.
 
-| Technology | Current model MW | ENTSO-E generation MW |
-|---|---:|---:|
-| Onshore wind | 4403.2 | 2762.9 |
-| Offshore wind | 2419.1 | 1800.2 |
-| Solar | 2783.6 | 38.7 |
-| Gas | 14632.9 | 18458.9 |
-| Hard coal | 18107.6 | 7032.7 |
-| Lignite | 13163.6 | 11009.9 |
-| Oil | 294.4 | 765.4 |
+| January 20, 16 UTC | Original model MW | Aligned model MW | SMARD forecast MW | SMARD actual MW |
+|---|---:|---:|---:|---:|
+| Solar | 2783.65 | 0.00 | 3.50 | 38.75 |
+| Onshore wind | 4403.17 | unchanged | 2485.00 | 2763.00 |
+| Offshore wind | 2419.14 | unchanged | 907.00 | 1800.25 |
+| Grid load | 70641.63 | unchanged | 69690.75 | 70641.75 |
 
-The exported conditional solar-allocation bounds are 2783.6–2783.6 MW at this hour. Reallocating the pooled renewable dispatch cannot close that solar mismatch. These are bounds conditional on model inputs, not weather-uncertainty intervals.
+Residual load here means **grid load minus wind and solar**. It is 61.04 GW in the original inputs and 63.82 GW after solar alignment, versus 66.30 GW in the forecast archive. This is a tightness diagnostic, not a newly fitted bid feature. Realized demand is higher than forecast at this hour; an underestimated German demand input is not the apparent problem.
 
-The model has too much solar and coal at this hour and too little gas and oil. Restricting ramps alone cannot correct a wrong resource profile or merit order. This comparison motivates the declared availability sensitivities; it does not establish that actual generation equals available supply.
+**Forecast-vintage limit:** these are current archived forecast series, not verified pre-auction snapshots. SMARD distinguishes day-ahead and intraday forecasts; its guidance describes renewable forecast publication by 18:00 for the following day, after the midday auction. File creation metadata does not establish the original forecast issue time. We therefore use these forecasts only as retrospective diagnostics, not recovered auction offers or physical resource bounds. Actual generation is never substituted for availability.
 
-| German modeled supply | Available GW | Dispatched GW | Bid range EUR/MWh |
+![Price, solar and wind evidence for January 20](assets/january-scarcity-prices.png)
+
+## Solar timing correction
+
+ECMWF defines ERA5 accumulated radiation as covering the preceding hour. The installed atlite adapter explicitly says 13:01–14:00 is labeled 14:00 and computes solar position at the interval midpoint. Our compact converter retains the source clock; the renewable loader copies profiles directly to market snapshots. Every original solar/PV-tracker generator profile matches the network coefficient exactly in the source replay. The market demand/price clock labels interval starts.
+
+The correction uses **PV coefficient at t+1 for market interval [t,t+1)**. Wind coefficients are unchanged. Destination-hour IRENA commissioning, source-country membership, plant geography and tranche shares are preserved. Original files remain intact; corrected coefficients are separate arrays. No circular roll, correlation-selected lag, weather rescaling or generation replacement is used.
+
+This fixes interval semantics, not the size of the midday solar resource estimate. A full-year corrected profile still needs the right-edge 2026-01-01 00:00 coefficient; this study neither wraps nor fills that endpoint. No annual corrected-profile or price-accuracy claim follows from this ten-day test.
+
+## German thermal-capacity reconciliation
+
+SMARD reports net installed capacity in MW, with an annual reporting calendar. The 2025 label is resolved in Europe/Berlin, including a UTC timestamp on December 31, 2024. These are revised annual stock figures, **not dated hourly outages, market-eligible offered capacity, or proof of January 20 availability**.
+
+| Technology | Inherited model MW | SMARD reported 2025 MW | Applied factor |
 |---|---:|---:|---:|
-| CCGT | 30.78 | 14.63 | 135.52–225.28 |
-| OCGT | 6.11 | 0.00 | 178.50–252.72 |
-| coal | 20.35 | 18.11 | 108.91–177.38 |
-| lignite | 19.46 | 13.16 | 133.79–194.92 |
+| hard_coal | 20351.94 | 15951.00 | 0.7838 |
+| lignite | 19457.03 | 15178.00 | 0.7801 |
+| gas | 36895.87 | 36614.00 | 0.9924 |
 
-These thermal offer columns enter only the same German balance row. In the current fixed-GSK network, substituting unused German gas for German coal leaves net exports and passive flows unchanged. Thus these unused local MW are not blocked by an internal plant-to-grid constraint in this model. Actual plant availability, startup conditions, bids and transmission effects may differ. The model offers substantial additional thermal supply below €253/MWh; explaining €583.40 requires showing why those offers would be unavailable or substantially more expensive, rather than simply adding a generic ramp cap.
+The capacity case proportionally reconciles only existing German coal/lignite/gas offer upper bounds, keeping spatial membership, relative offer tranches and bids unchanged. German/Luxembourg membership is checked against original source-country labels; no Luxembourg thermal fleet is folded into the German totals. Gas nameplate is already close to the reported stock. Hourly outages and commercial availability remain unresolved, so this is a reported-stock sensitivity, not a reconstructed available fleet.
 
-## Results
+## Clearing results
 
-The January 15 comparison uses 16:00 UTC, when observed DE-LU was €377.99/MWh. MAE covers all 41 complete observed-price zones.
+| Case | Jan 20 German price | European MAE | German MAE | Emergency MWh | Solver seconds |
+|---|---:|---:|---:|---:|---:|
+| Current book | 159.10 | 42.15 | 42.67 | 0.000000 | 0.000 |
+| Solar interval alignment | 160.68 | 42.27 | 42.88 | 0.000000 | 0.859 |
+| DE thermal capacity | 160.22 | 41.82 | 40.39 | 0.000000 | 0.837 |
+| Both source corrections | 162.40 | 41.89 | 40.62 | 0.000000 | 0.803 |
 
-| Alternative | Jan 20 DE-LU | DK1 | DK2 | Jan 15 DE-LU | 168h MAE | Emergency MWh* |
-|---|---:|---:|---:|---:|---:|---:|
-| Current supply bids | 159.10 | 158.97 | 116.44 | 157.41 | 42.15 | 0.000000 |
-| Running-unit ramps | 159.10 | 158.97 | 116.44 | 157.41 | 42.15 | 0.000000 |
-| Startup + online-state relaxation | 165.04 | 164.81 | 119.72 | 165.03 | 41.40 | 0.000000 |
-| Renewable availability stress | 160.71 | 160.58 | 139.59 | 160.91 | 45.33 | 0.000000 |
-| Renewable stress + ramps | 160.71 | 160.58 | 139.59 | 160.91 | 45.33 | 0.000000 |
-| Renewable stress + startup | 165.39 | 165.28 | 140.01 | 165.93 | 44.60 | 0.000000 |
-| Renewable + thermal stress + startup [emergency] | 199.59 | 199.59 | 165.42 | 198.92 | 51.49 | 1666.157818 |
+Prices/MAE are EUR/MWh. Evaluate every hour January 15–21 (168 hours), with equal weight across all 41 complete observed-price zones; German MAE is separate. All cases retain the entire European network, fixed hydro, original demand, calibrated bids, GSK, links and ratings/flow offsets. There is no startup/commitment optimization in these fast source tests. All four cases use zero emergency supply over all 240 checked hours.
 
-Prices and MAE are EUR/MWh. MAE gives equal weight to each complete observed-price zone and each evaluated hour; this is a seven-day event test, **not an annual accuracy estimate**. *Emergency use includes all 216 implemented hours, including warm-up. Emergency supply is the original €10,000/MWh diagnostic slack, not observed market supply. Any use, including unused forecast hours, disqualifies a case as a valid supply model; a successful mathematical solve alone does not qualify it. Overlapping forecasts are checked for maximum emergency MW rather than summed as if they were implemented energy.
+The control reuses the saved annual witness and has no new solve time. The three new cases each make 240 chronological hourly solves; recorded solver time excludes collection, source reconstruction and verification. These timings are not an 8,760-hour benchmark. Existing non-oil bids retain calibration to earlier incorrectly selected auction targets; no corrected-target refit was performed.
 
-![Event-hour prices and whole-window errors](assets/january-scarcity-comparison.png)
+![Fixed source cases and event-week price errors](assets/january-scarcity-comparison.png)
 
-![Hourly prices in Germany and Denmark](assets/january-scarcity-prices.png)
+## Verification and prior evidence
 
-Maximum emergency supply in any 48-hour forecast (MW): control: 0.000; ramp: 0.000; commitment: 0.000; weather_stress: 0.000; weather_ramp: 0.000; weather_commitment: 0.000; firm_stress: 1411.061.
+Independent replay covers the original raw source responses, configuration units, all four **960 hourly LP witnesses** (240 reused control,720 new), every native network equation, bounds, unchanged costs and full primal/dual optimality. Maximum native residual is 3.52e-08 MW and duality gap €2.31e-07. Quarter-hour energy sums match hourly energy; forecast components match their combined series. Four source-contract tests cover interval alignment across midnight, missing year endpoints and source-year selection.
 
-## Formulation and interpretation
+Authoritative ignored receipts: `data/bidding-zone-network-2025/january-supply-balance-v1/reconciliation-inputs.json`, `clearing-v1/summary.json`, `clearing-v1/audit.json` and `report-receipt.json`. URLs, original response bytes, retrieval timestamps and SHA256 hashes are retained. Source/case producers are `january_supply_sources_2025.py`, `january_supply_balance_2025.py` and `audit_january_supply_2025.py`.
 
-- **Control:** current calibrated hourly supply bids, original fixed hydro, physical PTDF constraints and links, fixed demand. All offer quantities and costs match the retained oil/CHP book.
-- **Ramps:** shared limits on total coal/lignite/CCGT/OCGT group dispatch, across all price tranches. A unit already online is distinct from a unit starting from offline.
-- **Startup relaxation:** continuous online, starting and shutting-down MW, stable minimum output, startup lead times, minimum up/down time, ramps and startup/no-load costs. This is an aggregated LP relaxation, not binary plant commitment or recovered EUPHEMIA pricing.
-- **Renewable stress:** original solar availability ×0.5 and wind ×0.7, everywhere throughout the window. Wind/solar are reconstructed before pooling into offers; observed generation never replaces availability. These factors are hypothetical sensitivities, not verified weather corrections.
-- **Thermal stress:** the renewable stress plus startup relaxation and 30% unavailability of modeled gas/coal capacity. This is not a measured outage series.
+The [prior ramp/startup investigation](https://github.com/autological-eu/grid-conductor/blob/3516be8/research/january-scarcity-2025.md) remains archived with all original witnesses: running-unit ramps left the event price at159.10; continuous startup states raised it to165.04. Its stronger stress failed the emergency-supply gate and peaked two hours late. The prior report/figures are also copied into this source checkpoint with their original hashes; no old numerical helper or receipt is rewritten.
 
-Nine daily decisions implement 24 hours each, with 48-hour perfect lookahead of the model inputs, which need not equal historical market forecasts. Dispatch, online MW and pending startup/shutdown history carry across midnight. January 13–14 warm up the model; January 15–21 provide 168 evaluated hours. January 22 is the last unimplemented forecast day. Initial online capacity is inferred from prior dispatch/minimum-load fractions, pending starts are zero and initial minimum durations are assumed satisfied; this is an initialization proxy.
+## Conclusion and next checks
 
-| Technology | Ramp (% capacity/hour) | Stable minimum | Startup lead | Minimum up/down | Startup €/MW | Online €/MW/h |
-|---|---:|---:|---:|---:|---:|---:|
-| coal | 60% | 40% | 3h | 3/3h | 100 | 2 |
-| lignite | 60% | 50% | 6h | 6/6h | 150 | 3 |
-| CCGT | 120% | 40% | 1h | 2/2h | 50 | 1 |
-| OCGT | 240% | 40% | 0h | 1/1h | 20 | 0.5 |
+These input corrections improve physical consistency and modestly improve the German price comparison, but they do not recover the scarcity event. Solar alignment alone slightly worsens price errors, consistent with inherited bid parameters already compensating for imperfect inputs; that possibility is not proof of its cause. Keep the source correction distinct from refitting bids.
 
-These are technology-class sensitivity assumptions. Fichtner/Agora gives orders of magnitude for ramping, minimum load and startup duration. Hard-coal and OCGT ramps here are stricter than its typical ranges. Even a 1%/minute running-unit ramp permits 60% of capacity per hour, so ordinary hourly changes can remain unconstrained. Offline startup can instead take hours. A single startup lead cannot represent hot/warm/cold plant states. Minimum durations, startup and no-load costs are experimental proxies, not measured fleet coefficients.
+The remaining forecast gap is chiefly wind. Gas installed capacity broadly agrees with the public stock, so the next decisive evidence is **hourly available/offered thermal capacity and bids**, along with the true regional import constraints and neighboring hydro opportunity costs. We have not identified which of these caused the observed spike.
 
-### Network contribution at the January 20 German peak
+A usable ENTSO-E API credential is not configured in this runtime, so authenticated outage queries are unavailable. Dated plant outages remain unverified; other public sources may provide evidence. This does not prevent the public SMARD audit or network solves. Obtain dated source evidence before asserting that a particular plant was unavailable; do not infer outages from low generation or from this price gap. The public model, accepted annual baseline and disabled recurring reviews remain unchanged.
 
-The free net-position column separates each LP marginal price into island energy and passive-network shadow-price terms. These are algebraic model contributions, not measured causes of the real market spike. In a degenerate LP, their split can depend on the selected optimal dual solution.
+## Sources
 
-| Alternative | Island energy | Passive network | Total |
-|---|---:|---:|---:|
-| Current supply bids | 160.22 | -1.12 | 159.10 |
-| Running-unit ramps | 160.22 | -1.12 | 159.10 |
-| Startup + online-state relaxation | 167.07 | -2.03 | 165.04 |
-| Renewable availability stress | 161.88 | -1.16 | 160.71 |
-| Renewable stress + ramps | 161.88 | -1.16 | 160.71 |
-| Renewable stress + startup | 166.40 | -1.00 | 165.39 |
-| Renewable + thermal stress + startup [emergency] | 198.03 | 1.56 | 199.59 |
-
-## Verification and provenance
-
-All 63 daily LP witnesses pass independent replay of original network equations, declared temporal constraints, state carry, bounds, costs and full primal/dual optimality. Maximum native residual: 2.58e-09 MW; temporal residual: 1.4e-10 MW; duality gap: €4.34e-05. The driver also solves ±0.1MW load perturbations at the German event hour and brackets the reported marginal price; the auditor checks the recorded slopes. Four toy tests cover ramp scarcity, startup carry, tranche grouping and mixed renewable stress.
-
-Sources are the frozen current physical book and oil/CHP witness; corrected original ENTSO-E A44 price snapshots; original PyPSA-Eur 2025 weather availability, retained geographic shares and IRENA linear capacity commissioning. Files and source hashes are bound in the ignored input, resource, run and audit receipts. The current published report/explorer are unchanged.
-
-Executable sequence: `prepare_thermal_event_2025.py`, protocol binding, `thermal_event_resources_2025.py`, `run_thermal_event_2025.py` (fresh: no reuse argument; checkpoint replay: `--reuse-version runs-v6`), `audit_thermal_event_2025.py`, then this report. Output folders are immutable: existing snapshots deliberately refuse overwrite. The protocol binder preserves the initial receipt after a pre-solve lookahead revision; it changes no physical array. The final driver replays and reuses completed daily witnesses instead of solving them twice. The initial 20-minute orchestration budget required a checkpoint continuation; physical cases and acceptance gates did not change. The final code/provenance replay links immutable witness files and makes no new solves. Reused partial-case days have zero newly spent solve time in the table, not zero original runtime.
-
-The native simplex backend failed numerically on a ramp block; the native-crossover attempt ended without a completed startup witness. Neither establishes physical infeasibility. The completed startup cases use SciPy’s bundled HiGHS IPM without native crossover, with unchanged feasibility/optimality gates. Two independent cases run concurrently; each case remains chronological. Runtime below measures recorded solve calls (excluding time originally spent on reused partial-case days), excluding input reconstruction, probes, audit and reporting; concurrent wall times are not comparable to production annual throughput.
-
-| Alternative | Recorded daily solve seconds* |
-|---|---:|
-| Current supply bids | 5.9 |
-| Running-unit ramps | 14.5 |
-| Startup + online-state relaxation | 806.5 |
-| Renewable availability stress | 145.1 |
-| Renewable stress + ramps | 40.6 |
-| Renewable stress + startup | 758.2 |
-| Renewable + thermal stress + startup [emergency] | 255.0 |
-
-## What the experiment establishes
-
-Running-unit ramps change the German event-hour price by €0.0000/MWh. Adding the declared startup/online-state model changes it from €159.10 to €165.04/MWh; its whole-window MAE is €41.40, compared with €42.15 for control.
-
-The combined renewable/thermal/startup stress gives €199.59/MWh, leaving an absolute €383.81/MWh event-hour discrepancy. It uses 1666.157818 MWh emergency supply across implemented hours. Even a closer stressed price would only demonstrate sensitivity under assumed availability; it would not identify the real cause.
-
-The strict stress does produce a higher German price of €522.95/MWh on January 20 at 18:00 UTC, two hours after the observed maximum; the observed price at that hour was €295.57/MWh. Its emergency supply includes 255.10 MWh inside the evaluated week, as well as warm-up shortages. This is a mistimed, supply-gate-failing sensitivity, not recovery of the observed spike.
-
-These outcomes decide whether this particular thermal extension explains the event; they cannot establish that actual plant startup/ramping was irrelevant. Missing outages, heterogeneous units, forecasts and real bids can change the result. Do not fit a one-off scarcity adder or promote an event-window winner into the annual simulator.
-
-## Sources and next action
-
-- [SMARD: January 20, 2025 market event](https://www.smard.de/page/en/topic-article/217400/219038): high demand and low wind/solar forecasts, with day-ahead prices formed before actual generation is known.
-- [Fichtner/Agora, Flexibility in thermal power plants (2017)](https://www.agora-energiewende.org/fileadmin/Projekte/2017/Flexibility_in_thermal_plants/115_flexibility-report-WEB.pdf), especially technology comparison around pp.48–52.
-- [PyPSA unit-commitment formulation](https://docs.pypsa.org/latest/user-guide/optimization/unit-commitment/): ramping, startup, minimum durations and linearized commitment.
-
-Before changing production bids, reconcile the unusually high modeled German solar output on the event day against independent **day-ahead forecasts** and source timestamps/geographic weighting; acquire dated thermal outages/availability and cross-border constraints. Actual generation is useful validation, but cannot prove what supply was forecast or offered. Fixed hydro, continuous group states, static GSK and the short event window remain material limits. No claim of actual scarcity, strategic bidding or outage causation follows from a synthetic stress reproducing a high price.
+- [ECMWF ERA5 time/accumulation convention](https://confluence.ecmwf.int/pages/viewpage.action?pageId=85415489).
+- [Atlite solar-interval discussion](https://github.com/PyPSA/atlite/issues/158); the locally installed adapter and exact loader/converter source bytes are hash-bound.
+- [SMARD forecasts](https://www.smard.de/page/en/wiki-article/5884/206318) and [net installed capacity](https://www.smard.de/page/en/wiki-article/5884/6038/installed-generation-capacity).
+- [SMARD API chart configuration](https://www.smard.de/app/chart_configuration/market_data_configuration.json): forecasts125/123/3791/5097/411; actual4068/4067/1225/410; installed4075/4072/198. Public SMARD data attribution: Bundesnetzagentur/SMARD, CC BY4.0.

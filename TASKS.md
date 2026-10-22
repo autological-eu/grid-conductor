@@ -1,10 +1,65 @@
 # Grid Conductor — current tasks
 
+## January supply-source follow-up — verified 22 October 2026
+
+Continued the user-authorized forecast/fleet investigation with four fixed fast
+network cases; no fitting, new annual solve, baseline promotion or publication.
+Updated [the same research report](research/january-scarcity-2025.md) and two
+figures. Prior ramp/startup results and their report/assets remain archived.
+
+- [x] Fresh public SMARD raw snapshots, configuration units, source IDs, retrieval
+  times/hashes; 240 forecast/actual hours and reported 2025 net capacity. Rebuild
+  normalized samples from original responses; quarter-hour energy sums match
+  hourly data and wind/solar components match the combined forecast series.
+- [x] Confirm ERA5 radiation represents the preceding hour; compact conversion
+  preserves its clock and renewable loading copies profiles directly. All PV/
+  tracker coefficients match the network source. Implement separate aligned PV
+  arrays using right-edge t+1, retaining wind timing and destination-hour IRENA
+  commissioning. No correlation-selected lag, circular roll or generation cap.
+- [x] German reported-stock case: hard coal20.352→15.951GW, lignite19.457→15.178GW,
+  gas36.896→36.614GW; preserve original geographic/tranche shares. Annual net
+  stock is not hourly availability or recovered market-eligible offers.
+- [x] Four source-contract tests; independent replay of960 hourly LP witnesses
+  (240 control witnesses reused,720 new hourly solves), all native equations,
+  bounds, unchanged costs and full optimality. Maximum native residual3.52e-8MW,
+  duality gap2.31e-7EUR. No emergency use in any case over240 checked hours.
+
+Jan20 16UTC German price: control159.10; aligned solar160.68; capacity160.22;
+both162.40EUR/MWh, versus583.40 observed. Capacity reconciliation improves German
+Jan15–21 MAE42.6659→40.3918; European equal-zone MAE42.1466→41.8224. Both source
+corrections give German40.6232 / Europe41.8898. Solar alignment alone slightly
+worsens price MAE; preserve it as a source-semantic correction, not a price-selected
+winner. No annual-accuracy claim. Each new240h case spends~0.8s in LP solves;
+collection, source reconstruction and independent verification are separate.
+
+At the peak, forecast wind+solar3.396GW vs modeled9.606GW before alignment;
+German solar2.784→0GW after alignment (forecast0.0035 / actual0.03875GW).
+The remaining model/forecast gap is chiefly wind. Original German model load
+70.6416GW matches actual70.6418, versus forecast69.6908. Forecast residual load
+66.2953GW vs original61.0357 and aligned63.8193; this is a diagnostic, not a fitted
+bid feature. Latest archive vintages are not verified as pre-auction information.
+
+Authoritative ignored checkpoint: `data/bidding-zone-network-2025/` +
+`january-supply-balance-v1`: collection, reconciliation-inputs, clearing-v1 summary/
+audit and report-receipt; prior report/assets copied with original hashes.
+Current report producer: report_january_supply_2025.py. Do not rerun the frozen
+historical report producer over this updated article.
+
+Next actions/blockers: verify wind profiles and available/offered thermal fleet,
+plant outages and dated cross-border limits. The managed runtime is accessible,
+but it has no configured ENTSO-E credential/outbound identity, so authenticated
+ENTSO-E outage queries are unavailable. Dated plant outages remain unverified; obtain
+source evidence before attributing
+unavailability to particular plants. A full-year aligned PV profile requires the
+right-edge 2026-01-01 00UTC coefficient; it has not been filled or certified here.
+Further bid fitting needs fresh corrected-target provenance and explicit scope;
+no automatic continuation, promotion or recurring-review restart.
+
 ## January scarcity alternatives — verified 22 October 2026
 
 The seven predeclared Europe-wide event cases are complete; the published model,
-country explorer and accepted baseline remain unchanged. Full report and two
-figures: [January scarcity investigation](research/january-scarcity-2025.md).
+country explorer and accepted baseline remain unchanged. Original report is archived at commit3516be8; the
+[current report](research/january-scarcity-2025.md) contains the source follow-up.
 
 - [x] Reconstruct the exact oil/CHP book for Jan13–22 UTC; preserve demand,
   original availability, fixed hydro, PTDF/GSK, links and inherited calibrated bids.
@@ -37,13 +92,10 @@ orchestration stop required continuation; all completed daily witnesses were
 replayed/reused with identical matrices/bounds/costs and no duplicate solves.
 No scenario parameters or physics/acceptance thresholds changed on retry.
 
-Next source investigation: reconcile excessive German modeled solar at the event
-against dated day-ahead forecasts and original timestamps/geographic weights;
-check coal/gas available fleet, outages and bids, plus dated cross-border limits.
-Unused modeled gas can replace local coal without changing modeled net exports;
-its presence is not proof of actual deliverability. Do not substitute generation
-for availability, infer a timing correction from correlation, or fit a one-off
-scarcity adder. Further fitting/promotion remains outside this completed study.
+The source follow-up above now checks the solar interval convention and reported
+German stock, while dated forecasts/outages/available offers retain explicit gaps.
+Do not substitute generation for availability or fit a one-off scarcity adder.
+Further fitting/promotion remains outside these completed studies.
 Reviews remain disabled.
 
 ## Current publication — corrected ENTSO-E targets and oil CHP, 22 October 2026

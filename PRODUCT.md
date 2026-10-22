@@ -70,6 +70,24 @@ renewable availability with observed dispatch, weaken feasibility gates or silen
 promote a calibrated correction. Full-year validation and investment acceptance
 remain separate requirements.
 
+## Hourly source contracts and forecast evidence
+
+Every hourly input must distinguish interval-start, interval-end and instantaneous
+samples, with energy converted to average power using the interval duration.
+Align ERA5 solar radiation/PV intervals to market hour starts from the source
+contract, not a lag chosen for price fit. Keep wind timing, destination-hour
+capacity commissioning and original arrays intact; certify calendar endpoints
+before claiming an annual corrected profile. Do not wrap or silently fill a
+missing weather endpoint.
+
+Keep reported annual net installed capacity, hourly available capacity and
+actually offered capacity distinct. Proportional reconciliation to an annual
+stock is a source sensitivity, not proof of outages or plant market eligibility.
+Forecast archives must identify revision/vintage limits: a current day-ahead
+archive is not automatically information available before the historical auction.
+Observed generation remains validation evidence, never a substitute for original
+renewable availability. Prices remain original ENTSO-E SDAC hourly targets.
+
 ## Active modelling approach and accuracy goal
 
 Liquid-oil generators require explicit source-backed generating capacity and
