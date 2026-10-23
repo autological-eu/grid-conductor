@@ -24,6 +24,8 @@ def run():
     assert audit['summary_sha256'] == digest(OUT / 'summary.json')
     assert audit['status'] == 'all_iteration_LP_scores_and_stopping_plus_best_smooth_KKT_passed'
     history = json.loads((OUT / 'history.json').read_text())
+    ancestry = json.loads((OUT / 'ancestry.json').read_text()) if (OUT / 'ancestry.json').exists() else None
+    recovery_start = ancestry['resumed_iteration'] if ancestry else np.inf
     assert digest(OUT / 'history.json') == summary['history_sha256']
     sealed, data, _, _, _ = load()
     hours = np.load(OUT / 'hours.npy')
@@ -42,7 +44,8 @@ def run():
     paths = []
     convergence = [dict(iteration=r['iteration'], lp_price_mae_eur_mwh=r['lp']['price_mae'], smooth_price_mae_eur_mwh=r['smooth']['price_mae'],
         lp_generation_mae_twh=r['lp']['generation_mae_twh'], lp_generation_normalized_mae=r['lp']['generation_normalized_mae'], joint_loss=r['loss'],
-        best_so_far_iteration=r['best_iteration'], consecutive_nonimprovements=r['nonimproving_iterations'], elapsed_seconds=r['elapsed_seconds']) for r in history]
+        best_so_far_iteration=r['best_iteration'], consecutive_nonimprovements=r['nonimproving_iterations'],
+        execution_stage='original' if r['iteration'] < recovery_start else 'numerical_recovery', loop_session_seconds=r['elapsed_seconds']) for r in history]
     p = dest / f'{name}-iterations.csv'
     write_csv(p, convergence)
     paths.append(p)
@@ -64,6 +67,11 @@ def run():
     ig, fg = monthly(initial_gen), monthly(gen)
     mix_rows = [dict(country=country, family=family, observed_twh=float(observed_gen[c, f]), initial_twh=float(ig[c, f]), fitted_twh=float(fg[c, f]))
         for c, country in enumerate(sealed['countries']) for f, family in enumerate(FAMILIES) if np.isfinite(observed_gen[c, f])]
+    eligible = [r for r in zones if r['eligible_headline']]
+    improved_zones = sum(r['fitted_mae_eur_mwh'] < r['initial_mae_eur_mwh'] for r in eligible)
+    worse_zones = [r['zone'] for r in eligible if r['fitted_mae_eur_mwh'] > r['initial_mae_eur_mwh'] + 1e-6]
+    improved_cells = sum(abs(r['fitted_twh'] - r['observed_twh']) < abs(r['initial_twh'] - r['observed_twh']) - 1e-10 for r in mix_rows)
+    worse_cells = sum(abs(r['fitted_twh'] - r['observed_twh']) > abs(r['initial_twh'] - r['observed_twh']) + 1e-10 for r in mix_rows)
     p = dest / f'{name}-generation.csv'
     write_csv(p, mix_rows)
     paths.append(p)
@@ -105,6 +113,24 @@ def run():
         if p.suffix == '.svg':
             p.write_text('\n'.join(s.rstrip() for s in p.read_text().splitlines()) + '\n')
     row = lambda label, m: f"| {label} | {m['price_mae']:.3f} | {m['generation_mae_twh']:.4f} | {m['generation_normalized_mae']:.4f} |"
+    bands = ['| Observed price band €/MWh | Zone-hours | Initial MAE | Selected MAE |', '|---|---:|---:|---:|']
+    observed = target[:, complete]
+    for label, low, high in [('Below0', -np.inf, 0), ('0–50', 0, 50), ('50–100', 50, 100), ('100–200', 100, 200), ('200–500', 200, 500), ('500+', 500, np.inf)]:
+        mask = (observed >= low) & (observed < high)
+        if mask.any():
+            a = abs(initial_prices[:, complete] - observed)[mask].mean()
+            b = abs(prices[:, complete] - observed)[mask].mean()
+            bands.append(f'| {label} | {int(mask.sum())} | {a:.2f} | {b:.2f} |')
+    recovery_text = ''
+    timing = f"Fitting-loop wall time was{summary['seconds_this_session'] / 60:.1f} minutes, excluding source setup and the separate audit."
+    if ancestry:
+        pilot = json.loads((OUT / 'recovery-pilot.json').read_text())
+        recovery_text = f"""The original run failed during iteration20 at24 January15:00 UTC: its Newton complementarity collapsed while stationarity remained above tolerance. This failure was **not** counted as a price nonimprovement. A fresh recovery controller retains the exact economic objective, Adam checkpoint, regularizers, data, physical equations and stopping rule. A residual-backtracked barrier Newton fallback with a per-inequality barrier floor1e-12 fixes the failed solve; its directional gradient discrepancy is{pilot['gradient']['scaled_discrepancy']:.3g}. All original precision/acceptance gates remain unchanged. The743 successful partial-hour states were revalidated; parent source files and the failed checkpoint remain intact, with immutable artifacts hardlinked rather than bulk-copied. Numerical fallback is used only when the original warm/cold solve fails. This is one continuous mathematical fitting experiment with explicitly versioned numerical recovery, not a new fitted model comparison.
+
+Reproduce the completed audit/report with `tools/audit_hourly_spline_reconstruction_2025.py --recovery` and `tools/report_hourly_spline_reconstruction_2025.py --recovery` using the scientific interpreter/PYTHONPATH documented in AGENTS.md.
+
+"""
+        timing = f"The original loop has at least{ancestry['original_observed_loop_seconds_lower_bound'] / 60:.1f} minutes of observed elapsed execution before failure; the recovery loop took another{summary['seconds_this_session'] / 60:.1f} minutes, excluding source setup and the separate audit. Raw per-iteration times in the CSV are session-relative and labelled by execution stage."
     text = f'''# Full-month hourly spline reconstruction
 
 **January2025, all744 chronological hours across the European network. In-sample reconstruction, not predictive validation.** This experiment learns separate technology/zone spline adjustments for every hour. It does not change the accepted model or public country explorer.
@@ -120,6 +146,8 @@ The user-requested stopping rule completed: {len(history) - 1} updated iteration
 {row('Last evaluated iteration', last_metrics)}
 
 Price MAE weights all744 hours and the same41 zones with complete annual observed-price coverage equally, not by demand. All48 zones remain in the physical network. Generation scores use known January national/resource cells from Ember, not invented hourly or zonal observations. Normalization divides each absolute monthly error by max(observed,0.25 TWh). Price-only parameter selection can sacrifice generation accuracy despite the joint training loss; retain both scores above.
+
+Price MAE improves in{improved_zones}/{len(eligible)} scored zones; worsened zones: {', '.join(worse_zones) or 'none'}. Monthly absolute generation errors improve in{improved_cells} known country/resource cells and worsen in{worse_cells}; the remaining cells are unchanged within1e-10 TWh. The full CSVs retain these adverse results.
 
 ![Complete training and LP evaluation history]({name}-convergence.svg)
 
@@ -141,13 +169,17 @@ Each candidate also clears every hour through the original HiGHS LP, with20 divi
 
 These plots use observations that participated in fitting. Strong recovery here demonstrates historical fitting flexibility, not next-month forecasting skill, unique supply bids or reliable investment counterfactuals. Inactive/fully dispatched technologies can remain weakly identified; fitted bids can also compensate for errors in physical inputs or missing market mechanisms. January-specific coefficients require an additional predictive rule before use for unseen February hours.
 
+Errors by observed price band retain negative-price and spike events. These are subdivisions of the same in-sample January scores, not new validation data.
+
+{chr(10).join(bands)}
+
 ## Verification and limitations
 
 Four focused tests cover exact shared-to-hourly initialization, shrinkage/temporal derivatives, true monthly generation sums and best-price stopping semantics. The European directional derivative discrepancy is4.34e-7 at the checked local step; a larger perturbation differed by.01096, retained in the local step-sweep evidence. Derivatives are local across active constraints, not globally smooth LP sensitivities. Three European pilot hours pass physical/optimality checks and warm-state replay. Numerical KKT precision was tightened rather than weakening existing acceptance gates.
 
 Independent auditing reconstructs economic bids with SciPy PCHIP, replays **{audit['lp_hours']:,} LP hour witnesses across all iterations**, independently reconstructs national generation and observed errors, verifies best-parameter identity and the complete stopping history, and checks all744 selected smooth KKT states. LP maximum physical residual is{audit['lp_maxima']['primal_mw']:.3g} MW and objective gap{audit['lp_maxima']['duality_gap_eur']:.3g} EUR. Original1e-4 MW feasibility and0.05 EUR economic gates remain unchanged. Zero-priced renewable allocation can be nonunique; monthly generation follows the saved raw LP allocation and original source-capacity shares, not uniquely identified national dispatch.
 
-The first background launch ended after48 forward hours without a numerical failure record or cgroup OOM event. A single attached runner restarted the same sealed experiment; no completed optimization iteration was lost. Active attached-session wall time was{summary['seconds_this_session'] / 60:.1f} minutes, including gradients and all-iteration LP scoring. This is training time, not a single annual dispatch runtime. Full parameters, KKT states and LP witnesses remain local ignored artifacts; compact evidence only is tracked.
+{recovery_text}The first background launch ended after48 forward hours without a numerical failure record or cgroup OOM event. A single attached runner restarted the same sealed experiment; no completed optimization iteration was lost. {timing} These are training times, not single annual dispatch runtimes. Full parameters, KKT states and LP witnesses remain local ignored artifacts; compact evidence only is tracked.
 
 [Machine-readable report receipt]({name}-receipt.json). The baseline, public explorer and disabled recurring reviews remain unchanged.
 '''
@@ -162,4 +194,10 @@ The first background launch ended after48 forward hours without a numerical fail
 
 
 if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--recovery', action='store_true')
+    args = parser.parse_args()
+    if args.recovery:
+        from hourly_spline_numerical_recovery_2025 import OUT, PLAN
     run()

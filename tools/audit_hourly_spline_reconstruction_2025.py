@@ -43,6 +43,16 @@ def run():
     assert digest(OUT / 'history.json') == summary['history_sha256']
     assert digest(OUT / 'best-parameters.npy') == summary['best_parameter_sha256']
     design = json.loads(PLAN.read_text())
+    if 'recovery_controller_sha256' in design:
+        controller = ROOT / 'tools/hourly_spline_numerical_recovery_2025.py'
+        assert digest(controller) == design['recovery_controller_sha256']
+        assert digest(OUT / 'recovery-pilot.json') == design['recovery_pilot_sha256']
+        completion = json.loads((OUT / 'recovery-completion.json').read_text())
+        assert completion['summary_sha256'] == digest(OUT / 'summary.json')
+        assert completion['ancestry_sha256'] == digest(OUT / 'ancestry.json')
+        ancestry = json.loads((OUT / 'ancestry.json').read_text())
+        for name, sha in ancestry['sha256'].items():
+            assert digest(ROOT / ancestry['parent'] / name) == sha
     sealed, data, A, emergency, original_capacity = load()
     hours = np.load(OUT / 'hours.npy')
     assert len(hours) == 744 and np.array_equal(hours, np.arange(744))
@@ -146,4 +156,10 @@ def run():
 
 
 if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--recovery', action='store_true')
+    args = parser.parse_args()
+    if args.recovery:
+        from hourly_spline_numerical_recovery_2025 import OUT, PLAN
     run()

@@ -13,9 +13,14 @@
   Gradients are local across active sets, not globally smooth LP derivatives.
 - [ ] Run all744 January hours at each iteration until three consecutive
   original-LP price MAE nonimprovements; retain best hourly coefficients and
-  generation tradeoffs. One attached runner is active. At iteration7, verified
-  producer LP scores30.7609→18.4878 EUR/MWh and monthly generation.33353→.29755
-  TWh; independent replay remains pending. Check live state, not this snapshot.
+  generation tradeoffs. Original runner failed at iteration20/hour567; best
+  completed iteration19 scores30.7609→16.2115 EUR/MWh and generation.33353→.28073
+  TWh. This numerical failure is not patience termination. Check live recovery
+  state, not this snapshot. Initial/iteration8 independent LP replay passes.
+- [x] Fresh-provenance numerical recovery: residual-backtracked barrier Newton
+  only for failed solves, unchanged objective/Adam state/gates. Hour567 KKT and
+  gradient discrepancy1.39e-6 pass. Preserve failed parent; hardlink/revalidate743
+  partial-hour states. One attached recovery-v1 runner continues iteration20.
 - [ ] Independently replay original LP bids/certificates, monthly generation,
   stopping/selection history and report results. No baseline/explorer promotion.
 

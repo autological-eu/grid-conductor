@@ -22,6 +22,21 @@ flock-protected runner. Full arrays stay ignored; never edit sealed old producer
 This is in-sample hourly reconstruction, not odd/even forecast validation or a
 new accepted baseline. Report price/mix tradeoffs and smooth-to-LP differences.
 
+Execution update: original v1 failed at iteration20/hour567 (24 January15UTC):
+warm Newton stationarity.00315 despite collapsed complementarity; cold fallback
+also failed. This is NOT patience completion. Best completed iteration19 price
+MAE16.21146, generation.28073 TWh. Preserve original producer/checkpoint/failure.
+Fresh hourly-spline-reconstruction-recovery-v1 uses the separate recovery config
+and hourly_spline_numerical_recovery_2025.py. Objective/Adam state/data/physics/
+stopping/gates unchanged; only failed numerical solves use damped barrier Newton
+with residual backtracking and barrier floor1e-12. Failed-hour KKT and directional
+gradient discrepancy1.39e-6 pass. Revalidate743 saved partial-hour states, then
+continue iteration20. New controller/config/pilot/ancestry hashes bind recovery;
+immutable parent evidence hardlinked. Do not edit either sealed numeric producer
+or resume original failed runner. Audit/report CLI must use --recovery. Inspect
+the recovery root's actual live state before any further action; no completion
+or baseline claim until real patience termination and full independent audit.
+
 
 ## Authorized six-node spline / original LP comparison — 23 October 2026
 
