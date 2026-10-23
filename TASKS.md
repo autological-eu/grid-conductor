@@ -1,5 +1,32 @@
 # Grid Conductor — current tasks
 
+## Differentiable monotone splines — 23 October 2026
+
+- [x] Implement cubic monotone marginal bids, exact integrated convex offer
+  costs, sparse primal-dual clearing and implicit price/dispatch KKT adjoints.
+  Wind/solar/run-of-river have zero economic bids; disclose the small numerical
+  regularizers. Preserve source capacities, network and fixed reservoir.
+- [x] Four core tests and two training-loss/isolation tests pass; three European
+  January hours pass physical/stationarity/complementarity checks. Joint price/
+  generation gradient agrees with finite differences (absolute9.38e-9 in pilot).
+  Three additional midpoint/shape/joint directions pass (max discrepancy4.55e-5).
+  Reducing technical curvature tenfold changes pilot prices by≤0.00972 EUR/MWh
+  and individual group dispatch by≤1.260 MW; annual sensitivity unverified.
+- [x] Declare six independent odd/even pairs, fixed16 training hours per odd
+  month/four Adam updates; implement resumable fitting, frozen proposals,
+  all-hour even-month scoring and saved primal/dual witnesses. Runner launched
+  under a single-job flock. Check live process and ignored progress/failure files.
+- [x] [Prototype report and learned-curve figures](research/differentiable-spline-2025.md):
+  January sample joint loss.87814→.70996 after four updates; both components
+  improve. This is sampled training evidence, not held-out price/generation MAE.
+- [ ] Complete and independently replay all8688 learned/control evaluation
+  hours; report all4344 held-out hours, monthly source-matched generation,
+  numerical regularization sensitivity and actual runtime. Do not infer success
+  from the prior sigmoid experiment or from training-loss improvement.
+- [ ] Assess fitting coverage/convergence:16 sampled training hours is a bounded
+  feasibility experiment, not a converged national technology fit. Declare any
+  larger-budget experiment separately before viewing its test outcomes.
+
 ## Learned sigmoid curves — odd/even month validation, 23 October 2026
 
 - [x] Declare six independent odd-month fits with next-even-month tests in

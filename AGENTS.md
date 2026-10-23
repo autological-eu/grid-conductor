@@ -1,5 +1,37 @@
 # Grid Conductor — agent instructions
 
+## Authorized differentiable spline candidate — 23 October 2026
+
+User authorizes trying flexible differentiable spline technology bids with actual
+gradient descent through clearing. Fresh config/differentiable-spline-2025.json,
+new spline tools and ignored differentiable-spline-v1 only. Preserve all sealed
+sigmoid producers/source bytes and accepted model. Six independent odd/even
+pairs; zero economic bids for wind, solar and run-of-river. Other resources use
+monotone cubic I-splines, source-cost anchors and local clock features. Fixed
+reservoir and original capacities/network unchanged; no storage fleet added.
+
+Use explicit KKT adjoints of both dispatch and balance prices. Small technical
+regularizers are disclosed, not economic bids. Hard active switches can make
+derivatives ill-conditioned; finite-difference checks are mandatory. Do not
+relax original 1e-4 MW physical / 0.05 EUR complementarity gates. Nonlinear KKT
+complementarity is not the old LP duality-gap statistic. Preserve failures.
+
+Pilot: four core tests and two training-loss/isolation tests pass. Three European
+January hours feasible, one European joint gradient error9.38e-9. Exact smooth
+solver currently1.5–3.4s/hour in initial pilot, not fast annual inference. Full
+candidate uses a deliberately bounded16-hour training sample/four Adam updates
+per odd month, then all4344 even-month hours and same-input neutral controls.
+Sample-expanded monthly energy is a training approximation; evaluation uses
+actual complete monthly totals. Check live progress/processes, not this note,
+before resuming. One flock-protected checkpointed runner was launched; no
+duplicate jobs. No completed CV/performance/adoption claim until witnesses pass
+audit_differentiable_spline_2025.py. Baseline/site/reviews unchanged.
+Additional three midpoint/shape/joint gradient directions pass (max discrepancy
+4.55e-5). Tenfold regularizer reduction changes three pilot-hour prices by at most
+0.00972 EUR/MWh and individual group dispatch by1.260 MW. January four-update
+sample training loss.87814→.70996; this is not validation MAE. Prototype report:
+research/differentiable-spline-2025.md, including learned source-group curves.
+
 ## Authorized sigmoid month-pair experiment — 23 October 2026
 
 User authorizes learned technology supply curves with six independent odd-month

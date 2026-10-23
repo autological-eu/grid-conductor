@@ -1,0 +1,18 @@
+{
+  "version": "differentiable-spline-v1",
+  "pairs": [[1,2],[3,4],[5,6],[7,8],[9,10],[11,12]],
+  "training_hours_per_month": 16,
+  "gradient_updates": 4,
+  "adam_learning_rate": 0.12,
+  "random_seed": 20251023,
+  "price_scale_eur_mwh": 40.0,
+  "price_smooth_absolute_epsilon": 1.0,
+  "generation_floor_twh": 0.25,
+  "generation_smooth_absolute_epsilon": 0.01,
+  "ridge": 0.001,
+  "generation_regularizer_eur_mwh": 0.01,
+  "checkpoint_hours": 24,
+  "zero_economic_bid": ["onshore_wind","offshore_wind","solar","ror"],
+  "training_design": "Fixed uniform training-only sample; monthly generation estimated by sample-hour expansion. Bounded proof of gradient fitting, not convergence certification.",
+  "evaluation_design": "All hours of each following even month, independently initialized fits, ordinary price MAE and actual monthly generation totals. No observed targets enter clearing."
+}

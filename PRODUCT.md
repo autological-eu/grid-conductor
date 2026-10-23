@@ -1,5 +1,24 @@
 # Grid Conductor — product requirements
 
+## Differentiable supply-curve fitting
+
+Evaluate flexible monotone cubic spline bids using gradients through constrained
+market clearing, jointly fitting cleared ENTSO-E prices and source-matched
+generation. Distinguish this from inverse least squares or heuristic coefficient
+updates. Shared technology/country parameters may produce different hourly curves
+through observed availability, source costs and local clock features. Keep the
+physical feasible set and fixed reservoir schedule explicit. Test wind, solar and
+run-of-river at zero economic bid as a declared assumption, with numerical
+regularisation measured separately. Smooth bids alone do not guarantee smooth
+solutions at active-constraint changes: verify price and dispatch gradients,
+feasibility, stationarity and complementarity before empirical claims.
+
+Preserve independent odd-month fits and next-even-month all-hour evaluation.
+Disclose sampled training objectives, fitting budgets and convergence limits;
+monthly generation must remain a monthly target. Report exact evaluation
+coverage and ordinary errors, without substituting training loss for validation.
+No automatic baseline promotion, public explorer update or storage-fleet adoption.
+
 ## Learned supply curves and month-ahead validation
 
 Evaluate monotone parameterised technology supply curves inside the constrained
