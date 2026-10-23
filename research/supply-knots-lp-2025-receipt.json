@@ -1,0 +1,11 @@
+{
+  "config/supply-knots-lp-2025.json": "60f9ea7efe90d97e1ee8d29635a68eed4194c941f0e7dc3f83a20789f69005d1",
+  "data/bidding-zone-network-2025/supply-knots-lp-v1/summary.json": "d06ad11ff637c44c6b517ac445cc2dca9425c6dec7073503ece3d7004dcf0147",
+  "data/bidding-zone-network-2025/supply-knots-lp-v1/layout.json": "91f50e14608139fa35c8fb4b74cc866c3386ac783c6d46789591e3142ef70348",
+  "data/bidding-zone-network-2025/supply-knots-lp-v1/provenance.json": "efae71a25637a94479133228d77a4ca9317f4cc0b57f22c5f2acb8e2463403fb",
+  "data/bidding-zone-network-2025/sigmoid-month-pairs-v1/summary.json": "95ec03fbb2027d0f8a64c505f39e08998d40a1b2ba9fe05bfc9e73d73719e40c",
+  "tools/report_supply_knots_lp_2025.py": "65c4d4aeb139ee038811e5cc90855da62b65c36235bed0c890f0cdb1ae36e6ae",
+  "data/bidding-zone-network-2025/supply-knots-lp-v1/audit.json": "d0c43a8236cbe8275c79e7e380cb0e6e9a4e39354f10185bbdf09fbee3b4f0ac",
+  "data/bidding-zone-network-2025/supply-knots-lp-v1/transfer.json": "00c744b76860180edcdc741348ab08643a96cf5655a94d22768a0021be2de4fe",
+  "data/bidding-zone-network-2025/supply-knots-lp-v1/orchestration.json": "3aea5670c4fca372f32db67fd09c5aca2ec5c98966587456214cc755440fd784"
+}

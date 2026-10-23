@@ -1,0 +1,23 @@
+{
+  "name": "supply-knots-lp-v1",
+  "knots": [0,0.2,0.4,0.6,0.8,1],
+  "curve": "Monotone cubic Hermite interpolation of six nodal prices; five independently learned positive increments and five shared local-clock midpoint coefficients per technology/bidding zone.",
+  "pairs": [[1,2],[3,4],[5,6],[7,8],[9,10],[11,12]],
+  "lp_tranches_per_curve": 20,
+  "training_hours": 16,
+  "updates": 8,
+  "learning_rate": 0.15,
+  "seed": 20251023,
+  "initializer": "Resample the corresponding odd-month-only differentiable-spline-v1 fit at the six supply nodes; dominant source country's own-month parameter, selected using physical capacity only. No even-month targets or inherited annual price fit.",
+  "selection": "Minimum sampled training joint smooth-clearing loss across initialization and eight Adam updates; freeze before any next-even-month scoring.",
+  "objective": "Smooth price MAE/40 + sample-expanded normalized Ember monthly generation error with .25TWh floor + .001 mean squared displacement from neutral coefficients. Fixed reservoir uses exact monthly total; no invented hourly generation targets.",
+  "price_smooth_absolute_epsilon": 1,
+  "price_scale_eur_mwh": 40,
+  "generation_floor_twh": 0.25,
+  "generation_smooth_absolute_epsilon": 0.01,
+  "ridge": 0.001,
+  "zero_economic_bid": ["onshore_wind","offshore_wind","solar","ror"],
+  "aggregation": "Pool only identical-constraint technology columns within each bidding zone. Source-cost anchor is hourly availability-weighted. Country output attribution follows original source availability shares, not independently identified plant dispatch.",
+  "evaluation": "Original HiGHS LP physical equations; 20 divisible equal-MW tranches priced by exact spline interval averages. Both learned and neutral controls, all4344 even-month hours. Economic LP has no quadratic regularizer; source artificial emergency must remain zero. Accepted annual model is in-sample context only.",
+  "scope": "Conditional retrospective source/model validation. No baseline, public explorer or review change. Exact smooth fit and LP inference are different allocations; report their mismatch on training hours. All-hour even-month metrics are not a full-year score."
+}

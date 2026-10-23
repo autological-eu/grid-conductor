@@ -1,5 +1,63 @@
 # Grid Conductor — agent instructions
 
+## Authorized six-node spline / original LP comparison — 23 October 2026
+
+User requests explicit0/20/40/60/80/100% supply nodes per technology/bidding zone
+and fitted price/mix scores from the original LP. New supply-knots-lp-v1 uses
+config/supply-knots-lp-2025.json and separate supply_knot_* tools. Do not edit
+sealed prior producers. The earlier smooth experiment's six fitted proposals are
+complete and retained; its expensive all-hour smooth validation was deliberately
+paused after partial February output (paused.json), not completed or resumed.
+
+New326 zone/technology curves pool only physically identical original columns;
+hourly MW conservation is checked. Source-cost anchors are availability-weighted,
+and national generation attribution uses original within-curve capacity shares;
+these are model assumptions, not identified individual dispatch. Price nodes use
+monotone cubic Hermite interpolation, five positive interval increments plus
+five local-clock coefficients. Wind/solar/ROR remain zero economic offers.
+Fit through exact smooth KKT adjoints, initialize only from the corresponding
+odd-month fit, eight Adam updates on16 odd-month hours. Freeze the minimum
+sampled-training-loss proposal, then clear all4344 even-month hours in original
+HiGHS LP constraints with20 equal-volume tranches/exact interval-average costs.
+LP has no technical quadratic regularizer; smooth training does. Never call
+hard LP price/dispatch globally differentiable or imply training minimizes its
+exact discrete inference error. Retain same-input neutral controls and adverse
+results. No baseline, browser/explorer, publication or review change.
+
+Five focused tests pass, including mixed-country monthly-loss derivatives.
+European knot-shape gradient discrepancy3.38e-5 passes;72 January LP hours at
+5/20/40 tranches pass original gates.20vs40 pilot mean price discrepancy.3561
+EUR/MWh, not an annual convergence guarantee. Inspect live producer/auditor
+processes and checkpoints; neither completion nor empirical gains are implied.
+The independent audit reconstructs nodal costs with SciPy, replays saved LP
+certificates, fold/initializer isolation and original observed metrics. Full
+hourly arrays remain local ignored artifacts; compact reports/data/figures only.
+
+Verified completion: all six pairs/all4344 held-out hours, same-input controls;
+all8688 saved LP witness hours pass independent SciPy cost/dual/quantity/target
+replay. Price MAE32.29899→28.38516 EUR/MWh; monthly generation MAE.34169→.29823
+TWh, normalized.29776→.22894,33 countries/1458 cells. Both improve in every
+test month;38/41 complete zones improve (ES/PT/NO2 worsen). Solar monthly error
+worsens slightly; retain this adverse result. Earlier sigmoid26.35868 remains
+stronger on these hours; changed pooling/zero-REN/sharing/training budgets prevent
+attributing the difference solely to curve family. No model promotion.
+
+All six selected training losses replay exactly; nontraining-target poisoning
+leaves checked loss/derivatives identical.96 training-hour smooth→LP mean price
+discrepancy.32384 EUR/MWh, max20.07954; no annual approximation guarantee.
+Independent sparse source/country attribution checks all8688 witness hours.
+Zero-bid curtailment allocation is nonunique: an equally optimal proportional
+allocation changes aggregate monthly mix MAE only slightly (.29826 learned),
+but individual hourly country/technology output can differ by8.30 GW. Report both
+and do not silently choose a convention after viewing targets.
+
+Active execution2315.6s including checkpointed first stage/two-process independent
+fits; summed LP preparation/clearing/certification646.3s, audit active28.2s with
+waiting separate. These are not annual inference timings; diagnostics overlapped.
+Frozen numerical producer/config unchanged during scheduling handoff. Original
+runner/proposals, scheduler receipts and full local witnesses retained; no jobs
+running. See research/supply-knots-lp-2025.md and score/curve CSVs/figures.
+
 ## Authorized differentiable spline candidate — 23 October 2026
 
 User authorizes trying flexible differentiable spline technology bids with actual

@@ -1,5 +1,43 @@
 # Grid Conductor — current tasks
 
+## Six supply nodes and original LP scores — 23 October 2026
+
+- [x] Implement0/20/40/60/80/100% price nodes with positive increments,
+  monotone cubic Hermite interpolation and exact interval-average LP offers.
+ 326technology/zone curves; pool only identical physical columns, conserve MW,
+  disclose weighted cost anchors and original-capacity country allocation.
+- [x] Four curve/adjoint/LP-compiler tests plus mixed-country monthly-loss
+  derivative test pass. European gradient discrepancy3.38e-5;72 training-month
+  LP hours at5/20/40 tranches pass physical/economic gates.20vs40 mean price
+  discrepancy.3561 EUR/MWh on this pilot; annual discretisation not certified.
+- [x] Declare odd-month-only warm initialization, eight gradient updates on16
+  training hours, training-only proposal selection and original-LP evaluation.
+  Start one producer and one independent SciPy-cost/LP-certificate auditor.
+- [x] Complete all six pairs/all4344 even-month hours plus neutral controls;
+  audit all8688 LP witness hours, report ordinary price MAE and actual monthly
+  generation errors, per-zone coverage, learned nodal curves and runtimes.
+  Price MAE32.29899→28.38516 EUR/MWh; monthly generation.34169→.29823 TWh,
+  normalized.29776→.22894;33 countries/1458 cells. Both improve in each month;
+  38/41 zones improve (ES/PT/NO2 worsen), Solar generation MAE worsens slightly.
+  Earlier sigmoid26.35868 still stronger; this is not a controlled family ablation.
+  Max independent physical2.19e-7 MW, objective gap1.42e-5 EUR; zero emergency.
+- [x] Quantify smooth-to-LP transfer and fitting-budget limitations; no baseline
+  or explorer adoption follows automatically. Retain adverse generation/zone
+  results and do not present six even months as an8760-hour validation year.
+  All96 selected training-hour losses replay exactly, target-poisoning loss/
+  derivative boundary unchanged. Smooth→LP mean price discrepancy.32384 EUR/MWh,
+  max20.07954. Independent sparse national/technology attribution passes.
+  Equal-price renewable allocation sensitivity preserves prices/cost/physics:
+  proportional curtailment yields.29826 TWh learned mix MAE; hourly country/tech
+  allocations may differ8.30 GW. Saved raw LP allocation stays authoritative.
+- [x] [Full report, explicit nodal curves, per-zone MAE grid and generation data](research/supply-knots-lp-2025.md).
+  Active execution2315.6s; LP compilation/clearing/certification646.3s; independent
+  audit28.2s plus waiting, diagnostics overlapped. Scheduling used2 independent
+  fit processes with frozen numerical producers and readable checkpoint handoff.
+  Full witnesses remain ignored; no solver/audit job running, baseline unchanged.
+- [ ] Before revising adoption, declare broader training coverage, controlled
+  family/source-pooling/zero-renewable comparisons and discretization study.
+
 ## Differentiable monotone splines — 23 October 2026
 
 - [x] Implement cubic monotone marginal bids, exact integrated convex offer
@@ -23,6 +61,8 @@
   hours; report all4344 held-out hours, monthly source-matched generation,
   numerical regularization sensitivity and actual runtime. Do not infer success
   from the prior sigmoid experiment or from training-loss improvement.
+  Superseded by user-requested original-LP test above: all six smooth fits are
+  saved, but smooth all-hour validation is paused (partial February), not complete.
 - [ ] Assess fitting coverage/convergence:16 sampled training hours is a bounded
   feasibility experiment, not a converged national technology fit. Declare any
   larger-budget experiment separately before viewing its test outcomes.

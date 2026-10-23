@@ -2,6 +2,19 @@
 
 ## Differentiable supply-curve fitting
 
+Evaluate six explicit marginal-price nodes at0/20/40/60/80/100% of hourly
+available output per technology and bidding zone. Positive independently learned
+node increments permit changing curvature while keeping bids nondecreasing.
+Compile fitted smooth curves into divisible offer tranches for the original LP,
+then measure actual LP price MAE and source-matched generation errors. Preserve
+the distinction between smooth-clearing training gradients and discontinuous LP
+inference, and quantify offer discretisation. If source groups are pooled, retain
+all physical MW/location constraints, disclose cost aggregation and country output
+allocation, and compare against a control with identical pooling assumptions.
+When identical zero-priced offers permit multiple optimal generation mixes,
+disclose the allocation convention and quantify sensitivity. A valid optimal LP
+allocation does not establish a unique hourly technology-generation prediction.
+
 Evaluate flexible monotone cubic spline bids using gradients through constrained
 market clearing, jointly fitting cleared ENTSO-E prices and source-matched
 generation. Distinguish this from inverse least squares or heuristic coefficient
