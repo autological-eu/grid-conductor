@@ -27,6 +27,10 @@ The older config/research-baseline.json remains unchanged for historical replays
 
 ## Current documentation and models
 
+- [Technology supply-curve example](research/de-lu-baseline-supply-curves-2025.md):
+  actual baseline offer curves for all technologies in DE-LU at noon UTC on
+  15 July 2025, their combined zonal curve and exact price/volume CSV.
+
 - [Linked-bid observed-price and generation comparison](research/europe-linked-clearing-2025-observed.md):
   saved full-year results versus accepted baseline, corrected ENTSO-E hourly
   SDAC prices, monthly Ember and available hourly generation. Price MAE changes

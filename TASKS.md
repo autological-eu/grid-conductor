@@ -1,5 +1,14 @@
 # Grid Conductor — current tasks
 
+## Baseline technology supply-curve example — 23 October 2026
+
+- [x] Extract exact accepted offers for DE-LU, 15 July 2025 12:00 UTC. Show all
+  technology curves and the combined zonal stack, current hourly available MW
+  rather than dispatch, and modeled/observed prices. Preserve original pooled
+  offer MW when splitting technology labels; nuclear zero and fixed reservoir
+  output explicit, artificial emergency backstop separate. No new solve or fit.
+  [Figures, explanation and exact offer CSV](research/de-lu-baseline-supply-curves-2025.md).
+
 ## Europe-wide linked bids and annual runtime — verified 23 October 2026
 
 - [x] Implement bounded allocation/pricing re-clearing with explicit heuristic
