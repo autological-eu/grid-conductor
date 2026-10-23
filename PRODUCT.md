@@ -1,5 +1,17 @@
 # Grid Conductor — product requirements
 
+## Block and linked-bid research direction — 23 October 2026
+
+Explore intertemporal block and parent/child bid relationships for gas and storage
+as an extension to the accepted hourly offer model. Distinguish supply-curve
+tranches, market-order acceptance and physical operating constraints. Storage
+linkage must retain explicit energy balance, efficiencies, stock chronology and
+power limits. Price validation must account for the economic conditions of
+accepted families, not assume that dispatch optimality alone supplies valid
+market prices. Preserve the adopted research baseline while evaluating this
+extension; a prototype or partial EUPHEMIA feature set does not establish full
+market replication, observed-price improvement or investment validity.
+
 ## Accepted research baseline — 23 October 2026
 
 Use **solar-anchor-bids-v1, annual case resource_full**, as the active research

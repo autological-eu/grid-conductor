@@ -1,5 +1,35 @@
 # Grid Conductor — agent instructions
 
+## Block/linked-order exploration — 23 October 2026
+
+The user requests exploring block and parent/child bids, especially gas/storage.
+The separate linked_profile_orders.py prototype and config/linked-order-pilot-2025.json
+implement one-sided profiles, MAR/binary activation, single-parent forests,
+exclusive groups, physical reservations and storage energy/power/direction limits.
+It does not alter the user-adopted resource_full baseline. Tests cover a tiny
+exhaustive binary reference and a losing accepted block. Supporting-price search
+checks one fixed optimal allocation; no allocation/price master cuts, MIC,
+multiple-parent surplus allocation or full EUPHEMIA compliance is implemented.
+
+Retained evidence: linked-order-pilot-v4, three controls/three gas cases,144
+full-day matrix replays (24 newly solved hours,120 exact reused hours), zero
+emergency, max residual1.10e-9MW. Controls reproduce active objectives within
+2.84e-7EUR. One-parent gas MILPs take.39–1.20s; full pilot20.6s with preparation
+and pricing. January allocation accepts the package but supporting-price search
+reports infeasible; retain this failure and never publish its LP duals as valid
+market prices. July/October reject the package. No annual speed/MAE claim follows.
+The synthetic7.17GW pooled group,20% minimum and25EUR/MW startup assumptions are
+not plant data or an adopted correction. All tranches are reserved/replaced.
+
+Failed loader/cold-simplex attempts remain in local v1–v3 source/log snapshots;
+they completed zero cases. Retained solver uses bounded interior-point LPs,
+zero-gap MILPs and original-matrix checks; only inconsistent bounds within1e-7MW
+are rectified. Decompose time only across genuinely disconnected order/physical
+components; never split storage state. Preserve sealed sources/checkpoints; any
+next cut/re-clearing experiment needs fresh provenance and bounded small-book
+oracles before annual claims. Baseline/public site unchanged, reviews disabled.
+See research/linked-orders-2025.md and its compact six-row CSV.
+
 ## User-adopted resource bids baseline — 23 October 2026
 
 The user explicitly accepts solar-anchor-bids-v1/resource_full as the new research

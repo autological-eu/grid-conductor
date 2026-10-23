@@ -1,0 +1,41 @@
+{
+  "baseline": "config/active-research-baseline.json",
+  "days_utc": [
+    "2025-01-20",
+    "2025-07-20",
+    "2025-10-20"
+  ],
+  "cases": [
+    "unchanged",
+    "gas_linked"
+  ],
+  "zone": "DE-LU",
+  "window_hours_utc": [
+    16,
+    17,
+    18,
+    19
+  ],
+  "minimum_output_fraction": 0.2,
+  "startup_eur_per_mw": 25,
+  "family": "Largest mean available German gas compiled member group, with all its tranches. Remove its hourly MW in the window; replace with one full-or-reject minimum-output parent and hourly divisible remaining-volume children.",
+  "parent_price": "Volume-weighted inherited resource_full tranche costs for the minimum-output profile plus startup_eur_per_mw * maximum family MW / parent MWh",
+  "assumptions": "Window, minimum output and startup cost are untuned synthetic package assumptions, not measured plant characteristics. Existing fitted bids may already absorb commitment costs. This is an order-semantics/runtime pilot, not an empirical startup correction.",
+  "limits": "Exactly three daily controls and three linked cases; 10-second limit per optimization, 5GiB address-space cap, one worker thread. No annual run, target fit, new hydro schedule, baseline replacement or website change.",
+  "pricing": "Fixed-integer dispatch LP plus dual feasibility search for leaf/subtree nonnegative surplus in single-parent forests. Preserve failed price searches; no master price cuts, MIC, market tick rounding or full EUPHEMIA compliance.",
+  "sources": [
+    {
+      "url": "https://www.nordpoolgroup.com/4a84e1/globalassets/download-center/single-day-ahead-coupling/euphemia-public-description.pdf",
+      "edition": "1 August 2024",
+      "sections": "5.4, 5.4.1, 5.4.2 and 7.5",
+      "accessed": "2026-10-23"
+    },
+    {
+      "url": "https://assume.readthedocs.io/en/latest/examples/06_advanced_orders_example.html",
+      "sections": "Block/linked-order tutorial; inflexible parent and flexible hourly children",
+      "accessed": "2026-10-23"
+    }
+  ],
+  "decomposition": "Exactly solve the four linked hours together; reuse the exact accepted witness for the other twenty independent hours. Replay all24 network hours. This factorization is valid only because no submitted order or temporal physical constraint crosses components; arbitrary daily storage requires its entire connected time component.",
+  "numerical_zero": "Rectify only inconsistent lower/upper pairs within1e-7MW (e.g. inherited -7e-15MW upper with zero lower). Verify the original unrectified network after solving; no physical capacity correction."
+}

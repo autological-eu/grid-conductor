@@ -27,6 +27,11 @@ The older config/research-baseline.json remains unchanged for historical replays
 
 ## Current documentation and models
 
+- [Block/linked-order prototype](research/linked-orders-2025.md): separate gas/
+  storage order-semantics research, nine tests and three European-network pilot
+  days. January's supporting-price failure remains unresolved; accepted baseline
+  and published models are unchanged by this prototype.
+
 - [Country data explorer](https://autological-eu.github.io/grid-conductor/countries/):
   choose among 34 countries and inspect the verified oil/CHP 25% checkpoint
   (€27.58/MWh against corrected ENTSO-E main day-ahead hourly prices). Compare hourly ENTSO-E generation/prices, monthly national Ember

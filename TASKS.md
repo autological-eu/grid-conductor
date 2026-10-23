@@ -1,5 +1,32 @@
 # Grid Conductor — current tasks
 
+## Block/parent-child bid prototype — 23 October 2026
+
+- [x] Inspect actual baseline: independent hourly LPs with divisible tranches,
+  no market blocks/links/storage. Review official EUPHEMIA2024 description and
+  ASSUME advanced-order example; source edition/access and links in pilot design.
+- [x] Implement separate sparse profile/MAR/parent-child/exclusive MILP compiler,
+  source-MW reservations and storage energy/power/efficiency/initial-terminal
+  state/direction constraints. Nine tests pass, including tiny exhaustive
+  activation oracle, losing accepted block and storage stock/direction cases.
+- [x] Add fixed-integer LP certificates and a supporting-price dual-feasibility
+  search for single-parent families; retain failure status. No price master cuts.
+- [x] Run three European-network controls and three synthetic German gas cases
+  on20Jan/20Jul/20Oct2025. Exact four-hour coupling plus20 unchanged hours/day;
+  all144 original-matrix/bound replays pass, zero emergency. Max residual1.10e-9MW;
+  control objective differences<=2.84e-7EUR. Linked MILP gaps zero, pricing LP
+  gaps<.05EUR. One gas parent binary per case; allocation.39–1.20s, pipeline20.6s.
+- [x] Preserve loader/solver failures in v1–v3; final v4 evidence and source hashes
+  verified. January accepts gas package but supporting-price LP reports infeasible;
+  July/October reject it. This is not price or annual performance acceptance.
+- [x] [Write report](research/linked-orders-2025.md) and compact six-row CSV;
+  retain active resource_full baseline and disabled reviews.
+
+Next: a bounded allocation/price re-clearing loop with exhaustive toy references;
+source-backed smaller operator groups (pilot group7.17GW is too coarse), explicit
+storage strategy/state carry, then predefined daily samples before annual price/
+generation evaluation. No new computation is running. Public website unchanged.
+
 ## Research baseline adopted — 23 October 2026
 
 - [x] Explicit user decision adopts solar-anchor-bids-v1/resource_full, superseding
