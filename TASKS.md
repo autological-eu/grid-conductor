@@ -27,6 +27,11 @@
   later fits. No automatic promotion, explorer change or review restart.
   Adverse outcomes retained:7/41 Nordic zones worsen; Solar monthly MAE
   .1718→.1968 TWh. Mix-share metrics cover9 complete-family countries only.
+- [x] [Learned technology-curve example](research/learned-supply-curve-example-2025.md):
+  DE-LU15June12UTC, fitted on May only. Show smooth control/learned curves,
+  actual LP segments, available versus dispatched GW and all bid quantiles.
+  Gas median109.35→105.03 but much wider tails; wind/solar shift clipping and
+  biomass spread bound disclosed. Reporting extraction only, no new solve/fit.
 - [ ] Before adoption/investment claims, assess parameter plausibility and
   hourly source gaps, curve discretisation and generalisation to a separately
   declared period. Existing even months are now inspected evaluation data;
