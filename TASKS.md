@@ -1,5 +1,10 @@
 # Grid Conductor — current tasks
 
+- [x] Extract [matched fitted spline/sigmoid examples](research/fitted-spline-sigmoid-comparison-2025.md)
+  for DE-LU15 June noon, both May fits and identical available MW. Verify saved
+  hashes, aggregate sigmoid inversion and independent SciPy PCHIP interpolation.
+  Report pooling/training/zero-renewable differences; no new fit or promotion.
+
 ## Six supply nodes and original LP scores — 23 October 2026
 
 - [x] Implement0/20/40/60/80/100% price nodes with positive increments,
