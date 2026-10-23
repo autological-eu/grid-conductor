@@ -1,0 +1,11 @@
+{
+  "source_plan": "config/europe-linked-clearing-2025.json",
+  "baseline": "config/active-research-baseline.json",
+  "meaning": "Same priced European gas/storage book and certificate-first loop. Increase computational allowance only; no change to source inputs, bids, physical/economic tolerances or MIP optimality gate.",
+  "per_solve_seconds": 60,
+  "per_day_wall_seconds": 300,
+  "annual_job_wall_seconds": 600,
+  "annual_days": 365,
+  "seed_checkpoint": "data/bidding-zone-network-2025/europe-linked-clearing-priced-v1",
+  "resume": "Reuse only already price-checked days from identical mathematics, with original record/source/witness hashes retained; do not reuse the timed-out January7 allocation. Preserve failed attempts."
+}

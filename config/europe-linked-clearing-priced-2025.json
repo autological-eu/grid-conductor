@@ -1,0 +1,8 @@
+{
+  "source_plan": "config/europe-linked-clearing-2025.json",
+  "baseline": "config/active-research-baseline.json",
+  "meaning": "Same European gas/storage books and physical/economic tolerances. Check the fixed-integer LP's actual KKT and family-surplus certificates before searching alternative supporting prices. Do not reject an already certified price vector because a redundant strict feasibility LP reports infeasible.",
+  "annual_job_wall_seconds": 600,
+  "annual_days": 365,
+  "resume": "Matching source/input/witness hashes and complete price-checked days only; bounded stages and explicit partial/failed status. Original raw price-search failures remain preserved."
+}

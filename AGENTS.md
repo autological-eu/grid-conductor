@@ -1,5 +1,50 @@
 # Grid Conductor — agent instructions
 
+## Authorized Europe-wide linked clearing benchmark — 23 October 2026
+
+The user requests implementing the re-clearing prototype on the full European
+network and measuring speed. New book config/europe-linked-clearing-2025.json
+uses all 103 positive gas member groups in 40 zones, at most 500 MW per synthetic
+package with every tranche reserved/replaced. Remaining gas MW retains hourly
+bids. Three hypothetical 100 MW/400 MWh daily-cycle batteries are explicit additions,
+not observed fleet data. Six connected hours are solved; 18 genuinely independent
+hours reuse the accepted witness. Closed daily storage cycles require terminal=
+initial=0; never silently reset energy or split a connected component.
+
+Active execution is run_robust_priced_europe_2025.py with priced_linked_orders.py
+and config/europe-linked-clearing-robust-2025.json. Sparse topology caching must
+refresh every dynamic cost, lower/upper bound and RHS. Direct fixed-integer duals
+must pass KKT/family checks before an optional alternative-price search; an
+auxiliary LP failure cannot override a valid actual price certificate. Same
+0.05 EUR economic and 1e-4 MW physical gates apply. Infeasible pricing may trigger
+heuristic root rejection and full re-clearing, never cuts on numerical/time
+failure. Preserve the ORIGINAL unrestricted allocation bound; heuristic-cut
+bounds do not certify globally optimal price clearing. Report remaining gaps.
+
+Cold/cached studies and first annual drafts are retained in separate local
+checkpoints. Strict-price draft stops 4 Jan despite direct valid surplus checks;
+certificate-first 10 s draft stops 7 Jan on allocation timeout. The robust budget
+allows 60 s per solve/300 s per day, 600 s between daily checkpoints, without relaxing
+optimality. Six certified seed days are reused with source/record/witness hashes.
+Do not infer annual completion from old progress. Reuse only checked matching
+days; no duplicate jobs. Keep sealed source versions intact while jobs run.
+
+Audit every saved daily matrix/dual/family/storage certificate before a verified
+annual timing claim. Report actual coverage, setup/solver/pricing/checkpoint times,
+tails, workload and runtime limits; never extrapolate sample timings as measured
+year runtime. No observed-price accuracy, real-operator/actual-storage coverage,
+full EUPHEMIA, public integration or baseline promotion follows from this test.
+Accepted resource_full and disabled reviews stay unchanged.
+
+Verified result: all 365 days, 8,760 represented hours independently replayed;
+19 tests pass. Successful daily pipelines 2155.5 s (35.92 min); cumulative checkpoint
+execution 2224.4 s (37.07 min), including preparation/earlier timeout. Independent
+audit 153.5 s separate. Median 3.33 s/day, p95 16.52 s, max 77.16 s. 113 days need repeated
+passes (max 5); maximum remaining original-bound interval 16141.35 EUR. Physical
+residual<=3.63e-7 MW, duality gap<=0.00228 EUR, storage terminal error zero. No
+seconds-scale annual runtime or observed-price improvement claim. See
+research/europe-linked-clearing-2025-runtime.md and its 365-row CSV. No job running.
+
 ## Block/linked-order exploration — 23 October 2026
 
 The user requests exploring block and parent/child bids, especially gas/storage.

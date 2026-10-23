@@ -1,5 +1,40 @@
 # Grid Conductor — current tasks
 
+## Europe-wide linked bids and annual runtime — verified 23 October 2026
+
+- [x] Implement bounded allocation/pricing re-clearing with explicit heuristic
+  root cuts and the ORIGINAL unrestricted cost bound. Five small-book tests
+  include exhaustive comparison, preserved nonzero gap, child rescue and failure
+  budgets; three direct-price certificate tests pass.
+- [x] Full 48-zone book: 103 gas groups in 40 zones, max 500 MW per package (~44.45 GW
+  of 225.77 GW eligible gas), all tranches conserved, remaining MW hourly. Three
+  hypothetical daily-cycle batteries, 106 binary decisions and 1345 orders/day.
+  Accepted inputs, fixed hydro and baseline remain intact. No real-fleet claims.
+- [x] Cold 3-day benchmark passes; cached sparse topology preserves exact sample
+  objectives and refreshes all dynamic values (two cache tests). Warm sample
+  days 1.74–1.86 s are sample timings, not an annual-runtime measurement.
+- [x] Preserve and diagnose earlier preflight/strict-price/10-second failures.
+  Robust pipeline keeps original gates and permits 60 s/solve, 300 s/day. Seed six
+  checked days; first 600-second chunk completes 121 days through 1 May. Resume only
+  complete matching witness/source hashes; no duplicate solver is started.
+- [x] Complete all 365 days (8,760 represented hours). Final checkpoint:
+  europe-linked-clearing-robust-v1; no unresolved daily failures.
+- [x] Independently replay all 365 daily dual/primal/family/storage certificates:
+  physical residual<=3.63e-7 MW, duality gap<=0.00228 EUR, terminal error zero.
+  All 19 tests pass; audit takes 153.5 s.
+- [x] [Report and daily CSV](research/europe-linked-clearing-2025-runtime.md):
+  successful daily pipelines 2155.5 s (35.92 min), median 3.33 s, p95 16.52 s,
+  max 77.16 s. Checkpoint-job execution 2224.4 s (37.07 min), including setup and
+  the earlier timeout; audit separate. 113 days need multiple passes (max 5).
+  Maximum conservative offer-cost interval 16141.35 EUR; no price-accuracy claim.
+- [ ] If pursuing adoption, evaluate observed-price and generation performance
+  under explicit operator assumptions. This runtime test does not establish an
+  accuracy benefit or justify replacing the accepted continuous baseline.
+
+The specified book newly solves six coupled hours/day and reuses 18 unchanged
+independent hours; all 24 hours are audited. It is not arbitrary full-day flexible
+unit commitment. Baseline/public site unchanged; reviews off. No solver running.
+
 ## Block/parent-child bid prototype — 23 October 2026
 
 - [x] Inspect actual baseline: independent hourly LPs with divisible tranches,
@@ -22,10 +57,9 @@
 - [x] [Write report](research/linked-orders-2025.md) and compact six-row CSV;
   retain active resource_full baseline and disabled reviews.
 
-Next: a bounded allocation/price re-clearing loop with exhaustive toy references;
-source-backed smaller operator groups (pilot group7.17GW is too coarse), explicit
-storage strategy/state carry, then predefined daily samples before annual price/
-generation evaluation. No new computation is running. Public website unchanged.
+The bounded re-clearing and annual timing work above supersedes this pilot
+next-step list. Actual operator grouping, chronological multi-day storage and
+observed-price/generation evaluation remain open. Public website unchanged.
 
 ## Research baseline adopted — 23 October 2026
 

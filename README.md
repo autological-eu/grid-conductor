@@ -27,10 +27,17 @@ The older config/research-baseline.json remains unchanged for historical replays
 
 ## Current documentation and models
 
+- [European linked-bid annual runtime](research/europe-linked-clearing-2025-runtime.md):
+  all 365 days on 48 zones, independently checked. Daily pipelines total 35.9 minutes;
+  median 3.33 s/day, p95 16.52 s, max 77.16 s. About 44.45 GW of gas enters synthetic
+  linked packages, alongside three hypothetical batteries. Six hours/day newly
+  coupled, 18 unchanged hours reused and all 24 verified. This separate prototype
+  does not replace the accepted baseline or establish improved price accuracy.
+
 - [Block/linked-order prototype](research/linked-orders-2025.md): separate gas/
   storage order-semantics research, nine tests and three European-network pilot
-  days. January's supporting-price failure remains unresolved; accepted baseline
-  and published models are unchanged by this prototype.
+  days. Its January supporting-price failure is retained; the annual extension
+  above adds bounded re-clearing. Accepted baseline and published models are unchanged.
 
 - [Country data explorer](https://autological-eu.github.io/grid-conductor/countries/):
   choose among 34 countries and inspect the verified oil/CHP 25% checkpoint

@@ -1,5 +1,17 @@
 # Grid Conductor — product requirements
 
+## European linked-order performance evaluation — 23 October 2026
+
+Evaluate the linked-bid extension on the full retained European network, with
+explicit spatial/time coverage and measured runtime. Distinguish independent
+hourly supply, the MW actually offered through linked packages, hypothetical
+storage and actual source capacity. Preserve physical/energy chronology and
+price-acceptance checks; report computational limits and remaining offer-cost
+bounds separately from observed-price error. Cached topology must not freeze
+daily changing bids, demand, renewable availability or network-flow constraints.
+This runtime evaluation does not itself adopt new bidding assumptions, change
+the research baseline or establish full market/investment validity.
+
 ## Block and linked-bid research direction — 23 October 2026
 
 Explore intertemporal block and parent/child bid relationships for gas and storage

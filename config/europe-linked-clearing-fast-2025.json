@@ -1,0 +1,8 @@
+{
+  "source_plan": "config/europe-linked-clearing-2025.json",
+  "baseline": "config/active-research-baseline.json",
+  "meaning": "Same submitted gas/storage books, physical constraints and pricing loop as the cold Europe benchmark; only precompute unchanged sparse topology and refresh all dynamic coefficients/bounds/RHS. No model/acceptance change.",
+  "annual_job_wall_seconds": 600,
+  "annual_days": 365,
+  "resume": "Reuse only complete price-checked days with matching input/source/witness hashes. Stop on unresolved numerical/price/physics failures. Per-day budgets stay unchanged. Record partial progress honestly."
+}
