@@ -1,5 +1,24 @@
 # Grid Conductor — current tasks
 
+## Full-month hourly spline reconstruction — 23 October 2026
+
+- [x] Implement independent hourly midpoint/five-node-increment adjustments,
+  own-month initialization, shrinkage and adjacent-hour departure penalties.
+  Full-month price and actual monthly generation loss; one batch Adam update.
+- [x] Four tests pass: initializer identity, temporal/shrinkage derivatives,
+  true full-month generation sum and best-price/three-stale stopping semantics.
+- [x] European hourly price/dispatch adjoint discrepancy4.34e-7; three hours
+  pass original physics/economic gates and warm-state replay. Tighten KKT
+  precision; retain the initial.01096 larger-step discrepancy and step sweep.
+  Gradients are local across active sets, not globally smooth LP derivatives.
+- [ ] Run all744 January hours at each iteration until three consecutive
+  original-LP price MAE nonimprovements; retain best hourly coefficients and
+  generation tradeoffs. One attached runner is active. At iteration7, verified
+  producer LP scores30.7609→18.4878 EUR/MWh and monthly generation.33353→.29755
+  TWh; independent replay remains pending. Check live state, not this snapshot.
+- [ ] Independently replay original LP bids/certificates, monthly generation,
+  stopping/selection history and report results. No baseline/explorer promotion.
+
 - [x] Extract [matched fitted spline/sigmoid examples](research/fitted-spline-sigmoid-comparison-2025.md)
   for DE-LU15 June noon, both May fits and identical available MW. Verify saved
   hashes, aggregate sigmoid inversion and independent SciPy PCHIP interpolation.

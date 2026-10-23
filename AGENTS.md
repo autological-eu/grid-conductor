@@ -1,5 +1,28 @@
 # Grid Conductor — agent instructions
 
+## Authorized full-month hourly spline reconstruction — 23 October 2026
+
+User authorizes individual hourly spline adjustments and full-month gradient
+descent until three consecutive price-error nonimprovements; keep best. Fresh
+config/hourly-spline-reconstruction-2025.json, hourly_spline_reconstruction_2025
+tools and ignored hourly-spline-reconstruction-v1 only. All744 January hours,
+no training sample expansion. One scalar midpoint plus five positive increments
+per hour/technology/zone, initialized from saved January spline fit; shrinkage
+and adjacent-departure penalties, zero wind/solar/ROR bids remain fixed. Original
+network, availability and fixed hydro unchanged. No other prior job resumed.
+
+Full-batch smooth KKT gradients use hourly price error and actual monthly Ember
+totals. Recheck every updated state through original20-tranche LP; select lowest
+full-month41-zone LP MAE and stop after three consecutive nonimprovements at
+1e-6 EUR/MWh tolerance. No arbitrary iteration-count completion claim. Preserve
+physical1e-4 MW and economic.05 EUR gates. Chunked two-process forwards save
+KKT witnesses; adjoints run only after complete monthly loss is assembled.
+Inspect live jobs/progress/history/failure before launching or resuming; one
+flock-protected runner. Full arrays stay ignored; never edit sealed old producers.
+This is in-sample hourly reconstruction, not odd/even forecast validation or a
+new accepted baseline. Report price/mix tradeoffs and smooth-to-LP differences.
+
+
 ## Authorized six-node spline / original LP comparison — 23 October 2026
 
 User requests explicit0/20/40/60/80/100% supply nodes per technology/bidding zone

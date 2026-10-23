@@ -1,5 +1,25 @@
 # Grid Conductor — product requirements
 
+## Hourly inverse reconstruction
+
+Evaluate a separate historical reconstruction with individual spline midpoint
+and five positive supply-node increments for each hour/technology/bidding zone.
+Initialize from a shared own-month curve; penalize hourly departures and abrupt
+changes in those departures. Preserve zero renewable bids, available MW, original
+network constraints and fixed reservoir injections. Every batch must include all
+hours of its training month and actual summed monthly generation, not a scaled
+sample. Compute gradients through constrained smooth clearing, then report actual
+original-LP prices and generation separately.
+
+Keep the parameters with the lowest full-month original-LP price MAE; stop after
+three consecutive updated iterations without improvement (numerical tolerance
+1e-6 EUR/MWh). Report generation tradeoffs even when selecting on price. Each
+declared training month must cover all its chronological hours across Europe.
+This is in-sample reconstruction,
+not month-ahead validation: independent hourly coefficients cannot be transferred
+to unobserved hours without an additional predictive rule. Do not identify a
+unique actual order book, promote the baseline or change the public explorer.
+
 ## Differentiable supply-curve fitting
 
 Evaluate six explicit marginal-price nodes at0/20/40/60/80/100% of hourly
