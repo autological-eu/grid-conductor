@@ -1,5 +1,28 @@
 # Grid Conductor — current tasks
 
+## Chronological storage bids — verified candidate, 23 October 2026
+
+- [x] Generic battery/PHS hourly bid interface, actual cleared stock carry,
+  charging/discharging/energy/efficiency/loss limits and positive bid spread.
+  Six tests pass; 26 zero-storage control hours match baseline objective within
+  2.24e-8 EUR. No source/forecast fitting, reservoir change or MILP.
+- [x] Preserve source 67 PHS units/58.15 GW/9088 GWh across 68 zonal entries; exact
+  source power/energy conservation and explicit located-plant mapping. Energy
+  durations are unverified; no silent cap correction. Battery fleet absent.
+- [x] Two full 8760-hour runs: source PHS and source PHS plus three hypothetical
+  1 GW/4 GWh batteries. Initial stocks empty, daily carry intact, actual final
+  stocks zero without forced reset. All 17,520 hourly network/energy/LP
+  certificates independently replayed; zero emergency and simultaneous cycling.
+- [x] [Report, figures and CSVs](research/hourly-storage-bids-2025.md): MAE
+  26.795→27.643/27.661 EUR/MWh; case runtimes 76.4/58.1 s. Nuclear mix error improves;
+  gas/coal worsen; joint renewable generation rises about 6.3 TWh. Total execution
+  153.8 s including 18.9 s setup; audit 23.7 s separate. Fresh own-model forecast solve
+  excluded; cached baseline forecast source and chronology explicit.
+- [ ] Reconcile 2025 PHS energy/pumping capacity and initial stocks; source a real
+  battery MW/MWh inventory before fleet-wide BESS claims. Evaluate any revised
+  rule under a fresh declared design. Keep resource_full accepted: current rule
+  does not improve price fit. Browser/explorer unchanged; reviews remain off.
+
 ## Baseline technology supply-curve example — 23 October 2026
 
 - [x] Extract exact accepted offers for DE-LU, 15 July 2025 12:00 UTC. Show all

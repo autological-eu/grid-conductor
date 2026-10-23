@@ -1,5 +1,20 @@
 # Grid Conductor — product requirements
 
+## Chronological storage extension
+
+Evaluate a separate storage-enabled candidate with explicit charging demand,
+discharging supply, pump/turbine power, MWh capacity, efficiencies, losses and
+hourly energy balance. Carry actual cleared stock across days; disclose initial
+and terminal assumptions and preserve fixed reservoir injections separately.
+Support batteries and pumped storage through the same explicit asset interface.
+Distinguish retained source-model fleet assumptions from verified 2025 inventories
+and hypothetical investment/test assets. Never infer missing batteries or initial
+inventories from generation. Use own-model reference prices for look-ahead bids,
+not observed auction prices as a forecast shortcut. Test numerical chronology,
+runtime, generation and observed-price fit before considering adoption. This
+sequential hourly screen does not establish intertemporal day-ahead auction,
+market forecasting, carbon savings or investment-profit validity.
+
 ## European linked-order performance evaluation — 23 October 2026
 
 Evaluate the linked-bid extension on the full retained European network, with

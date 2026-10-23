@@ -1,5 +1,29 @@
 # Grid Conductor — agent instructions
 
+## Authorized chronological storage candidate — 23 October 2026
+
+The user authorizes implementing storage in the accepted model. Separate
+hourly-storage-bids-v1 uses resource_full inputs unchanged: hourly buy/sell offers
+with the next 48 own-baseline modeled-price median, efficiency-adjusted bids and
+1 EUR/MWh margin. Current stock limits both directions and carries across days;
+no MILP, reservoir rescheduling or daily reset. Empty initial stock is an explicit
+assumption, closing stock is reported rather than forced/credited; both cases
+actually finish empty. Do not infer an annual optimum or storage profit.
+
+Source PHS: 67 units/68 zonal entries, 58.14753 GW and 9088.18 GWh, original physics.
+The extreme source durations/MWh are not verified 2025 inventory. No verified
+battery fleet exists locally: second case adds ONLY three hypothetical 1 GW/4 GWh
+batteries in DE-LU/FR/ES. Do not present them as installed fleet or replace source
+energy caps silently. Reservoir hydro stays fixed; zero PHS natural inflow.
+
+Both 8760-hour cases and independent 17,520-hour stock/network/LP replay pass;
+6 focused tests and 26 zero-storage control hours pass. MAE 26.79497 baseline→
+27.64295 PHS (76.4 s), 27.66089 demo (58.1 s); total execution 153.8 s, audit 23.7 s.
+Source/forecast preparation 18.9 s included; fresh baseline-price solve excluded.
+Keep accepted baseline/public explorer/reviews unchanged. No jobs running.
+See research/hourly-storage-bids-2025.md; runner, audit, generic rules and report
+are separate sealed producers. Full hourly witnesses stay ignored locally.
+
 ## Authorized Europe-wide linked clearing benchmark — 23 October 2026
 
 The user requests implementing the re-clearing prototype on the full European

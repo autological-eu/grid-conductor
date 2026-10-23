@@ -27,6 +27,11 @@ The older config/research-baseline.json remains unchanged for historical replays
 
 ## Current documentation and models
 
+- [Chronological battery/pumped-storage candidate](research/hourly-storage-bids-2025.md):
+  hourly bids and state carry, source-model PHS plus a clearly hypothetical
+  battery sensitivity. Both full-year runs pass physical/price checks in 58–76 s,
+  but MAE worsens to 27.64–27.66 EUR/MWh. The accepted baseline remains unchanged.
+
 - [Technology supply-curve example](research/de-lu-baseline-supply-curves-2025.md):
   actual baseline offer curves for all technologies in DE-LU at noon UTC on
   15 July 2025, their combined zonal curve and exact price/volume CSV.

@@ -1,0 +1,19 @@
+{
+  "baseline": "config/active-research-baseline.json",
+  "cases": ["phs_source", "phs_plus_battery_demo"],
+  "forecast_hours": 48,
+  "bid_margin_eur_mwh": 1,
+  "initial_energy_fraction": 0,
+  "strategy": "Future 48-hour median of cached own-baseline modeled prices, clipped at zero. Stored-energy value=eta_discharge*median. Buy=eta_charge*value-margin; sell=value/eta_discharge+margin. Post both divisible directions; a strictly positive spread precludes simultaneous cycling. Recompute volumes from actual carried stock every hour.",
+  "terminal": "No silent daily reset or free initial energy. Initial stock zero; final stock reported, not forced cyclic and not credited in profit. Shrink forecast window at year end; no wrap-around or future observed-price lookup. No investment-profit or annual-optimum claim.",
+  "fleet": "Positive PHS StorageUnits in the retained prepared PyPSA-Eur network only; original MW/MWh/efficiencies retained. Split into modeled zones by dated located pumped-storage plant capacities, pure-parent mapping or explicit modeled-bus-count fallback. Source energy capacities are not a verified 2025 inventory; no natural inflow. No duplicate reservoir schedule.",
+  "battery_scope": "No verified BESS fleet is cached. Second case adds ONLY the explicitly hypothetical assets below to exercise the same storage interface; not a European installed-battery estimate.",
+  "battery_demo": [
+    {"id":"demo-battery-DE-LU","zone":"DE-LU","technology":"battery","charge_mw":1000,"discharge_mw":1000,"energy_mwh":4000,"eta_charge":0.95,"eta_discharge":0.95,"standing_loss":0},
+    {"id":"demo-battery-FR","zone":"FR","technology":"battery","charge_mw":1000,"discharge_mw":1000,"energy_mwh":4000,"eta_charge":0.95,"eta_discharge":0.95,"standing_loss":0},
+    {"id":"demo-battery-ES","zone":"ES","technology":"battery","charge_mw":1000,"discharge_mw":1000,"energy_mwh":4000,"eta_charge":0.95,"eta_discharge":0.95,"standing_loss":0}
+  ],
+  "fixed": "Accepted resource_full generation costs/availability, corrected PV, demand, fixed reservoir hydro, links, grid/GSK/ratings and observed targets unchanged. No fit, baseline adoption or browser replacement.",
+  "limits": {"hour_seconds":10,"job_seconds":600,"address_space_gib":5,"threads":1},
+  "gates": {"physical_mw":0.0001,"economic_eur":0.05,"reduced_cost_eur_mwh":0.00001,"simultaneous_mw":0.000001}
+}
