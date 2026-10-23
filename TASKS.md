@@ -1,5 +1,37 @@
 # Grid Conductor — current tasks
 
+## Learned sigmoid curves — odd/even month validation, 23 October 2026
+
+- [x] Declare six independent odd-month fits with next-even-month tests in
+  config/sigmoid-month-pairs-2025.json; keep baseline/site/reviews unchanged.
+  Remove inherited full-year bid corrections and empirical PV factors from
+  the candidate; retain source costs, physical capacities, grid and fixed hydro.
+- [x] Build 474 technology/country/source-cost groups and 216 shared country/
+  resource parameter sets; 8 inverse-logistic quantile segments per group,
+  3840 total LP offers including original emergency backstops. Exact volume
+  conservation and source partition checks pass. Four focused tests pass.
+- [x] Complete six training/selection/test pairs, recording actual cleared
+  price and monthly generation objectives, source coverage and runtimes.
+- [x] Independently audit all retained LP witnesses, original observations,
+  target poisoning/isolation and frozen proposals; report all 4344 held-out
+  hours and all national generation families, including adverse outcomes.
+  All17520 retained LP hours pass: max physical1.26e-6 MW, gap1.03e-6 EUR,
+  zero emergency. Four tests pass; proposals and network updates unchanged
+  when all non-training observation targets are poisoned.
+- [x] [Report, fold/zone/mix/parameter CSVs and figures](research/sigmoid-month-pairs-2025.md):
+  unfit→learned price33.196→26.359 EUR/MWh (-20.6%); monthly generation
+  .32457→.19289 TWh (-40.6%), normalized.28823→.18633 (-35.4%). Both improve
+  in all six test months; 33 Ember countries/1458 matched monthly cells.
+  Accepted full-year-fitted baseline26.616 on those hours is an in-sample
+  reference only. Execution1683.2s, prep117.4s; audit active410.7s overlapping
+  later fits. No automatic promotion, explorer change or review restart.
+  Adverse outcomes retained:7/41 Nordic zones worsen; Solar monthly MAE
+  .1718→.1968 TWh. Mix-share metrics cover9 complete-family countries only.
+- [ ] Before adoption/investment claims, assess parameter plausibility and
+  hourly source gaps, curve discretisation and generalisation to a separately
+  declared period. Existing even months are now inspected evaluation data;
+  preserve the six fits and their original gates rather than tuning to them.
+
 ## Chronological storage bids — verified candidate, 23 October 2026
 
 - [x] [Hourly technology curves including storage](research/de-lu-storage-supply-curves-2025.md):

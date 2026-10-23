@@ -1,5 +1,36 @@
 # Grid Conductor — agent instructions
 
+## Authorized sigmoid month-pair experiment — 23 October 2026
+
+User authorizes learned technology supply curves with six independent odd-month
+fits and next-even-month tests. Fresh config/sigmoid-month-pairs-2025.json and
+ignored sigmoid-month-pairs-v1 checkpoints only; do not edit sealed producers.
+Strip inherited full-year price-fitted bids and empirical PV factors. Preserve
+physical bounds/chronology, source costs, grid and fixed hydro. Train on odd-month
+targets only; freeze proposals before reading/scoring even-month observations.
+Report conditional retrospective validation, not untouched forecast accuracy;
+accepted resource_full remains an in-sample comparator. Six even months are not
+an 8760-hour out-of-fold year. Missing generation remains unknown, monthly totals
+never become invented hourly targets. Storage fleet candidate remains separate.
+Audit all new LP certificates and fold isolation; no baseline/site/review change.
+
+Verified: six pairs complete, 4344 held-out hours/41 complete SDAC zones.
+Same-input unfit sigmoid→learned price MAE33.1961→26.3587 EUR/MWh; monthly
+Ember generation MAE.32457→.19289 TWh and normalized error.28823→.18633,
+33 countries/1458 known cells. Both improve in every test month. Accepted in-sample
+resource_full scores26.6157 on these hours; it is not a held-out competitor.
+474 source groups/3840 offers,216 country/resource parameter sets,8 bins each;
+parameters shared nationally because generation targets are mainly national.
+All17520 retained train/control/test LP hours and poisoned-target isolation pass;
+4 tests pass. Max primal1.26e-6MW, duality gap1.03e-6EUR, zero emergency.
+Execution1683.2s, preparation117.4s; audit active410.7s ran alongside later fits.
+See research/sigmoid-month-pairs-2025.md. Preserve sealed producers/inputs and
+bounded non-global training history. Reviews/public explorer/baseline unchanged.
+These even months are now evaluated, not untouched future validation data.
+Retain adverse results:7/41 zones worsen vs unfit control (Nordics); monthly
+Solar error worsens. Mix-share score covers only complete-family country/months,
+not every national scope. No automatic Nordic/source correction follows.
+
 ## Authorized chronological storage candidate — 23 October 2026
 
 The user authorizes implementing storage in the accepted model. Separate

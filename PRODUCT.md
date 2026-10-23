@@ -1,5 +1,24 @@
 # Grid Conductor — product requirements
 
+## Learned supply curves and month-ahead validation
+
+Evaluate monotone parameterised technology supply curves inside the constrained
+European clearing model. Hourly curves use shared learned parameters and changing
+source costs/availability, rather than independent parameters for every hour.
+Fit January and test February, March→April, May→June, July→August,
+September→October and November→December. Each fit uses only its odd month's
+price/generation targets; test months must not determine parameters or selection.
+Remove inherited full-year target-fitted bid and solar coefficients from the
+candidate's training inputs. Retain physical constraints, transparent source
+assumptions and fixed observed demand; disclose historical model selection and
+perfect-input limitations. Compare cleared ENTSO-E price errors and source-matched
+generation errors at their actual hourly/monthly resolution. Label the six even-
+month composite separately from a full-year score and from the accepted in-sample
+baseline. No automatic baseline or public-model promotion follows.
+Do not infer bidding-zone generation targets from national totals. Disclose any
+shared national/resource parameters, source technology distinctions, curve
+discretisation and weakly identified or unconverged fitting proposals.
+
 ## Chronological storage extension
 
 Evaluate a separate storage-enabled candidate with explicit charging demand,
