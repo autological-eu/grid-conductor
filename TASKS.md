@@ -2,6 +2,11 @@
 
 ## Chronological storage bids — verified candidate, 23 October 2026
 
+- [x] [Hourly technology curves including storage](research/de-lu-storage-supply-curves-2025.md):
+  same DE-LU July snapshot, exact generator offers and candidate storage stocks,
+  buy/sell prices and volume limits. Source hashes and hour energy balance checked;
+  distinguish charging demand, offered volume, actual dispatch and synthetic tranches.
+  Reporting extraction only; no new solve, fit or baseline change.
 - [x] Generic battery/PHS hourly bid interface, actual cleared stock carry,
   charging/discharging/energy/efficiency/loss limits and positive bid spread.
   Six tests pass; 26 zero-storage control hours match baseline objective within
