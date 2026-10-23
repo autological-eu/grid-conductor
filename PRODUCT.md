@@ -12,6 +12,14 @@ daily changing bids, demand, renewable availability or network-flow constraints.
 This runtime evaluation does not itself adopt new bidding assumptions, change
 the research baseline or establish full market/investment validity.
 
+Before adopting a linked-bid extension, compare its saved hourly cleared prices
+and generation with the accepted baseline on identical observed source coverage.
+Use corrected hourly ENTSO-E SDAC targets, original Ember monthly generation and
+available hourly ENTSO-E generation; distinguish IRENA capacity from generation.
+Retain missingness, country/zone boundaries, pooled-allocation uncertainty and
+separate storage discharge from primary generation. Runtime and numerical
+feasibility alone do not establish improved empirical model performance.
+
 ## Block and linked-bid research direction — 23 October 2026
 
 Explore intertemporal block and parent/child bid relationships for gas and storage

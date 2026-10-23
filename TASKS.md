@@ -27,9 +27,19 @@
   max 77.16 s. Checkpoint-job execution 2224.4 s (37.07 min), including setup and
   the earlier timeout; audit separate. 113 days need multiple passes (max 5).
   Maximum conservative offer-cost interval 16141.35 EUR; no price-accuracy claim.
-- [ ] If pursuing adoption, evaluate observed-price and generation performance
-  under explicit operator assumptions. This runtime test does not establish an
-  accuracy benefit or justify replacing the accepted continuous baseline.
+- [x] [Compare saved annual prices and mix with observed sources](research/europe-linked-clearing-2025-observed.md),
+  without a new solve: same 41 complete corrected hourly ENTSO-E SDAC zones;
+  MAE 26.79497→26.78596 EUR/MWh (0.034% lower), correlation .63281→.63327.
+  Original Ember monthly totals across 34 country scopes, plus available hourly
+  A75 generation with explicit missingness/allocation bounds. Gas monthly MAE
+  .6378→.6433 TWh, coal .4408→.4365 TWh; wind/solar effectively unchanged.
+- [x] Verify source/witness hashes, exact 6,570-hour reuse, corrected PV/capacity
+  partition and primary-generation closure. Independent metric replay checks 82
+  available zone/case records, 7,344 Ember monthly cells and 422 hourly generation
+  comparisons. Full hourly NPZ remains ignored locally; compact CSVs/figures in Git.
+- [ ] Before any linked-model adoption, test source-backed operator assumptions
+  or additional mechanisms with a meaningful observed-price/generation benefit.
+  Keep resource_full: this synthetic prototype adds runtime with negligible fit gain.
 
 The specified book newly solves six coupled hours/day and reuses 18 unchanged
 independent hours; all 24 hours are audited. It is not arbitrary full-day flexible

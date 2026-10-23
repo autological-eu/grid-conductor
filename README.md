@@ -27,6 +27,12 @@ The older config/research-baseline.json remains unchanged for historical replays
 
 ## Current documentation and models
 
+- [Linked-bid observed-price and generation comparison](research/europe-linked-clearing-2025-observed.md):
+  saved full-year results versus accepted baseline, corrected ENTSO-E hourly
+  SDAC prices, monthly Ember and available hourly generation. Price MAE changes
+  26.795→26.786 EUR/MWh; mix barely changes. Figures and downloadable summary CSVs;
+  the fast accepted baseline remains in place.
+
 - [European linked-bid annual runtime](research/europe-linked-clearing-2025-runtime.md):
   all 365 days on 48 zones, independently checked. Daily pipelines total 35.9 minutes;
   median 3.33 s/day, p95 16.52 s, max 77.16 s. About 44.45 GW of gas enters synthetic

@@ -45,6 +45,22 @@ residual<=3.63e-7 MW, duality gap<=0.00228 EUR, storage terminal error zero. No
 seconds-scale annual runtime or observed-price improvement claim. See
 research/europe-linked-clearing-2025-runtime.md and its 365-row CSV. No job running.
 
+## Observed comparison of linked annual results — 23 October 2026
+
+User requests comparing saved prices and generation mix with observations.
+Completed evaluate_linked_europe_2025.py, audit_linked_europe_comparison_2025.py
+and report_linked_europe_comparison_2025.py; no new solve. Local output is the
+sealed annual root/observed-comparison-v1. Preserve parent annual sources/audit.
+Corrected hourly SDAC MAE 26.79497→26.78596 EUR/MWh over 41 complete zones;
+correlation .63281→.63327. All 34 national scopes are compared with original Ember
+monthly cells and available hourly A75 generation, missing cells never zero-filled.
+Solar is reconstructed from current PV components; remaining source shares are
+proportional within pooled columns. Keep allocation bounds/nonuniqueness and
+source/gross-net limitations. Primary mix excludes added battery discharge.
+The negligible observed-fit benefit does not justify replacing resource_full.
+No explorer/browser promotion or review restart. Full hourly arrays remain local
+ignored cache, not Git backup; compact report/CSVs/figures are committed.
+
 ## Block/linked-order exploration — 23 October 2026
 
 The user requests exploring block and parent/child bids, especially gas/storage.
