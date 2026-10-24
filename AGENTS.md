@@ -1,5 +1,47 @@
 # Grid Conductor — agent instructions
 
+## Current performance gate: January→February —24 October2026
+
+User requests iteration acceleration, clarification of fast LP versus gradient
+training, and January/February pipeline tests before more annual work. The
+forward-hourly-splines-v1 fit/watcher groups are intentionally SIGSTOP-paused
+with performance-pause.json; inspect PID/start/state and do not resume while a
+performance test uses the same CPU budget. Saved states and producers are intact.
+
+Fresh config/spline-performance-jan-feb-2025.json and ignored
+spline-performance-jan-feb-v1 only. Condense the same KKT linear system, check
+its full residual, fall back to original sparse LU when needed. No economic,
+availability, chronology, regularization, loss or acceptance-gate change. Sealed
+source bytes remain unchanged; backend selection is explicit and process-local.
+Keep individual hourly parameters and exact local-hour-of-week function averaging.
+
+Six matched European cold/warm/adjoint comparisons and three finite-difference
+checks must pass before fitting. Full test: all744 January training hours and
+all672 February prediction hours, up to three gradient updates. This bounded
+budget is not convergence or an annual-validation score. Initialize neutrally;
+revalidate cached identical January iteration000 KKT states only. Disclose cache
+replay separately from new/warm dispatch and separate load, gradient, inference,
+certificate and postprocessing timings. Inspect actual execution/progress/failure
+and avoid duplicate jobs. Independently reconstruct SciPy costs and replay all
+initial/selected/last original-LP witnesses before reporting empirical results.
+No automatic baseline/explorer promotion or recurring-review change.
+
+Bounded test completed three updates, not patience convergence. Initial/selected
+SciPy-cost replay passes all4320 LP witness hours. Jan price35.2663→22.9158;
+Feb forward42.8597→37.3892 EUR/MWh, monthly mix.35039→.33481 TWh. Real updated
+iterations202–221s, not seconds; initial55.52s is cache replay. Matched solver
+microbenchmarks improve cold/warm2.33×/2.37×; adjoints are not faster. Short
+diagnostics overlapped two updates; do not treat full-month times as paired.
+
+compact_spline_lp_2025.py exactly collapses duplicate zero-price renewable
+tranches,6653→3784 columns, then expands/certifies original20-tranche witnesses.
+Jan/Feb LP passes are1.48×/1.52× faster. All41 scored prices match within1.19e-8;
+nonunique renewable allocations differ up to9.80GW and FR-COR's unscored January
+dual differs98.01 EUR/MWh. This remains a separate tested compiler, not an adopted
+pricing convention. Preserve adverse differences and original reference outputs.
+Before any annual acceleration/resume use fresh provenance; original annual
+groups remain paused. Do not edit sealed producers from either experiment.
+
 ## Current: twelve monthly hourly fits / forward validation —24 October2026
 
 User clarifies all12 full-month fits and adjacent-month predictions, with early

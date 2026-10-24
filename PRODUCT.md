@@ -1,5 +1,18 @@
 # Grid Conductor — product requirements
 
+## Fitting runtime and solver verification
+
+Before expanding expensive hourly fitting, test complete January fits and
+February forward predictions with measured phase timings. Distinguish input
+preparation, forward LP inference, smooth constrained training, adjoints, curve
+transfer and certificate/audit work. A fast annual forward-only dispatch time
+does not establish gradient-training throughput. Report cache reuse separately
+from fresh solves; do not silently change bid economics or data coverage to claim
+speed. Preserve the custom gradient-trained hourly spline parameters and verify
+any accelerated linear algebra against original dispatch/price gradients,
+finite differences and unchanged physical/economic gates. A bounded pilot is
+not a replacement for the twelve-month forward-validation acceptance criteria.
+
 ## Hourly fits with next-month validation
 
 Evaluate a separate historical reconstruction with individual spline midpoint

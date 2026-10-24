@@ -1,0 +1,23 @@
+{
+  "name": "spline-performance-jan-feb-v1",
+  "fit_month": 1,
+  "test_month": 2,
+  "training_hours": 744,
+  "prediction_hours": 672,
+  "maximum_updates": 3,
+  "scope": "Bounded pipeline/performance test, not annual cross-validation or a convergence claim. Preserve individual hourly fits and local-hour-of-week function averaging.",
+  "backend": "Algebraically condensed KKT linear solves, full residual checks, original sparse-LU fallback. Economics, regularizers, gradients and acceptance gates unchanged.",
+  "initial_cache": "Reuse and revalidate only the sealed neutral January iteration000 states, never fitted parameters. Measure cache replay separately from fresh/warm solves.",
+  "price_smooth_absolute_epsilon": 1,
+  "price_scale_eur_mwh": 40,
+  "generation_floor_twh": 0.25,
+  "generation_smooth_absolute_epsilon": 0.01,
+  "ridge": 0,
+  "hourly_shrinkage": 0.01,
+  "temporal_penalty": 0.01,
+  "learning_rate": 0.5,
+  "lp_tranches_per_curve": 20,
+  "patience": 3,
+  "minimum_price_improvement_eur_mwh": 0.000001,
+  "workers": 2
+}

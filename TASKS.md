@@ -1,5 +1,42 @@
 # Grid Conductor — current tasks
 
+## January/February runtime investigation —24 October2026
+
+- [x] Inspect live annual iteration and pause fit/watcher with identity-bound
+  receipt before performance work. January initial iteration:263.87s smooth
+  dispatch,15.09s adjoints,30.28s for three LP score sets;309.24s total phase time.
+  This is not30 seconds per hour. Annual neutral January MAE35.2663 and February
+  forward42.8597 are initial controls, not learned improvements.
+- [x] Profile six January/February hours: KKT factorization dominates. Implement
+  algebraically condensed factors with full-residual checks/original-LU fallback;
+  preserve spline economics and loss. Eight focused tests pass; six matched
+  European backend/gradient comparisons and three finite-difference checks pass.
+- [x] Finish bounded all744-hour January fitting / all672-hour February
+  prediction test, initial plus up to3 Adam updates. Preserve individual hourly
+  fits and average functions for transfer. Initial cache replay is not a new
+  clearing speed benchmark. Inspect live execution/progress/failure before action.
+- [x] Independently replay initial/selected/last LP witnesses using SciPy costs;
+  publish compact research timing/error comparisons and decide whether the
+  accelerated backend is ready for further all-month work. No annual completion,
+  baseline promotion or public-explorer change follows from this bounded test.
+  All4320 witness hours pass. Three updates: January MAE35.2663→22.9158,
+  February42.8597→37.3892 EUR/MWh; February mix.35039→.33481 TWh. Updated
+  iterations221.45/202.45/211.94s. Initial55.52s includes cache replay. Matched
+  cold/warm solver speedups2.33×/2.37×; adjoints are not faster. Full-month wall
+  times are not a paired engine comparison; short diagnostics overlapped.
+- [x] Exact duplicate-zero-offer LP projection:6653→3784 columns. Full Jan/Feb
+  timings10.49→7.10s and8.83→5.81s including setup/certificates; all1416 expanded
+  witnesses pass original gates. All41 scored prices match within1.19e-8 EUR/MWh.
+  Preserve adverse nonunique allocations (up to9.80GW/hour) and January FR-COR
+  price-dual variation98.01 EUR/MWh outside scored coverage. Compact LP remains
+  separate pending an explicit pricing/allocation convention. Nine tests pass.
+- [ ] Before annual continuation, use fresh provenance for any selected backend;
+  retain independent full-month gradients and original acceptance gates. Annual
+  fit/watcher remain intentionally paused; do not infer convergence. Investigate
+  further compiled/structured continuous-clearing acceleration and tie handling.
+  QP initialization and alternative orderings were tested without reliable gain;
+  two of three QP test hours failed. Keep these negative findings in the report.
+
 ## Twelve monthly fits / next-month validation —24 October2026
 
 - [x] Record user choice: independent hourly fitted curves, averaged as functions

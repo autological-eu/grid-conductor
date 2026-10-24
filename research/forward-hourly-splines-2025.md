@@ -1,5 +1,9 @@
 # Hourly spline fits and next-month validation —2025
 
+Execution is intentionally paused for the completed
+[January/February runtime tests](spline-performance-jan-feb-2025.md). Those tests
+do not complete this twelve-month study or change its acceptance criteria.
+
 The new study fits twelve separate monthly models, retaining individual hourly
 coefficients, then transfers each month's curves to the next month by averaging
 the economic functions at each local hour of the week. **Annual forward results
