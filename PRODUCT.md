@@ -1,5 +1,21 @@
 # Grid Conductor — product requirements
 
+## Fast fitting with physical-network evaluation
+
+Allow the reduced transport model to learn supply offers, while evaluating frozen
+offers against the original coupled physical network before adoption. Preserve
+actual hourly demand/availability/fuel anchors, all modeled bidding zones and
+fixed hydro. Select the best parameters using forward-month price MAE, stopping
+after three consecutive nonimprovements. Report validation used for selection
+separately from untouched forecasting.
+
+Transfer the learned economic functions without changing their shape into a
+different bid family. Declare smoothing/discretization differences and test their
+numerical sensitivity. Restore all original physical constraints/offsets and
+certification gates; independently verify saved outputs. Separate the effects of
+training, network constraints and transport-cost removal, and retain adverse
+price or generation results. No automatic baseline replacement follows.
+
 ## Independent-corridor batched candidate
 
 Evaluate the user-authorized transport approximation with independently bounded

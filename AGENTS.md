@@ -1,5 +1,44 @@
 # Grid Conductor — agent instructions
 
+## Fast fit, then coupled-network transfer — 24 October 2026
+
+User authorizes fast-transport fitting until three consecutive forward-price MAE
+nonimprovements, keeping the best curve state, then evaluating those curves with
+the slower combined physical constraints. Continue exact Adam state after update
+3 in fresh fast-fit-physical-transfer-v1 only. Full January 744 hours and February
+672 hours, all 48 zones; February selects stopping/best, not an untouched test.
+No arbitrary update-budget completion. Preserve all earlier producers/receipts.
+
+Transfer the learned PWL offer nodes using exact interval-average bids at 20
+tranches, rather than reinterpret parameters as cubic splines. The physical LP
+restores original PTDF, island/internal constraints, signed links and offsets;
+remove experimental quadratic corridor transport costs there. Disclose inverse
+smoothing versus hard bid discretization. Check 100-tranche matched hours and
+report discrepancies without hiding adverse changes. Same actual MW/source
+costs/fixed hydro and no artificial emergency. Native physical LP certificates
+must pass original 1e-4 MW / 0.05 EUR gates. Compare neutral and selected curves
+on both full months, independently replay saved fast/physical witnesses and
+observed metrics before conclusions. No baseline/app/publication change.
+
+Completed and audited: fast validation selects update 18 and stops at 21, after
+three consecutive nonimprovements. Jan MAE33.7723→22.2070; Feb42.2782→31.9262.
+New updates4–21 take81.98s core total (3.81–6.75s/update); inherited0–3 are not
+rerun. Frozen learned offers improve original-physical February price MAE at
+20 tranches42.8583→34.5781. A full672-hour100-tranche refinement confirms
+42.8558→34.5621 EUR/MWh (19.35%); mix0.35010→0.31157 TWh (11.01%). Selected
+physical February forward/certificate time33.88s at100 tranches. All48 zones,
+41 observed-price zones and243 monthly mix cells remain intact.
+
+Independent cost/physical/fast replay checks8,431 witness hours, including full
+neutral/selected Jan/Feb physical cases, selected/last fast states and both full
+February100-tranche cases. Preserve7-hour adverse discretization probe (up to
+5.85 EUR/MWh per-hour price movement); whole-month average scores change little.
+The physical replay is an explicit hard interval-average PWL LP, not an exact
+smoothed-response solve. No cubic reinterpretation or artificial supply. Report:
+research/fast-fit-physical-transfer-2025.md. No annual fitted-validation or
+baseline adoption; any all-month work needs fresh provenance. All jobs completed;
+inspect current processes before launching anything further.
+
 ## Authorized independent-corridor batched test —24 October2026
 
 User explicitly agrees to independently bounded interconnectors with transport

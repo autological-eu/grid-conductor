@@ -1,5 +1,32 @@
 # Grid Conductor — current tasks
 
+## Patience-stopped fast fitting → original physical network
+
+- [x] Declare January→February forward-MAE patience 3, 1e-6 EUR/MWh improvement,
+  exact continuation after update 3, all 48 zones/full 744+672 hours retained.
+- [x] Implement explicit PWL-node export as interval-average bids, original
+  coupled network LP and a 100-tranche matched-hour discretization check.
+- [x] Complete fitting to patience; retain best and final states/Adam history.
+  Inspect live identities and avoid duplicate jobs.
+- [x] Evaluate neutral and selected curves on both full months under original
+  PTDF/island/internal constraints; preserve feasibility and optimality gates.
+- [x] Independently audit fast and physical witnesses/metrics; report training
+  versus forward price/mix, timings, curve discretization and network changes.
+  Keep all large arrays ignored. No baseline/public-app change.
+
+Verified selected18/stop21; Jan33.7723→22.2070 and fast Feb42.2782→31.9262
+EUR/MWh. Eighteen new updates take81.98s core; no duplicate first four evaluations.
+Original coupled-network February:20-tranche42.8583→34.5781; full100-tranche
+42.8558→34.5621 EUR/MWh, mix0.35010→0.31157 TWh. Selected fine physical solve
+33.88s including certificates. Two tests, seven-real-hour pilot, independent
+8,431-hour replay and original physical/optimality gates pass. Report and complete
+iteration/per-zone CSVs: research/fast-fit-physical-transfer-2025.md. Receipts in
+ignored fast-fit-physical-transfer-v1 plus refined-physical. Adverse sampled
+20/100-price differences remain disclosed. No annual fitted/baseline claim.
+
+- [ ] Before adoption, test all adjacent-month transfers with fresh provenance;
+  distinguish February-selected stopping from untouched forecast performance.
+
 ## Full-resolution independent-corridor batch test —24 October2026
 
 - [x] Record user authorization to test independent corridor bounds/transport
