@@ -1,24 +1,43 @@
 # Grid Conductor — product requirements
 
-## Hourly inverse reconstruction
+## Hourly fits with next-month validation
 
 Evaluate a separate historical reconstruction with individual spline midpoint
 and five positive supply-node increments for each hour/technology/bidding zone.
-Initialize from a shared own-month curve; penalize hourly departures and abrupt
+Initialize all twelve monthly models from the same neutral source-cost curve;
+penalize hourly departures and abrupt
 changes in those departures. Preserve zero renewable bids, available MW, original
 network constraints and fixed reservoir injections. Every batch must include all
 hours of its training month and actual summed monthly generation, not a scaled
 sample. Compute gradients through constrained smooth clearing, then report actual
 original-LP prices and generation separately.
 
-Keep the parameters with the lowest full-month original-LP price MAE; stop after
-three consecutive updated iterations without improvement (numerical tolerance
-1e-6 EUR/MWh). Report generation tradeoffs even when selecting on price. Each
-declared training month must cover all its chronological hours across Europe.
-This is in-sample reconstruction,
-not month-ahead validation: independent hourly coefficients cannot be transferred
-to unobserved hours without an additional predictive rule. Do not identify a
-unique actual order book, promote the baseline or change the public explorer.
+Fit every month, covering all8760 chronological2025 hours. Retain individual
+calendar-hour coefficients; for the following month average the learned economic
+bid functions by technology/bidding zone/local hour of week. Average functions,
+not nonlinear raw parameters or available MW. Use only available training hours;
+unsupported clock slots use that resource's training-month mean and wholly absent
+resources use the neutral prior. Keep actual target-hour source/fuel costs,
+demand, renewable availability, network bounds and fixed hydro exogenous.
+
+Evaluate all eleven adjacent pairs January→February through November→December,
+covering8016 forward hours. December's fit has no forward score without2026
+inputs; never wrap backwards to January2025. After every common epoch select
+the twelve-model checkpoint with lowest aggregate next-month original-LP price
+MAE, stopping after three consecutive nonimproving epochs (1e-6 EUR/MWh).
+Generation errors participate in monthly training and are reported separately.
+Compare forward predictions with independent hourly fits and averaged-curve
+within-month fits, including matched February–December coverage. Report monthly
+generation against actual known country/technology targets, not invented hourly
+generation observations.
+
+Because next-month scores choose the epoch/stopping, label them model-selection
+validation rather than an untouched test. Disclose retrospective perfect-input
+and fixed-hydro limitations, historical2025 model exploration, actual runtime
+and failures. Keep best coefficients and auditable provenance; no unique actual
+order-book, baseline-promotion or public-explorer claim follows. Earlier
+January-only reconstruction and six odd/even studies are distinct experiments;
+their stopping/selection rules do not govern this twelve-month study.
 
 ## Differentiable supply-curve fitting
 

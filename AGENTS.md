@@ -1,6 +1,42 @@
 # Grid Conductor — agent instructions
 
-## Authorized full-month hourly spline reconstruction — 23 October 2026
+## Current: twelve monthly hourly fits / forward validation —24 October2026
+
+User clarifies all12 full-month fits and adjacent-month predictions, with early
+stopping on aggregate forward price error. Keep individual calendar-hour fits;
+average economic functions by local hour of week for prediction. Fresh
+config/forward-hourly-splines-2025.json, forward_hourly_splines tools and ignored
+forward-hourly-splines-v1 only. Same neutral initialization across months;
+no inherited target-fitted curves. Train each month only against its own targets.
+All8760 training hours and8016 forward hours; Jan→Feb through Nov→Dec, no wrap.
+Dec fit has noJan2026 test. Select common best epoch by original-LP forward MAE;
+patience3 at1e-6 EUR/MWh. Generation remains in full-month gradient loss.
+
+Average cubic economic markup coefficients, not nonlinear parameters or MW.
+Use availability-positive training hours; unsupported slots use own-month mean,
+wholly absent resources neutral prior. Future fuel costs/MW/demand/network/fixed
+hydro are perfect exogenous inputs. Report independent-hour within, averaged
+within and forward scores, with matched Feb–Dec comparisons. This is validation
+used for model selection, not untouched forecasting. No baseline/explorer change.
+Preserve zero renewable bids, chronology, capacities and original physics/economic
+gates. Cache-only cost acceleration must match sealed objective/gradients/LP.
+
+Inspect actual execution/progress/history/failure files and PID/start/state before
+launching. One flock-protected detached producer; separate one-off audit/report
+watcher, no recurring reviews. Source hashes seal all numerical producers and
+postprocessing. Bound worker caches to one month; disk reserve failure is not
+convergence. Full arrays stay ignored. Preserve initial/best/current LP evidence,
+scores and archived coefficients; prune obsolete interior states only as declared.
+Use independent SciPy coefficient/cost and original-certificate replay before
+claiming completion. A forward score is unavailable until all11 pairs finish.
+
+The earlier January recovery was deliberately SIGSTOP-paused after evaluation57,
+best15.30406 EUR/MWh within January, on24 October04:45:45UTC. Read its
+scope-pause.json. This was scope replacement, not patience completion or numerical
+failure. Its fit/completion groups remain intentionally paused; do not resume
+either. Keep their immutable ancestry/source/optimizer evidence intact.
+
+## Superseded January-only reconstruction protocol —23 October2026
 
 User authorizes individual hourly spline adjustments and full-month gradient
 descent until three consecutive price-error nonimprovements; keep best. Fresh

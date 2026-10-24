@@ -1,6 +1,35 @@
 # Grid Conductor — current tasks
 
-## Full-month hourly spline reconstruction — 23 October 2026
+## Twelve monthly fits / next-month validation —24 October2026
+
+- [x] Record user choice: independent hourly fitted curves, averaged as functions
+  by local hour of week for next-month prediction. All12 monthly full-batch fits;
+  eleven adjacent forward evaluations, all8016 Feb–Dec hours. No December wrap.
+- [x] Implement exact cubic-function averaging, availability-supported slots and
+  declared own-month/neutral fallbacks. Preserve actual hourly physical inputs.
+  Same neutral initialization across months; no inherited target-fitted curve.
+- [x] Implement common-epoch forward-MAE selection, patience3, best12-model set,
+  per-month restart/checkpoints, bounded worker caches and disk reserve guard.
+  Report full within/averaged-within/forward price and monthly generation scores.
+- [x] Ten tests pass, including all-year coverage/DST, exact curve averaging,
+  unavailable-hour isolation, compiler equivalence, cached objective/Hessian/VJP,
+  full-month generation loss, penalties and price stopping. Twelve European LP
+  hours reproduce old prices within1.14e-12 EUR/MWh; three cached smooth gradient
+  discrepancies below5.1e-7. This pilot does not establish annual runtime/gains.
+- [ ] Complete all12 fits and11 forward predictions per epoch until three
+  consecutive aggregate forward-price nonimprovements. Check live execution,
+  progress/history/failure; no annual scores or convergence claim from a pilot.
+- [ ] Independently replay selected coefficients/costs with SciPy and all25536
+  retained selected-epoch LP witness hours; verify stopping/selection and report
+  per-month price/mix, per-zone forward errors and matched coverage. One-off
+  completion pipeline produces a compact research report only after audit.
+  Forward scores select the model and are not an untouched test. Public explorer,
+  accepted baseline and disabled recurring reviews remain unchanged.
+- [x] Preserve and pause January-only recovery at evaluated57 (best15.30406
+  EUR/MWh in-sample). Old fit/completion groups are SIGSTOP-paused with receipt;
+  do not resume or mistake that result for next-month accuracy.
+
+## Superseded January-only reconstruction —23 October2026
 
 - [x] Implement independent hourly midpoint/five-node-increment adjustments,
   own-month initialization, shrinkage and adjacent-hour departure penalties.
@@ -11,7 +40,7 @@
   pass original physics/economic gates and warm-state replay. Tighten KKT
   precision; retain the initial.01096 larger-step discrepancy and step sweep.
   Gradients are local across active sets, not globally smooth LP derivatives.
-- [ ] Run all744 January hours at each iteration until three consecutive
+- [ ] Superseded by the twelve-month study above: run all744 January hours until three consecutive
   original-LP price MAE nonimprovements; retain best hourly coefficients and
   generation tradeoffs. Original runner failed at iteration20/hour567; best
   completed iteration19 scores30.7609→16.2115 EUR/MWh and generation.33353→.28073
@@ -24,11 +53,12 @@
   only for failed solves, unchanged objective/Adam state/gates. Hour567 KKT and
   gradient discrepancy1.39e-6 pass. Preserve failed parent; hardlink/revalidate743
   partial-hour states. One attached recovery-v1 runner continues iteration20.
-- [ ] Independently replay original LP bids/certificates, monthly generation,
+- [ ] Superseded completion target; preserve January evidence. Independently replay original LP bids/certificates, monthly generation,
   stopping/selection history and report results. No baseline/explorer promotion.
 - [x] Queue a one-off, PID/start-bound completion pipeline: wait for real fit
   completion, then independent audit/report with pinned source hashes. Currently
-  waiting; this is not an audit-success claim or a recurring review.
+  deliberately paused with its superseded fit; this is not an audit-success
+  claim or a recurring review.
 - [x] Reject zombie/dead states in liveness checks; detached fit/completion
   launcher survives shell ownership and rejects duplicate live launches. Verify
   current execution.json and process states before treating it as live.

@@ -1,0 +1,23 @@
+{
+  "name": "forward-hourly-splines-v1",
+  "training_months": [1,2,3,4,5,6,7,8,9,10,11,12],
+  "forward_pairs": [[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,12]],
+  "training_hours": 8760,
+  "validation_hours": 8016,
+  "initializer": "Same neutral source-cost-anchored six-node curve in all months; no inherited target-fitted parameters",
+  "transfer": "Exact equal-weight mean economic markup functions by zone/technology/local hour of week over available training hours. Unsupported slots use own-month mean; absent resources use neutral prior. New-month source costs, MW, demand, constraints and fixed hydro remain actual hourly inputs.",
+  "price_smooth_absolute_epsilon": 1,
+  "price_scale_eur_mwh": 40,
+  "generation_floor_twh": 0.25,
+  "generation_smooth_absolute_epsilon": 0.01,
+  "ridge": 0,
+  "hourly_shrinkage": 0.01,
+  "temporal_penalty": 0.01,
+  "learning_rate": 0.5,
+  "lp_tranches_per_curve": 20,
+  "patience": 3,
+  "minimum_price_improvement_eur_mwh": 0.000001,
+  "selection": "Common epoch minimizing all8016 next-month original-LP hourly price MAE across41 complete zones; generation trains each monthly fit but does not select epoch. Stop after3 consecutive nonimproving epochs. Retain best12 monthly models.",
+  "scope": "Retrospective perfect-input forward model-selection validation, not untouched testing or an operational forecast. December2025 fit has no January2026 validation. No wrap, baseline promotion or public-explorer change.",
+  "workers": 2
+}
