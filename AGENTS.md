@@ -1,5 +1,32 @@
 # Grid Conductor — agent instructions
 
+## Requested full-year 100-update benchmark — 25 October 2026
+
+User requests all12 monthly fits and1→2,...,11→12 forward validation over100
+parameter updates once a good forward model is available. This overrides patience
+stopping for this future experiment only: record initial state plus updates1–100
+for101 points/month, never truncate the learning curves after a plateau. Use a
+fresh study with a frozen qualified candidate; no old/paused job is resumed.
+
+All8760 training hours,8016 forward hours,48 modeled/41 currently complete target
+areas. December has training only withoutJan2026. Keep all actual hours, negative/
+extreme prices, original availability and chronology. Same neutral initialization
+per separate monthly model; own-month target/feature-scale isolation. No silent
+return to superseded weekday averaging: freeze the forward rule explicitly.
+
+Report12 monthly fit/next-month price-MAE panels, full-year training aggregate,
+matchedFeb–Dec training aggregate andFeb–Dec forward aggregate. Equal-zone and
+actual-hour weighting; ordinary EUR/MWh MAE, not normalized smooth training loss.
+Label scoring solver; no interpolated physical100-update curve from sparse checks.
+Original physical/economic and annual acceptance gates remain unchanged.
+
+Protocol config/full-year-forward-100-2025.json and research/full-year-forward-100-plan-2025.md are recorded. Model/solver IDs are unassigned; fitting producer and
+candidate qualification remain pending. Only reporting/validation tooling is
+implemented; no long run or real learning curves exist. Four reporting tests pass,
+including temporary Matplotlib exports and coverage/weighting/December guards. Do not claim a good model
+from price-only analogue gains or fabricate100 points. EarlierJan/Feb are development
+periods. Further-period tuning must be disclosed. No baseline/app/review change.
+
 ## Supply-conditioned analogue transfer — 25 October 2026
 
 User proposes matching January learned curves to February supply/demand conditions

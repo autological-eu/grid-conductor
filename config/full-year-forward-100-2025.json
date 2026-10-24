@@ -1,0 +1,94 @@
+{
+  "name": "full-year-forward-100-2025",
+  "status": "awaiting_forward_model_qualification",
+  "model_id": null,
+  "score_solver_id": null,
+  "training_months": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "forward_pairs": [
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      6
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      8,
+      9
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      11,
+      12
+    ]
+  ],
+  "training_hours": 8760,
+  "validation_hours": 8016,
+  "modeled_zones": 48,
+  "observed_price_zones": 41,
+  "parameter_updates": 100,
+  "record_initial_state": true,
+  "score_iterations": {
+    "first": 0,
+    "last": 100,
+    "count": 101
+  },
+  "early_stopping": false,
+  "initialization": "Separate monthly fits from the same declared neutral initialization; no future-month fitted weights.",
+  "fitting": "Own-month hourly price and actual monthly generation loss only. All actual hours retained; no future targets in fitting, feature scales or transfer.",
+  "transfer": "Choose and freeze the qualified conditional forward rule before this benchmark; no silent fallback to superseded calendar averaging.",
+  "curves": [
+    "12 panels: fit month m vs validation month m+1",
+    "Aggregate training across all12 months",
+    "Matched training February\u2013December vs forward validation February\u2013December"
+  ],
+  "weighting": "Equal eligible zones; within each zone weight month scores by actual hourly coverage. Same eligible-zone set at every update.",
+  "december": "Training only; January2026 inputs unavailable. No backward wrap or invented forward point.",
+  "evaluation": "Declare scoring solver before launch. Fast and physical scores must be labelled separately; never interpolate sparse physical checks into a100-update physical curve.",
+  "physical_verification": "Original coupled-network constraints and existing physical/economic gates remain required; report original physical results separately from fast fitting scores.",
+  "reporting": "Price MAE every iteration0..100 for every monthly fit/pair, generation errors alongside, timings and per-zone score receipts. No baseline promotion from curves alone.",
+  "validation": "Retrospective perfect-input model-selection validation; January/February are already development data. Later-month results are not untouched if used for tuning.",
+  "existing_research_target": "Below10 EUR/MWh equal-zone full8760-hour2025 price MAE; unchanged. This target is not yet achieved or a claim of bid identification.",
+  "launch": "The user authorizes this benchmark after forward-model development. Bind a frozen candidate and verified qualification evidence before launch; no further permission is required within that scope. Retired producers remain paused."
+}

@@ -1,5 +1,30 @@
 # Grid Conductor — product requirements
 
+## Full-year training and validation learning curves
+
+After forward-model development, evaluate twelve separate2025 monthly fits over
+exactly100 parameter updates each. Preserve the initial state and every update:
+101 training/forward score points per month. This experiment replaces patience
+stopping with a fixed100-update budget; show plateaus and deteriorations.
+
+Use month1 to predict2 through11 to predict12, all8760 fitting and8016 forward
+hours with no zone/hour sampling. December has training only untilJanuary2026
+inputs exist. Each model trains only on its own month; future observations do
+not enter fitting, feature scaling or curve transfer. Freeze the forward rule
+and neutral initialization before launching.
+
+Show12 month-pair price-MAE panels and aggregate curves, including both full-year
+training and matchedFebruary–December training againstFebruary–December forward
+validation. Equal eligible-zone weighting and actual-hour weighting within zones;
+ordinary EUR/MWh MAE with source-backed generation metrics alongside. Declare the
+scoring solver; fast and physical curves remain distinct, with no interpolated
+100-update physical claim from sparse checks. Existing physical/economic/full-year
+acceptance criteria and the below10 EUR/MWh research target are unchanged.
+
+Disclose earlier development data and validation-based model selection. Record
+all100 updates even when a descriptive best iteration is reported. No automatic
+baseline promotion follows from low in-sample error or learning curves alone.
+
 ## Physical-condition curve transfer
 
 Evaluate forward transfer of recovered offers using available supply, demand and

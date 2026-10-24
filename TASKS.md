@@ -1,5 +1,24 @@
 # Grid Conductor — current tasks
 
+## Full-year 100-update forward benchmark — requested next experiment
+
+- [x] Record100 updates plus initial state for all12 monthly fits; no patience
+  stop in this experiment. Forward pairs1→2,...,11→12, noDecember backward wrap.
+- [x] Implement score-export validation and Matplotlib reporting for12 panels,
+  full-year training, matchedFeb–Dec training andFeb–Dec forward aggregates.
+  Reject missing updates/months/zones/coverage and fabricatedDecember validation.
+- [ ] Establish and freeze the forward candidate/scoring solver; current analogues
+  improve price or generation separately. Do not claim model qualification or
+  silently select a February winner. Develop a shared condition-dependent curve
+  candidate and retain frozen analogue comparisons before this full benchmark.
+- [ ] Implement fresh checkpointed numerical producer with monthly target/scale
+  isolation, all100 updates, declared solver and source-bound score receipts.
+  Preserve old producers; inspect live jobs and avoid duplicates before launch.
+- [ ] Complete all100 updates/all12 months and every next-month evaluation,
+  independently audit numerical witnesses and produce complete curves/CSVs.
+  Current status: reporting tooling only, no numerical job or real100-update
+  curves. See research/full-year-forward-100-plan-2025.md and its fresh config.
+
 ## Supply-conditioned curve analogue test
 
 - [x] Freeze source independent checkpoint10, declare price-blind matching inputs,
