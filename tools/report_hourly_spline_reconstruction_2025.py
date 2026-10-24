@@ -26,6 +26,8 @@ def run():
     history = json.loads((OUT / 'history.json').read_text())
     ancestry = json.loads((OUT / 'ancestry.json').read_text()) if (OUT / 'ancestry.json').exists() else None
     recovery_start = ancestry['resumed_iteration'] if ancestry else np.inf
+    interruptions = [json.loads(p.read_text()) for p in sorted((OUT / 'interruptions').glob('*/receipt.json'))]
+    boundaries = [r['resume_iteration'] for r in interruptions]
     assert digest(OUT / 'history.json') == summary['history_sha256']
     sealed, data, _, _, _ = load()
     hours = np.load(OUT / 'hours.npy')
@@ -45,7 +47,7 @@ def run():
     convergence = [dict(iteration=r['iteration'], lp_price_mae_eur_mwh=r['lp']['price_mae'], smooth_price_mae_eur_mwh=r['smooth']['price_mae'],
         lp_generation_mae_twh=r['lp']['generation_mae_twh'], lp_generation_normalized_mae=r['lp']['generation_normalized_mae'], joint_loss=r['loss'],
         best_so_far_iteration=r['best_iteration'], consecutive_nonimprovements=r['nonimproving_iterations'],
-        execution_stage='original' if r['iteration'] < recovery_start else 'numerical_recovery', loop_session_seconds=r['elapsed_seconds']) for r in history]
+        execution_stage='original' if r['iteration'] < recovery_start else 'recovery_session_' + str(1 + sum(r['iteration'] >= b for b in boundaries)), loop_session_seconds=r['elapsed_seconds']) for r in history]
     p = dest / f'{name}-iterations.csv'
     write_csv(p, convergence)
     paths.append(p)
@@ -134,6 +136,11 @@ Reproduce the completed audit/report with `tools/audit_hourly_spline_reconstruct
 
 """
         timing = f"The original loop has at least{ancestry['original_observed_loop_seconds_lower_bound'] / 60:.1f} minutes of observed elapsed execution before failure; the recovery loop took another{summary['seconds_this_session'] / 60:.1f} minutes, excluding source setup and the separate audit. Raw per-iteration times in the CSV are session-relative and labelled by execution stage."
+    if interruptions:
+        earlier = sum(r['observed_loop_seconds_lower_bound'] for r in interruptions) / 60
+        stages = ', '.join(str(r['resume_iteration']) for r in interruptions)
+        recovery_text += f"Interactive execution was later interrupted at optimizer iteration(s){stages}. Detailed OS checks found exited/zombie processes; PID presence alone was insufficient evidence of a live job. The original checkpoint, evaluation witnesses and history were archived, and the same Adam state/parameters resumed in detached sessions. Completed cached forward states were revalidated and the incomplete gradient update recomputed; no optimizer update was skipped. No economic, data or stopping specification changed.\n\n"
+        timing += f" Earlier interrupted recovery sessions account for at least{earlier:.1f} additional observed loop minutes; those are separate from the final session time above."
     text = f'''# Full-month hourly spline reconstruction
 
 **January2025, all744 chronological hours across the European network. In-sample reconstruction, not predictive validation.** This experiment learns separate technology/zone spline adjustments for every hour. It does not change the accepted model or public country explorer.

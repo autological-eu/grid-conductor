@@ -24,11 +24,21 @@ def save(value):
     os.replace(temporary, path)
 
 
+def live_process(proc, started):
+    try:
+        fields = (proc / 'stat').read_text().split()
+        return fields[21] == started and fields[2] not in {'Z', 'X'}
+    except FileNotFoundError:
+        return False
+
+
 def run(pid):
     lock = (OUT / 'postprocessing.lock').open('a')
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     proc = Path(f'/proc/{pid}')
     started = (proc / 'stat').read_text().split()[21]
+    if not live_process(proc, started):
+        raise ValueError('Specified runner has exited; PID presence is insufficient')
     if 'hourly_spline_numerical_recovery_2025.py' not in (proc / 'cmdline').read_text():
         raise ValueError('Specified process is not the live recovery runner')
     scripts = ['audit_hourly_spline_reconstruction_2025.py', 'report_hourly_spline_reconstruction_2025.py']
@@ -39,7 +49,9 @@ def run(pid):
     while not (OUT / 'recovery-completion.json').exists():
         if (OUT / 'failure.json').exists():
             raise RuntimeError('Fit failed; no completed-fit/audit/report claim')
-        if not proc.exists() or (proc / 'stat').read_text().split()[21] != started:
+        if not live_process(proc, started):
+            if (OUT / 'recovery-completion.json').exists():
+                break
             raise RuntimeError('Runner exited without completion proof; verification incomplete')
         time.sleep(5)
     for name in scripts:

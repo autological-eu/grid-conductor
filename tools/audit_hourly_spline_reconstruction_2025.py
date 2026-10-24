@@ -40,6 +40,18 @@ def run():
     for name, sha in provenance.items():
         if digest(ROOT / name) != sha:
             raise ValueError('Changed producer: ' + name)
+    for receipt in sorted((OUT / 'interruptions').glob('*/receipt.json')):
+        interruption = json.loads(receipt.read_text())
+        for item in interruption['archives'].values():
+            assert digest(ROOT / item['path']) == item['sha256']
+        archived_history = json.loads((ROOT / interruption['archives']['history']['path']).read_text())
+        assert archived_history[-1]['lp_sha256'] == interruption['archives']['lp']['sha256']
+        if interruption['last_evaluated_iteration'] == interruption['resume_iteration']:
+            assert archived_history[-1]['parameter_sha256'] == interruption['archives']['parameters']['sha256']
+        with np.load(ROOT / interruption['archives']['optimizer']['path']) as z:
+            assert int(z['step']) == interruption['resume_iteration']
+            np.testing.assert_array_equal(z['theta'], np.load(ROOT / interruption['archives']['parameters']['path']))
+            np.testing.assert_array_equal(z['theta'], np.load(OUT / f"iteration-{int(z['step']):03d}/parameters.npy"))
     assert digest(OUT / 'history.json') == summary['history_sha256']
     assert digest(OUT / 'best-parameters.npy') == summary['best_parameter_sha256']
     design = json.loads(PLAN.read_text())

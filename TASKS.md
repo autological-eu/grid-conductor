@@ -17,6 +17,9 @@
   completed iteration19 scores30.7609→16.2115 EUR/MWh and generation.33353→.28073
   TWh. This numerical failure is not patience termination. Check live recovery
   state, not this snapshot. Initial/iteration8 independent LP replay passes.
+  Recovery later evaluated41 at15.51354 EUR/MWh and.26981 TWh; external SIGKILL
+  interrupted its adjoints, not the stopping criterion. Archived evidence and
+  unchanged Adam checkpoint41; detached continuation reproduced41 and reached42.
 - [x] Fresh-provenance numerical recovery: residual-backtracked barrier Newton
   only for failed solves, unchanged objective/Adam state/gates. Hour567 KKT and
   gradient discrepancy1.39e-6 pass. Preserve failed parent; hardlink/revalidate743
@@ -26,6 +29,9 @@
 - [x] Queue a one-off, PID/start-bound completion pipeline: wait for real fit
   completion, then independent audit/report with pinned source hashes. Currently
   waiting; this is not an audit-success claim or a recurring review.
+- [x] Reject zombie/dead states in liveness checks; detached fit/completion
+  launcher survives shell ownership and rejects duplicate live launches. Verify
+  current execution.json and process states before treating it as live.
 
 - [x] Extract [matched fitted spline/sigmoid examples](research/fitted-spline-sigmoid-comparison-2025.md)
   for DE-LU15 June noon, both May fits and identical available MW. Verify saved

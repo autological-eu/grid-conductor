@@ -41,6 +41,18 @@ runner's PID/start identity. It waits for recovery-completion.json, then runs
 the independent audit and compact report (--recovery), with fixed source hashes.
 It launches no fit and enables no recurring review. Inspect postprocessing.json
 and its live process before running another auditor/reporter; avoid duplicates.
+On24 October the interactive processes were found as zombies/SIGKILL after
+iteration41's evaluation and incomplete adjoints. A PID/start match alone is
+insufficient: reject OS states Z/X. Archived checkpoint/history/LP witnesses and
+interruption receipts live under recovery-v1/interruptions; the reason for the
+SIGKILL is unknown. The unchanged optimizer resumed at41, revalidated cached
+forwards, reproduced the41 LP score and advanced to42 without a lost Adam update.
+Use launch_hourly_spline_reconstruction_2025.py for continuation: it checks live
+processes, rejects duplicate launches and starts the fit/completion pipeline in
+independent sessions with redirected descriptors. Read execution.json for current
+PID/start/session identities, not expired interactive tool handles. Scientific
+producer/config/gates/stopping remain unchanged. The auditor verifies archived
+interruption evidence; report times distinguish execution sessions.
 
 
 ## Authorized six-node spline / original LP comparison — 23 October 2026
