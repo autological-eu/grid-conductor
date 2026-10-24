@@ -36,6 +36,11 @@ immutable parent evidence hardlinked. Do not edit either sealed numeric producer
 or resume original failed runner. Audit/report CLI must use --recovery. Inspect
 the recovery root's actual live state before any further action; no completion
 or baseline claim until real patience termination and full independent audit.
+One-off finish_hourly_spline_reconstruction_2025.py is attached to the recovery
+runner's PID/start identity. It waits for recovery-completion.json, then runs
+the independent audit and compact report (--recovery), with fixed source hashes.
+It launches no fit and enables no recurring review. Inspect postprocessing.json
+and its live process before running another auditor/reporter; avoid duplicates.
 
 
 ## Authorized six-node spline / original LP comparison — 23 October 2026

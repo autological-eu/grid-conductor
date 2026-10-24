@@ -23,6 +23,9 @@
   partial-hour states. One attached recovery-v1 runner continues iteration20.
 - [ ] Independently replay original LP bids/certificates, monthly generation,
   stopping/selection history and report results. No baseline/explorer promotion.
+- [x] Queue a one-off, PID/start-bound completion pipeline: wait for real fit
+  completion, then independent audit/report with pinned source hashes. Currently
+  waiting; this is not an audit-success claim or a recurring review.
 
 - [x] Extract [matched fitted spline/sigmoid examples](research/fitted-spline-sigmoid-comparison-2025.md)
   for DE-LU15 June noon, both May fits and identical available MW. Verify saved

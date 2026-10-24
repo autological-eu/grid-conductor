@@ -113,14 +113,17 @@ def run():
         if p.suffix == '.svg':
             p.write_text('\n'.join(s.rstrip() for s in p.read_text().splitlines()) + '\n')
     row = lambda label, m: f"| {label} | {m['price_mae']:.3f} | {m['generation_mae_twh']:.4f} | {m['generation_normalized_mae']:.4f} |"
-    bands = ['| Observed price band €/MWh | Zone-hours | Initial MAE | Selected MAE |', '|---|---:|---:|---:|']
+    bands = ['| Observed price band €/MWh | Zone-hours | Initial MAE | Selected MAE | Contribution to overall MAE |', '|---|---:|---:|---:|---:|']
     observed = target[:, complete]
     for label, low, high in [('Below0', -np.inf, 0), ('0–50', 0, 50), ('50–100', 50, 100), ('100–200', 100, 200), ('200–500', 200, 500), ('500+', 500, np.inf)]:
         mask = (observed >= low) & (observed < high)
         if mask.any():
             a = abs(initial_prices[:, complete] - observed)[mask].mean()
             b = abs(prices[:, complete] - observed)[mask].mean()
-            bands.append(f'| {label} | {int(mask.sum())} | {a:.2f} | {b:.2f} |')
+            bands.append(f'| {label} | {int(mask.sum())} | {a:.2f} | {b:.2f} | {b * mask.sum() / observed.size:.3f} |')
+    worst = ['| Zone | Initial MAE €/MWh | Selected MAE €/MWh |', '|---|---:|---:|']
+    for r in sorted(eligible, key=lambda r: r['fitted_mae_eur_mwh'], reverse=True)[:6]:
+        worst.append(f"| {r['zone']} | {r['initial_mae_eur_mwh']:.2f} | {r['fitted_mae_eur_mwh']:.2f} |")
     recovery_text = ''
     timing = f"Fitting-loop wall time was{summary['seconds_this_session'] / 60:.1f} minutes, excluding source setup and the separate audit."
     if ancestry:
@@ -169,9 +172,13 @@ Each candidate also clears every hour through the original HiGHS LP, with20 divi
 
 These plots use observations that participated in fitting. Strong recovery here demonstrates historical fitting flexibility, not next-month forecasting skill, unique supply bids or reliable investment counterfactuals. Inactive/fully dispatched technologies can remain weakly identified; fitted bids can also compensate for errors in physical inputs or missing market mechanisms. January-specific coefficients require an additional predictive rule before use for unseen February hours.
 
-Errors by observed price band retain negative-price and spike events. These are subdivisions of the same in-sample January scores, not new validation data.
+Errors by observed price band retain negative-price and spike events. Contribution is that band's absolute error sum divided by all scored zone-hours: rare spikes can have large conditional errors without dominating the overall MAE. These are subdivisions of the same in-sample January scores, not new validation data.
 
 {chr(10).join(bands)}
+
+The six zones with the largest remaining selected-fit errors:
+
+{chr(10).join(worst)}
 
 ## Verification and limitations
 
