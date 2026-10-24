@@ -1,5 +1,33 @@
 # Grid Conductor — current tasks
 
+## Supply-conditioned curve analogue test
+
+- [x] Freeze source independent checkpoint10, declare price-blind matching inputs,
+  training-only scales and four methods before scoring February.
+- [x] Test target-label isolation, training-scale isolation, exact day/hour matches,
+  donor economic functions, zone/technology identity and unsupported fallback.
+- [x] Predict all672 February hours/all48 zones for every method; evaluate both
+  fast and original physical LP100, preserving original acceptance gates.
+- [x] Independently replay distances/donors/function transfer, complete fast and
+  physical witnesses and observed metrics. Compare unchanged weekly mean/shared
+  controls; report support, price/generation, timings and identification limits.
+  No method tuning on February, baseline promotion or annual claim.
+
+Verified physical February MAE / monthly mix TWh: weekly mean34.8017/0.327911;
+nearest European day(primary)34.2076/0.335553; same-clock hour33.9352/0.333456;
+three-day economic blend32.9443/0.335860; own-zone/neighbors34.9020/0.308342.
+Price/generation tradeoffs remain: no automatic adoption. Only31 donor days;
+85.7% of whole-day matches exceed January nearest-other input-distance p95.
+Four tests and6,720 witness-hour independent feature/matching/curve/equilibrium/
+physical/metric replays pass, transfer-node error<=5.12e-13 EUR/MWh. Report:
+research/supply-analogue-transfer-2025.md and compact method/day CSVs. No new fit,
+February-label feature tuning or checkpoint reselection. Parent checkpoint was
+already February-selected, so this is exploratory validation, not untouched test.
+
+- [ ] Evaluate frozen condition-dependent transfer rules across subsequent
+  chronological months before adoption; assess prices and actual generation
+  jointly and keep inverse-fit identifiability limitations explicit.
+
 ## Independent-hour fast curve fitting and physical transfer
 
 - [x] Implement neutral independent744-hour parameters, training-only economic

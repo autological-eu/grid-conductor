@@ -1,5 +1,46 @@
 # Grid Conductor — agent instructions
 
+## Supply-conditioned analogue transfer — 25 October 2026
+
+User proposes matching January learned curves to February supply/demand conditions
+instead of weekday/hour averages, and asks whether the result indicates overfit.
+Fresh supply-analogue-transfer-v1 only; freeze prior independent checkpoint10,
+no fitting or February-target checkpoint reselection. All48 areas/all672 February
+hours remain. Predeclare nearest whole-European day (primary), same-UTC-hour,
+three-nearest-day economic blend and own-zone/neighbors day matching; report all.
+
+Distances use solver net demand after fixed generation, original available MW
+and supported thermal source costs. Training-only scales, equal physical feature
+blocks/zone balance; no observed prices, generation targets or dispatch-as-
+availability. Zone-neighbor weights split half own/half adjacent zones. Transfer
+markups with target fuel anchors/available MW unchanged; use neutral fallback
+for unsupported donor-hour resources. Record support distances vs January
+nearest-other 95th percentile. No February scoring to tune features/weights/k.
+
+Keep prior checkpoint's February-based selection explicit: this new transfer is
+exploratory validation, not an untouched forecast or identification of true bids.
+Use original physical LP100 and native gates; independently replay matching,
+functions, fast responses, physical costs/bounds/metrics before claims. Raw
+witnesses ignored, prior sources/jobs intact, no baseline/app/publication change.
+
+Completed and independently audited: weekly-mean physical February control
+34.8017 EUR/MWh, mix0.327911 TWh. Closest-European-day primary34.2076/mix0.335553;
+same-clock hour33.9352/0.333456; three-day blend32.9443/0.335860; own-zone/neighbor
+day34.9020/0.308342. Global analogues improve price but worsen generation; local
+neighbor matching improves generation while slightly worsening price. Do not
+promote a winner from this already-inspected February validation. Source10 had
+already been February-selected. The small31-day donor library limits support:
+85.7% of whole-day target matches exceed January nearest-other-day input p95.
+
+Four tests and6,720 witness-hour independent feature/distance/donor/function/
+fast/physical/metric replays pass. Curve transfer error<=5.12e-13 EUR/MWh; original
+physical gates unchanged. See research/supply-analogue-transfer-2025.md, compact
+method/runtime CSV and28 primary day matches. Raw arrays ignored; all jobs done.
+Interpret as partial transferable signal plus overparameterization/identification
+risk, not recovered unique actual bids. Any further tuning/chronological tests
+need fresh provenance; keep these rules frozen before future evaluation. No
+baseline/app/publication or annual completion change.
+
 ## Independent-hour fast fitting — 25 October 2026 (Europe/Paris)
 
 User authorizes testing independent calendar-hour curves in the fast transport

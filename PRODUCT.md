@@ -1,5 +1,22 @@
 # Grid Conductor — product requirements
 
+## Physical-condition curve transfer
+
+Evaluate forward transfer of recovered offers using available supply, demand and
+source-cost conditions, alongside calendar-pattern averages. Keep physical
+availability separate from observed generation/dispatch. Fit normalizations on
+training inputs only and exclude target prices/generation from donor selection.
+Transfer economic markups with the target period's own physical/fuel inputs.
+Declare spatial matching scope, neighbor treatment, averaging and unsupported
+resource fallbacks. Report sparse/out-of-support donor coverage and every
+predeclared sensitivity, including adverse results.
+
+Distinguish good price reconstruction, successful curve transfer and recovery of
+actual bids: price/monthly-generation agreement does not uniquely identify a
+supply stack. Existing target-selected checkpoints do not create an untouched
+test by changing the transfer method. Validate frozen predictions under original
+physical constraints before adoption; no automatic baseline replacement follows.
+
 ## Independent-hour fitting comparison
 
 Evaluate independent calendar-hour offer coefficients with the fast differentiable

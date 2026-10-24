@@ -1,0 +1,29 @@
+{
+  "name": "supply-analogue-transfer-v1",
+  "source_study": "independent-hourly-transport-v1",
+  "source_iteration": 10,
+  "train_month": 1,
+  "test_month": 2,
+  "zones": 48,
+  "training_hours": 744,
+  "prediction_hours": 672,
+  "methods": [
+    "nearest_day",
+    "nearest_hour",
+    "three_days",
+    "neighbor_zone_day"
+  ],
+  "primary": "nearest_day",
+  "features": "Solver net load after fixed generation, actual group availability, and supported thermal source costs. No observed prices or generation targets.",
+  "distance": "Equal three block weights; equal zones within each block, equal groups within zone. Whole-European 24-hour day profile or same-UTC-hour vector. Training-only scaling.",
+  "load_scale": "max(Jan hourly std,0.1*Jan maximum absolute net load,0.05GW)",
+  "availability_scale": "max(Jan hourly std,0.1*Jan mean,0.01*zone Jan peak absolute net load,0.001GW)",
+  "source_cost_scale": "max(Jan supported hourly std,10 EUR/MWh); unavailable costs use own supported January mean for distance only; never-supported groups omitted from cost distance.",
+  "three_day_weights": "Inverse squared standardized distance, normalized; availability-positive donor-hour support, neutral fallback if absent.",
+  "transfer": "Economic markups only. Actual target-hour availability/source anchors unchanged. Whole-system methods share donors across zones; neighbor-zone method shares donors across technologies within each zone.",
+  "support": "Compare target nearest distance to January nearest-other-day 95th percentile; diagnostic, not an acceptance cutoff.",
+  "physical_bins": 100,
+  "selection": "No February-target method tuning or checkpoint reselection; report every predeclared method. Source checkpoint previously selected with February validation, so no untouched-test claim.",
+  "scope": "Exploratory January\u2192February curve transfer, all48 zones and672 hours; no new fit, baseline adoption or annual claim.",
+  "neighbor_zone_day": "Nearest January UTC day per zone, equal physical-feature weight on own zone and neighboring zones jointly; neighbors split their half equally, using retained corridor adjacency. Each zone transfers all technology curves from its donor day. Market clearing still couples all48 zones."
+}
