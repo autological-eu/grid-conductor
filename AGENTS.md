@@ -1,5 +1,50 @@
 # Grid Conductor — agent instructions
 
+## Independent-hour fast fitting — 25 October 2026 (Europe/Paris)
+
+User authorizes testing independent calendar-hour curves in the fast transport
+model after contrasting the old January15.304 in-sample result with monthly
+shared patterns. Use fresh independent-hourly-transport-v1; do not resume old
+fits or reuse their January-fitted initialization. Same neutral initial economic
+curves as the recent monthly control, actual744 Jan/672 Feb hours and48 zones.
+Six raw coefficients per actual hour/technology/zone; frozen renewable/unavailable
+parameters. Same fast network/economic assumptions; actual-adjacent-hour departure
+regularization replaces cyclic shared-day regularization, weights unchanged.
+
+Stop on full-February price MAE after three nonimprovements at1e-6; retain best
+forward and best January states among visited iterations. For February, average
+PWL economic functions by local weekday/hour using availability-positive January
+support; unsupported slots use own-month means, wholly absent groups neutral.
+Never average raw nonlinear coefficients or use future targets/availability in
+projection. Keep January fitted, January averaged and February validation scores
+separate. No annual validation or untouched forecast claim.
+
+Verify raw/node averaging and independent-hour gradients before training. Freeze
+selected offers for original coupled physical LP100-tranche evaluation, restoring
+all original rows/offsets and certificate gates. Keep a20-tranche probe and adverse
+results. Reuse verified neutral February witness only after source and neutral
+function equality checks. Independently audit raw/projection/fast/physical/metric
+witnesses. Large arrays ignored; no baseline/app/publication change.
+
+Completed with verified patience: selected10, stop13, best January among visited
+states13. Selected January fast16.424/physical10020.067 EUR/MWh; selected weekly
+mean curves score23.863 on the same January inputs, then33.740 fast/34.802
+physical on February. Best-January diagnostic at13 scores15.654 fast/19.814
+physical, not a forward-selected score. Shared model still has slightly better
+physical February34.562 and mix0.31157 vs independent0.32791 TWh. No adoption.
+
+Nominal1,455,264/active781,200 raw coefficients. Thirteen updated core phases
+95.51s; full initial+updated loop127.57s with metrics/checkpoints. Updated full
+iterations6.52–21.27s, including outliers/retries; do not claim uniformly5s.
+Initial neutral-price reuse is explicit. New physical100 Jan/Feb evaluations
+pass all original gates; cached neutral February has source/function proof.
+Seven-hour20/100 probe shows up to2.83 EUR/MWh price movement, retained.
+Two tests, independent-hour/physical pilots and8,575 independent witness-hour
+replays pass; training-only weekly means agree within5.69e-14 EUR/MWh.
+See research/independent-hourly-transport-2025.md and compact iteration/zone CSVs.
+Raw states remain ignored; jobs completed, old fits never resumed. No full-year
+fit, untouched forecasting, baseline/app/publication or review change follows.
+
 ## Fast fit, then coupled-network transfer — 24 October 2026
 
 User authorizes fast-transport fitting until three consecutive forward-price MAE

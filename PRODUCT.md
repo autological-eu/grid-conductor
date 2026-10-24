@@ -1,5 +1,20 @@
 # Grid Conductor — product requirements
 
+## Independent-hour fitting comparison
+
+Evaluate independent calendar-hour offer coefficients with the fast differentiable
+transport model against the monthly shared daily-pattern candidate. Preserve all
+hourly physical inputs and zones and use the same neutral initialization. Report
+changes to regularization, network assumptions and curve families explicitly.
+
+Separate within-month reconstruction, within-month averaged-curve performance
+and next-month validation. Transfer economic functions by local weekday/hour
+with training-only availability support; do not average nonlinear coefficients.
+Use next-month validation for stopping/best selection and label it model selection.
+Evaluate frozen curves with original coupled physical constraints and unchanged
+certification gates before adoption. Keep the earlier January-only fitted score
+separate from forward scores; no automatic baseline replacement follows.
+
 ## Fast fitting with physical-network evaluation
 
 Allow the reduced transport model to learn supply offers, while evaluating frozen

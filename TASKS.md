@@ -1,5 +1,37 @@
 # Grid Conductor — current tasks
 
+## Independent-hour fast curve fitting and physical transfer
+
+- [x] Implement neutral independent744-hour parameters, training-only economic
+  function averaging by168 local weekday/hour slots, and explicit actual-hour
+  physical-LP adapter. Preserve48 zones/all672 February hours.
+- [x] Verify node inversion/mean functions and unavailable-hour/fallback isolation.
+- [x] Pass real independent-hour price/generation gradient and physical pilots.
+- [x] Fit to three forward-MAE nonimprovements; retain best forward, best January
+  and final states. Inspect live jobs and avoid duplicate computation.
+- [x] Evaluate frozen selected curves with original physical constraints at100
+  bid tranches; retain20-tranche sensitivity and verified neutral controls.
+- [x] Independently audit training-only projection, fast/physical witnesses and
+  observation metrics; compare monthly sharing and priorJanuary reconstruction.
+  Report initialization/regularization/economic differences. No baseline change.
+
+Verified selected10/stop13. Selected January fast16.424/physical20.067; weekly
+mean curves on January23.863, then February fast33.740/physical34.802 EUR/MWh.
+Best-January state13:15.654 fast/19.814 physical, a separate in-sample diagnostic.
+Shared model remains slightly better for February physical prices34.562 and
+mix0.31157 vs0.32791 TWh. Both use100 physical bid tranches for February.
+1,455,264 nominal/781,200 active coefficients. Thirteen updates95.51s core;
+127.57s total loop with initial/metrics/checkpoints. Full updated iterations
+6.52–21.27s; initial cached prices/retries are included and disclosed.
+Two tests, seven-real-hour independent-gradient/physical pilots and8,575-hour
+independent raw/projection/equilibrium/physical/metric replay pass. Weekly means
+agree within5.69e-14 EUR/MWh. Adverse2.83 EUR/MWh discretization probe retained.
+Report: research/independent-hourly-transport-2025.md. No model promotion.
+
+- [ ] Future prediction improvement should address the loss from averaging
+  independent hourly curves; report reconstruction separately. Keep monthly
+  sharing as the better January→February prediction reference for now.
+
 ## Patience-stopped fast fitting → original physical network
 
 - [x] Declare January→February forward-MAE patience 3, 1e-6 EUR/MWh improvement,
