@@ -1,5 +1,60 @@
 # Grid Conductor — agent instructions
 
+## Authorized independent-corridor batched test —24 October2026
+
+User explicitly agrees to independently bounded interconnectors with transport
+costs, preserving hourly and bidding-zone granularity. For this candidate only,
+this overrides the earlier requirement to keep passive PTDF/intrazonal/island
+coupling. Keep the physical reference and its gates untouched. No baseline/app
+promotion follows. Numerical recovery ancestry is retained; the completed
+canonical study is batched-transport-fit-v1, using the robust-v1 annual witness.
+
+All48 modeled areas/all8760 hourly inputs are required. Derive95 corridor limits
+from summed native cross-zone thermal ratings and37 original hourly signed link
+bounds, with source/ordering/unit-efficiency checks. These are model-derived
+thermal ceilings, not verified commercial NTC/ATC.154 within-zone components and
+coupled physical constraints no longer constrain this separate approximation.
+Predeclare kappa4 EUR/MWh per GW per aggregated corridor; it is an economic
+transport cost, not a tariff or numerical damping parameter. Supply uses actual
+available MW and source/fuel costs; fixed hydro stays unchanged. No emergency
+supply or dispatch-as-availability substitution.
+
+Batched48-price roots analytically recover all326 technology quantities and
+95 signed flows. Separate price/flow smoothing units; forward damping only, no
+backward ridge. Exact implicit gradients on identified directions; explicitly
+report Moore–Penrose conventions and halt fitting if a target materially projects
+onto an unidentified direction. Original1e-4 MW balance/bound tolerances apply to
+the new corridor model, not a claim of original-PTDF feasibility.
+
+Three focused tests and a six-European-hour/three-direction gradient pilot pass.
+Neutral all8760-hour inference plus full744-hour January/672-hour February,
+three-update monthly-shared gradient test; no sampling or convergence claim.
+Inspect execution/progress/failure and live PID/start/state before any launch.
+Old annual jobs remain paused. Independently reconstruct all annual and retained
+monthly response/energy witnesses and observed metrics before results claims.
+Large arrays stay ignored; only compact report/data/config/code are tracked.
+
+Verified completion: all 8,760 hours/48 zones, 95 corridors. Neutral annual
+forward computation 145.26s; observed-price MAE31.8229 EUR/MWh across41 complete
+zones; monthly generation MAE0.34437 TWh (2,916 actual cells). No emergency supply.
+Full Jan744/Feb672 fits: three updates improve Jan33.7723→25.8988 and Feb
+42.2782→34.9141 EUR/MWh; Feb mix0.34850→0.32907 TWh. Updated forward/adjoint/
+prediction phases total4.81–5.27s; initial0.95s reuses neutral price witnesses.
+This is a bounded January→February test, not annual fitted validation.
+
+Four focused tests and real gradient pilots pass. Independent response/balance
+replay covers11,592 witness hours; annual balance error<=1.01e-6 MW. Separate
+annual observation replay verifies all prices/monthly metrics and original native
+link-order injection columns. Some January price directions are unidentified;
+target projection<3e-18, with no hidden backward ridge. Keep that limitation.
+Failures at318/1928 were numerical; preserve their receipts. A file-saving error
+stopped the robust controller after annual completion; the fit controller fixes
+the namespace and reuses that exact annual SHA. Do not rerun completed controllers.
+See research/batched-transport-dispatch-2025.md and its compact CSVs; all raw
+arrays remain ignored. No old fit is running in the current environment; earlier
+paused/retired jobs must not be resumed. Next scope: all adjacent-month tests and
+transport coefficient/capacity sensitivity, without automatic baseline promotion.
+
 ## Notebook architectural review —24 October2026
 
 User provides supply_curve_recovery(2).ipynb for comparison, not as instructions

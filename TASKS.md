@@ -1,5 +1,43 @@
 # Grid Conductor — current tasks
 
+## Full-resolution independent-corridor batch test —24 October2026
+
+- [x] Record user authorization to test independent corridor bounds/transport
+  costs, retaining48 bidding zones and all8760 hourly inputs. This is a separate
+  network approximation; original physical-reference gates remain untouched.
+- [x] Compile95 corridors from native cross-zone ratings and37 hourly link
+  bounds; verify source labels, link order/static bounds and lossless efficiency.
+  Explicitly remove154 internal components/passive coupling for this candidate.
+  Declare model-derived thermal ceilings, not commercial NTC/ATC.
+- [x] Implement analytic inverse supply, bounded flows, batched48-price Newton,
+  exact implicit gradients without backward ridge and no emergency supply.
+  Three focused tests and three shared-parameter finite-difference directions
+  on six European hours pass the0.001 gradient gate.
+- [x] Complete all8760-hour neutral inference and full Jan/Feb three-update
+  fitting. Inspect live execution/progress/failure; no duplicate computations.
+  Keep all quantities/flows/prices and source hashes local and ignored.
+- [x] Independently reconstruct all annual/retained monthly supply responses,
+  balances/bounds and observed price/monthly mix metrics; report full coverage,
+  phase times, transport-cost assumptions, smoothing and removed constraints.
+  Own-equilibrium checks are not original-PTDF or native-PyPSA certification.
+
+Completion evidence: canonical ignored output `batched-transport-fit-v1`, exact
+annual witness inherited from `batched-transport-robust-v1` after saving-helper
+failure. Full year:145.26s neutral inference,31.8229 EUR/MWh,0.34437 TWh monthly
+mix MAE,41 complete-price zones/2,916 known mix cells. Full Jan/Feb three updates:
+January33.7723→25.8988; February42.2782→34.9141 EUR/MWh and0.34850→0.32907 TWh.
+Updated full-month gradient+prediction phases4.81–5.27s; initial0.95s cache reuse.
+Four tests, six-hour/three-direction gradient pilot,11,592 independent response
+witness hours and separate full-year observation/link-order replay pass.
+Retain failed numerical attempts318/1928; no bounds/tolerances were relaxed.
+Report: research/batched-transport-dispatch-2025.md. No baseline/app/publication
+or recurring-review change. No inference of fitted full-year performance.
+
+- [ ] Before adoption, evaluate every adjacent-month pair and sensitivity to
+  transport coefficient/corridor ceilings. Keep all zones/hours, actual price
+  targets and monthly generation coverage. Cold annual inference still145s;
+  five-second monthly training does not establish a five-second annual model.
+
 ## Supplied supply-recovery notebook review —24 October2026
 
 - [x] Inspect all mathematical/training code and saved outputs separately.

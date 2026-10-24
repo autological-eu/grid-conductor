@@ -1,5 +1,28 @@
 # Grid Conductor — product requirements
 
+## Independent-corridor batched candidate
+
+Evaluate the user-authorized transport approximation with independently bounded
+zonal interconnectors and explicit transport costs. Preserve all48 modeled
+bidding zones and every one of the8760 hourly2025 inputs; batching must not
+aggregate zones, average snapshots or sample training hours. Distinguish the
+price-space numerical formulation from this separate network assumption.
+
+Use original hourly demand, generation availability, source/fuel costs and fixed
+hydro. Label native-model corridor thermal ceilings separately from verified
+commercial NTC/ATC. State removed passive/internal/island coupling and avoid
+claiming unchanged physical-network feasibility. Transport costs affect prices
+even before capacity binds; they must be declared economic assumptions rather
+than hidden numerical stabilizers. Preserve no-artificial-emergency and energy/
+power bounds, and verify implicit price/generation gradients without a hidden
+backward ridge. Report unidentified price conventions explicitly.
+
+Test full-year neutral forward inference and full-month Jan→Feb fitting before
+adoption, separating inference, training and validation coverage. Compare price,
+monthly generation and runtime with the physical reference; do not attribute
+all changes to batching when bid/network assumptions also change. The accepted
+baseline, physical benchmark gates and public app remain unchanged until adoption.
+
 ## Monthly shared daily-pattern candidate
 
 Evaluate a monthly model with economic supply curves shared by technology,
