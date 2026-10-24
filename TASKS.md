@@ -1,5 +1,27 @@
 # Grid Conductor — current tasks
 
+## Supplied supply-recovery notebook review —24 October2026
+
+- [x] Inspect all mathematical/training code and saved outputs separately.
+  Three synthetic zones/four technologies, analytic inverse supply/flows,
+ 720-hour batches,864 raw coefficients and implicit differentiation. Saved
+ 1500-epoch/199s and0.381 EUR/MWh results are synthetic, not European evidence.
+- [x] Independently replay source-bound NumPy equations without executing
+  notebook cells or installing PyTorch. All720 toy hours close within8.62e-12GW;
+  Jacobian finite-difference error2.67e-8. Fresh cold forward0.289–0.326s and
+  warm0.166–0.180s exclude training. The same backward ridge biases a uniform
+  bid-shift price derivative1.83% at final-fit smoothing/true parameters.
+- [x] Record comparison and reusable architecture in
+  research/supply-recovery-notebook-review.md. Preserve limits: different network
+  economics, fixed capacities, synthetic hourly generation/flows, explicit20GW
+  scarcity backstop, mixed smoothing units, missing gradient/multi-start checks.
+- [ ] Next architectural test: eliminate separable generators analytically and
+  batch independent hours while retaining a reduced block for our coupled
+  physical constraints. Verify smoothing and exact implicit gradients, source-
+  matched price/monthly-generation metrics, no hidden scarcity, and complete
+  Jan/Feb timing before adoption. This supersedes emphasis on another solver
+  swap; a native-QP bid-family comparison remains a possible reference experiment.
+
 ## Monthly shared daily patterns / compiled dispatch —24 October2026
 
 - [x] Implement24 local-hour curves per technology/zone shared across a month,

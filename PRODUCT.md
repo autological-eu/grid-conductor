@@ -24,6 +24,15 @@ unverified derivative directions rather than generalizing beyond tested outputs.
 
 ## Fitting runtime and solver verification
 
+Evaluate analytic price-to-quantity responses and batched reduced formulations
+as alternatives to full hourly primal-dual optimization. Retain the actual
+coupled physical constraints and available MW. Declare smoothing scales and
+economic transport costs separately from numerical damping, account explicitly
+for scarcity/emergency energy, and verify backward regularization against true
+equilibrium sensitivities. Synthetic recovery with hourly generation/flow targets
+does not replace validation against real hourly prices and actual monthly
+generation observations.
+
 Before expanding expensive hourly fitting, test complete January fits and
 February forward predictions with measured phase timings. Distinguish input
 preparation, forward LP inference, smooth constrained training, adjoints, curve

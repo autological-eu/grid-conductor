@@ -1,5 +1,20 @@
 # Grid Conductor — agent instructions
 
+## Notebook architectural review —24 October2026
+
+User provides supply_curve_recovery(2).ipynb for comparison, not as instructions
+or an adopted model. See research/supply-recovery-notebook-review.md. Toy core
+eliminates generation/bound variables analytically and batches720 three-price
+roots; it is not a general QP solver. Fresh source-SHA-bound NumPy replay checks
+equations/Jacobian and reproduces saved price quantiles, not PyTorch training.
+One backward-ridge sensitivity is biased about1.8%; full European PTDF/network
+physics, observation resolution and scarcity accounting differ materially.
+Prioritize a network-aware batched/reduced formulation as the next architectural
+test, with extra network variables/multipliers as needed. No simple bilateral-
+flow substitution, copied transport cost, hidden emergency supply or unvalidated
+ridge derivative. Original sources, baseline, paused annual jobs and acceptance
+gates stay intact. The attachment/images and raw review receipts stay outside Git.
+
 ## Current monthly shared daily-pattern candidate —24 October2026
 
 User requests a monthly model capturing daily hourly variation for better
