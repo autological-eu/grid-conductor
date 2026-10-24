@@ -1,5 +1,39 @@
 # Grid Conductor — current tasks
 
+## Monthly shared daily patterns / compiled dispatch —24 October2026
+
+- [x] Implement24 local-hour curves per technology/zone shared across a month,
+  with exact gradient aggregation, cyclic daily smoothing and direct next-month
+  transfer. January nominal parameters1,455,264→46,944 (31× fewer). Actual hourly
+  demand/MW/fuel/network/fixed hydro stay unchanged; no sampling or baseline change.
+- [x] Four focused tests pass, including shared chain rule, local time/DST,
+  cyclic penalties and true quadratic/cubic dispatch optima. Implement Clarabel
+  convex QP subproblems with original nonlinear polishing/certificates. Retain
+  original recovery and distinguish certified unchanged-optimum reuse.
+- [x] Six European backend/gradient comparisons plus three finite-difference
+  sweeps pass for fitted generation/observed-price outputs at unchanged0.001
+  error gate. Arbitrary latent-flow functional fails and remains documented.
+  Nonlinear matched speedup only1.06×; no material speed improvement claimed.
+- [x] Complete bounded all744-hour January fits/all672-hour February predictions,
+  initial plus3 Adam updates. Inspect live execution/progress/failure. Original
+  annual/recovery fit and completion groups remain intentionally paused.
+- [x] Independently reconstruct local-hour shared expansions/SciPy costs and
+  replay initial/selected/last original-LP witnesses; compare full-month price,
+  monthly generation, parameters and phase timings with the independent-hour
+  candidate. Retain adverse results and separate sharing/solver/evaluation costs.
+  All2832 witness hours pass. Active coefficients25,200 vs781,200; nominal46,944
+  vs1,455,264. Three updates: January35.2663→26.4618 and February42.8597→35.7816
+  EUR/MWh. Compared with independent-hour update3, forward price improves4.3%,
+  but monthly generation.33954 vs.33481 TWh worsens1.4%. Updated phase totals
+  143.51/162.32/155.76s; initial38.04s is cache replay. All744 updated hours need
+  original nonlinear polishing. Same neutral controls and both source audits
+  verified; comparison-provenance.json binds references. No model promotion.
+- [ ] For substantial solver speed gains, test a native convex-QP bid family
+  (monotone piecewise-linear marginal offers at the same supply nodes) under
+  fresh provenance and unchanged complete-month/gradient/physical gates. The
+  current compiled initializer alone gains only1.06×. Native QP reformulation
+  is a proposed next experiment, not an implemented or verified speed claim.
+
 ## January/February runtime investigation —24 October2026
 
 - [x] Inspect live annual iteration and pause fit/watcher with identity-bound

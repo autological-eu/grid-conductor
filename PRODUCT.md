@@ -1,5 +1,27 @@
 # Grid Conductor — product requirements
 
+## Monthly shared daily-pattern candidate
+
+Evaluate a monthly model with economic supply curves shared by technology,
+bidding zone and local hour of day. Repeated days constrain the same24 hourly
+curves; preserve actual hourly demand, fuel costs and available MW. Use cyclic
+daily smoothing, with zero renewable bids and physically unavailable resources
+frozen. Fewer coefficients improve support but do not establish unique true bids.
+Monthly country generation and hourly zonal prices remain distinct target types.
+
+Fit using full-month price/generation gradients aggregated into shared
+parameters. For next-month validation, apply the learned local-hour functions
+directly with that month's physical inputs. Test January→February before any
+all-month adoption; distinguish this alternative sharing assumption from the
+previous independent-hour reconstruction/averaging experiment. No automatic
+baseline promotion or change to annual validation acceptance follows.
+
+Evaluate compiled differentiable dispatch alternatives with explicit economics,
+unchanged feasibility/optimality gates and finite-difference checks for the
+actual generation/observed-price loss. Separate matched solver benchmarks from
+model-sharing, checkpoint reuse and LP scoring costs. Preserve failed probes and
+unverified derivative directions rather than generalizing beyond tested outputs.
+
 ## Fitting runtime and solver verification
 
 Before expanding expensive hourly fitting, test complete January fits and

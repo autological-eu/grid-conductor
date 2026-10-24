@@ -1,5 +1,50 @@
 # Grid Conductor — agent instructions
 
+## Current monthly shared daily-pattern candidate —24 October2026
+
+User requests a monthly model capturing daily hourly variation for better
+identifiability, and a faster differentiable dispatch trial. Fresh
+config/monthly-diurnal-splines-2025.json and ignored monthly-diurnal-splines-v1
+only. Share one six-parameter curve per local hour/technology/zone across all
+days in a month; 24 slots, cyclic adjacent-hour regularization. Keep actual hourly
+MW, demand, fuel/source anchors, network and fixed hydro unchanged. Aggregate
+all hourly adjoints into shared parameters before Adam. All744 Jan training
+hours and672 Feb prediction hours; three-update bounded test, no convergence
+claim. Transfer curves directly by local hour, without calendar-hour averaging.
+This candidate does not silently replace the twelve-month protocol or baseline.
+
+Clarabel0.11.1 compiled convex QP subproblems initialize/refine the same cubic
+objective; original nonlinear Newton polishing and true KKT precision gates
+remain. Implicit gradients use the original cubic cost. Count compiled/direct,
+polished, certified unchanged-optimum reuse and original recovery paths. Never
+accept relaxed AlmostSolved certificates as final nonlinear dispatch. Preserve
+old source bytes. The package pin is in differentiable-dispatch-requirements.txt.
+
+Four focused tests pass (clock/DST sharing, aggregate chain rule, cyclic penalty,
+quadratic/cubic dispatch optima). Six matched European generation/observed-price
+gradient comparisons and three perturbation sweeps pass0.001 scaled error. An
+earlier arbitrary internal-flow functional failed; retain its log/JSON and do
+not claim general flow-sensitivity accuracy. No tolerance was relaxed. Matched
+nonlinear speedup is only1.06×; no substantial runtime gain is established.
+
+Inspect execution/progress/failure and PID/start/state before launching or
+resuming. One detached bounded study plus one-off audit/report, original annual
+jobs remain paused. Initial neutral KKT reuse must be disclosed as cache replay.
+Before results claims independently rebuild shared local-clock expansions and
+SciPy cubic costs, replay original LP certificates and source-matched metrics.
+Full witnesses stay ignored; no public explorer/accepted-model/review change.
+
+Bounded monthly test is complete and independently audited:2832 witness hours.
+25,200 active raw coefficients vs781,200 for January independent-hour fits.
+After three updates, Jan MAE26.4618 and Feb35.7816 EUR/MWh. Forward price is4.3%
+better than the independent-hour update3, but mix.33954 vs.33481 TWh worsens1.4%.
+Updated phase totals144–162s; initial38s is cache replay. All744 updated hours
+need nonlinear polishing, and matched backend speed gain is only1.06×. Two vs
+three LP score passes and different sharing prevent causal whole-iteration speed
+attribution. Comparison receipts verify identical neutral controls/audited source
+histories. No baseline/all-month adoption follows. A native convex-QP bid-family
+reformulation is a future test, not an implemented speed or accuracy claim.
+
 ## Current performance gate: January→February —24 October2026
 
 User requests iteration acceleration, clarification of fast LP versus gradient

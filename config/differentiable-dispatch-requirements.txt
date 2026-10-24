@@ -1,0 +1,2 @@
+# Compiled convex QP subproblems for the unchanged cubic supply-bid objective.
+clarabel==0.11.1
