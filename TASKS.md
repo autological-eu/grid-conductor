@@ -1,5 +1,21 @@
 # Grid Conductor — current tasks
 
+## Active higher Adam-rate tests
+
+- [x] Verify prior three trials completed101 points and unchanged sources;
+  final February MAE0.05:33.634,0.15:31.904,0.5:31.811EUR/MWh.
+- [x] Implement fresh1.0/2.0 wrappers preserving producer bytes and binding their
+  own SHA in provenance. Same initial bids/architecture/loss/data; no continuation.
+- [x] Pass5 original unit checks; launch one sequential suite and read-only
+  five-rate report. No concurrent numerical fit or duplicate job at launch.
+- [x] Rate1.0 real gradient pilot passed (scaled error1.84e-6).
+- [ ] Pass rate2.0 pilot and finish100 updates per new rate; retain failures.
+- [ ] Compare all five price/generation/convergence histories before extension.
+
+Local higher-hour-table-learning-rates-v1/report.md andcomparison.png combine
+completed original rates and actual higher-rate points; never infer completion
+from these notes. Check live-trial/PID and per-rate failure/complete receipts.
+
 ## Active matched hourly-table learning-rate suite
 
 - [x] Implement24 local-hour tables plus January-centered weekend/availability

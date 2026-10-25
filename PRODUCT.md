@@ -1,5 +1,13 @@
 # Grid Conductor — product requirements
 
+## Higher learning-rate sensitivity
+
+Extend the matched local-hour experiment to Adam1.0 and2.0, retaining100 updates,
+identical initial bids, data, architecture, losses and numerical gates. Compare
+all five rates with price/generation and stability evidence, keeping failed or
+adverse trials visible. Fresh rates do not continue previously fitted parameters.
+No automatic long-run extension or baseline promotion.
+
 ## Local-hour curves and learning-rate comparison
 
 Test24 local-hour technology–zone curves shared across month days, with small

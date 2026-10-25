@@ -1,5 +1,21 @@
 # Grid Conductor — agent instructions
 
+## Higher Adam rates authorized — 25 October 2026
+
+User asks for rates above0.5. Fresh higher-hour-table-learning-rates-v1 tests1.0
+and2.0,100 updates each with original identical neutral bids,26-feature local-hour
+conditioner, losses/regularization and unchanged numerical guards. Reuse immutable
+trial producer through explicit isolated wrappers; wrapper SHA added to every
+trial provenance. Prior0.05/0.15/0.5 all completed101 points and source hashes
+verify. Final Jan/Feb MAE:24.905/33.634,22.591/31.904,21.032/31.811; rate0.5 best
+Feb31.733 at40. Do not equate faster training with forward improvement.
+One sequential higher-rate suite, no other active fit at launch; read-only watcher
+combines all five rates. Higher rates each start fresh, never resume old fits.
+Five unchanged unit tests pass; each child must pass its real gradient pilot.
+Failures retained, remaining rate still tested; no adaptive damping/rate reduction
+or relaxed precision gate. Check actual execution/live-trial/progress/failure and
+suite-finished before claims/new jobs. No1000 extension/promotion/publication.
+
 ## Authorized hourly-table Adam comparison — 25 October 2026
 
 User accepts testing Adam0.05/0.15/0.5 for100 updates each before deciding on1000.

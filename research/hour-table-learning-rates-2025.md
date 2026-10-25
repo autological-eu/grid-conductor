@@ -34,3 +34,20 @@ PID/start/state and receipts before completion claims or new computation.
 
 No automatic1000-update extension or baseline replacement. Compare price and
 generation tradeoffs and stable convergence first. No public deployment.
+
+## Higher rates1.0 and2.0
+
+The original three trials completed101 points with unchanged source hashes. Final
+January/February MAE was24.905/33.634 at0.05,22.591/31.904 at0.15, and
+21.032/31.811 at0.5. Rate0.5's lowest February MAE31.733 occurred at update40.
+
+The user authorized fresh1.0/2.0 tests,100 updates each, same original neutral
+bids rather than continuation. New sequential controller and source-bound trial
+wrappers reuse the immutable original producer; all losses, regularizers, data
+and numerical gates remain unchanged. Five unit checks pass; real pilot gates
+are required per child. Failures remain visible, no rate reduction or automatic
+1000-update extension. Higher-rate results are pending.
+
+The ignored `higher-hour-table-learning-rates-v1/` directory holds execution and
+live-trial receipts, per-rate histories/plots and read-only five-rate report.md,
+comparison.png andlearning-curves.csv. No deployment or promotion is claimed.
