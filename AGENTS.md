@@ -1,5 +1,41 @@
 # Grid Conductor — agent instructions
 
+## Autonomous Nordic goal — verified water milestones, still OPEN
+
+User explicitly authorizes independent work until corrected/verified or concrete
+blocker. GOAL.md persists objective; no recurring review enabled. No routine
+permission requests for safe authorized stages. No goal-complete claim yet.
+
+Verified frozen-bid Norway stock anchoring: Jan22.6023/Feb26.4329MAE vs original
+21.9535/31.6688. Same annual reservoir139.2145TWh, inflow/spill/capacities/bounds/
+endpoints; original schedule followed inherited pattern but ignored intermediate
+observed stock, endingFeb5.315TWh high. Independent water/flow/metric audit passes.
+Combined Swedish SOURCE-COVERED Jan/Feb reconstruction yields20.6759/24.8520MAE;
+three water tests/two parser tests and full1416-hour audit pass. Northern bias
+persists, Denmark worsens: no promotion. See research/nordic-water-reconciliation-2025.md.
+
+Swedish public weekly PDFs:52/54bounding reports recovered; weeks14/27missing.
+Jan/Feb complete, no annual release or seam intoMarch claim. Source inflow may be
+production/stock-derived; retrospective reconstruction, not independent operational
+forecast. Original ROR source retained; country water-source mixture unresolved.
+Zero old production made initial geographic-share division invalid; failedv1
+preserved, v2 recovers source plant-capacity allocation in those hours. Annual
+energy-difference field from generic helper refers to a1416h WINDOW in SE case.
+
+Next: commercial Nordic constraints and geographic demand/allocation; source
+SE2–SE3 thermal ceiling11.04GW is not commercial capacity. JAO Nordic final domains
+are publicly obtainable; sample netPos endpoint empty. No unverified shrinkage,
+forced domain mapping or generation-as-availability. Elhub cached actual zonal
+consumption exists but differs in metering/loss scope; verify before changes.
+All old sources/checkpoints intact, fresh code/data roots only. No active fits.
+
+## Autonomous active goal
+
+User explicitly authorizes independent work until the Nordic issue is corrected
+and verified. Read GOAL.md; keep this objective across turns. Continue safe staged
+work without routine approval. Only mark complete with source/physics/empirical
+evidence; otherwise report a concrete blocker. No recurring review is enabled.
+
 ## ACTIVE PRIORITY: Nordic source reconciliation — 25 October 2026
 
 User directs focus to Nordics and requests a careful plan/context update.

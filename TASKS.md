@@ -1,5 +1,32 @@
 # Grid Conductor — current tasks
 
+## Active goal progress: water corrections verified, Nordic issue NOT finished
+
+- [x] Persist independent-work authorization and completion criteria inGOAL.md.
+- [x] Trace Norwegian prepared schedule exactly to NVE water witness; net-demand
+  subtraction closes. Identify intermediate stock drift (Feb+5.315TWh).
+- [x] Implement source-stock anchoring preserving NOannual generation/water/bounds;
+  independently verifyJan/Feb prices, generation, bid inverse and flows.
+- [x] Collect52/54Swedish bounding weekly reports; parse complete Jan/Feb calendar.
+- [x] Test combined NO+SEwindow with frozen bids, verify water/1416-hour market
+  replay and retain first zero-output allocation guard failure. Jan20.6759/
+  Feb24.8520priceMAE; no annual/forecast/adoption claim.
+- [ ] Resolve northern residual bias and southern regressions: check actual
+  commercial north–south constraints, geographic allocation and demand scope.
+- [ ] Recover missing Sweden2025weeks14/27 or an independently justified complete
+  alternative; do not fabricate inflow or release annual inputs from Jan/Feb.
+- [ ] Reconcile ROR/reservoir source mixture and inflow's production dependence;
+  full input release and same-method refit only when evidence supports it.
+
+See research/nordic-water-reconciliation-2025.md. Goal remains active; no new
+optimizer/architecture search or obsolete search resume.
+
+## ACTIVE GOAL: verified Nordic correction
+
+GOAL.md records user authorization to continue independently through correction
+and verification. Next: test stock-anchored Norwegian water schedule, bids frozen;
+check geographical energy and Nordic/non-Nordic price effects before any refit.
+
 ## ACTIVE: Nordic dispatch reconciliation
 
 Plan:research/nordic-dispatch-reconciliation-plan-2025.md. Keep all48European

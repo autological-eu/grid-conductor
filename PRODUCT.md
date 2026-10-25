@@ -1,5 +1,14 @@
 # Grid Conductor — product requirements
 
+## Hydro source-reconstruction evidence
+
+Require observed-stock trajectory checks as well as annual endpoint water closure
+for precomputed reservoir schedules. Separate retrospective observed-stock/inflow
+reconstruction from a forecast using only information available at prediction.
+Declare production-derived inflow dependence, missing weekly sources and geographic
+allocation fallbacks; no annual input release from partial source coverage.
+Test fixed bids before refitting and retain adverse Nordic/non-Nordic effects.
+
 ## Nordic reconciliation requirements
 
 Prioritize Nordic hydro/input and deliverability reconciliation while retaining
