@@ -1,5 +1,23 @@
 # Grid Conductor — agent instructions
 
+## Authorized neural conditioner test — 25 October 2026
+
+User authorizes small nonlinear conditioner and error breakdown after completed
+linear conditional spline fit (Jan23.4587/Feb32.1881 EUR/MWh at100). Fresh
+neural-conditional-spline-v1 only, no failed/retired fit resumed. Two32-unit tanh
+layers,8-zone/4-technology embeddings, same six nonconstant physical/calendar
+features, same neutral initial bids and monotone quadratic spline/fast network.
+Adam0.003 vs prior0.05 and parameter sharing are explicit comparison changes.
+January744h training, February672h forward,48 modeled/41 target areas,100 updates
+plus initialization; no early stop. Forward labels only score. Keep original
+availability, source costs, fixed hydro and annual-availability reference proxy.
+Inspect live execution/progress/failure/complete before any new launch. Raw arrays
+ignored. Five unit tests pass; numerical full neural/dispatch pilot must pass
+before training. Analytic neural backprop checked for every parameter block.
+Break down frozen linear100 vs neural per-zone/hour and January-defined price
+extremes. Existing February development history remains explicit. No baseline,
+physical-network acceptance or public website claim. Source producers immutable.
+
 ## Authorized conditional monotone spline pilot — 25 October 2026
 
 User authorizes January fit and full February prediction for100 updates, with

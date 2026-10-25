@@ -1,5 +1,15 @@
 # Grid Conductor — product requirements
 
+## Nonlinear shared conditioner comparison
+
+Test a modest neural network producing monotone spline bid coefficients, shared
+across zones and technologies with learned embeddings. Preserve actual hourly
+physical inputs and direct conditional forward prediction without averaging.
+Compare price/generation fit and forward errors with the frozen linear conditioner,
+including zonal bias, time-of-day and extreme-price cohorts. Explicitly distinguish
+architecture, sharing and optimizer changes; retain full100-update histories and
+capacity-reference limitations. No automatic baseline adoption.
+
 ## Conditional monotone curve experiment
 
 Evaluate a nonlinear conditional monotone spline bid model on January training

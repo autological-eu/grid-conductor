@@ -1,5 +1,20 @@
 # Grid Conductor — current tasks
 
+## Active neural-conditioned spline comparison
+
+- [x] Verify linear conditional model completed100 updates: Jan23.4587 and
+  Feb32.1881 EUR/MWh; old job inactive, no duplicate computation.
+- [x] Implement shared two32-unit tanh conditioner with zone/technology embeddings,
+  analytic backprop and exactly matched neutral initial economic curves.
+- [x] Pass5 conditioner/spline tests including all parameter-block derivatives.
+- [x] Launch fresh neural-conditional-spline-v1 plus read-only report watcher.
+- [x] Pass real neural/market gradient pilot in3 directions (max scaled error
+  4.91e-6 against0.001 gate).
+- [ ] Complete100 updates/all hours,
+  inspect losses and learned curves, compare frozen linear baseline and error
+  breakdowns. Check actual progress/failure/complete receipts; no completion yet.
+- [ ] Verify final provenance/coverage and report adverse results/limitations.
+
 ## Active conditional monotone spline January→February experiment
 
 - [x] Implement positive linear B-spline slopes and integrated quadratic bids,
