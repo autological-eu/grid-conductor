@@ -1,5 +1,24 @@
 # Grid Conductor — agent instructions
 
+## Authorized hourly-table Adam comparison — 25 October 2026
+
+User accepts testing Adam0.05/0.15/0.5 for100 updates each before deciding on1000.
+Fresh hour-table-learning-rates-v1, one suite controller and sequential isolated
+trial children. No old job resumed. New26-feature conditioner:24 local-hour table
+entries plus January-centered weekend and available/reference adjustments. Same
+neutral bids, monotone quadratic spline family, fixed hydro, source fuel costs,
+hourly availability/demand and fast95-corridor network. Same ridge/cyclic-hour
+penalty0.001 across rates. This differs from old harmonic sharing explicitly.
+All744Jan/672Feb hours,48 modeled/41 price targets; full101 scores per rate.
+Five unit tests pass; each real seven-hour gradient pilot must pass before fit.
+Guard failures retain receipts and do not relax gates; other rates still run.
+Inspect suite/live-trial/progress/failure/complete plus actual processes before
+any launch. Report watcher is read-only, not another fit. Raw arrays ignored.
+Original capacity-reference proxy and physical-network limitations remain.
+No auto1000 extension, promotion, deployment or recurring-review change. Compare
+convergence/price/generation tradeoffs before choosing extension; February is
+development/model-selection validation, not untouched test. Source scripts sealed.
+
 ## Independent hourly Jan/Feb comparison complete — 25 October 2026
 
 User clarifies fitting every actual hour in BOTH months, then comparing curve

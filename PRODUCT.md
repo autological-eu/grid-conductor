@@ -1,5 +1,16 @@
 # Grid Conductor — product requirements
 
+## Local-hour curves and learning-rate comparison
+
+Test24 local-hour technology–zone curves shared across month days, with small
+daily condition adjustments. Use January-only centering, direct February forward
+application and identical initial bids across Adam0.05,0.15,0.5. Run100 updates
+plus initialization per rate, retaining price/generation losses and adverse or
+failed outcomes. Compare stable convergence before a1000-update extension;
+no automatic extension or adoption. Distinguish the new hourly-table sharing
+from the earlier smooth daily harmonics. Preserve original physics/source inputs
+and all hours/zones; disclose fast-network and reference-capacity limitations.
+
 ## Hourly inverse-curve comparison
 
 Compare separate January and February fits with independent actual-hour curves,

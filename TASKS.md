@@ -1,5 +1,22 @@
 # Grid Conductor — current tasks
 
+## Active matched hourly-table learning-rate suite
+
+- [x] Implement24 local-hour tables plus January-centered weekend/availability
+  adjustments; identical neutral initialization across0.05/0.15/0.5.
+- [x] Pass5 feature/regularizer/spline tests including analytic chain derivatives.
+- [x] Inspect live jobs (all older fits inactive); launch single sequential suite
+  and read-only comparison report watcher; no duplicate/retired fit resumed.
+- [x] First rate0.05 real pilot passed (scaled gradient error1.84e-6).
+- [ ] Pass remaining real gradient pilots; finish100 updates/all101 score states for
+  each rate, preserving failures/adverse scores and unchanged precision guards.
+- [ ] Compare January/February prices and generation, convergence/stability and
+  source coverage. Decide extension only after comparison; no automatic1000 run.
+
+Fresh ignored output:hour-table-learning-rates-v1/report.md,comparison.png and
+learning-curves.csv. Actual status in suite-started/live-trial/suite-finished and
+per-rate pilot/progress/history/failure/complete; starting is not completion.
+
 ## Completed: daily individual-curve visualization
 
 - [x] Plot every daily15:00-local curve for six resources, January/February
