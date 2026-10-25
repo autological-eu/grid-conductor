@@ -1,3 +1,26 @@
+## Latest verified Nordic goal milestone — still OPEN
+
+- [x] Collect and hash118JAO daily responses: both published directional-envelope
+  controls complete1416hours; unit/sign/alias/preserved-outside-window tests pass.
+- [x] Reject fixed-hydro envelope runs with200/136infeasible hours; diagnose only
+  excess generation(.214153/.109555TWh), never add slack to dispatch or drop hours.
+- [x] Implement offline network/water retiming; keep NO+SE monthly energy and
+  stock endpoints, inflow/spill/turbine/stock/source availability, no price labels.
+- [x] Evaluate both predeclared controls, all48zones/1416hours. Full independent
+  water/flow/polynomial/generation/metric replay passes;9focused tests pass.
+- [x] Save local all-zone figure/CSV/report, retain Denmark regressions and both
+  controls; frozen bids unchanged, no model promotion or annual release.
+- [x] Compile raw regional NVE HBV/stock ledger. Regional stock sums differ from
+  national by up to.14737TWh; no forced normalization or new dispatch input.
+- [ ] Reconcile regional stock/inflow scope, ROR-source mixture, source-metered
+  zonal demand and actual Nordic domain semantics; evaluate source-backed fixes.
+- [ ] Recover Swedish weeks14/27or verified equivalent;16extrafilename probes
+  unsuccessful. Annual Swedish release remains blocked on source coverage.
+
+Receipt/output:nordic-network-stock-retiming-v1. See
+research/nordic-network-water-reconciliation-2025.md. Goal remains active;
+no recurring check-ins, retired-search resume, bid refit or deployment.
+
 # Grid Conductor — current tasks
 
 ## Active goal progress: water corrections verified, Nordic issue NOT finished

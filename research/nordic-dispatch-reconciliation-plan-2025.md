@@ -1,9 +1,11 @@
 # Nordic dispatch reconciliation: investigation and implementation plan
 
-Status: source inventory started; no hydro correction, new dispatch solve or new
-curve fitting has been performed. This is the active priority before optimizer
-or architecture expansion. Keep the fast European clearing model and flexible
-monotone bid curves. Establish which physical inputs need correction first.
+Status: source lineage traced; Norwegian stock and source-covered Swedish
+Jan/Feb corrections independently verified. Network-aware water retiming under
+two public JAO envelope controls also passes full1416hour replay; no bid refit.
+Goal OPEN: geographic/source reconciliation and Nordic regressions remain. Latest
+research/nordic-network-water-reconciliation-2025.md supersedes the historical
+starting-status passages below. No corrected annual release or promotion.
 
 ## Scope and frozen comparison
 

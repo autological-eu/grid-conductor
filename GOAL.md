@@ -26,3 +26,11 @@ substitution. Reconcile geography and Nordic spillovers before declaring success
 No model promotion, main merge, force-push, credentials, ignored bulk Git data,
 or weakening of existing annual/physical acceptance gates. Record milestones and
 material failures concisely. Commit coherent changes on public-v1.
+
+Latest verified milestone: water corrections plus source-backed border-envelope
+controls reduce February EuropeMAE31.6688→24.1156 with bids frozen. Both full1416h
+controls pass independent replay after water retiming. Denmark regression and
+SE2bias remain: NOT COMPLETE. Detailed evidence and next actions in
+research/nordic-network-water-reconciliation-2025.md. No live numerical fits.
+Regional source closure/ROR/demand/domain semantics and missing Swedish annual
+weeks remain before full input release or refitting. No automatic model adoption.

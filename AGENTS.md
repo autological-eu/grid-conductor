@@ -1,3 +1,26 @@
+## Latest Nordic goal checkpoint — verified network-aware water retiming
+
+Read GOAL.md and research/nordic-network-water-reconciliation-2025.md first.
+Goal remains OPEN; do not mark Nordic issue fixed or promote model. No live fits.
+Public JAO Nordic maxBorderFlow/maxExchanges each cover all1416Jan/Feb hours.
+These are independent directional envelope CONTROLS, not exact FB domains/NTC.
+With fixed corrected hydro they fail200/136hours; minimum diagnostic slack is
+surplus.214153/.109555TWh, ZERO deficit. No slack enters production dispatch.
+Fresh offline water/network LP preserves NO/SE monthly energy, month-end stocks,
+inflow/spill/capacities/original generation availability; zero interior margin.
+Both controls now pass full1416h feasibility and independent water/bid/flow/
+generation/price replay. Frozen1.0/29 Jan/Feb EuropeMAE: MFB20.3854/24.1156;
+MEX21.0567/24.1153 vs NO+SEwater20.6759/24.8520 and original21.9535/31.6688.
+Northern errors improve; Denmark regresses, SE2positivebias remains. No all-year,
+forecast, exact-domain or public deployment claim. Sources/producers sealed.
+
+Regional NVE HBV/stock ledger is diagnostic ONLY, not a zonal dispatch release.
+Regional-vs-national stock differences reach.14737TWh: not rounding; reconcile
+basis/coverage before forcing geographic closure. Same country hydro shares and
+old ROR sources remain limitations. Swedish weeks14/27still missing after16more
+filename probes; no missing source imputation. Next: zonal water/demand scope,
+ROR source reconciliation and full domain semantics before same-method refit.
+
 # Grid Conductor — agent instructions
 
 ## Autonomous Nordic goal — verified water milestones, still OPEN

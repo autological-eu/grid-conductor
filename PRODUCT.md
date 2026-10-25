@@ -1,5 +1,19 @@
 # Grid Conductor — product requirements
 
+## Network-aware hydro precomputation
+
+A precomputed reservoir schedule must be jointly feasible with the network
+constraints used during clearing. Reject infeasible hours; do not hide excess
+fixed production with emergency/slack variables, dropped observations or wider
+borders. Any retiming must preserve declared monthly energy/stock anchors, water,
+spill, turbine and inventory limits and original renewable availability.
+
+Distinguish published independent directional envelopes from full flow-based
+constraints and verified NTC. Require explicit source/domain mapping and retain
+adverse zonal effects. Regional/national source totals that disagree beyond
+rounding require scope/basis reconciliation, not unexplained normalization.
+
+
 ## Hydro source-reconstruction evidence
 
 Require observed-stock trajectory checks as well as annual endpoint water closure
