@@ -1,5 +1,12 @@
 # Grid Conductor — current tasks
 
+## Completed: daily individual-curve visualization
+
+- [x] Plot every daily15:00-local curve for six resources, January/February
+  separately:354 curves/2124 nodes; share axes and color by day, mark dispatch.
+- [x] Verify source/artifact hashes, all31+28 days per resource and CSV counts.
+  Local daily-1500-curves-v1/report.md; no retraining or public deployment.
+
 ## Completed: independent hourly January/February curve comparison
 
 - [x] Reuse and independently verify both existing100-update monthly fits:

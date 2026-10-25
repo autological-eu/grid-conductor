@@ -59,3 +59,14 @@ constant feature handling and a known shared signal. Metadata/public-asset check
 pass. No new numerical fit, baseline promotion, public deployment or automatic
 review was started. Next: assess repeat-fit and dispatch-local stability before
 using these patterns to design another forward conditioner.
+
+## Individual daily curves at15:00 local time
+
+Additional visualization: `data/bidding-zone-network-2025/daily-1500-curves-v1/`.
+Six resources,31January plus28February curves each:354 full daily bid curves,
+2,124 exported nodes. Separate month panels share price axes; colors identify
+day-of-month and dots locate fitted dispatch on each curve. Full bids include
+source fuel anchors, unlike the earlier markup bands. X-axis remains percentage
+of actual hourly availability; CSV also exports MW. No day sampling or retraining.
+Per-resource figures, combined grid and report.md are local; receipt hashes
+source/prior manifest/artifacts and confirms all59 days for every resource.
