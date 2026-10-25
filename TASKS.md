@@ -1,5 +1,18 @@
 # Grid Conductor — current tasks
 
+## Completed: independent hourly January/February curve comparison
+
+- [x] Reuse and independently verify both existing100-update monthly fits:
+  January12.8426/February21.2421EUR/MWh, all1416hours; no retraining needed.
+- [x] Compare all supported within-resource Jan×Feb pairs (87.49million), curve
+  envelopes and local daily patterns across175 technology/zone groups.
+- [x] Test January-trained clock/physical curve prediction on February; retain
+  adverse group results. Report curve MAE, not forward electricity-price MAE.
+- [x] Produce local report/three figures/all-groupCSV/SHA manifest, two diagnostic
+  tests and unchanged public-asset checks. No promotion/publication.
+- [ ] Before forward model adoption, assess repeat-fit and dispatch-local curve
+  stability; single reconstructed trajectory does not uniquely identify bids.
+
 ## Active neural-conditioned spline comparison
 
 - [x] Verify linear conditional model completed100 updates: Jan23.4587 and

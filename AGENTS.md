@@ -1,5 +1,23 @@
 # Grid Conductor — agent instructions
 
+## Independent hourly Jan/Feb comparison complete — 25 October 2026
+
+User clarifies fitting every actual hour in BOTH months, then comparing curve
+variability. Reused completed monthly-mean-forward-100-v1 month01/02 independent
+fits at100, without restarting any job. Jan12.8426/Feb21.2421 price MAE; these
+are own-month reconstruction scores, never forward validation. Source hashes,
+1416-hour full response/balance/bound/generation/metric replay and artifact SHA
+manifest pass. See research/hourly-curve-comparison-2025.md and ignored local
+hourly-curve-comparison-v1/report.md. 87,494,400 all-cross-month curve pairs within
+175 supported groups; remove fuel anchors, keep original available-MW axis.
+Clock predicts reconstructed curves17.1353→16.5831 (95/175 groups improve);
+physical17.0690; combined17.1055. These are curve-space errors, NOT price forecasts.
+Unconstrained ridge node predictions are diagnostic only, never dispatched.
+Two tests pass; preserve initial audit log and actual response-derived generation
+provenance. Do not relax gates. No new fit, promotion or publication. Weak tail/
+technology identification, imposed temporal regularization and single initialization
+limit inference: patterns do not establish actual bidding or prove randomness.
+
 ## Authorized neural conditioner test — 25 October 2026
 
 User authorizes small nonlinear conditioner and error breakdown after completed

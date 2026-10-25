@@ -1,5 +1,15 @@
 # Grid Conductor — product requirements
 
+## Hourly inverse-curve comparison
+
+Compare separate January and February fits with independent actual-hour curves,
+using own-month price/monthly-generation observations. Distinguish reconstructed
+curve predictability from forward clearing-price performance. Report temporal
+variation, monthly shifts, physical/calendar associations and weakly identified
+unused curve regions. Remove fuel anchors when comparing markups, preserve
+available-MW versus capacity axes and acknowledge imposed regularization. Reuse
+verified existing evidence before launching duplicate fits; no automatic adoption.
+
 ## Nonlinear shared conditioner comparison
 
 Test a modest neural network producing monotone spline bid coefficients, shared
