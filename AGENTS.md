@@ -1,5 +1,37 @@
 # Grid Conductor — agent instructions
 
+## ACTIVE PRIORITY: Nordic source reconciliation — 25 October 2026
+
+User directs focus to Nordics and requests a careful plan/context update.
+Read research/nordic-dispatch-reconciliation-plan-2025.md. Stages:1actual energy
+lineage;2observation/water-budget reconciliation;3zonal allocation/deliverability;
+4source-backed corrections with bids FROZEN first;5validation then same-method
+refit if justified. Keep all48 European zones in solves; focus diagnosis on
+NO1–NO5,SE1–SE4,FI,DK1/DK2. No new optimizer/architecture expansion or1000 run.
+
+Fresh prepared-source inventory SHA verifies fixed reservoir NOJan17.2921 and
+Feb7.7260TWh vs Ember TOTAL hydro15.262/14.007. Categories differ; do not infer
+missing capacity or causality. SEfixed3.7703/3.3071vs total6.907/6.485; FI0.5340/
+0.4664vs1.225/0.999. Receipt:nordic-source-inventory-v1/inventory.json. First
+trace exact origin of NOmonthly swing, water/stock boundaries and net-demand
+subtraction. Source reads show fixed_generation copies accepted_generation;
+spatial allocation uses plant-capacity shares; NVE compiler states country
+pooling limitations. Whether current artifacts correctly use the NVE release
+remains to verify. Existing raw NVE receipts are present, not completed reconciliation.
+
+Both higher-rate trials completed101 scores and source/pilot checks. Rate2 final
+Jan20.3095/Feb32.1568MAE. A planned pause was unnecessary: child exited before
+signal; NO signal delivered and no pause receipt. No live numerical fits at review.
+Frozen error-budget comparator remains rate1.0/update29, explicit February-selected
+snapshot; do not silently replace it. Preserve all old evidence/failed studies.
+
+Next safe authorized work: fresh monthly source/energy ledger before any hydro
+correction. Never substitute observed generation for availability, scale water
+freely, relax physical/price gates or restore retired searches. Keep chronology,
+source taxonomy, missing zones and electrical-equivalent conventions explicit.
+Plan stage gates require evidence, not repeated approval for safe authorized work.
+No model adoption, deployment, main merge or recurring-review change.
+
 ## Frozen price-error diagnosis — 25 October 2026
 
 User accepts holistic error diagnosis and asks whether to retain flexible bids.

@@ -1,5 +1,22 @@
 # Grid Conductor — product requirements
 
+## Nordic reconciliation requirements
+
+Prioritize Nordic hydro/input and deliverability reconciliation while retaining
+flexible monotone bids and European constrained clearing. Distinguish reservoir,
+run-of-river and pumped-storage generation/consumption, national vs bidding-zone
+coverage, stock/inflow units and calendar boundaries. Require source lineage,
+monthly conservation and explicit water/efficiency/turbine/stock constraints
+before correcting fixed schedules or geographical allocation. Observed generation
+is a validation target, not availability or freely adjustable water supply.
+
+Evaluate justified input changes first with frozen bids, then separate refitting
+with unchanged procedure. Show all Nordic per-zone and Europe-wide price,
+generation and exchange evidence with missingness, adverse spillovers and prior
+validation exposure. Preserve physical/annual acceptance gates and scenario-response
+requirements; neither a lower MAE nor monthly total agreement alone establishes
+correct bids, physical adequacy or investment value. No automatic promotion.
+
 ## Evidence-led dispatch calibration
 
 Retain flexible monotone supply bids within fast constrained market clearing.

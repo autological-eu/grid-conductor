@@ -1,5 +1,32 @@
 # Grid Conductor — current tasks
 
+## ACTIVE: Nordic dispatch reconciliation
+
+Plan:research/nordic-dispatch-reconciliation-plan-2025.md. Keep all48European
+zones for evaluation; focus NO1–NO5,SE1–SE4,FI,DK1/DK2. No further architecture/
+optimizer expansion; safe source investigation continues without repeated approval.
+
+- [x] Verify frozen error budget and prepare staged investigation/correction plan.
+- [x] Start SHA-verified prepared-input inventory: NO fixed reservoir17.2921Jan/
+  7.7260FebTWh; Ember TOTAL hydro15.262/14.007. Category difference explicit.
+- [x] Inspect lineage source: fixed reservoir copied from accepted generation;
+  geographical schedule allocation by plant-capacity shares; NVE pooling caveat.
+- [x] Verify higher-rate suites actually completed101points, source hashes/pilots;
+  no live fit remains. Planned pause not delivered because run had finished.
+- [ ] Stage1: actual artifact-by-artifact monthly energy/source ledger, all12months;
+  find origin of Norway'sJan→Feb swing, calendar/units/clipping and net-load closure.
+- [ ] Stage2: reconcile NVE/ENTSO-E/Ember and national source scope/coverage plus
+  reservoir stock/inflow/turbine/spill budget; fetch only missing source evidence.
+- [ ] Stage3: validate zonal assignment and Nordic deliverability/exchanges;
+  distinguish national energy mismatch from allocation/commercial-domain errors.
+- [ ] Stage4: implement only evidence-backed corrections in a fresh input release;
+  replay frozen bids first, keep water/availability/numerical gates unchanged.
+- [ ] Stage5: compare per-zone/European price+mix+flow evidence, then refit the SAME
+  model only if justified. Preserve adverse results and validation exposure.
+
+No hydro correction or causal price explanation is complete. Raw inventory stays
+ignored. Frozen1.0/29 comparator retained; no automatic1000run or public promotion.
+
 ## Completed first holistic error budget; next source reconciliation
 
 - [x] Freeze best COMPLETED hourly-table candidate at analysis start:1.0/29,
@@ -23,7 +50,7 @@
 - [x] Pass5 original unit checks; launch one sequential suite and read-only
   five-rate report. No concurrent numerical fit or duplicate job at launch.
 - [x] Rate1.0 real gradient pilot passed (scaled error1.84e-6).
-- [ ] Pass rate2.0 pilot and finish100 updates per new rate; retain failures.
+- [x] Rate2.0 pilot/source checks and both higher-rate100-update histories complete.
 - [ ] Compare all five price/generation/convergence histories before extension.
 
 Local higher-hour-table-learning-rates-v1/report.md andcomparison.png combine
@@ -38,8 +65,7 @@ from these notes. Check live-trial/PID and per-rate failure/complete receipts.
 - [x] Inspect live jobs (all older fits inactive); launch single sequential suite
   and read-only comparison report watcher; no duplicate/retired fit resumed.
 - [x] First rate0.05 real pilot passed (scaled gradient error1.84e-6).
-- [ ] Pass remaining real gradient pilots; finish100 updates/all101 score states for
-  each rate, preserving failures/adverse scores and unchanged precision guards.
+- [x] All original-rate pilots and101score states completed; source checks pass.
 - [ ] Compare January/February prices and generation, convergence/stability and
   source coverage. Decide extension only after comparison; no automatic1000 run.
 
