@@ -1,5 +1,24 @@
 # Grid Conductor — agent instructions
 
+## Frozen price-error diagnosis — 25 October 2026
+
+User accepts holistic error diagnosis and asks whether to retain flexible bids.
+Keep fast clearing and flexible monotone curves; diagnose physical inputs and
+constraints before further architecture/optimization expansion. No new training
+was launched. Existingrate2 test may still run; do not infer completion.
+Freeze strongest COMPLETED hourly-table state:rate1.0/update29,Feb31.66885MAE,
+explicitly February-selected development diagnosis. Error budget, monthly mix and
+input flags under dispatch-error-budget-v1; tracked research report same name.
+Top5 NO4/SE2/SE1/NO3/FI account34.81% of error, predominantly overpricing. Middle
+price cohort contributes82.87%; high>Januaryp95 contributes15.92%. These are
+additive absolute-error categories, not causal shares. Jan-bias correction30.6753;
+Feb-oracle centering20.8382 uses future labels and is not a forecast/fix/bound.
+NOhydro7.974vsEmber14.007TWh; reconcile scope/fixed schedule/zonal allocation and
+water constraints before attributing price causes. Never replace availability
+with generation or scale hydro freely. Hourly generation/exchange/outage source
+reconciliation remains pending. Source/metric/coverage checks and2 budget tests
+pass; no numerical fit, baseline/publication or physical acceptance claim.
+
 ## Higher Adam rates authorized — 25 October 2026
 
 User asks for rates above0.5. Fresh higher-hour-table-learning-rates-v1 tests1.0

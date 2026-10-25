@@ -1,5 +1,19 @@
 # Grid Conductor — current tasks
 
+## Completed first holistic error budget; next source reconciliation
+
+- [x] Freeze best COMPLETED hourly-table candidate at analysis start:1.0/29,
+  Feb31.66885MAE; label February selection/development exposure.
+- [x] Attribute absolute errors by zone and disjoint January-defined observed
+  price cohorts; inspect zonal hourly bias and monthly generation discrepancies.
+- [x] Verify source/score/generation coverage, additive error identities,2 tests
+  and local report/two figures/CSV/input flags/SHA receipt. No new fit/solve.
+- [ ] Reconcile Norwegian hydro monthly scope/energy/fixed schedule and northern
+  zonal mapping/deliverability.7.974modelvs14.007EmberTWh is not proven capacity
+  deficit or causal price attribution; preserve original water/availability gates.
+- [ ] Extend observational validation to hourly technology generation, exchanges
+  and dated outages where coverage supports it; scenario-response checks separate.
+
 ## Active higher Adam-rate tests
 
 - [x] Verify prior three trials completed101 points and unchanged sources;

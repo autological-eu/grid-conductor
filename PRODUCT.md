@@ -1,5 +1,16 @@
 # Grid Conductor — product requirements
 
+## Evidence-led dispatch calibration
+
+Retain flexible monotone supply bids within fast constrained market clearing.
+Before further architecture/optimizer expansion, diagnose price-error location,
+signed bias, daily timing, extreme regimes and generation consistency. Distinguish
+observational error budgets from causal explanations and predictive improvements.
+Reconcile source-backed demand/availability/hydro/network inputs before letting
+fitted bids compensate for their errors. Scope/taxonomy and zonal mapping stay
+explicit; observed generation never replaces availability. Validate scenario
+responses separately from baseline price fit; no adoption from MAE alone.
+
 ## Higher learning-rate sensitivity
 
 Extend the matched local-hour experiment to Adam1.0 and2.0, retaining100 updates,
