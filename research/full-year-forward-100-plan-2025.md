@@ -1,5 +1,10 @@
 # Full-year forward learning curves — 100-update protocol
 
+> **25 October update:** the user explicitly selected monthly averaging and
+> authorized execution now. The qualification prerequisite below is historical.
+> Active protocol: [monthly-mean run](monthly-mean-forward-100-2025.md).
+> Fresh producer is running; this original planning config is retained unchanged.
+
 **Status:** requested experiment recorded; reporting contract implemented and
 tested. A qualified, frozen forward candidate and the fitting producer are still
 pending. No 100-update results exist and no long-running job has been launched.

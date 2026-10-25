@@ -1,5 +1,26 @@
 # Grid Conductor — current tasks
 
+## Active: monthly average transfer, all months ×100 updates
+
+- [x] Freeze fresh monthly-mean-forward-100-v1 and user-selected monthly averaging;
+  earlier conditional-candidate prerequisite is superseded for this experiment.
+- [x] Implement checkpointed numerical producer, actual-point progress plotting,
+  independent live response/mean audits and storage budget. Seven unit tests pass.
+- [x] Inspect live processes: no duplicate fit; launch single detached controller.
+- [x] Pass real seven-hour European gradient pilot: three directions, maximum
+  scaled error6.72e-6; monthly mean nodes replay within1.07e-14 EUR/MWh.
+- [ ] Complete all12×100 updates/101 scores, all11 next-month evaluations
+  and complete training/validation curves.
+- [ ] Verify final coverage/provenance and retained numerical witnesses; report
+  full-year and matched-period price MAE, monthly generation errors and timings.
+- [ ] Evaluate retained curves under original coupled physics before adoption;
+  fast learning curves alone do not complete annual/integration acceptance.
+
+Check data/bidding-zone-network-2025/monthly-mean-forward-100-v1/{execution,
+progress,failure,pilot,complete}.json and actual process, not this launch note.
+Local report.md/plots/CSV refresh every5 updates. No100-update completion is
+claimed by starting the job. No baseline, public app or recurring review change.
+
 ## Full-year 100-update forward benchmark — requested next experiment
 
 - [x] Record100 updates plus initial state for all12 monthly fits; no patience

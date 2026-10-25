@@ -1,5 +1,39 @@
 # Grid Conductor — agent instructions
 
+## Active monthly-mean 100-update study — 25 October 2026
+
+The user now explicitly chooses averaging and requests the full training run.
+This supersedes the earlier qualification/conditional-model prerequisite for this
+experiment: use fresh monthly-mean-forward-100-v1, never resume retired fits.
+One independent six-node curve per actual hour/technology/zone during fitting;
+transfer ONE own-month average economic function per technology/zone to every
+next-month hour. No weekday/hour slots or analogues. Average equally over
+availability-positive training hours; absent groups neutral. Next-month demand,
+available MW and source/fuel anchors stay hourly and unchanged.
+
+Twelve separate neutral monthly fits, exactly100 Adam updates plus initial score,
+all8760 training/8016 forward hours and48 modeled/41 price-target zones. Score
+month1→2,...,11→12 at every state; December training only. Forward targets never
+enter gradients or stopping. Keep adverse scores and generation errors. Ordinary
+EUR/MWh price MAE is distinct from normalized joint optimization loss.
+
+Producer: tools/run_monthly_mean_forward_100_2025.py; config:
+config/monthly-mean-forward-100-2025.json. Inspect execution/progress/failure and
+actual PID/start/state before any new launch; one detached job only. Seven unit
+checks pass. Numerical gradient pilot runs before fitting and must pass. Every
+state independently replays soft responses/balance/bounds and mean functions.
+Keep all compact scores/hourly prices/monthly means, parameters every10 updates,
+full initial/final witnesses and active optimizer journal; new-output budget2GiB,
+stop if disk headroom falls below2GiB. No large Git artifacts. All prior sealed
+sources remain immutable. Job/report status must be checked live, never inferred.
+
+Local ignored output report.md, progress-curves.svg/png and progress-curves.csv
+refresh every5 updates with actual computed points only. Final reporting demands
+all1212 points. These are fast independent-corridor scores, not original coupled
+physical certification. Preserve original physical/annual gates and below10 MAE
+target; no good-model, unique bid recovery, baseline/app/publication or recurring
+review change. This run proceeds at user request despite prior transfer limits.
+
 ## Requested full-year 100-update benchmark — 25 October 2026
 
 User requests all12 monthly fits and1→2,...,11→12 forward validation over100

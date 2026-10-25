@@ -1,5 +1,22 @@
 # Grid Conductor — product requirements
 
+## Current decision: monthly average forward curves
+
+For the requested100-update experiment, fit independent actual-hour technology–
+bidding-zone bid curves within each month. Transfer the arithmetic mean economic
+curve at common normalized supply nodes, using own-month availability-positive
+hours equally. Apply that one curve per technology/zone throughout monthN+1;
+retain its actual hourly available MW, demand and fuel/source anchors. No local
+weekday/hour stratification or supply-conditioned donor matching in this study.
+Absent training resources use the neutral curve. Never average nonlinear raw
+coefficients or replace available renewable output with dispatch.
+
+Run all12 months now with100 updates and no early stopping; the earlier
+forward-model qualification prerequisite is superseded for this experiment.
+Within-month and next-month price MAE must be shown at initialization and every
+update, alongside generation errors and the actual joint training loss. This
+user choice does not establish predictive adequacy or baseline adoption.
+
 ## Full-year training and validation learning curves
 
 After forward-model development, evaluate twelve separate2025 monthly fits over
