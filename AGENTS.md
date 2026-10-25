@@ -1,5 +1,15 @@
 # Grid Conductor — agent instructions
 
+## Discussion pause — 25 October 2026
+
+User requests discussion of parameterization/forward gaps before further training
+or evaluation. Do not launch or resume fits while that discussion is pending.
+Live inspection: monthly-mean-forward-100-v1 PID2069 is a zombie, not running.
+Months1–7 completed100 updates; month8 has initialization only. At August update1
+the unchanged unidentified-price target-gradient guard raised; failure.json is
+preserved. No full-year completion or final aggregate claim. Do not relax the
+guard or restart the failed study silently. Retained curves/scores remain intact.
+
 ## Active monthly-mean 100-update study — 25 October 2026
 
 The user now explicitly chooses averaging and requests the full training run.

@@ -1,5 +1,16 @@
 # Grid Conductor — current tasks
 
+## Current hold: discuss transferable curve parameterization
+
+- [x] Inspect actual controller: no live training; PID2069 is a zombie.
+- [x] Read retained results/failure: months1–7 reached100 updates; August only
+  initialization. August update1 failed the unidentified-price target-gradient
+  guard. Keep failure evidence and all existing checkpoints intact.
+- [ ] Discuss consistent training/forward curve representations with the user
+  before further training/evaluation. Do not resume or start another fit yet.
+- [ ] Diagnose the August identification failure before any authorized retry;
+  preserve original derivative/feasibility gates. Full12-month run is incomplete.
+
 ## Active: monthly average transfer, all months ×100 updates
 
 - [x] Freeze fresh monthly-mean-forward-100-v1 and user-selected monthly averaging;
