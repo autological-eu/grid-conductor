@@ -1,5 +1,17 @@
 # Grid Conductor — current tasks
 
+## Active conditional monotone spline January→February experiment
+
+- [x] Implement positive linear B-spline slopes and integrated quadratic bids,
+  analytic inverse and implicit parameter/condition derivatives.
+- [x] Pass3 unit tests (independent quadrature, monotonicity and finite-difference
+  inverse/parameter derivatives) and real7-hour European condition-chain pilot.
+- [x] Launch single fresh conditional-monotone-v1; no older fit resumed.
+- [ ] Complete100 updates/all744 training and672 forward hours; retain all101
+  scores, parameter/price states, generation metrics and live replay checks.
+- [ ] Inspect final learning and example DE-LU supply curves; summarize tradeoffs,
+  limitations and observed price/generation errors. No baseline promotion.
+
 ## Current hold: discuss transferable curve parameterization
 
 - [x] Inspect actual controller: no live training; PID2069 is a zombie.

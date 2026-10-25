@@ -1,5 +1,25 @@
 # Grid Conductor — agent instructions
 
+## Authorized conditional monotone spline pilot — 25 October 2026
+
+User authorizes January fit and full February prediction for100 updates, with
+loss curves and example learned supply curves. This supersedes discussion hold
+for this fresh candidate only; do not resume failed monthly-mean study. Fresh
+conditional-monotone-v1 uses9 positive linear B-spline slope coefficients,
+integrated into quadratic monotone bids, with analytic bounded inverse. Per
+technology/zone conditional heads share7 features across actual hours: intercept,
+local-hour first/second harmonics, weekend and available/reference fraction.
+Source fuel costs remain explicit; zero-bid renewables and fixed hydro unchanged.
+Reference MW is annual peak available supply (documented proxy, not nameplate).
+This uses retrospective physical inputs, never future observed labels for fitting.
+Three unit tests and seven-European-hour full condition-chain implicit-gradient
+pilot pass; scaled error7.42e-6. All744Jan/672Feb hours and48 modeled/41 price zones.
+100 updates plus initialization, no early stop; next month uses learned function
+without averaging. Same independent-corridor network; no original PTDF or baseline
+claim. Inspect actual execution/progress/failure/complete and process before
+starting anything. Large parameters/prices/plots remain ignored. Source producers
+are sealed by provenance; retain failed older studies intact.
+
 ## Discussion pause — 25 October 2026
 
 User requests discussion of parameterization/forward gaps before further training

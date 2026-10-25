@@ -1,5 +1,16 @@
 # Grid Conductor — product requirements
 
+## Conditional monotone curve experiment
+
+Evaluate a nonlinear conditional monotone spline bid model on January training
+and February forward prediction over100 updates. Shared conditional functions
+produce curves for each technology/zone/hour; retain actual hourly availability,
+demand, source costs, fixed hydro and all modeled zones. No monthly averaging
+in this experiment. Show initialization and100 update price/data-loss curves,
+generation errors and a fixed example hour's learned bid curves. Preserve all
+adverse results, identify capacity-reference proxies and distinguish fast
+corridor feasibility from original-network certification. No baseline adoption.
+
 ## Current decision: monthly average forward curves
 
 For the requested100-update experiment, fit independent actual-hour technology–
