@@ -1,3 +1,14 @@
+## Proposed monthly bid fitting on annual Nordic inputs — 26 October 2026
+
+- [ ] First resolve the annual NO4 no-emergency failure and Swedish water-source
+  gaps; do not train prices against an invalid full-year hydro schedule.
+- [ ] Once physical annual inputs pass, run separate January–December local-hour
+  monotone spline fits, 100 Adam updates/month at rate 1, saving every score.
+- [ ] Score February–December forward transfers and all 8,760 in-sample hours
+  separately; compare accepted/corrected hydro × frozen/fitted bids with identical
+  price, generation, water and exchange gates. See
+  research/nordic-annual-water-bid-fit-plan-2025.md.
+
 ## Year-round Nordic hydro diagnosis — 26 October 2026
 
 - [x] Replay all 2025 hourly Swedish ENTSO-E B12 and Norwegian Elhub hydro

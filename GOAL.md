@@ -53,3 +53,10 @@ The NVE stock-anchored Norway-only annual timing control fails no-emergency
 in340NO4hours (99.723GWh), with numerical LP replay passing. Next implement
 network-aware annual water projection; retain all original availability and
 water/stock gates. See research/year-round-nordic-hydro-diagnosis-2025.md.
+
+Next bid experiment, after feasible annual physical inputs: user proposes
+month-specific local-hour supply curves with100Adam updates at rate1. Evaluate
+within-month full-year reconstruction and month-ahead transfers separately,
+with matched frozen/fitted bid and accepted/corrected physical controls. Bid
+fitting cannot waive the NO4 no-emergency gate. Protocol in
+research/nordic-annual-water-bid-fit-plan-2025.md.
