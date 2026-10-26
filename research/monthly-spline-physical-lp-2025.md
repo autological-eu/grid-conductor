@@ -20,7 +20,9 @@ smoothed transport model has effectively saturated available supply and
 corridor responses; its price is weakly or non-uniquely identified. This is a
 limitation of the fitting proxy, not a failed physical LP solve.
 
-The fresh `monthly-fast-splines-v3` experiment runs **only the twelve fast
+The `v3` launch was interrupted before its first fit score and a step-zero
+resume exposed a missing-journal guard. A fresh `monthly-fast-splines-v4`
+experiment fixes that startup case and runs **only the twelve fast
 monthly fits**. Its implicit adjoint explicitly projects away unsupported
 directions via the existing Moore–Penrose convention and records the affected
 hours and omitted gradient magnitude for every update. All hours remain in

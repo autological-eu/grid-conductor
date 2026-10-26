@@ -18,7 +18,7 @@ from run_supply_knots_lp_2025 import joint_loss
 from sigmoid_month_pairs_2025 import ROOT,digest,metric
 from supply_knot_network_2025 import generation
 
-OUT=ROOT/'data/bidding-zone-network-2025/monthly-fast-splines-v3'
+OUT=ROOT/'data/bidding-zone-network-2025/monthly-fast-splines-v4'
 RATE=1.
 UPDATES=100
 
@@ -107,7 +107,10 @@ def month_fit(base,state,market,month):
         with np.load(resume) as z:
             weights=z['weights'];moment=z['moment'];variance=z['variance'];p0=z['prices'];start=int(z['step'])
             previous_weights=z['previous_weights']
-        history=json.loads((folder/'history.json').read_text())
+        journal=folder/'history.json'
+        if not journal.exists() and start!=0:
+            raise ValueError('Missing nonempty fit journal')
+        history=json.loads(journal.read_text()) if journal.exists() else []
         if len(history) not in (start,start+1):raise ValueError('Inconsistent fit journal')
         history=history[:start]
     else:
