@@ -1,3 +1,13 @@
+## Verified Swedish geographic allocation control — 26 October 2026
+
+Source mapped static reservoir plant shares replace inherited hourly dispatch
+shares in a fresh diagnostic. Both1416h JAO-envelope controls pass independent
+water/bid/flow/generation/metric replay. Frozen-bid Europe Jan/FebMAE becomes
+20.1633/23.8711(maxBorderFlow) and20.6525/23.9526(maxExchanges), versus
+20.4382/24.3810 and20.8663/24.3380 with prior hourly shares. No model
+promotion or annual/operational claim. See research/nordic-input-controls-2025.md.
+NO4/DK/SE2 residuals and zonal water-routing uncertainty remain. Goal OPEN.
+
 ## Current Nordic work — 26 October 2026
 
 Read research/nordic-input-controls-2025.md. Demand geography sensitivity worsens
