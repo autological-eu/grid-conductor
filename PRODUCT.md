@@ -407,6 +407,12 @@ market replication, observed-price improvement or investment validity.
 
 ## Accepted research baseline — 23 October 2026
 
+For any annual replacement of this baseline using the Nordic correction, require
+complete source-supported 2025 water and renewable availability, hourly
+chronology and feasibility, and matched full-year price and zonal generation
+comparisons. A shorter-window improvement or a geography-only annual test does
+not establish the combined annual model's performance.
+
 Use **solar-anchor-bids-v1, annual case resource_full**, as the active research
 baseline for new comparisons. The user explicitly accepts its better observed-
 price fit together with the documented deterioration in thermal generation mix.

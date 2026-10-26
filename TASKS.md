@@ -1,3 +1,15 @@
+## Annual Nordic promotion check — 26 October 2026
+
+- [x] Run the isolated Swedish source-capacity geographic allocation on the
+  accepted 8,760-hour annual baseline, with bids and all national hourly energy
+  unchanged. Full witness and independent primal/dual/price replay pass.
+- [x] Reject geography-only baseline promotion: Europe hourly price MAE is
+  26.79497→26.79513 €/MWh. See research/annual-sweden-geography-control-2025.md.
+- [ ] Recover Swedish stock reports for weeks 14 and 27, or a verified complete
+  equivalent, before extending the *combined* stock/ROR/JAO control to all 2025.
+- [ ] Audit annual water, generation by zone, exchanges, price errors and adverse
+  spillovers before changing config/active-research-baseline.json.
+
 ## Verified Swedish geographic allocation control — 26 October 2026
 
 Source mapped static reservoir plant shares replace inherited hourly dispatch

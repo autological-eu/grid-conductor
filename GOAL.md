@@ -41,3 +41,8 @@ hydro errors remain; the Swedish static-allocation control is fully audited.
 Static Swedish plant-capacity allocation passed the two-month controls and audits;
 February maxBorderFlow priceMAE23.8711. Geographic water-routing and Nordic
 price residuals still prevent goal completion.
+
+Annual geography-only check: all8,760hours and independent LP replay pass, but
+accepted-baseline price MAE26.79497→26.79513 €/MWh. This is not the combined
+Nordic correction and gives no basis for baseline promotion. Recover missing
+Swedish weeks14/27 and source-check the full annual water/ROR/border inputs.
