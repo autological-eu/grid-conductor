@@ -1,5 +1,12 @@
 ## Monthly spline bids in the annual physical LP — 26 October 2026
 
+User-requested bounded follow-up: fit all twelve months independently for 20
+Adam updates at rate 2 in `monthly-fast-splines-rate2-20-v1`. This run uses
+only the batched fast transport fitter, with full hourly targets and monthly
+generation checks; it does not trigger the annual physical LP or baseline
+promotion. The former v4 100-update job was stopped with checkpoints preserved.
+Inspect its live process and per-month receipts before interpreting results.
+
 The first full fast-fit attempt (`monthly-fast-splines-v2`) stopped before the
 annual LP: January update 61 and August update 1 each had one hourly price
 direction with an unidentified implicit gradient. February, April and June

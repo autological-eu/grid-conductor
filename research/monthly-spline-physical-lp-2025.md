@@ -1,5 +1,14 @@
 # Monthly local-hour bids, then one annual physical LP
 
+**26 October bounded rate trial:** At the user's request, the fresh
+`monthly-fast-splines-rate2-20-v1` experiment fits each of the twelve months
+with 20 Adam updates at rate 2 and no monthly forward transfer. It invokes
+only the fast fitter, not the annual LP. The prior v4 rate-1/100-update run was
+stopped and its partial checkpoints retained. The earlier rate-2 January
+experiment's update-20 415-second solve was a real outlier: the median of its
+first 20 updates was 15.98 seconds (total 786.16 seconds). This new run needs
+its own measured timing and numerical receipts before any speed claim.
+
 **Implementation in progress; no annual result or baseline promotion yet.** The
 accepted comparator remains `solar-anchor-bids-v1/resource_full`: 48 modeled
 bidding zones, 41 with complete corrected hourly ENTSO-E price targets, fixed

@@ -18,9 +18,9 @@ from run_supply_knots_lp_2025 import joint_loss
 from sigmoid_month_pairs_2025 import ROOT,digest,metric
 from supply_knot_network_2025 import generation
 
-OUT=ROOT/'data/bidding-zone-network-2025/monthly-fast-splines-v4'
-RATE=1.
-UPDATES=100
+OUT=ROOT/'data/bidding-zone-network-2025/monthly-fast-splines-rate2-20-v1'
+RATE=2.
+UPDATES=20
 
 
 def initial_weights(groups):
@@ -143,7 +143,7 @@ def month_fit(base,state,market,month):
             price_loss=float(parts['price_loss']),generation_loss=float(parts['generation_loss']),
             solve_seconds=float(result['seconds']),seconds=float(time.perf_counter()-began),
             adam_proposal_factor=accepted_factor,rejected_proposals=rejected)
-        if step in (0,25,50,75,UPDATES):
+        if step in (0,UPDATES):
             record['certificate']=audit_fast(market,result)
             save(folder/f'state-{step:03d}.npz',weights=weights,prices=result['prices'],
                  quantities_gw=result['quantities_gw'],hours=hours,centers=centers)
@@ -180,7 +180,7 @@ def month_fit(base,state,market,month):
         p0=result['prices']
         save(resume,weights=weights,previous_weights=previous_weights,moment=moment,
              variance=variance,prices=p0,step=np.array(step+1))
-    atomic_json(folder/'complete.json',dict(status='month_100_updates_complete',month=month,
+    atomic_json(folder/'complete.json',dict(status='month_updates_complete',month=month,
         points=len(history),final_price_mae=history[-1]['price_mae'],
         final_generation_mae_twh=history[-1]['generation_mae_twh'],
         final_state_sha256=digest(folder/f'state-{UPDATES:03d}.npz')))
