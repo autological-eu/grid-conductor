@@ -8,6 +8,12 @@ stopped and its partial checkpoints retained. The earlier rate-2 January
 experiment's update-20 415-second solve was a real outlier: the median of its
 first 20 updates was 15.98 seconds (total 786.16 seconds). This new run needs
 its own measured timing and numerical receipts before any speed claim.
+Once all twelve final fit states exist, a separate read-only exporter saves
+the six marginal bid-price nodes and hourly available MW for every modeled
+zone/resource at 18:00 local on each month's 15th day. Example panels compare
+Germany and France across months and technologies. This fixed-clock view
+includes month-specific fuel anchors and availability effects; it is not a
+like-for-like coefficient-only comparison or a hydro reservoir bid curve.
 
 **Implementation in progress; no annual result or baseline promotion yet.** The
 accepted comparator remains `solar-anchor-bids-v1/resource_full`: 48 modeled

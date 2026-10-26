@@ -6,6 +6,10 @@ only the batched fast transport fitter, with full hourly targets and monthly
 generation checks; it does not trigger the annual physical LP or baseline
 promotion. The former v4 100-update job was stopped with checkpoints preserved.
 Inspect its live process and per-month receipts before interpreting results.
+After all twelve fit receipts pass, the read-only curve exporter will save
+six bid nodes (0–100% of hourly available MW) for every zone, technology and
+month at 18:00 local on the 15th, plus a Germany/France comparison figure.
+The export is waiting on the fit; no cross-month curve claim yet.
 
 The first full fast-fit attempt (`monthly-fast-splines-v2`) stopped before the
 annual LP: January update 61 and August update 1 each had one hourly price
