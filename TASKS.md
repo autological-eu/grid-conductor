@@ -1,5 +1,14 @@
 ## Monthly spline bids in the annual physical LP — 26 October 2026
 
+Active multistart numerical pilot: four predeclared monotone six-node starting
+curves (neutral, 0.75× slope, 1.5× slope, +10 EUR/MWh midpoint) each run ten
+LP-free batched transport Adam0.5 updates on January and April. Three workers
+run concurrently on the three-core host; every attempt gets a separate
+checkpoint/failure receipt under `batched-transport-multistart-10-v1`. This
+tests whether distinct *bid-curve* starts avoid the saved January/April price
+root stalls. No annual or cross-month result follows from the pilot. Inspect
+actual processes and receipts before any continuation.
+
 Current user-directed LP-free experiment: `batched-transport-monthly-100-v2`
 fits 100 Adam updates separately in each month using the recovered batched
 price-space solver and its originally demonstrated rate 0.5. It retains all

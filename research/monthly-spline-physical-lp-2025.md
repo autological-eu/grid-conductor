@@ -1,5 +1,17 @@
 # Monthly local-hour bids, then one annual physical LP
 
+**Multistart bid-curve pilot.** The recovered LP-free batched solver completed
+February's 100-update fit in 308.5 seconds (median 2.49 seconds in the price
+solve per updated step), but the twelve-month attempt stopped at January
+update 8/hour 650 and April initialization/hour 2336. Those are numerical
+price-root failures, not physical LP infeasibilities. A bounded fresh pilot
+tests four predeclared monotone curve initializations, each for ten Adam0.5
+updates on January and April. It preserves all hourly demand, availability,
+fuel anchors, corridor bounds and 48 zones. The four runs retain distinct
+price/mix and failure receipts; choosing the lowest same-month price error
+would be in-sample selection, not validation. No annual continuation until
+these receipts are reviewed.
+
 **LP-free monthly refocus.** The user stopped the rate-2/20 trial after
 clarifying that the target fitter is the original batched transport dispatch,
 not any physical LP loop. The latest fresh experiment is

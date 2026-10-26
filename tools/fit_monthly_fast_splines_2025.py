@@ -88,13 +88,16 @@ def save(path,**values):
     os.replace(temporary,path)
 
 
-def month_fit(base,state,market,month):
+def month_fit(base,state,market,month,initial_override=None):
     s,d,A,_,sourcecap=state
     folder=OUT/f'month-{month:02d}';folder.mkdir(exist_ok=True)
     if (folder/'complete.json').exists():return
     hours=month_hours(month);reference=market.reference
     X,centers=feature_rows(s['groups'],d,hours,reference)
-    weights=initial_weights(market.ng);initial=weights.copy()
+    weights=initial_weights(market.ng) if initial_override is None else np.array(initial_override,copy=True)
+    if weights.shape!=(market.ng,26,6) or not np.isfinite(weights).all():
+        raise ValueError('Invalid starting curve parameters')
+    initial=weights.copy()
     active=(d['capacity'][hours]>0).any(axis=0)&~market.zero
     target=targets(d,hours,month)
     target['prices'][:,~np.isfinite(d['observed_prices']).all(axis=0)]=np.nan
