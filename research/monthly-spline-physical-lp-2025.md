@@ -7,6 +7,30 @@ reservoir injection, source demand and renewable availability, and 799 original
 LP offer columns. Its saved annual clear was 51.81 seconds, excluding setup and
 audit. That timing is a comparator, not a promise for a new run.
 
+### Fast-fit gradient failure and bounded diagnostic
+
+The first full fast-fit attempt (`monthly-fast-splines-v2`) did **not** finish.
+January stopped at update 61 and August at update 1; February, April and June
+completed 100 updates. No 8,760-hour physical LP was started. Replaying the
+saved proposal states found one unsupported price-gradient direction in one
+hour of each failed month (2025 hour indices 383 and 5447). The smallest
+associated Jacobian eigenvalues were about 9.56e-15 and 4.75e-17, while the
+target-gradient projections were 5.68e-7 and 1.42e-6. At these points the
+smoothed transport model has effectively saturated available supply and
+corridor responses; its price is weakly or non-uniquely identified. This is a
+limitation of the fitting proxy, not a failed physical LP solve.
+
+The fresh `monthly-fast-splines-v3` experiment runs **only the twelve fast
+monthly fits**. Its implicit adjoint explicitly projects away unsupported
+directions via the existing Moore–Penrose convention and records the affected
+hours and omitted gradient magnitude for every update. All hours remain in
+the ordinary reported price MAE and loss. Consequently an optimized training
+loss may include price-error components the update cannot reduce; inspect the
+number and severity of omitted directions before any annual replay. This
+changes the experimental gradient rule transparently and leaves the physical
+LP, source availability, demand, flow bounds and numerical forward-solve gates
+untouched. The failed `v2` receipts remain intact.
+
 The requested sequence is (1) twelve separate retrospective monthly fits in
 the fast batched transport model, followed by (2) **one** 8,760-hour joint
 physical LP clear with the frozen fitted bids. The transport model is used for

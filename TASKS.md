@@ -1,5 +1,13 @@
 ## Monthly spline bids in the annual physical LP — 26 October 2026
 
+The first full fast-fit attempt (`monthly-fast-splines-v2`) stopped before the
+annual LP: January update 61 and August update 1 each had one hourly price
+direction with an unidentified implicit gradient. February, April and June
+completed 100 updates. The fresh `v3` **fast-fit-only** run records these
+directions and uses the explicit Moore–Penrose projection for their gradients;
+full-hour price errors remain in the score. Inspect its live process and receipts
+before starting work. This diagnostic change is not an annual or baseline gate.
+
 - [x] Reconcile fast and accepted LP source inputs, including exact physical
   columns and the accepted country solar correction. The superseded eight-bin
   neutral LP pilot is only setup evidence, not the intended annual method.

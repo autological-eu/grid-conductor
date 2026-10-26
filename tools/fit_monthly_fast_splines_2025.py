@@ -18,7 +18,7 @@ from run_supply_knots_lp_2025 import joint_loss
 from sigmoid_month_pairs_2025 import ROOT,digest,metric
 from supply_knot_network_2025 import generation
 
-OUT=ROOT/'data/bidding-zone-network-2025/monthly-fast-splines-v2'
+OUT=ROOT/'data/bidding-zone-network-2025/monthly-fast-splines-v3'
 RATE=1.
 UPDATES=100
 
@@ -144,13 +144,30 @@ def month_fit(base,state,market,month):
             record['certificate']=audit_fast(market,result)
             save(folder/f'state-{step:03d}.npz',weights=weights,prices=result['prices'],
                  quantities_gw=result['quantities_gw'],hours=hours,centers=centers)
+        if step<UPDATES:
+            hourly,info=market.backward(theta,result,gx[:,:market.ng],gp)
+            # An hour with saturated supply and corridors can have no unique
+            # price derivative. The Moore-Penrose adjoint omits only that
+            # unsupported direction. Keep its price error in the full score.
+            eigen,vectors=np.linalg.eigh(result['jacobian'])
+            threshold=np.maximum(1e-12,eigen[:,-1]*1e-12)
+            unidentified=eigen<=threshold[:,None]
+            if info['unidentified_rhs_max']>1e-8:
+                dq=market.supply(result['prices'],market.offers(theta,hours),derivative=True)[1]
+                rhs=gp+(gx[:,:market.ng]*dq)@market.Z
+                projected=np.einsum('tji,tj->ti',vectors,rhs)
+                affected=unidentified&(abs(projected)>1e-8)
+                record['excluded_gradient_hours']=hours[affected.any(axis=1)].tolist()
+                record['excluded_gradient_directions']=int(affected.sum())
+            else:
+                record['excluded_gradient_hours']=[]
+                record['excluded_gradient_directions']=0
+            record['gradient_identification']=info
         history.append(record);atomic_json(folder/'history.json',history)
         atomic_json(OUT/f'progress-month-{month:02d}.json',dict(month=month,update=step,price_mae=record['price_mae'],
                                               generation_mae_twh=record['generation_mae_twh']))
         print('FIT',month,step,record['price_mae'],record['generation_mae_twh'],flush=True)
         if step==UPDATES:break
-        hourly,info=market.backward(theta,result,gx[:,:market.ng],gp)
-        if info['unidentified_rhs_max']>1e-8:raise ValueError('Unidentified price gradient')
         gradient=np.einsum('tgf,tgk->gfk',X,hourly)+direct
         gradient[~active]=0
         if not np.isfinite(gradient).all():raise ValueError('Nonfinite gradient')
