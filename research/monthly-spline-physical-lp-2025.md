@@ -12,6 +12,18 @@ price/mix and failure receipts; choosing the lowest same-month price error
 would be in-sample selection, not validation. No annual continuation until
 these receipts are reviewed.
 
+The pilot finished with **zero of eight** ten-update cases complete. January
+neutral reached update 7 and improved 33.73→23.46 EUR/MWh before hour 650
+stalled; flatter reached update 6 (33.83→23.78) before hours 608/650 stalled;
+higher-midpoint reached update 0 and steeper failed before its first score.
+In April, three starts failed before a first score; steeper scored only its
+initial state (32.25 EUR/MWh) before hour 2745 stalled. All failures kept the
+same 1e-9 GW price-root tolerance and original supply/corridor bounds.
+Initial-curve variation alone therefore does not establish a reliable
+twelve-month fitter. These are numerical outcomes, not evidence that the
+physical network or source demand is infeasible. A separately certified
+hard-hour solver would be required before repeating monthly training.
+
 **LP-free monthly refocus.** The user stopped the rate-2/20 trial after
 clarifying that the target fitter is the original batched transport dispatch,
 not any physical LP loop. The latest fresh experiment is

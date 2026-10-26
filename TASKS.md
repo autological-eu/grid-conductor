@@ -8,6 +8,12 @@ checkpoint/failure receipt under `batched-transport-multistart-10-v1`. This
 tests whether distinct *bid-curve* starts avoid the saved January/April price
 root stalls. No annual or cross-month result follows from the pilot. Inspect
 actual processes and receipts before any continuation.
+Pilot completed: all eight cases failed the unchanged batched price-root gate
+before ten updates. January neutral reached update 7 (33.73→23.46 EUR/MWh);
+flatter reached 6, higher-midpoint 0, steeper none. April neutral/flatter/
+higher-midpoint failed at initialization; steeper scored only update 0.
+Different bid starts alone do not repair the numerical root. No all-year
+multistart run or baseline change was started.
 
 Current user-directed LP-free experiment: `batched-transport-monthly-100-v2`
 fits 100 Adam updates separately in each month using the recovered batched
