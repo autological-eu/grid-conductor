@@ -1,5 +1,11 @@
 # Monthly local-hour bids, then one annual physical LP
 
+The fresh combined curve/price-start January/April pilot is independently
+audited: all eight ten-update fits completed under unchanged fast-market
+forward gates. It does not complete the twelve-month fit or annual physical
+LP. Valid roots remain ambiguous by up to 78.18 EUR/MWh; see
+[the dedicated pilot report](curve-price-multistart-2025.md).
+
 **Multistart bid-curve pilot.** The recovered LP-free batched solver completed
 February's 100-update fit in 308.5 seconds (median 2.49 seconds in the price
 solve per updated step), but the twelve-month attempt stopped at January

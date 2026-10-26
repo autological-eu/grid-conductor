@@ -10,6 +10,15 @@ model-only cold guess at initialization). Every root keeps the original
 excluded gradient directions; select a completed curve by the declared
 within-month price-plus-generation data loss only after all receipts pass.
 This is an in-sample pilot, not a twelve-month or physical-LP result.
+Pilot complete and independently audited: **8/8** January/April ten-update
+fits passed their per-month receipts and final witness replay. The fixed
+price-root fallback recorded 4–51 hard-hour events per case across updates; valid alternative
+roots spread up to 78.18 EUR/MWh. In-sample joint data loss selected flatter
+January (price22.633 EUR/MWh, mix0.324 TWh) and neutral April (19.479,
+0.268). All wrapper-level completion receipts failed on a duplicate `month`
+field *after* the numerical fits; the independent audit verifies the intact
+per-month receipts and preserves those wrapper errors. No twelve-month fit or
+physical LP was launched. See research/curve-price-multistart-2025.md.
 
 The saved-hour price-start diagnostic is complete: 12 failed case-hours from
 the neutral and multistart fits, 73/90 predeclared model-only starts certified
