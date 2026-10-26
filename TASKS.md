@@ -1,3 +1,16 @@
+## Current Nordic work — 26 October 2026
+
+Read research/nordic-input-controls-2025.md. Demand geography sensitivity worsens
+Jan/Feb MAE20.6017/24.3481; additive control fails one negative scope residual.
+Consistent Swedish ROR inflow improves February hydro energy6.7807→6.5447TWh
+against Ember6.485, while priceMAE rises24.1156→24.3810. Both independent audits
+pass; no adoption. NVE sample weighting explains most regional stock non-additivity
+(148.30→5.80GWh), not exact closure. Raw zonal generation comparison identifies
+SE2 hourly correlation0.070 despite near-matching monthly energy. Next test:
+source-capacity Swedish geography instead of inherited hourly dispatch shares.
+Inspect sweden-static-hydro-allocation-v2 progress/completion; v1 numerical-source
+failure retained. No result claim until audited. Goal remains OPEN.
+
 ## Latest verified Nordic goal milestone — still OPEN
 
 - [x] Collect and hash118JAO daily responses: both published directional-envelope

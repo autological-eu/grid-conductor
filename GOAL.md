@@ -34,3 +34,6 @@ SE2bias remain: NOT COMPLETE. Detailed evidence and next actions in
 research/nordic-network-water-reconciliation-2025.md. No live numerical fits.
 Regional source closure/ROR/demand/domain semantics and missing Swedish annual
 weeks remain before full input release or refitting. No automatic model adoption.
+
+Latest work: see research/nordic-input-controls-2025.md. Timing and geographical
+hydro errors remain; the Swedish static-allocation control is under qualification.

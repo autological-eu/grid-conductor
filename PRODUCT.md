@@ -1,5 +1,15 @@
 # Grid Conductor — product requirements
 
+## Hourly hydro validation
+
+Require zonal hourly hydro comparisons alongside monthly energy totals. Retiming
+an aggregate water schedule must explicitly qualify geographic allocation;
+inherited dispatch shares are not automatically suitable for a revised schedule.
+Keep reported generation as validation, with country-specific reporting categories
+and metering scope visible. Reservoir and run-of-river availability must share an
+explicit inflow partition with turbine clipping/spill accounted for.
+
+
 ## Network-aware hydro precomputation
 
 A precomputed reservoir schedule must be jointly feasible with the network
