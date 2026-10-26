@@ -1,5 +1,16 @@
 # Monthly local-hour bids, then one annual physical LP
 
+**LP-free monthly refocus.** The user stopped the rate-2/20 trial after
+clarifying that the target fitter is the original batched transport dispatch,
+not any physical LP loop. The latest fresh experiment is
+`batched-transport-monthly-100-v2`: twelve separate 100-update fits at the
+original demonstrated Adam rate 0.5, using the 48-price analytic transport
+balance and recovered direction-preserving Newton method. The unrecovered
+direct Newton class failed its source-aligned five-hour pilot at hour 318,
+as the earlier batched study had documented. The v2 pilot passed; no monthly
+or annual result is claimed by the launch. There is no original network LP in
+this fitting job. Curves will be exported after all twelve fit receipts pass.
+
 **26 October bounded rate trial:** At the user's request, the fresh
 `monthly-fast-splines-rate2-20-v1` experiment fits each of the twelve months
 with 20 Adam updates at rate 2 and no monthly forward transfer. It invokes

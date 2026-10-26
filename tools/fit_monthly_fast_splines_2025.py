@@ -21,6 +21,7 @@ from supply_knot_network_2025 import generation
 OUT=ROOT/'data/bidding-zone-network-2025/monthly-fast-splines-rate2-20-v1'
 RATE=2.
 UPDATES=20
+FACTORS=(1.,.5,.25,.125,.0625)
 
 
 def initial_weights(groups):
@@ -119,7 +120,7 @@ def month_fit(base,state,market,month):
     for step in range(start,UPDATES+1):
         began=time.perf_counter()
         proposal=weights.copy();accepted_factor=1.;rejected=[]
-        for factor in (1.,.5,.25,.125,.0625):
+        for factor in FACTORS:
             weights=previous_weights+factor*(proposal-previous_weights)
             theta=np.einsum('tgf,gfk->tgk',X,weights)
             try:

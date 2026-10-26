@@ -1,5 +1,16 @@
 ## Monthly spline bids in the annual physical LP — 26 October 2026
 
+Current user-directed LP-free experiment: `batched-transport-monthly-100-v2`
+fits 100 Adam updates separately in each month using the recovered batched
+price-space solver and its originally demonstrated rate 0.5. It retains all
+48 zones and actual month hours, one local-hour curve per technology/zone,
+corrected solar availability, and source demand/fuel costs. It does **not**
+invoke the physical LP or fit a forward month. The unrecovered v1 solver failed
+its pilot at source hour 318; the recovered solver passed that pilot. The
+rate-2/20 run and its waiting export were stopped at the user's direction;
+their ignored partial checkpoints are retained. Inspect live process/receipts
+before any restart. New curve export waits for all twelve v2 fit completions.
+
 User-requested bounded follow-up: fit all twelve months independently for 20
 Adam updates at rate 2 in `monthly-fast-splines-rate2-20-v1`. This run uses
 only the batched fast transport fitter, with full hourly targets and monthly

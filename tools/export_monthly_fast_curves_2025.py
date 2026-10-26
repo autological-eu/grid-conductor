@@ -15,14 +15,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from fit_monthly_fast_splines_2025 import OUT as FIT
 from hour_table_conditioner_2025 import feature_rows
 from intraday_offer_bids_2025 import TIMEZONES
 from monthly_lp_spline_inputs_2025 import aligned
 from sigmoid_month_pairs_2025 import ROOT, digest
 
 
-OUT = ROOT/'data/bidding-zone-network-2025/monthly-fast-curves-rate2-20-v1'
+FIT = ROOT/'data/bidding-zone-network-2025/batched-transport-monthly-100-v2'
+OUT = ROOT/'data/bidding-zone-network-2025/batched-transport-monthly-curves-v1'
 UTILIZATION = np.linspace(0, 1, 6)
 EXAMPLES = {
     'DE-LU': ('gas', 'hard_coal', 'lignite', 'oil', 'onshore_wind', 'solar'),
@@ -62,7 +62,7 @@ def export():
     for month in range(1,13):
         folder = FIT/f'month-{month:02d}'
         receipt = json.loads((folder/'complete.json').read_text())
-        saved = folder/'state-020.npz'
+        saved = folder/'state-100.npz'
         if digest(saved) != receipt['final_state_sha256']:
             raise ValueError(f'Month {month} final state hash mismatch')
         witnesses[f'{month:02d}'] = digest(saved)
