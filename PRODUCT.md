@@ -407,6 +407,16 @@ market replication, observed-price improvement or investment validity.
 
 ## Accepted research baseline — 23 October 2026
 
+The next user-directed baseline method is twelve independently fitted 2025
+monotone supply-bid models: one curve per technology, bidding zone, local hour
+of day and month, with 100 rate-1 Adam updates in each month and **no** forward
+month transfer. Evaluate their bids in the accepted joint physical LP over all
+8,760 hours. Retain its source demand, original renewable availability, fixed
+hydro, network and no-emergency/numerical gates. Report price and generation
+performance against the current baseline before changing the baseline pointer.
+This same-month fitting establishes an in-sample reconstruction, not forecast
+skill or investment-response validity.
+
 For any annual replacement of this baseline using the Nordic correction, require
 complete source-supported 2025 water and renewable availability, hourly
 chronology and feasibility, and matched full-year price and zonal generation

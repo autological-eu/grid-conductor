@@ -1,3 +1,17 @@
+## Monthly spline bids in the annual physical LP — 26 October 2026
+
+- [x] Reconcile fast and accepted LP source inputs, including exact physical
+  columns and the accepted country solar correction; complete the 24-hour LP
+  transfer pilot with zero emergency output.
+- [ ] Finish all 12 separate local-hour/technology/zone fits, 100 Adam updates
+  at rate 1 per month. Preserve every monthly score and checkpoint.
+- [ ] Run the full 8,760-hour joint LP with eight-segment sampled fitted bids;
+  independently replay feasibility, duals, no-emergency, observed prices and
+  generation mix. See research/monthly-spline-physical-lp-2025.md.
+- [ ] Once the complete audited result is reviewable, update the active research
+  baseline pointer and report matched changes and limitations. No annual
+  result or baseline change follows from the initial fitting progress alone.
+
 ## Proposed monthly bid fitting on annual Nordic inputs — 26 October 2026
 
 - [ ] First resolve the annual NO4 no-emergency failure and Swedish water-source
