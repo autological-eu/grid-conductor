@@ -1,5 +1,13 @@
 ## Monthly spline bids in the annual physical LP — 26 October 2026
 
+The saved-hour price-start diagnostic is complete: 12 failed case-hours from
+the neutral and multistart fits, 73/90 predeclared model-only starts certified
+at the original 1e-9 GW balance gate. Every case had at least two certified
+starts, but valid price vectors differed by up to 66.48 EUR/MWh in one case.
+Thus cold starts can resolve solver *convergence* while leaving price-root
+identification open. No automatic numerical fallback or annual fit was enabled.
+See research/transport-price-starts-2025.md and ignored full receipts.
+
 Active multistart numerical pilot: four predeclared monotone six-node starting
 curves (neutral, 0.75× slope, 1.5× slope, +10 EUR/MWh midpoint) each run ten
 LP-free batched transport Adam0.5 updates on January and April. Three workers

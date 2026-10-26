@@ -10,6 +10,12 @@ Use the full month for 100 nominal Adam updates and report all 101 in-sample
 scores. Record any step reduction required to keep the unchanged numerical
 clearing tolerance;
 these fits are retrospective reconstruction, not forward forecasts.
+For the differentiable transport fit, certify each hourly balance and supply/
+corridor bound at the declared tolerance. Where several model-only price starts
+produce materially different valid prices for the same bids and inputs,
+quantify the ambiguity and its effect on gradients and price scores. Do not
+select a root using observed prices or treat mere convergence as unique price
+recovery.
 
 After all twelve fits pass numerical checks, transfer their bids to the
 existing offer columns and run **one** 8,760-hour clear in the accepted joint
