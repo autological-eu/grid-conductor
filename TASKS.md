@@ -1,3 +1,19 @@
+## Year-round Nordic hydro diagnosis — 26 October 2026
+
+- [x] Replay all 2025 hourly Swedish ENTSO-E B12 and Norwegian Elhub hydro
+  observations against the accepted model; pin source receipts and preserve
+  reservoir/ROR taxonomy caveats. See research/year-round-nordic-hydro-diagnosis-2025.md.
+- [x] Test NVE-stock-anchored Norwegian annual hydro with frozen accepted bids.
+  Reject candidate: 99.723 GWh emergency supply in 340 NO4 hours; independent
+  8,760-hour numerical replay passes but the no-emergency gate fails.
+- [ ] Implement a full-year network-aware Norwegian water projection using the
+  NVE stock/inflow ledger and original capacity/availability; first inspect the
+  NO4 failed hours and reject any schedule with emergency generation.
+- [ ] Recover Swedish weeks 14/27 or an independently verified continuous
+  source; only then construct annual Swedish stock/ROR and border controls.
+- [ ] Compare annual Nordic and Europe prices, observed zonal hydro, generation
+  mix, exchanges and adverse spillovers before baseline promotion.
+
 ## Annual Nordic promotion check — 26 October 2026
 
 - [x] Run the isolated Swedish source-capacity geographic allocation on the

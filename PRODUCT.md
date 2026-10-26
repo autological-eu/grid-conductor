@@ -412,6 +412,11 @@ complete source-supported 2025 water and renewable availability, hourly
 chronology and feasibility, and matched full-year price and zonal generation
 comparisons. A shorter-window improvement or a geography-only annual test does
 not establish the combined annual model's performance.
+Assess Nordic hydro across all 8,760 hours as both an energy budget and hourly
+zonal schedule, with separate reservoir/ROR accounting, observed stock bounds,
+network deliverability and no emergency generation. Evaluate observed-price
+errors and reported generation separately; national annual totals alone are
+insufficient to establish a useful hourly schedule.
 
 Use **solar-anchor-bids-v1, annual case resource_full**, as the active research
 baseline for new comparisons. The user explicitly accepts its better observed-

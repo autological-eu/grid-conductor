@@ -46,3 +46,10 @@ Annual geography-only check: all8,760hours and independent LP replay pass, but
 accepted-baseline price MAE26.79497→26.79513 €/MWh. This is not the combined
 Nordic correction and gives no basis for baseline promotion. Recover missing
 Swedish weeks14/27 and source-check the full annual water/ROR/border inputs.
+
+Year-round direction: source-audited Swedish/Elhub hourly generation shows
+seasonal and zonal hydro errors despite near-matching Norwegian annual total.
+The NVE stock-anchored Norway-only annual timing control fails no-emergency
+in340NO4hours (99.723GWh), with numerical LP replay passing. Next implement
+network-aware annual water projection; retain all original availability and
+water/stock gates. See research/year-round-nordic-hydro-diagnosis-2025.md.
