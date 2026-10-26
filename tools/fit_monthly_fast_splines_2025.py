@@ -147,6 +147,8 @@ def month_fit(base,state,market,month,initial_override=None):
             price_loss=float(parts['price_loss']),generation_loss=float(parts['generation_loss']),
             solve_seconds=float(result['seconds']),seconds=float(time.perf_counter()-began),
             adam_proposal_factor=accepted_factor,rejected_proposals=rejected)
+        if 'price_root_recovery' in result:
+            record['price_root_recovery']=result['price_root_recovery']
         if step in (0,UPDATES):
             record['certificate']=audit_fast(market,result)
             save(folder/f'state-{step:03d}.npz',weights=weights,prices=result['prices'],

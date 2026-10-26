@@ -15,6 +15,8 @@ from sigmoid_month_pairs_2025 import ROOT, digest
 
 
 OUT=ROOT/'data/bidding-zone-network-2025/batched-transport-multistart-10-v1'
+MARKET_FACTORY=direct_market
+EXTRA_SOURCES=()
 MONTHS=(1,4)
 STARTS=('neutral','flatter','steeper','higher_midpoint')
 UPDATES=10
@@ -64,14 +66,14 @@ def main():
     with (OUT/'job.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         base,state,source,_,_=aligned()
-        market=direct_market(source)
+        market=MARKET_FACTORY(source)
         sources=base.provenance()
         for path in (Path(__file__),ROOT/'tools/fit_monthly_fast_splines_2025.py',
                      ROOT/'tools/fit_batched_transport_all_months_2025.py',
                      ROOT/'tools/batched_transport_dispatch_2025.py',
                      ROOT/'tools/batched_transport_newton_recovery_2025.py',
                      ROOT/'tools/monthly_lp_spline_inputs_2025.py',
-                     ROOT/'tools/hour_table_conditioner_2025.py',SOLAR):
+                     ROOT/'tools/hour_table_conditioner_2025.py',SOLAR,*EXTRA_SOURCES):
             sources[str(path.relative_to(ROOT))]=digest(path)
         if (OUT/'sources.json').exists():
             if json.loads((OUT/'sources.json').read_text())!=sources:
@@ -96,12 +98,21 @@ def main():
                     final_price_mae=history[-1]['price_mae'],
                     initial_generation_mae_twh=history[0]['generation_mae_twh'],
                     final_generation_mae_twh=history[-1]['generation_mae_twh'],
+                    final_joint_data_loss=history[-1]['price_loss']+history[-1]['generation_loss'],
                     seconds=sum(x['seconds'] for x in history),
-                    excluded_gradient_directions=sum(x.get('excluded_gradient_directions',0) for x in history))
+                    excluded_gradient_directions=sum(x.get('excluded_gradient_directions',0) for x in history),
+                    fallback_hours=sum(x.get('price_root_recovery',{}).get('fallback_hours',0) for x in history),
+                    max_certified_root_spread_eur_mwh=max(
+                        (x.get('price_root_recovery',{}).get('max_price_spread_eur_mwh',0) for x in history),default=0))
             rows.append(row)
+        selected={}
+        for month in MONTHS:
+            eligible=[row for row in rows if row['month']==month and row['status']=='complete']
+            selected[str(month)]=min(eligible,key=lambda row:row['final_joint_data_loss'])['start'] if eligible else None
         atomic_json(OUT/'summary.json',dict(status='multistart_pilot_complete',
             months=list(MONTHS),starts=list(STARTS),updates=UPDATES,rate=RATE,
             network='LP-free independent corridors',cases=rows,
+            selected_by_in_sample_price_plus_generation_loss=selected,
             source_sha256=digest(OUT/'sources.json'),
             caveat='Two-month in-sample numerical pilot, not annual fit or forward validation'))
         print(json.dumps(rows,indent=2),flush=True)

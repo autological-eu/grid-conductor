@@ -1,5 +1,16 @@
 ## Monthly spline bids in the annual physical LP — 26 October 2026
 
+Current bounded follow-up: `curve-price-multistart-10-v1` retries the same
+January/April four curve starts for ten Adam0.5 updates with a deterministic
+model-only price-root fallback. The fallback first preserves the full batched
+solve; on failure it isolates hard hours, tries fixed starting prices, and
+chooses the certified root closest to the previous modeled price (or the
+model-only cold guess at initialization). Every root keeps the original
+1e-9 GW balance and generator/corridor bound gates. Record root spread and
+excluded gradient directions; select a completed curve by the declared
+within-month price-plus-generation data loss only after all receipts pass.
+This is an in-sample pilot, not a twelve-month or physical-LP result.
+
 The saved-hour price-start diagnostic is complete: 12 failed case-hours from
 the neutral and multistart fits, 73/90 predeclared model-only starts certified
 at the original 1e-9 GW balance gate. Every case had at least two certified
