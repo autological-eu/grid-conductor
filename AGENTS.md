@@ -1,3 +1,19 @@
+## Current single-pass monthly bid experiment — 26 October 2026
+
+User clarified the compute sequence: fit each of twelve 2025 months with the
+fast batched six-node transport model, 100 Adam updates per month, with one
+local-hour technology/zone curve; then clear all 8,760 hours **once** in the
+accepted 799-offer physical LP. No LP solve at each update, no eight-bin offer
+expansion, and no forward-month transfer in this experiment. The previous
+nine-slope fitter was stopped at January update 33; its ignored local receipts
+are diagnostic only and must not be resumed. Inspect live processes and fresh
+pipeline receipts before starting any job. The fast model is a fitting proxy,
+not a physical certification. Require independent LP primal/dual/no-emergency,
+price and generation replay before any baseline change. Earlier "9 seconds per
+month" was a misunderstanding: a bounded January pilot measured ~8 seconds
+per warm update, with source setup separate. Keep the Nordic source/physics
+goal open and the recurring check-ins disabled.
+
 ## Verified Swedish geographic allocation control — 26 October 2026
 
 Source mapped static reservoir plant shares replace inherited hourly dispatch

@@ -1,52 +1,78 @@
-# Monthly local-hour spline bids on the accepted annual LP
+# Monthly local-hour bids, then one annual physical LP
 
-**Target baseline method, pending annual audit.** The user requested a separate
-fitted supply curve for each bidding zone, technology and local daily hour in
-each 2025 month, with no transfer from one month to another. Monthly fitting is
-done in the differentiable fast market, followed by a full-year clear in the
-accepted model's physical LP constraint system. No new baseline is claimed
-until all 12 fits, 8,760 LP hours and the independent audit complete.
+**Implementation in progress; no annual result or baseline promotion yet.** The
+accepted comparator remains `solar-anchor-bids-v1/resource_full`: 48 modeled
+bidding zones, 41 with complete corrected hourly ENTSO-E price targets, fixed
+reservoir injection, source demand and renewable availability, and 799 original
+LP offer columns. Its saved annual clear was 51.81 seconds, excluding setup and
+audit. That timing is a comparator, not a promise for a new run.
 
-The current accepted `solar-anchor-bids-v1/resource_full` is an hourly joint LP
-over all 48 modeled zones. It has source-fixed demand, physical network rows,
-generator availability, fuel/carbon bid inputs and a fixed reservoir schedule.
-It does not itself supply gradients through hourly price duals. The fast
-conditional market has 326 technology-by-zone offer groups and an analytic
-gradient. Both prepared models share every zonal load, island/link bound,
-network rating and physical constraint row. Every fast grouped generator
-column matches a generator column in the accepted LP, and all link/free columns
-match exactly. The fast input's generic solar availability differed from the
-accepted baseline by the audited country solar correction; this is now applied
-to its grouped offer capacities and checked hour-by-hour by bidding zone.
+The requested sequence is (1) twelve separate retrospective monthly fits in
+the fast batched transport model, followed by (2) **one** 8,760-hour joint
+physical LP clear with the frozen fitted bids. The transport model is used for
+gradients, not as the final physical or price benchmark. There is no LP solve
+at each parameter update, and no transfer of a month's curve to the next month.
 
-Each month starts from the same neutral monotone spline. For each group, 24
-local-hour coefficient tables are shared across days, with weekend and
-available/reference-capacity conditions. Nine positive spline slopes describe
-the nonlinear marginal bid curve. Source fuel/carbon cost remains the anchor;
-renewables retain zero bids. Adam rate 1 performs exactly 100 updates against
-that month's corrected ENTSO-E hourly prices and monthly generation targets.
-The 101 in-sample scores and selected coefficient checkpoints are saved. There
-is no month-ahead training or score in this requested baseline experiment.
+For each month, one six-node monotone marginal bid curve belongs to each
+technology × zone × local hour of day. The 24 local-hour tables share across
+days; centered weekend and available/reference-capacity adjustments allow daily
+conditions to differ. Actual hourly demand, available MW and source fuel/carbon
+costs remain hourly. Renewable near-zero bids remain fixed. Each month starts
+from the same neutral state and makes 100 Adam proposals at nominal rate 1 against that
+month's corrected hourly prices and observed monthly generation. All 101
+ordinary EUR/MWh price MAEs, generation errors and loss scores must be saved.
+If a proposal does not converge at the unchanged fast-market precision gate,
+the coefficient step is halved successively (at most four halvings) and the
+accepted factor and rejected attempts are recorded. This is numerical
+globalization of the optimizer, not a relaxation of supply or network bounds.
+The prior nine-slope conditional-market attempt reached only January update 33
+and was stopped because it used a slower fitter; its ignored receipts are
+diagnostic only. Earlier batched measurements were about 5 seconds per update
+with January and February evaluations, **not** 9 seconds per 100-update month.
+The January pilot on the present aligned inputs took about 8 seconds per warm
+update; independent months will fit in two processes to reduce wall time
+without changing each month's hours, targets or parameter trajectory.
 
-To clear in the LP, each group is split into eight ordered capacity tranches.
-The tranche price approximates the integral-average spline marginal bid over
-its interval by three-point quadrature. This retains its matched physical LP
-column and original total MW; no extra capacity or transmission is added.
-The LP's unchanged emergency generators remain solely as a failure diagnostic
-and must dispatch zero MWh. An initial 24-hour transfer pilot cleared with
-zero emergency and a 5.83e-11 MW maximum balance residual. This is a bridge
-check, not a year-round result.
+A bounded one-update preflight subsequently passed all twelve months, but
+warm-update wall times ranged from 5.1 to 143.5 seconds. March's full nominal
+proposal did not converge; its half-step passed unchanged gates. The other
+eleven accepted the full proposal. These timings make the earlier notion of
+9 seconds per *month* untenable. Profile the slow hourly price solves before
+launching all 1,200 updates; the annual LP is still pending.
 
-The annual auditor will replay every LP row, bounds, bid objective, duals,
-emergency output, price target and monthly generation comparison from the
-saved witness and fitted coefficients. Its measured all-hour price MAE and
-generation errors will be compared with the accepted baseline. Because each
-month uses that same month's prices to fit its bids, the result is a 2025
-**in-sample reconstruction** and cannot be described as a forward prediction,
-real EUPHEMIA orders or a validated investment-response model. The fixed hydro
-schedule remains the accepted annual input; the unresolved Nordic annual water
-issue is a separate task.
+The April update's established Newton solver spent 54.3 seconds; its two
+hardest hours needed 96 and 133 iterations. A SciPy `hybr` price-root trial
+from the previous prices certified only 447 of 720 April hours at the original
+1e-9 GW residual. Some certified roots differed from the established solver
+by up to 59.5 EUR/MWh, exposing weakly identified or solver-path-dependent
+fast-market prices. A bounded local-root polish also failed to certify all
+hours. Neither root variant is adopted for training or scoring. The unchanged
+robust solver and its explicit coefficient backtracking remain the current
+numerical path; a faster certified method is still open.
 
-The fit and annual LP artifacts stay ignored under `monthly-lp-splines-v1` and
-`monthly-lp-splines-lp-v1`; the tracked code, source hashes, checks and final
-compact report provide reproducibility without adding bulk matrices to Git.
+The source-alignment check applies the accepted country solar availability
+correction to the fast inputs. It verifies each grouped generator's physical
+LP column, all free/link columns, zonal load, flow offsets, ratings and bounds,
+and per-zone available MW. Fitted six-node marginal prices will be sampled at
+the cumulative-MW midpoint of each accepted LP offer column, ranked by its
+original bid in that hour. Thermal offer columns retain their original
+capacities. Mixed renewable offers
+cannot express separate prices without extra columns, so they and geothermal
+retain accepted bids; this limitation must be visible in any final result.
+Neither availability nor fixed hydro is replaced with observed dispatch.
+
+The annual gate requires 8,760 optimal hours, unchanged physical rows and
+bounds, no emergency energy, objective/primal/dual replay, and a source-covered
+generation allocation audit. Corrected ENTSO-E prices are reported for every
+eligible zone and hour. The comparison to the accepted baseline must disclose
+price MAE, correlation, seasonal/tail behavior, monthly generation error and
+adverse zones. Same-month fitting is **in-sample reconstruction**, not a
+forecast or a unique recovery of real EUPHEMIA orders. Annual Nordic water
+limitations of the accepted fixed-hydro source remain separate.
+
+Tracked producers are `tools/fit_monthly_fast_splines_2025.py`,
+`tools/monthly_fast_lp_costs_2025.py`,
+`tools/clear_monthly_fast_lp_2025.py`, and
+`tools/audit_monthly_fast_lp_2025.py`. Bulk checkpoints remain ignored under
+`data/bidding-zone-network-2025/`. The original nine-slope/eight-bin trial
+code was retired; its stopped local receipts remain for provenance.

@@ -1,5 +1,24 @@
 # Grid Conductor — product requirements
 
+## Monthly fitted bids with one annual physical evaluation
+
+Fit a separate monotone supply curve for each technology, bidding zone and
+local hour of day in each 2025 month using the fast batched differentiable
+transport model. Keep observed hourly demand, source fuel costs, original
+renewable availability, fixed hydro and monthly generation targets unchanged.
+Use the full month for 100 nominal Adam updates and report all 101 in-sample
+scores. Record any step reduction required to keep the unchanged numerical
+clearing tolerance;
+these fits are retrospective reconstruction, not forward forecasts.
+
+After all twelve fits pass numerical checks, transfer their bids to the
+existing offer columns and run **one** 8,760-hour clear in the accepted joint
+physical LP. Retain its generator capacities, network, chronology, and
+no-emergency gate. Audit the single annual witness against corrected hourly
+ENTSO-E prices and source-covered generation, including the non-unique
+allocation of mixed offers. Report fit time, preparation time and annual LP
+time separately. A favorable fast-market fit alone cannot promote a baseline.
+
 ## Hourly hydro validation
 
 Require zonal hourly hydro comparisons alongside monthly energy totals. Retiming

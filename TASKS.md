@@ -1,11 +1,24 @@
 ## Monthly spline bids in the annual physical LP — 26 October 2026
 
 - [x] Reconcile fast and accepted LP source inputs, including exact physical
-  columns and the accepted country solar correction; complete the 24-hour LP
-  transfer pilot with zero emergency output.
+  columns and the accepted country solar correction. The superseded eight-bin
+  neutral LP pilot is only setup evidence, not the intended annual method.
+- [x] Implement six-node batched transport fitting and mapping of learned bids
+  onto the accepted LP's existing offer columns. The stopped nine-slope partial
+  fit remains an ignored diagnostic; do not resume it.
+- [x] Pass a five-hour implicit-gradient pilot (scaled error 3.99e-6), a
+  one-update January fit, and a 24-hour original-column LP pilot (799 offers,
+  zero emergency, maximum primal residual 5.68e-11 MW using within-hour
+  economic offer ordering). These are setup
+  checks only; annual acceptance remains open.
+- [x] Complete a one-update preflight for all twelve months with unchanged
+  fast-market balance/bound gates. March required an explicit 0.5 Adam step
+  factor. The warm update time ranged 5.1–143.5 seconds; profile slow hourly
+  convergence before starting 1,200 training updates. No annual LP was run.
 - [ ] Finish all 12 separate local-hour/technology/zone fits, 100 Adam updates
   at rate 1 per month. Preserve every monthly score and checkpoint.
-- [ ] Run the full 8,760-hour joint LP with eight-segment sampled fitted bids;
+- [ ] Run the full 8,760-hour joint LP **once after fitting**, with sampled bids
+  on its original offer columns;
   independently replay feasibility, duals, no-emergency, observed prices and
   generation mix. See research/monthly-spline-physical-lp-2025.md.
 - [ ] Once the complete audited result is reviewable, update the active research
