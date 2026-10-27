@@ -1,3 +1,19 @@
+## Fresh ENTSO-E 2025 flow retrieval — 27 October 2026
+
+Collected A11 physical and A09/A01 day-ahead commercial exchange documents for
+90 mapped source/model border pairs, both directions. Independent raw-XML,
+request-hash, contract/type and UTC-quarter-hour audits pass. Physical coverage:
+139 full, 23 partial, 18 unavailable directions; A09/A01: 128 full, 34 partial,
+18 unavailable. Of the retained physical model's 95 pairs, 69 have both A11
+directions full and 64 have both A09 directions full. Nine model pairs lack a
+verified EIC mapping (`FR-COR`, `IE-SEM`, `IT-CALA`, `XK` endpoints); six mapped
+model pairs return no data in either type. Raw evidence and audits are ignored,
+not published. See research/entsoe-flow-refresh-2025.md.
+
+Next: reconcile model-zone EICs and commercial scope, preserve coverage masks,
+then compare historical modeled exchanges to A09 on matched hours; do not freeze
+observed flows in asset scenarios or promote the fast model from source coverage.
+
 ## Monthly spline bids in the annual physical LP — 26 October 2026
 
 Current bounded follow-up: `curve-price-multistart-10-v1` retries the same

@@ -1,5 +1,14 @@
 # Grid Conductor — product requirements
 
+## Observed exchanges and scenario flows
+
+Use source-classified historical day-ahead commercial exchanges to diagnose
+baseline zonal-flow errors on compatible, covered borders and hours. Keep
+physical flow observations separate. A scenario that changes generation,
+storage or transmission must recalculate flows under its declared constraints;
+historical exchange is not a fixed scenario input. Preserve missing intervals,
+zone identity, request provenance and direction conventions explicitly.
+
 ## Monthly fitted bids with one annual physical evaluation
 
 Fit a separate monotone supply curve for each technology, bidding zone and
