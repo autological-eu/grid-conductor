@@ -151,6 +151,15 @@ def fetch(params, directory):
         return raw
     token = os.environ.get('ENTSOE_API_KEY')
     if not token:
+        # Reuse the workspace-local, Git-ignored credential when the managed
+        # environment has no persistent secret binding. The environment wins.
+        local_env = ROOT / '.env'
+        if local_env.is_file():
+            for line in local_env.read_text(encoding='utf-8').splitlines():
+                if line.startswith('ENTSOE_API_KEY='):
+                    token = line.partition('=')[2].strip().strip('"\'')
+                    break
+    if not token:
         raise ValueError('Missing ENTSOE_API_KEY and no cached response')
     url = 'https://web-api.tp.entsoe.eu/api?' + urllib.parse.urlencode(dict(params, securityToken=token))
     for attempt in range(3):
