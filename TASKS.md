@@ -1,3 +1,40 @@
+## Mixed-coverage monthly bid fit — 29 October 2026
+
+- [x] Add country/technology hourly generation-volume **and mix-share** losses
+  to the 48-zone, 95-corridor differentiable transport fit. Include observed
+  price cells even when complete incident ENTSO-E A09/A01 exchange is missing;
+  infer rather than impute their flows. Compatible observed exchange contributes
+  a separately masked/downweighted loss. Preserve source demand, original
+  renewable availability, fixed hydro, independent physical corridor bounds,
+  UTC chronology and unchanged 1e-9 GW price-root tolerance/no-emergency gate.
+- [x] Complete twelve bounded 20-update monthly pilots (Adam 0.05), each with
+  zone/technology/local-hour monotone six-anchor bids. Independent saved-curve
+  replay covers 8,760 hours and passes balance/capacity/flow bounds; maximum
+  balance residual 0.000001 MW. Same-month price MAE 31.82→24.58 EUR/MWh on
+  359,160 observed cells; missing-A09 subset 34.53→22.98 on 88,220 cells.
+  Hourly country/technology generation MAE 0.612→0.550 GW on 1,835,997 cells;
+  technology-share MAE 0.0731→0.0631 on 1,832,369. Compatible observed-flow
+  MAE 0.991→0.957 GW on 647,826 corridor-hours. Fit-loop time 783 seconds
+  excludes source preparation and independent replay. See
+  research/mixed-flow-monthly-bid-fit-2025.md.
+- [x] Save ignored monthly `inferred-flows.npz` files for all 8,760 UTC hours,
+  with directed edge/zone metadata, model bounds, observed A09 comparison,
+  net imports and SHA-256 audit. Positive flow direction is documented.
+  Existing 47,768 commercial corridor-hours outside model bounds are retained
+  as incompatible observations, not forced to match the physical proxy.
+- [ ] August required an explicitly flagged projected pseudogradient on 19
+  updates because EE/LV/LT at 2025-08-15 23:00 UTC have an unidentifiable
+  common price direction. Two valid model-only starts for the final bids differ
+  by 6.43 EUR/MWh in those prices but <1e-8 GW in dispatch and flows. The strict
+  run stopped and its failure was retained;
+  projected continuation is a **research diagnostic only** and does not pass
+  the exact-gradient gate. Bound root ambiguity across all hours and test
+  independent-month transfer;
+  reconcile commercial/physical corridor scope and Nordic source shortages.
+  Do not promote to the accepted price baseline or scenario solver, and do not
+  count this same-month fit as forward validation. Original annual LP replay
+  and 100-update protocol remain separate unfinished gates.
+
 ## Flow-adjusted eligibility audit — 28 October 2026
 
 - [x] Partition all 420,480 zone-hours: 149,540 miss a complete incident A09

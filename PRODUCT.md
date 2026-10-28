@@ -22,6 +22,20 @@ Report all-zone exclusions, numerical price-root identification and both
 within-month and independent evaluation limits. A fitted conditional bid curve
 does not establish a network-feasible or investment-responsive scenario model.
 
+An additional retrospective fit may include hours without complete observed
+commercial exchanges when a jointly cleared transport model supplies the
+flows. Include an explicit source-covered technology-generation volume **and
+mix-share** penalty alongside the price loss. Label every such flow as inferred,
+retain its hourly corridor direction, limits and model provenance, and report
+missing-flow price scores separately. Observed exchange mismatches must remain
+visible; a physical corridor proxy is not proof of a commercial market domain.
+If a price direction is unidentifiable to the differentiable clearing, retain
+its observed-price error in evaluation but disclose any gradient projection,
+affected hours and zones; such a projected fit cannot satisfy an exact-gradient
+acceptance gate.
+The inferred-flow fit is a research diagnostic until independent physical
+and out-of-sample checks support a scenario or baseline change.
+
 ## Additional ENTSO-E source evidence
 
 Use source-covered 2025 day-ahead load and renewable forecasts, unit-capacity

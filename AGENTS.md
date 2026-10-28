@@ -1,3 +1,27 @@
+## Mixed-coverage fitted-bid research checkpoint — 29 October 2026
+
+Read research/mixed-flow-monthly-bid-fit-2025.md and the new top TASKS.md
+section before extending the fit. The 48-zone/95-corridor joint transport
+research control now includes price, hourly source-covered country/technology
+generation volume, technology-share and compatible-observed-flow terms.
+Observed A09 is never imputed; missing-flow hours use **inferred** model flows.
+Twelve 20-update monthly pilots and independent 8,760-hour replay completed:
+same-month price MAE 31.82→24.58 EUR/MWh over 359,160 cells, missing-A09 subset
+34.53→22.98 over 88,220; generation and share errors also improved. Ignored
+monthly flow artifacts, direction/bound metadata and hashes are saved under
+`data/eu-market/flow-adjusted-clearing-2025/mixed-flow-monthly-v1-u20-r0.05/`.
+August required 19 explicitly projected-gradient updates after the strict
+unidentified-price guard stopped on an EE/LV/LT flat direction; exact-gradient
+acceptance is NOT met. Two valid model-only starts for its 15 Aug 23:00 hour
+change EE/LV/LT prices by 6.43 EUR/MWh but dispatch/flows <1e-8 GW. April's
+neutral Newton root required adjacent **modeled**
+hour starts; original balance/flow/no-emergency gates remained unchanged.
+This is same-month reconstruction, not a baseline, original physical LP,
+commercial market-domain or investment scenario validation. No main merge,
+public deployment or recurring check-in change. Next: diagnose root ambiguity,
+independent-month transfer, observed exchange/physical-bound conflicts and
+Nordic source/constraint gaps before any adoption.
+
 ## Current single-pass monthly bid experiment — 26 October 2026
 
 User clarified the compute sequence: fit each of twelve 2025 months with the
