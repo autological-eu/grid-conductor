@@ -9,6 +9,15 @@ storage or transmission must recalculate flows under its declared constraints;
 historical exchange is not a fixed scenario input. Preserve missing intervals,
 zone identity, request provenance and direction conventions explicitly.
 
+For a retrospective supply-bid diagnostic, fit technology and bidding-zone
+curves separately by month and local hour against demand adjusted by observed
+day-ahead net commercial imports. Use cleared-price and source-covered
+technology-generation errors with gradients through the clearing equation;
+retain complete incident-flow masks and reject infeasible local balances.
+Report all-zone exclusions, numerical price-root identification and both
+within-month and independent evaluation limits. A fitted conditional bid curve
+does not establish a network-feasible or investment-responsive scenario model.
+
 ## Additional ENTSO-E source evidence
 
 Use source-covered 2025 day-ahead load and renewable forecasts, unit-capacity

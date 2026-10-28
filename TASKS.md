@@ -1,3 +1,22 @@
+## Monthly flow-adjusted supply-bid fit — 28 October 2026
+
+- [x] Implement the attached notebook's implicit cleared-price gradient on
+  source-covered observed A09/A01 flow-adjusted zonal residual demand. Fit
+  monotone six-anchor bids by technology, bidding zone, local hour and month,
+  with 100 Adam0.1 updates in each of twelve months and hourly technology
+  generation targets. Independent saved-curve replay passed. In-sample matched
+  price MAE 40.87→23.37 EUR/MWh on 209,662 eligible zone-hours; generation
+  MAE 0.571→0.429 GW on 1,407,942 observed cells. Total fit 1,393 seconds.
+  See research/flow-adjusted-monthly-bid-fit-2025.md. No baseline promotion.
+- [x] Transfer each fitted month's curves without refit to the following
+  month on matched observed-flow/availability inputs: February–December
+  price MAE 30.53 vs neutral 40.73 and same-month 23.23 EUR/MWh on 193,080
+  eligible cells. This is bid-curve transfer, not an operational forecast.
+- [ ] Reconcile the fixed-hydro/residual-demand/A09 basis, especially NO1–NO3
+  with no flexible bid group and NO2 with only 394 eligible hours. Evaluate
+  fitted bids in the original joint LP and test independent month transfer
+  before scenario or predictive claims. Reclear flows in asset scenarios.
+
 ## Flow-adjusted zonal bid diagnostic — 28 October 2026
 
 - [x] Clear neutral technology bids against model residual demand minus
