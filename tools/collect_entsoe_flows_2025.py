@@ -38,12 +38,14 @@ def plan():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--kind', choices=('physical', 'day-ahead-commercial'),
+    parser.add_argument('--kind', choices=('physical', 'day-ahead-commercial',
+                                           'day-ahead-capacity'),
                         default='physical')
     args = parser.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
-    journal = OUT / ('coverage.jsonl' if args.kind == 'physical'
-                     else 'day-ahead-commercial-coverage.jsonl')
+    journal = OUT / {'physical':'coverage.jsonl',
+                     'day-ahead-commercial':'day-ahead-commercial-coverage.jsonl',
+                     'day-ahead-capacity':'day-ahead-capacity-coverage.jsonl'}[args.kind]
     done = {}
     if journal.exists():
         for line in journal.read_text().splitlines():
@@ -56,9 +58,10 @@ def main():
             direction = source + '>' + sink
             if direction in done:
                 continue
-            params = dict(PERIOD, documentType='A11' if args.kind == 'physical' else 'A09',
+            params = dict(PERIOD, documentType={'physical':'A11',
+                          'day-ahead-commercial':'A09','day-ahead-capacity':'A61'}[args.kind],
                           out_Domain=out_code, in_Domain=in_code)
-            if args.kind == 'day-ahead-commercial':
+            if args.kind != 'physical':
                 params['contract_MarketAgreement.Type'] = 'A01'
             started = time.monotonic()
             try:

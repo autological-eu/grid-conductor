@@ -14,6 +14,7 @@ import time
 import urllib.request
 import urllib.parse
 import urllib.error
+import http.client
 import xml.etree.ElementTree as ET
 
 from carbon_pilot import (AREAS as GENERATION_AREAS, FACTORS, FACTOR_VERSION, IPCC, ROOT, UTC, iso, STORAGE,
@@ -170,6 +171,10 @@ def fetch(params, directory):
         except urllib.error.HTTPError as error:
             if error.code not in (429, 500, 502, 503, 504) or attempt == 2:
                 raise ValueError(f'ENTSO-E HTTP {error.code}') from None
+            time.sleep(2**attempt)
+        except http.client.IncompleteRead:
+            if attempt == 2:
+                raise ValueError('ENTSO-E response ended before completion') from None
             time.sleep(2**attempt)
         except (urllib.error.URLError, TimeoutError):
             raise ValueError('ENTSO-E network failure') from None

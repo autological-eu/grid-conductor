@@ -14,8 +14,9 @@ COUNT = 365 * 24 * 4
 
 
 def audit(kind):
-    journal = OUT / ('coverage.jsonl' if kind == 'physical'
-                     else 'day-ahead-commercial-coverage.jsonl')
+    journal = OUT / {'physical':'coverage.jsonl',
+                     'day-ahead-commercial':'day-ahead-commercial-coverage.jsonl',
+                     'day-ahead-capacity':'day-ahead-capacity-coverage.jsonl'}[kind]
     rows = [json.loads(line) for line in journal.read_text().splitlines()]
     border_plan = plan()
     expected = {f'{a}>{b}' for a, b, _, _ in border_plan} | {f'{b}>{a}' for a, b, _, _ in border_plan}
@@ -25,7 +26,8 @@ def audit(kind):
     records = []
     for row in rows:
         source, sink = row['direction'].split('>')
-        request = dict(PERIOD, documentType='A11' if kind == 'physical' else 'A09',
+        request = dict(PERIOD, documentType={'physical':'A11',
+                       'day-ahead-commercial':'A09','day-ahead-capacity':'A61'}[kind],
                        out_Domain=code[source], in_Domain=code[sink])
         if kind != 'physical':
             request['contract_MarketAgreement.Type'] = 'A01'
@@ -41,8 +43,12 @@ def audit(kind):
             for node in root.iter():node.tag=node.tag.split('}')[-1]
             assert root.findtext('type') == request['documentType']
             series = root.findall('TimeSeries')
-            assert all(ts.findtext('businessType') == ('A66' if kind=='physical' else 'A06') for ts in series)
-            if kind != 'physical':
+            assert all(ts.findtext('businessType') == {'physical':'A66',
+                           'day-ahead-commercial':'A06','day-ahead-capacity':'A27'}[kind]
+                       for ts in series)
+            # A61's contract type is a request filter; the returned capacity
+            # TimeSeries often omits that field entirely.
+            if kind == 'day-ahead-commercial':
                 assert all(ts.findtext('contract_MarketAgreement.type') == 'A01' for ts in series)
             samples = parse_quantity(raw, {'out_Domain.mRID':request['out_Domain'],
                                            'in_Domain.mRID':request['in_Domain']})

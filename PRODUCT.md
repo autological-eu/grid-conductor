@@ -9,6 +9,19 @@ storage or transmission must recalculate flows under its declared constraints;
 historical exchange is not a fixed scenario input. Preserve missing intervals,
 zone identity, request provenance and direction conventions explicitly.
 
+## Additional ENTSO-E source evidence
+
+Use source-covered 2025 day-ahead load and renewable forecasts, unit-capacity
+notices, reservoir-filling reports, generation-unit outages, day-ahead transfer
+capacity and grid-outage notices to diagnose demand, supply and network input
+errors. Keep forecast generation distinct from physical renewable availability,
+and outage remaining capacity distinct from unavailable MW. Reconcile unit IDs,
+reporting thresholds, revisions, publication time, zone identity and missing
+hours before using an observation to change a model constraint. A retrospective
+API extract is not automatically the information available before each auction.
+Where day-ahead border capacity is absent or not equivalent to a flow-based
+market domain, retain the declared JAO/physical constraint provenance.
+
 ## Monthly fitted bids with one annual physical evaluation
 
 Fit a separate monotone supply curve for each technology, bidding zone and

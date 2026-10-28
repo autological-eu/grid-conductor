@@ -1,3 +1,21 @@
+## Additional ENTSO-E 2025 input evidence — 28 October 2026
+
+- [x] Collect and independently replay 176 annual requests across 44 mapped
+  model zones: day-ahead load and renewable forecasts (41 source-covered zones
+  each), year-ahead unit capacity (41), reservoir filling (31). Compile the
+  forecast sources to 8,760-hour UTC arrays with explicit gaps; no observed
+  dispatch substituted for availability.
+- [x] Collect and replay 528 generation-outage zone-months (440 with notices),
+  96 grid-outage border-months in a four-corridor pilot (82 with notices), and
+  180 directional day-ahead-capacity requests (58 full, 10 partial, 112 absent).
+  The outage documents repeat and include later revisions. Source receipts and
+  large raw files remain ignored. See research/entsoe-additional-inputs-2025.md.
+- [ ] Reconcile outage unit identifiers to installed fleets and publication-time
+  vintages; distinguish remaining available capacity from lost MW and verify
+  threshold/coverage before any availability correction. Compare source-covered
+  forecast/actual mismatches and A61 capacity with JAO market domains on matched
+  hours. No baseline promotion or scenario-input change from collection alone.
+
 ## Fresh ENTSO-E 2025 flow retrieval — 27 October 2026
 
 Collected A11 physical and A09/A01 day-ahead commercial exchange documents for
