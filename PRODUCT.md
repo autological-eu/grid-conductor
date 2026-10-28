@@ -14,6 +14,10 @@ curves separately by month and local hour against demand adjusted by observed
 day-ahead net commercial imports. Use cleared-price and source-covered
 technology-generation errors with gradients through the clearing equation;
 retain complete incident-flow masks and reject infeasible local balances.
+For missing observed exchanges, retain an explicit unknown interval and its
+source/constraint provenance; do not replace it with zero or a model estimate
+labelled as observed. A model-derived interval alone does not certify a
+commercially possible flow or identify one clearing price.
 Report all-zone exclusions, numerical price-root identification and both
 within-month and independent evaluation limits. A fitted conditional bid curve
 does not establish a network-feasible or investment-responsive scenario model.

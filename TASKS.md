@@ -1,3 +1,19 @@
+## Flow-adjusted eligibility audit — 28 October 2026
+
+- [x] Partition all 420,480 zone-hours: 149,540 miss a complete incident A09
+  exchange, 23,320 have negative flow-adjusted demand with complete A09,
+  37,958 exceed available local supply with complete A09, and 209,662 are
+  eligible. Implement explicit missing-flow intervals using model physical
+  bounds as diagnostics only; median width 6.38 GW, no point-price imputation.
+  47,768 observed corridor-hours exceed those model-derived physical bounds,
+  so they cannot be promoted as verified commercial limits. See
+  research/flow-adjusted-eligibility-2025.md.
+- [ ] Reconcile commercial zone identities and source scopes; test masked
+  joint clearing with compatible observed borders and unknown remaining
+  flows against held-out observed exchanges. Preserve separate flags for
+  observed, inferred and unavailable data; repair fully observed but locally
+  infeasible Nordic hours before using them in bid fitting.
+
 ## Monthly flow-adjusted supply-bid fit — 28 October 2026
 
 - [x] Implement the attached notebook's implicit cleared-price gradient on

@@ -18,7 +18,7 @@ DEST=ROOT/'data/eu-market/flow-adjusted-clearing-2025'
 START=datetime(2025,1,1,tzinfo=timezone.utc)
 
 
-def observed_exchanges(zones,edges):
+def observed_exchanges(zones,edges,return_edges=False):
     """Hourly net imports, only when every incident directed series is covered."""
     codes={z:eic for a,b,ca,cb in plan() for z,eic in ((a,ca),(b,cb))}
     allowed={(a,b) for a,b,_,_ in plan()} | {(b,a) for a,b,_,_ in plan()}
@@ -47,16 +47,19 @@ def observed_exchanges(zones,edges):
             directional[source,sink]=np.where(np.isfinite(blocks).all(axis=1),
                                               blocks.mean(axis=1)/1000,np.nan)
     net=np.zeros((8760,len(zones)));covered=np.ones((8760,len(zones)),bool)
-    for i,j in edges:
+    edge_flow=np.full((8760,len(edges)),np.nan)
+    for k,(i,j) in enumerate(edges):
         a,b=zones[i],zones[j]
         outgoing=directional.get((a,b));incoming=directional.get((b,a))
         if outgoing is None or incoming is None:
             covered[:,[i,j]]=False;continue
         good=np.isfinite(outgoing)&np.isfinite(incoming)
+        edge_flow[good,k]=outgoing[good]-incoming[good]
         covered[:,i]&=good;covered[:,j]&=good
         balance=incoming-outgoing
         net[:,i]+=np.where(good,balance,0)
         net[:,j]-=np.where(good,balance,0)
+    if return_edges:return net,covered,len(directional),edge_flow
     return net,covered,len(directional)
 
 
