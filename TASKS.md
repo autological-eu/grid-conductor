@@ -1,3 +1,16 @@
+## Flow-adjusted zonal bid diagnostic — 28 October 2026
+
+- [x] Clear neutral technology bids against model residual demand minus
+  observed A09/A01 net imports, preserving all 2025 hours and strict complete
+  incident-flow masks. 209,662/420,480 zone-hours are covered and feasible;
+  matched price MAE is €40.87/MWh on that subset only. NO2 clears just 394
+  hours despite complete incident-flow coverage: fixed-generation/demand and
+  commercial exchange scopes must be reconciled. This is not a replacement
+  baseline or scenario solver. See research/flow-adjusted-zonal-clearing-2025.md.
+- [ ] Reconcile Nordic hourly residual-demand, fixed hydro, source generation
+  and A09 balances before any bid fitting; compare on identical covered hours
+  with the joint constrained solve. Investment scenarios must reclear flows.
+
 ## Additional ENTSO-E 2025 input evidence — 28 October 2026
 
 - [x] Collect and independently replay 176 annual requests across 44 mapped
