@@ -488,6 +488,10 @@ month transfer. Evaluate their bids in the accepted joint physical LP over all
 8,760 hours. Retain its source demand, original renewable availability, fixed
 hydro, network and no-emergency/numerical gates. Report price and generation
 performance against the current baseline before changing the baseline pointer.
+Fit and LP evaluation must use the same accepted renewable-availability inputs;
+where a frozen fit predates an input correction, quantify the difference and
+refit before baseline selection. Mixed LP offer output has no unique technology
+allocation; report its allocated volume and any fallback separately.
 This same-month fitting establishes an in-sample reconstruction, not forecast
 skill or investment-response validity.
 

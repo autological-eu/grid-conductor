@@ -1,3 +1,26 @@
+## Monthly fitted bids transferred to the original joint LP — 29 October 2026
+
+- [x] Inspect live jobs, validate all twelve saved 20-update curve hashes and
+  accepted-baseline inputs, map 647 single-technology LP offers, retain 104 mixed
+  renewable bids, and run one original 799-offer/8,760-hour LP pass. A 24-hour
+  seasonal pilot and the full-year LP have zero emergency generation. Preparation
+  with pilot 23.74s; solver clearing 30.85s; no second annual solve was started.
+- [x] Independently replay saved hourly primals, duals, objectives and cost
+  transfer. Max primal violation 2.01e-5 MW, duality gap 2.98e-4 EUR, and
+  complementarity 9.93e-4 EUR pass the unchanged gates. Corrected-SDAC price
+  MAE is **26.863** vs accepted **26.795 EUR/MWh** (41 zones); 19 zones improve.
+  Illustrative hourly country/technology generation MAE **0.567 vs 0.633 GW**
+  and share MAE **0.0677 vs 0.0777**. Mixed offers dispatch 1,117.39 TWh and
+  have non-unique technology splits; 0.271 TWh needs a declared zero-member-
+  profile fallback in both cases. See
+  [joint-LP transfer report](research/mixed-flow-fast-joint-lp-2025.md).
+- [ ] **Do not replace the current baseline yet.** The candidate's price MAE is
+  0.068 EUR/MWh worse, the fit used only 20 updates, August required projected
+  gradients, and fitting solar availability is 37.116 TWh higher than the
+  accepted LP input. Refit on aligned solar inputs, resolve August root
+  ambiguity, complete the requested 100-update protocol, then repeat physical
+  LP/price/mix replay and independent-month evaluation. No browser change.
+
 ## Mixed-coverage monthly bid fit — 29 October 2026
 
 - [x] Add country/technology hourly generation-volume **and mix-share** losses
