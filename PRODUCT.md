@@ -33,6 +33,13 @@ If a price direction is unidentifiable to the differentiable clearing, retain
 its observed-price error in evaluation but disclose any gradient projection,
 affected hours and zones; such a projected fit cannot satisfy an exact-gradient
 acceptance gate.
+An explicitly diagnosed structurally unidentifiable price cell may be excluded
+from the *training loss* only when its zone, hour, model-based reason and count
+are declared before fitting. Report both the training-cell score and the
+all-observed-cell score, including excluded cells, at every update. Continue to
+require the original balance, generation and flow constraints and exact
+gradients for the declared training objective. This exception does not turn a
+same-month fit into independent validation or satisfy the annual LP gate.
 The inferred-flow fit is a research diagnostic until independent physical
 and out-of-sample checks support a scenario or baseline change.
 

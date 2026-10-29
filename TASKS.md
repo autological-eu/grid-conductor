@@ -1,3 +1,27 @@
+## Solar-aligned, identifiable-price monthly fit — 29 October 2026
+
+- [x] Align fast-fit solar group availability to the accepted 799-offer LP input.
+  The previous fit had 37.116 TWh more solar availability. Use the same 48 zones,
+  326 technology groups and 95 transport corridors; source hashes and curve
+  checkpoints are saved outside Git.
+- [x] Diagnose August's flat price root. At 2025-08-15 23:00 UTC, the common
+  EE/LV/LT price can change without changing generation, flows or balance. A
+  fixed model-only gauge ceased to be feasible under rate-1 updates. Declare
+  those three price cells absent from training only; retain them in every
+  all-cell price score. No projected gradient is accepted.
+- [x] Complete August's 20-update Adam-rate-1 pilot: all-cell price MAE
+  29.673 to 18.879 EUR/MWh across 30,504 observed price cells (30,501
+  training cells); generation MAE 0.562 to 0.478 GW. Maximum balance residual
+  9.79e-7 MW, zero emergency generation and zero projected updates. These are
+  same-month transport-fit metrics, not independent LP results.
+- [ ] Complete the other eleven 20-update solar-aligned fits, then all twelve
+  100-update histories using the same declared price mask. Recheck price-root
+  identification and source-bound history for every month.
+- [ ] Transfer completed curves to the original 799-offer joint LP for one
+  8,760-hour solve. Independently audit price, generation, primal/dual,
+  emergency and chronology; keep the accepted baseline unless every gate passes.
+
+
 ## Monthly fitted bids transferred to the original joint LP — 29 October 2026
 
 - [x] Inspect live jobs, validate all twelve saved 20-update curve hashes and
