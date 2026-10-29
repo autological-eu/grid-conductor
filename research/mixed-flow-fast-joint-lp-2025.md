@@ -1,5 +1,46 @@
 # Monthly fitted bids in the 2025 joint physical LP
 
+## What changed in the bids?
+
+The accepted baseline assigns each original LP offer column a discrete price.
+Those prices start from technology/resource inputs (including fuel, efficiency,
+carbon and existing CHP/offer adjustments); its accepted gas, coal/lignite and
+nuclear case adds bounded zone/resource calendar corrections. Sorting a
+technology's available offer columns by price gives the **grey step stack**
+below. The monthly fit instead learns **six increasing marginal-price anchors**
+at 0, 20, 40, 60, 80 and 100% of each technology's *hourly available MW* in
+each zone and local hour. The blue line joins these anchors. In the original LP
+test, each existing column receives the curve price at the midpoint of its
+available capacity tranche, producing the orange steps. Capacities and network
+constraints do not change in this comparison.
+
+![Baseline offer steps, learned curves and transferred LP steps for six technologies](assets/monthly-bids-vs-baseline-2025.png)
+
+This is **20 January 2025, 12:00 UTC**, not an annual average. Each panel has
+its own price scale and each horizontal axis refers to that technology's
+available output, not total zonal supply. Exact plotted values and capacity
+are in [the six-row example table](monthly-bids-vs-baseline-2025.csv).
+
+| Technology and zone | Available GW | Baseline column prices, EUR/MWh | Learned anchor range, EUR/MWh |
+| --- | ---: | ---: | ---: |
+| DE-LU gas | 36.61 | 119.57–236.78 | 135.42–170.54 |
+| DE-LU hard coal | 15.95 | 103.87–172.35 | 64.83–155.89 |
+| DE-LU lignite | 15.18 | 128.75–189.88 | 47.84–142.73 |
+| DE-LU oil | 5.68 | 93.93–197.21 | 166.82–214.83 |
+| DE-LU biomass | 8.02 | 19.98–21.32 | −10.54–76.27 |
+| FR nuclear | 46.97 | 28.74–28.74 | 7.42–41.89 |
+
+The baseline coal/gas steps reflect multiple physical source offers and earlier
+bid corrections; the learned shape is an effective curve fitted to prices and
+generation, **not** a reconstruction of operator bids or fuel costs. The
+negative biomass anchor is permitted by the experimental fit and is a reason
+to check economic plausibility before using it for scenarios. Wind, solar and
+run-of-river retain low/zero-price renewable bids in this experiment; their
+hourly *available volume* changes with source profiles. The original LP also
+pools some renewable technologies in mixed offer columns, so it has no uniquely
+observable separate wind or solar step stack for this hour. Reservoir hydro is
+a fixed hourly schedule here, and batteries have no offer curve in this LP.
+
 ## Result
 
 The twelve saved, same-month technology bid fits **can** be used in the fast joint
