@@ -19,6 +19,7 @@ The [baseline catalog](baselines/catalog.json) resolves these names to the archi
 - [TASKS.md](TASKS.md): current evidence, blockers and next work.
 - [AGENTS.md](AGENTS.md): operational rules for research and publication.
 - [Workbench methodology](docs/workbench-methodology.md): the current public app's data and equations.
+- [Research baseline summary](docs/research-baselines-2025.md): the two retained European offline models.
 - [Baseline decision](research/baseline-decision-2026-10-23.md): why the preceding control was retained.
 
 The accepted research baseline does not change the public app. Before scenario use, investment responses need chronology, storage, flow, feasibility and independent evaluation checks. Price and generation improvements alone do not establish EUPHEMIA equivalence.

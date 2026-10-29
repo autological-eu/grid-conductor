@@ -167,8 +167,8 @@ factors and storage/flow accounting. Direct operational COâ‚‚ and lifecycle COâ‚
 must remain distinct. The live model does not yet provide those comparisons,
 carbon monetisation, discounted welfare or the complete cost-benefit indicators.
 
-The newer Europe-wide fixed-reservoir dispatch calculation is **not currently
-connected to the workbench's scenario button**. This page describes the solver
+The European research dispatch baselines are **not currently connected to the
+workbench's scenario button**. This page describes the solver
 actually used by the public app. Both its reduced-form assumptions and the absence
 of calibrated price, chronology and paired investment validation limit how the
 results should be used: screening questions worth studying, not investment decisions.
@@ -191,50 +191,9 @@ workbench's scenario results. Raw provider caches and large research witnesses
 remain outside Git; the public app consumes compact static exports. Scenario
 units/results are stored locally in the browser, not uploaded to a server.
 
-## Retained European model reports
+## European research baselines
 
-- [Fixed-hydro/resource-bid model](european-physical-synthetic-clearing-2025.md):
-  fast hourly physical clearing, fixed reservoir injections, simple resource bids
-  and controlled full-year observed-price comparisons.
-- [Paused daily generator-bidding reference](daily-fuel-dispatch-2025.md): resource-specific
-  bids, daily clearing, carried storage and full-year observed-price diagnostics.
-
-These are offline research models. Neither replaces the live browser solver.
-
-The Norwegian hydro-input diagnostic uses NVE weather-driven HBV weekly usable
-inflow and dated reservoir energy stocks/capacity, with original ERA5 hourly
-shapes. Electrical-equivalent quantities are converted before dispatch efficiency
-is applied once. Gross/net energy basis, country pooling and retrospective
-release assumptions are documented in the fixed-hydro report. Elhub/Ember
-generation and ENTSO-E prices remain comparison observations, not fitted inputs.
-Controlled diagnostics now place Norwegian fixed hydro and demand at their original
-clustered buses rather than distributing their net injection with one generation
-shift key. Hourly volumes remain unchanged. Bounded 48-hour rescheduling tests
-preserve each reservoir's water and opening/closing stocks; they are not an annual
-strategy. Better annual error after the location change does not certify commercial
-zones or investment benefits. The report retains remaining price regressions,
-native checks and unresolved demand-scope differences.
-
-The offline dispatch model now clears the full retained network at bidding-zone
-resolution: Nordic and Italian zones separately, with common balances for DE-LU
-and Ireland's Single Electricity Market. Physical island balances and HVDC losses
-remain explicit even within a common market zone. Boundary-preserving grid
-preparation replaces country-only clustering/stub removal. Original hourly
-available supply, demand and fixed hydro are conserved; unresolved aggregate
-fleet/weather and demand splits remain declared location proxies. The report
-compares country and zonal pools on the same rebuilt grid and retains failed
-control hours. This changes the research model, not the live browser solver;
-commercial-domain, empirical and paired-investment acceptance remains open.
-
-### Current research comparison prices
-
-The current European model report and country explorer use original ENTSO-E A44
-main day-ahead observations, with all four quarter-hour samples averaged per UTC
-hour. Germany and Austria explicitly select SDAC auction sequence 1; intraday A07
-is excluded. Other cached markets use the sole unclassified A01 day-ahead series.
-A fresh full-year source replay corrects the former research target selection;
-the archived map prices already agree wherever covered and retain their existing
-coverage. The displayed oil/CHP checkpoint is re-evaluated, not refitted: its earlier
-non-oil bid calibration used the previous targets. See the
-[current report](/docs/european-physical-synthetic-clearing-2025/) for source checks
-and limitations; accepted research baseline and workbench scenario engine are separate.
+The [two retained 2025 research baselines](research-baselines-2025.md) compare
+solar-anchor fast dispatch with monthly fitted supply curves in an annual physical
+LP replay. Neither replaces the live browser solver. The country explorer still
+shows an archived, separately verified run and is labelled accordingly.

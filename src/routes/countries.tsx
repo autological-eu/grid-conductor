@@ -176,14 +176,14 @@ function Countries() {
       <nav className="mb-7 flex flex-wrap gap-5 text-sm">
         <Link to="/">Workbench</Link>
         <Link to="/docs">Docs</Link>
-        <Link to="/docs/$slug" params={{ slug: "european-physical-synthetic-clearing-2025" }}>
+        <Link to="/docs/$slug" params={{ slug: "research-baselines-2025" }}>
           Model report
         </Link>
       </nav>
       <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Country data explorer</h1>
       <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">
-        Explore 2025 source generation and day-ahead prices alongside the latest verified European
-        clearing run. Choose a country, then inspect its mix and every modeled price zone.
+        Explore 2025 source generation and day-ahead prices alongside an archived European clearing
+        run. This explorer has not yet been updated to the current research baseline.
       </p>
       <div className="my-6 grid grid-cols-2 gap-4 rounded-xl bg-muted/50 p-4 lg:grid-cols-5">
         <label className="col-span-2 text-sm font-medium">
@@ -754,8 +754,8 @@ function CountryView({
           <a href={publicAsset("research/country-explorer-2025/manifest.json")}>
             Dataset provenance
           </a>
-          <Link to="/docs/$slug" params={{ slug: "european-physical-synthetic-clearing-2025" }}>
-            Full model report
+          <Link to="/docs/$slug" params={{ slug: "research-baselines-2025" }}>
+            Current research baselines
           </Link>
         </div>
       </section>

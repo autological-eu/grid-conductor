@@ -1,5 +1,9 @@
 # Grid Conductor — product requirements
 
+## Public research scope
+
+Publish model reports and downloadable receipts only for the retained research baselines, `fast_dispatch_only` and `mixed_curve_fitting`, alongside data required by the live workbench. Retire superseded model publications from the current site. If a live country data explorer still displays an earlier model run, label its model comparison as archived and keep its source and validation receipts available until the explorer is migrated to a retained baseline or source-only view. Do not present that earlier run as the current research baseline.
+
 ## Observed exchanges and scenario flows
 
 Use source-classified historical day-ahead commercial exchanges to diagnose
