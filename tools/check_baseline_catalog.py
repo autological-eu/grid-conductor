@@ -23,6 +23,16 @@ def check():
     if current['name']!=catalog['active']:
         raise ValueError('Active model name mismatch')
 
+    # The witness-level check alone does not discover missing transitive source
+    # files. Load both unchanged model input paths as a read-only replay gate.
+    from solar_anchor_bids_2025 import model
+    from monthly_lp_spline_inputs_2025 import aligned
+    _, _, prior_lp = model()
+    _, (schema, data, *_), _, _, _ = aligned()
+    if prior_lp['ng'] != 799 or len(data['load']) != 8760 or len(schema['zones']) != 48:
+        raise ValueError('Retained baseline input dimensions changed')
+    print('baseline input loaders verified: 799 offers, 8760 hours, 48 zones')
+
 
 if __name__=='__main__':
     check()

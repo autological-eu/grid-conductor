@@ -1,6 +1,7 @@
 """Verify only assets consumed by the live workbench and country explorer."""
 from pathlib import Path
 import fnmatch
+import gzip
 import hashlib
 import json
 from check_country_explorer import check as check_countries
@@ -28,10 +29,14 @@ def check():
     assert carbon['metric_sha256'] == sha(root / 'src/lib/carbon-spread.ts')
     for zone, digest in carbon['price_sha256'].items():
         assert zone in manifest and sha(out / (zone + '.json')) == digest
+    # This archive is also an input to the retained solar-capacity baseline.
+    irena = json.loads(gzip.decompress((folder / 'irena-capacity-2025/summary.json.gz').read_bytes()))
+    assert irena['country_count'] >= 30 and len(irena['irena_rows']) >= 400
     allowed = [
         'entsoe-fast-targets.json', 'carbon-spreads-2025.json',
         'zone-prices-2025/*.json', 'country-explorer-2025/*.json',
         'country-explorer-2025/*.json.gz',
+        'irena-capacity-2025/summary.json.gz',
     ]
     files = [p for p in folder.rglob('*') if p.is_file()]
     unexpected = [str(p.relative_to(folder)) for p in files

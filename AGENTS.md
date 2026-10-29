@@ -15,6 +15,8 @@ Preserve 2025 UTC chronology, original renewable **availability** rather than di
 
 The active fit uses observed-price root selection and same-year targets. Report this and mixed-offer technology allocation uncertainty with every performance claim. Do not silently loosen feasibility, chronology, price coverage or acceptance gates. Preserve original source hashes; source-hashed producer scripts remain at their existing `tools/` paths. Inspect live processes and checkpoints before any compute to avoid duplicate jobs. Large source and witness artifacts stay in ignored `data/`, not Git.
 
+Before deleting a source or receipt, run the full read-only `tools/check_baseline_catalog.py` in the pinned scientific environment. It checks the retained witnesses and loads both baseline input paths, including the solar fleet's source-hash checks. This is not a complete recursive audit of every historical receipt. The IRENA archive under `public/research/irena-capacity-2025/` is part of the retained solar input chain. The 20-module successor design and current import categories are in `baselines/import-chain-audit.md`; do not relabel a wrapper around old modules as a completed refactor.
+
 ## Delivery
 
 Work on `public-v1`; commit coherent changes. No main merge, force push, visibility or credential changes. Inspect CI/Pages and verify public URLs before claiming publication. Keep `PRODUCT.md` as requirements, `TASKS.md` as the concise current backlog and evidence. The next research priorities are scenario reclearing/response validation, Nordic hydro/source adequacy, CZ and Italian price regressions, and independent transfer checks. Follow the user's current request over historical notes.
