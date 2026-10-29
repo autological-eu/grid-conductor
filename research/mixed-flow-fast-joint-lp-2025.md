@@ -41,6 +41,31 @@ pools some renewable technologies in mixed offer columns, so it has no uniquely
 observable separate wind or solar step stack for this hour. Reservoir hydro is
 a fixed hourly schedule here, and batteries have no offer curve in this LP.
 
+### Where the accepted DE-LU gas steps come from
+
+At this illustrated hour, the accepted DE-LU gas stack has **31 source offer
+groups × three divisible tranches = 93 LP columns**. Each group contributes
+50%, 35% and 15% of its available MW. Its tranche bid prices differ by exactly
+**0, +21 and +60 EUR/MWh** (the selected peaking shape); the accepted
+`resource_full` correction adds the same **+2.7145 EUR/MWh** to every DE-LU gas
+column that hour. Different source groups have different starting bids because
+their CCGT/OCGT membership, efficiencies and inherited cost adjustments differ.
+Sorting all 93 columns by bid and cumulatively summing their available MW gives
+the jagged grey curve; it is **not** a single fitted mathematical function.
+
+For one concrete group, the prepared DE-LU CCGT source generator at native
+index 39 contributes **4,204.20 MW** available, split **2,102.10 / 1,471.47 /
+630.63 MW**. Before the latest correction its three bids are **136.87 / 157.87 /
+196.87 EUR/MWh**; afterwards they are **139.59 / 160.59 / 199.59 EUR/MWh**.
+Its electrical efficiency is 0.50396. The model's 20 January fuel and carbon
+inputs are 48.3158 EUR/MWh-thermal and 80 EUR/tCO₂. The underlying thermal
+rule is `(fuel + carbon × emissions factor) / electrical efficiency + variable
+O&M`; this group also carries an inherited effective-bid adjustment from the
+earlier calibrated cost chain. These are model inputs and synthetic offer
+prices, not observed plant bids. The source layout, selected bid shape and
+latest adjustment are traceable in `renewable_source_bids_2025.py`,
+`hourly_offer_curves_2025.py` and `solar_anchor_bids_2025.py`, respectively.
+
 ## Result
 
 The twelve saved, same-month technology bid fits **can** be used in the fast joint
