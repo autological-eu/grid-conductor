@@ -1,3 +1,16 @@
+## Current 20-update solar-aligned fit — 29 October 2026
+
+The user withdrew the 100-update requirement. Fit all twelve 2025 months
+with 20 Adam updates at rate 1.0, using accepted-LP-aligned solar availability.
+August completed at all-observed-cell price MAE 18.879 EUR/MWh. The three
+structurally unidentifiable EE/LV/LT price cells at 15 August 23:00 UTC are
+excluded from training only and retained in reported price MAE. The attempted
+100-update background process ended before a monthly checkpoint; do not
+resume it. Inspect the live 20-update process and its source-hashed monthly
+results before starting another job. Next run an independent fast-fit replay,
+then one unchanged annual joint LP and independent price/generation/primal/
+dual audit. The accepted baseline remains unchanged until those gates pass.
+
 ## Mixed-coverage fitted-bid research checkpoint — 29 October 2026
 
 Read research/mixed-flow-monthly-bid-fit-2025.md and the new top TASKS.md

@@ -62,8 +62,9 @@ Fit a separate monotone supply curve for each technology, bidding zone and
 local hour of day in each 2025 month using the fast batched differentiable
 transport model. Keep observed hourly demand, source fuel costs, original
 renewable availability, fixed hydro and monthly generation targets unchanged.
-Use the full month for 100 nominal Adam updates and report all 101 in-sample
-scores. Record any step reduction required to keep the unchanged numerical
+Use the full month for 20 nominal Adam updates at rate 1.0 and report the
+initial score and all 20 update scores. The user has withdrawn the 100-update
+requirement for this experiment. Record any step reduction required to keep the unchanged numerical
 clearing tolerance;
 these fits are retrospective reconstruction, not forward forecasts.
 For the differentiable transport fit, certify each hourly balance and supply/

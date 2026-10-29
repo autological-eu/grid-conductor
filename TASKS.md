@@ -14,9 +14,11 @@
   training cells); generation MAE 0.562 to 0.478 GW. Maximum balance residual
   9.79e-7 MW, zero emergency generation and zero projected updates. These are
   same-month transport-fit metrics, not independent LP results.
-- [ ] Complete the other eleven 20-update solar-aligned fits, then all twelve
-  100-update histories using the same declared price mask. Recheck price-root
-  identification and source-bound history for every month.
+- [ ] Complete the other eleven 20-update solar-aligned fits using the same
+  declared price mask. Recheck price-root identification and source-bound
+  history for every month. The user withdrew the 100-update requirement;
+  the launched 100-update process ended before any monthly checkpoint and
+  must not be resumed.
 - [ ] Transfer completed curves to the original 799-offer joint LP for one
   8,760-hour solve. Independently audit price, generation, primal/dual,
   emergency and chronology; keep the accepted baseline unless every gate passes.
