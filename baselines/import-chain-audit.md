@@ -1,5 +1,7 @@
 # 2025 baseline import-chain audit
 
+**29 October 2026 update:** `baselines/compact/` now contains an independently implemented 11-module computation path plus a test-only verifier. It exactly reproduces all 6,999,240 transferred LP cost cells, the first two January fit losses, and the retained 8,760-hour LP objectives, zonal prices, and total generation in a fresh replay. See `baselines/compact/README.md`. The counts below describe the original source-hashed entrypoints retained for historical replay; they do not describe the compact path. The active research baseline pointer has not changed.
+
 Measured 29 October 2026 against the six source-hashed entrypoints for the two retained research baselines, plus three site checks. This is a **static transitive import** count: imports inside functions are included even when a given run never calls the function. It is 91 distinct Python modules (87 baseline, four additional site-only). Importing all six baseline entrypoints in the pinned environment actually loaded 76 local modules before any fit or LP clear. These are module counts, not 91 independent models.
 
 | Primary role | Modules | What they do |
