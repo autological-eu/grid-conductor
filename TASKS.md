@@ -1,39 +1,29 @@
-## Solar-aligned, identifiable-price monthly fit — 29 October 2026
+## Accepted monthly fitted-bid research baseline — 29 October 2026
 
-- [x] Pilot price-conditioned root selection on the saved January hard-hour
-  case. The prior model-only multistart certified the unchanged root in 19.7s
-  with seven hard-hour fallbacks, versus minutes of neighbor retries. Its
-  valid-root price spread reached 2.53 EUR/MWh. The user directed that, among
-  certified roots, retrospective fitting select the smallest observed-price
-  loss. Retain the root set and label the resulting same-month score as
-  price-conditioned; keep annual LP prices independent of this choice.
-- [x] Complete January's price-conditioned 20-update pilot on aligned solar:
-  all-cell price MAE 33.726 to 21.450 EUR/MWh, hourly country/technology
-  generation MAE 0.622 to 0.511 GW. These are in-sample transport scores.
-- [x] Align fast-fit solar group availability to the accepted 799-offer LP input.
-  The previous fit had 37.116 TWh more solar availability. Use the same 48 zones,
-  326 technology groups and 95 transport corridors; source hashes and curve
-  checkpoints are saved outside Git.
-- [x] Diagnose August's flat price root. At 2025-08-15 23:00 UTC, the common
-  EE/LV/LT price can change without changing generation, flows or balance. A
-  fixed model-only gauge ceased to be feasible under rate-1 updates. Declare
-  those three price cells absent from training only; retain them in every
-  all-cell price score. No projected gradient is accepted.
-- [x] Complete August's 20-update Adam-rate-1 pilot: all-cell price MAE
-  29.673 to 18.879 EUR/MWh across 30,504 observed price cells (30,501
-  training cells); generation MAE 0.562 to 0.478 GW. Maximum balance residual
-  9.79e-7 MW, zero emergency generation and zero projected updates. These are
-  same-month transport-fit metrics, not independent LP results.
-- [ ] Complete February–December 20-update fits with the price-conditioned
-  root-selection protocol. The previous August model-only fit remains a
-  separate pilot. Recheck root identification and source-bound history for
-  each month. The user withdrew the 100-update requirement;
-  the launched 100-update process ended before any monthly checkpoint and
-  must not be resumed.
-- [ ] Transfer completed curves to the original 799-offer joint LP for one
-  8,760-hour solve. Independently audit price, generation, primal/dual,
-  emergency and chronology; keep the accepted baseline unless every gate passes.
-
+- [x] Complete all twelve source-hashed 20-update Adam-rate-1 fits on
+  accepted-LP-aligned solar inputs. Select among certified stalled-hour price
+  roots by observed training loss, as directed. Keep three EE/LV/LT 15 August
+  price cells outside the gradient only; include them in all-cell MAE. Save
+  21-state histories, curve hashes and inferred flows for each month.
+- [x] Independently replay all 8,760 fast-market hours: same-month,
+  price-conditioned MAE **20.202 EUR/MWh** on 359,160 observed price cells;
+  hourly country/technology generation MAE **0.502 GW**. This is a training
+  diagnostic, not an independent price or scenario result.
+- [x] Transfer the twelve saved curves to the unchanged 799-offer joint LP,
+  with zero solar availability mismatch. One 8,760-hour annual solve completed
+  in 41.19s clearing time (fit time 3,758s separately). Independent primal,
+  dual and no-emergency audit passed: price MAE **25.051 vs 26.795 EUR/MWh**
+  and hourly generation MAE **0.552 vs 0.633 GW** against the archived
+  solar-anchor baseline; 32/41 zones improve. Mixed offer allocation remains
+  illustrative. See `research/observed-root-monthly-baseline-2025.md`.
+- [x] User-directed research baseline adoption: archive prior pointer and set
+  `config/active-research-baseline.json` to the audited monthly fit. This is a
+  retrospective in-sample baseline, with no forward or investment-response
+  validation. No public website/app integration is claimed.
+- [ ] Integrate the new baseline into supported scenario reclearing and the
+  static app only after independent response and chronology checks. Preserve
+  the prior baseline as a matched control; investigate CZ/Italian and late-year
+  price regressions, root-selection sensitivity, and mixed offer attribution.
 
 ## Monthly fitted bids transferred to the original joint LP — 29 October 2026
 

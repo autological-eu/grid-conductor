@@ -22,6 +22,7 @@ from solar_country_fit_2025 import write
 FIT=DEST/'aligned-mixed-flow-observed-root-v1-u20-r1'
 OUT=ROOT/'data/bidding-zone-network-2025/observed-root-fast-joint-lp-v1'
 ACTIVE=ROOT/'config/active-research-baseline.json'
+ARCHIVED=ROOT/'config/research-baseline-solar-anchor-2025.json'
 
 
 def inputs():
@@ -35,9 +36,15 @@ def inputs():
         summary=json.loads((path.parent/'summary.json').read_text())
         if summary['updates']!=20 or summary['month']!=month or summary['rate']!=1.:
             raise ValueError('Different monthly fit protocol')
-    for path in [FIT/'audit.json',FIT/'flow-metadata.json',ACTIVE]:
+    current=json.loads(ACTIVE.read_text())
+    historical=ARCHIVED if current['model']=='monthly-fitted-bids-v1' else ACTIVE
+    for path in [FIT/'audit.json',FIT/'flow-metadata.json']:
         sources[str(path.relative_to(ROOT))]=digest(path)
-    active=json.loads(ACTIVE.read_text())
+    # The annual witness was produced against the archived incumbent. Retain
+    # its original source key/hash so the sealed audit can be replayed after
+    # research-baseline adoption without pretending it used the new pointer.
+    sources[str(ACTIVE.relative_to(ROOT))]=digest(historical)
+    active=json.loads(historical.read_text())
     if active['model']!='solar-anchor-bids-v1' or active['annual_case']!='resource_full':
         raise ValueError('Accepted baseline pointer changed')
     for relative,sha in active['artifacts'].items():

@@ -37,11 +37,16 @@ An explicitly diagnosed structurally unidentifiable price cell may be excluded
 from the *training loss* only when its zone, hour, model-based reason and count
 are declared before fitting. Report both the training-cell score and the
 all-observed-cell score, including excluded cells, at every update. Continue to
-require the original balance, generation and flow constraints and exact
-gradients for the declared training objective. This exception does not turn a
+require the original balance, generation and flow constraints and locally
+identified implicit gradients for the selected root. Observed-price selection
+between valid roots can be nonsmooth, so a local adjoint is not a global
+gradient through the selection rule. This exception does not turn a
 same-month fit into independent validation or satisfy the annual LP gate.
-The inferred-flow fit is a research diagnostic until independent physical
-and out-of-sample checks support a scenario or baseline change.
+The inferred-flow fit is a research diagnostic for scenario value until
+independent physical and out-of-sample checks support scenario use. The user
+accepted the separately audited 2025 in-sample physical LP result as a
+**research baseline** on 29 October 2026; this does not establish forecast
+skill or investment-response validity.
 
 ## Additional ENTSO-E source evidence
 
@@ -492,21 +497,21 @@ market prices. Preserve the adopted research baseline while evaluating this
 extension; a prototype or partial EUPHEMIA feature set does not establish full
 market replication, observed-price improvement or investment validity.
 
-## Accepted research baseline — 23 October 2026
+## Accepted research baseline — 29 October 2026
 
-The next user-directed baseline method is twelve independently fitted 2025
-monotone supply-bid models: one curve per technology, bidding zone, local hour
-of day and month, with 100 rate-1 Adam updates in each month and **no** forward
-month transfer. Evaluate their bids in the accepted joint physical LP over all
-8,760 hours. Retain its source demand, original renewable availability, fixed
-hydro, network and no-emergency/numerical gates. Report price and generation
-performance against the current baseline before changing the baseline pointer.
-Fit and LP evaluation must use the same accepted renewable-availability inputs;
-where a frozen fit predates an input correction, quantify the difference and
-refit before baseline selection. Mixed LP offer output has no unique technology
-allocation; report its allocated volume and any fallback separately.
-This same-month fitting establishes an in-sample reconstruction, not forecast
-skill or investment-response validity.
+The accepted research baseline uses twelve separately fitted 2025 monotone
+supply-bid models: one curve per technology, bidding zone, local hour of day
+and month, with 20 rate-1 Adam updates in each month and **no** forward-month
+transfer. The saved bids are sampled onto the original 799 offer columns and
+cleared once in the joint physical LP over all 8,760 hours. Retain its source
+demand, original renewable availability, fixed hydro, network and
+no-emergency/numerical gates. The fitting and LP solar availability match.
+The user accepted the audited annual price and generation improvement over the
+archived solar-anchor baseline, despite missing out-of-sample validation.
+This is an in-sample research baseline, not a forecast or investment-response
+model. Mixed LP offer output has no unique technology allocation; report its
+allocated volume and any fallback separately. The static app remains a
+separate, unverified integration gate.
 
 For any annual replacement of this baseline using the Nordic correction, require
 complete source-supported 2025 water and renewable availability, hourly

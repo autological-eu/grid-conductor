@@ -1,0 +1,57 @@
+{
+  "model": "solar-anchor-bids-v1",
+  "annual_case": "resource_full",
+  "decision_date": "2026-10-23",
+  "role": "user-accepted research baseline",
+  "evaluation": "2025 full-year in-sample reconstruction against corrected hourly ENTSO-E SDAC; not independent forecast validation",
+  "proposal": {
+    "path": "data/bidding-zone-network-2025/solar-anchor-bids-v1/proposal.npz",
+    "coefficients": "resource",
+    "strength": 1
+  },
+  "summary_path": "data/bidding-zone-network-2025/solar-anchor-bids-v1/summary.json",
+  "audit_path": "data/bidding-zone-network-2025/solar-anchor-bids-v1/audit.json",
+  "inputs_path": "data/bidding-zone-network-2025/solar-anchor-bids-v1/inputs.json",
+  "witness": {
+    "witness": "data/bidding-zone-network-2025/solar-anchor-bids-v1/resource_full.npz",
+    "witness_sha256": "1837b12e5eeec08ff74fbb3a91c7312bbc8a9dcb842b477cf6a367015fa41ff9",
+    "hours": 8760,
+    "optimal_hours": 8760,
+    "complete_year": true,
+    "failures": [],
+    "clearing_seconds": 51.81260965000001,
+    "reused": false
+  },
+  "prices": {
+    "equal_zone_mae": 26.794968253415064,
+    "mean_correlation": 0.6328105294060915,
+    "mean_demeaned_mae": 18.75245592227756,
+    "complete_zones": 41,
+    "modeled_zones": 48,
+    "hours": 8760
+  },
+  "generation": {
+    "solar_monthly_mae_twh": 0.08833823269163081,
+    "thermal_monthly_normalized_error": 0.3692437083111281,
+    "thermal_error_increase_percent": 17.412964518228023
+  },
+  "decision": {
+    "automatic_experiment_selection": "control",
+    "automatic_generation_guard_passed": false,
+    "user_accepts_thermal_generation_tradeoff": true,
+    "note": "Explicit user adoption supersedes the prior no-promotion instruction. Preserve historical failed 5% generation guard; this is not a claim that the trial passed it. Numerical feasibility gates remain unchanged."
+  },
+  "artifacts": {
+    "data/bidding-zone-network-2025/solar-anchor-bids-v1/summary.json": "44642633db6510ff0decace44ecb842fad6f70f3379611dd98194cc8bef6cf1a",
+    "data/bidding-zone-network-2025/solar-anchor-bids-v1/audit.json": "6ca5b15740f002019dd618421602ac5114e6a9c1463411b3da5262805449ef47",
+    "data/bidding-zone-network-2025/solar-anchor-bids-v1/inputs.json": "e4691345c1bd8147e14f65958b96645100eee569fe215b638dce84c45d0bd46e",
+    "data/bidding-zone-network-2025/solar-anchor-bids-v1/proposal.npz": "cfc5cfee136f1b26800bd51a6a055c697c67965115f9387be735dbdc858de297",
+    "data/bidding-zone-network-2025/solar-anchor-bids-v1/resource_full.npz": "1837b12e5eeec08ff74fbb3a91c7312bbc8a9dcb842b477cf6a367015fa41ff9",
+    "data/bidding-zone-network-2025/solar-country-fit-v1/delta.npz": "4c36a2d2c22dea59f316f2fe3d5f06b5e79b7b28e8504bb89e7ebd3d3784d002",
+    "data/price-trace/sdac-hourly-2025-v1/prices.npz": "fcbb527f169fd461083e96eb3dd03a8639d9b8b71be84fc869751af1f926057e"
+  },
+  "historical_baseline_manifest": "config/research-baseline.json",
+  "public_explorer_updated": false,
+  "browser_integration": false,
+  "recurring_reviews_enabled": false
+}

@@ -1,25 +1,25 @@
-## Current 20-update solar-aligned fit — 29 October 2026
+## Current research baseline — 29 October 2026
 
-The user explicitly changed the retrospective fit's multistart selection:
-among certified price roots for fixed bids, choose the one with the lowest
-observed-price training loss. This may improve same-month price MAE by
-selection and is **not** independent validation. Model-only starting vectors
-remain the numerical seeds; observed prices choose among certified outcomes.
-The original annual joint LP must clear independently, and all root ambiguity
-and source-covered generation errors remain visible. January observed-price root-selection pilot completed at 21.450 EUR/MWh
-same-month price MAE after 20 updates and generation MAE 0.511 GW. Complete
-the other eleven months under its source-hashed protocol before an annual claim.
+The user directed adoption of the completed 20-update monthly bid fit after
+its separate original 799-offer, 8,760-hour LP audit. The active research
+pointer is `config/active-research-baseline.json` (`monthly-fitted-bids-v1`);
+the prior solar-anchor pointer is archived byte-for-byte at
+`config/research-baseline-solar-anchor-2025.json`. The new LP's corrected SDAC
+price MAE is 25.051 vs 26.795 EUR/MWh; hourly country/technology generation
+MAE is 0.552 vs 0.633 GW. All 8,760 hours are optimal with zero emergency;
+independent primal/dual checks pass. Read
+`research/observed-root-monthly-baseline-2025.md` and the top TASKS section.
 
-The user withdrew the 100-update requirement. Fit all twelve 2025 months
-with 20 Adam updates at rate 1.0, using accepted-LP-aligned solar availability.
-August completed as a separate model-only root-selection pilot at all-observed-cell
-price MAE 18.879 EUR/MWh; refit August under the chosen price-conditioned rule. The three
-structurally unidentifiable EE/LV/LT price cells at 15 August 23:00 UTC are
-excluded from training only and retained in reported price MAE. The attempted
-100-update background process ended before a monthly checkpoint; do not
-resume it. Inspect live jobs and source-hashed monthly results before starting another job. Next run an independent fast-fit replay,
-then one unchanged annual joint LP and independent price/generation/primal/
-dual audit. The accepted baseline remains unchanged until those gates pass.
+Twenty Adam updates at rate 1.0 were completed in every month, using aligned
+solar availability. On stalled hours, certified roots were selected by the
+lowest **observed** price loss, per user decision. This makes fast same-month
+scores price-conditioned and optimistic; the independent physical LP did not
+use observed prices to choose a root. Three structurally unidentifiable Baltic
+price cells were excluded from the training gradient only, and retained in
+all-cell evaluation. No forward or scenario-value validation exists. The
+static browser and historical research scripts still need explicit integration
+before they may use the new baseline. Do not equate this pointer with verified
+app support. Do not resume the abandoned 100-update trial or retired searches.
 
 ## Mixed-coverage fitted-bid research checkpoint — 29 October 2026
 
