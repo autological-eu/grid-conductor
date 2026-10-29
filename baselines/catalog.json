@@ -1,0 +1,19 @@
+{
+  "active": "mixed_curve_fitting",
+  "models": {
+    "fast_dispatch_only": {
+      "historical_id": "solar-anchor-bids-v1/resource_full",
+      "manifest": "config/research-baseline-solar-anchor-2025.json",
+      "report": "research/solar-anchor-bids-2025.md",
+      "witness": "data/bidding-zone-network-2025/solar-anchor-bids-v1/resource_full.npz",
+      "price_mae_eur_mwh": 26.794968253415064
+    },
+    "mixed_curve_fitting": {
+      "historical_id": "monthly-fitted-bids-v1/observed-root-fast-joint-lp",
+      "manifest": "config/active-research-baseline.json",
+      "report": "research/observed-root-monthly-baseline-2025.md",
+      "witness": "data/bidding-zone-network-2025/observed-root-fast-joint-lp-v1/annual.npz",
+      "price_mae_eur_mwh": 25.051056742655632
+    }
+  }
+}

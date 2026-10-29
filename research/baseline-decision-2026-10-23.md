@@ -1,9 +1,10 @@
 # Adopted baseline and bidding strategies
 
 On 23 October 2026, the user explicitly adopted **solar-anchor-bids-v1/resource_full**
-as the research baseline. [The active manifest](../config/active-research-baseline.json)
+as the research baseline. [Its archived manifest](../config/research-baseline-solar-anchor-2025.json)
 pins its proposal, source inputs, independent audit and full 8,760-hour witness.
-Future model comparisons start from this case.
+It is now named `fast_dispatch_only`; the later `mixed_curve_fitting` research
+baseline superseded it on 29 October 2026. It remains the matched control.
 
 ## How the adopted bids work
 
@@ -79,7 +80,7 @@ market reconstruction, not independent forecasting validation or uniquely
 identified real bids. Nordic price errors and exceptional scarcity spikes remain
 substantial. Fixed hydro also limits investment-response interpretation.
 
-This adoption updates the research reference only. The public country explorer,
+This historical adoption updated the research reference only. The public country explorer,
 public model article and browser scenario engine retain their existing published
-checkpoints; recurring reviews remain disabled. The old baseline manifest and
-all sealed numerical producers remain intact for historical replay.
+checkpoints; recurring reviews remain disabled. The archived baseline manifest and
+its numerical producers remain available for historical replay.

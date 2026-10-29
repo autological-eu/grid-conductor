@@ -83,5 +83,6 @@
   "historical_baseline_manifest": "config/research-baseline-solar-anchor-2025.json",
   "public_explorer_updated": false,
   "browser_integration": false,
-  "recurring_reviews_enabled": false
+  "recurring_reviews_enabled": false,
+  "name": "mixed_curve_fitting"
 }
