@@ -1,5 +1,15 @@
 ## Solar-aligned, identifiable-price monthly fit — 29 October 2026
 
+- [x] Pilot price-conditioned root selection on the saved January hard-hour
+  case. The prior model-only multistart certified the unchanged root in 19.7s
+  with seven hard-hour fallbacks, versus minutes of neighbor retries. Its
+  valid-root price spread reached 2.53 EUR/MWh. The user directed that, among
+  certified roots, retrospective fitting select the smallest observed-price
+  loss. Retain the root set and label the resulting same-month score as
+  price-conditioned; keep annual LP prices independent of this choice.
+- [x] Complete January's price-conditioned 20-update pilot on aligned solar:
+  all-cell price MAE 33.726 to 21.450 EUR/MWh, hourly country/technology
+  generation MAE 0.622 to 0.511 GW. These are in-sample transport scores.
 - [x] Align fast-fit solar group availability to the accepted 799-offer LP input.
   The previous fit had 37.116 TWh more solar availability. Use the same 48 zones,
   326 technology groups and 95 transport corridors; source hashes and curve
@@ -14,9 +24,10 @@
   training cells); generation MAE 0.562 to 0.478 GW. Maximum balance residual
   9.79e-7 MW, zero emergency generation and zero projected updates. These are
   same-month transport-fit metrics, not independent LP results.
-- [ ] Complete the other eleven 20-update solar-aligned fits using the same
-  declared price mask. Recheck price-root identification and source-bound
-  history for every month. The user withdrew the 100-update requirement;
+- [ ] Complete February–December 20-update fits with the price-conditioned
+  root-selection protocol. The previous August model-only fit remains a
+  separate pilot. Recheck root identification and source-bound history for
+  each month. The user withdrew the 100-update requirement;
   the launched 100-update process ended before any monthly checkpoint and
   must not be resumed.
 - [ ] Transfer completed curves to the original 799-offer joint LP for one

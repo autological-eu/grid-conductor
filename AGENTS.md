@@ -1,13 +1,23 @@
 ## Current 20-update solar-aligned fit — 29 October 2026
 
+The user explicitly changed the retrospective fit's multistart selection:
+among certified price roots for fixed bids, choose the one with the lowest
+observed-price training loss. This may improve same-month price MAE by
+selection and is **not** independent validation. Model-only starting vectors
+remain the numerical seeds; observed prices choose among certified outcomes.
+The original annual joint LP must clear independently, and all root ambiguity
+and source-covered generation errors remain visible. January observed-price root-selection pilot completed at 21.450 EUR/MWh
+same-month price MAE after 20 updates and generation MAE 0.511 GW. Complete
+the other eleven months under its source-hashed protocol before an annual claim.
+
 The user withdrew the 100-update requirement. Fit all twelve 2025 months
 with 20 Adam updates at rate 1.0, using accepted-LP-aligned solar availability.
-August completed at all-observed-cell price MAE 18.879 EUR/MWh. The three
+August completed as a separate model-only root-selection pilot at all-observed-cell
+price MAE 18.879 EUR/MWh; refit August under the chosen price-conditioned rule. The three
 structurally unidentifiable EE/LV/LT price cells at 15 August 23:00 UTC are
 excluded from training only and retained in reported price MAE. The attempted
 100-update background process ended before a monthly checkpoint; do not
-resume it. Inspect the live 20-update process and its source-hashed monthly
-results before starting another job. Next run an independent fast-fit replay,
+resume it. Inspect live jobs and source-hashed monthly results before starting another job. Next run an independent fast-fit replay,
 then one unchanged annual joint LP and independent price/generation/primal/
 dual audit. The accepted baseline remains unchanged until those gates pass.
 

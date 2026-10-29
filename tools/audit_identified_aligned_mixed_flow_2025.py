@@ -4,13 +4,13 @@ import json
 
 import numpy as np
 
-from batched_transport_newton_recovery_2025 import RecoveredTransportMarket
+from batched_transport_observed_price_multistart_2025 import ObservedPriceMultistartMarket
 from flow_adjusted_zonal_clearing_2025 import DEST,observed_exchanges
-from fit_mixed_flow_monthly_bids_2025 import solve_with_neighbor_starts
+
 from monthly_diurnal_splines_2025 import labels
 from monthly_lp_spline_inputs_2025 import aligned
 
-OUT=DEST/'aligned-mixed-flow-identified-v1-u20-r1'
+OUT=DEST/'aligned-mixed-flow-observed-root-v1-u20-r1'
 
 
 def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -21,14 +21,14 @@ def array_digest(array):return hashlib.sha256(np.ascontiguousarray(array).tobyte
 
 def replay():
     _,state,base,_,_=aligned();s,d,*_=state
-    market=RecoveredTransportMarket(base.zones,base.groups,base.lower,base.upper,
-        base.edges,base.capacity,base.source,base.load,cost=base.cost,
+    market=ObservedPriceMultistartMarket(base.zones,base.groups,base.lower,base.upper,
+        base.edges,base.capacity,base.source,base.load,observed_prices=d['observed_prices'],cost=base.cost,
         thermal_tau=base.thermal_tau,renewable_tau=base.renewable_tau,flow_tau=base.flow_tau)
     _,covered,_,observed_flow=observed_exchanges(s['zones'],market.edges,return_edges=True)
     missing=~covered
     ci=np.array([g['country_id'] for g in s['groups']]);ti=np.array([s['technologies'].index(g['technology']) for g in s['groups']])
     stamps=np.arange('2025-01-01','2026-01-01',dtype='datetime64[h]')
-    edge_metadata=dict(schema='aligned-mixed-flow-identified-v1-u20-r1',
+    edge_metadata=dict(schema='aligned-mixed-flow-observed-root-v1-u20-r1',
         direction='Positive flows_gw run from from_zone to to_zone; negative means reverse.',
         net_import='inferred_net_import_gw is positive for net imports into zone.',
         flow_kind='Inferred by bounded independent-corridor transport clearing; not observed ENTSO-E exchange.',
@@ -57,7 +57,7 @@ def replay():
         if (folder/'resume.npz').exists():
             with np.load(folder/'resume.npz') as checkpoint:
                 previous_modeled_prices=checkpoint['prior'] if bool(checkpoint['has_prior']) else None
-        result=solve_with_neighbor_starts(market,theta,hours,p0=previous_modeled_prices)
+        result=market.solve(theta,hours,p0=previous_modeled_prices)
         offers=market.offers(theta,hours)
         residual,_,q,f=market.evaluate(result['prices'],offers)
         if abs(residual).max()>1e-7 or np.any(q<-1e-7) or np.any(q-offers['capacity']>1e-7):
@@ -99,8 +99,8 @@ def replay():
             inferred_flows_sha256=digest(folder/'inferred-flows.npz'))
         if month==8:
             k=int(np.flatnonzero(hours==5447)[0])
-            cold=solve_with_neighbor_starts(market,theta[k:k+1],hours[k:k+1])
-            warm=solve_with_neighbor_starts(market,theta[k:k+1],hours[k:k+1],
+            cold=market.solve(theta[k:k+1],hours[k:k+1])
+            warm=market.solve(theta[k:k+1],hours[k:k+1],
                 p0=previous_modeled_prices[k:k+1])
             max_flow=float(abs(cold['flows_gw']-warm['flows_gw']).max())
             max_generation=float(abs(cold['quantities_gw']-warm['quantities_gw']).max())
@@ -131,7 +131,7 @@ def replay():
         observed_flow_mae_gw=float(np.average([r['observed_flow_mae_gw'] for r in records],weights=fc)),
         incompatible_observed_flow_cells=sum(r['incompatible_observed_flow_cells'] for r in records),
         source_witness_sha256=digest(DEST/'witness.npz'),
-        caveat='In-sample reconstructed prices with model-inferred flows; not a physical LP or investment scenario certificate.')
+        caveat='Observed-price-selected roots on hard hours; same-month fitted prices are optimistic and not independent validation. Model-inferred flows are not observed exchange or an annual physical LP certificate.')
     (OUT/'audit.json').write_text(json.dumps(audit,indent=2)+'\n')
     return audit
 

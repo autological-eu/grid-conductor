@@ -70,9 +70,14 @@ these fits are retrospective reconstruction, not forward forecasts.
 For the differentiable transport fit, certify each hourly balance and supply/
 corridor bound at the declared tolerance. Where several model-only price starts
 produce materially different valid prices for the same bids and inputs,
-quantify the ambiguity and its effect on gradients and price scores. Do not
-select a root using observed prices or treat mere convergence as unique price
-recovery.
+quantify the ambiguity and its effect on gradients and price scores. In the
+retrospective bid-fit experiment, when multiple certified roots are evaluated
+for the same bids, select the one with the lowest observed-price training loss;
+retain the tested-root set, source price coverage and tie rule. Label its
+same-month score as price-conditioned and potentially optimistic. Do not treat
+mere convergence as unique price recovery, or use observed-price root selection
+to claim an independent price validation. The original physical LP evaluation
+must use its own unchanged clearing rule.
 
 After all twelve fits pass numerical checks, transfer their bids to the
 existing offer columns and run **one** 8,760-hour clear in the accepted joint

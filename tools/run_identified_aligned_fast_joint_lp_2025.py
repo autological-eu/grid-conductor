@@ -19,8 +19,8 @@ from run_regional_water_candidate_2025 import guarded_hour
 from solar_anchor_bids_2025 import model
 from solar_country_fit_2025 import write
 
-FIT=DEST/'aligned-mixed-flow-identified-v1-u20-r1'
-OUT=ROOT/'data/bidding-zone-network-2025/identified-aligned-fast-joint-lp-v1'
+FIT=DEST/'aligned-mixed-flow-observed-root-v1-u20-r1'
+OUT=ROOT/'data/bidding-zone-network-2025/observed-root-fast-joint-lp-v1'
 ACTIVE=ROOT/'config/active-research-baseline.json'
 
 
@@ -124,7 +124,7 @@ def run():
         mapped_offer_columns=sum(map(len,grouped.values())),
         mixed_renewable_offer_columns=len(mixed),
         preparation_seconds=time.perf_counter()-started,
-        limitations=['20-update same-month fit; three Baltic price cells excluded from training; no forward test',
+        limitations=['20-update same-month fit; observed-price root selection on hard hours and three Baltic price cells excluded from training; no forward test',
                      'All observed price cells retained in reported fit MAE',
                      'Curve midpoints sampled on existing LP offer columns; no plant bid reconstruction']))
     print('PILOT',control,'SOLAR_MISMATCH',mismatch,flush=True)

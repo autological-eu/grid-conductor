@@ -22,3 +22,22 @@ All 30,504 observed August price cells enter the displayed price MAE; 30,501 ent
 Complete the other months with 20 Adam updates at rate 1.0, then perform one original joint-LP annual dispatch with independent primal/dual, price and generation audit. The accepted baseline remains unchanged. A price improvement here alone is insufficient to promote the candidate.
 
 On 29 October the user withdrew the 100-update requirement. Its abandoned run produced no monthly checkpoint; its empty ignored run directory was removed.
+
+## Price-conditioned root-selection pilot
+
+The user chose observed-price loss as the selector among certified numerical
+price roots during retrospective fitting. Numerical starting vectors remain
+model-only. For a hard hour, eight predeclared starts are tried; the valid
+root with the smallest smoothed observed-price loss is used. August's known
+flat-price hour is forced through this comparison. This selection can lower
+in-sample price error even when dispatch is unchanged. The accepted LP's
+annual evaluation does not select roots using observed prices.
+
+On aligned solar inputs, the 20-update January pilot reached **21.450
+EUR/MWh** all-observed-cell price MAE from 33.726 and **0.511 GW** hourly
+country/technology generation MAE from 0.622. The model-only multistart
+control certified January's previously stalled update 9 in 19.7 seconds,
+with seven hard-hour fallbacks and maximum valid-root price spread of
+2.53 EUR/MWh. The January price-conditioned fit is a same-month diagnostic,
+not an independent price score. Remaining months and the annual LP audit
+are pending.

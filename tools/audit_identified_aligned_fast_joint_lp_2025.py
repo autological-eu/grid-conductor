@@ -184,7 +184,7 @@ def run():
         zones_improved=sum(r['price_mae']<r['baseline_price_mae'] for r in zones),
         zones=zones,months=months,fit_audit_sha256=digest(FIT/'audit.json'),
         inputs_sha256=digest(OUT/'inputs.json'),witness_sha256=digest(OUT/'annual.npz'),
-        limitations=['20-update in-sample fit; three Baltic price cells excluded from training but retained in price score',
+        limitations=['20-update in-sample fit; observed-price root selection on hard hours; three Baltic price cells excluded from training but retained in price score',
                      'Fitting and accepted LP solar availability aligned',
                      'Mixed LP offer allocation is illustrative and not unique; zero member-profile hours use zonal technology availability shares',
                      'No next-month price or asset-scenario validation']))
