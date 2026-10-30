@@ -1,0 +1,31 @@
+{
+  "status": "retrospective_zone_tech_supply_candidate_not_lp_baseline",
+  "hours": 8760,
+  "zone_technology_rows": 624,
+  "a75_receipts_checked": 456,
+  "model_groups": 326,
+  "matched_rows_with_gap": 81,
+  "matched_gap_hours": 435279,
+  "candidate_uplift_rows": 28,
+  "candidate_uplift_mwh": 9808553.10881399,
+  "uplift_rows_needing_new_offer": 15,
+  "source_paths": [
+    "data/bidding-zone-network-2025/sigmoid-month-pairs-v1/inputs.npz",
+    "data/bidding-zone-network-2025/solar-country-fit-v1/delta.npz",
+    "data/carbon-pilot/map-2025/{zone}/{month}.json"
+  ],
+  "source_sha256": {
+    "grouped_input": "240157d56a1af31696b133873c179669319517bc534b7dffbbd2d60854f6d2d5",
+    "solar_delta": "4c36a2d2c22dea59f316f2fe3d5f06b5e79b7b28e8504bb89e7ebd3d3784d002",
+    "a75_receipt_set": "66eba20cf4e9e8dd9409e6f326f3c30af6827199ab240ed88df312efbbc949de"
+  },
+  "hourly_candidate_sha256": "d78438c542f96d354c48f228ca1c04d394406d2b8ce6ecb42fcdcb8d9b9d7de2",
+  "review_csv_sha256": "177211444de708121b69e31cda8c4dc522e7ff74828adcbfa05f223cf09112de",
+  "rules": [
+    "Only exact bidding-zone A75 scope is comparable",
+    "Only dispatchable non-hydro technology rows receive an hourly floor",
+    "Weather-limited renewables, run-of-river and reservoir keep original availability",
+    "Missing LP offers require an explicit new generator and bid",
+    "Observed dispatch is a retrospective lower bound, not a scenario forecast"
+  ]
+}

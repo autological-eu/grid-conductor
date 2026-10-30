@@ -1,0 +1,625 @@
+zone,technology,observed_source,observed_scope,model_source,model_group_index,matched_observation_hours,observed_over_model_hours,model_peak_mw,observed_peak_mw,candidate_peak_mw,candidate_hourly_uplift_mwh,treatment
+AL,onshore_wind,ENTSO-E A75 B19 hourly generation,unavailable,retained 2025 grouped supply inputs,0,0,,89.172402,,89.172402,0.0,unmatched_scope
+AL,offshore_wind,ENTSO-E A75 B18 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AL,solar,ENTSO-E A75 B16 hourly generation,unavailable,retained 2025 grouped supply inputs,2,0,,613.189499,,613.189499,0.0,unmatched_scope
+AL,nuclear,ENTSO-E A75 B14 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AL,ror,ENTSO-E A75 B11 hourly generation,unavailable,retained 2025 grouped supply inputs,1,0,,383.666,,383.666,0.0,unmatched_scope
+AL,reservoir,ENTSO-E A75 B12 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AL,gas,ENTSO-E A75 B04 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AL,hard_coal,ENTSO-E A75 B05 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AL,lignite,ENTSO-E A75 B02 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AL,oil,ENTSO-E A75 B06 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AL,biomass,ENTSO-E A75 B01 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AL,waste,ENTSO-E A75 B17 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AL,geothermal,ENTSO-E A75 B09 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AT,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,6,0,,3527.256562,,3527.256562,0.0,unmatched_scope
+AT,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AT,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,8,0,,6414.726648,,6414.726648,0.0,unmatched_scope
+AT,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AT,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,7,0,,2395.180368,,2395.180368,0.0,unmatched_scope
+AT,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AT,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,4,0,,4596.0,,4596.0,0.0,unmatched_scope
+AT,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AT,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+AT,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,5,0,,170.0,,170.0,0.0,unmatched_scope
+AT,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,3,0,,132.0,,132.0,0.0,unmatched_scope
+AT,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,9,0,,123.0,,123.0,0.0,unmatched_scope
+AT,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BA,onshore_wind,ENTSO-E A75 B19 hourly generation,unavailable,retained 2025 grouped supply inputs,11,0,,153.470964,,153.470964,0.0,unmatched_scope
+BA,offshore_wind,ENTSO-E A75 B18 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BA,solar,ENTSO-E A75 B16 hourly generation,unavailable,retained 2025 grouped supply inputs,13,0,,293.81256,,293.81256,0.0,unmatched_scope
+BA,nuclear,ENTSO-E A75 B14 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BA,ror,ENTSO-E A75 B11 hourly generation,unavailable,retained 2025 grouped supply inputs,12,0,,14.0,,14.0,0.0,unmatched_scope
+BA,reservoir,ENTSO-E A75 B12 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BA,gas,ENTSO-E A75 B04 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BA,hard_coal,ENTSO-E A75 B05 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BA,lignite,ENTSO-E A75 B02 hourly generation,unavailable,retained 2025 grouped supply inputs,10,0,,2090.0,,2090.0,0.0,unmatched_scope
+BA,oil,ENTSO-E A75 B06 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BA,biomass,ENTSO-E A75 B01 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BA,waste,ENTSO-E A75 B17 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BA,geothermal,ENTSO-E A75 B09 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BE,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,19,0,,2267.995758,,2267.995758,0.0,unmatched_scope
+BE,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,17,0,,3163.279888,,3163.279888,0.0,unmatched_scope
+BE,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,21,0,,7273.538329,,7273.538329,0.0,unmatched_scope
+BE,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,16,0,,3538.944,,3538.944,0.0,unmatched_scope
+BE,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,20,0,,58.474481,,58.474481,0.0,unmatched_scope
+BE,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BE,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,15,0,,6634.2,,6634.2,0.0,unmatched_scope
+BE,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BE,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BE,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,18,0,,130.2,,130.2,0.0,unmatched_scope
+BE,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,14,0,,113.0,,113.0,0.0,unmatched_scope
+BE,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,22,0,,293.8,,293.8,0.0,unmatched_scope
+BE,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BG,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,27,0,,563.861536,,563.861536,0.0,unmatched_scope
+BG,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BG,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,29,0,,3625.452908,,3625.452908,0.0,unmatched_scope
+BG,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,26,0,,1763.84,,1763.84,0.0,unmatched_scope
+BG,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,28,0,,218.076119,,218.076119,0.0,unmatched_scope
+BG,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BG,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,23,0,,761.0,,761.0,0.0,unmatched_scope
+BG,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,24,0,,1204.0,,1204.0,0.0,unmatched_scope
+BG,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,25,0,,6057.0,,6057.0,0.0,unmatched_scope
+BG,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BG,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BG,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+BG,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+CH,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,33,0,,84.243586,,84.243586,0.0,unmatched_scope
+CH,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+CH,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,35,0,,5201.939929,,5201.939929,0.0,unmatched_scope
+CH,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,32,0,,2729.79,,2729.79,0.0,unmatched_scope
+CH,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,34,0,,3272.468811,,3272.468811,0.0,unmatched_scope
+CH,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+CH,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,31,0,,98.8,,98.8,0.0,unmatched_scope
+CH,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+CH,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+CH,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+CH,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,30,0,,59.0,,59.0,0.0,unmatched_scope
+CH,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,36,0,,212.5,,212.5,0.0,unmatched_scope
+CH,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+CZ,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,42,0,,360.703807,,360.703807,0.0,unmatched_scope
+CZ,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+CZ,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,44,0,,3190.471661,,3190.471661,0.0,unmatched_scope
+CZ,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,41,0,,3356.184,,3356.184,0.0,unmatched_scope
+CZ,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,43,0,,24.015321,,24.015321,0.0,unmatched_scope
+CZ,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+CZ,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,38,0,,1719.0,,1719.0,0.0,unmatched_scope
+CZ,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,39,0,,639.0,,639.0,0.0,unmatched_scope
+CZ,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,40,0,,8875.6,,8875.6,0.0,unmatched_scope
+CZ,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+CZ,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,37,0,,30.0,,30.0,0.0,unmatched_scope
+CZ,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,45,0,,30.2,,30.2,0.0,unmatched_scope
+CZ,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+DE-LU,onshore_wind,ENTSO-E A75 B19 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,53,0,,65096.857083,,65096.857083,0.0,unmatched_scope
+DE-LU,offshore_wind,ENTSO-E A75 B18 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,51,0,,9089.799455,,9089.799455,0.0,unmatched_scope
+DE-LU,solar,ENTSO-E A75 B16 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,55,0,,61081.463265,,61081.463265,0.0,unmatched_scope
+DE-LU,nuclear,ENTSO-E A75 B14 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+DE-LU,ror,ENTSO-E A75 B11 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,54,0,,4014.118709,,4014.118709,0.0,unmatched_scope
+DE-LU,reservoir,ENTSO-E A75 B12 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+DE-LU,gas,ENTSO-E A75 B04 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,47,0,,36614.0,,36614.0,0.0,unmatched_scope
+DE-LU,hard_coal,ENTSO-E A75 B05 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,49,0,,15951.0,,15951.0,0.0,unmatched_scope
+DE-LU,lignite,ENTSO-E A75 B02 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,50,0,,15178.0,,15178.0,0.0,unmatched_scope
+DE-LU,oil,ENTSO-E A75 B06 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,52,0,,5684.345986,,5684.345986,0.0,unmatched_scope
+DE-LU,biomass,ENTSO-E A75 B01 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,46,0,,8022.801833,,8022.801833,0.0,unmatched_scope
+DE-LU,waste,ENTSO-E A75 B17 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,56,0,,3142.659,,3142.659,0.0,unmatched_scope
+DE-LU,geothermal,ENTSO-E A75 B09 hourly generation,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",retained 2025 grouped supply inputs,48,0,,26.9,,26.9,0.0,unmatched_scope
+DK1,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,61,8755,2720,2890.882628,3495.4,2890.882628,0.0,weather_or_water_reconciliation
+DK1,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,60,8755,331,2308.529172,1924.7275,2308.529172,0.0,weather_or_water_reconciliation
+DK1,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,62,8755,6277,2350.322241,2751.695,2350.322241,0.0,weather_or_water_reconciliation
+DK1,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+DK1,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8750,8748,0.0,3.64,0.0,0.0,weather_or_water_reconciliation
+DK1,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+DK1,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,58,8754,0,1137.2,468.19,1137.2,0.0,no_uplift
+DK1,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,59,8754,0,716.0,688.79,716.0,0.0,no_uplift
+DK1,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+DK1,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8754,8754,0.0,50.2766,50.2766,59592.974812,new_offer_required
+DK1,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,57,8754,58,661.0,809.81,809.81,2919.57375,existing_group_floor
+DK1,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,63,8754,8124,51.0,166.67,166.67,214885.215,existing_group_floor
+DK1,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+EE,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,74,0,,704.558542,,704.558542,0.0,unmatched_scope
+EE,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+EE,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,75,0,,675.411597,,675.411597,0.0,unmatched_scope
+EE,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+EE,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+EE,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+EE,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,72,0,,207.0,,207.0,0.0,unmatched_scope
+EE,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+EE,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+EE,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,73,0,,251.1,,251.1,0.0,unmatched_scope
+EE,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,71,0,,80.0,,80.0,0.0,unmatched_scope
+EE,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+EE,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+ES,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,82,0,,29378.000945,,29378.000945,0.0,unmatched_scope
+ES,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,80,0,,18.499986,,18.499986,0.0,unmatched_scope
+ES,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,84,0,,31266.136897,,31266.136897,0.0,unmatched_scope
+ES,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,79,0,,6459.776,,6459.776,0.0,unmatched_scope
+ES,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,83,0,,487.913391,,487.913391,0.0,unmatched_scope
+ES,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+ES,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,77,0,,27696.0,,27696.0,0.0,unmatched_scope
+ES,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+ES,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,78,0,,510.0,,510.0,0.0,unmatched_scope
+ES,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,81,0,,634.0,,634.0,0.0,unmatched_scope
+ES,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,76,0,,526.1,,526.1,0.0,unmatched_scope
+ES,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,85,0,,230.25,,230.25,0.0,unmatched_scope
+ES,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FR,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,104,0,,23217.207522,,23217.207522,0.0,unmatched_scope
+FR,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,102,0,,1745.97496,,1745.97496,0.0,unmatched_scope
+FR,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,106,0,,17991.945751,,17991.945751,0.0,unmatched_scope
+FR,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,101,0,,46968.35,,46968.35,0.0,unmatched_scope
+FR,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,105,0,,7103.255484,,7103.255484,0.0,unmatched_scope
+FR,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FR,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,97,0,,10079.7,,10079.7,0.0,unmatched_scope
+FR,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,99,0,,1385.0,,1385.0,0.0,unmatched_scope
+FR,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,100,0,,977.0,,977.0,0.0,unmatched_scope
+FR,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,103,0,,1077.0,,1077.0,0.0,unmatched_scope
+FR,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,96,0,,481.239,,481.239,0.0,unmatched_scope
+FR,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,107,0,,208.5,,208.5,0.0,unmatched_scope
+FR,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,98,0,,1.7,,1.7,0.0,unmatched_scope
+GR,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,124,0,,3545.082814,,3545.082814,0.0,unmatched_scope
+GR,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+GR,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,126,0,,6018.392832,,6018.392832,0.0,unmatched_scope
+GR,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+GR,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,125,0,,29.3,,29.3,0.0,unmatched_scope
+GR,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+GR,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,121,0,,8436.6,,8436.6,0.0,unmatched_scope
+GR,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+GR,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,122,0,,1280.0,,1280.0,0.0,unmatched_scope
+GR,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,123,0,,1262.0,,1262.0,0.0,unmatched_scope
+GR,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+GR,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+GR,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+HR,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,131,0,,993.323146,,993.323146,0.0,unmatched_scope
+HR,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+HR,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,133,0,,850.159003,,850.159003,0.0,unmatched_scope
+HR,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+HR,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,132,0,,375.76773,,375.76773,0.0,unmatched_scope
+HR,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+HR,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,127,0,,1005.8,,1005.8,0.0,unmatched_scope
+HR,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,129,0,,342.0,,342.0,0.0,unmatched_scope
+HR,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+HR,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,130,0,,415.0,,415.0,0.0,unmatched_scope
+HR,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+HR,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+HR,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,128,0,,36.1,,36.1,0.0,unmatched_scope
+HU,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,140,0,,301.401837,,301.401837,0.0,unmatched_scope
+HU,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+HU,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,142,0,,5597.563475,,5597.563475,0.0,unmatched_scope
+HU,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,138,0,,1822.273,,1822.273,0.0,unmatched_scope
+HU,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,141,0,,17.9,,17.9,0.0,unmatched_scope
+HU,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+HU,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,135,0,,2573.5,,2573.5,0.0,unmatched_scope
+HU,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+HU,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,137,0,,1134.0,,1134.0,0.0,unmatched_scope
+HU,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,139,0,,451.0,,451.0,0.0,unmatched_scope
+HU,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,134,0,,303.6,,303.6,0.0,unmatched_scope
+HU,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,143,0,,24.0,,24.0,0.0,unmatched_scope
+HU,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,136,0,,3.4,,3.4,0.0,unmatched_scope
+IT-CALA,onshore_wind,ENTSO-E A75 B19 hourly generation,unavailable,retained 2025 grouped supply inputs,156,0,,1121.991861,,1121.991861,0.0,unmatched_scope
+IT-CALA,offshore_wind,ENTSO-E A75 B18 hourly generation,unavailable,retained 2025 grouped supply inputs,155,0,,9.963141,,9.963141,0.0,unmatched_scope
+IT-CALA,solar,ENTSO-E A75 B16 hourly generation,unavailable,retained 2025 grouped supply inputs,158,0,,1617.662648,,1617.662648,0.0,unmatched_scope
+IT-CALA,nuclear,ENTSO-E A75 B14 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-CALA,ror,ENTSO-E A75 B11 hourly generation,unavailable,retained 2025 grouped supply inputs,157,0,,574.430752,,574.430752,0.0,unmatched_scope
+IT-CALA,reservoir,ENTSO-E A75 B12 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-CALA,gas,ENTSO-E A75 B04 hourly generation,unavailable,retained 2025 grouped supply inputs,154,0,,3499.0,,3499.0,0.0,unmatched_scope
+IT-CALA,hard_coal,ENTSO-E A75 B05 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-CALA,lignite,ENTSO-E A75 B02 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-CALA,oil,ENTSO-E A75 B06 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-CALA,biomass,ENTSO-E A75 B01 hourly generation,unavailable,retained 2025 grouped supply inputs,153,0,,73.0,,73.0,0.0,unmatched_scope
+IT-CALA,waste,ENTSO-E A75 B17 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-CALA,geothermal,ENTSO-E A75 B09 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-CNOR,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,162,8760,7652,176.369185,129.5,176.369185,0.0,weather_or_water_reconciliation
+IT-CNOR,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-CNOR,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,164,8760,804,2249.275321,1450.75,2249.275321,0.0,weather_or_water_reconciliation
+IT-CNOR,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-CNOR,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,163,8760,4990,255.34428,348.0,255.34428,0.0,weather_or_water_reconciliation
+IT-CNOR,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,6635,0.0,113.0,0.0,0.0,weather_or_water_reconciliation
+IT-CNOR,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,159,8760,0,2119.0,1066.5,2119.0,0.0,no_uplift
+IT-CNOR,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,94,94,0.0,175.0,175.0,15857.25,new_offer_required
+IT-CNOR,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-CNOR,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,161,94,94,100.0,175.0,175.0,6457.25,existing_group_floor
+IT-CNOR,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,7634,0.0,24.0,24.0,159417.75,new_offer_required
+IT-CNOR,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,165,69,0,21.182609,0.0,21.182609,0.0,no_uplift
+IT-CNOR,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,160,8760,8760,227.984833,632.0,632.0,3262899.861476,existing_group_floor
+IT-CSUD,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,170,8746,6120,4041.760394,1816.0,4041.760394,0.0,weather_or_water_reconciliation
+IT-CSUD,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-CSUD,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,172,8760,728,9353.007031,3810.0,9353.007031,0.0,weather_or_water_reconciliation
+IT-CSUD,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-CSUD,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,171,8760,838,1383.740691,593.5,1383.740691,0.0,weather_or_water_reconciliation
+IT-CSUD,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,4620,0.0,42.0,0.0,0.0,weather_or_water_reconciliation
+IT-CSUD,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,167,8760,0,7672.6,5352.0,7672.6,0.0,no_uplift
+IT-CSUD,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,464,0.0,387.0,387.0,75990.5,new_offer_required
+IT-CSUD,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-CSUD,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,169,8760,0,68.0,51.0,68.0,0.0,no_uplift
+IT-CSUD,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,166,8760,7713,46.0,99.5,99.5,308613.75,existing_group_floor
+IT-CSUD,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,173,69,0,87.246377,26.0,87.246377,0.0,no_uplift
+IT-CSUD,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,168,2199,0,524.232558,0.0,524.232558,0.0,no_uplift
+IT-North,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,178,8760,8011,96.16817,173.25,96.16817,0.0,weather_or_water_reconciliation
+IT-North,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-North,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,180,8760,3878,5884.416602,7630.0,5884.416602,0.0,weather_or_water_reconciliation
+IT-North,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-North,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,179,8760,6530,5594.724592,5403.0,5594.724592,0.0,weather_or_water_reconciliation
+IT-North,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,8760,0.0,1498.5,0.0,0.0,weather_or_water_reconciliation
+IT-North,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,175,8760,0,24786.1,17675.25,24786.1,0.0,no_uplift
+IT-North,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8753,2709,0.0,758.0,758.0,200121.75,new_offer_required
+IT-North,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-North,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,177,8760,0,51.0,27.0,51.0,0.0,no_uplift
+IT-North,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,174,8760,8760,70.88,270.5,270.5,1201969.95,existing_group_floor
+IT-North,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,181,69,0,247.417391,51.25,247.417391,0.0,no_uplift
+IT-North,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,176,2199,0,81.782609,0.0,81.782609,0.0,no_uplift
+IT-SICI,onshore_wind,ENTSO-E A75 B19 hourly generation,unavailable,retained 2025 grouped supply inputs,191,0,,2026.845266,,2026.845266,0.0,unmatched_scope
+IT-SICI,offshore_wind,ENTSO-E A75 B18 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-SICI,solar,ENTSO-E A75 B16 hourly generation,unavailable,retained 2025 grouped supply inputs,192,0,,3804.35624,,3804.35624,0.0,unmatched_scope
+IT-SICI,nuclear,ENTSO-E A75 B14 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-SICI,ror,ENTSO-E A75 B11 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-SICI,reservoir,ENTSO-E A75 B12 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-SICI,gas,ENTSO-E A75 B04 hourly generation,unavailable,retained 2025 grouped supply inputs,189,0,,3238.0,,3238.0,0.0,unmatched_scope
+IT-SICI,hard_coal,ENTSO-E A75 B05 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-SICI,lignite,ENTSO-E A75 B02 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-SICI,oil,ENTSO-E A75 B06 hourly generation,unavailable,retained 2025 grouped supply inputs,190,0,,255.0,,255.0,0.0,unmatched_scope
+IT-SICI,biomass,ENTSO-E A75 B01 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-SICI,waste,ENTSO-E A75 B17 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-SICI,geothermal,ENTSO-E A75 B09 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-SUD,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,197,8760,8183,2861.232988,4329.0,2861.232988,0.0,weather_or_water_reconciliation
+IT-SUD,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,195,8760,2600,23.911538,30.0,23.911538,0.0,weather_or_water_reconciliation
+IT-SUD,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,199,8760,3303,2567.298773,2920.25,2567.298773,0.0,weather_or_water_reconciliation
+IT-SUD,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-SUD,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,198,8760,8668,21.591612,55.25,21.591612,0.0,weather_or_water_reconciliation
+IT-SUD,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,5260,0.0,115.5,0.0,0.0,weather_or_water_reconciliation
+IT-SUD,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,194,8760,0,5239.7,3559.5,5239.7,0.0,no_uplift
+IT-SUD,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8739,201,0.0,323.5,323.5,46789.75,new_offer_required
+IT-SUD,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-SUD,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,196,8760,0,280.0,9.0,280.0,0.0,no_uplift
+IT-SUD,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,193,8760,8759,66.2,276.5,276.5,1271416.45,existing_group_floor
+IT-SUD,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,200,69,0,20.253623,2.5,20.253623,0.0,no_uplift
+IT-SUD,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,,2198,0,0.0,0.0,0.0,0.0,no_uplift
+LT,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,203,0,,2502.709399,,2502.709399,0.0,unmatched_scope
+LT,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LT,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,204,0,,1332.293204,,1332.293204,0.0,unmatched_scope
+LT,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LT,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LT,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LT,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,202,0,,1148.0,,1148.0,0.0,unmatched_scope
+LT,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LT,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LT,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LT,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,201,0,,80.0,,80.0,0.0,unmatched_scope
+LT,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,205,0,,64.0,,64.0,0.0,unmatched_scope
+LT,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LV,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,208,0,,132.425201,,132.425201,0.0,unmatched_scope
+LV,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LV,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,210,0,,542.404203,,542.404203,0.0,unmatched_scope
+LV,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LV,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,209,0,,732.77306,,732.77306,0.0,unmatched_scope
+LV,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LV,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,207,0,,1087.0,,1087.0,0.0,unmatched_scope
+LV,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LV,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LV,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LV,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,206,0,,23.0,,23.0,0.0,unmatched_scope
+LV,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+LV,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+ME,onshore_wind,ENTSO-E A75 B19 hourly generation,unavailable,retained 2025 grouped supply inputs,212,0,,90.249227,,90.249227,0.0,unmatched_scope
+ME,offshore_wind,ENTSO-E A75 B18 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+ME,solar,ENTSO-E A75 B16 hourly generation,unavailable,retained 2025 grouped supply inputs,214,0,,21.387387,,21.387387,0.0,unmatched_scope
+ME,nuclear,ENTSO-E A75 B14 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+ME,ror,ENTSO-E A75 B11 hourly generation,unavailable,retained 2025 grouped supply inputs,213,0,,5.36,,5.36,0.0,unmatched_scope
+ME,reservoir,ENTSO-E A75 B12 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+ME,gas,ENTSO-E A75 B04 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+ME,hard_coal,ENTSO-E A75 B05 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+ME,lignite,ENTSO-E A75 B02 hourly generation,unavailable,retained 2025 grouped supply inputs,211,0,,225.0,,225.0,0.0,unmatched_scope
+ME,oil,ENTSO-E A75 B06 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+ME,biomass,ENTSO-E A75 B01 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+ME,waste,ENTSO-E A75 B17 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+ME,geothermal,ENTSO-E A75 B09 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+MK,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,218,0,,45.305834,,45.305834,0.0,unmatched_scope
+MK,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+MK,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,220,0,,748.948814,,748.948814,0.0,unmatched_scope
+MK,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+MK,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,219,0,,207.6,,207.6,0.0,unmatched_scope
+MK,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+MK,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,215,0,,220.0,,220.0,0.0,unmatched_scope
+MK,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+MK,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,216,0,,824.0,,824.0,0.0,unmatched_scope
+MK,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,217,0,,198.0,,198.0,0.0,unmatched_scope
+MK,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+MK,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+MK,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NL,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,226,0,,4464.952322,,4464.952322,0.0,unmatched_scope
+NL,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,225,0,,6474.993651,,6474.993651,0.0,unmatched_scope
+NL,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,227,0,,19058.204786,,19058.204786,0.0,unmatched_scope
+NL,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,224,0,,409.94,,409.94,0.0,unmatched_scope
+NL,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NL,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NL,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,222,0,,14198.5,,14198.5,0.0,unmatched_scope
+NL,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,223,0,,4706.0,,4706.0,0.0,unmatched_scope
+NL,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NL,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NL,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,221,0,,877.0,,877.0,0.0,unmatched_scope
+NL,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,228,0,,696.2,,696.2,0.0,unmatched_scope
+NL,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+PL,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,254,0,,10256.761751,,10256.761751,0.0,unmatched_scope
+PL,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+PL,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,256,0,,13909.386463,,13909.386463,0.0,unmatched_scope
+PL,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+PL,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,255,0,,182.400369,,182.400369,0.0,unmatched_scope
+PL,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+PL,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,250,0,,6702.0,,6702.0,0.0,unmatched_scope
+PL,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,251,0,,13098.5,,13098.5,0.0,unmatched_scope
+PL,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,252,0,,8193.0,,8193.0,0.0,unmatched_scope
+PL,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,253,0,,392.535,,392.535,0.0,unmatched_scope
+PL,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,249,0,,678.0,,678.0,0.0,unmatched_scope
+PL,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,257,0,,16.0,,16.0,0.0,unmatched_scope
+PL,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+PT,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,262,0,,5515.542739,,5515.542739,0.0,unmatched_scope
+PT,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,260,0,,21.983816,,21.983816,0.0,unmatched_scope
+PT,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,264,0,,4844.108353,,4844.108353,0.0,unmatched_scope
+PT,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+PT,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,263,0,,2373.7,,2373.7,0.0,unmatched_scope
+PT,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+PT,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,259,0,,4186.0,,4186.0,0.0,unmatched_scope
+PT,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+PT,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+PT,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,261,0,,91.0,,91.0,0.0,unmatched_scope
+PT,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,258,0,,379.59,,379.59,0.0,unmatched_scope
+PT,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,265,0,,76.5,,76.5,0.0,unmatched_scope
+PT,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+RO,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,272,0,,2551.236232,,2551.236232,0.0,unmatched_scope
+RO,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+RO,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,274,0,,3527.145085,,3527.145085,0.0,unmatched_scope
+RO,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,270,0,,1241.68,,1241.68,0.0,unmatched_scope
+RO,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,273,0,,3725.582968,,3725.582968,0.0,unmatched_scope
+RO,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+RO,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,267,0,,3679.8,,3679.8,0.0,unmatched_scope
+RO,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,268,0,,260.0,,260.0,0.0,unmatched_scope
+RO,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,269,0,,4130.0,,4130.0,0.0,unmatched_scope
+RO,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,271,0,,100.0,,100.0,0.0,unmatched_scope
+RO,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,266,0,,30.0,,30.0,0.0,unmatched_scope
+RO,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+RO,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+RS,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,278,0,,610.738943,,610.738943,0.0,unmatched_scope
+RS,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+RS,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,280,0,,272.481582,,272.481582,0.0,unmatched_scope
+RS,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+RS,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,279,0,,341.0,,341.0,0.0,unmatched_scope
+RS,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+RS,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,276,0,,594.0,,594.0,0.0,unmatched_scope
+RS,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+RS,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,277,0,,4817.0,,4817.0,0.0,unmatched_scope
+RS,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+RS,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,275,0,,7.2,,7.2,0.0,unmatched_scope
+RS,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,281,0,,30.0,,30.0,0.0,unmatched_scope
+RS,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SI,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SI,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SI,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,315,0,,909.609619,,909.609619,0.0,unmatched_scope
+SI,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,312,0,,658.662,,658.662,0.0,unmatched_scope
+SI,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,314,0,,808.415,,808.415,0.0,unmatched_scope
+SI,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SI,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,309,0,,198.0,,198.0,0.0,unmatched_scope
+SI,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,310,0,,124.0,,124.0,0.0,unmatched_scope
+SI,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,311,0,,1355.0,,1355.0,0.0,unmatched_scope
+SI,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,313,0,,58.0,,58.0,0.0,unmatched_scope
+SI,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SI,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SI,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SK,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SK,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SK,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,321,0,,384.062683,,384.062683,0.0,unmatched_scope
+SK,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,318,0,,2536.004,,2536.004,0.0,unmatched_scope
+SK,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,320,0,,1180.415523,,1180.415523,0.0,unmatched_scope
+SK,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SK,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,316,0,,1076.0,,1076.0,0.0,unmatched_scope
+SK,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,317,0,,208.0,,208.0,0.0,unmatched_scope
+SK,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SK,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,319,0,,259.0,,259.0,0.0,unmatched_scope
+SK,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SK,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SK,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+XK,onshore_wind,ENTSO-E A75 B19 hourly generation,unavailable,retained 2025 grouped supply inputs,323,0,,80.15076,,80.15076,0.0,unmatched_scope
+XK,offshore_wind,ENTSO-E A75 B18 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+XK,solar,ENTSO-E A75 B16 hourly generation,unavailable,retained 2025 grouped supply inputs,325,0,,16.700236,,16.700236,0.0,unmatched_scope
+XK,nuclear,ENTSO-E A75 B14 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+XK,ror,ENTSO-E A75 B11 hourly generation,unavailable,retained 2025 grouped supply inputs,324,0,,30.2,,30.2,0.0,unmatched_scope
+XK,reservoir,ENTSO-E A75 B12 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+XK,gas,ENTSO-E A75 B04 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+XK,hard_coal,ENTSO-E A75 B05 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+XK,lignite,ENTSO-E A75 B02 hourly generation,unavailable,retained 2025 grouped supply inputs,322,0,,1480.0,,1480.0,0.0,unmatched_scope
+XK,oil,ENTSO-E A75 B06 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+XK,biomass,ENTSO-E A75 B01 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+XK,waste,ENTSO-E A75 B17 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+XK,geothermal,ENTSO-E A75 B09 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+DK2,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,68,8755,4726,339.890412,594.88875,339.890412,0.0,weather_or_water_reconciliation
+DK2,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,66,8755,227,1512.484005,955.75,1512.484005,0.0,weather_or_water_reconciliation
+DK2,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,69,8752,3470,793.83239,907.875,793.83239,0.0,weather_or_water_reconciliation
+DK2,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+DK2,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+DK2,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+DK2,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,65,8754,2769,38.0,229.48,229.48,117707.978075,existing_group_floor
+DK2,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8750,8750,0.0,276.45,276.45,731669.547164,new_offer_required
+DK2,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+DK2,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,67,8754,14,126.0,192.92,192.92,415.31355,existing_group_floor
+DK2,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,64,8754,0,1120.0,792.683,1120.0,0.0,no_uplift
+DK2,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,70,8754,4181,102.0,326.01475,326.01475,279697.320018,existing_group_floor
+DK2,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+FI,onshore_wind,ENTSO-E A75 B19 hourly generation,national area,retained 2025 grouped supply inputs,92,0,,8813.495919,,8813.495919,0.0,unmatched_scope
+FI,offshore_wind,ENTSO-E A75 B18 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FI,solar,ENTSO-E A75 B16 hourly generation,national area,retained 2025 grouped supply inputs,94,0,,851.744894,,851.744894,0.0,unmatched_scope
+FI,nuclear,ENTSO-E A75 B14 hourly generation,national area,retained 2025 grouped supply inputs,90,0,,3859.37,,3859.37,0.0,unmatched_scope
+FI,ror,ENTSO-E A75 B11 hourly generation,national area,retained 2025 grouped supply inputs,93,0,,1201.6,,1201.6,0.0,unmatched_scope
+FI,reservoir,ENTSO-E A75 B12 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FI,gas,ENTSO-E A75 B04 hourly generation,national area,retained 2025 grouped supply inputs,87,0,,1906.6,,1906.6,0.0,unmatched_scope
+FI,hard_coal,ENTSO-E A75 B05 hourly generation,national area,retained 2025 grouped supply inputs,88,0,,903.2,,903.2,0.0,unmatched_scope
+FI,lignite,ENTSO-E A75 B02 hourly generation,national area,retained 2025 grouped supply inputs,89,0,,150.0,,150.0,0.0,unmatched_scope
+FI,oil,ENTSO-E A75 B06 hourly generation,national area,retained 2025 grouped supply inputs,91,0,,1100.2,,1100.2,0.0,unmatched_scope
+FI,biomass,ENTSO-E A75 B01 hourly generation,national area,retained 2025 grouped supply inputs,86,0,,3800.74,,3800.74,0.0,unmatched_scope
+FI,waste,ENTSO-E A75 B17 hourly generation,national area,retained 2025 grouped supply inputs,95,0,,88.0,,88.0,0.0,unmatched_scope
+FI,geothermal,ENTSO-E A75 B09 hourly generation,national area,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NO1,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,229,8760,7810,340.041915,379.62,340.041915,0.0,weather_or_water_reconciliation
+NO1,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO1,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,231,8760,323,151.390905,6.91,151.390905,0.0,weather_or_water_reconciliation
+NO1,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO1,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,230,8760,8731,1388.686268,2027.026108,1388.686268,0.0,weather_or_water_reconciliation
+NO1,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,8760,0.0,1262.811588,0.0,0.0,weather_or_water_reconciliation
+NO1,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,7737,0.0,0.44,0.44,3403.378422,new_offer_required
+NO1,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO1,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO1,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO1,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,493,0.0,0.3,0.3,87.10091,new_offer_required
+NO1,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,8518,0.0,29.0925,29.0925,81902.966493,new_offer_required
+NO1,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO2,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,233,8760,6654,1248.575421,1312.84,1248.575421,0.0,weather_or_water_reconciliation
+NO2,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,232,3074,0,61.0559,4.6,61.0559,0.0,no_uplift
+NO2,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,235,0,0,213.225605,,213.225605,0.0,no_observed_generation
+NO2,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO2,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,234,8760,8760,223.831232,1146.504337,223.831232,0.0,weather_or_water_reconciliation
+NO2,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,8760,0.0,8624.67,0.0,0.0,weather_or_water_reconciliation
+NO2,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,7002,0.0,22.02,22.02,75052.201197,new_offer_required
+NO2,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO2,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO2,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO2,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO2,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,8660,0.0,18.825,18.825,59362.94758,new_offer_required
+NO2,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO3,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,237,8760,8273,891.001425,1746.11,891.001425,0.0,weather_or_water_reconciliation
+NO3,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,236,0,0,16.161856,,16.161856,0.0,no_observed_generation
+NO3,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,239,2330,0,102.293127,0.0,102.293127,0.0,no_uplift
+NO3,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO3,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,238,8760,8760,74.610411,1043.775,74.610411,0.0,weather_or_water_reconciliation
+NO3,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,8760,0.0,3068.788201,0.0,0.0,weather_or_water_reconciliation
+NO3,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO3,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO3,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO3,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO3,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,0,0.0,0.0,0.0,0.0,no_uplift
+NO3,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,6013,0.0,6.34,6.34,22197.830367,new_offer_required
+NO3,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO4,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,241,8760,4624,1545.798518,1039.405285,1545.798518,0.0,weather_or_water_reconciliation
+NO4,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO4,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,243,0,0,18.305187,,18.305187,0.0,no_observed_generation
+NO4,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO4,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,242,8760,8251,199.582848,408.1275,199.582848,0.0,weather_or_water_reconciliation
+NO4,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,8760,0.0,4265.04,0.0,0.0,weather_or_water_reconciliation
+NO4,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,240,8760,0,459.0,194.098815,459.0,0.0,no_uplift
+NO4,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO4,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO4,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO4,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO4,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO4,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+NO5,onshore_wind,ENTSO-E A75 B19 hourly generation,unavailable,retained 2025 grouped supply inputs,246,0,,907.816558,,907.816558,0.0,unmatched_scope
+NO5,offshore_wind,ENTSO-E A75 B18 hourly generation,unavailable,retained 2025 grouped supply inputs,245,0,,44.894044,,44.894044,0.0,unmatched_scope
+NO5,solar,ENTSO-E A75 B16 hourly generation,unavailable,retained 2025 grouped supply inputs,248,0,,152.199898,,152.199898,0.0,unmatched_scope
+NO5,nuclear,ENTSO-E A75 B14 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NO5,ror,ENTSO-E A75 B11 hourly generation,unavailable,retained 2025 grouped supply inputs,247,0,,55.957808,,55.957808,0.0,unmatched_scope
+NO5,reservoir,ENTSO-E A75 B12 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NO5,gas,ENTSO-E A75 B04 hourly generation,unavailable,retained 2025 grouped supply inputs,244,0,,294.0,,294.0,0.0,unmatched_scope
+NO5,hard_coal,ENTSO-E A75 B05 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NO5,lignite,ENTSO-E A75 B02 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NO5,oil,ENTSO-E A75 B06 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NO5,biomass,ENTSO-E A75 B01 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NO5,waste,ENTSO-E A75 B17 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+NO5,geothermal,ENTSO-E A75 B09 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+SE1,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,284,8760,4600,3880.992014,2728.74975,3880.992014,0.0,weather_or_water_reconciliation
+SE1,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE1,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,286,8760,3659,5.748256,11.85,5.748256,0.0,weather_or_water_reconciliation
+SE1,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE1,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,285,0,0,140.0,,140.0,0.0,no_observed_generation
+SE1,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,8760,0.0,4564.9,0.0,0.0,weather_or_water_reconciliation
+SE1,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,283,0,0,100.0,,100.0,0.0,no_observed_generation
+SE1,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE1,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE1,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE1,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,282,0,0,88.0,,88.0,0.0,no_observed_generation
+SE1,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE1,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE2,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,289,8760,6547,7531.80988,5967.64425,7531.80988,0.0,weather_or_water_reconciliation
+SE2,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,288,0,0,1.129264,,1.129264,0.0,no_observed_generation
+SE2,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,291,8760,4159,63.090895,69.61,63.090895,0.0,weather_or_water_reconciliation
+SE2,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE2,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,290,0,0,1756.0,,1756.0,0.0,no_observed_generation
+SE2,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,8760,0.0,6650.61,0.0,0.0,weather_or_water_reconciliation
+SE2,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,3879,0.0,0.17,0.17,194.816,new_offer_required
+SE2,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE2,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE2,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE2,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,287,0,0,538.8,,538.8,0.0,no_observed_generation
+SE2,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,292,0,0,86.226087,,86.226087,0.0,no_observed_generation
+SE2,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE3,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,298,8760,7611,3960.681174,3655.11875,3960.681174,0.0,weather_or_water_reconciliation
+SE3,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,296,0,0,54.156906,,54.156906,0.0,no_observed_generation
+SE3,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,300,8760,4756,2127.923325,1200.34,2127.923325,0.0,weather_or_water_reconciliation
+SE3,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,295,8760,2437,5833.408,7039.0,7039.0,1250400.834,existing_group_floor
+SE3,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,299,0,0,327.0,,327.0,0.0,no_observed_generation
+SE3,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,8760,0.0,2017.78,0.0,0.0,weather_or_water_reconciliation
+SE3,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,294,8760,0,250.0,44.2,250.0,0.0,no_uplift
+SE3,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE3,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE3,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,297,0,0,1999.0,,1999.0,0.0,no_observed_generation
+SE3,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,293,0,0,2265.7,,2265.7,0.0,no_observed_generation
+SE3,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,301,0,0,315.861159,,315.861159,0.0,no_observed_generation
+SE3,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE4,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,306,8760,7943,1763.194763,1952.53,1763.194763,0.0,weather_or_water_reconciliation
+SE4,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,304,0,0,84.106465,,84.106465,0.0,no_observed_generation
+SE4,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,307,8760,4797,1273.98786,856.54,1273.98786,0.0,weather_or_water_reconciliation
+SE4,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE4,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE4,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,8760,0.0,298.1,0.0,0.0,weather_or_water_reconciliation
+SE4,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,303,8760,0,440.0,143.6,440.0,0.0,no_uplift
+SE4,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE4,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+SE4,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,305,0,0,1110.0,,1110.0,0.0,no_observed_generation
+SE4,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,302,0,0,293.1,,293.1,0.0,no_observed_generation
+SE4,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,308,0,0,50.012754,,50.012754,0.0,no_observed_generation
+SE4,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+FR-COR,onshore_wind,ENTSO-E A75 B19 hourly generation,unavailable,retained 2025 grouped supply inputs,110,0,,15.50811,,15.50811,0.0,unmatched_scope
+FR-COR,offshore_wind,ENTSO-E A75 B18 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FR-COR,solar,ENTSO-E A75 B16 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FR-COR,nuclear,ENTSO-E A75 B14 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FR-COR,ror,ENTSO-E A75 B11 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FR-COR,reservoir,ENTSO-E A75 B12 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FR-COR,gas,ENTSO-E A75 B04 hourly generation,unavailable,retained 2025 grouped supply inputs,108,0,,133.0,,133.0,0.0,unmatched_scope
+FR-COR,hard_coal,ENTSO-E A75 B05 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FR-COR,lignite,ENTSO-E A75 B02 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FR-COR,oil,ENTSO-E A75 B06 hourly generation,unavailable,retained 2025 grouped supply inputs,109,0,,231.0,,231.0,0.0,unmatched_scope
+FR-COR,biomass,ENTSO-E A75 B01 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FR-COR,waste,ENTSO-E A75 B17 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+FR-COR,geothermal,ENTSO-E A75 B09 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+GB,onshore_wind,ENTSO-E A75 B19 hourly generation,unavailable,retained 2025 grouped supply inputs,117,0,,12913.039375,,12913.039375,0.0,unmatched_scope
+GB,offshore_wind,ENTSO-E A75 B18 hourly generation,unavailable,retained 2025 grouped supply inputs,115,0,,17101.027203,,17101.027203,0.0,unmatched_scope
+GB,solar,ENTSO-E A75 B16 hourly generation,unavailable,retained 2025 grouped supply inputs,119,0,,13286.812848,,13286.812848,0.0,unmatched_scope
+GB,nuclear,ENTSO-E A75 B14 hourly generation,unavailable,retained 2025 grouped supply inputs,114,0,,4717.548,,4717.548,0.0,unmatched_scope
+GB,ror,ENTSO-E A75 B11 hourly generation,unavailable,retained 2025 grouped supply inputs,118,0,,2073.765996,,2073.765996,0.0,unmatched_scope
+GB,reservoir,ENTSO-E A75 B12 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+GB,gas,ENTSO-E A75 B04 hourly generation,unavailable,retained 2025 grouped supply inputs,112,0,,33564.2,,33564.2,0.0,unmatched_scope
+GB,hard_coal,ENTSO-E A75 B05 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+GB,lignite,ENTSO-E A75 B02 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+GB,oil,ENTSO-E A75 B06 hourly generation,unavailable,retained 2025 grouped supply inputs,116,0,,392.7,,392.7,0.0,unmatched_scope
+GB,biomass,ENTSO-E A75 B01 hourly generation,unavailable,retained 2025 grouped supply inputs,111,0,,4185.9,,4185.9,0.0,unmatched_scope
+GB,waste,ENTSO-E A75 B17 hourly generation,unavailable,retained 2025 grouped supply inputs,120,0,,1766.15,,1766.15,0.0,unmatched_scope
+GB,geothermal,ENTSO-E A75 B09 hourly generation,unavailable,retained 2025 grouped supply inputs,113,0,,2.0,,2.0,0.0,unmatched_scope
+IE-SEM,onshore_wind,ENTSO-E A75 B19 hourly generation,unavailable,retained 2025 grouped supply inputs,149,0,,6141.749858,,6141.749858,0.0,unmatched_scope
+IE-SEM,offshore_wind,ENTSO-E A75 B18 hourly generation,unavailable,retained 2025 grouped supply inputs,147,0,,24.716539,,24.716539,0.0,unmatched_scope
+IE-SEM,solar,ENTSO-E A75 B16 hourly generation,unavailable,retained 2025 grouped supply inputs,151,0,,1069.286783,,1069.286783,0.0,unmatched_scope
+IE-SEM,nuclear,ENTSO-E A75 B14 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IE-SEM,ror,ENTSO-E A75 B11 hourly generation,unavailable,retained 2025 grouped supply inputs,150,0,,206.662211,,206.662211,0.0,unmatched_scope
+IE-SEM,reservoir,ENTSO-E A75 B12 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IE-SEM,gas,ENTSO-E A75 B04 hourly generation,unavailable,retained 2025 grouped supply inputs,145,0,,6645.4,,6645.4,0.0,unmatched_scope
+IE-SEM,hard_coal,ENTSO-E A75 B05 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IE-SEM,lignite,ENTSO-E A75 B02 hourly generation,unavailable,retained 2025 grouped supply inputs,146,0,,253.0,,253.0,0.0,unmatched_scope
+IE-SEM,oil,ENTSO-E A75 B06 hourly generation,unavailable,retained 2025 grouped supply inputs,148,0,,543.0,,543.0,0.0,unmatched_scope
+IE-SEM,biomass,ENTSO-E A75 B01 hourly generation,unavailable,retained 2025 grouped supply inputs,144,0,,54.2,,54.2,0.0,unmatched_scope
+IE-SEM,waste,ENTSO-E A75 B17 hourly generation,unavailable,retained 2025 grouped supply inputs,152,0,,85.0,,85.0,0.0,unmatched_scope
+IE-SEM,geothermal,ENTSO-E A75 B09 hourly generation,unavailable,retained 2025 grouped supply inputs,,0,,0.0,,0.0,0.0,unmatched_scope
+IT-SARD,onshore_wind,ENTSO-E A75 B19 hourly generation,bidding zone,retained 2025 grouped supply inputs,186,8760,5342,1533.710042,1000.5,1533.710042,0.0,weather_or_water_reconciliation
+IT-SARD,offshore_wind,ENTSO-E A75 B18 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-SARD,solar,ENTSO-E A75 B16 hourly generation,bidding zone,retained 2025 grouped supply inputs,188,8616,811,2601.609217,1045.25,2601.609217,0.0,weather_or_water_reconciliation
+IT-SARD,nuclear,ENTSO-E A75 B14 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-SARD,ror,ENTSO-E A75 B11 hourly generation,bidding zone,retained 2025 grouped supply inputs,187,8760,2076,18.775315,35.0,18.775315,0.0,weather_or_water_reconciliation
+IT-SARD,reservoir,ENTSO-E A75 B12 hourly generation,bidding zone,retained 2025 grouped supply inputs,,8760,5110,0.0,83.0,0.0,0.0,weather_or_water_reconciliation
+IT-SARD,gas,ENTSO-E A75 B04 hourly generation,bidding zone,retained 2025 grouped supply inputs,183,94,94,736.0,1166.0,1166.0,27997.75,existing_group_floor
+IT-SARD,hard_coal,ENTSO-E A75 B05 hourly generation,bidding zone,retained 2025 grouped supply inputs,184,8760,0,1230.0,715.5,1230.0,0.0,no_uplift
+IT-SARD,lignite,ENTSO-E A75 B02 hourly generation,bidding zone,retained 2025 grouped supply inputs,,0,0,0.0,,0.0,0.0,no_observed_generation
+IT-SARD,oil,ENTSO-E A75 B06 hourly generation,bidding zone,retained 2025 grouped supply inputs,185,8759,0,357.0,74.0,357.0,0.0,no_uplift
+IT-SARD,biomass,ENTSO-E A75 B01 hourly generation,bidding zone,retained 2025 grouped supply inputs,182,8760,8758,22.8,91.0,91.0,295721.35,existing_group_floor
+IT-SARD,waste,ENTSO-E A75 B17 hourly generation,bidding zone,retained 2025 grouped supply inputs,,94,94,0.0,650.5,650.5,35809.75,new_offer_required
+IT-SARD,geothermal,ENTSO-E A75 B09 hourly generation,bidding zone,retained 2025 grouped supply inputs,,2199,0,0.0,0.0,0.0,0.0,no_uplift

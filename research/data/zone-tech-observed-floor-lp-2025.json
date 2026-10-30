@@ -1,0 +1,288 @@
+{
+  "status": "partial_existing_offer_supply_floor_sensitivity_not_baseline",
+  "hours": 8760,
+  "changed_groups": [
+    {
+      "zone": "DK1",
+      "technology": "biomass",
+      "added_mwh": 2919.57375,
+      "offer_columns": [
+        247
+      ]
+    },
+    {
+      "zone": "DK1",
+      "technology": "waste",
+      "added_mwh": 214885.215,
+      "offer_columns": [
+        251
+      ]
+    },
+    {
+      "zone": "IT-CNOR",
+      "technology": "oil",
+      "added_mwh": 6457.249999999998,
+      "offer_columns": [
+        471,
+        794
+      ]
+    },
+    {
+      "zone": "IT-CSUD",
+      "technology": "biomass",
+      "added_mwh": 308613.75,
+      "offer_columns": [
+        432
+      ]
+    },
+    {
+      "zone": "IT-North",
+      "technology": "biomass",
+      "added_mwh": 1201969.95,
+      "offer_columns": [
+        464
+      ]
+    },
+    {
+      "zone": "IT-SUD",
+      "technology": "biomass",
+      "added_mwh": 1271416.4499999997,
+      "offer_columns": [
+        419
+      ]
+    },
+    {
+      "zone": "DK2",
+      "technology": "gas",
+      "added_mwh": 117707.97807500002,
+      "offer_columns": [
+        238,
+        239,
+        240
+      ]
+    },
+    {
+      "zone": "DK2",
+      "technology": "oil",
+      "added_mwh": 415.31354999999996,
+      "offer_columns": [
+        242
+      ]
+    },
+    {
+      "zone": "DK2",
+      "technology": "waste",
+      "added_mwh": 279697.3200175,
+      "offer_columns": [
+        243
+      ]
+    },
+    {
+      "zone": "SE3",
+      "technology": "nuclear",
+      "added_mwh": 1250400.8340000012,
+      "offer_columns": [
+        574
+      ]
+    },
+    {
+      "zone": "IT-SARD",
+      "technology": "gas",
+      "added_mwh": 27997.750000000007,
+      "offer_columns": [
+        473,
+        474,
+        475
+      ]
+    },
+    {
+      "zone": "IT-SARD",
+      "technology": "biomass",
+      "added_mwh": 295721.35,
+      "offer_columns": [
+        476
+      ]
+    }
+  ],
+  "excluded_missing_offer_groups": [
+    {
+      "zone": "DK1",
+      "technology": "oil",
+      "missing_mwh": 59592.97481175
+    },
+    {
+      "zone": "IT-CNOR",
+      "technology": "hard_coal",
+      "missing_mwh": 15857.25
+    },
+    {
+      "zone": "IT-CNOR",
+      "technology": "biomass",
+      "missing_mwh": 159417.75
+    },
+    {
+      "zone": "IT-CNOR",
+      "technology": "geothermal",
+      "missing_mwh": 3262899.861476239
+    },
+    {
+      "zone": "IT-CSUD",
+      "technology": "hard_coal",
+      "missing_mwh": 75990.5
+    },
+    {
+      "zone": "IT-North",
+      "technology": "hard_coal",
+      "missing_mwh": 200121.75
+    },
+    {
+      "zone": "IT-SUD",
+      "technology": "hard_coal",
+      "missing_mwh": 46789.75
+    },
+    {
+      "zone": "DK2",
+      "technology": "hard_coal",
+      "missing_mwh": 731669.54716375
+    },
+    {
+      "zone": "NO1",
+      "technology": "gas",
+      "missing_mwh": 3403.37842225
+    },
+    {
+      "zone": "NO1",
+      "technology": "biomass",
+      "missing_mwh": 87.10091
+    },
+    {
+      "zone": "NO1",
+      "technology": "waste",
+      "missing_mwh": 81902.96649275
+    },
+    {
+      "zone": "NO2",
+      "technology": "gas",
+      "missing_mwh": 75052.20119749999
+    },
+    {
+      "zone": "NO2",
+      "technology": "waste",
+      "missing_mwh": 59362.94758
+    },
+    {
+      "zone": "NO3",
+      "technology": "waste",
+      "missing_mwh": 22197.83036725
+    },
+    {
+      "zone": "SE2",
+      "technology": "gas",
+      "missing_mwh": 194.81599999999997
+    },
+    {
+      "zone": "IT-SARD",
+      "technology": "waste",
+      "missing_mwh": 35809.75
+    }
+  ],
+  "original_price_mae_eur_mwh": 25.051056742655632,
+  "trial_price_mae_eur_mwh": 24.99331338752135,
+  "affected_generation": [
+    {
+      "zone": "DK1",
+      "technology": "biomass",
+      "hours": 8754,
+      "baseline_generation_mae_mw": 299.74967492161545,
+      "trial_generation_mae_mw": 299.25784819355664
+    },
+    {
+      "zone": "DK1",
+      "technology": "waste",
+      "hours": 8754,
+      "baseline_generation_mae_mw": 28.328906783031798,
+      "trial_generation_mae_mw": 4.753589451524023
+    },
+    {
+      "zone": "IT-CNOR",
+      "technology": "oil",
+      "hours": 94,
+      "baseline_generation_mae_mw": 155.6622340425532,
+      "trial_generation_mae_mw": 147.12632978723406
+    },
+    {
+      "zone": "IT-CSUD",
+      "technology": "biomass",
+      "hours": 8760,
+      "baseline_generation_mae_mw": 46.809517934544424,
+      "trial_generation_mae_mw": 18.822288652009767
+    },
+    {
+      "zone": "IT-North",
+      "technology": "biomass",
+      "hours": 8760,
+      "baseline_generation_mae_mw": 138.1902317351598,
+      "trial_generation_mae_mw": 2.926417453615758
+    },
+    {
+      "zone": "IT-SUD",
+      "technology": "biomass",
+      "hours": 8760,
+      "baseline_generation_mae_mw": 157.13179285071826,
+      "trial_generation_mae_mw": 38.192704216652594
+    },
+    {
+      "zone": "DK2",
+      "technology": "gas",
+      "hours": 8754,
+      "baseline_generation_mae_mw": 29.186006339514243,
+      "trial_generation_mae_mw": 22.16933399121079
+    },
+    {
+      "zone": "DK2",
+      "technology": "oil",
+      "hours": 8754,
+      "baseline_generation_mae_mw": 12.298130709730252,
+      "trial_generation_mae_mw": 12.167605963450987
+    },
+    {
+      "zone": "DK2",
+      "technology": "waste",
+      "hours": 8754,
+      "baseline_generation_mae_mw": 79.38265499797384,
+      "trial_generation_mae_mw": 54.07918082811565
+    },
+    {
+      "zone": "SE3",
+      "technology": "nuclear",
+      "hours": 8760,
+      "baseline_generation_mae_mw": 2720.5573883235274,
+      "trial_generation_mae_mw": 2616.2309038334497
+    },
+    {
+      "zone": "IT-SARD",
+      "technology": "gas",
+      "hours": 94,
+      "baseline_generation_mae_mw": 1029.9335106382978,
+      "trial_generation_mae_mw": 1029.1001292529866
+    },
+    {
+      "zone": "IT-SARD",
+      "technology": "biomass",
+      "hours": 8760,
+      "baseline_generation_mae_mw": 38.60171727297437,
+      "trial_generation_mae_mw": 12.130185726259526
+    }
+  ],
+  "emergency_mwh": 0.0,
+  "maximum_primal_residual_mw": 2.6087855076184496e-06,
+  "solve_seconds": 48.70687823096523,
+  "input_sha256": "d78438c542f96d354c48f228ca1c04d394406d2b8ce6ecb42fcdcb8d9b9d7de2",
+  "limitations": [
+    "Retrospective observed-production floor, not forward available energy",
+    "Only existing technology-specific LP offer columns are changed",
+    "Missing fleets and mixed zero-bid offers remain unresolved",
+    "Frozen bids and unchanged physical network; no baseline promotion"
+  ],
+  "witness_sha256": "40c0ff274a660e0963440f887d78dcd615ceababf3593c4c106fc681c9d50ea7"
+}

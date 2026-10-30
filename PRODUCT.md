@@ -161,6 +161,12 @@ observed generation coverage and fixed reservoir output. Treat observed hourly
 production as a demonstrated lower bound only for a matched zone, technology,
 unit and reporting scope. Flag larger observed production for reconciliation,
 without automatically replacing renewable availability or hydro water.
+An observed-production hourly floor may be tested as a separate retrospective
+dispatchable-supply candidate when bidding-zone and technology scope match.
+Keep missing technology offers explicit and preserve the original baseline.
+Do not use the observed floor as a prospective availability forecast or infer
+new reservoir water or renewable weather availability from realised dispatch.
+Evaluate frozen bids and adverse zone effects before any capacity/source revision.
 
 Represent only source-supported cross-zone connections. Distinguish physical
 component ratings, the joint model's PTDF constraints, ENTSO-E observed A09
