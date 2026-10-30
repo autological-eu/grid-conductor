@@ -104,6 +104,12 @@ inherited dispatch shares are not automatically suitable for a revised schedule.
 Keep reported generation as validation, with country-specific reporting categories
 and metering scope visible. Reservoir and run-of-river availability must share an
 explicit inflow partition with turbine clipping/spill accounted for.
+Before promoting a Nordic hydro or network change, compare monthly observed and
+modelled reservoir volume, zonal price levels and north–south price spreads for
+the full year. Reconcile source-category scope where reported production and the
+model fleet disagree. Keep zones without an hourly hydro target identified as
+such; observed prices alone do not determine their water dispatch. Report
+seasonal diagnostics separately from any out-of-sample validation.
 
 
 ## Network-aware hydro precomputation
