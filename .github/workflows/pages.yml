@@ -1,10 +1,10 @@
-name: Public v1 — verify and deploy Pages
+name: Research — verify and deploy Pages
 
 on:
   push:
-    branches: [public-v1, main]
+    branches: [research]
   pull_request:
-    branches: [main]
+    branches: [research]
   workflow_dispatch:
 
 permissions:

@@ -19,4 +19,4 @@ Before deleting a source or receipt, run the full read-only `tools/check_baselin
 
 ## Delivery
 
-Work on `public-v1`; commit coherent changes. No main merge, force push, visibility or credential changes. Inspect CI/Pages and verify public URLs before claiming publication. Keep `PRODUCT.md` as requirements, `TASKS.md` as the concise current backlog and evidence. The next research priorities are scenario reclearing/response validation, Nordic hydro/source adequacy, CZ and Italian price regressions, and independent transfer checks. Follow the user's current request over historical notes.
+Work on `research`; commit coherent changes. Do not force push, change visibility or expose credentials. Inspect CI/Pages and verify public URLs before claiming publication. Keep `PRODUCT.md` as requirements, `TASKS.md` as the concise current backlog and evidence. The next research priorities are scenario reclearing/response validation, Nordic hydro/source adequacy, CZ and Italian price regressions, and independent transfer checks. Follow the user's current request over historical notes.
