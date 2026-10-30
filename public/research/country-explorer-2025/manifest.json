@@ -1,0 +1,661 @@
+{
+  "schema_version": 1,
+  "year": 2025,
+  "hours": 8760,
+  "start_utc": "2025-01-01T00:00:00Z",
+  "generation_scale": 10,
+  "price_scale": 1000,
+  "default_country": "DE",
+  "model": {
+    "id": "oil-chp25-sdac-2025",
+    "label": "Latest verified run: oil CHP 25% \u00b7 corrected day-ahead prices",
+    "case": "chp25",
+    "mae_eur_mwh": 27.576204900945047,
+    "accepted_baseline": false,
+    "summary_sha256": "5d7c45b8f238a35121fcb97c742cddc1d79b5d9845755e64a383a99a5eb06e9a",
+    "audit_sha256": "8e04e3533285aa81ca4ead982379f36008a8662ddbfadb3af01eaded56b1bed0",
+    "witness_sha256": "d14b8995864e89e54cc37c4aa9be510bb0b96683aacb7e84205f2d772aa66eb0"
+  },
+  "technologies": [
+    {
+      "id": "onshore_wind",
+      "label": "Onshore wind",
+      "psr": "B19"
+    },
+    {
+      "id": "offshore_wind",
+      "label": "Offshore wind",
+      "psr": "B18"
+    },
+    {
+      "id": "solar",
+      "label": "Solar",
+      "psr": "B16"
+    },
+    {
+      "id": "nuclear",
+      "label": "Nuclear",
+      "psr": "B14"
+    },
+    {
+      "id": "ror",
+      "label": "Run-of-river hydro",
+      "psr": "B11"
+    },
+    {
+      "id": "reservoir",
+      "label": "Reservoir hydro",
+      "psr": "B12"
+    },
+    {
+      "id": "gas",
+      "label": "Gas",
+      "psr": "B04"
+    },
+    {
+      "id": "hard_coal",
+      "label": "Hard coal",
+      "psr": "B05"
+    },
+    {
+      "id": "lignite",
+      "label": "Lignite",
+      "psr": "B02"
+    },
+    {
+      "id": "oil",
+      "label": "Oil",
+      "psr": "B06"
+    },
+    {
+      "id": "biomass",
+      "label": "Biomass",
+      "psr": "B01"
+    },
+    {
+      "id": "waste",
+      "label": "Waste",
+      "psr": "B17"
+    },
+    {
+      "id": "geothermal",
+      "label": "Geothermal",
+      "psr": "B09"
+    }
+  ],
+  "ember_fuels": [
+    "Wind",
+    "Solar",
+    "Nuclear",
+    "Hydro",
+    "Gas",
+    "Coal",
+    "Bioenergy",
+    "Other fossil",
+    "Other renewables"
+  ],
+  "countries": [
+    {
+      "code": "AL",
+      "name": "Albania",
+      "file": "AL.json.gz",
+      "sha256": "5a102737a28128acdbee2476f947db1f3de0745ccdd04e485a8ea756873101b3",
+      "bytes": 78203,
+      "price_zones": [
+        "AL"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "AL"
+      ],
+      "json_sha256": "c89694cc1e97e7196b74ec267750a11996b3c14c02b4e8cde2a83be290ba2fd2"
+    },
+    {
+      "code": "AT",
+      "name": "Austria",
+      "file": "AT.json.gz",
+      "sha256": "dbcde27a3465c020498e4f2c21661acee26f262defe4359a2a4955b7d0a48789",
+      "bytes": 281843,
+      "price_zones": [
+        "AT"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "AT"
+      ],
+      "json_sha256": "920ab375a789ddfcdca7f6ebdfca1d9d796826916a7b26fffa1863be2bbbeae4"
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "file": "BE.json.gz",
+      "sha256": "08ec00344bf82b1645fcbae80fca1d47104a96288ccdf63bd3453e06fffea2b9",
+      "bytes": 398139,
+      "price_zones": [
+        "BE"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "BE"
+      ],
+      "json_sha256": "734b2f8f05840ae5654ca1601d7005a21cdf6fc6badd483fc9b60c387692bc21"
+    },
+    {
+      "code": "BA",
+      "name": "Bosnia and Herzegovina",
+      "file": "BA.json.gz",
+      "sha256": "41ee3afa0d02e4789ac33ccfaef7813127aa3a3997dfb16cb104dd6d8e82cc5e",
+      "bytes": 90376,
+      "price_zones": [
+        "BA"
+      ],
+      "observed_price_zones": 0,
+      "generation_source_areas": [
+        "BA"
+      ],
+      "json_sha256": "250cabb2a4dbe8bc1a24347a4824c643b388b901b769bd50d88a482838ca6973"
+    },
+    {
+      "code": "BG",
+      "name": "Bulgaria",
+      "file": "BG.json.gz",
+      "sha256": "e668d4b5cd8fbf0f2e59798572b409a1e732771795af778cb53d0f593c2d629d",
+      "bytes": 242907,
+      "price_zones": [
+        "BG"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "BG"
+      ],
+      "json_sha256": "09208e67766bfed16d5ac7617b205c06f8c1c1dcefa05fb1899fff406cd2cf7a"
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "file": "HR.json.gz",
+      "sha256": "0f105a9466372a1b56a6f16f758566644da52d76911f0172eff17bf5c565c234",
+      "bytes": 273653,
+      "price_zones": [
+        "HR"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "HR"
+      ],
+      "json_sha256": "b6ff2832a3f229f6016c7aad56c3ff1bbc39a5c9547417c0febec45afbfc9f78"
+    },
+    {
+      "code": "CZ",
+      "name": "Czechia",
+      "file": "CZ.json.gz",
+      "sha256": "f4539fce3f6698e1eed98c24af912a2591025ad30d99e3ccf26179ac3a69fcc4",
+      "bytes": 350376,
+      "price_zones": [
+        "CZ"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "CZ"
+      ],
+      "json_sha256": "fe776b7c57547cc0ef4c3fee0abc1d794090a3c01afe1fa3671ca92f83087b4a"
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "file": "DK.json.gz",
+      "sha256": "c1af089203646453732621821e2bb7cd258f80d3e03abc874aa73f9a91432491",
+      "bytes": 929031,
+      "price_zones": [
+        "DK1",
+        "DK2"
+      ],
+      "observed_price_zones": 2,
+      "generation_source_areas": [
+        "DK1",
+        "DK2"
+      ],
+      "json_sha256": "c1bdcfd51189e76748b31af9fdcdcdc1ee88bd3b04cf63d1786dabab95f7ad4f"
+    },
+    {
+      "code": "EE",
+      "name": "Estonia",
+      "file": "EE.json.gz",
+      "sha256": "29a7183a6ae5b94184c87ffb8b02e2072bef6ee2056fc99b38939e13c67255bb",
+      "bytes": 220599,
+      "price_zones": [
+        "EE"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "EE"
+      ],
+      "json_sha256": "8afce43d41ac1814235916eb037f38c53681ae544adea27b1d2209baeddd487d"
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "file": "FI.json.gz",
+      "sha256": "4c09a029f0c9ea9496450496d333526514a508b31c215f029c623717269f25f6",
+      "bytes": 343713,
+      "price_zones": [
+        "FI"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "FI"
+      ],
+      "json_sha256": "ec686a332e0a582246aa126e4f681ebc1a97434da3df3b93ec56422bd2c50306"
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "file": "FR.json.gz",
+      "sha256": "030feca05a05fe2fc473c454caa05299183f4beecd93894ca228a0e33e248c0b",
+      "bytes": 481128,
+      "price_zones": [
+        "FR",
+        "FR-COR"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "FR"
+      ],
+      "json_sha256": "922c94a2111a0f479c35734f51b681fec1222867a7138560a131bdb9dc958077"
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "file": "DE.json.gz",
+      "sha256": "2cd9f70024970486c2ee858c207784b5e40ac079a7537ccbef7e3e80fa35a8ae",
+      "bytes": 780948,
+      "price_zones": [
+        "DE-LU"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "DE-LU"
+      ],
+      "json_sha256": "a8b3eb9812ebcb1d5b63e9a59317afecacb83c6e850859373b5e5ac770956ca0"
+    },
+    {
+      "code": "GR",
+      "name": "Greece",
+      "file": "GR.json.gz",
+      "sha256": "915702c96f13a9cd867799224eacbc640b37363639ffe44c324fd014a065f6bf",
+      "bytes": 247137,
+      "price_zones": [
+        "GR"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "GR"
+      ],
+      "json_sha256": "a1597c03b5b5a1e6a189ced9cebd93fe0c49f0539bcfd242ae2ca667cdc33eb0"
+    },
+    {
+      "code": "HU",
+      "name": "Hungary",
+      "file": "HU.json.gz",
+      "sha256": "cbb0fb3077d383bbd1902627dac8165e215be02e799be6e11c4a611c01be99af",
+      "bytes": 296789,
+      "price_zones": [
+        "HU"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "HU"
+      ],
+      "json_sha256": "bbfe3d14398745291dcaf9003f40dddb2a68e4c793ee44875263186e81c491cc"
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "file": "IE.json.gz",
+      "sha256": "adc25f321716c25a1cdfaecd1f2a2c3aefb082ff374d21b4a84f966078fbec87",
+      "bytes": 294594,
+      "price_zones": [
+        "IE-SEM"
+      ],
+      "observed_price_zones": 0,
+      "generation_source_areas": [
+        "IE-SEM"
+      ],
+      "json_sha256": "ec3294d1356a2642ff3056ddb4361364cf05c93fa8cde7c557c8dace7fc1207f"
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "file": "IT.json.gz",
+      "sha256": "23d7d60c77b67e10922baec0ac9b601740bdf236822ec6e57a1f4e876b556920",
+      "bytes": 1796697,
+      "price_zones": [
+        "IT-CALA",
+        "IT-CNOR",
+        "IT-CSUD",
+        "IT-North",
+        "IT-SICI",
+        "IT-SUD",
+        "IT-SARD"
+      ],
+      "observed_price_zones": 6,
+      "generation_source_areas": [
+        "IT-CALA",
+        "IT-CNOR",
+        "IT-CSUD",
+        "IT-North",
+        "IT-SARD",
+        "IT-SICI",
+        "IT-SUD"
+      ],
+      "json_sha256": "da9e68935640f17b28e399817038996a6e95013d0ebf98d27d3c9a37d24c13ff"
+    },
+    {
+      "code": "XK",
+      "name": "Kosovo",
+      "file": "XK.json.gz",
+      "sha256": "70537e0c8804e0254296247757e2b21c08dab932c27086fd6bb5f29feab0ce87",
+      "bytes": 50765,
+      "price_zones": [
+        "XK"
+      ],
+      "observed_price_zones": 0,
+      "generation_source_areas": [
+        "XK"
+      ],
+      "json_sha256": "6ec393bae673910526a78482559a500794c558223520b6cd680c81646a5bb40f"
+    },
+    {
+      "code": "LV",
+      "name": "Latvia",
+      "file": "LV.json.gz",
+      "sha256": "df32c75f8b84c00e99ccf18155fe90364d9fdde2d3b9fb88538d52081166dd3e",
+      "bytes": 166734,
+      "price_zones": [
+        "LV"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "LV"
+      ],
+      "json_sha256": "bfbef4e489a6f89393e5e611c570979892ed1a8fdcfd5aeb9ca7145f75d24761"
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania",
+      "file": "LT.json.gz",
+      "sha256": "2088151f70e4ead9affe898b7ccb559a3bb12f2bcd10309e761a27e0bd634ac6",
+      "bytes": 183505,
+      "price_zones": [
+        "LT"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "LT"
+      ],
+      "json_sha256": "ce665b1f513400fb364951849e23be95d2b52a12e57a5120caa6bff6ed9acb15"
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "file": "LU.json.gz",
+      "sha256": "fda1f30fa870893e75f1d1469eec5090e1ddfad80b14e9907a3a491bfe379b82",
+      "bytes": 413165,
+      "price_zones": [
+        "DE-LU"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [],
+      "json_sha256": "57a6e886e7680fe5637deb94a05e955d54856efc27df9138bd36576f33521c9f"
+    },
+    {
+      "code": "ME",
+      "name": "Montenegro",
+      "file": "ME.json.gz",
+      "sha256": "be08e2964ec6c9e48f5283fc1fe14446ea463fa79f9a7ceb18c4dda6a8b8ed0f",
+      "bytes": 48018,
+      "price_zones": [
+        "ME"
+      ],
+      "observed_price_zones": 0,
+      "generation_source_areas": [
+        "ME"
+      ],
+      "json_sha256": "82bc1d1e9773f872eccfd3965fb0b0e400c3ddbee6602a56646838f71202206f"
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "file": "NL.json.gz",
+      "sha256": "abd4ae1c2acd684efd368929afa205c96a8c598805596a39d713b499085d9073",
+      "bytes": 385968,
+      "price_zones": [
+        "NL"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "NL"
+      ],
+      "json_sha256": "0ada956ebe6bbc4664d44b46e140fa5b1c317b5d7476d13f1ce52648a5c314e9"
+    },
+    {
+      "code": "MK",
+      "name": "North Macedonia",
+      "file": "MK.json.gz",
+      "sha256": "145d44c0aa7774fc657fa68e473b1df67a963454d85a7899f0079a7705606467",
+      "bytes": 130537,
+      "price_zones": [
+        "MK"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "MK"
+      ],
+      "json_sha256": "d4f1903df29b9ffd0a918ae34057412721e7a84a0eae903fd62b40f0927e2754"
+    },
+    {
+      "code": "NO",
+      "name": "Norway",
+      "file": "NO.json.gz",
+      "sha256": "8260d18f7f12708f881271eb595d9c9f876ba0db8962a359ec6ef498a9d61a14",
+      "bytes": 1322446,
+      "price_zones": [
+        "NO1",
+        "NO2",
+        "NO3",
+        "NO4",
+        "NO5"
+      ],
+      "observed_price_zones": 5,
+      "generation_source_areas": [
+        "NO1",
+        "NO2",
+        "NO3",
+        "NO4",
+        "NO5"
+      ],
+      "json_sha256": "1ccea0661b4757c4cd9a221d2d81bffcabe170d251e8f58726686ea832ce7511"
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "file": "PL.json.gz",
+      "sha256": "f17bf465c219223f1612d1eb130e1b496efb02b31e685051bda95583dce067a9",
+      "bytes": 416887,
+      "price_zones": [
+        "PL"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "PL"
+      ],
+      "json_sha256": "724908c35cd90e1988aed9ce17c3e04a13a2320206767a3dbb93f3489bd7cd6d"
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "file": "PT.json.gz",
+      "sha256": "238aaa5b2adc0604a62df2b5cc8628476aec1c422ed84900c36baca13bf060d6",
+      "bytes": 346212,
+      "price_zones": [
+        "PT"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "PT"
+      ],
+      "json_sha256": "8cbb83c6897ea837423ba0b552fd2cce112f78025457bf542a707f9339aa92cc"
+    },
+    {
+      "code": "RO",
+      "name": "Romania",
+      "file": "RO.json.gz",
+      "sha256": "44e2a609f2a2e1986b118a305aeb2b34b7f9e25161b2042ef8c861f9b09db336",
+      "bytes": 257644,
+      "price_zones": [
+        "RO"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "RO"
+      ],
+      "json_sha256": "39c7295a8274c91a93d1d4c376e66340cad5e98cf7950b551e9bbe34c0b0b1c9"
+    },
+    {
+      "code": "RS",
+      "name": "Serbia",
+      "file": "RS.json.gz",
+      "sha256": "c652bc17d9973e9b7a363a321b0251259310d669d9f41ad8109b504de72ea5e7",
+      "bytes": 186168,
+      "price_zones": [
+        "RS"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "RS"
+      ],
+      "json_sha256": "0b4343be0423848a9e964ba5f532f2bea4713ab2b87b19937373a69c7feb0089"
+    },
+    {
+      "code": "SK",
+      "name": "Slovakia",
+      "file": "SK.json.gz",
+      "sha256": "c88376a48d34abf24c0e0d9290077275a6d5d2f4aad5f0c20b56fdf4f566f3f0",
+      "bytes": 226939,
+      "price_zones": [
+        "SK"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "SK"
+      ],
+      "json_sha256": "48e34ff5f3ce7f83b6e1a658498f05ddecdeb734a50363834d915fd56a0b8a8f"
+    },
+    {
+      "code": "SI",
+      "name": "Slovenia",
+      "file": "SI.json.gz",
+      "sha256": "a00f9e74aeeca8924f5456f539abe89a8be27eb955d84c71549682fcd6a7d75f",
+      "bytes": 177204,
+      "price_zones": [
+        "SI"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "SI"
+      ],
+      "json_sha256": "98733c670da51096c16a920045c7d64121c9cd603e897dda99ef6d5b211f9a8d"
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "file": "ES.json.gz",
+      "sha256": "e1be50ef9cbbbf3af27d69c98ec7306f6f644645ea59e74e171911adc22d240b",
+      "bytes": 411384,
+      "price_zones": [
+        "ES"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "ES"
+      ],
+      "json_sha256": "51e0f666f0d3ed06cd4d6ddd62919ed7590cf5223f4927d80d22fc71c02b3387"
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "file": "SE.json.gz",
+      "sha256": "7e7f3ffecc337bc167d1c3a09c77a253c89b8b8b2d85161d5256e8e867d6bd96",
+      "bytes": 1139347,
+      "price_zones": [
+        "SE1",
+        "SE2",
+        "SE3",
+        "SE4"
+      ],
+      "observed_price_zones": 4,
+      "generation_source_areas": [
+        "SE1",
+        "SE2",
+        "SE3",
+        "SE4"
+      ],
+      "json_sha256": "1831ac52b9a00edb1bfa78f8f458ca504308eb24c3d36b8ff57b615b4f60282d"
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "file": "CH.json.gz",
+      "sha256": "9e37fad4fff6f75e1bc3d3e833d3f8e088293f6957ec281300fc922d182911cc",
+      "bytes": 210343,
+      "price_zones": [
+        "CH"
+      ],
+      "observed_price_zones": 1,
+      "generation_source_areas": [
+        "CH"
+      ],
+      "json_sha256": "a8eacde91179d03a4168bee2cf9ecf7eaa12c415bc5a7d5347ddc5d2d0e0bfa9"
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "file": "GB.json.gz",
+      "sha256": "9f47f863ee88c409248dc42e333f6c4cf3087a2c0ced0cfc5981889b1f65cc99",
+      "bytes": 446132,
+      "price_zones": [
+        "GB",
+        "IE-SEM"
+      ],
+      "observed_price_zones": 0,
+      "generation_source_areas": [
+        "GB"
+      ],
+      "json_sha256": "5fbb6515345cab7e0bb33b6b4c2ecea5727d7e1482d5092545a345d238ddda8a"
+    }
+  ],
+  "sources": {
+    "irena": {
+      "url": "https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2026/Mar/IRENA_DAT_RE_capacity_statistics_2026.pdf",
+      "sha256": "fc580bd4f4ee39ef20de6b1ce3926005a4e3e3b8e2c92fd6a16d175a52515921",
+      "description": "Original published end-2024/end-2025 capacity cells (MW), including source flags; renewable parent/child rows overlap and must not be added."
+    },
+    "ember": {
+      "url": "https://files.ember-energy.org/public-downloads/generation/outputs/release_generation_monthly_global.csv",
+      "sha256": "182bf4a3be2521c650f29d05d5cf8f5afde8828cfea59f40538b3df2af5df893",
+      "description": "Original 2025 monthly national generation rows, TWh; no hourly disaggregation."
+    },
+    "entsoe": {
+      "url": "https://transparency.entsoe.eu/",
+      "description": "Auction-audited ENTSO-E A44 main day-ahead prices, SDAC where applicable: DE-LU/AT sequence 1 only; other cached markets sole unclassified A01; A07 intraday excluded. Four quarter-hour samples averaged per UTC hour. A75 hourly generation by PSR is unchanged."
+    }
+  },
+  "limitations": [
+    "2025 retrospective reconstruction; not independent forecast validation or recovered actual bids. Non-oil bid calibration used the earlier auction targets and is frozen, not refitted. Accepted baseline and browser scenario engine remain unchanged.",
+    "Model generation is availability-proportional allocation within saved equal-offer blocks. Conditional per-technology lower/upper bounds are not simultaneous outcomes or confidence intervals.",
+    "Hourly data is rounded to 0.1 MW generation / 0.001 EUR/MWh prices; hourly mean MW equals MWh in each one-hour bin. Summary price metrics use unrounded audited arrays.",
+    "Missing source areas/types/hours remain null. A national hourly source total requires all constituent areas/types; partial zone sums are never presented as full-country generation.",
+    "Germany A75 generation excludes Luxembourg, while DE-LU prices are shared. French national generation is distinct from the FR price area/model including Corsica; exact coverage is not certified.",
+    "Pumped-storage output and other reported PSR types are preserved in raw source downloads but excluded from this fixed-hydro model taxonomy. Ember fuel and waste classifications remain proxies."
+  ]
+}

@@ -25,6 +25,13 @@ function Publication() {
         <Link to="/" className="underline">
           Workbench
         </Link>
+        <Link
+          to="/countries"
+          search={{ country: "DE", start: "2025-01-01", end: "2025-01-07", resolution: "hourly" }}
+          className="underline"
+        >
+          Country data explorer
+        </Link>
       </nav>
       <ResearchArticle content={document.content} />
     </main>

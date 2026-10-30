@@ -147,11 +147,7 @@ try {
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
     if (process.env["SMOKE_SCREENSHOTS"])
       await page.screenshot({ path: `/tmp/grid-conductor-${viewport.width}.png`, fullPage: true });
-    for (const route of [
-      "docs/",
-      "docs/european-physical-synthetic-clearing-2025/",
-      "docs/daily-fuel-dispatch-2025/",
-    ]) {
+    for (const route of ["docs/", "docs/research-baselines-2025/"]) {
       const response = await page.goto(`${base}${route}`);
       assert.equal(response?.status(), 200, `Direct navigation to ${route}`);
       await page.getByRole("heading", { level: 1 }).first().waitFor();

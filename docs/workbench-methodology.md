@@ -167,8 +167,8 @@ factors and storage/flow accounting. Direct operational COâ‚‚ and lifecycle COâ‚
 must remain distinct. The live model does not yet provide those comparisons,
 carbon monetisation, discounted welfare or the complete cost-benefit indicators.
 
-The newer Europe-wide fixed-reservoir dispatch calculation is **not currently
-connected to the workbench's scenario button**. This page describes the solver
+The European research dispatch baselines are **not currently connected to the
+workbench's scenario button**. This page describes the solver
 actually used by the public app. Both its reduced-form assumptions and the absence
 of calibrated price, chronology and paired investment validation limit how the
 results should be used: screening questions worth studying, not investment decisions.
@@ -191,11 +191,9 @@ workbench's scenario results. Raw provider caches and large research witnesses
 remain outside Git; the public app consumes compact static exports. Scenario
 units/results are stored locally in the browser, not uploaded to a server.
 
-## Retained European model reports
+## European research baselines
 
-- [Full-year fixed-hydro checkpoint](european-physical-synthetic-clearing-2025.md):
-  fast hourly supply-curve clearing conditional on an audited reservoir schedule.
-- [Current generator-bidding model](daily-fuel-dispatch-2025.md): resource-specific
-  bids, daily clearing, carried storage and full-year observed-price diagnostics.
-
-These are offline research models. Neither replaces the live browser solver.
+The [two retained 2025 research baselines](research-baselines-2025.md) compare
+solar-anchor fast dispatch with monthly fitted supply curves in an annual physical
+LP replay. Neither replaces the live browser solver. The country explorer still
+shows an archived, separately verified run and is labelled accordingly.

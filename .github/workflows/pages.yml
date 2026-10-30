@@ -1,8 +1,8 @@
-name: Public v1 — verify and deploy Pages
+name: Main — verify and deploy Pages
 
 on:
   push:
-    branches: [public-v1, main]
+    branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:

@@ -18,7 +18,7 @@ function publicationLink(href: string): string {
   if (file?.includes("research/")) return publicAsset(file.slice(file.indexOf("research/")));
   if (href === "/" || href === "/docs") return publicAsset(href);
   if (href.startsWith("/research/")) return publicAsset(href);
-  return `https://github.com/autological-eu/grid-conductor/blob/public-v1/${href.replace(/^(\.\.\/)+/, "")}`;
+  return `https://github.com/autological-eu/grid-conductor/blob/research/${href.replace(/^(\.\.\/)+/, "")}`;
 }
 
 export function ResearchArticle({ content }: { content: string }) {

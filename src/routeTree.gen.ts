@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CountriesRouteImport } from './routes/countries'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as DocsSlugRouteImport } from './routes/docs.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CountriesRoute = CountriesRouteImport.update({
+  id: '/countries',
+  path: '/countries',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocsRoute = DocsRouteImport.update({
@@ -31,30 +37,34 @@ const DocsSlugRoute = DocsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/countries': typeof CountriesRoute
   '/docs': typeof DocsRouteWithChildren
   '/docs/$slug': typeof DocsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/countries': typeof CountriesRoute
   '/docs': typeof DocsRouteWithChildren
   '/docs/$slug': typeof DocsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/countries': typeof CountriesRoute
   '/docs': typeof DocsRouteWithChildren
   '/docs/$slug': typeof DocsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/docs' | '/docs/$slug'
+  fullPaths: '/' | '/countries' | '/docs' | '/docs/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/docs' | '/docs/$slug'
-  id: '__root__' | '/' | '/docs' | '/docs/$slug'
+  to: '/' | '/countries' | '/docs' | '/docs/$slug'
+  id: '__root__' | '/' | '/countries' | '/docs' | '/docs/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CountriesRoute: typeof CountriesRoute
   DocsRoute: typeof DocsRouteWithChildren
 }
 
@@ -65,6 +75,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/countries': {
+      id: '/countries'
+      path: '/countries'
+      fullPath: '/countries'
+      preLoaderRoute: typeof CountriesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/docs': {
@@ -96,6 +113,7 @@ const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CountriesRoute: CountriesRoute,
   DocsRoute: DocsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
