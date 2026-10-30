@@ -1,4 +1,4 @@
-name: Research — verify and deploy Pages
+name: Research — verify static app
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: pages-${{ github.event_name == 'pull_request' && github.ref || 'production' }}
+  group: research-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -43,41 +43,6 @@ jobs:
             if curl --silent --fail "$SMOKE_URL" > /dev/null; then break; fi
             sleep 1
           done
-          bun run test:browser
-          bun tools/math-browser-smoke.ts
-          bun tools/country-browser-smoke.ts
-      - uses: actions/upload-pages-artifact@v5
-        if: github.event_name != 'pull_request'
-        with:
-          path: dist
-
-  deploy:
-    if: github.event_name != 'pull_request'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy static application
-        id: deployment
-        uses: actions/deploy-pages@v5
-      - uses: actions/checkout@v7
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.4.2
-      - name: Prepare live-site browser verification
-        run: |
-          bun install --frozen-lockfile
-          bunx playwright install --with-deps chromium
-      - name: Verify the deployed public workbench and research
-        env:
-          SMOKE_URL: ${{ steps.deployment.outputs.page_url }}
-        run: |
           bun run test:browser
           bun tools/math-browser-smoke.ts
           bun tools/country-browser-smoke.ts
