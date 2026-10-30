@@ -25,7 +25,8 @@ substitution. Reconcile geography and Nordic spillovers before declaring success
 
 No model promotion, main merge, force-push, credentials, ignored bulk Git data,
 or weakening of existing annual/physical acceptance gates. Record milestones and
-material failures concisely. Commit coherent changes on public-v1.
+material failures concisely. Commit research changes on `research`; publish the
+website from `main` after verification.
 
 Latest verified milestone: water corrections plus source-backed border-envelope
 controls reduce February EuropeMAE31.6688→24.1156 with bids frozen. Both full1416h

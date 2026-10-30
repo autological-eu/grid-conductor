@@ -1116,7 +1116,8 @@ compliance with its transmission cost-benefit methodology.
 
 Static Bun/Vite/React/TanStack Router, IndexedDB and GitHub Pages; correct project
 base/deep links and reproducible builds. No credentials, login, persistent service,
-paid hosting or cloud scenario database. Work on public-v1; no automatic main merge,
+paid hosting or cloud scenario database. Develop and verify on `research`;
+deploy the public website from `main` after promotion. No automatic main merge,
 force-push or repository visibility change.
 
 Keep large provider inputs locally ignored, with source requests/versions/hashes
