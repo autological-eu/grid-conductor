@@ -184,6 +184,15 @@ Treat the inherited physical grid as one, potentially dated source of topology
 and deliverability rather than ground truth for 2025 market coupling. Reconcile
 its zone mapping and ratings against dated plant/grid evidence, observed A09
 commercial outcomes and mapped JAO domains without conflating these objects.
+For a source-matched modeled border, use ENTSO-E A11 reported physical exchange
+as a dated lower-bound diagnostic for its hourly directional corridor envelope,
+requiring both directions and complete interval coverage. Do not apply the
+possibly much larger A09 commercial schedule as a physical line-rating floor.
+Keep an A11-supported transport-envelope candidate separate from the accepted
+joint LP's branch PTDF/link limits; verify its source mapping, outage history,
+adverse zones and physical feasibility before any baseline network revision.
+JAO CNEC endpoints and `fmax` can corroborate topology/component evidence but
+cannot alone set an independent pairwise market transfer capacity.
 
 For JAO integration, retain the published time-step PTDF coefficients, RAM, CNEC
 identity, named virtual hubs, null fields and API/filter provenance. Map market
