@@ -152,6 +152,23 @@ validation exposure. Preserve physical/annual acceptance gates and scenario-resp
 requirements; neither a lower MAE nor monthly total agreement alone establishes
 correct bids, physical adequacy or investment value. No automatic promotion.
 
+## Zonal source and connection adequacy
+
+Maintain reviewable zone–technology generator and zone-connection inventories
+for the 2025 research model. Label each row's source data and geographic scope;
+show source fleet nameplate separately from corrected hourly model availability,
+observed generation coverage and fixed reservoir output. Treat observed hourly
+production as a demonstrated lower bound only for a matched zone, technology,
+unit and reporting scope. Flag larger observed production for reconciliation,
+without automatically replacing renewable availability or hydro water.
+
+Represent only source-supported cross-zone connections. Distinguish physical
+component ratings, the joint model's PTDF constraints, ENTSO-E observed A09
+commercial exchanges and JAO flow-based market domains. A sampled or incomplete
+JAO market domain is not an annual pairwise transfer limit. Preserve missing
+observations and source-mapping exceptions in the inventories, and test any
+later capacity or constraint revision as a separate physically audited model.
+
 ## Evidence-led dispatch calibration
 
 Retain flexible monotone supply bids within fast constrained market clearing.
