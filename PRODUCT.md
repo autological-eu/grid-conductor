@@ -169,6 +169,18 @@ JAO market domain is not an annual pairwise transfer limit. Preserve missing
 observations and source-mapping exceptions in the inventories, and test any
 later capacity or constraint revision as a separate physically audited model.
 
+For JAO integration, retain the published time-step PTDF coefficients, RAM, CNEC
+identity, named virtual hubs, null fields and API/filter provenance. Map market
+hub positions, cross-border HVDC participation and allocation rules to the
+model before applying any row as a constraint. Test the reconstructed regional
+domain against observed commercial net positions and historical allocation
+outcomes, then run a separate full-year constrained candidate with frozen bids.
+Do not treat filtered presolved or nonredundant rows alone as a complete JAO
+market domain or equate them with physical branch ratings.
+Preserve the JAO publication's actual time steps, including 15-minute Nordic
+steps in late 2025. Define and validate any conversion into the hourly research
+model; do not silently average PTDF coefficients or RAM across differing domains.
+
 ## Evidence-led dispatch calibration
 
 Retain flexible monotone supply bids within fast constrained market clearing.

@@ -1,0 +1,253 @@
+{
+  "status": "partial_JAO_direct_zone_row_sensitivity_not_baseline",
+  "period": "January 2025 UTC",
+  "directly_expressible_jao_rows": 161,
+  "hours_with_direct_rows": 160,
+  "feasible_hours": 133,
+  "infeasible_hours": [
+    {
+      "hour": 690,
+      "time": "2025-01-29T18:00:00Z",
+      "jao_source_ids": [
+        "1906875"
+      ]
+    },
+    {
+      "hour": 702,
+      "time": "2025-01-30T06:00:00Z",
+      "jao_source_ids": [
+        "1917747"
+      ]
+    },
+    {
+      "hour": 703,
+      "time": "2025-01-30T07:00:00Z",
+      "jao_source_ids": [
+        "1918785"
+      ]
+    },
+    {
+      "hour": 704,
+      "time": "2025-01-30T08:00:00Z",
+      "jao_source_ids": [
+        "1919701"
+      ]
+    },
+    {
+      "hour": 705,
+      "time": "2025-01-30T09:00:00Z",
+      "jao_source_ids": [
+        "1920760"
+      ]
+    },
+    {
+      "hour": 706,
+      "time": "2025-01-30T10:00:00Z",
+      "jao_source_ids": [
+        "1921539"
+      ]
+    },
+    {
+      "hour": 711,
+      "time": "2025-01-30T15:00:00Z",
+      "jao_source_ids": [
+        "1925711"
+      ]
+    },
+    {
+      "hour": 712,
+      "time": "2025-01-30T16:00:00Z",
+      "jao_source_ids": [
+        "1927053"
+      ]
+    },
+    {
+      "hour": 713,
+      "time": "2025-01-30T17:00:00Z",
+      "jao_source_ids": [
+        "1927656"
+      ]
+    },
+    {
+      "hour": 714,
+      "time": "2025-01-30T18:00:00Z",
+      "jao_source_ids": [
+        "1928891"
+      ]
+    },
+    {
+      "hour": 715,
+      "time": "2025-01-30T19:00:00Z",
+      "jao_source_ids": [
+        "1929614"
+      ]
+    },
+    {
+      "hour": 716,
+      "time": "2025-01-30T20:00:00Z",
+      "jao_source_ids": [
+        "1930729"
+      ]
+    },
+    {
+      "hour": 717,
+      "time": "2025-01-30T21:00:00Z",
+      "jao_source_ids": [
+        "1931575"
+      ]
+    },
+    {
+      "hour": 718,
+      "time": "2025-01-30T22:00:00Z",
+      "jao_source_ids": [
+        "1932618"
+      ]
+    },
+    {
+      "hour": 725,
+      "time": "2025-01-31T05:00:00Z",
+      "jao_source_ids": [
+        "1938337"
+      ]
+    },
+    {
+      "hour": 726,
+      "time": "2025-01-31T06:00:00Z",
+      "jao_source_ids": [
+        "1939863"
+      ]
+    },
+    {
+      "hour": 727,
+      "time": "2025-01-31T07:00:00Z",
+      "jao_source_ids": [
+        "1940319"
+      ]
+    },
+    {
+      "hour": 728,
+      "time": "2025-01-31T08:00:00Z",
+      "jao_source_ids": [
+        "1941686"
+      ]
+    },
+    {
+      "hour": 729,
+      "time": "2025-01-31T09:00:00Z",
+      "jao_source_ids": [
+        "1942237"
+      ]
+    },
+    {
+      "hour": 736,
+      "time": "2025-01-31T16:00:00Z",
+      "jao_source_ids": [
+        "1948982"
+      ]
+    },
+    {
+      "hour": 737,
+      "time": "2025-01-31T17:00:00Z",
+      "jao_source_ids": [
+        "1949864"
+      ]
+    },
+    {
+      "hour": 738,
+      "time": "2025-01-31T18:00:00Z",
+      "jao_source_ids": [
+        "1950883"
+      ]
+    },
+    {
+      "hour": 739,
+      "time": "2025-01-31T19:00:00Z",
+      "jao_source_ids": [
+        "1951715"
+      ]
+    },
+    {
+      "hour": 740,
+      "time": "2025-01-31T20:00:00Z",
+      "jao_source_ids": [
+        "1952813"
+      ]
+    },
+    {
+      "hour": 741,
+      "time": "2025-01-31T21:00:00Z",
+      "jao_source_ids": [
+        "1953537"
+      ]
+    },
+    {
+      "hour": 742,
+      "time": "2025-01-31T22:00:00Z",
+      "jao_source_ids": [
+        "1953823"
+      ]
+    },
+    {
+      "hour": 743,
+      "time": "2025-01-31T23:00:00Z",
+      "jao_source_ids": [
+        "1955355"
+      ]
+    }
+  ],
+  "emergency_mwh": 0.0,
+  "maximum_checked_primal_residual_mw": 7.560174708487466e-11,
+  "price_mae_on_feasible_direct_row_hours": {
+    "NO1": {
+      "hours": 133,
+      "original_mae": 29.012390020242922,
+      "direct_jao_mae": 29.012390020242954
+    },
+    "NO2": {
+      "hours": 133,
+      "original_mae": 30.59020351890054,
+      "direct_jao_mae": 30.590203518900605
+    },
+    "NO3": {
+      "hours": 133,
+      "original_mae": 43.31260019420682,
+      "direct_jao_mae": 43.31260019420683
+    },
+    "NO4": {
+      "hours": 133,
+      "original_mae": 63.9281186513713,
+      "direct_jao_mae": 63.91093087001075
+    },
+    "NO5": {
+      "hours": 133,
+      "original_mae": 30.205514191162955,
+      "direct_jao_mae": 30.205514191162926
+    },
+    "SE1": {
+      "hours": 133,
+      "original_mae": 47.60476784456052,
+      "direct_jao_mae": 47.60476784456054
+    },
+    "SE2": {
+      "hours": 133,
+      "original_mae": 48.28768306979917,
+      "direct_jao_mae": 48.28768306979917
+    },
+    "SE3": {
+      "hours": 133,
+      "original_mae": 32.44882286663108,
+      "direct_jao_mae": 32.44882286663109
+    },
+    "SE4": {
+      "hours": 133,
+      "original_mae": 27.38666475868315,
+      "direct_jao_mae": 27.386664758683164
+    }
+  },
+  "limitations": [
+    "Filtered Nordic JAO rows are not a complete market domain",
+    "Only source rows with defined PTDFs and no virtual hubs were added",
+    "PTDF reference and physical/market net-position equivalence are not independently certified",
+    "January selected-hour scores are not full-year or out-of-sample scores"
+  ]
+}

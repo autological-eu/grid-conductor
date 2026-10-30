@@ -11,6 +11,14 @@ This is a versioned successor to the retained `mixed_curve_fitting` research cal
 | Fast fitting | `transport.py`, `recovery.py`, `roots.py`, `fit.py`, `run_fit.py` | The same smoothed transport clearing, certified Newton roots, price-conditioned root selection, exact gradient, and monthly 20-update Adam protocol at rate 1.0. Each zone/technology has 24 local-hour six-node price curves per month. |
 | Joint LP and checks | `evaluation.py`, `lp.py`, `run_lp.py`, `verify.py` | Transfer monthly curves to the original 799 offer columns, then reclear all 8,760 UTC hours with unchanged link, island, PTDF, demand, and primal gates. `verify.py` is test-only. |
 
+An optional research input adapter, `jao.py`, reads the separately checkpointed
+2025 JAO Core/Nordic data and retains the published named PTDF hubs, RAM, UTC
+time steps and nullable coefficients. It audits compatibility with the 48-zone
+LP and can assemble a sparse **JAO-hub** matrix per published time step. It is
+not imported by the accepted `run_lp.py` path: the present LP lacks virtual-hub variables,
+their link coupling and a complete market-domain reconstruction. No JAO row is
+silently converted into a pairwise border limit or added to the baseline.
+
 Eleven active project modules implement the computation, including `__init__.py`, `run_fit.py`, and `run_lp.py`; `verify.py` is a separate test module. The original `tools/` producers and their bytes remain for source-hash replay. This is a computation refactor, not a source-data regeneration or a different market design.
 
 Run from the repository root with the pinned scientific interpreter:
