@@ -161,12 +161,18 @@ observed generation coverage and fixed reservoir output. Treat observed hourly
 production as a demonstrated lower bound only for a matched zone, technology,
 unit and reporting scope. Flag larger observed production for reconciliation,
 without automatically replacing renewable availability or hydro water.
-An observed-production hourly floor may be tested as a separate retrospective
-dispatchable-supply candidate when bidding-zone and technology scope match.
-Keep missing technology offers explicit and preserve the original baseline.
-Do not use the observed floor as a prospective availability forecast or infer
-new reservoir water or renewable weather availability from realised dispatch.
-Evaluate frozen bids and adverse zone effects before any capacity/source revision.
+An observed production peak above the modeled/source power ceiling is evidence
+for a larger zone–technology power envelope from that hour onward when bidding-
+zone and technology scope match. Keep the observation date, source ceiling and
+missing offers explicit. Test such revisions as separate candidates, not
+automatic baseline edits. For wind and solar, apply any justified power change
+to the original weather-shaped availability; for hydro, separate turbine power
+from inflow, stock and schedulable energy. Observed dispatch cannot supply
+missing weather or water. Reconcile unit coverage, outages, commissioning and
+reporting category before treating the inferred envelope as a prospective
+availability forecast. Refit bids and audit adverse zone effects after source
+revision; a frozen-bid price comparison is a physical sensitivity, not a fair
+calibration verdict.
 
 Represent only source-supported cross-zone connections. Distinguish physical
 component ratings, the joint model's PTDF constraints, ENTSO-E observed A09
@@ -174,6 +180,10 @@ commercial exchanges and JAO flow-based market domains. A sampled or incomplete
 JAO market domain is not an annual pairwise transfer limit. Preserve missing
 observations and source-mapping exceptions in the inventories, and test any
 later capacity or constraint revision as a separate physically audited model.
+Treat the inherited physical grid as one, potentially dated source of topology
+and deliverability rather than ground truth for 2025 market coupling. Reconcile
+its zone mapping and ratings against dated plant/grid evidence, observed A09
+commercial outcomes and mapped JAO domains without conflating these objects.
 
 For JAO integration, retain the published time-step PTDF coefficients, RAM, CNEC
 identity, named virtual hubs, null fields and API/filter provenance. Map market

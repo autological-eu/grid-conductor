@@ -1,6 +1,6 @@
 # 2025 zone–technology supply lower-bound candidate
 
-**Status:** retrospective input diagnostic and partial frozen-bid LP sensitivity. The accepted `mixed_curve_fitting` baseline is unchanged. Download the [624-row zone–technology table](data/zone-tech-observed-floor-2025.csv), [candidate source audit](data/zone-tech-observed-floor-2025.json) and [LP sensitivity audit](data/zone-tech-observed-floor-lp-2025.json). Large hourly arrays and LP witness stay in ignored `data/`.
+**Status:** historical hourly-floor diagnostic, superseded as an input proposal by the [dated power-envelope candidate](zone-tech-power-envelope-2025.md). This frozen-bid sensitivity remains useful for its numerical and adverse-zone evidence; it is not a fair calibration verdict after changing a fleet. The accepted `mixed_curve_fitting` baseline is unchanged. Download the [624-row zone–technology table](data/zone-tech-observed-floor-2025.csv), [candidate source audit](data/zone-tech-observed-floor-2025.json) and [LP sensitivity audit](data/zone-tech-observed-floor-lp-2025.json). Large hourly arrays and LP witness stay in ignored `data/`.
 
 ## Rule and source scope
 

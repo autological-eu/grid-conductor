@@ -1,0 +1,26 @@
+{
+  "status": "dated_demonstrated_power_candidate_not_baseline",
+  "hours": 8760,
+  "rows": 624,
+  "a75_receipts_checked": 456,
+  "rows_with_power_evidence_above_nameplate": 56,
+  "observed_exceedance_hours": 179427,
+  "availability_uplift_rows": 45,
+  "availability_uplift_mwh": 142993234.36174107,
+  "availability_rows_without_group": 12,
+  "source_sha256": {
+    "fleet_inventory": "7037f72d8ce7d30f3ff19a05ba35f775c8c24abc225d84ce3e0d1bedca50a793",
+    "grouped_input": "240157d56a1af31696b133873c179669319517bc534b7dffbbd2d60854f6d2d5",
+    "solar_delta": "4c36a2d2c22dea59f316f2fe3d5f06b5e79b7b28e8504bb89e7ebd3d3784d002",
+    "a75_receipt_set": "66eba20cf4e9e8dd9409e6f326f3c30af6827199ab240ed88df312efbbc949de"
+  },
+  "hourly_sha256": "31f13249b78ec90d4c87ea9e5a8d2a89d65b06fb857eaea38f4ab920492c0e74",
+  "csv_sha256": "0e1a6b3226d4e0e1d2a15ea11d613bf2cafaaf006e9fe17a0204ade1f7b215eb",
+  "limits": [
+    "Running observed peak increases a power ceiling only from its observed hour onward",
+    "Renewable candidate scales original weather availability only where source nameplate exists",
+    "Hydro power ceilings do not add water or change fixed output",
+    "Missing profiles/offers and outage timing need source reconciliation",
+    "Retrospective A75 evidence is not independent price validation"
+  ]
+}
