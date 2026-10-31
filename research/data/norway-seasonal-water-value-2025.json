@@ -1,0 +1,79 @@
+{
+  "status": "seasonal_water_value_timing_sensitivity_not_baseline",
+  "network_scale": 1.0,
+  "model_price_signal_only": true,
+  "seasonal_rule": "31-day modeled-price mean + 30 EUR/MWh times (0.5 - reservoir fullness)",
+  "absolute_reservoir_timing_change_twh": 5.866719231940186,
+  "national_reservoir_generation_twh": 139.21451260207073,
+  "terminal_stock_error_mwh": 1.862645149230957e-08,
+  "maximum_hourly_stock_violation_mwh": 0.0,
+  "maximum_primal_residual_mw": 3.1820852655073395e-06,
+  "emergency_mwh": 0.0,
+  "before_mae": 25.051056742655632,
+  "after_mae": 24.894328476705578,
+  "nordic_zones": {
+    "NO1": {
+      "before": 36.6105433733242,
+      "after": 35.227088822516244
+    },
+    "NO2": {
+      "before": 40.4182198400004,
+      "after": 39.24176667484874
+    },
+    "NO3": {
+      "before": 31.483448443127585,
+      "after": 30.12190344616161
+    },
+    "NO4": {
+      "before": 35.10680792889324,
+      "after": 34.50997541388057
+    },
+    "NO5": {
+      "before": 33.632013077907146,
+      "after": 32.38351628236231
+    }
+  },
+  "curves": [
+    {
+      "unit": 0,
+      "water_value_min": 0.0,
+      "water_value_max": 91.87915166503473,
+      "changed_energy_twh": 3.3298905163314587
+    },
+    {
+      "unit": 1,
+      "water_value_min": 0.0,
+      "water_value_max": 91.54321724697623,
+      "changed_energy_twh": 1.3554607465466284
+    },
+    {
+      "unit": 2,
+      "water_value_min": 0.8386859077707065,
+      "water_value_max": 88.7518892098215,
+      "changed_energy_twh": 0.7392506352900632
+    },
+    {
+      "unit": 3,
+      "water_value_min": 2.2224698832751537,
+      "water_value_max": 88.24526718970793,
+      "changed_energy_twh": 0.4250878453112517
+    },
+    {
+      "unit": 4,
+      "water_value_min": 2.222469883275158,
+      "water_value_max": 88.24526718970796,
+      "changed_energy_twh": 0.017029488460783653
+    }
+  ],
+  "seconds": 37.051998175000335,
+  "source_sha256": {
+    "water": "830d9cc1a1b1ccad67d1dbee8d6b00912e2a4ce9771c62df216e2396bf2b91bb",
+    "trial": "a5bc48a54b6a6be27eb5f92e2dcf73959ce5b34fe44db6641a2c105cff358998"
+  },
+  "limitations": [
+    "Existing national inflow and RoR split unchanged; corrected RoR turbine ceiling is inactive under that split",
+    "Fixed inherited hourly shape within each day; only daily energy shifts",
+    "Retrospective model-only price signal; no forward-market validation or actual hydro bid reconstruction",
+    "National stock pooled by inherited PyPSA units; no river routing or independent RoR inflow"
+  ]
+}
