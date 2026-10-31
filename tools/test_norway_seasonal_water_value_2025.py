@@ -38,6 +38,7 @@ def schedule(water, turbines, signal, alpha=0.05):
         # Daily scalar preserves the inherited intraday shape. Hourly power and
         # stock limits are checked after solving; the LP bounds protect power.
         upper_scale = np.min(np.where(p > 1e-9, turbines[unit] / np.maximum(p, 1e-9), np.inf), axis=1)
+        upper_scale = np.where(daily > 1e-9, upper_scale, 1.)
         lo = np.maximum(-alpha * daily, -daily)
         hi = np.minimum(alpha * daily, (upper_scale - 1) * daily)
         if np.any(lo > hi + 1e-6):

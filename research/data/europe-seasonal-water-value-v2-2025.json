@@ -1,0 +1,922 @@
+{
+  "status": "retrospective_europe_reservoir_timing_sensitivity_not_baseline",
+  "hours": 8760,
+  "countries_with_hydro": 29,
+  "reservoir_units": 93,
+  "eligible_units": 79,
+  "skipped_units": [
+    {
+      "unit": "ES2 0AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.018729933652755097
+    },
+    {
+      "unit": "ES2 1AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.018729933652755097
+    },
+    {
+      "unit": "ES2 2AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.018729933652755097
+    },
+    {
+      "unit": "ES2 3AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.018729933652755097
+    },
+    {
+      "unit": "ES2 4AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.01872993365275504
+    },
+    {
+      "unit": "ES2 5AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.018729933652755097
+    },
+    {
+      "unit": "ES2 6AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.018729933652755097
+    },
+    {
+      "unit": "ES2 7AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.018729933652755125
+    },
+    {
+      "unit": "ES2 8AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.018729933652755167
+    },
+    {
+      "unit": "ES2 9AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.018729933652755215
+    },
+    {
+      "unit": "GB1 2AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.008077043174720522
+    },
+    {
+      "unit": "GB1 3AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.008077043174720522
+    },
+    {
+      "unit": "GB1 8AC hydro",
+      "reason": "fixed_zonal_GSK_changes_physical_island_energy",
+      "maximum_island_imbalance_per_mw": 0.008077043174720688
+    },
+    {
+      "unit": "RS2 0AC hydro",
+      "reason": "no_positive_storage_or_generation"
+    }
+  ],
+  "network_scale": 1.0,
+  "model_price_signal_only": true,
+  "rule": "max(0, 31-day modeled-price mean + 30 EUR/MWh \u00d7 (0.5 - reservoir fullness)); 5% daily release change and weekly stock band",
+  "absolute_timing_change_twh": 6.108622013919233,
+  "annual_reservoir_generation_twh": 350.4409977546244,
+  "maximum_hourly_stock_violation_mwh": 4.78879883303307e-07,
+  "terminal_stock_error_mwh": 4.808716767001897e-07,
+  "maximum_primal_residual_mw": 4.122939571971074e-07,
+  "emergency_mwh": 0.0,
+  "before_mae": 25.051056742655632,
+  "after_mae": 24.887712575734895,
+  "zone_scores": {
+    "AL": {
+      "before": 28.9967204341613,
+      "after": 29.000195493151743
+    },
+    "AT": {
+      "before": 16.54909688614814,
+      "after": 16.528255337285508
+    },
+    "BE": {
+      "before": 18.191342842511595,
+      "after": 18.22748328522807
+    },
+    "BG": {
+      "before": 19.56540644506296,
+      "after": 19.557235656769425
+    },
+    "CH": {
+      "before": 18.995253195054136,
+      "after": 18.998417309981296
+    },
+    "CZ": {
+      "before": 28.346955349879632,
+      "after": 28.396596637400464
+    },
+    "DE-LU": {
+      "before": 15.977468176636314,
+      "after": 16.027622608586324
+    },
+    "DK1": {
+      "before": 16.57938415137785,
+      "after": 16.613908459614176
+    },
+    "EE": {
+      "before": 39.819804193134466,
+      "after": 39.79594293409835
+    },
+    "ES": {
+      "before": 18.175059840606014,
+      "after": 18.20713556573321
+    },
+    "FR": {
+      "before": 23.384993374858333,
+      "after": 23.403873917537048
+    },
+    "GR": {
+      "before": 21.251767959623656,
+      "after": 21.243803089029022
+    },
+    "HR": {
+      "before": 17.479372169897122,
+      "after": 17.46762357521124
+    },
+    "HU": {
+      "before": 18.378908781398966,
+      "after": 18.38310498958544
+    },
+    "IT-CNOR": {
+      "before": 18.394861555546324,
+      "after": 18.383483166900405
+    },
+    "IT-CSUD": {
+      "before": 19.07162286966983,
+      "after": 19.05521198730247
+    },
+    "IT-North": {
+      "before": 18.995013627834187,
+      "after": 18.97925043814278
+    },
+    "IT-SICI": {
+      "before": 20.242885501326487,
+      "after": 20.230797872982247
+    },
+    "IT-SUD": {
+      "before": 18.772590575209108,
+      "after": 18.75662774627757
+    },
+    "LT": {
+      "before": 35.763670495567396,
+      "after": 35.73778548885345
+    },
+    "LV": {
+      "before": 35.997516871121256,
+      "after": 35.97059668694272
+    },
+    "MK": {
+      "before": 18.175124121343234,
+      "after": 18.18467475279802
+    },
+    "NL": {
+      "before": 17.109712864519743,
+      "after": 17.16792720151078
+    },
+    "PL": {
+      "before": 20.426628724655036,
+      "after": 20.45135684514736
+    },
+    "PT": {
+      "before": 18.629076577376157,
+      "after": 18.659591132491613
+    },
+    "RO": {
+      "before": 18.805045544982953,
+      "after": 18.800856540418568
+    },
+    "RS": {
+      "before": 16.824036736846274,
+      "after": 16.81808394648804
+    },
+    "SI": {
+      "before": 19.060298206490067,
+      "after": 19.036502112549396
+    },
+    "SK": {
+      "before": 19.0159839545209,
+      "after": 19.022889259880078
+    },
+    "DK2": {
+      "before": 41.72793681422913,
+      "after": 42.1394874380209
+    },
+    "FI": {
+      "before": 37.80100525458908,
+      "after": 37.423744811747106
+    },
+    "NO1": {
+      "before": 36.6105433733242,
+      "after": 35.23577985680807
+    },
+    "NO2": {
+      "before": 40.4182198400004,
+      "after": 39.24699782744777
+    },
+    "NO3": {
+      "before": 31.483448443127585,
+      "after": 30.10792116663385
+    },
+    "NO4": {
+      "before": 35.10680792889324,
+      "after": 34.48339930925067
+    },
+    "NO5": {
+      "before": 33.632013077907146,
+      "after": 32.37427882952992
+    },
+    "SE1": {
+      "before": 34.07754653949547,
+      "after": 33.56284971948677
+    },
+    "SE2": {
+      "before": 35.63385509410182,
+      "after": 35.085565550340746
+    },
+    "SE3": {
+      "before": 28.908440058511,
+      "after": 28.759359255378012
+    },
+    "SE4": {
+      "before": 32.61417921683143,
+      "after": 32.76661151454639
+    },
+    "IT-SARD": {
+      "before": 22.103728780511194,
+      "after": 22.103386288043755
+    }
+  },
+  "countries": {
+    "AL": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 3.125727712705969,
+      "absolute_timing_change_twh": 0.005272907501285886
+    },
+    "AT": {
+      "units": 2,
+      "eligible": 2,
+      "reservoir_generation_twh": 23.438965458905262,
+      "absolute_timing_change_twh": 0.0044091593443429606
+    },
+    "BA": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 4.136915460868458,
+      "absolute_timing_change_twh": 0.0025535977513521575
+    },
+    "BE": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 0.04411911856892729,
+      "absolute_timing_change_twh": 4.36884102032124e-06
+    },
+    "BG": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 2.308968632567753,
+      "absolute_timing_change_twh": 0.005213704162442916
+    },
+    "CH": {
+      "units": 2,
+      "eligible": 2,
+      "reservoir_generation_twh": 21.288892174080015,
+      "absolute_timing_change_twh": 0.02742741071738014
+    },
+    "CZ": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 1.534604662047052,
+      "absolute_timing_change_twh": 0.0012350679300339549
+    },
+    "DE": {
+      "units": 15,
+      "eligible": 15,
+      "reservoir_generation_twh": 1.5934922862398482,
+      "absolute_timing_change_twh": 4.082441773341782e-05
+    },
+    "ES": {
+      "units": 10,
+      "eligible": 0,
+      "reservoir_generation_twh": 23.077940171847665,
+      "absolute_timing_change_twh": 0.0
+    },
+    "FI": {
+      "units": 3,
+      "eligible": 3,
+      "reservoir_generation_twh": 6.6560484030137586,
+      "absolute_timing_change_twh": 0.00417114208647073
+    },
+    "FR": {
+      "units": 10,
+      "eligible": 10,
+      "reservoir_generation_twh": 30.3921432236716,
+      "absolute_timing_change_twh": 0.006302188049756953
+    },
+    "GB": {
+      "units": 3,
+      "eligible": 0,
+      "reservoir_generation_twh": 0.4584126535774505,
+      "absolute_timing_change_twh": 0.0
+    },
+    "GR": {
+      "units": 2,
+      "eligible": 2,
+      "reservoir_generation_twh": 3.26415900126429,
+      "absolute_timing_change_twh": 0.009659491979334078
+    },
+    "HR": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 3.930458874843841,
+      "absolute_timing_change_twh": 0.0030117337720638277
+    },
+    "HU": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 0.10093112059744781,
+      "absolute_timing_change_twh": 2.239999371938861e-06
+    },
+    "IE": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 0.11590009615384571,
+      "absolute_timing_change_twh": 1.8106326897392787e-05
+    },
+    "IT": {
+      "units": 12,
+      "eligible": 12,
+      "reservoir_generation_twh": 14.753956849078863,
+      "absolute_timing_change_twh": 0.003622903120962842
+    },
+    "LT": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 0.3607897865105928,
+      "absolute_timing_change_twh": 1.0527061658965146e-05
+    },
+    "ME": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 1.3045776913837048,
+      "absolute_timing_change_twh": 0.00017604175598217404
+    },
+    "MK": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 0.6431623385769318,
+      "absolute_timing_change_twh": 0.0005969093373906135
+    },
+    "NO": {
+      "units": 5,
+      "eligible": 5,
+      "reservoir_generation_twh": 139.2145126020707,
+      "absolute_timing_change_twh": 5.866719231940186
+    },
+    "PL": {
+      "units": 5,
+      "eligible": 5,
+      "reservoir_generation_twh": 0.8567517481509137,
+      "absolute_timing_change_twh": 0.0
+    },
+    "PT": {
+      "units": 2,
+      "eligible": 2,
+      "reservoir_generation_twh": 3.4859529122322925,
+      "absolute_timing_change_twh": 0.0021239634353647898
+    },
+    "RO": {
+      "units": 2,
+      "eligible": 2,
+      "reservoir_generation_twh": 6.3509426570171215,
+      "absolute_timing_change_twh": 0.017062730369078478
+    },
+    "RS": {
+      "units": 1,
+      "eligible": 0,
+      "reservoir_generation_twh": 6.6594789133465895,
+      "absolute_timing_change_twh": 0.0
+    },
+    "SE": {
+      "units": 5,
+      "eligible": 5,
+      "reservoir_generation_twh": 50.17539510514334,
+      "absolute_timing_change_twh": 0.1486746077857753
+    },
+    "SI": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 0.7714621221672128,
+      "absolute_timing_change_twh": 0.00025562343974654334
+    },
+    "SK": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 0.31190821282664216,
+      "absolute_timing_change_twh": 3.751358810443802e-05
+    },
+    "XK": {
+      "units": 1,
+      "eligible": 1,
+      "reservoir_generation_twh": 0.08442776516631764,
+      "absolute_timing_change_twh": 2.001920549691336e-05
+    }
+  },
+  "curves": [
+    {
+      "unit": "AL2 0AC hydro",
+      "water_value_min": 67.59547311586046,
+      "water_value_max": 189.07421224223114,
+      "changed_energy_twh": 0.0052729075012858855
+    },
+    {
+      "unit": "AT2 0AC hydro",
+      "water_value_min": 44.20158718218707,
+      "water_value_max": 163.22989190688727,
+      "changed_energy_twh": 0.001908754110430923
+    },
+    {
+      "unit": "AT2 1AC hydro",
+      "water_value_min": 57.430017441013234,
+      "water_value_max": 161.12806287164784,
+      "changed_energy_twh": 0.002500405233912037
+    },
+    {
+      "unit": "BA2 0AC hydro",
+      "water_value_min": 56.29571958158409,
+      "water_value_max": 188.48071125330696,
+      "changed_energy_twh": 0.0025535977513521575
+    },
+    {
+      "unit": "BE2 0AC hydro",
+      "water_value_min": 40.66883228619198,
+      "water_value_max": 126.79381112343826,
+      "changed_energy_twh": 4.36884102032124e-06
+    },
+    {
+      "unit": "BG2 0AC hydro",
+      "water_value_min": 38.51619541394399,
+      "water_value_max": 166.6850964519407,
+      "changed_energy_twh": 0.005213704162442916
+    },
+    {
+      "unit": "CH2 0AC hydro",
+      "water_value_min": 49.76100474599873,
+      "water_value_max": 121.49566564461988,
+      "changed_energy_twh": 0.0062885876052013005
+    },
+    {
+      "unit": "CH2 1AC hydro",
+      "water_value_min": 64.99367361524595,
+      "water_value_max": 175.17972343703718,
+      "changed_energy_twh": 0.02113882311217884
+    },
+    {
+      "unit": "CZ2 1AC hydro",
+      "water_value_min": 74.24168660352304,
+      "water_value_max": 191.16743747651716,
+      "changed_energy_twh": 0.0012350679300339549
+    },
+    {
+      "unit": "DE2 0AC hydro",
+      "water_value_min": 64.4041925635947,
+      "water_value_max": 131.18857290198758,
+      "changed_energy_twh": 7.505536981669383e-07
+    },
+    {
+      "unit": "DE2 10AC hydro",
+      "water_value_min": 64.43320110755377,
+      "water_value_max": 131.18885705450444,
+      "changed_energy_twh": 4.410378675536702e-06
+    },
+    {
+      "unit": "DE2 11AC hydro",
+      "water_value_min": 63.79532887181906,
+      "water_value_max": 131.72316255668431,
+      "changed_energy_twh": 7.54906719327036e-07
+    },
+    {
+      "unit": "DE2 12AC hydro",
+      "water_value_min": 64.32900581100515,
+      "water_value_max": 131.30246703989278,
+      "changed_energy_twh": 1.048393533049044e-06
+    },
+    {
+      "unit": "DE2 13AC hydro",
+      "water_value_min": 64.888043112899,
+      "water_value_max": 130.26522431953384,
+      "changed_energy_twh": 6.065325351703003e-06
+    },
+    {
+      "unit": "DE2 14AC hydro",
+      "water_value_min": 51.78661107398814,
+      "water_value_max": 130.15781808406518,
+      "changed_energy_twh": 5.640222416462183e-06
+    },
+    {
+      "unit": "DE2 15AC hydro",
+      "water_value_min": 64.29717122332309,
+      "water_value_max": 131.36201324077862,
+      "changed_energy_twh": 4.279946279317492e-06
+    },
+    {
+      "unit": "DE2 17AC hydro",
+      "water_value_min": 64.55668473479395,
+      "water_value_max": 131.35425790083303,
+      "changed_energy_twh": 1.2366740849023047e-07
+    },
+    {
+      "unit": "DE2 1AC hydro",
+      "water_value_min": 64.19631384856713,
+      "water_value_max": 131.0923665015288,
+      "changed_energy_twh": 0.0
+    },
+    {
+      "unit": "DE2 2AC hydro",
+      "water_value_min": 63.82287375730127,
+      "water_value_max": 131.36664137741857,
+      "changed_energy_twh": 0.0
+    },
+    {
+      "unit": "DE2 3AC hydro",
+      "water_value_min": 64.2553048089338,
+      "water_value_max": 131.41529979756615,
+      "changed_energy_twh": 8.490666766550142e-06
+    },
+    {
+      "unit": "DE2 5AC hydro",
+      "water_value_min": 64.1444823946063,
+      "water_value_max": 131.16198890355776,
+      "changed_energy_twh": 6.608108341038473e-08
+    },
+    {
+      "unit": "DE2 6AC hydro",
+      "water_value_min": 64.71762376411534,
+      "water_value_max": 130.98442046512932,
+      "changed_energy_twh": 1.3635455725209703e-07
+    },
+    {
+      "unit": "DE2 8AC hydro",
+      "water_value_min": 64.92471306792245,
+      "water_value_max": 130.74107054913668,
+      "changed_energy_twh": 4.276411965887126e-07
+    },
+    {
+      "unit": "DE2 9AC hydro",
+      "water_value_min": 61.386390779284525,
+      "water_value_max": 131.2659679147749,
+      "changed_energy_twh": 8.630280047563847e-06
+    },
+    {
+      "unit": "FI0 0AC hydro",
+      "water_value_min": 25.098115739539796,
+      "water_value_max": 94.15809354040961,
+      "changed_energy_twh": 0.004132239860811816
+    },
+    {
+      "unit": "FI0 1AC hydro",
+      "water_value_min": 24.939254250457303,
+      "water_value_max": 99.22009373302751,
+      "changed_energy_twh": 3.626291209047619e-05
+    },
+    {
+      "unit": "FI0 2AC hydro",
+      "water_value_min": 25.109417968757022,
+      "water_value_max": 95.2498323975763,
+      "changed_energy_twh": 2.639313568436137e-06
+    },
+    {
+      "unit": "FR2 0AC hydro",
+      "water_value_min": 41.70966908460532,
+      "water_value_max": 118.22550479538164,
+      "changed_energy_twh": 3.532716483445274e-05
+    },
+    {
+      "unit": "FR2 10AC hydro",
+      "water_value_min": 39.217596368140704,
+      "water_value_max": 117.35937367577077,
+      "changed_energy_twh": 7.683062929645584e-05
+    },
+    {
+      "unit": "FR2 12AC hydro",
+      "water_value_min": 36.952495112678406,
+      "water_value_max": 117.3505654307306,
+      "changed_energy_twh": 1.5880093971582096e-05
+    },
+    {
+      "unit": "FR2 13AC hydro",
+      "water_value_min": 38.09153464294121,
+      "water_value_max": 118.25799715895211,
+      "changed_energy_twh": 6.007613822656711e-05
+    },
+    {
+      "unit": "FR2 14AC hydro",
+      "water_value_min": 38.77541895406232,
+      "water_value_max": 118.22496120239211,
+      "changed_energy_twh": 0.0005463628432680167
+    },
+    {
+      "unit": "FR2 16AC hydro",
+      "water_value_min": 36.989477814440775,
+      "water_value_max": 117.77927936797639,
+      "changed_energy_twh": 0.001946751721046738
+    },
+    {
+      "unit": "FR2 2AC hydro",
+      "water_value_min": 43.42502035784331,
+      "water_value_max": 118.7529832097325,
+      "changed_energy_twh": 0.0008053632780694874
+    },
+    {
+      "unit": "FR2 6AC hydro",
+      "water_value_min": 39.03257430310314,
+      "water_value_max": 117.85509761461225,
+      "changed_energy_twh": 0.0007459464674359998
+    },
+    {
+      "unit": "FR2 9AC hydro",
+      "water_value_min": 38.41975521321449,
+      "water_value_max": 117.77684650959942,
+      "changed_energy_twh": 0.00020524928763838285
+    },
+    {
+      "unit": "FR6 0AC hydro",
+      "water_value_min": 93.58536502337684,
+      "water_value_max": 172.99030611219968,
+      "changed_energy_twh": 0.0018644004259692711
+    },
+    {
+      "unit": "GR2 0AC hydro",
+      "water_value_min": 38.927867505136575,
+      "water_value_max": 195.67976518264754,
+      "changed_energy_twh": 0.008036281989736454
+    },
+    {
+      "unit": "GR2 1AC hydro",
+      "water_value_min": 38.48398678780282,
+      "water_value_max": 190.19747331289912,
+      "changed_energy_twh": 0.0016232099895976244
+    },
+    {
+      "unit": "HR2 0AC hydro",
+      "water_value_min": 55.61610332247671,
+      "water_value_max": 182.2798336350262,
+      "changed_energy_twh": 0.0030117337720638277
+    },
+    {
+      "unit": "HU2 0AC hydro",
+      "water_value_min": 74.53192644353541,
+      "water_value_max": 186.60933766690783,
+      "changed_energy_twh": 2.239999371938861e-06
+    },
+    {
+      "unit": "IE3 0AC hydro",
+      "water_value_min": 62.01881333602771,
+      "water_value_max": 142.32343064928818,
+      "changed_energy_twh": 1.8106326897392787e-05
+    },
+    {
+      "unit": "IT2 0AC hydro",
+      "water_value_min": 85.16360281186974,
+      "water_value_max": 175.93691191015742,
+      "changed_energy_twh": 0.0018304388247573215
+    },
+    {
+      "unit": "IT2 10AC hydro",
+      "water_value_min": 75.67130424550588,
+      "water_value_max": 186.90473532597773,
+      "changed_energy_twh": 0.0003164723914416942
+    },
+    {
+      "unit": "IT2 1AC hydro",
+      "water_value_min": 62.38120770975322,
+      "water_value_max": 175.01036276748755,
+      "changed_energy_twh": 7.538935077127792e-05
+    },
+    {
+      "unit": "IT2 2AC hydro",
+      "water_value_min": 85.36666703060179,
+      "water_value_max": 171.1552761254339,
+      "changed_energy_twh": 0.0002523601317339235
+    },
+    {
+      "unit": "IT2 3AC hydro",
+      "water_value_min": 63.92342845767391,
+      "water_value_max": 179.2336276745589,
+      "changed_energy_twh": 3.462047047561947e-05
+    },
+    {
+      "unit": "IT2 4AC hydro",
+      "water_value_min": 62.813269948857126,
+      "water_value_max": 174.15486923140696,
+      "changed_energy_twh": 0.00013340891276661246
+    },
+    {
+      "unit": "IT2 5AC hydro",
+      "water_value_min": 62.59825423867596,
+      "water_value_max": 175.74124060996385,
+      "changed_energy_twh": 2.4362263451945584e-05
+    },
+    {
+      "unit": "IT2 6AC hydro",
+      "water_value_min": 85.50210196008587,
+      "water_value_max": 184.20540917426885,
+      "changed_energy_twh": 4.371698872494759e-05
+    },
+    {
+      "unit": "IT2 7AC hydro",
+      "water_value_min": 38.23449163529273,
+      "water_value_max": 173.63838526718934,
+      "changed_energy_twh": 0.00029317645737422543
+    },
+    {
+      "unit": "IT2 8AC hydro",
+      "water_value_min": 96.4104846174985,
+      "water_value_max": 176.27630977944398,
+      "changed_energy_twh": 0.00034979494363519164
+    },
+    {
+      "unit": "IT2 9AC hydro",
+      "water_value_min": 75.56819839650552,
+      "water_value_max": 192.61097010625943,
+      "changed_energy_twh": 2.9683316994844668e-06
+    },
+    {
+      "unit": "IT4 0AC hydro",
+      "water_value_min": 50.83391801067215,
+      "water_value_max": 164.8990303884081,
+      "changed_energy_twh": 0.0002661940541305984
+    },
+    {
+      "unit": "LT2 0AC hydro",
+      "water_value_min": 73.86611950869617,
+      "water_value_max": 180.34828952942232,
+      "changed_energy_twh": 1.0527061658965146e-05
+    },
+    {
+      "unit": "ME2 0AC hydro",
+      "water_value_min": 93.9271883024702,
+      "water_value_max": 187.9220888137073,
+      "changed_energy_twh": 0.00017604175598217404
+    },
+    {
+      "unit": "MK2 0AC hydro",
+      "water_value_min": 58.83195535064739,
+      "water_value_max": 194.3426835383379,
+      "changed_energy_twh": 0.0005969093373906135
+    },
+    {
+      "unit": "NO0 0AC hydro",
+      "water_value_min": 0.0,
+      "water_value_max": 91.87915166503473,
+      "changed_energy_twh": 3.3298905163314596
+    },
+    {
+      "unit": "NO0 1AC hydro",
+      "water_value_min": 0.0,
+      "water_value_max": 91.54321724697623,
+      "changed_energy_twh": 1.3554607465466284
+    },
+    {
+      "unit": "NO0 2AC hydro",
+      "water_value_min": 0.8386859077707065,
+      "water_value_max": 88.7518892098215,
+      "changed_energy_twh": 0.7392506352900632
+    },
+    {
+      "unit": "NO0 3AC hydro",
+      "water_value_min": 2.2224698832751537,
+      "water_value_max": 88.24526718970793,
+      "changed_energy_twh": 0.4250878453112517
+    },
+    {
+      "unit": "NO0 4AC hydro",
+      "water_value_min": 2.222469883275158,
+      "water_value_max": 88.24526718970796,
+      "changed_energy_twh": 0.017029488460783653
+    },
+    {
+      "unit": "PL2 0AC hydro",
+      "water_value_min": 69.08468622978722,
+      "water_value_max": 170.10571767084707,
+      "changed_energy_twh": 0.0
+    },
+    {
+      "unit": "PL2 1AC hydro",
+      "water_value_min": 69.03497309673254,
+      "water_value_max": 170.11478238224407,
+      "changed_energy_twh": 0.0
+    },
+    {
+      "unit": "PL2 3AC hydro",
+      "water_value_min": 73.38971808468153,
+      "water_value_max": 170.41872577280878,
+      "changed_energy_twh": 0.0
+    },
+    {
+      "unit": "PL2 4AC hydro",
+      "water_value_min": 69.06390870409244,
+      "water_value_max": 170.45414524409668,
+      "changed_energy_twh": 0.0
+    },
+    {
+      "unit": "PL2 5AC hydro",
+      "water_value_min": 73.45979680591203,
+      "water_value_max": 170.58485684661744,
+      "changed_energy_twh": 0.0
+    },
+    {
+      "unit": "PT2 0AC hydro",
+      "water_value_min": 28.67340319748493,
+      "water_value_max": 124.94966734047122,
+      "changed_energy_twh": 0.0019188068122824803
+    },
+    {
+      "unit": "PT2 1AC hydro",
+      "water_value_min": 27.132415909522514,
+      "water_value_max": 125.4057681708459,
+      "changed_energy_twh": 0.00020515662308230956
+    },
+    {
+      "unit": "RO2 0AC hydro",
+      "water_value_min": 38.71956137923468,
+      "water_value_max": 170.4214797941229,
+      "changed_energy_twh": 0.0004630286068512163
+    },
+    {
+      "unit": "RO2 1AC hydro",
+      "water_value_min": 38.55969929211367,
+      "water_value_max": 161.62138379233804,
+      "changed_energy_twh": 0.016599701762227262
+    },
+    {
+      "unit": "SE0 0AC hydro",
+      "water_value_min": 26.23425426864042,
+      "water_value_max": 100.75380337739477,
+      "changed_energy_twh": 0.00021852089253657358
+    },
+    {
+      "unit": "SE0 1AC hydro",
+      "water_value_min": 24.455283913873764,
+      "water_value_max": 107.79283370982513,
+      "changed_energy_twh": 0.10630652813846708
+    },
+    {
+      "unit": "SE0 2AC hydro",
+      "water_value_min": 25.889867472975407,
+      "water_value_max": 102.30350026332746,
+      "changed_energy_twh": 0.0005061447873388695
+    },
+    {
+      "unit": "SE0 3AC hydro",
+      "water_value_min": 25.057790932472415,
+      "water_value_max": 109.2752434217989,
+      "changed_energy_twh": 0.04163302933749383
+    },
+    {
+      "unit": "SE0 4AC hydro",
+      "water_value_min": 26.39872772735317,
+      "water_value_max": 98.69523474608904,
+      "changed_energy_twh": 1.0384629938920292e-05
+    },
+    {
+      "unit": "SI2 0AC hydro",
+      "water_value_min": 65.67869959719128,
+      "water_value_max": 178.74805329347822,
+      "changed_energy_twh": 0.00025562343974654334
+    },
+    {
+      "unit": "SK2 0AC hydro",
+      "water_value_min": 53.15838492525265,
+      "water_value_max": 182.3171574529585,
+      "changed_energy_twh": 3.751358810443802e-05
+    },
+    {
+      "unit": "XK2 0AC hydro",
+      "water_value_min": 81.00649277990254,
+      "water_value_max": 195.85135968326145,
+      "changed_energy_twh": 2.001920549691336e-05
+    }
+  ],
+  "seconds": 31.291860497996822,
+  "source_sha256": {
+    "original_network": "f4f3a6b23946bc221e40d943c0d9f5a4609766eb76c63b7f15871f33e588a48f",
+    "warm_manifest": "30e13b50037e9c79c6b5e71081410670fc47a5a667ba456bc99aac1b1b52abef",
+    "nve_water": "830d9cc1a1b1ccad67d1dbee8d6b00912e2a4ce9771c62df216e2396bf2b91bb",
+    "mapping": "7768d92ba7193680e421c918b71a0b12466e19a24a71f3357536cb3a2fb9437c",
+    "trial": "7e48fbd0b076cf410e32f0fa1144f9b55efff37793799c793ed7a82a164ba9dd"
+  },
+  "limitations": [
+    "Norway NVE inflow and stock are source-reconstructed; other countries retain PyPSA-Eur-based hydro inflow and archived stock",
+    "No revised run-of-river water split or turbine correction; hydro taxonomy and source fleet vintage remain unresolved",
+    "Model-only price signal comes from retrospective fitted baseline, not an independent forecast",
+    "Daily output preserves inherited intraday shape; these are fixed injections rather than endogenous market bids",
+    "No river routing, plant-level head effects, pumping, or scenario-response validation"
+  ]
+}
