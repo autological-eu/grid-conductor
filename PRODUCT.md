@@ -166,7 +166,11 @@ for a larger zone–technology power envelope from that hour onward when bidding
 zone and technology scope match. Keep the observation date, source ceiling and
 missing offers explicit. Test such revisions as separate candidates, not
 automatic baseline edits. For wind and solar, apply any justified power change
-to the original weather-shaped availability; for hydro, separate turbine power
+to the original weather-shaped availability, measuring the increment against
+the current capacity-corrected modeled power envelope as well as the source
+fleet nameplate. Do not multiply availability by an observed-to-source-nameplate
+ratio when an existing correction has already raised the modeled envelope; this
+double counts capacity. For hydro, separate turbine power
 from inflow, stock and schedulable energy. Observed dispatch cannot supply
 missing weather or water. Reconcile unit coverage, outages, commissioning and
 reporting category before treating the inferred envelope as a prospective

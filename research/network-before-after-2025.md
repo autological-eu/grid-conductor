@@ -2,6 +2,8 @@
 
 **Scope:** 48 bidding zones, 13 generation categories and 95 modeled cross-zone connections. The original research baseline is unchanged. The generation power-ceiling candidate and the A11 physical-network candidate are **separate experiments**; the annual €24.831/MWh LP sensitivity uses only the latter, with original generation inputs and frozen bids.
 
+**Later correction:** The generation candidate column is the originally inferred physical power ceiling from observed A75 peaks. Its v2 hourly renewable-availability scaling was subsequently found to double count some capacity corrections already present in the LP. It is **not** the generation input used in the corrected LP sensitivity. See [the corrected LP power input](generation-power-lp-2025.md). The connection table is unaffected.
+
 Download all [624 zone–technology rows](data/network-before-after-generation-2025.csv) and [95 directional connection rows](data/network-before-after-connections-2025.csv). Blank observed values mean no exactly scoped observation; they do not mean zero generation or flow.
 
 ## Generation capacity beside observed output

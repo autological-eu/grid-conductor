@@ -1,0 +1,330 @@
+{
+  "status": "corrected_dated_power_candidate_not_baseline",
+  "hours": 8760,
+  "zone_technology_rows": 624,
+  "changed_rows": 39,
+  "incremental_available_twh": 41.15984432897996,
+  "old_v2_incremental_available_twh": 142.99323436174103,
+  "source_old_witness_sha256": "31f13249b78ec90d4c87ea9e5a8d2a89d65b06fb857eaea38f4ab920492c0e74",
+  "source_fleet_sha256": "7037f72d8ce7d30f3ff19a05ba35f775c8c24abc225d84ce3e0d1bedca50a793",
+  "hourly_sha256": "19fe9bb8fdd4e3934cf97ca25799cfc150ca2566593f17e2e89b9bbfcc7752e7",
+  "revised_rows": [
+    {
+      "zone": "DK1",
+      "technology": "onshore_wind",
+      "source_nameplate_mw": 1777.7,
+      "current_model_peak_available_mw": 2890.8826282222194,
+      "observed_peak_mw": 3495.4,
+      "candidate_incremental_available_twh": 2.071037216962209
+    },
+    {
+      "zone": "DK1",
+      "technology": "solar",
+      "source_nameplate_mw": 2529.5,
+      "current_model_peak_available_mw": 2350.322240613273,
+      "observed_peak_mw": 2751.695,
+      "candidate_incremental_available_twh": 0.1392951700918874
+    },
+    {
+      "zone": "DK1",
+      "technology": "oil",
+      "source_nameplate_mw": 0.0,
+      "current_model_peak_available_mw": 0.0,
+      "observed_peak_mw": 50.2766,
+      "candidate_incremental_available_twh": 0.36608852199999997
+    },
+    {
+      "zone": "DK1",
+      "technology": "biomass",
+      "source_nameplate_mw": 661.0,
+      "current_model_peak_available_mw": 661.0,
+      "observed_peak_mw": 809.81,
+      "candidate_incremental_available_twh": 1.2387267099999995
+    },
+    {
+      "zone": "DK1",
+      "technology": "waste",
+      "source_nameplate_mw": 51.0,
+      "current_model_peak_available_mw": 51.0,
+      "observed_peak_mw": 166.67,
+      "candidate_incremental_available_twh": 0.9610537399999998
+    },
+    {
+      "zone": "IT-CNOR",
+      "technology": "hard_coal",
+      "source_nameplate_mw": 0.0,
+      "current_model_peak_available_mw": 0.0,
+      "observed_peak_mw": 175.0,
+      "candidate_incremental_available_twh": 1.532885
+    },
+    {
+      "zone": "IT-CNOR",
+      "technology": "oil",
+      "source_nameplate_mw": 100.0,
+      "current_model_peak_available_mw": 100.00000000000001,
+      "observed_peak_mw": 175.0,
+      "candidate_incremental_available_twh": 0.6568849999999998
+    },
+    {
+      "zone": "IT-CNOR",
+      "technology": "biomass",
+      "source_nameplate_mw": 0.0,
+      "current_model_peak_available_mw": 0.0,
+      "observed_peak_mw": 24.0,
+      "candidate_incremental_available_twh": 0.17801475
+    },
+    {
+      "zone": "IT-CNOR",
+      "technology": "geothermal",
+      "source_nameplate_mw": 227.984833,
+      "current_model_peak_available_mw": 227.98483316481295,
+      "observed_peak_mw": 632.0,
+      "candidate_incremental_available_twh": 3.536248611476239
+    },
+    {
+      "zone": "IT-CSUD",
+      "technology": "hard_coal",
+      "source_nameplate_mw": 0.0,
+      "current_model_peak_available_mw": 0.0,
+      "observed_peak_mw": 387.0,
+      "candidate_incremental_available_twh": 0.43543
+    },
+    {
+      "zone": "IT-CSUD",
+      "technology": "biomass",
+      "source_nameplate_mw": 46.0,
+      "current_model_peak_available_mw": 46.0,
+      "observed_peak_mw": 99.5,
+      "candidate_incremental_available_twh": 0.403672
+    },
+    {
+      "zone": "IT-North",
+      "technology": "onshore_wind",
+      "source_nameplate_mw": 120.743478,
+      "current_model_peak_available_mw": 96.16816992870054,
+      "observed_peak_mw": 173.25,
+      "candidate_incremental_available_twh": 0.01953872368325233
+    },
+    {
+      "zone": "IT-North",
+      "technology": "solar",
+      "source_nameplate_mw": 1362.46087,
+      "current_model_peak_available_mw": 5884.416601654771,
+      "observed_peak_mw": 7630.0,
+      "candidate_incremental_available_twh": 2.5327164505672766
+    },
+    {
+      "zone": "IT-North",
+      "technology": "hard_coal",
+      "source_nameplate_mw": 0.0,
+      "current_model_peak_available_mw": 0.0,
+      "observed_peak_mw": 758.0,
+      "candidate_incremental_available_twh": 3.13744775
+    },
+    {
+      "zone": "IT-North",
+      "technology": "biomass",
+      "source_nameplate_mw": 70.88,
+      "current_model_peak_available_mw": 70.88,
+      "observed_peak_mw": 270.5,
+      "candidate_incremental_available_twh": 1.4976664499999996
+    },
+    {
+      "zone": "IT-SUD",
+      "technology": "onshore_wind",
+      "source_nameplate_mw": 2441.808781,
+      "current_model_peak_available_mw": 2861.232987797538,
+      "observed_peak_mw": 4329.0,
+      "candidate_incremental_available_twh": 1.189873153979545
+    },
+    {
+      "zone": "IT-SUD",
+      "technology": "offshore_wind",
+      "source_nameplate_mw": 21.176471,
+      "current_model_peak_available_mw": 23.911537878000946,
+      "observed_peak_mw": 30.0,
+      "candidate_incremental_available_twh": 0.014252378445950353
+    },
+    {
+      "zone": "IT-SUD",
+      "technology": "solar",
+      "source_nameplate_mw": 579.262063,
+      "current_model_peak_available_mw": 2567.298772587122,
+      "observed_peak_mw": 2920.25,
+      "candidate_incremental_available_twh": 0.5277564359674887
+    },
+    {
+      "zone": "IT-SUD",
+      "technology": "hard_coal",
+      "source_nameplate_mw": 0.0,
+      "current_model_peak_available_mw": 0.0,
+      "observed_peak_mw": 323.5,
+      "candidate_incremental_available_twh": 0.283098
+    },
+    {
+      "zone": "IT-SUD",
+      "technology": "biomass",
+      "source_nameplate_mw": 66.2,
+      "current_model_peak_available_mw": 66.2,
+      "observed_peak_mw": 276.5,
+      "candidate_incremental_available_twh": 1.7439022499999994
+    },
+    {
+      "zone": "DK2",
+      "technology": "onshore_wind",
+      "source_nameplate_mw": 209.0,
+      "current_model_peak_available_mw": 339.89041155432807,
+      "observed_peak_mw": 594.88875,
+      "candidate_incremental_available_twh": 0.9066872841349382
+    },
+    {
+      "zone": "DK2",
+      "technology": "solar",
+      "source_nameplate_mw": 854.4,
+      "current_model_peak_available_mw": 793.8323903692769,
+      "observed_peak_mw": 907.875,
+      "candidate_incremental_available_twh": 0.047960057685877376
+    },
+    {
+      "zone": "DK2",
+      "technology": "gas",
+      "source_nameplate_mw": 38.0,
+      "current_model_peak_available_mw": 38.0,
+      "observed_peak_mw": 229.48,
+      "candidate_incremental_available_twh": 1.60421438
+    },
+    {
+      "zone": "DK2",
+      "technology": "hard_coal",
+      "source_nameplate_mw": 0.0,
+      "current_model_peak_available_mw": 0.0,
+      "observed_peak_mw": 276.45,
+      "candidate_incremental_available_twh": 2.3789908099999995
+    },
+    {
+      "zone": "DK2",
+      "technology": "oil",
+      "source_nameplate_mw": 126.0,
+      "current_model_peak_available_mw": 126.0,
+      "observed_peak_mw": 192.92,
+      "candidate_incremental_available_twh": 0.5398665599999998
+    },
+    {
+      "zone": "DK2",
+      "technology": "waste",
+      "source_nameplate_mw": 102.0,
+      "current_model_peak_available_mw": 102.0,
+      "observed_peak_mw": 326.01475,
+      "candidate_incremental_available_twh": 0.9039588225
+    },
+    {
+      "zone": "NO1",
+      "technology": "onshore_wind",
+      "source_nameplate_mw": 343.830986,
+      "current_model_peak_available_mw": 340.0419149730574,
+      "observed_peak_mw": 379.62,
+      "candidate_incremental_available_twh": 0.042909298750940086
+    },
+    {
+      "zone": "NO1",
+      "technology": "waste",
+      "source_nameplate_mw": 0.0,
+      "current_model_peak_available_mw": 0.0,
+      "observed_peak_mw": 29.0925,
+      "candidate_incremental_available_twh": 0.1850028325
+    },
+    {
+      "zone": "NO2",
+      "technology": "onshore_wind",
+      "source_nameplate_mw": 1258.890141,
+      "current_model_peak_available_mw": 1248.575421158233,
+      "observed_peak_mw": 1312.84,
+      "candidate_incremental_available_twh": 0.0805469093783554
+    },
+    {
+      "zone": "NO2",
+      "technology": "gas",
+      "source_nameplate_mw": 0.0,
+      "current_model_peak_available_mw": 0.0,
+      "observed_peak_mw": 22.02,
+      "candidate_incremental_available_twh": 0.18213549
+    },
+    {
+      "zone": "NO2",
+      "technology": "waste",
+      "source_nameplate_mw": 0.0,
+      "current_model_peak_available_mw": 0.0,
+      "observed_peak_mw": 18.825,
+      "candidate_incremental_available_twh": 0.12570477749999998
+    },
+    {
+      "zone": "NO3",
+      "technology": "onshore_wind",
+      "source_nameplate_mw": 897.554466,
+      "current_model_peak_available_mw": 891.0014254284222,
+      "observed_peak_mw": 1746.11,
+      "candidate_incremental_available_twh": 1.494616844412175
+    },
+    {
+      "zone": "NO3",
+      "technology": "waste",
+      "source_nameplate_mw": 0.0,
+      "current_model_peak_available_mw": 0.0,
+      "observed_peak_mw": 6.34,
+      "candidate_incremental_available_twh": 0.0553645
+    },
+    {
+      "zone": "SE1",
+      "technology": "solar",
+      "source_nameplate_mw": 1.08,
+      "current_model_peak_available_mw": 5.748256490160309,
+      "observed_peak_mw": 11.85,
+      "candidate_incremental_available_twh": 0.004366863053004308
+    },
+    {
+      "zone": "SE2",
+      "technology": "solar",
+      "source_nameplate_mw": 12.338087,
+      "current_model_peak_available_mw": 63.09089479290366,
+      "observed_peak_mw": 69.61,
+      "candidate_incremental_available_twh": 0.003900450771388269
+    },
+    {
+      "zone": "SE4",
+      "technology": "onshore_wind",
+      "source_nameplate_mw": 1784.406667,
+      "current_model_peak_available_mw": 1763.1947630248098,
+      "observed_peak_mw": 1952.53,
+      "candidate_incremental_available_twh": 0.386267635119427
+    },
+    {
+      "zone": "IT-SARD",
+      "technology": "gas",
+      "source_nameplate_mw": 736.0,
+      "current_model_peak_available_mw": 735.9999999999999,
+      "observed_peak_mw": 1166.0,
+      "candidate_incremental_available_twh": 3.7575805000000004
+    },
+    {
+      "zone": "IT-SARD",
+      "technology": "biomass",
+      "source_nameplate_mw": 22.8,
+      "current_model_peak_available_mw": 22.8,
+      "observed_peak_mw": 91.0,
+      "candidate_incremental_available_twh": 0.41175674999999995
+    },
+    {
+      "zone": "IT-SARD",
+      "technology": "waste",
+      "source_nameplate_mw": 0.0,
+      "current_model_peak_available_mw": 0.0,
+      "observed_peak_mw": 650.5,
+      "candidate_incremental_available_twh": 5.58242525
+    }
+  ],
+  "limitations": [
+    "Retrospective A75 peak is a power diagnostic, not a weather forecast or outage schedule",
+    "Effective current-model ceiling uses peak modeled hourly availability as a conservative proxy",
+    "Hydro energy, water and fixed reservoir output remain unchanged"
+  ]
+}

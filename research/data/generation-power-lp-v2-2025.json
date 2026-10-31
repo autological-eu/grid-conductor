@@ -1,0 +1,1305 @@
+{
+  "status": "full_year_A75_power_sensitivity_not_baseline",
+  "source_power_sha256": "19fe9bb8fdd4e3934cf97ca25799cfc150ca2566593f17e2e89b9bbfcc7752e7",
+  "source_network_sha256": "d3e385d60afcb59346bd9f625f712ba0027d5703cdf5cddcad824eaa09c33fae",
+  "original_baseline_price_mae_eur_mwh": 25.051056742655632,
+  "outcomes": {
+    "original": {
+      "hours": 8760,
+      "solve_seconds": 31.849032823996822,
+      "maximum_primal_residual_mw": 9.465384209761396e-07,
+      "emergency_mwh": 0.0,
+      "price_mae_eur_mwh": 25.18055585076373,
+      "objective_reduction_from_baseline_eur": 1973302092.8901062,
+      "added_offer_dispatch_twh": 23.652086274022256,
+      "added_offer_available_twh": 41.15984432897995,
+      "witness_sha256": "6f68b244b826d57e5516a340ac3661825d525149bbd9826b860f1c11dcdf8bce",
+      "offer_rows": [
+        {
+          "zone": "DK1",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 2.071037216962209,
+          "peak_increment_mw": 604.5173717777807,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 1.8998554584816996
+        },
+        {
+          "zone": "DK1",
+          "technology": "solar",
+          "incremental_available_twh": 0.1392951700918874,
+          "peak_increment_mw": 203.7138278874172,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.12411023721394157
+        },
+        {
+          "zone": "DK1",
+          "technology": "oil",
+          "incremental_available_twh": 0.36608852199999997,
+          "peak_increment_mw": 50.2766,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.0034553034
+        },
+        {
+          "zone": "DK1",
+          "technology": "biomass",
+          "incremental_available_twh": 1.2387267099999995,
+          "peak_increment_mw": 148.80999999999995,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 0.7136849342162048
+        },
+        {
+          "zone": "DK1",
+          "technology": "waste",
+          "incremental_available_twh": 0.9610537399999998,
+          "peak_increment_mw": 115.66999999999999,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 0.8914928995972436
+        },
+        {
+          "zone": "IT-CNOR",
+          "technology": "hard_coal",
+          "incremental_available_twh": 1.532885,
+          "peak_increment_mw": 175.0,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.023266734632010466
+        },
+        {
+          "zone": "IT-CNOR",
+          "technology": "oil",
+          "incremental_available_twh": 0.6568849999999998,
+          "peak_increment_mw": 74.99999999999999,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 2,
+          "new_offer_dispatch_twh": 0.11853395483708
+        },
+        {
+          "zone": "IT-CNOR",
+          "technology": "biomass",
+          "incremental_available_twh": 0.17801475,
+          "peak_increment_mw": 24.0,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.17006168564767443
+        },
+        {
+          "zone": "IT-CNOR",
+          "technology": "geothermal",
+          "incremental_available_twh": 3.536248611476239,
+          "peak_increment_mw": 404.0151668351871,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 3.450994361188461
+        },
+        {
+          "zone": "IT-CSUD",
+          "technology": "hard_coal",
+          "incremental_available_twh": 0.43543,
+          "peak_increment_mw": 387.0,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.019818984928134033
+        },
+        {
+          "zone": "IT-CSUD",
+          "technology": "biomass",
+          "incremental_available_twh": 0.403672,
+          "peak_increment_mw": 53.5,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 0.31282684934694166
+        },
+        {
+          "zone": "IT-North",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 0.01953872368325233,
+          "peak_increment_mw": 34.57016848296537,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.019529815036321466
+        },
+        {
+          "zone": "IT-North",
+          "technology": "solar",
+          "incremental_available_twh": 2.5327164505672766,
+          "peak_increment_mw": 1688.8495315678656,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 2.52964820249609
+        },
+        {
+          "zone": "IT-North",
+          "technology": "hard_coal",
+          "incremental_available_twh": 3.13744775,
+          "peak_increment_mw": 758.0,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.11657818854072509
+        },
+        {
+          "zone": "IT-North",
+          "technology": "biomass",
+          "incremental_available_twh": 1.4976664499999996,
+          "peak_increment_mw": 199.62,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 1.4723580817030246
+        },
+        {
+          "zone": "IT-SUD",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 1.189873153979545,
+          "peak_increment_mw": 1467.767012202462,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 1.141233177713364
+        },
+        {
+          "zone": "IT-SUD",
+          "technology": "offshore_wind",
+          "incremental_available_twh": 0.014252378445950353,
+          "peak_increment_mw": 6.088462121999058,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.013778154101658755
+        },
+        {
+          "zone": "IT-SUD",
+          "technology": "solar",
+          "incremental_available_twh": 0.5277564359674887,
+          "peak_increment_mw": 341.196456114018,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.4606958466412417
+        },
+        {
+          "zone": "IT-SUD",
+          "technology": "hard_coal",
+          "incremental_available_twh": 0.283098,
+          "peak_increment_mw": 323.5,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.015360637795592538
+        },
+        {
+          "zone": "IT-SUD",
+          "technology": "biomass",
+          "incremental_available_twh": 1.7439022499999994,
+          "peak_increment_mw": 210.3,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 1.3872124477757892
+        },
+        {
+          "zone": "DK2",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 0.9066872841349382,
+          "peak_increment_mw": 254.9983384456719,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.7527886013784701
+        },
+        {
+          "zone": "DK2",
+          "technology": "solar",
+          "incremental_available_twh": 0.047960057685877376,
+          "peak_increment_mw": 49.544985429972485,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.03179741807459956
+        },
+        {
+          "zone": "DK2",
+          "technology": "gas",
+          "incremental_available_twh": 1.60421438,
+          "peak_increment_mw": 191.48,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 3,
+          "new_offer_dispatch_twh": 0.1551151165137272
+        },
+        {
+          "zone": "DK2",
+          "technology": "hard_coal",
+          "incremental_available_twh": 2.3789908099999995,
+          "peak_increment_mw": 276.45,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.00024677
+        },
+        {
+          "zone": "DK2",
+          "technology": "oil",
+          "incremental_available_twh": 0.5398665599999998,
+          "peak_increment_mw": 66.91999999999999,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 0.004829939396158075
+        },
+        {
+          "zone": "DK2",
+          "technology": "waste",
+          "incremental_available_twh": 0.9039588225,
+          "peak_increment_mw": 224.01475,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 0.547624998890293
+        },
+        {
+          "zone": "NO1",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 0.042909298750940086,
+          "peak_increment_mw": 35.394613490587346,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.03312308411744058
+        },
+        {
+          "zone": "NO1",
+          "technology": "waste",
+          "incremental_available_twh": 0.1850028325,
+          "peak_increment_mw": 29.0925,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.1212735382999002
+        },
+        {
+          "zone": "NO2",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 0.0805469093783554,
+          "peak_increment_mw": 53.507820681512385,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.06372313785844791
+        },
+        {
+          "zone": "NO2",
+          "technology": "gas",
+          "incremental_available_twh": 0.18213549,
+          "peak_increment_mw": 22.02,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 9.256000000000001e-05
+        },
+        {
+          "zone": "NO2",
+          "technology": "waste",
+          "incremental_available_twh": 0.12570477749999998,
+          "peak_increment_mw": 18.825,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.08286893316880692
+        },
+        {
+          "zone": "NO3",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 1.494616844412175,
+          "peak_increment_mw": 842.3602343806685,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 1.2325238551895157
+        },
+        {
+          "zone": "NO3",
+          "technology": "waste",
+          "incremental_available_twh": 0.0553645,
+          "peak_increment_mw": 6.34,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.03485857601769941
+        },
+        {
+          "zone": "SE1",
+          "technology": "solar",
+          "incremental_available_twh": 0.004366863053004308,
+          "peak_increment_mw": 5.617319618094384,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.0031250288658319597
+        },
+        {
+          "zone": "SE2",
+          "technology": "solar",
+          "incremental_available_twh": 0.003900450771388269,
+          "peak_increment_mw": 5.92017337914411,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.0038566003166295177
+        },
+        {
+          "zone": "SE4",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 0.386267635119427,
+          "peak_increment_mw": 166.12478857538144,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.38449344308164984
+        },
+        {
+          "zone": "IT-SARD",
+          "technology": "gas",
+          "incremental_available_twh": 3.7575805000000004,
+          "peak_increment_mw": 430.0000000000001,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 3,
+          "new_offer_dispatch_twh": 0.03197130527060664
+        },
+        {
+          "zone": "IT-SARD",
+          "technology": "biomass",
+          "incremental_available_twh": 0.41175674999999995,
+          "peak_increment_mw": 68.2,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 0.2949588538747926
+        },
+        {
+          "zone": "IT-SARD",
+          "technology": "waste",
+          "incremental_available_twh": 5.58242525,
+          "peak_increment_mw": 650.5,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 4.9883185584144885
+        }
+      ],
+      "zonal_price_mae": [
+        {
+          "zone": "AL",
+          "original_baseline_mae": 28.9967204341613,
+          "candidate_mae": 29.222394085542728
+        },
+        {
+          "zone": "AT",
+          "original_baseline_mae": 16.54909688614814,
+          "candidate_mae": 16.315291644542686
+        },
+        {
+          "zone": "BA",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "BE",
+          "original_baseline_mae": 18.191342842511595,
+          "candidate_mae": 18.586890257908514
+        },
+        {
+          "zone": "BG",
+          "original_baseline_mae": 19.56540644506296,
+          "candidate_mae": 19.11845795832754
+        },
+        {
+          "zone": "CH",
+          "original_baseline_mae": 18.995253195054136,
+          "candidate_mae": 19.455606844196993
+        },
+        {
+          "zone": "CZ",
+          "original_baseline_mae": 28.346955349879632,
+          "candidate_mae": 28.291027446585
+        },
+        {
+          "zone": "DE-LU",
+          "original_baseline_mae": 15.977468176636314,
+          "candidate_mae": 16.443287862861226
+        },
+        {
+          "zone": "DK1",
+          "original_baseline_mae": 16.57938415137785,
+          "candidate_mae": 17.198786796273726
+        },
+        {
+          "zone": "EE",
+          "original_baseline_mae": 39.819804193134466,
+          "candidate_mae": 39.50137407810211
+        },
+        {
+          "zone": "ES",
+          "original_baseline_mae": 18.175059840606014,
+          "candidate_mae": 18.070849065870764
+        },
+        {
+          "zone": "FR",
+          "original_baseline_mae": 23.384993374858333,
+          "candidate_mae": 23.394578310349196
+        },
+        {
+          "zone": "GR",
+          "original_baseline_mae": 21.251767959623656,
+          "candidate_mae": 20.807708182966966
+        },
+        {
+          "zone": "HR",
+          "original_baseline_mae": 17.479372169897122,
+          "candidate_mae": 16.942665808966332
+        },
+        {
+          "zone": "HU",
+          "original_baseline_mae": 18.378908781398966,
+          "candidate_mae": 18.138002649186255
+        },
+        {
+          "zone": "IT-CALA",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "IT-CNOR",
+          "original_baseline_mae": 18.394861555546324,
+          "candidate_mae": 18.9077773208208
+        },
+        {
+          "zone": "IT-CSUD",
+          "original_baseline_mae": 19.07162286966983,
+          "candidate_mae": 20.216615293407614
+        },
+        {
+          "zone": "IT-North",
+          "original_baseline_mae": 18.995013627834187,
+          "candidate_mae": 18.781940984178764
+        },
+        {
+          "zone": "IT-SICI",
+          "original_baseline_mae": 20.242885501326487,
+          "candidate_mae": 21.309343480155768
+        },
+        {
+          "zone": "IT-SUD",
+          "original_baseline_mae": 18.772590575209108,
+          "candidate_mae": 19.693870247388297
+        },
+        {
+          "zone": "LT",
+          "original_baseline_mae": 35.763670495567396,
+          "candidate_mae": 35.49517293559859
+        },
+        {
+          "zone": "LV",
+          "original_baseline_mae": 35.997516871121256,
+          "candidate_mae": 35.75104589206065
+        },
+        {
+          "zone": "ME",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "MK",
+          "original_baseline_mae": 18.175124121343234,
+          "candidate_mae": 17.85926622602108
+        },
+        {
+          "zone": "NL",
+          "original_baseline_mae": 17.109712864519743,
+          "candidate_mae": 17.60731333289094
+        },
+        {
+          "zone": "PL",
+          "original_baseline_mae": 20.426628724655036,
+          "candidate_mae": 20.698716201148716
+        },
+        {
+          "zone": "PT",
+          "original_baseline_mae": 18.629076577376157,
+          "candidate_mae": 18.53644044444837
+        },
+        {
+          "zone": "RO",
+          "original_baseline_mae": 18.805045544982953,
+          "candidate_mae": 18.41655453969
+        },
+        {
+          "zone": "RS",
+          "original_baseline_mae": 16.824036736846274,
+          "candidate_mae": 16.538811475234755
+        },
+        {
+          "zone": "SI",
+          "original_baseline_mae": 19.060298206490067,
+          "candidate_mae": 18.261944507035835
+        },
+        {
+          "zone": "SK",
+          "original_baseline_mae": 19.0159839545209,
+          "candidate_mae": 18.768246520840382
+        },
+        {
+          "zone": "XK",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "DK2",
+          "original_baseline_mae": 41.72793681422913,
+          "candidate_mae": 43.08107977765105
+        },
+        {
+          "zone": "FI",
+          "original_baseline_mae": 37.80100525458908,
+          "candidate_mae": 36.98945003226218
+        },
+        {
+          "zone": "NO1",
+          "original_baseline_mae": 36.6105433733242,
+          "candidate_mae": 36.74723023206189
+        },
+        {
+          "zone": "NO2",
+          "original_baseline_mae": 40.4182198400004,
+          "candidate_mae": 40.74265663042363
+        },
+        {
+          "zone": "NO3",
+          "original_baseline_mae": 31.483448443127585,
+          "candidate_mae": 29.9598356681753
+        },
+        {
+          "zone": "NO4",
+          "original_baseline_mae": 35.10680792889324,
+          "candidate_mae": 33.09562654569295
+        },
+        {
+          "zone": "NO5",
+          "original_baseline_mae": 33.632013077907146,
+          "candidate_mae": 33.41293779379611
+        },
+        {
+          "zone": "SE1",
+          "original_baseline_mae": 34.07754653949547,
+          "candidate_mae": 32.54758184631254
+        },
+        {
+          "zone": "SE2",
+          "original_baseline_mae": 35.63385509410182,
+          "candidate_mae": 34.05519949661031
+        },
+        {
+          "zone": "SE3",
+          "original_baseline_mae": 28.908440058511,
+          "candidate_mae": 28.24557578484489
+        },
+        {
+          "zone": "SE4",
+          "original_baseline_mae": 32.61417921683143,
+          "candidate_mae": 32.575912845725
+        },
+        {
+          "zone": "FR-COR",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "GB",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "IE-SEM",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "IT-SARD",
+          "original_baseline_mae": 22.103728780511194,
+          "candidate_mae": 32.61972283515661
+        }
+      ]
+    },
+    "a11": {
+      "hours": 8760,
+      "solve_seconds": 31.60195400000157,
+      "maximum_primal_residual_mw": 2.739661795203574e-07,
+      "emergency_mwh": 0.0,
+      "price_mae_eur_mwh": 25.039702272323876,
+      "objective_reduction_from_baseline_eur": 2464934753.772976,
+      "added_offer_dispatch_twh": 23.657219825566788,
+      "added_offer_available_twh": 41.15984432897995,
+      "witness_sha256": "888c6f1ede2faf7a1ccdc00c9f1a68530ce71d033ed22ff83e0b892b0ddf812c",
+      "offer_rows": [
+        {
+          "zone": "DK1",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 2.071037216962209,
+          "peak_increment_mw": 604.5173717777807,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 1.905540401316774
+        },
+        {
+          "zone": "DK1",
+          "technology": "solar",
+          "incremental_available_twh": 0.1392951700918874,
+          "peak_increment_mw": 203.7138278874172,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.12596244973900528
+        },
+        {
+          "zone": "DK1",
+          "technology": "oil",
+          "incremental_available_twh": 0.36608852199999997,
+          "peak_increment_mw": 50.2766,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.0033804138101646035
+        },
+        {
+          "zone": "DK1",
+          "technology": "biomass",
+          "incremental_available_twh": 1.2387267099999995,
+          "peak_increment_mw": 148.80999999999995,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 0.7134489875988638
+        },
+        {
+          "zone": "DK1",
+          "technology": "waste",
+          "incremental_available_twh": 0.9610537399999998,
+          "peak_increment_mw": 115.66999999999999,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 0.8909444028990566
+        },
+        {
+          "zone": "IT-CNOR",
+          "technology": "hard_coal",
+          "incremental_available_twh": 1.532885,
+          "peak_increment_mw": 175.0,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.020140645720919625
+        },
+        {
+          "zone": "IT-CNOR",
+          "technology": "oil",
+          "incremental_available_twh": 0.6568849999999998,
+          "peak_increment_mw": 74.99999999999999,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 2,
+          "new_offer_dispatch_twh": 0.11623703220405977
+        },
+        {
+          "zone": "IT-CNOR",
+          "technology": "biomass",
+          "incremental_available_twh": 0.17801475,
+          "peak_increment_mw": 24.0,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.16987961698480575
+        },
+        {
+          "zone": "IT-CNOR",
+          "technology": "geothermal",
+          "incremental_available_twh": 3.536248611476239,
+          "peak_increment_mw": 404.0151668351871,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 3.4442470436746313
+        },
+        {
+          "zone": "IT-CSUD",
+          "technology": "hard_coal",
+          "incremental_available_twh": 0.43543,
+          "peak_increment_mw": 387.0,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.01980300526681324
+        },
+        {
+          "zone": "IT-CSUD",
+          "technology": "biomass",
+          "incremental_available_twh": 0.403672,
+          "peak_increment_mw": 53.5,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 0.3122088155211086
+        },
+        {
+          "zone": "IT-North",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 0.01953872368325233,
+          "peak_increment_mw": 34.57016848296537,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.0195355474829778
+        },
+        {
+          "zone": "IT-North",
+          "technology": "solar",
+          "incremental_available_twh": 2.5327164505672766,
+          "peak_increment_mw": 1688.8495315678656,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 2.5304224109355373
+        },
+        {
+          "zone": "IT-North",
+          "technology": "hard_coal",
+          "incremental_available_twh": 3.13744775,
+          "peak_increment_mw": 758.0,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.08660580467495839
+        },
+        {
+          "zone": "IT-North",
+          "technology": "biomass",
+          "incremental_available_twh": 1.4976664499999996,
+          "peak_increment_mw": 199.62,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 1.4716115390940505
+        },
+        {
+          "zone": "IT-SUD",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 1.189873153979545,
+          "peak_increment_mw": 1467.767012202462,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 1.1431970456663412
+        },
+        {
+          "zone": "IT-SUD",
+          "technology": "offshore_wind",
+          "incremental_available_twh": 0.014252378445950353,
+          "peak_increment_mw": 6.088462121999058,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.013714774821560596
+        },
+        {
+          "zone": "IT-SUD",
+          "technology": "solar",
+          "incremental_available_twh": 0.5277564359674887,
+          "peak_increment_mw": 341.196456114018,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.45455481452069324
+        },
+        {
+          "zone": "IT-SUD",
+          "technology": "hard_coal",
+          "incremental_available_twh": 0.283098,
+          "peak_increment_mw": 323.5,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.016154704450875208
+        },
+        {
+          "zone": "IT-SUD",
+          "technology": "biomass",
+          "incremental_available_twh": 1.7439022499999994,
+          "peak_increment_mw": 210.3,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 1.3858877402752716
+        },
+        {
+          "zone": "DK2",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 0.9066872841349382,
+          "peak_increment_mw": 254.9983384456719,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.7694085889421918
+        },
+        {
+          "zone": "DK2",
+          "technology": "solar",
+          "incremental_available_twh": 0.047960057685877376,
+          "peak_increment_mw": 49.544985429972485,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.03220664996552869
+        },
+        {
+          "zone": "DK2",
+          "technology": "gas",
+          "incremental_available_twh": 1.60421438,
+          "peak_increment_mw": 191.48,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 3,
+          "new_offer_dispatch_twh": 0.16696821491044478
+        },
+        {
+          "zone": "DK2",
+          "technology": "hard_coal",
+          "incremental_available_twh": 2.3789908099999995,
+          "peak_increment_mw": 276.45,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.00024677
+        },
+        {
+          "zone": "DK2",
+          "technology": "oil",
+          "incremental_available_twh": 0.5398665599999998,
+          "peak_increment_mw": 66.91999999999999,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 0.00523193
+        },
+        {
+          "zone": "DK2",
+          "technology": "waste",
+          "incremental_available_twh": 0.9039588225,
+          "peak_increment_mw": 224.01475,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 0.5619548958830007
+        },
+        {
+          "zone": "NO1",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 0.042909298750940086,
+          "peak_increment_mw": 35.394613490587346,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.03326111746979332
+        },
+        {
+          "zone": "NO1",
+          "technology": "waste",
+          "incremental_available_twh": 0.1850028325,
+          "peak_increment_mw": 29.0925,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.12256490571309801
+        },
+        {
+          "zone": "NO2",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 0.0805469093783554,
+          "peak_increment_mw": 53.507820681512385,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.06430810948302074
+        },
+        {
+          "zone": "NO2",
+          "technology": "gas",
+          "incremental_available_twh": 0.18213549,
+          "peak_increment_mw": 22.02,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 9.276e-05
+        },
+        {
+          "zone": "NO2",
+          "technology": "waste",
+          "incremental_available_twh": 0.12570477749999998,
+          "peak_increment_mw": 18.825,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.08282821125236106
+        },
+        {
+          "zone": "NO3",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 1.494616844412175,
+          "peak_increment_mw": 842.3602343806685,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 1.2351964794942545
+        },
+        {
+          "zone": "NO3",
+          "technology": "waste",
+          "incremental_available_twh": 0.0553645,
+          "peak_increment_mw": 6.34,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.03522917587365662
+        },
+        {
+          "zone": "SE1",
+          "technology": "solar",
+          "incremental_available_twh": 0.004366863053004308,
+          "peak_increment_mw": 5.617319618094384,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.003125522912436949
+        },
+        {
+          "zone": "SE2",
+          "technology": "solar",
+          "incremental_available_twh": 0.003900450771388269,
+          "peak_increment_mw": 5.92017337914411,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.0038646271146383438
+        },
+        {
+          "zone": "SE4",
+          "technology": "onshore_wind",
+          "incremental_available_twh": 0.386267635119427,
+          "peak_increment_mw": 166.12478857538144,
+          "bid_source": "zero_bid_increment_weather_shaped_if_renewable",
+          "preexisting_group": true,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 0.3844765754717023
+        },
+        {
+          "zone": "IT-SARD",
+          "technology": "gas",
+          "incremental_available_twh": 3.7575805000000004,
+          "peak_increment_mw": 430.0000000000001,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 3,
+          "new_offer_dispatch_twh": 0.03161669915136597
+        },
+        {
+          "zone": "IT-SARD",
+          "technology": "biomass",
+          "incremental_available_twh": 0.41175674999999995,
+          "peak_increment_mw": 68.2,
+          "bid_source": "flat_extension_of_local_fitted_offer_tail",
+          "preexisting_group": true,
+          "local_pure_offers": 1,
+          "new_offer_dispatch_twh": 0.29497127922409166
+        },
+        {
+          "zone": "IT-SARD",
+          "technology": "waste",
+          "incremental_available_twh": 5.58242525,
+          "peak_increment_mw": 650.5,
+          "bid_source": "median_existing_same_technology_offer_proxy",
+          "preexisting_group": false,
+          "local_pure_offers": 0,
+          "new_offer_dispatch_twh": 4.986190116046732
+        }
+      ],
+      "zonal_price_mae": [
+        {
+          "zone": "AL",
+          "original_baseline_mae": 28.9967204341613,
+          "candidate_mae": 29.270748449037995
+        },
+        {
+          "zone": "AT",
+          "original_baseline_mae": 16.54909688614814,
+          "candidate_mae": 16.413222325250814
+        },
+        {
+          "zone": "BA",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "BE",
+          "original_baseline_mae": 18.191342842511595,
+          "candidate_mae": 18.836453185879577
+        },
+        {
+          "zone": "BG",
+          "original_baseline_mae": 19.56540644506296,
+          "candidate_mae": 19.06219739917316
+        },
+        {
+          "zone": "CH",
+          "original_baseline_mae": 18.995253195054136,
+          "candidate_mae": 19.523774367003675
+        },
+        {
+          "zone": "CZ",
+          "original_baseline_mae": 28.346955349879632,
+          "candidate_mae": 28.314513475445874
+        },
+        {
+          "zone": "DE-LU",
+          "original_baseline_mae": 15.977468176636314,
+          "candidate_mae": 16.55296184080375
+        },
+        {
+          "zone": "DK1",
+          "original_baseline_mae": 16.57938415137785,
+          "candidate_mae": 17.362308254119583
+        },
+        {
+          "zone": "EE",
+          "original_baseline_mae": 39.819804193134466,
+          "candidate_mae": 39.238822807217424
+        },
+        {
+          "zone": "ES",
+          "original_baseline_mae": 18.175059840606014,
+          "candidate_mae": 17.485475361020306
+        },
+        {
+          "zone": "FR",
+          "original_baseline_mae": 23.384993374858333,
+          "candidate_mae": 22.685125451567334
+        },
+        {
+          "zone": "GR",
+          "original_baseline_mae": 21.251767959623656,
+          "candidate_mae": 20.73586606187142
+        },
+        {
+          "zone": "HR",
+          "original_baseline_mae": 17.479372169897122,
+          "candidate_mae": 16.959696083764687
+        },
+        {
+          "zone": "HU",
+          "original_baseline_mae": 18.378908781398966,
+          "candidate_mae": 18.134318069129737
+        },
+        {
+          "zone": "IT-CALA",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "IT-CNOR",
+          "original_baseline_mae": 18.394861555546324,
+          "candidate_mae": 18.89461757861664
+        },
+        {
+          "zone": "IT-CSUD",
+          "original_baseline_mae": 19.07162286966983,
+          "candidate_mae": 20.200332269871293
+        },
+        {
+          "zone": "IT-North",
+          "original_baseline_mae": 18.995013627834187,
+          "candidate_mae": 18.223003246115205
+        },
+        {
+          "zone": "IT-SICI",
+          "original_baseline_mae": 20.242885501326487,
+          "candidate_mae": 21.30300871289539
+        },
+        {
+          "zone": "IT-SUD",
+          "original_baseline_mae": 18.772590575209108,
+          "candidate_mae": 19.665015093114565
+        },
+        {
+          "zone": "LT",
+          "original_baseline_mae": 35.763670495567396,
+          "candidate_mae": 35.3061580680776
+        },
+        {
+          "zone": "LV",
+          "original_baseline_mae": 35.997516871121256,
+          "candidate_mae": 35.564470448322396
+        },
+        {
+          "zone": "ME",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "MK",
+          "original_baseline_mae": 18.175124121343234,
+          "candidate_mae": 17.806023545703116
+        },
+        {
+          "zone": "NL",
+          "original_baseline_mae": 17.109712864519743,
+          "candidate_mae": 17.746055564070062
+        },
+        {
+          "zone": "PL",
+          "original_baseline_mae": 20.426628724655036,
+          "candidate_mae": 20.895383133568508
+        },
+        {
+          "zone": "PT",
+          "original_baseline_mae": 18.629076577376157,
+          "candidate_mae": 18.006611860772956
+        },
+        {
+          "zone": "RO",
+          "original_baseline_mae": 18.805045544982953,
+          "candidate_mae": 18.37147313273881
+        },
+        {
+          "zone": "RS",
+          "original_baseline_mae": 16.824036736846274,
+          "candidate_mae": 16.492817403307388
+        },
+        {
+          "zone": "SI",
+          "original_baseline_mae": 19.060298206490067,
+          "candidate_mae": 18.37942470661922
+        },
+        {
+          "zone": "SK",
+          "original_baseline_mae": 19.0159839545209,
+          "candidate_mae": 18.78518264380319
+        },
+        {
+          "zone": "XK",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "DK2",
+          "original_baseline_mae": 41.72793681422913,
+          "candidate_mae": 39.08594240482758
+        },
+        {
+          "zone": "FI",
+          "original_baseline_mae": 37.80100525458908,
+          "candidate_mae": 37.26460585757703
+        },
+        {
+          "zone": "NO1",
+          "original_baseline_mae": 36.6105433733242,
+          "candidate_mae": 36.47190629427631
+        },
+        {
+          "zone": "NO2",
+          "original_baseline_mae": 40.4182198400004,
+          "candidate_mae": 40.158773513461625
+        },
+        {
+          "zone": "NO3",
+          "original_baseline_mae": 31.483448443127585,
+          "candidate_mae": 30.6449641754665
+        },
+        {
+          "zone": "NO4",
+          "original_baseline_mae": 35.10680792889324,
+          "candidate_mae": 33.982355775730895
+        },
+        {
+          "zone": "NO5",
+          "original_baseline_mae": 33.632013077907146,
+          "candidate_mae": 31.909864841843817
+        },
+        {
+          "zone": "SE1",
+          "original_baseline_mae": 34.07754653949547,
+          "candidate_mae": 33.357614906644756
+        },
+        {
+          "zone": "SE2",
+          "original_baseline_mae": 35.63385509410182,
+          "candidate_mae": 34.99901892170123
+        },
+        {
+          "zone": "SE3",
+          "original_baseline_mae": 28.908440058511,
+          "candidate_mae": 28.117650644063577
+        },
+        {
+          "zone": "SE4",
+          "original_baseline_mae": 32.61417921683143,
+          "candidate_mae": 31.80945005782526
+        },
+        {
+          "zone": "FR-COR",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "GB",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "IE-SEM",
+          "original_baseline_mae": null,
+          "candidate_mae": null
+        },
+        {
+          "zone": "IT-SARD",
+          "original_baseline_mae": 22.103728780511194,
+          "candidate_mae": 32.610585232978565
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Retrospective A75 running peaks; no prospective capacity/outage validation",
+    "Original pooled renewable availability is preserved; incremental weather-shaped MW enters separate zero-bid columns",
+    "Missing dedicated fleets use provisional median same-technology bids; local existing technology uses a flat bid tail",
+    "Fixed hydro/water and original renewable weather-zero hours unchanged",
+    "No bid refit, generation-mix allocation audit, independent time transfer or scenario-response validation"
+  ]
+}

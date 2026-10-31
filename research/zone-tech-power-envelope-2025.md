@@ -1,6 +1,6 @@
 # Dated 2025 zone–technology power envelope
 
-**Status:** new research input candidate, not the accepted `mixed_curve_fitting` baseline. The [624-row review table](data/zone-tech-power-envelope-2025.csv) and [source-hashed summary](data/zone-tech-power-envelope-2025.json) describe the inferred ceiling; hourly arrays remain in ignored `data/bidding-zone-network-2025/zone-tech-power-envelope-v2/`.
+**Status:** historical power-ceiling diagnostic, **superseded for LP availability transfer**. The [624-row review table](data/zone-tech-power-envelope-2025.csv) and [source-hashed summary](data/zone-tech-power-envelope-2025.json) describe the inferred ceiling; hourly arrays remain in ignored `data/bidding-zone-network-2025/zone-tech-power-envelope-v2/`. A later LP test found that its renewable availability scaling double counts preexisting capacity corrections. The [corrected v3 LP candidate](generation-power-lp-2025.md) uses the larger of source nameplate and the current modeled peak hourly availability as the power reference. Neither candidate is the accepted baseline.
 
 ## Rule
 
@@ -10,7 +10,7 @@ For a zone and technology whose ENTSO-E A75 receipt has matching **bidding-zone*
 
 ## Source audit and scale
 
-The candidate checks the retained grouped input and solar correction, the source-hashed fleet inventory, and **456** A75 zone-month receipts. Across 48 zones and 13 technologies, **56** matched rows have observed output more than 1 MW above source fleet nameplate, covering **179,427 observed exceedance hours**. Eleven of those rows are water-limited and receive a power-ceiling update only. The provisional hourly availability arrays change **45 rows** (including weather-profile scaling), by **143.0 TWh of summed available MW-hours**. This number is *potential supply volume*, not generation or an estimated market effect. It is large enough that source vintage, technology classification, embedded generation and commissioning/outage history need reconciliation before use in a price model. Twelve changed rows have no corresponding grouped technology generator.
+The candidate checks the retained grouped input and solar correction, the source-hashed fleet inventory, and **456** A75 zone-month receipts. Across 48 zones and 13 technologies, **56** matched rows have observed output more than 1 MW above source fleet nameplate, covering **179,427 observed exceedance hours**. Eleven of those rows are water-limited and receive a power-ceiling update only. The v2 hourly availability arrays change **45 rows** by **143.0 TWh of summed available MW-hours**. This figure is **overstated for LP use** because source nameplate can be much lower than already capacity-corrected model availability. The corrected v3 LP input changes 39 rows by 41.16 TWh of potential available MW-hours. Neither figure is actual generation or an estimated market benefit. Twelve v2 changed rows have no corresponding grouped technology generator.
 
 | Matched example | Source fleet nameplate | Observed peak | First exceedance | Treatment |
 | --- | ---: | ---: | --- | --- |

@@ -163,6 +163,11 @@ def run():
         'The original research baseline is unchanged. The generation power-ceiling candidate and the '
         'A11 physical-network candidate are **separate experiments**; the annual €24.831/MWh LP sensitivity '
         'uses only the latter, with original generation inputs and frozen bids.', '',
+        '**Later correction:** The generation candidate column is the originally inferred physical power ceiling '
+        'from observed A75 peaks. Its v2 hourly renewable-availability scaling was subsequently found to '
+        'double count some capacity corrections already present in the LP. It is **not** the generation '
+        'input used in the corrected LP sensitivity. See [the corrected LP power input]'
+        '(generation-power-lp-2025.md). The connection table is unaffected.', '',
         f'Download all [624 zone–technology rows]({fleet_out.relative_to(REPORT.parent)}) and '
         f'[95 directional connection rows]({edge_out.relative_to(REPORT.parent)}). Blank observed values mean '
         'no exactly scoped observation; they do not mean zero generation or flow.', '',
