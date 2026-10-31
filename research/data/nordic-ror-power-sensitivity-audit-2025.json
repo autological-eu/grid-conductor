@@ -1,0 +1,33 @@
+{
+  "status": "both_full_year_primal_dual_replays_passed",
+  "outcomes": {
+    "original": {
+      "hours": 8760,
+      "new_offer_columns": 4,
+      "witness_sha256": "ce2809916049f09c1535820a37d3c5cd05a6fe4d4ae69ec289b7e1f799ff0503",
+      "numerical": {
+        "primal_residual_mw": 7.919152267277241e-07,
+        "objective_residual_eur": 2.2351741790771484e-08,
+        "stationarity_maximum_eur_mwh": 0.0,
+        "free_injection_reduced_cost_maximum": 1.8255263967148494e-10,
+        "complementarity_maximum_eur": 2.7172249354935192e-05,
+        "duality_gap_maximum_eur": 2.4368055164813995e-06,
+        "price_decomposition_maximum_eur_mwh": 1.8255263967148494e-10
+      }
+    },
+    "a11": {
+      "hours": 8760,
+      "new_offer_columns": 4,
+      "witness_sha256": "71a1e95a14d809b4045dc049e3980cd7151b10c4d1b6d0d70a8aad7cb18442b4",
+      "numerical": {
+        "primal_residual_mw": 2.6873385650105774e-07,
+        "objective_residual_eur": 1.6763806343078613e-08,
+        "stationarity_maximum_eur_mwh": 0.0,
+        "free_injection_reduced_cost_maximum": 4.434776990080991e-09,
+        "complementarity_maximum_eur": 1.596029725687605e-05,
+        "duality_gap_maximum_eur": 6.365240551531315e-06,
+        "price_decomposition_maximum_eur_mwh": 4.434781430973089e-09
+      }
+    }
+  }
+}

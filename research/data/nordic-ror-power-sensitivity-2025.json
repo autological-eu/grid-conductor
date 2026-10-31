@@ -1,0 +1,130 @@
+{
+  "status": "unverified_parallel_run_of_river_profile_sensitivity_not_baseline",
+  "source_a75_review_sha256": "0e1a6b3226d4e0e1d2a15ea11d613bf2cafaaf006e9fe17a0204ade1f7b215eb",
+  "original_baseline_price_mae_eur_mwh": 25.051056742655632,
+  "outcomes": {
+    "original": {
+      "hours": 8760,
+      "solve_seconds": 31.983150767999177,
+      "max_primal_residual_mw": 5.239039637672249e-07,
+      "emergency_mwh": 0.0,
+      "added_available_twh": 10.880572091412425,
+      "added_dispatch_twh": 7.806278710632285,
+      "price_mae_eur_mwh": 25.06284308658854,
+      "witness_sha256": "d1bb1968f13c3e9837ab791b74b915d92199cffa9fc7d8428bf7023648b79c6f",
+      "zones": [
+        {
+          "zone": "NO1",
+          "technology": "ror",
+          "source_nameplate_mw": 1489.0,
+          "observed_peak_mw": 2027.026108,
+          "first_observed_hour": 1571,
+          "source_profile_available_twh": 6.356762049135856,
+          "added_profile_available_twh": 2.067813314568505,
+          "added_offer_dispatch_twh": 1.280042296928172
+        },
+        {
+          "zone": "NO2",
+          "technology": "ror",
+          "source_nameplate_mw": 240.0,
+          "observed_peak_mw": 1146.504337,
+          "first_observed_hour": 0,
+          "source_profile_available_twh": 1.0245956291421126,
+          "added_profile_available_twh": 3.870001589535703,
+          "added_offer_dispatch_twh": 2.647724335443266
+        },
+        {
+          "zone": "NO3",
+          "technology": "ror",
+          "source_nameplate_mw": 80.0,
+          "observed_peak_mw": 1043.775,
+          "first_observed_hour": 0,
+          "source_profile_available_twh": 0.3415318763807041,
+          "added_profile_available_twh": 4.114498551985165,
+          "added_offer_dispatch_twh": 3.207349772097363
+        },
+        {
+          "zone": "NO4",
+          "technology": "ror",
+          "source_nameplate_mw": 214.0,
+          "observed_peak_mw": 408.1275,
+          "first_observed_hour": 10,
+          "source_profile_available_twh": 0.9135977693183837,
+          "added_profile_available_twh": 0.8282586353230516,
+          "added_offer_dispatch_twh": 0.6711623061634842
+        }
+      ],
+      "nordic_price_mae": {
+        "NO1": 40.752112851319986,
+        "NO2": 45.479041970190984,
+        "NO3": 28.486561934232242,
+        "NO4": 30.8385054786547
+      }
+    },
+    "a11": {
+      "hours": 8760,
+      "solve_seconds": 30.191615182000533,
+      "max_primal_residual_mw": 6.688514986308292e-07,
+      "emergency_mwh": 0.0,
+      "added_available_twh": 10.880572091412425,
+      "added_dispatch_twh": 7.87673750495189,
+      "price_mae_eur_mwh": 24.820218026971038,
+      "witness_sha256": "010863733d031e6475548739707214550a7f7d6195c7d7b16c0c0a6c825cfd88",
+      "zones": [
+        {
+          "zone": "NO1",
+          "technology": "ror",
+          "source_nameplate_mw": 1489.0,
+          "observed_peak_mw": 2027.026108,
+          "first_observed_hour": 1571,
+          "source_profile_available_twh": 6.356762049135856,
+          "added_profile_available_twh": 2.067813314568505,
+          "added_offer_dispatch_twh": 1.291829166167643
+        },
+        {
+          "zone": "NO2",
+          "technology": "ror",
+          "source_nameplate_mw": 240.0,
+          "observed_peak_mw": 1146.504337,
+          "first_observed_hour": 0,
+          "source_profile_available_twh": 1.0245956291421126,
+          "added_profile_available_twh": 3.870001589535703,
+          "added_offer_dispatch_twh": 2.6486966875429014
+        },
+        {
+          "zone": "NO3",
+          "technology": "ror",
+          "source_nameplate_mw": 80.0,
+          "observed_peak_mw": 1043.775,
+          "first_observed_hour": 0,
+          "source_profile_available_twh": 0.3415318763807041,
+          "added_profile_available_twh": 4.114498551985165,
+          "added_offer_dispatch_twh": 3.259857797988695
+        },
+        {
+          "zone": "NO4",
+          "technology": "ror",
+          "source_nameplate_mw": 214.0,
+          "observed_peak_mw": 408.1275,
+          "first_observed_hour": 10,
+          "source_profile_available_twh": 0.9135977693183837,
+          "added_profile_available_twh": 0.8282586353230516,
+          "added_offer_dispatch_twh": 0.6763538532526514
+        }
+      ],
+      "nordic_price_mae": {
+        "NO1": 40.0535328654565,
+        "NO2": 44.442824565538174,
+        "NO3": 28.8584666958828,
+        "NO4": 31.674848501318568
+      }
+    }
+  },
+  "limitations": [
+    "Original modeled RoR availability and fixed reservoir water remain unchanged",
+    "Parallel RoR profile assumes additional inflow follows existing per-unit shape; not independently validated",
+    "Observed A75 dispatch is only a dated turbine-power floor, not hourly availability",
+    "Swedish reservoir turbine limit alone changes no fixed hourly schedule",
+    "No bid refit, observed generation mix audit or investment-response validation"
+  ]
+}
