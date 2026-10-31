@@ -1,0 +1,16 @@
+{
+  "zones": 48,
+  "generator_rows": 624,
+  "connections": 95,
+  "matched_generator_rows": 107,
+  "a11_covered_connections": 80,
+  "generation_csv_sha256": "d0d213439b916442a201d1ea97662c0a3266a00a39c1b6157033dc911640f56e",
+  "connections_csv_sha256": "2c093532d8b35f00ac79cedfc5d84d14373b8caa49e3f26b227c525eb47ec72c",
+  "report_sha256": "a8b9924545457695b1b1bdc3decac11f080433fa394847f9ec7a674373cef315",
+  "generation_figure_sha256": "aa501c17a861243e369798ff008e260783083502f3a28b3d2b0ed68c6afabe23",
+  "connections_figure_sha256": "21a8d5d4e775d4c5e550e71b122156332cba6d06179c6018d9fc7d7fe1b52324",
+  "source_generation_sha256": "7037f72d8ce7d30f3ff19a05ba35f775c8c24abc225d84ce3e0d1bedca50a793",
+  "source_power_candidate_sha256": "0e1a6b3226d4e0e1d2a15ea11d613bf2cafaaf006e9fe17a0204ade1f7b215eb",
+  "source_network_candidate_sha256": "7b837316002d2fed4d5eba0a8fb926f64d80f4ed6383479205a62203a0c16a2b",
+  "source_hourly_a11_sha256": "57896c81b1b39bb1eab8639b28d051d46352be6f717ce3ad503dd6a683cc56ca"
+}

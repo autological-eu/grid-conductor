@@ -1,0 +1,625 @@
+zone,technology,original_fleet_nameplate_mw,peak_hourly_model_available_mw,candidate_demonstrated_power_ceiling_mw,observed_peak_generation_mw,unallocated_observed_peak_mw,observed_hours,observed_scope,candidate_treatment
+AL,biomass,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+AL,gas,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+AL,geothermal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+AL,hard_coal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+AL,lignite,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+AL,nuclear,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+AL,offshore_wind,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+AL,oil,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+AL,onshore_wind,150.0,89.172402,150.0,,,0,unavailable,unmatched_scope
+AL,reservoir,1690.7,1690.7,1690.7,,,0,unavailable,unmatched_scope
+AL,ror,383.666,383.666,383.666,,,0,unavailable,unmatched_scope
+AL,solar,354.2,613.189499,354.2,,,0,unavailable,unmatched_scope
+AL,waste,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+AT,biomass,132.0,132.0,132.0,,315.0,8760,national area,unmatched_scope
+AT,gas,4596.0,4596.0,4596.0,,3512.9,8760,national area,unmatched_scope
+AT,geothermal,0.0,0.0,0.0,,0.072,8760,national area,unmatched_scope
+AT,hard_coal,0.0,0.0,0.0,,0.0,8760,national area,unmatched_scope
+AT,lignite,0.0,0.0,0.0,,,0,national area,unmatched_scope
+AT,nuclear,0.0,0.0,0.0,,,0,national area,unmatched_scope
+AT,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+AT,oil,170.0,170.0,170.0,,0.0,8760,national area,unmatched_scope
+AT,onshore_wind,2788.6,3527.256562,2788.6,,3645.0,8760,national area,unmatched_scope
+AT,reservoir,6248.02,6248.02,6248.02,,1412.4,8760,national area,unmatched_scope
+AT,ror,2395.180368,2395.180368,2395.180368,,5520.6,8760,national area,unmatched_scope
+AT,solar,915.7764,6414.726648,915.7764,,4672.0,8760,national area,unmatched_scope
+AT,waste,123.0,123.0,123.0,,100.0,8760,national area,unmatched_scope
+BA,biomass,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+BA,gas,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+BA,geothermal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+BA,hard_coal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+BA,lignite,2090.0,2090.0,2090.0,,,0,unavailable,unmatched_scope
+BA,nuclear,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+BA,offshore_wind,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+BA,oil,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+BA,onshore_wind,244.0,153.470964,244.0,,,0,unavailable,unmatched_scope
+BA,reservoir,1651.0,1651.0,1651.0,,,0,unavailable,unmatched_scope
+BA,ror,14.0,14.0,14.0,,,0,unavailable,unmatched_scope
+BA,solar,564.5,293.81256,564.5,,,0,unavailable,unmatched_scope
+BA,waste,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+BE,biomass,113.0,113.0,113.0,,519.752101,8760,national area,unmatched_scope
+BE,gas,6634.2,6634.2,6634.2,,5690.422965,8760,national area,unmatched_scope
+BE,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+BE,hard_coal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+BE,lignite,0.0,0.0,0.0,,,0,national area,unmatched_scope
+BE,nuclear,4096.0,3538.944,4096.0,,3967.665,8760,national area,unmatched_scope
+BE,offshore_wind,2752.2,3163.279888,2752.2,,2203.4475,8022,national area,unmatched_scope
+BE,oil,130.2,130.2,130.2,,166.875666,8760,national area,unmatched_scope
+BE,onshore_wind,1753.56,2267.995758,1753.56,,2724.315755,8760,national area,unmatched_scope
+BE,reservoir,12.735669,12.735669,12.735669,,,0,national area,unmatched_scope
+BE,ror,58.474481,58.474481,58.474481,,104.217087,8760,national area,unmatched_scope
+BE,solar,937.6,7273.538329,937.6,,7726.27175,8760,national area,unmatched_scope
+BE,waste,293.8,293.8,293.8,,305.79,8760,national area,unmatched_scope
+BG,biomass,0.0,0.0,0.0,,23.760896,8760,national area,unmatched_scope
+BG,gas,761.0,761.0,761.0,,325.69,8760,national area,unmatched_scope
+BG,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+BG,hard_coal,1204.0,1204.0,1204.0,,88.85,8760,national area,unmatched_scope
+BG,lignite,6057.0,6057.0,6057.0,,2618.96,8760,national area,unmatched_scope
+BG,nuclear,2080.0,1763.84,2080.0,,1983.33,8760,national area,unmatched_scope
+BG,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+BG,oil,0.0,0.0,0.0,,,0,national area,unmatched_scope
+BG,onshore_wind,608.0,563.861536,608.0,,583.75,8760,national area,unmatched_scope
+BG,reservoir,1799.14,1799.14,1799.14,,1378.53,8760,national area,unmatched_scope
+BG,ror,241.4,218.076119,241.4,,359.65,8760,national area,unmatched_scope
+BG,solar,3604.0,3625.452908,3604.0,,3888.8,8760,national area,unmatched_scope
+BG,waste,0.0,0.0,0.0,,4.93,8760,national area,unmatched_scope
+CH,biomass,59.0,59.0,59.0,,,0,national area,unmatched_scope
+CH,gas,98.8,98.8,98.8,,,0,national area,unmatched_scope
+CH,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+CH,hard_coal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+CH,lignite,0.0,0.0,0.0,,,0,national area,unmatched_scope
+CH,nuclear,3095.0,2729.79,3095.0,,2979.08,8760,national area,unmatched_scope
+CH,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+CH,oil,0.0,0.0,0.0,,,0,national area,unmatched_scope
+CH,onshore_wind,55.0,84.243586,55.0,,76.26,8760,national area,unmatched_scope
+CH,reservoir,9670.32,9670.32,9670.32,,3466.12,8760,national area,unmatched_scope
+CH,ror,3892.226,3272.468811,3892.226,,3674.1,8760,national area,unmatched_scope
+CH,solar,98.79724,5201.939929,98.79724,,4017.76,8760,national area,unmatched_scope
+CH,waste,212.5,212.5,212.5,,,0,national area,unmatched_scope
+CZ,biomass,30.0,30.0,30.0,,403.5825,8759,national area,unmatched_scope
+CZ,gas,1719.0,1719.0,1719.0,,1470.9825,8759,national area,unmatched_scope
+CZ,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+CZ,hard_coal,639.0,639.0,639.0,,425.1325,8759,national area,unmatched_scope
+CZ,lignite,8875.6,8875.6,8875.6,,5117.2325,8759,national area,unmatched_scope
+CZ,nuclear,4164.0,3356.184,4164.0,,4012.6075,8759,national area,unmatched_scope
+CZ,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+CZ,oil,0.0,0.0,0.0,,57.09,8759,national area,unmatched_scope
+CZ,onshore_wind,155.26,360.703807,155.26,,298.39,8759,national area,unmatched_scope
+CZ,reservoir,621.383902,621.383902,621.383902,,798.9775,8759,national area,unmatched_scope
+CZ,ror,40.226382,24.015321,40.226382,,196.9575,8759,national area,unmatched_scope
+CZ,solar,2957.005,3190.471661,2957.005,,3231.0425,8759,national area,unmatched_scope
+CZ,waste,30.2,30.2,30.2,,42.5275,8759,national area,unmatched_scope
+DE-LU,biomass,8022.801833,8022.801833,8022.801833,,5271.4175,8760,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DE-LU,gas,36895.872053,36614.0,36895.872053,,20146.2975,8760,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DE-LU,geothermal,26.9,26.9,26.9,,36.15425,8760,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DE-LU,hard_coal,20351.945,15951.0,20351.945,,8907.285,8760,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DE-LU,lignite,19457.035,15178.0,19457.035,,13661.82013,8760,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DE-LU,nuclear,0.0,0.0,0.0,,,0,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DE-LU,offshore_wind,11163.743,9089.799455,11163.743,,8278.073,8760,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DE-LU,oil,5684.345986,5684.345986,5684.345986,,1343.11,8760,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DE-LU,onshore_wind,73465.6659,65096.857083,73465.6659,,45767.639184,8760,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DE-LU,reservoir,402.23815,402.23815,402.23815,,954.91,8760,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DE-LU,ror,4014.118709,4014.118709,4014.118709,,2248.6345,8760,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DE-LU,solar,48874.64402,61081.463265,48874.64402,,52132.525,8760,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DE-LU,waste,3142.659,3142.659,3142.659,,950.634,8760,"Germany national generation proxy; excludes Luxembourg, not DE-LU zonal generation",unmatched_scope
+DK1,biomass,661.0,661.0,809.81,809.81,,8754,bidding zone,existing_dispatchable_group
+DK1,gas,1137.2,1137.2,1137.2,468.19,,8754,bidding zone,no_new_power
+DK1,geothermal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+DK1,hard_coal,716.0,716.0,716.0,688.79,,8754,bidding zone,no_new_power
+DK1,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+DK1,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+DK1,offshore_wind,1602.6,2308.529172,1924.7275,1924.7275,,8755,bidding zone,weather_profile_scaled_by_demonstrated_power
+DK1,oil,0.0,0.0,50.2766,50.2766,,8754,bidding zone,new_offer_required
+DK1,onshore_wind,1777.7,2890.882628,3495.4,3495.4,,8755,bidding zone,weather_profile_scaled_by_demonstrated_power
+DK1,reservoir,0.0,0.0,0.0,,,0,bidding zone,no_observation
+DK1,ror,0.0,0.0,3.64,3.64,,8750,bidding zone,hydro_power_only_water_unreconciled
+DK1,solar,2529.5,2350.322241,2751.695,2751.695,,8755,bidding zone,weather_profile_scaled_by_demonstrated_power
+DK1,waste,51.0,51.0,166.67,166.67,,8754,bidding zone,existing_dispatchable_group
+DK2,biomass,1120.0,1120.0,1120.0,792.683,,8754,bidding zone,no_new_power
+DK2,gas,38.0,38.0,229.48,229.48,,8754,bidding zone,existing_dispatchable_group
+DK2,geothermal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+DK2,hard_coal,0.0,0.0,276.45,276.45,,8750,bidding zone,new_offer_required
+DK2,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+DK2,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+DK2,offshore_wind,1050.0,1512.484005,1050.0,955.75,,8755,bidding zone,no_new_power
+DK2,oil,126.0,126.0,192.92,192.92,,8754,bidding zone,existing_dispatchable_group
+DK2,onshore_wind,209.0,339.890412,594.88875,594.88875,,8755,bidding zone,weather_profile_scaled_by_demonstrated_power
+DK2,reservoir,0.0,0.0,0.0,,,0,bidding zone,no_observation
+DK2,ror,0.0,0.0,0.0,,,0,bidding zone,no_observation
+DK2,solar,854.4,793.83239,907.875,907.875,,8752,bidding zone,weather_profile_scaled_by_demonstrated_power
+DK2,waste,102.0,102.0,326.01475,326.01475,,8754,bidding zone,existing_dispatchable_group
+EE,biomass,80.0,80.0,80.0,,104.8,8748,national area,unmatched_scope
+EE,gas,207.0,207.0,207.0,,45.6,8748,national area,unmatched_scope
+EE,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+EE,hard_coal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+EE,lignite,0.0,0.0,0.0,,,0,national area,unmatched_scope
+EE,nuclear,0.0,0.0,0.0,,,0,national area,unmatched_scope
+EE,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+EE,oil,251.1,251.1,251.1,,,0,national area,unmatched_scope
+EE,onshore_wind,688.0,704.558542,688.0,,578.2,8742,national area,unmatched_scope
+EE,reservoir,0.0,0.0,0.0,,,0,national area,unmatched_scope
+EE,ror,0.0,0.0,0.0,,1.2,8748,national area,unmatched_scope
+EE,solar,1158.7,675.411597,1158.7,,933.5,8760,national area,unmatched_scope
+EE,waste,0.0,0.0,0.0,,18.45,8748,national area,unmatched_scope
+ES,biomass,526.1,526.1,526.1,,550.0,8723,national area,unmatched_scope
+ES,gas,27696.0,27696.0,27696.0,,16460.0,8723,national area,unmatched_scope
+ES,geothermal,0.0,0.0,0.0,,0.0,8723,national area,unmatched_scope
+ES,hard_coal,0.0,0.0,0.0,,1044.0,8723,national area,unmatched_scope
+ES,lignite,510.0,510.0,510.0,,0.0,8723,national area,unmatched_scope
+ES,nuclear,7408.0,6459.776,7408.0,,7140.0,8723,national area,unmatched_scope
+ES,offshore_wind,20.0,18.499986,20.0,,0.0,8723,national area,unmatched_scope
+ES,oil,634.0,634.0,634.0,,76.0,8723,national area,unmatched_scope
+ES,onshore_wind,31792.7,29378.000945,31792.7,,19535.0,8723,national area,unmatched_scope
+ES,reservoir,9852.197,9852.197,9852.197,,6966.0,8723,national area,unmatched_scope
+ES,ror,496.7958,487.913391,496.7958,,1827.0,8723,national area,unmatched_scope
+ES,solar,41268.5,31266.136897,41268.5,,23999.0,8723,national area,unmatched_scope
+ES,waste,230.25,230.25,230.25,,263.0,8723,national area,unmatched_scope
+FI,biomass,3800.74,3800.74,3800.74,,1906.45,8760,national area,unmatched_scope
+FI,gas,1906.6,1906.6,1906.6,,960.04,8760,national area,unmatched_scope
+FI,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+FI,hard_coal,903.2,903.2,903.2,,447.1475,8760,national area,unmatched_scope
+FI,lignite,150.0,150.0,150.0,,,0,national area,unmatched_scope
+FI,nuclear,4622.0,3859.37,4622.0,,4233.275,8760,national area,unmatched_scope
+FI,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+FI,oil,1100.2,1100.2,1100.2,,145.45,8760,national area,unmatched_scope
+FI,onshore_wind,8658.3,8813.495919,8658.3,,7407.125,8760,national area,unmatched_scope
+FI,reservoir,1568.0,1568.0,1568.0,,,0,national area,unmatched_scope
+FI,ror,1201.6,1201.6,1201.6,,2349.95,8760,national area,unmatched_scope
+FI,solar,253.4,851.744894,253.4,,1053.715,8760,national area,unmatched_scope
+FI,waste,88.0,88.0,88.0,,70.2,8760,national area,unmatched_scope
+FR,biomass,481.239,481.239,481.239,,516.26,8754,national area,unmatched_scope
+FR,gas,10079.7,10079.7,10079.7,,8236.5575,8754,national area,unmatched_scope
+FR,geothermal,1.7,1.7,1.7,,,0,national area,unmatched_scope
+FR,hard_coal,1385.0,1385.0,1385.0,,704.5075,1033,national area,unmatched_scope
+FR,lignite,977.0,977.0,977.0,,,0,national area,unmatched_scope
+FR,nuclear,65690.0,46968.35,65690.0,,56127.255,8754,national area,unmatched_scope
+FR,offshore_wind,2025.0,1745.97496,2025.0,,1851.825,8649,national area,unmatched_scope
+FR,oil,1077.0,1077.0,1077.0,,1375.9625,8748,national area,unmatched_scope
+FR,onshore_wind,24236.0,23217.207522,24236.0,,18120.2125,8750,national area,unmatched_scope
+FR,reservoir,8422.989172,8422.989172,8422.989172,,5255.575,8754,national area,unmatched_scope
+FR,ror,7126.214118,7103.255484,7126.214118,,7458.135,8754,national area,unmatched_scope
+FR,solar,13238.81398,17991.945751,13238.81398,,19434.23,8754,national area,unmatched_scope
+FR,waste,208.5,208.5,208.5,,433.9825,8754,national area,unmatched_scope
+FR-COR,biomass,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+FR-COR,gas,133.0,133.0,133.0,,,0,unavailable,unmatched_scope
+FR-COR,geothermal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+FR-COR,hard_coal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+FR-COR,lignite,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+FR-COR,nuclear,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+FR-COR,offshore_wind,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+FR-COR,oil,231.0,231.0,231.0,,,0,unavailable,unmatched_scope
+FR-COR,onshore_wind,17.0,15.50811,17.0,,,0,unavailable,unmatched_scope
+FR-COR,reservoir,190.461783,190.461783,190.461783,,,0,unavailable,unmatched_scope
+FR-COR,ror,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+FR-COR,solar,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+FR-COR,waste,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+GB,biomass,4185.9,4185.9,4185.9,,,0,unavailable,unmatched_scope
+GB,gas,33564.2,33564.2,33564.2,,,0,unavailable,unmatched_scope
+GB,geothermal,2.0,2.0,2.0,,,0,unavailable,unmatched_scope
+GB,hard_coal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+GB,lignite,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+GB,nuclear,6534.0,4717.548,6534.0,,,0,unavailable,unmatched_scope
+GB,offshore_wind,22620.6,17101.027203,22620.6,,,0,unavailable,unmatched_scope
+GB,oil,392.7,392.7,392.7,,,0,unavailable,unmatched_scope
+GB,onshore_wind,15206.3,12913.039375,15206.3,,,0,unavailable,unmatched_scope
+GB,reservoir,386.9,386.9,386.9,,,0,unavailable,unmatched_scope
+GB,ror,3349.0,2073.765996,3349.0,,,0,unavailable,unmatched_scope
+GB,solar,13418.6,13286.812848,13418.6,,,0,unavailable,unmatched_scope
+GB,waste,1766.15,1766.15,1766.15,,,0,unavailable,unmatched_scope
+GR,biomass,0.0,0.0,0.0,,,0,national area,unmatched_scope
+GR,gas,8436.6,8436.6,8436.6,,5611.0,8760,national area,unmatched_scope
+GR,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+GR,hard_coal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+GR,lignite,1280.0,1280.0,1280.0,,1140.0,8760,national area,unmatched_scope
+GR,nuclear,0.0,0.0,0.0,,,0,national area,unmatched_scope
+GR,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+GR,oil,1262.0,1262.0,1262.0,,0.0,8760,national area,unmatched_scope
+GR,onshore_wind,6093.4,3545.082814,6093.4,,3567.0,8758,national area,unmatched_scope
+GR,reservoir,2582.0,2582.0,2582.0,,1942.0,8760,national area,unmatched_scope
+GR,ror,29.3,29.3,29.3,,,0,national area,unmatched_scope
+GR,solar,11358.7,6018.392832,11358.7,,6816.0,8758,national area,unmatched_scope
+GR,waste,0.0,0.0,0.0,,,0,national area,unmatched_scope
+HR,biomass,0.0,0.0,0.0,,81.2,8760,national area,unmatched_scope
+HR,gas,1005.8,1005.8,1005.8,,622.9,8760,national area,unmatched_scope
+HR,geothermal,36.1,36.1,36.1,,0.0,8617,national area,unmatched_scope
+HR,hard_coal,342.0,342.0,342.0,,206.4,8760,national area,unmatched_scope
+HR,lignite,0.0,0.0,0.0,,,0,national area,unmatched_scope
+HR,nuclear,0.0,0.0,0.0,,,0,national area,unmatched_scope
+HR,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+HR,oil,415.0,415.0,415.0,,27.8,8760,national area,unmatched_scope
+HR,onshore_wind,1140.0,993.323146,1140.0,,1116.8,8760,national area,unmatched_scope
+HR,reservoir,1407.404459,1407.404459,1407.404459,,1075.6,8760,national area,unmatched_scope
+HR,ror,375.76773,375.76773,375.76773,,354.6,8760,national area,unmatched_scope
+HR,solar,366.8,850.159003,366.8,,361.4,8760,national area,unmatched_scope
+HR,waste,0.0,0.0,0.0,,10.0,8760,national area,unmatched_scope
+HU,biomass,303.6,303.6,303.6,,238.2,8760,national area,unmatched_scope
+HU,gas,2573.5,2573.5,2573.5,,2344.2265,8759,national area,unmatched_scope
+HU,geothermal,3.4,3.4,3.4,,1.14,8760,national area,unmatched_scope
+HU,hard_coal,0.0,0.0,0.0,,42.795,8760,national area,unmatched_scope
+HU,lignite,1134.0,1134.0,1134.0,,445.86,8760,national area,unmatched_scope
+HU,nuclear,2027.0,1822.273,2027.0,,1957.84975,8760,national area,unmatched_scope
+HU,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+HU,oil,451.0,451.0,451.0,,449.4775,6592,national area,unmatched_scope
+HU,onshore_wind,319.0,301.401837,319.0,,281.945,8760,national area,unmatched_scope
+HU,reservoir,28.0,28.0,28.0,,26.91525,8759,national area,unmatched_scope
+HU,ror,17.9,17.9,17.9,,21.08125,8760,national area,unmatched_scope
+HU,solar,4064.9,5597.563475,4064.9,,4045.4325,8760,national area,unmatched_scope
+HU,waste,24.0,24.0,24.0,,22.595,8760,national area,unmatched_scope
+IE-SEM,biomass,54.2,54.2,54.2,,,0,unavailable,unmatched_scope
+IE-SEM,gas,6645.4,6645.4,6645.4,,,0,unavailable,unmatched_scope
+IE-SEM,geothermal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IE-SEM,hard_coal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IE-SEM,lignite,253.0,253.0,253.0,,,0,unavailable,unmatched_scope
+IE-SEM,nuclear,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IE-SEM,offshore_wind,25.0,24.716539,25.0,,,0,unavailable,unmatched_scope
+IE-SEM,oil,543.0,543.0,543.0,,,0,unavailable,unmatched_scope
+IE-SEM,onshore_wind,5794.3,6141.749858,5794.3,,,0,unavailable,unmatched_scope
+IE-SEM,reservoir,45.0,45.0,45.0,,,0,unavailable,unmatched_scope
+IE-SEM,ror,215.0,206.662211,215.0,,,0,unavailable,unmatched_scope
+IE-SEM,solar,1604.0,1069.286783,1604.0,,,0,unavailable,unmatched_scope
+IE-SEM,waste,85.0,85.0,85.0,,,0,unavailable,unmatched_scope
+IT-CALA,biomass,73.0,73.0,73.0,,,0,unavailable,unmatched_scope
+IT-CALA,gas,3499.0,3499.0,3499.0,,,0,unavailable,unmatched_scope
+IT-CALA,geothermal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-CALA,hard_coal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-CALA,lignite,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-CALA,nuclear,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-CALA,offshore_wind,8.823529,9.963141,8.823529,,,0,unavailable,unmatched_scope
+IT-CALA,oil,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-CALA,onshore_wind,1073.61517,1121.991861,1073.61517,,,0,unavailable,unmatched_scope
+IT-CALA,reservoir,262.843931,262.843931,262.843931,,,0,unavailable,unmatched_scope
+IT-CALA,ror,611.9,574.430752,611.9,,,0,unavailable,unmatched_scope
+IT-CALA,solar,377.009752,1617.662648,377.009752,,,0,unavailable,unmatched_scope
+IT-CALA,waste,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-CNOR,biomass,0.0,0.0,24.0,24.0,,8760,bidding zone,new_offer_required
+IT-CNOR,gas,2119.0,2119.0,2119.0,1066.5,,8760,bidding zone,no_new_power
+IT-CNOR,geothermal,227.984833,227.984833,632.0,632.0,,8760,bidding zone,existing_dispatchable_group
+IT-CNOR,hard_coal,0.0,0.0,175.0,175.0,,94,bidding zone,new_offer_required
+IT-CNOR,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-CNOR,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-CNOR,offshore_wind,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-CNOR,oil,100.0,100.0,175.0,175.0,,94,bidding zone,existing_dispatchable_group
+IT-CNOR,onshore_wind,162.479778,176.369185,162.479778,129.5,,8760,bidding zone,no_new_power
+IT-CNOR,reservoir,194.0,194.0,194.0,113.0,,8760,bidding zone,no_new_power
+IT-CNOR,ror,272.0,255.34428,348.0,348.0,,8760,bidding zone,hydro_power_only_water_unreconciled
+IT-CNOR,solar,522.229828,2249.275321,1450.75,1450.75,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+IT-CNOR,waste,21.182609,21.182609,21.182609,0.0,,69,bidding zone,no_new_power
+IT-CSUD,biomass,46.0,46.0,99.5,99.5,,8760,bidding zone,existing_dispatchable_group
+IT-CSUD,gas,7672.6,7672.6,7672.6,5352.0,,8760,bidding zone,no_new_power
+IT-CSUD,geothermal,524.232558,524.232558,524.232558,0.0,,2199,bidding zone,no_new_power
+IT-CSUD,hard_coal,0.0,0.0,387.0,387.0,,8760,bidding zone,new_offer_required
+IT-CSUD,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-CSUD,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-CSUD,offshore_wind,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-CSUD,oil,68.0,68.0,68.0,51.0,,8760,bidding zone,no_new_power
+IT-CSUD,onshore_wind,3705.573846,4041.760394,3705.573846,1816.0,,8746,bidding zone,no_new_power
+IT-CSUD,reservoir,339.46,339.46,339.46,42.0,,8760,bidding zone,no_new_power
+IT-CSUD,ror,1474.0,1383.740691,1474.0,593.5,,8760,bidding zone,no_new_power
+IT-CSUD,solar,2128.629592,9353.007031,3810.0,3810.0,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+IT-CSUD,waste,87.246377,87.246377,87.246377,26.0,,69,bidding zone,no_new_power
+IT-North,biomass,70.88,70.88,270.5,270.5,,8760,bidding zone,existing_dispatchable_group
+IT-North,gas,24786.1,24786.1,24786.1,17675.25,,8760,bidding zone,no_new_power
+IT-North,geothermal,81.782609,81.782609,81.782609,0.0,,2199,bidding zone,no_new_power
+IT-North,hard_coal,0.0,0.0,758.0,758.0,,8753,bidding zone,new_offer_required
+IT-North,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-North,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-North,offshore_wind,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-North,oil,51.0,51.0,51.0,27.0,,8760,bidding zone,no_new_power
+IT-North,onshore_wind,120.743478,96.16817,173.25,173.25,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+IT-North,reservoir,4257.588,4257.588,4257.588,1498.5,,8760,bidding zone,no_new_power
+IT-North,ror,5959.66,5594.724592,5959.66,5403.0,,8760,bidding zone,no_new_power
+IT-North,solar,1362.46087,5884.416602,7630.0,7630.0,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+IT-North,waste,247.417391,247.417391,247.417391,51.25,,69,bidding zone,no_new_power
+IT-SARD,biomass,22.8,22.8,91.0,91.0,,8760,bidding zone,existing_dispatchable_group
+IT-SARD,gas,736.0,736.0,1166.0,1166.0,,94,bidding zone,existing_dispatchable_group
+IT-SARD,geothermal,0.0,0.0,0.0,0.0,,2199,bidding zone,no_new_power
+IT-SARD,hard_coal,1230.0,1230.0,1230.0,715.5,,8760,bidding zone,no_new_power
+IT-SARD,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-SARD,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-SARD,offshore_wind,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-SARD,oil,357.0,357.0,357.0,74.0,,8759,bidding zone,no_new_power
+IT-SARD,onshore_wind,1185.0,1533.710042,1185.0,1000.5,,8760,bidding zone,no_new_power
+IT-SARD,reservoir,152.62,152.62,152.62,83.0,,8760,bidding zone,no_new_power
+IT-SARD,ror,20.0,18.775315,35.0,35.0,,8760,bidding zone,hydro_power_only_water_unreconciled
+IT-SARD,solar,587.6,2601.609217,1045.25,1045.25,,8616,bidding zone,weather_profile_scaled_by_demonstrated_power
+IT-SARD,waste,0.0,0.0,650.5,650.5,,94,bidding zone,new_offer_required
+IT-SICI,biomass,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-SICI,gas,3238.0,3238.0,3238.0,,,0,unavailable,unmatched_scope
+IT-SICI,geothermal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-SICI,hard_coal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-SICI,lignite,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-SICI,nuclear,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-SICI,offshore_wind,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-SICI,oil,255.0,255.0,255.0,,,0,unavailable,unmatched_scope
+IT-SICI,onshore_wind,1653.278947,2026.845266,1653.278947,,,0,unavailable,unmatched_scope
+IT-SICI,reservoir,83.2,83.2,83.2,,,0,unavailable,unmatched_scope
+IT-SICI,ror,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-SICI,solar,880.807895,3804.35624,880.807895,,,0,unavailable,unmatched_scope
+IT-SICI,waste,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+IT-SUD,biomass,66.2,66.2,276.5,276.5,,8760,bidding zone,existing_dispatchable_group
+IT-SUD,gas,5239.7,5239.7,5239.7,3559.5,,8760,bidding zone,no_new_power
+IT-SUD,geothermal,0.0,0.0,0.0,0.0,,2198,bidding zone,no_new_power
+IT-SUD,hard_coal,0.0,0.0,323.5,323.5,,8739,bidding zone,new_offer_required
+IT-SUD,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-SUD,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+IT-SUD,offshore_wind,21.176471,23.911538,30.0,30.0,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+IT-SUD,oil,280.0,280.0,280.0,9.0,,8760,bidding zone,no_new_power
+IT-SUD,onshore_wind,2441.808781,2861.232988,4329.0,4329.0,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+IT-SUD,reservoir,162.156069,162.156069,162.156069,115.5,,8760,bidding zone,no_new_power
+IT-SUD,ror,23.0,21.591612,55.25,55.25,,8760,bidding zone,hydro_power_only_water_unreconciled
+IT-SUD,solar,579.262063,2567.298773,2920.25,2920.25,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+IT-SUD,waste,20.253623,20.253623,20.253623,2.5,,69,bidding zone,no_new_power
+LT,biomass,80.0,80.0,80.0,,22.555,8760,national area,unmatched_scope
+LT,gas,1148.0,1148.0,1148.0,,735.4575,8760,national area,unmatched_scope
+LT,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LT,hard_coal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LT,lignite,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LT,nuclear,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LT,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LT,oil,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LT,onshore_wind,1493.0,2502.709399,1493.0,,1654.322737,8760,national area,unmatched_scope
+LT,reservoir,101.0,101.0,101.0,,,0,national area,unmatched_scope
+LT,ror,0.0,0.0,0.0,,99.336415,8760,national area,unmatched_scope
+LT,solar,870.2,1332.293204,870.2,,1420.52,8760,national area,unmatched_scope
+LT,waste,64.0,64.0,64.0,,117.535,8760,national area,unmatched_scope
+LV,biomass,23.0,23.0,23.0,,78.2,8760,national area,unmatched_scope
+LV,gas,1087.0,1087.0,1087.0,,867.61,8760,national area,unmatched_scope
+LV,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LV,hard_coal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LV,lignite,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LV,nuclear,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LV,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LV,oil,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LV,onshore_wind,100.0,132.425201,100.0,,117.13,8760,national area,unmatched_scope
+LV,reservoir,0.0,0.0,0.0,,,0,national area,unmatched_scope
+LV,ror,1536.0,732.77306,1536.0,,1003.04,8760,national area,unmatched_scope
+LV,solar,810.3,542.404203,810.3,,647.96,8760,national area,unmatched_scope
+LV,waste,0.0,0.0,0.0,,,0,national area,unmatched_scope
+ME,biomass,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+ME,gas,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+ME,geothermal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+ME,hard_coal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+ME,lignite,225.0,225.0,225.0,,,0,unavailable,unmatched_scope
+ME,nuclear,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+ME,offshore_wind,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+ME,oil,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+ME,onshore_wind,118.0,90.249227,118.0,,,0,unavailable,unmatched_scope
+ME,reservoir,342.0,342.0,342.0,,,0,unavailable,unmatched_scope
+ME,ror,5.36,5.36,5.36,,,0,unavailable,unmatched_scope
+ME,solar,26.1,21.387387,26.1,,,0,unavailable,unmatched_scope
+ME,waste,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+MK,biomass,0.0,0.0,0.0,,,0,national area,unmatched_scope
+MK,gas,220.0,220.0,220.0,,242.23,8616,national area,unmatched_scope
+MK,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+MK,hard_coal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+MK,lignite,824.0,824.0,824.0,,481.25,8616,national area,unmatched_scope
+MK,nuclear,0.0,0.0,0.0,,,0,national area,unmatched_scope
+MK,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+MK,oil,198.0,198.0,198.0,,0.0,8616,national area,unmatched_scope
+MK,onshore_wind,546.0,45.305834,546.0,,68.782,8616,national area,unmatched_scope
+MK,reservoir,371.0,371.0,371.0,,430.255,8616,national area,unmatched_scope
+MK,ror,207.6,207.6,207.6,,,0,national area,unmatched_scope
+MK,solar,558.9,748.948814,558.9,,,0,national area,unmatched_scope
+MK,waste,0.0,0.0,0.0,,,0,national area,unmatched_scope
+NL,biomass,877.0,877.0,877.0,,601.343,8760,national area,unmatched_scope
+NL,gas,14198.5,14198.5,14198.5,,11244.16425,8760,national area,unmatched_scope
+NL,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+NL,hard_coal,4706.0,4706.0,4706.0,,3949.8635,8760,national area,unmatched_scope
+NL,lignite,0.0,0.0,0.0,,,0,national area,unmatched_scope
+NL,nuclear,515.0,409.94,515.0,,490.4775,8760,national area,unmatched_scope
+NL,offshore_wind,7121.0,6474.993651,7121.0,,4522.8435,8760,national area,unmatched_scope
+NL,oil,0.0,0.0,0.0,,,0,national area,unmatched_scope
+NL,onshore_wind,4352.4,4464.952322,4352.4,,2470.63575,8760,national area,unmatched_scope
+NL,reservoir,0.0,0.0,0.0,,,0,national area,unmatched_scope
+NL,ror,0.0,0.0,0.0,,0.0,8760,national area,unmatched_scope
+NL,solar,7094.3,19058.204786,7094.3,,424.2845,8760,national area,unmatched_scope
+NL,waste,696.2,696.2,696.2,,410.36075,8760,national area,unmatched_scope
+NO1,biomass,0.0,0.0,0.0,0.3,,8760,bidding zone,no_new_power
+NO1,gas,0.0,0.0,0.0,0.44,,8760,bidding zone,no_new_power
+NO1,geothermal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO1,hard_coal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO1,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO1,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO1,offshore_wind,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO1,oil,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO1,onshore_wind,343.830986,340.041915,379.62,379.62,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+NO1,reservoir,2463.78,2463.78,2463.78,1262.811588,,8760,bidding zone,no_new_power
+NO1,ror,1489.0,1388.686268,2027.026108,2027.026108,,8760,bidding zone,hydro_power_only_water_unreconciled
+NO1,solar,8.23662,151.390905,8.23662,6.91,,8760,bidding zone,no_new_power
+NO1,waste,0.0,0.0,29.0925,29.0925,,8760,bidding zone,new_offer_required
+NO2,biomass,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO2,gas,0.0,0.0,22.02,22.02,,8760,bidding zone,new_offer_required
+NO2,geothermal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO2,hard_coal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO2,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO2,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO2,offshore_wind,69.0,61.0559,69.0,4.6,,3074,bidding zone,no_new_power
+NO2,oil,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO2,onshore_wind,1258.890141,1248.575421,1312.84,1312.84,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+NO2,reservoir,11326.99,11326.99,11326.99,8624.67,,8760,bidding zone,no_new_power
+NO2,ror,240.0,223.831232,1146.504337,1146.504337,,8760,bidding zone,hydro_power_only_water_unreconciled
+NO2,solar,11.533803,213.225605,11.533803,,,0,bidding zone,no_observation
+NO2,waste,0.0,0.0,18.825,18.825,,8760,bidding zone,new_offer_required
+NO3,biomass,0.0,0.0,0.0,0.0,,8760,bidding zone,no_new_power
+NO3,gas,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO3,geothermal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO3,hard_coal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO3,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO3,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO3,offshore_wind,18.264706,16.161856,18.264706,,,0,bidding zone,no_observation
+NO3,oil,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO3,onshore_wind,897.554466,891.001425,1746.11,1746.11,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+NO3,reservoir,4276.40962,4276.40962,4276.40962,3068.788201,,8760,bidding zone,no_new_power
+NO3,ror,80.0,74.610411,1043.775,1043.775,,8760,bidding zone,hydro_power_only_water_unreconciled
+NO3,solar,5.574219,102.293127,5.574219,0.0,,2330,bidding zone,no_new_power
+NO3,waste,0.0,0.0,6.34,6.34,,8760,bidding zone,new_offer_required
+NO4,biomass,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO4,gas,459.0,459.0,459.0,194.098815,,8760,bidding zone,no_new_power
+NO4,geothermal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO4,hard_coal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO4,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO4,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO4,offshore_wind,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO4,oil,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO4,onshore_wind,1600.88,1545.798518,1600.88,1039.405285,,8760,bidding zone,no_new_power
+NO4,reservoir,5159.31038,5159.31038,5159.31038,4265.04,,8760,bidding zone,no_new_power
+NO4,ror,214.0,199.582848,408.1275,408.1275,,8760,bidding zone,hydro_power_only_water_unreconciled
+NO4,solar,1.024,18.305187,1.024,,,0,bidding zone,no_observation
+NO4,waste,0.0,0.0,0.0,,,0,bidding zone,no_observation
+NO5,biomass,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+NO5,gas,294.0,294.0,294.0,,,0,unavailable,unmatched_scope
+NO5,geothermal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+NO5,hard_coal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+NO5,lignite,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+NO5,nuclear,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+NO5,offshore_wind,50.735294,44.894044,50.735294,,,0,unavailable,unmatched_scope
+NO5,oil,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+NO5,onshore_wind,915.244408,907.816558,915.244408,,,0,unavailable,unmatched_scope
+NO5,reservoir,7868.24,7868.24,7868.24,,,0,unavailable,unmatched_scope
+NO5,ror,60.0,55.957808,60.0,,,0,unavailable,unmatched_scope
+NO5,solar,8.231359,152.199898,8.231359,,,0,unavailable,unmatched_scope
+NO5,waste,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+PL,biomass,678.0,678.0,678.0,,451.066,8760,national area,unmatched_scope
+PL,gas,6702.0,6702.0,6702.0,,4574.14175,8760,national area,unmatched_scope
+PL,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+PL,hard_coal,13098.5,13098.5,13098.5,,12328.52725,8760,national area,unmatched_scope
+PL,lignite,8193.0,8193.0,8193.0,,6539.06225,8760,national area,unmatched_scope
+PL,nuclear,0.0,0.0,0.0,,,0,national area,unmatched_scope
+PL,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+PL,oil,0.0,392.535,0.0,,240.571,8760,national area,unmatched_scope
+PL,onshore_wind,9259.5,10256.761751,9259.5,,8897.3525,8760,national area,unmatched_scope
+PL,reservoir,163.506369,163.506369,163.506369,,325.21275,8760,national area,unmatched_scope
+PL,ror,182.400369,182.400369,182.400369,,199.441,8760,national area,unmatched_scope
+PL,solar,9313.3,13909.386463,9313.3,,13682.332,8760,national area,unmatched_scope
+PL,waste,16.0,16.0,16.0,,,0,national area,unmatched_scope
+PT,biomass,379.59,379.59,379.59,,379.8,8760,national area,unmatched_scope
+PT,gas,4186.0,4186.0,4186.0,,2852.7,8760,national area,unmatched_scope
+PT,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+PT,hard_coal,0.0,0.0,0.0,,0.0,8760,national area,unmatched_scope
+PT,lignite,0.0,0.0,0.0,,,0,national area,unmatched_scope
+PT,nuclear,0.0,0.0,0.0,,,0,national area,unmatched_scope
+PT,offshore_wind,25.0,21.983816,25.0,,25.0,8760,national area,unmatched_scope
+PT,oil,91.0,91.0,91.0,,,0,national area,unmatched_scope
+PT,onshore_wind,5619.0,5515.542739,5619.0,,5062.4,8760,national area,unmatched_scope
+PT,reservoir,1764.3,1764.3,1764.3,,1727.9,8760,national area,unmatched_scope
+PT,ror,2373.7,2373.7,2373.7,,2637.3,8760,national area,unmatched_scope
+PT,solar,3921.1,4844.108353,3921.1,,3297.0,8760,national area,unmatched_scope
+PT,waste,76.5,76.5,76.5,,,0,national area,unmatched_scope
+RO,biomass,30.0,30.0,30.0,,78.5,8758,national area,unmatched_scope
+RO,gas,3679.8,3679.8,3679.8,,1831.25,8758,national area,unmatched_scope
+RO,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+RO,hard_coal,260.0,260.0,260.0,,105.5,8758,national area,unmatched_scope
+RO,lignite,4130.0,4130.0,4130.0,,1394.75,8758,national area,unmatched_scope
+RO,nuclear,1411.0,1241.68,1411.0,,1299.0,8758,national area,unmatched_scope
+RO,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+RO,oil,100.0,100.0,100.0,,,0,national area,unmatched_scope
+RO,onshore_wind,5723.2,2551.236232,5723.2,,2716.25,8759,national area,unmatched_scope
+RO,reservoir,3571.94,3571.94,3571.94,,1831.75,8758,national area,unmatched_scope
+RO,ror,3990.45,3725.582968,3990.45,,2087.25,8758,national area,unmatched_scope
+RO,solar,4237.9,3527.145085,4237.9,,1830.25,8759,national area,unmatched_scope
+RO,waste,0.0,0.0,0.0,,,0,national area,unmatched_scope
+RS,biomass,7.2,7.2,7.2,,41.0,8736,national area,unmatched_scope
+RS,gas,594.0,594.0,594.0,,371.0,8760,national area,unmatched_scope
+RS,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+RS,hard_coal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+RS,lignite,4817.0,4817.0,4817.0,,3559.0,8760,national area,unmatched_scope
+RS,nuclear,0.0,0.0,0.0,,,0,national area,unmatched_scope
+RS,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+RS,oil,0.0,0.0,0.0,,,0,national area,unmatched_scope
+RS,onshore_wind,670.1,610.738943,670.1,,553.64,8760,national area,unmatched_scope
+RS,reservoir,1509.3,1509.3,1509.3,,331.0,8760,national area,unmatched_scope
+RS,ror,341.0,341.0,341.0,,1995.0,8760,national area,unmatched_scope
+RS,solar,181.0,272.481582,181.0,,,0,national area,unmatched_scope
+RS,waste,30.0,30.0,30.0,,,0,national area,unmatched_scope
+SE1,biomass,88.0,88.0,88.0,,,0,bidding zone,no_observation
+SE1,gas,100.0,100.0,100.0,,,0,bidding zone,no_observation
+SE1,geothermal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE1,hard_coal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE1,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE1,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE1,offshore_wind,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE1,oil,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE1,onshore_wind,3898.62,3880.992014,3898.62,2728.74975,,8760,bidding zone,no_new_power
+SE1,reservoir,4932.039596,4932.039596,4932.039596,4564.9,,8760,bidding zone,no_new_power
+SE1,ror,140.0,140.0,140.0,,,0,bidding zone,no_observation
+SE1,solar,1.08,5.748256,11.85,11.85,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+SE1,waste,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE2,biomass,538.8,538.8,538.8,,,0,bidding zone,no_observation
+SE2,gas,0.0,0.0,0.0,0.17,,8760,bidding zone,no_new_power
+SE2,geothermal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE2,hard_coal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE2,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE2,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE2,offshore_wind,1.28,1.129264,1.28,,,0,bidding zone,no_observation
+SE2,oil,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE2,onshore_wind,7572.718667,7531.80988,7572.718667,5967.64425,,8760,bidding zone,no_new_power
+SE2,reservoir,5957.784555,5957.784555,6650.61,6650.61,,8760,bidding zone,hydro_power_only_water_unreconciled
+SE2,ror,1756.0,1756.0,1756.0,,,0,bidding zone,no_observation
+SE2,solar,12.338087,63.090895,69.61,69.61,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+SE2,waste,86.226087,86.226087,86.226087,,,0,bidding zone,no_observation
+SE3,biomass,2265.7,2265.7,2265.7,,,0,bidding zone,no_observation
+SE3,gas,250.0,250.0,250.0,44.2,,8760,bidding zone,no_new_power
+SE3,geothermal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE3,hard_coal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE3,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE3,nuclear,7184.0,5833.408,7184.0,7039.0,,8760,bidding zone,no_new_power
+SE3,offshore_wind,61.386667,54.156906,61.386667,,,0,bidding zone,no_observation
+SE3,oil,1999.0,1999.0,1999.0,,,0,bidding zone,no_observation
+SE3,onshore_wind,4029.054667,3960.681174,4029.054667,3655.11875,,8760,bidding zone,no_new_power
+SE3,reservoir,1291.238172,1291.238172,2017.78,2017.78,,8760,bidding zone,hydro_power_only_water_unreconciled
+SE3,ror,327.0,327.0,327.0,,,0,bidding zone,no_observation
+SE3,solar,415.475826,2127.923325,1200.34,1200.34,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+SE3,waste,315.861159,315.861159,315.861159,,,0,bidding zone,no_observation
+SE4,biomass,293.1,293.1,293.1,,,0,bidding zone,no_observation
+SE4,gas,440.0,440.0,440.0,143.6,,8760,bidding zone,no_new_power
+SE4,geothermal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE4,hard_coal,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE4,lignite,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE4,nuclear,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE4,offshore_wind,95.333333,84.106465,95.333333,,,0,bidding zone,no_observation
+SE4,oil,1110.0,1110.0,1110.0,,,0,bidding zone,no_observation
+SE4,onshore_wind,1784.406667,1763.194763,1952.53,1952.53,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+SE4,reservoir,123.3,123.3,298.1,298.1,,8760,bidding zone,hydro_power_only_water_unreconciled
+SE4,ror,0.0,0.0,0.0,,,0,bidding zone,no_observation
+SE4,solar,252.206087,1273.98786,856.54,856.54,,8760,bidding zone,weather_profile_scaled_by_demonstrated_power
+SE4,waste,50.012754,50.012754,50.012754,,,0,bidding zone,no_observation
+SI,biomass,0.0,0.0,0.0,,40.95,8758,national area,unmatched_scope
+SI,gas,198.0,198.0,198.0,,381.26,8758,national area,unmatched_scope
+SI,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+SI,hard_coal,124.0,124.0,124.0,,,0,national area,unmatched_scope
+SI,lignite,1355.0,1355.0,1355.0,,560.47,8758,national area,unmatched_scope
+SI,nuclear,727.0,658.662,727.0,,705.79,8758,national area,unmatched_scope
+SI,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+SI,oil,0.0,58.0,0.0,,46.49,8758,national area,unmatched_scope
+SI,onshore_wind,0.0,0.0,0.0,,4.23,8758,national area,unmatched_scope
+SI,reservoir,257.2,257.2,257.2,,,0,national area,unmatched_scope
+SI,ror,808.415,808.415,808.415,,995.85,8758,national area,unmatched_scope
+SI,solar,90.6,909.609619,90.6,,910.02,8758,national area,unmatched_scope
+SI,waste,0.0,0.0,0.0,,7.42,8758,national area,unmatched_scope
+SK,biomass,0.0,0.0,0.0,,139.3,8758,national area,unmatched_scope
+SK,gas,1076.0,1076.0,1076.0,,810.0,8758,national area,unmatched_scope
+SK,geothermal,0.0,0.0,0.0,,,0,national area,unmatched_scope
+SK,hard_coal,208.0,208.0,208.0,,0.0,8758,national area,unmatched_scope
+SK,lignite,0.0,0.0,0.0,,42.7,8758,national area,unmatched_scope
+SK,nuclear,2942.0,2536.004,2942.0,,2477.7,8758,national area,unmatched_scope
+SK,offshore_wind,0.0,0.0,0.0,,,0,national area,unmatched_scope
+SK,oil,0.0,259.0,0.0,,159.8,8758,national area,unmatched_scope
+SK,onshore_wind,0.0,0.0,0.0,,2.4,8759,national area,unmatched_scope
+SK,reservoir,125.4,125.4,125.4,,231.7,8758,national area,unmatched_scope
+SK,ror,1326.11,1180.415523,1326.11,,906.0,8758,national area,unmatched_scope
+SK,solar,894.3,384.062683,894.3,,382.7,8759,national area,unmatched_scope
+SK,waste,0.0,0.0,0.0,,,0,national area,unmatched_scope
+XK,biomass,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+XK,gas,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+XK,geothermal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+XK,hard_coal,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+XK,lignite,1480.0,1480.0,1480.0,,,0,unavailable,unmatched_scope
+XK,nuclear,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+XK,offshore_wind,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+XK,oil,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
+XK,onshore_wind,135.0,80.15076,135.0,,,0,unavailable,unmatched_scope
+XK,reservoir,35.0,35.0,35.0,,,0,unavailable,unmatched_scope
+XK,ror,30.2,30.2,30.2,,,0,unavailable,unmatched_scope
+XK,solar,20.4,16.700236,20.4,,,0,unavailable,unmatched_scope
+XK,waste,0.0,0.0,0.0,,,0,unavailable,unmatched_scope
