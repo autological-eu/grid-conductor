@@ -10,8 +10,12 @@ This is a versioned successor to the retained `mixed_curve_fitting` research cal
 | Network and capacity | `network.py` | Compile all 95 independent transport corridor bounds from the retained native grid. The accepted 311-row PTDF matrix is loaded separately for the final LP. |
 | Fast fitting | `transport.py`, `recovery.py`, `roots.py`, `fit.py`, `run_fit.py` | The same smoothed transport clearing, certified Newton roots, price-conditioned root selection, exact gradient, and monthly 20-update Adam protocol at rate 1.0. Each zone/technology has 24 local-hour six-node price curves per month. |
 | Joint LP and checks | `evaluation.py`, `lp.py`, `run_lp.py`, `verify.py` | Transfer monthly curves to the original 799 offer columns, then reclear all 8,760 UTC hours with unchanged link, island, PTDF, demand, and primal gates. `verify.py` is test-only. |
+| Scenario replay | `scenario.py`, `metrics.py`, `run_scenario.py` | Declared deltas on the accepted LP: added generator offer columns and scaled commercial-link envelopes, replayed for 8,760 hours with paired model-welfare and investor-income accounting. |
 
-Eleven active project modules implement the computation, including `__init__.py`, `run_fit.py`, and `run_lp.py`; `verify.py` is a separate test module. The original `tools/` producers and their bytes remain for source-hash replay. This is a computation refactor, not a source-data regeneration or a different market design.
+Fourteen active project modules implement the computation, including `__init__.py`,
+`run_fit.py` and `run_lp.py`; `verify.py` is a separate test module. The original
+`tools/` producers and their bytes remain for source-hash replay. This is a
+computation refactor, not a source-data regeneration or a different market design.
 
 Run from the repository root with the pinned scientific interpreter:
 
@@ -28,3 +32,30 @@ For a fresh monthly fit, inspect running jobs and use `python -m baselines.compa
 After twelve fresh monthly fits pass their audits, `python -m baselines.compact.run_lp data/eu-market/flow-adjusted-clearing-2025/compact-fit-v1` evaluates their curves in one chronological annual LP pass. It writes a separate ignored candidate witness and does not change `config/active-research-baseline.json`.
 
 The fast fit selects among certified price roots using observed same-month prices. Its training MAE is optimistic, and matching the retained LP numerics is not independent market validation. Independent month transfer, scenario response, storage chronology, and public app integration remain open gates.
+
+## Declared investment-response scenarios
+
+`run_scenario.py` replays the accepted LP with one frozen delta at a time. It
+does not change the active pointer, the retained witness or the fitted curves.
+
+- `python -m baselines.compact.run_scenario candidates` ranks commercial links by
+  baseline congestion rent and PTDF rows by their shadow-price rent proxy. No
+  re-solve.
+- `python -m baselines.compact.run_scenario plan` writes the declared pilot
+  matrix: zero delta, solar and wind generator ladders of 500/1000/2000 MW in the
+  highest-availability zone, and a 1.25/1.5/2.0 capacity ladder on the
+  highest-rent link with its observed envelope released.
+- `python -m baselines.compact.run_scenario run` clears each scenario for 8,760
+  hours behind the accepted gates: baseline witness reproduction on sampled
+  hours, 8,760 optimal hours, zero emergency dispatch and the unchanged primal
+  residual tolerance. A zero-delta scenario must reproduce the witness within
+  the same tolerances or the run fails.
+- `python -m baselines.compact.run_scenario report` aggregates the passed
+  summaries as a markdown table on stdout.
+
+A new generator is one extra zero- or fixed-bid offer column whose hourly
+availability follows its zone-technology fitted shape at declared nameplate. A
+link upgrade scales one commercial-exchange envelope; releasing it to a capacity
+band is declared in the scenario entry. PTDF branch ratings are not modified
+because the retained inputs carry no row-to-branch mapping. Outputs stay under
+ignored `data/bidding-zone-network-2025/compact-scenarios-v1/`.

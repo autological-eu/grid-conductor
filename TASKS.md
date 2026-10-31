@@ -12,6 +12,7 @@
 
 ## Open acceptance work
 
+- [ ] Run the declared investment-response pilot (`baselines/compact/run_scenario.py`, protocol in `research/investment-response-pilot.md`): zero-delta equivalence, solar and wind generator ladders, and one released commercial-link ladder, each with paired model-welfare and investor-income accounting. Code, gates and tests are in place; the retained `data/` witnesses and the pinned scientific interpreter are required to execute it.
 - [ ] Verify that the current research baseline can reclear changed transmission, generation and storage assets with valid network, storage, chronology and no-emergency constraints. The public browser still uses a separate two-zone model; do not claim app support yet.
 - [ ] Diagnose Nordic hydro/source adequacy and price error, CZ and Italian regressions, November/December regressions, root-selection sensitivity and mixed-offer technology attribution. Reconcile against source-covered observed generation and prices.
 - [ ] Test independent time transfer and scenario-response validity before interpreting calibrated 2025 fit as forward skill or investment value. Preserve fixed-hydro limitations and original renewable availability.
