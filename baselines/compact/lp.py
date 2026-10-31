@@ -5,6 +5,17 @@ import highspy
 import numpy as np
 
 
+def ratings_at(model, hour):
+    """Select static accepted or hourly source-backed candidate branch ratings."""
+    ratings = model['ratings']
+    if ratings.ndim == 1:
+        return ratings
+    if ratings.ndim == 2 and ratings.shape == (len(model['availability']),
+                                               model['A'].shape[0] - model['nz'] - len(model['islands'])):
+        return ratings[hour]
+    raise ValueError('Invalid physical branch rating chronology')
+
+
 def solver(model, costs):
     """Build the same 799-offer, link, and free zonal-injection LP."""
     A = model['A']
@@ -19,8 +30,8 @@ def solver(model, costs):
     lp.col_cost_ = np.r_[costs[0], np.zeros(nl + nz)]
     lp.col_lower_ = np.r_[np.zeros(ng), model['link_min'][0], np.full(nz, -np.inf)]
     lp.col_upper_ = np.r_[model['availability'][0], model['link_max'][0], np.full(nz, np.inf)]
-    lp.row_lower_ = np.r_[model['load'][0], model['island_rhs'][0], -model['ratings'] - model['flow'][0]]
-    lp.row_upper_ = np.r_[model['load'][0], model['island_rhs'][0], model['ratings'] - model['flow'][0]]
+    lp.row_lower_ = np.r_[model['load'][0], model['island_rhs'][0], -ratings_at(model, 0) - model['flow'][0]]
+    lp.row_upper_ = np.r_[model['load'][0], model['island_rhs'][0], ratings_at(model, 0) - model['flow'][0]]
     lp.a_matrix_.format_ = highspy.MatrixFormat.kColwise
     lp.a_matrix_.start_, lp.a_matrix_.index_, lp.a_matrix_.value_ = A.indptr, A.indices, A.data
     highs.passModel(lp)
@@ -36,9 +47,9 @@ def clear_hour(highs, model, costs, hour):
     highs.changeColsBounds(len(columns), columns, lower, upper)
     highs.changeColsCost(ng, np.arange(ng, dtype=np.int32), costs[hour])
     row_lower = np.r_[model['load'][hour], model['island_rhs'][hour],
-                      -model['ratings'] - model['flow'][hour]]
+                      -ratings_at(model, hour) - model['flow'][hour]]
     row_upper = np.r_[model['load'][hour], model['island_rhs'][hour],
-                      model['ratings'] - model['flow'][hour]]
+                      ratings_at(model, hour) - model['flow'][hour]]
     rows = np.arange(len(row_lower), dtype=np.int32)
     highs.changeRowsBounds(len(rows), rows, row_lower, row_upper)
     highs.setOptionValue('time_limit', highs.getRunTime() + 10.0)

@@ -6,7 +6,7 @@ import json
 import numpy as np
 from scipy.sparse import load_npz
 
-from .source import ROOT
+from .source import ROOT, digest
 
 ANCHOR = ROOT / 'data/bidding-zone-network-2025/annual-solar-alignment-v1'
 SOLAR = ROOT / 'data/bidding-zone-network-2025/solar-country-fit-v1/delta.npz'
@@ -33,6 +33,27 @@ def physical_lp():
                  zones=metadata['zones'], islands=[None] * metadata['islands'], flow=source['flow'])
     if model['ng'] != 799 or model['A'].shape != (311, 884):
         raise ValueError('Changed accepted LP dimensions')
+    return model
+
+
+def a11_component_lp():
+    """Load the separate dated A11 component candidate; do not alter baseline."""
+    model = physical_lp()
+    folder = ROOT / 'data/bidding-zone-network-2025/a11-component-network-v1'
+    summary = json.loads((ROOT / 'research/data/a11-component-network-2025.json').read_text())
+    if summary['status'] != 'complete_19_gap_component_level_candidate_not_baseline':
+        raise ValueError('Unrecognized A11 component network candidate')
+    if digest(folder / 'inputs.npz') != summary['input_sha256']:
+        raise ValueError('A11 component input hash changed')
+    with np.load(folder / 'inputs.npz') as archive:
+        ratings = archive['ratings_mw'].copy()
+        link_min = archive['link_min_mw'].copy()
+        link_max = archive['link_max_mw'].copy()
+    if ratings.shape != (8760, len(model['ratings'])) or link_min.shape != model['link_min'].shape or link_max.shape != model['link_max'].shape:
+        raise ValueError('A11 component network dimensions changed')
+    if np.any(ratings < model['ratings'][None, :] - 1e-6) or np.any(link_min > model['link_min'] + 1e-6) or np.any(link_max < model['link_max'] - 1e-6):
+        raise ValueError('A11 component candidate narrowed original source limits')
+    model.update(ratings=ratings, link_min=link_min, link_max=link_max)
     return model
 
 

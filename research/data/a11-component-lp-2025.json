@@ -1,0 +1,269 @@
+{
+  "status": "full_year_frozen_bid_A11_component_network_candidate_not_baseline",
+  "hours": 8760,
+  "source_network_audit_sha256": "d3e385d60afcb59346bd9f625f712ba0027d5703cdf5cddcad824eaa09c33fae",
+  "source_costs_sha256": "138a8e31af0a35e72f35cdb6c0ab9a75236f42e5e22800bce2b88d7d8f932f31",
+  "annual_witness_sha256": "1257be8cbed4a7746a75ee3513fca613f690563a41e4b2766e2a06f9d8e49773",
+  "solve_seconds": 31.970367694999993,
+  "maximum_primal_residual_mw": 1.6295780369546264e-07,
+  "emergency_mwh": 0.0,
+  "baseline_price_mae_eur_mwh": 25.051056742655632,
+  "candidate_price_mae_eur_mwh": 24.830899702958117,
+  "objective_reduction_eur": 505128215.22281265,
+  "zonal_prices": [
+    {
+      "zone": "AL",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 28.9967204341613,
+      "candidate_price_mae_eur_mwh": 29.01511493107526
+    },
+    {
+      "zone": "AT",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 16.54909688614814,
+      "candidate_price_mae_eur_mwh": 16.593602353758452
+    },
+    {
+      "zone": "BE",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 18.191342842511595,
+      "candidate_price_mae_eur_mwh": 18.40744656242409
+    },
+    {
+      "zone": "BG",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 19.56540644506296,
+      "candidate_price_mae_eur_mwh": 19.43541799187346
+    },
+    {
+      "zone": "CH",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 18.995253195054136,
+      "candidate_price_mae_eur_mwh": 19.050172843184118
+    },
+    {
+      "zone": "CZ",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 28.346955349879632,
+      "candidate_price_mae_eur_mwh": 28.337091867652465
+    },
+    {
+      "zone": "DE-LU",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 15.977468176636314,
+      "candidate_price_mae_eur_mwh": 16.09863969032678
+    },
+    {
+      "zone": "DK1",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 16.57938415137785,
+      "candidate_price_mae_eur_mwh": 16.645723736465452
+    },
+    {
+      "zone": "EE",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 39.819804193134466,
+      "candidate_price_mae_eur_mwh": 39.53150624646036
+    },
+    {
+      "zone": "ES",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 18.175059840606014,
+      "candidate_price_mae_eur_mwh": 17.5501898147086
+    },
+    {
+      "zone": "FR",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 23.384993374858333,
+      "candidate_price_mae_eur_mwh": 22.651555493107093
+    },
+    {
+      "zone": "GR",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 21.251767959623656,
+      "candidate_price_mae_eur_mwh": 21.101253570192405
+    },
+    {
+      "zone": "HR",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 17.479372169897122,
+      "candidate_price_mae_eur_mwh": 17.45980341698066
+    },
+    {
+      "zone": "HU",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 18.378908781398966,
+      "candidate_price_mae_eur_mwh": 18.278420394059737
+    },
+    {
+      "zone": "IT-CNOR",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 18.394861555546324,
+      "candidate_price_mae_eur_mwh": 18.103391599197476
+    },
+    {
+      "zone": "IT-CSUD",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 19.07162286966983,
+      "candidate_price_mae_eur_mwh": 18.879575855127396
+    },
+    {
+      "zone": "IT-North",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 18.995013627834187,
+      "candidate_price_mae_eur_mwh": 18.095153690109136
+    },
+    {
+      "zone": "IT-SICI",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 20.242885501326487,
+      "candidate_price_mae_eur_mwh": 20.099387032400507
+    },
+    {
+      "zone": "IT-SUD",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 18.772590575209108,
+      "candidate_price_mae_eur_mwh": 18.562871154765894
+    },
+    {
+      "zone": "LT",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 35.763670495567396,
+      "candidate_price_mae_eur_mwh": 35.53636433810993
+    },
+    {
+      "zone": "LV",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 35.997516871121256,
+      "candidate_price_mae_eur_mwh": 35.78163991683801
+    },
+    {
+      "zone": "MK",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 18.175124121343234,
+      "candidate_price_mae_eur_mwh": 18.115157317370382
+    },
+    {
+      "zone": "NL",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 17.109712864519743,
+      "candidate_price_mae_eur_mwh": 17.219733691722375
+    },
+    {
+      "zone": "PL",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 20.426628724655036,
+      "candidate_price_mae_eur_mwh": 20.63833996274016
+    },
+    {
+      "zone": "PT",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 18.629076577376157,
+      "candidate_price_mae_eur_mwh": 18.065396059384703
+    },
+    {
+      "zone": "RO",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 18.805045544982953,
+      "candidate_price_mae_eur_mwh": 18.69382353418276
+    },
+    {
+      "zone": "RS",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 16.824036736846274,
+      "candidate_price_mae_eur_mwh": 16.786267916895852
+    },
+    {
+      "zone": "SI",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 19.060298206490067,
+      "candidate_price_mae_eur_mwh": 19.17505720531145
+    },
+    {
+      "zone": "SK",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 19.0159839545209,
+      "candidate_price_mae_eur_mwh": 18.948025174372667
+    },
+    {
+      "zone": "DK2",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 41.72793681422913,
+      "candidate_price_mae_eur_mwh": 37.043391980987266
+    },
+    {
+      "zone": "FI",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 37.80100525458908,
+      "candidate_price_mae_eur_mwh": 38.12361205750077
+    },
+    {
+      "zone": "NO1",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 36.6105433733242,
+      "candidate_price_mae_eur_mwh": 36.29979044648956
+    },
+    {
+      "zone": "NO2",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 40.4182198400004,
+      "candidate_price_mae_eur_mwh": 39.757305729611936
+    },
+    {
+      "zone": "NO3",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 31.483448443127585,
+      "candidate_price_mae_eur_mwh": 32.00425330677343
+    },
+    {
+      "zone": "NO4",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 35.10680792889324,
+      "candidate_price_mae_eur_mwh": 35.93168618714779
+    },
+    {
+      "zone": "NO5",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 33.632013077907146,
+      "candidate_price_mae_eur_mwh": 32.02739702180264
+    },
+    {
+      "zone": "SE1",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 34.07754653949547,
+      "candidate_price_mae_eur_mwh": 34.854332014809884
+    },
+    {
+      "zone": "SE2",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 35.63385509410182,
+      "candidate_price_mae_eur_mwh": 36.5313555337945
+    },
+    {
+      "zone": "SE3",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 28.908440058511,
+      "candidate_price_mae_eur_mwh": 28.814828457280594
+    },
+    {
+      "zone": "SE4",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 32.61417921683143,
+      "candidate_price_mae_eur_mwh": 31.911159764788568
+    },
+    {
+      "zone": "IT-SARD",
+      "hours": 8760,
+      "baseline_price_mae_eur_mwh": 22.103728780511194,
+      "candidate_price_mae_eur_mwh": 21.911651959498403
+    }
+  ],
+  "limitations": [
+    "Frozen bids from accepted 2025 same-month fit; no bid recalibration",
+    "A11-driven component bounds are dated effective candidates, not certified asset ratings",
+    "HVDC uplift can proxy a missing parallel circuit at inherited endpoints",
+    "AC PTDF topology/impedance and hydro schedule unchanged",
+    "Source A11 physical flow and A09 commercial schedule are not LP clearing constraints",
+    "No scenario-response or forward validation; accepted baseline unchanged"
+  ]
+}

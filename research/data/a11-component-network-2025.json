@@ -1,0 +1,22 @@
+{
+  "status": "complete_19_gap_component_level_candidate_not_baseline",
+  "hours": 8760,
+  "reviewed_edges": 95,
+  "ac_edges_revised": 3,
+  "hvdc_edges_revised": 16,
+  "source_sha256": {
+    "native": "69e42301474f950c46e0d57d62685c29f8b7303b32a4fcc15e1d0464c378b855",
+    "original_branch_catalogue": "65ca0ba4e07d7ea52a1a4c3a76906f58d8b4de0ee1893f6f369ebe6c7b32d1de",
+    "a11_edge_witness": "57896c81b1b39bb1eab8639b28d051d46352be6f717ce3ad503dd6a683cc56ca",
+    "jao_endpoint_crosswalk": "c6e77132ec2879908a9409dcac70def156faedc16eaf3349045417e0014f2512"
+  },
+  "input_sha256": "0f3a9fedcd5cb7cc54bbf224cb46c4dd271cf99b8a78b85eca8f11ad1358f469",
+  "review_csv_sha256": "7b837316002d2fed4d5eba0a8fb926f64d80f4ed6383479205a62203a0c16a2b",
+  "limitations": [
+    "A11 demonstrates realized border flow, not firm transfer capacity",
+    "HVDC effective uplift may aggregate missing parallel equipment into an inherited link",
+    "AC PTDF coefficients, topology, impedance and hydro schedule are unchanged",
+    "JAO CNECs corroborate endpoints only; flow-based market domain remains unmapped",
+    "No acceptance or scenario-response gate passed"
+  ]
+}

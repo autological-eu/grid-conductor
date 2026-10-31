@@ -1,0 +1,14 @@
+{
+  "status": "full_year_primal_dual_replay_passed",
+  "hours": 8760,
+  "annual_witness_sha256": "1257be8cbed4a7746a75ee3513fca613f690563a41e4b2766e2a06f9d8e49773",
+  "numerical": {
+    "primal_residual_mw": 1.6295780369546264e-07,
+    "objective_residual_eur": 1.862645149230957e-08,
+    "stationarity_maximum_eur_mwh": 0.0,
+    "free_injection_reduced_cost_maximum": 1.1210053286820787e-09,
+    "complementarity_maximum_eur": 2.4690187718199033e-05,
+    "duality_gap_maximum_eur": 5.193054676055908e-06,
+    "price_decomposition_maximum_eur_mwh": 1.1210053286820789e-09
+  }
+}
