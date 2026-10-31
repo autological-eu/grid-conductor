@@ -24,7 +24,12 @@ def exact_hourly_schedule(water, turbine, signal, alpha=.05):
     p=water['power'].reshape(365,24)
     daily=p.sum(axis=1)
     peak=np.max(p,axis=1)
-    scale=np.divide(turbine,peak,out=np.ones(365),where=peak>1e-9)
+    if np.ndim(turbine)==0:
+        turbine_hour=np.full((365,24),float(turbine))
+    else:
+        turbine_hour=np.asarray(turbine,dtype=float).reshape(365,24)
+    scale=np.min(np.where(p>1e-9,turbine_hour/np.maximum(p,1e-9),np.inf),axis=1)
+    scale=np.where(daily>1e-9,scale,1.)
     lo=-alpha*daily
     hi=np.minimum(alpha*daily,(scale-1)*daily)
     hi=np.maximum(hi,0.)

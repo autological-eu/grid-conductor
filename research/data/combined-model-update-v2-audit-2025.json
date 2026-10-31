@@ -1,0 +1,91 @@
+{
+  "status": "combined_annual_primal_dual_water_generation_replay_passed",
+  "hours": 8760,
+  "witness_sha256": "9963f38f2ac333acf3042dd52512f9003d408685c2df8abeae17acd8db9598c2",
+  "numerical": {
+    "primal_residual_mw": 3.7565721413557185e-06,
+    "objective_residual_eur": 1.862645149230957e-08,
+    "stationarity_maximum_eur_mwh": 0.0,
+    "free_injection_reduced_cost_maximum": 1.6023662396946747e-09,
+    "complementarity_maximum_eur": 0.0006504350332204561,
+    "duality_gap_maximum_eur": 3.6209821701049805e-06,
+    "price_decomposition_maximum_eur_mwh": 1.6023662396946747e-09
+  },
+  "water_replay_maximum_mwh": 0.0,
+  "generation": {
+    "baseline": {
+      "covered_cells": 1835997,
+      "hourly_generation_mae_gw": 0.552867044912409,
+      "mix_share_mae": 0.06316183537508618
+    },
+    "combined": {
+      "covered_cells": 1835997,
+      "hourly_generation_mae_gw": 0.5528671099699164,
+      "mix_share_mae": 0.06307261098150589
+    }
+  },
+  "zonal_hydro_a75": {
+    "SE2": {
+      "hours": 8760,
+      "observed_twh": 37.34820917125,
+      "baseline_twh": 24.27453961607256,
+      "candidate_twh": 24.27453961607256,
+      "baseline_hourly_mae_gw": 2.2007867682272946,
+      "candidate_hourly_mae_gw": 2.1926019426618186
+    },
+    "SE3": {
+      "hours": 8760,
+      "observed_twh": 10.395733176750001,
+      "baseline_twh": 5.264006658936223,
+      "candidate_twh": 5.264006658936223,
+      "baseline_hourly_mae_gw": 0.7456628233987525,
+      "candidate_hourly_mae_gw": 0.7440275750661566
+    },
+    "SE4": {
+      "hours": 8760,
+      "observed_twh": 0.9225242302499999,
+      "baseline_twh": 0.5025204458832735,
+      "candidate_twh": 0.5025204458832735,
+      "baseline_hourly_mae_gw": 0.08605343687452086,
+      "candidate_hourly_mae_gw": 0.08580782112356974
+    },
+    "NO1": {
+      "hours": 8760,
+      "observed_twh": 5.43660007081775,
+      "baseline_twh": 11.030612964278184,
+      "candidate_twh": 11.030612964278184,
+      "baseline_hourly_mae_gw": 0.7208502312530891,
+      "candidate_hourly_mae_gw": 0.7162780652796823
+    },
+    "NO2": {
+      "hours": 8760,
+      "observed_twh": 42.511518471741496,
+      "baseline_twh": 50.712175088786076,
+      "candidate_twh": 50.712175088786076,
+      "baseline_hourly_mae_gw": 2.1989921006192485,
+      "candidate_hourly_mae_gw": 2.1458079158117886
+    },
+    "NO3": {
+      "hours": 8760,
+      "observed_twh": 16.485644278585248,
+      "baseline_twh": 19.145954346131052,
+      "candidate_twh": 19.145954346131052,
+      "baseline_hourly_mae_gw": 0.9023174294444348,
+      "candidate_hourly_mae_gw": 0.888216769147134
+    },
+    "NO4": {
+      "hours": 8760,
+      "observed_twh": 20.548501397071,
+      "baseline_twh": 23.098797766191858,
+      "candidate_twh": 23.098797766191858,
+      "baseline_hourly_mae_gw": 1.0491159775630068,
+      "candidate_hourly_mae_gw": 1.0321987079919097
+    }
+  },
+  "hydro_a75_source_collection_sha256": "9951ed5480a3c6619ca9a8f5911f00069408292989a639572d5ec1e4755f00cc",
+  "limitations": [
+    "Mixed renewable offer dispatch is allocated illustratively by member availability",
+    "Source-covered country/technology generation score is in-sample and excludes unreported cells",
+    "A09 commercial exchange and scenario-response audits remain outstanding"
+  ]
+}

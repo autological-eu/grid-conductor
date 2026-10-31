@@ -1,0 +1,329 @@
+{
+  "status": "combined_frozen_bid_2025_candidate_not_baseline",
+  "hours": 8760,
+  "generation_columns": 39,
+  "added_supply_available_twh": 41.15984432897995,
+  "added_supply_dispatch_twh": 23.69801277305596,
+  "a11_connection_gaps_revised": 19,
+  "hydro_units": 93,
+  "hydro_eligible_units": 79,
+  "hydro_skipped_units": [
+    {
+      "unit": "ES2 0AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "ES2 1AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "ES2 2AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "ES2 3AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "ES2 4AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "ES2 5AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "ES2 6AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "ES2 7AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "ES2 8AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "ES2 9AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "GB1 2AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "GB1 3AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "GB1 8AC hydro",
+      "reason": "physical_island_shift"
+    },
+    {
+      "unit": "RS2 0AC hydro",
+      "reason": "no_storage_or_generation"
+    }
+  ],
+  "hydro_network_scale": 1.0,
+  "hydro_absolute_timing_shift_twh": 7.248056494457495,
+  "annual_reservoir_generation_twh": 350.4409977546244,
+  "water_stock_violation_mwh": 4.78879883303307e-07,
+  "water_terminal_error_mwh": 4.808716767001897e-07,
+  "turbine_violation_mw": 9.094947017729282e-13,
+  "primal_residual_mw": 3.7565721413557185e-06,
+  "emergency_mwh": 0.0,
+  "baseline_price_mae": 25.051056742655632,
+  "generation_a11_price_mae": 25.039702272323876,
+  "combined_price_mae": 24.894058594485635,
+  "zones": {
+    "AL": {
+      "baseline": 28.9967204341613,
+      "generation_a11": 29.270748449037995,
+      "combined": 29.27873443468857
+    },
+    "AT": {
+      "baseline": 16.54909688614814,
+      "generation_a11": 16.413222325250814,
+      "combined": 16.42272321737697
+    },
+    "BE": {
+      "baseline": 18.191342842511595,
+      "generation_a11": 18.836453185879577,
+      "combined": 18.907156771505015
+    },
+    "BG": {
+      "baseline": 19.56540644506296,
+      "generation_a11": 19.06219739917316,
+      "combined": 19.062988374615248
+    },
+    "CH": {
+      "baseline": 18.995253195054136,
+      "generation_a11": 19.523774367003675,
+      "combined": 19.556539449187863
+    },
+    "CZ": {
+      "baseline": 28.346955349879632,
+      "generation_a11": 28.314513475445874,
+      "combined": 28.372882837067348
+    },
+    "DE-LU": {
+      "baseline": 15.977468176636314,
+      "generation_a11": 16.55296184080375,
+      "combined": 16.658402845712345
+    },
+    "DK1": {
+      "baseline": 16.57938415137785,
+      "generation_a11": 17.362308254119583,
+      "combined": 17.468606942520733
+    },
+    "EE": {
+      "baseline": 39.819804193134466,
+      "generation_a11": 39.238822807217424,
+      "combined": 39.19928269536457
+    },
+    "ES": {
+      "baseline": 18.175059840606014,
+      "generation_a11": 17.485475361020306,
+      "combined": 17.506269016887572
+    },
+    "FR": {
+      "baseline": 23.384993374858333,
+      "generation_a11": 22.685125451567334,
+      "combined": 22.722234522419008
+    },
+    "GR": {
+      "baseline": 21.251767959623656,
+      "generation_a11": 20.73586606187142,
+      "combined": 20.73742053713907
+    },
+    "HR": {
+      "baseline": 17.479372169897122,
+      "generation_a11": 16.959696083764687,
+      "combined": 16.971262989012065
+    },
+    "HU": {
+      "baseline": 18.378908781398966,
+      "generation_a11": 18.134318069129737,
+      "combined": 18.153620899980407
+    },
+    "IT-CNOR": {
+      "baseline": 18.394861555546324,
+      "generation_a11": 18.89461757861664,
+      "combined": 18.89128665042214
+    },
+    "IT-CSUD": {
+      "baseline": 19.07162286966983,
+      "generation_a11": 20.200332269871293,
+      "combined": 20.201137226735973
+    },
+    "IT-North": {
+      "baseline": 18.995013627834187,
+      "generation_a11": 18.223003246115205,
+      "combined": 18.22134397034216
+    },
+    "IT-SICI": {
+      "baseline": 20.242885501326487,
+      "generation_a11": 21.30300871289539,
+      "combined": 21.306538342605478
+    },
+    "IT-SUD": {
+      "baseline": 18.772590575209108,
+      "generation_a11": 19.665015093114565,
+      "combined": 19.66549644819573
+    },
+    "LT": {
+      "baseline": 35.763670495567396,
+      "generation_a11": 35.3061580680776,
+      "combined": 35.29049631428573
+    },
+    "LV": {
+      "baseline": 35.997516871121256,
+      "generation_a11": 35.564470448322396,
+      "combined": 35.54645153413285
+    },
+    "MK": {
+      "baseline": 18.175124121343234,
+      "generation_a11": 17.806023545703116,
+      "combined": 17.808400354377188
+    },
+    "NL": {
+      "baseline": 17.109712864519743,
+      "generation_a11": 17.746055564070062,
+      "combined": 17.844015245248464
+    },
+    "PL": {
+      "baseline": 20.426628724655036,
+      "generation_a11": 20.895383133568508,
+      "combined": 20.940747014184755
+    },
+    "PT": {
+      "baseline": 18.629076577376157,
+      "generation_a11": 18.006611860772956,
+      "combined": 18.027805345543104
+    },
+    "RO": {
+      "baseline": 18.805045544982953,
+      "generation_a11": 18.37147313273881,
+      "combined": 18.383167222150117
+    },
+    "RS": {
+      "baseline": 16.824036736846274,
+      "generation_a11": 16.492817403307388,
+      "combined": 16.50498511197262
+    },
+    "SI": {
+      "baseline": 19.060298206490067,
+      "generation_a11": 18.37942470661922,
+      "combined": 18.387011005727437
+    },
+    "SK": {
+      "baseline": 19.0159839545209,
+      "generation_a11": 18.78518264380319,
+      "combined": 18.796859946501815
+    },
+    "DK2": {
+      "baseline": 41.72793681422913,
+      "generation_a11": 39.08594240482758,
+      "combined": 39.65345199298673
+    },
+    "FI": {
+      "baseline": 37.80100525458908,
+      "generation_a11": 37.26460585757703,
+      "combined": 36.857887915984655
+    },
+    "NO1": {
+      "baseline": 36.6105433733242,
+      "generation_a11": 36.47190629427631,
+      "combined": 35.52657773839962
+    },
+    "NO2": {
+      "baseline": 40.4182198400004,
+      "generation_a11": 40.158773513461625,
+      "combined": 39.658759037580275
+    },
+    "NO3": {
+      "baseline": 31.483448443127585,
+      "generation_a11": 30.6449641754665,
+      "combined": 29.191503036268756
+    },
+    "NO4": {
+      "baseline": 35.10680792889324,
+      "generation_a11": 33.982355775730895,
+      "combined": 33.027953586449854
+    },
+    "NO5": {
+      "baseline": 33.632013077907146,
+      "generation_a11": 31.909864841843817,
+      "combined": 30.46671309150882
+    },
+    "SE1": {
+      "baseline": 34.07754653949547,
+      "generation_a11": 33.357614906644756,
+      "combined": 32.663819804814814
+    },
+    "SE2": {
+      "baseline": 35.63385509410182,
+      "generation_a11": 34.99901892170123,
+      "combined": 34.24017020732741
+    },
+    "SE3": {
+      "baseline": 28.908440058511,
+      "generation_a11": 28.117650644063577,
+      "combined": 27.89785135277816
+    },
+    "SE4": {
+      "baseline": 32.61417921683143,
+      "generation_a11": 31.80945005782526,
+      "combined": 32.03556018386187
+    },
+    "IT-SARD": {
+      "baseline": 22.103728780511194,
+      "generation_a11": 32.610585232978565,
+      "combined": 32.60228716004781
+    }
+  },
+  "solve_seconds": 33.373786601001484,
+  "source_sha256": {
+    "generation_a11": "888c6f1ede2faf7a1ccdc00c9f1a68530ce71d033ed22ff83e0b892b0ddf812c",
+    "europe_hydro_source": "830d9cc1a1b1ccad67d1dbee8d6b00912e2a4ce9771c62df216e2396bf2b91bb",
+    "a75_reservoir_hourly": "31f13249b78ec90d4c87ea9e5a8d2a89d65b06fb857eaea38f4ab920492c0e74",
+    "combined_witness": "9963f38f2ac333acf3042dd52512f9003d408685c2df8abeae17acd8db9598c2"
+  },
+  "turbine_evidence": {
+    "dated_provisional_pure_zone_assignments": [
+      {
+        "zone": "SE2",
+        "source_zone_turbine_mw": 5957.784555,
+        "observed_peak_mw": 6650.61,
+        "incremental_turbine_mw": 692.8254449999995,
+        "assigned_unit": "SE0 3AC hydro",
+        "first_eligible_hour": 107
+      },
+      {
+        "zone": "SE3",
+        "source_zone_turbine_mw": 1291.238172,
+        "observed_peak_mw": 2017.78,
+        "incremental_turbine_mw": 726.5418279999999,
+        "assigned_unit": "SE0 0AC hydro",
+        "first_eligible_hour": 29
+      },
+      {
+        "zone": "SE4",
+        "source_zone_turbine_mw": 123.3,
+        "observed_peak_mw": 298.1,
+        "incremental_turbine_mw": 174.8,
+        "assigned_unit": "SE0 4AC hydro",
+        "first_eligible_hour": 1
+      }
+    ],
+    "model_treatment": "Observed zonal peak shortfall assigned to a pure-zone source unit after first dated A75 exceedance; storage energy unchanged"
+  },
+  "limitations": [
+    "Frozen old fitted bids for changed generation and network; incremental technology bids are provisional proxies",
+    "Retrospective A75 peaks and A11 physical flow do not establish prospective availability or market domain",
+    "Hydro is bounded exogenous timing, not endogenous bidding; pure-zone Swedish turbine assignment is a provisional allocation, not a verified plant inventory",
+    "Original run-of-river water split and renewable weather availability remain unchanged",
+    "No independent generation-mix, A09 exchange, scenario-response or out-of-sample acceptance claim"
+  ]
+}
