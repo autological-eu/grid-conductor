@@ -1077,6 +1077,11 @@ hourly stock chronology and terminal policy are explicit. Recompute marginal
 value under each joint portfolio and distinguish modeled system offer-cost
 savings from investor income, CAPEX and net investment value. A bounded daily
 storage formulation is a numerical checkpoint, not an annual portfolio score.
+When a faster storage LP selects a different equally optimal stock path or
+zonal dual price, compare the full-year objective and energy as well as hourly
+stock, prices and revenue. Disclose material dual/revenue differences or use a
+declared tie rule or sensitivity interval; objective parity alone does not
+certify identical price or investor-income outputs.
 Selection among saved cases is not an arbitrary new solve. Do not route a
 different asset, capacity, location or battery through a saved case or label
 the pilot as general investment valuation. Replace the two-zone browser

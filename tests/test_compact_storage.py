@@ -4,6 +4,7 @@ from dataclasses import replace
 import numpy as np
 
 from baselines.compact.storage import Battery, clear_window, rolling_days
+from baselines.compact.storage_reuse import ReusableBatteryWindow
 from tests.test_scenario_2025 import toy_model
 
 
@@ -53,6 +54,20 @@ class StorageWindowTest(unittest.TestCase):
                                    result['storage'], atol=1e-8)
         self.assertAlmostEqual(first['objective_eur'] + second['objective_eur'],
                                result['objective_eur'])
+
+    def test_reusable_template_matches_fresh_lp_after_input_update(self):
+        model, cost = toy_model()
+        for key in ('availability', 'link_min', 'link_max', 'load', 'island_rhs', 'flow'):
+            model[key] = np.repeat(model[key], 24, axis=0)
+        costs = np.repeat(cost, 24, axis=0)
+        battery = Battery('AA', 5, 10, .95, .95, 5, 5)
+        reusable = ReusableBatteryWindow(model, costs, battery, 24)
+        for start in (0, 24):
+            fresh = clear_window(model, costs, start, 24, (battery,))
+            fast = reusable.clear(start, 5)
+            self.assertAlmostEqual(fast['objective_eur'], fresh['objective_eur'], places=5)
+            self.assertLess(fast['maximum_primal_residual'], 1e-8)
+            self.assertAlmostEqual(fast['storage'][-1, 2], 5)
 
 
 if __name__ == '__main__':

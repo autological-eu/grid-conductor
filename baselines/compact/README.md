@@ -122,3 +122,17 @@ figure and `research/storage-network-annual-2025.md` interpretation. This
 candidate remains separate from the accepted hourly LP and the general
 portfolio runner. Its 911-second coupled solve time and heuristic terminal
 policy require further work before repeated budget-search evaluations.
+
+### Reusable HiGHS storage performance candidate
+
+`storage_reuse.py` compiles the fixed 48-hour physical-network/stock matrix once
+and updates hourly costs, bounds and carried stock in HiGHS. The original
+source-hashed storage module and 915-second annual trial remain unchanged.
+`tools/benchmark_storage_reuse.py` checks 15 complete old/new windows;
+`tools/run_compact_storage_annual_reuse.py` writes a separate ignored 365-day
+checkpoint sequence with the original hourly physical replay gate;
+`tools/report_compact_storage_reuse.py` hashes both sequences and exports the
+tracked compact audit and runtime figure. The full-year system objective and
+battery energy agree, but some equally optimal stock paths and zonal prices
+do not. See `research/storage-reuse-speed-2025.md` before using its price or
+investor-income outputs.
