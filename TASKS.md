@@ -12,6 +12,9 @@
 
 ## Open acceptance work
 
+- [x] Prototype a DeepOPF-style zonal generation predictor with exact independent-corridor transport projection, trained on January–March retained LP dispatch and evaluated on 720 April hours. Inference takes 0.003 s and projection 4.10 s; projection certifies aggregate bounds and balance, but corrected generation differs from the LP by 1.706 GW mean absolute per zone. No technology-offer, PTDF, price, storage or scenario claim. See `research/learned-zonal-screen-pilot-2025.md`.
+- [ ] Extend learned screening to technology-level dispatch and the original joint network rows; benchmark the correction/fallback rate and full-year scenario deltas against retained joint-LP cases before considering a baseline or app change.
+
 - [x] Test the existing independent-corridor hourly supply-curve screen on retained inputs. A 24-hour, 48-zone/95-corridor solve passes balance and bounds in 0.71 s, but its price gap to the retained physical LP is 12.73 €/MWh; the 168-hour trial stalls at two price roots. See `research/independent-corridor-screen-trial-2025.md`. This is not a full-year or scenario result.
 - [ ] Make the simplified transport clearing numerically robust under a deterministic, price-independent tie rule; certify all 8,760 baseline hours before testing investment deltas. Then compare warm runtime, price/generation/flow effects and scenario rankings against matched retained joint-LP cases. Add chronological storage before claiming storage screening.
 
