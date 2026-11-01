@@ -1,0 +1,42 @@
+{
+  "status": "completed_research_pilot_not_feasible_clearing",
+  "log_sha256": "91abb71b9a4d1b68fcfe3da12bbbb41e92f97cd1817627d5128683040a8c0253",
+  "annual_witness_sha256": "5fbc4d1d1c6dace91299c9a2638fb1d092827a5d2914211bf0f5486a06771648",
+  "fitted_costs_sha256": "138a8e31af0a35e72f35cdb6c0ab9a75236f42e5e22800bce2b88d7d8f932f31",
+  "runs": [
+    {
+      "optimizer": "aurora",
+      "architecture": "standard",
+      "epochs": 100,
+      "training_hours": 1776,
+      "validation_hours": 384,
+      "best_epoch": 88,
+      "training_seconds": 302.5304778319987,
+      "inference_seconds": 0.18944591499166563,
+      "final_training_batch_loss": 0.01543971337378025,
+      "held_out_generation_mae_gw": 0.9778364300727844,
+      "held_out_price_mae_to_lp_eur_mwh": 15.57829475402832,
+      "held_out_balance_mae_mw": 509.544189453125,
+      "held_out_max_balance_residual_mw": 9645.1640625,
+      "held_out_generation_bound_violation_mw": 0.0,
+      "held_out_corridor_bound_violation_mw": 0.0
+    },
+    {
+      "optimizer": "aurora",
+      "architecture": "attnres",
+      "epochs": 100,
+      "training_hours": 1776,
+      "validation_hours": 384,
+      "best_epoch": 96,
+      "training_seconds": 850.0319257310039,
+      "inference_seconds": 0.5913325709989294,
+      "final_training_batch_loss": 0.014440344646573067,
+      "held_out_generation_mae_gw": 0.9740498661994934,
+      "held_out_price_mae_to_lp_eur_mwh": 16.036592483520508,
+      "held_out_balance_mae_mw": 548.4811401367188,
+      "held_out_max_balance_residual_mw": 8427.58984375,
+      "held_out_generation_bound_violation_mw": 0.0,
+      "held_out_corridor_bound_violation_mw": 0.0
+    }
+  ]
+}

@@ -2,6 +2,14 @@
 
 ## Public research scope
 
+One-pass learned clearing may be explored as a separate fast screening research
+candidate. Evaluate changed-asset cases and held-out time blocks against the
+retained physical LP, reporting hourly balance, supply, corridor, storage and
+joint-network violations, price/dispatch error and scenario-delta error.
+Bounded outputs alone do not establish a feasible clearing; do not present a
+learned screen as an LP solution or supported investment estimate without the
+same numerical, physical, provenance and response gates as other candidates.
+
 Publish model reports and downloadable receipts only for the retained research baselines, `fast_dispatch_only` and `mixed_curve_fitting`, alongside data required by the live workbench. Retire superseded model publications from the current site. If a live country data explorer still displays an earlier model run, label its model comparison as archived and keep its source and validation receipts available until the explorer is migrated to a retained baseline or source-only view. Do not present that earlier run as the current research baseline.
 
 ## Observed exchanges and scenario flows

@@ -12,6 +12,9 @@
 
 ## Open acceptance work
 
+- [x] Implement Kimi-inspired Block Attention Residuals in the zone-token transformer and run a matched 100-epoch AURORA comparison against a four-layer standard residual control. March checkpoint selection and April holdout show fast one-pass inference but 510–548 MW mean zonal imbalance; AttnRes does not improve held-out price or mean balance. See `research/attnres-transformer-screen-2025.md` and its full learning-curve receipt. No baseline or app change.
+- [ ] If pursuing one-pass inference, encode zonal balance in the output structure and measure simultaneous bounds plus changed-asset response; preserve joint-PTDF and storage gates before any scenario-support claim.
+
 - [x] Test a one-pass zone-token transformer with no inference-time correction on January–March LP targets and April holdout. AdamW and AURORA infer 720 hours in about 0.16 s, with aggregate generator and independent-corridor bounds by construction. Both fail zonal balance badly (673 versus 940 MW mean absolute residual), and AURORA does not improve held-out price error in the fixed-setting test. See `research/one-pass-transformer-screen-2025.md`; no baseline or app promotion.
 - [ ] For any further one-pass network, test balance-preserving output structure and changed-asset holdouts; require per-hour feasibility and objective/price/scenario-delta comparison against the retained LP. Keep storage stock and joint PTDF rows explicit before interpreting investment value.
 
