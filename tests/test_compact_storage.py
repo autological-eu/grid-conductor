@@ -1,5 +1,6 @@
 """Chronological battery mechanics on a small coupled-network LP."""
 import unittest
+from dataclasses import replace
 import numpy as np
 
 from baselines.compact.storage import Battery, clear_window, rolling_days
@@ -44,6 +45,14 @@ class StorageWindowTest(unittest.TestCase):
         self.assertAlmostEqual(stock[-1], 5)
         self.assertLess(result['objective_eur'], float(np.sum(costs[:, 0] * model['load'][:, 0])))
         self.assertLess(result['maximum_primal_residual'], 1e-8)
+        first = rolling_days(model, costs, 0, 1, battery, horizon_end=48)
+        second = rolling_days(model, costs, 24, 1,
+                              replace(battery, initial_mwh=float(first['storage'][-1, 2])),
+                              horizon_end=48)
+        np.testing.assert_allclose(np.vstack([first['storage'], second['storage']]),
+                                   result['storage'], atol=1e-8)
+        self.assertAlmostEqual(first['objective_eur'] + second['objective_eur'],
+                               result['objective_eur'])
 
 
 if __name__ == '__main__':

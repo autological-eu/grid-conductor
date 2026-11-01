@@ -1,0 +1,119 @@
+{
+  "status": "full_year_rolling_storage_trial_not_investment_validation",
+  "year": 2025,
+  "source_summary_sha256": "3fc6a23d5956a9f2274e79b463b08be2b27240854a7fb376ba6dc7d9310919b6",
+  "baseline_witness_sha256": "5fbc4d1d1c6dace91299c9a2638fb1d092827a5d2914211bf0f5486a06771648",
+  "bid_cost_sha256": "138a8e31af0a35e72f35cdb6c0ab9a75236f42e5e22800bce2b88d7d8f932f31",
+  "storage_model_sha256": "1b58704d4407f1f91f7a8bdd6711143bbe1d7b2e7f8a6cb8e4f0231f5ef49170",
+  "annual_runner_sha256": "16e65154771dbb1155e47ff158aad6191b01094b7540d247b65019b9fd11b14c",
+  "battery": {
+    "zone": "DE-LU",
+    "power_mw": 500,
+    "energy_mwh": 2000,
+    "charge_efficiency": 0.95,
+    "discharge_efficiency": 0.95,
+    "initial_mwh": 1000,
+    "terminal_mwh": 1000,
+    "throughput_eur_mwh": 0.01
+  },
+  "lookahead_hours": 48,
+  "terminal_policy": "target declared MWh at each look-ahead boundary",
+  "days": 365,
+  "hours": 8760,
+  "optimal_hours": 8760,
+  "emergency_mwh": 0.0,
+  "maximum_primal_residual": 3.469494913588278e-08,
+  "maximum_stock_replay_error_mwh": 1.318767317570746e-11,
+  "terminal_stock_mwh": 1000.0,
+  "modeled_offer_cost_reduction_meur": 70.34067164209748,
+  "modeled_battery_energy_revenue_meur": 69.45001291542894,
+  "mean_absolute_zonal_price_change_eur_mwh": 0.21921467123949442,
+  "total_solver_seconds": 910.7279011148203,
+  "wall_seconds": 915.1848374540132,
+  "monthly": [
+    {
+      "month": "Jan",
+      "modeled_offer_cost_reduction_meur": 4.515439668220293,
+      "charge_gwh": 105.97355099521411,
+      "discharge_gwh": 96.59112977318073,
+      "days": 31
+    },
+    {
+      "month": "Feb",
+      "modeled_offer_cost_reduction_meur": 4.277745720888545,
+      "charge_gwh": 107.82667905015687,
+      "discharge_gwh": 95.60607784276657,
+      "days": 28
+    },
+    {
+      "month": "Mar",
+      "modeled_offer_cost_reduction_meur": 7.602257318264933,
+      "charge_gwh": 121.33347914996025,
+      "discharge_gwh": 109.8572149328391,
+      "days": 31
+    },
+    {
+      "month": "Apr",
+      "modeled_offer_cost_reduction_meur": 8.011375881838294,
+      "charge_gwh": 106.99926676207501,
+      "discharge_gwh": 96.92058825277267,
+      "days": 30
+    },
+    {
+      "month": "May",
+      "modeled_offer_cost_reduction_meur": 7.903509239542328,
+      "charge_gwh": 108.65069907401988,
+      "discharge_gwh": 99.0572559143029,
+      "days": 31
+    },
+    {
+      "month": "Jun",
+      "modeled_offer_cost_reduction_meur": 7.6006740364611955,
+      "charge_gwh": 95.59141215547781,
+      "discharge_gwh": 86.27124947031868,
+      "days": 30
+    },
+    {
+      "month": "Jul",
+      "modeled_offer_cost_reduction_meur": 5.922513827099375,
+      "charge_gwh": 98.70424117661707,
+      "discharge_gwh": 88.62932766189687,
+      "days": 31
+    },
+    {
+      "month": "Aug",
+      "modeled_offer_cost_reduction_meur": 6.931717907556855,
+      "charge_gwh": 112.34028125129564,
+      "discharge_gwh": 101.29210382929426,
+      "days": 31
+    },
+    {
+      "month": "Sep",
+      "modeled_offer_cost_reduction_meur": 7.610764346612265,
+      "charge_gwh": 121.53971366639806,
+      "discharge_gwh": 109.6627072868784,
+      "days": 30
+    },
+    {
+      "month": "Oct",
+      "modeled_offer_cost_reduction_meur": 4.307431769308717,
+      "charge_gwh": 115.0649717912122,
+      "discharge_gwh": 103.5167713386148,
+      "days": 31
+    },
+    {
+      "month": "Nov",
+      "modeled_offer_cost_reduction_meur": 3.173477421103635,
+      "charge_gwh": 100.91533745123569,
+      "discharge_gwh": 91.07863728179935,
+      "days": 30
+    },
+    {
+      "month": "Dec",
+      "modeled_offer_cost_reduction_meur": 2.483764505197091,
+      "charge_gwh": 89.6361772744159,
+      "discharge_gwh": 80.84660475810117,
+      "days": 31
+    }
+  ]
+}

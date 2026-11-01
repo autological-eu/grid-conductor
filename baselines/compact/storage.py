@@ -138,7 +138,7 @@ def clear_window(model, costs, start: int, hours: int, batteries=()):
 
 
 def rolling_days(model, costs, start: int, days: int, battery: Battery,
-                 lookahead_hours: int = 48):
+                 lookahead_hours: int = 48, horizon_end: int | None = None):
     """Execute 24 hours at a time, carrying actual stock between coupled LPs.
 
     The declared terminal MWh is imposed at each look-ahead boundary and at
@@ -148,7 +148,9 @@ def rolling_days(model, costs, start: int, days: int, battery: Battery,
     if days < 1 or lookahead_hours < 24 or lookahead_hours % 24:
         raise ValueError('Rolling horizon must contain whole UTC days')
     stop = start + 24 * days
-    if start < 0 or stop > len(model['availability']):
+    horizon_end = stop if horizon_end is None else horizon_end
+    if (start < 0 or stop > len(model['availability']) or horizon_end < stop
+            or horizon_end > len(model['availability'])):
         raise ValueError('Rolling period outside source chronology')
     current = battery.initial_mwh
     values, prices, stocks = [], [], []
@@ -156,7 +158,7 @@ def rolling_days(model, costs, start: int, days: int, battery: Battery,
     ng = int(model['ng'])
     for day in range(days):
         hour = start + 24 * day
-        horizon = min(lookahead_hours, stop - hour)
+        horizon = min(lookahead_hours, horizon_end - hour)
         candidate = clear_window(model, costs, hour, horizon,
                                  (replace(battery, initial_mwh=current),))
         used = candidate['storage'][0, :24]
@@ -168,7 +170,7 @@ def rolling_days(model, costs, start: int, days: int, battery: Battery,
         cost_eur += battery.throughput_eur_mwh * float(used[:, :2].sum())
         current = float(used[-1, 2])
         residual = max(residual, candidate['maximum_primal_residual'])
-    if abs(current - battery.terminal_mwh) > 1e-6:
+    if stop == horizon_end and abs(current - battery.terminal_mwh) > 1e-6:
         raise ValueError('Rolling terminal stock did not close')
     stock = np.concatenate(stocks)
     replay = battery.initial_mwh + np.cumsum(

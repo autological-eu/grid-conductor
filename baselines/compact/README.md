@@ -108,3 +108,17 @@ cleared stock carried across midnight. It writes
 runner: a year-long policy must carry cleared stock across all days, handle
 the annual terminal inventory and pass full-year paired checks before
 storage enters portfolio search or the browser.
+
+### Full-year rolling storage trial
+
+`tools/run_compact_storage_annual.py` executes the declared 500 MW / 2,000 MWh
+DE-LU battery for all 365 days with 48-hour look-ahead, 24-hour execution and
+actual MWh stock carried between days. It uses a non-blocking lock and daily
+source/model-bound checkpoints under ignored
+`data/bidding-zone-network-2025/compact-storage-annual-v1/`; matching days
+are independently replayed before being skipped. `tools/report_compact_storage_annual.py`
+reads those checkpoints without solving and writes the tracked compact receipt,
+figure and `research/storage-network-annual-2025.md` interpretation. This
+candidate remains separate from the accepted hourly LP and the general
+portfolio runner. Its 911-second coupled solve time and heuristic terminal
+policy require further work before repeated budget-search evaluations.
