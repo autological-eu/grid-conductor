@@ -20,7 +20,7 @@ from pathlib import Path
 
 import numpy as np
 
-from .evaluation import ANNUAL, offer_groups, physical_lp, saved_annual
+from .evaluation import ANNUAL, physical_lp, saved_annual
 from .lp import clear_hour, solver
 from .metrics import (branch_congestion, compare, emergency_mwh, link_candidates)
 from .scenario import (GeneratorAddition, LinkUpgrade, Scenario, apply, link_endpoints)
@@ -43,16 +43,23 @@ def read(path):
 
 
 def profile_sources(schema, data, model):
-    """Map (zone, technology) to an existing offer column and its annual profile."""
-    grouped, _ = offer_groups(schema, model)
-    availability = np.asarray(model['availability'], dtype=float)
+    """Use sealed technology availability, even when accepted offers are pooled.
+
+    A new generator gets its own zonal offer column in ``scenario.apply``.
+    Requiring an old pure-technology offer would discard every solar/wind
+    group in this retained LP, whose renewable offers are pooled.
+    """
     sources = {}
-    for group, ids in grouped.items():
-        row = schema['groups'][group]
+    zones = set(map(str, model['zones']))
+    for group, row in enumerate(schema['groups']):
         technology, zone = str(row['technology']), str(row['zone'])
-        if technology not in PROFILE_TECHNOLOGIES or not ids:
+        if technology not in PROFILE_TECHNOLOGIES:
             continue
+        if zone not in zones:
+            raise ValueError(f'Availability source outside accepted zones: {zone}')
         capacity = np.asarray(data['capacity'][:, group], dtype=float)
+        if capacity.shape != (len(model['availability']),) or not np.isfinite(capacity).all():
+            raise ValueError(f'Invalid fitted capacity in {zone}/{technology}')
         if capacity.min() < -1e-5:
             raise ValueError(f'Negative fitted capacity in {zone}/{technology}')
         # The source loader tolerates a -1e-5 MW solar-correction residue; an
@@ -61,8 +68,7 @@ def profile_sources(schema, data, model):
         peak = float(capacity.max())
         if peak <= 0:
             continue
-        column = max(ids, key=lambda j: float(availability[:, j].sum()))
-        sources[(zone, technology)] = dict(group=int(group), column=int(column),
+        sources[(zone, technology)] = dict(group=int(group),
                                            peak_mw=peak,
                                            annual_gwh=float(capacity.sum() / 1000),
                                            capacity=capacity)
@@ -263,7 +269,7 @@ def zero_delta_gate(cleared, witness, nz, objective_tolerance=0.01, price_tolera
 
 def report(folder=OUT, out=None):
     """Aggregate passed scenario summaries into a reviewable markdown table."""
-    rows = []
+    rows = {}
     for path in sorted(Path(folder).glob('*/summary.json')):
         summary = read(path)
         if summary.get('status') != 'scenario_replay_passed':
@@ -276,14 +282,18 @@ def report(folder=OUT, out=None):
             f'{l["from_zone"]}->{l["to_zone"]} x{l["factor"]}: '
             f'{l["baseline"]["signed_meur"]:.1f} -> {l["scenario"]["signed_meur"]:.1f} M EUR rent'
             for l in result['links']) or '—'
-        rows.append((summary['scenario']['name'], result['welfare']['gain_meur'],
-                     generators, links, result['prices']['mean_abs_change_eur_mwh'],
-                     summary['emergency_mwh']))
+        name = summary['scenario']['name']
+        rows[name] = (result['welfare']['gain_meur'], generators, links,
+                      result['prices']['mean_abs_change_eur_mwh'], summary['emergency_mwh'])
+    plan = Path(folder) / 'plan.json'
+    declared = ([entry['name'] for entry in read(plan)['scenarios']] if plan.exists() else [])
+    order = [name for name in declared if name in rows]
+    order.extend(sorted(set(rows) - set(order)))
     lines = ['| scenario | welfare gain (M EUR) | investor income | link rent | '
-             'mean |price change| (EUR/MWh) | emergency (MWh) |',
+             'mean absolute price change (EUR/MWh) | emergency (MWh) |',
              '| --- | --- | --- | --- | --- | --- |']
-    lines += [f'| {name} | {welfare:.2f} | {gens} | {links} | {price:.3f} | {emergency:.3f} |'
-              for name, welfare, gens, links, price, emergency in rows]
+    lines += [f'| {name} | {rows[name][0]:.2f} | {rows[name][1]} | {rows[name][2]} | '
+              f'{rows[name][3]:.3f} | {rows[name][4]:.3f} |' for name in order]
     text = '\n'.join(lines) + '\n'
     if out:
         Path(out).parent.mkdir(parents=True, exist_ok=True)

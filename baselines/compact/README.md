@@ -21,7 +21,7 @@ their link coupling and a complete market-domain reconstruction. No JAO row is
 silently converted into a pairwise border limit or added to the baseline.
 
 
-Fourteen active project modules implement the computation, including `__init__.py`,
+The compact project modules implement the computation, including `__init__.py`,
 `run_fit.py` and `run_lp.py`; `verify.py` is a separate test module. The original
 `tools/` producers and their bytes remain for source-hash replay. This is a
 computation refactor, not a source-data regeneration or a different market design.

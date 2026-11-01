@@ -1,0 +1,151 @@
+{
+  "status": "ten_retained_2025_scenario_replays_passed_numerical_gates",
+  "plan_sha256": "4175684e8df6f01ded2058850f6373fd3b8bd6e1a8dbe0bf3716065344571a5d",
+  "baseline_witness_sha256": "5fbc4d1d1c6dace91299c9a2638fb1d092827a5d2914211bf0f5486a06771648",
+  "scenarios": [
+    {
+      "name": "zero-delta",
+      "summary_sha256": "f5adbc9fc1273a0c197427eda214002633242edc8e1c0caac08bb01bef3562b9",
+      "witness_sha256": "5fbc4d1d1c6dace91299c9a2638fb1d092827a5d2914211bf0f5486a06771648",
+      "hours": 8760,
+      "emergency_mwh": 0.0,
+      "maximum_primal_residual_mw": 3.476443453109823e-07,
+      "solve_seconds": 33.41007972198713,
+      "model_offer_cost_reduction_meur": 0.0,
+      "added_generator_income_meur": [],
+      "link_signed_rent_meur": []
+    },
+    {
+      "name": "gen-solar-DE-LU-500",
+      "summary_sha256": "a555afb07d4ed560ccc30d5ecb98c8f049ec6f70cb284a5799098056c66aa00c",
+      "witness_sha256": "b6e2ccfc554289f47c62ce5ec03b9fa19f53a021beeb87f6df400fcd6b2718ec",
+      "hours": 8760,
+      "emergency_mwh": 0.0,
+      "maximum_primal_residual_mw": 5.704423529095948e-07,
+      "solve_seconds": 33.22842484099965,
+      "model_offer_cost_reduction_meur": 35.42335537747192,
+      "added_generator_income_meur": [
+        35.30181713516369
+      ],
+      "link_signed_rent_meur": []
+    },
+    {
+      "name": "gen-solar-DE-LU-1000",
+      "summary_sha256": "f78d32583e15a4c90914e87042e499bdf6704c68cde34bcc9d8febffa863cff4",
+      "witness_sha256": "51bf1f2ea23ef7678a206d87debdb6324e22427ab0fa4eb4dc79a0a65da21345",
+      "hours": 8760,
+      "emergency_mwh": 0.0,
+      "maximum_primal_residual_mw": 1.7763159121386707e-07,
+      "solve_seconds": 33.20016979100183,
+      "model_offer_cost_reduction_meur": 70.60459554170227,
+      "added_generator_income_meur": [
+        70.15158000236158
+      ],
+      "link_signed_rent_meur": []
+    },
+    {
+      "name": "gen-solar-DE-LU-2000",
+      "summary_sha256": "af1a11b77b37c5e34897e7c0855f17b1abc0b7a6905f382991627c53e1b4b5cd",
+      "witness_sha256": "80c26603631c7419fcf42d38e09350026fe451280ee3d5905c613f519821336a",
+      "hours": 8760,
+      "emergency_mwh": 0.0,
+      "maximum_primal_residual_mw": 2.0679563021985814e-06,
+      "solve_seconds": 32.440990093004075,
+      "model_offer_cost_reduction_meur": 140.2983520429611,
+      "added_generator_income_meur": [
+        138.48434567308675
+      ],
+      "link_signed_rent_meur": []
+    },
+    {
+      "name": "gen-wind-DE-LU-500",
+      "summary_sha256": "9e1845df02a1f7125e881e2ff2b8d0f388a2e0aea6358f57b5c7c55bdb37e4f2",
+      "witness_sha256": "19ff763b57c9bae5c94eabd8ef2884d7e74b85640f51e33116f35ac794f352be",
+      "hours": 8760,
+      "emergency_mwh": 0.0,
+      "maximum_primal_residual_mw": 1.5377929685200797e-06,
+      "solve_seconds": 32.783317086010356,
+      "model_offer_cost_reduction_meur": 63.46104684747314,
+      "added_generator_income_meur": [
+        63.28276851004517
+      ],
+      "link_signed_rent_meur": []
+    },
+    {
+      "name": "gen-wind-DE-LU-1000",
+      "summary_sha256": "6654b81aa5f3f3aad4398f75dd6c25d94f48f3161b6c54e8115528eb6b81c3f8",
+      "witness_sha256": "1609497d740e4fb8d4577a56bbfcdace0484979957e459c5f62b957e2c7ff8a7",
+      "hours": 8760,
+      "emergency_mwh": 0.0,
+      "maximum_primal_residual_mw": 6.042628228897229e-07,
+      "solve_seconds": 35.380454808007926,
+      "model_offer_cost_reduction_meur": 126.58886955819702,
+      "added_generator_income_meur": [
+        125.91417810929022
+      ],
+      "link_signed_rent_meur": []
+    },
+    {
+      "name": "gen-wind-DE-LU-2000",
+      "summary_sha256": "93d459678013990fac8b913ad730df08b368abe2417f78704e4ef710a0f41696",
+      "witness_sha256": "59cb5505b8e5e4dbb7388f1aa11a52f658605847aaa372c7772989fc49edf411",
+      "hours": 8760,
+      "emergency_mwh": 0.0,
+      "maximum_primal_residual_mw": 5.541405698750168e-07,
+      "solve_seconds": 33.147707422991516,
+      "model_offer_cost_reduction_meur": 251.81046175303268,
+      "added_generator_income_meur": [
+        249.05509707261436
+      ],
+      "link_signed_rent_meur": []
+    },
+    {
+      "name": "line-NO2-GB-x1.25",
+      "summary_sha256": "0a40a15b5e6ec3541b1ffa67170ce2a2cd29aa5b6aa34cc1c5d9bc3d128b81ae",
+      "witness_sha256": "890bf3772676a3425021018cfff45c3518adf4023c28f3083de7b2e6f7e42755",
+      "hours": 8760,
+      "emergency_mwh": 0.0,
+      "maximum_primal_residual_mw": 1.3636235962621868e-07,
+      "solve_seconds": 34.65548959300213,
+      "model_offer_cost_reduction_meur": 119.87329810858154,
+      "added_generator_income_meur": [],
+      "link_signed_rent_meur": [
+        542.8998218537089
+      ]
+    },
+    {
+      "name": "line-NO2-GB-x1.5",
+      "summary_sha256": "d725072fbf1a7a09f4ac897332ccf6dd94947a7a45cad2c9183eaab72c37d14a",
+      "witness_sha256": "7be92ede75e58d4549906e6d3ea41688b6843b43fb12721b45860e4b20214106",
+      "hours": 8760,
+      "emergency_mwh": 0.0,
+      "maximum_primal_residual_mw": 1.5407931641675532e-07,
+      "solve_seconds": 32.31494833099714,
+      "model_offer_cost_reduction_meur": 212.44541691802215,
+      "added_generator_income_meur": [],
+      "link_signed_rent_meur": [
+        492.40623068320286
+      ]
+    },
+    {
+      "name": "line-NO2-GB-x2.0",
+      "summary_sha256": "b259655943193922c9fc4364116094a5c04eae429873421767fe12474db03b58",
+      "witness_sha256": "c20e0b48d0799f8669ea8b4e07c980c0a3c8446c2982817b20710a29e8b7c808",
+      "hours": 8760,
+      "emergency_mwh": 0.0,
+      "maximum_primal_residual_mw": 6.516056600958109e-07,
+      "solve_seconds": 28.338301847004914,
+      "model_offer_cost_reduction_meur": 326.6324445584259,
+      "added_generator_income_meur": [],
+      "link_signed_rent_meur": [
+        357.5575088904223
+      ]
+    }
+  ],
+  "limitations": [
+    "Accepted same-year fitted bids; no independent forward validation",
+    "Fixed hydro schedule and original renewable availability",
+    "Link envelope release is not a verified physical capacity upgrade",
+    "Model offer-cost reduction and simulated generator income omit investment costs"
+  ]
+}

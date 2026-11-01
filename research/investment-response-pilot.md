@@ -2,9 +2,58 @@
 
 ## Status
 
-Protocol declared; no scenario runs completed yet. The retained `data/`
-witnesses and the pinned scientific interpreter are required. Nothing here
-changes `config/active-research-baseline.json`.
+The declared ten-case pilot completed on the retained 2025 `mixed_curve_fitting`
+LP. All 8,760 hours of each case cleared with zero emergency supply. The
+zero-delta run reproduced the retained all-hour objective and zonal prices
+**exactly**. Nothing here changes `config/active-research-baseline.json` or
+establishes a supported investment estimator.
+
+## Full-year pilot results
+
+The plan selected DE-LU for both solar and onshore wind by highest source-profile
+annual availability, and the NO2–GB commercial link by highest baseline absolute
+model congestion rent. The generator addition is a separate zero-bid offer using
+the sealed zone–technology **availability** profile. The accepted renewable
+offers are pooled, so the source selector reads this technology profile directly
+instead of demanding a nonexistent pure solar or wind offer column.
+
+| Case | Modeled offer-cost reduction, M€ | Added generator income, M€ | NO2–GB signed rent, M€ |
+| --- | ---: | ---: | ---: |
+| Zero delta | 0.00 | — | 536.28 baseline |
+| DE-LU solar +500 MW | 35.42 | 35.30 | — |
+| DE-LU solar +1,000 MW | 70.60 | 70.15 | — |
+| DE-LU solar +2,000 MW | 140.30 | 138.48 | — |
+| DE-LU onshore wind +500 MW | 63.46 | 63.28 | — |
+| DE-LU onshore wind +1,000 MW | 126.59 | 125.91 | — |
+| DE-LU onshore wind +2,000 MW | 251.81 | 249.06 | — |
+| NO2–GB link envelope ×1.25 | 119.87 | — | **542.90** |
+| NO2–GB link envelope ×1.5 | 212.45 | — | 492.41 |
+| NO2–GB link envelope ×2.0 | 326.63 | — | 357.56 |
+
+Each case has 8,760/8,760 optimal hours and zero emergency MWh. The largest
+primal residual across all cases is **2.07×10⁻⁶ MW**, below the retained
+10⁻⁴ MW gate. Solver time totals **328.9 seconds** across ten clears; model
+loading and reporting are additional. The model-only annual offer-cost reduction
+is a *within-model* welfare measure, not verified social benefit. Added
+generator income is simulated energy revenue minus its declared zero bid cost,
+before capital, operating, balancing and financing costs. Link rent is not
+necessarily the return to the owner of a new cable.
+
+The solar daytime sanity check passed: when the 500/1,000/2,000 MW added solar
+offers dispatch, mean DE-LU model prices change by **−0.236/−0.466/−0.901
+€/MWh**; they do not rise in any such hour. The link's binding hours fall from
+**7,246** to **6,637/5,851/4,526** across the three larger envelopes. Its own
+signed rent, however, **rises** from 536.28 M€ at baseline to 542.90 M€ at
+×1.25 before falling at ×1.5 and ×2.0. Thus the declared rent-decline
+expectation does not hold for the first step: extra flow initially outweighs
+the change in price spread. Preserve this non-monotonic result when interpreting
+the line ladder.
+
+The completed plan, full hourly witnesses and individual summaries remain in
+ignored `data/bidding-zone-network-2025/compact-scenarios-v1/`. The tracked
+[source-hashed result index](data/compact-scenario-pilot-2025.json) records the
+ten summary and witness hashes. `python -m baselines.compact.run_scenario report`
+renders the ordered Markdown table. The public two-zone workbench is unchanged.
 
 ## Question
 

@@ -47,6 +47,16 @@ class ScenarioApplyTest(unittest.TestCase):
         self.assertEqual(description['generators'], [])
         np.testing.assert_array_equal(model['availability'], np.array([[50.0], [40.0]]))
 
+    def test_generator_profile_can_use_sealed_technology_without_pure_old_offer(self):
+        from baselines.compact.run_scenario import profile_sources
+
+        model, _ = toy_model()
+        schema = dict(groups=[dict(zone='AA', technology='solar')])
+        data = dict(capacity=np.array([[20.0], [0.0]]))
+        sources = profile_sources(schema, data, model)
+        self.assertEqual(sources['AA', 'solar']['peak_mw'], 20.0)
+        np.testing.assert_array_equal(sources['AA', 'solar']['capacity'], [20.0, 0.0])
+
     def test_generator_addition_appends_one_offer_column(self):
         model, cost = toy_model()
         profile = np.array([30.0, 0.0])
@@ -287,6 +297,7 @@ class DriverTest(unittest.TestCase):
             text = self.driver.report(folder)
         self.assertIn('| line-AA-BB-x1.5 | 12.50 |', text)
         self.assertIn('3.0 -> 2.0 M EUR rent', text)
+        self.assertIn('mean absolute price change (EUR/MWh)', text)
         self.assertNotIn('broken', text)
 
 
