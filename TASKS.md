@@ -12,6 +12,8 @@
 
 ## Open acceptance work
 
+- [x] Run an 80-epoch physical zone-graph tuning trial with November-only checkpoint selection and even-month readback. At fixed balance weight 8, rate 0.002 beats rate 0.001 on selected even-month transport-LP price MAE (9.48 vs 9.96 €/MWh), but worsens mean balance (320 vs 306 MW) and worst balance (8.86 vs 4.82 GW). Doubling balance weight at rate 0.001 gives 10.20 €/MWh and 260 MW mean balance; the declared November score selects that setting. Still 207,879/208,512 even-month zone-hours exceed 1 MW error. See `research/zone-graph-hyperparameter-trial-2025.md`; no baseline promotion.
+
 - [x] Test a physical zone/interconnector GNN on the **same** 2025 transport-LP oracle, odd/even split, loss and 40-epoch budget as the LP-coefficient graph. Withheld even-month price MAE to transport oracle falls 16.71→10.96 €/MWh, mean balance residual 498→337 MW, and inference 4.55→1.35 s over 4,344 hours. Training takes 215.66 s. Still 208,014/208,512 zone-hours exceed 1 MW balance error; no baseline or app promotion. See `research/zone-graph-transport-lp-trial-2025.md`.
 
 - [x] Test supervised LP-coefficient graph message passing on the same 48-zone/95-corridor transport LP as the ODE pilot. Odd-month training (40 epochs, 534 s) and withheld even-month evaluation give 16.71 €/MWh price MAE to the **transport** oracle and 498 MW mean zonal imbalance; 208,146/208,512 zone-hours exceed 1 MW. Inference takes 4.55 s for 4,344 hours. This improves matched ODE balance but fails the clearing gate; the earlier transformer has a different physical-LP teacher. See `research/graph-transport-lp-trial-2025.md`.
