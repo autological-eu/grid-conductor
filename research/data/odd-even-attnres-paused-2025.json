@@ -1,0 +1,187 @@
+{
+  "status": "paused_after_epoch_10_not_feasible_clearing",
+  "epoch": 10,
+  "checkpoint_sha256": "6105d67aa9557fba53e6da4cec32cc17105539382d78ae342a123b785ecd2ea5",
+  "training_source_sha256": "2d607c09e7d3ed1698e32dc344cc53a72142366291172b29c5499161524dda3b",
+  "odd": {
+    "hours": 4416,
+    "observed_price_cells": 181056,
+    "inference_seconds": 4.660644773000968,
+    "price_mae_to_lp_eur_mwh": 17.428049087524414,
+    "price_mae_to_observed_eur_mwh": 25.592281341552734,
+    "generation_mae_to_lp_gw": 1.1725003719329834,
+    "balance_mae_mw": 585.6867065429688,
+    "balance_max_mw": 12227.279296875,
+    "balance_above_1mw_cells": 211604,
+    "generation_bound_violation_mw": 0.0,
+    "corridor_bound_violation_mw": 0.0
+  },
+  "even": {
+    "hours": 4344,
+    "observed_price_cells": 178104,
+    "inference_seconds": 4.462832770994282,
+    "price_mae_to_lp_eur_mwh": 18.579364776611328,
+    "price_mae_to_observed_eur_mwh": 25.428794860839844,
+    "generation_mae_to_lp_gw": 1.2029330730438232,
+    "balance_mae_mw": 597.0316772460938,
+    "balance_max_mw": 6684.30615234375,
+    "balance_above_1mw_cells": 208200,
+    "generation_bound_violation_mw": 0.0,
+    "corridor_bound_violation_mw": 0.0
+  },
+  "even_months": {
+    "2": {
+      "hours": 672,
+      "observed_price_cells": 27552,
+      "inference_seconds": 0.5796324560069479,
+      "price_mae_to_lp_eur_mwh": 22.605806350708008,
+      "price_mae_to_observed_eur_mwh": 29.848352432250977,
+      "generation_mae_to_lp_gw": 1.1512702703475952,
+      "balance_mae_mw": 654.2019653320312,
+      "balance_max_mw": 5497.87890625,
+      "balance_above_1mw_cells": 32221,
+      "generation_bound_violation_mw": 0.0,
+      "corridor_bound_violation_mw": 0.0
+    },
+    "4": {
+      "hours": 720,
+      "observed_price_cells": 29520,
+      "inference_seconds": 0.8389993599994341,
+      "price_mae_to_lp_eur_mwh": 17.633075714111328,
+      "price_mae_to_observed_eur_mwh": 23.524829864501953,
+      "generation_mae_to_lp_gw": 1.3191232681274414,
+      "balance_mae_mw": 541.407958984375,
+      "balance_max_mw": 6684.30615234375,
+      "balance_above_1mw_cells": 34513,
+      "generation_bound_violation_mw": 0.0,
+      "corridor_bound_violation_mw": 0.0
+    },
+    "6": {
+      "hours": 720,
+      "observed_price_cells": 29520,
+      "inference_seconds": 0.6723133909981698,
+      "price_mae_to_lp_eur_mwh": 18.43406105041504,
+      "price_mae_to_observed_eur_mwh": 24.68541717529297,
+      "generation_mae_to_lp_gw": 1.2451510429382324,
+      "balance_mae_mw": 668.5498657226562,
+      "balance_max_mw": 5769.63427734375,
+      "balance_above_1mw_cells": 34497,
+      "generation_bound_violation_mw": 0.0,
+      "corridor_bound_violation_mw": 0.0
+    },
+    "8": {
+      "hours": 744,
+      "observed_price_cells": 30504,
+      "inference_seconds": 1.058347579994006,
+      "price_mae_to_lp_eur_mwh": 18.128286361694336,
+      "price_mae_to_observed_eur_mwh": 23.851581573486328,
+      "generation_mae_to_lp_gw": 1.2539854049682617,
+      "balance_mae_mw": 514.859619140625,
+      "balance_max_mw": 6303.69287109375,
+      "balance_above_1mw_cells": 35658,
+      "generation_bound_violation_mw": 0.0,
+      "corridor_bound_violation_mw": 0.0
+    },
+    "10": {
+      "hours": 744,
+      "observed_price_cells": 30504,
+      "inference_seconds": 0.6353305340016959,
+      "price_mae_to_lp_eur_mwh": 18.351600646972656,
+      "price_mae_to_observed_eur_mwh": 25.551376342773438,
+      "generation_mae_to_lp_gw": 1.1604973077774048,
+      "balance_mae_mw": 605.6765747070312,
+      "balance_max_mw": 5682.45703125,
+      "balance_above_1mw_cells": 35658,
+      "generation_bound_violation_mw": 0.0,
+      "corridor_bound_violation_mw": 0.0
+    },
+    "12": {
+      "hours": 744,
+      "observed_price_cells": 30504,
+      "inference_seconds": 0.5939118120004423,
+      "price_mae_to_lp_eur_mwh": 16.677804946899414,
+      "price_mae_to_observed_eur_mwh": 25.45351219177246,
+      "generation_mae_to_lp_gw": 1.0876810550689697,
+      "balance_mae_mw": 603.5393676757812,
+      "balance_max_mw": 5308.55029296875,
+      "balance_above_1mw_cells": 35653,
+      "generation_bound_violation_mw": 0.0,
+      "corridor_bound_violation_mw": 0.0
+    }
+  },
+  "loss_history": [
+    {
+      "epoch": 1,
+      "odd_generation_loss": 0.1598178698964741,
+      "odd_price_loss": 0.45360941385877307,
+      "odd_balance_loss": 0.46960773459379224
+    },
+    {
+      "epoch": 2,
+      "odd_generation_loss": 0.12217983106772105,
+      "odd_price_loss": 0.2195871198090954,
+      "odd_balance_loss": 0.36340358680573065
+    },
+    {
+      "epoch": 3,
+      "odd_generation_loss": 0.08044093339771465,
+      "odd_price_loss": 0.15225689156331879,
+      "odd_balance_loss": 0.2537820574598036
+    },
+    {
+      "epoch": 4,
+      "odd_generation_loss": 0.07233716569085052,
+      "odd_price_loss": 0.11679639980412912,
+      "odd_balance_loss": 0.17492256756278052
+    },
+    {
+      "epoch": 5,
+      "odd_generation_loss": 0.07504752051571141,
+      "odd_price_loss": 0.0950618887293166,
+      "odd_balance_loss": 0.12548188616832098
+    },
+    {
+      "epoch": 6,
+      "odd_generation_loss": 0.07152122269937958,
+      "odd_price_loss": 0.08305983742078145,
+      "odd_balance_loss": 0.0871930539176084
+    },
+    {
+      "epoch": 7,
+      "odd_generation_loss": 0.06534166385730107,
+      "odd_price_loss": 0.0776992888338324,
+      "odd_balance_loss": 0.05409916981622793
+    },
+    {
+      "epoch": 8,
+      "odd_generation_loss": 0.05729412557422251,
+      "odd_price_loss": 0.06739918671656346,
+      "odd_balance_loss": 0.04102897789815198
+    },
+    {
+      "epoch": 9,
+      "odd_generation_loss": 0.04860282279011132,
+      "odd_price_loss": 0.06360291614048723,
+      "odd_balance_loss": 0.03313813299156618
+    },
+    {
+      "epoch": 10,
+      "odd_generation_loss": 0.043452171095903366,
+      "odd_price_loss": 0.059632859476234604,
+      "odd_balance_loss": 0.029084493284640106,
+      "even": {
+        "hours": 4344,
+        "observed_price_cells": 178104,
+        "inference_seconds": 3.2831255110068014,
+        "price_mae_to_lp_eur_mwh": 18.579364776611328,
+        "price_mae_to_observed_eur_mwh": 25.428794860839844,
+        "generation_mae_to_lp_gw": 1.2029330730438232,
+        "balance_mae_mw": 597.0316772460938,
+        "balance_max_mw": 6684.30615234375,
+        "balance_above_1mw_cells": 208200,
+        "generation_bound_violation_mw": 0.0,
+        "corridor_bound_violation_mw": 0.0
+      }
+    }
+  ]
+}

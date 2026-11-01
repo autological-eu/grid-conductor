@@ -12,6 +12,9 @@
 
 ## Open acceptance work
 
+- [x] Start a resumable 100-epoch Block AttnRes trial trained on all 4,416 odd-month 2025 hours and evaluated on 4,344 even-month hours. Stop at the user's requested epoch-10 checkpoint, verify no live training process, and audit the checkpoint read-only. Even-month price MAE is 18.58 €/MWh to the LP and 25.43 €/MWh to observed ENTSO-E; mean zonal imbalance is 597 MW. See `research/odd-even-attnres-paused-2025.md`. This is neither a feasible clearing nor independent market validation.
+- [ ] If the user resumes training, use the intact ignored epoch-10 checkpoint and unchanged source-hashed protocol; do not start a duplicate job. Preserve the even-month test as evaluation-only. Test balance-preserving outputs and fuller offer shape as separate candidates before any scenario-support claim.
+
 - [x] Implement Kimi-inspired Block Attention Residuals in the zone-token transformer and run a matched 100-epoch AURORA comparison against a four-layer standard residual control. March checkpoint selection and April holdout show fast one-pass inference but 510–548 MW mean zonal imbalance; AttnRes does not improve held-out price or mean balance. See `research/attnres-transformer-screen-2025.md` and its full learning-curve receipt. No baseline or app change.
 - [ ] If pursuing one-pass inference, encode zonal balance in the output structure and measure simultaneous bounds plus changed-asset response; preserve joint-PTDF and storage gates before any scenario-support claim.
 
