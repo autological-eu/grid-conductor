@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CountriesRouteImport } from './routes/countries'
 import { Route as DocsRouteImport } from './routes/docs'
+import { Route as NetworkScenariosRouteImport } from './routes/network-scenarios'
 import { Route as DocsSlugRouteImport } from './routes/docs.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const DocsRoute = DocsRouteImport.update({
   path: '/docs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NetworkScenariosRoute = NetworkScenariosRouteImport.update({
+  id: '/network-scenarios',
+  path: '/network-scenarios',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DocsSlugRoute = DocsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/countries': typeof CountriesRoute
   '/docs': typeof DocsRouteWithChildren
+  '/network-scenarios': typeof NetworkScenariosRoute
   '/docs/$slug': typeof DocsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/countries': typeof CountriesRoute
   '/docs': typeof DocsRouteWithChildren
+  '/network-scenarios': typeof NetworkScenariosRoute
   '/docs/$slug': typeof DocsSlugRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,28 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/countries': typeof CountriesRoute
   '/docs': typeof DocsRouteWithChildren
+  '/network-scenarios': typeof NetworkScenariosRoute
   '/docs/$slug': typeof DocsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/countries' | '/docs' | '/docs/$slug'
+  fullPaths: '/' | '/countries' | '/docs' | '/network-scenarios' | '/docs/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/countries' | '/docs' | '/docs/$slug'
-  id: '__root__' | '/' | '/countries' | '/docs' | '/docs/$slug'
+  to: '/' | '/countries' | '/docs' | '/network-scenarios' | '/docs/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/countries'
+    | '/docs'
+    | '/network-scenarios'
+    | '/docs/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CountriesRoute: typeof CountriesRoute
   DocsRoute: typeof DocsRouteWithChildren
+  NetworkScenariosRoute: typeof NetworkScenariosRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -89,6 +105,13 @@ declare module '@tanstack/react-router' {
       path: '/docs'
       fullPath: '/docs'
       preLoaderRoute: typeof DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/network-scenarios': {
+      id: '/network-scenarios'
+      path: '/network-scenarios'
+      fullPath: '/network-scenarios'
+      preLoaderRoute: typeof NetworkScenariosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/docs/$slug': {
@@ -115,6 +138,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CountriesRoute: CountriesRoute,
   DocsRoute: DocsRouteWithChildren,
+  NetworkScenariosRoute: NetworkScenariosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

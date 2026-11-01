@@ -1063,6 +1063,16 @@ The live browser's two-zone line/battery screen remains in service until a
 verified replacement is explicitly integrated. Neither research model becomes
 the public scenario engine merely because its report is published.
 
+The user selected the retained European joint-LP scenario approach as the
+direction for the next estimator. Expose source-checked, full-year paired
+scenario replays in the static app as a bounded pilot with their exact asset
+deltas, baseline, numerical gates, offer-cost and investor-income measures.
+Selection among saved cases is not an arbitrary new solve. Do not route a
+different asset, capacity, location or battery through a saved case or label
+the pilot as general investment valuation. Replace the two-zone browser
+engine only after the requested assets have matched baseline/intervention
+reclears, independent scenario-response checks and static delivery support.
+
 ## Observed bottleneck baseline and public experience
 
 - Keep the map, one corridor per unordered zone pair, accessible selection,

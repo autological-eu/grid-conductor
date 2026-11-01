@@ -58,6 +58,12 @@ export function DataBar({ step }: { step: 1 | 2 | 3 }) {
       </ol>
 
       <Link
+        to="/network-scenarios"
+        className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
+      >
+        Network pilot
+      </Link>
+      <Link
         to="/docs"
         className="shrink-0 rounded-md px-2 py-1 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
       >

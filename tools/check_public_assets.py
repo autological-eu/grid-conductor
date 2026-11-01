@@ -32,11 +32,16 @@ def check():
     # This archive is also an input to the retained solar-capacity baseline.
     irena = json.loads(gzip.decompress((folder / 'irena-capacity-2025/summary.json.gz').read_bytes()))
     assert irena['country_count'] >= 30 and len(irena['irena_rows']) >= 400
+    pilot = json.loads((folder / 'network-scenario-pilot-2025.json').read_text())
+    assert pilot['status'] == 'saved_research_pilot_not_general_scenario_estimator'
+    assert pilot['year'] == 2025 and pilot['hours'] == 8760 and len(pilot['scenarios']) == 10
+    assert (folder / 'compact-solar-bid-curves-2025.png').stat().st_size > 10000
     allowed = [
         'entsoe-fast-targets.json', 'carbon-spreads-2025.json',
         'zone-prices-2025/*.json', 'country-explorer-2025/*.json',
         'country-explorer-2025/*.json.gz',
         'irena-capacity-2025/summary.json.gz',
+        'network-scenario-pilot-2025.json', 'compact-solar-bid-curves-2025.png',
     ]
     files = [p for p in folder.rglob('*') if p.is_file()]
     unexpected = [str(p.relative_to(folder)) for p in files

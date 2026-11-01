@@ -25,6 +25,15 @@ try {
     });
     await page.goto(base);
     await page.locator('g[data-corridor="FR|IT-North"]').waitFor();
+    await page.getByRole("link", { name: "Network pilot" }).click();
+    await page.getByRole("heading", { name: "European network scenario pilot" }).waitFor();
+    await page.getByText("70.60 M€ / year").waitFor();
+    await page
+      .getByRole("combobox", { name: "Evaluated investment" })
+      .selectOption("line-NO2-GB-x2.0");
+    await page.getByText("326.63 M€ / year").waitFor();
+    await page.getByRole("link", { name: "Workbench", exact: true }).click();
+    await page.locator('g[data-corridor="FR|IT-North"]').waitFor();
     assert.equal(
       await page.getByRole("link", { name: "European targets", exact: true }).count(),
       0,

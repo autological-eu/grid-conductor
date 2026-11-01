@@ -51,6 +51,22 @@ opportunities rather than establish investable returns.
 
 ## 2. Simulating scenarios
 
+### European network pilot
+
+The [network scenario pilot](../network-scenarios/) shows ten saved
+full-year 2025 replays on the retained 48-zone joint LP: an unchanged control,
+six DE-LU solar/wind additions and three NO2–GB link-envelope changes. Each
+case clears all 8,760 hours with the same fitted-offer baseline and reports
+modeled offer-cost reduction separately from generator income or link rent.
+The plotted bid curves illustrate one of those cases. Choosing a case reads a
+precomputed result; the static browser does not run or interpolate a new
+European dispatch. The underlying bids were fitted to 2025 observations,
+hydro remains fixed, and the link changes a proxy exchange envelope rather
+than a verified cable rating. These results are research sensitivities, not
+validated investment returns or observed ENTSO-E prices.
+
+### Browser-local line and battery screen
+
 The live workbench uses a **fast reduced-form two-zone screening model** for the
 selected border. It runs locally in the browser using `javascript-lp-solver` for
 battery optimisation and an exact benefit-curve calculation for added transmission.
