@@ -12,6 +12,9 @@
 
 ## Open acceptance work
 
+- [x] Test a one-pass zone-token transformer with no inference-time correction on January–March LP targets and April holdout. AdamW and AURORA infer 720 hours in about 0.16 s, with aggregate generator and independent-corridor bounds by construction. Both fail zonal balance badly (673 versus 940 MW mean absolute residual), and AURORA does not improve held-out price error in the fixed-setting test. See `research/one-pass-transformer-screen-2025.md`; no baseline or app promotion.
+- [ ] For any further one-pass network, test balance-preserving output structure and changed-asset holdouts; require per-hour feasibility and objective/price/scenario-delta comparison against the retained LP. Keep storage stock and joint PTDF rows explicit before interpreting investment value.
+
 - [x] Prototype a DeepOPF-style zonal generation predictor with exact independent-corridor transport projection, trained on January–March retained LP dispatch and evaluated on 720 April hours. Inference takes 0.003 s and projection 4.10 s; projection certifies aggregate bounds and balance, but corrected generation differs from the LP by 1.706 GW mean absolute per zone. No technology-offer, PTDF, price, storage or scenario claim. See `research/learned-zonal-screen-pilot-2025.md`.
 - [ ] Extend learned screening to technology-level dispatch and the original joint network rows; benchmark the correction/fallback rate and full-year scenario deltas against retained joint-LP cases before considering a baseline or app change.
 
