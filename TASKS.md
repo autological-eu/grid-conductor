@@ -12,6 +12,8 @@
 
 ## Open acceptance work
 
+- [x] Test supervised LP-coefficient graph message passing on the same 48-zone/95-corridor transport LP as the ODE pilot. Odd-month training (40 epochs, 534 s) and withheld even-month evaluation give 16.71 €/MWh price MAE to the **transport** oracle and 498 MW mean zonal imbalance; 208,146/208,512 zone-hours exceed 1 MW. Inference takes 4.55 s for 4,344 hours. This improves matched ODE balance but fails the clearing gate; the earlier transformer has a different physical-LP teacher. See `research/graph-transport-lp-trial-2025.md`.
+
 - [x] Pilot the Wu–Lisser ODE-residual one-shot method on a matched 48-zone/95-corridor aggregate transport LP with odd-month training and even-month exact-LP audit. Twenty epochs train in 9.08 s and infer 4,344 even-month hours in 0.042 s, but mean zonal imbalance is 877 MW (maximum 11.50 GW), so this is not a valid LP clearing or physical-baseline replacement. See `research/neurodynamic-transport-lp-trial-2025.md`.
 - [ ] If extending neural LP research, require simultaneous balance and bounds on the identical transport oracle before expanding to technology offers, joint PTDF rows, chronology and changed-asset response. Keep the retained baselines and public scenario estimator unchanged until the full gates pass.
 
