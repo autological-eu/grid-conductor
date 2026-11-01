@@ -1,0 +1,66 @@
+{
+  "status": "bounded_daily_storage_formulation_diagnostic_not_annual_investment_value",
+  "baseline": "mixed_curve_fitting",
+  "audit_script_sha256": "fa9f8ba998ffdb29850005a7b318fc51e3c582d3de5f3e516d963007ec7789f6",
+  "storage_model_sha256": "90c7536723dc7c0a873ac08f3601db114226fc9fea072513a7b7072f43559a7f",
+  "baseline_witness_sha256": "5fbc4d1d1c6dace91299c9a2638fb1d092827a5d2914211bf0f5486a06771648",
+  "bid_cost_sha256": "138a8e31af0a35e72f35cdb6c0ab9a75236f42e5e22800bce2b88d7d8f932f31",
+  "battery": {
+    "zone": "DE-LU",
+    "power_mw": 500,
+    "energy_mwh": 2000,
+    "charge_efficiency": 0.95,
+    "discharge_efficiency": 0.95,
+    "initial_mwh": 1000,
+    "terminal_mwh": 1000,
+    "throughput_eur_mwh": 0.01
+  },
+  "days": [
+    {
+      "start_hour": 0,
+      "date_utc": "2025-01-01T00",
+      "no_storage_objective_gap_eur": -8.242204785346985e-08,
+      "no_storage_max_price_gap_eur_mwh": 1.233502189279534e-11,
+      "no_storage_solve_seconds": 1.2268865989899496,
+      "battery_solve_seconds": 1.1902990349917673,
+      "modeled_offer_cost_reduction_eur": -8.055940270423889e-08,
+      "battery_charge_mwh": 0.0,
+      "battery_discharge_mwh": 0.0,
+      "end_stock_mwh": 1000.0,
+      "min_stock_mwh": 1000.0,
+      "max_stock_mwh": 1000.0,
+      "base_de_price_min_eur_mwh": -0.0,
+      "base_de_price_max_eur_mwh": -0.0,
+      "maximum_primal_residual": 5.115907697472721e-10
+    },
+    {
+      "start_hour": 7416,
+      "date_utc": "2025-11-06T00",
+      "no_storage_objective_gap_eur": 4.3213367462158203e-07,
+      "no_storage_max_price_gap_eur_mwh": 3.836930773104541e-11,
+      "no_storage_solve_seconds": 1.3777265359967714,
+      "battery_solve_seconds": 1.1798594949941617,
+      "modeled_offer_cost_reduction_eur": 94837.42338979244,
+      "battery_charge_mwh": 3552.6315789473683,
+      "battery_discharge_mwh": 3206.25,
+      "end_stock_mwh": 1000.0,
+      "min_stock_mwh": 0.0,
+      "max_stock_mwh": 2000.0,
+      "base_de_price_min_eur_mwh": 72.69497459482712,
+      "base_de_price_max_eur_mwh": 162.11013975047638,
+      "maximum_primal_residual": 1.7677166397334076e-09
+    }
+  ],
+  "rolling_two_day_trial": {
+    "start_hour": 7416,
+    "executed_hours": 48,
+    "lookahead_hours": 48,
+    "solve_seconds": 3.766106389986817,
+    "stock_after_first_day_mwh": 575.0,
+    "terminal_stock_mwh": 1000.0,
+    "charge_mwh": 7657.894736842105,
+    "discharge_mwh": 6911.25,
+    "modeled_offer_cost_reduction_eur": 286165.6437636018,
+    "maximum_primal_residual": 1.7677166397334076e-09
+  }
+}

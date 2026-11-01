@@ -1071,6 +1071,12 @@ The research runner should accept an explicit, reproducible portfolio of
 supported generator and connection changes, isolate each plan's outputs, and
 reject stale or mismatched saved witnesses before reuse. Combined investments
 must be cleared jointly rather than summed from separate single-asset cases.
+For a fixed-budget renewable portfolio search, include storage as an investment
+option once its MW/MWh cost, zonal buildability, charging/discharging losses,
+hourly stock chronology and terminal policy are explicit. Recompute marginal
+value under each joint portfolio and distinguish modeled system offer-cost
+savings from investor income, CAPEX and net investment value. A bounded daily
+storage formulation is a numerical checkpoint, not an annual portfolio score.
 Selection among saved cases is not an arbitrary new solve. Do not route a
 different asset, capacity, location or battery through a saved case or label
 the pilot as general investment valuation. Replace the two-zone browser

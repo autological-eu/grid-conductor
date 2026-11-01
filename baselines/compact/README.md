@@ -95,3 +95,16 @@ plan or a saved witness whose scenario, baseline or digest differs. A matching
 completed witness is skipped. Every new case still passes hourly primal,
 optimality and no-emergency checks. The pinned example and its result receipt
 are under `research/data/`; large hourly arrays stay ignored in `data/`.
+
+### Bounded chronological storage candidate
+
+`storage.py` is a separate 24-hour battery formulation on the unchanged joint
+LP. It couples charge, discharge and MWh stock across hours, retains the zonal,
+island, PTDF and link rows, and declares initial/terminal stock explicitly.
+`tools/audit_compact_storage_day.py` replays two days against the retained
+witness and runs a two-day 48-hour look-ahead/24-hour execution check with
+cleared stock carried across midnight. It writes
+`research/data/compact-storage-day-2025.json`. It is not the annual scenario
+runner: a year-long policy must carry cleared stock across all days, handle
+the annual terminal inventory and pass full-year paired checks before
+storage enters portfolio search or the browser.
