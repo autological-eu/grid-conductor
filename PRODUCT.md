@@ -1067,6 +1067,10 @@ The user selected the retained European joint-LP scenario approach as the
 direction for the next estimator. Expose source-checked, full-year paired
 scenario replays in the static app as a bounded pilot with their exact asset
 deltas, baseline, numerical gates, offer-cost and investor-income measures.
+The research runner should accept an explicit, reproducible portfolio of
+supported generator and connection changes, isolate each plan's outputs, and
+reject stale or mismatched saved witnesses before reuse. Combined investments
+must be cleared jointly rather than summed from separate single-asset cases.
 Selection among saved cases is not an arbitrary new solve. Do not route a
 different asset, capacity, location or battery through a saved case or label
 the pilot as general investment valuation. Replace the two-zone browser

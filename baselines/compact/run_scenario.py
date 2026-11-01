@@ -14,7 +14,9 @@ Usage (pinned scientific interpreter, repository root)::
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import re
 import time
 from pathlib import Path
 
@@ -134,20 +136,47 @@ def default_plan(evidence=None):
 
 def build_scenario(entry, sources, endpoints):
     """Resolve one plan entry into a declared scenario delta."""
+    if entry['kind'] == 'portfolio':
+        if set(entry) != {'name', 'kind', 'assets'}:
+            raise ValueError('Unrecognized portfolio field')
+        assets = entry.get('assets')
+        if not isinstance(assets, list) or not assets:
+            raise ValueError('A portfolio needs at least one asset')
+        if any(not isinstance(asset, dict) or asset.get('kind') not in {'generator', 'link'}
+               for asset in assets):
+            raise ValueError('Portfolio assets must be generators or existing links')
+        parts = [build_scenario(dict(asset, name=f'{entry["name"]}-{i}'), sources, endpoints)
+                 for i, asset in enumerate(assets)]
+        links = tuple(link for part in parts for link in part.links)
+        if len({link.link for link in links}) != len(links):
+            raise ValueError('A portfolio cannot upgrade the same link twice')
+        return Scenario(name=str(entry['name']),
+                        generators=tuple(g for part in parts for g in part.generators),
+                        links=links)
     if entry['kind'] == 'none':
+        if set(entry) != {'name', 'kind'}:
+            raise ValueError('A zero-delta case cannot contain asset fields')
         return Scenario(name=str(entry['name']))
     if entry['kind'] == 'generator':
+        if set(entry) - {'name', 'kind', 'zone', 'technology', 'capacity_mw', 'bid_eur_mwh'}:
+            raise ValueError('Unrecognized generator field')
         key = (str(entry['zone']), str(entry['technology']))
         if key not in sources:
             raise ValueError(f'No fitted availability source for {key}')
         source = sources[key]
         capacity = float(entry['capacity_mw'])
+        if not np.isfinite(capacity) or capacity <= 0 or capacity > 100000:
+            raise ValueError('Generator capacity must be in (0, 100000] MW')
+        if float(entry.get('bid_eur_mwh', 0.0)) != 0:
+            raise ValueError('Only zero-bid solar/wind additions are source-supported')
         profile = capacity * source['capacity'] / source['peak_mw']
         return Scenario(name=str(entry['name']), generators=(
             GeneratorAddition(name=f'{key[1]}-{key[0]}-{int(capacity)}',
                               zone=key[0], capacity_mw=capacity, profile_mw=profile,
                               bid_eur_mwh=float(entry.get('bid_eur_mwh', 0.0))),))
     if entry['kind'] == 'link':
+        if set(entry) - {'name', 'kind', 'link', 'from_zone', 'to_zone', 'factor', 'release_envelope'}:
+            raise ValueError('Unrecognized link field')
         start, end = str(entry['from_zone']), str(entry['to_zone'])
         if 'link' in entry:
             link = int(entry['link'])
@@ -158,8 +187,11 @@ def build_scenario(entry, sources, endpoints):
             if len(matches) != 1:
                 raise ValueError(f'Expected one link {start}->{end}, found {len(matches)}')
             link = matches[0]
+        factor = float(entry['factor'])
+        if not np.isfinite(factor) or factor <= 1 or factor > 5:
+            raise ValueError('Link factor must be in (1, 5]')
         return Scenario(name=str(entry['name']), links=(
-            LinkUpgrade(link=link, factor=float(entry['factor']),
+            LinkUpgrade(link=link, factor=factor,
                         release_envelope=bool(entry.get('release_envelope', True))),))
     raise ValueError(f'Unknown scenario kind: {entry["kind"]}')
 
@@ -193,26 +225,65 @@ def clear_scenario(model, cost):
                 maximum_primal_residual_mw=residual)
 
 
-def run(plan, only=None, evidence=None):
+def validate_plan(plan):
+    """Reject ambiguous, unsupported or path-unsafe declarations before any solve."""
+    if plan.get('plan_version') != 1 or plan.get('baseline') != 'mixed_curve_fitting':
+        raise ValueError('Unsupported scenario plan or baseline')
+    entries = plan.get('scenarios')
+    if not isinstance(entries, list) or not entries:
+        raise ValueError('Scenario plan needs at least one entry')
+    names = [entry.get('name') for entry in entries]
+    if any(not isinstance(name, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,79}', name)
+           or '..' in name
+           for name in names) or len(names) != len(set(names)):
+        raise ValueError('Scenario names must be unique safe directory names')
+    return hashlib.sha256(json.dumps(plan, sort_keys=True, allow_nan=False).encode()).hexdigest()
+
+
+def run(plan, only=None, evidence=None, output=OUT):
     # The compute host is Linux; the non-blocking lock guards a shared output
     # folder and must fail before any solve rather than after it.
     import fcntl
 
+    plan_hash = validate_plan(plan)
+    if only and set(only) - {entry['name'] for entry in plan['scenarios']}:
+        raise ValueError('Requested scenario is absent from the plan')
     evidence = evidence or baseline_evidence()
     model, cost, witness = evidence['model'], evidence['cost'], evidence['witness']
+    # Resolve every entry up front, before touching saved runs or solving.
+    resolved = {entry['name']: build_scenario(entry, evidence['sources'], evidence['endpoints'])
+                for entry in plan['scenarios']}
     baseline_gate(model, cost, witness)
-    OUT.mkdir(parents=True, exist_ok=True)
-    with (OUT / 'job.lock').open('a') as lock:
+    output = Path(output)
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / 'job.lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        plan_file = output / 'plan.json'
+        if plan_file.exists():
+            if validate_plan(read(plan_file)) != plan_hash:
+                raise ValueError('Output folder already belongs to a different scenario plan')
+        else:
+            write(plan_file, plan)
         results = []
         for entry in plan['scenarios']:
             if only and entry['name'] not in only:
                 continue
-            folder = OUT / str(entry['name'])
+            folder = output / str(entry['name'])
             if (folder / 'annual.npz').exists():
+                summary_path = folder / 'summary.json'
+                if not summary_path.exists():
+                    raise ValueError(f'{entry["name"]}: witness exists without a passed summary')
+                prior = read(summary_path)
+                if (prior.get('status') != 'scenario_replay_passed'
+                        or prior.get('scenario') != entry
+                        or prior.get('baseline', {}).get('witness_sha256') != digest(ANNUAL / 'annual.npz')
+                        or prior.get('witness_sha256') != digest(folder / 'annual.npz')
+                        or (prior.get('plan_sha256') is not None
+                            and prior['plan_sha256'] != plan_hash)):
+                    raise ValueError(f'{entry["name"]}: saved witness does not match this declaration')
                 results.append(dict(name=entry['name'], status='skipped_existing'))
                 continue
-            scenario = build_scenario(entry, evidence['sources'], evidence['endpoints'])
+            scenario = resolved[entry['name']]
             declared, declared_cost, description = apply(model, cost, scenario)
             cleared = clear_scenario(declared, declared_cost)
             emergency = emergency_mwh(cleared['values'], declared['emergency_mask'],
@@ -232,6 +303,7 @@ def run(plan, only=None, evidence=None):
                                                            'optimal', 'hours')})
             summary = dict(
                 status='scenario_replay_passed',
+                plan_sha256=plan_hash,
                 scenario=entry, delta=description,
                 baseline=dict(witness_sha256=digest(ANNUAL / 'annual.npz'),
                               pointer_sha256=digest(ROOT / 'config/active-research-baseline.json')),
@@ -307,6 +379,8 @@ def main():
     parser.add_argument('--plan', type=Path, default=OUT / 'plan.json')
     parser.add_argument('--only', nargs='*', default=None)
     parser.add_argument('--out', type=Path, default=None)
+    parser.add_argument('--output', type=Path, default=OUT,
+                        help='Isolated folder for this plan and its full-year witnesses')
     args = parser.parse_args()
     if args.stage == 'candidates':
         write(OUT / 'candidates.json', candidates())
@@ -316,9 +390,9 @@ def main():
         print(args.plan)
     elif args.stage == 'run':
         plan = read(args.plan) if args.plan.exists() else default_plan()
-        print(json.dumps(run(plan, only=args.only), indent=2))
+        print(json.dumps(run(plan, only=args.only, output=args.output), indent=2))
     else:
-        print(report(out=args.out))
+        print(report(folder=args.output, out=args.out))
 
 
 if __name__ == '__main__':

@@ -262,6 +262,34 @@ class DriverTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.driver.build_scenario(entry, {}, [('AA', 'BB')])
 
+    def test_portfolio_resolves_distinct_assets_without_reusing_an_old_offer(self):
+        evidence = self.evidence()
+        entry = dict(name='two-zone-renewables', kind='portfolio', assets=[
+            dict(kind='generator', zone='AA', technology='solar', capacity_mw=750),
+            dict(kind='generator', zone='BB', technology='onshore_wind', capacity_mw=400),
+            dict(kind='link', from_zone='AA', to_zone='BB', factor=1.2,
+                 release_envelope=True)])
+        scenario = self.driver.build_scenario(entry, evidence['sources'], evidence['endpoints'])
+        self.assertEqual(len(scenario.generators), 2)
+        self.assertEqual(len(scenario.links), 1)
+        np.testing.assert_array_equal(scenario.generators[0].profile_mw, [375, 750])
+        with self.assertRaisesRegex(ValueError, 'same link twice'):
+            self.driver.build_scenario(dict(name='duplicate', kind='portfolio', assets=[
+                entry['assets'][2], entry['assets'][2]]), evidence['sources'], evidence['endpoints'])
+
+    def test_general_plan_rejects_unsafe_or_unsupported_requests(self):
+        plan = dict(plan_version=1, baseline='mixed_curve_fitting', scenarios=[
+            dict(name='fr-solar', kind='generator', zone='AA', technology='solar', capacity_mw=750)])
+        self.driver.validate_plan(plan)
+        with self.assertRaises(ValueError):
+            self.driver.validate_plan(dict(plan, scenarios=[dict(plan['scenarios'][0], name='../old')]))
+        with self.assertRaises(ValueError):
+            self.driver.build_scenario(dict(plan['scenarios'][0], bid_eur_mwh=60),
+                                       self.evidence()['sources'], self.evidence()['endpoints'])
+        with self.assertRaises(ValueError):
+            self.driver.build_scenario(dict(name='x', kind='link', from_zone='AA',
+                                            to_zone='BB', factor=1), {}, [('AA', 'BB')])
+
     def test_zero_delta_gate_accepts_identical_and_rejects_drift(self):
         witness = dict(objectives=np.array([1.0, 2.0]),
                        row_duals=np.array([[10.0, 20.0, 5.0], [10.0, 20.0, 5.0]]))

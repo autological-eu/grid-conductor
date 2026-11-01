@@ -68,3 +68,30 @@ link upgrade scales one commercial-exchange envelope; releasing it to a capacity
 band is declared in the scenario entry. PTDF branch ratings are not modified
 because the retained inputs carry no row-to-branch mapping. Outputs stay under
 ignored `data/bidding-zone-network-2025/compact-scenarios-v1/`.
+
+### Declared portfolio runner
+
+For a new generator/link case, write a version-1 JSON plan with baseline
+`mixed_curve_fitting` and one or more unique, safe-named scenarios. Each
+scenario can be a single `generator` or `link`, or a `portfolio` with an
+`assets` array. Supported generator additions are zero-bid solar and onshore/
+offshore wind in zones with sealed original hourly technology availability;
+the declared MW scales that availability shape. A link addition identifies an
+existing modeled corridor by its exact endpoints and scales its inherited
+commercial envelope. Combining assets uses one joint reclear, not the sum of
+their separate responses. Battery, reservoir changes, a new topology edge,
+and physical branch-rating revisions are not supported by this runner.
+
+```sh
+data/pypsa-eur/upstream/.pixi/envs/default/bin/python -m baselines.compact.run_scenario run \
+  --plan research/data/general-scenario-example-plan-2025.json \
+  --output data/bidding-zone-network-2025/general-scenario-example-v1
+data/pypsa-eur/upstream/.pixi/envs/default/bin/python -m baselines.compact.run_scenario report \
+  --output data/bidding-zone-network-2025/general-scenario-example-v1
+```
+
+The output folder is locked, stores its own declaration and refuses a different
+plan or a saved witness whose scenario, baseline or digest differs. A matching
+completed witness is skipped. Every new case still passes hourly primal,
+optimality and no-emergency checks. The pinned example and its result receipt
+are under `research/data/`; large hourly arrays stay ignored in `data/`.

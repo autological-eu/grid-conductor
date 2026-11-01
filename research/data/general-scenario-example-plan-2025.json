@@ -1,0 +1,14 @@
+{
+  "plan_version": 1,
+  "baseline": "mixed_curve_fitting",
+  "scenarios": [
+    {
+      "name": "fr-solar-750-es-wind-400",
+      "kind": "portfolio",
+      "assets": [
+        {"kind": "generator", "zone": "FR", "technology": "solar", "capacity_mw": 750},
+        {"kind": "generator", "zone": "ES", "technology": "onshore_wind", "capacity_mw": 400}
+      ]
+    }
+  ]
+}

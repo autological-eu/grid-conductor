@@ -1,0 +1,27 @@
+{
+  "plan_sha256": "025c0aac308db6ff228b7d15fa4faac2efa853b09b4a28e14606f43dcfbe2883",
+  "saved_plan_sha256": "4a0fc9d6f61401c86c98a72562665d5135617acde5981aca25b5f80bc86de14b",
+  "baseline_witness_sha256": "5fbc4d1d1c6dace91299c9a2638fb1d092827a5d2914211bf0f5486a06771648",
+  "scenarios": [
+    {
+      "name": "fr-solar-750",
+      "summary_sha256": "bf001108e23f0b6c133aacf09305f37d1a18b99e9f9ac7384fae482a0f9b67eb",
+      "witness_sha256": "2280b69cb6a8d06da0df85d0bb7058292eb0bd5f5f8d3be0dc78d30d227d8e70",
+      "optimal_hours": 8760,
+      "emergency_mwh": 0.0,
+      "maximum_primal_residual_mw": 1.537279558760929e-06,
+      "solve_seconds": 33.79110937700898,
+      "model_offer_cost_reduction_meur": 36.29509453803253
+    },
+    {
+      "name": "es-wind-400",
+      "summary_sha256": "e196cd2382d660bf54534aaba26b596f8138932cdd38dae46f8ebba301d684c3",
+      "witness_sha256": "ccd82e5bf753e0f7242b2a54dfa39b05ecc0900b6941e4bdf1eb4908957b7af0",
+      "optimal_hours": 8760,
+      "emergency_mwh": 0.0,
+      "maximum_primal_residual_mw": 4.396875738166273e-06,
+      "solve_seconds": 31.98249273499823,
+      "model_offer_cost_reduction_meur": 26.54673772053528
+    }
+  ]
+}
