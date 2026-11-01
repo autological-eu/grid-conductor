@@ -12,6 +12,9 @@
 
 ## Open acceptance work
 
+- [x] Pilot the Wu–Lisser ODE-residual one-shot method on a matched 48-zone/95-corridor aggregate transport LP with odd-month training and even-month exact-LP audit. Twenty epochs train in 9.08 s and infer 4,344 even-month hours in 0.042 s, but mean zonal imbalance is 877 MW (maximum 11.50 GW), so this is not a valid LP clearing or physical-baseline replacement. See `research/neurodynamic-transport-lp-trial-2025.md`.
+- [ ] If extending neural LP research, require simultaneous balance and bounds on the identical transport oracle before expanding to technology offers, joint PTDF rows, chronology and changed-asset response. Keep the retained baselines and public scenario estimator unchanged until the full gates pass.
+
 - [x] Start a resumable 100-epoch Block AttnRes trial trained on all 4,416 odd-month 2025 hours and evaluated on 4,344 even-month hours. Stop at the user's requested epoch-10 checkpoint, verify no live training process, and audit the checkpoint read-only. Even-month price MAE is 18.58 €/MWh to the LP and 25.43 €/MWh to observed ENTSO-E; mean zonal imbalance is 597 MW. See `research/odd-even-attnres-paused-2025.md`. This is neither a feasible clearing nor independent market validation.
 - [ ] If the user resumes training, use the intact ignored epoch-10 checkpoint and unchanged source-hashed protocol; do not start a duplicate job. Preserve the even-month test as evaluation-only. Test balance-preserving outputs and fuller offer shape as separate candidates before any scenario-support claim.
 
