@@ -12,6 +12,8 @@
 
 ## Open acceptance work
 
+- [x] Test ten paired changed-asset cases on 4,344 even-month hours against fresh exact reclears of the **same simplified transport LP**. Frozen zone GNN approximates fixed renewable-injection cost totals but gets both DE-LU–FR link benefit signs wrong: exact +92.10/+182.44 M€ offer-cost reduction versus graph −5.65/−15.17 M€. Ten-case value-response MAE is 39.00 M€, Spearman ordering 0.358, and scenario balance remains ~260 MW mean (up to 5.99 GW). Exact saved decisions replay within 0.029 MW. See `research/zone-graph-investment-response-2025.md`; no investment estimator, baseline or app promotion.
+
 - [x] Run an 80-epoch physical zone-graph tuning trial with November-only checkpoint selection and even-month readback. At fixed balance weight 8, rate 0.002 beats rate 0.001 on selected even-month transport-LP price MAE (9.48 vs 9.96 €/MWh), but worsens mean balance (320 vs 306 MW) and worst balance (8.86 vs 4.82 GW). Doubling balance weight at rate 0.001 gives 10.20 €/MWh and 260 MW mean balance; the declared November score selects that setting. Still 207,879/208,512 even-month zone-hours exceed 1 MW error. See `research/zone-graph-hyperparameter-trial-2025.md`; no baseline promotion.
 
 - [x] Test a physical zone/interconnector GNN on the **same** 2025 transport-LP oracle, odd/even split, loss and 40-epoch budget as the LP-coefficient graph. Withheld even-month price MAE to transport oracle falls 16.71→10.96 €/MWh, mean balance residual 498→337 MW, and inference 4.55→1.35 s over 4,344 hours. Training takes 215.66 s. Still 208,014/208,512 zone-hours exceed 1 MW balance error; no baseline or app promotion. See `research/zone-graph-transport-lp-trial-2025.md`.
