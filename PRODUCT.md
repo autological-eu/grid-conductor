@@ -1085,6 +1085,11 @@ hourly stock chronology and terminal policy are explicit. Recompute marginal
 value under each joint portfolio and distinguish modeled system offer-cost
 savings from investor income, CAPEX and net investment value. A bounded daily
 storage formulation is a numerical checkpoint, not an annual portfolio score.
+Use a declared €5 billion budget as a research allocation case. Define the
+candidate set, cost year, physical build caps and objective before searching;
+report the best feasible portfolio and budget frontier. Claim a global optimum
+only with an exhaustive finite search or valid bound, and show interactions and
+diminishing returns through joint reclears rather than sums of solo benefits.
 When a faster storage LP selects a different equally optimal stock path or
 zonal dual price, compare the full-year objective and energy as well as hourly
 stock, prices and revenue. Disclose material dual/revenue differences or use a
