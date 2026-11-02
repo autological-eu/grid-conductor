@@ -69,6 +69,8 @@ This is a **retrospective system-cost sensitivity**, not an optimal investment p
 
 The candidate grid omits physical transmission builds because the retained commercial link-envelope releases lack a costable route and verified mapping to new physical network capacity. It also omits offshore wind, hydro additions, other storage durations, solar and wind site limits, connection costs, land/permitting constraints, and country-specific CAPEX. The 500 MW block grid and top-ten initial shortlist cannot certify a Europe-wide optimum. No line or generator is inferred to be buildable solely because its source profile and LP are feasible.
 
+A wider source-hashed single-block relocation challenge was started after this result. Six of its 106 planned Europe-wide wind, battery and solar alternatives completed within the five-hour work window; none beat the selected portfolio (the strongest, moving Greek wind to Estonia, scored €1,030.22 million/year). The job was stopped without an unattended process, and its ignored receipts can be resumed with `baselines/portfolio_challenge.py`. **Do not interpret the six-case subset as a complete geographic optimum check.**
+
 The €1,030.76 million is reduced **modeled offer cost**, not generator or battery owner revenue, ENTSO-E congestion rent, net welfare including all externalities, NPV, or a guaranteed annual return. A credible allocation needs site and line-build evidence, O&M and finance costs, adverse weather/fuel/CAPEX and storage-policy sensitivities, independent price/generation transfer checks, and a stronger search or valid upper bound. The active research baseline and public app estimator are unchanged.
 
 ## Reproduction and provenance
