@@ -1,8 +1,12 @@
 # Toward a €5 billion European investment allocation
 
-## Current position
+## Status of this plan
 
-The retained `mixed_curve_fitting` physical joint LP can reclear 2025 solar, wind and declared existing-link changes together in about 30–40 seconds per full year. A separate **one-battery** chronological 48-hour look-ahead path reuses a HiGHS model and finishes 365 days in about 106 seconds for the 500 MW DE-LU reference. Its generation, network, energy stock and no-emergency gates pass, but it is **not yet integrated with arbitrary generator/link portfolios or multiple batteries**. It is a rolling policy with 48-hour perfect retrospective model inputs, not a single full-year storage optimum.
+The bounded 2025 search has now run. Its protocol, best-found portfolio, full-year replay and limitations are in [the result report](european-budget-portfolio-search-2025.md). The remainder of this document records the original research plan and the initial battery size test; its proposed physical-line and site-cost gates remain open.
+
+## Starting position
+
+At the start of this plan, the retained `mixed_curve_fitting` physical joint LP could reclear 2025 solar, wind and declared existing-link changes together in about 30–40 seconds per full year. A separate **one-battery** chronological 48-hour look-ahead path reused a HiGHS model and finished 365 days in about 106 seconds for the 500 MW DE-LU reference. Its generation, network, energy stock and no-emergency gates passed, but it was not yet integrated with generator portfolios or multiple batteries. The completed research search now combines them. It remains a rolling policy with 48-hour perfect retrospective model inputs, not a single full-year storage optimum.
 
 The 2025 PyPSA-Eur technology-cost source cached at `data/pypsa-eur/online-source-audit/costs_2025-v0.15.0.csv` contains 2025-currency-year investment entries: utility solar **594.8646 €/kW**, onshore wind **1,438.8845 €/kW**, battery inverter **287.4657 €/kW** and battery energy **250.0283 €/kWh**. Its source rows cite Danish Energy Agency technology catalogues. These are European technology assumptions, **not** site-specific buildable-project quotes. Existing-link envelope releases in the dispatch runner are historical-flow proxies, not yet costable physical line builds. Site buildability, grid connection, land/seabed route, permitting and country-specific CAPEX remain unresolved.
 
